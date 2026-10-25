@@ -39,4 +39,15 @@ Para os outros 39 elencos B/C e a versão final A/B/C, ainda são necessários r
 
 Na base original, **Athletic, Amazonas, Anápolis, Barra, Inter de Limeira e Itabaiana têm ID interno 0**; **São Paulo e São Bernardo compartilham ID 2477**. Portanto, o editor não usa mais `team.id` como namespace para IDs de jogadores adicionados: deriva o namespace do SHA-256 específico do arquivo original. Os namespaces resultantes dos **59 arquivos existentes das Séries A/B/C** foram comparados localmente e são diferentes entre si. O Maranhão ainda precisa de arquivo legítimo novo.
 
-Foram gerados dois patches diferenciais privados e os dois foram reconstruídos byte a byte pelo **motor Go do instalador** em teste local. O Labratorório não publica os arquivos resultantes; seus metadados acima foram atualizados após a correção do namespace de IDs.
+Foram gerados dois patches diferenciais privados e os dois foram reconstruídos byte a byte pelo **motor Go do instalador** em teste local. O laboratório não publica os arquivos resultantes; seus metadados acima foram atualizados após a correção do namespace de IDs.
+
+
+## Mais elencos oficiais reproduzidos em laboratório — 25/10/2026
+
+Além de Criciúma e Londrina, foram confirmados diretamente nos sites dos clubes:
+
+- [Cuiabá](https://www.cuiabaesporteclube.com.br/futebol/5/time-profissional/): **25 atletas** com posição, original `cuiaba_bra.ban` (ID 2232; SHA-256 `a13007e58a381fd45f393c4f03e41f09bd4ec859a274f15dbb0484ce4030d722`). Laboratório: 3 históricos reaproveitados, 22 novos com atributos estimados; alvo SHA-256 `3babfdee3410f62fa528795e4e8fd1d746ea735d5e299ccbd8b140caa74aae57`. Receita diferencial: 72 operações, 1.249 bytes adicionados.
+- [Juventude](https://www.juventude.com.br/plantel/profissional): **36 atletas** com posição, original `juventude.ban` (ID 2335; SHA-256 `8aa0d733f9e776ca1954728211004dcd7f6313017d10c2f9a505445fb9610cd0`). Laboratório: 0 históricos reaproveitados, 36 com atributos estimados; alvo SHA-256 `380708953471d0f23c8cf8ceba44ba25e3ec1673531d17fe21c2bf29d9f55ae2`. Receita diferencial: 24 operações, 2.289 bytes adicionados.
+- **Total neste laboratório:** quatro clubes da Série B, **119 nomes e posições publicados em fontes oficiais**, com quatro arquivos de equipe reserializados e **quatro reconstruções diferenciais byte-idênticas aprovadas no motor Go** em teste local.
+
+Todos os arquivos de saída do laboratório ficaram **fora da instalação e do GitHub**; sem dados de identidade completos ou teste em carreira, nenhum deles foi anunciado como pronto para o usuário instalar.
