@@ -9,6 +9,7 @@ const html=read('index.html'),css=read('styles.css'),
 const release=JSON.parse(read('data/release.json'));
 const target=JSON.parse(read('data/target-abc-2026.json'));
 const historical=JSON.parse(read('data/competitions/2026-brazil.json'));
+const rosters=JSON.parse(read('data/published-rosters-2026-0-2.json'));
 
 for(const id of ['inicio','cobertura','clubes-2026','recursos','como-funciona','instalador','versao','faq'])
   assert.match(html,new RegExp('id="'+id+'"'));
@@ -35,8 +36,43 @@ assert.doesNotMatch(html,/data-division-count="D"/);
 assert.doesNotMatch(html,/<option value="D">/);
 assert.match(html,/<tbody id="clubs-grid">/);
 assert.match(html,/2026\.1\.1 anterior não atende/);
-assert.match(clubsJs,/fetch\('\.\/data\/target-abc-2026\.json'/);
-assert.match(clubsJs,/addEventListener\('input',draw\)/);
+assert.equal(rosters.schemaVersion,1);
+assert.equal(rosters.sourceRelease,'2026.0.2');
+assert.equal(rosters.totalClubs,20);
+assert.equal(rosters.totalPlayers,730);
+assert.equal(Object.keys(rosters.clubs).length,20);
+const allNames=Object.values(rosters.clubs).flatMap(team=>team.players);
+assert.equal(allNames.length,730);
+assert.ok(allNames.every(name=>typeof name==='string'&&name.trim().length>0));
+assert.ok(Object.keys(rosters.clubs).every(id=>target.clubs.some(club=>club.id===id&&club.division==='A')));
+assert.ok(rosters.clubs['br-cruzeiro-mg'].players.includes('Cássio'));
+assert.ok(rosters.clubs['br-santos-sp'].players.includes('Neymar'));
+assert.ok(!Object.keys(rosters.clubs).some(id=>target.clubs.find(c=>c.id===id)?.division==='D'));
+for(const id of ['clubs-pagination','clubs-page-size','clubs-previous','clubs-next','clubs-page-label',
+  'clubs-roster-filter','club-dialog','club-dialog-title','club-dialog-players','club-dialog-close']) {
+  assert.match(html,new RegExp('id="'+id+'"'));
+}
+assert.match(html,/<dialog class="club-dialog"/);
+assert.match(html,/aria-labelledby="club-dialog-title"/);
+assert.match(html,/option value="10" selected/);
+assert.match(html,/option value="20"/);
+assert.match(html,/option value="50"/);
+assert.match(clubsJs,/fetch\('\.\/data\/published-rosters-2026-0-2\.json'/); 
+assert.match(clubsJs,/showModal\(\)/);
+assert.match(clubsJs,/elements\.dialog\.close\(\)/);
+assert.match(clubsJs,/lastFocus\.focus\(\)/);
+assert.match(clubsJs,/pageSize\.addEventListener\('change'/);
+assert.match(clubsJs,/rosterFilter\.addEventListener\('change'/);
+assert.match(clubsJs,/search\.addEventListener\('input'/);
+assert.match(clubsJs,/slice\(start, start \+ size\)/);
+assert.match(clubsJs,/replaceChildren\(fragment\)/);
+assert.match(clubsJs,/item\.textContent = name/);
+assert.doesNotMatch(clubsJs,/innerHTML|eval\(/);
+assert.match(css,/\.clubs-pagination\{/);
+assert.match(css,/\.club-dialog\{/);
+assert.match(css,/\.club-dialog::backdrop\{/);
+assert.match(clubsJs,/getJson\('\.\/data\/target-abc-2026\.json'\)/);
+assert.match(clubsJs,/addEventListener\('input', clearPageAndRender\)/);
 assert.match(clubsJs,/\.normalize\('NFD'\)/);
 assert.match(clubsJs,/replaceChildren\(fragment\)/);
 assert.doesNotMatch(clubsJs,/innerHTML|API_FOOTBALL_KEY|x-apisports-key/);
@@ -47,4 +83,4 @@ assert.match(js,/item\.digest === 'sha256:'/);
 assert.match(js,/compatibilityVerifiedInGame\s*!==\s*true/);
 assert.doesNotMatch(html,/id="alfa-156"|class="ball"/);
 assert.doesNotMatch(html+js+clubsJs,/BEGIN PRIVATE KEY|x-apisports-key/);
-console.log('PASS: site A/B/C=60, D untouched, working search/table and published A-preview download');
+console.log('PASS: 60-club A/B/C paginated explorer, accessible modal, 730 real published patch names, Série D untouched.');
