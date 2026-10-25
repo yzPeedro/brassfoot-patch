@@ -6,6 +6,9 @@ on:
       - 'tools/team-roster-editor/**'
       - 'tools/build_team_delta.py'
       - 'tests/test_team_delta.py'
+      - 'tools/audit_roster_readiness.py'
+      - 'tests/test_roster_readiness.py'
+      - 'site/data/researched-rosters-2026.json'
       - '.github/workflows/roster-editor-regression.yml'
   workflow_dispatch:
 permissions:
@@ -42,3 +45,7 @@ jobs:
           PY
       - name: Verify synthetic byte-differential reconstruction and SHA
         run: python -m unittest discover -s tests -p 'test_team_delta.py' -v
+      - name: Audit research against release-readiness gates
+        run: |
+          python -m unittest discover -s tests -p 'test_roster_readiness.py' -v
+          python tools/audit_roster_readiness.py
