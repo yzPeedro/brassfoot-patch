@@ -70,6 +70,10 @@ jobs:
               ('caxias-2026-portal.tsv', [2,5,5,10,9]),
               ('confianca-2026-portal.tsv', [5,7,7,12,7]),
               ('ferroviaria-2026-portal.tsv', [2,2,4,7,7]),
+              ('figueirense-2026-portal.tsv', [4,5,8,11,11]),
+              ('guarani-2026-portal.tsv', [2,3,4,8,6]),
+              ('inter-limeira-2026-portal.tsv', [5,9,5,11,7]),
+              ('floresta-2026-portal.tsv', [5,4,6,9,8]),
           ):
               source=Path('tools/team-roster-editor/sources')/filename
               rows=[line.split('\t') for line in source.read_text(encoding='utf-8').splitlines() if line and not line.startswith('#')]
