@@ -192,7 +192,7 @@ func preparePayloadWithFS(fsys fs.FS, gamePath, staged string) error {
 			name := filepath.Base(f.Path)
 			if strings.ContainsAny(name, "/\\") { return fmt.Errorf("nome de equipe inválido") }
 			recipeName := name + ".json"
-			if f.Path == nationalConfigPath && current != "76b7af89b81859ed8ee29f78de34ced3c48636ec0a27554c29d8d0da55bc2834" {
+			if f.Path == nationalConfigPath && current == "edda3712891e30fa212dddddbcbba9af8dd4c8a83c02d735e3b80f014a776dcd" {
 				recipeName = name + "." + current + ".json"
 			}
 			data,e := fs.ReadFile(fsys,"bundled_release/patches/"+recipeName)
