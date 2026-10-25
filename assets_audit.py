@@ -96,10 +96,10 @@ def main() -> None:
     parser.add_argument("--game", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
-    result = audit_game(args.game)
-    args.out.parent.mkdir(parents=True, exist_ok=True)
     if args.out.resolve().is_relative_to(args.game.resolve()):
         parser.error("--out must be outside the Brasfoot installation")
+    result = audit_game(args.game)
+    args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({key: result[key] for key in ("totalFiles", "pngWithValidHeaders", "verifiedRights", "assetsApprovedForRedistribution")}, ensure_ascii=False))
 
