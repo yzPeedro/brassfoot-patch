@@ -5,6 +5,7 @@ Separate hosts without a shared coordinator are NOT globally coordinated.
 No API calls are made by this module or its tests.
 """
 from __future__ import annotations
+from contextlib import closing
 from datetime import datetime, timezone
 import hashlib
 import os
@@ -56,7 +57,7 @@ class QuotaLedger:
     def reserve(self, key: str, *, day: str | None = None) -> int:
         day = day or utc_day()
         fingerprint = self._key(key)
-        with self._connect() as connection:
+        with closing(self._connect()) as connection:
             connection.execute("BEGIN IMMEDIATE")
             try:
                 connection.execute(
@@ -98,7 +99,7 @@ class QuotaLedger:
             remaining = 0
         fingerprint = self._key(key)
         day = day or utc_day()
-        with self._connect() as connection:
+        with closing(self._connect()) as connection:
             connection.execute("BEGIN IMMEDIATE")
             try:
                 connection.execute(
@@ -115,7 +116,7 @@ class QuotaLedger:
                 raise
 
     def snapshot(self, key: str, *, day: str | None = None) -> dict:
-        with self._connect() as connection:
+        with closing(self._connect()) as connection:
             row = connection.execute(
                 "SELECT consumed,provider_remaining FROM usage WHERE key_hash=? AND day=?",
                 (self._key(key), day or utc_day())).fetchone()
