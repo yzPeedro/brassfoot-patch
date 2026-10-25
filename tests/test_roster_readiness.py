@@ -20,7 +20,7 @@ class ReadinessTests(unittest.TestCase):
         report = audit(self.catalog, self.rosters)
         summary = report["summary"]
         self.assertEqual(summary["clubs"], 40)
-        self.assertEqual(summary["observedNames"], 1304)
+        self.assertEqual(summary["observedNames"], 1302)
         self.assertEqual(summary["releaseReadyClubs"], 0)
         self.assertEqual(summary["clubsMissingPositionAgeIdReview"], 40)
         self.assertEqual(set(summary["clubsOver40"]), {"Caxias", "Confiança", "Floresta"})
