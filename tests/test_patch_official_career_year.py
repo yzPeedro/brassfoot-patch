@@ -81,5 +81,80 @@ class Check {
             self.assertIn("PASS:",result.stdout)
 
 
+    def test_fingerprinted_2023_2024_variant_only_uses_2026_in_ui_and_engine(self):
+        """Laboratory variant: not evidence about any installed proprietary EXE."""
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            source = root / "a" / "hU.java"
+            source.parent.mkdir(parents=True)
+            source.write_text("""
+package a;
+import javax.swing.JComboBox;
+public class hU {
+ public JComboBox<String> years = new JComboBox<>();
+ public int engineYear;
+ public int pref;
+ public hU(int oldPreference) {pref = oldPreference; mQ();}
+ public int am(String name) {return pref;}
+ public void mQ() {
+    years.addItem("2023");
+    years.addItem("2024");
+    if (am("anoinicio") == 1) years.setSelectedIndex(1);
+    else years.setSelectedIndex(0);
+ }
+ public void onClick() {
+    if (years.getSelectedIndex() == 1) engineYear = 2024;
+    else engineYear = 2023;
+ }
+}
+""", encoding="utf-8")
+            classes = root / "classes"
+            classes.mkdir()
+            subprocess.run(["javac", "-d", str(classes), str(source)],
+                           check=True, capture_output=True)
+            compiled = classes / "a" / "hU.class"
+            original = compiled.read_bytes()
+            expected = hashlib.sha256(original).hexdigest()
+            with self.assertRaises(patcher.ParseError):
+                patcher.patch_official(original)
+            with self.assertRaises(patcher.ParseError):
+                patcher.patch_verified_variant(
+                    original, expected_sha256="0" * 64, source_years=(2023, 2024)
+                )
+            with self.assertRaises(patcher.ParseError):
+                patcher.patch_verified_variant(
+                    original, expected_sha256=expected, source_years=(2023, 2026)
+                )
+            modified = patcher.patch_verified_variant(
+                original, expected_sha256=expected, source_years=(2023, 2024)
+            )
+            self.assertEqual(len(original), len(modified))
+            compiled.write_bytes(modified)
+            check = root / "CheckVariant.java"
+            check.write_text("""
+import a.hU;
+class CheckVariant {
+ public static void main(String... args) {
+   for (int oldPref: new int[]{0, 1}) {
+      hU screen = new hU(oldPref);
+      if (screen.years.getItemCount() != 1 ||
+          !"2026".equals(screen.years.getItemAt(0))) throw new AssertionError("UI");
+      screen.onClick();
+      if (screen.engineYear != 2026) throw new AssertionError("ENGINE");
+   }
+   System.out.println("2023/2024 synthetic adapter PASS");
+ }
+}
+""", encoding="utf-8")
+            subprocess.run(["javac", "-cp", str(classes), "-d", str(classes), str(check)],
+                           check=True, capture_output=True)
+            run = subprocess.run(
+                ["java", "-Djava.awt.headless=true", "-cp", str(classes), "CheckVariant"],
+                check=True, capture_output=True, text=True
+            )
+            self.assertIn("synthetic adapter PASS", run.stdout)
+
+
+
 if __name__=="__main__":
     unittest.main()
