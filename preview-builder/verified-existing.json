@@ -1,0 +1,456 @@
+{
+  "schemaVersion": 1,
+  "description": "Hash evidence from private licensed game for verify-only, no game bytes included. Original rosters are historical 2022-23.",
+  "files": [
+    {
+      "path": "teams/americamg_bra.ban",
+      "sha256": "bbfffd3d7225ad378794f2e025c7be595fcf50994b37c1efd3dad776846e92ad",
+      "size": 2125
+    },
+    {
+      "path": "teams/athleticclub_mg.ban",
+      "sha256": "1ca30fc9ef35c2cec1269259b7c973de8eea06fe6b46a0121cce950f04f3de34",
+      "size": 1755
+    },
+    {
+      "path": "teams/atleticogo_bra.ban",
+      "sha256": "e924f56389baf0730fccd2e5d09242779fb4941726b8cca0a504d488cae54568",
+      "size": 1918
+    },
+    {
+      "path": "teams/avai_bra.ban",
+      "sha256": "2b50901b43b016c91b4958d3724ba132d327af3d2a2d92c227a679f1a8c0df47",
+      "size": 1885
+    },
+    {
+      "path": "teams/botafogosp_bra.ban",
+      "sha256": "bb8e6812a2dfd1593c18932d7afa3ea5352c52667e1f3ec70e075476a7795846",
+      "size": 1777
+    },
+    {
+      "path": "teams/ceara_bra.ban",
+      "sha256": "45a59ec7894111790f89d80117e31468bd4a37078b630b9225afa1e91108ca32",
+      "size": 1993
+    },
+    {
+      "path": "teams/crb_bra.ban",
+      "sha256": "2e0220f8b196d0ea973079e5849072bab8ba138cc1e68427d9f2069f9736edce",
+      "size": 1901
+    },
+    {
+      "path": "teams/criciuma_bra.ban",
+      "sha256": "5eabaec785b1bffa23692dbd04718cf938cc8caecee02c94dcbaa40659b0ba94",
+      "size": 1926
+    },
+    {
+      "path": "teams/cuiaba_bra.ban",
+      "sha256": "a13007e58a381fd45f393c4f03e41f09bd4ec859a274f15dbb0484ce4030d722",
+      "size": 2042
+    },
+    {
+      "path": "teams/fortaleza.ban",
+      "sha256": "d458e162f42f4caa592d82cb7f476214ff6791f528857a3dcc7b9465e166bde3",
+      "size": 1938
+    },
+    {
+      "path": "teams/goias.ban",
+      "sha256": "7a6e01dceac0b62e85b8081dc1d6650c92b4e4ac27913177bd482cbea8b02aec",
+      "size": 1957
+    },
+    {
+      "path": "teams/juventude.ban",
+      "sha256": "8aa0d733f9e776ca1954728211004dcd7f6313017d10c2f9a505445fb9610cd0",
+      "size": 2038
+    },
+    {
+      "path": "teams/londrina_pr.ban",
+      "sha256": "8ca8e53ba3e7bfd3c930f92ef52de0593fe71490b7bec4b93e50d3f25b02eb45",
+      "size": 1805
+    },
+    {
+      "path": "teams/nautico.ban",
+      "sha256": "b2a96c5840dd82ac76c7c033e4a925f6e739c123ce86c38515dd8fe4f30eb2b3",
+      "size": 1813
+    },
+    {
+      "path": "teams/novorinzontino_sp.ban",
+      "sha256": "a26d63f66f4f11ec9b93486aef9d51a20153ef08c22fa464a375154866c88dfb",
+      "size": 1877
+    },
+    {
+      "path": "teams/operario_pr.ban",
+      "sha256": "7721dd7657a7ca344c4feaceb9d74ef58f961f6c06abe5bdb2fb5baeda003c29",
+      "size": 1917
+    },
+    {
+      "path": "teams/pontepreta_bra.ban",
+      "sha256": "dba5ce3d16c8f8b9a112f7fcb3aa2dbbd2772188344ca6792ed092a2f5551494",
+      "size": 1926
+    },
+    {
+      "path": "teams/saobernardo_sp.ban",
+      "sha256": "2bd6a604f93bbbdc1bba4b1630a451bda75f31c0d5ce6ccb0632978360f3783e",
+      "size": 1817
+    },
+    {
+      "path": "teams/sport.ban",
+      "sha256": "16abe995062bcde9195a5809f39e2b6fef61f871ec9b060dabc191a1e75985cd",
+      "size": 2032
+    },
+    {
+      "path": "teams/vilago.ban",
+      "sha256": "5282afc4b2400a3a865ba13648ab46cab0991a6021b59e368cb229fe1e9be0e0",
+      "size": 1905
+    },
+    {
+      "path": "teams/amazonas_am.ban",
+      "sha256": "45e43e396867cae0152969cc8097705c4349cb6f0ee8ff869e2389e808ab9164",
+      "size": 1626
+    },
+    {
+      "path": "teams/anapolisgo_bra.ban",
+      "sha256": "49be64a8f88ba2332c899f9f78f1c567a8144b4d9cac02e85bdaf988b5e473c4",
+      "size": 1784
+    },
+    {
+      "path": "teams/barra_sc.ban",
+      "sha256": "5c20bf9628b2b4ba9f14da40fe9933e7d46af000399633abee891dc915520b5d",
+      "size": 1728
+    },
+    {
+      "path": "teams/botafogopb_bra.ban",
+      "sha256": "27993451cc665d8f84ba47a6742b30f0291e461a9849e5c5742b6f6c8a8d742f",
+      "size": 1859
+    },
+    {
+      "path": "teams/brusquesc_bra.ban",
+      "sha256": "b37eb2c482341e0e9872ca9b54393d269149a820083b08e7593fef9164a872f6",
+      "size": 1832
+    },
+    {
+      "path": "teams/caxias.ban",
+      "sha256": "c2f5f4a4320e193b999b9ca6a0607a603955ccde0e0d67eb877e2dc781bbdaeb",
+      "size": 1611
+    },
+    {
+      "path": "teams/confianca_se.ban",
+      "sha256": "e0bb08819eefefaad4201167ffe6da6d6c173b6985b3a9051de688077c381b60",
+      "size": 1946
+    },
+    {
+      "path": "teams/ferroviaria_sp.ban",
+      "sha256": "17003c1669e95c845391fd46cbaf0a88d787f4fed788da67dfceb4a72d942905",
+      "size": 1640
+    },
+    {
+      "path": "teams/figueirense.ban",
+      "sha256": "a9b31c61381f82a6d29fa73cbc939eb153875102a7b5b18fac249e87bb658c90",
+      "size": 1966
+    },
+    {
+      "path": "teams/florestace.ban",
+      "sha256": "ee07389feb4b940254a0921c7f4881a67c3c8bf239d5b571a9c9e3e065bb7667",
+      "size": 1782
+    },
+    {
+      "path": "teams/guaranisp_bra.ban",
+      "sha256": "349ff87c15db8813d77d2a91609bee0b72411d9a3b8cb650c54a045894991885",
+      "size": 1978
+    },
+    {
+      "path": "teams/interlimeirasp_bra.ban",
+      "sha256": "69fd975b26948690ae9f970296a6b2a6007a7750f69da0bdc7ec049cb344c3a7",
+      "size": 1689
+    },
+    {
+      "path": "teams/itabaiana_se.ban",
+      "sha256": "569c54bb463cfeecefc694453bb26d3698aff479c54fe7ecb322ab478aee8027",
+      "size": 1786
+    },
+    {
+      "path": "teams/ituano_sp.ban",
+      "sha256": "37869cd680756a5beb75a8b12b3ad898917404948f0546ce2faf82052cb79c4d",
+      "size": 1880
+    },
+    {
+      "path": "teams/maringapr.ban",
+      "sha256": "5840104a75049549609276608a4cf19bc3289f8bb9de8600a25c2a8fb716f605",
+      "size": 1565
+    },
+    {
+      "path": "teams/paysandu.ban",
+      "sha256": "c27cce54c15dd0a37ca8c9954b6f933b81f99ae880341cc9d0caee301fe279c1",
+      "size": 1908
+    },
+    {
+      "path": "teams/santa.ban",
+      "sha256": "c08d3e7897f6dd6d384d19eba3cb73b962e03b5ca31ec4be32d28bd81568fd9c",
+      "size": 1902
+    },
+    {
+      "path": "teams/voltaredondarj_bra.ban",
+      "sha256": "0378c56029cb40e5ff6f7b17521c72fc967c1f6df2de3ad36c6c52e5a553f62d",
+      "size": 1780
+    },
+    {
+      "path": "teams/ypiranga_rs.ban",
+      "sha256": "df97b07e72316bae2f425a3172f09c6aca6cf722fffcb2293dae42474b3356b3",
+      "size": 1856
+    },
+    {
+      "path": "teams/nacional_am.ban",
+      "sha256": "ba3b2ebaaf50b24ca2c68a9b687e5c110a9518b6d890b100d03dcc7fe81d6929",
+      "size": 1700
+    },
+    {
+      "path": "teams/manaus_bra.ban",
+      "sha256": "9403118ce1eeed49c468745c942ef8e6c319f0abbe7e5359d79b508b41779651",
+      "size": 1841
+    },
+    {
+      "path": "teams/luverdensemt_bra.ban",
+      "sha256": "a4a26685e71c8959f5970ac1932d1633015f079f69cd60bf89878c2e46040472",
+      "size": 1673
+    },
+    {
+      "path": "teams/aparecidense_go.ban",
+      "sha256": "263d5d805ca4a22cd8a40be7bd2e8c89307c8b6bda7c533b2989e53145be1ee4",
+      "size": 1842
+    },
+    {
+      "path": "teams/operariovg_mt.ban",
+      "sha256": "e3cc9d34fb85b7f66c153c17ffbadea05a20209f9369d3b0ff99380453d64f60",
+      "size": 1610
+    },
+    {
+      "path": "teams/uniaopr_bra.ban",
+      "sha256": "43b5f36acd020f1b4e8dd5b29788f6b0911f1d281fc88da6c61126e84b187f0d",
+      "size": 1825
+    },
+    {
+      "path": "teams/goiatubago_bra.ban",
+      "sha256": "327f54a8e5c1c2f0d51c06cd9df3ba5bad368e081badc632533576a513cc335e",
+      "size": 1869
+    },
+    {
+      "path": "teams/tunaluso_pa.ban",
+      "sha256": "2ee94f55c5c3c2a6abb7f269b0ff8b14fff6b912abf90797b023ff49e238f12c",
+      "size": 1724
+    },
+    {
+      "path": "teams/aguiapa_bra.ban",
+      "sha256": "0a00dd48ad24b289232aedf7d8b48a607a8c3a72944c769efcc332e0fa5de453",
+      "size": 1671
+    },
+    {
+      "path": "teams/imperatriz_ma.ban",
+      "sha256": "3d3257a06265998865f31d3f177c71b3a11a245688ae23494e99c98a6876f029",
+      "size": 1918
+    },
+    {
+      "path": "teams/samapaiocorrea_ma.ban",
+      "sha256": "d7afd5714753b99e6bd89cd308d209bf472da3de04547da7465e046a83f90137",
+      "size": 1996
+    },
+    {
+      "path": "teams/motoclubma_bra.ban",
+      "sha256": "02dedcb7ae7f08a2e39daf3dcd1e82893379f9b894f72fbc60228ab68e96d2c5",
+      "size": 1754
+    },
+    {
+      "path": "teams/iape_ma.ban",
+      "sha256": "6a92e839a302f73e0ef2ff3a2e9eaad786ffbd92b57646a1074377e2491b12ff",
+      "size": 1672
+    },
+    {
+      "path": "teams/maracana_ce.ban",
+      "sha256": "b64b9539b7ef710e53b470b369bb46f5ba17c86a087a49af9b88ea3de5f9474d",
+      "size": 1757
+    },
+    {
+      "path": "teams/iguatu_ce.ban",
+      "sha256": "3737a19f5e96dc19fd8ae4fc08b0379982f93098c66749b297f06dbcb2397a23",
+      "size": 1863
+    },
+    {
+      "path": "teams/ferroviarioce_bra.ban",
+      "sha256": "0d60f6a3124e4248e69153dc86f1b6aa4e6fc8163cf284862cc32bb9972f327d",
+      "size": 1766
+    },
+    {
+      "path": "teams/atleticoce_bra.ban",
+      "sha256": "88458247c42868057387f9adb95f88e36473bedd59c52033d01bf56b169eae49",
+      "size": 1759
+    },
+    {
+      "path": "teams/altos_pi.ban",
+      "sha256": "fd455145e042f8b2b233e9db2b46918ccaf1e8fec122f631b67afdd6430d1e65",
+      "size": 1887
+    },
+    {
+      "path": "teams/abcrn_bra.ban",
+      "sha256": "c799d4a802d2622ec44c31da3726e5c6750ba6b1ecb1298a5eb7ec7f2263566d",
+      "size": 1889
+    },
+    {
+      "path": "teams/americarn.ban",
+      "sha256": "de57c1e46c6b31244e95f1932316d1b8a1da7f70fd7c796d36ea9a98f643f2f0",
+      "size": 1704
+    },
+    {
+      "path": "teams/sousapb_bra.ban",
+      "sha256": "c34342d1746760beb7eb6212ad5bc5fe57d8e90b28f6a34f8f824830cf97014e",
+      "size": 1612
+    },
+    {
+      "path": "teams/central_bra.ban",
+      "sha256": "5d9bb6a6d17b2d9ad1c612045ac11198fde1581729b01eb79c6e72a5f401f640",
+      "size": 1702
+    },
+    {
+      "path": "teams/retrope_bra.ban",
+      "sha256": "4ef8e7563ede838edca2aa1de4b6b5fa13e7d75211e4678284e251b42c6e139f",
+      "size": 1683
+    },
+    {
+      "path": "teams/trezepb_bra.ban",
+      "sha256": "1d91a1581a9c29348c46779ef31c12cf2350fe81eb82813e4d8936376ed38e0e",
+      "size": 1600
+    },
+    {
+      "path": "teams/lagarto_se.ban",
+      "sha256": "5da570c1b2ded47ad25f7b7ec6db1eae18b369897bfd22b3fcabfbd801bf9100",
+      "size": 1645
+    },
+    {
+      "path": "teams/sergipe_se.ban",
+      "sha256": "e46630b85d71c9d3e040d5aaf218a17a554505db84b93f7b5c3755cd3df501db",
+      "size": 1676
+    },
+    {
+      "path": "teams/asaarapiracaal_bra.ban",
+      "sha256": "71debed1d019457183c64adcec54491c1f43ae0736ac4476e69f8259e618aa6e",
+      "size": 1887
+    },
+    {
+      "path": "teams/csa_bra.ban",
+      "sha256": "8ac241261605e879d8252f900b1dc7f96570ef6826ab2085b85e9f14f82eedf3",
+      "size": 1952
+    },
+    {
+      "path": "teams/cseal_bra.ban",
+      "sha256": "d707439b9b70e2825538ad7d950518c9178cd130e85224c842f7e47cc1488b47",
+      "size": 1705
+    },
+    {
+      "path": "teams/jacuipense_bra.ban",
+      "sha256": "a380c2b69c4d99ee5bf1784bc2ec63e20076d30d08b7be6349da24c24033b330",
+      "size": 1929
+    },
+    {
+      "path": "teams/atleticoalagoinhas_bra.ban",
+      "sha256": "11be9e2f16d39e09d0ccd97544323cdb817a645966c545f67de9c147d96d7ff5",
+      "size": 1722
+    },
+    {
+      "path": "teams/juazeirense_ba.ban",
+      "sha256": "c17c08452c4de945de8a0bdbd6d1d991c3222cb8e3d093b19673713d5be1e297",
+      "size": 1703
+    },
+    {
+      "path": "teams/uberlandia_ec.ban",
+      "sha256": "89a9970618414a1c7aee4c58ab01af882339e44f788d05e5e6eee32a7a79f772",
+      "size": 1684
+    },
+    {
+      "path": "teams/cracgo_bra.ban",
+      "sha256": "95b1e2a4a5c8402c07af3fa01b8f8a8c9158ec1efe761945c6f3353a7c5bda29",
+      "size": 1685
+    },
+    {
+      "path": "teams/tombense_mg.ban",
+      "sha256": "dfec3566de8daf21d06d571c1f4cb2fbc2724c5c6228e7ec83a3fbdfe1d10119",
+      "size": 1906
+    },
+    {
+      "path": "teams/ecdemocrata_mg.ban",
+      "sha256": "1c34f2e66188f81685efd97fc0c012f5588ef38de6f9203861b6dd39bde20f4a",
+      "size": 2005
+    },
+    {
+      "path": "teams/madureira_bra.ban",
+      "sha256": "6b1b290ef755e8d654d9854bed962874fb54ff5bde3c13f404eb0e445a4f5840",
+      "size": 1790
+    },
+    {
+      "path": "teams/portuguesarj_bra.ban",
+      "sha256": "339497cf3fde897fe1b8520ccfb29b8163b086b0306dda5b7c2c0e34f377d967",
+      "size": 1977
+    },
+    {
+      "path": "teams/aguasantasp_bra.ban",
+      "sha256": "5d1333449817bf507f7bc2acf972b5eb61e65caef3d4bed7d7f2c1a34ca043f2",
+      "size": 1616
+    },
+    {
+      "path": "teams/pousoalegre_mg.ban",
+      "sha256": "41b3b98cee984787f3a7c2f60a0ee42475bf5d9a92895a9e75dacfd19a265dd7",
+      "size": 1722
+    },
+    {
+      "path": "teams/novaiguacu_rj.ban",
+      "sha256": "08f17d98b0d7cbc35aaec1c3c8978a831bc244f71787347c726e540a75ecdcb5",
+      "size": 1760
+    },
+    {
+      "path": "teams/cianorte_pr.ban",
+      "sha256": "39df1b996965ea7ebacc8eaec4df602e233116ffba56b0d35a7b19766f5735f3",
+      "size": 1645
+    },
+    {
+      "path": "teams/cascavel_pr.ban",
+      "sha256": "0820864e7e7933d34d5907dc840908d6f2c5ae6ea64a99ad5c45a2a62b6d7875",
+      "size": 1650
+    },
+    {
+      "path": "teams/joinville.ban",
+      "sha256": "65cc0a4bc55062f43642300e15c58b5f4314b6df9776a4eecac435165aa10288",
+      "size": 1614
+    },
+    {
+      "path": "teams/guaranyrs_bra.ban",
+      "sha256": "cc51c275d66b0b556e20b3b6229b83d139bf5217c538e879809f73d5f4f49f5b",
+      "size": 1812
+    },
+    {
+      "path": "teams/saoluiz_rs.ban",
+      "sha256": "5243487c907f93f5a5bd2554e6a729d7d8313c9c20d2c57e16558402bc6d27dd",
+      "size": 1627
+    },
+    {
+      "path": "teams/marciliodiassc_bra.ban",
+      "sha256": "08a90576dc2f57eee1a18557856c43f009898bd0136c0d5bf109598f531c5f28",
+      "size": 1616
+    },
+    {
+      "path": "teams/independente_pr.ban",
+      "sha256": "aa8c0475627e8d6cb8e1509f3515b6732821919854a2229e4d4b1c6c0f309540",
+      "size": 1623
+    },
+    {
+      "path": "teams/azurizpr_bra.ban",
+      "sha256": "07c0f7667d8ac68466a0b21bc756c652414e73b65866555b5556ee8f99e20cfc",
+      "size": 1577
+    },
+    {
+      "path": "teams/saojosers_bra.ban",
+      "sha256": "285a1c32fc7245b038a7c78fe9e4e1fe15cf9add7b11831be0de6cc7300d35c8",
+      "size": 1798
+    },
+    {
+      "path": "teams/brasilpelotas_bra.ban",
+      "sha256": "b7110cce5feee2bb30f9626ac69706f0e05f668269a6af066550b559028afbe3",
+      "size": 1958
+    }
+  ]
+}
