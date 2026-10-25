@@ -1,5 +1,16 @@
 # Progresso atual — Brasfoot Patch 2026
 
+## Nova interface e retomada A/B/C — 25/10/2026
+
+- O site público recebeu **paginação 10/20/50**, filtros por divisão e status, busca sem acentos e modal acessível com informações do clube.
+- Os **730 nomes efetivamente instalados na v2026.0.2** foram extraídos de 20 arquivos `.ban` cujos SHA-256 conferem com o manifesto publicado; expostos em `site/data/published-rosters-2026-0-2.json`. **Não** foi usado o snapshot bruto de 745 jogadores para afirmar nomes que não entraram no patch.
+- A pesquisa e o modal foram validados com testes simulando interação de usuário, incluindo páginas, divisão, estado, abertura/fechamento e retorno de foco. **Website regression: sucesso** no GitHub Actions. **GitHub Pages: deploy aprovado**.
+- O novo pipeline `collect_abc_rosters.py` cobre **20 clubes B + 20 clubes C**. Rejeita colisões de identidade e jogadores incompletos, utiliza cache e não consulta a Série D. **Coletor regression: sucesso**, inclusive em fixture offline de 40 equipes e 800 atletas sintéticos (usados exclusivamente nos testes).
+- **Bloqueador real:** nenhum dos 40 elencos B/C da temporada 2026 está disponível no cache desta sessão. Não foram consumidas requisições à API nesta tarefa. O endpoint `/players/squads` fornece uma foto atual, sem garantia de temporada; dados e elenco completo exigem verificação antes da inclusão no jogo.
+- **Release futura A/B/C ainda não publicada.** A v2026.1.1 alterava Série D e é incompatível com o escopo desejado; v2026.0.2 é a prévia de elenco A que o site apresenta. Nenhuma configuração de Série D foi alterada pelo trabalho atual.
+- Veja [`docs/rosters-abc-2026.md`](rosters-abc-2026.md).
+
+
 ## Pipeline diferencial BRA.cfg — execução local validada em 25/10/2026
 
 - Implementado `tools/build_bra_delta.py`: transforma `BRA.cfg` original e candidato de laboratório em uma receita compatível com Go v3, sem copiar configurações completas ao repositório/distribuição. Exige SHA-256 explícito do original, tamanho igual, assinatura Java e **exatamente 2 bytes distintos**, além de recusar saída dentro do jogo.
