@@ -94,6 +94,10 @@ jobs:
                        any(word in name.lower() for word in ('season','ano','division','divisao','inicio','career','carreira','liga','camp'))][:150])
                   print('PREVIEW_ENTRY_NAMES',names[:28])
           PY
+      - name: Locate likely first-second-third division selection UI classes
+        run: |
+          python tools/find_division_ui_candidates.py --game-exe /tmp/brasfoot-extracted/bf22-23.exe
+          echo 'Read-only class ranking: not proof of league membership or gameplay'
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
