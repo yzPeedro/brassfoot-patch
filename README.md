@@ -35,3 +35,7 @@ A coleta do catálogo foi feita via fontes oficiais CBF, sem consumir API-Footba
 A implementação em `windows-installer/` ganhou manifesto `schemaVersion: 3`, operações explícitas `add` e `replace`, suporte a lotes variáveis (1–512 clubes), receitas de criação de equipes, rollback, preservação de saves e testes sintéticos com 156 substituições. Os testes de integração com os **20 originais privados da v2026.0.2** passaram. Isso não comprova suporte de quatro divisões jogáveis no Brasfoot. Consulte `docs/windows-installer.md`.
 
 Para investigar os vínculos com os 136 clubes restantes, existe um coletor **privado** em `scripts/collect-game-structure.ps1`. Ele coleta apenas `.ban`, arquivos de competição `.ces` e inventário de imagens com hashes, nunca saves. O ZIP resultante não deve ser enviado ao GitHub nem publicado.
+
+### Estrutura das competições (nova descoberta)
+
+A análise dos **27 arquivos privados `.cfg`/`.ces`** fornecidos em 25/10/2026 comprovou que `BRA.cfg` registra quatro divisões nacionais A/B/C/D, com 20/20/20/64 clubes e oito grupos na Série D original. Foi implementado o codec Java em [`tools/competition-codec/`](tools/competition-codec/README.md), com round-trip exato 27/27 e um laboratório que produz, fora da instalação, uma configuração de 96 clubes/16 grupos. **A estrutura serializada permite representar os valores, mas a jogabilidade real da Série D com 96 não foi testada.** A expansão de jogadores/clubes e o instalador v2026.0.2 não mudaram nesta análise.
