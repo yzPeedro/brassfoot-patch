@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "status": "development",
-  "publishedVersion": null,
+  "status": "awaiting_release",
+  "publishedVersion": "2026.0.2",
   "publishedAt": null,
-  "downloadUrl": null,
-  "fileSizeBytes": null,
-  "sha256": null,
-  "compatibilityVerifiedInGame": false,
+  "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/download/v2026.0.2/Brassfoot-Patch-2026-Setup.exe",
+  "fileSizeBytes": 2799616,
+  "sha256": "a20885eeb164e9952266da91d575103b6fc784e49e6ce031f81ed9bdd8812b00",
+  "compatibilityVerifiedInGame": true,
   "competitionSeason": 2026,
-  "releaseNotes": "Não existe uma release de instalação validada. Download indisponível até a aprovação do patch e do instalador."
+  "releaseNotes": "Versão experimental: 20 clubes, 730 atletas, 713 atributos estimados, 15 jogadores excluídos. Requer Brasfoot original instalado. Backup e desfazer."
 }
