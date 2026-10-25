@@ -13,6 +13,18 @@
 - **Escudos/uniformes:** pipeline de inventário somente leitura já existe; não há aprovação de direitos/formato para redistribuição de novos assets.
 - **Publicação:** código atualizado em `main`. **Nenhuma release de 156 clubes foi criada**, e não se alterou o arquivo publicado v2026.0.2 nem o hash do seu download.
 
+## Coleta privada de 703 arquivos .ban — 25/10/2026
+
+- O usuário forneceu um ZIP com **703 equipes** da instalação Brasfoot 22-23, todas com hash SHA-256 confirmado e round-trip Java exato (703/703). Dessas, 196 possuem o código de país do Brasil (29).
+- Contra o catálogo oficial de 156 clubes, a reconciliação de nomes e aliases revisados encontrou **110 arquivos existentes** (20 A, 20 B, 19 C e 51 D), e **46 ausentes** (0 A, 0 B, 1 C e 45 D). Associações ainda precisam de validação de identidade interna; os dados não foram incorporados ao pacote público.
+- **Os 20 arquivos de Série A enviados já estão com a v2026.0.2 aplicada**, comprovado pelo SHA-256 dos 20 arquivos no manifesto do instalador publicado. O upgrade deve reconhecer hashes da versão anterior instalada.
+- A coleta incluiu metadados de **2.086 PNGs** (escudos 703, mini-escudos 702, camisas 336, camisas2 334, camisas3 11); **nenhum desses arquivos foi incluído** no ZIP, nem validado para temporada 2026/direitos de publicação.
+- Foram observados vários IDs internos igual a zero e duplicação `internalId=2477` entre São Bernardo e São Paulo; essas referências precisam de investigação antes de adicionar clubes. `tid`/`sid` zero no cabeçalho das equipes não prova divisão.
+- **Nenhum arquivo `.ces` no ZIP**: o coletor anterior verificou apenas a raiz do Brasfoot para essa extensão. Isso não demonstra ausência de mecanismos de competições ou suporte às quatro divisões.
+- O relatório individual de 156 clubes foi mantido **privado** e nunca deve ser publicado ou transformado em pacote que distribua os 703 arquivos de equipes originais.
+- Um teste Go local com `-race`, `vet` e compilação cruzada Windows amd64 passou no motor V3; **não é homologação no Brasfoot**.
+- Próxima etapa factual: encontrar estruturas de competição e referências internas, confirmar os clubes ausentes, obter elencos 2026 e testar um build privado em cópia isolada do jogo; preservar a release pública v2026.0.2.
+
 ## Histórico anterior (mantido como registro; não representa o estado atual)
 
 
