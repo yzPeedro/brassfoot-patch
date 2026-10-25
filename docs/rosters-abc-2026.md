@@ -60,3 +60,28 @@ Este requisito **não deve modificar a Série D** (equipes, formato, `BRA.cfg` e
 - A interface separa explicitamente **elenco publicado na v2026.0.2 (Série A)** de **jogadores pesquisados em fonte externa, ainda NÃO incluídos no patch (Séries B/C)**, com link no modal e filtros específicos.
 - Para gerar o futuro pacote 60 A/B/C, faltam validar individualmente todas as 40 fontes/nomes e transferências, identificar idade/posição e resolver os vínculos de arquivos `.ban`, reproduzir o patch diferencial, testar backups e homologar início de carreira. **Não anunciar "elencos 100% reais e atualizados" com base apenas na existência de nomes em páginas da web.**
 - Ordenação crescente/decrescente e agrupamento nas **quatro colunas** (clube, UF, série, situação do elenco) são feitos antes da paginação e funcionam com busca e filtros. Regressões do site executadas no GitHub Actions.
+
+## Seletores de divisão na criação de carreira — requisito enfileirado (25/10/2026)
+
+A captura de tela da criação de carreira mostra os controles **1ª divisão**, **2ª divisão**, **3ª divisão** e **Jogando estaduais**, com escolhas exibidas América-MG, Bahia, ABC e ASA. **Essas podem ser apenas as escolhas atuais: a imagem não comprova quais clubes integram cada lista nem o vínculo interno com as ligas.**
+
+### Comportamento exigido
+
+- **1ª divisão (Série A):** exatamente os 20 participantes oficiais de 2026.
+- **2ª divisão (Série B):** exatamente os 20 participantes oficiais de 2026.
+- **3ª divisão (Série C):** exatamente os 20 participantes oficiais de 2026.
+- **Jogando estaduais:** permitir a escolha apropriada e compatível com a divisão/UF, sem realocar ou apagar clubes e sem mudar a Série D. É necessário apurar no jogo a função exata desse quarto controle.
+- **Ano de início:** apenas **2026** selecionável, removendo as opções 2023/2024; partidas e save também devem começar realmente em 2026.
+- **Vínculo com o motor:** divisão apresentada = divisão usada na criação da carreira, calendário, adversários, resultados, classificação, acesso/rebaixamento e temporadas seguintes. **Alterar só os textos/ordem na UI não satisfaz o pedido.**
+- **Preservação:** Série D original intacta, inclusive clubes, jogadores, grupos e configuração BRA.cfg; saves anteriores intactos. Toda alteração real requer backup/desfazer.
+
+### Critérios de aceite para teste no Brasfoot Windows
+
+1. Identificar no executável/JAR ou no formato dos times o código que popula os quatro seletores e atribui a divisão aos clubes. O BRA.cfg decodificado contém regras e quantidades, **não a lista nominal de clubes**; a vinculação ainda não foi demonstrada.
+2. Conferir os 60 participantes A/B/C da temporada 2026, 20 por divisão, sem duplicações ou nomes na divisão errada. Os estaduais devem continuar coerentes.
+3. Iniciar uma carreira para cada divisão com **2026** selecionado; conferir clube, divisão, rivais, campeonato estadual quando aplicável e calendário realmente criado.
+4. Avançar rodadas, classificação, acessos e rebaixamentos, virada para a próxima temporada e reabertura dos novos saves.
+5. Comparar hashes de BRA.cfg, arquivos da Série D e saves preexistentes antes/depois; todos devem ficar idênticos.
+6. Testar o instalador e o rollback, com verificação de SHA-256 da versão original. Se o jogo carregar infinitamente, o aceite **falha**.
+
+**Estado:** enfileirado para engenharia reversa e teste na instalação real, **não implementado nem publicado**. O print mostra os seletores, mas não revela a lógica interna de divisão.
