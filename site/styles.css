@@ -109,3 +109,47 @@
 .clubs-table td.club-name{font-size:14px;font-weight:800;color:#fff}
 .clubs-table th:last-child,.clubs-table td:last-child{min-width:225px}
 @media(max-width:760px){.edition-counts{grid-template-columns:1fr;gap:9px}.edition-counts>div{padding:17px}.clubs-table td,.clubs-table th{padding:13px}}
+
+/* Club explorer: accessible pagination, filters and verified roster modal */
+.club-explorer .club-filters{flex-wrap:wrap;gap:12px;align-items:end}
+.club-explorer .club-filters label{min-width:145px}
+.club-explorer .club-filters input[type=search]{min-width:min(100%,245px)}
+.club-explorer .club-filters select:focus-visible,
+.club-explorer .club-filters input:focus-visible,
+.clubs-pagination select:focus-visible{outline:3px solid #c5ff69;outline-offset:3px}
+.club-clickable-row{cursor:pointer}
+.clubs-table .club-detail-trigger{background:none;border:0;padding:5px 0;cursor:pointer;color:#e4ffa4;text-decoration:underline;text-underline-offset:4px;font:inherit;font-weight:800;text-align:left}
+.clubs-table .club-detail-trigger:hover{color:#fff}
+.clubs-table .club-detail-trigger:focus-visible{outline:3px solid #c5ff69;outline-offset:5px;border-radius:2px}
+.clubs-table .club-roster-state{font-size:12px;color:#d1e4c3}
+.clubs-table .clubs-empty{text-align:center;padding:30px 20px;white-space:normal;color:#c9dec8}
+.clubs-pagination{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;margin-top:18px}
+.clubs-pagination label{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.065em;font-weight:800;color:#bad6bd}
+.clubs-pagination select{border:1px solid #5c7b61;border-radius:6px;background:#193b28;color:#fff;padding:9px 12px;font:inherit;min-width:75px}
+.clubs-pagination-actions{display:flex;gap:12px;align-items:center}
+.clubs-pagination-actions button{background:#c5ff69;border:1px solid #c5ff69;color:#0b2519;padding:10px 16px;border-radius:5px;font-size:12px;font-weight:800;cursor:pointer}
+.clubs-pagination-actions button:hover:not(:disabled){background:#fff}
+.clubs-pagination-actions button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.clubs-pagination-actions button:disabled{opacity:.42;cursor:not-allowed}
+#clubs-page-label{color:#d7e8d5;font-size:12px;font-variant-numeric:tabular-nums;min-width:96px;text-align:center}
+.club-dialog{box-sizing:border-box;width:min(720px,calc(100vw - 26px));max-width:720px;max-height:min(88dvh,840px);overflow-y:auto;margin:auto;padding:0;border-radius:13px;border:1px solid #4e845d;background:#102a1e;color:#f0fff0;box-shadow:0 30px 85px #000a}
+.club-dialog::backdrop{background:rgba(3,13,8,.78);backdrop-filter:blur(5px)}
+.club-dialog-header{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding:30px 30px 22px;background:linear-gradient(150deg,#245138,#163323)}
+.club-dialog-eyebrow{font-size:11px;color:#c5ff69;font-weight:800;letter-spacing:.09em}
+.club-dialog-header h3{margin:8px 0;font:900 clamp(28px,5vw,42px)/1.15 'Barlow Condensed',sans-serif;color:#fff;text-transform:uppercase}
+.club-dialog-header p{margin:0;color:#cee2d0;font-size:13px;line-height:1.6}
+.club-dialog-close{flex-shrink:0;width:42px;height:42px;cursor:pointer;border:1px solid #6c9470;border-radius:50%;background:#193d2b;color:#fff;font-size:27px;line-height:1}
+.club-dialog-close:hover{background:#376046}
+.club-dialog-close:focus-visible{outline:3px solid #c5ff69;outline-offset:3px}
+.club-dialog-metadata{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:22px 30px;border-bottom:1px solid #365b40}
+.club-dialog-metadata>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.club-dialog-metadata span{font-size:10px;color:#afcdb3;letter-spacing:.07em;font-weight:800}
+.club-dialog-metadata strong{font-size:13px;color:#fff;line-height:1.5}
+.club-dialog-roster{padding:20px 30px 30px}
+.club-dialog-roster h4{font:800 23px/1.2 'Barlow Condensed',sans-serif;color:#fff;text-transform:uppercase;margin:0 0 10px}
+.club-dialog-roster p{font-size:12px;line-height:1.8;color:#c3dbc5;margin:0 0 18px}
+.club-dialog-player-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 24px;padding:0 0 0 24px;margin:0;list-style:decimal}
+.club-dialog-player-list li{font-size:13px;color:#f0fff0;line-height:1.6;padding-left:3px;overflow-wrap:anywhere}
+.club-dialog-player-list li::marker{font-variant-numeric:tabular-nums;color:#b9ee87}
+@media(max-width:660px){.clubs-pagination{align-items:stretch}.clubs-pagination-actions{justify-content:space-between;width:100%}.clubs-pagination-actions button{padding:10px}.club-dialog-header{padding:22px 20px 17px}.club-dialog-metadata{padding:16px 20px;gap:9px}.club-dialog-roster{padding:16px 20px 24px}.club-dialog-player-list{grid-template-columns:1fr}.club-dialog-metadata strong{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.club-dialog::backdrop{backdrop-filter:none}}
