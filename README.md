@@ -6,7 +6,7 @@ Patch comunitário experimental para o Brasfoot 2022–2023 no Windows. O reposi
 
 - A coleta de 25/10/2026 registrou 20 clubes e 745 atletas na máquina de desenvolvimento; o snapshot privado **não está versionado aqui**.
 - O gerador `build_preview.py` é **experimental**; não foi validado em execução no Brasfoot e não constitui um patch público.
-- Um **executável experimental de teste offline** foi executado no Windows em 25/10/2026: a simulação reportou backup, SHA-256, rollback e identificação da pasta do jogo. Esse teste não instala elencos e não comprova o funcionamento do instalador real com arquivos `.ban`. Uma GitHub Release jogável **ainda não existe**; o download permanece desabilitado por segurança.
+- A **release pública v2026.0.2 (experimental)** foi criada em 25/10/2026 com instalador Windows em Go, após teste de instalação de elencos no Brasfoot relatado pelo usuário. [Baixe a versão publicada](https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.0.2). O pacote tem 20 clubes da Série A e 730 jogadores, dos quais 713 têm atributos estimados; não inclui as Séries B, C e D.
 - O site está versionado em `site/` e sua versão estática é mantida na raiz da branch `gh-pages` para publicação por branch, sem workflows personalizados. Em 25/10/2026 foi removida a bola animada do cabeçalho, sem remover o campo.
 
 ## Testar sem consumir a API
@@ -16,7 +16,7 @@ python -m unittest discover -s tests -q
 node site/tests/site.test.js
 ```
 
-Execute uma release somente depois de validar todos os arquivos `.ban` dentro do jogo, construir e testar um instalador de verdade e publicar um executável íntegro com checksum. O site só deve anunciar uma release depois dessas evidências.
+**Uma nova release** só deverá ser criada após gerar e testar todos os novos arquivos e confirmar no Windows e dentro do Brasfoot os clubes/divisões efetivamente anunciados, a integridade e os direitos sobre os assets. Preserve a v2026.0.2 enquanto a expansão estiver em implementação.
 
 Veja `docs/acceptance-matrix.md`, `docs/deployment.md` e `docs/release-process.md` para as pendências.
 
@@ -28,3 +28,10 @@ Em 25/10/2026 foi incluído o catálogo oficial de **156 clubes das Séries A (2
 A coleta do catálogo foi feita via fontes oficiais CBF, sem consumir API-Football. O coletor existente passa a usar o ledger SQLite `quota_guard.py` para contabilização diária conservadora (90 tentativas locais + reserva de 10), com a limitação de coordenação entre hosts descrita em [relatório de quota](docs/api-usage-report.md). Um [auditor offline de assets](assets_audit.py) agora permite inventariar imagens do jogo sem modificá-las nem publicá-las. Consulte [cobertura de assets](docs/assets-coverage.md) e [CANs da expansão](docs/upgrade-2026-acceptance.md).
 
 **Não existe release nova de 156 clubes, elencos B/C/D ou uniformes oficiais.** Próximo gate é investigar suporte real às divisões, validar assets e elencos, executar testes e testar novo instalador no Windows. O download da v2026.0.2 permanece inalterado.
+
+
+### Implementação Go V3 em andamento (não distribuída)
+
+A implementação em `windows-installer/` ganhou manifesto `schemaVersion: 3`, operações explícitas `add` e `replace`, suporte a lotes variáveis (1–512 clubes), receitas de criação de equipes, rollback, preservação de saves e testes sintéticos com 156 substituições. Os testes de integração com os **20 originais privados da v2026.0.2** passaram. Isso não comprova suporte de quatro divisões jogáveis no Brasfoot. Consulte `docs/windows-installer.md`.
+
+Para investigar os vínculos com os 136 clubes restantes, existe um coletor **privado** em `scripts/collect-game-structure.ps1`. Ele coleta apenas `.ban`, arquivos de competição `.ces` e inventário de imagens com hashes, nunca saves. O ZIP resultante não deve ser enviado ao GitHub nem publicado.
