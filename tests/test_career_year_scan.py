@@ -59,5 +59,39 @@ class CareerYearTests(unittest.TestCase):
             self.assertFalse(result["binaries"][0]["javaClassCandidates"]["readableZip"])
             self.assertEqual(exe.read_bytes(),b"MZ"+bytes(512))
 
+
+    def test_identifies_renamed_2023_2024_selector_without_copying_bytes(self):
+        with TemporaryDirectory() as temp:
+            archive = Path(temp) / "bf22-23.exe"
+            fake_class = (
+                b"\xca\xfe\xba\xbe"
+                + b"obfuscated/SeasonPanel javax/swing/JComboBox anoinicio 2023 2024"
+            )
+            with ZipFile(archive, "w") as z:
+                z.writestr("obf/SeasonPanel.class", fake_class)
+            before = archive.read_bytes()
+            scanned = inspect_jar(archive)
+            self.assertEqual(scanned["classFilesExamined"], 1)
+            self.assertEqual(len(scanned["selectorCandidates"]), 1)
+            candidate = scanned["selectorCandidates"][0]
+            self.assertEqual(candidate["classPath"], "obf/SeasonPanel.class")
+            self.assertEqual(candidate["possibleYearPairs"], [[2023, 2024]])
+            self.assertFalse(candidate["isKnownOfficialSelector"])
+            self.assertFalse(candidate["verifiedAsActualCareerSelector"])
+            self.assertFalse(candidate["originalBytesCopied"])
+            self.assertEqual(archive.read_bytes(), before)
+
+    def test_oversized_known_class_is_not_decompressed(self):
+        with TemporaryDirectory() as temp:
+            archive = Path(temp) / "bf22-23.exe"
+            with ZipFile(archive, "w") as z:
+                z.writestr("a/hU.class", b"\xca\xfe\xba\xbe" + b"X" * (3 * 1024 * 1024 + 1))
+            scanned = inspect_jar(archive)
+            self.assertIsNone(scanned["yearSelector"])
+            self.assertEqual(scanned["selectorCandidates"], [])
+            self.assertEqual(scanned["classFilesExamined"], 0)
+            self.assertIn("safe decompression limits", scanned["warning"])
+
+
 if __name__=="__main__":
     unittest.main()
