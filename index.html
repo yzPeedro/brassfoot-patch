@@ -116,6 +116,15 @@
                     <option value="pending">Aguardando elencos atualizados</option>
                   </select>
                 </label>
+                <label for="clubs-group-by">AGRUPAR POR
+                  <select id="clubs-group-by" disabled>
+                    <option value="none">Sem agrupamento</option>
+                    <option value="name">Inicial do clube</option>
+                    <option value="state">UF</option>
+                    <option value="division">Série</option>
+                    <option value="roster">Situação do elenco</option>
+                  </select>
+                </label>
                 <label for="clubs-search">BUSCAR CLUBE OU UF
                   <input id="clubs-search" type="search" autocomplete="off" placeholder="Ex.: Botafogo, MG, Cruzeiro" disabled />
                 </label>
@@ -124,7 +133,12 @@
             <div class="club-table-shell">
               <table class="clubs-table">
                 <caption>Clubes das Séries A, B e C, com status de verificação do elenco</caption>
-                <thead><tr><th scope="col">CLUBE</th><th scope="col">UF</th><th scope="col">SÉRIE</th><th scope="col">SITUAÇÃO</th></tr></thead>
+                <thead><tr>
+                  <th scope="col" id="clubs-heading-name" aria-sort="ascending"><button type="button" class="clubs-sort" id="clubs-sort-name" data-sort="name" aria-label="Ordenar por clube">CLUBE <span class="sort-indicator" aria-hidden="true">↑</span></button></th>
+                  <th scope="col" id="clubs-heading-state" aria-sort="none"><button type="button" class="clubs-sort" id="clubs-sort-state" data-sort="state" aria-label="Ordenar por UF">UF <span class="sort-indicator" aria-hidden="true">↕</span></button></th>
+                  <th scope="col" id="clubs-heading-division" aria-sort="none"><button type="button" class="clubs-sort" id="clubs-sort-division" data-sort="division" aria-label="Ordenar por Série">SÉRIE <span class="sort-indicator" aria-hidden="true">↕</span></button></th>
+                  <th scope="col" id="clubs-heading-roster" aria-sort="none"><button type="button" class="clubs-sort" id="clubs-sort-roster" data-sort="roster" aria-label="Ordenar por situação do elenco">SITUAÇÃO <span class="sort-indicator" aria-hidden="true">↕</span></button></th>
+                </tr></thead>
                 <tbody id="clubs-grid"></tbody>
               </table>
             </div>
