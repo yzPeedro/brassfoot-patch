@@ -1,5 +1,13 @@
 # Progresso atual — Brasfoot Patch 2026
 
+## Pipeline diferencial BRA.cfg — execução local validada em 25/10/2026
+
+- Implementado `tools/build_bra_delta.py`: transforma `BRA.cfg` original e candidato de laboratório em uma receita compatível com Go v3, sem copiar configurações completas ao repositório/distribuição. Exige SHA-256 explícito do original, tamanho igual, assinatura Java e **exatamente 2 bytes distintos**, além de recusar saída dentro do jogo.
+- Experimento privado: original 1.089 bytes `76b7af89b81859ed8ee29f78de34ced3c48636ec0a27554c29d8d0da55bc2834`; candidato 96/16 `edda3712891e30fa212dddddbcbba9af8dd4c8a83c02d735e3b80f014a776dcd`; receita **5 operações, 2 bytes adicionados**, que reconstruiu o candidato byte a byte.
+- O Go v3 foi executado localmente com a receita, em uma **cópia isolada com 703 equipes reais**: preflight, instalação da configuração, verificação SHA-256, estado já instalado, restauração do `BRA.cfg` original e preservação de `options.bcf` e `career.s22`. A regressão da v2026.0.2 também foi aprovada com os 20 originais privados.
+- Python: **3 testes do gerador** passaram, incluindo hash original incorreto, operação corrompida e rejeição de mais de 2 bytes alterados. Go: `go test -race -count=1 ./...`, `go vet ./...` e build Windows amd64 passaram na árvore local. O binário dessa validação não foi distribuído.
+- Gate não atendido: **o motor real do Brasfoot não foi executado**. Serialização, hashes e rollback não provam que Série D 96/16 possa gerar calendário nem que 96 clubes estejam nas divisões certas. **Release pública v2026.0.2 preservada**; não publicar o candidato experimental.
+
 ## Instalação transacional de BRA.cfg — validação 25/10/2026
 
 - O motor oficial Go `windows-installer/` passou a aceitar **somente** `conf_ligas_nacionais/BRA.cfg` em manifesto **schema 3**, operação `replace`, com SHA-256 do original previamente homologado, cabeçalho Java Serialization, limites de tamanho e preflight de diretório.
