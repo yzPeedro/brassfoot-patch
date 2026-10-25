@@ -42,3 +42,13 @@ O coletor salva o snapshot em `data/private/bc-rosters-2026-review.json`, ignora
 6. Atualizar site e release **somente depois** que houver os artefatos verificáveis.
 
 A release **v2026.1.1, que modificava a Série D**, não corresponde ao escopo definitivo. O site mantém a v2026.0.2 como referência para a prévia de elencos da Série A.
+
+## Requisito final de início de carreira — solicitado em 25/10/2026
+
+Ao criar **uma carreira nova no Brasfoot 22–23**, o campo de temporada deve permitir **exclusivamente 2026**, ocultando/removendo os atuais valores 2023 e 2024. Não basta alterar textos exibidos: o ano efetivamente persistido no novo save e utilizado nas partidas também deve ser 2026. Carreiras existentes devem permanecer intactas.
+
+Este requisito **não deve modificar a Série D** (equipes, formato, `BRA.cfg` e calendário). É um ajuste separado do patch de elencos A/B/C.
+
+**Estado: pendente de identificação e homologação.** A lista de anos parece fazer parte do código do jogo, e não dos `.ban` ou `BRA.cfg` já decodificados; ainda não há evidência binária suficiente para localizar o controle no executável/JAR do usuário. Não reescrever bytes da aplicação nem distribuir um mod de executável sem verificar o hash da versão-alvo. Existe precedente público de mods que alteram os anos iniciais, mas isso não prova compatibilidade com esta cópia particular.
+
+**Gate de aceitação:** após executar em cópia isolada, a interface mostra só 2026; é possível selecionar clube e iniciar uma nova carreira sem carregamento infinito; o save registra 2026; calendário e virada de temporada funcionam; backup/desfazer restaura a lista original 2023/2024; saves anteriores permanecem iguais por SHA-256. Não liberar release anunciando esse recurso até passar nessa sequência.
