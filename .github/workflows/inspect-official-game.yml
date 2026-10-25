@@ -44,6 +44,21 @@ jobs:
           echo "----- Extracted filenames (no file bytes) -----"
           find /tmp/brasfoot-extracted -type f -printf '%P\n' | head -n 100
           find /tmp/brasfoot-extracted -type f \( -iname '*.exe' -o -iname '*.jar' -o -iname '*.class' \) -printf '%P\n' | head -n 60
+      - name: Identify largest extracted file types and runtime executable names
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from collections import Counter
+          import subprocess
+          root=Path('/tmp/brasfoot-extracted')
+          files=[p for p in root.rglob('*') if p.is_file()]
+          print('EXTRACTED_FILE_COUNT',len(files))
+          print('EXTENSION_TOP',Counter(p.suffix.lower() or '<none>' for p in files).most_common(20))
+          top=sorted(files,key=lambda p:p.stat().st_size,reverse=True)[:50]
+          for p in top:
+              print('LARGEST',p.relative_to(root),p.stat().st_size,
+                    subprocess.run(['file','-b',str(p)],capture_output=True,text=True).stdout.strip()[:110])
+          PY
       - name: Identify class candidates related to year 2023 and 2024
         run: |
           python - <<'PY'
