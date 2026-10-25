@@ -7,7 +7,7 @@ Este módulo reconstrói **um arquivo `.ban` fornecido pelo proprietário da ins
 - **Criciúma:** 29 nomes e posições retirados do [elenco profissional oficial](https://mail.criciumaec.com.br/equipes/elenco-profissional), consulta de 25/10/2026.
 - O arquivo original privado `criciuma_bra.ban` tem SHA-256 `5eabaec785b1bffa23692dbd04718cf938cc8caecee02c94dcbaa40659b0ba94`, ID `2226` e 22 atletas históricos.
 - Em laboratório local, o editor recriou um time com **29 atletas** e produziu serialização Java válida com round-trip exato. Preservou IDs/atributos históricos dos quatro jogadores correspondentes; os outros **25** ainda precisaram de estimativas de idade, nacionalidade e atributos. **Não é um elenco homologado para release.**
-- A receita diferencial de laboratório reconstruiu o mesmo resultado com 40 operações, 1.716 bytes de dados alterados, sem redistribuir o original. SHA-256 experimental do destino: `840fd3e85f8bd6f384ff96b16ba15b77aaac7c83c525547580e3e5a8da92477b`.
+- A receita diferencial de laboratório reconstruiu o mesmo resultado com 48 operações, 1.636 bytes de dados alterados, sem redistribuir o original. SHA-256 experimental do destino: `334bb75defb31d1035f05d87b961d7a0cbfba2799546303c6ba05c4898e38e3e`.
 - A ferramenta não altera nem precisa consultar `conf_ligas_nacionais/BRA.cfg`, saves ou a Série D.
 
 ## Compilar e testar
@@ -34,3 +34,9 @@ Sem `--lab-estimates`, o editor recusa atributos estimados em jogadores novos. A
 ## Pendências
 
 Para os outros 39 elencos B/C e a versão final A/B/C, ainda são necessários revisão dos vínculos atuais de cada atleta, atributos compatíveis, reconciliação dos arquivos de origem e testes reais de criação de carreira. **A atualização dos 60 clubes não foi publicada nem testada no jogo.** A Série D original e saves antigos permanecem intocados.
+
+## Identificadores seguros e testes adicionais
+
+Na base original, **Athletic, Amazonas, Anápolis, Barra, Inter de Limeira e Itabaiana têm ID interno 0**; **São Paulo e São Bernardo compartilham ID 2477**. Portanto, o editor não usa mais `team.id` como namespace para IDs de jogadores adicionados: deriva o namespace do SHA-256 específico do arquivo original. Os namespaces resultantes dos **59 arquivos existentes das Séries A/B/C** foram comparados localmente e são diferentes entre si. O Maranhão ainda precisa de arquivo legítimo novo.
+
+Foram gerados dois patches diferenciais privados e os dois foram reconstruídos byte a byte pelo **motor Go do instalador** em teste local. O Labratorório não publica os arquivos resultantes; seus metadados acima foram atualizados após a correção do namespace de IDs.
