@@ -153,3 +153,12 @@
 .club-dialog-player-list li::marker{font-variant-numeric:tabular-nums;color:#b9ee87}
 @media(max-width:660px){.clubs-pagination{align-items:stretch}.clubs-pagination-actions{justify-content:space-between;width:100%}.clubs-pagination-actions button{padding:10px}.club-dialog-header{padding:22px 20px 17px}.club-dialog-metadata{padding:16px 20px;gap:9px}.club-dialog-roster{padding:16px 20px 24px}.club-dialog-player-list{grid-template-columns:1fr}.club-dialog-metadata strong{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.club-dialog::backdrop{backdrop-filter:none}}
+
+/* Accessible four-column sorting and grouping */
+.clubs-sort{font:inherit;color:inherit;letter-spacing:inherit;text-transform:inherit;font-weight:800;display:inline-flex;align-items:center;gap:7px;background:none;border:none;padding:7px 4px;cursor:pointer}
+.clubs-sort:hover{color:#c5ff69}
+.clubs-sort:focus-visible{outline:2px solid #c5ff69;outline-offset:3px;border-radius:3px}
+.clubs-sort .sort-indicator{font-size:14px;color:#c5ff69}
+.clubs-group-header th{background:#355d40!important;color:#e9ffb5!important;font-weight:800;padding:12px 20px;text-align:left;font-size:13px;letter-spacing:.035em;border-top:2px solid #73986b}
+.clubs-group-header:hover{cursor:default}
+.club-filters select{max-width:100%}
