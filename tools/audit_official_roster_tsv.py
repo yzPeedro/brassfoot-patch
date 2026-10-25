@@ -19,6 +19,7 @@ IDENTITIES = {
     "sao-bernardo":"br-sao-bernardo-sp",
     "goias":"br-goias-go", "atletico-goianiense":"br-atletico-goianiense-go",
     "crb":"br-crb-al",
+    "america":"br-america-mg",
 }
 
 def clean(name):
@@ -31,7 +32,9 @@ def audit(rosters, directory):
     result=[]
     total=0
     for stem,club_id in IDENTITIES.items():
-        path=directory/(stem+"-2026-official.tsv")
+        filename=("america-2026-contracts-o-tempo.tsv" if stem=="america"
+                  else stem+"-2026-official.tsv")
+        path=directory/filename
         if not path.is_file() or club_id not in records:
             raise ValueError("Missing sourced club: "+stem)
         lines=[line.split("\t") for line in path.read_text(encoding="utf-8").splitlines()
