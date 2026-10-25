@@ -6,3 +6,16 @@
 @media(max-width:760px){.top-ribbon{font-size:8px;gap:6px;text-align:center;padding:0 12px}.ribbon-line{display:none}.wrap{width:calc(100% - 40px)}.header-inner{height:66px}.brand-text{font-size:20px}.github-link{display:none}.mobile-menu{display:block}.nav{display:none;position:absolute;top:66px;left:0;right:0;background:#0c281b;padding:24px 20px;border-bottom:1px solid #35593e;flex-direction:column;gap:22px;align-items:flex-start}.nav.open{display:flex}.nav a{font-size:14px}.hero{min-height:0}.hero-grid{grid-template-columns:1fr;gap:0}.hero-copy{padding:75px 0 20px}.hero h1{font-size:clamp(64px,12vw,85px)}.hero-description{font-size:14px}.hero-art{height:410px;max-width:540px;width:100%;margin:10px auto 20px;transform:none}.season-card{transform:scale(.72)}.hero-bottom{height:60px}.numbers-grid{grid-template-columns:1fr 1fr}.numbers-grid>div{padding:23px 16px;min-height:100px;border-bottom:1px solid #0e4c292c}.numbers-grid>div:first-child{padding-left:16px}.numbers-grid strong{font-size:38px}.numbers-grid span{font-size:9px}.section{padding:74px 0}.section-head,.method-head{display:block}.section h2{font-size:clamp(53px,9vw,75px);margin:24px 0}.section-head p,.method-head p{margin-bottom:30px}.feature-grid,.steps,.release-grid,.faq-grid{grid-template-columns:1fr}.feature-card{min-height:285px}.steps{border-bottom:0}.step,.step:not(:first-child){padding:25px 0;border-right:0;border-bottom:1px solid #42614b}.step h3{margin-top:16px}.release-panel{box-shadow:10px 12px 0 #cad6bc}.panel-version{font-size:90px}.faq-grid{gap:25px}.ending-grid,.footer-inner{flex-direction:column;align-items:flex-start}.ending-grid>div:last-child{text-align:left}.ending-number{font-size:85px}.footer-inner{gap:20px}.footer p{max-width:100%}}
 @media(max-width:400px){.wrap{width:calc(100% - 30px)}.hero h1{font-size:61px}.hero-art{height:355px}.hero-actions{gap:20px}.field{inset:70px 16px 70px}.main-cta{width:100%}.panel-meta strong{font-size:11px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+/* Installation engineering disclosure: real code exists, binaries remain gated. */
+.installer-status {background: #0a211a; color: #f0f7ec;}
+.installer-status .section-head p {color:#b2c7b7;}
+.installer-status-grid {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:32px;}
+.installer-status-grid article {background:#123329;border:1px solid rgba(191,255,100,.18);padding:24px 20px;border-radius:10px;}
+.installer-status-grid article span {font-size:11px;letter-spacing:.14em;color:#c5ff69;font-weight:800;}
+.installer-status-grid article h3 {font-size:20px;margin:16px 0 10px;line-height:1.2;color:#fff;}
+.installer-status-grid article p {font-size:14px;line-height:1.6;color:#b8c8bd;margin:0;}
+.installer-note {margin:26px 0 0;padding:17px 22px;border-left:3px solid #c5ff69;background:#15352a;color:#d9e9dc;line-height:1.65;}
+.installer-note strong {color:#c5ff69;}
+@media(max-width:980px){.installer-status-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:580px){.installer-status-grid{grid-template-columns:1fr;}.installer-status-grid article{padding:20px;}}
