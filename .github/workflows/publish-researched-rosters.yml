@@ -1,0 +1,61 @@
+name: Publish researched B-C rosters to website
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/export_researched_rosters.py'
+      - '.github/workflows/publish-researched-rosters.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: site-roster-research-publish
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Rebuild only B-C source-researched data from 40 TSVs
+        run: python tools/export_researched_rosters.py
+      - name: Validate player observations and website
+        run: |
+          python tools/export_researched_rosters.py --check
+          python -m unittest discover -s tests -p 'test_official_roster_tsv.py' -v
+          node site/tests/site.test.js
+          node site/tests/explorer-interaction.test.js
+      - name: Commit generated public research data to main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/data/researched-rosters-2026.json
+          if ! git diff --cached --quiet; then
+            git commit -m "data(site): source-verified roster observations for 40 B-C clubs"
+            git push origin HEAD:main
+          fi
+      - name: Sync identical roster data to GitHub Pages
+        run: |
+          git fetch origin gh-pages
+          git worktree add --detach /tmp/brassfoot-pages origin/gh-pages
+          mkdir -p /tmp/brassfoot-pages/data
+          cp site/data/researched-rosters-2026.json /tmp/brassfoot-pages/data/researched-rosters-2026.json
+          git -C /tmp/brassfoot-pages config user.name "github-actions[bot]"
+          git -C /tmp/brassfoot-pages config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git -C /tmp/brassfoot-pages add data/researched-rosters-2026.json
+          if ! git -C /tmp/brassfoot-pages diff --cached --quiet; then
+            git -C /tmp/brassfoot-pages commit -m "data(pages): publish researched B-C names and roles"
+            git -C /tmp/brassfoot-pages push origin HEAD:gh-pages
+          fi
+      - name: Confirm both published JSON versions are byte-identical
+        run: |
+          git fetch origin main gh-pages
+          git show origin/gh-pages:data/researched-rosters-2026.json > /tmp/research-online.json
+          cmp site/data/researched-rosters-2026.json /tmp/research-online.json
