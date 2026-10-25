@@ -167,3 +167,6 @@
 .club-research-source[hidden]{display:none}
 .club-research-source a{color:#c5ff69;font-weight:800;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
 .club-research-source a:focus-visible{outline:2px solid #c5ff69;outline-offset:3px}
+
+/* External research only: visible player roles are not an installed patch guarantee. */
+.club-player-role{color:#aabfc4;font-weight:500;font-size:.84em;white-space:nowrap}
