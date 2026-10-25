@@ -59,8 +59,8 @@ $result = [PSCustomObject]@{
     contentCopied = $false
     ignoredUserData = @('saves','profiles','options.bcf','executables','archives','images','audio','backups')
     fileCountsByExtension = $extensions
-    directoryNames = @($directories)
-    candidateDataFiles = @($candidates)
+    directoryNames = $directories.ToArray()
+    candidateDataFiles = $candidates.ToArray()
 }
 $out = Join-Path $dest ('Brasfoot-2026-competicoes-inventario-' + (Get-Date -Format 'yyyyMMdd-HHmmss') + '.json')
 $result | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $out -Encoding UTF8
