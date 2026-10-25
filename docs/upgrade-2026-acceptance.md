@@ -24,3 +24,12 @@ Os statuses abaixo distinguem trabalho entregue em código de validação real. 
 | CAN40 (validação representativa final) | **bloqueado** | Novo patch 156 clubes não foi gerado nem testado no Brasfoot |
 
 **Gate de release:** não publicar novo instalador até resolver compatibilidade, integração real, direitos das imagens e validação no Windows.
+
+
+## Evidência adicional: integração do BRA.cfg — 25/10/2026
+
+- **CAN07:** formatos nacionais e estaduais confirmados via 27/27 round-trips idênticos em Java.
+- **CAN08:** Go v3 consegue substituir e restaurar `BRA.cfg` com hashes verificados em cópia com 703 equipes reais; **jogabilidade não aprovada**.
+- **CAN25–27:** transações de configuração agora têm backup/rollback e preservam `options.bcf` e saves nas fixtures privadas; integração completa 156 ainda pendente.
+- **CAN35:** `go test -race -count=1 ./...`, `go vet ./...` e build cruzado Windows amd64 executados com sucesso na árvore local evoluída; execução da GUI Windows e carreira Série D 96/16 continuam sem evidência.
+- **CAN40:** não homologado; nenhuma nova release foi criada. Não considerar a integridade dos arquivos equivalente a compatibilidade do jogo.
