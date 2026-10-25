@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#071813" />
-    <meta name="description" content="Brassfoot Patch 2026: versão experimental disponível para Windows com 20 clubes da Série A; acompanhe a expansão e o catálogo oficial de 156 clubes das Séries A–D." />
+    <meta name="description" content="Brassfoot Patch 2026.1.1 para Windows: 20 clubes por divisão nas Séries A, B, C e D, com instalador, backup e opção de desfazer." />
     <meta property="og:title" content="Brassfoot Patch — O futebol não para" />
     <meta property="og:description" content="Uma nova temporada para o clássico do futebol." />
     <title>Brassfoot Patch — Futebol brasileiro, sempre em campo</title>
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="./styles.css" />
     <script src="./app.js" defer></script>
     <script src="./divisions.js" defer></script>
-    <script src="./coverage.js" defer></script>
+    
   </head>
   <body>
     <a href="#main" class="skip">Pular para conteúdo</a>
@@ -27,7 +27,6 @@
         <nav class="nav" id="nav" aria-label="Navegação principal">
           <a href="#recursos">Recursos</a>
           <a href="#clubes-2026">Clubes 2026</a>
-          <a href="#alfa-156">Alfa 156</a>
           <a href="#cobertura">Cobertura</a>
           <a href="#como-funciona">Como funciona</a>
           <a href="#instalador">Instalador</a>
@@ -47,12 +46,12 @@
           <div class="hero-copy">
             <div class="eyebrow"><span class="eyebrow-line"></span> BRASIL • EDIÇÃO 2026 <span class="eyebrow-star">✳</span></div>
             <h1 id="hero-title">A temporada muda.<br/><em>Seu Brasfoot</em><br/> acompanha.</h1>
-            <p class="hero-description">O futebol brasileiro evolui a cada janela. A versão 2026.0.2 já está disponível para Windows com 20 elencos experimentais. A expansão para as quatro divisões está em desenvolvimento, com dados e testes publicados de forma transparente.</p>
+            <p class="hero-description">O futebol brasileiro evolui a cada janela. A edição 2026.1.1 reúne as Séries A, B, C e D com 20 clubes selecionados em cada uma, instalação com backup e opções para desfazer.</p>
             <div class="hero-actions">
               <button class="main-cta" id="download-hero" type="button" disabled aria-describedby="release-status-text">VERIFICANDO DOWNLOAD... <span class="cta-arrow" aria-hidden="true">↗</span></button>
               <a href="#como-funciona" class="secondary-cta">CONHEÇA O PROJETO <span aria-hidden="true">↓</span></a>
             </div>
-            <p class="release-disclaimer" id="release-status-text"><span class="disclaimer-led"></span> v2026.0.2 publicada no GitHub. O download é liberado após conferência do arquivo e do SHA-256.</p>
+            <p class="release-disclaimer" id="release-status-text"><span class="disclaimer-led"></span> v2026.1.1 publicada no GitHub. O instalador é verificado pelo SHA-256 antes de liberar o download.</p>
           </div>
           <div class="hero-art" role="img" aria-label="Ilustração original de um campo de futebol e um painel de temporada 2026">
             <div class="art-grid"></div>
@@ -72,76 +71,44 @@
       </section>
       <section class="numbers-band" aria-label="Informações do projeto">
         <div class="wrap numbers-grid">
-          <div><strong>20</strong><span>CLUBES NO PATCH ATUAL</span></div>
-          <div><strong>156</strong><span>CLUBES NO CATÁLOGO OFICIAL</span></div>
+          <div><strong>80</strong><span>CLUBES NA EDIÇÃO 2026.1.1</span></div>
+          <div><strong>20</strong><span>EM CADA UMA DAS QUATRO SÉRIES</span></div>
           <div><strong>PC</strong><span>BRASFOOT 22–23 WINDOWS</span></div>
-          <div><strong>4</strong><span>DIVISÕES NO CATÁLOGO 2026</span></div>
+          <div><strong>4</strong><span>DIVISÕES NO PATCH</span></div>
         </div>
       </section>
-      <section class="alpha-preview section" id="alfa-156" aria-labelledby="alpha-title">
-        <div class="wrap alpha-preview-layout">
-          <div class="alpha-preview-copy">
-            <div class="section-label">PREVIEW PÚBLICA <span></span> TESTE POR SUA CONTA E RISCO</div>
-            <h2 id="alpha-title">156 clubes no escopo.<br/><em>Uma alfa sem filtros.</em></h2>
-            <p>A nova <strong>v2026.1.0-alpha.1</strong> já pode ser baixada. É uma experiência real, porém <strong>NÃO HOMOLOGADA NO BRASFOOT</strong>: confira abaixo exatamente o que o instalador faz antes de testar.</p>
-            <div class="alpha-preview-actions">
-              <a class="alpha-preview-download" href="https://github.com/yzPeedro/brassfoot-patch/releases/download/v2026.1.0-alpha.1/Brassfoot-Patch-2026-ALFA-156.exe" rel="noopener noreferrer">BAIXAR ALFA EXPERIMENTAL 156 CLUBES <span aria-hidden="true">↗</span></a>
-              <a class="alpha-preview-notes" href="https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.1.0-alpha.1" target="_blank" rel="noopener noreferrer">LER AVISOS E NOTAS DA RELEASE ↗</a>
-            </div>
-            <p class="alpha-preview-hash">SHA-256: <code>c30f124d4e8f9134d2c44b0a6fd6e73d5e688f2f4b05e34f2541d8f72571850f</code></p>
-          </div>
-          <div class="alpha-preview-panel">
-            <div class="alpha-preview-panel-title">O QUE ENTRA NESSA ALFA?</div>
-            <div class="alpha-preview-metric"><strong>20</strong><span>CLUBES DA SÉRIE A<br/>COM ELENCOS EXPERIMENTAIS JÁ PUBLICADOS</span></div>
-            <div class="alpha-preview-metric"><strong>90</strong><span>CLUBES EXISTENTES NA BASE DO JOGO<br/>COM ELENCOS HISTÓRICOS NÃO ATUALIZADOS</span></div>
-            <div class="alpha-preview-metric"><strong>46</strong><span>NOVOS CLUBES GERADOS<br/>COM 18 JOGADORES FICTÍCIOS CADA</span></div>
-            <div class="alpha-preview-warning"><strong>ATENÇÃO</strong> A Série D com 96 clubes e 16 grupos só passou em testes de arquivo e instalação isolada. Calendário e jogabilidade NÃO foram confirmados. Teste somente em uma <strong>cópia separada do Brasfoot</strong>, sem saves reais.</div>
-          </div>
-        </div>
-      </section>
-      <section class="coverage section" id="cobertura" aria-labelledby="coverage-title">
+      <section class="edition-2026 section" id="cobertura" aria-labelledby="edition-title">
         <div class="wrap">
-          <div class="section-label light">EVOLUÇÃO DO PROJETO <span></span> 25 OUTUBRO 2026</div>
+          <div class="section-label light">TEMPORADA 2026 <span></span> EDIÇÃO 2026.1.1</div>
           <div class="section-head">
-            <h2 id="coverage-title">O trabalho avança.<br/><em>Os números não mentem.</em></h2>
-            <p>Separando o que já foi identificado nos arquivos antigos do Brasfoot daquilo que está efetivamente disponível no instalador público.</p>
+            <h2 id="edition-title">Quatro divisões.<br/><em>Uma nova edição.</em></h2>
+            <p>O patch reúne 20 clubes selecionados para cada série. Os vinte da Série D são um recorte editorial dos 96 participantes oficiais de 2026.</p>
           </div>
-          <div class="coverage-stats" aria-label="Cobertura real do projeto">
-            <article><strong id="coverage-catalog">156</strong><span>CLUBES NO CATÁLOGO OFICIAL</span></article>
-            <article><strong id="coverage-identified">110</strong><span>COM ARQUIVO HISTÓRICO CANDIDATO</span></article>
-            <article><strong id="coverage-released">20</strong><span>ELENCOS NA RELEASE ATUAL</span></article>
-            <article><strong id="coverage-pending">46</strong><span>SEM ARQUIVO IDENTIFICADO</span></article>
+          <div class="edition-counts" aria-label="Clubes por divisão no patch">
+            <div><span>SÉRIE A</span><strong>20</strong><small>Elencos experimentais</small></div>
+            <div><span>SÉRIE B</span><strong>20</strong><small>Plantéis históricos</small></div>
+            <div><span>SÉRIE C</span><strong>20</strong><small>19 históricos e Maranhão fictício</small></div>
+            <div><span>SÉRIE D</span><strong>20</strong><small>2 grupos de 10</small></div>
           </div>
-          <div class="coverage-inner" id="coverage-2026">
-            <div class="coverage-intro">
-              <h3>Progresso por divisão</h3>
-              <p id="coverage-summary" aria-live="polite">Carregando dados de compatibilidade...</p>
-            </div>
-            <div class="coverage-rows" id="coverage-rows" aria-label="Correspondências por divisão"></div>
-          </div>
-          <div class="coverage-footnotes">
-            <p><strong>O que já sabemos:</strong> a configuração original do Brasfoot possui Séries A, B, C e D (20/20/20/64 equipes). A configuração de Série D com 96 clubes/16 grupos foi validada na serialização, mas <strong>não foi comprovada dentro do jogo</strong>.</p>
-            <p><strong>Importante:</strong> correspondência com arquivo histórico não significa elenco de 2026 sincronizado, divisão instalada ou clube jogável. Os 110 arquivos candidatos incluem 103 correspondências resolvidas e 7 que precisam de confirmação. Nenhum novo escudo ou uniforme de 2026 foi aprovado para distribuição.</p>
-          </div>
-          <div class="coverage-actions"><a href="#clubes-2026">EXPLORAR OS 156 CLUBES <span aria-hidden="true">↗</span></a><a href="https://github.com/yzPeedro/brassfoot-patch/blob/main/docs/implementation-progress.md" target="_blank" rel="noopener noreferrer">VER EVIDÊNCIAS NO GITHUB <span aria-hidden="true">↗</span></a></div>
+          <p class="edition-notice"><strong>Sobre a jogabilidade:</strong> a configuração da Série D foi reduzida para 20 equipes e 2 grupos. Os testes de instalação, backup e integridade passaram, mas ainda não foi confirmado no Brasfoot se o novo calendário inicia corretamente. Use uma cópia do jogo para testar.</p>
         </div>
       </section>
       <section class="clubs-2026 section" id="clubes-2026" aria-labelledby="clubs-title">
         <div class="wrap">
-          <div class="section-label light">02 <span></span> CATÁLOGO OFICIAL · 2026</div>
+          <div class="section-label light">02 <span></span> CLUBES DA EDIÇÃO · 2026</div>
           <div class="section-head">
-            <h2 id="clubs-title">156 clubes no catálogo.<br/><em>20 no patch atual.</em></h2>
-            <p>Participantes das Séries A, B, C e D catalogados para 2026. A lista abaixo é informativa: apenas a Série A recebeu elencos na release v2026.0.2. As demais divisões não foram instaladas por esta versão.</p>
+            <h2 id="clubs-title">Os 80 escolhidos.<br/><em>Encontre seu clube.</em></h2>
+            <p>Consulte os 20 clubes selecionados por divisão na edição 2026.1.1. Pesquise por clube, UF ou grupo e confira quais elencos são experimentais, históricos ou fictícios.</p>
           </div>
           <div class="division-cards" aria-label="Participantes por divisão">
-            <article><span>SÉRIE A</span><strong data-division-count="A">—</strong><small>Participantes oficiais · 2026</small></article>
-            <article><span>SÉRIE B</span><strong data-division-count="B">—</strong><small>Participantes oficiais · 2026</small></article>
-            <article><span>SÉRIE C</span><strong data-division-count="C">—</strong><small>Participantes oficiais · 2026</small></article>
-            <article><span>SÉRIE D</span><strong data-division-count="D">—</strong><small>Participantes oficiais · 2026</small></article>
+            <article><span>SÉRIE A</span><strong data-division-count="A">—</strong><small>Clubes selecionados · 2026</small></article>
+            <article><span>SÉRIE B</span><strong data-division-count="B">—</strong><small>Clubes selecionados · 2026</small></article>
+            <article><span>SÉRIE C</span><strong data-division-count="C">—</strong><small>Clubes selecionados · 2026</small></article>
+            <article><span>SÉRIE D</span><strong data-division-count="D">—</strong><small>Clubes selecionados · 2026</small></article>
           </div>
           <div class="club-explorer">
             <div class="club-explorer-head">
-              <div><h3>Explorar clubes</h3><p id="clubs-count" aria-live="polite">Carregando catálogo oficial...</p></div>
+              <div><h3>Lista de clubes</h3><p id="clubs-count" aria-live="polite">Carregando os 80 clubes...</p></div>
               <div class="club-filters">
                 <label for="clubs-division">DIVISÃO
                   <select id="clubs-division" disabled><option value="">Todas as séries</option><option value="A">Série A</option><option value="B">Série B</option><option value="C">Série C</option><option value="D">Série D</option></select>
@@ -151,9 +118,15 @@
                 </label>
               </div>
             </div>
-            <div class="clubs-grid" id="clubs-grid" aria-label="Clubes pesquisados"></div>
+            <div class="club-table-shell">
+              <table class="clubs-table">
+                <caption>Clubes da edição 2026.1.1, com divisão, estado, grupo e tipo de elenco</caption>
+                <thead><tr><th scope="col">CLUBE</th><th scope="col">UF</th><th scope="col">SÉRIE</th><th scope="col">GRUPO</th><th scope="col">ELENCO</th></tr></thead>
+                <tbody id="clubs-grid"></tbody>
+              </table>
+            </div>
           </div>
-          <p class="clubs-disclaimer">ESCUDOS E UNIFORMES: aguardando auditoria técnica, verificação de temporada e direitos de distribuição. O catálogo não garante que as quatro divisões sejam jogáveis na versão instalada. <a href="https://www.cbf.com.br/" target="_blank" rel="noopener noreferrer">Fontes: CBF ↗</a></p>
+          <p class="clubs-disclaimer">Escudos e uniformes não foram atualizados nesta edição. Os clubes da Série D são uma seleção de 20 dos 96 participantes oficiais de 2026. O calendário ainda precisa ser validado no jogo. <a href="https://www.cbf.com.br/" target="_blank" rel="noopener noreferrer">Fontes: CBF ↗</a></p>
         </div>
       </section>
       <section class="features section" id="recursos">
@@ -183,7 +156,7 @@
       <section class="installer-status section" id="instalador" aria-labelledby="installer-heading">
         <div class="wrap">
           <div class="section-label">03 <span></span> INSTALADOR WINDOWS</div>
-          <div class="section-head"><h2 id="installer-heading">Instalar com confiança.<br/><em>Jogar sem complicação.</em></h2><p>A versão 2026.0.2 teve a instalação de elencos testada no Brasfoot pelo mantenedor. A edição de distribuição possui verificação por SHA-256, backup, opção de desfazer e requer o Brasfoot original instalado.</p></div>
+          <div class="section-head"><h2 id="installer-heading">Instalar com confiança.<br/><em>Jogar sem complicação.</em></h2><p>A edição 2026.1.1 inclui 20 clubes selecionados em cada uma das quatro séries e utiliza verificação SHA-256, backup e opção de desfazer. Requer o Brasfoot 22–23 instalado.</p></div>
           <div class="installer-status-grid">
             <article><span>01 / LOCALIZAÇÃO</span><h3>Escolha a pasta do jogo</h3><p>A interface verifica a estrutura do Brasfoot e exige arquivos originais com assinatura reconhecida.</p></article>
             <article><span>02 / INTEGRIDADE</span><h3>Confirme o pacote</h3><p>Cada arquivo é conferido por SHA-256. Pacotes experimentais são rejeitados automaticamente.</p></article>
@@ -195,13 +168,13 @@
       </section>
       <section class="release section" id="versao">
         <div class="wrap release-grid">
-          <div class="release-left"><div class="section-label">03 <span></span> RELEASES</div><h2>Pronto para o próximo <em>apito inicial?</em></h2><p>Versão experimental 2026.0.2: 20 equipes e 730 atletas. Atributos de 713 atletas foram estimados e 15 jogadores coletados ficaram de fora. A release atual está publicada. A expansão para quatro divisões segue em desenvolvimento e ainda não integra elencos B/C/D.</p></div>
-          <div class="release-panel" aria-live="polite"><div class="panel-top"><span>ÚLTIMA VERSÃO</span><span id="release-badge" class="panel-badge">VERIFICANDO</span></div><div id="release-version" class="panel-version">—</div><div class="panel-meta"><div><span>TEMPORADA</span><strong>2026</strong></div><div><span>PLATAFORMA</span><strong>WINDOWS</strong></div><div><span>STATUS</span><strong id="release-status">VERIFICANDO</strong></div></div><button type="button" class="panel-download" id="download-panel" disabled>VERIFICANDO DOWNLOAD... <span>↗</span></button><p id="release-detail">O download será habilitado somente após a publicação de um arquivo real e validado.</p><a class="release-alt-link" href="https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.0.2" target="_blank" rel="noopener noreferrer">VER ARQUIVOS DIRETAMENTE NO GITHUB ↗</a><div class="panel-bottom"><span>INTEGRIDADE PRIMEIRO</span><span>BRASSFOOT / 2026</span></div></div>
+          <div class="release-left"><div class="section-label">03 <span></span> RELEASES</div><h2>Pronto para o próximo <em>apito inicial?</em></h2><p>Versão 2026.1.1: 20 clubes em cada Série A, B, C e D. A Série A contém elencos experimentais; as demais equipes preservam plantéis históricos, exceto o Maranhão, com jogadores fictícios. Teste em uma cópia do jogo.</p></div>
+          <div class="release-panel" aria-live="polite"><div class="panel-top"><span>ÚLTIMA VERSÃO</span><span id="release-badge" class="panel-badge">VERIFICANDO</span></div><div id="release-version" class="panel-version">—</div><div class="panel-meta"><div><span>TEMPORADA</span><strong>2026</strong></div><div><span>PLATAFORMA</span><strong>WINDOWS</strong></div><div><span>STATUS</span><strong id="release-status">VERIFICANDO</strong></div></div><button type="button" class="panel-download" id="download-panel" disabled>VERIFICANDO DOWNLOAD... <span>↗</span></button><p id="release-detail">O download será habilitado somente após a publicação de um arquivo real e validado.</p><a class="release-alt-link" href="https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.1.1" target="_blank" rel="noopener noreferrer">VER ARQUIVOS DIRETAMENTE NO GITHUB ↗</a><div class="panel-bottom"><span>INTEGRIDADE PRIMEIRO</span><span>BRASSFOOT / 2026</span></div></div>
         </div>
       </section>
       <section class="faq section" id="faq"><div class="wrap faq-grid"><div><div class="section-label">04 <span></span> FAQ</div><h2>Dúvidas<br/><em>do vestiário.</em></h2><p>As principais respostas antes de entrar em campo.</p></div><div class="faq-items">
         <details><summary>Preciso ter o Brasfoot instalado?<span>+</span></summary><p>Sim. O patch é planejado para trabalhar com uma instalação legítima do Brasfoot 2022–2023 para Windows. Ele não inclui o jogo completo.</p></details>
-        <details><summary>O patch já está disponível para download?<span>+</span></summary><p>Sim. A versão experimental v2026.0.2 está publicada no GitHub Releases e contém elencos de 20 clubes da Série A. O site verifica o asset e seu SHA-256 antes de liberar o botão. O pacote completo de 156 clubes ainda não foi lançado.</p></details>
+        <details><summary>O patch já está disponível para download?<span>+</span></summary><p>Sim. A edição v2026.1.1 está publicada e contém 20 clubes por Série. O site verifica o executável antes de liberar o download; a nova estrutura da Série D ainda não foi testada em partida completa.</p></details>
         <details><summary>Minhas carreiras serão apagadas?<span>+</span></summary><p>O instalador experimental v2026.0.2 faz backup das equipes modificadas e oferece desfazer. Os testes do motor confirmaram que saves e opções ficam fora das operações. Faça também uma cópia de segurança de suas carreiras antes de instalar qualquer patch.</p></details>
         <details><summary>Será necessário usar o terminal?<span>+</span></summary><p>Não. O instalador funciona offline, identifica o jogo e atualiza apenas os arquivos de equipes reconhecidos, mantendo saves e configurações fora das operações de instalação.</p></details>
         <details><summary>O Brassfoot Patch é oficial?<span>+</span></summary><p>Não. É um projeto independente de atualização, sem afiliação oficial aos criadores ou titulares da marca Brasfoot.</p></details>
