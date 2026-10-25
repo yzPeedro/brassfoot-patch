@@ -1,5 +1,14 @@
 # Progresso atual — Brasfoot Patch 2026
 
+## Requisito final: ano único 2026 ao iniciar carreira
+
+Solicitação de 25/10/2026: depois de integrar e testar os 60 elencos A/B/C, substituir a escolha de anos **2023/2024** na criação de nova carreira por **somente 2026**, assegurando que o save e as partidas realmente iniciem em 2026. Os saves já existentes não podem ser modificados. A **Série D original deve continuar intacta**.
+
+**Pendente de engenharia reversa e teste no jogo:** `.ban` e `BRA.cfg` conhecidos não codificam o seletor de ano; é necessário identificar os bytes ou métodos no executável/JAR exato da instalação do usuário e testar em cópia isolada. Não há executável original com hash homologado no repositório para uma modificação responsável. A distribuição deverá ser diferencial, condicionada ao SHA-256 original, com backup e rollback. Uma alteração visual isolada não satisfaz o requisito.
+
+Aceite: só 2026 na interface; nova carreira criada sem travar; ano 2026 persistido e calendário válido; saves antigos iguais por hash; desinstalação restaura os anos antigos. Nenhuma release anuncia o recurso até prova real.
+
+
 ## Nova interface e retomada A/B/C — 25/10/2026
 
 - O site público recebeu **paginação 10/20/50**, filtros por divisão e status, busca sem acentos e modal acessível com informações do clube.
