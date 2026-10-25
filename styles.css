@@ -80,3 +80,6 @@
 @media(max-width:880px){.coverage-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.coverage-intro{display:block}.coverage-intro p{margin-top:9px}.coverage-footnotes{grid-template-columns:1fr;gap:12px}}
 @media(max-width:600px){.coverage-stats article{padding:16px}.coverage-rows{grid-template-columns:1fr;gap:20px}.coverage-inner{padding:18px}.coverage-actions a{width:100%;text-align:center}}
 @media(prefers-reduced-motion:reduce){.coverage-meter span{transition:none}}
+
+.release-alt-link{display:block;color:#c5ff69;font-size:11px;letter-spacing:.055em;font-weight:800;text-decoration:underline;text-underline-offset:4px;line-height:1.6;margin:14px 0 17px}
+.release-alt-link:hover,.release-alt-link:focus-visible{color:#fff;outline-offset:3px}
