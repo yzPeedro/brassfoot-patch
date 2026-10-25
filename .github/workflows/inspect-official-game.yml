@@ -203,6 +203,30 @@ jobs:
           print('NOT A GAMEPLAY TEST. Official version is different from the user 2023/2024 installation.')
           PY
           rm -rf /tmp/brasfoot-experimental
+      - name: Verify isolated 2026 launcher candidate without executing the game
+        run: |
+          mkdir -p /tmp/brasfoot-year-lab
+          python tools/build_official_year_candidate.py \
+            --original-exe /tmp/brasfoot-extracted/bf22-23.exe \
+            --output-exe /tmp/brasfoot-year-lab/bf22-23-2026-laboratory.exe \
+            --experimental
+          python - <<'PY'
+          import hashlib, zipfile
+          from pathlib import Path
+          a=Path('/tmp/brasfoot-extracted/bf22-23.exe')
+          b=Path('/tmp/brasfoot-year-lab/bf22-23-2026-laboratory.exe')
+          with zipfile.ZipFile(a) as original, zipfile.ZipFile(b) as modified:
+              aa=original.infolist()
+              bb=modified.infolist()
+              assert len(aa)==len(bb)==2193
+              assert [x.filename for x in aa]==[x.filename for x in bb]
+              changed=[x.filename for x in aa if original.read(x.filename)!=modified.read(x.filename)]
+              assert changed==['a/hU.class'], changed
+              assert hashlib.sha256(modified.read('a/hU.class')).hexdigest()=='9cb4b93ff5bc52bfe364c545128ecc69c7d5615d1c09d6ba01ca34d4c35dc591'
+          print('PASS official original 22/23: embedded JAR repackaged, only selector class changed')
+          print('EXPERIMENTAL ONLY - no Windows runtime, division, gameplay, save or 2027 test')
+          PY
+          rm -rf /tmp/brasfoot-year-lab
       - name: Delete all licensed installer/extracted files
         if: always()
         run: rm -rf /tmp/brasfoot-official /tmp/brasfoot-extracted
