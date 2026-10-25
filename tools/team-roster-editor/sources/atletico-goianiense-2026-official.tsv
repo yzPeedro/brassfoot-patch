@@ -1,0 +1,43 @@
+# atletico-goianiense professional squad; source https://atleticogoianiense.com.br/profissional/profissional-template.html; checked 2026-10-25
+# Five codes: 0=goalkeeper; 1=fullback; 2=centreback; 3=midfielder; 4=attacker.
+# Source groups only. No ages, identities or nationality invented.
+# NAME<TAB>POSITION<TAB>AGE_IF_VERIFIED<TAB>COUNTRY_IF_VERIFIED
+WLADIMIR	0		
+PAULO VITOR	0		
+LÉO	0		
+PAULO HENRIQUE	0		
+YURI	0		
+GUSTAVO DANIEL	1		
+GUILHERME LOPES	1		
+JAMPIERRE	1		
+EWERTHON	1		
+FELIPE GUIMARÃES	1		
+KAUÃ HENRIQUE	1		
+YURI SILVA	1		
+WARLEY	1		
+ADRIANO MARTINS	2		
+TITO	2		
+NATÃ FELIPE	2		
+JUNIOR BARRETO	2		
+MATHEUS BEBETO	2		
+LIMA	3		
+KLEBERT	3		
+IGOR HENRIQUE	3		
+GEOVANE	3		
+GUILHEME MARQUES	3		
+LEANDRO VILELA	3		
+CRISTIANO	3		
+DANIEL PEIXOTO	3		
+HENRIQUE FREITAS	3		
+NETINHO	3		
+BRUNO JOSÉ	4		
+MARRONY	4		
+LÉO TOCANTINS	4		
+GEOVANY SOARES	4		
+GUSTAVO COUTINHO	4		
+BRENNO	4		
+GABRIEL PAÉ	4		
+MATHEUSINHO	4		
+JOÃO PEDRO	4		
+GUSTAVO MAIA	4		
+KAHISER	4		
