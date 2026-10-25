@@ -22,3 +22,6 @@
 - Instalação: **não modificada**. A v2026.0.2 permanece como única release jogável experimental, com elencos de 20 clubes. Divisões B/C/D, escudos e uniformes novos ainda não instalados nem verificados no jogo.
 - Documentos: `docs/api-usage-report.md`, `docs/assets-coverage.md`, `docs/divisions-2026.md`, `docs/upgrade-2026-acceptance.md`.
 - Gate: não publicar nova release até obter dados confiáveis, rights clearance, compatibilidade de arquivos e teste no Brasfoot Windows.
+
+- Auditoria de publicação: HTML, CSS, JS e catálogo das branches `main`/`gh-pages` conferidos com equivalência exata; 156 IDs únicos, contagem 20/20/20/96 e 16 grupos Série D de seis equipes confirmados em inspeção estrutural. JavaScript do explorador, app e testes passou em validação sintática.
+- Regressão do instalador legado: `go test ./...` passou no código-fonte da release v2026.0.2 extraído do kit anterior; compilação cruzada GOOS=windows/GOARCH=amd64 passou. **Não é teste da expansão e não substitui execução dos testes Python recém-adicionados.**
