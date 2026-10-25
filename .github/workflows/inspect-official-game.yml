@@ -129,6 +129,18 @@ jobs:
                               print(f'  {j}: {lines[j][:155]}')
                               seen.add(j)
           PY
+      - name: Record installed official Java class source fingerprints
+        run: |
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+          import zipfile
+          archive=Path('/tmp/brasfoot-extracted/bf22-23.exe')
+          with zipfile.ZipFile(archive) as source:
+              for name in ('a/hU.class','best/f.class','best/p.class'):
+                  data=source.read(name)
+                  print('CLASS_FINGERPRINT',name,len(data),hashlib.sha256(data).hexdigest())
+          PY
       - name: Delete all licensed installer/extracted files
         if: always()
         run: rm -rf /tmp/brasfoot-official /tmp/brasfoot-extracted
