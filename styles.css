@@ -83,3 +83,30 @@
 
 .release-alt-link{display:block;color:#c5ff69;font-size:11px;letter-spacing:.055em;font-weight:800;text-decoration:underline;text-underline-offset:4px;line-height:1.6;margin:14px 0 17px}
 .release-alt-link:hover,.release-alt-link:focus-visible{color:#fff;outline-offset:3px}
+
+/* Opt-in, explicitly unverified alpha release; stable v2026.0.2 remains separate. */
+.alpha-preview{background:#112c20;color:#f2faed;border-top:2px solid #acd865;border-bottom:1px solid #477256}
+.alpha-preview-layout{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(24px,6vw,80px);align-items:center}
+.alpha-preview .section-label{color:#c5ff69}
+.alpha-preview h2{font:900 clamp(40px,5vw,74px)/1.04 'Barlow Condensed',sans-serif;text-transform:uppercase;margin:18px 0 25px;color:#fff}
+.alpha-preview h2 em{color:#c5ff69}
+.alpha-preview-copy>p{color:#bbd4bd;font-size:15px;line-height:1.8}
+.alpha-preview-copy>p strong{color:#fff}
+.alpha-preview-actions{display:flex;flex-direction:column;align-items:start;gap:14px;margin:26px 0 20px}
+.alpha-preview-actions a{font-weight:800;font-size:12px;letter-spacing:.055em;text-decoration:none}
+.alpha-preview-download{display:inline-flex;align-items:center;justify-content:space-between;gap:18px;background:#c5ff69;color:#0c2719!important;padding:18px 24px;border-radius:5px;min-height:56px;transition:transform .18s ease,background .18s ease}
+.alpha-preview-download:hover{background:#ecffb0;transform:translateY(-2px)}
+.alpha-preview-notes{color:#c5ff69!important;border-bottom:1px solid #c5ff69;padding-bottom:4px}
+.alpha-preview-actions a:focus-visible{outline:3px solid #fff;outline-offset:4px}
+.alpha-preview-hash{font-size:11px!important;color:#a9bfae!important;overflow-wrap:anywhere}
+.alpha-preview-hash code{font:11px/1.7 monospace;color:#def8c0}
+.alpha-preview-panel{border:1px solid #65885c;background:linear-gradient(160deg,#1c4330,#0b2519);padding:clamp(22px,3vw,38px);border-radius:9px;box-shadow:0 20px 46px #0002}
+.alpha-preview-panel-title{font-size:11px;color:#c5ff69;letter-spacing:.1em;font-weight:800;margin-bottom:18px}
+.alpha-preview-metric{display:flex;gap:20px;align-items:center;border-top:1px solid #466f4c;padding:18px 0}
+.alpha-preview-metric strong{font:900 52px/1 'Barlow Condensed',sans-serif;color:#fff;min-width:58px;font-variant-numeric:tabular-nums}
+.alpha-preview-metric span{font-size:10px;line-height:1.65;font-weight:700;letter-spacing:.055em;color:#c7dac9}
+.alpha-preview-warning{font-size:12px;line-height:1.8;color:#f3e7b5;background:#463922;border:1px solid #9e7b3c;padding:17px 18px;border-radius:5px}
+.alpha-preview-warning strong{color:#fff0b2}
+@media(max-width:950px){.alpha-preview-layout{grid-template-columns:1fr}}
+@media(max-width:650px){.alpha-preview-download{width:100%;font-size:11px!important;padding:14px}.alpha-preview-metric strong{font-size:44px}}
+@media(prefers-reduced-motion:reduce){.alpha-preview-download{transition:none}}
