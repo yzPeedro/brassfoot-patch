@@ -10,6 +10,18 @@
 - **CI e commits:** base experimental por PR #3 (`35c72e3`), rastreamento do ano por PR #4 (`d7bc68b`), rastreamento de divisões por PR #5 (`ad49532`). Nenhum binário proprietário foi versionado ou anexado ao projeto.
 
 
+## Resultado novo da engenharia reversa de divisões — 25/10/2026
+
+**Classe de UI localizada como candidata concreta: `a/bV.class`.** A inspeção read-only do executável oficial `bf22-23.exe` percorreu as 1.038 classes e classificou `a/bV.class` como a mais relevante, pelo conjunto de controles e termos de divisão, ligas nacionais, estaduais e inicialização de carreira. SHA-256 da classe: `2845a9dee433a4757074e728b88bba7089790f62216df41772dcad95cad05314`.
+
+Na classe original, o construtor recorre a `best/f.N()` para recuperar uma lista de equipes e utiliza vários combos Java Swing. O método `cX(int)` preenche escolhas consultando `f/B.yi()` e `f/s.yK()`, além de `best/Z.jg()`. Isso identifica um **vínculo real da interface com objetos de competição e clubes**, mas ainda não demonstra em qual objeto é persistido o enquadramento nacional A/B/C, nem se esses combos são os vistos na captura do usuário.
+
+Outras classes listadas como candidatas foram `a/cw.class` (checkboxes sem combo detectado), `a/fB.class` (controles gerais de opções, como estaduais agrupados/ignorados) e `a/aa.class`. A inspeção detalhada de `a/fB.class` apontou chamadas a configurações de jogo e não prova que controle filiação nacional. **Não modificar arquivos estaduais ou divisões nacionais por inferência somente do ranking.**
+
+Evidência reprodutível: CI oficial `40246448623` (ranking) e `40246635506` (traces do bytecode); ambas as execuções passaram. Regressões unificadas `40246448515` e `40246635503` aprovadas. Nenhum bytecode original foi publicado, nenhum save foi alterado e a Série D permaneceu fora do patch.
+
+**Próximo ponto obrigatório de implementação:** seguir as referências `f/B.yi() → f/s.yK()` até o armazenamento de clubes por competição; identificar o mapa oficial 2026 A/B/C e adicionar modificação diferencial com rollback somente após prova de que altera jogos, tabelas e calendário; revisar ano `best/p.class`. Continua **sem release 2026 homologada**.
+
 ## Novo requisito: seletores de clubes por divisão na carreira 2026
 
 - Screenshot de criação de carreira recebido em 25/10/2026. Controles observados: **1ª divisão**, **2ª divisão**, **3ª divisão**, **Jogando estaduais**. Exemplos de escolha visíveis: América-MG, Bahia, ABC e ASA. Esses exemplos não provam sozinhos a composição das listas.
