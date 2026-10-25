@@ -31,6 +31,9 @@ IDENTITIES = {
     "confianca":"br-confianca-se", "ferroviaria":"br-ferroviaria-sp",
     "figueirense":"br-figueirense-sc", "guarani":"br-guarani-sp",
     "inter-limeira":"br-inter-de-limeira-sp", "floresta":"br-floresta-ce",
+    "itabaiana":"br-itabaiana-se", "maranhao":"br-maranhao-ma",
+    "paysandu":"br-paysandu-pa", "santa-cruz":"br-santa-cruz-pe",
+    "volta-redonda":"br-volta-redonda-rj", "ypiranga":"br-ypiranga-rs",
 }
 
 def clean(name):
@@ -44,7 +47,7 @@ def audit(rosters, directory):
     total=0
     for stem,club_id in IDENTITIES.items():
         filename=("america-2026-contracts-o-tempo.tsv" if stem=="america"
-                  else stem+"-2026-portal.tsv" if stem in ("novorizontino","botafogo-sp","athletic","nautico","operario","ponte-preta","vila-nova","amazonas","anapolis","botafogo-pb","barra","brusque","caxias","confianca","ferroviaria","figueirense","guarani","inter-limeira","floresta")
+                  else stem+"-2026-portal.tsv" if stem in ("novorizontino","botafogo-sp","athletic","nautico","operario","ponte-preta","vila-nova","amazonas","anapolis","botafogo-pb","barra","brusque","caxias","confianca","ferroviaria","figueirense","guarani","inter-limeira","floresta","itabaiana","maranhao","paysandu","santa-cruz","volta-redonda","ypiranga")
                   else stem+"-2026-official.tsv")
         path=directory/filename
         if not path.is_file() or club_id not in records:
