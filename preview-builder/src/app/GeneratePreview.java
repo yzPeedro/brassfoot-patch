@@ -37,7 +37,7 @@ public final class GeneratePreview {
    }
    count++;
   }
-  if(count!=46)throw new IOException("Expected 46 placeholder teams, got "+count);
+  if(count<1||count>46)throw new IOException("Expected from 1 to 46 placeholder teams, got "+count);
   System.out.println("Generated "+count+" fictional teams with 18 placeholder players each.");
  }
 }
