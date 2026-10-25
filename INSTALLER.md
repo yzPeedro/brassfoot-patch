@@ -17,6 +17,6 @@ O manifesto de distribuição é `schemaVersion: 2`, `kind: BRASFOOT_VERIFIED_PA
 
 ### Validação executada / pendências
 
-Testes automatizados do motor executados em Linux com fixtures sintéticas: integridade, caminho inválido, arquivo modificado, symlink, repetição, cancelamento, backup, preservação de saves, rollback e instalação parcial. A interface Tk foi validada apenas por compilação sintática (ambiente sem área de trabalho Windows). **Pendente:** build PyInstaller em Windows, teste visual real, abertura dos arquivos `.ban` no Brasfoot, política de cancelamento sob bloqueio de arquivo e teste da limpeza do instalador. Não publicar `.exe` até resolver essas dependências.
+65 testes Python integrados à v5 (62 aprovados, 3 ignorados), incluindo testes automatizados do motor em Linux com fixtures sintéticas: integridade, caminho inválido, arquivo modificado, symlink, repetição, cancelamento, backup, preservação de saves, rollback e instalação parcial. A interface Tk passou na compilação sintática e em teste de abertura/navegação inicial no Linux usando Xvfb; a execução real no Windows segue pendente. **Pendente:** build PyInstaller em Windows, teste visual real, abertura dos arquivos `.ban` no Brasfoot, política de cancelamento sob bloqueio de arquivo e teste da limpeza do instalador. Não publicar `.exe` até resolver essas dependências.
 
 Nenhum mecanismo de autoexclusão foi ativado sem teste no Windows. Os temporários usados pelo PyInstaller são responsabilidade do empacotador, e os backups são preservados.

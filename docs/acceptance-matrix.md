@@ -13,9 +13,9 @@ Critérios baseados no prompt master do projeto. `pass` = verificado no componen
 | CAN07 | partial | Validação básica sem todos os atributos |
 | CAN08 | partial | Codec testado; jogo não executado |
 | CAN09 | blocked | Teste no Brasfoot Windows indisponível |
-| CAN10 | pending | Instalador GUI não implementado |
-| CAN11 | pending | Instalador CLI apenas |
-| CAN12 | pending | Barra gráfica ainda não existe |
+| CAN10 | partial | Motor e interface GUI implementados em código; build Windows e teste no jogo pendentes |
+| CAN11 | partial | Entrada de aplicativo GUI criada; .exe ainda não compilado |
+| CAN12 | partial | Progresso da GUI ligado a eventos reais; teste Windows pendente |
 | CAN13 | partial | Instalador CLI verifica teams/ e options.bcf |
 | CAN14 | partial | Backup automático em CLI testado |
 | CAN15 | partial | Rollback por falha injetada testado |
