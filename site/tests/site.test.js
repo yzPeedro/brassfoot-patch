@@ -10,6 +10,8 @@ const release=JSON.parse(read('data/release.json'));
 const target=JSON.parse(read('data/target-abc-2026.json'));
 const historical=JSON.parse(read('data/competitions/2026-brazil.json'));
 const rosters=JSON.parse(read('data/published-rosters-2026-0-2.json'));
+const researched=JSON.parse(read('data/researched-rosters-2026.json'));
+
 
 for(const id of ['inicio','cobertura','clubes-2026','recursos','como-funciona','instalador','versao','faq'])
   assert.match(html,new RegExp('id="'+id+'"'));
@@ -36,6 +38,23 @@ assert.doesNotMatch(html,/data-division-count="D"/);
 assert.doesNotMatch(html,/<option value="D">/);
 assert.match(html,/<tbody id="clubs-grid">/);
 assert.match(html,/2026\.1\.1 anterior não atende/);
+assert.equal(researched.schemaVersion,1);
+assert.equal(researched.season,2026);
+assert.equal(researched.researchedClubs,40);
+const researchedIds=Object.keys(researched.clubs);
+assert.equal(researchedIds.length,40);
+const bcIds=target.clubs.filter(c=>c.division==='B'||c.division==='C').map(c=>c.id);
+assert.ok(bcIds.every(id=>researchedIds.includes(id)));
+const observedNames=Object.values(researched.clubs).reduce((sum,r)=>sum+r.players.length,0);
+assert.equal(observedNames,1304);
+assert.ok(Object.entries(researched.clubs).every(([id,r])=>
+  bcIds.includes(id) && r.scope==='internet-research-not-installed' &&
+  r.completeSeason2026Verified===false && /^https:\/\//.test(r.sourceUrl) &&
+  Array.isArray(r.players) && r.players.length>=16 && r.players.length<=60));
+assert.match(html,/id="clubs-group-by"/);
+assert.match(html,/id="club-dialog-source"/);
+assert.match(html,/option value="researched"/);
+assert.match(clubsJs,/getJson\('\.\/data\/researched-rosters-2026\.json'\)/);
 assert.equal(rosters.schemaVersion,1);
 assert.equal(rosters.sourceRelease,'2026.0.2');
 assert.equal(rosters.totalClubs,20);
@@ -95,4 +114,4 @@ assert.match(js,/item\.digest === 'sha256:'/);
 assert.match(js,/compatibilityVerifiedInGame\s*!==\s*true/);
 assert.doesNotMatch(html,/id="alfa-156"|class="ball"/);
 assert.doesNotMatch(html+js+clubsJs,/BEGIN PRIVATE KEY|x-apisports-key/);
-console.log('PASS: 60-club A/B/C paginated explorer, accessible modal, 730 real published patch names, Série D untouched.');
+console.log('PASS: sortable/groupable A/B/C, 730 published patch names + 1304 researched names kept separate, Série D untouched.');
