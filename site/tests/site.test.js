@@ -16,5 +16,11 @@ assert.doesNotMatch(html,/href="https:\/\/github\.com\/"/);
 assert.match(js,/compatibilityVerifiedInGame\s*!==\s*true/);
 assert.match(js,/sha256/);
 assert.match(css,/prefers-reduced-motion/);
+assert.doesNotMatch(html,/class="ball"/);
+assert.doesNotMatch(css,/\.ball\{|@keyframes float-ball/);
+assert.match(html,/class="field-scan"/);
+assert.match(css,/@keyframes fieldscan/);
+assert.match(html,/protótipo executável passou no teste offline em Windows/i);
+
 assert.ok(!/x-apisports-key|API_FOOTBALL_KEY|\bVITE_/.test(html+js+css));
 console.log(`Site static checks: ${sections.length} sections, release safely disabled, no exposed API key.`);
