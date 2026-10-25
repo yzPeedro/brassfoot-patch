@@ -21,6 +21,7 @@ import unicodedata
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
+from quota_guard import QuotaLedger
 
 API = "https://v3.football.api-sports.io"
 EXPECTED_TEAMS = 20
@@ -117,6 +118,7 @@ def fetch(endpoint: str, params: dict[str, str | int], key: str, budget: Budget 
         raise RuntimeError("API_FOOTBALL_KEY absent: provide it securely on the host, or use --offline")
     request = Request(f"{API}/{endpoint}?{urlencode(params)}",
                       headers={"x-apisports-key": key, "Accept": "application/json"})
+    ledger = QuotaLedger()
     for attempt in range(3):
         if budget is not None:
             budget.consume()
@@ -127,8 +129,12 @@ def fetch(endpoint: str, params: dict[str, str | int], key: str, budget: Budget 
             if wait > 0:
                 time.sleep(wait)
         _LAST_REQUEST_AT = time.monotonic()
+        # One durable reservation for every network attempt, including retries and timeouts.
+        # Cache hits return upstream from cached_fetch() without reserving.
+        ledger.reserve(key)
         try:
             with urlopen(request, timeout=35) as response:
+                ledger.record_headers(key, response.headers)
                 doc = json.load(response)
             if not isinstance(doc, dict):
                 raise RuntimeError(f"Unexpected payload from /{endpoint}")
@@ -142,6 +148,7 @@ def fetch(endpoint: str, params: dict[str, str | int], key: str, budget: Budget 
                 raise RuntimeError(f"Unexpected pagination on /{endpoint}; refusing incomplete data")
             return doc
         except HTTPError as exc:
+            ledger.record_headers(key, exc.headers)
             if budget is not None:
                 budget.errors += 1
             if exc.code >= 500 and attempt < 2:
