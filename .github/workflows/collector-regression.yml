@@ -5,6 +5,8 @@ on:
     paths:
       - 'collect_abc_rosters.py'
       - 'tests/test_collect_abc_rosters.py'
+      - 'tools/inspect_career_years.py'
+      - 'tests/test_career_year_scan.py'
       - '.github/workflows/collector-regression.yml'
   workflow_dispatch:
 permissions:
@@ -19,5 +21,8 @@ jobs:
           python-version: '3.13'
       - name: Compile collector without network or credentials
         run: python -m py_compile collect_abc_rosters.py
+      - name: Verify career-year scanner on synthetic original-game archive
+        run: python -m unittest discover -s tests -p 'test_career_year_scan.py' -v
       - name: Run offline exact-identity and Series-D preservation tests
         run: python -m unittest discover -s tests -p 'test_collect_abc_rosters.py' -v
+
