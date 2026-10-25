@@ -52,6 +52,18 @@ for(const id of ['clubs-pagination','clubs-page-size','clubs-previous','clubs-ne
   'clubs-roster-filter','club-dialog','club-dialog-title','club-dialog-players','club-dialog-close']) {
   assert.match(html,new RegExp('id="'+id+'"'));
 }
+for(const key of ['name','state','division','roster']){
+  assert.match(html,new RegExp('id="clubs-sort-'+key+'"'));
+  assert.match(html,new RegExp('id="clubs-heading-'+key+'"'));
+}
+assert.match(html,/id="clubs-group-by"/);
+for(const group of ['name','state','division','roster']){
+ assert.match(html,new RegExp('value="'+group+'"'));
+}
+assert.match(clubsJs,/groupCounts\.get\(group\)/);
+assert.match(clubsJs,/updateSortLabels\(\)/);
+assert.match(css,/\.clubs-sort\{/);
+assert.match(css,/\.clubs-group-header th\{/);
 assert.match(html,/<dialog class="club-dialog"/);
 assert.match(html,/aria-labelledby="club-dialog-title"/);
 assert.match(html,/option value="10" selected/);
