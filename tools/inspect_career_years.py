@@ -1,0 +1,117 @@
+#!/usr/bin/env python3
+"""Read-only Brasfoot 22-23 runtime inventory for a future 2026-only career-year patch.
+
+This does NOT modify or copy proprietary executable bytes. Candidate matches in
+Java class files are exploratory: 2023/2024 numbers can mean unrelated things.
+"""
+from __future__ import annotations
+import argparse
+import hashlib
+import json
+from pathlib import Path
+from datetime import datetime, timezone
+import zipfile
+
+MAX_ARCHIVE_SIZE = 200 * 1024 * 1024
+MAX_CLASS_SIZE = 3 * 1024 * 1024
+MAX_CLASS_COUNT = 20000
+MAGIC_CLASS = b"\xca\xfe\xba\xbe"
+MATCHES = {
+    "ascii_2023": b"2023", "ascii_2024": b"2024",
+    "u16_2023": (2023).to_bytes(2, "big"),
+    "u16_2024": (2024).to_bytes(2, "big"),
+    "int32_2023": (2023).to_bytes(4, "big"),
+    "int32_2024": (2024).to_bytes(4, "big"),
+}
+
+
+def sha256(path: Path) -> str:
+    hash_ = hashlib.sha256()
+    with path.open("rb") as f:
+        for block in iter(lambda: f.read(1024 * 1024), b""):
+            hash_.update(block)
+    return hash_.hexdigest()
+
+
+def inspect_jar(path: Path) -> dict:
+    report = {"readableZip": False, "candidateClasses": [], "classFilesExamined": 0, "warning": None}
+    if path.stat().st_size > MAX_ARCHIVE_SIZE:
+        report["warning"] = "Archive too large: metadata only"
+        return report
+    if not zipfile.is_zipfile(path):
+        report["warning"] = "Not a ZIP/JAR; cannot inspect embedded Java classes"
+        return report
+    with zipfile.ZipFile(path) as z:
+        report["readableZip"] = True
+        entries = [item for item in z.infolist() if item.filename.endswith(".class")]
+        if len(entries) > MAX_CLASS_COUNT:
+            report["warning"] = "Too many class entries; scanning aborted"
+            return report
+        for entry in entries:
+            if (entry.file_size > MAX_CLASS_SIZE or
+                    entry.compress_size == 0 or
+                    entry.file_size > 100 * entry.compress_size):
+                continue
+            data = z.read(entry)
+            if not data.startswith(MAGIC_CLASS):
+                continue
+            report["classFilesExamined"] += 1
+            counts = {kind: data.count(needle) for kind, needle in MATCHES.items() if needle in data}
+            if counts and len(report["candidateClasses"]) < 100:
+                report["candidateClasses"].append({"class": entry.filename, "occurrences": counts})
+    return report
+
+
+def inspect_game(root: Path) -> dict:
+    root = root.resolve(strict=True)
+    if not root.is_dir() or not (root / "teams").is_dir():
+        raise ValueError("Game directory must contain teams")
+    binary_files: list[dict] = []
+    for file in sorted(root.rglob("*")):
+        if not file.is_file() or file.is_symlink():
+            continue
+        if any(p.lower() in {"saves", "backup", "backups", "profiles", "logs", "temp"} for p in file.relative_to(root).parts[:-1]):
+            continue
+        if file.suffix.lower() not in {".exe", ".jar", ".class"}:
+            continue
+        item = {"relativePath": file.relative_to(root).as_posix(),
+                "bytes": file.stat().st_size, "sha256": sha256(file)}
+        if file.suffix.lower() in {".jar", ".exe"}:
+            item["javaClassCandidates"] = inspect_jar(file)
+        binary_files.append(item)
+        if len(binary_files) > 300:
+            raise ValueError("Unexpectedly large runtime inventory")
+    return {
+        "schemaVersion": 1,
+        "goal": "identify original Brasfoot code owning the 2023/2024 career-year choices",
+        "changesMadeToGame": False, "proprietaryBytesCopied": False,
+        "matchesAreProofOfYearSelector": False,
+        "collectedAtUtc": datetime.now(timezone.utc).isoformat(),
+        "binaries": binary_files,
+        "notes": [
+            "Byte-pattern counts are not proof of the class controlling starting seasons.",
+            "A 2026-only selector must be validated by starting a real new career and inspecting the save.",
+            "Original files, saves and Serie D configuration must be preserved."
+        ]
+    }
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--game", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    game = args.game.resolve(strict=True)
+    output = args.output.resolve()
+    if output.is_relative_to(game) or output.exists():
+        parser.error("Output must be a NEW JSON file outside the Brasfoot installation")
+    data = inspect_game(game)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"Read-only runtime report: {output}")
+    print(f"Executable/JAR/class files analyzed: {len(data['binaries'])}")
+    print("No executable, saves, team file or league configuration was changed or copied.")
+
+
+if __name__ == "__main__":
+    main()
