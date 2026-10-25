@@ -51,14 +51,14 @@
   fetch('./data/release.json', { cache: 'no-cache' })
     .then((r) => { if (!r.ok) throw new Error(`Release manifest HTTP ${r.status}`); return r.json(); })
     .then(async (metadata) => {
-      if (metadata?.schemaVersion !== 1 || metadata.status !== 'awaiting_release') return;
+      if (metadata?.schemaVersion !== 1 || !['published','awaiting_release'].includes(metadata.status)) return;
       if (metadata.publishedVersion !== '2026.0.2' ||
           !/^[a-f0-9]{64}$/i.test(metadata.sha256 || '') ||
           !Number.isInteger(metadata.fileSizeBytes) || metadata.fileSizeBytes <= 0) return;
       const expected = 'https://github.com/yzPeedro/brassfoot-patch/releases/download/v2026.0.2/Brassfoot-Patch-2026-Setup.exe';
       if (metadata.downloadUrl !== expected) return;
       version.textContent = metadata.publishedVersion;
-      detail.textContent = 'Versão experimental: aguardando verificação do arquivo público no GitHub.';
+      detail.textContent = 'Confirmando a integridade do instalador público no GitHub Releases...';
       const response = await fetch('https://api.github.com/repos/yzPeedro/brassfoot-patch/releases/tags/v2026.0.2', {
         cache: 'no-store', headers: { Accept: 'application/vnd.github+json' }
       });
