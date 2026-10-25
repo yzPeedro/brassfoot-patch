@@ -1,0 +1,22 @@
+name: Website regression
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/site-regression.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check static site, release and patch player names
+        run: node site/tests/site.test.js
+      - name: Test interactive club explorer and roster modal
+        run: node site/tests/explorer-interaction.test.js
