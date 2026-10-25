@@ -38,14 +38,16 @@ jobs:
           for filename,expected in (
               ('criciuma-2026-official.tsv', [3,3,7,8,8]),
               ('londrina-2026-official.tsv', [4,3,6,7,9]),
+              ('cuiaba-2026-official.tsv', [4,4,4,7,6]),
+              ('juventude-2026-official.tsv', [4,8,6,8,10]),
           ):
               source=Path('tools/team-roster-editor/sources')/filename
               rows=[line.split('\t') for line in source.read_text(encoding='utf-8').splitlines() if line and not line.startswith('#')]
-              assert len(rows)==29,(filename,len(rows))
+              assert len(rows)==sum(expected),(filename,len(rows))
               assert [sum(row[1]==str(pos) for row in rows) for pos in range(5)]==expected,filename
               assert len({row[0] for row in rows})==29
               assert all(len(row)==4 and not row[2] and not row[3] for row in rows)
-              print('PASS:',filename,'29 players; verified positions, no invented ages/countries')
+              print('PASS:',filename,len(rows),'players; positions verified, no invented ages/countries')
           PY
       - name: Verify synthetic byte-differential reconstruction and SHA
         run: python -m unittest discover -s tests -p 'test_team_delta.py' -v
