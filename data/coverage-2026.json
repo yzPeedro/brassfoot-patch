@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "season": 2026,
+  "publishedRelease": {
+    "version": "2026.0.2",
+    "clubsWithExperimentalRosters": 20,
+    "divisionsWithRosterUpdates": [
+      "A"
+    ],
+    "playersIncluded": 730,
+    "playersCollected": 745,
+    "playersEstimatedAttributes": 713,
+    "playersExcluded": 15,
+    "gameTestEvidence": "User-reported test of private 20-club preview, 2026-10-25"
+  },
+  "catalog": {
+    "total": 156,
+    "divisions": {
+      "A": 20,
+      "B": 20,
+      "C": 20,
+      "D": 96
+    },
+    "origin": "Official CBF season 2026"
+  },
+  "legacyGameBase": {
+    "teamFilesAudited": 703,
+    "matchedConfirmed": 103,
+    "matchedCandidates": 7,
+    "noCorrespondingTeamFile": 46,
+    "divisions": {
+      "A": {
+        "confirmed": 18,
+        "candidate": 2,
+        "absent": 0
+      },
+      "B": {
+        "confirmed": 18,
+        "candidate": 2,
+        "absent": 0
+      },
+      "C": {
+        "confirmed": 18,
+        "candidate": 1,
+        "absent": 1
+      },
+      "D": {
+        "confirmed": 49,
+        "candidate": 2,
+        "absent": 45
+      }
+    },
+    "note": "Matching status indicates candidate 2022-23 game-file identity, not a synchronized 2026 roster or in-game competition membership."
+  },
+  "competitions": {
+    "existingNationalConfiguration": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "originalTeamCounts": {
+      "A": 20,
+      "B": 20,
+      "C": 20,
+      "D": 64
+    },
+    "originalSerieDGroups": 8,
+    "official2026SerieDTeams": 96,
+    "official2026SerieDGroups": 16,
+    "serializationRoundTripsPassed": 27,
+    "is96TeamGameplayVerified": false,
+    "isNewConfigPublished": false
+  },
+  "assets": {
+    "redistributionApprovedFor2026Expansion": 0,
+    "integratedInNewRelease": 0
+  },
+  "apiFootballRequestsDuringThisAudit": 0,
+  "full156PatchPublished": false,
+  "lastAuditDate": "2026-10-25",
+  "notice": "Public progress data only. No proprietary Brasfoot files, file names, internal IDs, account keys or raw player data are included."
+}
