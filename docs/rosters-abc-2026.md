@@ -97,3 +97,13 @@ Foi baixado **somente para inspeção read-only em GitHub Actions** o instalador
 - **Correção exigida:** não basta trocar o texto do JComboBox. A lista deve ter somente 2026; o evento do botão precisa configurar o motor para 2026 e gravar corretamente `anoinicio`, mesmo com preferências antigas; todas as referências internas que pressupõem 2022/2023 devem ser inspecionadas. Verificar save, calendário e telas reais em Windows.
 - A mesma classe contém referências à interface de seleção inicial, mas **a relação efetiva entre clubes e divisões ainda não foi mapeada**; `BRA.cfg` define formatos/quantidades, não a composição de A/B/C.
 - **Estado atual:** análise de bytecode concluída nessa parte; patch de ano e agrupamento interno **ainda não implementado, nem homologado, nem distribuído**. O workflow `inspect-official-game.yml` é reprodutível, apaga todos os arquivos privados ao final e registra apenas metadados/hashes nos logs de CI.
+
+
+## Descoberta: tabelas de clubes embutidas no executável, além dos arquivos .ban
+
+A inspeção do executável oficial `bf22-23.exe` revelou referências nominais a clubes em bytecode Java obfuscado `best/aq.class`. Por exemplo, a inicialização de um array fixo de **16 strings** inclui `corinthians_bra`, `santoandre_sp`, `interlimeirasp_bra`, `botafogosp_bra`, `pontepreta_bra`, `saobento_bra`, `bragantino_bra`, `palmeiras`, `ituano_sp` e `novorinzontino_sp`, entre outros. O trecho parece corresponder a uma lista estadual paulista; **não é prova de que defina a Série A, B ou C**. Em outras rotinas foram observadas referências a `bahia`, `abcrn_bra` e `avai_bra`.
+
+**Implicação importante:** as listas podem estar embutidas no código do jogo, e não somente nos arquivos `.ban` e `BRA.cfg`. Antes de mexer nos seletores de 1ª/2ª/3ª divisão, identificar a função de cada array por análise de chamadas e testar o mapeamento da divisão **na lógica de calendário real**. É inadmissível substituir um array de clubes estaduais por uma lista nacional, ou mudar a interface sem atualizar os fluxos de simulação. O jogo do usuário usa ainda outro binário que mostra 2023/2024, não 2022/2023; aplicar patches só com SHA-256 exato da versão instalada.
+
+Evidência reprodutível no workflow de CI `.github/workflows/inspect-official-game.yml`, execução `40240909477`; nenhum executável ou bytecode proprietário foi commitado nem distribuído.
+
