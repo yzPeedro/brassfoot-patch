@@ -71,7 +71,31 @@ public final class RosterEditorSelfTest {
                     output.toString(), sha, "500", "--lab-estimates"});
                 throw new AssertionError("Allowed overwriting an existing output");
             } catch (java.io.IOException expected) {}
-            System.out.println("PASS synthetic SHA checks, strict mode, original preservation and guarded lab edit");
+            // Multiple clubs in the legitimate game's database can share team.id,
+            // including 0 and 2477. New player IDs must still differ per source.
+            Path other = game.resolve("teams/second-club.ban");
+            Path secondOutput = root.resolve("result-second.ban");
+            team.e = "Another Team With Same Numeric ID";
+            byte[] secondOriginal = UpdateTeamRoster.serialize(team);
+            Files.write(other, secondOriginal);
+            UpdateTeamRoster.main(new String[] {other.toString(), roster.toString(),
+                secondOutput.toString(), UpdateTeamRoster.sha256(secondOriginal), "500", "--lab-estimates"});
+            t updatedSecond = UpdateTeamRoster.loadTeam(Files.readAllBytes(secondOutput));
+            if (updatedSecond.l.get(1).tid == updated.l.get(1).tid)
+                throw new AssertionError("Different clubs sharing team.id generated colliding player IDs");
+            team.id = 0;
+            team.e = "A Legitimate Team With Zero ID";
+            Path zero = game.resolve("teams/zero-club.ban");
+            Path zeroOutput = root.resolve("result-zero.ban");
+            byte[] zeroOriginal = UpdateTeamRoster.serialize(team);
+            Files.write(zero, zeroOriginal);
+            UpdateTeamRoster.main(new String[] {zero.toString(), roster.toString(),
+                zeroOutput.toString(), UpdateTeamRoster.sha256(zeroOriginal), "0", "--lab-estimates"});
+            t updatedZero = UpdateTeamRoster.loadTeam(Files.readAllBytes(zeroOutput));
+            if (updatedZero.l.get(1).tid == updated.l.get(1).tid ||
+                updatedZero.l.get(1).tid == updatedSecond.l.get(1).tid)
+                throw new AssertionError("Zero-ID team's generated player collided with another club");
+            System.out.println("PASS SHA, strict mode, 0/shared-ID collision isolation, original preservation and safe lab edit");
         } finally {
             try (var walk = Files.walk(root)) {
                 for (Path path : walk.sorted(Comparator.reverseOrder()).toList())
