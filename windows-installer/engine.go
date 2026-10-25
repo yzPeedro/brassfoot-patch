@@ -56,67 +56,9 @@ type InstallOptions struct { // TestFailAfter is for automated rollback tests, n
 }
 
 var (
-	teamName     = regexp.MustCompile(`^teams/[a-zA-Z0-9_-]+\.banpackage main
-
-import (
-	"crypto/sha256"
-	"encoding/hex"
-	"encoding/json"
-	"errors"
-	"fmt"
-	"io"
-	"os"
-	"path/filepath"
-	"regexp"
-	"sort"
-	"strings"
-	"time"
-)
-
-// Windows homologation installer. It never downloads data or calls an API.
-// The local game and the external homologation payload are never redistributed.
-type Manifest struct {
-	SchemaVersion             int            `json:"schemaVersion"`
-	Kind                      string         `json:"kind"`
-	PatchSeason               int            `json:"patchSeason"`
-	Version                   string         `json:"version"`
-	PublicationAllowed        bool           `json:"publicationAllowed"`
-	CompatibilityTestedInGame bool           `json:"compatibilityTestedInGame"`
-	Files                     []ManifestFile `json:"files"`
-}
-type ManifestFile struct {
-	Operation              string   `json:"operation,omitempty"`
-	Path                   string   `json:"path"`
-	Size                   int64    `json:"size"`
-	SHA256                 string   `json:"sha256"`
-	AcceptedOriginalSHA256 []string `json:"acceptedOriginalSha256"`
-}
-type Item struct {
-	File             ManifestFile
-	Source, Target   string
-	AlreadyInstalled bool
-}
-type Plan struct {
-	Game, Payload    string
-	Manifest         Manifest
-	Items            []Item
-	AlreadyInstalled bool
-}
-type InstallResult struct {
-	Status, Version, BackupPath string
-	Files                       int
-	InstalledAt                 time.Time
-}
-
-type InstallOptions struct { // TestFailAfter is for automated rollback tests, never used by the GUI.
-	TestFailAfter int
-	Progress      func(stage string, completed, total int)
-}
-
-var (
-	)
+	teamName = regexp.MustCompile(`^teams/[a-zA-Z0-9_-]+\.ban$`)
 	nationalConfigPath = "conf_ligas_nacionais/BRA.cfg"
-	validHash    = regexp.MustCompile(`^[0-9a-f]{64}$`)
+	validHash = regexp.MustCompile(`^[0-9a-f]{64}$`)
 	validVersion = regexp.MustCompile(`^2026\.[0-9]+\.[0-9]+$`)
 )
 
