@@ -44,3 +44,8 @@ Critérios baseados no prompt master do projeto. `pass` = verificado no componen
 | CAN38 | pending | Alertas no GitHub não implementados |
 | CAN39 | pass | Frontend estático não possui API-Football |
 | CAN40 | partial | Nenhum segredo nos arquivos locais analisados; binário GUI inexistente |
+
+
+## Novo escopo de 156 clubes (2026)
+
+Este arquivo documenta a **matriz original**. A matriz independente do upgrade Séries A/B/C/D é `docs/upgrade-2026-acceptance.md`. Não reutilize as aprovações CAN deste arquivo para afirmar que o novo escopo foi validado.
