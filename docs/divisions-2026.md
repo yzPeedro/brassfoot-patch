@@ -30,3 +30,11 @@ Os 156 clubes pertencem à temporada 2026 e **não** são propagados automaticam
 5. Preservar a release v2026.0.2 enquanto a ampliação não tiver validação funcional.
 
 **Não publicar um patch chamado "156 clubes instalados" com base apenas neste catálogo.**
+
+## Prova binária de configuração de quatro divisões — 25/10/2026
+
+Os **27 arquivos de configuração fornecidos privadamente** foram reconstruídos por um codec Java (UIDs compatíveis). O arquivo nacional `conf_ligas_nacionais/BRA.cfg` contém quatro instâncias de `est.ConfigLigaType` (UID 16), chamadas Série A/B/C/D, com `nTimes=20/20/20/64` e `nGrupos=0/0/0/8`. Os 25 `conf_estadual/*.ces` contêm quatro divisões estaduais cada, em `est.ConfigEstadualType` (UID 1).
+
+O teste offline fez **27 round-trips idênticos byte a byte**. Uma cópia isolada de `BRA.cfg` aceitou na serialização `nTimes=96` e `nGrupos=16`, com só dois bytes distintos do original. Isso **não comprova** que o jogo possa simular o novo calendário nem que os 96 participantes estejam vinculados à liga: a composição das equipes **não consta desses objetos de configuração**.
+
+A implementação está em `tools/competition-codec/`. Os binários proprietários do jogo permanecem privados. A v2026.0.2 pública não foi alterada.
