@@ -24,7 +24,10 @@
     modalCount: byId('club-dialog-player-count'),
     modalRosterTitle: byId('club-dialog-roster-title'),
     modalNotice: byId('club-dialog-notice'),
-    modalPlayers: byId('club-dialog-players')
+    modalPlayers: byId('club-dialog-players'),
+    sourceBox: byId('club-dialog-source-box'),
+    sourceLink: byId('club-dialog-source'),
+    sourceReviewed: byId('club-dialog-reviewed')
   };
   if (Object.values(elements).some(x => !x || (Array.isArray(x) && x.some(i => !i)))) return;
 
@@ -40,11 +43,33 @@
 
   let clubs = [];
   let rosters = {};
+  let researchedRosters = {};
   let rostersReady = false;
   let page = 1;
   let sortKey = 'name';
   let sortDirection = 'asc';
   let lastFocus = null;
+  function rosterStatus(club) {
+    if (club.division === 'A') return labels.A;
+    if (Object.hasOwn(researchedRosters,club.id)) return 'Pesquisa externa · não instalado';
+    return 'Elenco aguardando pesquisa completa';
+  }
+  function validateResearch(data) {
+    const known = new Set(clubs.filter(c => c.division !== 'A').map(c => c.id));
+    if (data?.schemaVersion !== 1 || data.season !== 2026 || !data.clubs ||
+        !Number.isInteger(data.researchedClubs) ||
+        Object.keys(data.clubs).length !== data.researchedClubs) throw new Error('Metadados externos inválidos');
+    for (const [id,entry] of Object.entries(data.clubs)) {
+      if (!known.has(id) || entry.scope !== 'internet-research-not-installed' ||
+          entry.completeSeason2026Verified !== false ||
+          !/^https:\/\//.test(entry.sourceUrl) || !Array.isArray(entry.players) ||
+          entry.players.length < 16 || entry.players.length > 60 ||
+          entry.players.some(x => typeof x !== 'string' || !x.trim())) {
+        throw new Error('Pesquisa externa inválida: ' + id);
+      }
+    }
+    return data.clubs;
+  }
 
   async function getJson(relativePath) {
     const response = await fetch(relativePath, {cache:'no-store'});
@@ -99,6 +124,8 @@
       if (chosenDivision && club.division !== chosenDivision) return false;
       if (chosenRoster === 'published' && club.division !== 'A') return false;
       if (chosenRoster === 'pending' && club.division === 'A') return false;
+      if (chosenRoster === 'researched' && !Object.hasOwn(researchedRosters,club.id)) return false;
+      if (chosenRoster === 'missing' && (club.division === 'A' || Object.hasOwn(researchedRosters,club.id))) return false;
       return !searched || normalized([club.name, club.state, 'Série ' + club.division].join(' ')).includes(searched);
     });
   }
@@ -107,14 +134,14 @@
     name: club => club.name,
     state: club => club.state,
     division: club => club.division,
-    roster: club => labels[club.division]
+    roster: club => rosterStatus(club)
   };
   const grouping = {
     none: () => '',
     name: club => normalized(club.name).charAt(0).toLocaleUpperCase('pt-BR') || '#',
     state: club => club.state,
     division: club => 'Série ' + club.division,
-    roster: club => labels[club.division]
+    roster: club => rosterStatus(club)
   };
 
   function compare(a,b,key) {
@@ -191,7 +218,7 @@
       row.appendChild(nameCell);
       for (const [cellValue, cellClass] of [
         [club.state, ''], ['Série ' + club.division, ''],
-        [labels[club.division], 'club-roster-state']
+        [rosterStatus(club), 'club-roster-state']
       ]) {
         const td = document.createElement('td');
         if (cellClass) td.className = cellClass;
@@ -230,20 +257,32 @@
   function openClub(club) {
     lastFocus = document.activeElement;
     const published = club.division === 'A';
-    const roster = rostersReady ? rosters[club.id] : undefined;
+    const external = published ? undefined : researchedRosters[club.id];
+    const roster = published ? (rostersReady ? rosters[club.id] : undefined) : external;
     elements.modalTitle.textContent = club.name;
     elements.modalDivision.textContent = 'Série ' + club.division + ' · Temporada 2026';
     elements.modalDescription.textContent = published
       ? 'Nomes dos jogadores efetivamente incluídos na prévia v2026.0.2.'
-      : 'Elenco atualizado de 2026 ainda não publicado para este clube.';
+      : (external ? 'Jogadores de fonte externa pesquisada; ainda NÃO estão no patch.' : 'Elenco atualizado de 2026 ainda não publicado para este clube.');
     elements.modalState.textContent = club.state;
-    elements.modalStatus.textContent = labels[club.division];
+    elements.modalStatus.textContent = rosterStatus(club);
     elements.modalCount.textContent = roster ? String(roster.players.length) : '—';
-    elements.modalRosterTitle.textContent = published ? 'Jogadores no patch v2026.0.2' : 'Elenco de 2026';
+    elements.modalRosterTitle.textContent = published ? 'Jogadores no patch v2026.0.2' : 'Jogadores identificados em fonte externa';
+    elements.sourceBox.hidden = !external;
+    if (external) {
+      elements.sourceLink.href = external.sourceUrl;
+      elements.sourceLink.textContent = external.sourceUrl.split('/')[2];
+      elements.sourceReviewed.textContent = '· consultada em ' + external.reviewedOn;
+    } else {
+      elements.sourceLink.removeAttribute('href');
+      elements.sourceLink.textContent = '';
+      elements.sourceReviewed.textContent = '';
+    }
     const fragment = document.createDocumentFragment();
     if (roster) {
-      elements.modalNotice.textContent =
-        'Lista conferida diretamente nos arquivos .ban distribuídos na v2026.0.2. Alguns atributos são estimados; não representa necessariamente o plantel atual do clube.';
+      elements.modalNotice.textContent = published
+        ? 'Nomes efetivamente no patch .ban da v2026.0.2; atributos estimados.'
+        : 'PESQUISA EXTERNA, NÃO INSTALADA NO PATCH. ' + external.note + ' Antes da inclusão, faltam conferir vínculos/2026 e validar o arquivo .ban.';
       for (const name of roster.players) {
         const item = document.createElement('li');
         item.textContent = name;
@@ -307,6 +346,9 @@
         .then(published => {
           rosters = validatePublishedRosters(published);
           rostersReady = true;
+          return getJson('./data/researched-rosters-2026.json')
+            .then(data => {researchedRosters = validateResearch(data);render();})
+            .catch(error => console.warn('Fontes externas indisponíveis:',error.message));
         })
         .catch(error => {
           console.warn('Detalhes de elencos indisponíveis:',error.message);
