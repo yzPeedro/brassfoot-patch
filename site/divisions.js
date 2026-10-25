@@ -64,7 +64,11 @@
           entry.completeSeason2026Verified !== false ||
           !/^https:\/\//.test(entry.sourceUrl) || !Array.isArray(entry.players) ||
           entry.players.length < 16 || entry.players.length > 60 ||
-          entry.players.some(x => typeof x !== 'string' || !x.trim())) {
+          entry.players.some(x => typeof x !== 'string' || !x.trim()) ||
+          (entry.positionCodes !== undefined && (
+            !Array.isArray(entry.positionCodes) ||
+            entry.positionCodes.length !== entry.players.length ||
+            entry.positionCodes.some(value => !Number.isInteger(value) || value < 0 || value > 4)))) {
         throw new Error('Pesquisa externa inválida: ' + id);
       }
     }
@@ -283,11 +287,18 @@
       elements.modalNotice.textContent = published
         ? 'Nomes efetivamente no patch .ban da v2026.0.2; atributos estimados.'
         : 'PESQUISA EXTERNA, NÃO INSTALADA NO PATCH. ' + external.note + ' Antes da inclusão, faltam conferir vínculos/2026 e validar o arquivo .ban.';
-      for (const name of roster.players) {
+      const roleLabels = ['Goleiro','Lateral','Zagueiro','Meio-campo','Atacante'];
+      roster.players.forEach((name,index) => {
         const item = document.createElement('li');
         item.textContent = name;
+        if (external && Array.isArray(external.positionCodes)) {
+          const role = document.createElement('span');
+          role.className = 'club-player-role';
+          role.textContent = ' · ' + roleLabels[external.positionCodes[index]];
+          item.appendChild(role);
+        }
         fragment.appendChild(item);
-      }
+      });
     } else if (published && !rostersReady) {
       elements.modalNotice.textContent =
         'Não foi possível carregar a lista de jogadores do patch. Tente recarregar a página.';
