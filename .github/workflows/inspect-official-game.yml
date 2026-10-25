@@ -139,6 +139,23 @@ jobs:
         run: |
           python tools/trace_career_controls.py --game-exe /tmp/brasfoot-extracted/bf22-23.exe
           echo 'READ-ONLY evidence only; league assignment and career gameplay are NOT validated'
+      - name: Identify which obfuscated 2022-23 Java methods own national-division controls
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from tools.trace_career_controls import trace
+          archive=Path('/tmp/brasfoot-extracted/bf22-23.exe')
+          for name in ('a/bV.class', 'a/fB.class', 'a/cw.class'):
+              data=trace(archive, name)
+              print('DIVISION_CANDIDATE', name, 'SHA256', data['sha256'])
+              print('COMBO_FIELDS', data['comboFieldNames'])
+              for method in data['methodsWithComboReferences'][:30]:
+                  reduced={key:method[key] for key in ('method','comboFields','comboActions','engineCalls')}
+                  reduced['selectorSnippets']=method['selectorSnippets'][:6]
+                  print('DIVISION_METHOD',json.dumps(reduced,ensure_ascii=False))
+          print('READ ONLY - these indicators are not a verified national division mapping')
+          PY
       - name: Record installed official Java class source fingerprints
         run: |
           python - <<'PY'
