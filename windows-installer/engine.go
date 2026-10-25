@@ -244,7 +244,7 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		}
 		mode := entry.Operation
 		if mode == "" { mode = "replace" }
-		if (m.SchemaVersion == 2 && entry.Operation != "") || (mode != "replace" && mode != "add") {
+		if (m.SchemaVersion == 2 && entry.Operation != "") || (mode != "replace" && mode != "add" && mode != "verify") {
 			return Plan{}, fmt.Errorf("operação não suportada para %s", entry.Path)
 		}
 		if m.SchemaVersion == 2 && mode == "add" {
@@ -265,7 +265,7 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		if mode == "replace" && (len(entry.AcceptedOriginalSHA256) == 0 || len(entry.AcceptedOriginalSHA256) > 64) {
 			return Plan{}, errors.New("falta assinatura do arquivo original homologado")
 		}
-		if mode == "add" && len(entry.AcceptedOriginalSHA256) != 0 {
+		if (mode == "add" || mode == "verify") && len(entry.AcceptedOriginalSHA256) != 0 {
 			return Plan{}, errors.New("nova equipe não pode declarar hashes de originais")
 		}
 		allowed := false
@@ -310,6 +310,7 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 				return Plan{}, fmt.Errorf("arquivo de equipe de destino incompatível: %s: %w", entry.Path, err)
 			}
 		}
+		if !targetExists && mode == "verify" { return Plan{}, fmt.Errorf("clube historico a conferir esta ausente: %s",entry.Path) }
 		if targetExists {
 			actual, er = canonical(target)
 			if er != nil || !within(actual, game) {
@@ -346,6 +347,7 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 			existing, e := sha(target)
 			if e != nil { return Plan{}, e }
 			isInstalled = existing == entry.SHA256
+			if mode == "verify" && !isInstalled { return Plan{}, fmt.Errorf("arquivo historico difere do esperado: %s", entry.Path) }
 			if !isInstalled {
 				if mode == "add" {
 					return Plan{}, fmt.Errorf("recusada adição: %s já existe com outro hash", entry.Path)
