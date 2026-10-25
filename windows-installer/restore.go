@@ -130,6 +130,14 @@ func restorePatch(plan Plan, progress func(int, int)) (string, error) {
 	if err := checkWritableTeams(fresh.Game); err != nil {
 		return "", err
 	}
+	for _, item := range fresh.Items {
+		if item.File.Path == nationalConfigPath {
+			if err = checkWritableDirectory(filepath.Join(fresh.Game, "conf_ligas_nacionais")); err != nil {
+				return "", fmt.Errorf("não consigo restaurar a configuração nacional: %w", err)
+			}
+			break
+		}
+	}
 	completed := []Item{}
 	rollback := func(problem error) (string, error) {
 		failures := []string{}
