@@ -1,3 +1,5 @@
+> **MATRIZ HISTÓRICA (anterior à v2026.0.2).** As afirmações antigas de que não existe release pública estão superadas. A versão pública v2026.0.2 existe, mas contém somente 20 equipes com atributos estimados. Consulte `docs/upgrade-2026-acceptance.md` para o novo escopo e `docs/implementation-progress.md` para evidências recentes.
+
 # Matriz objetiva CAN01–CAN40
 
 Critérios baseados no prompt master do projeto. `pass` = verificado no componente implementado; `partial` = implementação ou evidência insuficiente; `blocked` = depende de dado/ambiente externo; `pending` = não implementado. **Status partial não conta como aprovado.**
