@@ -1,0 +1,35 @@
+# goias professional squad; source https://www.goiasec.com.br/elenco/futebol-profissional; checked 2026-10-25
+# Five codes: 0=goalkeeper; 1=fullback; 2=centreback; 3=midfielder; 4=attacker.
+# Source groups only. No ages, identities or nationality invented.
+# NAME<TAB>POSITION<TAB>AGE_IF_VERIFIED<TAB>COUNTRY_IF_VERIFIED
+Tadeu	0		
+Ezequiel	0		
+Murillo Victorio	0		
+Thiago Rodrigues	0		
+RODRIGO SOARES	1		
+Marcos Vinicius	1		
+NICOLAS	1		
+Danilo	1		
+Djalma	1		
+LUISÃO	2		
+Lucas Ribeiro	2		
+Luiz Felipe	2		
+Ramon Menezes	2		
+Murilo Câmara	2		
+LOURENÇO	3		
+Filipe Machado	3		
+Baldória	3		
+Juninho	3		
+Lucas Rodrigues	3		
+GEGÊ	3		
+Lucas Lima	3		
+Brayann	3		
+Wellington Rato	3		
+Pedrinho	4		
+Anselmo Ramon	4		
+Cadu	4		
+Felipe Clemente	4		
+Jean Carlos	4		
+Halerrandrio	4		
+Esli Garcia	4		
+Kadu Sousa	4		
