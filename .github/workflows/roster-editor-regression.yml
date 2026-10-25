@@ -35,13 +35,17 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          source=Path('tools/team-roster-editor/sources/criciuma-2026-official.tsv')
-          records=[line.split('\t') for line in source.read_text(encoding='utf-8').splitlines() if line and not line.startswith('#')]
-          assert len(records)==29,len(records)
-          assert {v:sum(x[1]==v for x in records) for v in '01234'}=={'0':3,'1':3,'2':7,'3':8,'4':8}
-          assert len({line[0] for line in records})==29
-          assert all(not x[2] and not x[3] for x in records)
-          print('PASS: 29 sourced players, 5 position roles, unknown personal metadata not guessed')
+          for filename,expected in (
+              ('criciuma-2026-official.tsv', [3,3,7,8,8]),
+              ('londrina-2026-official.tsv', [4,3,6,7,9]),
+          ):
+              source=Path('tools/team-roster-editor/sources')/filename
+              rows=[line.split('\t') for line in source.read_text(encoding='utf-8').splitlines() if line and not line.startswith('#')]
+              assert len(rows)==29,(filename,len(rows))
+              assert [sum(row[1]==str(pos) for row in rows) for pos in range(5)]==expected,filename
+              assert len({row[0] for row in rows})==29
+              assert all(len(row)==4 and not row[2] and not row[3] for row in rows)
+              print('PASS:',filename,'29 players; verified positions, no invented ages/countries')
           PY
       - name: Verify synthetic byte-differential reconstruction and SHA
         run: python -m unittest discover -s tests -p 'test_team_delta.py' -v
