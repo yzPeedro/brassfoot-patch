@@ -21,4 +21,23 @@ assert.match(js,/api\.github\.com\/repos\/yzPeedro/);
 assert.match(js,/item\.digest === 'sha256:'/);
 assert.match(js,/compatibilityVerifiedInGame\s*!==\s*true/);
 assert.ok(!/x-apisports-key|API_FOOTBALL_KEY|\bVITE_/.test(html+js+css));
+
+const explorerJs = fs.readFileSync(path.join(root, 'divisions.js'), 'utf8');
+const divisions = JSON.parse(fs.readFileSync(path.join(root, 'data/competitions/2026-brazil.json'), 'utf8'));
+assert.equal(divisions.clubs.length, 156);
+assert.deepEqual(divisions.counts, {A:20,B:20,C:20,D:96});
+assert.equal(new Set(divisions.clubs.map(club => club.id)).size, 156);
+assert.equal(divisions.gameInstallCoverage.releasedClubs, 20);
+assert.equal(divisions.gameInstallCoverage.additionalDivisionsPlayable, false);
+assert.equal(divisions.apiFootballRequestsThisCatalog, 0);
+assert.equal(divisions.clubs.filter(x => x.division === 'D' && x.group).length, 96);
+assert.match(html,/id="clubes-2026"/);
+assert.match(html,/id="clubs-search"/);
+assert.match(html,/id="clubs-division"/);
+assert.match(html,/src="\.\/divisions\.js"/);
+assert.match(explorerJs,/new Set\(data\.clubs\.map\(x => x\.id\)\)/);
+assert.match(explorerJs,/textContent/);
+assert.doesNotMatch(explorerJs,/innerHTML|API_FOOTBALL_KEY|x-apisports-key/);
+assert.doesNotMatch(html,/class="ball"/);
+
 console.log('Site: versão aguardando release; download condicionado a digest/tamanho confirmados.');
