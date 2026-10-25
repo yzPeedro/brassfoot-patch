@@ -20,6 +20,7 @@ class Node {
     this.open=false;
   }
   setAttribute(name,value){this.attributes[name]=String(value);}
+  removeAttribute(name){delete this.attributes[name];}
   querySelector(selector){return selector==='.sort-indicator' ? this.indicator || null : null;}
   appendChild(node){
     if(node.tag==='fragment') for(const child of node.children)this.appendChild(child);
@@ -50,7 +51,7 @@ const ids=[
   'clubs-page-size','clubs-previous','clubs-next','clubs-page-label','clubs-group-by',
   'clubs-sort-name','clubs-sort-state','clubs-sort-division','clubs-sort-roster',
   'clubs-heading-name','clubs-heading-state','clubs-heading-division','clubs-heading-roster','club-dialog',
-  'club-dialog-close','club-dialog-title','club-dialog-division',
+  'club-dialog-close','club-dialog-title','club-dialog-division','club-dialog-source-box','club-dialog-source','club-dialog-reviewed',
   'club-dialog-description','club-dialog-state','club-dialog-roster-status',
   'club-dialog-player-count','club-dialog-roster-title','club-dialog-notice','club-dialog-players'
 ];
@@ -75,10 +76,11 @@ const doc={
 };
 const catalog=JSON.parse(fs.readFileSync(path.join(root,'data/target-abc-2026.json'),'utf8'));
 const rosters=JSON.parse(fs.readFileSync(path.join(root,'data/published-rosters-2026-0-2.json'),'utf8'));
+const researched=JSON.parse(fs.readFileSync(path.join(root,'data/researched-rosters-2026.json'),'utf8'));
 const requests=[];
 async function fetchMock(url){
   requests.push(url);
-  const data=url.includes('target-abc-2026')?catalog: url.includes('published-rosters')?rosters:null;
+  const data=url.includes('target-abc-2026')?catalog: url.includes('published-rosters')?rosters: url.includes('researched-rosters')?researched:null;
   return {ok:!!data,status:data?200:404,json:async()=>data};
 }
 const script=fs.readFileSync(path.join(root,'divisions.js'),'utf8');
@@ -88,7 +90,7 @@ const tick=()=>new Promise(resolve=>setImmediate(resolve));
 (async()=>{
   for(let i=0;i<5;i++)await tick();
   const get=id=>nodes[id];
-  assert.deepEqual(requests, ['./data/target-abc-2026.json','./data/published-rosters-2026-0-2.json']);
+  assert.deepEqual(requests, ['./data/target-abc-2026.json','./data/published-rosters-2026-0-2.json','./data/researched-rosters-2026.json']);
   assert.equal(get('clubs-grid').children.length,10);
   assert.match(get('clubs-page-label').textContent,/Página 1 de 6/);
   assert.equal(get('clubs-previous').disabled,true);
@@ -191,6 +193,30 @@ const tick=()=>new Promise(resolve=>setImmediate(resolve));
   assert.equal(get('clubs-grid').children[0].className,'clubs-group-header');
   assert.match(get('clubs-count').textContent,/2 clubes encontrados/);
 
+  // A B-team modal exposes a real source and named players, never claiming installation.
+  get('clubs-search').value='Criciúma';
+  get('clubs-division').value='B';
+  get('clubs-division').dispatch('change');
+  assert.equal(get('clubs-grid').children.filter(x=>x.dataset.clubId).length,1);
+  get('clubs-grid').dispatch('click',{target:get('clubs-grid').children.find(x=>x.dataset.clubId)});
+  assert.equal(get('club-dialog-title').textContent,'Criciúma');
+  assert.equal(get('club-dialog-player-count').textContent,String(researched.clubs['br-criciuma-sc'].players.length));
+  assert.match(get('club-dialog-notice').textContent,/NÃO INSTALADA NO PATCH/);
+  assert.equal(get('club-dialog-source').href,researched.clubs['br-criciuma-sc'].sourceUrl);
+  assert.equal(get('club-dialog-source-box').hidden,false);
+  assert.ok(get('club-dialog-players').children.some(x=>x.textContent==='Marcelo Hermes'));
+  get('club-dialog').close();
+  get('clubs-search').value='';
+  get('clubs-roster-filter').value='researched';
+  get('clubs-roster-filter').dispatch('change');
+  assert.equal(get('clubs-count').textContent.includes('16 clubes encontrados'),true);
+  get('clubs-roster-filter').value='missing';
+  get('clubs-roster-filter').dispatch('change');
+  assert.equal(get('clubs-count').textContent.includes('24 clubes encontrados'),true);
+  get('clubs-roster-filter').value='';
+  get('clubs-roster-filter').dispatch('change');
+  get('clubs-division').value='';
+  get('clubs-division').dispatch('change');
   assert.equal(counters[0].textContent,'20');
   assert.equal(counters[1].textContent,'20');
   assert.equal(counters[2].textContent,'20');
