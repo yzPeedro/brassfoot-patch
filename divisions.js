@@ -7,6 +7,8 @@
     division: byId('clubs-division'),
     search: byId('clubs-search'),
     rosterFilter: byId('clubs-roster-filter'),
+    groupBy: byId('clubs-group-by'),
+    sortButtons: ['name','state','division','roster'].map(k => byId('clubs-sort-' + k)),
     summary: byId('clubs-count'),
     pageSize: byId('clubs-page-size'),
     previous: byId('clubs-previous'),
@@ -24,7 +26,7 @@
     modalNotice: byId('club-dialog-notice'),
     modalPlayers: byId('club-dialog-players')
   };
-  if (Object.values(elements).some(x => !x)) return;
+  if (Object.values(elements).some(x => !x || (Array.isArray(x) && x.some(i => !i)))) return;
 
   const normalized = input => String(input ?? '').normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('pt-BR').trim();
@@ -40,6 +42,8 @@
   let rosters = {};
   let rostersReady = false;
   let page = 1;
+  let sortKey = 'name';
+  let sortDirection = 'asc';
   let lastFocus = null;
 
   async function getJson(relativePath) {
@@ -99,16 +103,79 @@
     });
   }
 
+  const sortValues = {
+    name: club => club.name,
+    state: club => club.state,
+    division: club => club.division,
+    roster: club => labels[club.division]
+  };
+  const grouping = {
+    none: () => '',
+    name: club => normalized(club.name).charAt(0).toLocaleUpperCase('pt-BR') || '#',
+    state: club => club.state,
+    division: club => 'Série ' + club.division,
+    roster: club => labels[club.division]
+  };
+
+  function compare(a,b,key) {
+    return collator.compare(sortValues[key](a),sortValues[key](b));
+  }
+
+  function order(items) {
+    const mode = elements.groupBy.value;
+    const group = grouping[mode] || grouping.none;
+    return items.sort((a,b) => {
+      const groupCompare = mode !== 'none' ? collator.compare(group(a),group(b)) : 0;
+      if (groupCompare) return groupCompare;
+      return (sortDirection === 'desc' ? -1 : 1) * compare(a,b,sortKey) ||
+        compare(a,b,'name') || compare(a,b,'state') || collator.compare(a.id,b.id);
+    });
+  }
+
+  function updateSortLabels() {
+    for (const key of Object.keys(sortValues)) {
+      const heading = byId('clubs-heading-' + key);
+      const button = byId('clubs-sort-' + key);
+      const active = key === sortKey;
+      heading.setAttribute('aria-sort', active ? (sortDirection === 'asc' ? 'ascending' : 'descending') : 'none');
+      const indicator = button.querySelector('.sort-indicator');
+      if (indicator) indicator.textContent = active ? (sortDirection === 'asc' ? '↑' : '↓') : '↕';
+    }
+  }
+
   function render() {
-    const filtered = matchingClubs();
+    const filtered = order(matchingClubs());
     const size = Number(elements.pageSize.value);
     const totalPages = Math.max(1, Math.ceil(filtered.length / size));
     page = Math.max(1, Math.min(page, totalPages));
     const start = (page - 1) * size;
     const visible = filtered.slice(start, start + size);
     const fragment = document.createDocumentFragment();
-
+    const groupMode = elements.groupBy.value;
+    const groupOf = grouping[groupMode] || grouping.none;
+    const groupCounts = new Map();
+    if (groupMode !== 'none') {
+      for (const club of filtered) {
+        const value = groupOf(club);
+        groupCounts.set(value,(groupCounts.get(value) || 0) + 1);
+      }
+    }
+    let previousGroup = null;
     for (const club of visible) {
+      if (groupMode !== 'none') {
+        const group = groupOf(club);
+        if (group !== previousGroup) {
+          const tr = document.createElement('tr');
+          tr.className = 'clubs-group-header';
+          const cell = document.createElement('th');
+          cell.scope = 'rowgroup';
+          cell.colSpan = 4;
+          cell.textContent = group + ' · ' + groupCounts.get(group) + ' clube(s) no filtro';
+          tr.appendChild(cell);
+          fragment.appendChild(tr);
+          previousGroup = group;
+        }
+      }
       const row = document.createElement('tr');
       row.dataset.clubId = club.id;
       row.className = 'club-clickable-row';
@@ -152,6 +219,7 @@
     elements.pageLabel.textContent = 'Página ' + page + ' de ' + totalPages;
     elements.previous.disabled = page <= 1;
     elements.next.disabled = page >= totalPages;
+    updateSortLabels();
   }
 
   function clearPageAndRender() {
@@ -213,17 +281,25 @@
   elements.division.addEventListener('change', clearPageAndRender);
   elements.rosterFilter.addEventListener('change', clearPageAndRender);
   elements.search.addEventListener('input', clearPageAndRender);
+  elements.groupBy.addEventListener('change', clearPageAndRender);
+  for (const button of elements.sortButtons) {
+    button.addEventListener('click', () => {
+      const selected = button.dataset.sort;
+      if (!Object.hasOwn(sortValues,selected)) return;
+      if (selected === sortKey) sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+      else {sortKey = selected;sortDirection = 'asc';}
+      clearPageAndRender();
+    });
+  }
 
   getJson('./data/target-abc-2026.json')
     .then(data => {
       validateCatalog(data);
-      clubs = data.clubs.sort((a,b) =>
-        'ABC'.indexOf(a.division) - 'ABC'.indexOf(b.division) ||
-        collator.compare(a.name,b.name) || collator.compare(a.state,b.state));
+      clubs = data.clubs;
       for (const counter of document.querySelectorAll('[data-division-count]')) {
         counter.textContent = String(data.clubs.filter(c => c.division === counter.dataset.divisionCount).length);
       }
-      for (const field of [elements.division,elements.search,elements.rosterFilter,elements.pageSize]) {
+      for (const field of [elements.division,elements.search,elements.rosterFilter,elements.pageSize,elements.groupBy]) {
         field.disabled = false;
       }
       render();
