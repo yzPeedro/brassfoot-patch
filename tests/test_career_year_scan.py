@@ -30,6 +30,24 @@ class CareerYearTests(unittest.TestCase):
             self.assertEqual(found["candidateClasses"][0]["class"],"game/SeasonPicker.class")
             self.assertEqual({file:file.read_bytes() for file in before},before)
 
+    def test_recognizes_exact_selector_evidence_without_modification(self):
+        with TemporaryDirectory() as temp:
+            game=Path(temp)/"game"
+            (game/"teams").mkdir(parents=True)
+            payload=bytes.fromhex("cafebabe")+b"javax/swing/JComboBox anoinicio 2023 2024"
+            with ZipFile(game/"bf22-23.exe","w") as stream:
+                stream.writestr("a/hU.class",payload)
+            data=inspect_game(game)["binaries"][0]["javaClassCandidates"]
+            selector=data["yearSelector"]
+            self.assertEqual(selector["classPath"],"a/hU.class")
+            self.assertTrue(selector["containsStartupYearPreference"])
+            self.assertTrue(selector["containsJComboBox"])
+            self.assertEqual(selector["stringYearCounts"]["2023"],1)
+            self.assertEqual(selector["stringYearCounts"]["2024"],1)
+            self.assertFalse(selector["matchesOriginalOfficial"])
+            self.assertFalse(selector["originalBytesCopied"])
+            self.assertFalse(selector["gameBehaviorValidated"])
+
     def test_executable_without_embedded_jar_is_reported_not_modified(self):
         with TemporaryDirectory() as tmp:
             game=Path(tmp)/"game"
