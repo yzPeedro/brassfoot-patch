@@ -23,6 +23,8 @@ IDENTITIES = {
     "novorizontino":"br-novorizontino-sp",
     "botafogo-sp":"br-botafogo-sp",
     "athletic":"br-athletic-mg",
+    "nautico":"br-nautico-pe", "operario":"br-operario-ferroviario-pr",
+    "ponte-preta":"br-ponte-preta-sp", "vila-nova":"br-vila-nova-go",
 }
 
 def clean(name):
@@ -36,7 +38,7 @@ def audit(rosters, directory):
     total=0
     for stem,club_id in IDENTITIES.items():
         filename=("america-2026-contracts-o-tempo.tsv" if stem=="america"
-                  else stem+"-2026-portal.tsv" if stem in ("novorizontino","botafogo-sp","athletic")
+                  else stem+"-2026-portal.tsv" if stem in ("novorizontino","botafogo-sp","athletic","nautico","operario","ponte-preta","vila-nova")
                   else stem+"-2026-official.tsv")
         path=directory/filename
         if not path.is_file() or club_id not in records:
