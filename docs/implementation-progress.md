@@ -1,5 +1,17 @@
 # Progresso atual — Brasfoot Patch 2026
 
+## Configurações binárias nacionais e estaduais decodificadas — 25/10/2026
+
+- Usuário enviou ZIP **privado** com `conf_ligas_nacionais/BRA.cfg`, `ESP.cfg` e 25 arquivos de `conf_estadual/*.ces`. Foram conferidas assinaturas SHA-256, tamanhos e 27/27 objetos Java sem bytes extras.
+- O `BRA.cfg` original possui `est.ArrayLigaType` (UID 1) contendo quatro objetos `est.ConfigLigaType` (UID 16), com divisões 1/2/3/4: **20, 20, 20 e 64 clubes**, respectivamente. A quarta se identifica como **Série D**, com `nGrupos=8`; países: `pais=29`, `versaoArquivo=22`.
+- `ESP.cfg`: também quatro divisões com 20, 22, 10 e 30 equipes; fornece comparação de esquema, mas não prova formato jogável brasileiro de 96 clubes.
+- Os 25 arquivos `.ces` usam `est.ArrayLigaEType` e `est.ConfigEstadualType` (UID 1), com quatro registros `divisao=1..4` em cada UF.
+- Criado `tools/competition-codec/`: modelo tipado da serialização, leitura, round-trip byte-exato, filtro de classes permitidas, teste sintético e laboratório de Série D com 96 clubes/16 grupos **sem tocar no jogo**.
+- **Teste real de serialização:** 27/27 round-trips Java JDK 21 reproduziram os bytes originais exatamente. Alterar exclusivamente `nTimes:64→96` e `nGrupos:8→16` em cópia privada do `BRA.cfg` alterou **apenas dois bytes**, sem mudar o tamanho de 1.089 bytes. A cópia resultante também foi desserializada com sucesso.
+- **Limitação ainda aberta:** serialização aceita 96/16, mas não há prova de que a lógica de jogos/grupos, classificação, promoção/rebaixamento ou IDs das 96 equipes funcione no Brasfoot real. Não foi instalada configuração modificada nem iniciada carreira. A release v2026.0.2 continua inalterada.
+- O arquivo `BRA.cfg` contém configurações de quantidade/formato das ligas e **não contém a lista dos times participantes**. O mapeamento dos 156 clubes às divisões jogáveis ainda depende de identificar o vínculo de equipe com competição.
+- Nenhum arquivo proprietário de configurações foi adicionado ao GitHub. **API-Football consumida nesta etapa: 0 chamadas.**
+
 ## Implementação do motor Go v3 — 25/10/2026
 
 - **Release existente:** v2026.0.2 publicada e aprovada pelo usuário em teste no Brasfoot; contém 20 clubes da Série A, 730 jogadores com limitações relatadas. Não foi substituída nesta execução.
