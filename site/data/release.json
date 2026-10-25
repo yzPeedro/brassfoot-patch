@@ -1,12 +1,12 @@
 {
-    "schemaVersion":  1,
-    "status":  "awaiting_release",
-    "publishedVersion":  "2026.0.2",
-    "publishedAt":  null,
-    "downloadUrl":  "https://github.com/yzPeedro/brassfoot-patch/releases/download/v2026.0.2/Brassfoot-Patch-2026-Setup.exe",
-    "fileSizeBytes":  2799616,
-    "sha256":  "a20885eeb164e9952266da91d575103b6fc784e49e6ce031f81ed9bdd8812b00",
-    "compatibilityVerifiedInGame":  true,
-    "competitionSeason":  2026,
-    "releaseNotes":  "20 equipes/730 atletas, 713 atributos estimados, 15 atletas excluídos. Instalação exige Brasfoot original. Backup e desfazer incluídos."
+  "schemaVersion": 1,
+  "status": "published",
+  "publishedVersion": "2026.0.2",
+  "publishedAt": "2026-10-25",
+  "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/download/v2026.0.2/Brassfoot-Patch-2026-Setup.exe",
+  "fileSizeBytes": 2799616,
+  "sha256": "a20885eeb164e9952266da91d575103b6fc784e49e6ce031f81ed9bdd8812b00",
+  "compatibilityVerifiedInGame": true,
+  "competitionSeason": 2026,
+  "releaseNotes": "20 equipes/730 atletas, 713 atributos estimados, 15 atletas excluídos. Instalação exige Brasfoot original. Backup e desfazer incluídos."
 }
