@@ -162,3 +162,8 @@
 .clubs-group-header th{background:#355d40!important;color:#e9ffb5!important;font-weight:800;padding:12px 20px;text-align:left;font-size:13px;letter-spacing:.035em;border-top:2px solid #73986b}
 .clubs-group-header:hover{cursor:default}
 .club-filters select{max-width:100%}
+
+.club-research-source:not([hidden]){display:flex;flex-wrap:wrap;gap:7px;align-items:center;background:#21412b;border-left:3px solid #bfef86;border-radius:4px;padding:12px 14px;margin:13px 0;color:#e2f5d9!important;font-size:12px}
+.club-research-source[hidden]{display:none}
+.club-research-source a{color:#c5ff69;font-weight:800;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.club-research-source a:focus-visible{outline:2px solid #c5ff69;outline-offset:3px}
