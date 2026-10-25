@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "season": 2026,
+  "kind": "VISUAL_REFERENCES_ONLY_NOT_GAME_ASSETS",
+  "distributionRightsVerified": false,
+  "licenseReview": "pending",
+  "clubs": [
+    {
+      "clubId": "br-cruzeiro-mg",
+      "name": "Cruzeiro",
+      "state": "MG",
+      "uniforms": [
+        {
+          "type": "home",
+          "season": 2026,
+          "source": "https://www.adidas.com.br/camisa-i-cruzeiro-26/KT0124.html",
+          "secondarySource": "https://ge.globo.com/futebol/times/cruzeiro/noticia/2026/01/22/cruzeiro-lanca-nova-camisa-em-alusao-ao-titulo-da-libertadores-de-1976-veja-imagens-e-detalhes.ghtml",
+          "description": "Azul, detalhes brancos, estrelas soltas, homenagem aos 50 anos da Libertadores de 1976",
+          "referenceVerified": true,
+          "gameAsset": null,
+          "distributionAllowed": false
+        },
+        {
+          "type": "third",
+          "season": 2026,
+          "source": "https://camisa3.cruzeiro.com.br/",
+          "description": "Off-white com escudo fechado e detalhes azuis e amarelos, anúncio oficial com lançamento em 07/08/2026",
+          "referenceVerified": true,
+          "gameAsset": null,
+          "distributionAllowed": false
+        }
+      ]
+    }
+  ],
+  "caveat": "Documentação de lançamento não é licença para redistribuir imagens ou recriar marcas e uniformes protegidos; não instalar nem expor texturas sem autorização."
+}
