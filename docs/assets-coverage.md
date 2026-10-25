@@ -20,3 +20,7 @@ py -3 .\assets_audit.py --game "C:\Brasfoot22-23" --out ".\output\assets-audit.j
 Esses zeros significam **auditoria ainda não efetuada**, não ausência de imagens no jogo. O script não distribui os arquivos encontrados nem presume que um PNG válido possa ser republicado. A relação clube↔arquivo só pode ser aprovada após investigação dos nomes e identificadores reais do jogo. Até lá `clubId`, `sourceUrl` e `season` permanecem nulos; `distributionAllowed=false`.
 
 **Bloqueios:** inventário completo da pasta `C:\Brasfoot22-23`, confirmação de dimensões/formatos suportados, fontes oficiais das camisas de 2026, licenças e testes visuais.
+
+## Referências pesquisadas (ainda não distribuíveis)
+
+O arquivo `data/assets/references-2026.json` registra **duas referências oficiais de uniformes do Cruzeiro em 2026**: camisa principal (adidas) e terceira camisa (site oficial do clube). Ambas estão registradas apenas como evidência do modelo/temporada, com `gameAsset=null` e `distributionAllowed=false`. **Nenhuma imagem foi baixada ou publicada por este pipeline.** Uma referência visual não é uma textura licenciada do Brasfoot.
