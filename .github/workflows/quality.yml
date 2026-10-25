@@ -1,7 +1,5 @@
 name: Quality checks (no API, no publish)
 on:
-  push:
-  pull_request:
   workflow_dispatch:
 permissions:
   contents: read

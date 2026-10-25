@@ -1,7 +1,5 @@
 name: Transfer windows — due checks only (publication disabled)
 on:
-  schedule:
-    - cron: '25 11 * * *'
   workflow_dispatch:
 permissions:
   contents: read
