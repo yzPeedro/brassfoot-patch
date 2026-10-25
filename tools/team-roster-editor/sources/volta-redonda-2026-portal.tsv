@@ -1,0 +1,35 @@
+# Brazilian Serie C 2026 observed player list. Source: https://www.voltaco.com.br/
+# Reviewed 2026-10-25. Grouped by source categories; excludes coaches and unnamed placeholders.
+# Official club homepage squad, not provider inference. A published 365Scores player profile may mark Oswaldo Blanco as left club; require transfer review before including him in released .ban.
+# Codes: 0 goalkeeper; 1 fullback; 2 centerback; 3 midfield; 4 attacker.
+# Age/country omitted if not individually verified.
+Avelino	0		
+Deivity	0		
+Heitor	0		
+Guilherme	0		
+Pedro Costa	1		
+Wellington Silva	1		
+Jean Victor	1		
+Juninho	1		
+Lucas Rocha	2		
+Fabrício	2		
+Rafael Augusto	2		
+Alan	2		
+Lucas Adell	2		
+Bruno Barra	3		
+Juliano Fabro	3		
+Caetano Breves	3		
+Luciano	3		
+Caio Henrique	3		
+Juninho Ramos	3		
+Du Fernandes	3		
+Dener	3		
+Matheus Moresche	4		
+Ygor Catatau	4		
+Rafael Furtado	4		
+Wendel	4		
+Romarinho	4		
+Fellipinho	4		
+Marquinhos	4		
+Oswaldo Blanco	4		
+Kauã Souza	4		
