@@ -33,3 +33,7 @@ Os statuses abaixo distinguem trabalho entregue em código de validação real. 
 - **CAN25–27:** transações de configuração agora têm backup/rollback e preservam `options.bcf` e saves nas fixtures privadas; integração completa 156 ainda pendente.
 - **CAN35:** `go test -race -count=1 ./...`, `go vet ./...` e build cruzado Windows amd64 executados com sucesso na árvore local evoluída; execução da GUI Windows e carreira Série D 96/16 continuam sem evidência.
 - **CAN40:** não homologado; nenhuma nova release foi criada. Não considerar a integridade dos arquivos equivalente a compatibilidade do jogo.
+
+## Publicação do site atualizada em 25/10/2026
+
+O GitHub Pages recebeu o dashboard de cobertura com métricas separadas: 156 no catálogo, 103 correspondências históricas resolvidas, 7 candidatas, 46 ausentes, 20 elencos efetivamente lançados. A branch `gh-pages` foi implantada com sucesso (run 40226645585); os dados e HTML/CSS/JS correspondem a `main/site/`. A versão binária pública continua v2026.0.2. **Não aprova nenhuma nova divisão jogável nem uma release de 156 clubes.** Detalhes: `docs/site-publication-2026-10-25.md`.
