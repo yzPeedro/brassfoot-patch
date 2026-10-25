@@ -25,11 +25,12 @@
         <nav class="nav" id="nav" aria-label="Navegação principal">
           <a href="#recursos">Recursos</a>
           <a href="#como-funciona">Como funciona</a>
+          <a href="#instalador">Instalador</a>
           <a href="#versao">Versão</a>
           <a href="#faq">Dúvidas</a>
         </nav>
         <div class="header-actions">
-          <span class="github-link" title="O repositório público ainda não foi informado">REPOSITÓRIO EM PREPARAÇÃO</span>
+          <a class="github-link" href="https://github.com/yzPeedro/brassfoot-patch" target="_blank" rel="noopener noreferrer">CÓDIGO NO GITHUB ↗</a>
           <button id="mobile-menu" class="mobile-menu" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu"><span></span><span></span><span></span></button>
         </div>
       </div>
@@ -94,7 +95,20 @@
             <div class="step"><div class="step-index">02 <span>—</span></div><div><h3>Validação</h3><p>Conferência de clubes, atletas, IDs e compatibilidade antes da geração.</p></div><span class="step-deco" aria-hidden="true">↗</span></div>
             <div class="step"><div class="step-index">03 <span>—</span></div><div><h3>Um clique para jogar</h3><p>Instalador Windows com progresso real, backup e recuperação segura.</p></div><span class="step-deco" aria-hidden="true">↗</span></div>
           </div>
-          <p class="method-disclaimer">Fluxo planejado. O instalador gráfico ainda não está disponível.</p>
+          <p class="method-disclaimer">O motor de instalação e a interface gráfica já estão em código-fonte. A versão executável ainda aguarda compilação e testes reais no Windows e no Brasfoot.</p>
+        </div>
+      </section>
+      <section class="installer-status section" id="instalador" aria-labelledby="installer-heading">
+        <div class="wrap">
+          <div class="section-label">03 <span></span> INSTALADOR WINDOWS</div>
+          <div class="section-head"><h2 id="installer-heading">Instalar com confiança.<br/><em>Jogar sem complicação.</em></h2><p>O instalador gráfico já existe no código-fonte. O arquivo .exe só será publicado após a validação de um patch jogável e testes reais de execução no Windows.</p></div>
+          <div class="installer-status-grid">
+            <article><span>01 / LOCALIZAÇÃO</span><h3>Escolha a pasta do jogo</h3><p>A interface verifica a estrutura do Brasfoot e exige arquivos originais com assinatura reconhecida.</p></article>
+            <article><span>02 / INTEGRIDADE</span><h3>Confirme o pacote</h3><p>Cada arquivo é conferido por SHA-256. Pacotes experimentais são rejeitados automaticamente.</p></article>
+            <article><span>03 / INSTALAÇÃO</span><h3>Backup e progresso</h3><p>O motor preserva cópias de segurança e informa o progresso das operações reais.</p></article>
+            <article><span>04 / RECUPERAÇÃO</span><h3>Verificação final</h3><p>Após cada substituição, o arquivo é validado. Em caso de falha, o motor tenta restaurar os originais.</p></article>
+          </div>
+          <p class="installer-note"><strong>ESTADO ATUAL:</strong> código-fonte e testes automatizados disponíveis no GitHub. Build Windows, instalador distribuível e teste no Brasfoot ainda pendentes. Nenhum download será oferecido antes dessas validações.</p>
         </div>
       </section>
       <section class="release section" id="versao">
@@ -106,8 +120,8 @@
       <section class="faq section" id="faq"><div class="wrap faq-grid"><div><div class="section-label">04 <span></span> FAQ</div><h2>Dúvidas<br/><em>do vestiário.</em></h2><p>As principais respostas antes de entrar em campo.</p></div><div class="faq-items">
         <details><summary>Preciso ter o Brasfoot instalado?<span>+</span></summary><p>Sim. O patch é planejado para trabalhar com uma instalação legítima do Brasfoot 2022–2023 para Windows. Ele não inclui o jogo completo.</p></details>
         <details><summary>O patch já está disponível para download?<span>+</span></summary><p>Ainda não. A geração de arquivos é experimental. Uma versão pública dependerá de validação de compatibilidade dentro do jogo e da qualidade dos dados.</p></details>
-        <details><summary>Minhas carreiras serão apagadas?<span>+</span></summary><p>A proposta é preservar saves e configurações. O instalador final deverá fazer backup e validar a instalação antes de alterar qualquer arquivo. Essa etapa ainda está sendo desenvolvida.</p></details>
-        <details><summary>Será necessário usar o terminal?<span>+</span></summary><p>Não para usuários finais. Estamos planejando um instalador gráfico para Windows; os scripts existentes são ferramentas de desenvolvimento.</p></details>
+        <details><summary>Minhas carreiras serão apagadas?<span>+</span></summary><p>A proposta é preservar saves e configurações. O mecanismo já implementado faz backup e verifica os arquivos afetados, com recuperação em testes automatizados. A compatibilidade e preservação em uma instalação real ainda precisam ser confirmadas antes da publicação.</p></details>
+        <details><summary>Será necessário usar o terminal?<span>+</span></summary><p>Não para usuários finais. O aplicativo gráfico já está implementado em código-fonte; ainda não existe um executável validado e publicado. O usuário final não precisará do terminal quando a versão aprovada estiver disponível.</p></details>
         <details><summary>O Brassfoot Patch é oficial?<span>+</span></summary><p>Não. É um projeto independente de atualização, sem afiliação oficial aos criadores ou titulares da marca Brasfoot.</p></details>
       </div></div></section>
       <section class="ending" aria-label="Fique de olho"><div class="wrap ending-grid"><div><div class="ending-label">O FUTEBOL ESTÁ SEMPRE EM MOVIMENTO</div><h2>A próxima temporada <em>começa aqui.</em></h2></div><div><span class="ending-number">26</span><p>UM PROJETO FEITO PARA O FUTEBOL BRASILEIRO.</p></div></div></section>
