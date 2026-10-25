@@ -47,7 +47,7 @@
               <button class="main-cta" id="download-hero" type="button" disabled aria-describedby="release-status-text">DOWNLOAD AINDA INDISPONÍVEL <span class="cta-arrow" aria-hidden="true">↗</span></button>
               <a href="#como-funciona" class="secondary-cta">CONHEÇA O PROJETO <span aria-hidden="true">↓</span></a>
             </div>
-            <p class="release-disclaimer" id="release-status-text"><span class="disclaimer-led"></span> Em desenvolvimento — ainda não existe um patch 2026 validado para download.</p>
+            <p class="release-disclaimer" id="release-status-text"><span class="disclaimer-led"></span> Atualização testada pelo mantenedor. Publicação do pacote experimental aguardando confirmação no GitHub Releases.</p>
           </div>
           <div class="hero-art" role="img" aria-label="Ilustração original de um campo de futebol e um painel de temporada 2026">
             <div class="art-grid"></div>
@@ -94,33 +94,33 @@
             <div class="step"><div class="step-index">02 <span>—</span></div><div><h3>Validação</h3><p>Conferência de clubes, atletas, IDs e compatibilidade antes da geração.</p></div><span class="step-deco" aria-hidden="true">↗</span></div>
             <div class="step"><div class="step-index">03 <span>—</span></div><div><h3>Um clique para jogar</h3><p>Instalador Windows com progresso real, backup e recuperação segura.</p></div><span class="step-deco" aria-hidden="true">↗</span></div>
           </div>
-          <p class="method-disclaimer">O motor de instalação e a interface gráfica já estão em código-fonte. Um protótipo executável passou no teste offline em Windows; a instalação real de elencos e a compatibilidade dentro do Brasfoot ainda precisam ser verificadas.</p>
+          <p class="method-disclaimer">O motor de instalação e a interface gráfica já estão em código-fonte. A atualização dos elencos foi testada no Brasfoot pelo mantenedor. O instalador para distribuição reconstrói os arquivos a partir do jogo original; esta edição experimental contém atributos estimados.</p>
         </div>
       </section>
       <section class="installer-status section" id="instalador" aria-labelledby="installer-heading">
         <div class="wrap">
           <div class="section-label">03 <span></span> INSTALADOR WINDOWS</div>
-          <div class="section-head"><h2 id="installer-heading">Instalar com confiança.<br/><em>Jogar sem complicação.</em></h2><p>O motor gráfico já existe em código-fonte. Um executável experimental passou no teste offline no Windows e identificou a pasta do jogo; a instalação real depende de um pacote de elencos validado dentro do Brasfoot.</p></div>
+          <div class="section-head"><h2 id="installer-heading">Instalar com confiança.<br/><em>Jogar sem complicação.</em></h2><p>A versão 2026.0.2 teve a instalação de elencos testada no Brasfoot pelo mantenedor. A edição de distribuição possui verificação por SHA-256, backup, opção de desfazer e requer o Brasfoot original instalado.</p></div>
           <div class="installer-status-grid">
             <article><span>01 / LOCALIZAÇÃO</span><h3>Escolha a pasta do jogo</h3><p>A interface verifica a estrutura do Brasfoot e exige arquivos originais com assinatura reconhecida.</p></article>
             <article><span>02 / INTEGRIDADE</span><h3>Confirme o pacote</h3><p>Cada arquivo é conferido por SHA-256. Pacotes experimentais são rejeitados automaticamente.</p></article>
             <article><span>03 / INSTALAÇÃO</span><h3>Backup e progresso</h3><p>O motor preserva cópias de segurança e informa o progresso das operações reais.</p></article>
             <article><span>04 / RECUPERAÇÃO</span><h3>Verificação final</h3><p>Após cada substituição, o arquivo é validado. Em caso de falha, o motor tenta restaurar os originais.</p></article>
           </div>
-          <p class="installer-note"><strong>ESTADO ATUAL:</strong> código-fonte e testes automatizados disponíveis no GitHub. Protótipo Windows testado offline, incluindo identificação da pasta do jogo. Elencos reais compatíveis, validação dentro do Brasfoot e instalador final distribuível ainda pendentes. Nenhum download será oferecido antes dessas validações.</p>
+          <p class="installer-note"><strong>ESTADO ATUAL:</strong> código-fonte e testes automatizados disponíveis no GitHub. Elencos testados no Brasfoot pelo mantenedor. Versão distribuível preparada com atualização diferencial, validação SHA-256, backup e desfazer. Download só será habilitado após confirmação da release pública e do hash. Nenhum download será oferecido antes dessas validações. <strong>LIMITAÇÕES:</strong> 713 jogadores têm atributos estimados, e 15 atletas coletados ficaram de fora. Não é banco de dados esportivos oficial.</p>
         </div>
       </section>
       <section class="release section" id="versao">
         <div class="wrap release-grid">
-          <div class="release-left"><div class="section-label">03 <span></span> RELEASES</div><h2>Pronto para o próximo <em>apito inicial?</em></h2><p>Só disponibilizaremos o instalador depois que os elencos e arquivos do patch passarem pelas verificações de segurança e compatibilidade.</p></div>
+          <div class="release-left"><div class="section-label">03 <span></span> RELEASES</div><h2>Pronto para o próximo <em>apito inicial?</em></h2><p>Versão experimental 2026.0.2: 20 equipes e 730 atletas. Atributos de 713 atletas foram estimados e 15 jogadores coletados ficaram de fora. O download só é habilitado após a confirmação da release pública.</p></div>
           <div class="release-panel" aria-live="polite"><div class="panel-top"><span>ÚLTIMA VERSÃO</span><span id="release-badge" class="panel-badge">DESENVOLVIMENTO</span></div><div id="release-version" class="panel-version">—</div><div class="panel-meta"><div><span>TEMPORADA</span><strong>2026</strong></div><div><span>PLATAFORMA</span><strong>WINDOWS</strong></div><div><span>STATUS</span><strong id="release-status">NÃO PUBLICADO</strong></div></div><button type="button" class="panel-download" id="download-panel" disabled>SEM RELEASE DISPONÍVEL <span>↗</span></button><p id="release-detail">O download será habilitado somente após a publicação de um arquivo real e validado.</p><div class="panel-bottom"><span>INTEGRIDADE PRIMEIRO</span><span>BRASSFOOT / 2026</span></div></div>
         </div>
       </section>
       <section class="faq section" id="faq"><div class="wrap faq-grid"><div><div class="section-label">04 <span></span> FAQ</div><h2>Dúvidas<br/><em>do vestiário.</em></h2><p>As principais respostas antes de entrar em campo.</p></div><div class="faq-items">
         <details><summary>Preciso ter o Brasfoot instalado?<span>+</span></summary><p>Sim. O patch é planejado para trabalhar com uma instalação legítima do Brasfoot 2022–2023 para Windows. Ele não inclui o jogo completo.</p></details>
-        <details><summary>O patch já está disponível para download?<span>+</span></summary><p>Ainda não. A geração de arquivos é experimental. Uma versão pública dependerá de validação de compatibilidade dentro do jogo e da qualidade dos dados.</p></details>
+        <details><summary>O patch já está disponível para download?<span>+</span></summary><p>A versão 2026.0.2 foi testada pelo mantenedor, mas ainda possui atributos estimados. O download será ativado automaticamente após publicação e verificação do arquivo no GitHub Releases.</p></details>
         <details><summary>Minhas carreiras serão apagadas?<span>+</span></summary><p>A proposta é preservar saves e configurações. O mecanismo já implementado faz backup e verifica os arquivos afetados, com recuperação em testes automatizados. A compatibilidade e preservação em uma instalação real ainda precisam ser confirmadas antes da publicação.</p></details>
-        <details><summary>Será necessário usar o terminal?<span>+</span></summary><p>Não para usuários finais. O aplicativo gráfico já está implementado em código-fonte; ainda não existe um executável validado e publicado. O usuário final não precisará do terminal quando a versão aprovada estiver disponível.</p></details>
+        <details><summary>Será necessário usar o terminal?<span>+</span></summary><p>Não. O instalador funciona offline, identifica o jogo e atualiza apenas os arquivos de equipes reconhecidos, mantendo saves e configurações fora das operações de instalação.</p></details>
         <details><summary>O Brassfoot Patch é oficial?<span>+</span></summary><p>Não. É um projeto independente de atualização, sem afiliação oficial aos criadores ou titulares da marca Brasfoot.</p></details>
       </div></div></section>
       <section class="ending" aria-label="Fique de olho"><div class="wrap ending-grid"><div><div class="ending-label">O FUTEBOL ESTÁ SEMPRE EM MOVIMENTO</div><h2>A próxima temporada <em>começa aqui.</em></h2></div><div><span class="ending-number">26</span><p>UM PROJETO FEITO PARA O FUTEBOL BRASILEIRO.</p></div></div></section>
