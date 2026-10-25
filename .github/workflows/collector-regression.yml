@@ -1,0 +1,23 @@
+name: B-C roster collector regression
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'collect_abc_rosters.py'
+      - 'tests/test_collect_abc_rosters.py'
+      - '.github/workflows/collector-regression.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  collector:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Compile collector without network or credentials
+        run: python -m py_compile collect_abc_rosters.py
+      - name: Run offline exact-identity and Series-D preservation tests
+        run: python -m unittest discover -s tests -p 'test_collect_abc_rosters.py' -v
