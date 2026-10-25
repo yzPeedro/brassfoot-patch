@@ -129,8 +129,12 @@ func preparePayloadWithFS(fsys fs.FS, gamePath, staged string) error {
 	}
 	seen := make(map[string]bool, len(manifest.Files))
 	for _, f := range manifest.Files {
-		if !teamName.MatchString(f.Path) {
+		isNationalConfig := manifest.SchemaVersion == 3 && f.Path == nationalConfigPath
+		if !teamName.MatchString(f.Path) && !isNationalConfig {
 			return fmt.Errorf("arquivo não autorizado no pacote: %s", f.Path)
+		}
+		if isNationalConfig && f.Operation != "replace" {
+			return fmt.Errorf("BRA.cfg somente pode ser substituído: %s", f.Path)
 		}
 		key := strings.ToLower(f.Path)
 		if seen[key] {
