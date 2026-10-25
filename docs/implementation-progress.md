@@ -13,6 +13,16 @@
 - **Escudos/uniformes:** pipeline de inventário somente leitura já existe; não há aprovação de direitos/formato para redistribuição de novos assets.
 - **Publicação:** código atualizado em `main`. **Nenhuma release de 156 clubes foi criada**, e não se alterou o arquivo publicado v2026.0.2 nem o hash do seu download.
 
+## Inventário recursivo de competições — 25/10/2026
+
+- O usuário executou o coletor corrigido do PowerShell 5.1 e enviou `Brasfoot-2026-competicoes-inventario-20261025-151642.json`; o inventário é **somente metadados** e não inclui conteúdos binários.
+- **25 arquivos estaduais `.ces`** em `conf_estadual/`, cada um com **432 bytes**, nos estados AC, AL, AM, AP, BA, CE, DF, ES, GO, MA, MG, MS, MT, PA, PB, PE, PR, RJ, RN, RO, RR, RS, SC, SP e TO.
+- **2 configurações nacionais `.cfg`** em `conf_ligas_nacionais/BRA.cfg` e `conf_ligas_nacionais/ESP.cfg`, **1.089 bytes** cada. São o principal candidato para descobrir a organização nacional.
+- Os arquivos `.ces` estavam ausentes do ZIP anterior porque o coletor original só procurava na raiz. **A inexistência de `.ces` não era uma limitação confirmada do Brasfoot.**
+- A existência desses arquivos **não comprova** o suporte jogável às Séries A, B, C e D, seus formatos, quantidade de clubes ou IDs. É preciso analisar o conteúdo e depois testar no Brasfoot instalado.
+- Criado `scripts/collect-competition-configs.ps1`: coleta privada, exclusivamente de leitura, de `BRA.cfg`, `ESP.cfg` e `conf_estadual/*.ces`, com metadados SHA-256 e verificação de integridade do ZIP; **exclui `.ban`, saves, opções, imagens e executáveis**. O usuário ainda precisa executar o script no Windows e enviar o ZIP privado para a análise binária.
+- Nenhum dado proprietário coletado foi publicado; nenhum arquivo do jogo ou release existente foi alterado.
+
 ## Coleta privada de 703 arquivos .ban — 25/10/2026
 
 - O usuário forneceu um ZIP com **703 equipes** da instalação Brasfoot 22-23, todas com hash SHA-256 confirmado e round-trip Java exato (703/703). Dessas, 196 possuem o código de país do Brasil (29).
