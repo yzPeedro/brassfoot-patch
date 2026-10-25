@@ -1,5 +1,7 @@
 # Brassfoot Patch 2026
 
+> **Novo requisito de carreira:** a versão final deve oferecer **somente 2026** como ano inicial, removendo 2023/2024 da interface e do ano real da carreira. Esse ajuste ainda exige identificar o código da versão instalada do Brasfoot e testar uma carreira nova; não está implementado nas releases publicadas. Inspeção não invasiva em [`tools/inspect_career_years.py`](tools/inspect_career_years.py) e critérios em [`docs/rosters-abc-2026.md`](docs/rosters-abc-2026.md).
+
 > **Escopo atual (25/10/2026):** 60 clubes das Séries A, B e C, com elencos reais de 2026 como objetivo. A **Série D permanece original do Brasfoot**, sem mudança de equipes, jogadores ou configurações. A prévia pública de elencos v2026.0.2 inclui 730 nomes da Série A, extraídos dos arquivos instaláveis; os 40 elencos B/C ainda não estão validados. O site exibe esses nomes em um [explorador paginado com modais](https://yzpeedro.github.io/brassfoot-patch/#clubes-2026). A v2026.1.1 anterior alterava a Série D e não deve ser confundida com o escopo atual. Detalhes em [docs/rosters-abc-2026.md](docs/rosters-abc-2026.md).
 
 
