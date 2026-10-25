@@ -8,15 +8,15 @@ Os statuses abaixo distinguem trabalho entregue em código de validação real. 
 | CAN07–CAN08 (compatibilidade das divisões) | **bloqueado** | Não há prova de formato/configuração jogável B/C/D |
 | CAN09–CAN18 (escudos/uniformes/pipeline) | **parcial** | Auditor somente-leitura criado; imagens/direitos/temporada e integração não validados |
 | CAN19–CAN20 (web first/API last) | **parcial** | Catálogo oficial obtido sem API, mas coleta de jogadores adicional não implantada |
-| CAN21–CAN22 (quota global, concorrência) | **parcial** | Teto local SQLite 90 + margem 10; coordenação entre hosts e saldo global desconhecidos |
+| CAN21–CAN22 (quota global, concorrência) | **parcial** | SQLite protege no mesmo banco: 90 por dia e rolling 24h; coordenação entre hosts e saldo global desconhecidos |
 | CAN23 (retomada em vários dias) | **pendente** | Coletor antigo tem cache, pipeline de 156 clubes não está pronto |
 | CAN24 (testes offline) | **implementado, execução pendente** | Testes Python e Node criados sem chamadas ao provedor |
-| CAN25–CAN27 (instalação e saves) | **bloqueado para a expansão** | Ainda só há validação de 20 clubes na v2026.0.2 |
+| CAN25–CAN27 (instalação e saves) | **implementado parcialmente; jogo pendente** | Go schema 3 cria/substitui arquivos e permite desfazer com backup; testes sintéticos (1, 156) e integração com os 20 originais passaram. Faltam IDs/arquivos de 136 clubes e teste no Brasfoot. |
 | CAN28–CAN29 (4 divisões, busca no site) | **implementado, navegador pendente** | Cards, filtros e pesquisa por nome/UF vinculados ao JSON oficial |
 | CAN30–CAN31 (assets e cobertura real) | **parcial** | Não exibe imagens não aprovadas; mostra 156 do catálogo e 20 da release |
 | CAN32 (download) | **preservado** | Não altera o link nem o checksum da v2026.0.2 |
 | CAN33–CAN34 (manifest/commits) | **parcial** | Catálogo oficial e site separados do manifest do instalador vigente |
-| CAN35 (execução de testes) | **pendente** | Execução final de testes Python e site ainda requerida |
+| CAN35 (execução de testes) | **parcial** | `go test -race` passou na cópia local incluindo 20 originais e casos v3; smoke test local de quota passou. Execução integral das suítes Python/Node do checkout atual ainda necessária. |
 | CAN36 (automações quota) | **pendente** | Workflows não ligados ao ledger global |
 | CAN37 (documentação) | **em andamento** | Atualizações das divisões, quota, assets e progresso |
 | CAN38 (sem segredos distribuídos) | **inspeção parcial** | Nenhuma chave incluída no novo catálogo/código; auditoria histórica necessária |
