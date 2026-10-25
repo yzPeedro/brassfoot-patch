@@ -1,5 +1,15 @@
 # Progresso atual — Brasfoot Patch 2026
 
+## Checkpoint técnico: executável oficial e seletores (25/10/2026)
+
+- **Referência original confirmada:** download oficial do Brasfoot 22–23, setup SHA-256 `8e3c7a77768d551a1f3c722ef2447c3e451af830613e8a65de33f35bc0e2b33d`; executável extraído `bf22-23.exe` de 7.320.384 bytes.
+- **Montagem experimental implementada:** `tools/build_official_year_candidate.py` valida três classes Java por SHA, reconstrói o executável em caminho separado com somente `a/hU.class` transformada para 2026 e compara os 2.192 demais recursos sem alteração de conteúdo. SHA-256 da cópia resultante na execução de referência: `368479d07f817e91e8b2d03b4e5e9948898948fadfdd26b47c16d4623cc7993f` (arquivo efêmero, **não distribuído**). Execução CI `40245947104` aprovada. O instalador, os saves, a Série D e o jogo de usuário não foram alterados.
+- **Rastreamento do seletor do ano:** `tools/trace_career_controls.py` identificou somente um campo `JComboBox` na classe `a/hU.class`: `afA`. O método `mQ()` popula os anos antigos, e `oq()` usa o índice e chama `best/f.I(int)`. Logo, os controles de 1ª/2ª/3ª divisão **não foram identificados nessa classe**; buscar outras classes e testar a ligação ao motor. A validação do rastreador sobre o jogo oficial passou no CI `40246232488`.
+- **Pesquisa complementar:** `tools/find_division_ui_candidates.py` enumera classes com indícios de controles nacionais/estaduais, preservando os bytes proprietários. **O ranking de candidatos ainda precisa ser interpretado**; não é mapeamento comprovado dos clubes.
+- **Limitações claras:** a versão oficial analisada oferece 2022/2023, enquanto a instalação citada pelo usuário exibiu 2023/2024. Não há autorização para aplicar offsets desconhecidos. A referência 2023 em `best/p.class`, os calendários, 2027, os grupos A/B/C e os saves ainda exigem execução Windows real. **Não existe release com ano 2026 validado nem novo pacote A/B/C instalado.**
+- **CI e commits:** base experimental por PR #3 (`35c72e3`), rastreamento do ano por PR #4 (`d7bc68b`), rastreamento de divisões por PR #5 (`ad49532`). Nenhum binário proprietário foi versionado ou anexado ao projeto.
+
+
 ## Novo requisito: seletores de clubes por divisão na carreira 2026
 
 - Screenshot de criação de carreira recebido em 25/10/2026. Controles observados: **1ª divisão**, **2ª divisão**, **3ª divisão**, **Jogando estaduais**. Exemplos de escolha visíveis: América-MG, Bahia, ABC e ASA. Esses exemplos não provam sozinhos a composição das listas.
