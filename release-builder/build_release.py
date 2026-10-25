@@ -37,13 +37,21 @@ def build():
   raise ValueError("Only clean v2026.0.2 source may generate new release")
  existing=json.loads((SRC/"verified-existing.json").read_text(encoding="utf-8"))["files"]
  if len(existing)!=90:raise ValueError("Expected 90 hashed historical records")
- B=[x for x in existing if x["division"]=="B"]
- C=[x for x in existing if x["division"]=="C"]
- D=[]
- for club,uf in SELECTED:
-  matches=[x for x in existing if x["division"]=="D" and x["name"]==club and x["state"]==uf]
-  if len(matches)!=1:raise ValueError("Ambiguous Série D club: "+club+"/"+uf)
-  D.append(matches[0])
+ # The stored public hash inventory is intentionally name-free. Its proven
+ # ordering is 20 Serie B, 19 Serie C and 51 Serie D records.
+ if (existing[0]["path"]!="teams/americamg_bra.ban" or
+     existing[19]["path"]!="teams/vilago.ban" or
+     existing[20]["path"]!="teams/amazonas_am.ban" or
+     existing[38]["path"]!="teams/ypiranga_rs.ban" or
+     existing[39]["path"]!="teams/nacional_am.ban"):
+  raise ValueError("Historical inventory was reordered: cannot classify clubs safely")
+ B=existing[:20]
+ C=existing[20:39]
+ available={x["path"]:x for x in existing[39:]}
+ selected_paths=["teams/abcrn_bra.ban","teams/americarn.ban","teams/csa_bra.ban","teams/asaarapiracaal_bra.ban","teams/samapaiocorrea_ma.ban","teams/motoclubma_bra.ban","teams/ferroviarioce_bra.ban","teams/trezepb_bra.ban","teams/sousapb_bra.ban","teams/sergipe_se.ban","teams/altos_pi.ban","teams/retrope_bra.ban","teams/brasilpelotas_bra.ban","teams/joinville.ban","teams/tunaluso_pa.ban","teams/manaus_bra.ban","teams/madureira_bra.ban","teams/portuguesarj_bra.ban","teams/luverdensemt_bra.ban","teams/aparecidense_go.ban"]
+ if len(set(selected_paths))!=20 or any(x not in available for x in selected_paths):
+  raise ValueError("Some selected Serie D clubs have no verifiable old file")
+ D=[available[x] for x in selected_paths]
  if len(B)!=20 or len(C)!=19 or len(D)!=20 or len({x["path"] for x in B+C+D})!=59:
   raise ValueError("Division club counts not validated")
  source_rows=[row for row in (SRC/"missing-teams.tsv").read_text(encoding="utf-8").splitlines()
