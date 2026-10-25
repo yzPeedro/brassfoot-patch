@@ -5,6 +5,8 @@ on:
     paths:
       - '.github/workflows/inspect-official-game.yml'
       - 'tools/inspect_career_years.py'
+      - 'tools/patch_official_career_year.py'
+      - 'tests/test_patch_official_career_year.py'
   workflow_dispatch:
 permissions:
   contents: read
@@ -170,6 +172,8 @@ jobs:
                       for line in rows[max(0,idx-8):min(len(rows),idx+14)]:
                           print(' ',line[:170])
           PY
+      - name: Run synthetic 2026-only selector and engine-year regression
+        run: python -m unittest discover -s tests -p 'test_patch_official_career_year.py' -v
       - name: Experimentally rewrite only the known official year class to 2026
         run: |
           python - <<'PY'
