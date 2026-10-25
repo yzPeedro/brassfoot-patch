@@ -50,7 +50,33 @@
 
   fetch('./data/release.json', { cache: 'no-cache' })
     .then((r) => { if (!r.ok) throw new Error(`Release manifest HTTP ${r.status}`); return r.json(); })
-    .then((metadata) => { if (metadata?.schemaVersion === 1) setReady(metadata); })
+    .then(async (metadata) => {
+      if (metadata?.schemaVersion !== 1 || metadata.status !== 'awaiting_release') return;
+      if (metadata.publishedVersion !== '2026.0.2' ||
+          !/^[a-f0-9]{64}$/i.test(metadata.sha256 || '') ||
+          !Number.isInteger(metadata.fileSizeBytes) || metadata.fileSizeBytes <= 0) return;
+      const expected = 'https://github.com/yzPeedro/brassfoot-patch/releases/download/v2026.0.2/Brassfoot-Patch-2026-Setup.exe';
+      if (metadata.downloadUrl !== expected) return;
+      version.textContent = metadata.publishedVersion;
+      detail.textContent = 'Versão experimental: aguardando verificação do arquivo público no GitHub.';
+      const response = await fetch('https://api.github.com/repos/yzPeedro/brassfoot-patch/releases/tags/v2026.0.2', {
+        cache: 'no-store', headers: { Accept: 'application/vnd.github+json' }
+      });
+      if (response.status === 404) return;
+      if (!response.ok) throw new Error('Não foi possível verificar a release no GitHub.');
+      const release = await response.json();
+      if (release.draft || release.prerelease || release.tag_name !== 'v2026.0.2') return;
+      const asset = (release.assets || []).find((item) =>
+        item.name === 'Brassfoot-Patch-2026-Setup.exe' && item.state === 'uploaded' &&
+        item.browser_download_url === expected && item.size === metadata.fileSizeBytes &&
+        item.digest === 'sha256:' + metadata.sha256
+      );
+      if (!asset) {
+        detail.textContent = 'Arquivo da release não passou na verificação de SHA-256 e tamanho. Download bloqueado.';
+        return;
+      }
+      setReady({ ...metadata, status: 'published', publishedAt: release.published_at?.slice(0, 10) });
+    })
     .catch(() => {
       // Keep download controls disabled and expose a meaningful error.
       detail.textContent = 'Não foi possível consultar o estado da versão. Nenhum download será oferecido até confirmar os dados.';
