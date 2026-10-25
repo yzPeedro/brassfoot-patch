@@ -1,5 +1,17 @@
 # Progresso atual — Brasfoot Patch 2026
 
+## Instalação transacional de BRA.cfg — validação 25/10/2026
+
+- O motor oficial Go `windows-installer/` passou a aceitar **somente** `conf_ligas_nacionais/BRA.cfg` em manifesto **schema 3**, operação `replace`, com SHA-256 do original previamente homologado, cabeçalho Java Serialization, limites de tamanho e preflight de diretório.
+- `BRA.cfg` agora participa do mesmo fluxo de **backup externo, instalação, idempotência, rollback e restauração** usado para arquivos de equipes. O schema 2 publicado em v2026.0.2 permanece restrito a `teams/*.ban`. Tentativas de adicionar `BRA.cfg`, modificar `ESP.cfg` ou usar path traversal são recusadas.
+- **Testes locais realmente executados:** `go test -race -count=1 ./...` com originais privados, `go vet ./...` e build cruzado Windows amd64 passaram. Foram executados 24 testes de topo Go (incluindo caso sintético do `BRA.cfg`).
+- **Teste com dados reais:** em pasta de teste isolada com os **703 arquivos .ban privados**, o Go substituiu o `BRA.cfg` original (**SHA-256 `76b7af89...`**) pelo candidato 96/16 (**SHA-256 `edda371...`**), inspecionou o estado instalado, restaurou o original byte a byte e confirmou preservação de `options.bcf` e `career.s22`. **Nenhum arquivo da instalação real do usuário foi modificado.**
+- O teste real do pacote de elencos **v2026.0.2**, usando os **20 .ban originais**, também passou com backup/desfazer. Isso preserva a regressão da versão pública.
+- O binário compilado Windows é um **artefato de laboratório**; embute os mesmos 20 arquivos da v2026.0.2, mas contém motor expandido. **Não foi executado na interface Windows e não foi publicado.** Seu hash SHA-256 local: `944078c0083637a2e95cd9405207546bb98dd4a548ea293f2b2a5821c4ab1ca9`.
+- **Limitação factual:** o Brasfoot não está executável no ambiente Linux/container desta sessão, e nenhum executável legítimo completo foi fornecido. O teste de serialização e instalação **não demonstra jogabilidade** da Série D 96/16 nem distribuição das 96 equipes pelos grupos. O `BRA.cfg` não lista clubes individuais.
+- Os 110 clubes com correspondência de arquivo ainda não possuem elencos 2026 homologados para B/C/D; 46 equipes requerem arquivos legítimos novos. Não habilitar flags de publicação, não inserir o `BRA.cfg` experimental no pacote público e não afirmar 156 jogáveis.
+- **API-Football consultada nesta etapa: zero requisições.** A release pública v2026.0.2 e seu SHA-256 permanecem inalterados.
+
 ## Configurações binárias nacionais e estaduais decodificadas — 25/10/2026
 
 - Usuário enviou ZIP **privado** com `conf_ligas_nacionais/BRA.cfg`, `ESP.cfg` e 25 arquivos de `conf_estadual/*.ces`. Foram conferidas assinaturas SHA-256, tamanhos e 27/27 objetos Java sem bytes extras.
