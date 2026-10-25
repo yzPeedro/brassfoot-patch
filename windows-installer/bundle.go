@@ -8,6 +8,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"io/fs"
 	"os"
 	"path/filepath"
 	"strings"
@@ -102,11 +103,17 @@ func stageBundledPayload() (string, error) {
 // Produces temporary patched files only AFTER comparing against the local
 // originals. No game files are modified here; inspect() then validates them.
 func prepareBundledPayload(gamePath, staged string) error {
+	return preparePayloadWithFS(deltaPayload, gamePath, staged)
+}
+
+// preparePayloadWithFS accepts a variable-size validated manifest and allows tests
+// to inject a synthetic release without changing production embedded assets.
+func preparePayloadWithFS(fsys fs.FS, gamePath, staged string) error {
 	game, _, err := validGame(gamePath)
 	if err != nil {
 		return err
 	}
-	body, err := deltaPayload.ReadFile("bundled_release/manifest.json")
+	body, err := fs.ReadFile(fsys, "bundled_release/manifest.json")
 	if err != nil {
 		return err
 	}
@@ -114,13 +121,24 @@ func prepareBundledPayload(gamePath, staged string) error {
 	if err = json.Unmarshal(body, &manifest); err != nil {
 		return err
 	}
-	if len(manifest.Files) != 20 {
-		return fmt.Errorf("pacote de 20 equipes incompleto")
+	if manifest.SchemaVersion != 2 || manifest.PatchSeason != 2026 || !validVersion.MatchString(manifest.Version) {
+		return fmt.Errorf("manifesto do pacote inválido")
 	}
+	if len(manifest.Files) < 1 || len(manifest.Files) > 512 {
+		return fmt.Errorf("pacote incompatível: esperado de 1 a 512 arquivos .ban, encontrados %d", len(manifest.Files))
+	}
+	seen := make(map[string]bool, len(manifest.Files))
 	for _, f := range manifest.Files {
 		if !teamName.MatchString(f.Path) {
 			return fmt.Errorf("arquivo não autorizado no pacote: %s", f.Path)
 		}
+		key := strings.ToLower(f.Path)
+		if seen[key] {
+			return fmt.Errorf("arquivo de equipe duplicado no pacote: %s", f.Path)
+		}
+		seen[key] = true
+	}
+	for _, f := range manifest.Files {
 		src := filepath.Join(game, filepath.FromSlash(f.Path))
 		if err = checkRegular(src); err != nil {
 			return fmt.Errorf("arquivo do Brasfoot ausente: %s: %w", f.Path, err)
@@ -148,7 +166,7 @@ func prepareBundledPayload(gamePath, staged string) error {
 			if strings.ContainsAny(name, "/\\") {
 				return fmt.Errorf("nome de equipe inválido")
 			}
-			data, e := deltaPayload.ReadFile("bundled_release/patches/" + name + ".json")
+			data, e := fs.ReadFile(fsys, "bundled_release/patches/" + name + ".json")
 			if e != nil {
 				return fmt.Errorf("instruções de %s ausentes: %w", f.Path, e)
 			}
