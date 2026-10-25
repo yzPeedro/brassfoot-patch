@@ -85,3 +85,15 @@ A captura de tela da criação de carreira mostra os controles **1ª divisão**,
 6. Testar o instalador e o rollback, com verificação de SHA-256 da versão original. Se o jogo carregar infinitamente, o aceite **falha**.
 
 **Estado:** enfileirado para engenharia reversa e teste na instalação real, **não implementado nem publicado**. O print mostra os seletores, mas não revela a lógica interna de divisão.
+
+## Engenharia reversa do seletor de ano — executável oficial inspecionado (25/10/2026)
+
+Foi baixado **somente para inspeção read-only em GitHub Actions** o instalador diretamente de `https://www.brasfoot.com/download22/brasfoot22-23.exe`, SHA-256 `8e3c7a77768d551a1f3c722ef2447c3e451af830613e8a65de33f35bc0e2b33d`, tamanho 18.113.849 bytes. O setup NSIS foi descompactado na pasta temporária do runner, sem execução e sem publicar arquivos proprietários.
+
+- Executável oficial interno: `bf22-23.exe`, 7.320.384 bytes, ZIP anexado com **2.193 entradas e 1.038 classes Java**.
+- Classe `a/hU.class`, SHA-256 `37fb17d876aab1263756bca97c3f9488007b7afe59f8c68494cf711a0f61a234` (14.933 bytes): **identificada como rotina do JComboBox de seleção de ano**. Seu método `mQ()` insere os anos **2022 e 2023**, chama `best/aq.am("anoinicio")` e seleciona índice 0 ou 1. A ação de iniciar usa `getSelectedIndex()` e grava ano 2022/2023 em `best/f.I(int)` e a preferência `anoinicio`.
+- Classe principal de estado `best/f.class`, SHA-256 `dbd5bd8633e3a1c2f211e8bd6c322db8f7401c5ccf7cc622cc4050f0624df71b`. `best/p.class`, SHA-256 `466327e6cedae77503021dd222a33bf9163e453b639ebc29a399d9d851f4c256`, possui uma comparação de ano igual a 2023 que requer revisão caso passe a 2026.
+- **Diferença de versão:** a instalação descrita pelo usuário mostra **2023 e 2024**, diferente dos **2022 e 2023** do executável baixado do site oficial. Portanto, não aplicar um patch estático dos bytes/classe oficiais na instalação sem confirmar a versão exata e sua assinatura.
+- **Correção exigida:** não basta trocar o texto do JComboBox. A lista deve ter somente 2026; o evento do botão precisa configurar o motor para 2026 e gravar corretamente `anoinicio`, mesmo com preferências antigas; todas as referências internas que pressupõem 2022/2023 devem ser inspecionadas. Verificar save, calendário e telas reais em Windows.
+- A mesma classe contém referências à interface de seleção inicial, mas **a relação efetiva entre clubes e divisões ainda não foi mapeada**; `BRA.cfg` define formatos/quantidades, não a composição de A/B/C.
+- **Estado atual:** análise de bytecode concluída nessa parte; patch de ano e agrupamento interno **ainda não implementado, nem homologado, nem distribuído**. O workflow `inspect-official-game.yml` é reprodutível, apaga todos os arquivos privados ao final e registra apenas metadados/hashes nos logs de CI.
