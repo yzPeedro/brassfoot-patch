@@ -1,0 +1,37 @@
+# Maringá FC professional 2026, official https://maringafc.com.br/elenco/ consulted 2026-10-25
+# Age derived from published birth dates at reference 2026-10-25 (the site displays a few stale ages); country 29 only if Brazilian birthplace supplied.
+# 11 players under a generic 'Defensores' category are provisionally mapped to code 2 (centerback), NOT confirmed as centerbacks. Needs role refinement before release.
+# TSV: NAME<TAB>POSITION<TAB>AGE_AT_2026-10-25<TAB>COUNTRY_IF_PUBLISHED
+Gabriel Affonso	0	27	29
+Romário	0	25	29
+Guilherme Neto	0	31	29
+Mateus	0	21	29
+Gabriel Souza	2	23	29
+Felipe	2	22	
+Jhow Alecxander	2	23	29
+Diego Sousa	2	20	
+Keven Henrique	2	24	29
+Lomar	2	30	29
+Thiago Rosa	2	24	
+Wallace	2	22	29
+Ronald Carvalho	2	26	29
+Travassos	2	25	
+Jesiel Miranda	2	32	
+Bruno Cheron	3	22	29
+Adeílson Maranhão	3	28	
+Danielzinho	3	24	29
+Iago Santana	3	27	
+Kelvi	3	24	29
+Lucas Bonifácio	3	25	29
+Paulinho	3	28	29
+Zé Pedro	3	18	29
+Serginho	3	35	29
+Rafael	3	26	
+Caíque Calito	4	26	29
+Giovane Gomez	4	31	29
+Guilherme Pira	4	26	29
+Negueba	4	26	29
+Pedrinho	4	23	29
+Ronald Camarão	4	26	29
+Rai Natalino	4	21	29
+Rian Patric	4	20	
