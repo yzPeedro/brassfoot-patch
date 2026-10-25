@@ -32,6 +32,8 @@ public class hU {
                     z.write(root/'a/hU.class','a/hU.class',compress_type=zipfile.ZIP_DEFLATED)
             before = executable.read_bytes()
             report = trace(executable)
+            with self.assertRaisesRegex(ValueError, 'approved'):
+                trace(executable, '../unsafe.class')
             self.assertEqual(report['comboFieldNames'], ['ano','divisao'])
             self.assertFalse(report['divisionMappingConfirmed'])
             self.assertTrue(report['methodsWithComboReferences'])
