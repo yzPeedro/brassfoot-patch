@@ -45,7 +45,7 @@ jobs:
               rows=[line.split('\t') for line in source.read_text(encoding='utf-8').splitlines() if line and not line.startswith('#')]
               assert len(rows)==sum(expected),(filename,len(rows))
               assert [sum(row[1]==str(pos) for row in rows) for pos in range(5)]==expected,filename
-              assert len({row[0] for row in rows})==29
+              assert len({row[0] for row in rows})==len(rows)
               assert all(len(row)==4 and not row[2] and not row[3] for row in rows)
               print('PASS:',filename,len(rows),'players; positions verified, no invented ages/countries')
           PY
