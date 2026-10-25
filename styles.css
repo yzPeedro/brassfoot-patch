@@ -49,3 +49,34 @@
 @media(max-width:1050px){.clubs-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:760px){.division-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.club-explorer-head{display:block}.club-filters{margin-top:24px}.club-filters label{flex:1 1 180px}.club-filters input,.club-filters select{width:100%;min-width:0}.clubs-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.club-explorer{padding:19px}}
 @media(max-width:430px){.division-cards article{padding:17px}.division-cards article strong{font-size:48px}.clubs-grid{grid-template-columns:1fr}}
+
+/* Public, traceable coverage: a historical club file is not an installed roster. */
+.coverage{background:#0b2319;color:#e9f8e9;border-top:1px solid #345542;border-bottom:1px solid #345542}
+.coverage .section-label{color:#c5ff69}
+.coverage h2{color:#f2fff1}
+.coverage .section-head p{color:#afcbb6;max-width:580px}
+.coverage-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:12px 0 44px}
+.coverage-stats article{background:linear-gradient(138deg,#1a3826,#102b1e);border:1px solid #47664d;border-radius:9px;padding:24px;min-width:0;display:flex;flex-direction:column;gap:11px}
+.coverage-stats article strong{font:900 clamp(39px,5.2vw,72px)/1 'Barlow Condensed',sans-serif;letter-spacing:-.02em;color:#c5ff69;font-variant-numeric:tabular-nums}
+.coverage-stats article span{font-size:10px;line-height:1.55;letter-spacing:.09em;font-weight:800;color:#cadacc}
+.coverage-inner{border:1px solid #46674a;border-radius:9px;padding:28px;background:#102e20}
+.coverage-intro{display:flex;justify-content:space-between;align-items:start;gap:22px;border-bottom:1px solid #335a40;padding-bottom:22px;margin-bottom:18px}
+.coverage-intro h3{font:800 34px/1.1 'Barlow Condensed',sans-serif;text-transform:uppercase;margin:0;color:#f4fff2}
+.coverage-intro p{font-size:12px;line-height:1.55;color:#b5cbb9;max-width:580px;margin:0}
+.coverage-rows{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:35px;row-gap:22px}
+.coverage-row{min-width:0}
+.coverage-row-head{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:12px}
+.coverage-row-head strong{font:800 21px 'Barlow Condensed',sans-serif;color:white}
+.coverage-row-head span{font-size:11px;color:#d2e5d3;text-align:right}
+.coverage-meter{height:8px;background:#34513c;border-radius:999px;overflow:hidden}
+.coverage-meter span{display:block;height:100%;background:linear-gradient(90deg,#70ca78,#c5ff69);border-radius:inherit;transition:width .7s ease}
+.coverage-row p{font-size:11px;color:#afcbb6;line-height:1.5;margin:10px 0 0}
+.coverage-footnotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px;margin:23px 0 26px}
+.coverage-footnotes p{font-size:12px;line-height:1.8;color:#b4cdbb;margin:0}
+.coverage-footnotes strong{color:#f1fff0}
+.coverage-actions{display:flex;gap:14px;flex-wrap:wrap}
+.coverage-actions a{padding:13px 20px;text-decoration:none;border:1px solid #80b475;border-radius:5px;color:#d2f6be;font-size:12px;font-weight:800;letter-spacing:.045em;transition:background .18s ease,color .18s ease}
+.coverage-actions a:hover,.coverage-actions a:focus-visible{background:#c5ff69;color:#092015;outline-offset:3px}
+@media(max-width:880px){.coverage-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.coverage-intro{display:block}.coverage-intro p{margin-top:9px}.coverage-footnotes{grid-template-columns:1fr;gap:12px}}
+@media(max-width:600px){.coverage-stats article{padding:16px}.coverage-rows{grid-template-columns:1fr;gap:20px}.coverage-inner{padding:18px}.coverage-actions a{width:100%;text-align:center}}
+@media(prefers-reduced-motion:reduce){.coverage-meter span{transition:none}}
