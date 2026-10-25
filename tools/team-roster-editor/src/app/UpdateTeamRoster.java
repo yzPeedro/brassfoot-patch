@@ -85,11 +85,11 @@ public final class UpdateTeamRoster {
         return bytes.toByteArray();
     }
 
-    private static g create(Player row, t team, int serial, List<g> existing) {
+    private static g create(Player row, t team, int serial, int namespace, List<g> existing) {
         g base = existing.stream().filter(p -> p.e == row.position()).findFirst().orElse(existing.get(0));
         g player = new g();
         player.a = row.name();
-        player.tid = 200_000_000 + team.id * 100 + serial;
+        player.tid = 200_000_000 + namespace * 100 + serial;
         player.d = row.age() != null ? row.age() : 25;
         player.e = row.position();
         player.c = row.country() != null ? row.country() : 29;
@@ -101,7 +101,7 @@ public final class UpdateTeamRoster {
         return player;
     }
 
-    public static Report update(t team, List<Player> rows, boolean labEstimates) throws IOException {
+    public static Report update(t team, List<Player> rows, boolean labEstimates, int namespace) throws IOException {
         List<g> original = new ArrayList<>(team.l);
         Map<String, g> oldByName = new HashMap<>();
         for (g player : original) if (player.a != null)
@@ -112,7 +112,7 @@ public final class UpdateTeamRoster {
         int serial = 1;
         for (Player row : rows) {
             g old = oldByName.get(normalize(row.name()));
-            g player = create(row, team, serial, original);
+            g player = create(row, team, serial, namespace, original);
             if (old != null) {
                 player.tid = old.tid;
                 player.aid = old.aid;
@@ -162,7 +162,13 @@ public final class UpdateTeamRoster {
         int teamId = Integer.parseInt(args[4]);
         if (team.id != teamId) throw new IOException("Unexpected internal team ID");
         if (!Arrays.equals(serialize(team), original)) throw new IOException("Original does not round-trip byte for byte");
-        Report report = update(team, loadPlayers(roster), lab);
+        // A number of legitimate original 2022-23 Brazilian clubs have internal ID=0.
+        // Derive a stable, source-hash-scoped namespace for synthetic player IDs
+        // rather than reusing 0 across different clubs. This is NOT proof that
+        // the game's league selector knows which division the club belongs to.
+        int namespace = team.id > 0 ? team.id :
+            (int) (Long.parseLong(sha256(original).substring(0, 7), 16) % 1_000_000);
+        Report report = update(team, loadPlayers(roster), lab, namespace);
         byte[] result = serialize(team);
         if (loadTeam(result).l.size() != report.total()) throw new IOException("Serialized roster invalid");
         Files.write(output, result, StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE);
