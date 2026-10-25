@@ -56,7 +56,66 @@ type InstallOptions struct { // TestFailAfter is for automated rollback tests, n
 }
 
 var (
-	teamName     = regexp.MustCompile(`^teams/[a-zA-Z0-9_-]+\.ban$`)
+	teamName     = regexp.MustCompile(`^teams/[a-zA-Z0-9_-]+\.banpackage main
+
+import (
+	"crypto/sha256"
+	"encoding/hex"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"io"
+	"os"
+	"path/filepath"
+	"regexp"
+	"sort"
+	"strings"
+	"time"
+)
+
+// Windows homologation installer. It never downloads data or calls an API.
+// The local game and the external homologation payload are never redistributed.
+type Manifest struct {
+	SchemaVersion             int            `json:"schemaVersion"`
+	Kind                      string         `json:"kind"`
+	PatchSeason               int            `json:"patchSeason"`
+	Version                   string         `json:"version"`
+	PublicationAllowed        bool           `json:"publicationAllowed"`
+	CompatibilityTestedInGame bool           `json:"compatibilityTestedInGame"`
+	Files                     []ManifestFile `json:"files"`
+}
+type ManifestFile struct {
+	Operation              string   `json:"operation,omitempty"`
+	Path                   string   `json:"path"`
+	Size                   int64    `json:"size"`
+	SHA256                 string   `json:"sha256"`
+	AcceptedOriginalSHA256 []string `json:"acceptedOriginalSha256"`
+}
+type Item struct {
+	File             ManifestFile
+	Source, Target   string
+	AlreadyInstalled bool
+}
+type Plan struct {
+	Game, Payload    string
+	Manifest         Manifest
+	Items            []Item
+	AlreadyInstalled bool
+}
+type InstallResult struct {
+	Status, Version, BackupPath string
+	Files                       int
+	InstalledAt                 time.Time
+}
+
+type InstallOptions struct { // TestFailAfter is for automated rollback tests, never used by the GUI.
+	TestFailAfter int
+	Progress      func(stage string, completed, total int)
+}
+
+var (
+	)
+	nationalConfigPath = "conf_ligas_nacionais/BRA.cfg"
 	validHash    = regexp.MustCompile(`^[0-9a-f]{64}$`)
 	validVersion = regexp.MustCompile(`^2026\.[0-9]+\.[0-9]+$`)
 )
@@ -179,8 +238,9 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 	seen := map[string]bool{}
 	states := map[bool]bool{}
 	for _, entry := range m.Files {
-		if !teamName.MatchString(entry.Path) {
-			return Plan{}, fmt.Errorf("caminho de equipe proibido: %s", entry.Path)
+		isNationalConfig := entry.Path == nationalConfigPath && m.SchemaVersion == 3
+		if !teamName.MatchString(entry.Path) && !isNationalConfig {
+			return Plan{}, fmt.Errorf("caminho de patch proibido: %s", entry.Path)
 		}
 		mode := entry.Operation
 		if mode == "" { mode = "replace" }
@@ -189,6 +249,9 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		}
 		if m.SchemaVersion == 2 && mode == "add" {
 			return Plan{}, errors.New("schema 2 não permite adicionar equipes")
+		}
+		if isNationalConfig && mode != "replace" {
+			return Plan{}, errors.New("configuração de liga só pode substituir um BRA.cfg conhecido")
 		}
 		entry.Operation = mode
 		key := strings.ToLower(entry.Path)
@@ -228,6 +291,17 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		if er != nil || !within(actual, payload) {
 			return Plan{}, errors.New("arquivo fora da pasta permitida")
 		}
+		if isNationalConfig {
+			configDir := filepath.Dir(target)
+			info, dirErr := os.Lstat(configDir)
+			if dirErr != nil || !info.IsDir() || info.Mode()&os.ModeSymlink != 0 {
+				return Plan{}, errors.New("pasta conf_ligas_nacionais incompatível ou ausente")
+			}
+			resolved, dirErr := canonical(configDir)
+			if dirErr != nil || !within(resolved, game) {
+				return Plan{}, errors.New("pasta de ligas fora do Brasfoot")
+			}
+		}
 		targetExists := true
 		if err = checkRegular(target); err != nil {
 			if mode == "add" && errors.Is(err, os.ErrNotExist) {
@@ -258,7 +332,7 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		_, err = io.ReadFull(f, h[:])
 		f.Close()
 		if err != nil || h != [4]byte{0xac, 0xed, 0x00, 0x05} {
-			return Plan{}, fmt.Errorf("arquivo .ban sem cabeçalho esperado: %s", entry.Path)
+			return Plan{}, fmt.Errorf("arquivo serializado sem cabeçalho esperado: %s", entry.Path)
 		}
 		result, err := sha(source)
 		if err != nil {
@@ -358,6 +432,17 @@ func backupRoot() (string, error) {
 	}
 	return filepath.Join(root, "BrassfootPatch2026", "backups"), nil
 }
+// Check permissions before backups or replacements.
+func checkWritableDirectory(dir string) error {
+	f, err := os.CreateTemp(dir, ".brassfoot-write-check-*.tmp")
+	if err != nil { return err }
+	name := f.Name()
+	closeErr := f.Close()
+	removeErr := os.Remove(name)
+	if closeErr != nil { return closeErr }
+	return removeErr
+}
+
 func install(p Plan, opts InstallOptions) (InstallResult, error) {
 	var res InstallResult
 	if p.AlreadyInstalled {
@@ -372,6 +457,14 @@ func install(p Plan, opts InstallOptions) (InstallResult, error) {
 	}
 	if err = checkWritableTeams(p.Game); err != nil {
 		return res, err
+	}
+	for _, item := range fresh.Items {
+		if item.File.Path == nationalConfigPath {
+			if err = checkWritableDirectory(filepath.Join(p.Game, "conf_ligas_nacionais")); err != nil {
+				return res, fmt.Errorf("não consigo gravar a configuração nacional: %w", err)
+			}
+			break
+		}
 	}
 	if len(fresh.Items) != len(p.Items) {
 		return res, errors.New("pacote mudou após a verificação")
