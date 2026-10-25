@@ -27,6 +27,7 @@ type Manifest struct {
 	Files                     []ManifestFile `json:"files"`
 }
 type ManifestFile struct {
+	Operation              string   `json:"operation,omitempty"`
 	Path                   string   `json:"path"`
 	Size                   int64    `json:"size"`
 	SHA256                 string   `json:"sha256"`
@@ -164,7 +165,7 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 	if err = json.Unmarshal(buf, &m); err != nil {
 		return p, fmt.Errorf("manifesto JSON inválido: %w", err)
 	}
-	if m.SchemaVersion != 2 || m.PatchSeason != 2026 || !validVersion.MatchString(m.Version) {
+	if (m.SchemaVersion != 2 && m.SchemaVersion != 3) || m.PatchSeason != 2026 || !validVersion.MatchString(m.Version) {
 		return p, errors.New("formato ou versão do pacote incompatível")
 	}
 	if !((m.Kind == "BRASFOOT_HOMOLOGATION_PATCH" && !m.PublicationAllowed && !m.CompatibilityTestedInGame) ||
@@ -181,6 +182,15 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		if !teamName.MatchString(entry.Path) {
 			return Plan{}, fmt.Errorf("caminho de equipe proibido: %s", entry.Path)
 		}
+		mode := entry.Operation
+		if mode == "" { mode = "replace" }
+		if (m.SchemaVersion == 2 && entry.Operation != "") || (mode != "replace" && mode != "add") {
+			return Plan{}, fmt.Errorf("operação não suportada para %s", entry.Path)
+		}
+		if m.SchemaVersion == 2 && mode == "add" {
+			return Plan{}, errors.New("schema 2 não permite adicionar equipes")
+		}
+		entry.Operation = mode
 		key := strings.ToLower(entry.Path)
 		if seen[key] {
 			return Plan{}, errors.New("caminhos duplicados no pacote")
@@ -189,8 +199,11 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		if entry.Size < 4 || entry.Size > 25*1024*1024 || !validHash.MatchString(entry.SHA256) {
 			return Plan{}, errors.New("tamanho/hash do pacote inválidos")
 		}
-		if len(entry.AcceptedOriginalSHA256) == 0 || len(entry.AcceptedOriginalSHA256) > 64 {
+		if mode == "replace" && (len(entry.AcceptedOriginalSHA256) == 0 || len(entry.AcceptedOriginalSHA256) > 64) {
 			return Plan{}, errors.New("falta assinatura do arquivo original homologado")
+		}
+		if mode == "add" && len(entry.AcceptedOriginalSHA256) != 0 {
+			return Plan{}, errors.New("nova equipe não pode declarar hashes de originais")
 		}
 		allowed := false
 		for _, v := range entry.AcceptedOriginalSHA256 {
@@ -207,21 +220,29 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		pathParts := strings.Split(entry.Path, "/")
 		source := filepath.Join(payload, pathParts[0], pathParts[1])
 		target := filepath.Join(game, pathParts[0], pathParts[1])
-		for _, pair := range []struct {
-			file string
-			root string
-		}{{source, payload}, {target, game}} {
-			if err = checkRegular(pair.file); err != nil {
-				if pair.file == target {
-					return Plan{}, fmt.Errorf("arquivo não encontrado na instalação: %s (%s): %w", entry.Path, pair.file, err)
-				}
-				return Plan{}, fmt.Errorf("arquivo ausente ou incompatível no pacote: %s: %w", entry.Path, err)
-			}
-			actual, er := canonical(pair.file)
-			if er != nil || !within(actual, pair.root) {
-				return Plan{}, errors.New("arquivo fora da pasta permitida")
+		// Replacement originals must exist; additions must not overwrite any unknown file.
+		if err = checkRegular(source); err != nil {
+			return Plan{}, fmt.Errorf("arquivo inválido no pacote: %s: %w", entry.Path, err)
+		}
+		actual, er := canonical(source)
+		if er != nil || !within(actual, payload) {
+			return Plan{}, errors.New("arquivo fora da pasta permitida")
+		}
+		targetExists := true
+		if err = checkRegular(target); err != nil {
+			if mode == "add" && errors.Is(err, os.ErrNotExist) {
+				targetExists = false
+			} else {
+				return Plan{}, fmt.Errorf("arquivo de equipe de destino incompatível: %s: %w", entry.Path, err)
 			}
 		}
+		if targetExists {
+			actual, er = canonical(target)
+			if er != nil || !within(actual, game) {
+				return Plan{}, errors.New("arquivo de destino fora da pasta do jogo")
+			}
+		}
+
 		data, err := os.Stat(source)
 		if err != nil {
 			return Plan{}, err
@@ -246,28 +267,25 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		if result != entry.SHA256 {
 			return Plan{}, fmt.Errorf("hash corrompido: %s", entry.Path)
 		}
-		existing, err := sha(target)
-		if err != nil {
-			return Plan{}, err
-		}
-		isInstalled := existing == entry.SHA256
-		if !isInstalled {
-			ok := false
-			for _, v := range entry.AcceptedOriginalSHA256 {
-				if existing == v {
-					ok = true
-					break
+		isInstalled := false
+		if targetExists {
+			existing, e := sha(target)
+			if e != nil { return Plan{}, e }
+			isInstalled = existing == entry.SHA256
+			if !isInstalled {
+				if mode == "add" {
+					return Plan{}, fmt.Errorf("recusada adição: %s já existe com outro hash", entry.Path)
 				}
+				ok := false
+				for _, v := range entry.AcceptedOriginalSHA256 { if existing == v { ok = true; break } }
+				if !ok { return Plan{}, &UnknownOriginalError{Relative: entry.Path, Actual: existing, Accepted: entry.AcceptedOriginalSHA256} }
 			}
-			if !ok {
-				return Plan{}, &UnknownOriginalError{Relative: entry.Path, Actual: existing, Accepted: entry.AcceptedOriginalSHA256}
-			}
-			p.AlreadyInstalled = false
 		}
+		if !isInstalled { p.AlreadyInstalled = false }
 		states[isInstalled] = true
 		p.Items = append(p.Items, Item{File: entry, Source: source, Target: target, AlreadyInstalled: isInstalled})
 	}
-	if len(states) > 1 {
+	if m.SchemaVersion == 2 && len(states) > 1 {
 		return Plan{}, errors.New("pacote parcialmente instalado: restaure sua cópia original antes de tentar novamente")
 	}
 	return p, nil
@@ -359,9 +377,17 @@ func install(p Plan, opts InstallOptions) (InstallResult, error) {
 		return res, errors.New("pacote mudou após a verificação")
 	}
 	for i := range p.Items {
-		if p.Items[i].File.SHA256 != fresh.Items[i].File.SHA256 || p.Items[i].Source != fresh.Items[i].Source || p.Items[i].Target != fresh.Items[i].Target {
+		if p.Items[i].File.SHA256 != fresh.Items[i].File.SHA256 || p.Items[i].File.Operation != fresh.Items[i].File.Operation || p.Items[i].AlreadyInstalled != fresh.Items[i].AlreadyInstalled || p.Items[i].Source != fresh.Items[i].Source || p.Items[i].Target != fresh.Items[i].Target {
 			return res, errors.New("pacote mudou após a verificação")
 		}
+	}
+	active := make([]Item, 0, len(fresh.Items))
+	skipped := []string{}
+	added := []string{}
+	for _, item := range fresh.Items {
+		if item.AlreadyInstalled { skipped = append(skipped, item.File.Path); continue }
+		active = append(active, item)
+		if item.File.Operation == "add" { added = append(added, item.File.Path) }
 	}
 	root, err := backupRoot()
 	if err != nil {
@@ -383,7 +409,7 @@ func install(p Plan, opts InstallOptions) (InstallResult, error) {
 	}
 	replaced := []Item{}
 	backups := map[string]string{}
-	report := map[string]any{"version": p.Manifest.Version, "files": len(p.Items), "game": p.Game, "backupsRetained": true}
+	report := map[string]any{"version": p.Manifest.Version, "files": len(p.Items), "game": p.Game, "backupsRetained": true, "addedPaths": added, "skippedPaths": skipped, "schemaVersion": p.Manifest.SchemaVersion}
 	reportFile := func(name string) {
 		b, e := json.MarshalIndent(report, "", "  ")
 		if e == nil {
@@ -394,6 +420,18 @@ func install(p Plan, opts InstallOptions) (InstallResult, error) {
 		failures := []string{}
 		for i := len(replaced) - 1; i >= 0; i-- {
 			item := replaced[i]
+			if item.File.Operation == "add" {
+				current, e := sha(item.Target)
+				if errors.Is(e, os.ErrNotExist) { continue }
+				if e != nil || current != item.File.SHA256 {
+					failures = append(failures, item.File.Path+": arquivo criado foi modificado; exclusão automática recusada")
+					continue
+				}
+				if e = os.Remove(item.Target); e != nil {
+					failures = append(failures, item.File.Path+": "+e.Error())
+				}
+				continue
+			}
 			saved := backups[item.File.Path]
 			hash, _ := sha(saved)
 			expected := item.File.AcceptedOriginalSHA256
@@ -424,7 +462,8 @@ func install(p Plan, opts InstallOptions) (InstallResult, error) {
 		}
 		return InstallResult{}, fmt.Errorf("falha de instalação; originais restaurados; backup em %s: %w", backup, cause)
 	}
-	for idx, item := range p.Items {
+	for idx, item := range active {
+		if item.File.Operation == "add" { continue } // no existing file to back up
 		saved := filepath.Join(backup, filepath.FromSlash(item.File.Path))
 		if err = os.MkdirAll(filepath.Dir(saved), 0700); err != nil {
 			return fail(err)
@@ -442,18 +481,23 @@ func install(p Plan, opts InstallOptions) (InstallResult, error) {
 		}
 		backups[item.File.Path] = saved
 		if opts.Progress != nil {
-			opts.Progress("backup", idx+1, len(p.Items))
+			opts.Progress("backup", idx+1, len(active))
 		}
 	}
-	for idx, item := range p.Items {
-		// Include this file even if replacement returned an error after it had already renamed.
-		// This permits restoring an original if verification after os.Rename fails.
-		replaced = append(replaced, item)
-		if err = replaceVerified(item.Source, item.Target, item.File.SHA256); err != nil {
-			return fail(err)
+	for idx, item := range active {
+		if item.File.Operation == "add" {
+			// O_EXCL refuses unexpected existing files; copyFile cleans partial creations.
+			if err = copyFile(item.Source, item.Target); err != nil { return fail(err) }
+			replaced = append(replaced, item)
+			hash, e := sha(item.Target)
+			if e != nil || hash != item.File.SHA256 { return fail(errors.New("arquivo adicionado não passou na verificação SHA-256")) }
+		} else {
+			// A failed atomic replacement might already have replaced the original.
+			replaced = append(replaced, item)
+			if err = replaceVerified(item.Source, item.Target, item.File.SHA256); err != nil { return fail(err) }
 		}
 		if opts.Progress != nil {
-			opts.Progress("install", idx+1, len(p.Items))
+			opts.Progress("install", idx+1, len(active))
 		}
 		if opts.TestFailAfter > 0 && len(replaced) >= opts.TestFailAfter {
 			return fail(errors.New("falha injetada em teste"))
@@ -471,7 +515,7 @@ func install(p Plan, opts InstallOptions) (InstallResult, error) {
 	}()
 	reportFile("install-report.json")
 	if opts.Progress != nil {
-		opts.Progress("done", len(p.Items), len(p.Items))
+		opts.Progress("done", len(active), len(active))
 	}
 	return InstallResult{Status: "installed", Version: p.Manifest.Version, BackupPath: backup, Files: len(p.Items), InstalledAt: time.Now()}, nil
 }
