@@ -12,16 +12,16 @@ class ClubRoleAuditTests(unittest.TestCase):
     def test_all_sourced_clubs_real_names_and_source_roles(self):
         research=json.loads((ROOT/"site/data/researched-rosters-2026.json").read_text(encoding="utf-8"))
         result=audit(research,ROOT/"tools/team-roster-editor/sources")
-        self.assertEqual(result["teamsWithSourcePositions"],11)
-        self.assertEqual(result["playersWithSourcePositions"],353)
+        self.assertEqual(result["teamsWithSourcePositions"],14)
+        self.assertEqual(result["playersWithSourcePositions"],451)
         self.assertFalse(result["serieDModified"])
         self.assertFalse(result["sourcePositionReviewIsGameValidation"])
-        self.assertEqual(len(result["clubs"]),11)
-        self.assertEqual(sum(x["agePresent"] for x in result["clubs"]),70)
-        self.assertEqual(sum(x["countryPresent"] for x in result["clubs"]),24)
+        self.assertEqual(len(result["clubs"]),14)
+        self.assertEqual(sum(x["agePresent"] for x in result["clubs"]),98)
+        self.assertEqual(sum(x["countryPresent"] for x in result["clubs"]),52)
         self.assertTrue(all(x["requiresFinalEligibilityAndGameReview"] for x in result["clubs"]))
         self.assertTrue(all(x["clubId"] in research["clubs"] for x in result["clubs"]))
-        self.assertEqual(len({x["clubId"] for x in result["clubs"]}),11)
+        self.assertEqual(len({x["clubId"] for x in result["clubs"]}),14)
 
 if __name__=="__main__":
     unittest.main()
