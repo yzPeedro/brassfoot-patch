@@ -1,4 +1,20 @@
-# Estado observado — 2026-10-25
+# Progresso atual — Brasfoot Patch 2026
+
+## Implementação do motor Go v3 — 25/10/2026
+
+- **Release existente:** v2026.0.2 publicada e aprovada pelo usuário em teste no Brasfoot; contém 20 clubes da Série A, 730 jogadores com limitações relatadas. Não foi substituída nesta execução.
+- **Catálogo:** 156 clubes distintos nos dados oficiais (20 A, 20 B, 20 C, 96 D) e explorador de clubes publicado; 136 clubes adicionais ainda não estão no instalador.
+- **Motor Go:** manifesto v3 com `operation: add` / `replace`; suporte a quantidades de 1 a 512; empacotador sem limite hardcoded de 20; validação de operações, caminhos, hashes, destinos existentes e duplicações. Mantido v2 para compatibilidade com a release atual.
+- **Transações:** inclusão de novas equipes com criação exclusiva; backup para substituições; rollback de inclusões sem apagar arquivos modificados externamente; desfazer somente o que a transação instalou, preservando arquivos já modificados antes dela.
+- **Testes reais executados localmente:** `go test -race -count=1 ./...` passou, incluindo 20 originais privados da release, testes sintéticos de 1 e 156 equipes, adição, restauração, colisões, idempotência, saves e rollback. O comando foi executado no motor Go reconstruído localmente a partir do código-fonte da release e evoluído nesta execução. **É necessária uma execução final dos testes após `git pull` na árvore atual do GitHub.**
+- **Build:** compilação cruzada Go para Windows amd64 concluída; **não houve execução interativa em Windows nem prova de jogabilidade das novas 136 equipes**.
+- **Quota:** ledger SQLite local ganhou proteção de janela móvel de 24h para evitar surtos no reset UTC; smoke tests locais de concorrência, persitência, teto 90 e transição de dia passaram. Não há prova de coordenação de múltiplos hosts externos.
+- **Evidências e insumos:** o upload privado anterior possui apenas 20 `.ban`; criado `scripts/collect-game-structure.ps1` para coletar de forma privada arquivos de equipes e competições sem copiar saves/executáveis. Precisa ser executado em uma instalação real com os 703 clubes antes do mapeamento confiável de 156 IDs e competições.
+- **Escudos/uniformes:** pipeline de inventário somente leitura já existe; não há aprovação de direitos/formato para redistribuição de novos assets.
+- **Publicação:** código atualizado em `main`. **Nenhuma release de 156 clubes foi criada**, e não se alterou o arquivo publicado v2026.0.2 nem o hash do seu download.
+
+## Histórico anterior (mantido como registro; não representa o estado atual)
+
 
 - Dados: sincronização real no Windows confirmou 20 clubes, 745 jogadores e zero falhas de API. Snapshot privado não foi commitado.
 - Reconciliador: correção do Atlético-MG ID 1062 aprovada no Windows; testes completos do hotfix v5.0.4 executados (52 aprovados, 3 ignorados).
