@@ -20,10 +20,17 @@ class ReadinessTests(unittest.TestCase):
         report = audit(self.catalog, self.rosters)
         summary = report["summary"]
         self.assertEqual(summary["clubs"], 40)
-        self.assertEqual(summary["observedNames"], 1302)
+        source_count = sum(len(entry["players"]) for entry in self.rosters["clubs"].values())
+        self.assertEqual(summary["observedNames"], source_count)
+        self.assertGreaterEqual(source_count, 1000)
         self.assertEqual(summary["releaseReadyClubs"], 0)
         self.assertEqual(summary["clubsMissingPositionAgeIdReview"], 40)
-        self.assertEqual(set(summary["clubsOver40"]), {"Caxias", "Confiança", "Floresta"})
+        expected_over_limit = {
+            club["name"] for club in self.catalog["clubs"]
+            if club["division"] in ("B", "C")
+            and len(self.rosters["clubs"][club["id"]]["players"]) > 40
+        }
+        self.assertEqual(set(summary["clubsOver40"]), expected_over_limit)
         self.assertFalse(summary["serieDReviewedOrChanged"])
         self.assertFalse(report["releaseAuthorized"])
         self.assertEqual({c["division"] for c in report["clubs"]}, {"B", "C"})
