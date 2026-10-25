@@ -40,13 +40,24 @@ jobs:
               ('londrina-2026-official.tsv', [4,3,6,7,9]),
               ('cuiaba-2026-official.tsv', [4,4,4,7,6]),
               ('juventude-2026-official.tsv', [4,8,6,8,10]),
+              ('maringa-2026-official.tsv', [4,0,11,10,8]),
+              ('avai-2026-official.tsv', [3,5,6,11,11]),
+              ('fortaleza-2026-official.tsv', [4,5,6,11,9]),
           ):
               source=Path('tools/team-roster-editor/sources')/filename
               rows=[line.split('\t') for line in source.read_text(encoding='utf-8').splitlines() if line and not line.startswith('#')]
               assert len(rows)==sum(expected),(filename,len(rows))
               assert [sum(row[1]==str(pos) for row in rows) for pos in range(5)]==expected,filename
               assert len({row[0] for row in rows})==len(rows)
-              assert all(len(row)==4 and not row[2] and not row[3] for row in rows)
+              assert all(len(row)==4 for row in rows)
+              for row in rows:
+                  if row[2]: assert 15<=int(row[2])<=49
+                  if row[3]: assert 1<=int(row[3])<=250
+              if filename=='maringa-2026-official.tsv':
+                  assert sum(bool(row[2]) for row in rows)==33
+                  assert sum(bool(row[3]) for row in rows)==24
+              else:
+                  assert all(not row[2] and not row[3] for row in rows)
               print('PASS:',filename,len(rows),'players; positions verified, no invented ages/countries')
           PY
       - name: Verify synthetic byte-differential reconstruction and SHA
