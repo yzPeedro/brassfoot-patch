@@ -119,17 +119,29 @@ class ClassFile:
         self.data[offset:offset + length] = after.encode("utf-8")
 
 
-def patch_official(original: bytes) -> bytes:
-    """The *official* 2022/23 class only. Strict hash + structural signature."""
-    if hashlib.sha256(original).hexdigest() != OFFICIAL_HU_SHA:
+def patch_verified_variant(original: bytes, *, expected_sha256: str,
+                           source_years: tuple[int, int]) -> bytes:
+    """Patch a structurally compatible *fingerprinted* class; no in-game proof.
+
+    Only callers with an independently verified original hash may use this
+    adapter. The CLI still accepts exclusively the known official fingerprint.
+    """
+    if (not isinstance(expected_sha256, str) or len(expected_sha256) != 64
+            or any(c not in "0123456789abcdef" for c in expected_sha256)):
+        raise ParseError("An exact lowercase SHA-256 fingerprint is required")
+    if (len(source_years) != 2 or any(type(year) is not int or year < 2000
+                                   or year > 2099 for year in source_years)
+            or source_years[0] >= source_years[1] or 2026 in source_years):
+        raise ParseError("Unsupported source year pair")
+    if hashlib.sha256(original).hexdigest() != expected_sha256:
         raise ParseError("Unknown Brasfoot version: original a/hU.class SHA mismatch")
     klass = ClassFile(original)
     if "mQ" not in klass.methods:
         raise ParseError("Expected career year initialization method not found")
     start, length = klass.methods["mQ"]
     instructions = bytes(klass.data[start:start + length])
-    first = klass.cp_string(2022)
-    second = klass.cp_string(2023)
+    first = klass.cp_string(source_years[0])
+    second = klass.cp_string(source_years[1])
     if max(first, second) > 255:
         raise ParseError("Unexpected wide LDC constants")
     calls = []
@@ -154,7 +166,7 @@ def patch_official(original: bytes) -> bytes:
         raise ParseError("Old selected-index branch changed")
     klass.data[start + instructions.index(selection)] = 0x03
     # Send 2026 to the actual engine rather than merely changing the UI.
-    year_literals = (b"\x11\x07\xE6", b"\x11\x07\xE7")
+    year_literals = tuple(b"\x11" + year.to_bytes(2, "big") for year in source_years)
     consumers = []
     for method, (offset, count) in klass.methods.items():
         code = bytes(klass.data[offset:offset + count])
@@ -166,12 +178,19 @@ def patch_official(original: bytes) -> bytes:
     for target in year_literals:
         index = consumer_start + consumer_code.index(target)
         klass.data[index:index + 3] = b"\x11\x07\xEA"  # JVM sipush 2026
-    klass.replace_constant("2022", "2026")
+    klass.replace_constant(str(source_years[0]), "2026")
     result = bytes(klass.data)
     verified = ClassFile(result)
     if verified.cp_string(2026) != first or len(result) != len(original):
         raise ParseError("Patched class integrity check failed")
     return result
+
+
+def patch_official(original: bytes) -> bytes:
+    """Public official 2022/2023 fingerprint only; fail closed for all others."""
+    return patch_verified_variant(
+        original, expected_sha256=OFFICIAL_HU_SHA, source_years=(2022, 2023)
+    )
 
 
 def main():
