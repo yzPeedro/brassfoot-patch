@@ -47,7 +47,7 @@ def read_targets(path:Path)->list[dict]:
 def select_team(club:dict, rows:list[dict])->dict:
     # Team-name comparison is exact after accent/punctuation normalization.
     # State qualifiers prevent ambiguous Botafogo/América identities.
-    options=[club["name"],*ALIASES.get(club["id"],[])]
+    options=ALIASES.get(club["id"],[club["name"]])  # no generic Botafogo / América
     norm={normalize(x) for x in options}
     matches={}
     for row in rows:
