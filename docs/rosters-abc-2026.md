@@ -55,7 +55,7 @@ Este requisito **não deve modificar a Série D** (equipes, formato, `BRA.cfg` e
 
 ## Pesquisa web por elencos da Série B/C — 25/10/2026
 
-- `site/data/researched-rosters-2026.json`: **40 clubes**, **1.304 nomes pesquisados**, com URL da fonte, tipo de fonte, data de consulta e observações; nenhum desses atletas foi instalado no Brasfoot pelas releases existentes.
+- `site/data/researched-rosters-2026.json`: **40 clubes**, **1.302 nomes pesquisados**, com URL da fonte, tipo de fonte, data de consulta e observações; nenhum desses atletas foi instalado no Brasfoot pelas releases existentes.
 - Algumas fontes refletem uma **lista de jogadores que passaram pelo clube durante 2026**, uma lista do início da temporada ou um retrato esportivo sem garantia de vínculo em outubro. Ex.: notícia do Maranhão de 29/09/2026 relata seis saídas de titulares e já prepara elenco 2027; não é correto somar todos os nomes e declarar um plantel atual de 2026. A fonte de fevereiro/2026 da Ferroviária usa nomes abreviados e repete a grafia de Denilson, o que requer desambiguação.
 - A interface separa explicitamente **elenco publicado na v2026.0.2 (Série A)** de **jogadores pesquisados em fonte externa, ainda NÃO incluídos no patch (Séries B/C)**, com link no modal e filtros específicos.
 - Para gerar o futuro pacote 60 A/B/C, faltam validar individualmente todas as 40 fontes/nomes e transferências, identificar idade/posição e resolver os vínculos de arquivos `.ban`, reproduzir o patch diferencial, testar backups e homologar início de carreira. **Não anunciar "elencos 100% reais e atualizados" com base apenas na existência de nomes em páginas da web.**
