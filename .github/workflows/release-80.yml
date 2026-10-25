@@ -1,0 +1,95 @@
+name: Build and publish Brasfoot Patch 2026.1.1
+on:
+  push:
+    branches: [release/2026-1-1-80-clubes]
+    paths:
+      - '.github/workflows/release-80.yml'
+      - 'release-builder/**'
+      - 'preview-builder/src/**'
+      - 'windows-installer/**'
+permissions:
+  contents: write
+concurrency:
+  group: brassfoot-release-2026-1-1
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.23.2'
+      - name: Build verified 20/20/20/20 selection and differential league settings
+        run: python release-builder/build_release.py
+      - name: Update Windows installer wording
+        run: python release-builder/patch_gui.py
+      - name: Verify generated manifest and 2-group Série D
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          root=pathlib.Path('windows-installer/bundled_release')
+          m=json.loads((root/'manifest.json').read_text())
+          modes={key:sum(f['operation']==key for f in m['files']) for key in ('replace','verify','add')}
+          assert len(m['files'])==81 and modes=={'replace':21,'verify':59,'add':1},modes
+          assert m['version']=='2026.1.1'
+          assert m['files'][-1]['sha256']=='ded1604e7d143622b580bec9237cd7accf1a1bbe2de7ffc11b28dc02853d0503'
+          a=json.loads((root/'patches'/'BRA.cfg.json').read_text())
+          assert a['operations'][1]['add']=='Ag==' and a['operations'][3]['add']=='FA=='
+          print('Pass: four divisions of 20, 59 historical files, one Maranhão addition, and 2 groups of 10')
+          PY
+      - name: Go regression tests
+        working-directory: windows-installer
+        run: go test -count=1 -skip '^TestReleaseDeltaInstallsRestores20Teams$' ./...
+      - name: Go static analysis
+        working-directory: windows-installer
+        run: go vet ./...
+      - name: Build release for Windows 64-bit
+        working-directory: windows-installer
+        run: |
+          mkdir -p ../dist
+          CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -trimpath -ldflags='-s -w -H=windowsgui' -o ../dist/Brassfoot-Patch-2026-Setup.exe .
+      - name: Publish hash and detailed notes
+        run: |
+          cd dist
+          sha256sum Brassfoot-Patch-2026-Setup.exe > SHA256-Brassfoot-2026.1.1.txt
+          cat > NOTAS-2026.1.1.txt <<'EOF'
+          Brassfoot Patch 2026.1.1 - 20 times em cada Serie brasileira.
+          A: 20 equipes com elencos experimentais da release anterior.
+          B: 20 equipes historicas; nao possuem plantel real atualizado para 2026.
+          C: 19 historicas e Maranhao com 18 atletas ficticios.
+          D: selecao editorial de 20 participantes da Serie D 2026,
+             usando arquivos historicos ja presentes no Brasfoot; 2 grupos de 10.
+          NAO FOI DEMONSTRADO QUE O BRASFOOT CRIE UM CALENDARIO FUNCIONAL
+          COM O NOVO FORMATO DA SERIE D.
+          Use uma copia isolada do jogo e guarde backups dos saves.
+          Se voce instalou antes a versao com 156 clubes,
+          utilize a opcao Desfazer naquele instalador ANTES de instalar esta.
+          O instalador bloqueia arquivos sinteticos extras encontrados.
+          Integridade SHA-256, backup e desfazer disponiveis.
+          EOF
+      - name: Publish main release if checks passed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag=v2026.1.1
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo 'Release exists; refusing to overwrite.'
+            exit 0
+          fi
+          gh release create "$tag" \
+            dist/Brassfoot-Patch-2026-Setup.exe \
+            dist/SHA256-Brassfoot-2026.1.1.txt \
+            dist/NOTAS-2026.1.1.txt \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --latest \
+            --title "Brassfoot Patch 2026.1.1 - 20 clubes por divisão" \
+            --notes "Nova edição oficial de distribuição: 20 clubes em cada Série A/B/C/D, com Série D em 2 grupos de 10. A Série A mantém os elencos experimentais; as Séries B/C/D usam arquivos históricos e o Maranhão tem jogadores fictícios. A nova estrutura da Série D ainda não foi homologada dentro do jogo. Faça backup, teste em uma cópia isolada e, caso tenha instalado a antiga prévia com 156 clubes, use Desfazer antes de instalar esta versão."
