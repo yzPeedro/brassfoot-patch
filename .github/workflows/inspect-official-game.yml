@@ -131,6 +131,10 @@ jobs:
                               print(f'  {j}: {lines[j][:155]}')
                               seen.add(j)
           PY
+      - name: Trace original career combo-box fields and links to game engine (read-only)
+        run: |
+          python tools/trace_career_controls.py --game-exe /tmp/brasfoot-extracted/bf22-23.exe
+          echo 'READ-ONLY evidence only; league assignment and career gameplay are NOT validated'
       - name: Record installed official Java class source fingerprints
         run: |
           python - <<'PY'
