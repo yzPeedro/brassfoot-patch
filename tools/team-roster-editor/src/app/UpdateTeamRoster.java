@@ -166,8 +166,7 @@ public final class UpdateTeamRoster {
         // Derive a stable, source-hash-scoped namespace for synthetic player IDs
         // rather than reusing 0 across different clubs. This is NOT proof that
         // the game's league selector knows which division the club belongs to.
-        int namespace = team.id > 0 ? team.id :
-            (int) (Long.parseLong(sha256(original).substring(0, 7), 16) % 1_000_000);
+        int namespace = (int) (Long.parseLong(sha256(original).substring(0, 7), 16) % 1_000_000);
         Report report = update(team, loadPlayers(roster), lab, namespace);
         byte[] result = serialize(team);
         if (loadTeam(result).l.size() != report.total()) throw new IOException("Serialized roster invalid");
