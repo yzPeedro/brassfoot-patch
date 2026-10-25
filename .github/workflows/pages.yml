@@ -1,0 +1,69 @@
+name: Publish verified site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: brassfoot-pages
+  cancel-in-progress: false
+
+jobs:
+  readiness:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+    outputs:
+      enabled: ${{ steps.pages.outputs.enabled }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate public site and release gate
+        run: node site/tests/site.test.js
+      - name: Detect Pages configuration without assuming enablement
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          status=$(curl --silent --show-error --location --output /tmp/pages-response.json --write-out '%{http_code}' \
+            --header 'Accept: application/vnd.github+json' \
+            --header "Authorization: Bearer $GH_TOKEN" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/pages")
+          if [ "$status" = '200' ] && [ "$(jq -r '.build_type // empty' /tmp/pages-response.json)" = 'workflow' ]; then
+            echo 'enabled=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'enabled=false' >> "$GITHUB_OUTPUT"
+            echo '::notice::GitHub Pages is not configured with GitHub Actions as its source. Deployment skipped; no website URL claimed.'
+          fi
+
+  publish:
+    needs: readiness
+    if: needs.readiness.outputs.enabled == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+      - name: Deploy public site
+        uses: actions/deploy-pages@v4
+        id: deployment
