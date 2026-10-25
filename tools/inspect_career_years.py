@@ -32,7 +32,8 @@ def sha256(path: Path) -> str:
 
 
 def inspect_jar(path: Path) -> dict:
-    report = {"readableZip": False, "candidateClasses": [], "classFilesExamined": 0, "warning": None}
+    report = {"readableZip": False, "candidateClasses": [], "selectorCandidates": [],
+              "classFilesExamined": 0, "warning": None}
     if path.stat().st_size > MAX_ARCHIVE_SIZE:
         report["warning"] = "Archive too large: metadata only"
         return report
@@ -42,14 +43,24 @@ def inspect_jar(path: Path) -> dict:
     with zipfile.ZipFile(path) as z:
         report["readableZip"] = True
         entries = [item for item in z.infolist() if item.filename.endswith(".class")]
+        filenames = [item.filename for item in entries]
+        if len(filenames) != len(set(filenames)):
+            report["warning"] = "Duplicate Java class paths; version identification refused"
+            return report
         if len(entries) > MAX_CLASS_COUNT:
             report["warning"] = "Too many class entries; scanning aborted"
             return report
         # Exact Java classes discovered in the unmodified official 22-23 executable.
         # Fingerprints are version evidence, not a license to patch unknown binaries.
         report["yearSelector"] = None
-        if "a/hU.class" in z.namelist():
-            selector = z.read("a/hU.class")
+        if "a/hU.class" in filenames:
+            info = z.getinfo("a/hU.class")
+            if (info.file_size <= MAX_CLASS_SIZE and info.compress_size > 0
+                    and info.file_size <= 100 * info.compress_size):
+                selector = z.read(info)
+            else:
+                selector = b""
+                report["warning"] = "Known selector candidate exceeds safe decompression limits"
             if selector.startswith(MAGIC_CLASS):
                 report["yearSelector"] = {
                     "classPath": "a/hU.class",
@@ -73,6 +84,30 @@ def inspect_jar(path: Path) -> dict:
             if not data.startswith(MAGIC_CLASS):
                 continue
             report["classFilesExamined"] += 1
+            # Obfuscated class names may change between the official 2022/2023
+            # release and the user's distinct 2023/2024 build. Report only
+            # fingerprints and observable strings, never the proprietary bytes.
+            if b"anoinicio" in data and b"javax/swing/JComboBox" in data:
+                pairs = [
+                    [year, year + 1]
+                    for year in (2022, 2023)
+                    if str(year).encode("ascii") in data
+                    and str(year + 1).encode("ascii") in data
+                ]
+                if pairs and len(report["selectorCandidates"]) < 30:
+                    report["selectorCandidates"].append({
+                        "classPath": entry.filename,
+                        "bytes": len(data),
+                        "sha256": hashlib.sha256(data).hexdigest(),
+                        "possibleYearPairs": pairs,
+                        "isKnownOfficialSelector": (
+                            entry.filename == "a/hU.class"
+                            and hashlib.sha256(data).hexdigest()
+                            == "37fb17d876aab1263756bca97c3f9488007b7afe59f8c68494cf711a0f61a234"
+                        ),
+                        "verifiedAsActualCareerSelector": False,
+                        "originalBytesCopied": False,
+                    })
             counts = {kind: data.count(needle) for kind, needle in MATCHES.items() if needle in data}
             if counts and len(report["candidateClasses"]) < 100:
                 report["candidateClasses"].append({"class": entry.filename, "occurrences": counts})
