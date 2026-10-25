@@ -19,3 +19,33 @@
 .installer-note strong {color:#c5ff69;}
 @media(max-width:980px){.installer-status-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media(max-width:580px){.installer-status-grid{grid-template-columns:1fr;}.installer-status-grid article{padding:20px;}}
+
+/* Verified 2026 CBF catalogue. Informational only; not a claim of game support. */
+.clubs-2026{background:#091f19;color:#eff9ee;border-top:1px solid #335542}
+.clubs-2026 .section-head p{color:#a8c7ae}
+.clubs-2026 .section h2,.clubs-2026 h2{color:#f2fff0}
+.clubs-2026 .section-label{color:#c5ff69}
+.division-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:10px 0 44px}
+.division-cards article{border:1px solid #3f694d;background:linear-gradient(130deg,#153727,#102d22);border-radius:8px;padding:26px;display:flex;flex-direction:column;gap:9px}
+.division-cards article span{letter-spacing:.13em;font-size:12px;font-weight:800;color:#c5ff69}
+.division-cards article strong{font:900 62px/1 'Barlow Condensed',sans-serif;color:#fff}
+.division-cards article small{font-size:11px;color:#b2c9b9}
+.club-explorer{background:#102a20;border:1px solid #3f694d;border-radius:10px;padding:30px}
+.club-explorer-head{display:flex;align-items:end;justify-content:space-between;gap:32px;padding-bottom:22px;border-bottom:1px solid #325040}
+.club-explorer h3{font:800 35px 'Barlow Condensed',sans-serif;text-transform:uppercase;margin:0 0 6px}
+.club-explorer-head p{font-size:12px;margin:0;color:#b2c9b9}
+.club-filters{display:flex;align-items:end;gap:14px;flex-wrap:wrap}
+.club-filters label{display:flex;flex-direction:column;gap:8px;color:#c5ff69;font-size:10px;font-weight:800;letter-spacing:.07em}
+.club-filters input,.club-filters select{font:500 13px 'DM Sans',sans-serif;min-height:44px;background:#071b15;color:#edf8ee;border:1px solid #548262;border-radius:5px;padding:9px 12px;min-width:185px}
+.club-filters :is(input,select):focus-visible{outline:2px solid #c5ff69;outline-offset:2px}
+.club-filters :is(input,select):disabled{opacity:.5}
+.clubs-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:21px;max-height:610px;overflow:auto;overscroll-behavior:contain}
+.club-entry{background:#163729;border:1px solid #355d43;padding:15px;min-width:0;display:flex;flex-direction:column;gap:6px;border-radius:6px}
+.club-entry strong{font-size:13px;color:#f3fff2;overflow-wrap:anywhere}
+.club-entry span{font-size:11px;color:#c5ff69}
+.club-entry small{font-size:10px;color:#b4ccba;line-height:1.55}
+.clubs-disclaimer{font-size:12px;line-height:1.8;color:#a7c5ae;margin:25px 0 0}
+.clubs-disclaimer a{color:#c5ff69;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:1050px){.clubs-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:760px){.division-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.club-explorer-head{display:block}.club-filters{margin-top:24px}.club-filters label{flex:1 1 180px}.club-filters input,.club-filters select{width:100%;min-width:0}.clubs-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.club-explorer{padding:19px}}
+@media(max-width:430px){.division-cards article{padding:17px}.division-cards article strong{font-size:48px}.clubs-grid{grid-template-columns:1fr}}
