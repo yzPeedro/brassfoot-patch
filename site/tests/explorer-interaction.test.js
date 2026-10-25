@@ -207,6 +207,8 @@ const tick=()=>new Promise(resolve=>setImmediate(resolve));
   assert.ok(get('club-dialog-players').children.some(x=>x.textContent==='Marcelo Hermes'));
   get('club-dialog').close();
   get('clubs-search').value='';
+  get('clubs-division').value='';
+  get('clubs-division').dispatch('change');
   get('clubs-roster-filter').value='researched';
   get('clubs-roster-filter').dispatch('change');
   assert.equal(get('clubs-count').textContent.includes('16 clubes encontrados'),true);
