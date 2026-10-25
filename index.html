@@ -11,6 +11,7 @@
     <link rel="icon" type="image/svg+xml" href="./assets/mark.svg" />
     <link rel="stylesheet" href="./styles.css" />
     <script src="./app.js" defer></script>
+    <script src="./divisions.js" defer></script>
   </head>
   <body>
     <a href="#main" class="skip">Pular para conteúdo</a>
@@ -24,6 +25,7 @@
         </a>
         <nav class="nav" id="nav" aria-label="Navegação principal">
           <a href="#recursos">Recursos</a>
+          <a href="#clubes-2026">Clubes 2026</a>
           <a href="#como-funciona">Como funciona</a>
           <a href="#instalador">Instalador</a>
           <a href="#versao">Versão</a>
@@ -71,6 +73,36 @@
           <div><strong>2026</strong><span>TEMPORADA-ALVO</span></div>
           <div><strong>PC</strong><span>BRASFOOT 22–23 WINDOWS</span></div>
           <div><strong>01</strong><span>PROJETO. INFINITAS PARTIDAS.</span></div>
+        </div>
+      </section>
+      <section class="clubs-2026 section" id="clubes-2026" aria-labelledby="clubs-title">
+        <div class="wrap">
+          <div class="section-label light">02 <span></span> CATÁLOGO OFICIAL · 2026</div>
+          <div class="section-head">
+            <h2 id="clubs-title">O Brasil inteiro.<br/><em>156 clubes em campo.</em></h2>
+            <p>Participantes das Séries A, B, C e D confirmados pela CBF. Este é um catálogo informativo; a release v2026.0.2 instala elencos experimentais apenas dos 20 clubes da Série A.</p>
+          </div>
+          <div class="division-cards" aria-label="Participantes por divisão">
+            <article><span>SÉRIE A</span><strong data-division-count="A">—</strong><small>Participantes oficiais · 2026</small></article>
+            <article><span>SÉRIE B</span><strong data-division-count="B">—</strong><small>Participantes oficiais · 2026</small></article>
+            <article><span>SÉRIE C</span><strong data-division-count="C">—</strong><small>Participantes oficiais · 2026</small></article>
+            <article><span>SÉRIE D</span><strong data-division-count="D">—</strong><small>Participantes oficiais · 2026</small></article>
+          </div>
+          <div class="club-explorer">
+            <div class="club-explorer-head">
+              <div><h3>Explorar clubes</h3><p id="clubs-count" aria-live="polite">Carregando catálogo oficial...</p></div>
+              <div class="club-filters">
+                <label for="clubs-division">DIVISÃO
+                  <select id="clubs-division" disabled><option value="">Todas as séries</option><option value="A">Série A</option><option value="B">Série B</option><option value="C">Série C</option><option value="D">Série D</option></select>
+                </label>
+                <label for="clubs-search">BUSCAR CLUBE OU UF
+                  <input id="clubs-search" type="search" autocomplete="off" placeholder="Ex.: Botafogo, MG, Cruzeiro" disabled />
+                </label>
+              </div>
+            </div>
+            <div class="clubs-grid" id="clubs-grid" aria-label="Clubes pesquisados"></div>
+          </div>
+          <p class="clubs-disclaimer">ESCUDOS E UNIFORMES: aguardando auditoria técnica, verificação de temporada e direitos de distribuição. O catálogo não garante que as quatro divisões sejam jogáveis na versão instalada. <a href="https://www.cbf.com.br/" target="_blank" rel="noopener noreferrer">Fontes: CBF ↗</a></p>
         </div>
       </section>
       <section class="features section" id="recursos">
