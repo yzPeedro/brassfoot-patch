@@ -1,82 +1,50 @@
 (() => {
   'use strict';
-
-  const root = document.getElementById('clubes-2026');
-  const body = document.getElementById('clubs-grid');
-  const filter = document.getElementById('clubs-division');
+  const grid = document.getElementById('clubs-grid');
+  const division = document.getElementById('clubs-division');
   const search = document.getElementById('clubs-search');
   const summary = document.getElementById('clubs-count');
-  if (!root || !body || !filter || !search || !summary) return;
-
-  const counters = [...document.querySelectorAll('[data-division-count]')];
-  const normalized = value => String(value || '').normalize('NFD')
+  if (!grid || !division || !search || !summary) return;
+  const normalized = value => String(value ?? '').normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('pt-BR').trim();
-  const statusLabel = status => ({
-    'experimental-2026': 'Elenco 2026 experimental',
-    'historical-2022-23': 'Plantel histórico 2022–23',
-    'fictional-placeholder': 'Atletas fictícios'
-  })[status] || 'Sem informação';
-
-  let clubs = [];
-
-  function render() {
-    const div = filter.value;
-    const query = normalized(search.value);
-    const found = clubs.filter(c =>
-      (!div || div === c.division) &&
-      (!query || normalized([c.name, c.state, c.division, c.group || ''].join(' ')).includes(query))
-    );
-
+  let entries = [];
+  const description = {A:'Prévia experimental disponível',B:'Elenco 2026 aguardando validação',C:'Elenco 2026 aguardando validação'};
+  function draw() {
+    const term = normalized(search.value), selected = division.value;
+    const visible = entries.filter(c => (!selected || selected === c.division) &&
+      (!term || normalized([c.name,c.state,'serie '+c.division].join(' ')).includes(term)));
     const fragment = document.createDocumentFragment();
-    for (const c of found) {
+    for (const club of visible) {
       const row = document.createElement('tr');
-      const name = document.createElement('td');
-      name.className = 'club-name';
-      name.textContent = c.name;
-      const state = document.createElement('td');
-      state.textContent = c.state;
-      const division = document.createElement('td');
-      division.textContent = 'Série ' + c.division;
-      const group = document.createElement('td');
-      group.textContent = c.group || '—';
-      const status = document.createElement('td');
-      const badge = document.createElement('span');
-      badge.className = 'roster-status roster-' + c.rosterStatus;
-      badge.textContent = statusLabel(c.rosterStatus);
-      status.append(badge);
-      row.append(name, state, division, group, status);
-      fragment.append(row);
+      for (const [value,css] of [[club.name,'club-name'],[club.state,''],['Série '+club.division,''],
+                                 [description[club.division],'']]) {
+        const td = document.createElement('td');
+        td.textContent = value; if(css)td.className=css;
+        row.appendChild(td);
+      }
+      fragment.appendChild(row);
     }
-    body.replaceChildren(fragment);
-    summary.textContent = found.length + ' de 80 clubes' +
-      (div ? ' na Série ' + div : '') +
-      (query ? ' encontrados' : ' na edição 2026.1.1');
+    grid.replaceChildren(fragment);
+    summary.textContent = visible.length + ' de 60 clubes' +
+      (term ? ' correspondentes à pesquisa' : ' previstos nas Séries A, B e C');
   }
-
-  fetch('./data/release-clubs-80.json', {cache: 'no-store'})
-    .then(r => {if (!r.ok) throw new Error('HTTP ' + r.status); return r.json();})
-    .then(payload => {
-      const counts = {A:20, B:20, C:20, D:20};
-      if (payload.schemaVersion !== 1 || payload.releaseVersion !== '2026.1.1' ||
-          !Array.isArray(payload.clubs) || payload.clubs.length !== 80 ||
-          new Set(payload.clubs.map(x => x.id)).size !== 80 ||
-          Object.keys(counts).some(d =>
-            payload.divisionCounts?.[d] !== 20 ||
-            payload.clubs.filter(x => x.division === d).length !== 20)) {
-        throw new Error('Invalid division catalog');
+  fetch('./data/target-abc-2026.json',{cache:'no-store'})
+    .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+    .then(data=>{
+      const expected={A:20,B:20,C:20};
+      if(data.schemaVersion!==1||data.targetClubs!==60||!Array.isArray(data.clubs)||
+        data.clubs.length!==60||data.serieD?.policy!=='untouched'||
+        new Set(data.clubs.map(c=>c.id)).size!==60||
+        Object.entries(expected).some(([d,n])=>data.clubs.filter(c=>c.division===d).length!==n))
+        throw new Error('Invalid catalogue');
+      entries=data.clubs;
+      for(const x of document.querySelectorAll('[data-division-count]')) {
+        x.textContent=String(expected[x.dataset.divisionCount]??'—');
       }
-      clubs = payload.clubs;
-      for (const counter of counters) {
-        counter.textContent = String(payload.divisionCounts[counter.dataset.divisionCount] ?? '—');
-      }
-      search.disabled = false;
-      filter.disabled = false;
-      search.addEventListener('input', render);
-      filter.addEventListener('change', render);
-      render();
+      division.disabled=false;search.disabled=false;
+      division.addEventListener('change',draw);
+      search.addEventListener('input',draw);
+      draw();
     })
-    .catch(() => {
-      summary.textContent = 'Não foi possível carregar a lista de clubes. Recarregue a página.';
-      body.replaceChildren();
-    });
+    .catch(()=>{summary.textContent='Não foi possível carregar os clubes. Atualize a página.';grid.replaceChildren();});
 })();
