@@ -110,8 +110,17 @@ func prepareBundledPayload(gamePath, staged string) error {
 // to inject a synthetic release without changing production embedded assets.
 func preparePayloadWithFS(fsys fs.FS, gamePath, staged string) error {
 	game, _, err := validGame(gamePath)
-	if err != nil {
-		return err
+	if err != nil { return err }
+	// The old 156-club alpha left 46 synthetic club files. An 80-club
+	// edition must never silently leave those extra clubs installed.
+	entries, err := os.ReadDir(filepath.Join(game, "teams"))
+	if err != nil { return err }
+	for _, entry := range entries {
+		n := strings.ToLower(entry.Name())
+		if strings.HasPrefix(n, "xp26_") && strings.HasSuffix(n, ".ban") &&
+			n != "xp26_maranhao_ma.ban" {
+			return fmt.Errorf("clubes extras da versão anterior detectados (%s); use Desfazer no instalador antigo e depois aplique a edição de 80 clubes",entry.Name())
+		}
 	}
 	body, err := fs.ReadFile(fsys, "bundled_release/manifest.json")
 	if err != nil {
@@ -182,8 +191,12 @@ func preparePayloadWithFS(fsys fs.FS, gamePath, staged string) error {
 			}
 			name := filepath.Base(f.Path)
 			if strings.ContainsAny(name, "/\\") { return fmt.Errorf("nome de equipe inválido") }
-			data,e := fs.ReadFile(fsys,"bundled_release/patches/"+name+".json")
-			if e != nil { return fmt.Errorf("instruções de %s ausentes: %w",f.Path,e) }
+			recipeName := name + ".json"
+			if f.Path == nationalConfigPath && current != "76b7af89b81859ed8ee29f78de34ced3c48636ec0a27554c29d8d0da55bc2834" {
+				recipeName = name + "." + current + ".json"
+			}
+			data,e := fs.ReadFile(fsys,"bundled_release/patches/"+recipeName)
+			if e != nil { return fmt.Errorf("instruções de %s ausentes para o hash original: %w",f.Path,e) }
 			output,e = applyRecipe(original,data,f)
 			if e != nil { return e }
 		}
