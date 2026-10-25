@@ -17,11 +17,9 @@ MAX_CLASS_SIZE = 3 * 1024 * 1024
 MAX_CLASS_COUNT = 20000
 MAGIC_CLASS = b"\xca\xfe\xba\xbe"
 MATCHES = {
-    "ascii_2023": b"2023", "ascii_2024": b"2024",
-    "u16_2023": (2023).to_bytes(2, "big"),
-    "u16_2024": (2024).to_bytes(2, "big"),
-    "int32_2023": (2023).to_bytes(4, "big"),
-    "int32_2024": (2024).to_bytes(4, "big"),
+    **{f"ascii_{year}": str(year).encode("ascii") for year in (2022, 2023, 2024, 2026)},
+    **{f"u16_{year}": year.to_bytes(2, "big") for year in (2022, 2023, 2024, 2026)},
+    **{f"int32_{year}": year.to_bytes(4, "big") for year in (2022, 2023, 2024, 2026)},
 }
 
 
@@ -47,6 +45,25 @@ def inspect_jar(path: Path) -> dict:
         if len(entries) > MAX_CLASS_COUNT:
             report["warning"] = "Too many class entries; scanning aborted"
             return report
+        # Exact Java classes discovered in the unmodified official 22-23 executable.
+        # Fingerprints are version evidence, not a license to patch unknown binaries.
+        report["yearSelector"] = None
+        if "a/hU.class" in z.namelist():
+            selector = z.read("a/hU.class")
+            if selector.startswith(MAGIC_CLASS):
+                report["yearSelector"] = {
+                    "classPath": "a/hU.class",
+                    "bytes": len(selector),
+                    "sha256": hashlib.sha256(selector).hexdigest(),
+                    "matchesOriginalOfficial": hashlib.sha256(selector).hexdigest() ==
+                        "37fb17d876aab1263756bca97c3f9488007b7afe59f8c68494cf711a0f61a234",
+                    "containsStartupYearPreference": b"anoinicio" in selector,
+                    "containsJComboBox": b"javax/swing/JComboBox" in selector,
+                    "stringYearCounts": {str(year): selector.count(str(year).encode("ascii"))
+                                         for year in (2022, 2023, 2024, 2026)},
+                    "originalBytesCopied": False,
+                    "gameBehaviorValidated": False,
+                }
         for entry in entries:
             if (entry.file_size > MAX_CLASS_SIZE or
                     entry.compress_size == 0 or
