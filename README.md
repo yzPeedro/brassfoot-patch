@@ -39,3 +39,8 @@ Para investigar os vínculos com os 136 clubes restantes, existe um coletor **pr
 ### Estrutura das competições (nova descoberta)
 
 A análise dos **27 arquivos privados `.cfg`/`.ces`** fornecidos em 25/10/2026 comprovou que `BRA.cfg` registra quatro divisões nacionais A/B/C/D, com 20/20/20/64 clubes e oito grupos na Série D original. Foi implementado o codec Java em [`tools/competition-codec/`](tools/competition-codec/README.md), com round-trip exato 27/27 e um laboratório que produz, fora da instalação, uma configuração de 96 clubes/16 grupos. **A estrutura serializada permite representar os valores, mas a jogabilidade real da Série D com 96 não foi testada.** A expansão de jogadores/clubes e o instalador v2026.0.2 não mudaram nesta análise.
+
+
+### Site publicado e cobertura real — 25/10/2026
+
+O painel de cobertura do [site público](https://yzpeedro.github.io/brassfoot-patch/) distingue **156 clubes oficiais catalogados**, **103 correspondências de arquivo resolvidas**, **7 ainda candidatas**, **46 sem arquivo na instalação auditada** e **20 elencos experimentais disponíveis na v2026.0.2**. Não anuncia Série D 96/16 como jogável. O download público da v2026.0.2 continua igual e usa verificação SHA-256/asset via GitHub API, com link alternativo para a release. [Evidência de publicação e testes](docs/site-publication-2026-10-25.md).
