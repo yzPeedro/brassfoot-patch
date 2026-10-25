@@ -1,0 +1,97 @@
+name: Unified release readiness gate
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tests/**'
+      - 'tools/**'
+      - 'windows-installer/**'
+      - 'site/**'
+      - 'scripts/**'
+      - '.github/workflows/unified-release-gate.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Compile Python sources
+        run: python -m compileall -q tools scripts tests
+      - name: All offline Python regressions
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
+      - name: 2026 B/C source evidence audit (must not claim ready)
+        run: |
+          python tools/audit_roster_readiness.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from tools.audit_roster_readiness import audit
+          catalog=json.loads(Path('site/data/target-abc-2026.json').read_text())
+          researched=json.loads(Path('site/data/researched-rosters-2026.json').read_text())
+          report=audit(catalog,researched)
+          assert report['summary']['clubs']==40
+          assert report['summary']['releaseReadyClubs']==0
+          assert report['releaseAuthorized'] is False
+          assert report['summary']['serieDReviewedOrChanged'] is False
+          print('PASS: unfinished B/C patch cannot be certified as complete')
+          PY
+  go:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: windows-installer
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: windows-installer/go.mod
+          cache-dependency-path: windows-installer/go.sum
+          cache: false
+      - name: Verify GUI installer engine and restore safety
+        run: go test -race -count=1 ./...
+      - name: Vet code
+        run: go vet ./...
+      - name: Windows cross-build (not GUI gameplay validation)
+        env:
+          GOOS: windows
+          GOARCH: amd64
+          CGO_ENABLED: '0'
+        run: |
+          mkdir -p /tmp/brassfoot-build
+          go build -o /tmp/brassfoot-build/Brassfoot-2026-preflight.exe .
+          sha256sum /tmp/brassfoot-build/Brassfoot-2026-preflight.exe
+          echo 'Windows cross-build only; no user-game validation'
+  java:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile original-data-compatible editor
+        run: |
+          mkdir -p /tmp/roster-editor
+          javac -encoding UTF-8 -d /tmp/roster-editor \
+            tools/team-roster-editor/src/e/*.java \
+            tools/team-roster-editor/src/app/*.java
+      - name: Synthetic Java team serialization and safety
+        run: java -cp /tmp/roster-editor app.RosterEditorSelfTest
+      - name: Java 2026 selector synthetic proof
+        run: python -m unittest discover -s tests -p 'test_patch_official_career_year.py' -v
+  site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Static release/website integrity
+        run: node site/tests/site.test.js
+      - name: Table sort/group pagination and modal interactions
+        run: node site/tests/explorer-interaction.test.js
