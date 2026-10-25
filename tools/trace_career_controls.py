@@ -24,15 +24,17 @@ COMBO_CALL = re.compile(r'Method javax/swing/JComboBox\.([\w$]+):')
 ENGINE_CALL = re.compile(r'Method best/f\.([\w$]+):')
 
 
-def trace(archive: Path) -> dict:
+def trace(archive: Path, class_path: str = CLASS_PATH) -> dict:
+    if class_path not in ('a/hU.class', 'a/bV.class', 'a/cw.class', 'a/fB.class'):
+        raise ValueError('Not an approved read-only class for career analysis')
     archive = archive.resolve(strict=True)
     if archive.stat().st_size > MAX_ARCHIVE_BYTES or not zipfile.is_zipfile(archive):
         raise ValueError('Expected a normal game exe containing a ZIP/JAR')
     with zipfile.ZipFile(archive) as z:
         entries = z.infolist()
-        if sum(x.filename == CLASS_PATH for x in entries) != 1:
+        if sum(x.filename == class_path for x in entries) != 1:
             raise ValueError('Career dialog class missing or duplicated')
-        entry = z.getinfo(CLASS_PATH)
+        entry = z.getinfo(class_path)
         if (entry.file_size > MAX_CLASS_BYTES or entry.compress_size == 0
                 or entry.file_size > 100 * entry.compress_size):
             raise ValueError('Unsafe Java class size/compression ratio')
@@ -40,7 +42,7 @@ def trace(archive: Path) -> dict:
     if not cls.startswith(b'\xca\xfe\xba\xbe'):
         raise ValueError('Not a JVM class file')
     with tempfile.TemporaryDirectory(prefix='brasfoot-structure-only-') as temp:
-        target = Path(temp) / CLASS_PATH
+        target = Path(temp) / class_path
         target.parent.mkdir(parents=True)
         target.write_bytes(cls)
         command = subprocess.run(['javap', '-p', '-c', str(target)], capture_output=True,
@@ -87,7 +89,7 @@ def trace(archive: Path) -> dict:
         for key in ('comboFields', 'comboActions', 'engineCalls'):
             m[key] = dict(m[key])
     return {
-        'schemaVersion': 1, 'class': CLASS_PATH, 'sha256': hashlib.sha256(cls).hexdigest(),
+        'schemaVersion': 1, 'class': class_path, 'sha256': hashlib.sha256(cls).hexdigest(),
         'readOnly': True, 'gameplayConfirmed': False, 'divisionMappingConfirmed': False,
         'comboFieldNames': all_fields, 'methodsWithComboReferences': useful,
     }
@@ -96,8 +98,9 @@ def trace(archive: Path) -> dict:
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--game-exe', required=True, type=Path)
+    parser.add_argument('--class-path', choices=['a/hU.class','a/bV.class','a/cw.class','a/fB.class'], default=CLASS_PATH)
     args = parser.parse_args()
-    print(json.dumps(trace(args.game_exe), ensure_ascii=False, indent=2))
+    print(json.dumps(trace(args.game_exe, args.class_path), ensure_ascii=False, indent=2))
 
 
 if __name__ == '__main__':
