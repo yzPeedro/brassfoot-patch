@@ -113,7 +113,9 @@
                   <select id="clubs-roster-filter" disabled>
                     <option value="">Todos os elencos</option>
                     <option value="published">Com jogadores no patch</option>
-                    <option value="pending">Aguardando elencos atualizados</option>
+                    <option value="pending">Não instalado no patch (B/C)</option>
+                    <option value="researched">Elenco pesquisado na internet</option>
+                    <option value="missing">Sem pesquisa de elenco suficiente</option>
                   </select>
                 </label>
                 <label for="clubs-group-by">AGRUPAR POR
@@ -173,6 +175,7 @@
         <div class="club-dialog-roster">
           <h4 id="club-dialog-roster-title">Jogadores do patch</h4>
           <p id="club-dialog-notice"></p>
+          <p class="club-research-source" id="club-dialog-source-box" hidden><strong>Fonte consultada:</strong> <a id="club-dialog-source" target="_blank" rel="noopener noreferrer"></a> <span id="club-dialog-reviewed"></span></p>
           <ol id="club-dialog-players" class="club-dialog-player-list"></ol>
         </div>
       </dialog>
