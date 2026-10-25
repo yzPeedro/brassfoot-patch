@@ -3,6 +3,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
+from unittest.mock import patch
 
 from quota_guard import HARD_LIMIT, RESERVED, TARGET_LIMIT, QuotaExceeded, QuotaLedger
 
@@ -47,6 +48,20 @@ class PersistentQuotaTests(unittest.TestCase):
             self.assertEqual(quota.snapshot("abc", day="2026-10-25")["providerRemainingLastObserved"], 5)
             with self.assertRaises(QuotaExceeded):
                 quota.reserve("abc", day="2026-10-25")
+
+    def test_no_utc_midnight_burst_even_when_day_counter_resets(self):
+        # Conservative rolling 24h budget prevents 90 requests at 23:59
+        # followed by another 90 at 00:01 without any provider reset proof.
+        with TemporaryDirectory() as directory:
+            quota = QuotaLedger(Path(directory) / "rolling.sqlite3", max_calls=3)
+            with patch("quota_guard.time.time", return_value=1792972799):
+                for _ in range(3):
+                    quota.reserve("same-api-key")
+            with patch("quota_guard.time.time", return_value=1792972801):
+                with self.assertRaises(QuotaExceeded):
+                    quota.reserve("same-api-key")
+            with patch("quota_guard.time.time", return_value=1793059200):
+                quota.reserve("same-api-key")
 
     def test_90_plus_10_never_exceeds_100(self):
         self.assertEqual(HARD_LIMIT, 100)
