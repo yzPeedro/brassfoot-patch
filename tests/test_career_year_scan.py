@@ -64,7 +64,7 @@ class CareerYearTests(unittest.TestCase):
         with TemporaryDirectory() as temp:
             archive = Path(temp) / "bf22-23.exe"
             fake_class = (
-                b"\\xca\\xfe\\xba\\xbe"
+                b"\xca\xfe\xba\xbe"
                 + b"obfuscated/SeasonPanel javax/swing/JComboBox anoinicio 2023 2024"
             )
             with ZipFile(archive, "w") as z:
@@ -85,7 +85,7 @@ class CareerYearTests(unittest.TestCase):
         with TemporaryDirectory() as temp:
             archive = Path(temp) / "bf22-23.exe"
             with ZipFile(archive, "w") as z:
-                z.writestr("a/hU.class", b"\\xca\\xfe\\xba\\xbe" + b"X" * (3 * 1024 * 1024 + 1))
+                z.writestr("a/hU.class", b"\xca\xfe\xba\xbe" + b"X" * (3 * 1024 * 1024 + 1))
             scanned = inspect_jar(archive)
             self.assertIsNone(scanned["yearSelector"])
             self.assertEqual(scanned["selectorCandidates"], [])
