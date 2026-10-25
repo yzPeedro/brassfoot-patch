@@ -20,6 +20,7 @@ class Node {
     this.open=false;
   }
   setAttribute(name,value){this.attributes[name]=String(value);}
+  querySelector(selector){return selector==='.sort-indicator' ? this.indicator || null : null;}
   appendChild(node){
     if(node.tag==='fragment') for(const child of node.children)this.appendChild(child);
     else {node.parent=this;this.children.push(node);}
@@ -46,13 +47,20 @@ class Node {
 
 const ids=[
   'clubs-grid','clubs-division','clubs-search','clubs-roster-filter','clubs-count',
-  'clubs-page-size','clubs-previous','clubs-next','clubs-page-label','club-dialog',
+  'clubs-page-size','clubs-previous','clubs-next','clubs-page-label','clubs-group-by',
+  'clubs-sort-name','clubs-sort-state','clubs-sort-division','clubs-sort-roster',
+  'clubs-heading-name','clubs-heading-state','clubs-heading-division','clubs-heading-roster','club-dialog',
   'club-dialog-close','club-dialog-title','club-dialog-division',
   'club-dialog-description','club-dialog-state','club-dialog-roster-status',
   'club-dialog-player-count','club-dialog-roster-title','club-dialog-notice','club-dialog-players'
 ];
 const nodes=Object.fromEntries(ids.map(id=>[id,new Node()]));
 nodes['clubs-page-size'].value='10';
+nodes['clubs-group-by'].value='none';
+for(const key of ['name','state','division','roster']){
+  nodes['clubs-sort-'+key].dataset.sort=key;
+  nodes['clubs-sort-'+key].indicator=new Node('span');
+}
 const counters=['A','B','C'].map(d=>{
   const element=new Node('strong');
   element.dataset.divisionCount=d;
@@ -132,8 +140,59 @@ const tick=()=>new Promise(resolve=>setImmediate(resolve));
   get('clubs-search').dispatch('input');
   assert.equal(get('clubs-grid').children.length,1);
 
+  // Sorting and grouping must operate on all filtered rows before pagination.
+  get('clubs-search').value='';
+  get('clubs-division').value='';
+  get('clubs-roster-filter').value='';
+  get('clubs-page-size').value='10';
+  get('clubs-page-size').dispatch('change');
+  get('clubs-sort-state').dispatch('click');
+  assert.equal(get('clubs-heading-state').attributes['aria-sort'],'ascending');
+  assert.equal(get('clubs-heading-name').attributes['aria-sort'],'none');
+  let visible = get('clubs-grid').children.filter(x=>x.dataset.clubId);
+  let states=visible.map(x=>x.children[1].textContent);
+  assert.deepEqual(states,[...states].sort((a,b)=>a.localeCompare(b,'pt-BR')));
+  get('clubs-sort-state').dispatch('click');
+  assert.equal(get('clubs-heading-state').attributes['aria-sort'],'descending');
+  visible=get('clubs-grid').children.filter(x=>x.dataset.clubId);
+  states=visible.map(x=>x.children[1].textContent);
+  assert.deepEqual(states,[...states].sort((a,b)=>b.localeCompare(a,'pt-BR')));
+
+  get('clubs-group-by').value='division';
+  get('clubs-group-by').dispatch('change');
+  assert.match(get('clubs-page-label').textContent,/Página 1/);
+  assert.equal(get('clubs-grid').children[0].className,'clubs-group-header');
+  assert.match(get('clubs-grid').children[0].children[0].textContent,/Série A · 20 clube/);
+  assert.equal(get('clubs-grid').children.filter(x=>x.dataset.clubId).length,10);
+  get('clubs-group-by').value='state';
+  get('clubs-group-by').dispatch('change');
+  assert.ok(get('clubs-grid').children.some(x=>x.className==='clubs-group-header'));
+  get('clubs-group-by').value='roster';
+  get('clubs-group-by').dispatch('change');
+  assert.ok(get('clubs-grid').children[0].children[0].textContent.includes('clube(s) no filtro'));
+  get('clubs-group-by').value='name';
+  get('clubs-group-by').dispatch('change');
+  assert.ok(get('clubs-grid').children[0].className==='clubs-group-header');
+  get('clubs-group-by').value='none';
+  get('clubs-group-by').dispatch('change');
+  assert.equal(get('clubs-grid').children.filter(x=>x.className==='clubs-group-header').length,0);
+  for(const sort of ['name','division','roster']){
+    get('clubs-sort-'+sort).dispatch('click');
+    assert.equal(get('clubs-heading-'+sort).attributes['aria-sort'],'ascending');
+    get('clubs-sort-'+sort).dispatch('click');
+    assert.equal(get('clubs-heading-'+sort).attributes['aria-sort'],'descending');
+  }
+  // Filter + grouping + pagination intersect correctly without leaking Serie D.
+  get('clubs-group-by').value='state';
+  get('clubs-division').value='B';
+  get('clubs-search').value='MG';
+  get('clubs-search').dispatch('input');
+  assert.equal(get('clubs-grid').children.filter(x=>x.dataset.clubId).length,2);
+  assert.equal(get('clubs-grid').children[0].className,'clubs-group-header');
+  assert.match(get('clubs-count').textContent,/2 clubes encontrados/);
+
   assert.equal(counters[0].textContent,'20');
   assert.equal(counters[1].textContent,'20');
   assert.equal(counters[2].textContent,'20');
-  console.log('PASS: real table pagination, pagination reset, filters, accents, roster modal 36 names, missing B/C and focus restore.');
+  console.log('PASS: real table 4-column sorting asc/desc, all-column grouping, pagination, filters, accents, roster modal and focus restore.');
 })().catch(e=>{console.error(e);process.exitCode=1;});
