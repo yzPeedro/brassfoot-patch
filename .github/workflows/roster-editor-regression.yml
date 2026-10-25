@@ -55,6 +55,9 @@ jobs:
               ('atletico-goianiense-2026-official.tsv', [5,8,5,10,11]),
               ('crb-2026-official.tsv', [4,5,5,6,8]),
               ('america-2026-contracts-o-tempo.tsv', [5,6,5,9,7]),
+              ('novorizontino-2026-portal.tsv', [5,4,6,10,10]),
+              ('botafogo-sp-2026-portal.tsv', [3,6,6,8,9]),
+              ('athletic-2026-portal.tsv', [3,0,10,12,9]),
           ):
               source=Path('tools/team-roster-editor/sources')/filename
               rows=[line.split('\t') for line in source.read_text(encoding='utf-8').splitlines() if line and not line.startswith('#')]
