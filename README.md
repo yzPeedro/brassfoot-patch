@@ -44,3 +44,20 @@ A análise dos **27 arquivos privados `.cfg`/`.ces`** fornecidos em 25/10/2026 c
 ### Site publicado e cobertura real — 25/10/2026
 
 O painel de cobertura do [site público](https://yzpeedro.github.io/brassfoot-patch/) distingue **156 clubes oficiais catalogados**, **103 correspondências de arquivo resolvidas**, **7 ainda candidatas**, **46 sem arquivo na instalação auditada** e **20 elencos experimentais disponíveis na v2026.0.2**. Não anuncia Série D 96/16 como jogável. O download público da v2026.0.2 continua igual e usa verificação SHA-256/asset via GitHub API, com link alternativo para a release. [Evidência de publicação e testes](docs/site-publication-2026-10-25.md).
+
+
+### Nova alfa experimental v2026.1.0-alpha.1
+
+Uma **pré-release separada e não homologada** está publicada:
+https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.1.0-alpha.1
+
+- **20 clubes Série A:** aproveita elencos experimentais da v2026.0.2.
+- **90 clubes existentes B/C/D:** verifica arquivos históricos da instalação 2022–23; não atualiza esses elencos.
+- **46 clubes ausentes:** instala arquivos sintéticos com **18 atletas fictícios por clube**, não jogadores reais.
+- **Série D:** experimento `BRA.cfg` com 96 clubes e 16 grupos; serialização, backup e rollback aprovados em ambiente isolado, mas **sem teste do motor real do jogo**.
+- **Segurança:** instalador exige confirmação, valida hashes, cria backup e permite desfazer. A instalação em cópia isolada com 703 arquivos fornecidos pelo usuário foi testada; a execução gráfica no Windows e o calendário do Brasfoot não foram validados.
+- **Código-fonte e build:** branch `experimental/2026-1-0-156-clubes`; pipeline GitHub Actions compilou executável Windows 64 bits e publicou a pré-release em 25/10/2026.
+- **Integridade do executável alfa:** `SHA-256 c30f124d4e8f9134d2c44b0a6fd6e73d5e688f2f4b05e34f2541d8f72571850f`.
+- **Importante:** a alfa não equivale a 156 elencos de 2026 nem a 156 clubes comprovadamente jogáveis. **Use somente em cópia separada do jogo**, sem carreiras importantes.
+
+O site mantém o download da v2026.0.2 como versão principal e oferece a alfa em uma seção própria.
