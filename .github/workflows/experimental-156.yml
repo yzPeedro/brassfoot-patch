@@ -1,0 +1,77 @@
+name: Experimental 156-club alpha build and release
+on:
+  push:
+    branches:
+      - experimental/2026-1-0-156-clubes
+    paths:
+      - '.github/workflows/experimental-156.yml'
+      - 'preview-builder/**'
+      - 'windows-installer/**'
+permissions:
+  contents: write
+concurrency:
+  group: brassfoot-alpha-156
+  cancel-in-progress: false
+jobs:
+  alpha:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.23.2'
+      - name: Generate 46 fictional teams and 157-entry alpha manifest offline
+        run: python preview-builder/build_preview.py
+      - name: Mark experimental GUI and require explicit consent
+        run: python preview-builder/patch_gui.py
+      - name: Go unit and synthetic installation tests
+        working-directory: windows-installer
+        run: go test -count=1 -skip '^TestReleaseDeltaInstallsRestores20Teams$' ./...
+      - name: Static analysis
+        working-directory: windows-installer
+        run: go vet ./...
+      - name: Build Windows GUI, unsigned experimental alpha
+        working-directory: windows-installer
+        run: |
+          mkdir -p ../dist
+          GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build -trimpath -ldflags='-s -w -H=windowsgui' -o ../dist/Brassfoot-Patch-2026-ALFA-156.exe .
+      - name: Write hash and compatibility warnings
+        run: |
+          cd dist
+          sha256sum Brassfoot-Patch-2026-ALFA-156.exe > SHA256-ALFA-156.txt
+          cat > AVISO-IMPORTANTE-ALFA-156.txt <<'EOF'
+          ALFA v2026.1.0 - NAO HOMOLOGADA DENTRO DO BRASFOOT
+          20 elencos Serie A: experimentais da release anterior v2026.0.2.
+          90 clubes historicos: somente verificados, com atletas antigos 2022/23.
+          46 novos clubes: dados gerados com 18 ATLETAS FICTICIOS por equipe.
+          Serie D: configuracao experimental com 96 clubes e 16 grupos.
+          NAO FOI VERIFICADO SE O MOTOR DO JOGO ACEITA A ESTRUTURA.
+          TESTE SOMENTE EM UMA COPIA ISOLADA DO BRASFOOT.
+          O instalador verifica hashes, usa backup/rollback e nao altera saves.
+          A release v2026.0.2 continua disponivel e nao e substituida.
+          EOF
+      - name: Publish opt-in prerelease if missing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag=v2026.1.0-alpha.1
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Alpha tag already exists; not overwriting a published artifact"
+            exit 0
+          fi
+          gh release create "$tag" \
+            dist/Brassfoot-Patch-2026-ALFA-156.exe \
+            dist/SHA256-ALFA-156.txt \
+            dist/AVISO-IMPORTANTE-ALFA-156.txt \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "Brassfoot Patch 2026 - ALFA 156 clubes (NAO HOMOLOGADA)" \
+            --notes "PRE-RELEASE EXPERIMENTAL. 20 elencos Serie A antigos, 90 clubes historicos verificados, 46 clubes novos com atletas ficticios e configuracao da Serie D 96/16 sem comprovacao dentro do Brasfoot. Testar somente em copia isolada, com backup. O instalador nao modifica saves. Esta versao NAO representa 156 elencos reais ou divisao jogavel homologada." \
+            --prerelease
