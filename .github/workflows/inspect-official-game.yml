@@ -170,6 +170,35 @@ jobs:
                       for line in rows[max(0,idx-8):min(len(rows),idx+14)]:
                           print(' ',line[:170])
           PY
+      - name: Experimentally rewrite only the known official year class to 2026
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import zipfile
+          src=Path('/tmp/brasfoot-extracted/bf22-23.exe')
+          with zipfile.ZipFile(src) as jar:
+              content=jar.read('a/hU.class')
+          p=Path('/tmp/brasfoot-experimental/a/hU.class')
+          p.parent.mkdir(parents=True,exist_ok=True)
+          p.write_bytes(content)
+          PY
+          python tools/patch_official_career_year.py \
+            --original-class /tmp/brasfoot-experimental/a/hU.class \
+            --output-class /tmp/brasfoot-experimental/patched/a/hU.class
+          javap -c -p /tmp/brasfoot-experimental/patched/a/hU.class > /tmp/brasfoot-experimental/bytecode.txt
+          python - <<'PY'
+          from pathlib import Path
+          source=Path('/tmp/brasfoot-experimental/bytecode.txt').read_text()
+          m=source.split('private void mQ();',1)[1].split('\n  private ',1)[0]
+          assert '// String 2026' in m
+          assert sum('JComboBox.addItem' in line for line in m.splitlines())==1
+          assert 'pop' in m
+          assert 'setSelectedIndex' in m
+          assert source.count('sipush        2026')>=2
+          print('PASS structural year-only 2026 selector and engine setter in official Java class')
+          print('NOT A GAMEPLAY TEST. Official version is different from the user 2023/2024 installation.')
+          PY
+          rm -rf /tmp/brasfoot-experimental
       - name: Delete all licensed installer/extracted files
         if: always()
         run: rm -rf /tmp/brasfoot-official /tmp/brasfoot-extracted
