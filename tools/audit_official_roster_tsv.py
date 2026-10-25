@@ -17,6 +17,8 @@ IDENTITIES = {
     "fortaleza":"br-fortaleza-ce", "sport":"br-sport-pe",
     "ceara":"br-ceara-ce", "ituano":"br-ituano-sp",
     "sao-bernardo":"br-sao-bernardo-sp",
+    "goias":"br-goias-go", "atletico-goianiense":"br-atletico-goianiense-go",
+    "crb":"br-crb-al",
 }
 
 def clean(name):
