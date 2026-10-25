@@ -109,6 +109,13 @@
                 <label for="clubs-division">DIVISÃO
                   <select id="clubs-division" disabled><option value="">Séries A, B e C</option><option value="A">Série A</option><option value="B">Série B</option><option value="C">Série C</option></select>
                 </label>
+                <label for="clubs-roster-filter">ELENCO
+                  <select id="clubs-roster-filter" disabled>
+                    <option value="">Todos os elencos</option>
+                    <option value="published">Com jogadores no patch</option>
+                    <option value="pending">Aguardando elencos atualizados</option>
+                  </select>
+                </label>
                 <label for="clubs-search">BUSCAR CLUBE OU UF
                   <input id="clubs-search" type="search" autocomplete="off" placeholder="Ex.: Botafogo, MG, Cruzeiro" disabled />
                 </label>
@@ -121,10 +128,40 @@
                 <tbody id="clubs-grid"></tbody>
               </table>
             </div>
+            <div class="clubs-pagination" id="clubs-pagination">
+              <label for="clubs-page-size">CLUBES POR PÁGINA
+                <select id="clubs-page-size" disabled><option value="10" selected>10</option><option value="20">20</option><option value="50">50</option></select>
+              </label>
+              <div class="clubs-pagination-actions">
+                <button type="button" id="clubs-previous" disabled aria-label="Página anterior">‹ Anterior</button>
+                <span id="clubs-page-label" aria-live="polite">Página —</span>
+                <button type="button" id="clubs-next" disabled aria-label="Próxima página">Próxima ›</button>
+              </div>
+            </div>
           </div>
           <p class="clubs-disclaimer">A Série D não faz parte da atualização: nenhum arquivo de equipe nem a configuração nacional será alterado. Os 40 elencos de B/C continuam em coleta, sem uso de jogadores fictícios. <a href="https://www.cbf.com.br/" target="_blank" rel="noopener noreferrer">Fontes: CBF ↗</a></p>
         </div>
       </section>
+      <dialog class="club-dialog" id="club-dialog" aria-labelledby="club-dialog-title" aria-describedby="club-dialog-description">
+        <div class="club-dialog-header">
+          <div>
+            <span class="club-dialog-eyebrow" id="club-dialog-division">Série —</span>
+            <h3 id="club-dialog-title">Detalhes do clube</h3>
+            <p id="club-dialog-description">Jogadores incluídos no patch publicado.</p>
+          </div>
+          <button type="button" id="club-dialog-close" class="club-dialog-close" aria-label="Fechar detalhes do clube">×</button>
+        </div>
+        <div class="club-dialog-metadata">
+          <div><span>ESTADO</span><strong id="club-dialog-state">—</strong></div>
+          <div><span>ELENCO</span><strong id="club-dialog-roster-status">—</strong></div>
+          <div><span>JOGADORES</span><strong id="club-dialog-player-count">—</strong></div>
+        </div>
+        <div class="club-dialog-roster">
+          <h4 id="club-dialog-roster-title">Jogadores do patch</h4>
+          <p id="club-dialog-notice"></p>
+          <ol id="club-dialog-players" class="club-dialog-player-list"></ol>
+        </div>
+      </dialog>
       <section class="features section" id="recursos">
         <div class="wrap">
           <div class="section-label">01 <span></span> O PROJETO</div>
