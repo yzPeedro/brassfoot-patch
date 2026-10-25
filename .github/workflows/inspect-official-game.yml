@@ -1,0 +1,64 @@
+name: Research official Brasfoot 22-23 year selector
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/inspect-official-game.yml'
+      - 'tools/inspect_career_years.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  read-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch unmodified setup from developer's official website (private CI temp only)
+        run: |
+          mkdir -p /tmp/brasfoot-official
+          curl --fail --location --silent --show-error --max-time 90             --retry 2 --retry-delay 4             -o /tmp/brasfoot-official/brasfoot22-23.exe             https://www.brasfoot.com/download22/brasfoot22-23.exe
+          test $(stat -c %s /tmp/brasfoot-official/brasfoot22-23.exe) -gt 5000000
+          file /tmp/brasfoot-official/brasfoot22-23.exe
+          sha256sum /tmp/brasfoot-official/brasfoot22-23.exe
+      - name: Inspect the container read-only; never execute game installer
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib
+          p=Path('/tmp/brasfoot-official/brasfoot22-23.exe')
+          data=p.read_bytes()
+          needles=(b'2023',b'2024',b'2026',b'\x07\xe7',b'\x07\xe8',b'\xca\xfe\xba\xbe',b'PK\x03\x04')
+          print('SIZE',len(data),'SHA256',hashlib.sha256(data).hexdigest())
+          for x in needles:
+              print('BYTE_PATTERN',x.hex(),'COUNT',data.count(x))
+          print('PE_HEADER',data[:2].hex())
+          PY
+      - name: List archive content without executing the installer
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq p7zip-full >/dev/null
+          7z l /tmp/brasfoot-official/brasfoot22-23.exe | tail -n 55
+          mkdir -p /tmp/brasfoot-extracted
+          7z x -y -o/tmp/brasfoot-extracted /tmp/brasfoot-official/brasfoot22-23.exe >/dev/null || true
+          echo "----- Extracted filenames (no file bytes) -----"
+          find /tmp/brasfoot-extracted -type f -printf '%P\n' | head -n 100
+          find /tmp/brasfoot-extracted -type f \( -iname '*.exe' -o -iname '*.jar' -o -iname '*.class' \) -printf '%P\n' | head -n 60
+      - name: Identify class candidates related to year 2023 and 2024
+        run: |
+          python - <<'PY'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0,'.')
+          from tools.inspect_career_years import inspect_jar
+          root=Path('/tmp/brasfoot-extracted')
+          archives=list(root.rglob('*.jar'))
+          print('EXTRACTED_JARS',len(archives))
+          for p in archives[:30]:
+              report=inspect_jar(p)
+              print('JAR',p.relative_to(root),'CLASSES',report['classFilesExamined'],
+                    'CANDIDATES',report['candidateClasses'][:40])
+          PY
+      - name: Delete all licensed installer/extracted files
+        if: always()
+        run: rm -rf /tmp/brasfoot-official /tmp/brasfoot-extracted
