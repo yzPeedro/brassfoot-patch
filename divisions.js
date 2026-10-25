@@ -121,6 +121,7 @@
       trigger.setAttribute('aria-label', 'Ver clube ' + club.name + ', ' + club.state + ', Série ' + club.division);
       trigger.textContent = club.name;
       nameCell.appendChild(trigger);
+      row.appendChild(nameCell);
       for (const [cellValue, cellClass] of [
         [club.state, ''], ['Série ' + club.division, ''],
         [labels[club.division], 'club-roster-state']
@@ -128,7 +129,6 @@
         const td = document.createElement('td');
         if (cellClass) td.className = cellClass;
         td.textContent = cellValue;
-        row.appendChild(nameCell); // append once; subsequent moves retain order
         row.appendChild(td);
       }
       fragment.appendChild(row);
