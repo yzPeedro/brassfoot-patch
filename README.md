@@ -1,5 +1,8 @@
 # Brassfoot Patch 2026
 
+> **Escopo atual (25/10/2026):** 60 clubes das Séries A, B e C, com elencos reais de 2026 como objetivo. A **Série D permanece original do Brasfoot**, sem mudança de equipes, jogadores ou configurações. A prévia pública de elencos v2026.0.2 inclui 730 nomes da Série A, extraídos dos arquivos instaláveis; os 40 elencos B/C ainda não estão validados. O site exibe esses nomes em um [explorador paginado com modais](https://yzpeedro.github.io/brassfoot-patch/#clubes-2026). A v2026.1.1 anterior alterava a Série D e não deve ser confundida com o escopo atual. Detalhes em [docs/rosters-abc-2026.md](docs/rosters-abc-2026.md).
+
+
 Patch comunitário experimental para o Brasfoot 2022–2023 no Windows. O repositório contém a coleta de elencos, um codec de arquivos `.ban`, testes e um site estático.
 
 ## Status verificável
