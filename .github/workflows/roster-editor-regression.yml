@@ -7,6 +7,8 @@ on:
       - 'tools/build_team_delta.py'
       - 'tests/test_team_delta.py'
       - 'tools/audit_roster_readiness.py'
+      - 'tools/build_abc_team_map.py'
+      - 'tests/test_abc_team_map.py'
       - 'tests/test_roster_readiness.py'
       - 'site/data/researched-rosters-2026.json'
       - '.github/workflows/roster-editor-regression.yml'
@@ -62,6 +64,8 @@ jobs:
           PY
       - name: Verify synthetic byte-differential reconstruction and SHA
         run: python -m unittest discover -s tests -p 'test_team_delta.py' -v
+      - name: Confirm 59 existing A/B/C mappings, one missing Maranhão and no Serie D changes
+        run: python -m unittest discover -s tests -p 'test_abc_team_map.py' -v
       - name: Audit research against release-readiness gates
         run: |
           python -m unittest discover -s tests -p 'test_roster_readiness.py' -v
