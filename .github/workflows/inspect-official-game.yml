@@ -92,6 +92,43 @@ jobs:
                        any(word in name.lower() for word in ('season','ano','division','divisao','inicio','career','carreira','liga','camp'))][:150])
                   print('PREVIEW_ENTRY_NAMES',names[:28])
           PY
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Inspect only relevant year constants in four class bytecode listings
+        run: |
+          python - <<'PY'
+          import subprocess, zipfile
+          from pathlib import Path
+          path=Path('/tmp/brasfoot-extracted/bf22-23.exe')
+          candidates=('best/aq.class','best/p.class','a/eg.class','a/hU.class',
+                      'est/LoadLigaOptions.class','est/ConfigLigaType.class')
+          temporary=Path('/tmp/brasfoot-bytecode')
+          temporary.mkdir(exist_ok=True)
+          with zipfile.ZipFile(path) as z:
+              for name in candidates:
+                  if name not in z.namelist():continue
+                  output=temporary/name
+                  output.parent.mkdir(parents=True,exist_ok=True)
+                  output.write_bytes(z.read(name))
+                  process=subprocess.run(['javap','-c','-p','-constants',str(output)],
+                      capture_output=True,text=True,timeout=30)
+                  if process.returncode!=0:
+                      print('FAILED_JAVAP',name,process.stderr[:400])
+                      continue
+                  lines=process.stdout.splitlines()
+                  matches=[i for i,line in enumerate(lines) if any(x in line for x in (
+                      '2023','2024','2026','javax/swing/JComboBox','javax/swing/DefaultComboBoxModel',
+                      'getSelectedItem','setSelectedItem','addItem','a1_div','ano','Year'))]
+                  print('BYTECODE_CLASS',name,'LINES',len(lines),'MATCHES',len(matches))
+                  seen=set()
+                  for i in matches[:25]:
+                      for j in range(max(0,i-8),min(len(lines),i+9)):
+                          if j not in seen:
+                              print(f'  {j}: {lines[j][:155]}')
+                              seen.add(j)
+          PY
       - name: Delete all licensed installer/extracted files
         if: always()
         run: rm -rf /tmp/brasfoot-official /tmp/brasfoot-extracted
