@@ -57,7 +57,7 @@ assert.match(html,/aria-labelledby="club-dialog-title"/);
 assert.match(html,/option value="10" selected/);
 assert.match(html,/option value="20"/);
 assert.match(html,/option value="50"/);
-assert.match(clubsJs,/fetch\('\.\/data\/published-rosters-2026-0-2\.json'/); 
+assert.match(clubsJs,/getJson\('\.\/data\/published-rosters-2026-0-2\.json'\)/); 
 assert.match(clubsJs,/showModal\(\)/);
 assert.match(clubsJs,/elements\.dialog\.close\(\)/);
 assert.match(clubsJs,/lastFocus\.focus\(\)/);
