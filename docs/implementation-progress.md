@@ -1,5 +1,15 @@
 # Progresso atual — Brasfoot Patch 2026
 
+## Novo requisito: seletores de clubes por divisão na carreira 2026
+
+- Screenshot de criação de carreira recebido em 25/10/2026. Controles observados: **1ª divisão**, **2ª divisão**, **3ª divisão**, **Jogando estaduais**. Exemplos de escolha visíveis: América-MG, Bahia, ABC e ASA. Esses exemplos não provam sozinhos a composição das listas.
+- **Objetivo obrigatório:** listas 2026 com **20 clubes corretos por divisão** nas Séries A/B/C. O controle de estaduais deve continuar válido; a Série D é preservada sem modificar grupos, clubes ou o BRA.cfg.
+- **Não é só apresentação:** o jogo deverá montar competições, adversários, calendário, classificação, acesso/rebaixamento e temporadas subsequentes usando as mesmas divisões mostradas ao criar uma carreira.
+- **Integrar ao seletor de ano:** única opção **2026**, e novo save e partidas efetivamente iniciando em 2026.
+- **Status: enfileirado e não implementado.** O BRA.cfg inspecionado define regras/quantidades, mas não contém a lista dos clubes. A origem da filiação dos clubes às ligas e a rotina dos seletores no motor precisam ser identificadas no binário/JAR original.
+- **Gate de release:** teste real em cópia isolada do Brasfoot em cada divisão, verificação de adversários, rodadas, acesso/rebaixamento, reabertura do save, nenhuma tela de carregamento infinito; hash da Série D e de saves antigos imutável, rollback do patch verificado.
+- Critérios completos: docs/rosters-abc-2026.md, seção **Seletores de divisão na criação de carreira**.
+
 ## Requisito final: ano único 2026 ao iniciar carreira
 
 Solicitação de 25/10/2026: depois de integrar e testar os 60 elencos A/B/C, substituir a escolha de anos **2023/2024** na criação de nova carreira por **somente 2026**, assegurando que o save e as partidas realmente iniciem em 2026. Os saves já existentes não podem ser modificados. A **Série D original deve continuar intacta**.
