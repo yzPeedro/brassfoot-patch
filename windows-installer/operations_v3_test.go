@@ -2,10 +2,12 @@ package main
 
 import (
   "encoding/json"
+"encoding/base64"
   "os"
   "path/filepath"
   "strings"
   "testing"
+"testing/fstest"
 )
 
 func v3Fixture(t *testing.T) (string,string,[]byte,[]byte,[]byte) {
@@ -62,4 +64,23 @@ func TestV3MixedAlreadyInstalledAndNewAddition(t *testing.T){
   if _,err=restorePatch(patched,nil);err!=nil{t.Fatalf("mixed restore %v",err)}
   b,_:=os.ReadFile(filepath.Join(game,"teams","a.ban"));if digestBytes(b)!=digestBytes(target){t.Fatal("preexisting patched file should not be restored")}
   if _,err=os.Lstat(filepath.Join(game,"teams","created.ban"));!os.IsNotExist(err){t.Fatal("added file not removed")}
+}
+
+func TestV3BundledNewTeamIsCreatedFromVerifiedRecipe(t *testing.T) {
+  game,_,_,_,added:=v3Fixture(t)
+  f:=ManifestFile{Operation:"add",Path:"teams/newclub.ban",Size:int64(len(added)),SHA256:digestBytes(added)}
+  m:=Manifest{SchemaVersion:3,Kind:"BRASFOOT_HOMOLOGATION_PATCH",PatchSeason:2026,Version:"2026.2.0",Files:[]ManifestFile{f}}
+  body,_:=json.Marshal(m)
+  recipe:=patchRecipe{SchemaVersion:1,Path:f.Path,OriginalSHA256:digestBytes(nil),OriginalSize:0,TargetSHA256:f.SHA256,TargetSize:len(added),Operations:[]patchOp{{Add:base64.StdEncoding.EncodeToString(added)}}}
+  delta,_:=json.Marshal(recipe)
+  fsys:=fstest.MapFS{"bundled_release/manifest.json":{Data:body},"bundled_release/patches/newclub.ban.json":{Data:delta}}
+  staged:=filepath.Join(t.TempDir(),"staged")
+  if err:=os.MkdirAll(staged,0700);err!=nil{t.Fatal(err)}
+  if err:=os.WriteFile(filepath.Join(staged,"manifest.json"),body,0600);err!=nil{t.Fatal(err)}
+  if err:=preparePayloadWithFS(fsys,game,staged);err!=nil{t.Fatal(err)}
+  plan,err:=inspect(staged,game);if err!=nil{t.Fatal(err)}
+  if len(plan.Items)!=1||plan.AlreadyInstalled{t.Fatal("unexpected add-only preflight")}
+  if _,err=install(plan,InstallOptions{});err!=nil{t.Fatal(err)}
+  got,_:=os.ReadFile(filepath.Join(game,"teams","newclub.ban"))
+  if digestBytes(got)!=digestBytes(added){t.Fatal("reconstructed new team differs")}
 }
