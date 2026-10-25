@@ -67,12 +67,30 @@ jobs:
           sys.path.insert(0,'.')
           from tools.inspect_career_years import inspect_jar
           root=Path('/tmp/brasfoot-extracted')
-          archives=list(root.rglob('*.jar'))
-          print('EXTRACTED_JARS',len(archives))
+          archives=list(root.rglob('*.jar'))+list(root.rglob('*.exe'))
+          print('EXTRACTED_JARS_AND_PE_FILES',len(archives))
           for p in archives[:30]:
               report=inspect_jar(p)
-              print('JAR',p.relative_to(root),'CLASSES',report['classFilesExamined'],
-                    'CANDIDATES',report['candidateClasses'][:40])
+              print('ARCHIVE',p.relative_to(root),'CLASSES',report['classFilesExamined'],
+                    'CANDIDATES',report['candidateClasses'][:75], 'WARNING',report['warning'])
+          PY
+      - name: Check packed game executable ZIP entries without modification
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import zipfile
+          p=Path('/tmp/brasfoot-extracted/bf22-23.exe')
+          if not zipfile.is_zipfile(p):
+              print('Game executable does not contain readable zip structures')
+          else:
+              with zipfile.ZipFile(p) as z:
+                  names=z.namelist()
+                  print('EMBEDDED_ZIP_ENTRIES',len(names))
+                  print('JAVA_CLASS_FILES',sum(name.endswith('.class') for name in names))
+                  print('SUSPECTED_YEAR_DIVISION_CLASSES',
+                      [name for name in names if name.endswith('.class') and
+                       any(word in name.lower() for word in ('season','ano','division','divisao','inicio','career','carreira','liga','camp'))][:150])
+                  print('PREVIEW_ENTRY_NAMES',names[:28])
           PY
       - name: Delete all licensed installer/extracted files
         if: always()
