@@ -19,6 +19,10 @@ Solicitação de 25/10/2026: depois de integrar e testar os 60 elencos A/B/C, su
 Aceite: só 2026 na interface; nova carreira criada sem travar; ano 2026 persistido e calendário válido; saves antigos iguais por hash; desinstalação restaura os anos antigos. Nenhuma release anuncia o recurso até prova real.
 
 
+### Quatro elencos oficiais convertidos em laboratório
+
+Foram adicionadas listas TSV de Criciúma (29), Londrina (29), Cuiabá (25) e Juventude (36), total de **119 jogadores com nomes e posições observados em páginas oficiais**. Nos quatro casos foram desserializados os originais privados, reconstruídos `.ban` experimentais e aplicadas receitas SHA-vinculadas à função Go `applyRecipe`, com **quatro resultados iguais byte a byte**. Essas cópias não foram instaladas no jogo, não modificam Série D e **ainda contêm estimativas de idade, nacionalidade e atributos para jogadores sem dados completos**. Portanto não são candidatos homologados à release. Fonte/código: `tools/team-roster-editor/`.
+
 ## Novo pipeline de elencos .ban, auditoria e fontes oficiais — 25/10/2026
 
 - Trabalho executado com os **arquivos originais privados do Brasfoot** fornecidos previamente, sem publicar o conteúdo proprietário e sem modificar a instalação do usuário.
