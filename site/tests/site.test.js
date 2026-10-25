@@ -46,7 +46,16 @@ assert.equal(researchedIds.length,40);
 const bcIds=target.clubs.filter(c=>c.division==='B'||c.division==='C').map(c=>c.id);
 assert.ok(bcIds.every(id=>researchedIds.includes(id)));
 const observedNames=Object.values(researched.clubs).reduce((sum,r)=>sum+r.players.length,0);
-assert.equal(observedNames,1302);
+assert.equal(observedNames,researched.totalObservedPlayers??1302);
+if (researched.totalObservedPlayers!==undefined){
+  assert.equal(researched.totalObservedPlayers,1296);
+  assert.ok(Object.values(researched.clubs).every(c=>
+    c.positionCodes.length===c.players.length &&
+    c.verifiedAges.length===c.players.length &&
+    c.reportedCountries.length===c.players.length &&
+    c.positionCodes.every(p=>Number.isInteger(p)&&p>=0&&p<=4) &&
+    c.positionCodes.filter(p=>p===0).length>=2));
+}
 assert.ok(Object.entries(researched.clubs).every(([id,r])=>
   bcIds.includes(id) && r.scope==='internet-research-not-installed' &&
   r.completeSeason2026Verified===false && /^https:\/\//.test(r.sourceUrl) &&
@@ -114,4 +123,4 @@ assert.match(js,/item\.digest === 'sha256:'/);
 assert.match(js,/compatibilityVerifiedInGame\s*!==\s*true/);
 assert.doesNotMatch(html,/id="alfa-156"|class="ball"/);
 assert.doesNotMatch(html+js+clubsJs,/BEGIN PRIVATE KEY|x-apisports-key/);
-console.log('PASS: sortable/groupable A/B/C, 730 published patch names + 1302 researched names kept separate, Série D untouched.');
+console.log('PASS: sortable/groupable A/B/C, 730 installed A player names plus researched B/C names kept separate, Série D untouched.');
