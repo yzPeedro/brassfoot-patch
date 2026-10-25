@@ -141,6 +141,35 @@ jobs:
                   data=source.read(name)
                   print('CLASS_FINGERPRINT',name,len(data),hashlib.sha256(data).hexdigest())
           PY
+      - name: Locate hardcoded national club division arrays in original Java bytecode
+        run: |
+          python - <<'PY'
+          import zipfile,subprocess
+          from pathlib import Path
+          with zipfile.ZipFile('/tmp/brasfoot-extracted/bf22-23.exe') as z:
+              root=Path('/tmp/brasfoot-referenced')
+              root.mkdir(exist_ok=True)
+              for name in ['best/aq.class','a/hU.class']:
+                  p=root/name
+                  p.parent.mkdir(parents=True,exist_ok=True)
+                  p.write_bytes(z.read(name))
+                  proc=subprocess.run(['javap','-c','-p',str(p)],capture_output=True,text=True,timeout=35)
+                  rows=proc.stdout.splitlines()
+                  relevant=[i for i,v in enumerate(rows) if
+                      any(term in v.lower() for term in (
+                        'string atletico', 'string bragantino_bra','string americamg',
+                        'string botafogo', 'string avai', 'string bahi','string criciuma',
+                        'string corinthians', 'string abc', 'string saobernardo',
+                        'field ar','getselectedindex','method best/aq.am:'))]
+                  print('CLASS',name,'TOTAL_LINES',len(rows),'MATCHES',len(relevant))
+                  taken=[]
+                  for idx in relevant[:16]:
+                      if any(abs(idx-prev)<24 for prev in taken):continue
+                      taken.append(idx)
+                      print('SNIPPET',name,'LINE',idx)
+                      for line in rows[max(0,idx-8):min(len(rows),idx+14)]:
+                          print(' ',line[:170])
+          PY
       - name: Delete all licensed installer/extracted files
         if: always()
         run: rm -rf /tmp/brasfoot-official /tmp/brasfoot-extracted
