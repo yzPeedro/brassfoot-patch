@@ -1,0 +1,146 @@
+{
+  "source": "CBF - clubes da Série A 2026",
+  "sourceUrl": "https://www.cbf.com.br/futebol-brasileiro/times/campeonato-brasileiro/serie-a/2026",
+  "clubs": [
+    {
+      "club": "Athletico-PR",
+      "id": "atleticopr_bra",
+      "matchedName": "Athletico-PR",
+      "inExport": true,
+      "matchingStrategy": "normalized_name"
+    },
+    {
+      "club": "Atlético-MG",
+      "id": "atleticomg_bra",
+      "matchedName": "Atlético-MG",
+      "inExport": true,
+      "matchingStrategy": "normalized_name"
+    },
+    {
+      "club": "Bahia",
+      "id": "bahia",
+      "matchedName": "Bahia",
+      "inExport": true,
+      "matchingStrategy": "normalized_name"
+    },
+    {
+      "club": "Botafogo",
+      "id": "botafogorj_bra",
+      "matchedName": "Botafogo",
+      "inExport": true,
+      "matchingStrategy": "normalized_name"
+    },
+    {
+      "club": "Chapecoense",
+      "id": "chapecoense_bra",
+      "matchedName": "Chapecoense",
+      "inExport": true,
+      "matchingStrategy": "normalized_name"
+    },
+    {
+      "club": "Corinthians",
+      "id": "corinthians_bra",
+      "matchedName": "Corinthians",
+      "inExport": true,
+      "matchingStrategy": "normalized_name"
+    },
+    {
+      "club": "Coritiba",
+      "id": "coritiba_bra",
+      "matchedName": "Coritiba",
+      "inExport": true,
+      "matchingStrategy": "normalized_name"
+    },
+    {
+      "club": "Cruzeiro",
+      "id": "cruzeiro_bra",
+      "matchedName": "Cruzeiro",
+      "inExport": true,
+      "matchingStrategy": "normalized_name"
+    },
+    {
+      "club": "Flamengo",
+      "id": "flarj",
+      "matchedName": "Flamengo",
+      "inExport": true,
+      "matchingStrategy": "normalized_name"
+    },
+    {
+      "club": "Fluminense",
+      "id": "flurj",
+      "matchedName": "Fluminense",
+      "inExport": true,
+      "matchingStrategy": "normalized_name"
+    },
+    {
+      "club": "Grêmio",
+      "id": "gremio",
+      "matchedName": "Grêmio",
+      "inExport": true,
+      "matchingStrategy": "normalized_name"
+    },
+    {
+      "club": "Internacional",
+      "id": "internacional_bra",
+      "matchedName": "Internacional",
+      "inExport": true,
+      "matchingStrategy": "normalized_name"
+    },
+    {
+      "club": "Mirassol",
+      "id": "miirassol_sp",
+      "matchedName": "Mirassol",
+      "inExport": true,
+      "matchingStrategy": "normalized_name"
+    },
+    {
+      "club": "Palmeiras",
+      "id": "palmeiras",
+      "matchedName": "Palmeiras",
+      "inExport": true,
+      "matchingStrategy": "normalized_name"
+    },
+    {
+      "club": "Red Bull Bragantino",
+      "id": "bragantino_bra",
+      "matchedName": "RB Bragantino",
+      "inExport": true,
+      "matchingStrategy": "normalized_name_alias"
+    },
+    {
+      "club": "Remo",
+      "id": "remo",
+      "matchedName": "Remo",
+      "inExport": true,
+      "matchingStrategy": "normalized_name"
+    },
+    {
+      "club": "Santos",
+      "id": "santos",
+      "matchedName": "Santos",
+      "inExport": true,
+      "matchingStrategy": "normalized_name"
+    },
+    {
+      "club": "São Paulo",
+      "id": "saopaulo_bra",
+      "matchedName": "São Paulo",
+      "inExport": true,
+      "matchingStrategy": "normalized_name"
+    },
+    {
+      "club": "Vasco da Gama",
+      "id": "vasco",
+      "matchedName": "Vasco",
+      "inExport": true,
+      "matchingStrategy": "normalized_name_alias"
+    },
+    {
+      "club": "Vitória",
+      "id": "vitoria",
+      "matchedName": "Vitória",
+      "inExport": true,
+      "matchingStrategy": "normalized_name"
+    }
+  ]
+}
