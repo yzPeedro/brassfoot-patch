@@ -45,6 +45,10 @@ jobs:
               ('maringa-2026-official.tsv', [4,0,11,10,8]),
               ('avai-2026-official.tsv', [3,5,6,11,11]),
               ('fortaleza-2026-official.tsv', [4,5,6,11,9]),
+              ('sport-2026-official.tsv', [4,6,5,10,7]),
+              ('ceara-2026-official.tsv', [4,4,6,8,10]),
+              ('ituano-2026-official.tsv', [3,5,4,9,8]),
+              ('sao-bernardo-2026-official.tsv', [4,5,6,11,11]),
           ):
               source=Path('tools/team-roster-editor/sources')/filename
               rows=[line.split('\t') for line in source.read_text(encoding='utf-8').splitlines() if line and not line.startswith('#')]
@@ -58,6 +62,9 @@ jobs:
               if filename=='maringa-2026-official.tsv':
                   assert sum(bool(row[2]) for row in rows)==33
                   assert sum(bool(row[3]) for row in rows)==24
+              elif filename=='sao-bernardo-2026-official.tsv':
+                  assert sum(bool(row[2]) for row in rows)==37
+                  assert all(not row[3] for row in rows)
               else:
                   assert all(not row[2] and not row[3] for row in rows)
               print('PASS:',filename,len(rows),'players; positions verified, no invented ages/countries')
