@@ -122,7 +122,11 @@ class ApiFootballSyncTests(unittest.TestCase):
                 for n in range(16)]}], 'errors': {}, 'paging': {'current': 1, 'total': 1}}
         with TemporaryDirectory() as td:
             args = argparse.Namespace(mapping=coverage_file, output=Path(td) / 'out', refresh=False)
+            # Test only the first-time fetch path. Sibling installations may
+            # contain an existing v4.2 catalogue; that cache-import behavior
+            # has its own independent regression test.
             with patch.dict(os.environ, {'API_FOOTBALL_KEY': 'offline'}), \
+                 patch('api_football_sync.import_legacy_catalog', return_value=False), \
                  patch('api_football_sync.fetch', side_effect=fake_fetch):
                 self.assertEqual(run(args), 0)
                 self.assertEqual(len(requests), 21)

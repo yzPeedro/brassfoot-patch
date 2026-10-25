@@ -9,15 +9,38 @@ import argparse
 from datetime import date, timedelta
 import json
 from pathlib import Path
-from zoneinfo import ZoneInfo
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 from datetime import datetime
+
+
+BUNDLED_SAO_PAULO_TZIF = Path(__file__).resolve().parent / "config" / "tzdata" / "America" / "Sao_Paulo"
+
+
+def _system_zoneinfo() -> ZoneInfo:
+    return ZoneInfo("America/Sao_Paulo")
+
+
+def _sao_paulo_today() -> date:
+    # Windows Python often has no system IANA timezone database. Use the
+    # bundled IANA TZif file rather than guessing a fixed offset.
+    try:
+        zone = _system_zoneinfo()
+    except ZoneInfoNotFoundError:
+        try:
+            with BUNDLED_SAO_PAULO_TZIF.open("rb") as source:
+                zone = ZoneInfo.from_file(source, key="America/Sao_Paulo")
+        except (OSError, ValueError) as exc:
+            raise RuntimeError(
+                "Timezone America/Sao_Paulo unavailable: bundled IANA data missing or invalid"
+            ) from exc
+    return datetime.now(zone).date()
 
 
 def check_calendar(path: Path, now: date | None = None, completed: set[str] | None = None) -> dict:
     data = json.loads(path.read_text(encoding="utf-8"))
     if data.get("schemaVersion") != 1 or data.get("timezone") != "America/Sao_Paulo":
         raise ValueError("Unsupported transfer-window calendar schema/timezone")
-    now = now or datetime.now(ZoneInfo("America/Sao_Paulo")).date()
+    now = now if now is not None else _sao_paulo_today()
     completed = completed if completed is not None else set()
     decisions = []
     identifiers = set()

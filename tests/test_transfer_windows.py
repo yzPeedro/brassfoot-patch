@@ -3,12 +3,30 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import json
 import unittest
-from transfer_windows import check_calendar
+from transfer_windows import check_calendar, _sao_paulo_today, BUNDLED_SAO_PAULO_TZIF
+from zoneinfo import ZoneInfoNotFoundError
+from unittest.mock import patch
 
 ROOT=Path(__file__).resolve().parents[1]
 CAL=ROOT/'config/transfer-windows-2026.json'
 
 class CalendarTests(unittest.TestCase):
+    def test_bundled_timezone_fallback_on_windows_without_tzdata(self):
+        # Emulate Python on Windows without an IANA tzdata installation.
+        self.assertTrue(BUNDLED_SAO_PAULO_TZIF.is_file())
+        with patch('transfer_windows._system_zoneinfo', side_effect=ZoneInfoNotFoundError()):
+            actual = _sao_paulo_today()
+            self.assertIsInstance(actual, date)
+
+    def test_duplicate_window_needs_no_system_timezone_database(self):
+        with patch('transfer_windows._system_zoneinfo', side_effect=ZoneInfoNotFoundError()):
+            with TemporaryDirectory() as t:
+                root=Path(t); payload=json.loads(CAL.read_text())
+                payload['windows'].append(dict(payload['windows'][0]))
+                p=root/'dup.json'; p.write_text(json.dumps(payload))
+                with self.assertRaisesRegex(ValueError, 'Duplicate'):
+                    check_calendar(p)
+
     def test_before_end_no_calls(self):
         result=check_calendar(CAL,now=date(2026,2,22))
         self.assertFalse(result['publicationEnabled'])

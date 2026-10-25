@@ -201,7 +201,21 @@ def select_brazilian_team(club: str, results: list[dict]) -> list[dict]:
 
 
 def find_team_in_catalog(club: str, rows: list[dict]) -> dict:
-    unique = {int(team["id"]): team for team in select_brazilian_team(club, rows)}
+    """Resolve identities by *priority*, never by similarity ranking.
+
+    A unique canonical-name match (after accent/punctuation normalization) wins
+    over broader aliases. Previously, an unrelated club matching a broad alias
+    could make an otherwise unique canonical match appear ambiguous. If there
+    are two canonical matches with different IDs, or multiple alias matches
+    without a canonical match, fail closed rather than choose arbitrarily.
+    """
+    matches = select_brazilian_team(club, rows)
+    canonical = normalize(club)
+    canonical_matches = {
+        int(team["id"]): team for team in matches
+        if normalize(str(team["name"])) == canonical
+    }
+    unique = canonical_matches or {int(team["id"]): team for team in matches}
     if not unique:
         raise RuntimeError(f"Club {club} not found in Brazilian team catalog")
     if len(unique) > 1:

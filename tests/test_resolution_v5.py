@@ -34,9 +34,19 @@ class RecoveryTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "not found"):
             find_team_in_catalog("Chapecoense", [row(3, "Chapecoense", "Argentina")])
 
-    def test_both_different_ids_matching_are_ambiguous(self):
+    def test_unique_canonical_wins_over_broad_alias(self):
+        catalog = [row(112, "Atlético Mineiro"), row(114, "Atletico-MG")]
+        self.assertEqual(find_team_in_catalog("Atlético-MG", catalog)["id"], 114)
+
+    def test_two_alias_ids_without_canonical_are_ambiguous(self):
+        catalog = [row(112, "Atlético Mineiro"), row(114, "Clube Atletico Mineiro")]
         with self.assertRaisesRegex(RuntimeError, "Ambiguous"):
-            find_team_in_catalog("Atlético-MG", [row(112, "Atlético Mineiro"), row(114, "Atletico-MG")])
+            find_team_in_catalog("Atlético-MG", catalog)
+
+    def test_two_canonical_ids_are_ambiguous(self):
+        catalog = [row(112, "Atlético-MG"), row(114, "Atletico MG")]
+        with self.assertRaisesRegex(RuntimeError, "Ambiguous"):
+            find_team_in_catalog("Atlético-MG", catalog)
 
     def test_fuzzy_only_suggests_never_binds(self):
         catalog = [row(33, "Atlético-GO"), row(34, "Atletico Mineirinho")]

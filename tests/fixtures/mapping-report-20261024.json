@@ -1,0 +1,230 @@
+{
+  "createdAt": "2026-10-24T18:07:15.128867+00:00",
+  "expected": 20,
+  "matched": [
+    {
+      "club": "Athletico-PR",
+      "brasfootId": "atleticopr_bra",
+      "apiTeamId": 134,
+      "apiTeamName": "Atletico Paranaense",
+      "method": "country_catalog_exact",
+      "country": "Brazil",
+      "verifiedAgainst": "explicit names + Brazil country"
+    },
+    {
+      "club": "Bahia",
+      "brasfootId": "bahia",
+      "apiTeamId": 118,
+      "apiTeamName": "Bahia",
+      "method": "country_catalog_exact",
+      "country": "Brazil",
+      "verifiedAgainst": "explicit names + Brazil country"
+    },
+    {
+      "club": "Botafogo",
+      "brasfootId": "botafogorj_bra",
+      "apiTeamId": 120,
+      "apiTeamName": "Botafogo",
+      "method": "country_catalog_exact",
+      "country": "Brazil",
+      "verifiedAgainst": "explicit names + Brazil country"
+    },
+    {
+      "club": "Chapecoense",
+      "brasfootId": "chapecoense_bra",
+      "apiTeamId": 132,
+      "apiTeamName": "Chapecoense-sc",
+      "method": "country_catalog_exact",
+      "country": "Brazil",
+      "verifiedAgainst": "explicit names + Brazil country"
+    },
+    {
+      "club": "Corinthians",
+      "brasfootId": "corinthians_bra",
+      "apiTeamId": 131,
+      "apiTeamName": "Corinthians",
+      "method": "country_catalog_exact",
+      "country": "Brazil",
+      "verifiedAgainst": "explicit names + Brazil country"
+    },
+    {
+      "club": "Coritiba",
+      "brasfootId": "coritiba_bra",
+      "apiTeamId": 147,
+      "apiTeamName": "Coritiba",
+      "method": "country_catalog_exact",
+      "country": "Brazil",
+      "verifiedAgainst": "explicit names + Brazil country"
+    },
+    {
+      "club": "Cruzeiro",
+      "brasfootId": "cruzeiro_bra",
+      "apiTeamId": 135,
+      "apiTeamName": "Cruzeiro",
+      "method": "country_catalog_exact",
+      "country": "Brazil",
+      "verifiedAgainst": "explicit names + Brazil country"
+    },
+    {
+      "club": "Flamengo",
+      "brasfootId": "flarj",
+      "apiTeamId": 127,
+      "apiTeamName": "Flamengo",
+      "method": "country_catalog_exact",
+      "country": "Brazil",
+      "verifiedAgainst": "explicit names + Brazil country"
+    },
+    {
+      "club": "Fluminense",
+      "brasfootId": "flurj",
+      "apiTeamId": 124,
+      "apiTeamName": "Fluminense",
+      "method": "country_catalog_exact",
+      "country": "Brazil",
+      "verifiedAgainst": "explicit names + Brazil country"
+    },
+    {
+      "club": "Grêmio",
+      "brasfootId": "gremio",
+      "apiTeamId": 130,
+      "apiTeamName": "Gremio",
+      "method": "country_catalog_exact",
+      "country": "Brazil",
+      "verifiedAgainst": "explicit names + Brazil country"
+    },
+    {
+      "club": "Internacional",
+      "brasfootId": "internacional_bra",
+      "apiTeamId": 119,
+      "apiTeamName": "Internacional",
+      "method": "country_catalog_exact",
+      "country": "Brazil",
+      "verifiedAgainst": "explicit names + Brazil country"
+    },
+    {
+      "club": "Mirassol",
+      "brasfootId": "miirassol_sp",
+      "apiTeamId": 7848,
+      "apiTeamName": "Mirassol",
+      "method": "country_catalog_exact",
+      "country": "Brazil",
+      "verifiedAgainst": "explicit names + Brazil country"
+    },
+    {
+      "club": "Palmeiras",
+      "brasfootId": "palmeiras",
+      "apiTeamId": 121,
+      "apiTeamName": "Palmeiras",
+      "method": "country_catalog_exact",
+      "country": "Brazil",
+      "verifiedAgainst": "explicit names + Brazil country"
+    },
+    {
+      "club": "Red Bull Bragantino",
+      "brasfootId": "bragantino_bra",
+      "apiTeamId": 794,
+      "apiTeamName": "RB Bragantino",
+      "method": "country_catalog_exact",
+      "country": "Brazil",
+      "verifiedAgainst": "explicit names + Brazil country"
+    },
+    {
+      "club": "Remo",
+      "brasfootId": "remo",
+      "apiTeamId": 1198,
+      "apiTeamName": "Remo",
+      "method": "country_catalog_exact",
+      "country": "Brazil",
+      "verifiedAgainst": "explicit names + Brazil country"
+    },
+    {
+      "club": "Santos",
+      "brasfootId": "santos",
+      "apiTeamId": 128,
+      "apiTeamName": "Santos",
+      "method": "country_catalog_exact",
+      "country": "Brazil",
+      "verifiedAgainst": "explicit names + Brazil country"
+    },
+    {
+      "club": "São Paulo",
+      "brasfootId": "saopaulo_bra",
+      "apiTeamId": 126,
+      "apiTeamName": "Sao Paulo",
+      "method": "country_catalog_exact",
+      "country": "Brazil",
+      "verifiedAgainst": "explicit names + Brazil country"
+    },
+    {
+      "club": "Vasco da Gama",
+      "brasfootId": "vasco",
+      "apiTeamId": 133,
+      "apiTeamName": "Vasco DA Gama",
+      "method": "country_catalog_exact",
+      "country": "Brazil",
+      "verifiedAgainst": "explicit names + Brazil country"
+    },
+    {
+      "club": "Vitória",
+      "brasfootId": "vitoria",
+      "apiTeamId": 136,
+      "apiTeamName": "Vitoria",
+      "method": "country_catalog_exact",
+      "country": "Brazil",
+      "verifiedAgainst": "explicit names + Brazil country"
+    }
+  ],
+  "failures": [
+    {
+      "club": "Atlético-MG",
+      "reason": "ambiguous_catalog",
+      "suggestions": [
+        {
+          "id": 1062,
+          "name": "Atletico-MG",
+          "similarityForReviewOnly": 1.0,
+          "city": "Belo Horizonte, Minas Gerais"
+        },
+        {
+          "id": 23570,
+          "name": "Atletico Mogi",
+          "similarityForReviewOnly": 0.909,
+          "city": "Mogi das Cruzes, São Paulo"
+        },
+        {
+          "id": 25125,
+          "name": "Atletico-MG U23",
+          "similarityForReviewOnly": 0.87,
+          "city": null
+        },
+        {
+          "id": 7853,
+          "name": "Atlético PE",
+          "similarityForReviewOnly": 0.8,
+          "city": "Carpina, Pernambuco"
+        },
+        {
+          "id": 12986,
+          "name": "Atlético GO U20",
+          "similarityForReviewOnly": 0.783,
+          "city": "Damolândia, Goiás"
+        },
+        {
+          "id": 24470,
+          "name": "Atletico GO U17",
+          "similarityForReviewOnly": 0.783,
+          "city": null
+        }
+      ]
+    }
+  ],
+  "requests": {
+    "apiCalls": 0,
+    "maxCallsPerRun": 25,
+    "cacheHits": 1,
+    "apiFailures": 0,
+    "retries": 0
+  },
+  "note": "Similarity suggestions are never used for automatic association",
+  "status": "blocked"
+}
