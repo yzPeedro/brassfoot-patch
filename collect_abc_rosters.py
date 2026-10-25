@@ -15,7 +15,7 @@ from api_football_sync import (Budget,cached_fetch,fetch_team_catalog,
                                find_team_in_catalog,normalize,write_json)
 
 ROOT=Path(__file__).resolve().parent
-CATALOG=ROOT/"data"/"target-abc-2026.json"
+CATALOG=ROOT/"site"/"data"/"target-abc-2026.json"
 ALIASES={
  "br-america-mg": ["America MG","America Mineiro","América Mineiro"],
  "br-athletic-mg": ["Athletic Club","Athletic Club MG"],
