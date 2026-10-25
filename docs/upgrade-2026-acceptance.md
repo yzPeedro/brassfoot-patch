@@ -5,7 +5,7 @@ Os statuses abaixo distinguem trabalho entregue em código de validação real. 
 | Critérios | Estado | Evidência / bloqueio |
 |---|---|---|
 | CAN01–CAN06 (clubes e divisões oficiais) | **catalogado** | 156 IDs distintos, 20/20/20/96 por CBF, grupos A1–A16; testar no jogo ainda pendente |
-| CAN07–CAN08 (compatibilidade das divisões) | **bloqueado** | Não há prova de formato/configuração jogável B/C/D |
+| CAN07–CAN08 (compatibilidade das divisões) | **CAN07 estrutural demonstrado; CAN08 pendente** | BRA.cfg possui configurações explícitas A/B/C/D (20/20/20/64); 27/27 roundtrips exatos. Série D 96/16 apenas serialização laboratorial, jogabilidade e participantes não comprovados. |
 | CAN09–CAN18 (escudos/uniformes/pipeline) | **parcial** | Auditor somente-leitura criado; imagens/direitos/temporada e integração não validados |
 | CAN19–CAN20 (web first/API last) | **parcial** | Catálogo oficial obtido sem API, mas coleta de jogadores adicional não implantada |
 | CAN21–CAN22 (quota global, concorrência) | **parcial** | SQLite protege no mesmo banco: 90 por dia e rolling 24h; coordenação entre hosts e saldo global desconhecidos |
