@@ -141,7 +141,7 @@ func preparePayloadWithFS(fsys fs.FS, gamePath, staged string) error {
 			return fmt.Errorf("arquivo de equipe duplicado no pacote: %s", f.Path)
 		}
 		seen[key] = true
-		if f.Operation != "" && (manifest.SchemaVersion != 3 || (f.Operation != "replace" && f.Operation != "add")) {
+		if f.Operation != "" && (manifest.SchemaVersion != 3 || (f.Operation != "replace" && f.Operation != "add" && f.Operation != "verify")) {
 			return fmt.Errorf("operação do pacote incompatível: %s", f.Path)
 		}
 	}
@@ -150,7 +150,7 @@ func preparePayloadWithFS(fsys fs.FS, gamePath, staged string) error {
 		mode := f.Operation
 		if mode == "" { mode = "replace" }
 		var original []byte
-		if mode == "replace" {
+		if mode == "replace" || mode == "verify" {
 			if err = checkRegular(src); err != nil {
 				return fmt.Errorf("arquivo do Brasfoot ausente: %s: %w", f.Path, err)
 			}
@@ -172,6 +172,7 @@ func preparePayloadWithFS(fsys fs.FS, gamePath, staged string) error {
 		if current == f.SHA256 && int64(len(original)) == f.Size {
 			output = original
 		} else {
+			if mode == "verify" { return fmt.Errorf("arquivo historico foi modificado: %s", f.Path) }
 			if mode == "replace" {
 				allowed := false
 				for _, h := range f.AcceptedOriginalSHA256 { if current == h { allowed = true; break } }
