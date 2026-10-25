@@ -24,3 +24,12 @@ https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.0.2
 Em ambiente local Linux, os testes Go da release usaram os 20 `.ban` privados enviados pelo usuário e foram aprovados. Os testes de extensão Go também passaram com corrida de dados habilitada (`go test -race`), incluindo 156 substituições sintéticas, inclusão de novas equipes, rollback, idempotência e preservação dos saves das fixtures. Um novo binário foi compilado para Windows amd64, mas **não foi executado no Windows real nem testado no Brasfoot**. Não substitui a v2026.0.2 pública.
 
 Próximos gates: mapear IDs dos 136 clubes adicionais, testar clubes/competição no jogo, gerar elencos íntegros e resolver procedência das imagens.
+
+
+## Configuração nacional BRA.cfg em schema v3 — etapa de laboratório
+
+O motor agora aceita somente `conf_ligas_nacionais/BRA.cfg` como arquivo adicional de substituição (`operation=replace` em manifesto v3); caminhos estaduais, outras configurações, criação de `BRA.cfg` e path traversal continuam bloqueados. Preflight exige pasta `conf_ligas_nacionais` real e dentro do jogo, arquivo Java Serialization regular e um hash original conhecido. Criação de backup, substituição atômica, verificação SHA-256 e desfazer estão implementados.
+
+Foi realizado teste com os **703 `.ban` privados fornecidos pelo usuário** em instalação temporária, juntamente com o `BRA.cfg` original real e o laboratório 96/16: instalação, idempotência e restauração passaram com arquivos pessoais intactos. Os **20 originais privados da v2026.0.2** também passaram na suíte de regressão Go. O código-fonte possui testes opcionais ativados por fixture privada, mas **não contém nem distribui os arquivos do Brasfoot**.
+
+A compilação Windows foi feita por cross-build e não equivale à execução da GUI. A configuração 96/16 **não deve ser anunciada como jogável até confirmação com o motor do jogo real**. Nenhum binário dessa etapa foi publicado no GitHub Releases.
