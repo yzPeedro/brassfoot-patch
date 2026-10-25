@@ -23,6 +23,16 @@ Aceite: só 2026 na interface; nova carreira criada sem travar; ano 2026 persist
 
 Foram adicionadas listas TSV de Criciúma (29), Londrina (29), Cuiabá (25) e Juventude (36), total de **119 jogadores com nomes e posições observados em páginas oficiais**. Nos quatro casos foram desserializados os originais privados, reconstruídos `.ban` experimentais e aplicadas receitas SHA-vinculadas à função Go `applyRecipe`, com **quatro resultados iguais byte a byte**. Essas cópias não foram instaladas no jogo, não modificam Série D e **ainda contêm estimativas de idade, nacionalidade e atributos para jogadores sem dados completos**. Portanto não são candidatos homologados à release. Fonte/código: `tools/team-roster-editor/`.
 
+## Pesquisa intensiva e testes adicionais — 25/10/2026
+
+- **14 equipes das Séries B/C com 451 jogadores nominais e posição de fonte profissional identificada**: Criciúma (29), Londrina (29), Cuiabá (25), Juventude (36), Maringá (33), Avaí (36), Fortaleza (35), Sport (32), Ceará (32), Ituano (29), São Bernardo (37), Goiás (31), Atlético Goianiense (39) e CRB (28). As fontes originais ficam citadas em `tools/team-roster-editor/sources/*.tsv`.
+- **98 campos de idade presentes** (37 em São Bernardo, 33 no Maringá calculados a partir do aniversário oficial e 28 no CRB calculados a partir do nascimento); **52 nacionalidades registradas ou inferidas de naturalidade nacional**, para revisão final. **Nenhum atributo de habilidade foi validado como oficial**, portanto nenhum desses elencos está pronto para release.
+- Site continua com nomes de todos os 40 clubes B/C pesquisados (atualmente **1.302** nomes), mas a auditoria de posição e a pesquisa da internet são camadas distintas; **nada disso foi instalado** em uma release pública.
+- `tools/audit_official_roster_tsv.py`, `tests/test_official_roster_tsv.py` e pipeline `roster-editor-regression.yml` passaram no GitHub Actions em **40241055618** (14 clubes, 451 nomes, escopo A/B/C, sem Série D).
+- `tools/build_abc_team_map.py` e testes sintéticos garantem **59 originais identificados e 1 ausência do Maranhão**, hashes SHA-256, tratamento de ID 0/2477, nenhuma inclusão de Série D e nenhum `BRA.cfg`. O teste sintético não equivale à validação no jogo.
+- O instalador **oficial** 22–23 baixado para inspeção apresenta ano de início 2022/2023; o usuário apresenta 2023/2024. Encontrado `a/hU.class` (`JComboBox` e `best/f.I(int)`) e arrays nominais de equipes em `best/aq.class` (parecem incluir estaduais), mas a versão do usuário **não foi inspecionada** e **não existe patch aprovado para 2026-only ou divisão A/B/C**.
+- **Prontidão final: BLOQUEADA** por 26 equipes sem posições de fonte rastreada, validação de transferências, atributos reais, Maranhão, diferença do binário, integração do motor com divisão de 2026 e testes de carreira/jogabilidade. Não houve nova release A/B/C; site e última release continuam separados.
+
 ## Novo pipeline de elencos .ban, auditoria e fontes oficiais — 25/10/2026
 
 - Trabalho executado com os **arquivos originais privados do Brasfoot** fornecidos previamente, sem publicar o conteúdo proprietário e sem modificar a instalação do usuário.
