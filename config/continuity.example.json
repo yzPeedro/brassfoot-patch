@@ -1,0 +1,14 @@
+{
+  "stateDir": "data/private/continuity",
+  "aletheScript": "~/.agents/skills/alethe/scripts/orchestrate.py",
+  "backlog": "config/backlog.json",
+  "dailyHour": 6,
+  "timezone": "America/Sao_Paulo",
+  "maxDailyCalls": 2,
+  "maxDailyTokens": 20000,
+  "stopAt": 70,
+  "maxUsageAgeMinutes": 30,
+  "liveQuota": true,
+  "autoIntegrate": true,
+  "autoPush": true
+}
