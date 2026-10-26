@@ -50,8 +50,10 @@ ficam registrados. O status sempre e **candidate-only-not-for-release**:
 nomes presentes numa fonte nao comprovam vinculo atual, atributos,
 compatibilidade ou instalacao no jogo.
 
-Auditoria de entrada no GitHub (25/10/2026): 40 TSVs com 1.296 nomes e
-posicoes, 98 idades informadas; nao equivale a 1.296 jogadores instalados.
+Auditoria inicial no GitHub (25/10/2026): 40 TSVs com 1.296 nomes e
+posicoes, 98 idades informadas. A primeira correção retirou quatro jogadores
+com saidas confirmadas do Maranhão em 29/09/2026: agora sao **1.292** nomes
+candidatos nos 40 TSVs. Nenhum desses totais equivale a jogadores instalados.
 
 ## Versao e publicacao futura
 
