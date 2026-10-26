@@ -51,7 +51,7 @@ const ids=[
   'clubs-page-size','clubs-previous','clubs-next','clubs-page-label','clubs-group-by',
   'clubs-sort-name','clubs-sort-state','clubs-sort-division','clubs-sort-roster',
   'clubs-heading-name','clubs-heading-state','clubs-heading-division','clubs-heading-roster','club-dialog',
-  'club-dialog-close','club-dialog-title','club-dialog-division','club-dialog-source-box','club-dialog-source','club-dialog-reviewed',
+  'club-dialog-close','club-dialog-title','club-dialog-division','club-dialog-source-box','club-dialog-source','club-dialog-reviewed','club-dialog-365scores',
   'club-dialog-description','club-dialog-state','club-dialog-roster-status',
   'club-dialog-player-count','club-dialog-roster-title','club-dialog-notice','club-dialog-players'
 ];
@@ -148,6 +148,8 @@ const tick=()=>new Promise(resolve=>setImmediate(resolve));
   get('clubs-grid').dispatch('click',{target:button});
   assert.equal(get('club-dialog').open,true);
   assert.equal(get('club-dialog-title').textContent,'Cruzeiro');
+  assert.equal(get('club-dialog-365scores').hidden,false);
+  assert.equal(get('club-dialog-365scores').href,'https://www.365scores.com/pt-br/football/team/cruzeiro-1213/squad');
   assert.equal(get('club-dialog-player-count').textContent,'36');
   assert.equal(get('club-dialog-players').children.length,36);
   assert.ok(get('club-dialog-players').children.some(node=>node.textContent==='Cássio'));
