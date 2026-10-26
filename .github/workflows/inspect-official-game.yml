@@ -8,6 +8,8 @@ on:
       - 'tools/patch_official_career_year.py'
       - 'tests/test_patch_official_career_year.py'
       - 'tools/team-roster-editor/src/app/OriginalBrazilDivisionProbe.java'
+      - 'tools/verify_official_abc_file_map.py'
+      - 'data/competitions/2026-abc-original-file-map.json'
   workflow_dispatch:
 permissions:
   contents: read
@@ -47,6 +49,11 @@ jobs:
           echo "----- Extracted filenames (no file bytes) -----"
           find /tmp/brasfoot-extracted -type f -printf '%P\n' | head -n 100
           find /tmp/brasfoot-extracted -type f \( -iname '*.exe' -o -iname '*.jar' -o -iname '*.class' \) -printf '%P\n' | head -n 60
+      - name: Verify 59 mapped Brazil club source hashes against official game setup
+        run: |
+          python tools/verify_official_abc_file_map.py \
+            --game-teams /tmp/brasfoot-extracted/teams
+          echo '59 source identities only; 2026 division gameplay and Maranhão remain unverified'
       - name: Identify largest extracted file types and runtime executable names
         run: |
           python - <<'PY'
