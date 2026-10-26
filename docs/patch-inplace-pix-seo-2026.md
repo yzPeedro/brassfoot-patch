@@ -1,7 +1,7 @@
 # Patch in-place, Pix e SEO — implementação parcial e bloqueios
 
 ## Objetivo original
-Um único `Brassfoot-Patch-2026-Setup.exe` que atualize **no mesmo diretório**
+Um único `Brasfoot-Patch-2026-Setup.exe` que atualize **no mesmo diretório**
 uma instalação legítima do Brasfoot 22–23; sem gerar outra cópia do jogo,
 sem alterar saves ou atalhos e sem distribuir executáveis proprietários.
 
@@ -54,7 +54,7 @@ Pendências objetivas:
    validação e publicação. Ranking orgânico não pode ser garantido.
 
 ## Formato da nova release
-Tag `v2026.n.n`; asset principal `Brassfoot-Patch-2026-Setup.exe`,
+Tag `v2026.n.n`; asset principal `Brasfoot-Patch-2026-Setup.exe`,
 sem instalador ZIP de código como download principal. O manifesto do
 site é atualizado somente depois que a API do GitHub confirmar nome,
 URL, tamanho e SHA-256 do executável **realmente disponível**.
