@@ -16,10 +16,17 @@ const researched=JSON.parse(read('data/researched-rosters-2026.json'));
 for(const id of ['inicio','cobertura','clubes-2026','recursos','como-funciona','instalador','versao','faq'])
   assert.match(html,new RegExp('id="'+id+'"'));
 assert.ok(['published','awaiting_release'].includes(release.status));
-assert.equal(release.publishedVersion,'2026.2.0');
-assert.equal(release.sha256,'25264615120dba5681c5238b331d5012c40b3ffea1c933f1d23bdfe755b2cbd3');
-assert.equal(release.fileSizeBytes,967095);
-assert.match(release.downloadUrl,/v2026\.2\.0\/Brasfoot-2026-ABC20-Compatibilidade-v4\.zip$/);
+assert.match(release.publishedVersion,/^2026\.\d+\.\d+$/);
+assert.match(release.sha256,/^[a-f0-9]{64}$/);
+assert.ok(Number.isInteger(release.fileSizeBytes)&&release.fileSizeBytes>0);
+const activeAssetUrl = 'https://github.com/yzPeedro/brassfoot-patch/releases/download/v' +
+  release.publishedVersion + '/' + release.assetName;
+assert.equal(release.downloadUrl,activeAssetUrl);
+assert.ok(/^(Brasfoot-2026-[A-Za-z0-9._-]+\.(zip|exe)|Brassfoot-Patch-2026-Setup\.exe)$/.test(release.assetName));
+if(release.publishedVersion==='2026.2.0') {
+  assert.equal(release.sha256,'25264615120dba5681c5238b331d5012c40b3ffea1c933f1d23bdfe755b2cbd3');
+  assert.equal(release.fileSizeBytes,967095);
+}
 assert.equal(target.season,2026);
 assert.equal(target.targetClubs,60);
 assert.deepEqual(target.targetDivisions,['A','B','C']);
@@ -29,7 +36,21 @@ assert.equal(target.clubs.length,60);
 assert.equal(new Set(target.clubs.map(c=>c.id)).size,60);
 for(const div of ['A','B','C']) assert.equal(target.clubs.filter(x=>x.division===div).length,20);
 assert.ok(target.clubs.every(c=>c.division!=='D'));
-assert.equal(target.completedReal2026BAndCSquads,0);
+assert.ok([0,40].includes(target.completedReal2026BAndCSquads));
+if(target.completedReal2026BAndCSquads === 40) {
+  assert.equal(target.publishedRosterVersion,release.publishedVersion);
+  assert.equal(release.rostersBCStatus,'verified-2026');
+  const complete = JSON.parse(read('data/published-rosters-2026.json'));
+  assert.equal(complete.schemaVersion,2);
+  assert.equal(complete.sourceRelease,release.publishedVersion);
+  assert.equal(complete.totalClubs,60);
+  assert.equal(complete.rostersBCVerified,40);
+  assert.ok(complete.allRostersVerified);
+  const identities = target.clubs.map(x=>x.id);
+  assert.ok(identities.every(id=>Object.hasOwn(complete.clubs,id)));
+} else {
+  assert.notEqual(release.rostersBCStatus,'verified-2026');
+}
 assert.equal(historical.clubs.length,156);
 assert.equal(historical.counts.D,96);
 assert.match(html,/Série D/);
@@ -97,7 +118,8 @@ assert.match(html,/aria-labelledby="club-dialog-title"/);
 assert.match(html,/option value="10" selected/);
 assert.match(html,/option value="20"/);
 assert.match(html,/option value="50"/);
-assert.match(clubsJs,/getJson\('\.\/data\/published-rosters-2026-0-2\.json'\)/); 
+assert.match(clubsJs,/published-rosters-2026-0-2\.json/);
+assert.match(clubsJs,/published-rosters-2026\.json/); 
 assert.match(clubsJs,/showModal\(\)/);
 assert.match(clubsJs,/elements\.dialog\.close\(\)/);
 assert.match(clubsJs,/lastFocus\.focus\(\)/);
