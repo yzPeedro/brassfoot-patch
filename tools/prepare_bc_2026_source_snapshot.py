@@ -117,7 +117,9 @@ def prepare(target: dict, research: dict, mapping: dict, sources: Path, *, colle
         if not isinstance(prior.get("sourceUrl"), str) or not prior["sourceUrl"].startswith("https://"):
             raise ValueError(f"{club_id}: missing HTTPS research provenance")
         previous_set = {clean(p) for p in previous_names}
+        candidate_set = {clean(p["name"]) for p in players}
         differences = [p["name"] for p in players if clean(p["name"]) not in previous_set]
+        omissions = [name for name in previous_names if clean(name) not in candidate_set]
         original = mapped_by_id.get(club_id)
         if not original or original.get("division") != club["division"]:
             raise ValueError(f"{club_id}: missing original map or division mismatch")
@@ -138,6 +140,7 @@ def prepare(target: dict, research: dict, mapping: dict, sources: Path, *, colle
             "originalTeamMapped": isinstance(original_path, str),
             "players": players, "playerCount": len(players),
             "candidateNamesNotInEarlierResearch": differences,
+            "earlierNamesAbsentFromCandidate": omissions,
             "unverifiedAgeCount": missing_age, "unverifiedCountryCount": missing_country,
             "currentClubEligibilityProven": False,
             "allPlayerAttributesVerified": False,
@@ -161,7 +164,7 @@ def prepare(target: dict, research: dict, mapping: dict, sources: Path, *, colle
         "missingPlayerAges": total_missing_age,
         "missingPlayerCountryCodes": total_missing_country,
         "clubsWithDisagreementsAgainstPriorResearch": [row["clubId"] for row in prepared
-                                                     if row["candidateNamesNotInEarlierResearch"]],
+                                                     if row["candidateNamesNotInEarlierResearch"] or row["earlierNamesAbsentFromCandidate"]],
         "requiredNextSteps": [
             "Reconfirm current club memberships and season eligibility using dated club sources",
             "Resolve unknown player metadata, and retain verifiable attribute values",
