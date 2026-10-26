@@ -57,6 +57,9 @@ jobs:
           python tools/verify_official_abc_file_map.py \
             --game-teams /tmp/brasfoot-extracted/teams
           echo '59 source identities only; 2026 division gameplay and Maranhão remain unverified'
+      - name: Fingerprint original PE runtime for a strict local-only year candidate
+        run: |
+          sha256sum /tmp/brasfoot-extracted/bf22-23.exe
       - name: Identify largest extracted file types and runtime executable names
         run: |
           python - <<'PY'
