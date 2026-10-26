@@ -13,7 +13,8 @@ class ClubRoleAuditTests(unittest.TestCase):
         research=json.loads((ROOT/"site/data/researched-rosters-2026.json").read_text(encoding="utf-8"))
         result=audit(research,ROOT/"tools/team-roster-editor/sources")
         self.assertEqual(result["teamsWithSourcePositions"],40)
-        self.assertEqual(result["playersWithSourcePositions"],1296)
+        # Four departed Maranhão players were removed from sourced candidates.
+        self.assertEqual(result["playersWithSourcePositions"],1292)
         self.assertFalse(result["serieDModified"])
         self.assertFalse(result["sourcePositionReviewIsGameValidation"])
         self.assertEqual(len(result["clubs"]),40)
