@@ -58,6 +58,7 @@ type InstallOptions struct { // TestFailAfter is for automated rollback tests, n
 var (
 	teamName = regexp.MustCompile(`^teams/[a-zA-Z0-9_-]+\.ban$`)
 	nationalConfigPath = "conf_ligas_nacionais/BRA.cfg"
+	gameExecutablePath = "bf22-23.exe"
 	validHash = regexp.MustCompile(`^[0-9a-f]{64}$`)
 	validVersion = regexp.MustCompile(`^2026\.[0-9]+\.[0-9]+$`)
 )
@@ -166,7 +167,7 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 	if err = json.Unmarshal(buf, &m); err != nil {
 		return p, fmt.Errorf("manifesto JSON inválido: %w", err)
 	}
-	if (m.SchemaVersion != 2 && m.SchemaVersion != 3) || m.PatchSeason != 2026 || !validVersion.MatchString(m.Version) {
+	if (m.SchemaVersion != 2 && m.SchemaVersion != 3 && m.SchemaVersion != 4) || m.PatchSeason != 2026 || !validVersion.MatchString(m.Version) {
 		return p, errors.New("formato ou versão do pacote incompatível")
 	}
 	if !((m.Kind == "BRASFOOT_HOMOLOGATION_PATCH" && !m.PublicationAllowed && !m.CompatibilityTestedInGame) ||
@@ -174,14 +175,16 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		return p, errors.New("marcadores de homologação/publicação incoerentes; instalação recusada")
 	}
 	if len(m.Files) < 1 || len(m.Files) > 512 {
-		return p, errors.New("o pacote precisa ter de 1 a 512 arquivos .ban")
+		return p, errors.New("o pacote precisa ter de 1 a 512 arquivos autorizados")
 	}
 	p = Plan{Game: game, Payload: payload, Manifest: m, AlreadyInstalled: true, Items: make([]Item, 0, len(m.Files))}
 	seen := map[string]bool{}
 	states := map[bool]bool{}
 	for _, entry := range m.Files {
-		isNationalConfig := entry.Path == nationalConfigPath && m.SchemaVersion == 3
-		if !teamName.MatchString(entry.Path) && !isNationalConfig {
+		// O executável só pode ser atualizado por manifesto v4 e assinatura SHA reconhecida.
+		isNationalConfig := entry.Path == nationalConfigPath && m.SchemaVersion >= 3
+		isExecutable := entry.Path == gameExecutablePath && m.SchemaVersion == 4
+		if !teamName.MatchString(entry.Path) && !isNationalConfig && !isExecutable {
 			return Plan{}, fmt.Errorf("caminho de patch proibido: %s", entry.Path)
 		}
 		mode := entry.Operation
@@ -192,8 +195,8 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		if m.SchemaVersion == 2 && mode == "add" {
 			return Plan{}, errors.New("schema 2 não permite adicionar equipes")
 		}
-		if isNationalConfig && mode != "replace" {
-			return Plan{}, errors.New("configuração de liga só pode substituir um BRA.cfg conhecido")
+		if (isNationalConfig || isExecutable) && mode != "replace" {
+			return Plan{}, errors.New("configuração nacional e executável só podem substituir originais conhecidos")
 		}
 		entry.Operation = mode
 		key := strings.ToLower(entry.Path)
@@ -222,9 +225,8 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		if allowed {
 			return Plan{}, errors.New("hash original não pode ser idêntico ao patch")
 		}
-		pathParts := strings.Split(entry.Path, "/")
-		source := filepath.Join(payload, pathParts[0], pathParts[1])
-		target := filepath.Join(game, pathParts[0], pathParts[1])
+		source := filepath.Join(payload, filepath.FromSlash(entry.Path))
+		target := filepath.Join(game, filepath.FromSlash(entry.Path))
 		// Replacement originals must exist; additions must not overwrite any unknown file.
 		if err = checkRegular(source); err != nil {
 			return Plan{}, fmt.Errorf("arquivo inválido no pacote: %s: %w", entry.Path, err)
@@ -273,8 +275,9 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		h := [4]byte{}
 		_, err = io.ReadFull(f, h[:])
 		f.Close()
-		if err != nil || h != [4]byte{0xac, 0xed, 0x00, 0x05} {
-			return Plan{}, fmt.Errorf("arquivo serializado sem cabeçalho esperado: %s", entry.Path)
+		if err != nil || (isExecutable && (h[0] != 0x4d || h[1] != 0x5a)) ||
+			(!isExecutable && h != [4]byte{0xac, 0xed, 0x00, 0x05}) {
+			return Plan{}, fmt.Errorf("assinatura inválida de arquivo autorizado: %s", entry.Path)
 		}
 		result, err := sha(source)
 		if err != nil {
@@ -401,6 +404,11 @@ func install(p Plan, opts InstallOptions) (InstallResult, error) {
 		return res, err
 	}
 	for _, item := range fresh.Items {
+		if item.File.Path == gameExecutablePath {
+			if err = checkWritableDirectory(fresh.Game); err != nil {
+				return res, fmt.Errorf("não consigo atualizar o executável na pasta original do jogo: %w", err)
+			}
+		}
 		if item.File.Path == nationalConfigPath {
 			if err = checkWritableDirectory(filepath.Join(p.Game, "conf_ligas_nacionais")); err != nil {
 				return res, fmt.Errorf("não consigo gravar a configuração nacional: %w", err)
