@@ -1,0 +1,84 @@
+name: Inspect Maranhão created by approved V4 (NO RELEASE)
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/inspect-v4-maranhao.yml'
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch SHA-verified approved V4 and original Brasfoot
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $root = Join-Path $env:RUNNER_TEMP 'brasfoot-lab'
+          $game = Join-Path $root 'original'
+          New-Item -ItemType Directory -Force $root,$game | Out-Null
+          $zip = Join-Path $root 'v4.zip'
+          gh release download v2026.2.0 --repo "$env:GITHUB_REPOSITORY" --pattern "Brasfoot-2026-ABC20-Compatibilidade-v4.zip" --dir $root
+          Move-Item (Join-Path $root "Brasfoot-2026-ABC20-Compatibilidade-v4.zip") $zip
+          if ((Get-FileHash $zip -Algorithm SHA256).Hash.ToLower() -ne '25264615120dba5681c5238b331d5012c40b3ffea1c933f1d23bdfe755b2cbd3') { throw 'V4 ZIP SHA mismatch' }
+          Expand-Archive -Path $zip -DestinationPath (Join-Path $root 'v4') -Force
+          $tool = Join-Path $root 'v4/Brasfoot-2026-ABC20-Compatibilidade-v4.exe'
+          if ((Get-FileHash $tool -Algorithm SHA256).Hash.ToLower() -ne 'a894362f73a09f23cdb187a4b1574df820a8d696478803ebe7d488221f708654') { throw 'V4 EXE SHA mismatch' }
+          Invoke-WebRequest -Uri 'https://www.brasfoot.com/download22/brasfoot22-23.exe' -OutFile (Join-Path $root 'original-installer.exe') -TimeoutSec 120
+          if ((Get-FileHash (Join-Path $root 'original-installer.exe') -Algorithm SHA256).Hash.ToLower() -ne '8e3c7a77768d551a1f3c722ef2447c3e451af830613e8a65de33f35bc0e2b33d') { throw 'Official setup SHA mismatch' }
+          $seven = 'C:\Program Files\7-Zip\7z.exe'
+          if (-not (Test-Path $seven)) { throw '7-Zip unavailable' }
+          & $seven x -y "-o$game" (Join-Path $root 'original-installer.exe') | Out-Null
+          if (-not (Test-Path (Join-Path $game 'teams/cruzeiro_bra.ban'))) { throw 'Original teams unavailable' }
+          "LAB=$root" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "V4TOOL=$tool" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "ORIGINALGAME=$game" | Out-File -FilePath $env:GITHUB_ENV -Append
+      - name: Execute V4 in isolated runner using piped original folder
+        timeout-minutes: 4
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $info = New-Object System.Diagnostics.ProcessStartInfo
+          $info.FileName = $env:V4TOOL
+          $info.UseShellExecute = $false
+          $info.RedirectStandardInput = $true
+          $info.RedirectStandardOutput = $true
+          $info.RedirectStandardError = $true
+          $info.WorkingDirectory = $env:LAB
+          $proc = [System.Diagnostics.Process]::Start($info)
+          $proc.StandardInput.WriteLine($env:ORIGINALGAME)
+          $proc.StandardInput.Close()
+          if (-not $proc.WaitForExit(95000)) { $proc.Kill(); throw 'V4 exceeded isolated test timeout' }
+          $stdout = $proc.StandardOutput.ReadToEnd()
+          $stderr = $proc.StandardError.ReadToEnd()
+          Write-Output ('V4_EXIT=' + $proc.ExitCode)
+          Write-Output ('V4_STDOUT=' + $stdout.Substring(0,[Math]::Min($stdout.Length,4000)))
+          Write-Output ('V4_STDERR=' + $stderr.Substring(0,[Math]::Min($stderr.Length,1000)))
+          if ($proc.ExitCode -ne 0) { throw 'V4 command did not complete successfully in CI' }
+      - name: Inspect output hashes only - no licensed binaries uploaded
+        run: |
+          $ErrorActionPreference='Stop'
+          $roots = @($env:LAB, $env:RUNNER_TEMP, (Join-Path $env:USERPROFILE 'Desktop'))
+          $seen = @{}
+          foreach($root in $roots) {
+            if (-not (Test-Path $root)) { continue }
+            Get-ChildItem -Path $root -Recurse -Filter 'maranhao_ma.ban' -File -ErrorAction SilentlyContinue |
+              ForEach-Object {
+                if ($seen.ContainsKey($_.FullName)) { return }
+                $seen[$_.FullName] = 1
+                Write-Output ('FOUND_MARANHAO_PATH=' + $_.FullName)
+                Write-Output ('FOUND_MARANHAO_SIZE=' + $_.Length)
+                Write-Output ('FOUND_MARANHAO_SHA256=' + (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower())
+              }
+          }
+          if ($seen.Count -lt 1) { throw 'V4 did not create Maranhão in inspected paths' }
+      - name: Delete files from Windows runner
+        if: always()
+        run: |
+          if ($env:LAB -and (Test-Path $env:LAB)) { Remove-Item -Recurse -Force $env:LAB -ErrorAction SilentlyContinue }
