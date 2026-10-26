@@ -75,12 +75,17 @@ const doc={
   createDocumentFragment:()=>new Node('fragment')
 };
 const catalog=JSON.parse(fs.readFileSync(path.join(root,'data/target-abc-2026.json'),'utf8'));
+const modern=catalog.completedReal2026BAndCSquads===40;
+const fullRosters=modern ? JSON.parse(fs.readFileSync(path.join(root,'data/published-rosters-2026.json'),'utf8')) : null;
 const rosters=JSON.parse(fs.readFileSync(path.join(root,'data/published-rosters-2026-0-2.json'),'utf8'));
 const researched=JSON.parse(fs.readFileSync(path.join(root,'data/researched-rosters-2026.json'),'utf8'));
 const requests=[];
 async function fetchMock(url){
   requests.push(url);
-  const data=url.includes('target-abc-2026')?catalog: url.includes('published-rosters')?rosters: url.includes('researched-rosters')?researched:null;
+  const data=url.includes('target-abc-2026')?catalog:
+    url.includes('published-rosters-2026.json')?fullRosters:
+    url.includes('published-rosters')?rosters:
+    url.includes('researched-rosters')?researched:null;
   return {ok:!!data,status:data?200:404,json:async()=>data};
 }
 const script=fs.readFileSync(path.join(root,'divisions.js'),'utf8');
@@ -90,6 +95,36 @@ const tick=()=>new Promise(resolve=>setImmediate(resolve));
 (async()=>{
   for(let i=0;i<5;i++)await tick();
   const get=id=>nodes[id];
+  if(modern) {
+    assert.deepEqual(requests,['./data/target-abc-2026.json','./data/published-rosters-2026.json']);
+    assert.equal(fullRosters.sourceRelease,catalog.publishedRosterVersion);
+    assert.equal(get('clubs-grid').children.filter(x=>x.dataset.clubId).length,10);
+    get('clubs-roster-filter').value='published';
+    get('clubs-roster-filter').dispatch('change');
+    assert.match(get('clubs-count').textContent,/60 clubes encontrados/);
+    get('clubs-division').value='B';
+    get('clubs-division').dispatch('change');
+    assert.match(get('clubs-count').textContent,/20 clubes encontrados/);
+    get('clubs-search').value='Criciúma';
+    get('clubs-search').dispatch('input');
+    const row=get('clubs-grid').children.find(x=>x.dataset.clubId);
+    assert.ok(row,'Criciúma from verified B roster should be selectable');
+    get('clubs-grid').dispatch('click',{target:row});
+    assert.equal(get('club-dialog-title').textContent,'Criciúma');
+    assert.match(get('club-dialog-notice').textContent,/validado e publicado na versão/);
+    assert.equal(get('club-dialog-source-box').hidden,false);
+    assert.equal(get('club-dialog-player-count').textContent,
+      String(fullRosters.clubs['br-criciuma-sc'].players.length));
+    get('club-dialog').close();
+    get('clubs-search').value='';
+    get('clubs-group-by').value='roster';
+    get('clubs-group-by').dispatch('change');
+    get('clubs-sort-state').dispatch('click');
+    assert.equal(get('clubs-heading-state').attributes['aria-sort'],'ascending');
+    assert.equal(get('clubs-grid').children[0].className,'clubs-group-header');
+    console.log('PASS: 60 verified A/B/C rosters, modern published filter, modal, grouping, sorting and pagination.');
+    return;
+  }
   assert.deepEqual(requests, ['./data/target-abc-2026.json','./data/published-rosters-2026-0-2.json','./data/researched-rosters-2026.json']);
   assert.equal(get('clubs-grid').children.length,10);
   assert.match(get('clubs-page-label').textContent,/Página 1 de 6/);

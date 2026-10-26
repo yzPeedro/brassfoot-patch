@@ -3,6 +3,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"os/exec"
@@ -44,6 +45,7 @@ const (
 	idDetails         = 304
 	idBackup          = 305
 	idRestore         = 306
+	idPix             = 307
 	pbmSetRange32     = 0x0406
 	pbmSetPos         = 0x0402
 	iccProgressClass  = 0x20
@@ -285,7 +287,7 @@ func runningBrasfoot() (string, error) {
 	ok, _, _ := processFirst.Call(snap, uintptr(unsafe.Pointer(&p)))
 	for ok != 0 {
 		exe := syscall.UTF16ToString(p.Executable[:])
-		if strings.Contains(strings.ToLower(exe), "brasfoot") {
+		if strings.Contains(strings.ToLower(exe), "brasfoot") || strings.EqualFold(exe, "bf22-23.exe") {
 			return exe, nil
 		}
 		ok, _, _ = processNext.Call(snap, uintptr(unsafe.Pointer(&p)))
@@ -293,6 +295,19 @@ func runningBrasfoot() (string, error) {
 	return "", nil
 }
 
+func bundledManifest() Manifest {
+    var manifest Manifest
+    if embeddedPayload == "" { return manifest }
+    data, err := os.ReadFile(filepath.Join(embeddedPayload,"manifest.json"))
+    if err == nil { _ = json.Unmarshal(data,&manifest) }
+    return manifest
+}
+func executableInPlan(plan Plan) bool {
+    for _, item := range plan.Items {
+        if item.File.Path == gameExecutablePath { return true }
+    }
+    return false
+}
 func normalizeGameSelection(path string) string {
 	path = filepath.Clean(strings.TrimSpace(path))
 	if strings.EqualFold(filepath.Base(path), "teams") {
@@ -305,10 +320,12 @@ func normalizeGameSelection(path string) string {
 }
 
 func perform(id int) {
-	if running && id != idDetails {
+	if running && id != idDetails && id != idPix {
 		return
 	}
 	switch id {
+	case idPix:
+		showPixDialog()
 	case idChooseGame:
 		if p := chooseFolder("Selecione a pasta principal do Brasfoot"); p != "" {
 			setText(gameEdit, p)
@@ -369,11 +386,11 @@ func perform(id int) {
 			displayError(Diagnostic{"BF-112", "Feche o Brasfoot antes de restaurar", "O jogo está aberto: " + process, "Salve e feche o Brasfoot; então tente novamente.", process})
 			return
 		}
-		if msgbox("Isto vai restaurar os 20 arquivos originais das equipes a partir do backup conferido. Os arquivos da sua carreira e suas configurações NÃO serão alterados.\n\nDeseja DESFAZER o patch?", "Restaurar elencos originais", mbYesNo|mbIconWarning|mbDefaultButton2) != 6 {
+		if msgbox(fmt.Sprintf("Isto vai restaurar os %d arquivos afetados a partir de backup conferido. Saves e configurações pessoais NÃO serão alterados.\n\nDeseja DESFAZER o patch?",len(restorePlan.Items)), "Restaurar arquivos originais", mbYesNo|mbIconWarning|mbDefaultButton2) != 6 {
 			return
 		}
 		setBusy(true)
-		setStatus("RESTAURANDO OS ELENCOS ORIGINAIS", "Conferindo os backups e revertendo apenas os arquivos teams/*.ban...", "Não feche a janela até a verificação final.", false)
+		setStatus("RESTAURANDO OS ARQUIVOS ORIGINAIS", "Conferindo backups por SHA-256, inclusive do executável se fizer parte do patch...", "Não feche a janela até a verificação final.", false)
 		showProgress(0, "Iniciando restauração")
 		go func(plan Plan) {
 			if process, e := runningBrasfoot(); e == nil && process != "" {
@@ -448,13 +465,16 @@ func onEvent(ev guiEvent) {
 		}
 		// Explicit consent remains necessary because this is a PRIVATE, unverified roster preview.
 		warning := fmt.Sprintf("Jogo detectado e %d arquivos de equipes verificados.\n\nEsta é uma PRÉVIA COM DADOS ESTIMADOS: 713 jogadores têm atributos estimados.\n\nO instalador vai substituir SOMENTE os %d arquivos .ban aprovados em teams/. Vai salvar antes backups íntegros em AppData; NÃO vai editar saves, carreiras ou configurações.\n\nSalve e FECHE o Brasfoot antes de continuar.\n\nDeseja instalar na pasta selecionada?", len(ev.plan.Items), len(ev.plan.Items))
-		if msgbox(warning, "Confirmar atualização de elencos", mbYesNo|mbIconWarning|mbDefaultButton2) != 6 {
+		if executableInPlan(ev.plan) {
+            warning=fmt.Sprintf("Jogo verificado na pasta original.\n\n%d arquivos assinados serão atualizados NESTA MESMA INSTALAÇÃO, incluindo bf22-23.exe.\n\nO executável original e todos os arquivos afetados receberão backups persistentes com SHA-256. Saves e configurações não serão tocados. Em caso de erro, o patch será revertido.\n\nFeche o Brasfoot antes de continuar.\n\nAplicar o patch?",len(ev.plan.Items))
+        }
+        if msgbox(warning, "Confirmar atualização do Brasfoot", mbYesNo|mbIconWarning|mbDefaultButton2) != 6 {
 			setBusy(false)
 			setStatus("INSTALAÇÃO CANCELADA", "Nenhum arquivo do Brasfoot foi modificado.", "Quando estiver pronto, clique novamente em INSTALAR PATCH.", false)
 			showProgress(0, "Aguardando confirmação")
 			return
 		}
-		setStatus("CRIANDO BACKUPS VERIFICADOS", "O patch está sendo aplicado apenas nos arquivos .ban dos clubes selecionados.", "Não feche esta janela até a confirmação final.", false)
+		setStatus("CRIANDO BACKUPS VERIFICADOS", "Atualizando somente os arquivos assinados na pasta selecionada do Brasfoot.", "Não feche esta janela até a confirmação final.", false)
 		showProgress(0, "Preparando instalação")
 		go func(p Plan) {
 			if process, err := runningBrasfoot(); err == nil && process != "" {
@@ -493,7 +513,7 @@ func onEvent(ev guiEvent) {
 		}
 		backupPath = ev.result.BackupPath
 		enableWindow.Call(backupButton, 1)
-		setStatus("PATCH APLICADO E VERIFICADO", fmt.Sprintf("%d equipes atualizadas na versão %s. Arquivos originais salvos com segurança.", ev.result.Files, ev.result.Version), "Agora abra o Brasfoot, inicie uma NOVA carreira e teste os clubes. Seus saves anteriores não foram alterados.", false)
+		setStatus("PATCH APLICADO E VERIFICADO", fmt.Sprintf("%d arquivos atualizados na versão %s. Backups persistentes preservados.", ev.result.Files, ev.result.Version), "Agora abra o Brasfoot, inicie uma NOVA carreira e teste os clubes. Seus saves anteriores não foram alterados.", false)
 		showProgress(100, "Arquivos e hashes verificados")
 		msgbox("A instalação terminou e os arquivos substituídos foram conferidos por SHA-256.\n\nBackups: "+backupPath+"\n\nTeste em uma carreira nova antes de usar seus saves antigos. A compatibilidade foi testada pelo criador do patch; elencos incluem atributos estimados.", "Instalação técnica concluída", mbOK|mbIconInfo)
 	case "restored":
@@ -503,7 +523,7 @@ func onEvent(ev guiEvent) {
 		enableWindow.Call(restoreButton, 0)
 		backupPath = ev.result.BackupPath
 		enableWindow.Call(backupButton, 1)
-		setStatus("ELENCOS ORIGINAIS RESTAURADOS", fmt.Sprintf("Os %d arquivos .ban originais foram restaurados e tiveram seus hashes conferidos.", ev.result.Files), "Seus saves e configurações não foram modificados. O backup continua disponível.", false)
+		setStatus("ARQUIVOS ORIGINAIS RESTAURADOS", fmt.Sprintf("Os %d arquivos afetados foram restaurados e tiveram seus hashes conferidos.", ev.result.Files), "Seus saves e configurações não foram modificados. O backup continua disponível.", false)
 		showProgress(100, "Restauração e hashes confirmados")
 		msgbox("Arquivos originais restaurados com sucesso.\n\nBackups preservados em: "+backupPath, "Patch desfeito", mbOK|mbIconInfo)
 	}
@@ -533,14 +553,17 @@ func setupControls() {
 	muted := color(177, 197, 185)
 	yellow := color(255, 218, 117)
 	labelColor(textLabel("BRASSFOOT PATCH 2026", 37, 26, 830, 48, green, headingFont), green)
-	textLabel("INSTALADOR WINDOWS   /   PRÉVIA 2026.0.2 — ACOMPANHE LIMITAÇÕES", 39, 80, 830, 25, muted, bodyFont)
+	manifest := bundledManifest()
+	textLabel(fmt.Sprintf("INSTALADOR WINDOWS / VERSÃO %s / GRATUITO", manifest.Version), 39, 80, 830, 25, muted, bodyFont)
 	textLabel("01   SELECIONE A PASTA DO JOGO", 40, 130, 830, 29, green, strongFont)
 	gameEdit = create("EDIT", findGame(), wsChild|wsVisible|wsBorder|wsTabStop|esAutoHScroll, 40, 166, 682, 38, 0, bodyFont)
 	gameBrowse = create("BUTTON", "PROCURAR…", wsChild|wsVisible|wsTabStop, 735, 165, 143, 40, idChooseGame, bodyFont)
 	textLabel("Exemplo: C:\\Brasfoot22-23  ·  Detectamos a instalação automaticamente quando possível.", 41, 216, 835, 25, muted, smallFont)
 	textLabel("02   PATCH INCLUSO NO INSTALADOR", 40, 264, 835, 29, green, strongFont)
-	textLabel("20 clubes brasileiros  •  730 atletas  •  Temporada 2026", 41, 300, 835, 29, white, bodyFont)
-	textLabel("PRÉVIA EXPERIMENTAL: 713 jogadores com atributos estimados. Compatibilidade testada; dados ainda estimados.", 41, 332, 838, 44, yellow, smallFont)
+	textLabel(fmt.Sprintf("Temporada 2026  •  %d arquivos assinados no pacote",len(manifest.Files)), 41, 300, 835, 29, white, bodyFont)
+	scope := "Somente arquivos reconhecidos por SHA-256. Backups e rollback automáticos."
+    if manifest.SchemaVersion < 4 { scope = "Prévia Série A: atletas com atributos estimados. Compatibilidade limitada." }
+    textLabel(scope, 41, 332, 838, 44, yellow, smallFont)
 	installButton = create("BUTTON", "VERIFICAR E INSTALAR PATCH", wsChild|wsVisible|wsTabStop, 40, 390, 322, 46, idInstall, strongFont)
 	diagnoseButton = create("BUTTON", "SÓ VERIFICAR", wsChild|wsVisible|wsTabStop, 376, 390, 167, 46, idDiagnose, bodyFont)
 	restoreButton = create("BUTTON", "DESFAZER PATCH", wsChild|wsVisible|wsTabStop, 553, 390, 154, 46, idRestore, smallFont)
@@ -554,7 +577,8 @@ func setupControls() {
 	progressText = textLabel("0%  ·  Aguardando instalação", 40, 484, 830, 23, muted, smallFont)
 	statusHeading = textLabel("PRONTO PARA COMEÇAR", 40, 523, 675, 27, green, strongFont)
 	statusReason = textLabel("Selecione a pasta do Brasfoot. O instalador verificará o jogo, o pacote e fará backup automaticamente.", 40, 556, 837, 38, white, smallFont)
-	statusAction = textLabel("Somente arquivos teams/*.ban serão alterados. Carreiras, saves e configurações serão preservados.", 40, 600, 837, 48, muted, smallFont)
+	statusAction = textLabel("Somente arquivos assinados serão alterados. Saves e configurações pessoais serão preservados.", 40, 600, 685, 48, muted, smallFont)
+	create("BUTTON", "☕ PIX OPCIONAL", wsChild|wsVisible|wsTabStop, 737, 600, 140, 36, idPix, smallFont)
 	detailButton = create("BUTTON", "DETALHES", wsChild|wsVisible|wsTabStop, 735, 520, 143, 28, idDetails, smallFont)
 	enableWindow.Call(detailButton, 0)
 	if getText(gameEdit) == "" {
@@ -570,7 +594,7 @@ func windowProcedure(h uintptr, msg uint32, w, l uintptr) uintptr {
 	case wmCommand:
 		id := int(w & 0xffff)
 		switch id {
-		case idChooseGame, idInstall, idDiagnose, idDetails, idBackup, idRestore:
+		case idChooseGame, idInstall, idDiagnose, idDetails, idBackup, idRestore, idPix:
 			perform(id)
 			return 0
 		}

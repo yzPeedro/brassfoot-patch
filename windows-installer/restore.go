@@ -70,7 +70,7 @@ func findRestorableBackup(plan Plan) (string, backupRecord, error) {
 		if err := json.Unmarshal(bytes, &saved); err != nil {
 			continue
 		}
-		if saved.Status != "installed" || saved.Version != plan.Manifest.Version || !strings.EqualFold(filepath.Clean(saved.Game), filepath.Clean(plan.Game)) || saved.Files != len(plan.Items) || (plan.Manifest.SchemaVersion == 2 && len(saved.OriginalSHA256) != len(plan.Items)) || (plan.Manifest.SchemaVersion == 3 && saved.SchemaVersion != 3) {
+		if saved.Status != "installed" || saved.Version != plan.Manifest.Version || !strings.EqualFold(filepath.Clean(saved.Game), filepath.Clean(plan.Game)) || saved.Files != len(plan.Items) || (plan.Manifest.SchemaVersion == 2 && len(saved.OriginalSHA256) != len(plan.Items)) || (plan.Manifest.SchemaVersion >= 3 && saved.SchemaVersion != plan.Manifest.SchemaVersion) {
 			continue
 		}
 		valid := true
@@ -112,7 +112,7 @@ func findRestorableBackup(plan Plan) (string, backupRecord, error) {
 	return "", backupRecord{}, errors.New("não encontrei backup íntegro e compatível com este patch; restauração automática indisponível")
 }
 
-// Restore ONLY those .ban targets recorded in the successful install report.
+// Restore ONLY signed targets recorded in the successful install report.
 // On failure we attempt to roll back the restore to the patched state, so a
 // partially undone patch is not silently left behind.
 func restorePatch(plan Plan, progress func(int, int)) (string, error) {
@@ -131,6 +131,11 @@ func restorePatch(plan Plan, progress func(int, int)) (string, error) {
 		return "", err
 	}
 	for _, item := range fresh.Items {
+		if item.File.Path == gameExecutablePath {
+			if err = checkWritableDirectory(fresh.Game); err != nil {
+				return "", fmt.Errorf("não consigo restaurar o executável original: %w", err)
+			}
+		}
 		if item.File.Path == nationalConfigPath {
 			if err = checkWritableDirectory(filepath.Join(fresh.Game, "conf_ligas_nacionais")); err != nil {
 				return "", fmt.Errorf("não consigo restaurar a configuração nacional: %w", err)

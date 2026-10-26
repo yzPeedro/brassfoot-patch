@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#071813">
+<meta name="description" content="Saiba quais versões do Brasfoot 22–23 são suportadas, como funcionam hashes, backups e a preservação de carreiras.">
+<link rel="canonical" href="https://yzpeedro.github.io/brassfoot-patch/compatibilidade/">
+<link rel="stylesheet" href="../styles.css">
+<link rel="icon" type="image/svg+xml" href="../assets/mark.svg">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Brassfoot Patch">
+<meta property="og:title" content="Compatibilidade do Brasfoot Patch 2026 — Segurança e saves">
+<meta property="og:description" content="Saiba quais versões do Brasfoot 22–23 são suportadas, como funcionam hashes, backups e a preservação de carreiras.">
+<meta property="og:url" content="https://yzpeedro.github.io/brassfoot-patch/compatibilidade/">
+<meta property="og:image" content="https://yzpeedro.github.io/brassfoot-patch/assets/og-card.svg">
+<title>Compatibilidade do Brasfoot Patch 2026 — Segurança e saves</title>
+<style>
+.guide{width:min(820px,calc(100% - 36px));margin:65px auto 110px;line-height:1.75}
+.guide h1,.guide h2{font-family:'Barlow Condensed',sans-serif;line-height:1.2}
+.guide h1{font-size:clamp(36px,6vw,65px);color:var(--lime)}
+.guide h2{font-size:29px;margin-top:40px}
+.guide p,.guide li{color:#d6e6da;font-size:16px}
+.guide a{color:var(--lime);text-decoration:underline}
+.guide code{background:#264131;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}
+.guide .muted{color:#9bb2a5}
+.guide .lead{font-size:19px}
+.guide .home{display:inline-block;margin-top:20px}
+</style>
+</head>
+<body>
+<header class="top-ribbon">BRASSFOOT PATCH · PROJETO GRATUITO E INDEPENDENTE · 2026</header>
+<main class="guide">
+<a class="home" href="../">← Voltar ao site</a>
+<h1>Compatibilidade, segurança e backups</h1><p class="lead">A compatibilidade depende da versão exata do Brasfoot e da integridade dos arquivos existentes. Não basta que uma instalação tenha o nome Brasfoot.</p>
+<h2>Qual jogo é necessário?</h2><p>Uma cópia legítima do Brasfoot 22–23 para Windows, com estrutura <code>teams/</code> e <code>options.bcf</code>. O sistema confere SHA-256 antes de alterar arquivos conhecidos.</p>
+<h2>Versão disponível</h2><p><strong>2026.2.0:</strong> utilitário que gera uma cópia isolada com seletor de ano 2026 e 20 clubes em cada Série A/B/C. Os 40 elencos B/C ainda não foram substituídos por elencos atuais; Maranhão usa dados experimentais. Não há prova de uma temporada completa ou progressão para 2027.</p>
+<h2>O que acontece com meus saves?</h2><p>Na edição atual, os saves da instalação original não são copiados para a nova pasta. A implementação in-place em andamento terá backup persistente, restauração verificável por hash e proteção contra substituição de arquivos desconhecidos. Preservar os bytes do save não garante automaticamente compatibilidade com uma carreira antiga.</p>
+<h2>Segurança da instalação futura</h2><p>O fluxo esperado será verificação da assinatura → backup íntegro → atualização na mesma pasta → validação → recuperação por rollback em caso de falha. A instalação não deve prosseguir quando o Brasfoot estiver aberto.</p>
+<h2>Série D</h2><p>A configuração original <code>BRA.cfg</code> é preservada no escopo atual, com 64 participantes e oito grupos. A reclassificação nacional pode mudar a participação derivada de clubes; isso exige validação em uma carreira real.</p>
+<p><a href="../como-instalar/">Consultar o guia de instalação →</a></p>
+<p class="muted">Informações referentes à versão publicada 2026.2.0, com dados verificados em 26/10/2026. As funcionalidades de futuras versões só serão anunciadas quando realmente estiverem disponíveis.</p>
+</main>
+<footer class="footer"><div class="wrap footer-inner"><p>Projeto independente. Este patch não inclui licença do Brasfoot original. <a href="../">Página inicial</a></p></div></footer>
+</body></html>

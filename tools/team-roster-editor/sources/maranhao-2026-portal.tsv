@@ -1,6 +1,8 @@
 # Brazilian Serie C 2026 observed player list. Source: https://www.365scores.com/pt-br/football/team/maranhao-ma-12748/squad
 # Reviewed 2026-10-25. Grouped by source categories; excludes coaches and unnamed placeholders.
-# Lucão excluded from source snapshot due to September 2026 transfer-out report; verify final registrations and role before release. Maranhão has NO existing source .ban and needs new game team file and real league identity.
+# Saídas confirmadas em 29/09/2026: Will, Vander, Tibúrcio e Vagalume removidos do candidato; Lucão já estava excluído. Rosivan também deixou o clube, mas não estava neste TSV.
+# https://ge.globo.com/ma/futebol/times/maranhao/noticia/2026/09/29/seis-saidas-quatro-renovacoes-e-uma-duvida-veja-como-ficou-o-time-base-de-2026-do-mac.ghtml
+# Situação de Felipe Cruz ainda dependia de definição em outubro; conferir inscrição antes da release. Maranhão has NO existing source .ban and needs new game team file and real league identity.
 # Codes: 0 goalkeeper; 1 fullback; 2 centerback; 3 midfield; 4 attacker.
 # Age/country omitted if not individually verified.
 Jean	0		
@@ -14,20 +16,16 @@ Franklin	1
 Lucas Santos	1		
 Ball	1		
 Edson	2		
-Tibúrcio	2		
 Keven	2		
 Luís Felipe	2		
 Rodrigo	3		
-Vander	3		
 Raílson	3		
 Jorge Rocha	3		
 Luís Gustavo	3		
 Caio Victor	3		
 Pedro Lucas	3		
-Vagalume	3		
 Pimentinha	4		
 Felipe Cruz	4		
-Will	4		
 Rafael Teixeira	4		
 Joelson	4		
 Pedro Henrique	4		

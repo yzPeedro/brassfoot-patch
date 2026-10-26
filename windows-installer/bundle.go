@@ -121,19 +121,20 @@ func preparePayloadWithFS(fsys fs.FS, gamePath, staged string) error {
 	if err = json.Unmarshal(body, &manifest); err != nil {
 		return err
 	}
-	if (manifest.SchemaVersion != 2 && manifest.SchemaVersion != 3) || manifest.PatchSeason != 2026 || !validVersion.MatchString(manifest.Version) {
+	if (manifest.SchemaVersion != 2 && manifest.SchemaVersion != 3 && manifest.SchemaVersion != 4) || manifest.PatchSeason != 2026 || !validVersion.MatchString(manifest.Version) {
 		return fmt.Errorf("manifesto do pacote inválido")
 	}
 	if len(manifest.Files) < 1 || len(manifest.Files) > 512 {
-		return fmt.Errorf("pacote incompatível: esperado de 1 a 512 arquivos .ban, encontrados %d", len(manifest.Files))
+		return fmt.Errorf("pacote incompatível: esperado de 1 a 512 arquivos autorizados, encontrados %d", len(manifest.Files))
 	}
 	seen := make(map[string]bool, len(manifest.Files))
 	for _, f := range manifest.Files {
-		isNationalConfig := manifest.SchemaVersion == 3 && f.Path == nationalConfigPath
-		if !teamName.MatchString(f.Path) && !isNationalConfig {
+		isNationalConfig := manifest.SchemaVersion >= 3 && f.Path == nationalConfigPath
+		isExecutable := manifest.SchemaVersion == 4 && f.Path == gameExecutablePath
+		if !teamName.MatchString(f.Path) && !isNationalConfig && !isExecutable {
 			return fmt.Errorf("arquivo não autorizado no pacote: %s", f.Path)
 		}
-		if isNationalConfig && f.Operation != "replace" {
+		if (isNationalConfig || isExecutable) && f.Operation != "replace" {
 			return fmt.Errorf("BRA.cfg somente pode ser substituído: %s", f.Path)
 		}
 		key := strings.ToLower(f.Path)
@@ -141,7 +142,7 @@ func preparePayloadWithFS(fsys fs.FS, gamePath, staged string) error {
 			return fmt.Errorf("arquivo de equipe duplicado no pacote: %s", f.Path)
 		}
 		seen[key] = true
-		if f.Operation != "" && (manifest.SchemaVersion != 3 || (f.Operation != "replace" && f.Operation != "add")) {
+		if f.Operation != "" && (manifest.SchemaVersion < 3 || (f.Operation != "replace" && f.Operation != "add")) {
 			return fmt.Errorf("operação do pacote incompatível: %s", f.Path)
 		}
 	}
@@ -156,6 +157,9 @@ func preparePayloadWithFS(fsys fs.FS, gamePath, staged string) error {
 			}
 			original, err = os.ReadFile(src)
 			if err != nil { return err }
+			if f.Path == gameExecutablePath && (len(original) < 2 || original[0] != 0x4d || original[1] != 0x5a) {
+				return fmt.Errorf("executável original não possui assinatura MZ reconhecida")
+			}
 		} else {
 			if e := checkRegular(src); e == nil {
 				original, err = os.ReadFile(src)
