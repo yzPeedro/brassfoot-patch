@@ -32,7 +32,9 @@ func findRestorableBackup(plan Plan) (string, backupRecord, error) {
 	if err != nil {
 		return "", backupRecord{}, err
 	}
-	root, err = filepath.Abs(root)
+	// Use the same canonical backup root as install(); Windows temp paths can
+	// have different textual spellings after symlink/short-path resolution.
+	root, err = canonical(root)
 	if err != nil {
 		return "", backupRecord{}, err
 	}
