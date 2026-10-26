@@ -109,7 +109,7 @@ try {
     try {
         Run 'go' @('test','./...')
         Run 'go' @('vet','./...')
-        $filename = 'Brassfoot-Patch-2026-Setup.exe'
+        $filename = 'Brasfoot-Patch-2026-Setup.exe'
         $exe = Join-Path $logDir $filename
         Run 'go' @('build','-trimpath','-ldflags=-H windowsgui','-o',$exe,'.')
     } finally { Pop-Location }
