@@ -27,7 +27,7 @@ Na raiz do repositório:
 py -3 collect_abc_rosters.py --offline
 
 # Para coleta controlada e com API_FOOTBALL_KEY configurada apenas no ambiente:
-py -3 collect_abc_rosters.py --max-requests 60
+py -3 collect_abc_rosters.py --allow-network --max-requests 60
 ```
 
 O coletor salva o snapshot em `data/private/bc-rosters-2026-review.json`, ignorado pelo Git. Nunca versionar credenciais ou arquivos binários originais do jogo. O teto persistente de consumo da API depende de executar todos os consumidores no mesmo ledger local; não presume limite global entre máquinas.
