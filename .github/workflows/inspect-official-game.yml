@@ -7,6 +7,7 @@ on:
       - 'tools/inspect_career_years.py'
       - 'tools/patch_official_career_year.py'
       - 'tests/test_patch_official_career_year.py'
+      - 'tools/team-roster-editor/src/app/OriginalBrazilDivisionProbe.java'
   workflow_dispatch:
 permissions:
   contents: read
