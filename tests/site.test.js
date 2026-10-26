@@ -22,7 +22,7 @@ assert.ok(Number.isInteger(release.fileSizeBytes)&&release.fileSizeBytes>0);
 const activeAssetUrl = 'https://github.com/yzPeedro/brassfoot-patch/releases/download/v' +
   release.publishedVersion + '/' + release.assetName;
 assert.equal(release.downloadUrl,activeAssetUrl);
-assert.ok(/^(Brasfoot-2026-[A-Za-z0-9._-]+\.(zip|exe)|Brasfoot-Patch-2026-Setup\.exe)$/.test(release.assetName));
+assert.ok(/^(Brasfoot-2026-[A-Za-z0-9._-]+\.(zip|exe)|Brasfoot-Patch-2026-Setup(?:-v[0-9]{4}\.[0-9]+\.[0-9]+)?\.exe)$/.test(release.assetName));
 if(release.publishedVersion==='2026.2.0') {
   assert.equal(release.sha256,'25264615120dba5681c5238b331d5012c40b3ffea1c933f1d23bdfe755b2cbd3');
   assert.equal(release.fileSizeBytes,967095);
