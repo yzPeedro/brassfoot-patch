@@ -13,6 +13,7 @@ on:
       - 'tools/build_bc_lab_deltas.py'
       - 'tools/trace_national_league_routing.py'
       - 'tools/inspect_league_model_fields.py'
+      - 'tools/locate_league_original_club_lists.py'
   workflow_dispatch:
 permissions:
   contents: read
@@ -179,6 +180,11 @@ jobs:
                   print('DIVISION_METHOD',json.dumps(reduced,ensure_ascii=False))
           print('READ ONLY - these indicators are not a verified national division mapping')
           PY
+      - name: Find original 2022 twenty-club division list owner (read-only)
+        run: |
+          python tools/locate_league_original_club_lists.py \
+            --game-exe /tmp/brasfoot-extracted/bf22-23.exe
+          echo 'Team names may also be rivals/states; do not patch unconfirmed owners'
       - name: Trace national league to club accessors in original Java engine (read-only)
         run: |
           python tools/trace_national_league_routing.py \
