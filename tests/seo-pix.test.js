@@ -33,6 +33,15 @@ for(const page of ['como-instalar','compatibilidade','versoes']) {
 }
 assert.ok(sitemap.includes(target+'</loc>'));
 assert.ok(html.includes('id="pix-open"'));
+assert.ok(html.includes('id="pix-floating"'));
+assert.match(html, /id="pix-floating"[^>]+aria-controls="pix-dialog"/);
+assert.ok(styles.includes('.pix-floating{'));
+assert.ok(styles.includes('.pix-floating[hidden]'));
+assert.match(js, /floatingButton\.addEventListener\('click', openPixDialog\)/);
+assert.match(js, /openButton\.addEventListener\('click', openPixDialog\)/);
+assert.match(js, /new IntersectionObserver\(/);
+assert.match(js, /observer\.observe\(openButton\)/);
+assert.match(js, /floatingButton\.hidden = footerPixVisible/);
 assert.ok(html.includes('id="pix-dialog"'));
 assert.ok(html.includes('id="pix-qr"'));
 assert.ok(html.includes('id="pix-code"'));
