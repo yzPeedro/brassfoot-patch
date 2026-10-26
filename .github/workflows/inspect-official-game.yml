@@ -14,6 +14,7 @@ on:
       - 'tools/trace_national_league_routing.py'
       - 'tools/inspect_league_model_fields.py'
       - 'tools/locate_league_original_club_lists.py'
+      - 'tools/year-division-lab/**'
   workflow_dispatch:
 permissions:
   contents: read
@@ -58,6 +59,11 @@ jobs:
           python tools/verify_official_abc_file_map.py \
             --game-teams /tmp/brasfoot-extracted/teams
           echo '59 source identities only; 2026 division gameplay and Maranhão remain unverified'
+      - name: Validate 43 division changes on the original game without writing
+        run: |
+          python tools/year-division-lab/verify_original_division_plan.py \
+            --original-teams /tmp/brasfoot-extracted/teams
+          echo 'Read-only: one Serie C participant Maranhão still must be created'
       - name: Fingerprint original PE runtime for a strict local-only year candidate
         run: |
           sha256sum /tmp/brasfoot-extracted/bf22-23.exe
