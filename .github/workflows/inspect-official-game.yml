@@ -12,6 +12,7 @@ on:
       - 'data/competitions/2026-abc-original-file-map.json'
       - 'tools/build_bc_lab_deltas.py'
       - 'tools/trace_national_league_routing.py'
+      - 'tools/inspect_league_model_fields.py'
   workflow_dispatch:
 permissions:
   contents: read
@@ -180,6 +181,11 @@ jobs:
           python tools/trace_national_league_routing.py \
             --game-exe /tmp/brasfoot-extracted/bf22-23.exe
           echo 'Forensic call graph only; this is not evidence of correct 2026 league gameplay'
+      - name: Inspect league model fields, divisao accessors and collection allocation sites
+        run: |
+          python tools/inspect_league_model_fields.py \
+            --game-exe /tmp/brasfoot-extracted/bf22-23.exe
+          echo 'Read only: no changes to national competitions or saved games'
       - name: Record installed official Java class source fingerprints
         run: |
           python - <<'PY'
