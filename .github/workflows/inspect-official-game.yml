@@ -102,6 +102,15 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Analyze original Brazil team metadata without modifying team files
+        run: |
+          mkdir -p /tmp/brasfoot-division-probe-classes
+          javac -encoding UTF-8 -d /tmp/brasfoot-division-probe-classes \
+            tools/team-roster-editor/src/e/*.java \
+            tools/team-roster-editor/src/app/*.java
+          java -cp /tmp/brasfoot-division-probe-classes app.OriginalBrazilDivisionProbeSelfTest
+          java -cp /tmp/brasfoot-division-probe-classes app.OriginalBrazilDivisionProbe \
+            /tmp/brasfoot-extracted/teams
       - name: Inspect only relevant year constants in four class bytecode listings
         run: |
           python - <<'PY'
