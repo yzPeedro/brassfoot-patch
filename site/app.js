@@ -18,7 +18,7 @@
     if(metadata.compatibilityVerifiedInGame!==true||!/^[a-f0-9]{64}$/i.test(metadata.sha256||'')||
        !Number.isInteger(metadata.fileSizeBytes)||metadata.fileSizeBytes<=0)throw Error('Integridade incompleta');
     const expected=base+'v'+metadata.publishedVersion+'/'+metadata.assetName;
-    if(metadata.downloadUrl!==expected||!/^Brasfoot-2026-[A-Za-z0-9._-]+\.zip$/.test(metadata.assetName||''))throw Error('Link não autorizado');
+    if(metadata.downloadUrl!==expected||!(/^(?:Brasfoot-2026-[A-Za-z0-9._-]+\.(?:zip|exe)|Brassfoot-Patch-2026-Setup\.exe)$/.test(metadata.assetName||'')))throw Error('Link não autorizado');
     detail.textContent='Verificando hash e tamanho no GitHub…';
     const responseGithub=await fetch('https://api.github.com/repos/yzPeedro/brassfoot-patch/releases/tags/v'+metadata.publishedVersion,{cache:'no-store',headers:{Accept:'application/vnd.github+json'}});
     if(!responseGithub.ok)throw Error('Release ainda não disponível');
@@ -28,7 +28,9 @@
     if(!asset)throw Error('Arquivo público não passou na verificação SHA-256 e tamanho');
     status.textContent='DISPONÍVEL';badge.textContent='PUBLICADO';badge.style.color='#c5ff69';
     detail.textContent='SHA-256: '+metadata.sha256+'. Confirme a integridade após baixar.';
-    disclaimer.textContent='Versão '+metadata.publishedVersion+' · ano 2026 e 60 clubes nas Séries A/B/C · B/C ainda com elencos históricos.';
+    disclaimer.textContent='Versão '+metadata.publishedVersion+' · ano 2026 e 60 clubes nas Séries A/B/C · '+(metadata.rostersBCStatus==='verified-2026'?'elencos B/C atualizados para 2026.':'elencos B/C ainda históricos.');
+    const alternate=document.querySelector('.release-alt-link');
+    if(alternate) alternate.href='https://github.com/yzPeedro/brassfoot-patch/releases/tag/v'+metadata.publishedVersion;
     for(const button of buttons){button.disabled=false;button.textContent='BAIXAR VERSÃO '+metadata.publishedVersion+' ↗';button.addEventListener('click',()=>window.location.assign(expected));}
   }).catch(error=>{status.textContent='INDISPONÍVEL';badge.textContent='NÃO VERIFICADO';detail.textContent='Download bloqueado: '+error.message+'. Consulte a página da release no GitHub.';});
 })();
