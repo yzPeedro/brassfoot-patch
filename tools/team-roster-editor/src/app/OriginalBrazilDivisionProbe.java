@@ -25,15 +25,16 @@ public final class OriginalBrazilDivisionProbe {
                 examined++;
                 if (Files.size(entry) > 1_000_000) { rejected++; continue; }
                 try {
-                    t club = UpdateTeamRoster.loadTeam(Files.readAllBytes(entry));
+                    byte[] source = Files.readAllBytes(entry);
+                    t club = UpdateTeamRoster.loadTeam(source);
                     if (club.a != 29) continue;
                     brazilian++;
                     // Numeric metadata only. Name and original player lists are not printed.
                     String line = String.format(Locale.ROOT,
-                        "BRA_TEAM filename=%s id=%d aid=%d sid=%d tid=%d vid=%d a=%d b=%d c=%d g=%d i=%d n=%d o=%d valid=%s players=%d",
+                        "BRA_TEAM filename=%s id=%d aid=%d sid=%d tid=%d vid=%d a=%d b=%d c=%d g=%d i=%d n=%d o=%d valid=%s players=%d sourceSha256=%s",
                         entry.getFileName(), club.id, club.aid, club.sid, club.tid,
                         club.vid, club.a, club.b, club.c, club.g, club.i, club.n,
-                        club.o, club.valid, club.l.size());
+                        club.o, club.valid, club.l.size(), UpdateTeamRoster.sha256(source));
                     names.add(line);
                 } catch (Exception unsupported) {
                     // Foreign-country files and unsupported serializations are not modified.
