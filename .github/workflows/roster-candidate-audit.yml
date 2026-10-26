@@ -1,0 +1,58 @@
+name: Audit 2026 roster deltas (NOT RELEASE)
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/prepare_2026_roster_candidate.py'
+      - '.github/workflows/roster-candidate-audit.yml'
+permissions:
+  contents: read
+jobs:
+  audit-candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Download official Brasfoot 22-23 into CI temp only
+        run: |
+          mkdir -p /tmp/brasfoot-source /tmp/brasfoot-installed
+          curl -fL --retry 2 --connect-timeout 15 --max-time 120 -o /tmp/brasfoot-source/brasfoot22-23.exe https://www.brasfoot.com/download22/brasfoot22-23.exe
+          echo "8e3c7a77768d551a1f3c722ef2447c3e451af830613e8a65de33f35bc0e2b33d  /tmp/brasfoot-source/brasfoot22-23.exe" | sha256sum -c -
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq p7zip-full > /dev/null
+          7z x -y -o/tmp/brasfoot-installed /tmp/brasfoot-source/brasfoot22-23.exe > /dev/null
+      - name: Build 39 B/C experimental player deltas
+        run: |
+          python -m tools.build_bc_lab_deltas --game-teams /tmp/brasfoot-installed/teams --output /tmp/brasfoot-bc-lab --lab-estimates
+      - name: Audit A+B+C source-based candidate and enforce no-release marker
+        run: |
+          python -m tools.prepare_2026_roster_candidate --game-teams /tmp/brasfoot-installed/teams --bc-lab /tmp/brasfoot-bc-lab --output /tmp/brasfoot-rosters-candidate
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path=Path('/tmp/brasfoot-rosters-candidate')
+          report=json.loads((path/'report.json').read_text())
+          assert report['candidateClubs']==59 and report['totalTargetClubs']==60
+          assert (report['serieA'],report['serieB'],report['serieC'])==(20,19,20) or (report['serieA'],report['serieB'],report['serieC'])==(20,20,19)
+          assert not report['readyForDistribution'] and not report['compatibleWithV4InstallerVerified']
+          assert report['unresolvedClub']=='br-maranhao-ma'
+          assert len(list((path/'patches').glob('*.json')))==59
+          print('CANDIDATE ONLY: 59 verified byte-level deltas, Maranhão and player eligibility still pending')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: experimental-2026-59-roster-deltas-NOT-FOR-RELEASE
+          path: /tmp/brasfoot-rosters-candidate
+          if-no-files-found: error
+          retention-days: 3
+      - name: Delete official game binaries from runner
+        if: always()
+        run: rm -rf /tmp/brasfoot-source /tmp/brasfoot-installed /tmp/brasfoot-bc-lab /tmp/brasfoot-rosters-candidate
