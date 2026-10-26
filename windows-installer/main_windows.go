@@ -44,6 +44,7 @@ const (
 	idDetails         = 304
 	idBackup          = 305
 	idRestore         = 306
+	idPix             = 307
 	pbmSetRange32     = 0x0406
 	pbmSetPos         = 0x0402
 	iccProgressClass  = 0x20
@@ -305,10 +306,12 @@ func normalizeGameSelection(path string) string {
 }
 
 func perform(id int) {
-	if running && id != idDetails {
+	if running && id != idDetails && id != idPix {
 		return
 	}
 	switch id {
+	case idPix:
+		showPixDialog()
 	case idChooseGame:
 		if p := chooseFolder("Selecione a pasta principal do Brasfoot"); p != "" {
 			setText(gameEdit, p)
@@ -554,7 +557,8 @@ func setupControls() {
 	progressText = textLabel("0%  ·  Aguardando instalação", 40, 484, 830, 23, muted, smallFont)
 	statusHeading = textLabel("PRONTO PARA COMEÇAR", 40, 523, 675, 27, green, strongFont)
 	statusReason = textLabel("Selecione a pasta do Brasfoot. O instalador verificará o jogo, o pacote e fará backup automaticamente.", 40, 556, 837, 38, white, smallFont)
-	statusAction = textLabel("Somente arquivos teams/*.ban serão alterados. Carreiras, saves e configurações serão preservados.", 40, 600, 837, 48, muted, smallFont)
+	statusAction = textLabel("Somente arquivos assinados serão alterados. Saves e configurações pessoais serão preservados.", 40, 600, 685, 48, muted, smallFont)
+	create("BUTTON", "☕ PIX OPCIONAL", wsChild|wsVisible|wsTabStop, 737, 600, 140, 36, idPix, smallFont)
 	detailButton = create("BUTTON", "DETALHES", wsChild|wsVisible|wsTabStop, 735, 520, 143, 28, idDetails, smallFont)
 	enableWindow.Call(detailButton, 0)
 	if getText(gameEdit) == "" {
@@ -570,7 +574,7 @@ func windowProcedure(h uintptr, msg uint32, w, l uintptr) uintptr {
 	case wmCommand:
 		id := int(w & 0xffff)
 		switch id {
-		case idChooseGame, idInstall, idDiagnose, idDetails, idBackup, idRestore:
+		case idChooseGame, idInstall, idDiagnose, idDetails, idBackup, idRestore, idPix:
 			perform(id)
 			return 0
 		}
