@@ -72,6 +72,15 @@ class SourceSnapshotTests(unittest.TestCase):
             prepare(self.target, self.research, self.original, self.sources,
                     collected_at="2026-10-25T00:00:00Z")
 
+    def test_departure_is_reported_as_missing_from_candidate(self):
+        club_id = IDENTITIES["criciuma"]
+        self.research["clubs"][club_id]["players"].append("Transferido para fora")
+        snapshot, report = prepare(self.target, self.research, self.original, self.sources,
+                                   collected_at="2026-10-25T00:00:00Z")
+        club = next(x for x in snapshot["clubs"] if x["clubId"] == club_id)
+        self.assertEqual(club["earlierNamesAbsentFromCandidate"], ["Transferido para fora"])
+        self.assertIn(club_id, report["clubsWithDisagreementsAgainstPriorResearch"])
+
     def test_atomic_write_generates_valid_json(self):
         path = self.sources / "out" / "result.json"
         write_atomic(path, {"clubCount": 40, "readyForDistribution": False})
