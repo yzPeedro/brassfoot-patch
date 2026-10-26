@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "status": "awaiting_release",
+  "status": "published",
   "publishedVersion": "2026.2.0",
-  "publishedAt": null,
+  "publishedAt": "2026-10-26",
   "assetName": "Brasfoot-2026-ABC20-Compatibilidade-v4.zip",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/download/v2026.2.0/Brasfoot-2026-ABC20-Compatibilidade-v4.zip",
   "fileSizeBytes": 967095,
