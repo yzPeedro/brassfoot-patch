@@ -36,9 +36,9 @@
 
   const collator = new Intl.Collator('pt-BR', {sensitivity:'base', numeric:true});
   const labels = {
-    A: 'Prévia publicada (2026.0.2)',
-    B: 'Aguardando elenco 2026',
-    C: 'Aguardando elenco 2026'
+    A: 'Série A 2026 · elenco original ou v2026.0.2',
+    B: 'Série B 2026 · elenco histórico',
+    C: 'Série C 2026 · elenco histórico (Maranhão experimental)'
   };
 
   let clubs = [];
@@ -266,12 +266,12 @@
     elements.modalTitle.textContent = club.name;
     elements.modalDivision.textContent = 'Série ' + club.division + ' · Temporada 2026';
     elements.modalDescription.textContent = published
-      ? 'Nomes dos jogadores efetivamente incluídos na prévia v2026.0.2.'
+      ? 'Jogadores da v2026.0.2: presentes apenas em instalações onde esse patch já foi aplicado.'
       : (external ? 'Jogadores de fonte externa pesquisada; ainda NÃO estão no patch.' : 'Elenco atualizado de 2026 ainda não publicado para este clube.');
     elements.modalState.textContent = club.state;
     elements.modalStatus.textContent = rosterStatus(club);
     elements.modalCount.textContent = roster ? String(roster.players.length) : '—';
-    elements.modalRosterTitle.textContent = published ? 'Jogadores no patch v2026.0.2' : 'Jogadores identificados em fonte externa';
+    elements.modalRosterTitle.textContent = published ? 'Jogadores da antiga v2026.0.2 (se aplicada)' : 'Jogadores identificados em fonte externa';
     elements.sourceBox.hidden = !external;
     if (external) {
       elements.sourceLink.href = external.sourceUrl;
@@ -285,7 +285,7 @@
     const fragment = document.createDocumentFragment();
     if (roster) {
       elements.modalNotice.textContent = published
-        ? 'Nomes efetivamente no patch .ban da v2026.0.2; atributos estimados.'
+        ? 'Esses jogadores só são preservados na 2026.2.0 se a v2026.0.2 já estava instalada. A nova edição não instala elencos da Série A.'
         : 'PESQUISA EXTERNA, NÃO INSTALADA NO PATCH. ' + external.note + ' Antes da inclusão, faltam conferir vínculos/2026 e validar o arquivo .ban.';
       const roleLabels = ['Goleiro','Lateral','Zagueiro','Meio-campo','Atacante'];
       roster.players.forEach((name,index) => {
