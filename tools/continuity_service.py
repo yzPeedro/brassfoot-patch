@@ -42,7 +42,7 @@ def prepare(cfg):
             'why': 'Bounded persisted backlog task with automatic checks',
             'budget': {'maxCalls': 1, 'maxWallSeconds': 150,
                        'maxReportedTokens': 10000, 'maxEstimatedPromptTokens': 4000},
-            'workers': [{'id': task['id'], 'provider': 'codex', 'model': 'gpt-6-luna',
+            'workers': [{'id': task['id'], 'provider': 'codex', 'model': 'mega-code',
                          'effort': 'high', 'mode': 'write', 'cwd': str(cfg['repoRoot']),
                          'timeoutSeconds': 120, 'why': 'Savings worker for bounded implementation',
                          'task': task['brief'] + '\nFollow AGENTS.md. Do not change any other paths. Do not weaken existing tests. No commits, push, releases or nested workers.'}]})
@@ -134,3 +134,4 @@ def main():
 
 if __name__ == '__main__':
     raise SystemExit(main())
+
