@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "status": "published",
-  "publishedVersion": "2026.2.0",
-  "publishedAt": "2026-10-26",
-  "assetName": "Brasfoot-2026-ABC20-Compatibilidade-v4.zip",
-  "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/download/v2026.2.0/Brasfoot-2026-ABC20-Compatibilidade-v4.zip",
-  "fileSizeBytes": 967095,
-  "sha256": "25264615120dba5681c5238b331d5012c40b3ffea1c933f1d23bdfe755b2cbd3",
+  "status": "awaiting_release",
+  "publishedVersion": "2026.3.4",
+  "publishedAt": null,
+  "assetName": "Brasfoot-Patch-2026-Setup-v2026.3.4.exe",
+  "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/download/v2026.3.4/Brasfoot-Patch-2026-Setup-v2026.3.4.exe",
+  "fileSizeBytes": 5045760,
+  "sha256": "bf12ad06b664b562a23dd23450c9440e5050327fd732839c72d63b96c2dc2c82",
   "compatibilityVerifiedInGame": true,
-  "scopeOfGameValidation": "Year 2026, A/B/C club selectors and opening game reported by maintainer; full season and calendar not verified",
+  "scopeOfGameValidation": "V4 instalada e validada no Windows pelo mantenedor; ciclo completo de campeonato e temporadas posteriores não homologado.",
   "competitionSeason": 2026,
   "serieDConfigPreserved": true,
   "serieDMembershipMayChange": true,
-  "releaseNotes": "Creates isolated copy. Year 2026 and A/B/C 20 clubs, synthetic Maranhão. Previous 2026.0.2 rosters retained when hash approved; current version does not install B/C 2026 rosters."
+  "releaseNotes": "V4: atualização na pasta original do Brasfoot 22-23, backup integral antes de modificar, preservação dos saves e configurações, restauração do original, ícone atemporal B e progresso exibido. Divisões A/B/C da V4. Plantéis B/C não declarados como totalmente atualizados para 2026."
 }
