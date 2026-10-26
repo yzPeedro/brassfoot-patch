@@ -21,7 +21,7 @@ assert.ok(schema['@graph'].some(x=>x['@type']==='WebSite'));
 const app=schema['@graph'].find(x=>x['@type']==='SoftwareApplication');
 assert.equal(app.offers.price,'0');
 assert.equal(app.offers.priceCurrency,'BRL');
-assert.equal(app.softwareVersion,'2026.2.0');
+assert.equal(app.softwareVersion,JSON.parse(read('data/release.json')).publishedVersion);
 
 const target='https://yzpeedro.github.io/brassfoot-patch/';
 for(const page of ['como-instalar','compatibilidade','versoes']) {
