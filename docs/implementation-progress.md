@@ -1,5 +1,18 @@
 # Progresso atual — Brasfoot Patch 2026
 
+## Checkpoint de execução — 26/10/2026 UTC (25/10 em Brasília)
+
+**Implementação e teste executados, não apenas planejamento:**
+
+- A cópia imutável do Brasfoot 22–23 oficial foi inspecionada: executável do jogo `bf22-23.exe` SHA-256 `2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c`. O setup original possui SHA-256 `8e3c7a77768d551a1f3c722ef2447c3e451af830613e8a65de33f35bc0e2b33d`.
+- A pesquisa de metadados do setup encontrou **196 equipes brasileiras** entre os 703 `.ban`. Foram associadas **59 das 60 equipes A/B/C de 2026** aos arquivos reais, IDs internos e SHA-256 originais, com nomes idênticos ou aliases explícitos; o Maranhão não possui `.ban` original conhecido. Mapeamento em `data/competitions/2026-abc-original-file-map.json`. Auditoria offline `tools/verify_official_abc_file_map.py` com bloqueio para hashes, versões e caminhos desconhecidos, e seis novos testes.
+- O gerador `tools/build_bc_lab_deltas.py` **conseguiu reconstruir 39 elencos das Séries B/C**, partindo dos arquivos originais e nomes/posições presentes nos TSVs. Criou 39 receitas diferenciais com reconstrução byte a byte, verificadas contra a instalação original **somente em pasta temporária**, sem copiar saves ou mudar Série D. CI oficial `40248735020` passou. Os arquivos gerados em CI foram apagados ao fim e **não são release**: a elegibilidade final dos atletas e atributos ainda precisam ser validados. O Maranhão permanece sem original e fora do pacote.
+- A classe `a/hU.class` tem **sete bytes alterados** para o seletor 2026; original e destino reconhecidos por SHA exato. Byte edits `(offset, antigo, novo)`: `(4566,50,54)`, `(8736,182,87)`, `(8737,1,87)`, `(8738,1,0)`, `(8752,4,3)`, `(9603,231,234)`, `(9621,230,234)`. Isso substitui uma opção do JComboBox, neutraliza a segunda entrada e envia 2026 ao setter do motor. **Não comprova compatibilidade do calendário e do jogo real.**
+- **Acesso real às ligas encontrado:** `a/bV.cX(int)` preenche os combos das divisões nacionais por `best/Z.eb() → f/B.yi() → f/s.yK()` e os estaduais por `best/Z.jg()`, em estruturas distintas. `best/ah` (representação de equipe carregada) possui `getDivisao()/setDivisao(int)`. `f/B` e `f/s` possuem o campo `divisao`; `f/s` mantém uma `ArrayList Zb` com participantes. São evidências de implementação, não prova de quais dados novos serão aceitos no save/calendário. Auditorias CI `40248994075` e `40249264025` passaram.
+- Estado final continua **BLOQUEADO** para distribuição de um patch completo: falta criar Maranhão com identidade segura, aplicar filiação nacional A/B/C em objetos reais do motor, revisar lógica específica de 2023 em `best/p.class`, validar 2026→2027 e saves no Windows, e validar os plantéis. Não relabelar `v2026.1.1` como release aprovada, pois ela alterou Série D e usou nomes fictícios/históricos.
+- Em todas as etapas de produção de receitas, **Série D, BRA.cfg, arquivos de save e instalação original foram preservados**. O material de código recém-implementado está na branch principal; nenhuma nova release final foi publicada.
+
+
 ## Checkpoint técnico: executável oficial e seletores (25/10/2026)
 
 - **Referência original confirmada:** download oficial do Brasfoot 22–23, setup SHA-256 `8e3c7a77768d551a1f3c722ef2447c3e451af830613e8a65de33f35bc0e2b33d`; executável extraído `bf22-23.exe` de 7.320.384 bytes.
