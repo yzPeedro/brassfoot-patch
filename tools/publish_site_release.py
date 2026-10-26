@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "site"
 SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 VERSION = re.compile(r"2026\.[0-9]+\.[0-9]+\Z")
-ASSET = "Brassfoot-Patch-2026-Setup.exe"
+ASSET = "Brasfoot-Patch-2026-Setup.exe"
 URL = "https://github.com/yzPeedro/brassfoot-patch/releases/download/"
 
 
@@ -214,7 +214,7 @@ def main() -> int:
     parser.add_argument("--notes-file", type=Path, required=True)
     args = parser.parse_args()
     if args.filename != ASSET:
-        parser.error("O download principal precisa ser Brassfoot-Patch-2026-Setup.exe")
+        parser.error("O download principal precisa ser Brasfoot-Patch-2026-Setup.exe")
     try:
         day = date.fromisoformat(args.published_at)
         previous = json.loads((SITE / "data" / "release.json").read_text(encoding="utf-8"))
