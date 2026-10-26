@@ -75,7 +75,7 @@ jobs:
               ('inter-limeira-2026-portal.tsv', [5,9,5,11,7]),
               ('floresta-2026-portal.tsv', [5,4,6,9,8]),
               ('itabaiana-2026-portal.tsv', [4,4,6,10,11]),
-              ('maranhao-2026-portal.tsv', [3,7,4,8,7]),
+              ('maranhao-2026-portal.tsv', [3,7,3,6,6]),
               ('paysandu-2026-portal.tsv', [4,8,7,11,7]),
               ('santa-cruz-2026-portal.tsv', [4,4,7,12,11]),
               ('volta-redonda-2026-portal.tsv', [4,4,5,8,9]),
