@@ -107,7 +107,33 @@ jobs:
           $dir=Join-Path $env:LAB 'candidate'
           Copy-Item (Join-Path $dir 'manifest.json') 'windows-installer/bundled_release/manifest.json' -Force
           Copy-Item (Join-Path $dir 'patches/*.json') 'windows-installer/bundled_release/patches/' -Force
+          $env:BRASFOOT_V4_CI_GAME = Join-Path $env:USERPROFILE 'Desktop/Brasfoot-2026-Laboratorio-1'
           Push-Location windows-installer
+          go test -run '^TestV4RealRosterInstallRestoreCI          Pop-Location
+          $exe=Join-Path $env:LAB 'V4-Rosters-2026.3.5-TESTE-NAO-PUBLICAR.exe'
+          if (-not (Test-Path $exe)) { throw 'No Windows executable generated' }
+          Write-Output ('TEST_BINARY_SIZE=' + (Get-Item $exe).Length)
+          Write-Output ('TEST_BINARY_SHA256=' + (Get-FileHash $exe -Algorithm SHA256).Hash.ToLower())
+          Write-Output 'EXPERIMENTAL ONLY: Works on SHA-recognized V4 team files; does not install V4 by itself.'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: V4-2026.3.5-ROSTERS-WINDOWS-CANDIDATE-NOT-FOR-PUBLIC-RELEASE
+          path: ${{ runner.temp }}/brasfoot-lab/V4-Rosters-2026.3.5-TESTE-NAO-PUBLICAR.exe
+          retention-days: 3
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: experimental-2026-60-V4-roster-deltas-NOT-FOR-RELEASE
+          path: ${{ runner.temp }}/brasfoot-lab/candidate
+          retention-days: 3
+          if-no-files-found: error
+      - name: Delete files from Windows runner
+        if: always()
+        run: |
+          if ($env:LAB -and (Test-Path $env:LAB)) { Remove-Item -Recurse -Force $env:LAB -ErrorAction SilentlyContinue }
+          $sandbox=Join-Path $env:USERPROFILE 'Desktop/Brasfoot-2026-Laboratorio-1'
+          if (Test-Path $sandbox) { Remove-Item -Recurse -Force $sandbox -ErrorAction SilentlyContinue }
+ -count=1 -v .
           go build -ldflags='-H windowsgui -s -w' -o (Join-Path $env:LAB 'V4-Rosters-2026.3.5-TESTE-NAO-PUBLICAR.exe') .
           Pop-Location
           $exe=Join-Path $env:LAB 'V4-Rosters-2026.3.5-TESTE-NAO-PUBLICAR.exe'
