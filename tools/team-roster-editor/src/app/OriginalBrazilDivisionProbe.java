@@ -36,6 +36,19 @@ public final class OriginalBrazilDivisionProbe {
                         club.vid, club.a, club.b, club.c, club.g, club.i, club.n,
                         club.o, club.valid, club.l.size(), UpdateTeamRoster.sha256(source));
                     names.add(line);
+                    if (entry.getFileName().toString().equals("samapaiocorrea_ma.ban")
+                            || entry.getFileName().toString().equals("athleticclub_mg.ban")
+                            || entry.getFileName().toString().equals("barra_sc.ban")) {
+                        String[] fields = {club.cor1, club.cor2, club.d, club.e, club.f, club.h};
+                        System.out.print("ORIGINAL_TEAM_STRING_LAYOUT " + entry.getFileName());
+                        for (int j=0;j<fields.length;j++) {
+                            String value=fields[j];
+                            System.out.print(" field"+j+"="+
+                                (value==null ? "<null>" :
+                                  value.replace("\n"," ").replace("\r"," ").substring(0,Math.min(70,value.length()))));
+                        }
+                        System.out.println();
+                    }
                 } catch (Exception unsupported) {
                     // Foreign-country files and unsupported serializations are not modified.
                     rejected++;
