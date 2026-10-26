@@ -1,5 +1,16 @@
 # Progresso atual — Brasfoot Patch 2026
 
+## Teste jogável disponibilizado para validação pelo usuário — 26/10/2026
+
+- **Confirmação visual do usuário:** o executável experimental com ano 2026 abre a tela de escolha de equipe e permite selecionar 2026, mas mostra participantes originais de 2022 na 1ª divisão. Essa confirmação valida apenas navegação/seleção do ano, não gameplay de carreira/temporada completa.
+- **Causa identificada pela engenharia reversa:** o campo numérico serializado `e.t.c` dos **196 clubes brasileiros** delimita originalmente **A20 (`c=16..19`), B20 (`c=12..15`), C20 (`c=10..11`)**. Os 20 clubes de A coincidem exatamente com a captura da interface. Não são apenas nomes fixos de combos.
+- **Plano seguro:** 43 alterações de 4 bytes no campo `c` identificadas por arquivo original, estado, estádio e SHA-256 em `tools/year-division-lab/changes.tsv`, com montagem de `A=20, B=20, C=19` e Maranhão explicitamente ausente. Auditoria em memória contra o instalador original `tools/year-division-lab/verify_original_division_plan.py`, **aprovada no CI**: https://github.com/yzPeedro/brassfoot-patch/actions/runs/40252763403. Nenhuma instalação real ou save foi alterado nesse teste.
+- **Laboratório Windows v2:** o código Go original do seletor 2026 foi estendido com validações SHA-256 individuais e edição em cópia isolada desses 43 campos; 3 testes Go locais passaram, incluindo cópia do jogo com saves preservados e recusa de executável adulterado.
+- **Laboratório Windows v3:** para fechar Série C com 20 clubes, um `maranhao_ma.ban` original **sintético** foi serializado em Java a partir de 29 nomes/posições de pesquisa de 2026 e metadados locais identificados por comparação com clubes originais (formato de e.t e e.g, MA=9, `c=10`, `d` = nome-base da imagem, `e` = nome, `f` = estádio, `h` = treinador). SHA-256 do novo arquivo: `a3a2d72491596763d5b94cc65658b65fcd594aade4e057df76dc1292d28b9909`; serialização roundtrip testada. **Atributos genéricos, identidade/comportamento dentro do jogo e disponibilidade de assets ainda não homologados.**
+- O novo utilitário Go monta **cópia isolada com A20/B20/C20**, verifica as 43 alterações individuais, verifica que a original possui 196 clubes brasileiros e a cópia 197, e não copia saves. Testes de laboratório: `go test ./...`, `go vet ./...`, cross-build `GOOS=windows GOARCH=amd64` passaram. Executável disponibilizado diretamente nesta conversa (não publicado em release pública).
+- **Limites atuais:** alteração estática de índices e serialização aprovada, **mas usuário ainda não testou este novo binário**. Série D mantém `BRA.cfg` original (64 clubes/8 grupos), embora participações derivadas possam mudar devido às promoções/rebaixamentos. Elencos B/C recentes completos, uniformes/escudos, calendário, 2027, partidas e saves ainda requerem testes antes de um instalador final. Não publicar como patch definitivo.
+
+
 ## Checkpoint de execução — 26/10/2026 UTC (25/10 em Brasília)
 
 **Implementação e teste executados, não apenas planejamento:**
