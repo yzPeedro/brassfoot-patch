@@ -24,6 +24,7 @@ if ($actualZip -ne $expectedZipSHA) {
     throw "SHA-256 ZIP invalido: $actualZip. Nada publicado."
 }
 Add-Type -AssemblyName System.IO.Compression
+Add-Type -AssemblyName System.IO.Compression.FileSystem
 $archive = [System.IO.Compression.ZipFile]::OpenRead($ZipPath)
 try {
     $entry = $archive.GetEntry($exeName)
