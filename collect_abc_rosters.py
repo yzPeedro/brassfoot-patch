@@ -120,11 +120,15 @@ def main():
     p.add_argument("--target",type=Path,default=CATALOG)
     p.add_argument("--cache",type=Path,default=ROOT/"data"/"api-football")
     p.add_argument("--output",type=Path,default=ROOT/"data"/"private"/"bc-rosters-2026-review.json")
-    p.add_argument("--max-requests",type=int,default=60)
+    p.add_argument("--max-requests",type=int,default=0)
     p.add_argument("--offline",action="store_true")
+    p.add_argument("--allow-network",action="store_true",help="Opt in explicitly to API-Football requests, with a nonzero --max-requests ceiling")
     args=p.parse_args()
     if args.max_requests<0 or args.max_requests>80:p.error("Request limit must be from 0 to 80")
-    try:print(json.dumps(collect(args.target,args.cache,args.output,offline=args.offline,max_requests=args.max_requests),ensure_ascii=False))
+    if args.allow_network and args.offline:p.error("Use --allow-network OR --offline, not both")
+    if args.allow_network and args.max_requests==0:p.error("Live API calls require an explicit --max-requests budget")
+    if not args.allow_network and args.max_requests>0:p.error("Use --allow-network to enable API-Football; offline is the default")
+    try:print(json.dumps(collect(args.target,args.cache,args.output,offline=not args.allow_network,max_requests=args.max_requests),ensure_ascii=False))
     except (ValueError,RuntimeError,OSError,KeyError) as exc:
         print("Collection blocked:",exc,file=sys.stderr)
         return 1
