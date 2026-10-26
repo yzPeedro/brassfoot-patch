@@ -169,7 +169,15 @@ public final class UpdateTeamRoster {
         int namespace = (int) (Long.parseLong(sha256(original).substring(0, 7), 16) % 1_000_000);
         Report report = update(team, loadPlayers(roster), lab, namespace);
         byte[] result = serialize(team);
-        if (loadTeam(result).l.size() != report.total()) throw new IOException("Serialized roster invalid");
+        t verified = loadTeam(result);
+        if (verified.l.size() != report.total()) throw new IOException("Serialized roster invalid");
+        List<Player> expectedPlayers=loadPlayers(roster);
+        for (int i=0;i<report.total();i++) {
+            Player expected=expectedPlayers.get(i);
+            g actual=verified.l.get(i);
+            if (!expected.name().equals(actual.a) || actual.e!=expected.position())
+                throw new IOException("Serialized player name/position mismatched at index " + i);
+        }
         Files.write(output, result, StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE);
         System.out.printf("TEAM=%d PLAYERS=%d REUSED=%d ESTIMATED_AGE=%d ESTIMATED_COUNTRY=%d ESTIMATED_RATINGS=%d%n",
             teamId, report.total(), report.reused(), report.estimatedAge(), report.estimatedCountry(), report.estimatedRatings());
