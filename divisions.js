@@ -27,7 +27,8 @@
     modalPlayers: byId('club-dialog-players'),
     sourceBox: byId('club-dialog-source-box'),
     sourceLink: byId('club-dialog-source'),
-    sourceReviewed: byId('club-dialog-reviewed')
+    sourceReviewed: byId('club-dialog-reviewed'),
+    supplementary365scores: byId('club-dialog-365scores')
   };
   if (Object.values(elements).some(x => !x || (Array.isArray(x) && x.some(i => !i)))) return;
 
@@ -35,6 +36,12 @@
     .replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('pt-BR').trim();
 
   const collator = new Intl.Collator('pt-BR', {sensitivity:'base', numeric:true});
+  const supplementary365scores = Object.freeze({
+    'br-cruzeiro-mg': 'https://www.365scores.com/pt-br/football/team/cruzeiro-1213/squad',
+    'br-maranhao-ma': 'https://www.365scores.com/pt-br/football/team/maranhao-ma-12748/squad',
+    'br-maringa-pr': 'https://www.365scores.com/pt-br/football/team/maringa-18884/squad'
+  });
+
   const labels = {
     A: 'Série A 2026 · elenco original ou v2026.0.2',
     B: 'Série B 2026 · elenco histórico',
@@ -338,6 +345,10 @@
       elements.modalNotice.textContent =
         'Nenhum elenco real de 2026 foi publicado para este clube nas Séries B/C. A lista aparecerá depois da coleta, da conferência e da integração ao patch; não exibimos jogadores fictícios.';
     }
+    const corroboration = supplementary365scores[club.id];
+    elements.supplementary365scores.hidden = !corroboration;
+    if (corroboration) elements.supplementary365scores.href = corroboration;
+    else elements.supplementary365scores.removeAttribute('href');
     elements.modalPlayers.replaceChildren(fragment);
     elements.dialog.showModal();
     elements.close.focus();
