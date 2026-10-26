@@ -103,6 +103,7 @@ jobs:
           $ErrorActionPreference='Stop'
           Push-Location windows-installer
           go test ./...
+          if ($LASTEXITCODE -ne 0) { throw 'Full Go regressions failed: installer not eligible for artifact' }
           Pop-Location
           $dir=Join-Path $env:LAB 'candidate'
           Copy-Item (Join-Path $dir 'manifest.json') 'windows-installer/bundled_release/manifest.json' -Force
@@ -110,7 +111,9 @@ jobs:
           $env:BRASFOOT_V4_CI_GAME = Join-Path $env:USERPROFILE 'Desktop/Brasfoot-2026-Laboratorio-1'
           Push-Location windows-installer
           go test -run TestV4RealRosterInstallRestoreCI -count=1 -v .
+          if ($LASTEXITCODE -ne 0) { throw 'Real V4 install/restore test failed' }
           go build -ldflags='-H windowsgui -s -w' -o (Join-Path $env:LAB 'V4-Rosters-2026.3.5-TESTE-NAO-PUBLICAR.exe') .
+          if ($LASTEXITCODE -ne 0) { throw 'Go executable compilation failed' }
           Pop-Location
           $exe=Join-Path $env:LAB 'V4-Rosters-2026.3.5-TESTE-NAO-PUBLICAR.exe'
           if (-not (Test-Path $exe)) { throw 'No Windows executable generated' }
