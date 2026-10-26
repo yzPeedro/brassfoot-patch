@@ -302,6 +302,20 @@ jobs:
           print('NOT GAME VALIDATION: estimates present, gameplay and career year not verified')
           PY
           rm -rf /tmp/brasfoot-bc-2026-laboratory
+      - name: Record only verified byte-level change positions for optional local 2026 patcher
+        run: |
+          python - <<'PY'
+          import zipfile
+          from tools.patch_official_career_year import patch_official
+          with zipfile.ZipFile('/tmp/brasfoot-extracted/bf22-23.exe') as archive:
+              original=archive.read('a/hU.class')
+          modified=patch_official(original)
+          changes=[[i,a,b] for i,(a,b) in enumerate(zip(original,modified)) if a!=b]
+          assert len(original)==len(modified)
+          assert 1<=len(changes)<=20
+          print('YEAR_SELECTOR_BYTE_DIFFS',changes)
+          print('PATCHABLE_YEAR_CLASS_ONLY - no original game bytes or class distributed')
+          PY
       - name: Delete all licensed installer/extracted files
         if: always()
         run: rm -rf /tmp/brasfoot-official /tmp/brasfoot-extracted
