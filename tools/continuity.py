@@ -261,7 +261,7 @@ def _evaluate_wave(cfg: dict[str, Any], state: dict[str, Any], task: dict[str, A
     day = info["day"]
     ledger = state["daily"].setdefault(day, {"calls": 0, "reservedTokens": 0, "reportedTokens": 0})
     if tokens is not None:
-        ledger["reservedTokens"] = max(0, ledger.get("reservedTokens", 0) - cfg["maxDailyTokens"])
+        ledger["reservedTokens"] = max(0, ledger.get("reservedTokens", 0) - 10000)
         ledger["reportedTokens"] = ledger.get("reportedTokens", 0) + tokens
     checks_ok = bool(task.get("checks"))
     for check in task.get("checks", []):
@@ -375,13 +375,13 @@ def tick(cfg: dict[str, Any], *, now: dt.datetime | None = None) -> dict[str, An
             _journal(journal_path, {"event": "deferred", "task": task["id"], "reason": reason, "nextEligibleAt": eligible})
             return state
         ledger = state["daily"][local_day]
-        if ledger["calls"] >= cfg["maxDailyCalls"] or ledger["reportedTokens"] + ledger["reservedTokens"] + cfg["maxDailyTokens"] > cfg["maxDailyTokens"]:
+        if ledger["calls"] >= cfg["maxDailyCalls"] or ledger["reportedTokens"] + ledger["reservedTokens"] + 10000 > cfg["maxDailyTokens"]:
             ts.update(nextEligibleAt=_iso(now + dt.timedelta(days=1)), deferReason="daily budget exhausted")
             _atomic(state_path, state)
             return state
         # Reserve before the child can launch.
         ledger["calls"] += 1
-        ledger["reservedTokens"] += cfg["maxDailyTokens"]
+        ledger["reservedTokens"] += 10000
         ts.update(status="running", attempts=ts.get("attempts", 0) + 1, launchedAt=_iso(now), plan=str(plan))
         orch = cfg["stateDir"] / "orchestrations" / task["id"]
         attempt_dir = orch / f"attempt-{ts['attempts']}"
@@ -444,3 +444,4 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

@@ -119,7 +119,7 @@ class ContinuityTests(unittest.TestCase):
             state = continuity.tick(self.cfg, now=self.now)
         daily = state["daily"][self.now.astimezone(continuity._timezone(self.cfg["timezone"])).date().isoformat()]
         self.assertEqual(daily["calls"], 1)
-        self.assertEqual(daily["reservedTokens"], self.cfg["maxDailyTokens"])
+        self.assertEqual(daily["reservedTokens"], 10000)
         # Restart is still attached to the recorded wave; reservation remains durable.
         again = continuity.status(self.cfg)
         self.assertEqual(again["daily"], state["daily"])
@@ -167,3 +167,4 @@ def _completed(code, stdout=""):
 
 if __name__ == "__main__":
     unittest.main()
+
