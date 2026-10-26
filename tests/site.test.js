@@ -17,6 +17,13 @@ for(const id of ['inicio','cobertura','clubes-2026','recursos','como-funciona','
   assert.match(html,new RegExp('id="'+id+'"'));
 assert.ok(['published','awaiting_release'].includes(release.status));
 assert.match(release.publishedVersion,/^2026\.\d+\.\d+$/);
+// The published V4 installs year/divisions but not current player rosters.
+// Keep the known-issue warning until a roster-verified installer replaces it.
+if (release.publishedVersion==='2026.3.4') {
+  assert.match(html,/id="roster-known-issue"/);
+  assert.match(html,/não instala os novos jogadores/);
+}
+
 assert.match(release.sha256,/^[a-f0-9]{64}$/);
 assert.ok(Number.isInteger(release.fileSizeBytes)&&release.fileSizeBytes>0);
 const activeAssetUrl = 'https://github.com/yzPeedro/brassfoot-patch/releases/download/v' +
