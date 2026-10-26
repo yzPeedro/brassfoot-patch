@@ -53,9 +53,9 @@ assert.equal(crc16(Buffer.from(payload.slice(0,-4),'utf8')).toString(16).toUpper
 const qr=js.match(/const QR_BITS = '([^']+)'/);
 assert.ok(qr);
 const packed=Buffer.from(qr[1],'base64');
-assert.equal(packed.length,Math.ceil(61*61/8));
-const bit=(x,y)=>{const idx=y*61+x;return !!(packed[idx>>3] & (1<<(7-(idx&7))))};
-for(let i=0;i<61;i++) for(let j=0;j<4;j++)
-  assert.ok(!bit(i,j)&&!bit(j,i)&&!bit(i,60-j)&&!bit(60-j,i),'QR missing quiet zone');
+assert.equal(packed.length,Math.ceil(65*65/8));
+const bit=(x,y)=>{const idx=y*65+x;return !!(packed[idx>>3] & (1<<(7-(idx&7))))};
+for(let i=0;i<65;i++) for(let j=0;j<4;j++)
+  assert.ok(!bit(i,j)&&!bit(j,i)&&!bit(i,64-j)&&!bit(64-j,i),'QR missing quiet zone');
 assert.match(html,/100% gratuito/);
 console.log('SEO + Pix: canonical, JSON-LD, sitemap, 3 pages, CRC/QR and optional donation OK');
