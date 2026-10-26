@@ -1,0 +1,71 @@
+name: Finalize approved 2026.2.0 release and publish site
+on:
+  release:
+    types: [published]
+permissions:
+  contents: write
+concurrency:
+  group: brasfoot-2026-2-0-release-publication
+  cancel-in-progress: false
+jobs:
+  verify-and-publish:
+    if: github.event.release.tag_name == 'v2026.2.0'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Download exact maintainer-approved V4 ZIP
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p /tmp/brasfoot-release-v4
+          gh release download v2026.2.0 \
+            --repo "$GITHUB_REPOSITORY" \
+            --pattern 'Brasfoot-2026-ABC20-Compatibilidade-v4.zip' \
+            --dir /tmp/brasfoot-release-v4
+          cd /tmp/brasfoot-release-v4
+          test "$(stat -c %s Brasfoot-2026-ABC20-Compatibilidade-v4.zip)" -eq 967095
+          echo '25264615120dba5681c5238b331d5012c40b3ffea1c933f1d23bdfe755b2cbd3  Brasfoot-2026-ABC20-Compatibilidade-v4.zip' | sha256sum --check --status
+          unzip -p Brasfoot-2026-ABC20-Compatibilidade-v4.zip Brasfoot-2026-ABC20-Compatibilidade-v4.exe > original-v4.exe
+          test "$(stat -c %s original-v4.exe)" -eq 2199040
+          echo 'a894362f73a09f23cdb187a4b1574df820a8d696478803ebe7d488221f708654  original-v4.exe' | sha256sum --check --status
+          file original-v4.exe
+          echo 'PASS: the exact ZIP and EXE approved by the maintainer are attached.'
+      - name: Verify site regressions and published release metadata
+        run: |
+          node site/tests/site.test.js
+          node site/tests/explorer-interaction.test.js
+          python - <<'PY'
+          from pathlib import Path
+          import datetime, json
+          path=Path('site/data/release.json')
+          meta=json.loads(path.read_text())
+          assert meta['publishedVersion']=='2026.2.0'
+          assert meta['sha256']=='25264615120dba5681c5238b331d5012c40b3ffea1c933f1d23bdfe755b2cbd3'
+          assert meta['fileSizeBytes']==967095
+          assert meta['compatibilityVerifiedInGame'] is True
+          assert meta['assetName']=='Brasfoot-2026-ABC20-Compatibilidade-v4.zip'
+          assert meta['downloadUrl']=='https://github.com/yzPeedro/brassfoot-patch/releases/download/v2026.2.0/Brasfoot-2026-ABC20-Compatibilidade-v4.zip'
+          meta['status']='published'
+          meta['publishedAt']=datetime.date.today().isoformat()
+          path.write_text(json.dumps(meta,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+      - name: Push verified release metadata to main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/data/release.json
+          git diff --cached --quiet || git commit -m "release(2026.2.0): mark exact verified V4 ZIP publicly downloadable"
+          git push origin HEAD:main
+      - name: Update production gh-pages branch from the verified main site
+        run: |
+          git fetch origin main gh-pages
+          git worktree add /tmp/brasfoot-live-pages -B pages-sync origin/gh-pages
+          rsync -a --delete --exclude '.git' site/ /tmp/brasfoot-live-pages/
+          cd /tmp/brasfoot-live-pages
+          git add -A
+          git diff --cached --quiet || git commit -m "publish: verified 2026.2.0 exact V4 download and current club data"
+          git push origin HEAD:gh-pages
+          echo "GitHub Pages branch updated with verified release data."
