@@ -31,5 +31,10 @@
     const alternate=document.querySelector('.release-alt-link');
     if(alternate) alternate.href='https://github.com/yzPeedro/brassfoot-patch/releases/tag/v'+metadata.publishedVersion;
     for(const button of buttons){button.disabled=false;button.textContent='BAIXAR VERSÃO '+metadata.publishedVersion+' ↗';button.addEventListener('click',()=>window.location.assign(expected));}
-  }).catch(error=>{status.textContent='INDISPONÍVEL';badge.textContent='NÃO VERIFICADO';detail.textContent='Download bloqueado: '+error.message+'. Consulte a página da release no GitHub.';});
+  }).catch(error=>{
+    const awaiting=String(error.message||'').includes('ainda não foi publicada');
+    status.textContent=awaiting?'AGUARDANDO RELEASE':'INDISPONÍVEL';
+    badge.textContent=awaiting?'EM PUBLICAÇÃO':'NÃO VERIFICADO';
+    detail.textContent=awaiting?'A release v2026.3.4 ainda não foi publicada. O download será liberado automaticamente após conferência de integridade.':'Download bloqueado: '+error.message+'. Consulte a página da release no GitHub.';
+  });
 })();
