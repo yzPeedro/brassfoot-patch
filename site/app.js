@@ -18,7 +18,7 @@
     if(metadata.compatibilityVerifiedInGame!==true||!/^[a-f0-9]{64}$/i.test(metadata.sha256||'')||
        !Number.isInteger(metadata.fileSizeBytes)||metadata.fileSizeBytes<=0)throw Error('Integridade incompleta');
     const expected=base+'v'+metadata.publishedVersion+'/'+metadata.assetName;
-    if(metadata.downloadUrl!==expected||!(/^(?:Brasfoot-2026-[A-Za-z0-9._-]+\.(?:zip|exe)|Brassfoot-Patch-2026-Setup\.exe)$/.test(metadata.assetName||'')))throw Error('Link não autorizado');
+    if(metadata.downloadUrl!==expected||!(/^(?:Brasfoot-2026-[A-Za-z0-9._-]+\.(?:zip|exe)|Brasfoot-Patch-2026-Setup\.exe)$/.test(metadata.assetName||'')))throw Error('Link não autorizado');
     detail.textContent='Verificando hash e tamanho no GitHub…';
     const responseGithub=await fetch('https://api.github.com/repos/yzPeedro/brassfoot-patch/releases/tags/v'+metadata.publishedVersion,{cache:'no-store',headers:{Accept:'application/vnd.github+json'}});
     if(!responseGithub.ok)throw Error('Release ainda não disponível');
