@@ -47,10 +47,11 @@ try {
 
 & gh auth status --hostname github.com
 if ($LASTEXITCODE -ne 0) { throw 'gh nao autenticado. Nao publicado.' }
-& gh release view $tag -R $repo 2>$null | Out-Null
-if ($LASTEXITCODE -eq 0) {
-    throw "A release $tag ja existe, nao sobrescrever: https://github.com/$repo/releases/tag/$tag"
-}
+# Nao chame 'gh release view' aqui: quando a release ainda nao existe,
+# o gh escreve 'release not found' em stderr e o Windows PowerShell 5.1
+# converte essa mensagem em erro terminante com ErrorActionPreference=Stop.
+# 'gh release create' ja recusa o tag que possua release publicada, sem sobrescrever.
+Write-Host "Criando $tag. Se a release ja existir, gh release create ira recusar a operacao."
 $notes = @'
 ## Brasfoot Patch 2026.2.0 — primeira versão de ano e divisões corrigidas
 - Seletor de carreira somente 2026.
