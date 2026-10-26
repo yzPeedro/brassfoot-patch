@@ -14,10 +14,13 @@
       status.textContent='AGUARDANDO RELEASE';badge.textContent='EM PUBLICAÇÃO';
       detail.textContent='Assim que a release v'+metadata.publishedVersion+' for publicada, o arquivo será validado por SHA-256 e liberado automaticamente.';
     }
-    if(metadata.compatibilityVerifiedInGame!==true||!/^[a-f0-9]{64}$/i.test(metadata.sha256||'')||
+    if(!['experimental','verified'].includes(metadata.editionStatus)||
+       (metadata.editionStatus==='verified'&&metadata.compatibilityVerifiedInGame!==true)||
+       (metadata.editionStatus==='experimental'&&metadata.compatibilityVerifiedInGame!==false)||
+       !/^[a-f0-9]{64}$/i.test(metadata.sha256||'')||
        !Number.isInteger(metadata.fileSizeBytes)||metadata.fileSizeBytes<=0)throw Error('Integridade incompleta');
     const expected=base+'v'+metadata.publishedVersion+'/'+metadata.assetName;
-    if(metadata.downloadUrl!==expected||!(/^(?:Brasfoot-2026-[A-Za-z0-9._-]+\.(?:zip|exe)|Brasfoot-Patch-2026-Setup(?:-v[0-9]{4}\.[0-9]+\.[0-9]+)?\.exe)$/.test(metadata.assetName||'')))throw Error('Link não autorizado');
+    if(metadata.downloadUrl!==expected||!(/^(?:Brasfoot-2026-[A-Za-z0-9._-]+\.(?:zip|exe)|Brasfoot-Patch-2026-Setup(?:-v[0-9]{4}\.[0-9]+\.[0-9]+)?\.exe|Brasfoot-Patch-V4-Elencos-[0-9]{4}\.[0-9]+\.[0-9]+-SEM-CONSOLE\.exe)$/.test(metadata.assetName||'')))throw Error('Link não autorizado');
     detail.textContent='Verificando hash e tamanho no GitHub…';
     const responseGithub=await fetch('https://api.github.com/repos/yzPeedro/brassfoot-patch/releases/tags/v'+metadata.publishedVersion,{cache:'no-store',headers:{Accept:'application/vnd.github+json'}});
     if(!responseGithub.ok)throw Error('A release v'+metadata.publishedVersion+' ainda não foi publicada');
@@ -25,9 +28,9 @@
     if(release.draft||release.tag_name!=='v'+metadata.publishedVersion)throw Error('Release não publicada');
     const asset=(release.assets||[]).find(item=>item.name===metadata.assetName&&item.state==='uploaded'&&item.browser_download_url===expected&&item.size===metadata.fileSizeBytes&&item.digest==='sha256:'+metadata.sha256);
     if(!asset)throw Error('Arquivo público não passou na verificação SHA-256 e tamanho');
-    status.textContent='DISPONÍVEL';badge.textContent='PUBLICADO';badge.style.color='#c5ff69';
-    detail.textContent='SHA-256: '+metadata.sha256+'. Confirme a integridade após baixar.';
-    disclaimer.textContent='Versão '+metadata.publishedVersion+' · ano 2026 e 60 clubes nas Séries A/B/C · '+(metadata.rostersBCStatus==='verified-2026'?'elencos B/C atualizados para 2026.':'elencos B/C ainda históricos.');
+    status.textContent='DISPONÍVEL';badge.textContent=metadata.editionStatus==='experimental'?'PRÉVIA PUBLICADA':'PUBLICADO';badge.style.color='#c5ff69';
+    detail.textContent=(metadata.editionStatus==='experimental'?'EDIÇÃO EXPERIMENTAL · ':'')+'SHA-256: '+metadata.sha256+'. Confirme a integridade após baixar.';
+    disclaimer.textContent='Versão '+metadata.publishedVersion+' · 60 clubes nas Séries A/B/C · '+(metadata.rostersBCStatus==='verified-2026'?'elencos verificados.':'elencos experimentais com atributos em revisão; faça backup e teste em nova carreira.');
     const alternate=document.querySelector('.release-alt-link');
     if(alternate) alternate.href='https://github.com/yzPeedro/brassfoot-patch/releases/tag/v'+metadata.publishedVersion;
     for(const button of buttons){button.disabled=false;button.textContent='BAIXAR VERSÃO '+metadata.publishedVersion+' ↗';button.addEventListener('click',()=>window.location.assign(expected));}
@@ -35,6 +38,6 @@
     const awaiting=String(error.message||'').includes('ainda não foi publicada');
     status.textContent=awaiting?'AGUARDANDO RELEASE':'INDISPONÍVEL';
     badge.textContent=awaiting?'EM PUBLICAÇÃO':'NÃO VERIFICADO';
-    detail.textContent=awaiting?'A release v2026.3.4 ainda não foi publicada. O download será liberado automaticamente após conferência de integridade.':'Download bloqueado: '+error.message+'. Consulte a página da release no GitHub.';
+    detail.textContent=awaiting?'A release v'+version.textContent+' ainda não foi publicada. O download será liberado automaticamente após conferência de integridade.':'Download bloqueado: '+error.message+'. Consulte a página da release no GitHub.';
   });
 })();

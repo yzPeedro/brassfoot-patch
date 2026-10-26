@@ -1,16 +1,20 @@
 {
   "schemaVersion": 1,
   "status": "awaiting_release",
-  "publishedVersion": "2026.3.4",
+  "publishedVersion": "2026.3.5",
   "publishedAt": null,
-  "assetName": "Brasfoot-Patch-2026-Setup-v2026.3.4.exe",
-  "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/download/v2026.3.4/Brasfoot-Patch-2026-Setup-v2026.3.4.exe",
-  "fileSizeBytes": 5045760,
-  "sha256": "bf12ad06b664b562a23dd23450c9440e5050327fd732839c72d63b96c2dc2c82",
-  "compatibilityVerifiedInGame": true,
-  "scopeOfGameValidation": "V4 instalada e validada no Windows pelo mantenedor; ciclo completo de campeonato e temporadas posteriores não homologado.",
+  "assetName": "Brasfoot-Patch-V4-Elencos-2026.3.5-SEM-CONSOLE.exe",
+  "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/download/v2026.3.5/Brasfoot-Patch-V4-Elencos-2026.3.5-SEM-CONSOLE.exe",
+  "fileSizeBytes": 5419520,
+  "sha256": "eb546eec17a6e7e20ffb65a32078bccfdea2e2b7f62f429688e698d5a458e45d",
+  "compatibilityVerifiedInGame": false,
+  "scopeOfGameValidation": "Instalador gráfico Windows testado pelo mantenedor; alterações .ban A/B/C geradas e verificadas por SHA-256 em ambiente isolado. Novos jogadores em carreira e temporadas completas não homologados.",
   "competitionSeason": 2026,
   "serieDConfigPreserved": true,
   "serieDMembershipMayChange": true,
-  "releaseNotes": "V4: atualização na pasta original do Brasfoot 22-23, backup integral antes de modificar, preservação dos saves e configurações, restauração do original, ícone atemporal B e progresso exibido. Divisões A/B/C da V4. Plantéis B/C não declarados como totalmente atualizados para 2026."
+  "releaseNotes": "2026.3.5: V4 + 60 elencos experimentais em arquivos .ban, interface gráfica Win32 sem PowerShell/CMD visíveis, correção dos acentos, backup integral e restauração. Idades, atributos e posições de alguns atletas ainda não estão integralmente validados.",
+  "editionStatus": "experimental",
+  "gameplayVerified": false,
+  "rostersBCStatus": "experimental-2026",
+  "rosterTargetClubs": 60
 }
