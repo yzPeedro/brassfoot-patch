@@ -67,7 +67,7 @@ func pixDraw(h uintptr) {
     const step int32 = 4
     const left int32 = 93
     const top int32 = 72
-    region:=rect{Left:left,Top:top,Right:left+61*step,Bottom:top+61*step}
+    region:=rect{Left:left,Top:top,Right:left+65*step,Bottom:top+65*step}
     pixFillRect.Call(hdc,uintptr(unsafe.Pointer(&region)),background)
     for y:=0;y<pixQRSize;y++ {
         for x:=0;x<pixQRSize;x++ {
@@ -90,12 +90,12 @@ func pixWindowProc(h uintptr, message uint32, w,l uintptr) uintptr {
         labelColors[first]=white
         second:=pixControl(h,"STATIC","100% opcional. O patch continua gratuito.",wsVisible|wsChild,22,45,383,24,0,smallFont)
         labelColors[second]=muted
-        third:=pixControl(h,"STATIC","Pix copia e cola (sem valor definido):",wsVisible|wsChild,21,324,383,24,0,smallFont)
+        third:=pixControl(h,"STATIC","Pix copia e cola (sem valor definido):",wsVisible|wsChild,21,342,383,24,0,smallFont)
         labelColors[third]=white
         pixCodeControl=pixControl(h,"EDIT",pixPayload,wsVisible|wsChild|wsBorder|esMultiline|esReadOnly|wsVScroll,
-            21,349,385,63,0,smallFont)
-        pixControl(h,"BUTTON","COPIAR CÓDIGO PIX",wsVisible|wsChild|wsTabStop,21,423,214,38,pixCopyID,bodyFont)
-        pixCopyStatus=pixControl(h,"STATIC","Sem cobrança, cadastro ou rastreamento.",wsVisible|wsChild,21,470,390,26,0,smallFont)
+            21,368,385,63,0,smallFont)
+        pixControl(h,"BUTTON","COPIAR CÓDIGO PIX",wsVisible|wsChild|wsTabStop,21,442,214,38,pixCopyID,bodyFont)
+        pixCopyStatus=pixControl(h,"STATIC","Sem cobrança, cadastro ou rastreamento.",wsVisible|wsChild,21,491,390,26,0,smallFont)
         labelColors[pixCopyStatus]=muted
         return 0
     case wmPaintPix:
@@ -155,7 +155,7 @@ func showPixDialog() {
     inst,_,_:=getModule.Call(0)
     popup,_,_:=createWindow.Call(0,uintptr(unsafe.Pointer(strPtr(pixWindowClass))),
         uintptr(unsafe.Pointer(strPtr("Brasfoot Patch — Pix voluntário"))),
-        wsCaption|wsSysMenu|wsVisible,220,130,438,547,hwnd,0,inst,0)
+        wsCaption|wsSysMenu|wsVisible,220,130,438,578,hwnd,0,inst,0)
     if popup==0 {
         msgbox("Não foi possível mostrar o Pix. O instalador continua gratuito.","Pix opcional",mbOK|mbIconWarning)
         return
