@@ -64,6 +64,13 @@ def build(previous: dict, version: str, size: int, digest: str, published: date,
         raise ValueError("Release sem changelog")
     if len(notes) > 10000:
         raise ValueError("Notas maiores que o limite permitido")
+    full_rosters = json.loads((SITE / "data/published-rosters-2026.json").read_text(encoding="utf-8"))
+    if (full_rosters.get("schemaVersion") != 2 or full_rosters.get("sourceRelease") != version or
+            full_rosters.get("totalClubs") != 60 or full_rosters.get("rostersBCVerified") != 40 or
+            full_rosters.get("allRostersVerified") is not True or
+            len(full_rosters.get("clubs", {})) != 60):
+        raise ValueError("Não existe arquivo público verdadeiro com 60 plantéis do manifesto")
+
 
     metadata = {
         "schemaVersion": 1,
@@ -105,7 +112,28 @@ def build(previous: dict, version: str, size: int, digest: str, published: date,
     if html.count(previous_software_version) != 1:
         raise ValueError("Versão JSON-LD não encontrada ou ambígua")
     html = html.replace(previous_software_version, '"softwareVersion": "' + version + '"', 1)
+    # Textos sobre a edição isolada anterior só podem ser trocados depois da
+    # validação completa da versão nova. Nunca apague o histórico v2026.2.0.
+    legacy_sentences = {
+        "Os elencos B/C ainda são históricos nesta primeira edição.":
+            "Os elencos publicados nesta edição foram validados para 2026.",
+        "Os 40 clubes da Série B e C estão com elencos históricos na versão vigente.":
+            "Os 40 clubes B/C receberam plantéis 2026 verificados na versão vigente.",
+    }
+    for old, new in legacy_sentences.items():
+        html = html.replace(old, new)
     changes[index_file] = html
+    target_path = SITE / "data/target-abc-2026.json"
+    target = json.loads(target_path.read_text(encoding="utf-8"))
+    if (target.get("season") != 2026 or target.get("targetClubs") != 60 or
+            target.get("serieD", {}).get("policy") != "untouched" or
+            len(target.get("clubs", [])) != 60):
+        raise ValueError("Catálogo não homologado; site não pode anunciar 60 elencos")
+    target["completedReal2026BAndCSquads"] = 40
+    target["publishedRosterVersion"] = version
+    target["status"] = "published-2026-a-b-c"
+    target["blockers"] = []
+    changes[target_path] = json.dumps(target, ensure_ascii=False, indent=2) + "\n"
 
     guide_file = SITE / "como-instalar" / "index.html"
     guide = guide_file.read_text(encoding="utf-8")
@@ -127,7 +155,9 @@ def build(previous: dict, version: str, size: int, digest: str, published: date,
         '<h2>Se algo falhar</h2><p>O rollback devolve os arquivos de backup. Não force versões '
         'desconhecidas nem abra o Brasfoot durante a instalação. '
         '<a href="../compatibilidade/">Veja compatibilidade e segurança.</a></p>')
-    changes[guide_file] = replace_guide(guide, guide_body)
+    changes[guide_file] = replace_guide(guide, guide_body).replace(
+        "Informações referentes à versão publicada 2026.2.0, com dados verificados em 26/10/2026. As funcionalidades de futuras versões só serão anunciadas quando realmente estiverem disponíveis.",
+        f"Informações sobre a versão {version}, publicada em {published.strftime('%d/%m/%Y')}. As atualizações passam por verificações de integridade antes da publicação.")
 
     compat_file = SITE / "compatibilidade" / "index.html"
     compat = compat_file.read_text(encoding="utf-8")
@@ -145,7 +175,9 @@ def build(previous: dict, version: str, size: int, digest: str, published: date,
         'Veja as notas da release para limites de calendário e temporadas.</p>'
         '<h2>Restauração</h2><p>O sistema verifica SHA-256 antes de desfazer o patch; '
         'não sobrescreve alterações de origem desconhecida realizadas posteriormente.</p>')
-    changes[compat_file] = replace_guide(compat, compat_body)
+    changes[compat_file] = replace_guide(compat, compat_body).replace(
+        "Informações referentes à versão publicada 2026.2.0, com dados verificados em 26/10/2026. As funcionalidades de futuras versões só serão anunciadas quando realmente estiverem disponíveis.",
+        f"Informações sobre a versão {version}, publicada em {published.strftime('%d/%m/%Y')}. Consulte sempre as notas da release para limitações.")
 
     history_file = SITE / "versoes" / "index.html"
     history = history_file.read_text(encoding="utf-8")
@@ -157,7 +189,11 @@ def build(previous: dict, version: str, size: int, digest: str, published: date,
                  'elencos A/B/C atualizados para 2026 e publicação automática com SHA-256. '
                  f'<a href="https://github.com/yzPeedro/brassfoot-patch/releases/tag/v{version}">'
                  'Detalhes e artefato público</a>.</p>\n')
-    changes[history_file] = history.replace(marker, new_entry + marker, 1)
+    updated_history = history.replace(marker, new_entry + marker, 1)
+    updated_history = updated_history.replace(
+        "Informações referentes à versão publicada 2026.2.0, com dados verificados em 26/10/2026. As funcionalidades de futuras versões só serão anunciadas quando realmente estiverem disponíveis.",
+        f"Última atualização: {published.strftime('%d/%m/%Y')}. Histórico anterior preservado.")
+    changes[history_file] = updated_history
     sitemap_file = SITE / "sitemap.xml"
     sitemap = sitemap_file.read_text(encoding="utf-8")
     if "<lastmod>" not in sitemap:
