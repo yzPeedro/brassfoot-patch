@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#071813">
-<meta name="description" content="Guia da versão Brasfoot Patch 2026.2.0: requisitos, download, seleção de pasta e limitações da instalação atual.">
+<meta name="description" content="Guia da V4: backup integral, atualização no mesmo caminho, saves e restauração da instalação original.">
 <link rel="canonical" href="https://yzpeedro.github.io/brassfoot-patch/como-instalar/">
 <link rel="stylesheet" href="../styles.css">
 <link rel="icon" type="image/svg+xml" href="../assets/mark.svg">
@@ -12,7 +12,7 @@
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="Brassfoot Patch">
 <meta property="og:title" content="Como instalar o Brasfoot Patch 2026 — Guia grátis">
-<meta property="og:description" content="Guia da versão Brasfoot Patch 2026.2.0: requisitos, download, seleção de pasta e limitações da instalação atual.">
+<meta property="og:description" content="Guia da V4: backup integral, atualização no mesmo caminho, saves e restauração da instalação original.">
 <meta property="og:url" content="https://yzpeedro.github.io/brassfoot-patch/como-instalar/">
 <meta property="og:image" content="https://yzpeedro.github.io/brassfoot-patch/assets/og-card.svg">
 <title>Como instalar o Brasfoot Patch 2026 — Guia grátis</title>
@@ -33,16 +33,24 @@
 <header class="top-ribbon">BRASSFOOT PATCH · PROJETO GRATUITO E INDEPENDENTE · 2026</header>
 <main class="guide">
 <a class="home" href="../">← Voltar ao site</a>
-<h1>Como instalar o Brasfoot Patch 2026</h1>
-<p class="lead">O Brasfoot Patch é 100% gratuito e independente. É necessário possuir uma instalação legítima do Brasfoot 22–23 para Windows.</p>
-<h2>1. Confira o jogo instalado</h2><p>Abra o Brasfoot original para identificar sua pasta. A versão 2026.2.0 é compatível apenas com assinaturas de arquivos reconhecidas pelo utilitário, incluindo originais e algumas variantes previamente atualizadas.</p>
-<h2>2. Baixe a release disponível</h2><p>A versão 2026.2.0 é fornecida em um <a href="https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.2.0">ZIP com utilitário Windows</a>. O download principal da futura edição in-place será um instalador gráfico .exe, sem ZIP obrigatório; esse novo formato ainda não foi publicado.</p>
-<h2>3. Selecione a pasta do Brasfoot</h2><p>Na edição 2026.2.0, extraia o ZIP, execute o utilitário gráfico e selecione a pasta do Brasfoot instalado. Ele exige arquivos reconhecidos por hash SHA-256; versões desconhecidas são bloqueadas para proteção.</p>
-<h2>4. Entenda a cópia de teste</h2><p><strong>A edição publicada atualmente cria uma cópia isolada do jogo.</strong> Ela não sobrescreve a instalação original e não leva saves para a cópia. A mudança para atualização diretamente na pasta existente ainda está em desenvolvimento.</p>
-<h2>5. Inicie uma nova carreira</h2><p>Use a cópia criada para selecionar 2026 e conferir os 20 clubes das Séries A, B e C. Os elencos das Séries B/C ainda são históricos nesta edição. Calendário completo e temporadas seguintes não estão homologados.</p>
-<h2>Erros e recuperação</h2><p>Não force o utilitário sobre um executável ou pasta não reconhecidos. A edição in-place futura fará backup persistente do executável e dos demais arquivos antes de modificar o Brasfoot.</p>
-<p><a href="../compatibilidade/">Ver compatibilidade e segurança →</a></p>
-<p class="muted">Informações referentes à versão publicada 2026.2.0, com dados verificados em 26/10/2026. As funcionalidades de futuras versões só serão anunciadas quando realmente estiverem disponíveis.</p>
+ <h1>Como instalar o Brasfoot Patch V4</h1>
+ <p class="lead">O patch é gratuito e independente. É necessário possuir uma instalação legítima do Brasfoot 22–23 para Windows.</p>
+ <h2>1. Baixe a versão correta</h2>
+ <p>A atualização <strong>v2026.3.4</strong> é distribuída como um instalador <code>Brasfoot-Patch-2026-Setup-v2026.3.4.exe</code>. O botão principal do site só fica disponível após a publicação e conferência de integridade do arquivo no <a href="https://github.com/yzPeedro/brassfoot-patch/releases">GitHub Releases</a>.</p>
+ <h2>2. Selecione a pasta do Brasfoot original</h2>
+ <p>Abra o instalador e escolha a pasta onde o jogo já está instalado, por exemplo <code>C:\Brasfoot22-23</code>. Não precisa criar outra pasta ou substituir atalhos manualmente. Feche o jogo antes de aplicar a atualização.</p>
+ <h2>3. Backup integral antes de modificar</h2>
+ <p>O instalador copia a instalação existente para um backup separado, incluindo saves, equipes, configurações e personalizações. Se o backup falhar, a instalação deve ser interrompida sem substituir arquivos.</p>
+ <h2>4. Atualização V4 no mesmo caminho</h2>
+ <p>O patch aplica os arquivos da V4 na instalação existente, com seletor de 2026 e reorganização das Séries A/B/C. O caminho de <code>bf22-23.exe</code> não muda e os atalhos existentes continuam apontando para o jogo. A barra informa as etapas e o instalador registra um relatório.</p>
+ <h2>5. Confirme e abra o jogo</h2>
+ <p>Ao concluir, o instalador apresenta a confirmação e o caminho do backup. Abra o Brasfoot e teste em uma <strong>nova carreira</strong>; a compatibilidade de carreiras antigas e temporadas futuras não é garantida apenas pela preservação dos arquivos.</p>
+ <h2>6. Como desfazer o patch</h2>
+ <p>Abra o instalador e selecione <strong>Restaurar Brasfoot original</strong>. A restauração usa o backup criado antes da atualização. Recomenda-se guardar uma cópia dos saves recentes antes de restaurar.</p>
+ <h2>Limitações conhecidas</h2>
+ <p>Os elencos de B/C não devem ser considerados integralmente atualizados para 2026. A validação completa de uma temporada, progressão de ano, camisas e escudos ainda exige testes adicionais.</p>
+ <p><a href="../compatibilidade/">Ver detalhes de segurança e compatibilidade →</a></p>
+ <p class="muted">Guia da v2026.3.4. O arquivo só estará disponível no site depois que a release for publicada e tiver sua integridade confirmada.</p>
 </main>
 <footer class="footer"><div class="wrap footer-inner"><p>Projeto independente. Este patch não inclui licença do Brasfoot original. <a href="../">Página inicial</a></p></div></footer>
 </body></html>
