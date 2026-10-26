@@ -39,7 +39,7 @@ func TestPixQRCodeMatrixHasQuietZoneAndFinderPatterns(t *testing.T) {
             }
         }
     }
-    for _,p:=range [][2]int{{4,4},{50,4},{4,50}} {
+    for _,p:=range [][2]int{{4,4},{54,4},{4,54}} {
         if !bit(p[0],p[1])||!bit(p[0]+6,p[1])||!bit(p[0],p[1]+6)||!bit(p[0]+6,p[1]+6) {
             t.Fatal("QR finder markers missing")
         }
