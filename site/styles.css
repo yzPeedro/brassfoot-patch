@@ -170,3 +170,25 @@
 
 /* External research only: visible player roles are not an installed patch guarantee. */
 .club-player-role{color:#aabfc4;font-weight:500;font-size:.84em;white-space:nowrap}
+
+
+/* Apoio opcional: não compete com o CTA principal nem interfere na navegação. */
+.footer-pix{background:none;border:1px solid #3c594b;border-radius:999px;padding:10px 15px;color:#cfe5d4;font-size:12px;line-height:1.4;max-width:250px;cursor:pointer}
+.footer-pix:hover,.footer-pix:focus-visible{border-color:var(--lime);color:var(--lime)}
+.pix-dialog{width:min(430px,calc(100% - 28px));max-height:calc(100dvh - 30px);overflow:auto;border:1px solid #365345;border-radius:18px;background:#0b211b;color:#f2f6ef;padding:24px;box-shadow:0 30px 90px #000a}
+.pix-dialog::backdrop{background:rgba(0,0,0,.75)}
+.pix-dialog-header{display:flex;align-items:start;justify-content:space-between;gap:12px}
+.pix-dialog-header h2{font-family:'Barlow Condensed',sans-serif;font-size:28px;line-height:1.15;margin:0}
+.pix-close{border:1px solid #496252;border-radius:9px;background:transparent;color:white;font-size:26px;width:36px;height:36px;flex:none}
+.pix-dialog p{font-size:14px;line-height:1.65;color:#d4e4d7;margin:12px 0}
+.pix-dialog small{font-size:11px;color:#a9c4b2;line-height:1.5;display:block;margin-top:14px}
+.pix-qr{display:flex;align-items:center;justify-content:center;background:white;border-radius:12px;padding:12px;width:max-content;max-width:100%;margin:16px auto}
+.pix-qr svg{display:block;max-width:100%;height:auto;image-rendering:pixelated}
+.pix-dialog label{display:block;font-weight:700;font-size:12px;margin:14px 0 8px}
+.pix-dialog textarea{resize:none;width:100%;border:1px solid #4b6454;border-radius:9px;padding:10px;background:#071813;color:#eaf6ed;line-height:1.4;word-break:break-all}
+.pix-copy{border:0;border-radius:9px;background:var(--lime);color:#071813;font-weight:800;padding:12px 18px;width:100%;margin-top:12px}
+.pix-dialog .pix-status{min-height:21px;font-size:12px;margin:5px 0}
+.resource-guides{display:flex;flex-wrap:wrap;gap:14px;padding:20px 0 10px}
+.resource-guides a{display:inline-flex;border:1px solid #3c594b;border-radius:12px;padding:14px 18px;font-size:13px;font-weight:700;color:#dbf0de}
+.resource-guides a:hover{border-color:var(--lime);color:var(--lime)}
+@media(max-width:760px){.pix-dialog{padding:18px}.resource-guides{flex-direction:column}.resource-guides a{width:100%}}
