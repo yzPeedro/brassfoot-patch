@@ -45,11 +45,14 @@
   let rosters = {};
   let researchedRosters = {};
   let rostersReady = false;
+  let fullRostersReady = false;
+  let fullRosterVersion = "";
   let page = 1;
   let sortKey = 'name';
   let sortDirection = 'asc';
   let lastFocus = null;
   function rosterStatus(club) {
+    if (fullRostersReady && Object.hasOwn(rosters,club.id)) return 'Elenco 2026 publicado · v' + fullRosterVersion;
     if (club.division === 'A') return labels.A;
     if (Object.hasOwn(researchedRosters,club.id)) return 'Pesquisa externa · não instalado';
     return 'Elenco aguardando pesquisa completa';
@@ -120,16 +123,40 @@
     return data.clubs;
   }
 
+  function validateFullPublishedRosters(data, expectedVersion) {
+    if (data?.schemaVersion !== 2 || data.season !== 2026 || data.sourceRelease !== expectedVersion ||
+        data.totalClubs !== 60 || data.rostersBCVerified !== 40 || data.allRostersVerified !== true ||
+        !data.clubs || Object.keys(data.clubs).length !== 60) {
+      throw new Error('Release de elencos A/B/C incompleta');
+    }
+    let total = 0;
+    for (const club of clubs) {
+      const roster = data.clubs[club.id];
+      if (!roster || roster.division !== club.division || !/^teams\/[a-z0-9_-]+\.ban$/i.test(roster.teamFile) ||
+          roster.verified2026 !== true || !/^https:\/\//.test(roster.sourceUrl) ||
+          !Array.isArray(roster.players) || roster.players.length < 16 || roster.players.length > 40 ||
+          !Array.isArray(roster.positionCodes) || roster.positionCodes.length !== roster.players.length ||
+          roster.players.some(name => typeof name !== 'string' || !name.trim()) ||
+          roster.positionCodes.some(n => !Number.isInteger(n) || n < 0 || n > 4)) {
+        throw new Error('Elenco da release não confere: ' + club.id);
+      }
+      total += roster.players.length;
+    }
+    if (total !== data.totalPlayers) throw new Error('Quantidade de jogadores da release diverge');
+    return data.clubs;
+  }
+
   function matchingClubs() {
     const searched = normalized(elements.search.value);
     const chosenDivision = elements.division.value;
     const chosenRoster = elements.rosterFilter.value;
     return clubs.filter(club => {
       if (chosenDivision && club.division !== chosenDivision) return false;
-      if (chosenRoster === 'published' && club.division !== 'A') return false;
-      if (chosenRoster === 'pending' && club.division === 'A') return false;
-      if (chosenRoster === 'researched' && !Object.hasOwn(researchedRosters,club.id)) return false;
-      if (chosenRoster === 'missing' && (club.division === 'A' || Object.hasOwn(researchedRosters,club.id))) return false;
+      const isPublished = fullRostersReady ? Object.hasOwn(rosters,club.id) : club.division === 'A';
+      if (chosenRoster === 'published' && !isPublished) return false;
+      if (chosenRoster === 'pending' && isPublished) return false;
+      if (chosenRoster === 'researched' && (fullRostersReady || !Object.hasOwn(researchedRosters,club.id))) return false;
+      if (chosenRoster === 'missing' && (isPublished || Object.hasOwn(researchedRosters,club.id))) return false;
       return !searched || normalized([club.name, club.state, 'Série ' + club.division].join(' ')).includes(searched);
     });
   }
@@ -260,23 +287,27 @@
 
   function openClub(club) {
     lastFocus = document.activeElement;
-    const published = club.division === 'A';
+    const verified = fullRostersReady && Object.hasOwn(rosters,club.id);
+    const published = verified || club.division === 'A';
     const external = published ? undefined : researchedRosters[club.id];
     const roster = published ? (rostersReady ? rosters[club.id] : undefined) : external;
     elements.modalTitle.textContent = club.name;
     elements.modalDivision.textContent = 'Série ' + club.division + ' · Temporada 2026';
-    elements.modalDescription.textContent = published
-      ? 'Jogadores da v2026.0.2: presentes apenas em instalações onde esse patch já foi aplicado.'
+    elements.modalDescription.textContent = verified
+      ? 'Jogadores de 2026 incluídos na versão ' + fullRosterVersion + ' do patch.'
+      : published ? 'Jogadores da v2026.0.2: presentes apenas em instalações onde esse patch já foi aplicado.'
       : (external ? 'Jogadores de fonte externa pesquisada; ainda NÃO estão no patch.' : 'Elenco atualizado de 2026 ainda não publicado para este clube.');
     elements.modalState.textContent = club.state;
     elements.modalStatus.textContent = rosterStatus(club);
     elements.modalCount.textContent = roster ? String(roster.players.length) : '—';
-    elements.modalRosterTitle.textContent = published ? 'Jogadores da antiga v2026.0.2 (se aplicada)' : 'Jogadores identificados em fonte externa';
-    elements.sourceBox.hidden = !external;
-    if (external) {
-      elements.sourceLink.href = external.sourceUrl;
-      elements.sourceLink.textContent = external.sourceUrl.split('/')[2];
-      elements.sourceReviewed.textContent = '· consultada em ' + external.reviewedOn;
+    elements.modalRosterTitle.textContent = verified ? 'Jogadores da versão ' + fullRosterVersion
+      : published ? 'Jogadores da antiga v2026.0.2 (se aplicada)' : 'Jogadores identificados em fonte externa';
+    const provenance = verified ? roster : external;
+    elements.sourceBox.hidden = !provenance;
+    if (provenance) {
+      elements.sourceLink.href = provenance.sourceUrl;
+      elements.sourceLink.textContent = provenance.sourceUrl.split('/')[2];
+      elements.sourceReviewed.textContent = '· consultada em ' + provenance.reviewedOn;
     } else {
       elements.sourceLink.removeAttribute('href');
       elements.sourceLink.textContent = '';
@@ -284,17 +315,18 @@
     }
     const fragment = document.createDocumentFragment();
     if (roster) {
-      elements.modalNotice.textContent = published
-        ? 'Esses jogadores só são preservados na 2026.2.0 se a v2026.0.2 já estava instalada. A nova edição não instala elencos da Série A.'
+      elements.modalNotice.textContent = verified
+        ? 'Elenco de 2026 validado e publicado na versão ' + fullRosterVersion + '.'
+        : published ? 'Esses jogadores só são preservados na 2026.2.0 se a v2026.0.2 já estava instalada. A nova edição não instala elencos da Série A.'
         : 'PESQUISA EXTERNA, NÃO INSTALADA NO PATCH. ' + external.note + ' Antes da inclusão, faltam conferir vínculos/2026 e validar o arquivo .ban.';
       const roleLabels = ['Goleiro','Lateral','Zagueiro','Meio-campo','Atacante'];
       roster.players.forEach((name,index) => {
         const item = document.createElement('li');
         item.textContent = name;
-        if (external && Array.isArray(external.positionCodes)) {
+        if (provenance && Array.isArray(provenance.positionCodes)) {
           const role = document.createElement('span');
           role.className = 'club-player-role';
-          role.textContent = ' · ' + roleLabels[external.positionCodes[index]];
+          role.textContent = ' · ' + roleLabels[provenance.positionCodes[index]];
           item.appendChild(role);
         }
         fragment.appendChild(item);
@@ -353,10 +385,18 @@
         field.disabled = false;
       }
       render();
-      return getJson('./data/published-rosters-2026-0-2.json')
+      const hasNewRelease = data.completedReal2026BAndCSquads === 40 &&
+        typeof data.publishedRosterVersion === 'string';
+      const rosterPath = hasNewRelease ? './data/published-rosters-2026.json'
+        : './data/published-rosters-2026-0-2.json';
+      return getJson(rosterPath)
         .then(published => {
-          rosters = validatePublishedRosters(published);
+          rosters = hasNewRelease ? validateFullPublishedRosters(published,data.publishedRosterVersion)
+            : validatePublishedRosters(published);
+          fullRostersReady = hasNewRelease;
+          fullRosterVersion = hasNewRelease ? data.publishedRosterVersion : '';
           rostersReady = true;
+          if (fullRostersReady) {render();return;}
           return getJson('./data/researched-rosters-2026.json')
             .then(data => {researchedRosters = validateResearch(data);render();})
             .catch(error => console.warn('Fontes externas indisponíveis:',error.message));
