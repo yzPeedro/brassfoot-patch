@@ -164,7 +164,7 @@ const tick=()=>new Promise(resolve=>setImmediate(resolve));
   get('clubs-grid').dispatch('click',{target:get('clubs-grid').children[0]});
   assert.ok(Number(get('club-dialog-player-count').textContent)>15);
   assert.ok(get('club-dialog-players').children.length>15);
-  assert.match(get('club-dialog-notice').textContent,/PESQUISA EXTERNA, NÃO INSTALADA NO PATCH/);
+  assert.match(get('club-dialog-notice').textContent,/PESQUISA DO SITE/);
   get('club-dialog').close();
 
   get('clubs-division').value='';
@@ -238,7 +238,7 @@ const tick=()=>new Promise(resolve=>setImmediate(resolve));
   get('clubs-grid').dispatch('click',{target:get('clubs-grid').children.find(x=>x.dataset.clubId)});
   assert.equal(get('club-dialog-title').textContent,'Criciúma');
   assert.equal(get('club-dialog-player-count').textContent,String(researched.clubs['br-criciuma-sc'].players.length));
-  assert.match(get('club-dialog-notice').textContent,/NÃO INSTALADA NO PATCH/);
+  assert.match(get('club-dialog-notice').textContent,/NÃO é extraída do jogo/);
   assert.equal(get('club-dialog-source').href,researched.clubs['br-criciuma-sc'].sourceUrl);
   assert.equal(get('club-dialog-source-box').hidden,false);
   assert.ok(get('club-dialog-players').children.some(x=>x.textContent==='Marcelo Hermes'));

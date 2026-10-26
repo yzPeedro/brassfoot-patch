@@ -24,12 +24,22 @@ if (release.publishedVersion==='2026.3.4') {
   assert.match(html,/não instala os novos jogadores/);
 }
 
+if (release.publishedVersion==='2026.3.5') {
+  assert.match(html,/id="roster-known-issue"/);
+  assert.match(html,/elencos experimentais/);
+  assert.equal(release.editionStatus,'experimental');
+  assert.equal(release.compatibilityVerifiedInGame,false);
+  assert.equal(release.rosterTargetClubs,60);
+  assert.equal(release.assetName,'Brasfoot-Patch-V4-Elencos-2026.3.5-SEM-CONSOLE.exe');
+  assert.equal(release.fileSizeBytes,5419520);
+  assert.equal(release.sha256,'eb546eec17a6e7e20ffb65a32078bccfdea2e2b7f62f429688e698d5a458e45d');
+}
 assert.match(release.sha256,/^[a-f0-9]{64}$/);
 assert.ok(Number.isInteger(release.fileSizeBytes)&&release.fileSizeBytes>0);
 const activeAssetUrl = 'https://github.com/yzPeedro/brassfoot-patch/releases/download/v' +
   release.publishedVersion + '/' + release.assetName;
 assert.equal(release.downloadUrl,activeAssetUrl);
-assert.ok(/^(Brasfoot-2026-[A-Za-z0-9._-]+\.(zip|exe)|Brasfoot-Patch-2026-Setup(?:-v[0-9]{4}\.[0-9]+\.[0-9]+)?\.exe)$/.test(release.assetName));
+assert.ok(/^(Brasfoot-2026-[A-Za-z0-9._-]+\.(zip|exe)|Brasfoot-Patch-2026-Setup(?:-v[0-9]{4}\.[0-9]+\.[0-9]+)?\.exe|Brasfoot-Patch-V4-Elencos-[0-9]{4}\.[0-9]+\.[0-9]+-SEM-CONSOLE\.exe)$/.test(release.assetName));
 if(release.publishedVersion==='2026.2.0') {
   assert.equal(release.sha256,'25264615120dba5681c5238b331d5012c40b3ffea1c933f1d23bdfe755b2cbd3');
   assert.equal(release.fileSizeBytes,967095);
@@ -149,7 +159,7 @@ assert.match(css,/\.clubs-table\{/);
 assert.match(css,/\.edition-counts\{/);
 assert.match(js,/api\.github\.com\/repos\/yzPeedro/);
 assert.match(js,/item\.digest==='sha256:'/);
-assert.match(js,/compatibilityVerifiedInGame!==true/);
+assert.match(js,/metadata\.editionStatus==='experimental'/);
 assert.doesNotMatch(html,/id="alfa-156"|class="ball"/);
 assert.doesNotMatch(html+js+clubsJs,/BEGIN PRIVATE KEY|x-apisports-key/);
 console.log('PASS: sortable/groupable A/B/C, 730 installed A player names plus researched B/C names kept separate, Série D untouched.');

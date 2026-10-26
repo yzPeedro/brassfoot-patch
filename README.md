@@ -1,3 +1,21 @@
+# Brasfoot Patch — atualização 2026.3.5
+
+**Estado:** instalador V4 + 60 elencos experimentais para A/B/C, com interface Win32 sem abrir janelas de CMD ou PowerShell. A release `v2026.3.5` será publicada separadamente pelo mantenedor; o download do site é liberado após verificação de SHA-256.
+
+- Arquivo: `Brasfoot-Patch-V4-Elencos-2026.3.5-SEM-CONSOLE.exe`
+- Tamanho: **5419520 bytes**
+- SHA-256: `eb546eec17a6e7e20ffb65a32078bccfdea2e2b7f62f429688e698d5a458e45d`
+- Atualização na pasta existente com backup integral e opção de restauração.
+- 20 Série A, 20 Série B, 20 Série C, incluindo Maranhão; os arquivos experimentais `.ban` foram reconstruídos a partir da V4 e conferidos em ambiente isolado.
+- **Não homologado:** jogabilidade completa, todas as inscrições e atributos dos jogadores e saves antigos. A geração experimental contém estimativas. O 365Scores é referência preferencial de conferência, não uma garantia de 100% de precisão.
+- API-Football desativada por padrão; site não raspia a base do 365Scores.
+
+[Site](https://yzpeedro.github.io/brassfoot-patch/) · [Guia](https://yzpeedro.github.io/brassfoot-patch/como-instalar/) · [Notas da 2026.3.5](docs/release-2026.3.5.md)
+
+---
+
+## Histórico técnico e versões anteriores
+
 # Brasfoot Patch — lançamento V4 in-place v2026.3.4
 
 **Situação em 26/10/2026:** instalador Windows v2026.3.4 aprovado pelo mantenedor; publicação do asset do instalador no GitHub Releases será feita manualmente. O site ativa o download quando a release publicada passar pela verificação de nome, tamanho e SHA-256.
