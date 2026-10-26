@@ -1,3 +1,19 @@
+# Brasfoot Patch — lançamento V4 in-place v2026.3.4
+
+**Situação em 26/10/2026:** instalador Windows v2026.3.4 aprovado pelo mantenedor; publicação do asset do instalador no GitHub Releases será feita manualmente. O site ativa o download quando a release publicada passar pela verificação de nome, tamanho e SHA-256.
+
+- O instalador utiliza a **V4 fornecida pelo mantenedor**, aplica o patch na pasta original do Brasfoot 22–23 (sem criar instalação final no Desktop), faz backup integral antes de alterar e permite restaurar o original.
+- Carreiras, dados e arquivos personalizados são preservados, embora a compatibilidade de saves em andamento com divisões novas precise ser testada caso a caso.
+- Barra de progresso, notificações, relatório e Pix por QR Code estão presentes. O ícone passa a ser um **B sem ano**, para ser reutilizado nas próximas temporadas.
+- **Arquivo exato do release:** `Brasfoot-Patch-2026-Setup-v2026.3.4.exe` (5.045.760 bytes); SHA-256: `bf12ad06b664b562a23dd23450c9440e5050327fd732839c72d63b96c2dc2c82`.
+- Elencos B/C integralmente revisados para 2026, camisas, escudos, calendário e temporadas seguintes continuam fora da homologação.
+
+Veja [instruções da release v2026.3.4](docs/release-2026.3.4.md) e o [site do projeto](https://yzpeedro.github.io/brassfoot-patch/).
+
+---
+
+## Histórico técnico anterior (versão 2026.2.0 e prévias)
+
 # Release 2026.2.0 — Primeira versão concreta do ano e divisões
 
 O utilitário Windows V4 coloca **apenas 2026 no seletor de ano** e reorganiza A/B/C em 20 clubes por divisão. O mantenedor confirmou os controles no jogo. Ele gera uma cópia isolada de uma instalação Brasfoot 22–23 com SHA reconhecido (original ou atualização v2026.0.2), sem transportar saves. Série B/C ainda contêm elencos históricos; Maranhão usa atributos experimentais. A Série D mantém BRA.cfg original (64 equipes/8 grupos), mas a reclassificação pode alterar participantes. Temporadas completas ainda não homologadas. [Release 2026.2.0](https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.2.0).
