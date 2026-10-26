@@ -94,11 +94,13 @@ try {
         throw 'Relatório de validação final B/C ausente; não gerar release'
     }
     $ready = Get-Content -LiteralPath 'data/private/bc-release-ready.json' -Raw -Encoding UTF8 | ConvertFrom-Json
-    if ($ready.readyForDistribution -ne $true -or $ready.clubCount -ne 40 -or
+    if ($ready.readyForDistribution -ne $true -or $ready.clubCount -ne 60 -or $ready.bcClubCount -ne 40 -or
         $ready.gameplayValidated -ne $true -or $ready.serieDModified -ne $false -or $ready.savesModified -ne $false) {
         throw '40 elencos B/C não verificados; versão anterior preservada'
     }
-    Record "Candidato v$version verificado; iniciando testes e build automático."
+    Record "Candidato v$version verificado; criando snapshot público a partir de 60 plantéis homologados."
+    Run 'py' @('-3','tools/build_public_rosters_2026.py')
+    Record 'Iniciando testes e build automático.'
     Run 'py' @('-3','-m','unittest','discover','-s','tests','-q')
     Run 'node' @('site/tests/site.test.js')
     Run 'node' @('site/tests/seo-pix.test.js')
@@ -131,7 +133,9 @@ try {
     $day = (Get-Date).ToUniversalTime().ToString('yyyy-MM-dd')
     Run 'py' @('-3','tools/publish_site_release.py','--version',$version,'--filename',$filename,
                 '--file-size',([string]$length),'--sha256',$hash,'--published-at',$day,'--notes-file',$notes)
+    Run 'node' @('site/tests/site.test.js')
     Run 'node' @('site/tests/seo-pix.test.js')
+    Run 'node' @('site/tests/explorer-interaction.test.js')
     Run 'git' @('add','site')
     Run 'git' @('commit','-m',("site: divulgar release verificada "+$version))
     Run 'git' @('push','origin','main')
