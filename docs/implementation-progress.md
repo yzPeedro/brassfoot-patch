@@ -1,5 +1,14 @@
 # Progresso atual — Brasfoot Patch 2026
 
+## Correção do erro de hash com patch anterior — 26/10/2026
+
+- O teste do usuário em `C:\\Brasfoot22-23` falhou em `teams\\bahia.ban` com `hash da equipe original diferente`. A frase `Série C com 19 sem Maranhão` no mesmo log confirma que ele também executou o **laboratório V2 antigo**, não o V3 com Maranhão.
+- Causa: o laboratório esperava exclusivamente o SHA original `86521d33...`, mas o patch anterior aprovado `v2026.0.2` distribuiu um Bahia com SHA de destino `c4b2e9fcd205bd0f1fa5b82ce7db7818b6ec14eddcb31a83c258bccd4528609a`. Referência: `windows-installer/bundled_release/manifest.json`.
+- Foi construído **laboratório V4 compatível** (distribuído nesta conversa por ZIP e EXE, não incluído em release GitHub). O código aceita **somente** arquivos de origem originais por SHA ou os **20 hashes de destino aprovados** na `v2026.0.2`. Continua exigindo os metadados UF, estádio e classificação do clube; modifica apenas os quatro bytes `e.t.c` na cópia isolada. Caso a classificação do clube já seja a correta e o hash seja conhecido, mantém o arquivo idêntico.
+- A instalação original, os saves e demais bytes dos elencos são preservados; variantes desconhecidas continuam bloqueadas com o hash de diagnóstico completo. O executável base deve ser exatamente o oficial reconhecido pelo SHA.
+- Nova versão compilada: `Brasfoot-2026-ABC20-Compatibilidade-v4.exe`; SHA-256 `a894362f73a09f23cdb187a4b1574df820a8d696478803ebe7d488221f708654`; testes locais `go test ./...`, `go vet ./...` e cross-build Windows amd64 aprovados, incluindo testes de reconhecimento da variante aprovada e preservação de bytes de jogadores. **Ainda não foi validada pelo usuário abrindo o Brasfoot**. Maranhão continua experimental, como na V3. Código-fonte integral incluído em ZIP na conversa.
+
+
 ## Teste jogável disponibilizado para validação pelo usuário — 26/10/2026
 
 - **Confirmação visual do usuário:** o executável experimental com ano 2026 abre a tela de escolha de equipe e permite selecionar 2026, mas mostra participantes originais de 2022 na 1ª divisão. Essa confirmação valida apenas navegação/seleção do ano, não gameplay de carreira/temporada completa.
