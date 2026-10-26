@@ -285,7 +285,7 @@ func runningBrasfoot() (string, error) {
 	ok, _, _ := processFirst.Call(snap, uintptr(unsafe.Pointer(&p)))
 	for ok != 0 {
 		exe := syscall.UTF16ToString(p.Executable[:])
-		if strings.Contains(strings.ToLower(exe), "brasfoot") {
+		if strings.Contains(strings.ToLower(exe), "brasfoot") || strings.EqualFold(exe, "bf22-23.exe") {
 			return exe, nil
 		}
 		ok, _, _ = processNext.Call(snap, uintptr(unsafe.Pointer(&p)))
