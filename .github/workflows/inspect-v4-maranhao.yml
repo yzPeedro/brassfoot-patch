@@ -95,6 +95,32 @@ jobs:
           if ($r.rosterTargets -ne 60 -or $r.generated -ne 60 -or $r.readyForDistribution -ne $false -or $r.serieDModified -ne $false) { throw 'Candidate integrity failed' }
           if ((Get-ChildItem (Join-Path $env:LAB 'candidate/patches') -Filter '*.json').Count -ne 60) { throw 'Missing V4 roster patch' }
           Write-Output 'PASS: 60 V4-relative .ban recipes reconstructed. EXPERIMENTAL ONLY.'
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.23.2'
+      - name: Build V4-roster-only candidate installer for isolated testing (NOT FINAL)
+        run: |
+          $ErrorActionPreference='Stop'
+          Push-Location windows-installer
+          go test ./...
+          Pop-Location
+          $dir=Join-Path $env:LAB 'candidate'
+          Copy-Item (Join-Path $dir 'manifest.json') 'windows-installer/bundled_release/manifest.json' -Force
+          Copy-Item (Join-Path $dir 'patches/*.json') 'windows-installer/bundled_release/patches/' -Force
+          Push-Location windows-installer
+          go build -ldflags='-H windowsgui -s -w' -o (Join-Path $env:LAB 'V4-Rosters-2026.3.5-TESTE-NAO-PUBLICAR.exe') .
+          Pop-Location
+          $exe=Join-Path $env:LAB 'V4-Rosters-2026.3.5-TESTE-NAO-PUBLICAR.exe'
+          if (-not (Test-Path $exe)) { throw 'No Windows executable generated' }
+          Write-Output ('TEST_BINARY_SIZE=' + (Get-Item $exe).Length)
+          Write-Output ('TEST_BINARY_SHA256=' + (Get-FileHash $exe -Algorithm SHA256).Hash.ToLower())
+          Write-Output 'EXPERIMENTAL ONLY: Works on SHA-recognized V4 team files; does not install V4 by itself.'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: V4-2026.3.5-ROSTERS-WINDOWS-CANDIDATE-NOT-FOR-PUBLIC-RELEASE
+          path: ${{ runner.temp }}/brasfoot-lab/V4-Rosters-2026.3.5-TESTE-NAO-PUBLICAR.exe
+          retention-days: 3
+          if-no-files-found: error
       - uses: actions/upload-artifact@v4
         with:
           name: experimental-2026-60-V4-roster-deltas-NOT-FOR-RELEASE
