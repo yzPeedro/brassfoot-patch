@@ -10,6 +10,7 @@ on:
       - 'tools/team-roster-editor/src/app/OriginalBrazilDivisionProbe.java'
       - 'tools/verify_official_abc_file_map.py'
       - 'data/competitions/2026-abc-original-file-map.json'
+      - 'tools/build_bc_lab_deltas.py'
   workflow_dispatch:
 permissions:
   contents: read
@@ -269,6 +270,26 @@ jobs:
           print('EXPERIMENTAL ONLY - no Windows runtime, division, gameplay, save or 2027 test')
           PY
           rm -rf /tmp/brasfoot-year-lab
+      - name: Reconstruct 39 real-source B/C laboratory deltas against official game, no install
+        run: |
+          python -m tools.build_bc_lab_deltas \
+            --game-teams /tmp/brasfoot-extracted/teams \
+            --output /tmp/brasfoot-bc-2026-laboratory \
+            --lab-estimates
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          base=Path('/tmp/brasfoot-bc-2026-laboratory')
+          report=json.loads((base/'report.json').read_text())
+          assert report['bcCandidatesReconstructed']==39
+          assert report['bcTotalTargetClubs']==40
+          assert report['readyForDistribution'] is False
+          assert report['serieDModified'] is False
+          assert len(list((base/'patches').glob('*.json')))==39
+          print('PASS: 39 B/C SHA-bound delta recipes generated; Maranhão missing; no Serie D changed')
+          print('NOT GAME VALIDATION: estimates present, gameplay and career year not verified')
+          PY
+          rm -rf /tmp/brasfoot-bc-2026-laboratory
       - name: Delete all licensed installer/extracted files
         if: always()
         run: rm -rf /tmp/brasfoot-official /tmp/brasfoot-extracted
