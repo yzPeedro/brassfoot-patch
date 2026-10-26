@@ -1,12 +1,16 @@
 {
   "schemaVersion": 1,
-  "status": "published",
-  "publishedVersion": "2026.0.2",
-  "publishedAt": "2026-10-25",
-  "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/download/v2026.0.2/Brassfoot-Patch-2026-Setup.exe",
-  "fileSizeBytes": 2799616,
-  "sha256": "a20885eeb164e9952266da91d575103b6fc784e49e6ce031f81ed9bdd8812b00",
+  "status": "awaiting_release",
+  "publishedVersion": "2026.2.0",
+  "publishedAt": null,
+  "assetName": "Brasfoot-2026-ABC20-Compatibilidade-v4.zip",
+  "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/download/v2026.2.0/Brasfoot-2026-ABC20-Compatibilidade-v4.zip",
+  "fileSizeBytes": 967095,
+  "sha256": "25264615120dba5681c5238b331d5012c40b3ffea1c933f1d23bdfe755b2cbd3",
   "compatibilityVerifiedInGame": true,
+  "scopeOfGameValidation": "Year 2026, A/B/C club selectors and opening game reported by maintainer; full season and calendar not verified",
   "competitionSeason": 2026,
-  "releaseNotes": "20 equipes/730 atletas, 713 atributos estimados, 15 atletas excluídos. Instalação exige Brasfoot original. Backup e desfazer incluídos."
+  "serieDConfigPreserved": true,
+  "serieDMembershipMayChange": true,
+  "releaseNotes": "Creates isolated copy. Year 2026 and A/B/C 20 clubs, synthetic Maranhão. Previous 2026.0.2 rosters retained when hash approved; current version does not install B/C 2026 rosters."
 }

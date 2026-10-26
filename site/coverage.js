@@ -31,14 +31,14 @@
           data.catalog.total !== 156 || game.teamFilesAudited !== 703 ||
           recognized !== 110 || game.noCorrespondingTeamFile !== 46 ||
           recognized + game.noCorrespondingTeamFile !== 156 ||
-          data.publishedRelease.version !== '2026.0.2' ||
-          data.publishedRelease.clubsWithExperimentalRosters !== 20 ||
+          data.publishedRelease.version !== '2026.2.0' ||
+          data.publishedRelease.clubsWith2026DivisionMembership !== 60 ||
           data.full156PatchPublished !== false || !complete) {
         throw new Error('Unverified coverage data');
       }
       counters.catalog.textContent = String(data.catalog.total);
       counters.identified.textContent = String(recognized);
-      counters.released.textContent = String(data.publishedRelease.clubsWithExperimentalRosters);
+      counters.released.textContent = String(data.publishedRelease.clubsWith2026DivisionMembership);
       counters.pending.textContent = String(game.noCorrespondingTeamFile);
       const fragment = document.createDocumentFragment();
       for (const division of divisions) {

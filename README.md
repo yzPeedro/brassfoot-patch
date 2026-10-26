@@ -1,3 +1,7 @@
+# Release 2026.2.0 — Primeira versão concreta do ano e divisões
+
+O utilitário Windows V4 coloca **apenas 2026 no seletor de ano** e reorganiza A/B/C em 20 clubes por divisão. O mantenedor confirmou os controles no jogo. Ele gera uma cópia isolada de uma instalação Brasfoot 22–23 com SHA reconhecido (original ou atualização v2026.0.2), sem transportar saves. Série B/C ainda contêm elencos históricos; Maranhão usa atributos experimentais. A Série D mantém BRA.cfg original (64 equipes/8 grupos), mas a reclassificação pode alterar participantes. Temporadas completas ainda não homologadas. [Release 2026.2.0](https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.2.0).
+
 # Brassfoot Patch 2026
 
 > **Progresso de elencos por posição (25/10/2026):** **14 clubes B/C, 451 jogadores nomeados e categorizados** a partir de fontes profissionais rastreadas, com 98 campos de idade e 52 nacionalidades anotados (algumas inferências ainda exigem revisão). São dados para edição; **não estão instalados no patch publicado**. O site oferece 730 nomes efetivamente instalados na prévia A e a pesquisa de 40 equipes B/C. A nova release continua bloqueada até validação da temporada, engine e execução real de carreira. [Progresso e fontes](docs/implementation-progress.md).

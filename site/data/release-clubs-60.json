@@ -1,603 +1,505 @@
 {
   "schemaVersion": 1,
   "season": 2026,
-  "releaseVersion": "2026.1.1",
-  "selectionType": "community-curated-20-per-division",
+  "releaseVersion": "2026.2.0",
+  "type": "2026-game-division-membership-and-roster-readiness",
   "divisionCounts": {
     "A": 20,
     "B": 20,
-    "C": 20,
-    "D": 20
+    "C": 20
   },
-  "officialSerieDTotal": 96,
-  "groupFormat": "Série D no patch: 2 grupos de 10, configuração ainda não homologada no jogo",
-  "rosterCoverage": {
-    "experimentalA": 20,
-    "historicalBcd": 59,
-    "fictionalSerieC": 1
+  "serieD": {
+    "originalBRAcfgKept": true,
+    "originalTeams": 64,
+    "originalGroups": 8,
+    "membershipMayShift": true
   },
-  "gameplayVerified": false,
-  "notes": "Listagem da edição de 80 times: não representa todos os 96 participantes oficiais da Série D de 2026. B/C/D mantêm elencos históricos e o Maranhão é fictício.",
+  "rosters2026": {
+    "newBCDeltasInstalled": 0,
+    "priorAExperimentalRosterOnlyWhenV2026_0_2PreviouslyInstalled": true,
+    "maranhaoProvisional": true
+  },
+  "fullCareerTested": false,
   "clubs": [
     {
       "id": "br-athletico-paranaense-pr",
       "name": "Athletico Paranaense",
       "state": "PR",
       "division": "A",
-      "rosterStatus": "experimental-2026"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "preserved-from-original-or-v2026.0.2"
     },
     {
       "id": "br-atletico-mineiro-mg",
       "name": "Atlético Mineiro",
       "state": "MG",
       "division": "A",
-      "rosterStatus": "experimental-2026"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "preserved-from-original-or-v2026.0.2"
     },
     {
       "id": "br-bahia-ba",
       "name": "Bahia",
       "state": "BA",
       "division": "A",
-      "rosterStatus": "experimental-2026"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "preserved-from-original-or-v2026.0.2"
     },
     {
       "id": "br-botafogo-rj",
       "name": "Botafogo",
       "state": "RJ",
       "division": "A",
-      "rosterStatus": "experimental-2026"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "preserved-from-original-or-v2026.0.2"
     },
     {
       "id": "br-chapecoense-sc",
       "name": "Chapecoense",
       "state": "SC",
       "division": "A",
-      "rosterStatus": "experimental-2026"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "preserved-from-original-or-v2026.0.2"
     },
     {
       "id": "br-corinthians-sp",
       "name": "Corinthians",
       "state": "SP",
       "division": "A",
-      "rosterStatus": "experimental-2026"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "preserved-from-original-or-v2026.0.2"
     },
     {
       "id": "br-coritiba-pr",
       "name": "Coritiba",
       "state": "PR",
       "division": "A",
-      "rosterStatus": "experimental-2026"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "preserved-from-original-or-v2026.0.2"
     },
     {
       "id": "br-cruzeiro-mg",
       "name": "Cruzeiro",
       "state": "MG",
       "division": "A",
-      "rosterStatus": "experimental-2026"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "preserved-from-original-or-v2026.0.2"
     },
     {
       "id": "br-flamengo-rj",
       "name": "Flamengo",
       "state": "RJ",
       "division": "A",
-      "rosterStatus": "experimental-2026"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "preserved-from-original-or-v2026.0.2"
     },
     {
       "id": "br-fluminense-rj",
       "name": "Fluminense",
       "state": "RJ",
       "division": "A",
-      "rosterStatus": "experimental-2026"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "preserved-from-original-or-v2026.0.2"
     },
     {
       "id": "br-gremio-rs",
       "name": "Grêmio",
       "state": "RS",
       "division": "A",
-      "rosterStatus": "experimental-2026"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "preserved-from-original-or-v2026.0.2"
     },
     {
       "id": "br-internacional-rs",
       "name": "Internacional",
       "state": "RS",
       "division": "A",
-      "rosterStatus": "experimental-2026"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "preserved-from-original-or-v2026.0.2"
     },
     {
       "id": "br-mirassol-sp",
       "name": "Mirassol",
       "state": "SP",
       "division": "A",
-      "rosterStatus": "experimental-2026"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "preserved-from-original-or-v2026.0.2"
     },
     {
       "id": "br-palmeiras-sp",
       "name": "Palmeiras",
       "state": "SP",
       "division": "A",
-      "rosterStatus": "experimental-2026"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "preserved-from-original-or-v2026.0.2"
     },
     {
       "id": "br-red-bull-bragantino-sp",
       "name": "Red Bull Bragantino",
       "state": "SP",
       "division": "A",
-      "rosterStatus": "experimental-2026"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "preserved-from-original-or-v2026.0.2"
     },
     {
       "id": "br-remo-pa",
       "name": "Remo",
       "state": "PA",
       "division": "A",
-      "rosterStatus": "experimental-2026"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "preserved-from-original-or-v2026.0.2"
     },
     {
       "id": "br-santos-sp",
       "name": "Santos",
       "state": "SP",
       "division": "A",
-      "rosterStatus": "experimental-2026"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "preserved-from-original-or-v2026.0.2"
     },
     {
       "id": "br-sao-paulo-sp",
       "name": "São Paulo",
       "state": "SP",
       "division": "A",
-      "rosterStatus": "experimental-2026"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "preserved-from-original-or-v2026.0.2"
     },
     {
       "id": "br-vasco-da-gama-rj",
       "name": "Vasco da Gama",
       "state": "RJ",
       "division": "A",
-      "rosterStatus": "experimental-2026"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "preserved-from-original-or-v2026.0.2"
     },
     {
       "id": "br-vitoria-ba",
       "name": "Vitória",
       "state": "BA",
       "division": "A",
-      "rosterStatus": "experimental-2026"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "preserved-from-original-or-v2026.0.2"
     },
     {
       "id": "br-america-mg",
       "name": "América",
       "state": "MG",
       "division": "B",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-athletic-mg",
       "name": "Athletic",
       "state": "MG",
       "division": "B",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-atletico-goianiense-go",
       "name": "Atlético Goianiense",
       "state": "GO",
       "division": "B",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-avai-sc",
       "name": "Avaí",
       "state": "SC",
       "division": "B",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-botafogo-sp",
       "name": "Botafogo",
       "state": "SP",
       "division": "B",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-ceara-ce",
       "name": "Ceará",
       "state": "CE",
       "division": "B",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-crb-al",
       "name": "CRB",
       "state": "AL",
       "division": "B",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-criciuma-sc",
       "name": "Criciúma",
       "state": "SC",
       "division": "B",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-cuiaba-mt",
       "name": "Cuiabá",
       "state": "MT",
       "division": "B",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-fortaleza-ce",
       "name": "Fortaleza",
       "state": "CE",
       "division": "B",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-goias-go",
       "name": "Goiás",
       "state": "GO",
       "division": "B",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-juventude-rs",
       "name": "Juventude",
       "state": "RS",
       "division": "B",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-londrina-pr",
       "name": "Londrina",
       "state": "PR",
       "division": "B",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-nautico-pe",
       "name": "Náutico",
       "state": "PE",
       "division": "B",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-novorizontino-sp",
       "name": "Novorizontino",
       "state": "SP",
       "division": "B",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-operario-ferroviario-pr",
       "name": "Operário Ferroviário",
       "state": "PR",
       "division": "B",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-ponte-preta-sp",
       "name": "Ponte Preta",
       "state": "SP",
       "division": "B",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-sao-bernardo-sp",
       "name": "São Bernardo",
       "state": "SP",
       "division": "B",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-sport-pe",
       "name": "Sport",
       "state": "PE",
       "division": "B",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-vila-nova-go",
       "name": "Vila Nova",
       "state": "GO",
       "division": "B",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-amazonas-am",
       "name": "Amazonas",
       "state": "AM",
       "division": "C",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-anapolis-go",
       "name": "Anápolis",
       "state": "GO",
       "division": "C",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-barra-sc",
       "name": "Barra",
       "state": "SC",
       "division": "C",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-botafogo-pb",
       "name": "Botafogo",
       "state": "PB",
       "division": "C",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-brusque-sc",
       "name": "Brusque",
       "state": "SC",
       "division": "C",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-caxias-rs",
       "name": "Caxias",
       "state": "RS",
       "division": "C",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-confianca-se",
       "name": "Confiança",
       "state": "SE",
       "division": "C",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-ferroviaria-sp",
       "name": "Ferroviária",
       "state": "SP",
       "division": "C",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-figueirense-sc",
       "name": "Figueirense",
       "state": "SC",
       "division": "C",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-floresta-ce",
       "name": "Floresta",
       "state": "CE",
       "division": "C",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-guarani-sp",
       "name": "Guarani",
       "state": "SP",
       "division": "C",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-inter-de-limeira-sp",
       "name": "Inter de Limeira",
       "state": "SP",
       "division": "C",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-itabaiana-se",
       "name": "Itabaiana",
       "state": "SE",
       "division": "C",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-ituano-sp",
       "name": "Ituano",
       "state": "SP",
       "division": "C",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-maranhao-ma",
       "name": "Maranhão",
       "state": "MA",
       "division": "C",
-      "rosterStatus": "fictional-placeholder"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "synthetic-experimental"
     },
     {
       "id": "br-maringa-pr",
       "name": "Maringá",
       "state": "PR",
       "division": "C",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-paysandu-pa",
       "name": "Paysandu",
       "state": "PA",
       "division": "C",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-santa-cruz-pe",
       "name": "Santa Cruz",
       "state": "PE",
       "division": "C",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-volta-redonda-rj",
       "name": "Volta Redonda",
       "state": "RJ",
       "division": "C",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     },
     {
       "id": "br-ypiranga-rs",
       "name": "Ypiranga",
       "state": "RS",
       "division": "C",
-      "rosterStatus": "historical-2022-23"
-    },
-    {
-      "id": "br-manaus-am",
-      "name": "Manaus",
-      "state": "AM",
-      "division": "D",
-      "group": "D1",
-      "rosterStatus": "historical-2022-23"
-    },
-    {
-      "id": "br-tuna-luso-pa",
-      "name": "Tuna Luso",
-      "state": "PA",
-      "division": "D",
-      "group": "D1",
-      "rosterStatus": "historical-2022-23"
-    },
-    {
-      "id": "br-sampaio-correa-ma",
-      "name": "Sampaio Corrêa",
-      "state": "MA",
-      "division": "D",
-      "group": "D1",
-      "rosterStatus": "historical-2022-23"
-    },
-    {
-      "id": "br-moto-club-ma",
-      "name": "Moto Club",
-      "state": "MA",
-      "division": "D",
-      "group": "D1",
-      "rosterStatus": "historical-2022-23"
-    },
-    {
-      "id": "br-ferroviario-ce",
-      "name": "Ferroviário",
-      "state": "CE",
-      "division": "D",
-      "group": "D1",
-      "rosterStatus": "historical-2022-23"
-    },
-    {
-      "id": "br-altos-pi",
-      "name": "Altos",
-      "state": "PI",
-      "division": "D",
-      "group": "D1",
-      "rosterStatus": "historical-2022-23"
-    },
-    {
-      "id": "br-abc-rn",
-      "name": "ABC",
-      "state": "RN",
-      "division": "D",
-      "group": "D1",
-      "rosterStatus": "historical-2022-23"
-    },
-    {
-      "id": "br-america-rn",
-      "name": "América",
-      "state": "RN",
-      "division": "D",
-      "group": "D1",
-      "rosterStatus": "historical-2022-23"
-    },
-    {
-      "id": "br-treze-pb",
-      "name": "Treze",
-      "state": "PB",
-      "division": "D",
-      "group": "D1",
-      "rosterStatus": "historical-2022-23"
-    },
-    {
-      "id": "br-sousa-pb",
-      "name": "Sousa",
-      "state": "PB",
-      "division": "D",
-      "group": "D1",
-      "rosterStatus": "historical-2022-23"
-    },
-    {
-      "id": "br-csa-al",
-      "name": "CSA",
-      "state": "AL",
-      "division": "D",
-      "group": "D2",
-      "rosterStatus": "historical-2022-23"
-    },
-    {
-      "id": "br-asa-al",
-      "name": "ASA",
-      "state": "AL",
-      "division": "D",
-      "group": "D2",
-      "rosterStatus": "historical-2022-23"
-    },
-    {
-      "id": "br-sergipe-se",
-      "name": "Sergipe",
-      "state": "SE",
-      "division": "D",
-      "group": "D2",
-      "rosterStatus": "historical-2022-23"
-    },
-    {
-      "id": "br-retro-pe",
-      "name": "Retrô",
-      "state": "PE",
-      "division": "D",
-      "group": "D2",
-      "rosterStatus": "historical-2022-23"
-    },
-    {
-      "id": "br-madureira-rj",
-      "name": "Madureira",
-      "state": "RJ",
-      "division": "D",
-      "group": "D2",
-      "rosterStatus": "historical-2022-23"
-    },
-    {
-      "id": "br-portuguesa-rj",
-      "name": "Portuguesa",
-      "state": "RJ",
-      "division": "D",
-      "group": "D2",
-      "rosterStatus": "historical-2022-23"
-    },
-    {
-      "id": "br-joinville-sc",
-      "name": "Joinville",
-      "state": "SC",
-      "division": "D",
-      "group": "D2",
-      "rosterStatus": "historical-2022-23"
-    },
-    {
-      "id": "br-brasil-rs",
-      "name": "Brasil",
-      "state": "RS",
-      "division": "D",
-      "group": "D2",
-      "rosterStatus": "historical-2022-23"
-    },
-    {
-      "id": "br-luverdense-mt",
-      "name": "Luverdense",
-      "state": "MT",
-      "division": "D",
-      "group": "D2",
-      "rosterStatus": "historical-2022-23"
-    },
-    {
-      "id": "br-aparecidense-go",
-      "name": "Aparecidense",
-      "state": "GO",
-      "division": "D",
-      "group": "D2",
-      "rosterStatus": "historical-2022-23"
+      "gameMembershipUpdated": true,
+      "rosterStatus": "historical-players-original"
     }
   ]
 }

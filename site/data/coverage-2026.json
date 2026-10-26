@@ -2,16 +2,19 @@
   "schemaVersion": 1,
   "season": 2026,
   "publishedRelease": {
-    "version": "2026.0.2",
-    "clubsWithExperimentalRosters": 20,
-    "divisionsWithRosterUpdates": [
-      "A"
-    ],
-    "playersIncluded": 730,
-    "playersCollected": 745,
-    "playersEstimatedAttributes": 713,
-    "playersExcluded": 15,
-    "gameTestEvidence": "User-reported test of private 20-club preview, 2026-10-25"
+    "version": "2026.2.0",
+    "clubsWith2026DivisionMembership": 60,
+    "divisionCounts": {
+      "A": 20,
+      "B": 20,
+      "C": 20
+    },
+    "bcRostersUpdatedInThisRelease": 0,
+    "rostersFromEarlierVersion": 20,
+    "previousRostersVersion": "2026.0.2",
+    "syntheticMaranhao": true,
+    "yearAndSelectorsTestedByMaintainer": true,
+    "fullCareerTested": false
   },
   "catalog": {
     "total": 156,
@@ -70,7 +73,9 @@
     "official2026SerieDGroups": 16,
     "serializationRoundTripsPassed": 27,
     "is96TeamGameplayVerified": false,
-    "isNewConfigPublished": false
+    "isNewConfigPublished": false,
+    "serieDConfigurationUnchanged": true,
+    "serieDMembershipMayShiftDueToDivisionReclassification": true
   },
   "assets": {
     "redistributionApprovedFor2026Expansion": 0,
@@ -78,6 +83,6 @@
   },
   "apiFootballRequestsDuringThisAudit": 0,
   "full156PatchPublished": false,
-  "lastAuditDate": "2026-10-25",
-  "notice": "Public progress data only. No proprietary Brasfoot files, file names, internal IDs, account keys or raw player data are included."
+  "lastAuditDate": "2026-10-26",
+  "notice": "Edição 2026.2.0: ano 2026 e clubes A/B/C corretos. Não instala elencos novos B/C. Maranhão experimental. Série D mantém BRA.cfg mas participantes podem mudar."
 }
