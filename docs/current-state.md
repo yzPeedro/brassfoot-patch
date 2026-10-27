@@ -22,6 +22,8 @@ Prioridade: instalar e comprovar retomada independente da conversa antes de expa
 
 `world-catalog-contract`, `incremental-snapshot` e `daily-sources` estão concluídos no backlog com checks locais e sem chamadas de rede. O próximo trabalho deve ser escolhido entre os domínios restantes, preservando os gates fail-closed e sem repetir auditorias concluídas.
 
+O commit `7f05b2c` foi enviado para `main` após os gates locais. A consulta read-only ao GitHub confirmou como `success` os workflows `Unified release readiness gate` e `Research official Brasfoot 22-23 year selector` no commit de código `c53077e`; isso não altera os bloqueios de gameplay, saves, licenças ou plataformas ainda sem evidência.
+
 ## Bloqueadores conhecidos de produto
 
 - Gameplay/calendário/temporadas e saves não comprovados integralmente para o candidato atual.
