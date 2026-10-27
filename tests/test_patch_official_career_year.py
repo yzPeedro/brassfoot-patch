@@ -3,6 +3,7 @@
 An actual Brasfoot career is NOT simulated. All bytes are test-generated.
 """
 import hashlib
+import os
 import shutil
 from pathlib import Path
 import subprocess
@@ -13,6 +14,11 @@ import unittest
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from tools import patch_official_career_year as patcher
+
+
+def java_runtime():
+    javac = Path(shutil.which("javac"))
+    return str(javac.with_name("java.exe" if os.name == "nt" else "java"))
 
 @unittest.skipUnless(shutil.which("javac") and shutil.which("java"), "JDK required")
 class YearSelectorSyntheticTest(unittest.TestCase):
@@ -76,7 +82,7 @@ class Check {
 """)
             subprocess.run(["javac","-cp",str(classes),"-d",str(classes),str(runtime)],
                            check=True,capture_output=True)
-            java = str(Path(shutil.which("javac")).parent / "java.exe")
+            java = java_runtime()
             result=subprocess.run([java,"-Djava.awt.headless=true","-cp",str(classes),"Check"],
                                   check=True,capture_output=True,text=True)
             self.assertIn("PASS:",result.stdout)
@@ -150,7 +156,7 @@ class CheckVariant {
             subprocess.run(["javac", "-cp", str(classes), "-d", str(classes), str(check)],
                            check=True, capture_output=True)
             run = subprocess.run(
-                [str(Path(shutil.which("javac")).parent / "java.exe"), "-Djava.awt.headless=true", "-cp", str(classes), "CheckVariant"],
+                [java_runtime(), "-Djava.awt.headless=true", "-cp", str(classes), "CheckVariant"],
                 check=True, capture_output=True, text=True
             )
             self.assertIn("synthetic adapter PASS", run.stdout)

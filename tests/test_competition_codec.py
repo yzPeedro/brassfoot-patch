@@ -1,5 +1,6 @@
 """Runs a self-contained Java serialization regression test, no proprietary game files."""
 from pathlib import Path
+import os
 import shutil
 import subprocess
 from tempfile import TemporaryDirectory
@@ -7,6 +8,11 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1] / "tools" / "competition-codec"
 JAVA_SRC = ROOT / "src"
+
+
+def java_runtime():
+    javac = Path(shutil.which("javac"))
+    return str(javac.with_name("java.exe" if os.name == "nt" else "java"))
 
 
 class CompetitionCodecTests(unittest.TestCase):
@@ -22,7 +28,7 @@ class CompetitionCodecTests(unittest.TestCase):
                 check=True, timeout=45, capture_output=True, text=True
             )
             run = subprocess.run(
-                [str(Path(shutil.which("javac")).parent / "java.exe"), "-cp", str(compiled), "app.CodecSelfTest"],
+                [java_runtime(), "-cp", str(compiled), "app.CodecSelfTest"],
                 check=True, timeout=25, capture_output=True, text=True
             )
             self.assertIn("PASS synthetic national/state codec", run.stdout)

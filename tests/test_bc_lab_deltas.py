@@ -1,6 +1,7 @@
 """Synthetic Java and byte-level tests for B/C candidate delta generation."""
 import hashlib
 import json
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -9,6 +10,11 @@ import unittest
 
 from tools.build_bc_lab_deltas import build_one, prepare_java, source_for
 from tools.build_team_delta import reconstruct
+
+
+def java_runtime():
+    javac = Path(shutil.which("javac"))
+    return str(javac.with_name("java.exe" if os.name == "nt" else "java"))
 
 
 @unittest.skipUnless(shutil.which("java") and shutil.which("javac"), "JDK required")
@@ -63,7 +69,7 @@ public class CreateSyntheticTeam {
             subprocess.run(["javac", "-encoding", "UTF-8", "-cp", str(classes),
                             "-d", str(classes), str(java)], check=True, capture_output=True)
             original_path = game / "criciuma_bra.ban"
-            java = str(Path(shutil.which("javac")).parent / "java.exe")
+            java = java_runtime()
             subprocess.run([java, "-cp", str(classes), "CreateSyntheticTeam",
                             str(original_path)], check=True, capture_output=True)
             original = original_path.read_bytes()
