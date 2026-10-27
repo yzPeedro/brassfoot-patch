@@ -1,23 +1,19 @@
-# Processo de release
+# Publicação da edição Mega Patch
 
-## Estado em 25/10/2026
+A edição é definida em `config/edition.json`. A entrega 2026.4.0 foi autorizada sem testes e deve permanecer experimental. Os gates de integridade de produção não são testes de gameplay.
 
-A **v2026.0.2 (experimental)** é pública:
-https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.0.2
+1. Faça commit/push dos fontes, pacote e notas em `docs/releases/vVERSAO.md`.
+2. Execute `python -m tools.daily_update` para obter o snapshot exato.
+3. Construa com `python tools/build_distribution.py --bundle windows-installer/bundled_release --output dist/VERSAO --snapshot data/private/daily/snapshot.json`.
+4. Publique com `python tools/publish_distribution.py --directory dist/VERSAO --notes docs/releases/vVERSAO.md`.
+5. Faça commit/push de `site/data/distribution.json` e publique com `python tools/publish_pages.py`.
 
-Instala elencos de **20 clubes da Série A** e preserva saves por escopo de escrita, com backup/rollback/desfazer. Limitações: 730 atletas incluídos, 713 com características estimadas, 15 não incluídos. Não declarar cobertura das Séries B, C ou D.
+O publicador exige commit no GitHub, associa a tag a esse commit, cria uma release draft experimental, envia arquivos ausentes, confere o digest fornecido pelo GitHub e só então abre a pré-release. Assets existentes com conteúdo diferente são recusados; uma falha preserva a versão anterior. A mesma pasta de saída permite retomar uploads sem substituir artefatos publicados. `--latest=false` mantém a base 2026.3.5 como referência de instalação inicial.
 
-O repositório possui uma expansão de código em curso: catálogo oficial de 156 clubes e motor Go V3 capaz de adicionar arquivos de equipe e instalar lotes variáveis. A interface pública/instalador da v2026.0.2 **não muda automaticamente** com esses commits.
+O workflow `distribution.yml` executa esse fluxo ao mudar `config/edition.json` e também permite execução manual. Não contém testes. O site é publicado na branch `gh-pages`, configuração real deste repositório. Uma solicitação de build estático é enviada após o push; não é um teste do site.
 
-## Gates para uma nova release com 156 clubes
+`release.ps1 -Publish` coordena coleta/build/publicação local. `-PublishExisting` retoma a publicação de uma pasta de artefatos existente. Nunca gere uma versão nova quando o snapshot não mudou: a coleta diária só atualiza seus dados e resumo; a versão de binário muda por uma edição explicitamente definida.
 
-1. Resolver os vínculos de clubes e IDs do Brasfoot para todos os participantes que serão instalados; provar que as estruturas reais do jogo aceitam novos arquivos e as divisões alegadas.
-2. Coletar e validar elencos, posições e atributos; não anunciar como oficiais valores estimados.
-3. Validar assets: temporada, formato real, associação com a equipe, origem e autorização de redistribuição. Nunca incluir imagens apenas porque são públicas na internet.
-4. Gerar manifestos e receitas com integridade SHA-256 e flags somente após evidências.
-5. Testar pacote completo, backups, rollback, restauração, preservação de saves e instalação incremental.
-6. Compilar e **executar** o instalador no Windows e testar em instalação isolada do Brasfoot, com carreira nova e verificação de clubes/divisões.
-7. Publicar tag e Release separadas da v2026.0.2, conferir asset público/tamanho/hash e só então atualizar o site.
-8. Preservar a release atual até a nova passar integralmente os gates.
+A release registra estado experimental, commit dos fontes, hashes do conteúdo compilado e bundle, snapshot, plataforma, arquitetura, tamanho e SHA-256. O catálogo de fontes abertas é anexado comprimido. O payload nunca inclui saves ou o executável original do Brasfoot.
 
-GitHub Actions não é requisito para publicação manual com GitHub CLI (`gh`), mas nenhum fluxo deve contornar testes ou direitos de distribuição.
+A base V4 é preservada em `site/data/release.json`; os novos atualizadores usam `site/data/distribution.json`. São propósitos diferentes. As listas de jogadores continuam com sua versão de origem 2026.3.5.

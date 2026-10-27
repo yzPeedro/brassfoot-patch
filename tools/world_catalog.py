@@ -119,6 +119,8 @@ CREATE TABLE IF NOT EXISTS player_memberships (
 """
 
 VALID_CAPABILITIES = {"catalog", "generated", "playable"}
+TABLES = {"countries", "associations", "competitions", "seasons", "clubs",
+          "players", "coaches", "club_memberships", "player_memberships"}
 
 
 def now_iso():
@@ -145,58 +147,69 @@ class WorldCatalog:
         self.conn.execute("PRAGMA foreign_keys = ON")
         self.conn.executescript(SCHEMA)
         self.conn.commit()
+        self._transaction_depth = 0
 
     def close(self):
         self.conn.close()
 
+    @contextmanager
     def transaction(self):
-        import contextlib
-        @contextlib.contextmanager
-        def _tx():
-            try:
-                yield self.conn
-                self.conn.commit()
-            except Exception:
-                self.conn.rollback()
-                raise
-        return _tx()
+        # SAVEPOINT works both at the outermost level and for nested units.
+        # Individual add methods must not commit a surrounding transaction.
+        name = "catalog_%d" % self._transaction_depth
+        self.conn.execute("SAVEPOINT " + name)
+        self._transaction_depth += 1
+        try:
+            yield self.conn
+        except BaseException:
+            self.conn.execute("ROLLBACK TO SAVEPOINT " + name)
+            self.conn.execute("RELEASE SAVEPOINT " + name)
+            raise
+        else:
+            self.conn.execute("RELEASE SAVEPOINT " + name)
+        finally:
+            self._transaction_depth -= 1
+
+    def _commit(self):
+        if not self._transaction_depth:
+            self.conn.commit()
 
     def _validate_capability(self, cap):
         if cap not in VALID_CAPABILITIES:
             raise ValueError("invalid capability: %s" % cap)
 
     def add_country(self, name, iso_code=None, **prov):
-        cid = new_id("country")
+        cid = prov.pop("entity_id", None) or new_id("country")
         p = provenance_fields(**prov)
         self.conn.execute(
             "INSERT INTO countries (id,name,iso_code,source_url,observed_at,effective_at,confidence,capability) VALUES (?,?,?,?,?,?,?,?)",
             (cid, name, iso_code, p["source_url"], p["observed_at"], p["effective_at"], p["confidence"], "catalog"),
         )
-        self.conn.commit()
+        self._commit()
         return cid
 
     def add_association(self, name, country_id, **prov):
         if not self.conn.execute("SELECT 1 FROM countries WHERE id=?", (country_id,)).fetchone():
             raise ValueError("unknown country_id")
-        aid = new_id("assoc")
+        aid = prov.pop("entity_id", None) or new_id("assoc")
         p = provenance_fields(**prov)
         self.conn.execute(
             "INSERT INTO associations (id,name,country_id,source_url,observed_at,effective_at,confidence,capability) VALUES (?,?,?,?,?,?,?,?)",
             (aid, name, country_id, p["source_url"], p["observed_at"], p["effective_at"], p["confidence"], "catalog"),
         )
-        self.conn.commit()
+        self._commit()
         return aid
 
     def add_competition(self, name, association_id, tier=None, **prov):
         if not self.conn.execute("SELECT 1 FROM associations WHERE id=?", (association_id,)).fetchone():
             raise ValueError("unknown association_id")
-        cid = new_id("comp")
+        cid = prov.pop("entity_id", None) or new_id("comp")
         p = provenance_fields(**prov)
         self.conn.execute(
             "INSERT INTO competitions (id,name,association_id,tier,source_url,observed_at,effective_at,confidence,capability) VALUES (?,?,?,?,?,?,?,?,?)",
             (cid, name, association_id, tier, p["source_url"], p["observed_at"], p["effective_at"], p["confidence"], "catalog"),
         )
-        self.conn.commit()
+        self._commit()
         return cid
 
     def add_season(self, competition_id, label, start_year, end_year, **prov):
@@ -204,90 +217,91 @@ class WorldCatalog:
             raise ValueError("unknown competition_id")
         if end_year < start_year:
             raise ValueError("end_year before start_year")
-        sid = new_id("season")
+        sid = prov.pop("entity_id", None) or new_id("season")
         p = provenance_fields(**prov)
         try:
             self.conn.execute(
                 "INSERT INTO seasons (id,competition_id,label,start_year,end_year,source_url,observed_at,effective_at,confidence,capability) VALUES (?,?,?,?,?,?,?,?,?,?)",
                 (sid, competition_id, label, start_year, end_year, p["source_url"], p["observed_at"], p["effective_at"], p["confidence"], "catalog"),
             )
-            self.conn.commit()
+            self._commit()
         except sqlite3.IntegrityError:
-            self.conn.rollback()
             raise ValueError("duplicate season label for competition")
         return sid
 
     def add_club(self, name, country_id, **prov):
         if not self.conn.execute("SELECT 1 FROM countries WHERE id=?", (country_id,)).fetchone():
             raise ValueError("unknown country_id")
-        cid = new_id("club")
+        cid = prov.pop("entity_id", None) or new_id("club")
         p = provenance_fields(**prov)
         self.conn.execute(
             "INSERT INTO clubs (id,name,country_id,source_url,observed_at,effective_at,confidence,capability) VALUES (?,?,?,?,?,?,?,?)",
             (cid, name, country_id, p["source_url"], p["observed_at"], p["effective_at"], p["confidence"], "catalog"),
         )
-        self.conn.commit()
+        self._commit()
         return cid
 
     def add_club_membership(self, club_id, competition_id, season_id, division_label=None, **prov):
         for tbl, col, val in (("clubs", "id", club_id), ("competitions", "id", competition_id), ("seasons", "id", season_id)):
             if not self.conn.execute("SELECT 1 FROM %s WHERE %s=?" % (tbl, col), (val,)).fetchone():
                 raise ValueError("unknown %s reference" % tbl)
-        mid = new_id("cm")
+        mid = prov.pop("entity_id", None) or new_id("cm")
         p = provenance_fields(**prov)
         self.conn.execute(
             "INSERT INTO club_memberships (id,club_id,competition_id,season_id,division_label,source_url,observed_at,effective_at,confidence,capability) VALUES (?,?,?,?,?,?,?,?,?,?)",
             (mid, club_id, competition_id, season_id, division_label, p["source_url"], p["observed_at"], p["effective_at"], p["confidence"], "catalog"),
         )
-        self.conn.commit()
+        self._commit()
         return mid
 
     def add_player(self, full_name, birth_date=None, nationality_country_id=None, **prov):
         if nationality_country_id is not None and not self.conn.execute("SELECT 1 FROM countries WHERE id=?", (nationality_country_id,)).fetchone():
             raise ValueError("unknown nationality country")
-        pid = new_id("player")
+        pid = prov.pop("entity_id", None) or new_id("player")
         p = provenance_fields(**prov)
         self.conn.execute(
             "INSERT INTO players (id,full_name,birth_date,nationality_country_id,source_url,observed_at,effective_at,confidence,capability) VALUES (?,?,?,?,?,?,?,?,?)",
             (pid, full_name, birth_date, nationality_country_id, p["source_url"], p["observed_at"], p["effective_at"], p["confidence"], "catalog"),
         )
-        self.conn.commit()
+        self._commit()
         return pid
 
     def add_coach(self, full_name, nationality_country_id=None, **prov):
         if nationality_country_id is not None and not self.conn.execute("SELECT 1 FROM countries WHERE id=?", (nationality_country_id,)).fetchone():
             raise ValueError("unknown nationality country")
-        cid = new_id("coach")
+        cid = prov.pop("entity_id", None) or new_id("coach")
         p = provenance_fields(**prov)
         self.conn.execute(
             "INSERT INTO coaches (id,full_name,nationality_country_id,source_url,observed_at,effective_at,confidence,capability) VALUES (?,?,?,?,?,?,?,?)",
             (cid, full_name, nationality_country_id, p["source_url"], p["observed_at"], p["effective_at"], p["confidence"], "catalog"),
         )
-        self.conn.commit()
+        self._commit()
         return cid
 
     def add_player_membership(self, player_id, club_id, season_id, role=None, **prov):
         for tbl, val in (("players", player_id), ("clubs", club_id), ("seasons", season_id)):
             if not self.conn.execute("SELECT 1 FROM %s WHERE id=?" % tbl, (val,)).fetchone():
                 raise ValueError("unknown %s reference" % tbl)
-        mid = new_id("pm")
+        mid = prov.pop("entity_id", None) or new_id("pm")
         p = provenance_fields(**prov)
         self.conn.execute(
             "INSERT INTO player_memberships (id,player_id,club_id,season_id,role,source_url,observed_at,effective_at,confidence,capability) VALUES (?,?,?,?,?,?,?,?,?,?)",
             (mid, player_id, club_id, season_id, role, p["source_url"], p["observed_at"], p["effective_at"], p["confidence"], "catalog"),
         )
-        self.conn.commit()
+        self._commit()
         return mid
 
     def set_capability(self, table, entity_id, capability):
         self._validate_capability(capability)
-        if table not in {"countries","associations","competitions","seasons","clubs","players","coaches","club_memberships","player_memberships"}:
+        if table not in TABLES:
             raise ValueError("unknown table")
         cur = self.conn.execute("UPDATE %s SET capability=? WHERE id=?" % table, (capability, entity_id))
         if cur.rowcount == 0:
             raise ValueError("entity not found")
-        self.conn.commit()
+        self._commit()
 
     def get(self, table, entity_id):
+        if table not in TABLES:
+            raise ValueError("unknown table")
         row = self.conn.execute("SELECT * FROM %s WHERE id=?" % table, (entity_id,)).fetchone()
         return dict(row) if row else None

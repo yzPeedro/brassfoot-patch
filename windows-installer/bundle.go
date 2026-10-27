@@ -79,7 +79,7 @@ func applyRecipe(original []byte, raw []byte, wanted ManifestFile) ([]byte, erro
 }
 
 func stageBundledPayload() (string, error) {
-	base, err := os.MkdirTemp("", "brassfoot-2026-release-")
+	base, err := os.MkdirTemp("", "brasfoot-mega-patch-release-")
 	if err != nil {
 		return "", err
 	}
@@ -121,7 +121,7 @@ func preparePayloadWithFS(fsys fs.FS, gamePath, staged string) error {
 	if err = json.Unmarshal(body, &manifest); err != nil {
 		return err
 	}
-	if (manifest.SchemaVersion != 2 && manifest.SchemaVersion != 3 && manifest.SchemaVersion != 4) || manifest.PatchSeason != 2026 || !validVersion.MatchString(manifest.Version) {
+	if (manifest.SchemaVersion != 2 && manifest.SchemaVersion != 3 && manifest.SchemaVersion != 4) || manifest.PatchSeason != patchYear() || !validVersion.MatchString(manifest.Version) || !strings.HasPrefix(manifest.Version, patchYearText+".") {
 		return fmt.Errorf("manifesto do pacote inválido")
 	}
 	if len(manifest.Files) < 1 || len(manifest.Files) > 512 {

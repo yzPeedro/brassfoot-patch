@@ -21,7 +21,7 @@ from tools.audit_official_roster_tsv import IDENTITIES
 from tools.verify_official_abc_file_map import check as verify_original_map
 
 ROOT = Path(__file__).resolve().parents[1]
-BASELINE = ROOT / "windows-installer/bundled_release"
+BASELINE = ROOT / "tools/baselines/2026.0.2"
 MAP = ROOT / "data/competitions/2026-abc-original-file-map.json"
 CATALOG = ROOT / "site/data/target-abc-2026.json"
 INVERSE = {value: key for key,value in IDENTITIES.items()}

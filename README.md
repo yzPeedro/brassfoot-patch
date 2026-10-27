@@ -1,108 +1,37 @@
-# Brasfoot Patch — atualização 2026.3.5
+# Brasfoot Mega Patch 2026
 
-**Estado:** instalador V4 + 60 elencos experimentais para A/B/C, com interface Win32 sem abrir janelas de CMD ou PowerShell. A release `v2026.3.5` será publicada separadamente pelo mantenedor; o download do site é liberado após verificação de SHA-256.
+Atualizadores gratuitos para uma instalação própria do Brasfoot 22–23. A edição **2026.4.0 é experimental**, publicada sem execução de testes a pedido do mantenedor.
 
-- Arquivo: `Brasfoot-Patch-V4-Elencos-2026.3.5-SEM-CONSOLE.exe`
-- Tamanho: **5419520 bytes**
-- SHA-256: `eb546eec17a6e7e20ffb65a32078bccfdea2e2b7f62f429688e698d5a458e45d`
-- Atualização na pasta existente com backup integral e opção de restauração.
-- 20 Série A, 20 Série B, 20 Série C, incluindo Maranhão; os arquivos experimentais `.ban` foram reconstruídos a partir da V4 e conferidos em ambiente isolado.
-- **Não homologado:** jogabilidade completa, todas as inscrições e atributos dos jogadores e saves antigos. A geração experimental contém estimativas. O 365Scores é referência preferencial de conferência, não uma garantia de 100% de precisão.
-- API-Football desativada por padrão; site não raspia a base do 365Scores.
+[Site](https://yzpeedro.github.io/brassfoot-patch/) · [Download 2026.4.0](https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.4.0) · [Instalação](https://yzpeedro.github.io/brassfoot-patch/como-instalar/) · [Compatibilidade](https://yzpeedro.github.io/brassfoot-patch/compatibilidade/)
 
-[Site](https://yzpeedro.github.io/brassfoot-patch/) · [Guia](https://yzpeedro.github.io/brassfoot-patch/como-instalar/) · [Notas da 2026.3.5](docs/release-2026.3.5.md)
+## O que está disponível
 
----
+- Atualizador Windows com interface azul, backup, restauração e botão Jogar.
+- Ferramentas de atualização para Linux e macOS, x64 e ARM64. Não incluem o jogo ou Wine; execução nessas plataformas não homologada.
+- Os mesmos 60 elencos experimentais A/B/C da edição 2026.3.5. As receitas agora estão no Git; o build não volta à antiga prévia de 20 clubes.
+- Catálogo de 312 clubes, 12 competições e oito países/territórios, com coleta diária de oito fontes abertas OpenFootball e referências brasileiras já documentadas. Catálogo não significa ligas jogáveis.
+- Snapshots incrementais, catálogo SQLite, cache condicional HTTPS, proveniência, preservação do último dado e journal durável.
+- Site reconstruído, seleção de plataforma/arquitetura, explorador de clubes e Pix opcional preservado.
+- Pipeline de gráficos com cache, proporções, transparência e registro de origem/licença para recursos locais autorizados.
+- Pacotes associados a commit, snapshot, tamanho e SHA-256, com publicação automática de pré-release antes do manifesto do site.
 
-## Histórico técnico e versões anteriores
+## Instalação
 
-# Brasfoot Patch — lançamento V4 in-place v2026.3.4
+Para preparar ano/divisões, use primeiro a [base Windows V4 + elencos 2026.3.5](https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.3.5). Depois abra o atualizador da sua plataforma e selecione a pasta do jogo. Se os mesmos elencos já estiverem instalados, a operação é dispensada. Para restaurar um backup antigo, use o instalador que o criou.
 
-**Situação em 26/10/2026:** instalador Windows v2026.3.4 aprovado pelo mantenedor; publicação do asset do instalador no GitHub Releases será feita manualmente. O site ativa o download quando a release publicada passar pela verificação de nome, tamanho e SHA-256.
+A edição 2026.4.0 não modifica o executável do jogo, seu ano inicial, BRA.cfg ou saves. Não adiciona ligas internacionais à engine. Atributos de parte dos jogadores continuam estimados, e temporadas completas não foram homologadas.
 
-- O instalador utiliza a **V4 fornecida pelo mantenedor**, aplica o patch na pasta original do Brasfoot 22–23 (sem criar instalação final no Desktop), faz backup integral antes de alterar e permite restaurar o original.
-- Carreiras, dados e arquivos personalizados são preservados, embora a compatibilidade de saves em andamento com divisões novas precise ser testada caso a caso.
-- Barra de progresso, notificações, relatório e Pix por QR Code estão presentes. O ícone passa a ser um **B sem ano**, para ser reutilizado nas próximas temporadas.
-- **Arquivo exato do release:** `Brasfoot-Patch-2026-Setup-v2026.3.4.exe` (5.045.760 bytes); SHA-256: `bf12ad06b664b562a23dd23450c9440e5050327fd732839c72d63b96c2dc2c82`.
-- Elencos B/C integralmente revisados para 2026, camisas, escudos, calendário e temporadas seguintes continuam fora da homologação.
+## Operação e compilação
 
-Veja [instruções da release v2026.3.4](docs/release-2026.3.4.md) e o [site do projeto](https://yzpeedro.github.io/brassfoot-patch/).
-
----
-
-## Histórico técnico anterior (versão 2026.2.0 e prévias)
-
-# Release 2026.2.0 — Primeira versão concreta do ano e divisões
-
-O utilitário Windows V4 coloca **apenas 2026 no seletor de ano** e reorganiza A/B/C em 20 clubes por divisão. O mantenedor confirmou os controles no jogo. Ele gera uma cópia isolada de uma instalação Brasfoot 22–23 com SHA reconhecido (original ou atualização v2026.0.2), sem transportar saves. Série B/C ainda contêm elencos históricos; Maranhão usa atributos experimentais. A Série D mantém BRA.cfg original (64 equipes/8 grupos), mas a reclassificação pode alterar participantes. Temporadas completas ainda não homologadas. [Release 2026.2.0](https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.2.0).
-
-# Brassfoot Patch 2026
-
-> **Progresso de elencos por posição (25/10/2026):** **14 clubes B/C, 451 jogadores nomeados e categorizados** a partir de fontes profissionais rastreadas, com 98 campos de idade e 52 nacionalidades anotados (algumas inferências ainda exigem revisão). São dados para edição; **não estão instalados no patch publicado**. O site oferece 730 nomes efetivamente instalados na prévia A e a pesquisa de 40 equipes B/C. A nova release continua bloqueada até validação da temporada, engine e execução real de carreira. [Progresso e fontes](docs/implementation-progress.md).
-
-> **Novo requisito de carreira:** a versão final deve oferecer **somente 2026** como ano inicial, removendo 2023/2024 da interface e do ano real da carreira. Esse ajuste ainda exige identificar o código da versão instalada do Brasfoot e testar uma carreira nova; não está implementado nas releases publicadas. Inspeção não invasiva em [`tools/inspect_career_years.py`](tools/inspect_career_years.py) e critérios em [`docs/rosters-abc-2026.md`](docs/rosters-abc-2026.md).
-
-> **Escopo atual (25/10/2026):** 60 clubes das Séries A, B e C, com elencos reais de 2026 como objetivo. A **Série D permanece original do Brasfoot**, sem mudança de equipes, jogadores ou configurações. A prévia pública de elencos v2026.0.2 inclui 730 nomes da Série A, extraídos dos arquivos instaláveis; os 40 elencos B/C ainda não estão validados. O site exibe esses nomes em um [explorador paginado com modais](https://yzpeedro.github.io/brassfoot-patch/#clubes-2026). A v2026.1.1 anterior alterava a Série D e não deve ser confundida com o escopo atual. Detalhes em [docs/rosters-abc-2026.md](docs/rosters-abc-2026.md).
-
-
-Patch comunitário experimental para o Brasfoot 2022–2023 no Windows. O repositório contém a coleta de elencos, um codec de arquivos `.ban`, testes e um site estático.
-
-## Status verificável
-
-- A coleta de 25/10/2026 registrou 20 clubes e 745 atletas na máquina de desenvolvimento; o snapshot privado **não está versionado aqui**.
-- O gerador `build_preview.py` é **experimental**; não foi validado em execução no Brasfoot e não constitui um patch público.
-- A **release pública v2026.0.2 (experimental)** foi criada em 25/10/2026 com instalador Windows em Go, após teste de instalação de elencos no Brasfoot relatado pelo usuário. [Baixe a versão publicada](https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.0.2). O pacote tem 20 clubes da Série A e 730 jogadores, dos quais 713 têm atributos estimados; não inclui as Séries B, C e D.
-- O site está versionado em `site/` e sua versão estática é mantida na raiz da branch `gh-pages` para publicação por branch, sem workflows personalizados. Em 25/10/2026 foi removida a bola animada do cabeçalho, sem remover o campo.
-
-## Testar sem consumir a API
+A edição central fica em `config/edition.json` (`PATCH_YEAR`, nome, versão e plataformas).
 
 ```sh
-python -m unittest discover -s tests -q
-node site/tests/site.test.js
+python -m tools.daily_update
+python tools/build_distribution.py --bundle windows-installer/bundled_release --output dist/2026.4.0 --snapshot data/private/daily/snapshot.json
+python tools/publish_distribution.py --directory dist/2026.4.0 --notes docs/releases/v2026.4.0.md
+python tools/publish_pages.py
 ```
 
-**Uma nova release** só deverá ser criada após gerar e testar todos os novos arquivos e confirmar no Windows e dentro do Brasfoot os clubes/divisões efetivamente anunciados, a integridade e os direitos sobre os assets. Preserve a v2026.0.2 enquanto a expansão estiver em implementação.
+O build requer Go 1.25 e Python 3.12. Coleta: 06:00 Brasília no agendador local já instalado; 06:20 no GitHub Actions. O workflow de distribuição publica quando a edição muda. Nenhum desses novos comandos executa suítes de testes. Os workflows anteriores de testes foram preservados; os commits desta entrega usam `[skip ci]`.
 
-Veja `docs/acceptance-matrix.md`, `docs/deployment.md` e `docs/release-process.md` para as pendências.
-
-
-## Expansão das divisões brasileiras (trabalho em curso)
-
-Em 25/10/2026 foi incluído o catálogo oficial de **156 clubes das Séries A (20), B (20), C (20) e D (96)**, identificado por IDs estáveis e documentado em [divisões 2026](docs/divisions-2026.md). O [site](https://yzpeedro.github.io/brassfoot-patch/) contém um explorador informativo com filtros por série e pesquisa. **A release v2026.0.2 continua contendo apenas 20 clubes da Série A**; não há promessa de novas divisões jogáveis, camisas ou escudos nela.
-
-A coleta do catálogo foi feita via fontes oficiais CBF, sem consumir API-Football. O coletor existente passa a usar o ledger SQLite `quota_guard.py` para contabilização diária conservadora (90 tentativas locais + reserva de 10), com a limitação de coordenação entre hosts descrita em [relatório de quota](docs/api-usage-report.md). Um [auditor offline de assets](assets_audit.py) agora permite inventariar imagens do jogo sem modificá-las nem publicá-las. Consulte [cobertura de assets](docs/assets-coverage.md) e [CANs da expansão](docs/upgrade-2026-acceptance.md).
-
-**Não existe release nova de 156 clubes, elencos B/C/D ou uniformes oficiais.** Próximo gate é investigar suporte real às divisões, validar assets e elencos, executar testes e testar novo instalador no Windows. O download da v2026.0.2 permanece inalterado.
-
-
-### Implementação Go V3 em andamento (não distribuída)
-
-A implementação em `windows-installer/` ganhou manifesto `schemaVersion: 3`, operações explícitas `add` e `replace`, suporte a lotes variáveis (1–512 clubes), receitas de criação de equipes, rollback, preservação de saves e testes sintéticos com 156 substituições. Os testes de integração com os **20 originais privados da v2026.0.2** passaram. Isso não comprova suporte de quatro divisões jogáveis no Brasfoot. Consulte `docs/windows-installer.md`.
-
-Para investigar os vínculos com os 136 clubes restantes, existe um coletor **privado** em `scripts/collect-game-structure.ps1`. Ele coleta apenas `.ban`, arquivos de competição `.ces` e inventário de imagens com hashes, nunca saves. O ZIP resultante não deve ser enviado ao GitHub nem publicado.
-
-### Estrutura das competições (nova descoberta)
-
-A análise dos **27 arquivos privados `.cfg`/`.ces`** fornecidos em 25/10/2026 comprovou que `BRA.cfg` registra quatro divisões nacionais A/B/C/D, com 20/20/20/64 clubes e oito grupos na Série D original. Foi implementado o codec Java em [`tools/competition-codec/`](tools/competition-codec/README.md), com round-trip exato 27/27 e um laboratório que produz, fora da instalação, uma configuração de 96 clubes/16 grupos. **A estrutura serializada permite representar os valores, mas a jogabilidade real da Série D com 96 não foi testada.** A expansão de jogadores/clubes e o instalador v2026.0.2 não mudaram nesta análise.
-
-
-### Site publicado e cobertura real — 25/10/2026
-
-O painel de cobertura do [site público](https://yzpeedro.github.io/brassfoot-patch/) distingue **156 clubes oficiais catalogados**, **103 correspondências de arquivo resolvidas**, **7 ainda candidatas**, **46 sem arquivo na instalação auditada** e **20 elencos experimentais disponíveis na v2026.0.2**. Não anuncia Série D 96/16 como jogável. O download público da v2026.0.2 continua igual e usa verificação SHA-256/asset via GitHub API, com link alternativo para a release. [Evidência de publicação e testes](docs/site-publication-2026-10-25.md).
-
-
-### Nova alfa experimental v2026.1.0-alpha.1
-
-Uma **pré-release separada e não homologada** está publicada:
-https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.1.0-alpha.1
-
-- **20 clubes Série A:** aproveita elencos experimentais da v2026.0.2.
-- **90 clubes existentes B/C/D:** verifica arquivos históricos da instalação 2022–23; não atualiza esses elencos.
-- **46 clubes ausentes:** instala arquivos sintéticos com **18 atletas fictícios por clube**, não jogadores reais.
-- **Série D:** experimento `BRA.cfg` com 96 clubes e 16 grupos; serialização, backup e rollback aprovados em ambiente isolado, mas **sem teste do motor real do jogo**.
-- **Segurança:** instalador exige confirmação, valida hashes, cria backup e permite desfazer. A instalação em cópia isolada com 703 arquivos fornecidos pelo usuário foi testada; a execução gráfica no Windows e o calendário do Brasfoot não foram validados.
-- **Código-fonte e build:** branch `experimental/2026-1-0-156-clubes`; pipeline GitHub Actions compilou executável Windows 64 bits e publicou a pré-release em 25/10/2026.
-- **Integridade do executável alfa:** `SHA-256 c30f124d4e8f9134d2c44b0a6fd6e73d5e688f2f4b05e34f2541d8f72571850f`.
-- **Importante:** a alfa não equivale a 156 elencos de 2026 nem a 156 clubes comprovadamente jogáveis. **Use somente em cópia separada do jogo**, sem carreiras importantes.
-
-O site mantém o download da v2026.0.2 como versão principal e oferece a alfa em uma seção própria.
+[Estado atual](docs/current-state.md) · [Especificação integral](docs/mega-patch-specification.md) · [Cobertura por requisito](config/specification-coverage.json) · [Coleta](docs/daily-update.md) · [Distribuição](docs/platform-distribution.md) · [Gráficos](docs/graphics-pipeline.md) · [Histórico anterior](docs/audit/README-before-mega-2026.4.0.md)

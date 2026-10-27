@@ -42,7 +42,7 @@ def prepare(cfg):
             'why': 'Bounded persisted backlog task with automatic checks',
             'budget': {'maxCalls': 1, 'maxWallSeconds': 150,
                        'maxReportedTokens': 10000, 'maxEstimatedPromptTokens': 4000},
-            'workers': [{'id': task['id'], 'provider': 'codex', 'model': 'mega-code',
+            'workers': [{'id': task['id'], 'provider': 'codex', 'model': cfg.get('workerModel', 'gpt-6-luna'),
                          'effort': 'high', 'mode': 'write', 'cwd': str(cfg['repoRoot']),
                          'timeoutSeconds': 600, 'why': 'Savings worker for bounded implementation',
                          'task': task['brief'] + '\nFollow AGENTS.md. Do not change any other paths. Do not weaken existing tests. No commits, push, releases or nested workers.'}]})
@@ -60,6 +60,10 @@ def integrate(cfg, backlog, state):
     root = cfg['repoRoot']
     for task in backlog['tasks']:
         item = state['tasks'].get(task['id'], {})
+        if task.get('status') == 'done':
+            if item:
+                item['status'] = 'done'
+            continue
         if item.get('status') != 'validated':
             continue
         allowed = set(task.get('ownedPaths', []))

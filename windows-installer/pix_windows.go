@@ -154,7 +154,7 @@ func showPixDialog() {
     }
     inst,_,_:=getModule.Call(0)
     popup,_,_:=createWindow.Call(0,uintptr(unsafe.Pointer(strPtr(pixWindowClass))),
-        uintptr(unsafe.Pointer(strPtr("Brasfoot Patch — Pix voluntário"))),
+        uintptr(unsafe.Pointer(strPtr("Brasfoot Mega Patch — Pix voluntário"))),
         wsCaption|wsSysMenu|wsVisible,220,130,438,578,hwnd,0,inst,0)
     if popup==0 {
         msgbox("Não foi possível mostrar o Pix. O instalador continua gratuito.","Pix opcional",mbOK|mbIconWarning)

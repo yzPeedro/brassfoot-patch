@@ -2,9 +2,8 @@
 param([Parameter(Mandatory=$true)][string]$Config)
 $env:NINEROUTER_API_KEY = [Environment]::GetEnvironmentVariable("NINEROUTER_API_KEY", "User")
 
-if ([string]::IsNullOrWhiteSpace($env:NINEROUTER_API_KEY)) {
-    throw "NINEROUTER_API_KEY não configurada para o usuário."
-}
+# Public daily collection needs no provider credential. A configured worker
+# reports its own authentication failure without disabling daily maintenance.
 
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path

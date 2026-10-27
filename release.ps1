@@ -1,48 +1,33 @@
 #requires -Version 5.1
 [CmdletBinding()]
 param(
-  [string]$PackagePath = '.\payload',
-  [string]$GamePath = '',
-  [switch]$Publish
+  [string]$PackagePath = '.\windows-installer\bundled_release',
+  [string]$OutputDirectory = '',
+  [switch]$Publish,
+  [switch]$PublishExisting
 )
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
-$root = $PSScriptRoot
-Set-Location $root
-
-function Run([string]$File, [string[]]$Arguments) {
+Set-Location -LiteralPath $PSScriptRoot
+function Invoke-ReleaseCommand([string]$File, [string[]]$Arguments) {
   & $File @Arguments
-  if ($LASTEXITCODE -ne 0) { throw "Comando falhou (exit=$LASTEXITCODE): $File $($Arguments -join ' ')" }
+  if ($LASTEXITCODE -ne 0) { throw "Falha no comando de distribuição: $File (exit=$LASTEXITCODE)" }
 }
-
-Write-Host 'Brasfoot Patch 2026 — build seguro do instalador' -ForegroundColor Green
-$package = (Resolve-Path -LiteralPath $PackagePath -ErrorAction Stop).Path
-$manifest = Join-Path $package 'manifest.json'
-if (-not (Test-Path -LiteralPath $manifest -PathType Leaf)) { throw 'Falta payload/manifest.json validado.' }
-$m = Get-Content -LiteralPath $manifest -Raw -Encoding UTF8 | ConvertFrom-Json
-if ($m.schemaVersion -ne 2 -or $m.kind -ne 'BRASFOOT_VERIFIED_PATCH' -or
-    $m.publicationAllowed -ne $true -or $m.compatibilityTestedInGame -ne $true) {
-  throw 'Pacote não é uma release verificada dentro do Brasfoot. Build e publicação bloqueados.'
+$edition = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'config/edition.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+if (-not $OutputDirectory) { $OutputDirectory = Join-Path $PSScriptRoot ('dist/' + $edition.version) }
+$notes = Join-Path $PSScriptRoot ('docs/releases/v' + $edition.version + '.md')
+if (-not (Test-Path -LiteralPath $notes -PathType Leaf)) { throw 'Escreva as notas da edição antes de construir/publicar.' }
+if (-not $PublishExisting) {
+  Invoke-ReleaseCommand 'python' @('-m', 'tools.daily_update')
+  Invoke-ReleaseCommand 'python' @('tools/build_distribution.py', '--bundle', $PackagePath, '--output', $OutputDirectory, '--snapshot', 'data/private/daily/snapshot.json')
 }
-if (-not $GamePath) { throw 'Informe -GamePath com a instalação real utilizada na validação.' }
-$game = (Resolve-Path -LiteralPath $GamePath -ErrorAction Stop).Path
-if (-not (Test-Path -LiteralPath (Join-Path $game 'options.bcf'))) { throw 'Pasta do Brasfoot incompatível.' }
-
-Run 'py' @('-3', '-m', 'unittest', 'discover', '-s', 'tests', '-p', 'test_*.py', '-q')
-Run 'py' @('-3', '-m', 'PyInstaller', '--version')
-# A verificação detalhada do patch também é realizada pelo executável antes de qualquer gravação.
-$dist = Join-Path $root 'dist'
-New-Item -ItemType Directory -Force -Path $dist | Out-Null
-Run 'py' @('-3', '-m', 'PyInstaller', '--clean', '--noconfirm', '--onefile', '--windowed',
-  '--name', 'Brasfoot-Patch-2026-Setup', '--distpath', $dist,
-  '--add-data', "$package;payload", '--paths', $root, (Join-Path $root 'installer-entry.py'))
-$exe = Join-Path $dist 'Brasfoot-Patch-2026-Setup.exe'
-if (-not (Test-Path -LiteralPath $exe -PathType Leaf) -or (Get-Item $exe).Length -lt 100000) {
-  throw 'Nenhum executável Windows válido foi produzido.'
-}
-$hash = (Get-FileHash -LiteralPath $exe -Algorithm SHA256).Hash.ToLowerInvariant()
-Write-Host "Build criado: $exe`nSHA-256: $hash" -ForegroundColor Green
-if ($Publish) {
-  # Falhar de maneira segura: compilar não é prova de que o jogo realmente abrirá os .ban.
-  throw 'Publicação automática indisponível sem validação funcional independente do .exe no Windows e dos arquivos .ban dentro do Brasfoot. Não anuncie release não testada.'
+Write-Host 'Distribuição experimental. Nenhuma suíte de testes foi executada.'
+if ($Publish -or $PublishExisting) {
+  Invoke-ReleaseCommand 'python' @('tools/publish_distribution.py', '--directory', $OutputDirectory, '--notes', $notes)
+  Invoke-ReleaseCommand 'git' @('add', '--', 'site/data/distribution.json', 'site/data/world-status.json')
+  & git diff --cached --quiet
+  if ($LASTEXITCODE -eq 1) { Invoke-ReleaseCommand 'git' @('commit', '-m', ('release: publish Mega Patch ' + $edition.version + ' metadata [skip ci]')) }
+  elseif ($LASTEXITCODE -ne 0) { throw 'Não foi possível ler o estado do índice Git.' }
+  Invoke-ReleaseCommand 'git' @('push', 'origin', 'main')
+  Invoke-ReleaseCommand 'python' @('tools/publish_pages.py')
 }

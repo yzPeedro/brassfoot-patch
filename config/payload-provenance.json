@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "sourceVersion": "2026.3.5",
+  "updaterVersion": "2026.4.0",
+  "sourceUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/download/v2026.3.5/Brasfoot-Patch-V4-Elencos-2026.3.5.exe",
+  "sourceExeSha256": "eb546eec17a6e7e20ffb65a32078bccfdea2e2b7f62f429688e698d5a458e45d",
+  "embeddedZipSha256": "f8cbd119811d612afe977c85572447c1eaaada082134dd99992549970dfb4766",
+  "recipeCount": 60,
+  "recipeChanges": false,
+  "gameExecutableIncluded": false,
+  "requiresV4Base": true,
+  "tests": "not-run-at-owner-request"
+}

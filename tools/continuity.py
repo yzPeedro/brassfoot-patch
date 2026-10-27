@@ -350,6 +350,7 @@ def tick(cfg: dict[str, Any], *, now: dt.datetime | None = None) -> dict[str, An
     if cfg.get("dailyCommand") is None:
         state["dailyCommand"] = "disabled"
     elif local.hour >= cfg["dailyHour"] and state.get("dailyCommandDate") != local_day:
+        state["dailyCommand"] = "enabled"
         due = state.get("dailyNextEligibleAt")
         if not due or dt.datetime.fromisoformat(due) <= now:
             try:

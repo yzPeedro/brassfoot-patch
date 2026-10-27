@@ -13,8 +13,22 @@
         "docs/history-records.md"
       ],
       "checks": [
-        ["python", "-m", "unittest", "discover", "-s", "tests", "-p", "test_history_records.py", "-v"],
-        ["git", "diff", "--check"]
+        [
+          "python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_history_records.py",
+          "-v"
+        ],
+        [
+          "git",
+          "diff",
+          "--check"
+        ]
       ],
       "brief": "Offline fail-closed ledger separating historical, current and simulated records; HTTPS provenance and confidence for historical records; deterministic export; synthetic tests only.",
       "completedAt": "2026-10-27T14:05:00-03:00"
@@ -114,6 +128,82 @@
       ],
       "brief": "Define an offline daily source intake boundary using only explicit local JSON cache files, HTTPS provenance, bounded source count and bytes, fail-closed validation, deterministic snapshot integration, and zero network requests. Synthetic fixtures only; no live collection or publication.",
       "completedAt": "2026-10-27T01:25:00+00:00"
+    },
+    {
+      "id": "live-catalog",
+      "status": "done",
+      "priority": 70,
+      "dependencies": [],
+      "ownedPaths": [
+        "tools/fetch_sources.py",
+        "tools/daily_update.py",
+        "config/sources.json"
+      ],
+      "checks": [],
+      "brief": "Coleta real e catálogo; cobertura parcial, sem plantéis internacionais.",
+      "validation": "not-run-at-owner-request",
+      "completedAt": "2026-10-27",
+      "operationEvidence": "docs/releases/v2026.4.0.md"
+    },
+    {
+      "id": "mega-site",
+      "status": "done",
+      "priority": 70,
+      "dependencies": [],
+      "ownedPaths": [
+        "site"
+      ],
+      "checks": [],
+      "brief": "Redesign completo azul e seletor de downloads.",
+      "validation": "not-run-at-owner-request",
+      "completedAt": "2026-10-27",
+      "operationEvidence": "docs/releases/v2026.4.0.md"
+    },
+    {
+      "id": "portable-updaters",
+      "status": "done",
+      "priority": 70,
+      "dependencies": [],
+      "ownedPaths": [
+        "windows-installer",
+        "tools/build_distribution.py"
+      ],
+      "checks": [],
+      "brief": "Cinco binários/pacotes de atualização; não representam port do jogo.",
+      "validation": "not-run-at-owner-request",
+      "completedAt": "2026-10-27",
+      "operationEvidence": "docs/releases/v2026.4.0.md"
+    },
+    {
+      "id": "experimental-publication",
+      "status": "done",
+      "priority": 70,
+      "dependencies": [],
+      "ownedPaths": [
+        "tools/publish_distribution.py",
+        "tools/publish_pages.py",
+        ".github/workflows/distribution.yml"
+      ],
+      "checks": [],
+      "brief": "Assets, hash, snapshot e manifesto publicados nessa ordem.",
+      "validation": "not-run-at-owner-request",
+      "completedAt": "2026-10-27",
+      "operationEvidence": "docs/releases/v2026.4.0.md"
+    },
+    {
+      "id": "graphics-pipeline",
+      "status": "done",
+      "priority": 70,
+      "dependencies": [],
+      "ownedPaths": [
+        "tools/graphics_pipeline.py",
+        "config/graphics.json"
+      ],
+      "checks": [],
+      "brief": "Conversão de originais autorizados; sem inventar acervo oficial.",
+      "validation": "not-run-at-owner-request",
+      "completedAt": "2026-10-27",
+      "operationEvidence": "docs/releases/v2026.4.0.md"
     }
   ],
   "remainingDomains": [
@@ -192,5 +282,7 @@
       ],
       "acceptance": "Persistent checkpoints, no duplicate audits, per-domain implementation/validation/operation evidence"
     }
-  ]
+  ],
+  "specificationCoverage": "config/specification-coverage.json",
+  "fullSpecificationComplete": false
 }

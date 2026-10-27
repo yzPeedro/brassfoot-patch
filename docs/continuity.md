@@ -15,3 +15,11 @@ Diagnóstico: `python tools/continuity.py --config config/continuity.local.json 
 Teste inicial real: tarefa separada `Continuity Smoke` executou em 26/10/2026 às 19:35:11 (PID 71536), terminou com código 0; nova execução automática às 19:35:39 (PID 24496) reutilizou o checkpoint e não repetiu a operação diária. Evidência em `data/private/continuity-smoke/`. Esse teste prova scheduler/processos/estado; a recuperação de onda Codex precisa ser comprovada separadamente.
 
 Incidente de or?amento: Alethe reportou 163.273 tokens (mais 5.928.192 de cache) numa chamada configurada para 20.000. O limite reportado n?o ? teto r?gido durante a chamada. Consumo real lan?ado no ledger: nenhuma nova onda hoje. Pr?ximas chamadas limitadas a 120 segundos; monitorar consumo antes de ampliar. Custo monet?rio n?o reportado.
+
+## Atualização 2026.4.0
+
+A tarefa existente permanece agendada a cada 15 minutos. A configuração local passou a executar `python -m tools.daily_update --report-output data/private/daily/world-status.json` uma vez por dia após 06:00 de Brasília. A saída fica no estado privado e não modifica arquivos versionados; os dados públicos são atualizados pelo workflow diário de 06:20.
+
+O launcher não exige mais `NINEROUTER_API_KEY` para começar: coleta de dados públicos não usa um agente. Se um worker precisar de autenticação ausente, ele continua registrando a falha normalmente. O modelo padrão voltou a ser configurável via `workerModel`, padrão `gpt-6-luna`, em vez do alias fixo `mega-code`.
+
+A integração ignora corretamente tarefas já marcadas como concluídas no backlog, evitando que um estado antigo `validated` tente repetir checks antes da rotina diária. Nenhum teste foi executado para esta alteração. Não foi alterada nem contornada credencial de provedor.

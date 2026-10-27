@@ -1,11 +1,13 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 )
 
 // Diagnostic gives a clear cause and an action, rather than a raw filesystem error.
@@ -15,6 +17,27 @@ type Diagnostic struct {
 
 func (d Diagnostic) Full() string {
 	return fmt.Sprintf("%s — %s\n\nO que aconteceu:\n%s\n\nComo resolver:\n%s\n\nDetalhes técnicos:\n%s", d.Code, d.Title, d.Reason, d.Action, d.Detail)
+}
+
+// Keep detailed errors available after closing the small installer window.
+func recordDiagnostic(d Diagnostic) {
+	root, err := backupRoot()
+	if err != nil {
+		return
+	}
+	logs := filepath.Join(filepath.Dir(root), "logs")
+	if err := os.MkdirAll(logs, 0700); err != nil {
+		return
+	}
+	file, err := os.OpenFile(filepath.Join(logs, "installer-"+time.Now().UTC().Format("2006-01-02")+".jsonl"), os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
+	if err != nil {
+		return
+	}
+	defer file.Close()
+	_ = json.NewEncoder(file).Encode(map[string]any{
+		"at": time.Now().UTC().Format(time.RFC3339), "product": productName,
+		"version": productVersion, "diagnostic": d,
+	})
 }
 
 type UnknownOriginalError struct {

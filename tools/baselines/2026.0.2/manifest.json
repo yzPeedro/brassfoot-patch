@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 2,
+  "kind": "BRASFOOT_VERIFIED_PATCH",
+  "patchSeason": 2026,
+  "version": "2026.0.2",
+  "publicationAllowed": true,
+  "compatibilityTestedInGame": true,
+  "status": "FIRST_USER_APPROVED_PREVIEW",
+  "sourceCollectedAt": "2026-10-25T14:35:37.040408+00:00",
+  "sourceSeasonProvenByAPI": false,
+  "notes": "Versão 2026.0.2 aprovada por teste do usuário no Brasfoot em 25/10/2026. 20 clubes e 730 jogadores; 713 atributos estimados e 15 atletas não incluídos. Distribuição por instruções de diferenças que exigem a instalação original licenciada; nenhum .ban original ou modificado completo é distribuído.",
+  "files": [
+    {
+      "path": "teams/atleticopr_bra.ban",
+      "size": 2949,
+      "sha256": "33be0628667ff9fd6dd1bef7d3ae46ad35224c244133002cdf3f147aa7533a9f",
+      "acceptedOriginalSha256": [
+        "b20d73ffda08126c4294c31cc89cceadcd4b54da0d9f247f999370e640aee867"
+      ]
+    },
+    {
+      "path": "teams/atleticomg_bra.ban",
+      "size": 3048,
+      "sha256": "aa0d480c75b18e8865d5bd49caf163bf5d9ada49b0f9572e0308440ecdb16606",
+      "acceptedOriginalSha256": [
+        "4cd2023a5263b4e34f19914bdc758cb3b76a31487e4786ebefd3bbd4d404535d"
+      ]
+    },
+    {
+      "path": "teams/bahia.ban",
+      "size": 2774,
+      "sha256": "c4b2e9fcd205bd0f1fa5b82ce7db7818b6ec14eddcb31a83c258bccd4528609a",
+      "acceptedOriginalSha256": [
+        "86521d33166685fb2c827d1a94661c316c68946f7b6e9b1263720e679d2c473f"
+      ]
+    },
+    {
+      "path": "teams/botafogorj_bra.ban",
+      "size": 3005,
+      "sha256": "44daea952aa47d142e0bc915bf11401dd7a46922ef3da9bfa1bd73790efc68dd",
+      "acceptedOriginalSha256": [
+        "d8bfeaef34a2f47249896ec1ff2755efbc1ab4a5a482f80b045f67653630bb2d"
+      ]
+    },
+    {
+      "path": "teams/chapecoense_bra.ban",
+      "size": 3089,
+      "sha256": "8977c2f49c3a41800bd5aa02b9ea4b2efee355d8f1de4a6f38eb018d281ef0d3",
+      "acceptedOriginalSha256": [
+        "99f2cf112734f9de45051c4fb28c17885b6782ce3d34595cbd0d15bf6ec52ff3"
+      ]
+    },
+    {
+      "path": "teams/corinthians_bra.ban",
+      "size": 2832,
+      "sha256": "172dac6d5ba22644d19a22345a6b5440fde0a3f42f0975cb1f2e75ba7b5aa4a4",
+      "acceptedOriginalSha256": [
+        "a1dd8a3bfc3bd3574615f1f727dd32c47871e9fecbe1cdb09b2b39e378071e6a"
+      ]
+    },
+    {
+      "path": "teams/coritiba_bra.ban",
+      "size": 2888,
+      "sha256": "11b3f8b05c64df01953a2313e92bbc36fb918d10c30d5f3900364cfbff548ae7",
+      "acceptedOriginalSha256": [
+        "c7572c7400cebb5a05eda92823a806ec3f469db3fdf3d9d2329d8b1b5bc78a12"
+      ]
+    },
+    {
+      "path": "teams/cruzeiro_bra.ban",
+      "size": 2892,
+      "sha256": "0e268c5b46e31df77424ecb38381f802b7a509d4fd994ed1a45e73112e1aa9e4",
+      "acceptedOriginalSha256": [
+        "2f5f637107015c161cb1a706fdebd0fdc296e992db18a2c00a48efdb40e120a6"
+      ]
+    },
+    {
+      "path": "teams/flarj.ban",
+      "size": 2697,
+      "sha256": "511f6bfeaeacc1c05ba2cbe7823185a844b67a5a1bbe219a1c2131c4720e6f37",
+      "acceptedOriginalSha256": [
+        "7a73cfe1b61b94c76a64e92143ae4a6ebe74ea2e9752ed8365e6b5e312d5bd9a"
+      ]
+    },
+    {
+      "path": "teams/flurj.ban",
+      "size": 2782,
+      "sha256": "dc67756599d63b2daa59aebb734ad4e6876e91bd8f2d1b22ced9e1dc96fedebd",
+      "acceptedOriginalSha256": [
+        "1d6e1c6b68c7f27a0a8b0817723faffa525f22a52b0a2ab1f746e4d2ebee2b0c"
+      ]
+    },
+    {
+      "path": "teams/gremio.ban",
+      "size": 3020,
+      "sha256": "c447cd72204ffb1b6f81c07572f298abf3d2b0ddd8fc36ab478723a3182a64fb",
+      "acceptedOriginalSha256": [
+        "76366417ca9ae459cfd3ddbb7cdc9012c03c3ba8287437fca527d38f05b97f27"
+      ]
+    },
+    {
+      "path": "teams/internacional_bra.ban",
+      "size": 3697,
+      "sha256": "e84354ee711a0525ee5ee7ded9af4578391ff372aac4b0214b14b5b6ee538b06",
+      "acceptedOriginalSha256": [
+        "1c3387d720175f7f1c04dcf67cb0a568ea61bd31b980711480f79648183fd229"
+      ]
+    },
+    {
+      "path": "teams/miirassol_sp.ban",
+      "size": 2433,
+      "sha256": "840a0bb53566574735aa6394389dba9d8d120bec27f39f701d682b8dbe0014c4",
+      "acceptedOriginalSha256": [
+        "1504e7e11eab25c779ef0c17371993389663f452fd479260fdee3e7a4af87b3d"
+      ]
+    },
+    {
+      "path": "teams/palmeiras.ban",
+      "size": 2750,
+      "sha256": "1ba4ad8e394769810a095713d1c92f46d987c63220e8e56fb58055f9e74a5e0c",
+      "acceptedOriginalSha256": [
+        "8a8e76657513721fcfc93a10cb657850615aa45777c4a7155a67d8a8a8b13f76"
+      ]
+    },
+    {
+      "path": "teams/bragantino_bra.ban",
+      "size": 2870,
+      "sha256": "f4de3c64e4a1b10633a1251b0ac20d64960ce00a4ec163b066aa4581d3def010",
+      "acceptedOriginalSha256": [
+        "38054125a0b63e6b6b5833f5232fbb5096c3f2f6072ecc3c4c24bffa60193c3f"
+      ]
+    },
+    {
+      "path": "teams/remo.ban",
+      "size": 2503,
+      "sha256": "920fd971e03f46c78f7a182b93a917df2bd38b3c62736d536b6e742b4001ef01",
+      "acceptedOriginalSha256": [
+        "5221da9996d84bf0ddccc7af9898610729a1432baaf2e3f8218b05abbd7f45a2"
+      ]
+    },
+    {
+      "path": "teams/santos.ban",
+      "size": 2988,
+      "sha256": "449d26ba4d442361c4179b4a96a64789a251fe500ffeaecd2c80573199c07914",
+      "acceptedOriginalSha256": [
+        "6900fe639a2a0fecd074fb2e9c5887a8d37d5251b9efdcd442c8ec10158a198b"
+      ]
+    },
+    {
+      "path": "teams/saopaulo_bra.ban",
+      "size": 2980,
+      "sha256": "399dc7729fcbdc6d413449465a34ddca51ef4a2867797fff76ca05caf6ac0429",
+      "acceptedOriginalSha256": [
+        "2c70c8f5be7ba32beb44794205c1714133529220e85e9aa7dfd3ea8f9741564a"
+      ]
+    },
+    {
+      "path": "teams/vasco.ban",
+      "size": 3097,
+      "sha256": "dcb2031691e8e2078de93d3d36a9dd3ab83c981c46fada1592d30b247f1cfa95",
+      "acceptedOriginalSha256": [
+        "7abe6fb3b3aff7b65e84982aa35bc55000978c40c2e1f1083e7b0ac0f8518a91"
+      ]
+    },
+    {
+      "path": "teams/vitoria.ban",
+      "size": 2789,
+      "sha256": "f859eba82ba9a243635e6622d1752b2cc2d027e03714329ceea59c0e0b8eb5c2",
+      "acceptedOriginalSha256": [
+        "7a264825f37d76518d32b7868999aff54f94fe7b66f3b479ed87db1088fd75ec"
+      ]
+    }
+  ]
+}

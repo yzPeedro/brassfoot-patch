@@ -60,7 +60,7 @@ var (
 	nationalConfigPath = "conf_ligas_nacionais/BRA.cfg"
 	gameExecutablePath = "bf22-23.exe"
 	validHash = regexp.MustCompile(`^[0-9a-f]{64}$`)
-	validVersion = regexp.MustCompile(`^2026\.[0-9]+\.[0-9]+$`)
+	validVersion = regexp.MustCompile(`^[0-9]{4}\.[0-9]+\.[0-9]+$`)
 )
 
 func sha(path string) (string, error) {
@@ -167,7 +167,7 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 	if err = json.Unmarshal(buf, &m); err != nil {
 		return p, fmt.Errorf("manifesto JSON inválido: %w", err)
 	}
-	if (m.SchemaVersion != 2 && m.SchemaVersion != 3 && m.SchemaVersion != 4) || m.PatchSeason != 2026 || !validVersion.MatchString(m.Version) {
+	if (m.SchemaVersion != 2 && m.SchemaVersion != 3 && m.SchemaVersion != 4) || m.PatchSeason != patchYear() || !validVersion.MatchString(m.Version) || !strings.HasPrefix(m.Version, patchYearText+".") {
 		return p, errors.New("formato ou versão do pacote incompatível")
 	}
 	if !((m.Kind == "BRASFOOT_HOMOLOGATION_PATCH" && !m.PublicationAllowed && !m.CompatibilityTestedInGame) ||

@@ -10,5 +10,13 @@
   "maxUsageAgeMinutes": 30,
   "liveQuota": true,
   "autoIntegrate": true,
-  "autoPush": true
+  "autoPush": true,
+  "workerModel": "gpt-6-luna",
+  "dailyCommand": [
+    "python",
+    "-m",
+    "tools.daily_update",
+    "--report-output",
+    "data/private/daily/world-status.json"
+  ]
 }

@@ -1,0 +1,6 @@
+{
+  "schemaVersion": 1,
+  "policy": "Local authorized originals only. No downloads, invented official badges, or installation into game directories.",
+  "sizes": [[32, 32], [64, 64], [128, 128]],
+  "assets": []
+}

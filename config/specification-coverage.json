@@ -1,0 +1,335 @@
+{
+  "schemaVersion": 1,
+  "edition": "2026.4.0",
+  "fullSpecificationComplete": false,
+  "source": "docs/mega-patch-specification.md",
+  "sections": [
+    {
+      "section": 1,
+      "title": "CONTEXTO E PONTO DE PARTIDA",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 2,
+      "title": "FILOSOFIA DO NOVO PROJETO",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 3,
+      "title": "RECONSTRUÇÃO DA ARQUITETURA",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 4,
+      "title": "COBERTURA MUNDIAL DE CLUBES E CAMPEONATOS",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 5,
+      "title": "ATUALIZAÇÃO MUNDIAL DE JOGADORES",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 6,
+      "title": "ATUALIZAÇÃO GLOBAL DE TREINADORES",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 7,
+      "title": "FONTES DE DADOS E ESTRATÉGIA DE COLETA",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 8,
+      "title": "SELEÇÕES NACIONAIS E COPAS DO MUNDO",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Implementação parcial; consultar limites específicos da release e backlog. Nenhuma homologação inferida."
+    },
+    {
+      "section": 9,
+      "title": "BOLA DE OURO E PREMIAÇÕES",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Implementação parcial; consultar limites específicos da release e backlog. Nenhuma homologação inferida."
+    },
+    {
+      "section": 10,
+      "title": "ENGENHARIA REVERSA PROFUNDA DO BRASFOOT",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Implementação parcial; consultar limites específicos da release e backlog. Nenhuma homologação inferida."
+    },
+    {
+      "section": 11,
+      "title": "NOVO EXECUTÁVEL E DISTRIBUIÇÃO",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 12,
+      "title": "PRESERVAÇÃO DA EXPERIÊNCIA E DAS CARREIRAS",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 13,
+      "title": "TEMPORADAS E REFERÊNCIAS A ANOS ANTIGOS",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 14,
+      "title": "ESCUDOS E UNIFORMES EM ALTA QUALIDADE",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Implementação parcial; consultar limites específicos da release e backlog. Nenhuma homologação inferida."
+    },
+    {
+      "section": 15,
+      "title": "MODERNIZAÇÃO VISUAL DO JOGO",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Implementação parcial; consultar limites específicos da release e backlog. Nenhuma homologação inferida."
+    },
+    {
+      "section": 16,
+      "title": "SUPORTE A WINDOWS, MACOS E LINUX",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Implementação parcial; consultar limites específicos da release e backlog. Nenhuma homologação inferida."
+    },
+    {
+      "section": 17,
+      "title": "INSTALADOR COMPLETAMENTE RENOVADO",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Implementação parcial; consultar limites específicos da release e backlog. Nenhuma homologação inferida."
+    },
+    {
+      "section": 18,
+      "title": "NOVA IDENTIDADE VISUAL — BRASFOOT MEGA PATCH",
+      "implementation": "implemented",
+      "validation": "not-run-at-owner-request",
+      "next": "Entrega sem testes; não implica homologação de comportamento.",
+      "evidence": [
+        "site/styles.css",
+        "site/assets/mark.svg"
+      ]
+    },
+    {
+      "section": 19,
+      "title": "RECONSTRUÇÃO TOTAL DO SITE",
+      "implementation": "implemented",
+      "validation": "not-run-at-owner-request",
+      "next": "Entrega sem testes; não implica homologação de comportamento.",
+      "evidence": [
+        "site/index.html",
+        "site/app.js"
+      ]
+    },
+    {
+      "section": 20,
+      "title": "ANIMAÇÕES, MOVIMENTO E EXPERIÊNCIA",
+      "implementation": "implemented",
+      "validation": "not-run-at-owner-request",
+      "next": "Entrega sem testes; não implica homologação de comportamento.",
+      "evidence": [
+        "site/styles.css"
+      ]
+    },
+    {
+      "section": 21,
+      "title": "SEO EXTREMAMENTE BEM ESTRUTURADO",
+      "implementation": "implemented",
+      "validation": "not-run-at-owner-request",
+      "next": "Entrega sem testes; não implica homologação de comportamento.",
+      "evidence": [
+        "site/sitemap.xml",
+        "site/robots.txt"
+      ]
+    },
+    {
+      "section": 22,
+      "title": "PIX, DOAÇÕES E GRATUIDADE",
+      "implementation": "implemented",
+      "validation": "not-run-at-owner-request",
+      "next": "Entrega sem testes; não implica homologação de comportamento.",
+      "evidence": [
+        "site/pix.js"
+      ]
+    },
+    {
+      "section": 23,
+      "title": "AUTOMAÇÃO DIÁRIA — PRINCIPAL EXIGÊNCIA OPERACIONAL",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Implementação parcial; consultar limites específicos da release e backlog. Nenhuma homologação inferida."
+    },
+    {
+      "section": 24,
+      "title": "EXECUÇÃO SEM DEPENDER DO CHAT ABERTO",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Implementação parcial; consultar limites específicos da release e backlog. Nenhuma homologação inferida."
+    },
+    {
+      "section": 25,
+      "title": "PUBLICAÇÃO AUTOMÁTICA NO GITHUB",
+      "implementation": "implemented",
+      "validation": "not-run-at-owner-request",
+      "next": "Entrega sem testes; não implica homologação de comportamento.",
+      "evidence": [
+        "tools/publish_distribution.py",
+        ".github/workflows/distribution.yml"
+      ]
+    },
+    {
+      "section": 26,
+      "title": "VERSIONAMENTO E EDIÇÕES",
+      "implementation": "implemented",
+      "validation": "not-run-at-owner-request",
+      "next": "Entrega sem testes; não implica homologação de comportamento.",
+      "evidence": [
+        "config/edition.json"
+      ]
+    },
+    {
+      "section": 27,
+      "title": "SITE SINCRONIZADO COM A ÚLTIMA RELEASE",
+      "implementation": "implemented",
+      "validation": "not-run-at-owner-request",
+      "next": "Entrega sem testes; não implica homologação de comportamento.",
+      "evidence": [
+        "site/app.js",
+        "tools/publish_distribution.py"
+      ]
+    },
+    {
+      "section": 28,
+      "title": "DOCUMENTAÇÃO COMO PARTE OBRIGATÓRIA DO DESENVOLVIMENTO",
+      "implementation": "implemented",
+      "validation": "not-run-at-owner-request",
+      "next": "Entrega sem testes; não implica homologação de comportamento.",
+      "evidence": [
+        "docs/current-state.md",
+        "config/specification-coverage.json"
+      ]
+    },
+    {
+      "section": 29,
+      "title": "TESTES, COMPATIBILIDADE E PUBLICAÇÃO CONTÍNUA",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 30,
+      "title": "SEGURANÇA E INTEGRIDADE",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 31,
+      "title": "DESEMPENHO E ESCALABILIDADE",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 32,
+      "title": "PLANO DE MIGRAÇÃO DO PROJETO ANTIGO",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 33,
+      "title": "ESTRATÉGIA DE IMPLEMENTAÇÃO POR FASES",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 34,
+      "title": "COMO LIDAR COM LIMITAÇÕES REAIS",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 35,
+      "title": "REGRAS DE AUTONOMIA DO AGENTE",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 36,
+      "title": "CRITÉRIOS DE ACEITE DO PRODUTO",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 37,
+      "title": "MÉTRICAS DE PROGRESSO",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 38,
+      "title": "ENTREGÁVEIS OBRIGATÓRIOS",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 39,
+      "title": "REGRAS DE PUBLICAÇÃO DEFINITIVAS",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 40,
+      "title": "EVITE ESTES ERROS",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 41,
+      "title": "PRIMEIRA EXECUÇÃO — O QUE VOCÊ DEVE FAZER AGORA",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    },
+    {
+      "section": 42,
+      "title": "DIRETRIZ FINAL",
+      "implementation": "partial",
+      "validation": "not-run-at-owner-request",
+      "next": "Consultar os domínios pendentes em docs/current-state.md; não inferir conclusão de contratos offline."
+    }
+  ]
+}
