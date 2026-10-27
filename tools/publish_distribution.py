@@ -68,7 +68,10 @@ def publish(directory, notes):
         ref = json.loads(gh("api", f"repos/{REPO}/git/tags/{ref['sha']}"))["object"]
     if ref["type"] != "commit" or ref["sha"] != commit:
         raise ValueError("existing tag refers to another source commit")
-    release = json.loads(gh("api", f"repos/{REPO}/releases/tags/{tag}"))
+    # The tags endpoint returns 404 for drafts. The CLI can resolve drafts by
+    # their tag, after which the stable release-ID endpoint also returns assets.
+    release_api = json.loads(gh("release", "view", tag, "--repo", REPO, "--json", "apiUrl"))["apiUrl"]
+    release = json.loads(gh("api", release_api))
     existing = {asset["name"]: asset for asset in release["assets"]}
     for name, (size, digest) in identities.items():
         if name in existing:
@@ -77,7 +80,7 @@ def publish(directory, notes):
                 raise ValueError("refusing to replace conflicting release asset: " + name)
         else:
             gh("release", "upload", tag, str(directory / name), "--repo", REPO)
-    release = json.loads(gh("api", f"repos/{REPO}/releases/tags/{tag}"))
+    release = json.loads(gh("api", release_api))
     uploaded = {asset["name"]: asset for asset in release["assets"]}
     for name, (size, digest) in identities.items():
         asset = uploaded.get(name, {})
@@ -85,6 +88,7 @@ def publish(directory, notes):
             raise ValueError("upload incomplete or digest unavailable; draft preserved: " + name)
     gh("release", "edit", tag, "--repo", REPO, "--draft=false", "--prerelease", "--latest=false",
        "--notes-file", str(notes))
+    release = json.loads(gh("api", release_api))
     public = dict(manifest, status="published", publishedAt=datetime.now(timezone.utc).isoformat())
     public["artifacts"] = [dict(a,
         platform={"macos": "darwin"}.get(a["platform"], a["platform"]),
