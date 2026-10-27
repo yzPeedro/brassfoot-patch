@@ -76,7 +76,8 @@ class Check {
 """)
             subprocess.run(["javac","-cp",str(classes),"-d",str(classes),str(runtime)],
                            check=True,capture_output=True)
-            result=subprocess.run(["java","-Djava.awt.headless=true","-cp",str(classes),"Check"],
+            java = str(Path(shutil.which("javac")).parent / "java.exe")
+            result=subprocess.run([java,"-Djava.awt.headless=true","-cp",str(classes),"Check"],
                                   check=True,capture_output=True,text=True)
             self.assertIn("PASS:",result.stdout)
 
@@ -149,7 +150,7 @@ class CheckVariant {
             subprocess.run(["javac", "-cp", str(classes), "-d", str(classes), str(check)],
                            check=True, capture_output=True)
             run = subprocess.run(
-                ["java", "-Djava.awt.headless=true", "-cp", str(classes), "CheckVariant"],
+                [str(Path(shutil.which("javac")).parent / "java.exe"), "-Djava.awt.headless=true", "-cp", str(classes), "CheckVariant"],
                 check=True, capture_output=True, text=True
             )
             self.assertIn("synthetic adapter PASS", run.stdout)

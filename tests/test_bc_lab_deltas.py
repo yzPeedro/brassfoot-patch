@@ -63,7 +63,8 @@ public class CreateSyntheticTeam {
             subprocess.run(["javac", "-encoding", "UTF-8", "-cp", str(classes),
                             "-d", str(classes), str(java)], check=True, capture_output=True)
             original_path = game / "criciuma_bra.ban"
-            subprocess.run(["java", "-cp", str(classes), "CreateSyntheticTeam",
+            java = str(Path(shutil.which("javac")).parent / "java.exe")
+            subprocess.run([java, "-cp", str(classes), "CreateSyntheticTeam",
                             str(original_path)], check=True, capture_output=True)
             original = original_path.read_bytes()
             row = {

@@ -11,6 +11,7 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+import shutil
 import tempfile
 
 from tools.audit_official_roster_tsv import IDENTITIES
@@ -36,6 +37,16 @@ def prepare_java(classes: Path, java_sources: Path = ROOT / "tools/team-roster-e
                    check=True, timeout=120, capture_output=True)
 
 
+def java_runtime() -> str:
+    """Use the runtime beside javac when PATH contains mixed Java versions."""
+    javac = shutil.which("javac")
+    if javac:
+        candidate = Path(javac).with_name("java.exe")
+        if candidate.exists():
+            return str(candidate)
+    return "java"
+
+
 def build_one(row: dict, *, teams: Path, roster: Path, classes: Path,
               candidates: Path, recipes: Path) -> dict:
     if row["originalTeamFile"] is None or row["division"] not in ("B", "C"):
@@ -47,7 +58,7 @@ def build_one(row: dict, *, teams: Path, roster: Path, classes: Path,
         raise ValueError("Original hash changed after preflight: " + row["clubId"])
     updated_path = candidates / original_path.name
     run = subprocess.run(
-        ["java", "-Xmx256m", "-cp", str(classes), "app.UpdateTeamRoster",
+        [java_runtime(), "-Xmx256m", "-cp", str(classes), "app.UpdateTeamRoster",
          str(original_path), str(roster), str(updated_path), digest,
          str(row["originalTeamId"]), "--lab-estimates"],
         check=True, capture_output=True, text=True, timeout=45,

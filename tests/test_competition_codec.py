@@ -22,7 +22,7 @@ class CompetitionCodecTests(unittest.TestCase):
                 check=True, timeout=45, capture_output=True, text=True
             )
             run = subprocess.run(
-                ["java", "-cp", str(compiled), "app.CodecSelfTest"],
+                [str(Path(shutil.which("javac")).parent / "java.exe"), "-cp", str(compiled), "app.CodecSelfTest"],
                 check=True, timeout=25, capture_output=True, text=True
             )
             self.assertIn("PASS synthetic national/state codec", run.stdout)
