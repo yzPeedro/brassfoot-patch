@@ -23,3 +23,12 @@ Operação: coletor produtivo registrou oito fontes sem falha, 312 clubes, 12 co
 O status por seção da especificação está em `config/specification-coverage.json`. Cobertura mundial de jogadores/treinadores, seleções, Copa/prêmios em produção, expansão da engine, fontes tipográficas dentro do jogo, acervo oficial autorizado e migração de saves continuam incompletos. Linux/macOS não foram executados. O site não deve anunciar esses objetivos como já entregues.
 
 O histórico anterior foi preservado em `docs/audit/state-before-mega-2026.4.0.md`. Não repetir auditorias concluídas nem marcar toda a especificação como completa pela existência de contratos de dados.
+
+## Publicação efetiva
+
+- Código dos binários: `a921b2e1a06243698bc936c4a6971db59c0e2fd4`.
+- Pré-release pública: https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.4.0
+- Cinco pacotes de plataforma, catálogo comprimido, `distribution.json` e `SHA256SUMS.txt` publicados. O publicador comparou o digest fornecido pelo GitHub com os arquivos enviados.
+- Snapshot de conteúdo: `d3d448ebcdf14a091e2493cdbaea7de0d604750ae30bc7d920213b78290bd2cf`.
+- Correção operacional posterior `ff004f8`: resolver drafts pelo ID da release, porque o endpoint por tag retorna 404 enquanto o draft não foi publicado. Binários preservam o commit exato de compilação.
+- Nenhum teste foi executado e os commits de código não dispararam workflows de testes (`[skip ci]`). A compilação produziu os cinco artefatos; isso não demonstra execução em cada plataforma.
