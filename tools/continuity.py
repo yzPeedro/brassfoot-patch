@@ -212,6 +212,20 @@ def _reported_tokens(run_dir: Path) -> int | None:
         return None
 
 
+def _failed_before_model_call(run_dir: Path) -> bool:
+    texts = []
+    workers_dir = run_dir / "workers"
+    if workers_dir.is_dir():
+        for path in workers_dir.rglob("*"):
+            if path.is_file() and path.suffix in {".md", ".log", ".json", ".txt"}:
+                try:
+                    texts.append(path.read_text(encoding="utf-8", errors="replace"))
+                except OSError:
+                    pass
+    joined = "\n".join(texts)
+    return "Missing environment variable" in joined or "NINEROUTER_API_KEY" in joined
+
+
 def _evaluate_wave(cfg: dict[str, Any], state: dict[str, Any], task: dict[str, Any], task_state: dict[str, Any]) -> None:
     info = state["waves"][task["id"]]
     run_dir = Path(info["runDir"])
@@ -263,6 +277,9 @@ def _evaluate_wave(cfg: dict[str, Any], state: dict[str, Any], task: dict[str, A
     if tokens is not None:
         ledger["reservedTokens"] = max(0, ledger.get("reservedTokens", 0) - 10000)
         ledger["reportedTokens"] = ledger.get("reportedTokens", 0) + tokens
+    elif _failed_before_model_call(run_dir):
+        ledger["reservedTokens"] = max(0, ledger.get("reservedTokens", 0) - 10000)
+        ledger["calls"] = max(0, ledger.get("calls", 0) - 1)
     checks_ok = bool(task.get("checks"))
     for check in task.get("checks", []):
         if not isinstance(check, list) or not check or not all(isinstance(x, str) for x in check):
