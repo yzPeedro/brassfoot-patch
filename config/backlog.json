@@ -34,7 +34,7 @@
     },
     {
       "id": "incremental-snapshot",
-      "status": "pending",
+      "status": "done",
       "priority": 80,
       "dependencies": [
         "world-catalog-contract"
@@ -62,7 +62,8 @@
           "--check"
         ]
       ],
-      "brief": "Implement deterministic incremental snapshots for tools/world_catalog.py in tools/world_snapshot.py with tests/test_world_snapshot.py and docs/world-snapshot.md only. Read preceding catalog API. Sections 7,23,24,31 of specification. Stable content hashes excluding observation clock; identical content yields no new content version; source failure/empty input must preserve previous trusted fields; conflicts retained for reconciliation; atomic snapshot write, provenance and diff, dry-run support. Synthetic fixtures only, no network/API paid services or game files. Prove unchanged data, changed field, missing source, crash before atomic replace and conflict preservation. Do not claim live sports update. Run configured unittest and git diff --check."
+      "brief": "Implement deterministic incremental snapshots for tools/world_catalog.py in tools/world_snapshot.py with tests/test_world_snapshot.py and docs/world-snapshot.md only. Read preceding catalog API. Sections 7,23,24,31 of specification. Stable content hashes excluding observation clock; identical content yields no new content version; source failure/empty input must preserve previous trusted fields; conflicts retained for reconciliation; atomic snapshot write, provenance and diff, dry-run support. Synthetic fixtures only, no network/API paid services or game files. Prove unchanged data, changed field, missing source, crash before atomic replace and conflict preservation. Do not claim live sports update. Run configured unittest and git diff --check.",
+      "completedAt": "2026-10-27T00:49:05.224385+00:00"
     }
   ],
   "remainingDomains": [
