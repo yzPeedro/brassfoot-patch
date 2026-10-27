@@ -101,19 +101,6 @@
   ],
   "remainingDomains": [
     {
-      "id": "daily-sources",
-      "sections": [
-        5,
-        6,
-        7,
-        23
-      ],
-      "dependsOn": [
-        "incremental-snapshot"
-      ],
-      "acceptance": "Authorized cached sources, bounded requests, provenance, daily change detection without inventing data"
-    },
-    {
       "id": "engine",
       "sections": [
         10,

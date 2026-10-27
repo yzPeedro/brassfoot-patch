@@ -20,7 +20,7 @@ Prioridade: instalar e comprovar retomada independente da conversa antes de expa
 
 ## Próximas entregas
 
-Consultar `config/backlog.json`: continuidade primeiro, depois contratos de catálogo mundial e atualização incremental. Reaproveitar codecs e descobertas comprovadas; não repetir auditoria geral.
+`world-catalog-contract`, `incremental-snapshot` e `daily-sources` estão concluídos no backlog com checks locais e sem chamadas de rede. O próximo trabalho deve ser escolhido entre os domínios restantes, preservando os gates fail-closed e sem repetir auditorias concluídas.
 
 ## Bloqueadores conhecidos de produto
 
