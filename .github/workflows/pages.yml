@@ -29,7 +29,11 @@ jobs:
         with:
           node-version: '22'
       - name: Validate public site and release gate
-        run: node site/tests/site.test.js
+        run: |
+          node site/tests/site.test.js
+          node site/tests/seo-pix.test.js
+          node site/tests/explorer-interaction.test.js
+          python -m unittest tests.test_release_traceability -q
       - name: Detect Pages configuration without assuming enablement
         id: pages
         env:

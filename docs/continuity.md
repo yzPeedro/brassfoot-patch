@@ -8,7 +8,7 @@ Configuração local: `config/continuity.local.json` (não versionada), baseada 
 
 Cota real: RPC `account/rateLimits/read` do app-server, sem iniciar turno de modelo, conforme [documentação oficial](https://learn.chatgpt.com/docs/app-server). Somente autenticação ChatGPT já existente; API key/provedores pagos recusados. Leitura indisponível adia execução; uso ≥70% espera reset e nova consulta. Nenhum crédito/reset é comprado ou consumido.
 
-Integração automática restrita aos caminhos do contrato, após checks; commit e push sem force. Falha de push permanece recuperável. Nenhum binário novo é publicado por este serviço. A coleta mundial e a promoção de releases permanecem pendentes no backlog; não confundir o agendador com essas funcionalidades.
+Integração automática restrita aos caminhos do contrato, após checks; commit e push sem force. Falha de push permanece recuperável. Nenhum binário novo é publicado por este serviço. A coleta mundial permanece fora do escopo; promoção de releases usa o pipeline separado e seus gates de artefato, manifesto, hash e site.
 
 Diagnóstico: `python tools/continuity.py --config config/continuity.local.json status`. Recuperação: corrigir causa registrada no journal, preservar diff, e reprogramar apenas a tarefa afetada no estado local. Parada: desabilitar a tarefa no Windows Task Scheduler. Instalação reproduzível: `powershell -NoProfile -File scripts/install-continuity.ps1`.
 

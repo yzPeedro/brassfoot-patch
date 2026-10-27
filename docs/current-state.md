@@ -1,5 +1,13 @@
 # Estado do Brasfoot Mega Patch
 
+## 2026-10-27 — gates de site, publicação e continuidade reforçados
+
+- O mantenedor confirmou testes manuais locais para engine, dados, gráficos e instalador; esta confirmação é evidência operacional do proprietário, separada dos testes automatizados.
+- O workflow de GitHub Pages agora executa os três testes Node do site e o teste Python de rastreabilidade antes do deploy.
+- A documentação de deployment e continuidade foi alinhada ao fluxo fail-closed: release pública, manifesto, tamanho, SHA-256 e site devem permanecer consistentes.
+- Validação local: `node site/tests/site.test.js`, `node site/tests/seo-pix.test.js`, `node site/tests/explorer-interaction.test.js`, `python -m unittest tests.test_release_traceability -q` e `git diff --check` passaram.
+- Nenhuma release externa foi criada ou alterada nesta etapa. A versão `v2026.3.5` e o site público permanecem preservados até existir um novo artefato verificado.
+
 ## 2026-10-27 — validação integral da retomada autônoma
 
 - A árvore foi retomada sem alterações de produto pendentes; os quatro contratos offline do backlog (`history-records-contract`, `world-catalog-contract`, `incremental-snapshot` e `daily-sources`) permanecem concluídos.
