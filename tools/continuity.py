@@ -466,7 +466,7 @@ def status(cfg: dict[str, Any]) -> dict[str, Any]:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", required=True, type=Path)
-    parser.add_argument("command", choices=("tick", "status", "retry"))
+    parser.add_argument("command", choices=("tick", "status", "retry", "validate-existing"))
     parser.add_argument("task", nargs="?", help="task id for retry")
     parser.add_argument("--task", dest="task_option", help="task id for retry")
     args = parser.parse_args(argv)
@@ -477,11 +477,16 @@ def main(argv: list[str] | None = None) -> int:
                 result = tick(cfg)
             elif args.command == "status":
                 result = status(cfg)
-            else:
+            elif args.command == "retry":
                 task_id = args.task_option or args.task
                 if not task_id:
                     raise ValueError("retry requires a task id")
                 result = retry(cfg, task_id)
+            else:
+                task_id = args.task_option or args.task
+                if not task_id:
+                    raise ValueError("validate-existing requires a task id")
+                result = validate_existing(cfg, task_id)
         print(json.dumps(result, indent=2, ensure_ascii=False))
         return 0
     except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as exc:
@@ -489,7 +494,78 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
 
+
+
+def validate_existing(cfg, task_id):
+    state_path = cfg["stateDir"] / "state.json"
+    journal_path = cfg["stateDir"] / "journal.jsonl"
+    backlog = _load_json(cfg["backlog"])
+    state = _load_json(state_path) if state_path.exists() else _new_state(backlog)
+    if task_id not in state.get("tasks", {}):
+        raise ValueError("unknown continuity task: %s" % task_id)
+    task = next((t for t in backlog.get("tasks", []) if t.get("id") == task_id), None)
+    if not isinstance(task, dict):
+        raise ValueError("unknown continuity task: %s" % task_id)
+    task_state = state["tasks"][task_id]
+    if task_state.get("status") == "running" or task_id in state.get("waves", {}):
+        raise RuntimeError("cannot validate task with active execution: %s" % task_id)
+    deps_ok = True
+    for dep in task.get("dependencies", []):
+        dep_state = state["tasks"].get(dep)
+        if not isinstance(dep_state, dict) or dep_state.get("status") not in {"done", "validated"}:
+            deps_ok = False
+            break
+    paths_ok = True
+    missing_paths = []
+    for rel in task.get("ownedPaths", []):
+        full = Path(cfg["repoRoot"]) / rel
+        if not full.exists():
+            paths_ok = False
+            missing_paths.append(str(rel))
+            continue
+        try:
+            result = _call(["git", "-C", str(cfg["repoRoot"]), "ls-files", "--", str(rel)], timeout=60)
+        except (OSError, subprocess.TimeoutExpired):
+            paths_ok = False
+            missing_paths.append(str(rel))
+            continue
+        if result.returncode != 0 or not result.stdout.strip():
+            paths_ok = False
+            missing_paths.append(str(rel))
+    checks = task.get("checks", [])
+    checks_results = []
+    checks_ok = bool(checks)
+    if not checks:
+        checks_ok = False
+    for check in checks:
+        if not isinstance(check, list) or not check or not all(isinstance(x, str) for x in check):
+            checks_ok = False
+            checks_results.append({"check": check, "ok": False, "reason": "invalid check"})
+            break
+        try:
+            result = _call(check, cwd=cfg["repoRoot"], timeout=300)
+            ok = result.returncode == 0
+            checks_results.append({"check": check, "ok": ok, "returncode": result.returncode,
+                                  "stdout": result.stdout[-2000:], "stderr": result.stderr[-2000:]})
+            if not ok:
+                checks_ok = False
+                break
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            checks_results.append({"check": check, "ok": False, "reason": str(exc)})
+            checks_ok = False
+            break
+    all_ok = deps_ok and paths_ok and checks_ok
+    if all_ok:
+        task_state.update(status="validated", validatedAt=_iso(), validatedBy="validate-existing")
+        _atomic(state_path, state)
+        _journal(journal_path, {"event": "task_validated", "task": task_id, "status": "validated",
+                                "dependenciesOk": deps_ok, "pathsOk": paths_ok,
+                                "checks": checks_results, "attempts": task_state.get("attempts", 0)})
+    else:
+        _journal(journal_path, {"event": "task_validation_failed", "task": task_id, "status": task_state.get("status"),
+                                "dependenciesOk": deps_ok, "pathsOk": paths_ok, "missingPaths": missing_paths,
+                                "checks": checks_results, "attempts": task_state.get("attempts", 0)})
+    return state
+
 if __name__ == "__main__":
     raise SystemExit(main())
-
-
