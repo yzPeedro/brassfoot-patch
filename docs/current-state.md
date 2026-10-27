@@ -1,5 +1,12 @@
 # Estado do Brasfoot Mega Patch
 
+## 2026-10-27 — validação integral da retomada autônoma
+
+- A árvore foi retomada sem alterações de produto pendentes; os quatro contratos offline do backlog (`history-records-contract`, `world-catalog-contract`, `incremental-snapshot` e `daily-sources`) permanecem concluídos.
+- Gates locais executados nesta retomada: `python -m unittest discover -s tests -q` (182 testes, 3 skips), `node site/tests/site.test.js`, `node site/tests/seo-pix.test.js`, `node site/tests/explorer-interaction.test.js`, `go test ./...` e `go vet ./...` em `windows-installer`; todos passaram.
+- A validação confirma contratos, instalador, site e SEO/Pix em ambiente automatizado. Ela não acrescenta evidência de gameplay/calendário/saves, macOS/Linux funcional, licenças/direitos ou elencos B/C verificados; a edição continua experimental e a promoção permanece bloqueada.
+- Alethe: diagnóstico local confirmou Codex autenticado e cota baixa; Claude instalado sem autenticação. Não foi aberta nova unidade porque não há tarefa independente pendente no backlog que possa ser concluída sem inventar dados ou repetir auditorias.
+
 ## 2026-10-27 — regressão Java CI corrigida
 
 - Corrigidos os testes sintéticos Java para executar o runtime ao lado do `javac`, usando `java.exe` apenas no Windows e `java` nos demais sistemas. Isso removeu a dependência acidental do Java 8 em Windows e o caminho inválido `java.exe` em runners Linux.
