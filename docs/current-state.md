@@ -1,5 +1,12 @@
 # Estado do Brasfoot Mega Patch
 
+## 2026-10-27 — regressão Java CI corrigida
+
+- Corrigidos os testes sintéticos Java para executar o runtime ao lado do `javac`, usando `java.exe` apenas no Windows e `java` nos demais sistemas. Isso removeu a dependência acidental do Java 8 em Windows e o caminho inválido `java.exe` em runners Linux.
+- Validação local: 178 testes Python passaram, incluindo os seis testes Java sintéticos afetados; testes Node do site, `go test ./...`, `go vet ./...` e `git diff --check` passaram.
+- Commit/push: `c53077e` em `main`. Os workflows `Unified release readiness gate` e `Research official Brasfoot 22-23 year selector` passaram no GitHub Actions.
+- Esta correção melhora a portabilidade dos gates; não acrescenta evidência de jogabilidade, compatibilidade de saves, macOS/Linux funcional ou direitos de redistribuição.
+
 ## 2026-10-26 — infraestrutura de continuidade em implementação
 
 Prioridade: instalar e comprovar retomada independente da conversa antes de expandir produto.
