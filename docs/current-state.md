@@ -43,3 +43,11 @@ Agendador instalado e smoke/reentrada comprovados (docs/continuity.md). Su?te: 1
 - Validação local desta retomada: `python -m unittest discover -s tests -q` passou com 178 testes e 3 skips; `node site/tests/site.test.js`, `node site/tests/seo-pix.test.js` e `node site/tests/explorer-interaction.test.js` passaram; `go test ./...` e `go vet ./...` passaram em `windows-installer`; `git diff --check` passou.
 - A árvore estava limpa antes deste registro. Os workflows remotos mais recentes consultados permanecem verdes para o commit de código `c53077e` (`Unified release readiness gate` e `Research official Brasfoot 22-23 year selector`).
 - Este checkpoint não acrescenta evidência de gameplay, calendário, compatibilidade de saves, macOS/Linux, licenças ou direitos de redistribuição. A promoção de release continua bloqueada pelos gates reais já documentados.
+
+## 2026-10-27 — contrato offline de histórico
+
+- Implementado `tools/history_records.py` com IDs estáveis, separação explícita entre `historical`, `current` e `simulated`, validação fail-closed, HTTPS e confiança obrigatórios para fatos históricos e exportação JSON determinística.
+- Testes sintéticos em `tests/test_history_records.py` cobrem separação, proveniência ausente, duplicatas, ordenação determinística e round-trip. Nenhum fato esportivo de produção foi inventado ou coletado.
+- Validação desta etapa: 182 testes Python passaram com 3 skips; três testes Node do site, `go test ./...`, `go vet ./...` e `git diff --check` passaram.
+- A onda Alethe foi tentada uma vez em perfil savings, mas o worker falhou antes de editar por ausência de `NINEROUTER_API_KEY`; a unidade pequena foi concluída diretamente e a falha operacional permanece registrada no handoff.
+- Este contrato não prova resultados reais de Copa/prêmios, gameplay, calendário, saves, macOS/Linux, licenças ou publicação.

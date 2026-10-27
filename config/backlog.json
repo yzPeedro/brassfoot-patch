@@ -3,6 +3,23 @@
   "specification": "docs/mega-patch-specification.md",
   "tasks": [
     {
+      "id": "history-records-contract",
+      "status": "done",
+      "priority": 65,
+      "dependencies": [],
+      "ownedPaths": [
+        "tools/history_records.py",
+        "tests/test_history_records.py",
+        "docs/history-records.md"
+      ],
+      "checks": [
+        ["python", "-m", "unittest", "discover", "-s", "tests", "-p", "test_history_records.py", "-v"],
+        ["git", "diff", "--check"]
+      ],
+      "brief": "Offline fail-closed ledger separating historical, current and simulated records; HTTPS provenance and confidence for historical records; deterministic export; synthetic tests only.",
+      "completedAt": "2026-10-27T14:05:00-03:00"
+    },
+    {
       "id": "world-catalog-contract",
       "status": "done",
       "priority": 90,
