@@ -22,6 +22,8 @@ Consultar `config/backlog.json`: continuidade primeiro, depois contratos de cat�
 - macOS/Linux sem validação funcional demonstrada.
 - Fontes e direitos de redistribuição precisam de evidência por recurso; nenhuma coleta mundial está comprovada.
 - A publicação automática só poderá promover builds que satisfaçam seus gates técnicos. A automação não deve transformar ausência de evidência em aprovação.
+- Contrato de rastreabilidade offline adicionado em `tools/release_traceability.py` e publicado no commit `e9cf0e8`; a release `v2026.3.5` permanece inalterada porque não há snapshot verificável para preencher retroativamente.
+- Go 1.25.4 instalado pelo Scoop para os gates do instalador; `go test ./...` e `go vet ./...` passaram em 2026-10-27.
 
 ## Checkpoint operacional 19:38 Bras?lia
 Agendador instalado e smoke/reentrada comprovados (docs/continuity.md). Su?te: 153 testes passaram, 3 skips, com Java/Javac 17 alinhados. Tr?s testes Node passaram. Worker Alethe encerrado; 163.273 tokens reportados excederam or?amento, por isso ledger bloqueia novas chamadas hoje. Pr?ximas duas tarefas persistidas; cota real ? consultada a cada tentativa. Coleta mundial di?ria e publica??o integral ainda n?o conectadas. Pr?xima valida??o necess?ria: tarefa econ?mica completa ? checks ? commit/push autom?ticos, ap?s recupera??o de cota e or?amento di?rio.

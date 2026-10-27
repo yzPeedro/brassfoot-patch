@@ -42,7 +42,7 @@ Critérios baseados no prompt master do projeto. `pass` = verificado no componen
 | CAN34 | partial | Workflow qualidade criado, não rodado no GitHub |
 | CAN35 | partial | Documentação de arquitetura e operação criada |
 | CAN36 | partial | Prévia determinística em arquivos, build em jogo não verificado |
-| CAN37 | pending | Rastreabilidade release/commit não implementada |
+| CAN37 | partial | Contrato offline em `tools/release_traceability.py` valida versão, commit, snapshot e SHA-256; manifesto publicado ainda não foi reemitido com snapshot verificável |
 | CAN38 | pending | Alertas no GitHub não implementados |
 | CAN39 | pass | Frontend estático não possui API-Football |
 | CAN40 | partial | Nenhum segredo nos arquivos locais analisados; binário GUI inexistente |
