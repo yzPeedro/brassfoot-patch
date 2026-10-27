@@ -36,3 +36,10 @@ O commit `7f05b2c` foi enviado para `main` após os gates locais. A consulta rea
 
 ## Checkpoint operacional 19:38 Bras?lia
 Agendador instalado e smoke/reentrada comprovados (docs/continuity.md). Su?te: 153 testes passaram, 3 skips, com Java/Javac 17 alinhados. Tr?s testes Node passaram. Worker Alethe encerrado; 163.273 tokens reportados excederam or?amento, por isso ledger bloqueia novas chamadas hoje. Pr?ximas duas tarefas persistidas; cota real ? consultada a cada tentativa. Coleta mundial di?ria e publica??o integral ainda n?o conectadas. Pr?xima valida??o necess?ria: tarefa econ?mica completa ? checks ? commit/push autom?ticos, ap?s recupera??o de cota e or?amento di?rio.
+
+## 2026-10-27 — retomada autônoma e gates locais
+
+- Retomada feita a partir do backlog persistente; `world-catalog-contract`, `incremental-snapshot` e `daily-sources` continuam concluídos. Nenhuma auditoria desses itens foi repetida.
+- Validação local desta retomada: `python -m unittest discover -s tests -q` passou com 178 testes e 3 skips; `node site/tests/site.test.js`, `node site/tests/seo-pix.test.js` e `node site/tests/explorer-interaction.test.js` passaram; `go test ./...` e `go vet ./...` passaram em `windows-installer`; `git diff --check` passou.
+- A árvore estava limpa antes deste registro. Os workflows remotos mais recentes consultados permanecem verdes para o commit de código `c53077e` (`Unified release readiness gate` e `Research official Brasfoot 22-23 year selector`).
+- Este checkpoint não acrescenta evidência de gameplay, calendário, compatibilidade de saves, macOS/Linux, licenças ou direitos de redistribuição. A promoção de release continua bloqueada pelos gates reais já documentados.
