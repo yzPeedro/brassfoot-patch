@@ -361,7 +361,7 @@ def tick(cfg: dict[str, Any], *, now: dt.datetime | None = None) -> dict[str, An
         deps = task.get("dependencies", [])
         if any(d not in state["tasks"] or state["tasks"][d]["status"] != "done" for d in deps):
             continue
-        plan = Path(task.get("plan", ""))
+        plan = Path(ts.get("plan") or task.get("plan", ""))
         if not plan.is_absolute():
             plan = cfg["repoRoot"] / plan
         task["plan"] = str(plan.resolve())
@@ -421,6 +421,26 @@ def tick(cfg: dict[str, Any], *, now: dt.datetime | None = None) -> dict[str, An
     return state
 
 
+def retry(cfg: dict[str, Any], task_id: str) -> dict[str, Any]:
+    state_path = cfg["stateDir"] / "state.json"
+    journal_path = cfg["stateDir"] / "journal.jsonl"
+    state = _load_json(state_path) if state_path.exists() else _new_state(_load_json(cfg["backlog"]))
+    if task_id not in state.get("tasks", {}):
+        raise ValueError(f"unknown continuity task: {task_id}")
+    task_state = state["tasks"][task_id]
+    if task_state.get("status") == "running":
+        raise RuntimeError(f"cannot retry task that is still running: {task_id}")
+    if task_state.get("status") != "blocked":
+        raise ValueError(f"only blocked tasks can be retried: {task_id} ({task_state.get('status')})")
+    task_state.update(status="pending")
+    task_state.pop("reason", None)
+    task_state.pop("deferReason", None)
+    task_state.pop("nextEligibleAt", None)
+    _atomic(state_path, state)
+    _journal(journal_path, {"event": "retry_requested", "task": task_id, "attempts": task_state.get("attempts", 0)})
+    return state
+
+
 def status(cfg: dict[str, Any]) -> dict[str, Any]:
     path = cfg["stateDir"] / "state.json"
     return _load_json(path) if path.exists() else _new_state(_load_json(cfg["backlog"]))
@@ -429,12 +449,22 @@ def status(cfg: dict[str, Any]) -> dict[str, Any]:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", required=True, type=Path)
-    parser.add_argument("command", choices=("tick", "status"))
+    parser.add_argument("command", choices=("tick", "status", "retry"))
+    parser.add_argument("task", nargs="?", help="task id for retry")
+    parser.add_argument("--task", dest="task_option", help="task id for retry")
     args = parser.parse_args(argv)
     try:
         cfg = load_config(args.config)
         with exclusive_lock(cfg["stateDir"] / "continuity.lock"):
-            result = tick(cfg) if args.command == "tick" else status(cfg)
+            if args.command == "tick":
+                result = tick(cfg)
+            elif args.command == "status":
+                result = status(cfg)
+            else:
+                task_id = args.task_option or args.task
+                if not task_id:
+                    raise ValueError("retry requires a task id")
+                result = retry(cfg, task_id)
         print(json.dumps(result, indent=2, ensure_ascii=False))
         return 0
     except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as exc:
@@ -444,4 +474,5 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
 
