@@ -1,72 +1,54 @@
 (() => {
   'use strict';
-
-  // The verified release URL is present in HTML. Never block downloads while
-  // checking GitHub API or release metadata: users may have CORS/API failures.
   const byId = id => document.getElementById(id);
-  const buttons = [byId('download-hero'), byId('download-panel')].filter(Boolean);
-  const status = byId('release-status');
-  const badge = byId('release-badge');
-  const detail = byId('release-detail');
-  const version = byId('release-version');
-  const alternate = document.querySelector('.release-alt-link');
-
-  const shipped = {
-    version: '2026.3.5',
-    tag: 'v2026.3.5',
-    asset: 'Brasfoot-Patch-V4-Elencos-2026.3.5.exe',
-    size: 5419520,
-    sha256: 'eb546eec17a6e7e20ffb65a32078bccfdea2e2b7f62f429688e698d5a458e45d'
-  };
-  const base = 'https://github.com/yzPeedro/brassfoot-patch/releases/download/';
-  const releaseUrl = 'https://github.com/yzPeedro/brassfoot-patch/releases/tag/';
-  const currentUrl = base + shipped.tag + '/' + shipped.asset;
-
-  function showRelease(versionText, url, sha256) {
-    // Anchors work without JavaScript. JS only updates a *verified* newer asset.
-    for (const button of buttons) {
-      button.href = url;
-      button.removeAttribute('aria-disabled');
-      button.textContent = 'BAIXAR PATCH ' + versionText + ' ↗';
-    }
-    if (status) status.textContent = 'DISPONÍVEL';
-    if (badge) badge.textContent = 'PUBLICADO';
-    if (version) version.textContent = versionText;
-    if (detail) detail.textContent = 'Versão ' + versionText + ' · Windows · Download gratuito';
-    if (alternate) alternate.href = releaseUrl + 'v' + versionText;
-  }
-
-  showRelease(shipped.version, currentUrl, shipped.sha256);
-
-  // Optional enhancement for later releases. A failed fetch never disables
-  // the already published and SHA-verified download in the HTML.
-  if (typeof fetch !== 'function') return;
-  fetch('./data/release.json', {cache:'no-store'}).then(async response => {
-    if (!response.ok) return;
-    const meta = await response.json();
-    if (!meta || meta.status !== 'published' ||
-        !/^20[0-9]{2}\.[0-9]+\.[0-9]+$/.test(meta.publishedVersion || '') ||
-        !/^[a-f0-9]{64}$/i.test(meta.sha256 || '') ||
-        !Number.isInteger(meta.fileSizeBytes) || meta.fileSizeBytes <= 0) return;
-    const expected = base + 'v' + meta.publishedVersion + '/' + meta.assetName;
-    if (expected !== meta.downloadUrl ||
-        !/^Brasfoot-Patch-[a-zA-Z0-9._-]+\.exe$/.test(meta.assetName || '')) return;
-    if (meta.publishedVersion === shipped.version) {
-      // Current binary already checked against the public release by SHA-256.
-      return;
-    }
-    const api = await fetch('https://api.github.com/repos/yzPeedro/brassfoot-patch/releases/tags/v' + meta.publishedVersion,
-      {cache:'no-store', headers:{Accept:'application/vnd.github+json'}});
-    if (!api.ok) return;
-    const release = await api.json();
-    if (release.draft || release.tag_name !== 'v' + meta.publishedVersion) return;
-    const asset = (release.assets || []).find(item =>
-      item.name === meta.assetName && item.state === 'uploaded' &&
-      item.size === meta.fileSizeBytes &&
-      item.browser_download_url === expected &&
-      item.digest === 'sha256:' + meta.sha256);
-    if (asset) showRelease(meta.publishedVersion, expected, meta.sha256);
-  }).catch(() => {
-    // The static download remains functional when offline or rate-limited.
+  const menu = byId('mobile-menu');
+  const nav = byId('nav');
+  menu?.addEventListener('click', () => {
+    const open = menu.getAttribute('aria-expanded') !== 'true';
+    menu.setAttribute('aria-expanded', String(open)); nav?.classList.toggle('open', open);
   });
+  nav?.addEventListener('click', event => {
+    if (event.target.closest('a')) { menu?.setAttribute('aria-expanded', 'false'); nav.classList.remove('open'); }
+  });
+  const select = byId('download-platform');
+  const button = byId('download-panel');
+  const platforms = {windows:'Windows', linux:'Linux', darwin:'macOS'};
+  const agent = navigator.userAgentData?.platform || navigator.platform || navigator.userAgent;
+  const os = /win/i.test(agent) ? 'windows' : /mac/i.test(agent) ? 'darwin' : /linux/i.test(agent) ? 'linux' : null;
+  if (select && os) select.value = os + '-amd64';
+  if (byId('detected-os') && os) byId('detected-os').textContent = platforms[os].toUpperCase() + ' DETECTADO';
+  let manifest = null;
+  const releaseBase = 'https://github.com/yzPeedro/brassfoot-patch/releases/';
+  function refreshDownload() {
+    if (!select || !button) return;
+    const [platform, architecture] = select.value.split('-');
+    const note = byId('platform-note');
+    if (note) note.textContent = platform === 'windows'
+      ? 'Atualizador experimental. Instale a V4 primeiro se a sua base ainda não for compatível. Nenhum teste executado nesta edição.'
+      : 'Utilitário de patch experimental. O jogo requer Wine ou outra camada de compatibilidade, instalada separadamente. Execução não homologada. Escolha a arquitetura do seu computador.';
+    const item = manifest?.artifacts?.find(a => a.platform === platform && a.architecture === architecture);
+    if (!item) { button.href = releaseBase + 'tag/v2026.4.0'; button.textContent = 'Ver arquivos da edição ↗'; return; }
+    button.href = item.downloadUrl;
+    button.textContent = 'Baixar para ' + platforms[platform] + ' ↗';
+    if (byId('release-detail')) byId('release-detail').textContent = `${item.name} · ${(item.sizeBytes / 1048576).toFixed(1)} MB · ${manifest.version}`;
+    if (byId('asset-hash')) byId('asset-hash').textContent = 'SHA-256: ' + item.sha256;
+  }
+  select?.addEventListener('change', refreshDownload);
+  refreshDownload();
+  if (typeof fetch !== 'function') return;
+  fetch('./data/distribution.json', {cache:'no-cache'}).then(r => r.ok ? r.json() : null).then(data => {
+    if (!data || !/^20\d{2}\.\d+\.\d+$/.test(data.version) || data.status !== 'published' || !Array.isArray(data.artifacts)) return;
+    const prefix = releaseBase + 'download/v' + data.version + '/';
+    if (data.artifacts.some(a => !/^[a-zA-Z0-9._-]+$/.test(a.name) || a.downloadUrl !== prefix + a.name ||
+        !/^[a-f0-9]{64}$/.test(a.sha256) || !Number.isSafeInteger(a.sizeBytes) || a.sizeBytes <= 0)) return;
+    manifest = data; refreshDownload();
+  }).catch(() => {});
+  fetch('./data/world-status.json', {cache:'no-cache'}).then(r => r.ok ? r.json() : null).then(data => {
+    if (!data) return;
+    const c = data.coverage || data.counts || data.summary || {};
+    const metrics = { 'world-countries': c.countries ?? c.countriesCataloged, 'world-competitions': c.competitions ?? c.competitionsCataloged, 'world-clubs': c.clubs ?? c.clubsCataloged };
+    for (const [id, count] of Object.entries(metrics)) if (byId(id) && Number.isInteger(count) && count >= 0) byId(id).textContent = count.toLocaleString('pt-BR');
+    const when = data.updatedAt || data.observedAt || data.generatedAt;
+    if (when && !Number.isNaN(Date.parse(when)) && byId('world-freshness')) byId('world-freshness').textContent = 'Última coleta: ' + new Date(when).toLocaleString('pt-BR', {timeZone:'America/Sao_Paulo'}) + ' (Brasília). Dados catalogados não representam novas ligas jogáveis.';
+  }).catch(() => {});
 })();

@@ -1,15 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
-<title id="title">Brassfoot Patch 2026</title>
-<desc id="description">Atualização independente e gratuita do Brasfoot para Windows.</desc>
-<defs><linearGradient id="field" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0a2a20"/><stop offset="1" stop-color="#06110e"/></linearGradient></defs>
-<rect width="1200" height="630" fill="url(#field)"/>
-<path d="M0 120H1200M0 510H1200M600 0V630" stroke="#284b3c" stroke-width="3" opacity=".6"/>
-<circle cx="600" cy="315" r="130" fill="none" stroke="#284b3c" stroke-width="3"/>
-<rect x="70" y="80" width="150" height="12" rx="6" fill="#c5ff69"/>
-<text x="70" y="205" fill="#c5ff69" font-family="Arial,sans-serif" font-size="63" font-weight="900">BRASSFOOT PATCH</text>
-<text x="70" y="365" fill="#f0f6ed" font-family="Arial,sans-serif" font-size="142" font-weight="900">2026</text>
-<text x="75" y="437" fill="#d1e5d5" font-family="Arial,sans-serif" font-size="35">Clubes A/B/C • Windows • 100% gratuito</text>
-<text x="75" y="545" fill="#b8cfbf" font-family="Arial,sans-serif" font-size="26">Projeto independente — yzpeedro.github.io/brassfoot-patch</text>
-<rect x="952" y="80" width="172" height="68" rx="14" fill="#c5ff69"/>
-<text x="1038" y="125" text-anchor="middle" fill="#10261b" font-family="Arial,sans-serif" font-size="26" font-weight="800">GRÁTIS</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#074bdb"/><g fill="none" stroke="#80aaff" opacity=".35"><circle cx="1050" cy="270" r="280"/><circle cx="1050" cy="270" r="230"/><circle cx="1050" cy="270" r="180"/></g><g fill="white" font-family="Arial,sans-serif"><text x="75" y="90" font-size="20" letter-spacing="4">BRASFOOT MEGA PATCH</text><text x="70" y="250" font-size="93" font-weight="bold" letter-spacing="-5">Seu próximo</text><text x="70" y="353" font-size="93" font-weight="bold" letter-spacing="-5">capítulo no futebol.</text><text x="75" y="540" font-size="24">GRATUITO · EDIÇÃO EXPERIMENTAL</text><text x="920" y="545" font-size="85" font-weight="bold">2026</text></g></svg>

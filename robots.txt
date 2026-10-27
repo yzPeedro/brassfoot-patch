@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://yzpeedro.github.io/brassfoot-patch/sitemap.xml
