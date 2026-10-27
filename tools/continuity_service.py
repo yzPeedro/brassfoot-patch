@@ -44,7 +44,7 @@ def prepare(cfg):
                        'maxReportedTokens': 10000, 'maxEstimatedPromptTokens': 4000},
             'workers': [{'id': task['id'], 'provider': 'codex', 'model': 'mega-code',
                          'effort': 'high', 'mode': 'write', 'cwd': str(cfg['repoRoot']),
-                         'timeoutSeconds': 120, 'why': 'Savings worker for bounded implementation',
+                         'timeoutSeconds': 600, 'why': 'Savings worker for bounded implementation',
                          'task': task['brief'] + '\nFollow AGENTS.md. Do not change any other paths. Do not weaken existing tests. No commits, push, releases or nested workers.'}]})
         task['plan'] = str(plan)
     generated = cfg['stateDir'] / 'backlog.resolved.json'
