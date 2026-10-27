@@ -51,3 +51,10 @@ Agendador instalado e smoke/reentrada comprovados (docs/continuity.md). Su?te: 1
 - Validação desta etapa: 182 testes Python passaram com 3 skips; três testes Node do site, `go test ./...`, `go vet ./...` e `git diff --check` passaram.
 - A onda Alethe foi tentada uma vez em perfil savings, mas o worker falhou antes de editar por ausência de `NINEROUTER_API_KEY`; a unidade pequena foi concluída diretamente e a falha operacional permanece registrada no handoff.
 - Este contrato não prova resultados reais de Copa/prêmios, gameplay, calendário, saves, macOS/Linux, licenças ou publicação.
+
+## 2026-10-27 — retomada autônoma: gates completos e bloqueio operacional Alethe
+
+- O estado persistente foi retomado sem repetir as auditorias concluídas. A cota local do Codex estava disponível (5h: 2%; semana: 17% no momento da tentativa), e Claude permaneceu indisponível por falta de autenticação.
+- Foi preparada uma unidade Alethe de economia para implementar no máximo um critério pendente com check determinístico, usando o provider configurado. O worker não iniciou por `404 No active credentials for provider: codex`; nenhuma chave foi exibida, salva ou adicionada ao repositório, e nenhum arquivo de produto foi alterado.
+- Validação local completa desta retomada: `python -m unittest discover -s tests -q` passou com 182 testes e 3 skips; os três testes Node do site passaram; `go test ./...` e `go vet ./...` passaram em `windows-installer`; `git diff --check` passou.
+- Nenhum critério pendente foi promovido por inferência. Permanecem sem evidência real gameplay/calendário/saves, macOS/Linux, licenciamento/direitos, coleta esportiva mundial completa e publicação estável.
