@@ -84,5 +84,5 @@
   "apiFootballRequestsDuringThisAudit": 0,
   "full156PatchPublished": false,
   "lastAuditDate": "2026-10-26",
-  "notice": "Edição 2026.2.0: ano 2026 e clubes A/B/C corretos. Não instala elencos novos B/C. Maranhão experimental. Série D mantém BRA.cfg mas participantes podem mudar."
+  "notice": "Edição 2026.4.1: 704 clubes no pacote, 301 elencos atualizados. A configuração da Série D é preservada."
 }

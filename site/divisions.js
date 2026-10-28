@@ -3,422 +3,482 @@
 
   const byId = id => document.getElementById(id);
   const elements = {
-    grid: byId('clubs-grid'),
-    division: byId('clubs-division'),
-    search: byId('clubs-search'),
-    rosterFilter: byId('clubs-roster-filter'),
-    groupBy: byId('clubs-group-by'),
-    sortButtons: ['name','state','division','roster'].map(k => byId('clubs-sort-' + k)),
-    summary: byId('clubs-count'),
-    pageSize: byId('clubs-page-size'),
-    previous: byId('clubs-previous'),
-    next: byId('clubs-next'),
-    pageLabel: byId('clubs-page-label'),
-    dialog: byId('club-dialog'),
-    close: byId('club-dialog-close'),
-    modalTitle: byId('club-dialog-title'),
-    modalDivision: byId('club-dialog-division'),
-    modalDescription: byId('club-dialog-description'),
-    modalState: byId('club-dialog-state'),
-    modalStatus: byId('club-dialog-roster-status'),
-    modalCount: byId('club-dialog-player-count'),
-    modalRosterTitle: byId('club-dialog-roster-title'),
-    modalNotice: byId('club-dialog-notice'),
-    modalPlayers: byId('club-dialog-players'),
-    sourceBox: byId('club-dialog-source-box'),
-    sourceLink: byId('club-dialog-source'),
-    sourceReviewed: byId('club-dialog-reviewed'),
-    supplementary365scores: byId('club-dialog-365scores')
+    grid: byId('clubs-grid'), search: byId('clubs-search'),
+    country: byId('clubs-country'), competition: byId('clubs-competition'),
+    coverage: byId('clubs-roster-filter'), sort: byId('clubs-sort'),
+    summary: byId('clubs-count'), activeFilters: byId('clubs-active-filters'),
+    reset: byId('clubs-reset'), retry: byId('clubs-retry'),
+    pageSize: byId('clubs-page-size'), previous: byId('clubs-previous'),
+    next: byId('clubs-next'), pageLabel: byId('clubs-page-label'),
+    dialog: byId('club-dialog'), close: byId('club-dialog-close'),
+    modalTitle: byId('club-dialog-title'), modalCompetition: byId('club-dialog-division'),
+    modalDescription: byId('club-dialog-description'), modalCountry: byId('club-dialog-state'),
+    modalStatus: byId('club-dialog-roster-status'), modalCount: byId('club-dialog-player-count'),
+    modalRosterTitle: byId('club-dialog-roster-title'), modalNotice: byId('club-dialog-notice'),
+    modalPlayers: byId('club-dialog-players'), sourceBox: byId('club-dialog-source-box'),
+    sourceLink: byId('club-dialog-source'), sourceReviewed: byId('club-dialog-reviewed'),
+    supplementary: byId('club-dialog-365scores')
   };
-  if (Object.values(elements).some(x => !x || (Array.isArray(x) && x.some(i => !i)))) return;
+  const required = ['grid', 'search', 'country', 'competition', 'coverage', 'sort', 'summary',
+    'pageSize', 'previous', 'next', 'pageLabel', 'dialog', 'close', 'modalTitle',
+    'modalCompetition', 'modalDescription', 'modalCountry', 'modalStatus', 'modalCount',
+    'modalRosterTitle', 'modalNotice', 'modalPlayers'];
+  if (required.some(key => !elements[key])) return;
 
-  const normalized = input => String(input ?? '').normalize('NFD')
+  const normalize = value => String(value ?? '').normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('pt-BR').trim();
-
-  const collator = new Intl.Collator('pt-BR', {sensitivity:'base', numeric:true});
-  const supplementary365scores = Object.freeze({
-    'br-cruzeiro-mg': 'https://www.365scores.com/pt-br/football/team/cruzeiro-1213/squad',
-    'br-maranhao-ma': 'https://www.365scores.com/pt-br/football/team/maranhao-ma-12748/squad',
-    'br-maringa-pr': 'https://www.365scores.com/pt-br/football/team/maringa-18884/squad'
+  const collator = new Intl.Collator('pt-BR', {sensitivity: 'base', numeric: true});
+  const number = value => value.toLocaleString('pt-BR');
+  const coverageLabels = Object.freeze({
+    updated: 'Atualizado', partial: 'Parcial', preserved: 'Preservado'
   });
-
-  const labels = {
-    A: 'Série A 2026 · lista de referência',
-    B: 'Série B 2026 · pesquisa em validação',
-    C: 'Série C 2026 · pesquisa em validação'
-  };
-
-  let clubs = [];
-  let rosters = {};
-  let researchedRosters = {};
-  let rostersReady = false;
-  let fullRostersReady = false;
-  let fullRosterVersion = "";
+  const coverageOrder = Object.freeze({updated: 0, partial: 1, preserved: 2});
+  const roleLabels = ['Goleiro', 'Lateral', 'Zagueiro', 'Meio-campo', 'Atacante'];
+  const sortKeys = ['name', 'country', 'competition', 'coverage', 'playerCount'];
+  const controls = [elements.search, elements.country, elements.competition, elements.coverage,
+    elements.sort, elements.pageSize, elements.reset].filter(Boolean);
+  const quickFilters = [...document.querySelectorAll('[data-country-filter], [data-coverage-filter]')];
+  const table = elements.grid.closest('table');
+  let catalog = null;
+  let records = [];
+  let recordsById = new Map();
+  let loading = null;
   let page = 1;
   let sortKey = 'name';
   let sortDirection = 'asc';
   let lastFocus = null;
-  function rosterStatus(club) {
-    if (fullRostersReady && Object.hasOwn(rosters,club.id)) return 'Elenco 2026 · pacote publicado';
-    if (club.division === 'A') return labels.A;
-    if (Object.hasOwn(researchedRosters,club.id)) return 'Pesquisa de 2026 · conferir com o jogo';
-    return 'Elenco em conferência';
-  }
-  function validateResearch(data) {
-    const known = new Set(clubs.filter(c => c.division !== 'A').map(c => c.id));
-    if (data?.schemaVersion !== 1 || data.season !== 2026 || !data.clubs ||
-        !Number.isInteger(data.researchedClubs) ||
-        Object.keys(data.clubs).length !== data.researchedClubs) throw new Error('Metadados externos inválidos');
-    for (const [id,entry] of Object.entries(data.clubs)) {
-      if (!known.has(id) || entry.scope !== 'internet-research-not-installed' ||
-          entry.completeSeason2026Verified !== false ||
-          !/^https:\/\//.test(entry.sourceUrl) || !Array.isArray(entry.players) ||
-          entry.players.length < 16 || entry.players.length > 60 ||
-          entry.players.some(x => typeof x !== 'string' || !x.trim()) ||
-          (entry.positionCodes !== undefined && (
-            !Array.isArray(entry.positionCodes) ||
-            entry.positionCodes.length !== entry.players.length ||
-            entry.positionCodes.some(value => !Number.isInteger(value) || value < 0 || value > 4)))) {
-        throw new Error('Pesquisa externa inválida: ' + id);
-      }
-    }
-    return data.clubs;
+  let lastClubId = null;
+
+  function textElement(tag, text, className) {
+    const element = document.createElement(tag);
+    element.textContent = text;
+    if (className) element.className = className;
+    return element;
   }
 
-  async function getJson(relativePath) {
-    const response = await fetch(relativePath, {cache:'no-store'});
-    if (!response.ok) throw new Error('HTTP ' + response.status + ' em ' + relativePath);
-    return response.json();
+  function competitionLabel(club) {
+    return club.competition.trim() || 'Competição não informada';
+  }
+
+  function safeSource(value) {
+    if (typeof value !== 'string') return null;
+    try {
+      const url = new URL(value);
+      return url.protocol === 'https:' && url.hostname && !url.username && !url.password ? url : null;
+    } catch (_) {
+      return null;
+    }
   }
 
   function validateCatalog(data) {
-    const counts = {A:20, B:20, C:20};
-    if (data?.schemaVersion !== 1 || data.targetClubs !== 60 ||
-        data.serieD?.policy !== 'configuration-preserved' || !Array.isArray(data.clubs) ||
-        data.clubs.length !== 60 ||
-        new Set(data.clubs.map(c => c.id)).size !== 60 ||
-        data.clubs.some(c => !c.id || typeof c.name !== 'string' ||
-          typeof c.state !== 'string' || !counts[c.division]) ||
-        Object.entries(counts).some(([d,n]) =>
-          data.clubs.filter(c => c.division === d).length !== n)) {
-      throw new Error('Catálogo A/B/C inconsistente');
+    if (data?.schemaVersion !== 1 || typeof data.version !== 'string' || !data.version.trim() ||
+        !Array.isArray(data.countries) || !Array.isArray(data.clubs) ||
+        !Number.isInteger(data.totalClubs) || data.totalClubs < 1 ||
+        data.clubs.length !== data.totalClubs || !Number.isInteger(data.totalPlayers) ||
+        data.totalPlayers < 0) throw new Error('Catálogo incompleto');
+    const countries = new Map();
+    for (const country of data.countries) {
+      if (!country || !Number.isInteger(country.id) || typeof country.name !== 'string' ||
+          !country.name.trim() || !Number.isInteger(country.count) || country.count < 1 ||
+          countries.has(country.id)) throw new Error('País inválido');
+      countries.set(country.id, {...country, actualCount: 0});
     }
-  }
-
-  function validatePublishedRosters(data) {
-    if (data?.schemaVersion !== 1 || data.sourceRelease !== '2026.0.2' ||
-        data.totalClubs !== 20 || data.totalPlayers !== 730 ||
-        !data.clubs || Object.keys(data.clubs).length !== 20) {
-      throw new Error('Dados dos jogadores publicados incompletos');
-    }
-    const publishedIds = new Set(clubs.filter(c => c.division === 'A').map(c => c.id));
-    if (Object.keys(data.clubs).some(id => !publishedIds.has(id)) ||
-        [...publishedIds].some(id => !Object.hasOwn(data.clubs, id))) {
-      throw new Error('Elencos atribuídos a clubes incorretos');
-    }
-    let count = 0;
-    for (const club of Object.values(data.clubs)) {
-      if (!/^teams\/[a-z0-9_-]+\.ban$/.test(club.teamFile) ||
-          !Array.isArray(club.players) || club.players.length < 16 ||
-          club.players.length > 40 ||
-          club.players.some(name => typeof name !== 'string' || !name.trim())) {
-        throw new Error('Lista de jogadores inválida');
+    const ids = new Set();
+    let totalPlayers = 0;
+    for (const club of data.clubs) {
+      const country = countries.get(club?.countryId);
+      if (!club || typeof club.id !== 'string' || !club.id.trim() || ids.has(club.id) ||
+          typeof club.name !== 'string' || !club.name.trim() || !country ||
+          club.country !== country.name || typeof club.competition !== 'string' ||
+          !Array.isArray(club.aliases) || club.aliases.some(alias => typeof alias !== 'string') ||
+          !Object.hasOwn(coverageLabels, club.coverage) ||
+          ![club.division, club.state].every(value => value === null || typeof value === 'string') ||
+          !Array.isArray(club.players) || !Number.isInteger(club.playerCount) ||
+          club.playerCount !== club.players.length || typeof club.teamFile !== 'string' ||
+          ![club.sourceUrl, club.observedAt].every(value => value === null || typeof value === 'string')) {
+        throw new Error('Clube inválido');
       }
-      count += club.players.length;
-    }
-    if (count !== 730) throw new Error('Quantidade de jogadores não confere com a release');
-    return data.clubs;
-  }
-
-  function validateFullPublishedRosters(data, expectedVersion) {
-    if (data?.schemaVersion !== 3 || data.season !== 2026 || data.sourceRelease !== expectedVersion ||
-        data.totalClubs !== 60 || data.includedInPackage !== true ||
-        !data.clubs || Object.keys(data.clubs).length !== 60) {
-      throw new Error('Release de elencos A/B/C incompleta');
-    }
-    let total = 0;
-    for (const club of clubs) {
-      const roster = data.clubs[club.id];
-      if (!roster || roster.division !== club.division || !/^teams\/[a-z0-9_-]+\.ban$/i.test(roster.teamFile) ||
-          roster.includedInPackage !== true || !/^https:\/\//.test(roster.sourceUrl) ||
-          !Array.isArray(roster.players) || roster.players.length < 16 || roster.players.length > 40 ||
-          !Array.isArray(roster.positionCodes) || roster.positionCodes.length !== roster.players.length ||
-          roster.players.some(name => typeof name !== 'string' || !name.trim()) ||
-          roster.positionCodes.some(n => !Number.isInteger(n) || n < 0 || n > 4)) {
-        throw new Error('Elenco da release não confere: ' + club.id);
+      for (const player of club.players) {
+        if (!player || typeof player.name !== 'string' || !player.name.trim() ||
+            !Number.isInteger(player.position) || player.position < 0 || player.position > 4 ||
+            !['Direito', 'Esquerdo'].includes(player.side) || !Array.isArray(player.traits) ||
+            player.traits.length !== 2 || player.traits.some(trait => typeof trait !== 'string')) {
+          throw new Error('Jogador inválido');
+        }
       }
-      total += roster.players.length;
+      ids.add(club.id);
+      country.actualCount++;
+      totalPlayers += club.playerCount;
     }
-    if (total !== data.totalPlayers) throw new Error('Quantidade de jogadores da release diverge');
-    return data.clubs;
+    if (totalPlayers !== data.totalPlayers || [...countries.values()].some(c => c.count !== c.actualCount)) {
+      throw new Error('Contagem do catálogo inconsistente');
+    }
+    return data;
   }
 
-  function matchingClubs() {
-    const searched = normalized(elements.search.value);
-    const chosenDivision = elements.division.value;
-    const chosenRoster = elements.rosterFilter.value;
-    return clubs.filter(club => {
-      if (chosenDivision && club.division !== chosenDivision) return false;
-      const isPublished = fullRostersReady ? Object.hasOwn(rosters,club.id) : club.division === 'A';
-      if (chosenRoster === 'published' && !isPublished) return false;
-      if (chosenRoster === 'pending' && isPublished) return false;
-      if (chosenRoster === 'researched' && (fullRostersReady || !Object.hasOwn(researchedRosters,club.id))) return false;
-      if (chosenRoster === 'missing' && (isPublished || Object.hasOwn(researchedRosters,club.id))) return false;
-      return !searched || normalized([club.name, club.state, 'Série ' + club.division].join(' ')).includes(searched);
+  function indexCatalog(data) {
+    records = data.clubs.map(club => {
+      const metadata = normalize([club.name, ...club.aliases, club.country, club.competition,
+        club.division, club.state].join(' '));
+      const players = club.players.map(player => normalize(player.name));
+      return {club, metadata, players, searchText: metadata + ' ' + players.join(' ')};
     });
+    recordsById = new Map(records.map(record => [record.club.id, record]));
   }
 
-  const sortValues = {
-    name: club => club.name,
-    state: club => club.state,
-    division: club => club.division,
-    roster: club => rosterStatus(club)
-  };
-  const grouping = {
-    none: () => '',
-    name: club => normalized(club.name).charAt(0).toLocaleUpperCase('pt-BR') || '#',
-    state: club => club.state,
-    division: club => 'Série ' + club.division,
-    roster: club => rosterStatus(club)
-  };
-
-  function compare(a,b,key) {
-    return collator.compare(sortValues[key](a),sortValues[key](b));
+  function populateCountries() {
+    const fragment = document.createDocumentFragment();
+    const all = textElement('option', 'Todos os países');
+    all.value = '';
+    fragment.appendChild(all);
+    for (const country of [...catalog.countries].sort((a, b) => collator.compare(a.name, b.name))) {
+      const option = textElement('option', country.name + ' (' + number(country.count) + ')');
+      option.value = String(country.id);
+      fragment.appendChild(option);
+    }
+    elements.country.replaceChildren(fragment);
   }
 
-  function order(items) {
-    const mode = elements.groupBy.value;
-    const group = grouping[mode] || grouping.none;
-    return items.sort((a,b) => {
-      const groupCompare = mode !== 'none' ? collator.compare(group(a),group(b)) : 0;
-      if (groupCompare) return groupCompare;
-      return (sortDirection === 'desc' ? -1 : 1) * compare(a,b,sortKey) ||
-        compare(a,b,'name') || compare(a,b,'state') || collator.compare(a.id,b.id);
-    });
+  function populateCompetitions() {
+    const selected = elements.competition.value;
+    const countryId = elements.country.value;
+    const values = new Map();
+    for (const {club} of records) {
+      if (countryId && String(club.countryId) !== countryId) continue;
+      values.set(club.competition, competitionLabel(club));
+    }
+    const fragment = document.createDocumentFragment();
+    const all = textElement('option', 'Todas as competições');
+    all.value = '';
+    fragment.appendChild(all);
+    // The empty value belongs to the all-competitions option; unknown competitions
+    // remain visible in results without being presented as a named competition.
+    for (const [value, label] of [...values].filter(([value]) => value !== '')
+      .sort((a, b) => collator.compare(a[1], b[1]))) {
+      const option = textElement('option', label);
+      option.value = value;
+      fragment.appendChild(option);
+    }
+    elements.competition.replaceChildren(fragment);
+    if (selected && values.has(selected)) elements.competition.value = selected;
+  }
+
+  function searchTokens() {
+    return normalize(elements.search.value).split(/\s+/).filter(Boolean);
+  }
+
+  function matchingPlayers(record, tokens) {
+    if (!tokens.length) return [];
+    const playerTerms = tokens.filter(token => !record.metadata.includes(token));
+    if (!playerTerms.length) return [];
+    return record.club.players.filter((_, index) => playerTerms.every(token => record.players[index].includes(token)));
+  }
+
+  function compareRecords(a, b) {
+    const left = a.club;
+    const right = b.club;
+    let result;
+    if (sortKey === 'playerCount') result = left.playerCount - right.playerCount;
+    else if (sortKey === 'coverage') result = coverageOrder[left.coverage] - coverageOrder[right.coverage];
+    else result = collator.compare(sortKey === 'competition' ? competitionLabel(left) : left[sortKey],
+      sortKey === 'competition' ? competitionLabel(right) : right[sortKey]);
+    return result * (sortDirection === 'desc' ? -1 : 1) ||
+      collator.compare(left.name, right.name) || collator.compare(left.country, right.country) ||
+      collator.compare(left.id, right.id);
+  }
+
+  function badge(club) {
+    const element = textElement('span', coverageLabels[club.coverage], 'coverage-badge roster-badge');
+    element.dataset.coverage = club.coverage;
+    return element;
   }
 
   function updateSortLabels() {
-    for (const key of Object.keys(sortValues)) {
-      const heading = byId('clubs-heading-' + key);
-      const button = byId('clubs-sort-' + key);
+    for (const heading of table?.querySelectorAll('thead th') || []) {
+      const key = heading.dataset.sort || heading.querySelector('[data-sort]')?.dataset.sort ||
+        heading.id.replace('clubs-heading-', '');
+      if (!sortKeys.includes(key)) continue;
       const active = key === sortKey;
-      heading.setAttribute('aria-sort', active ? (sortDirection === 'asc' ? 'ascending' : 'descending') : 'none');
-      const indicator = button.querySelector('.sort-indicator');
-      if (indicator) indicator.textContent = active ? (sortDirection === 'asc' ? '↑' : '↓') : '↕';
+      heading.setAttribute('aria-sort', active ? (sortDirection === 'desc' ? 'descending' : 'ascending') : 'none');
+      const indicator = heading.querySelector('.sort-indicator');
+      if (indicator) indicator.textContent = active ? (sortDirection === 'desc' ? '↓' : '↑') : '↕';
     }
+  }
+
+  function renderActiveFilters() {
+    const parts = [];
+    if (elements.search.value.trim()) parts.push('Busca: ' + elements.search.value.trim());
+    if (elements.country.value) {
+      parts.push('País: ' + catalog.countries.find(c => String(c.id) === elements.country.value)?.name);
+    }
+    if (elements.competition.value) parts.push('Competição: ' + elements.competition.value);
+    if (elements.coverage.value) parts.push('Elenco: ' + coverageLabels[elements.coverage.value]);
+    if (elements.activeFilters) elements.activeFilters.textContent = parts.length ? parts.join(' · ') : 'Todos os clubes do pacote';
+    if (elements.reset) elements.reset.disabled = !parts.length;
+    for (const button of quickFilters) {
+      const country = button.dataset.countryFilter;
+      const active = country !== undefined ? catalog.countries.some(c =>
+        String(c.id) === elements.country.value && (String(c.id) === country || normalize(c.name) === normalize(country)))
+        : elements.coverage.value === button.dataset.coverageFilter;
+      button.setAttribute('aria-pressed', String(active));
+    }
+  }
+
+  function statusRow(message) {
+    const row = document.createElement('tr');
+    const cell = textElement('td', message, 'clubs-empty');
+    cell.colSpan = 6;
+    row.appendChild(cell);
+    elements.grid.replaceChildren(row);
   }
 
   function render() {
-    const filtered = order(matchingClubs());
-    const size = Number(elements.pageSize.value);
-    const totalPages = Math.max(1, Math.ceil(filtered.length / size));
-    page = Math.max(1, Math.min(page, totalPages));
+    if (!catalog) return;
+    const tokens = searchTokens();
+    const country = elements.country.value;
+    const competition = elements.competition.value;
+    const coverage = elements.coverage.value;
+    const filtered = records.filter(record => {
+      const {club, searchText, metadata, players} = record;
+      if ((country && String(club.countryId) !== country) ||
+          (competition && club.competition !== competition) ||
+          (coverage && club.coverage !== coverage) || !tokens.every(token => searchText.includes(token))) return false;
+      const playerTerms = tokens.filter(token => !metadata.includes(token));
+      return !playerTerms.length || players.some(name => playerTerms.every(token => name.includes(token)));
+    }).sort(compareRecords);
+    const selectedSize = Number(elements.pageSize.value);
+    const size = [25, 50, 100].includes(selectedSize) ? selectedSize : 25;
+    const pages = Math.max(1, Math.ceil(filtered.length / size));
+    page = Math.max(1, Math.min(page, pages));
     const start = (page - 1) * size;
     const visible = filtered.slice(start, start + size);
     const fragment = document.createDocumentFragment();
-    const groupMode = elements.groupBy.value;
-    const groupOf = grouping[groupMode] || grouping.none;
-    const groupCounts = new Map();
-    if (groupMode !== 'none') {
-      for (const club of filtered) {
-        const value = groupOf(club);
-        groupCounts.set(value,(groupCounts.get(value) || 0) + 1);
-      }
-    }
-    let previousGroup = null;
-    for (const club of visible) {
-      if (groupMode !== 'none') {
-        const group = groupOf(club);
-        if (group !== previousGroup) {
-          const tr = document.createElement('tr');
-          tr.className = 'clubs-group-header';
-          const cell = document.createElement('th');
-          cell.scope = 'rowgroup';
-          cell.colSpan = 4;
-          cell.textContent = group + ' · ' + groupCounts.get(group) + ' clube(s) no filtro';
-          tr.appendChild(cell);
-          fragment.appendChild(tr);
-          previousGroup = group;
-        }
-      }
+    for (const record of visible) {
+      const {club} = record;
       const row = document.createElement('tr');
-      row.dataset.clubId = club.id;
       row.className = 'club-clickable-row';
-      const nameCell = document.createElement('td');
-      nameCell.className = 'club-name';
-      const trigger = document.createElement('button');
-      trigger.type = 'button';
-      trigger.className = 'club-detail-trigger';
-      trigger.dataset.clubId = club.id;
-      trigger.setAttribute('aria-label', 'Ver clube ' + club.name + ', ' + club.state + ', Série ' + club.division);
-      trigger.textContent = club.name;
-      nameCell.appendChild(trigger);
-      row.appendChild(nameCell);
-      for (const [cellValue, cellClass] of [
-        [club.state, ''], ['Série ' + club.division, ''],
-        [rosterStatus(club), 'club-roster-state']
-      ]) {
-        const td = document.createElement('td');
-        if (cellClass) td.className = cellClass;
-        td.textContent = cellValue;
-        row.appendChild(td);
+      row.dataset.clubId = club.id;
+      const nameCell = textElement('td', '', 'club-name');
+      nameCell.appendChild(textElement('strong', club.name));
+      const found = matchingPlayers(record, tokens);
+      if (found.length) {
+        row.classList.add('club-search-match');
+        const names = found.slice(0, 2).map(player => player.name).join(', ');
+        nameCell.appendChild(textElement('small', 'Jogador: ' + names + (found.length > 2 ? ' +' + (found.length - 2) : ''), 'club-search-context'));
       }
+      row.appendChild(nameCell);
+      row.appendChild(textElement('td', club.country, 'club-country'));
+      row.appendChild(textElement('td', competitionLabel(club), 'club-competition'));
+      const status = textElement('td', '', 'club-roster-state');
+      status.appendChild(badge(club));
+      row.appendChild(status);
+      row.appendChild(textElement('td', number(club.playerCount), 'club-player-count'));
+      const action = document.createElement('td');
+      const button = textElement('button', 'Ver elenco', 'club-row-button club-detail-trigger');
+      button.type = 'button';
+      button.dataset.clubId = club.id;
+      button.setAttribute('aria-label', 'Ver elenco de ' + club.name + ', ' + club.country);
+      action.appendChild(button);
+      row.appendChild(action);
       fragment.appendChild(row);
     }
-
-    if (!visible.length) {
-      const row = document.createElement('tr');
-      const cell = document.createElement('td');
-      cell.colSpan = 4;
-      cell.className = 'clubs-empty';
-      cell.textContent = 'Nenhum clube encontrado. Experimente outro nome, UF ou divisão.';
-      row.appendChild(cell);
-      fragment.appendChild(row);
-    }
-
     elements.grid.replaceChildren(fragment);
+    if (!visible.length) statusRow('Nenhum clube encontrado. Altere a busca ou limpe os filtros.');
     const from = filtered.length ? start + 1 : 0;
     const to = filtered.length ? start + visible.length : 0;
-    elements.summary.textContent = 'Exibindo ' + from + '–' + to +
-      ' de ' + filtered.length + ' clubes encontrados (60 no total)';
-    elements.pageLabel.textContent = 'Página ' + page + ' de ' + totalPages;
+    elements.summary.textContent = number(filtered.length) + ' clubes encontrados · exibindo ' + number(from) + '–' + number(to) +
+      ' de ' + number(catalog.totalClubs) + ' no pacote';
+    elements.pageLabel.textContent = 'Página ' + page + ' de ' + pages;
     elements.previous.disabled = page <= 1;
-    elements.next.disabled = page >= totalPages;
+    elements.next.disabled = page >= pages;
+    renderActiveFilters();
     updateSortLabels();
   }
 
-  function clearPageAndRender() {
+  function resetPage() {
     page = 1;
     render();
   }
 
-  function openClub(club) {
+  function observedDate(value) {
+    if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}(?:T|$)/.test(value)) return '';
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? '' : new Intl.DateTimeFormat('pt-BR', {timeZone: 'UTC'}).format(date);
+  }
+
+  function openClub(record) {
+    const {club} = record;
     lastFocus = document.activeElement;
-    const verified = fullRostersReady && Object.hasOwn(rosters,club.id);
-    const published = verified || club.division === 'A';
-    const external = published ? undefined : researchedRosters[club.id];
-    const roster = published ? (rostersReady ? rosters[club.id] : undefined) : external;
+    lastClubId = club.id;
     elements.modalTitle.textContent = club.name;
-    elements.modalDivision.textContent = 'Série ' + club.division + ' · Temporada 2026';
-    elements.modalDescription.textContent = verified
-      ? 'Lista de jogadores associada ao pacote publicado.'
-      : published ? 'Lista de referência da Série A; pode divergir do conteúdo instalado.'
-      : (external ? 'Lista pesquisada para 2026; os nomes exibidos aqui podem divergir do conteúdo instalado.' : 'Elenco atualizado de 2026 ainda não publicado para este clube.');
-    elements.modalState.textContent = club.state;
-    elements.modalStatus.textContent = rosterStatus(club);
-    elements.modalCount.textContent = roster ? String(roster.players.length) : '—';
-    elements.modalRosterTitle.textContent = verified ? 'Jogadores do pacote publicado'
-      : published ? 'Jogadores da lista de referência' : 'Jogadores identificados em fonte externa';
-    const provenance = verified ? roster : external;
-    elements.sourceBox.hidden = !provenance;
-    if (provenance) {
-      elements.sourceLink.href = provenance.sourceUrl;
-      elements.sourceLink.textContent = provenance.sourceUrl.split('/')[2];
-      elements.sourceReviewed.textContent = '· consultada em ' + provenance.reviewedOn;
-    } else {
+    elements.modalCompetition.textContent = competitionLabel(club) + ' · versão ' + catalog.version;
+    elements.modalCountry.textContent = club.country;
+    elements.modalStatus.replaceChildren(badge(club));
+    elements.modalCount.textContent = number(club.playerCount);
+    elements.modalDescription.textContent = 'Elenco incluído no pacote publicado. ' +
+      (club.division ? 'Divisão: ' + club.division + '. ' : '') + (club.state ? 'Estado: ' + club.state + '.' : '');
+    elements.modalRosterTitle.textContent = 'Jogadores do pacote';
+    const notices = {
+      updated: 'Elenco substituído na atualização. As características do jogo podem incluir valores derivados da função do atleta.',
+      partial: 'Atualização parcial: o elenco anterior foi preservado com correções pontuais. A fonte não confirmou um elenco completo.',
+      preserved: 'Elenco anterior preservado nesta versão. A presença no pacote não indica atualização completa para 2026.'
+    };
+    elements.modalNotice.textContent = notices[club.coverage] + ' Lado indica a posição de atuação no jogo.';
+    const source = safeSource(club.sourceUrl);
+    if (elements.sourceBox) elements.sourceBox.hidden = !source;
+    if (elements.sourceLink) {
       elements.sourceLink.removeAttribute('href');
       elements.sourceLink.textContent = '';
-      elements.sourceReviewed.textContent = '';
+      if (source) {
+        elements.sourceLink.href = source.href;
+        elements.sourceLink.textContent = source.hostname + ' ↗';
+        elements.sourceLink.target = '_blank';
+        elements.sourceLink.rel = 'noopener noreferrer';
+      }
     }
+    if (elements.sourceReviewed) {
+      const date = observedDate(club.observedAt);
+      elements.sourceReviewed.textContent = source ? (date ? '· consultada em ' + date : '· data da consulta não informada') : '';
+    }
+    if (elements.supplementary) {
+      elements.supplementary.hidden = true;
+      elements.supplementary.removeAttribute('href');
+    }
+    const matched = new Set(matchingPlayers(record, searchTokens()));
     const fragment = document.createDocumentFragment();
-    if (roster) {
-      elements.modalNotice.textContent = verified
-        ? 'Jogadores incluídos no pacote atual. Consulte a fonte e a data da coleta.'
-        : published ? 'Lista de referência da Série A. A pesquisa exibida pode divergir do conteúdo instalado; confira a origem dos dados.'
-        : 'Pesquisa de elenco: esta lista foi consultada em fonte externa e não é extraída do jogo. Confira jogadores, posições e vínculos de 2026 na fonte indicada.';
-      const roleLabels = ['Goleiro','Lateral','Zagueiro','Meio-campo','Atacante'];
-      roster.players.forEach((name,index) => {
-        const item = document.createElement('li');
-        item.textContent = name;
-        if (provenance && Array.isArray(provenance.positionCodes)) {
-          const role = document.createElement('span');
-          role.className = 'club-player-role';
-          role.textContent = ' · ' + roleLabels[provenance.positionCodes[index]];
-          item.appendChild(role);
-        }
-        fragment.appendChild(item);
-      });
-    } else if (published && !rostersReady) {
-      elements.modalNotice.textContent =
-        'Não foi possível carregar a lista de jogadores do patch. Tente recarregar a página.';
-    } else {
-      elements.modalNotice.textContent =
-        'Lista de pesquisa indisponível neste painel. Consulte a fonte do clube para conferir seu elenco.';
+    for (const player of club.players) {
+      const item = document.createElement('li');
+      item.className = 'club-player-row';
+      const name = textElement(matched.has(player) ? 'mark' : 'strong', player.name, 'club-player-name');
+      item.appendChild(name);
+      const traits = player.traits.filter(trait => trait.trim());
+      item.appendChild(textElement('span', roleLabels[player.position] + ' · Lado ' + player.side.toLocaleLowerCase('pt-BR'), 'club-player-role'));
+      item.appendChild(textElement('span', 'Características: ' + (traits.length ? traits.join(' / ') : 'não informadas'), 'club-player-traits'));
+      fragment.appendChild(item);
     }
-    const corroboration = supplementary365scores[club.id];
-    elements.supplementary365scores.hidden = !corroboration;
-    if (corroboration) elements.supplementary365scores.href = corroboration;
-    else elements.supplementary365scores.removeAttribute('href');
+    if (!club.players.length) fragment.appendChild(textElement('li', 'Nenhum jogador registrado neste pacote.'));
     elements.modalPlayers.replaceChildren(fragment);
-    elements.dialog.showModal();
+    if (!elements.dialog.open) elements.dialog.showModal();
+    elements.dialog.scrollTop = 0;
     elements.close.focus();
   }
 
-  elements.grid.addEventListener('click', event => {
-    const row = event.target.closest('tr[data-club-id]');
-    if (!row) return;
-    const club = clubs.find(c => c.id === row.dataset.clubId);
-    if (club) openClub(club);
-  });
-  elements.dialog.addEventListener('click', event => {
-    if (event.target === elements.dialog) elements.dialog.close();
-  });
-  elements.close.addEventListener('click', () => elements.dialog.close());
-  elements.dialog.addEventListener('close', () => {
-    if (lastFocus && lastFocus.isConnected && typeof lastFocus.focus === 'function') lastFocus.focus();
-    lastFocus = null;
-  });
-  elements.previous.addEventListener('click', () => {if (page > 1) {page--;render();}});
-  elements.next.addEventListener('click', () => {page++;render();});
-  elements.pageSize.addEventListener('change', clearPageAndRender);
-  elements.division.addEventListener('change', clearPageAndRender);
-  elements.rosterFilter.addEventListener('change', clearPageAndRender);
-  elements.search.addEventListener('input', clearPageAndRender);
-  elements.groupBy.addEventListener('change', clearPageAndRender);
-  for (const button of elements.sortButtons) {
-    button.addEventListener('click', () => {
-      const selected = button.dataset.sort;
-      if (!Object.hasOwn(sortValues,selected)) return;
-      if (selected === sortKey) sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
-      else {sortKey = selected;sortDirection = 'asc';}
-      clearPageAndRender();
-    });
+  function setLoading(isLoading) {
+    controls.forEach(control => {control.disabled = isLoading;});
+    quickFilters.forEach(button => {button.disabled = isLoading;});
+    if (table) table.setAttribute('aria-busy', String(isLoading));
+    if (elements.retry) elements.retry.hidden = true;
   }
 
-  getJson('./data/target-abc-2026.json')
-    .then(data => {
-      validateCatalog(data);
-      clubs = data.clubs;
-      for (const counter of document.querySelectorAll('[data-division-count]')) {
-        counter.textContent = String(data.clubs.filter(c => c.division === counter.dataset.divisionCount).length);
+  async function loadCatalog() {
+    if (catalog || loading) return loading;
+    setLoading(true);
+    elements.summary.textContent = 'Carregando os clubes e jogadores do pacote…';
+    elements.pageLabel.textContent = 'Carregando…';
+    elements.previous.disabled = true;
+    elements.next.disabled = true;
+    statusRow('Carregando o catálogo…');
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 25000);
+    loading = (async () => {
+      try {
+        const response = await fetch('./data/patch-clubs.json', {signal: controller.signal});
+        if (!response.ok) throw new Error('Catálogo indisponível');
+        const data = validateCatalog(await response.json());
+        indexCatalog(data);
+        catalog = data;
+        populateCountries();
+        populateCompetitions();
+        setLoading(false);
+        render();
+      } catch (_) {
+        catalog = null;
+        records = [];
+        recordsById.clear();
+        if (table) table.setAttribute('aria-busy', 'false');
+        elements.summary.textContent = 'Não foi possível carregar o catálogo de clubes.';
+        elements.pageLabel.textContent = 'Catálogo indisponível';
+        statusRow('Falha ao carregar os dados. Use “Tentar novamente” para recarregar o catálogo.');
+        if (elements.retry) elements.retry.hidden = false;
+      } finally {
+        clearTimeout(timeout);
+        loading = null;
       }
-      for (const field of [elements.division,elements.search,elements.rosterFilter,elements.pageSize,elements.groupBy]) {
-        field.disabled = false;
-      }
-      render();
-      const hasNewRelease = data.publishedRosterSnapshot === true &&
-        typeof data.publishedRosterVersion === 'string';
-      const rosterPath = hasNewRelease ? './data/published-rosters-2026.json'
-        : './data/published-rosters-2026-0-2.json';
-      return getJson(rosterPath)
-        .then(published => {
-          rosters = hasNewRelease ? validateFullPublishedRosters(published,data.publishedRosterVersion)
-            : validatePublishedRosters(published);
-          fullRostersReady = hasNewRelease;
-          fullRosterVersion = hasNewRelease ? data.publishedRosterVersion : '';
-          rostersReady = true;
-          if (fullRostersReady) {render();return;}
-          return getJson('./data/researched-rosters-2026.json')
-            .then(data => {researchedRosters = validateResearch(data);render();})
-            .catch(error => console.warn('Fontes externas indisponíveis:',error.message));
-        })
-        .catch(error => {
-          console.warn('Detalhes de elencos indisponíveis:',error.message);
-        });
-    })
-    .catch(error => {
-      elements.summary.textContent = 'Falha ao carregar a listagem. Atualize a página.';
-      elements.pageLabel.textContent = 'Indisponível';
-      console.warn('Não foi possível validar o catálogo:',error.message);
+    })();
+    return loading;
+  }
+
+  elements.search.addEventListener('input', resetPage);
+  elements.country.addEventListener('change', () => {populateCompetitions(); resetPage();});
+  elements.competition.addEventListener('change', resetPage);
+  elements.coverage.addEventListener('change', resetPage);
+  elements.pageSize.addEventListener('change', resetPage);
+  elements.sort.addEventListener('change', () => {
+    sortKey = sortKeys.includes(elements.sort.value) ? elements.sort.value : 'name';
+    sortDirection = sortKey === 'playerCount' ? 'desc' : 'asc';
+    resetPage();
+  });
+  for (const button of table?.querySelectorAll('button[data-sort]') || []) {
+    button.addEventListener('click', () => {
+      const key = button.dataset.sort;
+      if (!sortKeys.includes(key)) return;
+      sortDirection = key === sortKey ? (sortDirection === 'asc' ? 'desc' : 'asc') : key === 'playerCount' ? 'desc' : 'asc';
+      sortKey = key;
+      elements.sort.value = key;
+      resetPage();
     });
+  }
+  elements.previous.addEventListener('click', () => {if (page > 1) {page--; render();}});
+  elements.next.addEventListener('click', () => {page++; render();});
+  if (elements.reset) elements.reset.addEventListener('click', () => {
+    elements.search.value = '';
+    elements.country.value = '';
+    elements.competition.value = '';
+    elements.coverage.value = '';
+    populateCompetitions();
+    resetPage();
+    elements.search.focus();
+  });
+  if (elements.retry) elements.retry.addEventListener('click', loadCatalog);
+  for (const button of quickFilters) button.addEventListener('click', () => {
+    if (!catalog) return;
+    if (button.dataset.countryFilter !== undefined) {
+      const value = button.dataset.countryFilter;
+      const country = catalog.countries.find(country => String(country.id) === value || normalize(country.name) === normalize(value));
+      if (!country) return;
+      elements.country.value = String(country.id);
+      elements.competition.value = '';
+      populateCompetitions();
+    }
+    if (Object.hasOwn(coverageLabels, button.dataset.coverageFilter)) elements.coverage.value = button.dataset.coverageFilter;
+    resetPage();
+  });
+  elements.grid.addEventListener('click', event => {
+    const row = event.target.closest('tr[data-club-id]');
+    if (!row || !elements.grid.contains(row) || window.getSelection()?.toString()) return;
+    const record = recordsById.get(row.dataset.clubId);
+    if (record) {
+      // A mouse click on a cell is represented by the row's keyboard-accessible button.
+      if (!event.target.closest('button')) row.querySelector('button')?.focus();
+      openClub(record);
+    }
+  });
+  elements.close.addEventListener('click', () => elements.dialog.close());
+  elements.dialog.addEventListener('click', event => {
+    if (event.target !== elements.dialog) return;
+    const bounds = elements.dialog.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) {
+      elements.dialog.close();
+    }
+  });
+  // Native <dialog> handles Escape and focus containment; close covers every exit path.
+  elements.dialog.addEventListener('close', () => {
+    const fallback = [...elements.grid.querySelectorAll('button[data-club-id]')]
+      .find(button => button.dataset.clubId === lastClubId);
+    const target = lastFocus?.isConnected ? lastFocus : fallback || elements.search;
+    target?.focus();
+    lastFocus = null;
+    lastClubId = null;
+  });
+  loadCatalog();
 })();

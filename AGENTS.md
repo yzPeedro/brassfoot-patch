@@ -18,7 +18,7 @@
 - Não substituir saves, remover ativação ou redistribuir binários proprietários sem autorização aplicável.
 - Publicar artefatos verificados antes do manifesto/site. Vincular versão a commit, snapshot e hashes; recuperar falhas parciais de forma idempotente.
 - API-Football desativada por padrão. Não inventar dados esportivos; conservar último dado confiável se uma fonte falhar.
-- Identidade futura: Brasfoot Mega Patch, azul neutro sem marca de clube; PIX existente opcional, sem PayPal.
+- Identidade visual atual solicitada: Brasfoot Mega Patch com estética celeste inspirada no Cruzeiro, azul profundo, ciano, branco e constelações; projeto independente. PIX existente opcional, sem PayPal.
 
 ## Verificações
 - Python: `python -m unittest discover -s tests -q`.

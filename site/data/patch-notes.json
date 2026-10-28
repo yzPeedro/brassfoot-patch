@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-28T12:09:24.280283+00:00",
+  "entries": [
+    {
+      "id": "site-celeste-2026-10-28",
+      "version": "2026.4.1",
+      "date": "2026-10-28T12:09:24.280283+00:00",
+      "title": "Uma nova dimensão para o Mega Patch",
+      "kind": "site",
+      "summary": "Visual celeste, universo interativo e todos os clubes do pacote em um só lugar.",
+      "changes": [
+        "Nova identidade em azul celeste, azul profundo, ciano e constelações, com animações e efeitos que acompanham o mouse.",
+        "Explorador completo com 704 clubes de 134 países e territórios e 16.973 jogadores.",
+        "Busca por clube ou jogador, filtros por país, competição e situação do elenco, ordenação e paginação.",
+        "Detalhes de todos os elencos e uma nova seção de últimas atualizações.",
+        "Patch 100% gratuito, com download automático para o sistema identificado."
+      ]
+    },
+    {
+      "id": "patch-2026-4-1",
+      "version": "2026.4.1",
+      "date": "2026-10-28T11:47:39Z",
+      "title": "Instalação direta. Uma temporada renovada.",
+      "kind": "patch",
+      "summary": "301 elencos completos atualizados e um instalador que parte do Brasfoot original.",
+      "changes": [
+        "Atualização direta do Brasfoot 22–23 original, sem exigir a instalação prévia da V4.",
+        "60 elencos brasileiros e 241 europeus substituídos a partir das fontes de jogadores.",
+        "1.320 laterais e 1.221 pontas classificados pela função; pontas são atacantes.",
+        "Tela inicial e seletor de nova carreira em 2026. Nomes longos usam as duas primeiras palavras.",
+        "Cinco pacotes para Windows, Linux e macOS, com backup e restauração."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.4.1"
+    },
+    {
+      "id": "patch-2026-4-0",
+      "version": "2026.4.0",
+      "date": "2026-10-27T18:59:33Z",
+      "title": "O Mega Patch chega a mais sistemas",
+      "kind": "patch",
+      "summary": "Distribuição para Windows, Linux e macOS e nova base de coleta de dados.",
+      "changes": [
+        "Atualizador gráfico Windows renovado, com diagnóstico e botão Jogar.",
+        "Utilitários de atualização para Linux e macOS, em Intel/AMD e ARM64.",
+        "60 receitas de elencos integradas ao projeto e coleta diária do catálogo internacional."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.4.0"
+    },
+    {
+      "id": "patch-2026-3-5",
+      "version": "2026.3.5",
+      "date": "2026-10-26T22:18:17Z",
+      "title": "Séries A, B e C no mesmo pacote",
+      "kind": "patch",
+      "summary": "Um instalador reúne a base V4 e os 60 elencos brasileiros.",
+      "changes": [
+        "20 clubes de cada Série A, B e C no pacote.",
+        "Interface Windows sem janelas de terminal, com textos em Unicode.",
+        "Backup, restauração, progresso de instalação e apoio opcional via Pix."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.3.5"
+    },
+    {
+      "id": "patch-2026-3-4",
+      "version": "2026.3.4",
+      "date": "2026-10-26T18:51:58Z",
+      "title": "Mais controle sobre sua instalação",
+      "kind": "patch",
+      "summary": "Atualização na pasta do jogo com recursos de recuperação.",
+      "changes": [
+        "Backup antes das alterações e botão para restaurar a instalação original.",
+        "Barra de progresso, histórico das operações e notificações.",
+        "Preservação dos saves e das configurações durante a aplicação do patch."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.3.4"
+    },
+    {
+      "id": "patch-2026-2-0",
+      "version": "2026.2.0",
+      "date": "2026-10-26T01:55:41Z",
+      "title": "A temporada 2026 começa",
+      "kind": "patch",
+      "summary": "Ano de início e organização das três divisões brasileiras.",
+      "changes": [
+        "Seletor de início em 2026.",
+        "Séries A, B e C organizadas com 20 clubes cada.",
+        "Configuração original da Série D preservada."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.2.0"
+    },
+    {
+      "id": "patch-2026-1-1",
+      "version": "2026.1.1",
+      "date": "2026-10-25T20:13:53Z",
+      "title": "Os primeiros passos da edição 2026",
+      "kind": "patch",
+      "summary": "Primeira organização das divisões e distribuição para a comunidade.",
+      "changes": [
+        "Organização inicial dos clubes por divisão.",
+        "Distribuição gratuita e estrutura para as atualizações seguintes."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.1.1"
+    }
+  ]
+}

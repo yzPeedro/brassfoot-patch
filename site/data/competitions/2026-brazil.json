@@ -33,7 +33,7 @@
       "gameIntegration": "release-v2026.0.2-roster-only",
       "crest": "not-audited",
       "kits": "not-audited",
-      "roster": "experimental"
+      "roster": "reference"
     },
     {
       "id": "br-atletico-mineiro-mg",
@@ -44,7 +44,7 @@
       "gameIntegration": "release-v2026.0.2-roster-only",
       "crest": "not-audited",
       "kits": "not-audited",
-      "roster": "experimental"
+      "roster": "reference"
     },
     {
       "id": "br-bahia-ba",
@@ -55,7 +55,7 @@
       "gameIntegration": "release-v2026.0.2-roster-only",
       "crest": "not-audited",
       "kits": "not-audited",
-      "roster": "experimental"
+      "roster": "reference"
     },
     {
       "id": "br-botafogo-rj",
@@ -66,7 +66,7 @@
       "gameIntegration": "release-v2026.0.2-roster-only",
       "crest": "not-audited",
       "kits": "not-audited",
-      "roster": "experimental"
+      "roster": "reference"
     },
     {
       "id": "br-chapecoense-sc",
@@ -77,7 +77,7 @@
       "gameIntegration": "release-v2026.0.2-roster-only",
       "crest": "not-audited",
       "kits": "not-audited",
-      "roster": "experimental"
+      "roster": "reference"
     },
     {
       "id": "br-corinthians-sp",
@@ -88,7 +88,7 @@
       "gameIntegration": "release-v2026.0.2-roster-only",
       "crest": "not-audited",
       "kits": "not-audited",
-      "roster": "experimental"
+      "roster": "reference"
     },
     {
       "id": "br-coritiba-pr",
@@ -99,7 +99,7 @@
       "gameIntegration": "release-v2026.0.2-roster-only",
       "crest": "not-audited",
       "kits": "not-audited",
-      "roster": "experimental"
+      "roster": "reference"
     },
     {
       "id": "br-cruzeiro-mg",
@@ -110,7 +110,7 @@
       "gameIntegration": "release-v2026.0.2-roster-only",
       "crest": "not-audited",
       "kits": "not-audited",
-      "roster": "experimental"
+      "roster": "reference"
     },
     {
       "id": "br-flamengo-rj",
@@ -121,7 +121,7 @@
       "gameIntegration": "release-v2026.0.2-roster-only",
       "crest": "not-audited",
       "kits": "not-audited",
-      "roster": "experimental"
+      "roster": "reference"
     },
     {
       "id": "br-fluminense-rj",
@@ -132,7 +132,7 @@
       "gameIntegration": "release-v2026.0.2-roster-only",
       "crest": "not-audited",
       "kits": "not-audited",
-      "roster": "experimental"
+      "roster": "reference"
     },
     {
       "id": "br-gremio-rs",
@@ -143,7 +143,7 @@
       "gameIntegration": "release-v2026.0.2-roster-only",
       "crest": "not-audited",
       "kits": "not-audited",
-      "roster": "experimental"
+      "roster": "reference"
     },
     {
       "id": "br-internacional-rs",
@@ -154,7 +154,7 @@
       "gameIntegration": "release-v2026.0.2-roster-only",
       "crest": "not-audited",
       "kits": "not-audited",
-      "roster": "experimental"
+      "roster": "reference"
     },
     {
       "id": "br-mirassol-sp",
@@ -165,7 +165,7 @@
       "gameIntegration": "release-v2026.0.2-roster-only",
       "crest": "not-audited",
       "kits": "not-audited",
-      "roster": "experimental"
+      "roster": "reference"
     },
     {
       "id": "br-palmeiras-sp",
@@ -176,7 +176,7 @@
       "gameIntegration": "release-v2026.0.2-roster-only",
       "crest": "not-audited",
       "kits": "not-audited",
-      "roster": "experimental"
+      "roster": "reference"
     },
     {
       "id": "br-red-bull-bragantino-sp",
@@ -187,7 +187,7 @@
       "gameIntegration": "release-v2026.0.2-roster-only",
       "crest": "not-audited",
       "kits": "not-audited",
-      "roster": "experimental"
+      "roster": "reference"
     },
     {
       "id": "br-remo-pa",
@@ -198,7 +198,7 @@
       "gameIntegration": "release-v2026.0.2-roster-only",
       "crest": "not-audited",
       "kits": "not-audited",
-      "roster": "experimental"
+      "roster": "reference"
     },
     {
       "id": "br-santos-sp",
@@ -209,7 +209,7 @@
       "gameIntegration": "release-v2026.0.2-roster-only",
       "crest": "not-audited",
       "kits": "not-audited",
-      "roster": "experimental"
+      "roster": "reference"
     },
     {
       "id": "br-sao-paulo-sp",
@@ -220,7 +220,7 @@
       "gameIntegration": "release-v2026.0.2-roster-only",
       "crest": "not-audited",
       "kits": "not-audited",
-      "roster": "experimental"
+      "roster": "reference"
     },
     {
       "id": "br-vasco-da-gama-rj",
@@ -231,7 +231,7 @@
       "gameIntegration": "release-v2026.0.2-roster-only",
       "crest": "not-audited",
       "kits": "not-audited",
-      "roster": "experimental"
+      "roster": "reference"
     },
     {
       "id": "br-vitoria-ba",
@@ -242,7 +242,7 @@
       "gameIntegration": "release-v2026.0.2-roster-only",
       "crest": "not-audited",
       "kits": "not-audited",
-      "roster": "experimental"
+      "roster": "reference"
     },
     {
       "id": "br-america-mg",

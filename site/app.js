@@ -235,3 +235,57 @@
     }
   }).catch(() => {});
 })();
+
+// Patch notes progressively replace a complete, readable static fallback.
+(() => {
+  'use strict';
+  const list = document.getElementById('patch-notes-list');
+  if (!list || typeof fetch !== 'function') return;
+  const script = document.currentScript?.src || new URL('./app.js', location.href).href;
+  const node = (tag, className, value) => {
+    const el = document.createElement(tag);
+    if (className) el.className = className;
+    if (value) el.textContent = value;
+    return el;
+  };
+  fetch(new URL('./data/patch-notes.json', script), {cache: 'no-cache'})
+    .then(response => response.ok ? response.json() : null)
+    .then(data => {
+      if (data?.schemaVersion !== 1 || !Array.isArray(data.entries)) return;
+      const valid = data.entries.filter(entry => entry && typeof entry.title === 'string' &&
+        typeof entry.summary === 'string' && ['site', 'patch'].includes(entry.kind) &&
+        Array.isArray(entry.changes) && !Number.isNaN(Date.parse(entry.date)));
+      if (!valid.length) return;
+      const content = document.createDocumentFragment();
+      valid.forEach(entry => {
+        const article = node('article', 'patch-note');
+        const date = node('div', 'patch-note-date');
+        date.append(node('span', 'note-orbit'));
+        const time = node('time', '', new Date(entry.date).toLocaleDateString('pt-BR',
+          {day: '2-digit', month: 'short', year: 'numeric', timeZone: 'America/Sao_Paulo'}).toUpperCase());
+        time.dateTime = entry.date;
+        date.append(time, node('span', 'note-kind', entry.kind === 'site' ? 'SITE' : 'PATCH'));
+        const body = node('div', 'patch-note-body');
+        body.append(node('span', 'note-version', entry.version ? 'VERSÃO ' + entry.version : 'NOVIDADES DO PROJETO'),
+          node('h3', '', entry.title), node('p', '', entry.summary));
+        const changes = node('ul');
+        entry.changes.filter(change => typeof change === 'string').forEach(change => changes.append(node('li', '', change)));
+        body.append(changes);
+        if (entry.url) {
+          try {
+            const url = new URL(entry.url);
+            if (url.protocol === 'https:' && url.hostname === 'github.com') {
+              const link = node('a', 'text-link note-source', 'Ver notas da versão ↗');
+              link.href = url.href;
+              body.append(link);
+            }
+          } catch (_) {}
+        }
+        const arrow = node('span', 'note-arrow', '↗');
+        arrow.setAttribute('aria-hidden', 'true');
+        article.append(date, body, arrow);
+        content.append(article);
+      });
+      list.replaceChildren(content);
+    }).catch(() => {});
+})();
