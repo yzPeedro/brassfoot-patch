@@ -20,7 +20,7 @@ Nenhum teste foi executado. Foram realizadas leitura de código, coleta produtiv
 
 A tarefa local diária de dados existente permanece ativa e coleta o catálogo. Ela não substitui a manutenção integral de plantéis e publicações.
 
-Em 28/10/2026 foi criada no aplicativo Codex a rotina ativa `atualizar-brasfoot-e-site`: todos os dias às 06:00 e 18:00, America/Sao_Paulo, modelo `gpt-5.6-sol`, esforço `medium`, execução local. O proprietário autorizou pesquisa de todos os clubes, implementação, compilação, commit/push, release final, publicação do site, atualização anual e patch notes sem aprovação recorrente. Processo e limitações conhecidas: `docs/scheduled-maintenance.md`.
+Em 28/10/2026 foi criada no aplicativo Codex a rotina ativa `atualizar-brasfoot-e-site`: todos os dias às 18:00, America/Sao_Paulo, modelo `gpt-5.6-sol`, esforço `medium`, execução local. O proprietário autorizou pesquisa de todos os clubes, implementação, compilação, commit/push, release final, publicação do site, atualização anual e patch notes sem aprovação recorrente. Processo e limitações conhecidas: `docs/scheduled-maintenance.md`.
 
 A rotina usa o projeto local do aplicativo em `C:/Users/Pedro/Documents/ChatGPT/brassfoot patch`, cujo `AGENTS.md` aponta para este checkout real. Há configuração de execução sem confirmações somente nessa pasta do projeto; os padrões globais não foram modificados. A máquina deve estar ligada e o aplicativo aberto para a execução local. A criação da agenda não representa uma nova coleta, release ou teste executado; cada execução registra seu resultado real e retoma falhas parciais.
 

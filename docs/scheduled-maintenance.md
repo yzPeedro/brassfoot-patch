@@ -1,6 +1,6 @@
 # Manutenção automática do patch e do site
 
-Autorização permanente do proprietário em 28/10/2026: realizar o processo completo de pesquisa, atualização, commit, push, release final e publicação do site, sem pedir aprovação a cada execução. A rotina do Codex deve executar todos os dias às 06:00 e às 18:00, em America/Sao_Paulo, com `gpt-5.6-sol` e esforço `medium`. O agendamento é administrado pelo Codex; este documento não cria um agendador paralelo.
+Autorização permanente do proprietário em 28/10/2026: realizar o processo completo de pesquisa, atualização, commit, push, release final e publicação do site, sem pedir aprovação a cada execução. A rotina do Codex deve executar todos os dias às 18:00, em America/Sao_Paulo, com `gpt-5.6-sol` e esforço `medium`. O agendamento é administrado pelo Codex; este documento não cria um agendador paralelo.
 
 ## Contexto e escopo
 
@@ -14,7 +14,7 @@ O escopo de pesquisa é a lista completa de clubes existente no patch, obtida do
 
 Buscar transferências, entradas e saídas, elencos, posições, lados, características comprováveis, nomes, comissões, identidade dos clubes, competições, divisões e demais informações representadas no patch. Priorizar clubes, federações, ligas e outras fontes confiáveis; usar a coleta pública existente onde aplicável. Registrar URL, data de consulta, data da informação e proveniência dos campos. Rumores não são transferências confirmadas.
 
-Consultar fontes novas em cada janela de 06h/18h. O cache inicial de `tools/collect_live_rosters.py` dura 20 horas: adaptar o coletor para atualização explícita ou validade menor que 12 horas, preservando o último dado confiável para falhas. Não descartar o cache de recuperação. O coletor deve registrar quando usa dados antigos por indisponibilidade. Não driblar autenticação, limites de acesso ou cotas; usar fontes públicas alternativas quando necessário.
+Consultar fontes novas em cada execução das 18h. O cache inicial de `tools/collect_live_rosters.py` dura 20 horas: adaptar o coletor para atualização explícita ou validade menor que 24 horas, preservando o último dado confiável para falhas. Não descartar o cache de recuperação. O coletor deve registrar quando usa dados antigos por indisponibilidade. Não driblar autenticação, limites de acesso ou cotas; usar fontes públicas alternativas quando necessário.
 
 Comparar conteúdo normalizado com a última versão publicada. Mudanças somente em timestamps, ordenação ou metadados de consulta não justificam uma nova release do instalador. Uma pesquisa sem novidades não deve fabricar atualização, data de transferência ou patch note. Informações atuais relevantes podem justificar uma publicação só do site.
 

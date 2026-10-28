@@ -3,7 +3,7 @@
 ## Fonte e retomada
 - Missão integral: `docs/mega-patch-specification.md`, cópia byte a byte de `PROMPT.md`; hash em `config/mega-patch-specification.json`. Não remover requisitos.
 - Leia `docs/current-state.md`, `config/backlog.json` e o estado local em `data/private/continuity/` antes de trabalhar.
-- Manutenção recorrente autorizada: seguir `docs/scheduled-maintenance.md` nas execuções de 06h/18h de Brasília; pesquisa de todos os clubes, publicação automática, datas/ano e patch notes fazem parte do mesmo ciclo.
+- Manutenção recorrente autorizada: seguir `docs/scheduled-maintenance.md` na execução diária das 18h de Brasília; pesquisa de todos os clubes, publicação automática, datas/ano e patch notes fazem parte do mesmo ciclo.
 - Evidências anteriores: `docs/implementation-progress.md`, `docs/release-2026.3.5.md`, `docs/365scores-roster-policy.md`. Não repetir auditorias concluídas. Documentos antigos podem descrever releases anteriores; consultar manifesto e GitHub para situação publicada.
 
 ## Execução
