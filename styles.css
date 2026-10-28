@@ -14,8 +14,11 @@ dialog{border:1px solid #7198e24d;border-radius:18px;padding:30px;color:var(--in
 /* Keep the system menu above the following ticker and hero content. */
 .download-control{z-index:80}
 .download-package{position:relative;z-index:70}
-.download-options{position:relative;z-index:90}
-.download-menu{z-index:1000;isolation:isolate;white-space:normal}
+.download-options{position:static;z-index:90}
+.download-menu{z-index:1000;isolation:isolate;white-space:normal;left:auto;right:0;width:min(360px,calc(100vw - 32px));min-width:292px;pointer-events:auto}
+.download-menu a{position:relative;z-index:2;pointer-events:auto}
+.download-menu-note{display:block}
+@media(max-width:430px){.download-menu{right:-8px;width:calc(100vw - 32px);min-width:0}}
 .download-menu>p,.download-menu>a,.download-menu-note{position:relative;z-index:1}
 @media print{body{background:white;color:black}.site-header,.hero-atmosphere,.hero-visual,.download-options,.pix-floating,.ticker{display:none}.reveal-ready{opacity:1;transform:none}.hero,.download-station{display:block}.section{padding-block:30px}.wrap{width:100%}.club-table-shell{overflow:visible}a{color:inherit}.club-section{background:white}.clubs-table{min-width:0}}
 .motion-control{border:0;background:none;padding:0;color:#89a4cb;font-size:7px;letter-spacing:.03em}.motion-control:hover{color:var(--cyan)}.motion-paused *,.motion-paused *:before,.motion-paused *:after{animation-play-state:paused!important}.note-source{font-size:10px;color:#8ebcff;margin-top:15px}
