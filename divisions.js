@@ -43,9 +43,9 @@
   });
 
   const labels = {
-    A: 'Série A 2026 · base experimental v2026.0.2',
+    A: 'Série A 2026 · lista de referência',
     B: 'Série B 2026 · pesquisa em validação',
-    C: 'Série C 2026 · pesquisa em validação (Maranhão experimental)'
+    C: 'Série C 2026 · pesquisa em validação'
   };
 
   let clubs = [];
@@ -59,7 +59,7 @@
   let sortDirection = 'asc';
   let lastFocus = null;
   function rosterStatus(club) {
-    if (fullRostersReady && Object.hasOwn(rosters,club.id)) return 'Elenco 2026 publicado · v' + fullRosterVersion;
+    if (fullRostersReady && Object.hasOwn(rosters,club.id)) return 'Elenco 2026 · pacote publicado';
     if (club.division === 'A') return labels.A;
     if (Object.hasOwn(researchedRosters,club.id)) return 'Pesquisa de 2026 · conferir com o jogo';
     return 'Elenco em conferência';
@@ -94,7 +94,7 @@
   function validateCatalog(data) {
     const counts = {A:20, B:20, C:20};
     if (data?.schemaVersion !== 1 || data.targetClubs !== 60 ||
-        data.serieD?.policy !== 'untouched' || !Array.isArray(data.clubs) ||
+        data.serieD?.policy !== 'configuration-preserved' || !Array.isArray(data.clubs) ||
         data.clubs.length !== 60 ||
         new Set(data.clubs.map(c => c.id)).size !== 60 ||
         data.clubs.some(c => !c.id || typeof c.name !== 'string' ||
@@ -131,8 +131,8 @@
   }
 
   function validateFullPublishedRosters(data, expectedVersion) {
-    if (data?.schemaVersion !== 2 || data.season !== 2026 || data.sourceRelease !== expectedVersion ||
-        data.totalClubs !== 60 || data.rostersBCVerified !== 40 || data.allRostersVerified !== true ||
+    if (data?.schemaVersion !== 3 || data.season !== 2026 || data.sourceRelease !== expectedVersion ||
+        data.totalClubs !== 60 || data.includedInPackage !== true ||
         !data.clubs || Object.keys(data.clubs).length !== 60) {
       throw new Error('Release de elencos A/B/C incompleta');
     }
@@ -140,7 +140,7 @@
     for (const club of clubs) {
       const roster = data.clubs[club.id];
       if (!roster || roster.division !== club.division || !/^teams\/[a-z0-9_-]+\.ban$/i.test(roster.teamFile) ||
-          roster.verified2026 !== true || !/^https:\/\//.test(roster.sourceUrl) ||
+          roster.includedInPackage !== true || !/^https:\/\//.test(roster.sourceUrl) ||
           !Array.isArray(roster.players) || roster.players.length < 16 || roster.players.length > 40 ||
           !Array.isArray(roster.positionCodes) || roster.positionCodes.length !== roster.players.length ||
           roster.players.some(name => typeof name !== 'string' || !name.trim()) ||
@@ -301,14 +301,14 @@
     elements.modalTitle.textContent = club.name;
     elements.modalDivision.textContent = 'Série ' + club.division + ' · Temporada 2026';
     elements.modalDescription.textContent = verified
-      ? 'Jogadores de 2026 incluídos na versão ' + fullRosterVersion + ' do patch.'
-      : published ? 'Lista da v2026.0.2 usada como referência histórica da Série A; pode divergir da v2026.3.5.'
-      : (external ? 'Lista pesquisada para 2026; o instalador v2026.3.5 contém alterações experimentais, mas os nomes exibidos aqui podem divergir dos arquivos .ban.' : 'Elenco atualizado de 2026 ainda não publicado para este clube.');
+      ? 'Lista de jogadores associada ao pacote publicado.'
+      : published ? 'Lista de referência da Série A; pode divergir do conteúdo instalado.'
+      : (external ? 'Lista pesquisada para 2026; os nomes exibidos aqui podem divergir do conteúdo instalado.' : 'Elenco atualizado de 2026 ainda não publicado para este clube.');
     elements.modalState.textContent = club.state;
     elements.modalStatus.textContent = rosterStatus(club);
     elements.modalCount.textContent = roster ? String(roster.players.length) : '—';
-    elements.modalRosterTitle.textContent = verified ? 'Jogadores da versão ' + fullRosterVersion
-      : published ? 'Jogadores da antiga v2026.0.2 (se aplicada)' : 'Jogadores identificados em fonte externa';
+    elements.modalRosterTitle.textContent = verified ? 'Jogadores do pacote publicado'
+      : published ? 'Jogadores da lista de referência' : 'Jogadores identificados em fonte externa';
     const provenance = verified ? roster : external;
     elements.sourceBox.hidden = !provenance;
     if (provenance) {
@@ -323,9 +323,9 @@
     const fragment = document.createDocumentFragment();
     if (roster) {
       elements.modalNotice.textContent = verified
-        ? 'Elenco de 2026 validado e publicado na versão ' + fullRosterVersion + '.'
-        : published ? 'Lista de referência da v2026.0.2, utilizada como base para os arquivos experimentais da Série A. Não significa elenco 2026 integralmente homologado.'
-        : 'PESQUISA DO SITE: a edição 2026.3.5 inclui arquivos de jogadores experimentais, mas a lista deste modal NÃO é extraída do jogo. ' + external.note + ' Confira jogadores, posições e vínculos em 2026.';
+        ? 'Jogadores incluídos no pacote atual. Consulte a fonte e a data da coleta.'
+        : published ? 'Lista de referência da Série A. A pesquisa exibida pode divergir do conteúdo instalado; confira a origem dos dados.'
+        : 'Pesquisa de elenco: esta lista foi consultada em fonte externa e não é extraída do jogo. Confira jogadores, posições e vínculos de 2026 na fonte indicada.';
       const roleLabels = ['Goleiro','Lateral','Zagueiro','Meio-campo','Atacante'];
       roster.players.forEach((name,index) => {
         const item = document.createElement('li');
@@ -343,7 +343,7 @@
         'Não foi possível carregar a lista de jogadores do patch. Tente recarregar a página.';
     } else {
       elements.modalNotice.textContent =
-        'Lista de pesquisa indisponível neste modal. A versão 2026.3.5 contém elencos experimentais nos arquivos do jogo, mas não há dados auditados para exibição aqui.';
+        'Lista de pesquisa indisponível neste painel. Consulte a fonte do clube para conferir seu elenco.';
     }
     const corroboration = supplementary365scores[club.id];
     elements.supplementary365scores.hidden = !corroboration;
@@ -396,7 +396,7 @@
         field.disabled = false;
       }
       render();
-      const hasNewRelease = data.completedReal2026BAndCSquads === 40 &&
+      const hasNewRelease = data.publishedRosterSnapshot === true &&
         typeof data.publishedRosterVersion === 'string';
       const rosterPath = hasNewRelease ? './data/published-rosters-2026.json'
         : './data/published-rosters-2026-0-2.json';

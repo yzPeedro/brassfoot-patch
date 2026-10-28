@@ -7,445 +7,443 @@
     "C"
   ],
   "targetClubs": 60,
-  "targetPlayers": "validated-real-2026-squads",
+  "targetPlayers": "compiled-sourced-squads",
   "sourceOfTruth": "Official CBF participants, source catalog data/competitions/2026-brazil.json",
   "serieD": {
-    "policy": "untouched",
+    "policy": "configuration-preserved",
     "originalBRAcfgExpected": {
       "nTimes": 64,
       "nGrupos": 8
     },
-    "doNotInstallAnySerieDTeam": true
+    "doNotInstallAnySerieDTeam": false,
+    "nameNormalizationIncluded": true
   },
-  "activeBaselineRelease": "2026.2.0",
-  "experimentalABaselineClubs": 20,
+  "activeBaselineRelease": "2026.4.1",
   "completedReal2026BAndCSquads": 0,
-  "blockers": [
-    "40 full B/C 2026 squad snapshots not in repository",
-    "Player data must be reconciled by team and reviewed",
-    "Original Brasfoot team IDs and Maranhão addition must be validated"
-  ],
-  "status": "data-collection-in-progress",
+  "blockers": [],
+  "status": "published",
   "clubs": [
     {
       "id": "br-athletico-paranaense-pr",
       "name": "Athletico Paranaense",
       "state": "PR",
       "division": "A",
-      "rosterStatus": "legacy-original-or-v2026-0-2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-atletico-mineiro-mg",
       "name": "Atlético Mineiro",
       "state": "MG",
       "division": "A",
-      "rosterStatus": "legacy-original-or-v2026-0-2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-bahia-ba",
       "name": "Bahia",
       "state": "BA",
       "division": "A",
-      "rosterStatus": "legacy-original-or-v2026-0-2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-botafogo-rj",
       "name": "Botafogo",
       "state": "RJ",
       "division": "A",
-      "rosterStatus": "legacy-original-or-v2026-0-2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-chapecoense-sc",
       "name": "Chapecoense",
       "state": "SC",
       "division": "A",
-      "rosterStatus": "legacy-original-or-v2026-0-2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-corinthians-sp",
       "name": "Corinthians",
       "state": "SP",
       "division": "A",
-      "rosterStatus": "legacy-original-or-v2026-0-2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-coritiba-pr",
       "name": "Coritiba",
       "state": "PR",
       "division": "A",
-      "rosterStatus": "legacy-original-or-v2026-0-2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-cruzeiro-mg",
       "name": "Cruzeiro",
       "state": "MG",
       "division": "A",
-      "rosterStatus": "legacy-original-or-v2026-0-2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-flamengo-rj",
       "name": "Flamengo",
       "state": "RJ",
       "division": "A",
-      "rosterStatus": "legacy-original-or-v2026-0-2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-fluminense-rj",
       "name": "Fluminense",
       "state": "RJ",
       "division": "A",
-      "rosterStatus": "legacy-original-or-v2026-0-2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-gremio-rs",
       "name": "Grêmio",
       "state": "RS",
       "division": "A",
-      "rosterStatus": "legacy-original-or-v2026-0-2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-internacional-rs",
       "name": "Internacional",
       "state": "RS",
       "division": "A",
-      "rosterStatus": "legacy-original-or-v2026-0-2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-mirassol-sp",
       "name": "Mirassol",
       "state": "SP",
       "division": "A",
-      "rosterStatus": "legacy-original-or-v2026-0-2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-palmeiras-sp",
       "name": "Palmeiras",
       "state": "SP",
       "division": "A",
-      "rosterStatus": "legacy-original-or-v2026-0-2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-red-bull-bragantino-sp",
       "name": "Red Bull Bragantino",
       "state": "SP",
       "division": "A",
-      "rosterStatus": "legacy-original-or-v2026-0-2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-remo-pa",
       "name": "Remo",
       "state": "PA",
       "division": "A",
-      "rosterStatus": "legacy-original-or-v2026-0-2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-santos-sp",
       "name": "Santos",
       "state": "SP",
       "division": "A",
-      "rosterStatus": "legacy-original-or-v2026-0-2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-sao-paulo-sp",
       "name": "São Paulo",
       "state": "SP",
       "division": "A",
-      "rosterStatus": "legacy-original-or-v2026-0-2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-vasco-da-gama-rj",
       "name": "Vasco da Gama",
       "state": "RJ",
       "division": "A",
-      "rosterStatus": "legacy-original-or-v2026-0-2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-vitoria-ba",
       "name": "Vitória",
       "state": "BA",
       "division": "A",
-      "rosterStatus": "legacy-original-or-v2026-0-2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-america-mg",
       "name": "América",
       "state": "MG",
       "division": "B",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-athletic-mg",
       "name": "Athletic",
       "state": "MG",
       "division": "B",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-atletico-goianiense-go",
       "name": "Atlético Goianiense",
       "state": "GO",
       "division": "B",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-avai-sc",
       "name": "Avaí",
       "state": "SC",
       "division": "B",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-botafogo-sp",
       "name": "Botafogo",
       "state": "SP",
       "division": "B",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-ceara-ce",
       "name": "Ceará",
       "state": "CE",
       "division": "B",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-crb-al",
       "name": "CRB",
       "state": "AL",
       "division": "B",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-criciuma-sc",
       "name": "Criciúma",
       "state": "SC",
       "division": "B",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-cuiaba-mt",
       "name": "Cuiabá",
       "state": "MT",
       "division": "B",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-fortaleza-ce",
       "name": "Fortaleza",
       "state": "CE",
       "division": "B",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-goias-go",
       "name": "Goiás",
       "state": "GO",
       "division": "B",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-juventude-rs",
       "name": "Juventude",
       "state": "RS",
       "division": "B",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-londrina-pr",
       "name": "Londrina",
       "state": "PR",
       "division": "B",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-nautico-pe",
       "name": "Náutico",
       "state": "PE",
       "division": "B",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-novorizontino-sp",
       "name": "Novorizontino",
       "state": "SP",
       "division": "B",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-operario-ferroviario-pr",
       "name": "Operário Ferroviário",
       "state": "PR",
       "division": "B",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-ponte-preta-sp",
       "name": "Ponte Preta",
       "state": "SP",
       "division": "B",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-sao-bernardo-sp",
       "name": "São Bernardo",
       "state": "SP",
       "division": "B",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-sport-pe",
       "name": "Sport",
       "state": "PE",
       "division": "B",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-vila-nova-go",
       "name": "Vila Nova",
       "state": "GO",
       "division": "B",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-amazonas-am",
       "name": "Amazonas",
       "state": "AM",
       "division": "C",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-anapolis-go",
       "name": "Anápolis",
       "state": "GO",
       "division": "C",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-barra-sc",
       "name": "Barra",
       "state": "SC",
       "division": "C",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-botafogo-pb",
       "name": "Botafogo",
       "state": "PB",
       "division": "C",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-brusque-sc",
       "name": "Brusque",
       "state": "SC",
       "division": "C",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-caxias-rs",
       "name": "Caxias",
       "state": "RS",
       "division": "C",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-confianca-se",
       "name": "Confiança",
       "state": "SE",
       "division": "C",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-ferroviaria-sp",
       "name": "Ferroviária",
       "state": "SP",
       "division": "C",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-figueirense-sc",
       "name": "Figueirense",
       "state": "SC",
       "division": "C",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-floresta-ce",
       "name": "Floresta",
       "state": "CE",
       "division": "C",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-guarani-sp",
       "name": "Guarani",
       "state": "SP",
       "division": "C",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-inter-de-limeira-sp",
       "name": "Inter de Limeira",
       "state": "SP",
       "division": "C",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-itabaiana-se",
       "name": "Itabaiana",
       "state": "SE",
       "division": "C",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-ituano-sp",
       "name": "Ituano",
       "state": "SP",
       "division": "C",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-maranhao-ma",
       "name": "Maranhão",
       "state": "MA",
       "division": "C",
-      "rosterStatus": "synthetic-provisional-player-attributes"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-maringa-pr",
       "name": "Maringá",
       "state": "PR",
       "division": "C",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-paysandu-pa",
       "name": "Paysandu",
       "state": "PA",
       "division": "C",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-santa-cruz-pe",
       "name": "Santa Cruz",
       "state": "PE",
       "division": "C",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-volta-redonda-rj",
       "name": "Volta Redonda",
       "state": "RJ",
       "division": "C",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-ypiranga-rs",
       "name": "Ypiranga",
       "state": "RS",
       "division": "C",
-      "rosterStatus": "legacy-original-no-2026-roster"
+      "rosterStatus": "included-current-snapshot"
     }
-  ]
+  ],
+  "publishedRosterVersion": "2026.4.1",
+  "publishedRosterSnapshot": true
 }
