@@ -23,3 +23,11 @@ A tarefa existente permanece agendada a cada 15 minutos. A configuração local 
 O launcher não exige mais `NINEROUTER_API_KEY` para começar: coleta de dados públicos não usa um agente. Se um worker precisar de autenticação ausente, ele continua registrando a falha normalmente. O modelo padrão voltou a ser configurável via `workerModel`, padrão `gpt-6-luna`, em vez do alias fixo `mega-code`.
 
 A integração ignora corretamente tarefas já marcadas como concluídas no backlog, evitando que um estado antigo `validated` tente repetir checks antes da rotina diária. Nenhum teste foi executado para esta alteração. Não foi alterada nem contornada credencial de provedor.
+
+## Estado final da operação local
+
+A tarefa antiga `Brasfoot Mega Patch - Continuity` foi encontrada desabilitada e permaneceu assim. Para não depender dela, a coleta produtiva agora é executada pela tarefa independente **Brasfoot Mega Patch - Daily Data**, instalada com `scripts/install-daily-data.ps1`. Ela chama `scripts/run-daily-data.ps1` → `tools/daily_maintenance.py`, sem provider/credenciais de agente ou execução de testes.
+
+O horário vem de `config/sources.json` (06:00 America/Sao_Paulo). Disparos a cada 15 minutos e no login recuperam horários perdidos; o estado diário impede chamadas repetidas após sucesso. Falhas parciais tentam novamente em uma hora; falhas de execução, em 30 minutos. Cada fonte continua respeitando seu Retry-After. O computador precisa estar ligado com o usuário autenticado.
+
+A primeira execução produtiva concluiu com código 0 e estado `unchanged`, zero fontes com falha e o mesmo hash da release, sem gerar nova versão. Logs ficam em `data/private/daily/maintenance-YYYYMMDD.log`; checkpoint em `maintenance.json`. A saída pública é publicada pelo workflow diário do GitHub.

@@ -19,3 +19,7 @@ Estado local: `data/private/daily/{cache,snapshot.json,catalog.sqlite,journal.js
 O workflow `Daily public football catalog` executa diariamente às **06:20 de Brasília** (09:20 UTC), restaura/preserva o cache entre execuções, publica o resumo em `main` e `gh-pages` e solicita o build estático do Pages. Ele também pode ser iniciado manualmente. Não contém execução de testes. O cache do GitHub pode ser removido por expiração/limite; nesse caso, os dados voltam a ser coletados, sem usar o resumo público como fonte esportiva.
 
 Esta etapa não entrega cobertura mundial integral, atualização global de jogadores, validação funcional das ligas, nem promoção automática de release do jogo. Nenhum teste foi executado na implementação por instrução explícita do mantenedor.
+
+## Agendador local independente
+
+`scripts/install-daily-data.ps1` instala `Brasfoot Mega Patch - Daily Data`, sob o usuário atual sem elevação. `tools/daily_maintenance.py` utiliza a seção `schedule` de `config/sources.json`, registra sucesso por data local e retoma disparos perdidos. A saída é privada para não modificar o checkout. Não depende de agentes, credenciais ou GitHub Actions. A tarefa antiga de desenvolvimento pode permanecer desabilitada.

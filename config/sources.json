@@ -130,5 +130,9 @@
       "attribution": "https://github.com/openfootball/football.json",
       "clubAliases": {}
     }
-  ]
+  ],
+  "schedule": {
+    "hour": 6,
+    "timezone": "America/Sao_Paulo"
+  }
 }

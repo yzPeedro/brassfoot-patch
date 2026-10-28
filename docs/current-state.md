@@ -6,7 +6,7 @@ Implementação: site reconstruído, identidade azul, atualização Windows reno
 
 Validação: **nenhum teste executado nesta entrega por pedido explícito do mantenedor**. Somente leitura/revisão de código, execução produtiva da coleta, compilação dos artefatos e cálculo de hashes. Não reaproveitar a aprovação dos testes de commits antigos para estes arquivos.
 
-Operação: coletor produtivo registrou oito fontes sem falha, 312 clubes, 12 competições, oito países/territórios, 2.916 partidas e 1.296 observações de elencos. O serviço local já instalado ganhou `dailyCommand` de coleta privada; workflow diário publica cobertura às 06:20 Brasília. `distribution.yml` constrói/publica pré-releases ao mudar a edição. Os agendamentos novos não foram exercitados como testes.
+Operação: coletor produtivo registrou oito fontes sem falha, 312 clubes, 12 competições, oito países/territórios, 2.916 partidas e 1.296 observações de elencos. A coleta local é uma tarefa independente `Brasfoot Mega Patch - Daily Data`; a tarefa antiga de agentes foi encontrada desabilitada e preservada assim. O workflow diário publica cobertura às 06:20 Brasília. `distribution.yml` constrói/publica pré-releases ao mudar a edição. Os agendamentos novos não foram exercitados como testes.
 
 ## Decisões e origem
 
@@ -32,3 +32,10 @@ O histórico anterior foi preservado em `docs/audit/state-before-mega-2026.4.0.m
 - Snapshot de conteúdo: `d3d448ebcdf14a091e2493cdbaea7de0d604750ae30bc7d920213b78290bd2cf`.
 - Correção operacional posterior `ff004f8`: resolver drafts pelo ID da release, porque o endpoint por tag retorna 404 enquanto o draft não foi publicado. Binários preservam o commit exato de compilação.
 - Nenhum teste foi executado e os commits de código não dispararam workflows de testes (`[skip ci]`). A compilação produziu os cinco artefatos; isso não demonstra execução em cada plataforma.
+
+## Publicação do site e operação local concluídas
+
+- GitHub Pages confirmou `built`, sem erro, para `824ccf4573369cedc13af99c029472a438039e46`; deployment `40565129383` concluído com sucesso. Nenhum teste de interface foi executado.
+- Nova tarefa local `Brasfoot Mega Patch - Daily Data` instalada sem privilégios administrativos. Verifica a cada 15 minutos/login se já completou a coleta do dia após 06:00 de Brasília. Horário configurável em `config/sources.json`.
+- A execução produtiva terminou com código 0, oito fontes sem falhas, estado `unchanged` e o mesmo hash do snapshot da release. Evidência privada em `data/private/daily/maintenance.json` e journal. Isso foi manutenção real do catálogo, não suíte de testes.
+- A tarefa de agentes anterior permanece desabilitada; a nova tarefa não usa agentes, tokens, credenciais de provider ou comandos de testes.
