@@ -289,3 +289,31 @@
       list.replaceChildren(content);
     }).catch(() => {});
 })();
+
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const toggle = document.getElementById('motion-toggle');
+  toggle?.addEventListener('click', () => {
+    const paused = document.body.classList.toggle('motion-paused');
+    toggle.setAttribute('aria-pressed', String(paused));
+    toggle.textContent = paused ? 'Retomar movimento ▷' : 'Pausar movimento Ⅱ';
+  });
+  if (reduce.matches || !('IntersectionObserver' in window)) return;
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    observer.unobserve(entry.target);
+    const el = entry.target;
+    const text = el.firstChild;
+    const target = Number(el.dataset.countup);
+    const suffix = el.dataset.countupSuffix || '';
+    const start = performance.now();
+    const frame = now => {
+      if (reduce.matches) { text.textContent = target.toLocaleString('pt-BR') + suffix; return; }
+      const progress = Math.min((now - start) / 1100, 1);
+      text.textContent = Math.round(target * (1 - Math.pow(1 - progress, 3))).toLocaleString('pt-BR') + suffix;
+      if (progress < 1) requestAnimationFrame(frame);
+    };
+    requestAnimationFrame(frame);
+  }), {threshold: .5});
+  document.querySelectorAll('[data-countup]').forEach(el => observer.observe(el));
+})();
