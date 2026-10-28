@@ -1,25 +1,27 @@
 # Brasfoot Mega Patch 2026
 
-Atualizadores gratuitos para uma instalação própria do Brasfoot 22–23. A edição **2026.4.0 é experimental**, publicada sem execução de testes a pedido do mantenedor.
+Atualizadores gratuitos para uma instalação própria do Brasfoot 22–23. A **release final 2026.4.1** instala diretamente sobre o jogo original ou bases anteriores reconhecidas. Nenhum teste foi executado, conforme solicitação do mantenedor.
 
-[Site](https://yzpeedro.github.io/brassfoot-patch/) · [Download 2026.4.0](https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.4.0) · [Instalação](https://yzpeedro.github.io/brassfoot-patch/como-instalar/) · [Compatibilidade](https://yzpeedro.github.io/brassfoot-patch/compatibilidade/)
+[Site](https://yzpeedro.github.io/brassfoot-patch/) · [Baixar versão mais recente](https://github.com/yzPeedro/brassfoot-patch/releases/latest) · [Instalação](https://yzpeedro.github.io/brassfoot-patch/como-instalar/) · [Compatibilidade](https://yzpeedro.github.io/brassfoot-patch/compatibilidade/)
 
 ## O que está disponível
 
 - Atualizador Windows com interface azul, backup, restauração e botão Jogar.
 - Ferramentas de atualização para Linux e macOS, x64 e ARM64. Não incluem o jogo ou Wine; execução nessas plataformas não homologada.
-- Os mesmos 60 elencos experimentais A/B/C da edição 2026.3.5. As receitas agora estão no Git; o build não volta à antiga prévia de 20 clubes.
+- 301 elencos completos substituídos: 60 brasileiros e 241 europeus, com 8.672 jogadores importados das fontes. Laterais têm posição própria; pontas são atacantes.
 - Catálogo de 312 clubes, 12 competições e oito países/territórios, com coleta diária de oito fontes abertas OpenFootball e referências brasileiras já documentadas. Catálogo não significa ligas jogáveis.
 - Snapshots incrementais, catálogo SQLite, cache condicional HTTPS, proveniência, preservação do último dado e journal durável.
-- Site reconstruído, seleção de plataforma/arquitetura, explorador de clubes e Pix opcional preservado.
+- Site azul interativo, fundo acompanhando o ponteiro, animações e botão Baixar com detecção de sistema e seta para alternativas.
 - Pipeline de gráficos com cache, proporções, transparência e registro de origem/licença para recursos locais autorizados.
-- Pacotes associados a commit, snapshot, tamanho e SHA-256, com publicação automática de pré-release antes do manifesto do site.
+- Pacotes associados a commit, snapshot, tamanho e SHA-256, com publicação de release final antes do manifesto do site.
 
 ## Instalação
 
-Para preparar ano/divisões, use primeiro a [base Windows V4 + elencos 2026.3.5](https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.3.5). Depois abra o atualizador da sua plataforma e selecione a pasta do jogo. Se os mesmos elencos já estiverem instalados, a operação é dispensada. Para restaurar um backup antigo, use o instalador que o criou.
+Baixe o arquivo do seu sistema, feche o jogo e selecione a pasta onde o Brasfoot 22–23 está instalado. Não é necessário aplicar a V4 antes. O instalador faz backup dos arquivos alterados e permite restauração.
 
-A edição 2026.4.0 não modifica o executável do jogo, seu ano inicial, BRA.cfg ou saves. Não adiciona ligas internacionais à engine. Atributos de parte dos jogadores continuam estimados, e temporadas completas não foram homologadas.
+A tela inicial e o seletor de nova carreira mostram 2026. Nomes com três ou mais palavras usam as duas primeiras, nos 704 clubes. Saves não fazem parte das receitas de atualização.
+
+A cobertura europeia não é integral: 54 fontes parciais preservam o elenco existente, e um clube não teve plantel atual obtido. Características de 5.388 atletas novos são derivadas da função; o jogo tem lado direito/esquerdo, sem um campo separado para pé dominante. [Cobertura e fontes](site/data/roster-coverage.json).
 
 ## Operação e compilação
 
@@ -27,8 +29,8 @@ A edição central fica em `config/edition.json` (`PATCH_YEAR`, nome, versão e 
 
 ```sh
 python -m tools.daily_update
-python tools/build_distribution.py --bundle windows-installer/bundled_release --output dist/2026.4.0 --snapshot data/private/daily/snapshot.json
-python tools/publish_distribution.py --directory dist/2026.4.0 --notes docs/releases/v2026.4.0.md
+python tools/build_distribution.py --bundle windows-installer/bundled_release --output dist/2026.4.1 --snapshot data/private/daily/snapshot.json
+python tools/publish_distribution.py --directory dist/2026.4.1 --notes docs/releases/v2026.4.1.md
 python tools/publish_pages.py
 ```
 

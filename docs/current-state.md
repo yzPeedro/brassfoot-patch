@@ -21,3 +21,13 @@ Nenhum teste foi executado. Foram realizadas leitura de código, coleta produtiv
 A tarefa local diária de dados existente permanece ativa. Ela coleta o catálogo; a coleta de plantéis também está implementada, mas sua publicação não é automaticamente atribuída ao agendamento do catálogo. Não confundir catálogo com plantéis instalados.
 
 A especificação integral ainda tem requisitos de expansão da engine e cobertura mundial pendentes; esta entrega trata os dez pontos da correção solicitada.
+
+## Publicação confirmada
+
+- Release final/latest: https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.4.1 ; `prerelease=false`, `draft=false`.
+- Fonte dos cinco binários: `264365d91686814ba50353f276175993f6d52766`.
+- Windows: 4.730.880 bytes; SHA-256 `e3bd5c13b29e2f7c5230338c0964894f457413e6ecb96aeaee4f4372f0566897`.
+- Cinco nomes versionados, cinco aliases permanentes, catálogo, manifesto e checksums carregados com digest confirmado pelo GitHub.
+- Site em `gh-pages`: `8cad7bce8800ed4e8b6077b532a2776e3f2cf00d`; Pages confirmou `built`, sem erro.
+- A antiga 2026.4.0 também perdeu o marcador de pré-release, mantendo seus arquivos; somente 2026.4.1 é latest.
+- Suítes de testes não executadas. O único workflow de release anterior foi ignorado por sua condição de tag; Pages concluiu a implantação.
