@@ -32,6 +32,7 @@ type ManifestFile struct {
 	Size                   int64    `json:"size"`
 	SHA256                 string   `json:"sha256"`
 	AcceptedOriginalSHA256 []string `json:"acceptedOriginalSha256"`
+	AllowMissing           bool     `json:"allowMissing,omitempty"`
 }
 type Item struct {
 	File             ManifestFile
@@ -56,11 +57,11 @@ type InstallOptions struct { // TestFailAfter is for automated rollback tests, n
 }
 
 var (
-	teamName = regexp.MustCompile(`^teams/[a-zA-Z0-9_-]+\.ban$`)
+	teamName           = regexp.MustCompile(`^teams/[\p{L}\p{N}_ -]+\.ban$`)
 	nationalConfigPath = "conf_ligas_nacionais/BRA.cfg"
 	gameExecutablePath = "bf22-23.exe"
-	validHash = regexp.MustCompile(`^[0-9a-f]{64}$`)
-	validVersion = regexp.MustCompile(`^[0-9]{4}\.[0-9]+\.[0-9]+$`)
+	validHash          = regexp.MustCompile(`^[0-9a-f]{64}$`)
+	validVersion       = regexp.MustCompile(`^[0-9]{4}\.[0-9]+\.[0-9]+$`)
 )
 
 func sha(path string) (string, error) {
@@ -171,11 +172,12 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		return p, errors.New("formato ou versão do pacote incompatível")
 	}
 	if !((m.Kind == "BRASFOOT_HOMOLOGATION_PATCH" && !m.PublicationAllowed && !m.CompatibilityTestedInGame) ||
-		(m.Kind == "BRASFOOT_VERIFIED_PATCH" && m.PublicationAllowed && m.CompatibilityTestedInGame)) {
+		(m.Kind == "BRASFOOT_VERIFIED_PATCH" && m.PublicationAllowed && m.CompatibilityTestedInGame) ||
+		(m.Kind == "BRASFOOT_RELEASE_PATCH" && m.PublicationAllowed)) {
 		return p, errors.New("marcadores de homologação/publicação incoerentes; instalação recusada")
 	}
-	if len(m.Files) < 1 || len(m.Files) > 512 {
-		return p, errors.New("o pacote precisa ter de 1 a 512 arquivos autorizados")
+	if len(m.Files) < 1 || len(m.Files) > 2048 {
+		return p, errors.New("o pacote precisa ter de 1 a 2048 arquivos autorizados")
 	}
 	p = Plan{Game: game, Payload: payload, Manifest: m, AlreadyInstalled: true, Items: make([]Item, 0, len(m.Files))}
 	seen := map[string]bool{}
@@ -188,7 +190,9 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 			return Plan{}, fmt.Errorf("caminho de patch proibido: %s", entry.Path)
 		}
 		mode := entry.Operation
-		if mode == "" { mode = "replace" }
+		if mode == "" {
+			mode = "replace"
+		}
 		if (m.SchemaVersion == 2 && entry.Operation != "") || (mode != "replace" && mode != "add") {
 			return Plan{}, fmt.Errorf("operação não suportada para %s", entry.Path)
 		}
@@ -197,6 +201,9 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		}
 		if (isNationalConfig || isExecutable) && mode != "replace" {
 			return Plan{}, errors.New("configuração nacional e executável só podem substituir originais conhecidos")
+		}
+		if entry.AllowMissing && (!teamName.MatchString(entry.Path) || mode != "replace") {
+			return Plan{}, errors.New("adição opcional permitida somente para equipes")
 		}
 		entry.Operation = mode
 		key := strings.ToLower(entry.Path)
@@ -248,8 +255,9 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		}
 		targetExists := true
 		if err = checkRegular(target); err != nil {
-			if mode == "add" && errors.Is(err, os.ErrNotExist) {
+			if (mode == "add" || entry.AllowMissing) && errors.Is(err, os.ErrNotExist) {
 				targetExists = false
+				entry.Operation = "add"
 			} else {
 				return Plan{}, fmt.Errorf("arquivo de equipe de destino incompatível: %s: %w", entry.Path, err)
 			}
@@ -289,18 +297,29 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		isInstalled := false
 		if targetExists {
 			existing, e := sha(target)
-			if e != nil { return Plan{}, e }
+			if e != nil {
+				return Plan{}, e
+			}
 			isInstalled = existing == entry.SHA256
 			if !isInstalled {
 				if mode == "add" {
 					return Plan{}, fmt.Errorf("recusada adição: %s já existe com outro hash", entry.Path)
 				}
 				ok := false
-				for _, v := range entry.AcceptedOriginalSHA256 { if existing == v { ok = true; break } }
-				if !ok { return Plan{}, &UnknownOriginalError{Relative: entry.Path, Actual: existing, Accepted: entry.AcceptedOriginalSHA256} }
+				for _, v := range entry.AcceptedOriginalSHA256 {
+					if existing == v {
+						ok = true
+						break
+					}
+				}
+				if !ok {
+					return Plan{}, &UnknownOriginalError{Relative: entry.Path, Actual: existing, Accepted: entry.AcceptedOriginalSHA256}
+				}
 			}
 		}
-		if !isInstalled { p.AlreadyInstalled = false }
+		if !isInstalled {
+			p.AlreadyInstalled = false
+		}
 		states[isInstalled] = true
 		p.Items = append(p.Items, Item{File: entry, Source: source, Target: target, AlreadyInstalled: isInstalled})
 	}
@@ -377,14 +396,19 @@ func backupRoot() (string, error) {
 	}
 	return filepath.Join(root, "BrassfootPatch2026", "backups"), nil
 }
+
 // Check permissions before backups or replacements.
 func checkWritableDirectory(dir string) error {
 	f, err := os.CreateTemp(dir, ".brassfoot-write-check-*.tmp")
-	if err != nil { return err }
+	if err != nil {
+		return err
+	}
 	name := f.Name()
 	closeErr := f.Close()
 	removeErr := os.Remove(name)
-	if closeErr != nil { return closeErr }
+	if closeErr != nil {
+		return closeErr
+	}
 	return removeErr
 }
 
@@ -428,9 +452,14 @@ func install(p Plan, opts InstallOptions) (InstallResult, error) {
 	skipped := []string{}
 	added := []string{}
 	for _, item := range fresh.Items {
-		if item.AlreadyInstalled { skipped = append(skipped, item.File.Path); continue }
+		if item.AlreadyInstalled {
+			skipped = append(skipped, item.File.Path)
+			continue
+		}
 		active = append(active, item)
-		if item.File.Operation == "add" { added = append(added, item.File.Path) }
+		if item.File.Operation == "add" {
+			added = append(added, item.File.Path)
+		}
 	}
 	root, err := backupRoot()
 	if err != nil {
@@ -465,7 +494,9 @@ func install(p Plan, opts InstallOptions) (InstallResult, error) {
 			item := replaced[i]
 			if item.File.Operation == "add" {
 				current, e := sha(item.Target)
-				if errors.Is(e, os.ErrNotExist) { continue }
+				if errors.Is(e, os.ErrNotExist) {
+					continue
+				}
 				if e != nil || current != item.File.SHA256 {
 					failures = append(failures, item.File.Path+": arquivo criado foi modificado; exclusão automática recusada")
 					continue
@@ -506,7 +537,9 @@ func install(p Plan, opts InstallOptions) (InstallResult, error) {
 		return InstallResult{}, fmt.Errorf("falha de instalação; originais restaurados; backup em %s: %w", backup, cause)
 	}
 	for idx, item := range active {
-		if item.File.Operation == "add" { continue } // no existing file to back up
+		if item.File.Operation == "add" {
+			continue
+		} // no existing file to back up
 		saved := filepath.Join(backup, filepath.FromSlash(item.File.Path))
 		if err = os.MkdirAll(filepath.Dir(saved), 0700); err != nil {
 			return fail(err)
@@ -530,14 +563,20 @@ func install(p Plan, opts InstallOptions) (InstallResult, error) {
 	for idx, item := range active {
 		if item.File.Operation == "add" {
 			// O_EXCL refuses unexpected existing files; copyFile cleans partial creations.
-			if err = copyFile(item.Source, item.Target); err != nil { return fail(err) }
+			if err = copyFile(item.Source, item.Target); err != nil {
+				return fail(err)
+			}
 			replaced = append(replaced, item)
 			hash, e := sha(item.Target)
-			if e != nil || hash != item.File.SHA256 { return fail(errors.New("arquivo adicionado não passou na verificação SHA-256")) }
+			if e != nil || hash != item.File.SHA256 {
+				return fail(errors.New("arquivo adicionado não passou na verificação SHA-256"))
+			}
 		} else {
 			// A failed atomic replacement might already have replaced the original.
 			replaced = append(replaced, item)
-			if err = replaceVerified(item.Source, item.Target, item.File.SHA256); err != nil { return fail(err) }
+			if err = replaceVerified(item.Source, item.Target, item.File.SHA256); err != nil {
+				return fail(err)
+			}
 		}
 		if opts.Progress != nil {
 			opts.Progress("install", idx+1, len(active))

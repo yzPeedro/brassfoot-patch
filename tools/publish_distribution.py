@@ -1,4 +1,4 @@
-"""Idempotently publish an experimental distribution, then its website metadata.
+"""Idempotently publish the final distribution, then its website metadata.
 
 This command performs publication and artifact integrity checks, not test suites.
 It requires a pushed source commit and the authenticated GitHub CLI. It never
@@ -12,6 +12,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 import re
+import shutil
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -33,8 +34,8 @@ def publish(directory, notes):
     version, commit = manifest["version"], manifest["sourceCommit"]
     if not re.fullmatch(r"20\d{2}\.\d+\.\d+", version) or not re.fullmatch(r"[0-9a-f]{40}", commit):
         raise ValueError("invalid release identity")
-    if manifest.get("channel") != "experimental" or not manifest.get("artifacts"):
-        raise ValueError("this publisher handles nonempty experimental distributions only")
+    if manifest.get("channel") != "stable" or not manifest.get("artifacts"):
+        raise ValueError("this publisher requires a nonempty final distribution")
     tag = "v" + version
     assets = manifest["artifacts"] + manifest.get("attachments", [])
     identities = {}
@@ -46,6 +47,16 @@ def publish(directory, notes):
         if path.stat().st_size != item["size"] or file_hash(path) != item["sha256"]:
             raise ValueError("artifact differs from build manifest: " + name)
         identities[name] = (item["size"], item["sha256"])
+    # Permanent filenames make /releases/latest/download resolve directly to
+    # the newest final build, including when website metadata is cached.
+    for item in manifest["artifacts"]:
+        alias = item["name"].replace("-" + version + "-", "-")
+        alias_path = directory / alias
+        if alias_path.exists() and file_hash(alias_path) != item["sha256"]:
+            raise ValueError("conflicting permanent asset filename: " + alias)
+        if not alias_path.exists():
+            shutil.copy2(directory / item["name"], alias_path)
+        identities[alias] = (item["size"], item["sha256"])
     for name in ["distribution.json", "SHA256SUMS.txt"]:
         path = directory / name
         identities[name] = (path.stat().st_size, file_hash(path))
@@ -61,8 +72,8 @@ def publish(directory, notes):
     probe = subprocess.run(["gh", "release", "view", tag, "--repo", REPO,
                             "--json", "isDraft,tagName"], cwd=ROOT, capture_output=True, text=True)
     if probe.returncode:
-        gh("release", "create", tag, "--repo", REPO, "--target", commit, "--draft", "--prerelease",
-           "--title", f"Brasfoot Mega Patch 2026 — {tag} (experimental)", "--notes-file", str(notes))
+        gh("release", "create", tag, "--repo", REPO, "--target", commit, "--draft",
+           "--title", f"Brasfoot Mega Patch 2026 — {tag}", "--notes-file", str(notes))
     ref = json.loads(gh("api", f"repos/{REPO}/git/ref/tags/{tag}"))["object"]
     if ref["type"] == "tag":
         ref = json.loads(gh("api", f"repos/{REPO}/git/tags/{ref['sha']}"))["object"]
@@ -86,20 +97,28 @@ def publish(directory, notes):
         asset = uploaded.get(name, {})
         if asset.get("state") != "uploaded" or asset.get("size") != size or asset.get("digest") != "sha256:" + digest:
             raise ValueError("upload incomplete or digest unavailable; draft preserved: " + name)
-    gh("release", "edit", tag, "--repo", REPO, "--draft=false", "--prerelease", "--latest=false",
+    gh("release", "edit", tag, "--repo", REPO, "--draft=false", "--prerelease=false", "--latest",
        "--notes-file", str(notes))
     release = json.loads(gh("api", release_api))
     public = dict(manifest, status="published", publishedAt=datetime.now(timezone.utc).isoformat())
     public["artifacts"] = [dict(a,
         platform={"macos": "darwin"}.get(a["platform"], a["platform"]),
         architecture={"x64": "amd64"}.get(a["architecture"], a["architecture"]),
-        sizeBytes=a["size"], downloadUrl=uploaded[a["name"]]["browser_download_url"])
+        sizeBytes=a["size"], downloadUrl=f"https://github.com/{REPO}/releases/latest/download/" + a["name"].replace("-" + version + "-", "-"))
         for a in manifest["artifacts"]]
     for item in public.get("attachments", []):
         item["downloadUrl"] = uploaded[item["name"]]["browser_download_url"]
     (ROOT / "site/data/distribution.json").write_text(
         json.dumps(public, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    # Keep legacy release.json: it describes the still-required first-install V4.
+    windows = next(a for a in public["artifacts"] if a["platform"] == "windows")
+    legacy = {"schemaVersion": 1, "status": "published", "publishedVersion": version,
+              "publishedAt": public["publishedAt"], "assetName": windows["name"],
+              "downloadUrl": windows["downloadUrl"], "fileSizeBytes": windows["sizeBytes"],
+              "sha256": windows["sha256"], "competitionSeason": manifest["patchYear"],
+              "editionStatus": "stable", "compatibilityVerifiedInGame": False,
+              "gameplayVerified": False, "releaseNotes": "Instalação direta, elencos atuais e tela inicial 2026."}
+    (ROOT / "site/data/release.json").write_text(
+        json.dumps(legacy, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(release["html_url"])
     return public
 

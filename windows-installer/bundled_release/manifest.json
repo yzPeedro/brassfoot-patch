@@ -1,551 +1,3688 @@
 {
   "schemaVersion": 4,
-  "kind": "BRASFOOT_HOMOLOGATION_PATCH",
+  "kind": "BRASFOOT_RELEASE_PATCH",
   "patchSeason": 2026,
-  "version": "2026.4.0",
-  "publicationAllowed": false,
+  "version": "2026.4.1",
+  "publicationAllowed": true,
   "compatibilityTestedInGame": false,
+  "channel": "stable",
+  "requiresV4Base": false,
+  "tests": "not-run-at-owner-request",
   "files": [
     {
       "operation": "replace",
-      "path": "teams/atleticopr_bra.ban",
-      "size": 2949,
-      "sha256": "33be0628667ff9fd6dd1bef7d3ae46ad35224c244133002cdf3f147aa7533a9f",
+      "path": "bf22-23.exe",
+      "size": 7158218,
+      "sha256": "5ba1bff7a563cb8bdab28735696b22edac388c90edce4ac8a8caa75919d2b3ae",
       "acceptedOriginalSha256": [
-        "b20d73ffda08126c4294c31cc89cceadcd4b54da0d9f247f999370e640aee867"
+        "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
+        "31383d9d7085980be8b8b156546f1c068de873c7de4b03ee717e3a7f74f0c87b"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/atleticomg_bra.ban",
-      "size": 3048,
-      "sha256": "aa0d480c75b18e8865d5bd49caf163bf5d9ada49b0f9572e0308440ecdb16606",
+      "path": "teams/BeitarJer_isr.ban",
+      "size": 3209,
+      "sha256": "a0a1f0274e5a170d65e1b8a2fa8ef84e1cb642489bd3e47fb526ca6653c88a62",
       "acceptedOriginalSha256": [
-        "4cd2023a5263b4e34f19914bdc758cb3b76a31487e4786ebefd3bbd4d404535d"
+        "41f119b0bdfac66c02f2b64afa728c4a0fd0daf75b5b3320d901aaacdc58d609"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/bahia.ban",
-      "size": 2774,
-      "sha256": "39f06b59d07809fed6a2e332025d371f5131f6d3c4de2171246e5f3c4786f876",
+      "path": "teams/DBatumi_Geo.ban",
+      "size": 2129,
+      "sha256": "e681c3f699b147d9666a82220418e9ec0af8c886dcfc8aeada5aa3b0be3acb77",
       "acceptedOriginalSha256": [
-        "e6b3bdaa06dbced5ff6ac2b503aa2d0205efe22a10452a4fbdbba0aef5bd8dff"
+        "683728999b2350d61c118785a5fd78fcee50cbe1ef32d6749852baba4d0e1a8e"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/botafogorj_bra.ban",
-      "size": 3005,
-      "sha256": "44daea952aa47d142e0bc915bf11401dd7a46922ef3da9bfa1bd73790efc68dd",
+      "path": "teams/Differdange_Lux.ban",
+      "size": 2516,
+      "sha256": "a92e2e7da07fa651a36423ed03d8858a5d58cd74d0baa1574c2114cd29cf08dc",
       "acceptedOriginalSha256": [
-        "d8bfeaef34a2f47249896ec1ff2755efbc1ab4a5a482f80b045f67653630bb2d"
+        "4a68fc696f181070c46f9d6007a0075c1a87a68f69ab3f47f445b904087f4378"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/chapecoense_bra.ban",
-      "size": 3089,
-      "sha256": "96ccb4d12986c35c5d23bae369b3107abbe6bbba3c29548b710e5d3ae8fee3f4",
+      "path": "teams/Drita_kos.ban",
+      "size": 2313,
+      "sha256": "f00409485a45856f3054689afe420a1cd8686796df03818299f95d2b45c0a4fe",
       "acceptedOriginalSha256": [
-        "65aeab87d81c5bc86bb61a53aa5392d17e35a1020d7aa68333ac981371600e96"
+        "ee4dcec0632c93833711f7bfb20148038d3e1dcbe26e4224aa4bb29a246288e6"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/corinthians_bra.ban",
-      "size": 2832,
-      "sha256": "172dac6d5ba22644d19a22345a6b5440fde0a3f42f0975cb1f2e75ba7b5aa4a4",
+      "path": "teams/Fola_Lux.ban",
+      "size": 2030,
+      "sha256": "837bf07f0dc6d98812a43a7aeeff14bbad31422b6d99554c711013b9bbd97b1e",
       "acceptedOriginalSha256": [
-        "a1dd8a3bfc3bd3574615f1f727dd32c47871e9fecbe1cdb09b2b39e378071e6a"
+        "f1a8ca547585fdac3a50c6c60a86b0359533fda6a1d44319b7cf0a546470e5ec"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/coritiba_bra.ban",
-      "size": 2888,
-      "sha256": "11b3f8b05c64df01953a2313e92bbc36fb918d10c30d5f3900364cfbff548ae7",
+      "path": "teams/Glentoran_irn.ban",
+      "size": 1907,
+      "sha256": "473778030de37c2dcbdb2cf739192291e471f59ab2e4a58034e2d952119f3ef5",
       "acceptedOriginalSha256": [
-        "c7572c7400cebb5a05eda92823a806ec3f469db3fdf3d9d2329d8b1b5bc78a12"
+        "69184141338f32da2399c140846553c7cbeb6d21b09ecae4a0bef4e9da5b5d8a"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/cruzeiro_bra.ban",
-      "size": 2892,
-      "sha256": "0de94b9e3a1d31a55f5f961f2dad5c373ef5c3f3545235d89e1b6b83a30b2f0b",
+      "path": "teams/Hafnarfjordur_isl.ban",
+      "size": 2306,
+      "sha256": "729224bcac0cb68abb2d9c8fa615ff12a44c21ca249f37aa3243170e7088b1d4",
       "acceptedOriginalSha256": [
-        "b4d4394d4a66b16f7733ce64d4fbdba50ed33f2f808c17714a57e9cba910c79b"
+        "27f1b3d5a93c1b5ad344ae0e661fcb5b40eec7d048123516701f0a0151264d39"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/flarj.ban",
-      "size": 2697,
-      "sha256": "511f6bfeaeacc1c05ba2cbe7823185a844b67a5a1bbe219a1c2131c4720e6f37",
+      "path": "teams/Larne_irn.ban",
+      "size": 3093,
+      "sha256": "13d4f386ebaf7f955b079877cbc83f711b473767fef2ce7b5b50a48d4a3b77b8",
       "acceptedOriginalSha256": [
-        "7a73cfe1b61b94c76a64e92143ae4a6ebe74ea2e9752ed8365e6b5e312d5bd9a"
+        "afa5efc0c4ea410b47f1f7292552b24ddfa521c0e128718dcc0c0fca8ccdc890"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/flurj.ban",
-      "size": 2782,
-      "sha256": "dc67756599d63b2daa59aebb734ad4e6876e91bd8f2d1b22ced9e1dc96fedebd",
+      "path": "teams/Linfield_irn.ban",
+      "size": 2293,
+      "sha256": "47d420943e8907fe4287f1dc0637f60fb53e12c22f887809ae52d8d398edeb36",
       "acceptedOriginalSha256": [
-        "1d6e1c6b68c7f27a0a8b0817723faffa525f22a52b0a2ab1f746e4d2ebee2b0c"
+        "c04f98e0436027e45966e76304af7857436c29c9d78804803c3c5ae508bb2756"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/gremio.ban",
-      "size": 3020,
-      "sha256": "6a767dac3a72b91eb9b324a3d6c41bcfd37fb636b1f5e8c943e5a9ddc595035e",
+      "path": "teams/MaccaiTel_isr.ban",
+      "size": 2233,
+      "sha256": "f356cdc88fb5379f4bb11baa5641e059695ac109169fb11c6aee2a16ae0f76bd",
       "acceptedOriginalSha256": [
-        "81c250fc854ff2c178f49716dcb4a87dbdf96edd0fd329d8df5e5da05ab73ee1"
+        "9c644fa4b0515c15d3b243db1cf2f41d039e3bbd040bc186b93d392cef3333f3"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/internacional_bra.ban",
-      "size": 3697,
-      "sha256": "e84354ee711a0525ee5ee7ded9af4578391ff372aac4b0214b14b5b6ee538b06",
+      "path": "teams/Noah_Arm.ban",
+      "size": 2302,
+      "sha256": "5e22ac2e8dd3c688a54a6d98a2dac3be5bc709eb98229bdf0bd9a6d4dabbac4c",
       "acceptedOriginalSha256": [
-        "1c3387d720175f7f1c04dcf67cb0a568ea61bd31b980711480f79648183fd229"
+        "0cb1b03b0862611634228a6b8ef3eabd231d585e727a16b6f58b1e106b1b63d5"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/miirassol_sp.ban",
-      "size": 2433,
-      "sha256": "a01f506a7c1ef5230579297f4de0dd2a11b5d77c03397415470e94a5ecc3d618",
+      "path": "teams/Prishtina_kos.ban",
+      "size": 2857,
+      "sha256": "b0058a54ca72d90c946b5891a4228f893ca6764ed7872733fc39548d586e34fd",
       "acceptedOriginalSha256": [
-        "ae76b4fdc8064e339ab3f5bef910d24fcb34a1e2fd66a8b566ee00486c3a9700"
+        "259b41fe4c5e80d595fafefc3510d4c784711d567250e4510fd82843ff13c45c"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/palmeiras.ban",
-      "size": 2750,
-      "sha256": "1ba4ad8e394769810a095713d1c92f46d987c63220e8e56fb58055f9e74a5e0c",
+      "path": "teams/ProgrèsNiederkorn_lux.ban",
+      "size": 1795,
+      "sha256": "8bfdcb6524f66e61086141887f153dc887517dd4b2f908c3258716b340677936",
       "acceptedOriginalSha256": [
-        "8a8e76657513721fcfc93a10cb657850615aa45777c4a7155a67d8a8a8b13f76"
+        "f8914b70f3f35c54967f8eccb9a4e05fce3cad7e4fdbdfa044ba639940e614d4"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/bragantino_bra.ban",
-      "size": 2870,
-      "sha256": "f4de3c64e4a1b10633a1251b0ac20d64960ce00a4ec163b066aa4581d3def010",
+      "path": "teams/Saburtalo_Geo.ban",
+      "size": 2407,
+      "sha256": "0928144c55bca8d6559b9497de2f7c7cac27ffa3a2cbd3716aee5b50ae6f4825",
       "acceptedOriginalSha256": [
-        "38054125a0b63e6b6b5833f5232fbb5096c3f2f6072ecc3c4c24bffa60193c3f"
+        "65229e9668a1e30ea344c236f6135884d760706e07e2f0b842ce187358afe606"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/remo.ban",
-      "size": 2503,
-      "sha256": "205c65baae3ad24a14a7a3dd10d9ebb0912c5e181539ead996f7bfb745b6d369",
+      "path": "teams/SantaColoma_AND.ban",
+      "size": 1847,
+      "sha256": "7edfbf20c6742c516ad02623a3bcf4cb9f413f21b6f725f5d2dc4d503bce6849",
       "acceptedOriginalSha256": [
-        "363a32c6c9b48e6cb6c9d4b302334a2451306bd44eb92c6b4369811eba23e80b"
+        "aeff88157016a2a47b108c344828327a4391f22f1ecbc19856145b513e6c54d7"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/santos.ban",
-      "size": 2988,
-      "sha256": "449d26ba4d442361c4179b4a96a64789a251fe500ffeaecd2c80573199c07914",
+      "path": "teams/Shirak_Arm.ban",
+      "size": 2024,
+      "sha256": "716258a4009fda24179015cf9fde59dfaf5b4631a35fed72f5e4c17a2a8bbeaa",
       "acceptedOriginalSha256": [
-        "6900fe639a2a0fecd074fb2e9c5887a8d37d5251b9efdcd442c8ec10158a198b"
+        "39d66d3b2e4daba6db852cfcff3a9643ed2aa5dc1d160c8743a45610539560e1"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/saopaulo_bra.ban",
-      "size": 2980,
-      "sha256": "399dc7729fcbdc6d413449465a34ddca51ef4a2867797fff76ca05caf6ac0429",
+      "path": "teams/UPetange_Lux.ban",
+      "size": 1794,
+      "sha256": "add17abf68b258e287ee9b975212236ac28989d4135034520fc31246257c520c",
       "acceptedOriginalSha256": [
-        "2c70c8f5be7ba32beb44794205c1714133529220e85e9aa7dfd3ea8f9741564a"
+        "31443d86c741ddf20d341835abd387cd38a7b1bd7a1208f74237ef48af48c0e5"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/vasco.ban",
-      "size": 3097,
-      "sha256": "ec36463788c52ad51e45ed253fcc4d34e41a81098cd3c272cac69c7d74e5d1fc",
+      "path": "teams/aarhus_den.ban",
+      "size": 2396,
+      "sha256": "96b2864f57a238ed0cb6d753a5c37dbd903aac6465be1c074e422353aa302374",
       "acceptedOriginalSha256": [
-        "81d7614e6252f4212b57342841841defc32e33299b67732fbcb98b84731164ab"
+        "5bd1a6f41006bbc976b7d62c13b484bc5e2d25a3f0e8f742ab73069b418c104d"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/vitoria.ban",
-      "size": 2789,
-      "sha256": "71e86d3c8bb5e81231e07d34b784d69dc0949dba38b25964728d782629685050",
+      "path": "teams/abcrn_bra.ban",
+      "size": 1889,
+      "sha256": "145a3515e30628ef2d3d4eb0371480fca1f619ed2680e23a3acd4b110995c93a",
       "acceptedOriginalSha256": [
-        "cb214621c97c9e992322e9f1a0d68ce2fc413c7dc00d71f30e20d0f9892d73cd"
+        "c799d4a802d2622ec44c31da3726e5c6750ba6b1ecb1298a5eb7ec7f2263566d"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/americamg_bra.ban",
-      "size": 2578,
-      "sha256": "381ff2a72b79d4dca16364f3798b8acce873e6e2b76f3e8fa2c8a411fbd7786f",
+      "path": "teams/aberdeen_esc.ban",
+      "size": 2320,
+      "sha256": "ea2d6452197bbcf088056e4eabff34cbc25fbd41b7d83fbe597fcfb3921c017c",
       "acceptedOriginalSha256": [
-        "0083035f21e5b7bcaea0e042bb8975aef31f52fa2bc9bab3efacd4d08d244533"
+        "0de4e4651abe76e2b3109155d821c21327f9b158fb4217446f2da9444862c914"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/athleticclub_mg.ban",
-      "size": 3111,
-      "sha256": "e12784c4be8afd9be0339157912852569f4d084f61ef7b6afb321ef20fd5a3b5",
+      "path": "teams/aek_gre.ban",
+      "size": 2564,
+      "sha256": "f1ec20b08994aa263f202546e8699dec57683dff834d37988eb5263c236d7eae",
       "acceptedOriginalSha256": [
-        "eb1ddfbaa0867078333572f8e01cb2e5ae6fbb9f8e3e1e1d66a14844417b5fb8"
+        "833caade532674c4a4b747bb6766b4503a5b50d0090b4768638f5392f0f7433f"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/atleticogo_bra.ban",
-      "size": 3055,
-      "sha256": "a365379057aef463432e1430810bd2757df73010986c15ce911b2535439b8e70",
+      "path": "teams/ahli_uae.ban",
+      "size": 3104,
+      "sha256": "1c94af430b9733acf3ac73cf9fa8da8eb188baa068d830156fd00b366aa7ed7e",
       "acceptedOriginalSha256": [
-        "98ecaec133948564ee63c2960803e5dee1ffd8f6241e0aecfdf3b8e3b47333ba"
+        "582c49e0a42b6342371c14807e893767693be36a5437606c13639b0f975ea9d6"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/avai_bra.ban",
-      "size": 2826,
-      "sha256": "5d57ed8ab585b6c120e3cd5766aee57d636e66805bfc0794fbe5134ae16400de",
+      "path": "teams/ajax_hol.ban",
+      "size": 2388,
+      "sha256": "c1547ce19b4db2fd4d498ca51db3c281a41984fa58c39499bc7354c8e3f912a0",
       "acceptedOriginalSha256": [
-        "30fa3c764e447f5d057746c4204f9e3203a77b025ffffe5985d515f42de9f30d"
+        "b0418508153b7e7a239c6cb7326c0b2f6dc7647d0f9c649a566b69ba617b2f5b"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/botafogosp_bra.ban",
-      "size": 2608,
-      "sha256": "477357e15ba74744a3491ba2c797e9bed6f63c204fd61157b092f11eaf094e6c",
+      "path": "teams/al_ain_emi.ban",
+      "size": 1977,
+      "sha256": "1a2e9cd2e52aae05f3bf22b6846aacc5a139350c8a3c5556a3d02ffa82c061c9",
       "acceptedOriginalSha256": [
-        "0e1d248bf05384a750dcad85574f66e0181a040017a565af6a533ee121eac0e5"
+        "e0036c54a00b1f29dc9d3eb4a1844522067f10ae80664b4da912ed6c28592f80"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/ceara_bra.ban",
-      "size": 2591,
-      "sha256": "e399d931e95a5fc2e9d20d10b2ac48b921b0fb98600b5d4531e15af75316c87b",
+      "path": "teams/alahlytripoli_lib.ban",
+      "size": 2024,
+      "sha256": "d357e10ada34ef5db9a8ceced1d455d922829f194b2f748458ef0a58410e5725",
       "acceptedOriginalSha256": [
-        "80b6f6fd311e50c2a470af65c7d19862dc18d0985e22ad01b24a0be15d7b8d0b"
+        "b428ee845abc5899dccfffe8342b12668eaf07f432a38158d60b618c95f8b31f"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/crb_bra.ban",
-      "size": 2292,
-      "sha256": "37728f6c6ec58bfe9f6f3c68b72134b57a61a24bb465419b7c3f3c944ba1ade2",
+      "path": "teams/alanyaspor_tur.ban",
+      "size": 2426,
+      "sha256": "a92ecd5b5f38a4a8a397ddc6223d2d0559fe618349112e731eee53d2209a9ce3",
       "acceptedOriginalSha256": [
-        "2e0220f8b196d0ea973079e5849072bab8ba138cc1e68427d9f2069f9736edce"
+        "12547119192bc05d0b4be6f1f6e35a8bb7bf4f3e39b3b091bee0209d20ea482e"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/criciuma_bra.ban",
-      "size": 2352,
-      "sha256": "334bb75defb31d1035f05d87b961d7a0cbfba2799546303c6ba05c4898e38e3e",
+      "path": "teams/alashkertyerevan_arm.ban",
+      "size": 2459,
+      "sha256": "079beb3ff6c1d013a1a1c4afe3a8d1b11e85bc769b420054409fdcb760fe41dd",
       "acceptedOriginalSha256": [
-        "5eabaec785b1bffa23692dbd04718cf938cc8caecee02c94dcbaa40659b0ba94"
+        "c6a6a128452341429b0c47e68ddf6270ddb10ee23ce832b9e3facdb60b1ae06f"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/cuiaba_bra.ban",
-      "size": 2114,
-      "sha256": "0434cb754045b52278ba4458f9328c10b498c24bbf539fc46e958445affa2d77",
+      "path": "teams/alaves_esp.ban",
+      "size": 2127,
+      "sha256": "00f51067c7a72e1dd031ab9a8a57037cd6dd0d3fb13ac24774c8dcb85e0c7b71",
       "acceptedOriginalSha256": [
-        "44720ebc3a1c4056a7f80635b03871f6c10d786c5b77f1247a03ca014f3b0c78"
+        "4bfcefd0491e8c5e22fcd7d91050e688cf68dc8fafbd429cade2ff222c1ff562"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/fortaleza.ban",
-      "size": 2779,
-      "sha256": "923a2fcbc77f912d945e83ff9d4f0d726a2800abd8ffba4780fe40eb0f53e7a6",
+      "path": "teams/albacete_esp.ban",
+      "size": 2235,
+      "sha256": "e449df0d783b7038670bfcc6eb2715003da37075563f8e64692e676c75c26b47",
       "acceptedOriginalSha256": [
-        "b904a27673817db3726e3a6f5d6ae8255d40a4dc54aaa3b956f3f9735a88ab44"
+        "f3745b65894842d568df6840329768a04fd56d09db720f230c7bf402b1635303"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/goias.ban",
-      "size": 2505,
-      "sha256": "bbb1e0ff2747c10c0f1f0c16529e588c7a1374798db1f40b08ae0275b0cd48e0",
+      "path": "teams/alcorcon_esp.ban",
+      "size": 1904,
+      "sha256": "7928942c755ac3240ad3308fe38b464faeb10383ab05608132eee36f48dcf689",
       "acceptedOriginalSha256": [
-        "279c4682d996ff5f25453e5e8f371b7b08a72b062d2108f01751ba861e360b8d"
+        "8175f71b83a6ac12cb9d2c16a33af0c1ea5e139caba7ed5349439e694bfc0a2c"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/juventude.ban",
-      "size": 2858,
-      "sha256": "8b19a50c19aed954f6c25526af89bdf6184ebcd8cab11595caf509d9f888014a",
+      "path": "teams/almeria_esp.ban",
+      "size": 2230,
+      "sha256": "be758a38341cbc666a87f5906bb120233118557fab724b63beaf3a5f4d6b10af",
       "acceptedOriginalSha256": [
-        "c65b906f858d6a3fa64e02c448e431e68e6d49de240be307940ea169648a796f"
+        "dc28c3793d8975b774efeeaccff38094d49d3eeb8f8df28f9c147a163e2519f6"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/londrina_pr.ban",
-      "size": 2372,
-      "sha256": "2bd726cef710f9680cc28ba8694483d9e992d2890ed8709c414c8fa49963457f",
+      "path": "teams/almokawloon_egi.ban",
+      "size": 2024,
+      "sha256": "fdc7608064ae6159426fd6844b14b859a2e5b35a07661e1cc5d4af5da44adc64",
       "acceptedOriginalSha256": [
-        "8ca8e53ba3e7bfd3c930f92ef52de0593fe71490b7bec4b93e50d3f25b02eb45"
+        "a508bfa191cbad9b7c2a3c99f2e66c388635f70f25981882a97bec63c3a5f7cc"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/nautico.ban",
-      "size": 2579,
-      "sha256": "05265c7b00c6afccde62232e9cef9cf8660ed3e1eed46584972978a25672d880",
+      "path": "teams/alnasr_lib.ban",
+      "size": 2034,
+      "sha256": "fb56aa42d92a620d61f7c9d98d597ccbb6aca502a82e4eb9153016bfefa1d695",
       "acceptedOriginalSha256": [
-        "b2a96c5840dd82ac76c7c033e4a925f6e739c123ce86c38515dd8fe4f30eb2b3"
+        "8fee4b25f6ca9b79adf1c49468c675f1e5683efcd0ebcd6cba0e0c7af095b678"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/novorinzontino_sp.ban",
-      "size": 2782,
-      "sha256": "b08fc036e4a4d721a7c6d8fefe25a1573dd577fae133f2c44ddc98cac3a29e6e",
+      "path": "teams/alrayyan_cat.ban",
+      "size": 1879,
+      "sha256": "fd596b97eada87cc8ca9f2b2ed148241fa5bd744c04e325129b80bfcc37a618e",
       "acceptedOriginalSha256": [
-        "a26d63f66f4f11ec9b93486aef9d51a20153ef08c22fa464a375154866c88dfb"
+        "e0f48153242c354303f546b9eb9b814149ad84b992f4a425f5a950e7ce051fd4"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/operario_pr.ban",
-      "size": 2553,
-      "sha256": "34b5c2b91499f7516f3eab6d60dca6dea18eb04de89541e88f86766b358a78fb",
+      "path": "teams/altos_pi.ban",
+      "size": 1887,
+      "sha256": "af7eb19b0a9e36259361bea644c422eb3b24efa3fa908757172c0eaca85d6374",
       "acceptedOriginalSha256": [
-        "7721dd7657a7ca344c4feaceb9d74ef58f961f6c06abe5bdb2fb5baeda003c29"
+        "fd455145e042f8b2b233e9db2b46918ccaf1e8fec122f631b67afdd6430d1e65"
       ]
     },
     {
       "operation": "replace",
-      "path": "teams/pontepreta_bra.ban",
-      "size": 2502,
-      "sha256": "61aed901ca8d87226f2e9325279be3ab28504121ebd76675ef68a2140a148287",
+      "path": "teams/alwahda_sir.ban",
+      "size": 1967,
+      "sha256": "79c7938609e59b081dfbe1363cc6bd53e9ff0b39dcacdc341ccc2746727b26a1",
       "acceptedOriginalSha256": [
-        "dba5ce3d16c8f8b9a112f7fcb3aa2dbbd2772188344ca6792ed092a2f5551494"
-      ]
-    },
-    {
-      "operation": "replace",
-      "path": "teams/saobernardo_sp.ban",
-      "size": 2922,
-      "sha256": "126deb81ad2d279ddf8a7b1552b683ba5fa49e93b36c6f11bec7b77e098a31dd",
-      "acceptedOriginalSha256": [
-        "9ee7a8c2fedaf523008016b4c67b48ff89c80b04c8b5251eb4de5670cd3e9460"
-      ]
-    },
-    {
-      "operation": "replace",
-      "path": "teams/sport.ban",
-      "size": 2582,
-      "sha256": "2851cc4410179d7628b2f369c7b5b911c83129127e5387e9941b9b87e3e658fb",
-      "acceptedOriginalSha256": [
-        "16abe995062bcde9195a5809f39e2b6fef61f871ec9b060dabc191a1e75985cd"
-      ]
-    },
-    {
-      "operation": "replace",
-      "path": "teams/vilago.ban",
-      "size": 2524,
-      "sha256": "529e4ef7f5c0d314be8d6847b5f1173f4bbd2eb519cd82beb16dbcab77706ffe",
-      "acceptedOriginalSha256": [
-        "5282afc4b2400a3a865ba13648ab46cab0991a6021b59e368cb229fe1e9be0e0"
+        "b205c0c91790f040a61a2409489e49e1370a917870e10f04f7b81dc2158299fc"
       ]
     },
     {
       "operation": "replace",
       "path": "teams/amazonas_am.ban",
       "size": 3018,
-      "sha256": "ae71c6ae686105c4899d9a5c5732475e373dddba207dbdf7ba6b600d175367ca",
+      "sha256": "b09cf2525ae093d98418990f2eac78a1b8110219b6439b0c1c1f3ea20fb83be6",
       "acceptedOriginalSha256": [
-        "720a7e33662293be5ce19ecfb059cd789bef4d003890d56bebd7c0542e826628"
+        "45e43e396867cae0152969cc8097705c4349cb6f0ee8ff869e2389e808ab9164",
+        "720a7e33662293be5ce19ecfb059cd789bef4d003890d56bebd7c0542e826628",
+        "ae71c6ae686105c4899d9a5c5732475e373dddba207dbdf7ba6b600d175367ca"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/americamg_bra.ban",
+      "size": 2681,
+      "sha256": "f9a27edf22ffcc1dfc5a17c440961373d852df48a8309daa0cf016858a611a13",
+      "acceptedOriginalSha256": [
+        "bbfffd3d7225ad378794f2e025c7be595fcf50994b37c1efd3dad776846e92ad",
+        "0083035f21e5b7bcaea0e042bb8975aef31f52fa2bc9bab3efacd4d08d244533",
+        "381ff2a72b79d4dca16364f3798b8acce873e6e2b76f3e8fa2c8a411fbd7786f"
       ]
     },
     {
       "operation": "replace",
       "path": "teams/anapolisgo_bra.ban",
       "size": 2259,
-      "sha256": "41f60c371d2ef3369767a436c961514ce9557ad530b671e9e23839a51fac269c",
+      "sha256": "f18b06e6f86727de5aabad72789ed50ad1709c38d676e36d0d0eab076cf0e0aa",
       "acceptedOriginalSha256": [
-        "7e817a779bf2b47bc22b443b2beb2c4abd2efb5335384099ff948680a40dadff"
+        "49be64a8f88ba2332c899f9f78f1c567a8144b4d9cac02e85bdaf988b5e473c4",
+        "7e817a779bf2b47bc22b443b2beb2c4abd2efb5335384099ff948680a40dadff",
+        "41f60c371d2ef3369767a436c961514ce9557ad530b671e9e23839a51fac269c"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/anderlecht_bel.ban",
+      "size": 2827,
+      "sha256": "deb88e6466453031ef7f42ef2eff957e44b1495ac8b2961c904747e20f07446a",
+      "acceptedOriginalSha256": [
+        "635efeb6e1eca8d963294f028ccc07cee39736cf5fa2ed2e876a83a6b007c7b1"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/anorthosisfamag_cyp.ban",
+      "size": 2471,
+      "sha256": "16b966a4e462ad52b95f6735dd96a8f0fc6fe4f6ae418aaa5002510c64df0605",
+      "acceptedOriginalSha256": [
+        "84b08a7f2cf525eda8519f1d1e8e04bf894e4aea835ff8d26c43d27b1323a9da"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/aparecidense_go.ban",
+      "size": 1842,
+      "sha256": "c0a58e3018ed8d530bd67d909be79428466ff55390ea8b06b90e9a4496127728",
+      "acceptedOriginalSha256": [
+        "263d5d805ca4a22cd8a40be7bd2e8c89307c8b6bda7c533b2989e53145be1ee4"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/apoel_chp.ban",
+      "size": 2582,
+      "sha256": "136c289008a521836708e07a9da8271163d9f5c01efd4ee4fe87c14809c3cb46",
+      "acceptedOriginalSha256": [
+        "1872a1f8048c1517f1f1bee991409b67e1625b85084b57d0f20c8aabb222b9e3"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/apollonlemesos_chp.ban",
+      "size": 2382,
+      "sha256": "d1911b299ebee61b54763032d9116ba6dad89c845ea860c3995de0788895cbb0",
+      "acceptedOriginalSha256": [
+        "0cc0d4e33a47ccdf9882f8b09809ce93cd52270f429d2eb3caa97fd78c8ff751"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/araraterewan_arm.ban",
+      "size": 2497,
+      "sha256": "350ddff97ddd30200a12e8bf38bc75f3c0ac5348ce1898ddee1a76597ec9002a",
+      "acceptedOriginalSha256": [
+        "0f16fb4a73a5a3b448ae64ef8c96fbba8d86c8d9906facba4f116b004a3dbaf0"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/arcahaie_hai.ban",
+      "size": 3014,
+      "sha256": "6a1a1f847af0401dd59a2bc4f804e4600c098a64f3ca69574a189f69edd0f765",
+      "acceptedOriginalSha256": [
+        "55805eed871863bd2e02d34920be896b89c09bcffdef49d164ad632703837fab"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/aris_gre.ban",
+      "size": 2721,
+      "sha256": "0c86bf075b89825c39cd0d015816ee5d48e55c7dcb1c6f015b40f363bc9c3ab1",
+      "acceptedOriginalSha256": [
+        "99507d1fba998a35e82f27495c6ac47af1df9a6c8abe0c1a3ad042ca236e7004"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/arislimassol_chp.ban",
+      "size": 2338,
+      "sha256": "587ba04e2d93438408eecef160f52c3b0dce12eb788ccb65c422809c540343a4",
+      "acceptedOriginalSha256": [
+        "62c911173dc062855324f33e4567ad74c356a2dab544e57d902a69dc096748ad"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/arsenal.ban",
+      "size": 2131,
+      "sha256": "374b851eaafc072ae7d18eab182e536d2012e45df29c5eea2b4ecc874b562610",
+      "acceptedOriginalSha256": [
+        "3b26da885b96a653fc0bb0b235217ac798c928d28bf0a704f824b04accf81f7c"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/asantekotoko_nig.ban",
+      "size": 1985,
+      "sha256": "4e8c44784023e3cdd65daf6feb4b22954470ba3f2f8fe75e3e438f52c4ff9f87",
+      "acceptedOriginalSha256": [
+        "99a9bc4701d65da0ec748f13c79a87d15671d71c906e9909b796443784f14562"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/astana_caz.ban",
+      "size": 2461,
+      "sha256": "085f0e0187308c8943fb2d6813b16cc4c8568ba7c7f178ae79f9a8e7951d62dd",
+      "acceptedOriginalSha256": [
+        "7a9a16882a0935a120d0fa7070898415d2e8d21c00ed690fc9f0874ed6bfb6b4"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/atalanta_it.ban",
+      "size": 2225,
+      "sha256": "f4eaa4044352c2fdd3c2bb0665604c3a4a5762f211ae88a8c89216649733ee12",
+      "acceptedOriginalSha256": [
+        "c679be62c311737cdd1a3fb1b187fd8217c4f4c1e3c27ce831bd77a70682789a"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/athleticclub_mg.ban",
+      "size": 2796,
+      "sha256": "dfd4497d90243ce2971be6d3c6957b0bc1814276499413f9d936a5b7ff9fe23d",
+      "acceptedOriginalSha256": [
+        "1ca30fc9ef35c2cec1269259b7c973de8eea06fe6b46a0121cce950f04f3de34",
+        "eb1ddfbaa0867078333572f8e01cb2e5ae6fbb9f8e3e1e1d66a14844417b5fb8",
+        "e12784c4be8afd9be0339157912852569f4d084f61ef7b6afb321ef20fd5a3b5"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/atleticobilbao_esp.ban",
+      "size": 2280,
+      "sha256": "63c9f7808e2f69105a76b5c1747db86ab71d8956079b850232e20f6f73c21ffc",
+      "acceptedOriginalSha256": [
+        "9c155a69b19207a46285ebc465e0bf3613dd6aaad3cac03b2ccca81b199be93f"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/atleticoce_bra.ban",
+      "size": 1759,
+      "sha256": "a5af926cec16ed42ac06244ce966f7324ba7f6e8348f4dd800b7fa810236d6e4",
+      "acceptedOriginalSha256": [
+        "88458247c42868057387f9adb95f88e36473bedd59c52033d01bf56b169eae49"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/atleticogo_bra.ban",
+      "size": 2531,
+      "sha256": "0fece718379701fa02e6d4e962b650bc4946d369b4c069cf9737ac2924c55283",
+      "acceptedOriginalSha256": [
+        "e924f56389baf0730fccd2e5d09242779fb4941726b8cca0a504d488cae54568",
+        "98ecaec133948564ee63c2960803e5dee1ffd8f6241e0aecfdf3b8e3b47333ba",
+        "a365379057aef463432e1430810bd2757df73010986c15ce911b2535439b8e70"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/atleticomadrid_esp.ban",
+      "size": 2124,
+      "sha256": "735c32e346a3299c1d37b3f05e73459db7110544da55bd401de6356c96e108d9",
+      "acceptedOriginalSha256": [
+        "4a4d8ca007373839f93477eac2e16c168978d97382adc7ef5891ecc7eb175435"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/atleticomg_bra.ban",
+      "size": 2576,
+      "sha256": "b93976b8b16deecafcf1682b83ef9fca752260bca652aff1bbc1dcf9db39214c",
+      "acceptedOriginalSha256": [
+        "4cd2023a5263b4e34f19914bdc758cb3b76a31487e4786ebefd3bbd4d404535d",
+        "aa0d480c75b18e8865d5bd49caf163bf5d9ada49b0f9572e0308440ecdb16606"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/atleticopr_bra.ban",
+      "size": 2610,
+      "sha256": "91fdde54df059a1c234f8166ad26f82ae00c406091e1f6a262e8313b7aed480c",
+      "acceptedOriginalSha256": [
+        "b20d73ffda08126c4294c31cc89cceadcd4b54da0d9f247f999370e640aee867",
+        "33be0628667ff9fd6dd1bef7d3ae46ad35224c244133002cdf3f147aa7533a9f"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/avai_bra.ban",
+      "size": 2634,
+      "sha256": "e667792ad6b75c56348282f761995e1dd6c2a8acbbe142ef9a58fe687c3199fb",
+      "acceptedOriginalSha256": [
+        "2b50901b43b016c91b4958d3724ba132d327af3d2a2d92c227a679f1a8c0df47",
+        "30fa3c764e447f5d057746c4204f9e3203a77b025ffffe5985d515f42de9f30d",
+        "5d57ed8ab585b6c120e3cd5766aee57d636e66805bfc0794fbe5134ae16400de"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/azalkmaar_hol.ban",
+      "size": 2384,
+      "sha256": "0cb6804216eba9772414791b03f8ef5e222b0223e4839530148e671faecdf49c",
+      "acceptedOriginalSha256": [
+        "678d87a304a470fffd40546def051dbca2af82c3b43ec8c4385156ec6cbf2f6a"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/b36torshavn_fro.ban",
+      "size": 3033,
+      "sha256": "610c288c57f8724295df6055d6639a619878f45f5df49274ef8668f18efae50c",
+      "acceptedOriginalSha256": [
+        "67e43da85296f9f5b263f6fee54cd29989afc43caa23c7d4f401276ef4f5697d"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/backa_srb.ban",
+      "size": 3165,
+      "sha256": "8353180aa6c3434aa9823dec5d6c4dae47cd6882d95d69d06fb242c4c486a596",
+      "acceptedOriginalSha256": [
+        "dc5ffa32981cc86447f5c95bfe9629d8dac9ce6345eceb7427ee775c3c5edc1a"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/bahia.ban",
+      "size": 2607,
+      "sha256": "b4b845209a007cd182b7fb8db3ce62edb751d18059f3133b7c7be8372cde5948",
+      "acceptedOriginalSha256": [
+        "86521d33166685fb2c827d1a94661c316c68946f7b6e9b1263720e679d2c473f",
+        "e6b3bdaa06dbced5ff6ac2b503aa2d0205efe22a10452a4fbdbba0aef5bd8dff",
+        "39f06b59d07809fed6a2e332025d371f5131f6d3c4de2171246e5f3c4786f876"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/bali_idn.ban",
+      "size": 3061,
+      "sha256": "5a75fed57a379f751d1c3ec63356151a1337d0f3de668230dbe382f5ad30c38d",
+      "acceptedOriginalSha256": [
+        "3a7fed605ff25d691ab70c6cded301a2421faa1956ab119f234af698e19e4f06"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/barcelona_esp.ban",
+      "size": 2308,
+      "sha256": "0f7f8eb5287b7adad603e03fcfcec9546097ec1414a33703d330b74445c025d7",
+      "acceptedOriginalSha256": [
+        "ec1508f9e0a719846ce798f02dab727507643a8a79b4644868b5395c9a34c6be"
       ]
     },
     {
       "operation": "replace",
       "path": "teams/barra_sc.ban",
       "size": 2417,
-      "sha256": "578397f5be36e3b32dc080f04b34f69d01bf15980595511450aa4decfc939410",
+      "sha256": "0ea77f9407530746387b12ef0ee632c10d9beaed70d193b4bd1ad3676be0a0cc",
       "acceptedOriginalSha256": [
-        "2c63f7ae2ea467f051819d0afe5e638e3803dca8bdb9cb91eef23ba43bf55dca"
+        "5c20bf9628b2b4ba9f14da40fe9933e7d46af000399633abee891dc915520b5d",
+        "2c63f7ae2ea467f051819d0afe5e638e3803dca8bdb9cb91eef23ba43bf55dca",
+        "578397f5be36e3b32dc080f04b34f69d01bf15980595511450aa4decfc939410"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/basaksehir_tur.ban",
+      "size": 2402,
+      "sha256": "4100052cf85937308d77ea64a6cb94fe5f109072177360ebc52229c7e57da13f",
+      "acceptedOriginalSha256": [
+        "bf422f2d0cf56b7c7740edd72541b8492f9c0e4968ba7d934cc40cfb7622f4ba"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/basel_sui.ban",
+      "size": 2307,
+      "sha256": "b45b77170c0a147229991be047bc947e63ca2d4e3f10a4435535c6e5fa5f6a6f",
+      "acceptedOriginalSha256": [
+        "e31374d87689357c6f73b979e80b79dbd0866d9f479f1e929768c9cdfdd3ef1a"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/bateborisov_bie.ban",
+      "size": 1958,
+      "sha256": "e24aba0cd3d25cc6b4ff8e4a27a811c57f022694fca0c765572a7ec0b33d5a16",
+      "acceptedOriginalSha256": [
+        "18620b6019dcdb8cefcc84771fd001739faae1660e8cd35f4f9aadd3cfcbb27d"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/bayerleverkusen_ale.ban",
+      "size": 2417,
+      "sha256": "b4bc913fb2ba28b50779f97b791d1c335d4d60c69fc20a6a14c7288ad8c0e646",
+      "acceptedOriginalSha256": [
+        "c9c512a102f62d7189cc081b8c72d8470db5d2f08782090b6ab2fbbaa36973f8"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/bayern_ale.ban",
+      "size": 2048,
+      "sha256": "74b52931e8595954aa5378902217d9968bc87a4f6d32b0c7c62cfe7c9308fb6e",
+      "acceptedOriginalSha256": [
+        "7f0bc0013d67c25981c91e2cc5ad5dab2f0be6daf038fb31fe1020d0e25fbf50"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/benfica_por.ban",
+      "size": 2220,
+      "sha256": "89fb7e8a21be1796741f6695d54852c0982010463473d3c411aeca0e74e1c9cf",
+      "acceptedOriginalSha256": [
+        "d8566e4a03996c11861de44d534d0dacb93b0c89d6975bf6009f0124d3b10e4a"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/berkane_mar.ban",
+      "size": 1828,
+      "sha256": "043743e4991fa0bacc6f4227e79a61c130c1b7fde715e611289a1446d90116ed",
+      "acceptedOriginalSha256": [
+        "245b0de625d75c2c71e569cd99e440ed27223e3fb1be20e3543cf42c993a2918"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/besiktas_tur.ban",
+      "size": 2668,
+      "sha256": "2c74954fee44c6834abe7b1e522ba4a112437c7bc4aab75f586db32f7100f63b",
+      "acceptedOriginalSha256": [
+        "f41a64ecd27a5e25377792c6aefa0af0a697326ebc1225c97415aa4f935e7697"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/betis_esp.ban",
+      "size": 2166,
+      "sha256": "c94ce9ccb1d27e9f9c2ff457d3843281f1db6d91d7a87678ced07fa3b53dff8b",
+      "acceptedOriginalSha256": [
+        "23ee4ac24e7c40c4b402357b65ea29c0a390d51708fd1f1777e95945633a3eca"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/bodoglimt_nor.ban",
+      "size": 3099,
+      "sha256": "2529793b4be66175bae905a7e4c8a32078de95c596a13a497aa4dcfc3ec5803d",
+      "acceptedOriginalSha256": [
+        "a9dfda6f0b3c41657fef54c091ebe24fdd022d94e74ba93ce78856df51e41260"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/bohemians_irl.ban",
+      "size": 3396,
+      "sha256": "d082e4b20bd1342f9d8e82f79a5eaa77cc5cfe3f345239815546a3e0028866ad",
+      "acceptedOriginalSha256": [
+        "32a4910fffe85cc6cee6ec8b9358669a9c7bfd9865ab45195f2ce5efab334734"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/borac_bih.ban",
+      "size": 3787,
+      "sha256": "5e5713029f3821ff4c76c71f8024ba33b37771492ccda17b39091611e2858e00",
+      "acceptedOriginalSha256": [
+        "61e86000f09a3d06ced5370c8e4ba2806b73b2dea9a2da55f63772580c579e80"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/borussia_ale.ban",
+      "size": 2562,
+      "sha256": "efdd282588edec921e28408464bbfad952a5a9d9daceabdde79f972caa76f9e6",
+      "acceptedOriginalSha256": [
+        "b9b6ce0784f5ae6684d8abf92b53754f0629a9b42f679e481736d2398f8fae81"
       ]
     },
     {
       "operation": "replace",
       "path": "teams/botafogopb_bra.ban",
       "size": 3089,
-      "sha256": "990318e96bfe7f9dcd540491ec3e3e1479bcb536c3f53d5806f9f77120477443",
+      "sha256": "3b2d5a58ab90e79f0bd97baf2bddbbfb881b08e45f4c56aa11340a4b708eb65f",
       "acceptedOriginalSha256": [
-        "27993451cc665d8f84ba47a6742b30f0291e461a9849e5c5742b6f6c8a8d742f"
+        "27993451cc665d8f84ba47a6742b30f0291e461a9849e5c5742b6f6c8a8d742f",
+        "990318e96bfe7f9dcd540491ec3e3e1479bcb536c3f53d5806f9f77120477443"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/botafogorj_bra.ban",
+      "size": 2901,
+      "sha256": "7590404690ec2fd710d0601b4fcd6b1e9975d8de07be9dd1d1afe0ebe4267fcd",
+      "acceptedOriginalSha256": [
+        "d8bfeaef34a2f47249896ec1ff2755efbc1ab4a5a482f80b045f67653630bb2d",
+        "44daea952aa47d142e0bc915bf11401dd7a46922ef3da9bfa1bd73790efc68dd"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/botafogosp_bra.ban",
+      "size": 2613,
+      "sha256": "4e3dcfe548a1770110b9fa286a13947139a4525406f6055afe4e1f413c5acf91",
+      "acceptedOriginalSha256": [
+        "bb8e6812a2dfd1593c18932d7afa3ea5352c52667e1f3ec70e075476a7795846",
+        "0e1d248bf05384a750dcad85574f66e0181a040017a565af6a533ee121eac0e5",
+        "477357e15ba74744a3491ba2c797e9bed6f63c204fd61157b092f11eaf094e6c"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/botev_bul.ban",
+      "size": 2550,
+      "sha256": "12dce958458a3fded5f8d41855b6cb014815e4115b1a8168d1fc348b322ddfa4",
+      "acceptedOriginalSha256": [
+        "90085d60c45a86582325bf6b53ed84990eb4885c96384f8261b6f7f807f7f334"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/botosani_rom.ban",
+      "size": 3419,
+      "sha256": "044e8affb1554de8bcd4e2aaf53338e6433291f7ca306363741315e738fb4afe",
+      "acceptedOriginalSha256": [
+        "7b9a90049d3c41687426b79207dd1ece19859923e85e138260a26847c77bb00a"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/bragantino_bra.ban",
+      "size": 2782,
+      "sha256": "c0d97d131b33ad6446ce4afd11f40901dfe7f072a85187236a525696828fe64e",
+      "acceptedOriginalSha256": [
+        "38054125a0b63e6b6b5833f5232fbb5096c3f2f6072ecc3c4c24bffa60193c3f",
+        "f4de3c64e4a1b10633a1251b0ac20d64960ce00a4ec163b066aa4581d3def010"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/brasilpelotas_bra.ban",
+      "size": 1958,
+      "sha256": "185435545b670650f3315f9b3100b6bbaf432ca0cde5e5309d036939a7372ab0",
+      "acceptedOriginalSha256": [
+        "b7110cce5feee2bb30f9626ac69706f0e05f668269a6af066550b559028afbe3"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/breidablik_isl.ban",
+      "size": 3165,
+      "sha256": "e640e2c0bcb08acf2e8578029d08c9bbd71df45074386c330919e1ccc3038a12",
+      "acceptedOriginalSha256": [
+        "a98eefc5d8217d8cdf573926fd264f6993e631a322a397492d1184f31966c283"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/brondby_din.ban",
+      "size": 2283,
+      "sha256": "70e7d3774d497c1d2d4d0ae743df0b01b3a198fcbf02bc4778160f9fbccd8efe",
+      "acceptedOriginalSha256": [
+        "72d5f27579657b6bed2e2420e0401f4dc52e4129424e6bb6fc688e9a8b36bdcd"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/brugge_bel.ban",
+      "size": 2384,
+      "sha256": "928af5285f452203b1308d8bc7433c7990c4587b3c2f6e3b8de553408b830d77",
+      "acceptedOriginalSha256": [
+        "75e47848c9bf74596220ce512fd4ef49d22c985d0936da5ef83d6f40ba136ec3"
       ]
     },
     {
       "operation": "replace",
       "path": "teams/brusquesc_bra.ban",
-      "size": 2741,
-      "sha256": "c79f5641168289a361be66ddfd11ad25ae135a02cd702134adbda1e4bb3c15af",
+      "size": 2734,
+      "sha256": "ca69f43ef401c6a3b2048330534340fbe7adb914459877ec74b86f87fe6f4a76",
       "acceptedOriginalSha256": [
-        "af3d634d157df534030dd5b9fbc37de53e2c6bfeaa8c15e77a1cd0f55952bef2"
+        "b37eb2c482341e0e9872ca9b54393d269149a820083b08e7593fef9164a872f6",
+        "af3d634d157df534030dd5b9fbc37de53e2c6bfeaa8c15e77a1cd0f55952bef2",
+        "c79f5641168289a361be66ddfd11ad25ae135a02cd702134adbda1e4bb3c15af"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/budapeste_hun.ban",
+      "size": 2476,
+      "sha256": "953a94159bad43e1d4adf00077f027ed77f3b980743b6e7b8ec60adeb647ab45",
+      "acceptedOriginalSha256": [
+        "820a4ab66fc1c45bac814806a5f6e55bed66cae6b5b45b0bc27d34771a37cf83"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/buducnost_mon.ban",
+      "size": 2512,
+      "sha256": "4b1aa87c4bbae052457d81315bb7741411f093cf27f23a782b5ecb7adbfd5414",
+      "acceptedOriginalSha256": [
+        "2d23188698c9a0e14804f09f3137a7ef4a35a252e3cfa48996e6b49d0e99c9bb"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/burgos_esp.ban",
+      "size": 2127,
+      "sha256": "630f46263ccc9b41879a2de0dbad0141edcb37fc50306e3a550dfc5bb245c1b1",
+      "acceptedOriginalSha256": [
+        "affee6c0a3115f01fb0270bcdafc23fe470242bf67d4938758710cc4ede7b348"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/cadiz_esp.ban",
+      "size": 2204,
+      "sha256": "da955ae436fbb419284ecccf58b3db4eaf97962dc197be63d423cd6a5b2c6284",
+      "acceptedOriginalSha256": [
+        "f7bc4934ae4c9b1d37da68a9f50cadaeeafea14bb2b82dfdacbe8e76289f000b"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/campinensepb_bra.ban",
+      "size": 1882,
+      "sha256": "971ae65fe690126208b5bb5830680b21375e2ed97f765233e4f671037ff0b54a",
+      "acceptedOriginalSha256": [
+        "ba06755c36e58315e32a69c90dcc4ceba7fda64c70486d17178ee413cfd41f37"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/caracas_ven.ban",
+      "size": 2003,
+      "sha256": "7dc17dc9eaa0dc102e3c974a8b6da41cb2ea16f1d90bd90cca46d15ab6c64fc2",
+      "acceptedOriginalSha256": [
+        "09deb496516457957a7b8cba77d0e83459236ac6e9203b7ad359ec049ad77c41"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/cartagena_esp.ban",
+      "size": 1643,
+      "sha256": "a2288c698a34e509ee5208ba695bf88d5d559ffaa0c5b5c13d7a3d2dc82d71f0",
+      "acceptedOriginalSha256": [
+        "1fb183db8c23d7a22acc8a1a9df78464d84e0f45c7be01ed3ad1958b8fbcc7dd"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/cavalry_can.ban",
+      "size": 2850,
+      "sha256": "dc7af43a8686ef24a7b5f5e95a6419f64f852d015721e300aa46748da33ff50e",
+      "acceptedOriginalSha256": [
+        "ed5f0859265296210b3bd56c649d36ea1e394e0fe508dc514b71b0389acfccdb"
       ]
     },
     {
       "operation": "replace",
       "path": "teams/caxias.ban",
-      "size": 2507,
-      "sha256": "6700a54e46005fda3f757348109fd8b6a94e8aee098d0ed06848e0e1f1d55631",
+      "size": 2501,
+      "sha256": "9a4de1537eea0c4aaf469ab4cc1c044617194e7f8723cb298daef74c019edf0a",
       "acceptedOriginalSha256": [
-        "2b0828a80d1a9f80225dcdde6beeb5fd8c3ad36a10f85b5088d2717f32d21674"
+        "c2f5f4a4320e193b999b9ca6a0607a603955ccde0e0d67eb877e2dc781bbdaeb",
+        "2b0828a80d1a9f80225dcdde6beeb5fd8c3ad36a10f85b5088d2717f32d21674",
+        "6700a54e46005fda3f757348109fd8b6a94e8aee098d0ed06848e0e1f1d55631"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/ceara_bra.ban",
+      "size": 2527,
+      "sha256": "5340a5abff5e4f5c4a362155c829a3f43bb02762be691818b0e1953061d8824d",
+      "acceptedOriginalSha256": [
+        "45a59ec7894111790f89d80117e31468bd4a37078b630b9225afa1e91108ca32",
+        "80b6f6fd311e50c2a470af65c7d19862dc18d0985e22ad01b24a0be15d7b8d0b",
+        "e399d931e95a5fc2e9d20d10b2ac48b921b0fb98600b5d4531e15af75316c87b"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/celje_elv.ban",
+      "size": 2839,
+      "sha256": "f271fd40b3eb35a94bb0babe19b61e14d425b59ec070e51ac8528576b2a0e964",
+      "acceptedOriginalSha256": [
+        "5c3d2d2e87d6050d118151d7dfe99114c1b57822691789699f239f0e17f9d1d3"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/celtadevigo_esp.ban",
+      "size": 2265,
+      "sha256": "09f788e0cace5a754896f1e8c024071744ad789a306727e42a2cbae4fe359659",
+      "acceptedOriginalSha256": [
+        "1fd7edde6ca2463a79e2e4163acaa471bca8cc519a0958ac287ce459d4ba09f7"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/cerrolargo_uru.ban",
+      "size": 3120,
+      "sha256": "2770cc811239d8263d57ef23d555b980d2c0cc59518d45602a4cc26c73052f08",
+      "acceptedOriginalSha256": [
+        "0f99400a20074bf62a897d693b1e616cd6d22864f056c032c58ade1e124085d2"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/cesarvallejo_per.ban",
+      "size": 1941,
+      "sha256": "f41198cc63292350e80b7d0687196b90e427bda1ecf8fd44759af6ba5efb35b3",
+      "acceptedOriginalSha256": [
+        "e3758e1fec44301acc98aed52eae975595df8c52f9cbe8af53bdbaa001717646"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/cfrcluj_rom.ban",
+      "size": 2990,
+      "sha256": "50edef5a0b28cb5cc65bffe574b2798ac8ba2af7a3d950e1254676665a875818",
+      "acceptedOriginalSha256": [
+        "74260c693937f2e5dd06e4f6d553fe1caf77897c260851f2cf3ff408b1316db8"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/chapecoense_bra.ban",
+      "size": 2906,
+      "sha256": "b0589239967c9ce424cc78b1c2bc328c9331e17c73c24712c77e14de676c6b93",
+      "acceptedOriginalSha256": [
+        "99f2cf112734f9de45051c4fb28c17885b6782ce3d34595cbd0d15bf6ec52ff3",
+        "65aeab87d81c5bc86bb61a53aa5392d17e35a1020d7aa68333ac981371600e96",
+        "96ccb4d12986c35c5d23bae369b3107abbe6bbba3c29548b710e5d3ae8fee3f4"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/charleroi_bel.ban",
+      "size": 2128,
+      "sha256": "f27c17508f20d9f4e02487b8dc388018f9f9c39c3cc19341169eaa0ca8dc857d",
+      "acceptedOriginalSha256": [
+        "d844a20698a9346d4ccf1d07689cdc77bcf4235e59fb3a2a94e8a55dedb23079"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/chelsea.ban",
+      "size": 2322,
+      "sha256": "5b7d9d230246c7ba7e8fbc540e5ed844d42934a09be02bfd7a590b9d41dadc51",
+      "acceptedOriginalSha256": [
+        "f3a595eb31f90fc403b7d5438f2c9e355f6df67078ec0b279e0c4d1435d2bee1"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/clubdeportivoguabirá_bol.ban",
+      "size": 2006,
+      "sha256": "40a237614ec5f749a428c455dcb98958ad8bdb5cef8d34b981d467ea42fcc5f7",
+      "acceptedOriginalSha256": [
+        "f90625c332545ac8e9fb4b060e2b4494b4b387558fb8d827033cb869898356e2"
       ]
     },
     {
       "operation": "replace",
       "path": "teams/confianca_se.ban",
       "size": 2976,
-      "sha256": "d260f894b36d5b2a23b0f692437f318257846872499c7c50263abf064f14afc4",
+      "sha256": "a2bbe1ea5800cc32cd2998fce83c4c2ee2bc6f3d1daa35d10563a2267ffb56d9",
       "acceptedOriginalSha256": [
-        "e0bb08819eefefaad4201167ffe6da6d6c173b6985b3a9051de688077c381b60"
+        "e0bb08819eefefaad4201167ffe6da6d6c173b6985b3a9051de688077c381b60",
+        "d260f894b36d5b2a23b0f692437f318257846872499c7c50263abf064f14afc4"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/connahsquay_wal.ban",
+      "size": 1905,
+      "sha256": "861b8d84f1b52e2bd831d70106236987980be7472e396ad67ed0a1a03a8cb70d",
+      "acceptedOriginalSha256": [
+        "2a7c94b25d9263bb3cc2e3c941e7db414fc6f36cf875715c4062f9927fa464c3"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/copenhague_din.ban",
+      "size": 2131,
+      "sha256": "18a32e8f96b73bff6fcf587a2da2cfcb7031b13efa9dbf934b9b59994a4d14b6",
+      "acceptedOriginalSha256": [
+        "278f3fe094842c9da1a066620fac7c01a4e5880312255800c272339ce3b0c759"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/corinthians_bra.ban",
+      "size": 2741,
+      "sha256": "35fe0e5724df2b3580270b9721a21b740a515672d9c45b8ae5bf578c690c5224",
+      "acceptedOriginalSha256": [
+        "a1dd8a3bfc3bd3574615f1f727dd32c47871e9fecbe1cdb09b2b39e378071e6a",
+        "172dac6d5ba22644d19a22345a6b5440fde0a3f42f0975cb1f2e75ba7b5aa4a4"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/coritiba_bra.ban",
+      "size": 2614,
+      "sha256": "93545baea678dad3ea1493fa9a6c70bc68125dbaf444c26e704e889d9f9ad8ec",
+      "acceptedOriginalSha256": [
+        "c7572c7400cebb5a05eda92823a806ec3f469db3fdf3d9d2329d8b1b5bc78a12",
+        "11b3f8b05c64df01953a2313e92bbc36fb918d10c30d5f3900364cfbff548ae7"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/cotonsport_cam.ban",
+      "size": 2005,
+      "sha256": "063ef4a77696fbd6d4a64e686c188dd5b0f0016f7a2ce860732707eee3df325d",
+      "acceptedOriginalSha256": [
+        "961dc2ca0f3b52d3360a97862f5efaf9ee6c3408e7adef66649bf835761f13c5"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/cracóvia_pl.ban",
+      "size": 2845,
+      "sha256": "5cf71c3fe677e102d96d94b767e261a3594c7e2ad424bfed7ccb9d4ff0d81926",
+      "acceptedOriginalSha256": [
+        "ce608a15abb88bea74a619c5763e54f0b4dd8ea4fc72650e20f58e76036101fb"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/craiova_rom.ban",
+      "size": 3382,
+      "sha256": "a70525159d22783fb292b1066913c0959d924d45513191085f5639431fb7d2bb",
+      "acceptedOriginalSha256": [
+        "5d1e0d7a6a00190c4effdf0fd71f64adcc462b503695ad013aa65162beb46195"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/crb_bra.ban",
+      "size": 2617,
+      "sha256": "fc27eeb78d88924656f9da0739b4416cc15f0967915f70a9d94bbad1bb5d5d02",
+      "acceptedOriginalSha256": [
+        "2e0220f8b196d0ea973079e5849072bab8ba138cc1e68427d9f2069f9736edce",
+        "37728f6c6ec58bfe9f6f3c68b72134b57a61a24bb465419b7c3f3c944ba1ade2"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/crbelouizdad_arl.ban",
+      "size": 1850,
+      "sha256": "2a78da2324b1d18412a4d654256850d30589b8020f3959cd7a9987465c7799f9",
+      "acceptedOriginalSha256": [
+        "339b106015bb89796f1b46c6e8756101c418882a316c6d0dbbd60b368afabe75"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/criciuma_bra.ban",
+      "size": 2715,
+      "sha256": "86487bf6c26dd727e865f3db2b6def4a89a6eec5af7b33714cf750d160d0ef85",
+      "acceptedOriginalSha256": [
+        "5eabaec785b1bffa23692dbd04718cf938cc8caecee02c94dcbaa40659b0ba94",
+        "334bb75defb31d1035f05d87b961d7a0cbfba2799546303c6ba05c4898e38e3e"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/cruzeiro_bra.ban",
+      "size": 2624,
+      "sha256": "7b100fc4493eafca966e97ef5f6d89c835de0248dd8a240007601d4c74776bdb",
+      "acceptedOriginalSha256": [
+        "2f5f637107015c161cb1a706fdebd0fdc296e992db18a2c00a48efdb40e120a6",
+        "b4d4394d4a66b16f7733ce64d4fbdba50ed33f2f808c17714a57e9cba910c79b",
+        "0de94b9e3a1d31a55f5f961f2dad5c373ef5c3f3545235d89e1b6b83a30b2f0b"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/csa_bra.ban",
+      "size": 1952,
+      "sha256": "74e683466a340128dadfd0f8e00f265d75a2177088f45f37654460269a0f8b8d",
+      "acceptedOriginalSha256": [
+        "8ac241261605e879d8252f900b1dc7f96570ef6826ab2085b85e9f14f82eedf3"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/cskamoscow_rus.ban",
+      "size": 2407,
+      "sha256": "d3b0a2d743400f72c6beacff80f8f47f99613cb43b04dce65af3f17b79abbffa",
+      "acceptedOriginalSha256": [
+        "d87042d71989129a95c5181bee9f298620f45833c3dd884d22579422e3bfb23b"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/cskasofia_bul.ban",
+      "size": 2206,
+      "sha256": "141f7b1a04f57df656820c83e8d0d1fb060b70404fd1dd7508b637fa2141557f",
+      "acceptedOriginalSha256": [
+        "5fd31cc90cfab76486333660f3bc90b684a004395acc44beca1fe5744c5f1350"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/cuiaba_bra.ban",
+      "size": 2717,
+      "sha256": "c507303bc51847e0ea041e325b17d89e7425f974d020f00cbc0139afaa9370be",
+      "acceptedOriginalSha256": [
+        "a13007e58a381fd45f393c4f03e41f09bd4ec859a274f15dbb0484ce4030d722",
+        "44720ebc3a1c4056a7f80635b03871f6c10d786c5b77f1247a03ca014f3b0c78",
+        "0434cb754045b52278ba4458f9328c10b498c24bbf539fc46e958445affa2d77"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/dacdunajskastreda_slk.ban",
+      "size": 3310,
+      "sha256": "636937b6edda06ee6b8c6f3d94c764f155720451b0d4f5a6b98fbb9ba7abcb3c",
+      "acceptedOriginalSha256": [
+        "aaa5488a56d89825b22a26558b08107ac4ee8fd1439eba41e6176f7dcce67eaa"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/debrecen_hun.ban",
+      "size": 2598,
+      "sha256": "710d7c41ebed51430781c769068535a43e1eea9dec702104ae01062da38aac67",
+      "acceptedOriginalSha256": [
+        "24ba0a5019136a7fcc2900feb1f37ea6acd118dda2b8feaf05af2b0dc89837b6"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/deportivolacoruna_esp.ban",
+      "size": 2331,
+      "sha256": "6246f1c65817752c00a72181b78eda22e521a4fa46fd563fd7405dc0f4d11a9d",
+      "acceptedOriginalSha256": [
+        "e2205594fe31ce038d8be6995673696f41b49b1e586f611b0747ba9250c1ceff"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/derry_irl.ban",
+      "size": 3705,
+      "sha256": "8be803d7e97e1610414e17caaf8684fdc0b8e23e15be0138bfdeaac84765411b",
+      "acceptedOriginalSha256": [
+        "fef6b99054f6ac438ebf4ce338668ee6abb77b49b1c0417929a6a105a7da477c"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/dinamokiev_ucr.ban",
+      "size": 3246,
+      "sha256": "5082b9b520f8f6e70db1bc41029804ba18bc2a39fe1464735712f38e534861a0",
+      "acceptedOriginalSha256": [
+        "f4e920a52fd3b98d09e3fd60374a559a17acdecddaac1619213dcf691375866a"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/dinamominsk_bie.ban",
+      "size": 3297,
+      "sha256": "02b7153644814c3fd5a5e383d4a026ea882d224224ea30bdeb1404d3ed87bdef",
+      "acceptedOriginalSha256": [
+        "c4b842b21cca12c18e117259105e248195e0df8da41e2ab5db8523099e3b7b4a"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/dinamotbilisi_geo.ban",
+      "size": 1969,
+      "sha256": "0b805c28abcaef1c6b8b48625df30cd3e5fb2d270fd95250ec0ca7d0cfac4be6",
+      "acceptedOriginalSha256": [
+        "a1f83bf3b1b2371e80eed3645e190c74a8065a17afd21be43a8902134894cb89"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/dinamozagreb_cro.ban",
+      "size": 2796,
+      "sha256": "bb9df23972de4e9d34b46ca026fba134f6c002c4f7b294f57f007a8b6891d215",
+      "acceptedOriginalSha256": [
+        "e1db77eb53a2064a6c88002e5522bb0dabe5260d1381f4501e70c02a5ad94d13"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/djurgardens_sue.ban",
+      "size": 3271,
+      "sha256": "9ed0535cc5157081f9ef42a5710762b134bc09c673014f86a1981b430fa224f8",
+      "acceptedOriginalSha256": [
+        "28d0749fdb9933262abf8f82b800ef5b652a94b3d793265ea70dcf6cce96585e"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/dundalk_irl.ban",
+      "size": 3919,
+      "sha256": "2051a3764c1ccdff8fb70481087294ea564a4c2cbaf03090c2174ed8a41259b2",
+      "acceptedOriginalSha256": [
+        "fd06660be0d741b448fd0d6f6b1b93c27e355cda88001962b5f8fac57f954e81"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/dynamo_rus.ban",
+      "size": 2364,
+      "sha256": "866818eb7a467d648583599cc66519c8ca8d46de8a3798f3b803e3fbe00f741a",
+      "acceptedOriginalSha256": [
+        "2190d96b62386451acf881bed8c1d375e6e339bdbae77af4d41a6ef85a8d05b5"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/dynamobrest_bie.ban",
+      "size": 1892,
+      "sha256": "55d7bf05b6650612b3dc722c0b9efde454b86790754ba49d5688f7c1afe84303",
+      "acceptedOriginalSha256": [
+        "d0557a324c4562db634b983e7335acdab5775007d25d5813803a589909cdc2d4"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/eibar_esp.ban",
+      "size": 2167,
+      "sha256": "473a12dc35cdf8e6b719c5608a469b39f2049dc64bf493f38f69fc2d96600f8c",
+      "acceptedOriginalSha256": [
+        "bcf4e8fcbb0bbe40f63cc9efde30d2f3037d2d65cd2469e16a74a7d97d480c46"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/elche_esp.ban",
+      "size": 2386,
+      "sha256": "730c33141a29c5e1b45aa93af1d8496c80d1a9906286cecb53237896dd9ee04e",
+      "acceptedOriginalSha256": [
+        "53339e6f9e3ba249d305d77c04cf75822aba9f9220f0528c768ef19d47d340fc"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/engordany_and.ban",
+      "size": 2300,
+      "sha256": "673115eb2837df75a54d8d29497cb29dd48819b887eb6d9ec44d7a36b1ef9bb3",
+      "acceptedOriginalSha256": [
+        "e24119112b914bbfcf1bfb00d0b9f21983cebbaa71ea8c03c9beb5deed3c6ed3"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/enyimba_nig.ban",
+      "size": 1988,
+      "sha256": "8c50fb51c61833672b088119a6d527ddf590fab65334b2302ed380567f5de0af",
+      "acceptedOriginalSha256": [
+        "5aef86a5fceaf99cdadee1d845348f37af72da1332dfb2dddfa8447f88806e2b"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/espanyol_esp.ban",
+      "size": 2204,
+      "sha256": "7c10bd30c9d8979a884c1b191ef25888d425f4a2ea27b066b2e6a33553ebd395",
+      "acceptedOriginalSha256": [
+        "3d560d259254d42a1ac346a8a5c240c2b1471ab3a35d09f088f3e2f308e121bc"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/essetif_arl.ban",
+      "size": 1795,
+      "sha256": "b8b7549f1c914e2ff6c404d8fd58c99615475cfaf210d00ca64b1df6babd614c",
+      "acceptedOriginalSha256": [
+        "f17fb5bd43515814bdcc0d8b96b0c5b24d078baf804fcbd6ba37edaa7c720abf"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/estrelavermelha_ser.ban",
+      "size": 2557,
+      "sha256": "fcfcada473262b66eea1974e2deec98c7fff48b49ceed5bf1d9c6e6764d13ac2",
+      "acceptedOriginalSha256": [
+        "ce180a1f77dd9c20a199a609cc5233f03c1a1b92d219034db703cff0e3678362"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/estunis_tun.ban",
+      "size": 2006,
+      "sha256": "26333a9d666180283c35234a4b7e393e3795d2844f8f43efe20bc59974263c12",
+      "acceptedOriginalSha256": [
+        "8b911ffb715828f5db654104d960b3d6ff8a9af654fd5d6417c71a403e3e6ff3"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/europa_gib.ban",
+      "size": 2991,
+      "sha256": "8de76024e922deba95f82ecaab45ba003e624376a4f9c7a06f63d1ef8b50ce90",
+      "acceptedOriginalSha256": [
+        "7cb05b401a95f7f7ec9fdd854daa4e473813280db1069d250502bc09b69ab026"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/everton_chi.ban",
+      "size": 1919,
+      "sha256": "3dfc0a2a360ecdcf6a594b45f1de317e975fc0c56919aa18c61e62ac9c8ae747",
+      "acceptedOriginalSha256": [
+        "9366796077df66584c9892c353ad836358aa0be70550c144d6a1d06ba5840ae6"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/fcandorra_esp.ban",
+      "size": 2362,
+      "sha256": "28f309aa5e63fc95bc0bc864b7d190d10220c85388ef428404f4921f5b6109bd",
+      "acceptedOriginalSha256": [
+        "438df27d23017debf0ade6b2863efc3852981bc420359e52ef256a5ac7969e9c"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/fcgoa_ind.ban",
+      "size": 2047,
+      "sha256": "f583817df1279eb7edfa09f83aba68952d2ed5c00f495bffeb03dd72b8dd6f67",
+      "acceptedOriginalSha256": [
+        "31623ef256df9793bab02c7403486484f249932431c0969a6011138b4b7e5db0"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/fenerbahce_tur.ban",
+      "size": 2462,
+      "sha256": "847677c99923ca6a1b3a9a3a04e9dc64f38709c789e1f336e71c592fc31a46ce",
+      "acceptedOriginalSha256": [
+        "9f709f7e8304ac34b0d7fb0f5d82b00c95058922afe42675f494b166691fc36a"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/ferencvaros_hun.ban",
+      "size": 2969,
+      "sha256": "36b232d4133c98ebfaad30b0f8a9b78e25824e0513654f4a1da2219e2294e290",
+      "acceptedOriginalSha256": [
+        "ed671229eb7cd14146e1e67736a28846f1815b7a26e1377ac5ea37f9d50a9aa8"
       ]
     },
     {
       "operation": "replace",
       "path": "teams/ferroviaria_sp.ban",
-      "size": 1940,
-      "sha256": "038c88889bb275c12e354fc5ebf9a47f31592e89c8481d0cd006c45b20525307",
+      "size": 2589,
+      "sha256": "833751b98280f89563f2ead66c94a8cae953147fd17bd59707031fcced9d01b4",
       "acceptedOriginalSha256": [
-        "34ac5a9ad413136ee30aac7862e626e4ba692315d9947ca2e40d48ecfc730e0c"
+        "17003c1669e95c845391fd46cbaf0a88d787f4fed788da67dfceb4a72d942905",
+        "34ac5a9ad413136ee30aac7862e626e4ba692315d9947ca2e40d48ecfc730e0c",
+        "038c88889bb275c12e354fc5ebf9a47f31592e89c8481d0cd006c45b20525307"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/ferroviarioce_bra.ban",
+      "size": 1766,
+      "sha256": "8d203ba6a7ed4aee30549eff1909d18440d6d65ac62b5c9fec8d91b7a26d0f0d",
+      "acceptedOriginalSha256": [
+        "0d60f6a3124e4248e69153dc86f1b6aa4e6fc8163cf284862cc32bb9972f327d"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/feynoord_hol.ban",
+      "size": 2374,
+      "sha256": "bc61d5dfb99b529ce540f3e4fe870cb5830684ed84d2e479fc2433e004b915bf",
+      "acceptedOriginalSha256": [
+        "13d4829df91e8317e69f9b33113ae64310944f43cd23349a15dc1191b02eb593"
       ]
     },
     {
       "operation": "replace",
       "path": "teams/figueirense.ban",
       "size": 3055,
-      "sha256": "217fadd45477a8b3d21b23804c089838b626f1265264fd690b1462b6b895a80a",
+      "sha256": "a5a5457619de57c6594461f4abc62cb30a33bc7e8b5a38ae82cebd2d768231df",
       "acceptedOriginalSha256": [
-        "a9b31c61381f82a6d29fa73cbc939eb153875102a7b5b18fac249e87bb658c90"
+        "a9b31c61381f82a6d29fa73cbc939eb153875102a7b5b18fac249e87bb658c90",
+        "217fadd45477a8b3d21b23804c089838b626f1265264fd690b1462b6b895a80a"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/flarj.ban",
+      "size": 2273,
+      "sha256": "e8a27fcc03fe4487338d772ed2808622af641819916242a4a53b46a604a0501e",
+      "acceptedOriginalSha256": [
+        "7a73cfe1b61b94c76a64e92143ae4a6ebe74ea2e9752ed8365e6b5e312d5bd9a",
+        "511f6bfeaeacc1c05ba2cbe7823185a844b67a5a1bbe219a1c2131c4720e6f37"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/floratallinn_est.ban",
+      "size": 1985,
+      "sha256": "ba022d9748e0b682958dc66120f3924d73b691f42b43453a4d94d4d608b9aba2",
+      "acceptedOriginalSha256": [
+        "1f82846592deb83d482bae483197da9b4379a63925a79df951b4956670c9c61f"
       ]
     },
     {
       "operation": "replace",
       "path": "teams/florestace.ban",
-      "size": 2538,
-      "sha256": "427e368935bbe95e850db1097f419e7d3e86449bb3c0a702c6ba754c275ddc2a",
+      "size": 2793,
+      "sha256": "9cd069e64fc52828ac08592a3b68175de4afea851cfa46a3e6c4c4ada9f4055b",
       "acceptedOriginalSha256": [
-        "ee07389feb4b940254a0921c7f4881a67c3c8bf239d5b571a9c9e3e065bb7667"
+        "ee07389feb4b940254a0921c7f4881a67c3c8bf239d5b571a9c9e3e065bb7667",
+        "427e368935bbe95e850db1097f419e7d3e86449bb3c0a702c6ba754c275ddc2a"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/floriana_mta.ban",
+      "size": 2039,
+      "sha256": "fd57e6813c27495b20dd4bb01e93bb230d723874f66ee1129dea8cd73d235e84",
+      "acceptedOriginalSha256": [
+        "5f3cdb0826ea5616519675b51cdc41779ee35c2481f828581e8110870de26f56"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/flurj.ban",
+      "size": 2797,
+      "sha256": "f06df1663be4627eaa174a948aeea9f087e412aa7452cd13849033ccbb98e94e",
+      "acceptedOriginalSha256": [
+        "1d6e1c6b68c7f27a0a8b0817723faffa525f22a52b0a2ab1f746e4d2ebee2b0c",
+        "dc67756599d63b2daa59aebb734ad4e6876e91bd8f2d1b22ced9e1dc96fedebd"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/fortaleza.ban",
+      "size": 2662,
+      "sha256": "c23f7a3be8aab46035318b007b8be11550b59366cf9506c16f736f4870439418",
+      "acceptedOriginalSha256": [
+        "d458e162f42f4caa592d82cb7f476214ff6791f528857a3dcc7b9465e166bde3",
+        "b904a27673817db3726e3a6f5d6ae8255d40a4dc54aaa3b956f3f9735a88ab44",
+        "923a2fcbc77f912d945e83ff9d4f0d726a2800abd8ffba4780fe40eb0f53e7a6"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/fsvfrankfurt_ale.ban",
+      "size": 2275,
+      "sha256": "f25de4aeb2aeabaf7c2ffdcd762b8fcca071a14a09fd04d47abddbcb20ae8fb6",
+      "acceptedOriginalSha256": [
+        "bb084d5a2d80939712012a0e253fcc925a590ccfdf65d3c5af30808bb7b68073"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/galatasaray_tur.ban",
+      "size": 2734,
+      "sha256": "6af06ca0f7a54bb4f673d918c84cb63f3f0a8f5e7f1d63548056dbbcd120572d",
+      "acceptedOriginalSha256": [
+        "c76a3982300f49821c5654e986b4781da2510a57043f12a54a3023feac8a3a0d"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/genk_bel.ban",
+      "size": 2531,
+      "sha256": "d23b228869218dd634d3dc4dfe53d4512ddd8253d23125bc2a18b387b68f2834",
+      "acceptedOriginalSha256": [
+        "72ec49012a10d5fd0cf5abd880fb5b905286d601372ec705f6e052a88c18f8d9"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/getafe_esp.ban",
+      "size": 2163,
+      "sha256": "fc4b52c17d064cb356d57b33197d1e1b0ac1bf0dd4a0d4fce17158ad365d56c6",
+      "acceptedOriginalSha256": [
+        "508306d12555169fed3ac9d9ae0668bccaceffb5ef8cb57ce1c8192aba1298b0"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/gilvicente_por.ban",
+      "size": 2471,
+      "sha256": "3a5b70e28e0576ae853428d01909238d9ee5e4944eef34ba4a731b2a1e7c9563",
+      "acceptedOriginalSha256": [
+        "922c8094ae6ebce3e2235d2fe49759a98873afda7ab83532b866a766e89465a3"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/gimnastic_esp.ban",
+      "size": 2027,
+      "sha256": "071e4f879b4e942cf90d465e56aa3c5bfb606594b37dca9c2b51d59d47ef82f5",
+      "acceptedOriginalSha256": [
+        "be3f99685b58e5d99bb72c1112abb28809219e63807d2daae26ad407cdd14448"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/girona_esp.ban",
+      "size": 2236,
+      "sha256": "b9acc9cfebe8334b7f4e9367ed58e375820c1c37c47915f152a4aca676e714c5",
+      "acceptedOriginalSha256": [
+        "53e6fc89910761c17f45f074e850137fbcb137cc9196708b1f4ced1b30535066"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/glasgowceltic_esc.ban",
+      "size": 2472,
+      "sha256": "a480bc9b27c59a3e356d180776060f5bf2780e70eed6f09481f6b5707f000d7d",
+      "acceptedOriginalSha256": [
+        "047eb560cfd7aaaef43bdf2a292cfa379527cdf3f6669806114c092db24d7bd4"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/goias.ban",
+      "size": 2514,
+      "sha256": "ad90a8c694e2ed50bfe9e77d74938757a66d9a62414c15413e55fddd8594bab9",
+      "acceptedOriginalSha256": [
+        "7a6e01dceac0b62e85b8081dc1d6650c92b4e4ac27913177bd482cbea8b02aec",
+        "279c4682d996ff5f25453e5e8f371b7b08a72b062d2108f01751ba861e360b8d",
+        "bbb1e0ff2747c10c0f1f0c16529e588c7a1374798db1f40b08ae0275b0cd48e0"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/gotenborg_sue.ban",
+      "size": 3513,
+      "sha256": "ef5faba08dcab4f4e892fdf50b93922b9ad6a47184d011aafdb549045842a6c7",
+      "acceptedOriginalSha256": [
+        "7a2f9434e7cb8a316d77537a105eac8c0a63cd94d0344834aef64989f2afac76"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/granada_esp.ban",
+      "size": 1854,
+      "sha256": "1fe29b8073654e5a483c41204b526c3ebb6c49f90ccaa400412c5a51e9d6fe25",
+      "acceptedOriginalSha256": [
+        "eda0e739d7a0fccb3e8e015357f19d2720c3890b8364e55b8758ac68750b8f5b"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/gremio.ban",
+      "size": 2714,
+      "sha256": "163534df66ac76449d3d4cc8b52d1edf03162dc065675d88c92cf632aa6a0f21",
+      "acceptedOriginalSha256": [
+        "76366417ca9ae459cfd3ddbb7cdc9012c03c3ba8287437fca527d38f05b97f27",
+        "81c250fc854ff2c178f49716dcb4a87dbdf96edd0fd329d8df5e5da05ab73ee1",
+        "6a767dac3a72b91eb9b324a3d6c41bcfd37fb636b1f5e8c943e5a9ddc595035e"
       ]
     },
     {
       "operation": "replace",
       "path": "teams/guaranisp_bra.ban",
       "size": 1972,
-      "sha256": "5d51585da41019236cf5eaac7bb042b51bb10a05fe71150bf3287ee3fb4c402b",
+      "sha256": "cec66fbede03bc8da09f3b1cc8e467ebaa0202404561f3b045d1b0a4905df5b6",
       "acceptedOriginalSha256": [
-        "f453dcd8caa6680865ac97c03f4785870a42dd580d02ca75c06df70b27fad31c"
+        "349ff87c15db8813d77d2a91609bee0b72411d9a3b8cb650c54a045894991885",
+        "f453dcd8caa6680865ac97c03f4785870a42dd580d02ca75c06df70b27fad31c",
+        "5d51585da41019236cf5eaac7bb042b51bb10a05fe71150bf3287ee3fb4c402b"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/hajduk_cro.ban",
+      "size": 3863,
+      "sha256": "787ae5acb709b10abf466775c867b10df1df5e1f7ac24cc9743c583be5426a40",
+      "acceptedOriginalSha256": [
+        "ba24363540beaf9d85c2ce5d1b8b4bb4da9e160660e153e32e23151cd9835fab"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/hammarby_sue.ban",
+      "size": 3104,
+      "sha256": "e9a352abc5c0c87f5531d81cc1a7608c82d1e9e74029895e9f2b040fd3b3a35e",
+      "acceptedOriginalSha256": [
+        "5f1614bf11aa99f5856f8137d057eeb063204aa88d3aba3d1d466a113a20697c"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/hanoi_vie.ban",
+      "size": 1809,
+      "sha256": "4641564859f3a3970cab9b8b546076267c5c3813e2fb1e01459105ee4d770b35",
+      "acceptedOriginalSha256": [
+        "63e78f1977c6d5d6f2e3a7ef39107ae06c4616ac6519350d1008d99e3ce95c12"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/hapoelbeersheva_isr.ban",
+      "size": 3316,
+      "sha256": "589d08b54f5feae607a870c6f439194b508d24956c868ee1778c1ebe7c1e7217",
+      "acceptedOriginalSha256": [
+        "7ad145d611b3576128806c84d99796c599eaf0fb7a04044ccfefc3a20be94de6"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/hbtorshavn_fro.ban",
+      "size": 3296,
+      "sha256": "669b96c16d226ae3568946aabd9d04b2b9bfafbeb6de3d5fea38f90b1ae5df8f",
+      "acceptedOriginalSha256": [
+        "96fb50f0671c4da2570830c823d0294e15a79b0f78675b6f1c2aae9510706bf7"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/helsinki_fin.ban",
+      "size": 2388,
+      "sha256": "d808b06db5b8c6de142a33c6b8570ce088b32deef6540374d7a0719dac376c04",
+      "acceptedOriginalSha256": [
+        "76f5b55cb49915c74381df6966e8cb111d269255c567145357e0a7676d965485"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/hibernian_esc.ban",
+      "size": 2367,
+      "sha256": "4eb644329d6e9fb1b7d929a89538f7d9ae081c2022f1cdbc248bb2f6f3ab430d",
+      "acceptedOriginalSha256": [
+        "4514807bfe771be0a566cfa671dbb4272c667f6bbe31fc5ff1a99e8695a5cdfc"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/hibernians_mta.ban",
+      "size": 2050,
+      "sha256": "d632720480dabee7c9a3af7a6d485f0685f2624a8bc9924feb382ceb64e9e98a",
+      "acceptedOriginalSha256": [
+        "92896ddab14755ad1bbbb7e9c5ca95f63127b85355ed7b6fa6892ae76e187c41"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/hoffebheim_ale.ban",
+      "size": 2324,
+      "sha256": "51dc0c890a556b8552b31cd8ee130efb42f50f1f3860c87f7fc853d06393b29d",
+      "acceptedOriginalSha256": [
+        "89e6fb87ce22ec371ffac1fdb76e82057f050a870e577a8d1690e29bb8735c00"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/honka_fin.ban",
+      "size": 2939,
+      "sha256": "ca327e45029c1362f0f30b56bb7975de6c5e8a06c32b9a34679c05f0bdacea58",
+      "acceptedOriginalSha256": [
+        "d780d02eca1904b8b772059bd9e645cbdf31131d3b7fb3beb0742961720eb9fe"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/huesca_esp.ban",
+      "size": 1715,
+      "sha256": "1f69405099ea92ef82d6bae8d07e64eb642cf5d62e255fb9f2752fb13e080d4f",
+      "acceptedOriginalSha256": [
+        "96582481a0ae946d45e90c48c5e7286410e6d3cbd94d37f494ae86f1d7a40d4b"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/ibiza_esp.ban",
+      "size": 1763,
+      "sha256": "92b4eeac6804b2c6974eaff929ba229742f0fe7fa78e4497f7a24203235c4c9d",
+      "acceptedOriginalSha256": [
+        "0e498ca4edb121a30cbfbe845f77e8e0190c95b311a88f1c9b4a9ba8f9f4d9c8"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/ilves_fin.ban",
+      "size": 2969,
+      "sha256": "036f30ca3a07d27bff66828d341b7850fec5ede449952ec76fe689c77d1b7c31",
+      "acceptedOriginalSha256": [
+        "2792f7ab93abec9d1646ea5b838cc226ee472da21d91a8337b7bf50d68905219"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/inter_and.ban",
+      "size": 2858,
+      "sha256": "e3eb5d1509fe37fd96f7ae36cfad63dc96b95675b66d8debc99645443247f78e",
+      "acceptedOriginalSha256": [
+        "a60856dc807c720c78d4b5baa6586430702f9897ca270be4afd15ade16a5dcf8"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/inter_it.ban",
+      "size": 2142,
+      "sha256": "ae05b5007d3d757d7bf9847c066340dde45e3d07542fdc6e263b8a489e13ca29",
+      "acceptedOriginalSha256": [
+        "0661f78b36b98519d1cce58500b6b47c080d0dc86aa3e1baca0f221a6a7129e1"
       ]
     },
     {
       "operation": "replace",
       "path": "teams/interlimeirasp_bra.ban",
-      "size": 2946,
-      "sha256": "e3601f4bf71f27d01f2d524b33356c71c856e5c5bcf940e4733bef4d3e12130e",
+      "size": 2937,
+      "sha256": "e449c6ac8f6009cef159bc00011e4e85803794a3e77ca211d5ba149b6cf18954",
       "acceptedOriginalSha256": [
-        "030f1e1fed2c9f59d1cf429ed1eb5d96ccef9bfc27f31be2518ed88821725771"
+        "69fd975b26948690ae9f970296a6b2a6007a7750f69da0bdc7ec049cb344c3a7",
+        "030f1e1fed2c9f59d1cf429ed1eb5d96ccef9bfc27f31be2518ed88821725771",
+        "e3601f4bf71f27d01f2d524b33356c71c856e5c5bcf940e4733bef4d3e12130e"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/internacional_bra.ban",
+      "size": 3132,
+      "sha256": "61eab87e3ddf9f8b676bc88c632b056c291022f3a7861f7c7b9884fce87ef165",
+      "acceptedOriginalSha256": [
+        "1c3387d720175f7f1c04dcf67cb0a568ea61bd31b980711480f79648183fd229",
+        "e84354ee711a0525ee5ee7ded9af4578391ff372aac4b0214b14b5b6ee538b06"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/interturku_fin.ban",
+      "size": 3445,
+      "sha256": "3385a653d820952744895c4524e32faa6d44787572a1c7127914f8189d5dfad7",
+      "acceptedOriginalSha256": [
+        "692e98b8ee852783a538809aec86db490e33a22eff557049549970496c3bfb07"
       ]
     },
     {
       "operation": "replace",
       "path": "teams/itabaiana_se.ban",
       "size": 2743,
-      "sha256": "cdac13d2c8ff676fbd996f407d9240ba9b8daa08083490c2971b501efd6f7975",
+      "sha256": "66fde9e6fbaf52c33aa65168093686e296649bfb5cee40fedd209515619a5d44",
       "acceptedOriginalSha256": [
-        "9763bc1d273c60bf33ec0440eb8bbd7f054a1a79e59b41a37a76925241689e89"
+        "569c54bb463cfeecefc694453bb26d3698aff479c54fe7ecb322ab478aee8027",
+        "9763bc1d273c60bf33ec0440eb8bbd7f054a1a79e59b41a37a76925241689e89",
+        "cdac13d2c8ff676fbd996f407d9240ba9b8daa08083490c2971b501efd6f7975"
       ]
     },
     {
       "operation": "replace",
       "path": "teams/ituano_sp.ban",
       "size": 2375,
-      "sha256": "71e95e0af9323c80b2a02dab06f92f637775cfb16d6164488a31a73ef5f7edb6",
+      "sha256": "990d6de118633b81ec31e805ac4998d4281299a0a8e29eb544e90f07a395e965",
       "acceptedOriginalSha256": [
-        "96220a9871eecfe75467afca2c8768705d691f5239f0186af3ddaf278d69ba61"
+        "37869cd680756a5beb75a8b12b3ad898917404948f0546ce2faf82052cb79c4d",
+        "96220a9871eecfe75467afca2c8768705d691f5239f0186af3ddaf278d69ba61",
+        "71e95e0af9323c80b2a02dab06f92f637775cfb16d6164488a31a73ef5f7edb6"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/jablonec_tch.ban",
+      "size": 2471,
+      "sha256": "fec693a07768d68b6fbb1275677089a5bcc36df5f408e7a033f0adcbca49d094",
+      "acceptedOriginalSha256": [
+        "bbb5d560afdd2aedd0c81f2776bc40564d62b504ea6c5ade1d7f96a05ba292a7"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/juventude.ban",
+      "size": 2751,
+      "sha256": "28544e8aafcc1317f6a95900e61529740b5c80d4fb76536d8f319b137c23ec23",
+      "acceptedOriginalSha256": [
+        "8aa0d733f9e776ca1954728211004dcd7f6313017d10c2f9a505445fb9610cd0",
+        "c65b906f858d6a3fa64e02c448e431e68e6d49de240be307940ea169648a796f",
+        "8b19a50c19aed954f6c25526af89bdf6184ebcd8cab11595caf509d9f888014a"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/juventus_it.ban",
+      "size": 2470,
+      "sha256": "52b92f64521bb548a616a9d2f69f3b75fd4efe48f04eb60a3a3844f61073e42d",
+      "acceptedOriginalSha256": [
+        "bed85c7a04efc45e1f8ed1b7c22429cc8b0075108d1815f39648ea088a4f299b"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/kairat_caz.ban",
+      "size": 2153,
+      "sha256": "d4803a1866b00af5782330a4183639728c26b89488a699525e4a062911da7386",
+      "acceptedOriginalSha256": [
+        "5da607ba59c5bc4dd007bfcc1f5eff3add3fa3fad2891b973c1c7ad6ecea0679"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/kaisar_caz.ban",
+      "size": 3094,
+      "sha256": "da9c5b49b28843c2d90cecb83b98d2f4f099c9f008361f24fcd59241603c4485",
+      "acceptedOriginalSha256": [
+        "d39d13ac637b95403fe8eb64232ac73c3e40265e61611d74315eb8634370106c"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/kalju_est.ban",
+      "size": 1829,
+      "sha256": "c8a080262e1e97649d481be7837a9fe89ddc511c03b773f7e88e7cdb96f40ce5",
+      "acceptedOriginalSha256": [
+        "1dcbbdefd3648a06543d77434c65eeb7d051ee62824e223fe50e714eecad7d40"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/kauno_lit.ban",
+      "size": 3376,
+      "sha256": "40eaffe59760acb1bec4d757bc74d7e237758654d9f11d481f1886b125a490d3",
+      "acceptedOriginalSha256": [
+        "db9e4700644fa29bef18cbb5158c4b0daf28e095cd01d3eafcfe49a25c227068"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/keshla_azb.ban",
+      "size": 3486,
+      "sha256": "70143624cfed95a9564578735d8e35e5859655a1b328b0139b7747dd61b8d797",
+      "acceptedOriginalSha256": [
+        "4e0b0ee8c3f0ad0a896eadc1ff4659b07f4c5beb1fae39d57cdd8af563820aac"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/kftirana_alb.ban",
+      "size": 1975,
+      "sha256": "83b2e1bb328f9c23623626b77b661c5c0d880ef07dfe953d5149387eb7757032",
+      "acceptedOriginalSha256": [
+        "6a2f85f3828dba496ffab9af8ec295becdbf6d1fab5d5e1322288ab310e11a03"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/klaksvik_fro.ban",
+      "size": 3567,
+      "sha256": "9e8e6385170ad560a10e46d1394cb3e385fbc23d136fd97f52177ad22b3da39b",
+      "acceptedOriginalSha256": [
+        "f5f18b423b6d2bfcc4170c9b67cc2bbcdc888031f783416f11caf8664fcad074"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/kolos_ucr.ban",
+      "size": 2429,
+      "sha256": "06273ad954383057956bcb26bf6e04795de24ab0c977948a58b540a45a76f55a",
+      "acceptedOriginalSha256": [
+        "766eacc2596f724253d412d865a7be81296e8687eb3eece9d0ec4f6c2e870041"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/krreykjavic_isl.ban",
+      "size": 3144,
+      "sha256": "3c1b466fb2e5157df7177acc0ab02efc87bde287e8752c84d5da9039a2b9df0f",
+      "acceptedOriginalSha256": [
+        "030cde8dd8d2b2083425bb8c09c8d23a1e607405374e4a7dbee7716b940a7a8f"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/kups_fin.ban",
+      "size": 3666,
+      "sha256": "6acb134c2a49b092a233d012351880ca4fcdd2fdf00e6e39dac4172454ac3f99",
+      "acceptedOriginalSha256": [
+        "3c4db4f1d14e457f0dbf1f8072f69c3b4dbf2b4a895014739002530b59d79a1d"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/lafiorita_smr.ban",
+      "size": 1947,
+      "sha256": "8669871c4fafd41b4642993904606e67409e885bae9cc9cf14d3f0638078be74",
+      "acceptedOriginalSha256": [
+        "56e0ad709d66383e9c4c9d73e2aef31bc36b44bbe285763ecfddf07d5bb8de30"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/lask_aut.ban",
+      "size": 2221,
+      "sha256": "b82377b50479264695ab6309afeed32319efab03a975a7c825959456a6c031f1",
+      "acceptedOriginalSha256": [
+        "34fb1d41451f9245e318812c3f5274a858ae3a16783ca99cba74058336f111f8"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/laspalmas_esp.ban",
+      "size": 2503,
+      "sha256": "8d277a6b9579a7a06732b80dac96172c84eca0e3b94391b3c4270f8b0443326c",
+      "acceptedOriginalSha256": [
+        "58d4f5fb0761e9cc1de8731e8f810ac5bd707ad07968173e7e3c99aace2a05fc"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/lazio_it.ban",
+      "size": 2773,
+      "sha256": "5559a2d29d7b4c1d3a6ac021994a9b6b518b08f2e765e844b032b7f88d37d654",
+      "acceptedOriginalSha256": [
+        "9194465aed754c8f826a94af899768cde965eb5c807714bdae54340045254002"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/lechpoznan_pol.ban",
+      "size": 2367,
+      "sha256": "df64b0a8c65845737415c7386305537d0c72dcbee37c72e3fd3b564bb2527ffb",
+      "acceptedOriginalSha256": [
+        "8a7984dcde493a20ee9755d25755d90faca5bca5fcd85c119dbd47dc3d41d91a"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/leganes_esp.ban",
+      "size": 2040,
+      "sha256": "ccd6ebe8bc49651bd86a3e7d292a5ce0e5851266e411fa13e6425dda4463a4f2",
+      "acceptedOriginalSha256": [
+        "07d58aa31d1576ad6b4af48f6cc32fb72df1f54abd9c59764e8a79a31022e7b9"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/legiawarsaw.ban",
+      "size": 2732,
+      "sha256": "2f4fcc8eb8866119932e35c4eb61677b058074909ca7642ff0836c184606d116",
+      "acceptedOriginalSha256": [
+        "82b1438dbc8e7ade35ad12d86b4694abf91097440d78ebd15a7db5de957cf94e"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/leicestercity_ing.ban",
+      "size": 2112,
+      "sha256": "78a6909852aedb2296ad0cd259961f226e828c67ddc39059dae03090219650cf",
+      "acceptedOriginalSha256": [
+        "d22835ecc99d7a1204e048b6eab3068c923445774978caa0f71dc7ea6f214ac2"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/leipzig_ale.ban",
+      "size": 2479,
+      "sha256": "1657b8f9288db34bfc11694c61e388cd9445db6faa581da31c47545f056f0a81",
+      "acceptedOriginalSha256": [
+        "a61b6015970a58a99e0e79c9796d505dfbc759ee9576c2ef7cfa24651ea02406"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/levadia_est.ban",
+      "size": 2508,
+      "sha256": "3957a2e61b0a922f0eabc5a93b68f69df014887f2696cab34fcea78dd485c982",
+      "acceptedOriginalSha256": [
+        "10017cbf1970cdcce9b23b4fb107220a7375e203cbb086cac216c4f83d7545ee"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/levante_esp.ban",
+      "size": 2088,
+      "sha256": "1f25b28247a0eefcaafcbbbee05606cef30ef6f9eb27156ead8b800c420a2b3a",
+      "acceptedOriginalSha256": [
+        "79358fceae9f810d68847ea7fa1c17eb240059b3325b3f96e47af7c30e3df06c"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/liapi_kos.ban",
+      "size": 1910,
+      "sha256": "0c19257faca29350c049fc7acb9e08092eec30cb3952bb5f1955d50dee2eb767",
+      "acceptedOriginalSha256": [
+        "6348a304e1e498caaa257460a8d3353199bbfcc925b2be385ccf63ec73953021"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/libertad_par.ban",
+      "size": 1935,
+      "sha256": "a3dbd8bfefab9529c0c1d6387f157301414bb132dbf45bb53fc2c745a93ec1ce",
+      "acceptedOriginalSha256": [
+        "45f767f16735ae05c6080f7a89173083a35e285a2c2329c612a781bca5170cdb"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/liepaja_let.ban",
+      "size": 2337,
+      "sha256": "fdc88b03223199aed4456c68d5ae13a439dbbcfea438858101b5215f53030930",
+      "acceptedOriginalSha256": [
+        "87fc27b909bf3dd6e13f21757a051f74b70779ca7fb2666c57bcb6e5997e9b73"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/lille_fra.ban",
+      "size": 2260,
+      "sha256": "3158285692c5b171087bf93013fba6b25251c51b16b724c55162dc52e25bf439",
+      "acceptedOriginalSha256": [
+        "e8a82b8126977a216cfd24a23d9bc5207f6c6d784435a4238c317b1fb804273a"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/lincoln_gib.ban",
+      "size": 3315,
+      "sha256": "f178b53d2d89a88654969148c78bb353048050989d5fa623298e5dbacc8f807e",
+      "acceptedOriginalSha256": [
+        "f8a47bce6fc5156bda1f5d5d65de003f3e7d5de95d2ea596deb762ad72166920"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/liverpool_ing.ban",
+      "size": 2465,
+      "sha256": "8b0ad4ed835227696f77c99a3d48ee29966043c0fc4d25301f5bd07f09ea7854",
+      "acceptedOriginalSha256": [
+        "1a7deb3356626e2506188360befd018bb56717261756d67febeb8c02efdc95fe"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/logrones_esp.ban",
+      "size": 1907,
+      "sha256": "fd105c87edc2a7426d52b2df0d1d7ddc6f5d658a2e750ea04291c4673c7b71ac",
+      "acceptedOriginalSha256": [
+        "93171bd08b0f9b2439394d5a2ff14e3a178d4d05817dab929f9e42dc4617c7cb"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/lokomotiv_rus.ban",
+      "size": 2458,
+      "sha256": "565b79cf91f30fadd8607e78bab146417694bfad727d0c226b117bf6c9e7c932",
+      "acceptedOriginalSha256": [
+        "ce20a2053479fe9c153d6e2839f50624f2e0b02173f71530f266cc68761cbf13"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/lokoplovdiv_bul.ban",
+      "size": 2470,
+      "sha256": "6460b05deb44ca29e638960286b919459368a718cf79758fc81888f70795e70a",
+      "acceptedOriginalSha256": [
+        "edf0ab0c92485361e2e9d76e4395cadbfa8c65f184bd86123bb0c627309e1663"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/londrina_pr.ban",
+      "size": 3140,
+      "sha256": "12a2bcb457b9551152b4d0423c4f674483fed7c8b7261c63d80e28661d4495dc",
+      "acceptedOriginalSha256": [
+        "8ca8e53ba3e7bfd3c930f92ef52de0593fe71490b7bec4b93e50d3f25b02eb45",
+        "2bd726cef710f9680cc28ba8694483d9e992d2890ed8709c414c8fa49963457f"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/ludogorets_bul.ban",
+      "size": 2051,
+      "sha256": "b8a41ff2db0d66d14a97cd4e16fad60203136f7bfd06633e2d3b33d1aa348d05",
+      "acceptedOriginalSha256": [
+        "17cf4fee9cb4fbacaefd0eac0e74a23b18146943e1c296a8990ce2d15cd3307c"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/lugo_esp.ban",
+      "size": 1625,
+      "sha256": "1bee2ba6c2576fb83a7e4fd59dd2ee9b0dfe6def5107171d7d7dc0e48b6e2102",
+      "acceptedOriginalSha256": [
+        "35cc1ed95176c2e029d572fe7085dafdffb97209cab50a1ff279e615af50d20f"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/luzern_sui.ban",
+      "size": 2462,
+      "sha256": "07e0b027ad74d0521e3e1529865ac88fad379a0065097f4ca82e95811d9dbcc2",
+      "acceptedOriginalSha256": [
+        "255e738c2bc46db91f4e97a1b28294b63d7d4acb7f9a8dde2fa81d71fc907646"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/lyon.ban",
+      "size": 2453,
+      "sha256": "86dcdda5f622f890cd2b647b18a66047d6ac3ed24fe8f7ac69e3a336b817864f",
+      "acceptedOriginalSha256": [
+        "62cab40a262e79387876748ea80b29541d8e645ea7daee97e0289639d88314ef"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/maccabihaifa_isr.ban",
+      "size": 3756,
+      "sha256": "a3b0cfac881f93c5f6ce6a66f28856dd370a9be2c438e5994ca86ae82265e4ca",
+      "acceptedOriginalSha256": [
+        "9e4539fc81e19828a0eb2ba92713be6183163b0d99290868af08ed0c32ca55a6"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/machester_ing.ban",
+      "size": 2452,
+      "sha256": "7fcc74eb4ad4823ff1ffbc9deae316ee113edd325eac8103225d0bcd01a814dd",
+      "acceptedOriginalSha256": [
+        "834a41a3c0722f8d13e1768209223eeba61258151a09e3fd762b02260857a3fd"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/machestercity_ing.ban",
+      "size": 2135,
+      "sha256": "65a33ed8bf898a1b6e00ca9fd8ce75137d5df5c4b5b806b8165219f54accfc73",
+      "acceptedOriginalSha256": [
+        "b82af5d4f6e958db2b813c7351ab23e350e497adcb171a806686e99eceb4d7d1"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/malaga_esp.ban",
+      "size": 2438,
+      "sha256": "feb70e5052433fcb67c4112ad99911223c719d1baf945f7f9d2dcbe0407bb49d",
+      "acceptedOriginalSha256": [
+        "5fd9d8a5b90d506091f2d6d28c45a70a4d9c0ef17852616e833411dd4854b425"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/mallorca_esp.ban",
+      "size": 2309,
+      "sha256": "f7fb4a3a94579eab018b37597b674a067f581c6f8ab3d1c3732dfefe67d62bb2",
+      "acceptedOriginalSha256": [
+        "dba39a83d393badbcf34516fbc6c177bc298f83f898ad736d1e60a20bc4fc898"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/malmo_sue.ban",
+      "size": 2621,
+      "sha256": "477d4eabb0e34d293364e6c4bc069e0de4a2d90e04019d3248b47c2f7ebe206a",
+      "acceptedOriginalSha256": [
+        "f90466de7a30ad485ec0798d54900738e86a5c91e2b21f898008786b2074dbc2"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/manaus_bra.ban",
+      "size": 1841,
+      "sha256": "ea909e1320595dfb102a9459364aa43e4b0dc212673af5d60cd0ec2acebf4d27",
+      "acceptedOriginalSha256": [
+        "9403118ce1eeed49c468745c942ef8e6c319f0abbe7e5359d79b508b41779651"
       ]
     },
     {
       "operation": "replace",
       "path": "teams/maranhao_ma.ban",
       "size": 2123,
-      "sha256": "04ae85e72c5f3e1e6405d17d85ed8ed82aec50fced82ca2b286da299e740bb91",
+      "sha256": "8312614e4c8172d9f8a768c7be7fea50c2358e3e02ee65f8d84c0366f7848040",
       "acceptedOriginalSha256": [
-        "a3a2d72491596763d5b94cc65658b65fcd594aade4e057df76dc1292d28b9909"
+        "a3a2d72491596763d5b94cc65658b65fcd594aade4e057df76dc1292d28b9909",
+        "04ae85e72c5f3e1e6405d17d85ed8ed82aec50fced82ca2b286da299e740bb91"
+      ],
+      "allowMissing": true
+    },
+    {
+      "operation": "replace",
+      "path": "teams/maribor_esl.ban",
+      "size": 2231,
+      "sha256": "e15c3c1b59c2f71ab593640a783e6daecdd3be0d493d9808fc0573274c5c0781",
+      "acceptedOriginalSha256": [
+        "ffac016480145871e1ba4bea8ce84dc72b26c9aa02b54ef17d7ea8c70a7bc165"
       ]
     },
     {
       "operation": "replace",
       "path": "teams/maringapr.ban",
-      "size": 2659,
-      "sha256": "694149846b7c053204b115c8abec70badb8e78d997ccaa623177a745d0edcee8",
+      "size": 2728,
+      "sha256": "58598295c7a7357bbec08045a4305de9f24e2d9a38528c231bb93dbcb320d066",
       "acceptedOriginalSha256": [
-        "b5cabb703a21b491ee9fbe1b0b3e27e9c77d55fd0d81fdc243da75f2bb45d5b9"
+        "5840104a75049549609276608a4cf19bc3289f8bb9de8600a25c2a8fb716f605",
+        "b5cabb703a21b491ee9fbe1b0b3e27e9c77d55fd0d81fdc243da75f2bb45d5b9",
+        "694149846b7c053204b115c8abec70badb8e78d997ccaa623177a745d0edcee8"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/midtjylland_din.ban",
+      "size": 2382,
+      "sha256": "4f0b5a4e9ceca9f9e9056be464a15e263d818ea1477830fc11310d2f320a8e49",
+      "acceptedOriginalSha256": [
+        "95934b2b1afdbaf8096cbdccbe5f2b045606fb6555448f72829f04876eb691a8"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/miirassol_sp.ban",
+      "size": 2655,
+      "sha256": "776056dc8c8f812f581ec422fb64a7ce97d6142960f086710b641b819760b9d6",
+      "acceptedOriginalSha256": [
+        "1504e7e11eab25c779ef0c17371993389663f452fd479260fdee3e7a4af87b3d",
+        "ae76b4fdc8064e339ab3f5bef910d24fcb34a1e2fd66a8b566ee00486c3a9700",
+        "a01f506a7c1ef5230579297f4de0dd2a11b5d77c03397415470e94a5ecc3d618"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/milan_it.ban",
+      "size": 2425,
+      "sha256": "cc321c3270d4439e081af46230e6dadb80d3f1ecafd07c7283ae36d7a3c65ce3",
+      "acceptedOriginalSha256": [
+        "6da529fd591d30bd07a58041da6617f8173efcab1fa5645bd12f340602b547d0"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/molde_nor.ban",
+      "size": 2458,
+      "sha256": "11267c6655449f3ab38211ece7f1bc47f1e910dba13f0b86717f1e64c9c77760",
+      "acceptedOriginalSha256": [
+        "9fa38747ea4de513987b191d57e8e8cc275e0ed7abdb1e5aaee00a5582c960d8"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/monaco_fr.ban",
+      "size": 2106,
+      "sha256": "8a799207bcb3c80167e0abd378b1b23c20e7a95bd05cc8c96b239fa928259cbf",
+      "acceptedOriginalSha256": [
+        "7b5298acc059e99c8567697cf513b91c1624a8bd388abf25f8c902d48fceb10e"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/monchengladbach_ale.ban",
+      "size": 2539,
+      "sha256": "084bf573ab681ae17c153831653b202a0b41e0f605a17627c3c9760cf0673a93",
+      "acceptedOriginalSha256": [
+        "3a2a7b1a66c0275c400677c7ad60859418fcd7ca5ae8b7492c37250a6ab8e3a2"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/monscalpe_gib.ban",
+      "size": 2723,
+      "sha256": "bfd5e354a89ca9c741522dc55b72789f81b45af8e570ab5b50c429b2f77d97b7",
+      "acceptedOriginalSha256": [
+        "2bf303ca4e95331684d324636c1152528dc7327411c7a8176606bb4f856ebb0c"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/motherwell_esc.ban",
+      "size": 2354,
+      "sha256": "f8b3299e7b5f7260e26ee243ddf8eb94c6262664fe383ffd332fc5fd08364729",
+      "acceptedOriginalSha256": [
+        "6aa1163c2776dbacf4d1d91614baa7889fb259173109b7b4dc6e362447da9fde"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/nacional_par.ban",
+      "size": 1999,
+      "sha256": "4bbd1079b58b3380a5fba588c3c35910cf40b63fb04c08ea994a1c70575466c0",
+      "acceptedOriginalSha256": [
+        "3436ea5e1740df5932dd2c033f63fcd0ba7de3e7005487152600e1d0a83b34b5"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/napoli_it.ban",
+      "size": 2343,
+      "sha256": "fed230096cf4bb844e46f973de54eaf9386b8e6182a7eb1c3903d58d01c77637",
+      "acceptedOriginalSha256": [
+        "f7fa43d1ea4dca6301c47e5df1af94b6af58a74e20750249110175950744814f"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/nautico.ban",
+      "size": 2579,
+      "sha256": "69b73b7bd584d771254eacd0bcbd28cc38e7e6b305cf2673ec37677ba6652f83",
+      "acceptedOriginalSha256": [
+        "b2a96c5840dd82ac76c7c033e4a925f6e739c123ce86c38515dd8fe4f30eb2b3",
+        "05265c7b00c6afccde62232e9cef9cf8660ed3e1eed46584972978a25672d880"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/neftci_aze.ban",
+      "size": 2347,
+      "sha256": "9cca942368e3341e728156f6994e4a51c35d3723b0a6388b210d8ae29275aee1",
+      "acceptedOriginalSha256": [
+        "966743c0e20a0e4d30d62ea4edc110d5a81ae60049f695735b599e0130ae423e"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/nice_fra.ban",
+      "size": 2534,
+      "sha256": "4d115fdb5e0c86c4da3bb4e815132564b7cf641a4fb1bcd8601bb85a9cb77fa0",
+      "acceptedOriginalSha256": [
+        "7a3f8a7f0654f912fd9f6ac45ca38e767dc76c84127d578d4100651f250b162b"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/nkzagreb_cro.ban",
+      "size": 3764,
+      "sha256": "a7957e0e765589a2ed2feb0d591155ac96a86d0b97ed2ef508eab6deaf2351ea",
+      "acceptedOriginalSha256": [
+        "8d394bd3870250b67bf0059ad8ec68c8dd30d038721c818271f98b15256a641c"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/novorinzontino_sp.ban",
+      "size": 2798,
+      "sha256": "cdc045e378ee656f578334d12969f8a404951f9a54dcf171221104d0ef5d3b5c",
+      "acceptedOriginalSha256": [
+        "a26d63f66f4f11ec9b93486aef9d51a20153ef08c22fa464a375154866c88dfb",
+        "b08fc036e4a4d721a7c6d8fefe25a1573dd577fae133f2c44ddc98cac3a29e6e"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/nsirunavik_fro.ban",
+      "size": 2937,
+      "sha256": "6ac39b55be5dd9d7ad30d14eeaeb8944f64defdf4ce64c334d65a4913583269c",
+      "acceptedOriginalSha256": [
+        "4745ff9f9fce7241507f704b257e9a403ee66c18372c804d361c96260233acae"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/nsmura_elv.ban",
+      "size": 2708,
+      "sha256": "305cb475493af02dd12a9127f4d803bc404e7aa38676799b34e571410cc065d3",
+      "acceptedOriginalSha256": [
+        "fd27470b7cb35719e46fe0d434f9293afcbf029d1b028aa2796b9a4b5aa25a6f"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/ofi_gre.ban",
+      "size": 2747,
+      "sha256": "c66f8f54bd7099f17e7edf73db8c15020d65cb6d59ee40245508309c5486f8e0",
+      "acceptedOriginalSha256": [
+        "375fae7fc2e30e35eeb2c7b3345a9e28e442a355b3409a57377adee06d6cfab8"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/olimpia_esl.ban",
+      "size": 2589,
+      "sha256": "8a638b77f311089ee7a619e5b1d1e99fc13faa7e8716e98a55bccf71842da3a1",
+      "acceptedOriginalSha256": [
+        "8af01f41291045a5fb09b15265996ecd245a06fd02f9c3780a3e403013f299aa"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/olympiakos_gre.ban",
+      "size": 2559,
+      "sha256": "7beba048c6e56dac87499a96083fdc2a4bbb2040852c611aa25f943f1dc6ae98",
+      "acceptedOriginalSha256": [
+        "50d1276b807ec5259deefe4ff1057deeefbb6d808e1bdb695ff02d7e9f4c6e3a"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/olympiquemarseile_fra.ban",
+      "size": 2078,
+      "sha256": "6d80f17d944589cf8a86e6b35c6ed25e35e6206888c46afae86f2afcd0e9811c",
+      "acceptedOriginalSha256": [
+        "09f29570a549bfd15e8d98d33824957a60ba3f6e67e69746e66601e07bd1f005"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/omdurman_sud.ban",
+      "size": 1914,
+      "sha256": "7ab9d5e685ff6107461249334132d870c1e2fe3fd841312a51f45555ff9d26d6",
+      "acceptedOriginalSha256": [
+        "edc8246c040e576b9a459cc80746366fc3dd3f61d81c7792fed21b2c29592f81"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/omonianicosia_chp.ban",
+      "size": 2720,
+      "sha256": "deb50343527f05754dd6c36fd0af7209b0d6789484d31e81c9ef68f5590299b2",
+      "acceptedOriginalSha256": [
+        "5a0a53b1d19db6517c635c95763a10112157dae92313a8ca84ca9e486d9bbc43"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/operario_pr.ban",
+      "size": 2547,
+      "sha256": "1e56add9fd1bd1f7b61050ae320e1eef996ae04022d2b2138ee6bd1c3ea04b9a",
+      "acceptedOriginalSha256": [
+        "7721dd7657a7ca344c4feaceb9d74ef58f961f6c06abe5bdb2fb5baeda003c29",
+        "34b5c2b91499f7516f3eab6d60dca6dea18eb04de89541e88f86766b358a78fb"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/ordabasy_caz.ban",
+      "size": 3645,
+      "sha256": "d5815b61513a816c91954eb244f47c08ca1e908d8c6cb56a3807248b2b2478f5",
+      "acceptedOriginalSha256": [
+        "6c8802b7bf92acd1aad48c4628f3c8794b51c664366abfd3f15cc506e9bf2403"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/osasuna_esp.ban",
+      "size": 2172,
+      "sha256": "6a3ccb36a17de1f57a6a3b00037b1c43173a874b5454dc855deb82ca73ed4494",
+      "acceptedOriginalSha256": [
+        "c813a5da2ab2c91f47e2795b2f5e33c2edb7655406894c8930e882d056ec644e"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/osijek_cro.ban",
+      "size": 3342,
+      "sha256": "70548f9be1f266cea88d775a03475f9f959399a661beffb5f87c33ff00621682",
+      "acceptedOriginalSha256": [
+        "39c4349291bcf1e7c7f7746237262e662f5e09b7423471f088fe6069498d2273"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/paide_est.ban",
+      "size": 1836,
+      "sha256": "4e3ef5c5e5a2b263e69bd8862407d087967da3c35e84f9d99db7f8e80ab0341a",
+      "acceptedOriginalSha256": [
+        "1282186038973e8909872449f27645c94227f2544c122c6c89c96eb818d97207"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/palmeiras.ban",
+      "size": 2236,
+      "sha256": "c758856b6ffd5bb11d4d6fab3c9a416926c1f95703734dba35f07c859353206c",
+      "acceptedOriginalSha256": [
+        "8a8e76657513721fcfc93a10cb657850615aa45777c4a7155a67d8a8a8b13f76",
+        "1ba4ad8e394769810a095713d1c92f46d987c63220e8e56fb58055f9e74a5e0c"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/paok_gre.ban",
+      "size": 2864,
+      "sha256": "4f4cd362c764e4aff500ece69581d00e4bb8d2778525445719faff42c4613004",
+      "acceptedOriginalSha256": [
+        "a6782194af2d723dff4a422ce098b5cdf7dd86aa7a46051ddd2d14181b78813e"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/parissaintgermain_fr.ban",
+      "size": 2155,
+      "sha256": "711d8c1597a371b8199936c65e8e85a1f458e661890a044982ec2005a02fdf69",
+      "acceptedOriginalSha256": [
+        "c2597695b9a9c7cd081e358d66387dfa32519668ae8aba89d2d88aca82868f03"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/partizan_ser.ban",
+      "size": 2833,
+      "sha256": "0e8a72b476ecdc9094461e4e49015d4712c387db74cf5c677b3dff3c369d5ede",
+      "acceptedOriginalSha256": [
+        "0a609ece925df5af23f6b564858f420ab0a6e9f30c553786e9a72957c94d6a99"
       ]
     },
     {
       "operation": "replace",
       "path": "teams/paysandu.ban",
       "size": 2923,
-      "sha256": "a3ccca1bbf874ad2c780a5ddec60e470b8f2cf24b406a82caa07774777a5b703",
+      "sha256": "c8868d8c3350fe8412f495203ebbfd5be779407a90f8ad492013cca8e9f20a98",
       "acceptedOriginalSha256": [
-        "c27cce54c15dd0a37ca8c9954b6f933b81f99ae880341cc9d0caee301fe279c1"
+        "c27cce54c15dd0a37ca8c9954b6f933b81f99ae880341cc9d0caee301fe279c1",
+        "a3ccca1bbf874ad2c780a5ddec60e470b8f2cf24b406a82caa07774777a5b703"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/petrocub_mol.ban",
+      "size": 4112,
+      "sha256": "24aedfd626873ca9cf86a91508273ea6f96672cef38808f0da4941b5af81c765",
+      "acceptedOriginalSha256": [
+        "988a32aa2b40ead57a81a4f89eb5a27a707bf501d637f71d0f83c8fd007868f1"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/piast_pol.ban",
+      "size": 2203,
+      "sha256": "7356b4355494f3c524b5d6112564ff95ef4b0aad7545d4a80d9a9f49b8eb6587",
+      "acceptedOriginalSha256": [
+        "b29c9c3de4fb660a6fd52a2b4961bf4999ea2b131b666bf7cfda6c282cf3ceeb"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/plazacolonia_uru.ban",
+      "size": 2918,
+      "sha256": "90910ee1314f513956c352079c6d38c459cffa06fcf373783740eeaa2c32de6d",
+      "acceptedOriginalSha256": [
+        "4d0d028c619b034d04aa2353eb2329b95184dd45a66dfc819b3f4631ce3274dd"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/ponferradina_esp.ban",
+      "size": 1958,
+      "sha256": "3b84afa97257d67f88df8d47be1b3e798388f1c1ee6763fea209f3432a432589",
+      "acceptedOriginalSha256": [
+        "215b4d0e638a3194d36a9d58b6b56c4bd0e48dbab09529ed4d53dde071dea1f7"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/pontepreta_bra.ban",
+      "size": 2482,
+      "sha256": "fd48976a93b4e3805f77ba7f4e0b60fa8d64fbee25670dfbb36dac852def9787",
+      "acceptedOriginalSha256": [
+        "dba5ce3d16c8f8b9a112f7fcb3aa2dbbd2772188344ca6792ed092a2f5551494",
+        "61aed901ca8d87226f2e9325279be3ab28504121ebd76675ef68a2140a148287"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/porto.ban",
+      "size": 2506,
+      "sha256": "a2804ec03e74fa6717f98d5a034c8054456e6de091f7ae91c71247c55ae0388a",
+      "acceptedOriginalSha256": [
+        "5ebbaf56a6ffbfece6b034d0fb29d952c10945d7a88319c1faf53912a392f408"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/psv_hol.ban",
+      "size": 2443,
+      "sha256": "0db0b169f5368bea0a66745f6cb6753089dc83571bf3b310cd1ca018b42173db",
+      "acceptedOriginalSha256": [
+        "b9be8a062e7702e714be8805ba12fadbf02892235636b44e43bcaa724cd31ee4"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/puskás_hun.ban",
+      "size": 2622,
+      "sha256": "be63c5d210e5a7ea51f55c30f66b711f39731d00368af71abb32f300ba359393",
+      "acceptedOriginalSha256": [
+        "8e362365358e7a725c3cf0b922cad8a745b3f9ce532d21dfa6ce4bdd54467e18"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/pyramidsfc_egi.ban",
+      "size": 2006,
+      "sha256": "21d790332053439557b3300ad7ff80074157d85ac4827345f2c514d3a3e9c84f",
+      "acceptedOriginalSha256": [
+        "fff405b7c9908639618b3e2df54b7bd76c5576fbed8403dd46344979273a150f"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/qarabag_aze.ban",
+      "size": 2231,
+      "sha256": "dbf6d622384422e06f46d3c2c2c2bfae00da01e1ddcadc9a8002424875de670a",
+      "acceptedOriginalSha256": [
+        "abf75d84665b90b5a6431fa8e8b98b3392219bc8a2e3834d6c01a7e106242adb"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/racing_esp.ban",
+      "size": 2159,
+      "sha256": "606ec383ff1a799105c1cb0452ef5c8d7bb435122c604a27673ca67686f8be78",
+      "acceptedOriginalSha256": [
+        "e50680e97d136c065723b02f04047d0425092ce7b2724cc4c0a8569eec8e1912"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/rajacasablanca_mar.ban",
+      "size": 2061,
+      "sha256": "8f212ab90694e2fcbcf17ff7a4db8cb184b8c06600393c726df0944ed5bc4a44",
+      "acceptedOriginalSha256": [
+        "b006156f9277a6c091b725f417c915713aa20e2f1b35c8c99a15d473a5ceb5a4"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/randers_den.ban",
+      "size": 2540,
+      "sha256": "3c654cd0d842026d0521ec0409e1b08c9dd67330ada42f05ec1fdc49d8c186ce",
+      "acceptedOriginalSha256": [
+        "a0f7a0474a33b8196ff60be122a3ffd10150f5846d0a0b3066a50b29cd5c205f"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/rangers_esc.ban",
+      "size": 2416,
+      "sha256": "8290b0e655254477ba0e3ac66d197699746e015d6f0acc7b8b8b5a540ed2911f",
+      "acceptedOriginalSha256": [
+        "90c82b8beeb1e6259afccf94dd2bf92344c537794d1abc0e905655fb4c5e2090"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/rapidviena_aut.ban",
+      "size": 2532,
+      "sha256": "6eec4e9f8df26ad330a454bb2ca297aad0d06e6ced9d4d57643362ab865f6470",
+      "acceptedOriginalSha256": [
+        "babcc54d2220aec3540c2005b20b5195063b25d985a56119a3588be3c7144aa4"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/rayovallecano_esp.ban",
+      "size": 2326,
+      "sha256": "5124d7482974848350b0816ad8df45f56e5ffdf3862f1d8308b5c3be3f382090",
+      "acceptedOriginalSha256": [
+        "692607446f984df3fe2330dbf9c6f48abb810f9ce72fc39b9f87518161f2d813"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/rcabidjan_cma.ban",
+      "size": 1693,
+      "sha256": "ea7bb313ab2b0395ccbe122a992a5c507501518ba967a6a9635b5f0fea9779c8",
+      "acceptedOriginalSha256": [
+        "67841d09141a540f4b4c9a523e852e3bd61fba37f71b0590a37f9cb58c5e53a7"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/realmadrid_esp.ban",
+      "size": 2291,
+      "sha256": "853dfb33d47e009604a7352321e81859339885c3ef27b209876de53184546b06",
+      "acceptedOriginalSha256": [
+        "46056570d2a8c383263b036feadcb0d1932ca824996228a7173dc9ab13a91139"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/realoviedo_esp.ban",
+      "size": 2189,
+      "sha256": "5cfc51022ca381d9f2c9e625cb9818ca15797ae2631465b5600dcde4fc169f16",
+      "acceptedOriginalSha256": [
+        "4aa063b17372afbf5ea9d6d2e81f4fff2ba7eecfbb42388e788273e62414d09e"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/realsociedad_esp.ban",
+      "size": 2129,
+      "sha256": "b896eb8c821870ba0363c032ba23a988e9749fc5c33ba7c6bfc522e0be1558de",
+      "acceptedOriginalSha256": [
+        "cd22ebbe61ea3c50b5b221e1d788c406498d4304a56f70e984028681950b9fc2"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/realzaragoza_esp.ban",
+      "size": 1577,
+      "sha256": "4cc6794938859ff015ad40fb42150f087bc7ead68cdb0917909c3a39f90d5a0b",
+      "acceptedOriginalSha256": [
+        "8cb7d1efe2bcbf46046c87fdde4419e986ce3416b1d42e1deca777dcb23f4031"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/remo.ban",
+      "size": 2584,
+      "sha256": "145528206d7b7ec8938f95b3029f71705c48bcfff14ee0a0eb3048ae32bc02b9",
+      "acceptedOriginalSha256": [
+        "5221da9996d84bf0ddccc7af9898610729a1432baaf2e3f8218b05abbd7f45a2",
+        "363a32c6c9b48e6cb6c9d4b302334a2451306bd44eb92c6b4369811eba23e80b",
+        "205c65baae3ad24a14a7a3dd10d9ebb0912c5e181539ead996f7bfb745b6d369"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/rennes_fr.ban",
+      "size": 2223,
+      "sha256": "d5d409e96edbcd4f5a6e651fbcceccfaec62fe5d53625e8c4ea37facdd3805ba",
+      "acceptedOriginalSha256": [
+        "4b49b22d2be7ce1a33c217383a2fff37e47d4a1608967f3c6e412c3ff1cc9974"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/rfs_let.ban",
+      "size": 2568,
+      "sha256": "e177582f2e22bf7991daa9143ddb0a86d846ff6357fa2e01d020adb9f4ff79a7",
+      "acceptedOriginalSha256": [
+        "ca768bd5fc9254615a0f0b876cb5b7a753d26af81d204eb9863ad6b6ce502d76"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/riga_let.ban",
+      "size": 2546,
+      "sha256": "00935b7cffaf4fa4ee6a52d330281c7e6a68302486c330e37d5a9081cf3847bb",
+      "acceptedOriginalSha256": [
+        "f3dcf9d3c517351974a0aa0c85eaddd963a9a43c4e06602e6ff33e1901ac415e"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/rijeka_cro.ban",
+      "size": 3460,
+      "sha256": "5227c2cb6e92511cf436a2d38c3447fb514a3aa9b5b814772564f1dfdb8edf87",
+      "acceptedOriginalSha256": [
+        "3f85e1db0062cec45a711d3c4da4dbd00ec4c55c31960892656e813d0b5a220c"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/rioave_por.ban",
+      "size": 3886,
+      "sha256": "10c12c9f641bceb0962576294704e8c36de8dd5551f6063735ee4fe4d167aaad",
+      "acceptedOriginalSha256": [
+        "3be2c8454d4ca2494916f9e6e2d3d854787773d9ea39d58745a94e9d369b51b8"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/riteriai_lit.ban",
+      "size": 3090,
+      "sha256": "0c53719de2a38250bc18e37e962407df45d5858b3744e081a5c8e8e3099c9489",
+      "acceptedOriginalSha256": [
+        "1339322035ea9f0693235a8d52867d4efd0ec10f8cc376e5c079cc182b248996"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/riverplate_arg.ban",
+      "size": 1903,
+      "sha256": "c1fb32ca5a61160018be37ab54258494f501b2b17355e3c29c66d21d4f0c7300",
+      "acceptedOriginalSha256": [
+        "4bb98ad53ffaec5ba4a81f20382cb68227e89e53471d1904bf249a65899af606"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/riverplate_uru.ban",
+      "size": 2857,
+      "sha256": "756cf5406256f9f35f4c403b6faf7b6599013bfae546afef2a99bb6f8599cff6",
+      "acceptedOriginalSha256": [
+        "85c8308442995aacce0fcafba83816167c5bb980d5931762b8592a83d3e706e8"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/rivers_nga.ban",
+      "size": 2991,
+      "sha256": "a657df20134b259379faee1c6326e1858b7f8cbcaa6f8ec74c2cfa88173e921b",
+      "acceptedOriginalSha256": [
+        "10641c8988a8e90601b321378ba0163a42c45f451f7bf7b31bfc13b48b95586a"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/roma_it.ban",
+      "size": 2188,
+      "sha256": "791f172adc13a44a94da97c8310f6c32458d311325ef4f847199943939a8d633",
+      "acceptedOriginalSha256": [
+        "60ef1429221dcbcdd3bed67c69b64c9e28c585234ba98ae60382fe88ce809498"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/rosenborg_nor.ban",
+      "size": 2415,
+      "sha256": "ef1ab09bc133acaf8c15f1d7bf364f946e09c190c9d3392d525082ae65caf2d3",
+      "acceptedOriginalSha256": [
+        "e3b7daaa4767721fdfc08671f75a03c998b26afb804c541167848070fc445c67"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/royalantwerp_bel.ban",
+      "size": 2468,
+      "sha256": "6c589f24ec9284bb27dfcb61b425992cf9e54ec7cdd8c09f698c1796716978f3",
+      "acceptedOriginalSha256": [
+        "7df778787329af4d0510340ecd40ade298fca068369f32d5d7d7c779de8d7047"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/ruzomberok_slk.ban",
+      "size": 3482,
+      "sha256": "f44b057c35df2083173e26cc55b8e1f172c11f965515ea415bbb17447f5aaa99",
+      "acceptedOriginalSha256": [
+        "74419dca5b3bb424556474913d878d2b1e96e60717598455c824c9e1e4a24349"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/salzburg_aut.ban",
+      "size": 2585,
+      "sha256": "ce0b7e23425758d79a57decc81c703fb0d5bd5144b25d9a66b07d5adbdec57df",
+      "acceptedOriginalSha256": [
+        "04a31ed6365996ce6c31d0648ef4c95af38cffd99959d1991d254ac593510904"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/samapaiocorrea_ma.ban",
+      "size": 1996,
+      "sha256": "c05f44c66f9efefb8d3c5221ad18635f163f067e018fca2b79c8871a6f996f4a",
+      "acceptedOriginalSha256": [
+        "d7afd5714753b99e6bd89cd308d209bf472da3de04547da7465e046a83f90137"
       ]
     },
     {
       "operation": "replace",
       "path": "teams/santa.ban",
       "size": 2963,
-      "sha256": "c60a213da79225d368847c86815dbd547481fe3e0d4fdb013cb5145abb141ca5",
+      "sha256": "268a1c450b3883d52870840c31889645939c0304f9b773e73a53a4f526f4e0fb",
       "acceptedOriginalSha256": [
-        "cc1a18b60a5c526ea126fdd99ea8664fc44658492a778783a1eda0f20cc3a1ab"
+        "c08d3e7897f6dd6d384d19eba3cb73b962e03b5ca31ec4be32d28bd81568fd9c",
+        "cc1a18b60a5c526ea126fdd99ea8664fc44658492a778783a1eda0f20cc3a1ab",
+        "c60a213da79225d368847c86815dbd547481fe3e0d4fdb013cb5145abb141ca5"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/santos.ban",
+      "size": 2815,
+      "sha256": "821ad3be3158ab71e0922e6f9c28e4cc842e8fcac5cc151f12f8a229cd3b5366",
+      "acceptedOriginalSha256": [
+        "6900fe639a2a0fecd074fb2e9c5887a8d37d5251b9efdcd442c8ec10158a198b",
+        "449d26ba4d442361c4179b4a96a64789a251fe500ffeaecd2c80573199c07914"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/saobernardo_sp.ban",
+      "size": 2798,
+      "sha256": "4a40f70d3d380fe25b6cade1324880538eb41e36ec6a92270cd8028e3a77b486",
+      "acceptedOriginalSha256": [
+        "2bd6a604f93bbbdc1bba4b1630a451bda75f31c0d5ce6ccb0632978360f3783e",
+        "9ee7a8c2fedaf523008016b4c67b48ff89c80b04c8b5251eb4de5670cd3e9460",
+        "126deb81ad2d279ddf8a7b1552b683ba5fa49e93b36c6f11bec7b77e098a31dd"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/saojosers_bra.ban",
+      "size": 1798,
+      "sha256": "aec6000768c14d8e52fe8fecdfa5985fbd962930edfec7731e41d7ec03dd9712",
+      "acceptedOriginalSha256": [
+        "285a1c32fc7245b038a7c78fe9e4e1fe15cf9add7b11831be0de6cc7300d35c8"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/saoluiz_rs.ban",
+      "size": 1620,
+      "sha256": "2251487d711d24d62c993cf872704348da2247da1a6bee578b7e45a18fb2afc4",
+      "acceptedOriginalSha256": [
+        "5243487c907f93f5a5bd2554e6a729d7d8313c9c20d2c57e16558402bc6d27dd"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/saopaulo_bra.ban",
+      "size": 3113,
+      "sha256": "be62c49f07bbb4848be3346dc9df98a0d1a3dc9c14aff5d1643637d26c3a1238",
+      "acceptedOriginalSha256": [
+        "2c70c8f5be7ba32beb44794205c1714133529220e85e9aa7dfd3ea8f9741564a",
+        "399dc7729fcbdc6d413449465a34ddca51ef4a2867797fff76ca05caf6ac0429"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/saraievo_bos.ban",
+      "size": 1987,
+      "sha256": "2e6d65cb234e3ff3a6f7c0760aaacfa81e805402e050d5a1b3f6c7ad22825bc5",
+      "acceptedOriginalSha256": [
+        "2f59b7a12280e434e777fc5dd5783eb8f8b1a56bccfe2b9133defc494b72247f"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/servette_sui.ban",
+      "size": 2403,
+      "sha256": "08def6ce3dbbbb78ee9a2626bbe4492bdc4f6c4b5b4e4211e508f69ddd78c9d4",
+      "acceptedOriginalSha256": [
+        "1ae7d513e872fd4a0f8330bbe64284f9b5f12b1930e6775699286c1a6279cf48"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/sevilla_esp.ban",
+      "size": 2260,
+      "sha256": "121256453716e06166bf865465a0f2e4d9dc8691d0d90295081477873cc44e7d",
+      "acceptedOriginalSha256": [
+        "bb33aecb1b02d7b4a32c853243a70d1f2898044c046fb287570904e3f58f0c18"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/sfintul_mol.ban",
+      "size": 2826,
+      "sha256": "205f1d5d1a1b2150a6166896f97ec3555c67bdc23d5e819b94c42021e9d60fea",
+      "acceptedOriginalSha256": [
+        "fb33ba471743d29b5cb9e418297b0768ba59c62d85071ecb2d888400d97d8503"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/shakhtar_ucr.ban",
+      "size": 2803,
+      "sha256": "b2ddf8bbe7a049441c4df09eeb12219c47a0f08a893a854e44e36da79640ebaa",
+      "acceptedOriginalSha256": [
+        "21be719fdf7ab653085b78e02196389eb4ca7403132143794842655eb9be9e3e"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/shamrock_irl.ban",
+      "size": 3849,
+      "sha256": "d021e4dd79c1e84578b4ec9de8afab877e4047993ea7cf2ec11fc715015d8990",
+      "acceptedOriginalSha256": [
+        "fc991591146b6773d8915bca953d0b653c5bc77f9415351af11d5e54294e936e"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/sharjah_uae.ban",
+      "size": 3045,
+      "sha256": "ec97f99a82f962cb44c259dbd87ee33c40b0e69dba7bef0c902e77529480b71d",
+      "acceptedOriginalSha256": [
+        "ce14579dd2cbef25f3c4c1365d882cfe7a0aba3789755619c4d3349b1529b938"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/sherifftiraspol_mol.ban",
+      "size": 2550,
+      "sha256": "59f59ffd9a3069ca0527d1b3d5e6b37b33a6ddf39c00e3d352c4783547dcc424",
+      "acceptedOriginalSha256": [
+        "a535b713b1aae9dc71ec39776fb0b7591b23ed33519daf1dfd314a5c0ab7afd2"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/shkendija_mkd.ban",
+      "size": 1918,
+      "sha256": "b781210181196ec8a809342f735de8f33e19fc058d4d998345093b099bf3f7a9",
+      "acceptedOriginalSha256": [
+        "309662a1b0a93bedf5a3d107df288a747a934fcd09e9c671bc32698cc1616338"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/sirens_mta.ban",
+      "size": 1747,
+      "sha256": "f69ce6f2b1f3b4037e4149a38244d17b5f2d057c1fe5020bb4e42fd972f18002",
+      "acceptedOriginalSha256": [
+        "8b66837adf31fae7b6e55d55313bdf56fd2ede823776894afe57d266b5b672ce"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/sivasspor_tur.ban",
+      "size": 2854,
+      "sha256": "6de5ed7f55bce61ffe9cc78c5908557e5dff25cac6729ccca4e09aa02c0db124",
+      "acceptedOriginalSha256": [
+        "90aed95798098dd7416102ef1f707ad3b0071b607aac140b42f73f72aee30f27"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/slavia_cze.ban",
+      "size": 2402,
+      "sha256": "59f8ec60ffb34760ac853204bf008cb3a2892878f40cdab4cc5778eb6b9ff063",
+      "acceptedOriginalSha256": [
+        "223da9d41984d065be03e96251972147087b019341f21c11f371a65f1cd9eb2a"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/slaviasofia_bul.ban",
+      "size": 2421,
+      "sha256": "3f4fca9378a23791416c445226c1f918072dde53119ded65e7bb52b22df7050c",
+      "acceptedOriginalSha256": [
+        "3ab4907274282f4230b4abbd7a70af4361eab6d40325cfefa3e986165c7327c5"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/slovan_slk.ban",
+      "size": 2500,
+      "sha256": "3f5a025716d064666394c9e5b9332a4edcade46f93b0a22d0c7c3f4718777426",
+      "acceptedOriginalSha256": [
+        "b211e6de08afa08b8982e5c992f9bfe63e74db2f330c7aa89cb1cd6a5496686b"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/slovanliberec_cze.ban",
+      "size": 3343,
+      "sha256": "efd4981f1bca73ce52e194ae101d058592d613e38a77a03f7299070706d6abe4",
+      "acceptedOriginalSha256": [
+        "1bd6883c1abc683ede0e4dc434646767ce71fde31bf58e44a79098f87b954c0d"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/solamerica_par.ban",
+      "size": 2023,
+      "sha256": "4c55e1bba82acdd1b9eeb06848032d2cec993f6f9df65c80f9aeac1aa930e5c9",
+      "acceptedOriginalSha256": [
+        "de72735b9ca099daf49d83c5e210fce5c3aad9aa8473f5dff95daeb49f177c20"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/soligorsk_bie.ban",
+      "size": 2948,
+      "sha256": "c1ef20f8a1932c739eeda0ba41e1b447f80e0ad2e4643490184b514d528c5029",
+      "acceptedOriginalSha256": [
+        "f209b9bc0ea8bf2d4dfff1897aa58a2d4a4f028eaf7798363d0ba71193db5835"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/sonderjyske_din.ban",
+      "size": 2561,
+      "sha256": "f88f6a93227195bcdb5850f7093d25a5850dbb38c2c55a7df226a0d754da9394",
+      "acceptedOriginalSha256": [
+        "63dfc427efd815bc3057f6419aeb20cdd8043c0ac256e08cca69fe20ab148d92"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/sparta_tch.ban",
+      "size": 2480,
+      "sha256": "dcd9de54f6f8b30213f695969ed8353d1de629c4826772f2f633a5662ebd3f05",
+      "acceptedOriginalSha256": [
+        "e3b83526f363a9317941a5c00e24ca3a5cfdb84680ced0d81f3fa503dc56568e"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/spartak_rus.ban",
+      "size": 2152,
+      "sha256": "add52ba03ce0b9d2c77817e28d6fdfaf0bfa42c1f018416b5758013996321687",
+      "acceptedOriginalSha256": [
+        "6e29fc860b4face5af5be604a4a1eebc630bf2bac7d819e604854ce3b8d7ecb1"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/sport.ban",
+      "size": 2596,
+      "sha256": "5c54e63a14bcb56c0684f484a50549e86629948bee404631339bcf591838647f",
+      "acceptedOriginalSha256": [
+        "16abe995062bcde9195a5809f39e2b6fef61f871ec9b060dabc191a1e75985cd",
+        "2851cc4410179d7628b2f369c7b5b911c83129127e5387e9941b9b87e3e658fb"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/sporting_por.ban",
+      "size": 2403,
+      "sha256": "7a163e194e4d4eb1101191b09d9fbec0cbec954b554bb992eb46bb81a0962e91",
+      "acceptedOriginalSha256": [
+        "df09105ecaac538f02dd3b3ac1c29d1525043f2e62b4862d37a7f1d44cdbeb4b"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/sportingbraga_por.ban",
+      "size": 2266,
+      "sha256": "b313af7bfe40416690d43de8356822facf3275d267489462b31e9a9b0a5f70a3",
+      "acceptedOriginalSha256": [
+        "aa34af83cdaf2bc480a9dc24dbbbbf4834aed3941b40f63eb5a8f2c470604834"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/sportinggijon_esp.ban",
+      "size": 2054,
+      "sha256": "b05f29cc8a0f16333c4278d91ef2c0604071525f384923c1ceaf317c36bf5392",
+      "acceptedOriginalSha256": [
+        "75da7d58b7874e48fa299d968672eca5e67c3ccb5f5f59b15a82bafc62d75e1b"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/standardliege_bel.ban",
+      "size": 2346,
+      "sha256": "68dccd0c5c1c3d1a2cf1382225d57e5ce86e011395a682a335e93613bb0b4878",
+      "acceptedOriginalSha256": [
+        "4c19111638c0b01c9e77e4a4b15f32b6c453a3c2e4d48157df6e55edd43a3803"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/steua_bucaresti_rom.ban",
+      "size": 2341,
+      "sha256": "0602ce5c5ea933fb7669770355949524500fda8aa35e91708db3058f918c2219",
+      "acceptedOriginalSha256": [
+        "0f2e1142475abf744643ee94490be42e8d5cc128bd742fa75dddab4a6e1ae752"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/stgallen_sui.ban",
+      "size": 2540,
+      "sha256": "78bd1e1bc358de17ec129a5ed19461d896ae3c0de453123c053da487e41d93dd",
+      "acceptedOriginalSha256": [
+        "7416d265e88eca9d01ecd2dad7b87f54de3e99b2195d798fa7342c81d2b7b844"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/stjosephs_gib.ban",
+      "size": 2829,
+      "sha256": "b2c48e1567f802980bd2f6a60d89bfe1af2c1af218f7222102314c2c1865f31c",
+      "acceptedOriginalSha256": [
+        "e9ba06002f586b3da597c5079f58ea9ed9bf7c5cacdb65eef3ab4829d7cc4bd6"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/strasbourg_fra.ban",
+      "size": 2487,
+      "sha256": "b28b4914217b220f6f8c0df9ad4fe977113d7e2563eeb056c0af9a893f4d0775",
+      "acceptedOriginalSha256": [
+        "a25edbcf4b9fb70243440856af5828933ddcfd27e5253d125f3371f66a995088"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/sturmgraz_aut.ban",
+      "size": 2326,
+      "sha256": "76fe76563f6a5714fe705bab7a06db1d53a396bd22c378c3f875d8201876dfc1",
+      "acceptedOriginalSha256": [
+        "c6a9ff4d427823be19c9e741f4903da0f5ed618c3eedb282f3cba00b8997f3b8"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/suduva_lit.ban",
+      "size": 3086,
+      "sha256": "542ef5759a4f2a0bfcf7d34d69c975168b7910df5da68150ee404d7313dad6c5",
+      "acceptedOriginalSha256": [
+        "2e325a43a0d125bca267f7bfa144e41a095ecbbce8bbced2a1db43447d77393d"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/sumqayit_azb.ban",
+      "size": 3486,
+      "sha256": "ecdb3beec1fd9a3ce64d8e17ccb577023c17c1fe75ed5e0824d89ae8d0067d66",
+      "acceptedOriginalSha256": [
+        "2d40beeb4a4916d8d04c7bd0ba7a3fc0d333d095686e9d2b38262f5bf56802ed"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/sutjeska_mon.ban",
+      "size": 2313,
+      "sha256": "97672c5d0375b4dd76f040d139e10e7ef614653a5f6450aee28b96b468d9a34e",
+      "acceptedOriginalSha256": [
+        "4fa4bca54edbd9620b6285af135709230106e82e14cba079a988537387c2c054"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/suva_fij.ban",
+      "size": 2532,
+      "sha256": "968843f070dc1cf9814b83a97f4e3b02eced9baa805a466325aa89321ef627bf",
+      "acceptedOriginalSha256": [
+        "4461f2c03da0eda9333446fcb48d8e97c8a29f8e891183ab32249c47a44a5fb8"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/tauro_pan.ban",
+      "size": 2945,
+      "sha256": "0bb9ba86f7802905b319d55eb2cd7c4ad0c2eae6ac2ee61ef3d2f6f09a7cfea0",
+      "acceptedOriginalSha256": [
+        "b6e95ca61aaf493363dc06688a72940b0b11b1557ba79d37c905cf835c33dd55"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/tenerife_esp.ban",
+      "size": 2379,
+      "sha256": "463ce1cbc6426b58bbcd519e1fbdc7e16f0507ec615f64e26ca75f0a4ee09f6a",
+      "acceptedOriginalSha256": [
+        "97795503b79b26209bcac03bc08df868d18379d340a9e57fce18940b6a4659b4"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/teungueth_sen.ban",
+      "size": 1896,
+      "sha256": "8de14afaead6cf7a5c6e2b1b195623e4fd1a55cba3f9618993623fa86245c2ae",
+      "acceptedOriginalSha256": [
+        "8260cc4fb1e26d55c9485a388f7de3ba4399ce3c4c72c49f2ef9c9a4154a8f6d"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/thenewsaints_wal.ban",
+      "size": 2509,
+      "sha256": "9e4f3fe34f954361c1c4beaa483d513778ee7985613294b0f734cf84692ac60a",
+      "acceptedOriginalSha256": [
+        "0388ac903d4f4faf86315e1d4bcb5e564bbe5295af731d2afc74eee1a110882b"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/tombense_mg.ban",
+      "size": 1906,
+      "sha256": "307b9b2791fa0b4887c0a8679ef95408c90428a21c5c79e1ebeaad799f9132ce",
+      "acceptedOriginalSha256": [
+        "dfec3566de8daf21d06d571c1f4cb2fbc2724c5c6228e7ec83a3fbdfe1d10119"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/tottenhamhotspur_ing.ban",
+      "size": 2403,
+      "sha256": "ed0c2f947299f5b76f892d7a285d3bcd553d39abdbb1cf94af6ad39a92c730ac",
+      "acceptedOriginalSha256": [
+        "af4594c65eb1d301751fa79aacf38563d7c0629dd5cc952699a9d4795975c97b"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/tractor_irn.ban",
+      "size": 1945,
+      "sha256": "058064ae80a9f7224ff92fe724df79395d5d0edc4a23788c74f258600de8f4ee",
+      "acceptedOriginalSha256": [
+        "7f1e88787635712b90afce5fa859c68718a6ba59057a6941210b9643373bb75b"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/trepenne_smr.ban",
+      "size": 2015,
+      "sha256": "8d35606d3f919f2234f911b70bf936c24652dfc4a6c90118c385324e6234a72c",
+      "acceptedOriginalSha256": [
+        "8a12a92fed7eab67731086a8048d200a66b1d6da921183f84dbada118fabc56f"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/tsvhartberg_aut.ban",
+      "size": 2489,
+      "sha256": "95bb4a37fc8e6b496285c3751b13cb689208e3bef396f81c1139c1043199b781",
+      "acceptedOriginalSha256": [
+        "d00f83dc823046478046bda26b87bdfabcd68be57dcfe3ef062520f262c9c44f"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/twente_hol.ban",
+      "size": 2324,
+      "sha256": "39a2b0d955c96c06e9de23aff44e2bd971ab9aac6d5e81fe6a39b4b01a4d914c",
+      "acceptedOriginalSha256": [
+        "2d1f498a309b5b37b94c16d64202444f30a136456445e9986b54f75fb55c072c"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/unionespanola_chi.ban",
+      "size": 2010,
+      "sha256": "c41dd1dbb86f5f2ab706b732e44872e48b90fd720ab0249b1d9de959d940d6dc",
+      "acceptedOriginalSha256": [
+        "e711913544f85a489a39ab412647bf02c907a1cdd242b1c4d40dc0a27b898e73"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/univcatolicaquito_equ.ban",
+      "size": 2925,
+      "sha256": "9ae14acab52ebb0e979be94ef3bb38ae2a57e6b8e177e235768027c26a80435f",
+      "acceptedOriginalSha256": [
+        "d5b84b615db82bbaea467a8ae28e4aabc6ca54d2e959a1caecf6b3603aaf5e25"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/universidadchile_chi.ban",
+      "size": 1954,
+      "sha256": "0fc669f6b638fc1bccb10e987442bbc141125d4a40c5f845025ae74f3ff42980",
+      "acceptedOriginalSha256": [
+        "bab4cc80b3ae48fe9dd1548ae1f79d8da9ec24cce22a82d510ac3e8f71a70531"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/vaduz_lie.ban",
+      "size": 2332,
+      "sha256": "7513a7d830fa23878c3366dd931b62301da3628720d7f48da948050d9192d558",
+      "acceptedOriginalSha256": [
+        "ca7ef613c8e0c98e7792622dc1f2307b817546722118d7969e127e6946fb6fe9"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/valencia_esp.ban",
+      "size": 2428,
+      "sha256": "f7336d4f0bb83f7011bdabebc0e0d6b00012c73a2801e4a14e955c67bd531655",
+      "acceptedOriginalSha256": [
+        "302836d2ce9bafce116e18166613dd620f0d0350c459d6a5b0d07ee18618e892"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/valladolid_esp.ban",
+      "size": 2436,
+      "sha256": "892e1556170eb83aa6f0b42e95409996c90d5320d02929037d72e2f4f4d94f1e",
+      "acceptedOriginalSha256": [
+        "ee86a7356e7bb3339c51d2b9c6326eee62227006367f8bc156319453e41a81b9"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/valletta_mta.ban",
+      "size": 1699,
+      "sha256": "a08692e859972dc051dacd754f3ae8cd7558842c194d9d430cd12cac2b1d0119",
+      "acceptedOriginalSha256": [
+        "887b1ddace01eaca277978c66b6c2ae6a5a7d1b8e19fb239eeb6c19930d6178e"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/valmiera_let.ban",
+      "size": 1783,
+      "sha256": "12180a0d1374c772bc3df04927a21fb64b791934f2a159035f0621c1eeded3a6",
+      "acceptedOriginalSha256": [
+        "4000a5e52ee58ca04b7ca6e8c7f497078bcbfaf81c0c8ce9f2eae832534171e0"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/vasco.ban",
+      "size": 2943,
+      "sha256": "1f84dc9cf9bb203d80ce0bc55660072bead5b41e2d0b9bdf1852d1ae1b9f468c",
+      "acceptedOriginalSha256": [
+        "7abe6fb3b3aff7b65e84982aa35bc55000978c40c2e1f1083e7b0ac0f8518a91",
+        "81d7614e6252f4212b57342841841defc32e33299b67732fbcb98b84731164ab",
+        "ec36463788c52ad51e45ed253fcc4d34e41a81098cd3c272cac69c7d74e5d1fc"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/viettel_vie.ban",
+      "size": 2843,
+      "sha256": "b43c16d4fdefc2edc1b5f70e5a4f74960a1a8862a7ee2c1029d52eb9a25b0442",
+      "acceptedOriginalSha256": [
+        "22041176b10166c843f21ec20a4410afd4312c34f1b7f69a48032c9b2b9af49d"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/viking_nor.ban",
+      "size": 3540,
+      "sha256": "6c4d4ad1a708170bff26ce2ebe8985c3fde7bf4b7eecd07566988c38d742770e",
+      "acceptedOriginalSha256": [
+        "9a8fcad99110dad5b609005ff7d438f275cdf17ce4b27d119b1eda12ae33ab7a"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/vikingur_isl.ban",
+      "size": 2960,
+      "sha256": "f6d726b14a692354ce7ddd2dbd2481df883cd5c2eb5b20a5c213961f7182f9d7",
+      "acceptedOriginalSha256": [
+        "bd865a902249bcd05da8934eb0954f36a6756b6427ce70fcff9cc8de94e0a5f6"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/viktoria_rep.ban",
+      "size": 3469,
+      "sha256": "ea5584a7521fe2ef0b3e74ff04e363fea59cf2334ee52c0dce3e7543993dd843",
+      "acceptedOriginalSha256": [
+        "2f46d518c4b05ba32a5399ec156100fe69cb53bcd5996098f3fae9f53bf5f45c"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/vilago.ban",
+      "size": 2523,
+      "sha256": "444cd6e33f3c902921025050df6cfbd70ccbf4a0f5b946837e944eea25eddfbf",
+      "acceptedOriginalSha256": [
+        "5282afc4b2400a3a865ba13648ab46cab0991a6021b59e368cb229fe1e9be0e0",
+        "529e4ef7f5c0d314be8d6847b5f1173f4bbd2eb519cd82beb16dbcab77706ffe"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/villareal_esp.ban",
+      "size": 2124,
+      "sha256": "1e5b0946679119496c8e50e0c0058bfd3dc8ec8ccf5df0bcd1ae24a6029c0225",
+      "acceptedOriginalSha256": [
+        "1dd35f560fb3f3c7bcc0e6158d9ec6882c541f37633c1b0eb6331cabd661e796"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/vitesse_hol.ban",
+      "size": 2197,
+      "sha256": "4261dafde525636ac37ffc18dc0f9bc6aeff3f69715e44e66884928e01797373",
+      "acceptedOriginalSha256": [
+        "d054ee481f83be1f6e4012e5de7652b1ed694f5270872150a7bc568db51c328f"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/vitoria.ban",
+      "size": 3019,
+      "sha256": "8f066b12cad69a219a1b65e397b8646b9f789ff8b2e81235d839d61b6c8ea96f",
+      "acceptedOriginalSha256": [
+        "7a264825f37d76518d32b7868999aff54f94fe7b66f3b479ed87db1088fd75ec",
+        "cb214621c97c9e992322e9f1a0d68ce2fc413c7dc00d71f30e20d0f9892d73cd",
+        "71e86d3c8bb5e81231e07d34b784d69dc0949dba38b25964728d782629685050"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/vitoriaguimaraes_por.ban",
+      "size": 2450,
+      "sha256": "66e71629b0df896a7bddfbacf718a22e0a72d59859f4975b76492f3bf46ac569",
+      "acceptedOriginalSha256": [
+        "f4584c51471891f81a4b4728f3d86646b4ce197fd82fffe7f886f20c4e05ccdc"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/vojvodina_srb.ban",
+      "size": 3542,
+      "sha256": "6b07438da7e7bd463082ba7e9856d9396559efdc974ba383d0b4af54938a8cb0",
+      "acceptedOriginalSha256": [
+        "926b2f4ffebb1a31bd6fc9b879276778508192addbb4e0cc29f2ddb37358ed6d"
       ]
     },
     {
       "operation": "replace",
       "path": "teams/voltaredondarj_bra.ban",
       "size": 2467,
-      "sha256": "8f729487dc2b9d54dafc1576835e78be89039e586a0d597c8e45fdae1c44c744",
+      "sha256": "af2e0283d15a28253fb50ce7e316211dc6d27dce0e86fc7ddb630fd98a3cf6eb",
       "acceptedOriginalSha256": [
-        "0378c56029cb40e5ff6f7b17521c72fc967c1f6df2de3ad36c6c52e5a553f62d"
+        "0378c56029cb40e5ff6f7b17521c72fc967c1f6df2de3ad36c6c52e5a553f62d",
+        "8f729487dc2b9d54dafc1576835e78be89039e586a0d597c8e45fdae1c44c744"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/wac_mar.ban",
+      "size": 2037,
+      "sha256": "e68d31231e323a20122285468aeed88de5807bdf67e6402c7cdb932da49070b0",
+      "acceptedOriginalSha256": [
+        "33df299aa6228a21aecd07d107e90d6cc21433896f2c24af2f844e606f75228b"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/waterhouse_jam.ban",
+      "size": 3168,
+      "sha256": "8d40ff41ece9dd4e85b77d83c3e737774a805c2bc46f83739d0de8a4e0b4cd6f",
+      "acceptedOriginalSha256": [
+        "f6eaa18179ba5de5857cd0b38a7c72032198a14e47203f6763f71e6061af7fcc"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/westham_eng.ban",
+      "size": 2389,
+      "sha256": "ff6dd5882eb452894c3d64f39590b62ae21270cea079cef2ec58c5ab19845048",
+      "acceptedOriginalSha256": [
+        "8a1a4a8a58c0b3bb3bc8b6985d13cfe88ba25cabf025f7238180f427a3beabc1"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/wolfsbergerac_aut.ban",
+      "size": 2290,
+      "sha256": "3b0d72ad8d6a84f31fa77a3116bde0f05b14f52c6497fd8ea30e502b949a0f1b",
+      "acceptedOriginalSha256": [
+        "3b1f28d373820b699491eb65fe1ca18135f40ec0dc8fea35851b40b86382bbb6"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/wolfsburg_ale.ban",
+      "size": 2479,
+      "sha256": "2cb772b595ec96361e18ae4b3a0ad49931ba94e4eee21b883fd0aff465ddcf20",
+      "acceptedOriginalSha256": [
+        "7089f0b4ea93a0096fba97597754e3743d5b3e41dea1910fec6f7de824e32f30"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/youngboys_sui.ban",
+      "size": 2191,
+      "sha256": "6ea17009d321d7c364ad8f5a9221c86fa92072e0fdce5d6d81acf6c909b67a2d",
+      "acceptedOriginalSha256": [
+        "1634609b333a658dc0fb75c1a73fef5cc7e28a878963a9a74fd5ed61208212ae"
       ]
     },
     {
       "operation": "replace",
       "path": "teams/ypiranga_rs.ban",
       "size": 2326,
-      "sha256": "81715100cbb12dc76a130da1ed22c7affaa33c6e9dbaf574e86432e8fd2a4272",
+      "sha256": "b67a746f3a183e92a44fee0eb57e321028cbaf1f4c9db6590e740a9b61fe52b8",
       "acceptedOriginalSha256": [
-        "df97b07e72316bae2f425a3172f09c6aca6cf722fffcb2293dae42474b3356b3"
+        "df97b07e72316bae2f425a3172f09c6aca6cf722fffcb2293dae42474b3356b3",
+        "81715100cbb12dc76a130da1ed22c7affaa33c6e9dbaf574e86432e8fd2a4272"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/zalgiris_lit.ban",
+      "size": 3164,
+      "sha256": "44d21db532b99de5378422fd755ca74b8c08264fcd3e8a73335b471f5af0ed85",
+      "acceptedOriginalSha256": [
+        "d2c8f35e9a4017b0858ce4a0719c534c704e6cf065cffa3e7d41205da996d0ba"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/zamalek_egi.ban",
+      "size": 1999,
+      "sha256": "1ab62c9d1d006013f863fdc567aeb35004a19d7bf29c4ff0819817d57ab457d1",
+      "acceptedOriginalSha256": [
+        "10027ad577ed3518ea5b4f2d53b468c43e234d6fef31ed7a139efb64204a498d"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/zeljeznicar_bih.ban",
+      "size": 2932,
+      "sha256": "64baf98e241091e82ef29a96858a3fbcaf6fd569d5963a1de396f45d55442c2c",
+      "acceptedOriginalSha256": [
+        "42992ee5784a8c389f87e59e64251ba1d241de4b85e4f961d6dd75a709871a7f"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/zenit_rus.ban",
+      "size": 2189,
+      "sha256": "67eea0fa8ba4832b7a469209faa3a687745f8f9c9a5a82e4287169eb6eca9ddb",
+      "acceptedOriginalSha256": [
+        "9febb394a433f9400ff6c1a7fc2ea06fca4b71589ba56ca1ae4fe8b8ff5ad9e1"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/zilina_slk.ban",
+      "size": 3206,
+      "sha256": "8b2997a0ca014043ee824c6157056cbd2e52ea9c7150a6cd9c5a43b4535b465f",
+      "acceptedOriginalSha256": [
+        "d81b250d83d9e9e95dee74cd83a2263b03a122ff8cb491762505d726428d0cde"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/zorya_ucr.ban",
+      "size": 2344,
+      "sha256": "2d47ac46c8ad80832f6d77c4d0ea60400f600ec6e54599cad4fb246f58e8673b",
+      "acceptedOriginalSha256": [
+        "f9ba75b34305a35033a72dfa6d69615cc5bcef08574a9e81a16ea50253ac6062"
+      ]
+    },
+    {
+      "operation": "replace",
+      "path": "teams/zrinjski_bos.ban",
+      "size": 2399,
+      "sha256": "b94a7d638c07e52312746bab44e11f51eac51e4e13ee4fd4575adba4b9f9b309",
+      "acceptedOriginalSha256": [
+        "df10173cdb0f07356008b071e87f6dd0b96a27c8950b76a64c8f5b3e1efa8c47"
       ]
     }
-  ],
-  "notes": "Atualizador experimental. Mesmos 60 elencos da edição 2026.3.5; requer base V4 compatível. Nenhum teste executado nesta edição."
+  ]
 }

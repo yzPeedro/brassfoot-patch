@@ -5,7 +5,7 @@ import "strconv"
 // Release builds read config/edition.json and inject these values with -X.
 // Defaults keep a source checkout usable without running a code generator.
 var productName = "Brasfoot Mega Patch"
-var productVersion = "2026.4.0"
+var productVersion = "2026.4.1"
 var patchYearText = "2026"
 var sourceCommit = "development"
 

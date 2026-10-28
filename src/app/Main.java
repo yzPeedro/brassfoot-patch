@@ -145,6 +145,13 @@ public final class Main {
     private static void replaceRoster(Path source, Path roster, Path destination) throws Exception {
         if (Files.exists(destination)) throw new FileAlreadyExistsException(destination.toString());
         t team = load(source);
+        team.l = readRoster(roster);
+        store(team, destination);
+        System.out.println("{\"teamId\":" + str(team.d) + ",\"players\":" + team.l.size()
+                + ",\"output\":" + str(destination.toAbsolutePath().toString()) + "}");
+    }
+
+    private static ArrayList<g> readRoster(Path roster) throws Exception {
         List<String> rows = Files.readAllLines(roster, StandardCharsets.UTF_8);
         if (rows.size() < 16 || rows.size() > 40)
             throw new IllegalArgumentException("Expected 16..40 roster players, got " + rows.size());
@@ -157,7 +164,7 @@ public final class Main {
             if (p.a.isBlank() || p.a.length() > 120) throw new IllegalArgumentException("Invalid player name");
             p.aid = parseIntField(v[1], "aid", 0, Integer.MAX_VALUE);
             p.b = Boolean.parseBoolean(v[2]);
-            p.c = parseIntField(v[3], "c", 0, 220);
+            p.c = parseIntField(v[3], "c", 0, 223);
             p.d = parseIntField(v[4], "d", 0, 100);
             p.e = parseIntField(v[5], "e", 0, 4);
             p.f = parseIntField(v[6], "f", 0, 1);
@@ -170,14 +177,44 @@ public final class Main {
             p.tid = parseIntField(v[13], "tid", 0, Integer.MAX_VALUE);
             replacement.add(p);
         }
-        team.l = replacement;
-        // Preserve original secondary/youth squad and all team metadata untouched.
-        store(team, destination);
-        t verified = load(destination);
-        if (verified.l.size() != replacement.size() || !Objects.equals(verified.d, team.d))
-            throw new IOException("Validation of written file failed");
-        System.out.println("{\"teamId\":" + str(team.d) + ",\"players\":" + verified.l.size()
-                + ",\"output\":" + str(destination.toAbsolutePath().toString()) + "}");
+        return replacement;
+    }
+
+    private static void shortenNames(ArrayList<g> players) {
+        if (players == null) return;
+        for (g player : players) {
+            if (player.a == null) continue;
+            String[] words = player.a.strip().split("\\s+");
+            player.a = words.length > 2 ? words[0] + " " + words[1] : String.join(" ", words);
+        }
+    }
+
+    /** One production compiler invocation; preserves every base team field and
+     * secondary player field except the explicitly requested display-name rule. */
+    private static void batchRosters(Path sourceDir, Path rosterDir, Path destinationDir) throws Exception {
+        sourceDir = sourceDir.toAbsolutePath().normalize();
+        rosterDir = rosterDir.toAbsolutePath().normalize();
+        destinationDir = destinationDir.toAbsolutePath().normalize();
+        if (destinationDir.startsWith(sourceDir) || sourceDir.startsWith(destinationDir)
+                || destinationDir.startsWith(rosterDir) || Files.exists(destinationDir))
+            throw new IOException("Batch destination must be new and separate from its inputs");
+        List<Path> sources = teamFiles(sourceDir);
+        Files.createDirectories(destinationDir);
+        int updated = 0, players = 0;
+        for (Path source : sources) {
+            t team = load(source);
+            Path roster = rosterDir.resolve(source.getFileName() + ".tsv");
+            if (Files.isRegularFile(roster)) {
+                team.l = readRoster(roster);
+                updated++;
+            }
+            shortenNames(team.l);
+            shortenNames(team.m);
+            players += team.l == null ? 0 : team.l.size();
+            store(team, destinationDir.resolve(source.getFileName()));
+        }
+        System.out.println("{\"teams\":" + sources.size() + ",\"rostersSupplied\":" + updated
+                + ",\"players\":" + players + "}");
     }
 
     private static void usage() {
@@ -188,11 +225,17 @@ public final class Main {
         System.err.println("  audit-directory <installation/teams>");
         System.err.println("  export-directory <installation/teams> <out-json-directory>");
         System.err.println("  replace-roster <original.ban> <roster.tsv> <new.ban>");
+        System.err.println("  batch-rosters <base-teams-dir> <tsv-dir> <new-teams-dir>");
     }
 
     public static void main(String[] args) throws Exception {
         if (args.length < 2) {usage(); System.exit(2);}
         switch (args[0]) {
+            case "batch-rosters": {
+                if (args.length != 4) {usage(); System.exit(2);}
+                batchRosters(Path.of(args[1]), Path.of(args[2]), Path.of(args[3]));
+                break;
+            }
             case "inspect": {
                 if (args.length != 2) {usage(); System.exit(2);}
                 System.out.println(json(load(Path.of(args[1]))));

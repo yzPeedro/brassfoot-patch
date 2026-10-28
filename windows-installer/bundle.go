@@ -25,13 +25,14 @@ type patchOp struct {
 	Add  string `json:"add,omitempty"`
 }
 type patchRecipe struct {
-	SchemaVersion  int       `json:"schemaVersion"`
-	Path           string    `json:"path"`
-	OriginalSHA256 string    `json:"originalSha256"`
-	TargetSHA256   string    `json:"targetSha256"`
-	OriginalSize   int       `json:"originalSize"`
-	TargetSize     int       `json:"targetSize"`
-	Operations     []patchOp `json:"operations"`
+	SchemaVersion  int           `json:"schemaVersion"`
+	Path           string        `json:"path"`
+	OriginalSHA256 string        `json:"originalSha256"`
+	TargetSHA256   string        `json:"targetSha256"`
+	OriginalSize   int           `json:"originalSize"`
+	TargetSize     int           `json:"targetSize"`
+	Operations     []patchOp     `json:"operations"`
+	Variants       []patchRecipe `json:"variants,omitempty"`
 }
 
 func digestBytes(b []byte) string {
@@ -43,6 +44,19 @@ func applyRecipe(original []byte, raw []byte, wanted ManifestFile) ([]byte, erro
 	var recipe patchRecipe
 	if err := json.Unmarshal(raw, &recipe); err != nil {
 		return nil, fmt.Errorf("instruções inválidas: %w", err)
+	}
+	if recipe.SchemaVersion == 2 {
+		matched := false
+		for _, variant := range recipe.Variants {
+			if variant.OriginalSHA256 == digestBytes(original) {
+				recipe = variant
+				matched = true
+				break
+			}
+		}
+		if !matched {
+			return nil, fmt.Errorf("base não reconhecida para %s", wanted.Path)
+		}
 	}
 	if recipe.SchemaVersion != 1 || recipe.Path != wanted.Path ||
 		recipe.TargetSHA256 != wanted.SHA256 || recipe.TargetSize != int(wanted.Size) ||
@@ -124,8 +138,8 @@ func preparePayloadWithFS(fsys fs.FS, gamePath, staged string) error {
 	if (manifest.SchemaVersion != 2 && manifest.SchemaVersion != 3 && manifest.SchemaVersion != 4) || manifest.PatchSeason != patchYear() || !validVersion.MatchString(manifest.Version) || !strings.HasPrefix(manifest.Version, patchYearText+".") {
 		return fmt.Errorf("manifesto do pacote inválido")
 	}
-	if len(manifest.Files) < 1 || len(manifest.Files) > 512 {
-		return fmt.Errorf("pacote incompatível: esperado de 1 a 512 arquivos autorizados, encontrados %d", len(manifest.Files))
+	if len(manifest.Files) < 1 || len(manifest.Files) > 2048 {
+		return fmt.Errorf("pacote incompatível: esperado de 1 a 2048 arquivos autorizados, encontrados %d", len(manifest.Files))
 	}
 	seen := make(map[string]bool, len(manifest.Files))
 	for _, f := range manifest.Files {
@@ -149,26 +163,35 @@ func preparePayloadWithFS(fsys fs.FS, gamePath, staged string) error {
 	for _, f := range manifest.Files {
 		src := filepath.Join(game, filepath.FromSlash(f.Path))
 		mode := f.Operation
-		if mode == "" { mode = "replace" }
+		if mode == "" {
+			mode = "replace"
+		}
 		var original []byte
 		if mode == "replace" {
 			if err = checkRegular(src); err != nil {
-				return fmt.Errorf("arquivo do Brasfoot ausente: %s: %w", f.Path, err)
+				if !(f.AllowMissing && teamName.MatchString(f.Path) && os.IsNotExist(err)) {
+					return fmt.Errorf("arquivo do Brasfoot ausente: %s: %w", f.Path, err)
+				}
+			} else {
+				original, err = os.ReadFile(src)
+				if err != nil {
+					return err
+				}
 			}
-			original, err = os.ReadFile(src)
-			if err != nil { return err }
 			if f.Path == gameExecutablePath && (len(original) < 2 || original[0] != 0x4d || original[1] != 0x5a) {
 				return fmt.Errorf("executável original não possui assinatura MZ reconhecida")
 			}
 		} else {
 			if e := checkRegular(src); e == nil {
 				original, err = os.ReadFile(src)
-				if err != nil { return err }
+				if err != nil {
+					return err
+				}
 				if digestBytes(original) != f.SHA256 || int64(len(original)) != f.Size {
 					return fmt.Errorf("nova equipe não pode sobrescrever arquivo existente: %s", f.Path)
 				}
 			} else if !os.IsNotExist(e) {
-				return fmt.Errorf("arquivo de destino incompatível: %s: %w",f.Path,e)
+				return fmt.Errorf("arquivo de destino incompatível: %s: %w", f.Path, e)
 			}
 		}
 		current := digestBytes(original)
@@ -177,18 +200,31 @@ func preparePayloadWithFS(fsys fs.FS, gamePath, staged string) error {
 			output = original
 		} else {
 			if mode == "replace" {
-				allowed := false
-				for _, h := range f.AcceptedOriginalSHA256 { if current == h { allowed = true; break } }
-				if !allowed { return &UnknownOriginalError{Relative:f.Path,Actual:current,Accepted:f.AcceptedOriginalSHA256} }
+				allowed := f.AllowMissing && len(original) == 0
+				for _, h := range f.AcceptedOriginalSHA256 {
+					if current == h {
+						allowed = true
+						break
+					}
+				}
+				if !allowed {
+					return &UnknownOriginalError{Relative: f.Path, Actual: current, Accepted: f.AcceptedOriginalSHA256}
+				}
 			} else if len(f.AcceptedOriginalSHA256) != 0 {
 				return fmt.Errorf("adição com hashes de originais indevidos: %s", f.Path)
 			}
 			name := filepath.Base(f.Path)
-			if strings.ContainsAny(name, "/\\") { return fmt.Errorf("nome de equipe inválido") }
-			data,e := fs.ReadFile(fsys,"bundled_release/patches/"+name+".json")
-			if e != nil { return fmt.Errorf("instruções de %s ausentes: %w",f.Path,e) }
-			output,e = applyRecipe(original,data,f)
-			if e != nil { return e }
+			if strings.ContainsAny(name, "/\\") {
+				return fmt.Errorf("nome de equipe inválido")
+			}
+			data, e := fs.ReadFile(fsys, "bundled_release/patches/"+name+".json")
+			if e != nil {
+				return fmt.Errorf("instruções de %s ausentes: %w", f.Path, e)
+			}
+			output, e = applyRecipe(original, data, f)
+			if e != nil {
+				return e
+			}
 		}
 		target := filepath.Join(staged, filepath.FromSlash(f.Path))
 		if err = os.MkdirAll(filepath.Dir(target), 0700); err != nil {

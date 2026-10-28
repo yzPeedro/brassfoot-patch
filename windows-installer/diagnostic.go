@@ -73,7 +73,7 @@ func diagnose(err error) Diagnostic {
 	case strings.Contains(lower, "arquivo ausente") || strings.Contains(lower, "arquivo não encontrado na instalação"):
 		return Diagnostic{"BF-105", "Faltam arquivos do clube no seu Brasfoot", "Um dos clubes de 2026 não existe na pasta teams ou não pode ser lido.", "Confirme que o Brasfoot foi instalado corretamente. Não copie arquivos aleatórios de outras versões.", raw}
 	case strings.Contains(lower, "pacote") || strings.Contains(lower, "manifest") || strings.Contains(lower, "hash corrompido"):
-		return Diagnostic{"BF-106", "Pacote de elencos inválido", "A verificação de integridade do conteúdo embutido falhou.", "Baixe novamente o instalador de homologação. Não altere manualmente os arquivos.", raw}
+		return Diagnostic{"BF-106", "Pacote de elencos inválido", "A verificação de integridade do conteúdo embutido falhou.", "Baixe novamente o instalador mais recente. Não altere manualmente os arquivos.", raw}
 	case strings.Contains(lower, "permission") || strings.Contains(lower, "permissão") || strings.Contains(lower, "access is denied") || errors.Is(err, os.ErrPermission):
 		return Diagnostic{"BF-107", "Sem permissão para atualizar os arquivos", "O Windows negou o acesso a um arquivo ou pasta necessária para a instalação.", "Feche o Brasfoot. Verifique a permissão de gravação da pasta do jogo; se necessário, execute o instalador como administrador.", raw}
 	case strings.Contains(lower, "rollback incompleto"):

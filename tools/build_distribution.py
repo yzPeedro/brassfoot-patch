@@ -1,4 +1,4 @@
-"""Build experimental patch updaters from an explicit delta bundle, without tests.
+"""Build final patch installers from an explicit delta bundle, without tests.
 
 The game is never bundled. Cross-compilation does not demonstrate gameplay or
 platform compatibility. Each artifact carries the exact source/bundle hashes.
@@ -108,18 +108,18 @@ def build(args: argparse.Namespace) -> Path:
                 "version": version, "patchYear": year, "sourceCommit": source_commit,
                 "sourceTreeSha256": source_tree_hash, "bundleSha256": bundle_hash,
                 "sourceBundleVersion": original.get("version"), "files": len(manifest.get("files", [])),
-                "channel": "experimental", "compatibility": "not-verified",
+                "channel": "stable", "compatibility": "not-verified",
                 "tests": "not-run-at-owner-request", "gameRuntime": target["gameRuntime"],
-                "interface": target["interface"], "requires": "existing-legitimate-Brasfoot-with-V4-patch",
+                "interface": target["interface"], "requires": "legitimate-Brasfoot-22-23-original-or-recognized-patch",
                 "nativeGamePort": False,
             }
             write_json(package / "build-info.json", info)
             (package / "LEIA-ME.txt").write_text(
                 f"{edition['productName']} {version}\n\n"
-                "Atualizador experimental de elencos. Requer o Brasfoot legítimo com a V4 já aplicada.\n"
+                "Atualização completa. Use a pasta do seu Brasfoot 22-23 original ou já atualizado.\n"
                 "O pacote não inclui o jogo, Wine ou CrossOver. Não é um port nativo do Brasfoot.\n"
                 "Feche o jogo antes de atualizar. O instalador cria backup e permite restauração.\n"
-                "Compatibilidade funcional desta build ainda não verificada; testes não executados.\n\n"
+                "Testes não executados a pedido do mantenedor.\n\n"
                 "Linux/macOS: execute ./brasfoot-mega-patch para escolher a pasta do jogo.\n"
                 "Terminal: ./brasfoot-mega-patch --game /caminho/do/Brasfoot\n"
                 "Restaurar: ./brasfoot-mega-patch --game /caminho/do/Brasfoot --restore\n"
@@ -157,7 +157,7 @@ def build(args: argparse.Namespace) -> Path:
     write_json(manifest_path, {
         "schemaVersion": 1, "productName": edition["productName"], "version": version,
         "patchYear": year, "sourceCommit": source_commit, "editionSha256": sha256(edition_path),
-        "channel": "experimental", "tests": "not-run-at-owner-request", "artifacts": artifacts,
+        "channel": "stable", "tests": "not-run-at-owner-request", "artifacts": artifacts,
         "attachments": attachments, "snapshot": snapshot.get("content_hash") if snapshot else None,
     })
     (output / "SHA256SUMS.txt").write_text(

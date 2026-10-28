@@ -11,13 +11,13 @@ import unicodedata
 
 _POSITIONS = {
     0: ("goleiro", "guarda redes", "goalkeeper"),
-    1: ("lateral direito", "lateral esquerdo", "lateral", "ala direito", "ala esquerdo", "right back", "left back", "fullback"),
+    1: ("lateral direito", "lateral esquerdo", "lateral", "ala direito", "ala esquerdo", "right back", "left back", "fullback", "right wing back", "left wing back", "wing back"),
     2: ("zagueiro", "zagueiro central", "defensor central", "defesa central", "centre back", "center back"),
     3: ("volante", "meia central", "meia atacante", "meio campista", "meio campo",
         "meia", "trinco", "medio central", "medio ofensivo", "central midfield",
-        "attacking midfield", "defensive midfield", "midfielder"),
+        "attacking midfield", "defensive midfield", "midfielder", "left midfield", "right midfield", "central midfielder", "attacking midfielder", "defensive midfielder"),
     4: ("centroavante", "ponta esquerda", "ponta direita", "atacante", "ponta de lanca",
-        "centre forward", "center forward", "left forward", "right forward", "striker"),
+        "centre forward", "center forward", "left forward", "right forward", "striker", "forward", "attacker", "left winger", "right winger", "winger", "second striker", "secondary striker"),
 }
 
 
@@ -35,6 +35,39 @@ def brasfoot_code(position_label: str) -> int:
         if label in aliases:
             return code
     raise ValueError(f"Posição ambígua ou desconhecida: {position_label!r}; exige revisão manual")
+
+
+def resolve_positions(primary: str, secondary=()) -> int:
+    """Prefer the specific primary role; resolve broad groups from alternatives.
+
+    A fullback who can also play as a winger remains a fullback. A primary winger
+    is a forward. Side and preferred foot are never inferred from one another.
+    """
+    primary = normalize(primary)
+    broad = {"defender", "midfielder", "forward", "attacker"}
+    alternatives = [normalize(x) for x in secondary if x]
+    labels = alternatives + [primary] if primary in broad else [primary] + alternatives
+    for label in labels:
+        try:
+            return brasfoot_code(label)
+        except ValueError:
+            continue
+    raise ValueError(f"Posições sem detalhe suficiente: {labels!r}")
+
+
+def position_flank(label: str) -> str | None:
+    """Only an explicitly sided position supplies flank, never preferred foot."""
+    label = normalize(label)
+    if "left" in label or "esquerd" in label:
+        return "left"
+    if "right" in label or "direit" in label:
+        return "right"
+    return None
+
+
+def display_player_name(full_name: str) -> str:
+    """The product's two-word rule, keeping the complete source name elsewhere."""
+    return " ".join(full_name.split()[:2])
 
 
 def validate_source_url(url: str) -> str:

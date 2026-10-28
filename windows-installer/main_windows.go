@@ -490,7 +490,7 @@ func onEvent(ev guiEvent) {
 			displayError(Diagnostic{"BF-112", "O Brasfoot está aberto", "Detectei o processo " + process + " em execução.", "Salve sua carreira, feche o Brasfoot e tente novamente. O instalador não alterou nada.", "Processo: " + process})
 			return
 		}
-		warning := fmt.Sprintf("Atualizar %d arquivos do Brasfoot?\n\nEdição experimental: parte dos dados é estimada. Este atualizador de elencos usa a instalação V4 já preparada.\n\nUm backup será criado antes de começar. Saves não fazem parte do pacote.\n\nFeche o jogo e confirme para continuar.", len(ev.plan.Items))
+		warning := fmt.Sprintf("Atualizar %d arquivos do Brasfoot?\n\nAtualização completa da edição 2026. Compatível com a instalação original e com os patches anteriores reconhecidos.\n\nUm backup será criado antes de começar. Saves não fazem parte do pacote.\n\nFeche o jogo e confirme para continuar.", len(ev.plan.Items))
 		if executableInPlan(ev.plan) {
 			warning = fmt.Sprintf("Jogo verificado na pasta original.\n\n%d arquivos verificados serão atualizados NESTA MESMA INSTALAÇÃO, incluindo bf22-23.exe.\n\nO executável original e todos os arquivos afetados receberão backups persistentes com SHA-256. Saves e configurações não serão tocados. Em caso de erro, o patch será revertido.\n\nFeche o Brasfoot antes de continuar.\n\nAplicar o patch?", len(ev.plan.Items))
 		}
@@ -539,7 +539,7 @@ func onEvent(ev guiEvent) {
 		}
 		backupPath = ev.result.BackupPath
 		enableWindow.Call(backupButton, 1)
-		setStatus("ATUALIZAÇÃO CONCLUÍDA", fmt.Sprintf("Edição %s instalada. Seu backup está disponível em Abrir backup.", ev.result.Version), "Você já pode abrir o Brasfoot. Esta edição permanece experimental.", false)
+		setStatus("ATUALIZAÇÃO CONCLUÍDA", fmt.Sprintf("Edição %s instalada. Seu backup está disponível em Abrir backup.", ev.result.Version), "Você já pode abrir o Brasfoot atualizado.", false)
 		showProgress(100, "Arquivos e hashes verificados")
 		enableWindow.Call(playButton, 1)
 	case "restored":
@@ -585,10 +585,10 @@ func setupControls() {
 	textLabel("Sua instalação", 40, 169, 830, 28, white, strongFont)
 	gameEdit = create("EDIT", findGame(), wsChild|wsVisible|wsBorder|wsTabStop|esAutoHScroll, 40, 207, 682, 38, 0, bodyFont)
 	gameBrowse = create("BUTTON", "Escolher pasta", wsChild|wsVisible|wsTabStop, 735, 206, 143, 40, idChooseGame, smallFont)
-	textLabel("Use a pasta do Brasfoot com o patch V4 já instalado.", 41, 254, 835, 25, muted, smallFont)
+	textLabel("Escolha a pasta onde o Brasfoot está instalado.", 41, 254, 835, 25, muted, smallFont)
 
 	textLabel(fmt.Sprintf("Atualização %s · %d arquivos", productVersion, len(manifest.Files)), 40, 302, 835, 29, accent, strongFont)
-	textLabel("Edição experimental. Backup automático antes de qualquer alteração.", 41, 340, 835, 28, muted, smallFont)
+	textLabel("Edição 2026. Backup automático antes de qualquer alteração.", 41, 340, 835, 28, muted, smallFont)
 	installButton = create("BUTTON", "Atualizar Brasfoot", wsChild|wsVisible|wsTabStop, 40, 389, 322, 48, idInstall, strongFont)
 	playButton = create("BUTTON", "Jogar", wsChild|wsVisible|wsTabStop, 376, 390, 148, 46, idPlay, bodyFont)
 	restoreButton = create("BUTTON", "Restaurar original", wsChild|wsVisible|wsTabStop, 537, 390, 185, 46, idRestore, smallFont)

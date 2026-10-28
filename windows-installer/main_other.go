@@ -138,7 +138,7 @@ func runPortable() error {
 	if strings.EqualFold(filepath.Base(filepath.Clean(*game)), "teams") {
 		*game = filepath.Dir(filepath.Clean(*game))
 	}
-	fmt.Printf("%s %s\nAtualizador experimental. O jogo Windows requer uma camada de compatibilidade já configurada.\n", productName, productVersion)
+	fmt.Printf("%s %s\nAtualizador Brasfoot Mega Patch. O jogo Windows requer uma camada de compatibilidade já configurada.\n", productName, productVersion)
 	if err := checkPortableGameClosed(); err != nil && !*inspectOnly {
 		return err
 	}
@@ -165,7 +165,7 @@ func runPortable() error {
 	if *restore {
 		action = "Restaurar os arquivos anteriores do Brasfoot a partir do backup?"
 	}
-	if !*yes && !portableConfirmation(action+"\nPasta: "+plan.Game+"\nEdição experimental. Feche o jogo antes de continuar. Saves não fazem parte do pacote.", graphical) {
+	if !*yes && !portableConfirmation(action+"\nPasta: "+plan.Game+"\nEdição 2026. Feche o jogo antes de continuar. Saves não fazem parte do pacote.", graphical) {
 		fmt.Println("Operação cancelada. Nenhum arquivo do jogo foi alterado.")
 		return nil
 	}

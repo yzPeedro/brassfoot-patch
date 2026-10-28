@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "season": 2026,
-  "releaseVersion": "2026.2.0",
+  "releaseVersion": "2026.4.1",
   "type": "2026-game-division-membership-and-roster-readiness",
   "divisionCounts": {
     "A": 20,
@@ -15,9 +15,8 @@
     "membershipMayShift": true
   },
   "rosters2026": {
-    "newBCDeltasInstalled": 0,
-    "priorAExperimentalRosterOnlyWhenV2026_0_2PreviouslyInstalled": true,
-    "maranhaoProvisional": true
+    "includedClubs": 60,
+    "newBCDeltasInstalled": 40
   },
   "fullCareerTested": false,
   "clubs": [
@@ -27,7 +26,7 @@
       "state": "PR",
       "division": "A",
       "gameMembershipUpdated": true,
-      "rosterStatus": "preserved-from-original-or-v2026.0.2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-atletico-mineiro-mg",
@@ -35,7 +34,7 @@
       "state": "MG",
       "division": "A",
       "gameMembershipUpdated": true,
-      "rosterStatus": "preserved-from-original-or-v2026.0.2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-bahia-ba",
@@ -43,7 +42,7 @@
       "state": "BA",
       "division": "A",
       "gameMembershipUpdated": true,
-      "rosterStatus": "preserved-from-original-or-v2026.0.2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-botafogo-rj",
@@ -51,7 +50,7 @@
       "state": "RJ",
       "division": "A",
       "gameMembershipUpdated": true,
-      "rosterStatus": "preserved-from-original-or-v2026.0.2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-chapecoense-sc",
@@ -59,7 +58,7 @@
       "state": "SC",
       "division": "A",
       "gameMembershipUpdated": true,
-      "rosterStatus": "preserved-from-original-or-v2026.0.2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-corinthians-sp",
@@ -67,7 +66,7 @@
       "state": "SP",
       "division": "A",
       "gameMembershipUpdated": true,
-      "rosterStatus": "preserved-from-original-or-v2026.0.2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-coritiba-pr",
@@ -75,7 +74,7 @@
       "state": "PR",
       "division": "A",
       "gameMembershipUpdated": true,
-      "rosterStatus": "preserved-from-original-or-v2026.0.2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-cruzeiro-mg",
@@ -83,7 +82,7 @@
       "state": "MG",
       "division": "A",
       "gameMembershipUpdated": true,
-      "rosterStatus": "preserved-from-original-or-v2026.0.2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-flamengo-rj",
@@ -91,7 +90,7 @@
       "state": "RJ",
       "division": "A",
       "gameMembershipUpdated": true,
-      "rosterStatus": "preserved-from-original-or-v2026.0.2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-fluminense-rj",
@@ -99,7 +98,7 @@
       "state": "RJ",
       "division": "A",
       "gameMembershipUpdated": true,
-      "rosterStatus": "preserved-from-original-or-v2026.0.2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-gremio-rs",
@@ -107,7 +106,7 @@
       "state": "RS",
       "division": "A",
       "gameMembershipUpdated": true,
-      "rosterStatus": "preserved-from-original-or-v2026.0.2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-internacional-rs",
@@ -115,7 +114,7 @@
       "state": "RS",
       "division": "A",
       "gameMembershipUpdated": true,
-      "rosterStatus": "preserved-from-original-or-v2026.0.2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-mirassol-sp",
@@ -123,7 +122,7 @@
       "state": "SP",
       "division": "A",
       "gameMembershipUpdated": true,
-      "rosterStatus": "preserved-from-original-or-v2026.0.2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-palmeiras-sp",
@@ -131,7 +130,7 @@
       "state": "SP",
       "division": "A",
       "gameMembershipUpdated": true,
-      "rosterStatus": "preserved-from-original-or-v2026.0.2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-red-bull-bragantino-sp",
@@ -139,7 +138,7 @@
       "state": "SP",
       "division": "A",
       "gameMembershipUpdated": true,
-      "rosterStatus": "preserved-from-original-or-v2026.0.2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-remo-pa",
@@ -147,7 +146,7 @@
       "state": "PA",
       "division": "A",
       "gameMembershipUpdated": true,
-      "rosterStatus": "preserved-from-original-or-v2026.0.2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-santos-sp",
@@ -155,7 +154,7 @@
       "state": "SP",
       "division": "A",
       "gameMembershipUpdated": true,
-      "rosterStatus": "preserved-from-original-or-v2026.0.2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-sao-paulo-sp",
@@ -163,7 +162,7 @@
       "state": "SP",
       "division": "A",
       "gameMembershipUpdated": true,
-      "rosterStatus": "preserved-from-original-or-v2026.0.2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-vasco-da-gama-rj",
@@ -171,7 +170,7 @@
       "state": "RJ",
       "division": "A",
       "gameMembershipUpdated": true,
-      "rosterStatus": "preserved-from-original-or-v2026.0.2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-vitoria-ba",
@@ -179,7 +178,7 @@
       "state": "BA",
       "division": "A",
       "gameMembershipUpdated": true,
-      "rosterStatus": "preserved-from-original-or-v2026.0.2"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-america-mg",
@@ -187,7 +186,7 @@
       "state": "MG",
       "division": "B",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-athletic-mg",
@@ -195,7 +194,7 @@
       "state": "MG",
       "division": "B",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-atletico-goianiense-go",
@@ -203,7 +202,7 @@
       "state": "GO",
       "division": "B",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-avai-sc",
@@ -211,7 +210,7 @@
       "state": "SC",
       "division": "B",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-botafogo-sp",
@@ -219,7 +218,7 @@
       "state": "SP",
       "division": "B",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-ceara-ce",
@@ -227,7 +226,7 @@
       "state": "CE",
       "division": "B",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-crb-al",
@@ -235,7 +234,7 @@
       "state": "AL",
       "division": "B",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-criciuma-sc",
@@ -243,7 +242,7 @@
       "state": "SC",
       "division": "B",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-cuiaba-mt",
@@ -251,7 +250,7 @@
       "state": "MT",
       "division": "B",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-fortaleza-ce",
@@ -259,7 +258,7 @@
       "state": "CE",
       "division": "B",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-goias-go",
@@ -267,7 +266,7 @@
       "state": "GO",
       "division": "B",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-juventude-rs",
@@ -275,7 +274,7 @@
       "state": "RS",
       "division": "B",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-londrina-pr",
@@ -283,7 +282,7 @@
       "state": "PR",
       "division": "B",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-nautico-pe",
@@ -291,7 +290,7 @@
       "state": "PE",
       "division": "B",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-novorizontino-sp",
@@ -299,7 +298,7 @@
       "state": "SP",
       "division": "B",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-operario-ferroviario-pr",
@@ -307,7 +306,7 @@
       "state": "PR",
       "division": "B",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-ponte-preta-sp",
@@ -315,7 +314,7 @@
       "state": "SP",
       "division": "B",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-sao-bernardo-sp",
@@ -323,7 +322,7 @@
       "state": "SP",
       "division": "B",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-sport-pe",
@@ -331,7 +330,7 @@
       "state": "PE",
       "division": "B",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-vila-nova-go",
@@ -339,7 +338,7 @@
       "state": "GO",
       "division": "B",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-amazonas-am",
@@ -347,7 +346,7 @@
       "state": "AM",
       "division": "C",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-anapolis-go",
@@ -355,7 +354,7 @@
       "state": "GO",
       "division": "C",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-barra-sc",
@@ -363,7 +362,7 @@
       "state": "SC",
       "division": "C",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-botafogo-pb",
@@ -371,7 +370,7 @@
       "state": "PB",
       "division": "C",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-brusque-sc",
@@ -379,7 +378,7 @@
       "state": "SC",
       "division": "C",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-caxias-rs",
@@ -387,7 +386,7 @@
       "state": "RS",
       "division": "C",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-confianca-se",
@@ -395,7 +394,7 @@
       "state": "SE",
       "division": "C",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-ferroviaria-sp",
@@ -403,7 +402,7 @@
       "state": "SP",
       "division": "C",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-figueirense-sc",
@@ -411,7 +410,7 @@
       "state": "SC",
       "division": "C",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-floresta-ce",
@@ -419,7 +418,7 @@
       "state": "CE",
       "division": "C",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-guarani-sp",
@@ -427,7 +426,7 @@
       "state": "SP",
       "division": "C",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-inter-de-limeira-sp",
@@ -435,7 +434,7 @@
       "state": "SP",
       "division": "C",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-itabaiana-se",
@@ -443,7 +442,7 @@
       "state": "SE",
       "division": "C",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-ituano-sp",
@@ -451,7 +450,7 @@
       "state": "SP",
       "division": "C",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-maranhao-ma",
@@ -459,7 +458,7 @@
       "state": "MA",
       "division": "C",
       "gameMembershipUpdated": true,
-      "rosterStatus": "synthetic-experimental"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-maringa-pr",
@@ -467,7 +466,7 @@
       "state": "PR",
       "division": "C",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-paysandu-pa",
@@ -475,7 +474,7 @@
       "state": "PA",
       "division": "C",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-santa-cruz-pe",
@@ -483,7 +482,7 @@
       "state": "PE",
       "division": "C",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-volta-redonda-rj",
@@ -491,7 +490,7 @@
       "state": "RJ",
       "division": "C",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     },
     {
       "id": "br-ypiranga-rs",
@@ -499,7 +498,7 @@
       "state": "RS",
       "division": "C",
       "gameMembershipUpdated": true,
-      "rosterStatus": "historical-players-original"
+      "rosterStatus": "included-current-snapshot"
     }
   ]
 }

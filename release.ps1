@@ -21,10 +21,10 @@ if (-not $PublishExisting) {
   Invoke-ReleaseCommand 'python' @('-m', 'tools.daily_update')
   Invoke-ReleaseCommand 'python' @('tools/build_distribution.py', '--bundle', $PackagePath, '--output', $OutputDirectory, '--snapshot', 'data/private/daily/snapshot.json')
 }
-Write-Host 'Distribuição experimental. Nenhuma suíte de testes foi executada.'
+Write-Host 'Release final. Nenhuma suíte de testes foi executada.'
 if ($Publish -or $PublishExisting) {
   Invoke-ReleaseCommand 'python' @('tools/publish_distribution.py', '--directory', $OutputDirectory, '--notes', $notes)
-  Invoke-ReleaseCommand 'git' @('add', '--', 'site/data/distribution.json', 'site/data/world-status.json')
+  Invoke-ReleaseCommand 'git' @('add', '--', 'site/data/distribution.json', 'site/data/release.json', 'site/data/world-status.json')
   & git diff --cached --quiet
   if ($LASTEXITCODE -eq 1) { Invoke-ReleaseCommand 'git' @('commit', '-m', ('release: publish Mega Patch ' + $edition.version + ' metadata [skip ci]')) }
   elseif ($LASTEXITCODE -ne 0) { throw 'Não foi possível ler o estado do índice Git.' }
