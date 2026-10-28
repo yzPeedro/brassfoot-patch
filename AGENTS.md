@@ -3,6 +3,7 @@
 ## Fonte e retomada
 - Missão integral: `docs/mega-patch-specification.md`, cópia byte a byte de `PROMPT.md`; hash em `config/mega-patch-specification.json`. Não remover requisitos.
 - Leia `docs/current-state.md`, `config/backlog.json` e o estado local em `data/private/continuity/` antes de trabalhar.
+- Manutenção recorrente autorizada: seguir `docs/scheduled-maintenance.md` nas execuções de 06h/18h de Brasília; pesquisa de todos os clubes, publicação automática, datas/ano e patch notes fazem parte do mesmo ciclo.
 - Evidências anteriores: `docs/implementation-progress.md`, `docs/release-2026.3.5.md`, `docs/365scores-roster-policy.md`. Não repetir auditorias concluídas. Documentos antigos podem descrever releases anteriores; consultar manifesto e GitHub para situação publicada.
 
 ## Execução
@@ -21,10 +22,9 @@
 - Identidade visual atual solicitada: Brasfoot Mega Patch com estética celeste inspirada no Cruzeiro, azul profundo, ciano, branco e constelações; projeto independente. PIX existente opcional, sem PayPal.
 
 ## Verificações
-- Python: `python -m unittest discover -s tests -q`.
-- Site: `node site/tests/site.test.js`, `node site/tests/seo-pix.test.js`, `node site/tests/explorer-interaction.test.js`.
-- Instalador: `go test ./...` e `go vet ./...` em `windows-installer` quando afetado.
-- Testes unitários não comprovam gameplay, temporadas, macOS ou Linux. Manter esses gates pendentes até evidência real.
+- Por solicitação explícita do proprietário, não executar testes nesta manutenção, incluindo suítes Python/JavaScript/Go, testes de navegador e gameplay.
+- Realizar apenas compilação produtiva, geração de dados, leitura de código, integridade/proveniência dos artefatos e conferência do estado de publicação. Não descrever essas atividades como testes funcionais.
+- Não afirmar validação de gameplay, temporadas, macOS ou Linux sem evidência real.
 
 ## Entrega corretiva 2026.4.1
 - Estado atual por seção: `config/specification-coverage.json`; conclusão integral explicitamente falsa.
