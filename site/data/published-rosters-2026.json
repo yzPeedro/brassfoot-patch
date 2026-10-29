@@ -1,17 +1,17 @@
 {
   "schemaVersion": 3,
   "season": 2026,
-  "sourceRelease": "2026.4.1",
+  "sourceRelease": "2026.4.2",
   "includedInPackage": true,
   "totalClubs": 60,
-  "totalPlayers": 1988,
+  "totalPlayers": 1987,
   "clubs": {
     "br-athletico-paranaense-pr": {
       "division": "A",
       "teamFile": "teams/atleticopr_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/athletico-paranaense-1210/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Mycael",
@@ -87,7 +87,7 @@
       "teamFile": "teams/atleticomg_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/atletico-mineiro-1209/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Gabriel Delfim",
@@ -163,7 +163,7 @@
       "teamFile": "teams/bahia.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/bahia-1767/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Ronaldo Strada",
@@ -239,7 +239,7 @@
       "teamFile": "teams/botafogorj_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/botafogo-1211/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Gabriel Batista",
@@ -323,7 +323,7 @@
       "teamFile": "teams/chapecoense_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/chapecoense-7387/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Gabriel Werner",
@@ -407,7 +407,7 @@
       "teamFile": "teams/corinthians_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/corinthians-1267/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Hugo Souza",
@@ -437,7 +437,7 @@
         "Kaio César",
         "Renato Santos",
         "Hugo",
-        "André",
+        "André Luiz",
         "Zakaria Labyad",
         "Iago Machado",
         "Gui Negão",
@@ -487,7 +487,7 @@
       "teamFile": "teams/coritiba_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/coritiba-1212/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Pedro Morisco",
@@ -563,7 +563,7 @@
       "teamFile": "teams/cruzeiro_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/cruzeiro-1213/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Cássio",
@@ -639,7 +639,7 @@
       "teamFile": "teams/flarj.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/flamengo-1215/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Agustin Rossi",
@@ -705,7 +705,7 @@
       "teamFile": "teams/flurj.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/fluminense-1216/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Fábio",
@@ -787,7 +787,7 @@
       "teamFile": "teams/gremio.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/gremio-1218/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Weverton",
@@ -865,7 +865,7 @@
       "teamFile": "teams/internacional_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/internacional-1219/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Sergio Rochet",
@@ -935,7 +935,7 @@
       "teamFile": "teams/miirassol_sp.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/mirassol-1269/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Georgemy",
@@ -1013,7 +1013,7 @@
       "teamFile": "teams/palmeiras.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/palmeiras-1222/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Carlos Miguel",
@@ -1077,15 +1077,13 @@
       "teamFile": "teams/bragantino_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/rb-bragantino-1273/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Cleiton",
         "Tiago Volpi",
-        "Fernando Costa",
         "Fabricio",
         "Gustavo Reis",
-        "Patrick",
         "Guzmán Rodríguez",
         "Eduardo Santos",
         "Alix Vinicius",
@@ -1105,6 +1103,7 @@
         "Gustavo Neves",
         "Agustín Sant'Anna",
         "Davi Gomes",
+        "Patrick",
         "Juninho Capixaba",
         "Henry Mosquera",
         "José Herrera",
@@ -1120,8 +1119,6 @@
         0,
         0,
         0,
-        0,
-        3,
         2,
         2,
         2,
@@ -1141,6 +1138,7 @@
         3,
         1,
         4,
+        3,
         1,
         4,
         4,
@@ -1157,7 +1155,7 @@
       "teamFile": "teams/remo.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/remo-7383/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Marcelo Rangel",
@@ -1233,7 +1231,7 @@
       "teamFile": "teams/santos.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/santos-1224/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Diogenes",
@@ -1315,7 +1313,7 @@
       "teamFile": "teams/saopaulo_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/sao-paulo-1225/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Rafael",
@@ -1407,7 +1405,7 @@
       "teamFile": "teams/vasco.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/vasco-da-gama-1227/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Léo Jardim",
@@ -1493,7 +1491,7 @@
       "teamFile": "teams/vitoria.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/vitoria-1228/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Lucas Arcanjo",
@@ -1583,7 +1581,7 @@
       "teamFile": "teams/americamg_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/america-mineiro-8514/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Gustavo",
@@ -1661,7 +1659,7 @@
       "teamFile": "teams/athleticclub_mg.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/athletic-club-67683/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Tony Batista",
@@ -1743,7 +1741,7 @@
       "teamFile": "teams/atleticogo_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/atletico-goianiense-5918/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Paulo Henrique",
@@ -1817,7 +1815,7 @@
       "teamFile": "teams/avai_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/avai-1777/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Igor Bohn",
@@ -1895,7 +1893,7 @@
       "teamFile": "teams/botafogosp_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/botafogo-sp-1773/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Victor Souza",
@@ -1971,7 +1969,7 @@
       "teamFile": "teams/ceara_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/ceara-1781/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Richard",
@@ -2045,7 +2043,7 @@
       "teamFile": "teams/crb_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/crb-1784/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Pablo",
@@ -2123,7 +2121,7 @@
       "teamFile": "teams/criciuma_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/criciuma-1780/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Alisson",
@@ -2203,7 +2201,7 @@
       "teamFile": "teams/cuiaba_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/cuiaba-9188/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "João Carlos",
@@ -2283,7 +2281,7 @@
       "teamFile": "teams/fortaleza.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/fortaleza-1778/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "João Ricardo",
@@ -2361,7 +2359,7 @@
       "teamFile": "teams/goias.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/goias-1217/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Thiago Rodrigues",
@@ -2435,7 +2433,7 @@
       "teamFile": "teams/juventude.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/juventude-1775/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Pedro Rocha",
@@ -2517,7 +2515,7 @@
       "teamFile": "teams/londrina_pr.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/londrina-9113/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Luan Ribeiro",
@@ -2609,7 +2607,7 @@
       "teamFile": "teams/nautico.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/nautico-1221/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Léo",
@@ -2685,7 +2683,7 @@
       "teamFile": "teams/novorinzontino_sp.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/novorizontino-23765/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Lucas Pereira",
@@ -2767,7 +2765,7 @@
       "teamFile": "teams/operario_pr.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/operario-pr-9109/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Elias Curzel",
@@ -2841,7 +2839,7 @@
       "teamFile": "teams/pontepreta_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/ponte-preta-1266/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Guilherme Viana",
@@ -2913,7 +2911,7 @@
       "teamFile": "teams/saobernardo_sp.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/sao-bernardo-10253/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Alex Alves",
@@ -2995,7 +2993,7 @@
       "teamFile": "teams/sport.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/sport-recife-1226/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Dênis",
@@ -3071,7 +3069,7 @@
       "teamFile": "teams/vilago.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/vila-nova-1782/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Helton Leite",
@@ -3371,7 +3369,7 @@
       "teamFile": "teams/botafogopb_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/botafogo-pb-9203/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Leandro Mathias",
@@ -3463,7 +3461,7 @@
       "teamFile": "teams/brusquesc_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/brusque-9149/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Paulo Gianezini",
@@ -3705,7 +3703,7 @@
       "teamFile": "teams/ferroviaria_sp.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/ferroviaria-9182/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Léo Wall",
@@ -3871,7 +3869,7 @@
       "teamFile": "teams/florestace.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/floresta-ec-50729/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Jeferson Souza",
@@ -4013,7 +4011,7 @@
       "teamFile": "teams/interlimeirasp_bra.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/inter-de-limeira-23975/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Emerson Júnior",
@@ -4313,7 +4311,7 @@
       "teamFile": "teams/maringapr.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/maringa-18884/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Gabriel Affonso",
@@ -4393,7 +4391,7 @@
       "teamFile": "teams/paysandu.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/paysandu-7390/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Levi",
@@ -4479,7 +4477,7 @@
       "teamFile": "teams/santa.ban",
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/santa-cruz-7384/squad",
-      "reviewedOn": "2026-10-28",
+      "reviewedOn": "2026-10-29",
       "rosterPolicy": "source-replacement",
       "players": [
         "Gabriel Souza",

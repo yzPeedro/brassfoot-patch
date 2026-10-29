@@ -8,13 +8,14 @@ from __future__ import annotations
 import argparse
 import base64
 from collections import Counter, defaultdict
-from datetime import date
+from datetime import date, datetime
 import hashlib
 import json
 from pathlib import Path
 import re
 import shutil
 import subprocess
+from zoneinfo import ZoneInfo
 
 from tools.collect_live_rosters import GAME_COUNTRIES, key
 from tools.roster_position_map import display_player_name, resolve_positions
@@ -48,6 +49,15 @@ COUNTRIES=GAME_COUNTRIES | {
 }
 FIELDS=["aid","b","c","d","e","f","g","h","hash","i","j","sid","tid"]
 DERIVED_TRAITS={0:(2,0),1:(6,12),2:(7,10),3:(11,12),4:(9,13)}
+
+
+def sao_paulo_today():
+    try:
+        zone=ZoneInfo("America/Sao_Paulo")
+    except Exception:
+        with (ROOT/"config/tzdata/America/Sao_Paulo").open("rb") as stream:
+            zone=ZoneInfo.from_file(stream,key="America/Sao_Paulo")
+    return datetime.now(zone).date()
 
 
 def run(command):
@@ -94,7 +104,7 @@ def curated_clubs(existing):
     return result
 
 
-def compile_rosters(base_game, original_game, output, snapshot, supplements, fallback_game, java, javac, reference):
+def compile_rosters(base_game, original_game, output, snapshot, supplements, fallback_game, java, javac, reference, version):
     output=output.resolve()
     for protected in [base_game,original_game,fallback_game]:
         if protected and (output.is_relative_to(protected.resolve()) or protected.resolve().is_relative_to(output)):
@@ -189,8 +199,11 @@ def compile_rosters(base_game, original_game, output, snapshot, supplements, fal
                 if nationality is None:nationality=COUNTRIES.get(raw.get("nationality"))
                 age=age_on(raw.get("birthDate"),reference) if raw.get("birthDate") else raw.get("age")
                 position=raw.get("positionCode")
-                match=local.get(key(name))
-                origin="original-same-club" if match else None
+                match=prior_local.get(key(name)) or prior_local.get(key(display_player_name(name)))
+                origin="previous-patch-identified-player" if match else None
+                if match is None:
+                    match=local.get(key(name))
+                    origin="original-same-club" if match else None
                 if match is None:
                     candidates=[]
                     for alias in [name,raw.get("shortName")]:
@@ -202,8 +215,6 @@ def compile_rosters(base_game, original_game, output, snapshot, supplements, fal
                     unique={(other,p["name"],p["c"],p["d"]):(other,p) for other,p in candidates}
                     if len(unique)==1:
                         match=next(iter(unique.values()))[1];origin="original-identified-player"
-                if match is None and key(name) in prior_local:
-                    match=prior_local[key(name)];origin="previous-patch-unverified-attributes"
                 if position is None:
                     if match:position=match["e"]
                     else:
@@ -234,7 +245,6 @@ def compile_rosters(base_game, original_game, output, snapshot, supplements, fal
                 if age is not None:
                     player["d"]=max(0,min(100,age));provenance["age"]="source-birthdate" if raw.get("birthDate") else "source-tsv"
                 elif match:
-                    if origin.startswith("original"):player["d"]=min(100,match["d"]+4)
                     provenance["age"]="preserved-estimate"
                 else:report["defaults"]["age"]+=1;provenance["age"]="default-25"
                 if nationality is not None:player["c"]=nationality;provenance["nationality"]="source"
@@ -282,6 +292,11 @@ def compile_rosters(base_game, original_game, output, snapshot, supplements, fal
             if shortened!=player["name"]:
                 counts["secondaryNamesShortened"]+=1
                 full_name_records.append({"teamFile":file,"squad":"secondary","fullName":player["name"],"displayName":shortened})
+        # Provider ordering and shirt-number changes are not roster changes.
+        # Keep the published byte order when every serialized player fact is equal.
+        canonical=lambda values:sorted(json.dumps(p,sort_keys=True,separators=(",",":")) for p in values)
+        if canonical(rows)==canonical(prior_team["players"]):
+            rows=[dict(p) for p in prior_team["players"]]
         lines=[]
         for player in rows:
             values=[base64.b64encode(player["name"].encode()).decode()]
@@ -297,7 +312,7 @@ def compile_rosters(base_game, original_game, output, snapshot, supplements, fal
         for label,number in report["defaults"].items():counts["default_"+label]+=number
         club_reports.append(report)
     compiler=run([java,"-cp",classes,"app.Main","batch-rosters",base_game/"teams",tsvs,output/"teams"])
-    result={"schemaVersion":1,"version":"2026.4.1","referenceDate":reference.isoformat(),
+    result={"schemaVersion":1,"version":version,"referenceDate":reference.isoformat(),
         "snapshotSha256":hashlib.sha256(snapshot.read_bytes()).hexdigest(),"compilerOutput":json.loads(compiler),
         "counts":dict(counts),"clubs":club_reports,"fullNameProvenance":full_name_records,
         "limitations":["Individual traits unavailable at squad sources; preserved attributes or explicitly derived role defaults.",
@@ -310,19 +325,23 @@ def compile_rosters(base_game, original_game, output, snapshot, supplements, fal
 
 
 def main():
+    edition=json.loads((ROOT/"config/edition.json").read_text(encoding="utf8"))
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--base-game",type=Path,required=True)
     parser.add_argument("--original-game",type=Path,required=True)
     parser.add_argument("--fallback-game",type=Path)
     parser.add_argument("--output",type=Path,required=True)
-    parser.add_argument("--snapshot",type=Path,default=ROOT/"config/rosters-2026.4.1.json")
+    parser.add_argument("--snapshot",type=Path)
     parser.add_argument("--supplement",type=Path,action="append",default=[])
     parser.add_argument("--java",default="java")
     parser.add_argument("--javac",default="javac")
-    parser.add_argument("--reference-date",type=date.fromisoformat,default=date(2026,10,28))
+    parser.add_argument("--reference-date",type=date.fromisoformat,
+                        default=sao_paulo_today())
+    parser.add_argument("--version",default=edition["version"])
     args=parser.parse_args()
-    report=compile_rosters(args.base_game,args.original_game,args.output,args.snapshot,args.supplement,
-                           args.fallback_game,args.java,args.javac,args.reference_date)
+    snapshot=args.snapshot or ROOT/f"config/rosters-{args.version}.json"
+    report=compile_rosters(args.base_game,args.original_game,args.output,snapshot,args.supplement,
+                           args.fallback_game,args.java,args.javac,args.reference_date,args.version)
     print(json.dumps(report["counts"],ensure_ascii=True))
 
 

@@ -19,6 +19,8 @@ from urllib.request import Request, urlopen
 from tools.roster_position_map import resolve_positions, position_flank
 
 ROOT = Path(__file__).resolve().parents[1]
+EDITION = json.loads((ROOT / "config/edition.json").read_text(encoding="utf8"))
+VERSION = EDITION["version"]
 API = "https://webws.365scores.com/web/"
 # Men's domestic first divisions across UEFA, Spanish lower tiers, and Brazil A/B/C.
 LEAGUES = [7,1,11,12,7865,7741,17,25,35,57,73,74,98,111,61,62,84,89,95,
@@ -47,13 +49,14 @@ def key(value: str) -> str:
     return "".join(c for c in value if c.isalnum() and not unicodedata.combining(c))
 
 
-def fetch(endpoint: str, cache: Path, **params) -> dict:
+def fetch(endpoint: str, cache: Path, *, max_age_hours: float, force_refresh: bool, **params) -> dict:
     url = API + endpoint + "/?" + urlencode({"appTypeId":5,"langId":1,**params})
     target = cache / (hashlib.sha256(url.encode()).hexdigest() + ".json")
     cached = json.loads(target.read_text(encoding="utf8")) if target.exists() else None
-    if cached and datetime.now(timezone.utc) - datetime.fromisoformat(cached["observedAt"]) < timedelta(hours=20):
+    if (cached and not force_refresh and
+            datetime.now(timezone.utc) - datetime.fromisoformat(cached["observedAt"]) < timedelta(hours=max_age_hours)):
         return cached
-    request = Request(url, headers={"User-Agent":"BrasfootCommunityRoster/2026.4.1", "Accept":"application/json"})
+    request = Request(url, headers={"User-Agent":f"BrasfootCommunityRoster/{VERSION}", "Accept":"application/json"})
     # A rate-limit or access error is surfaced; no retry/proxy/bypass.
     try:
         with urlopen(request, timeout=45) as response:
@@ -76,7 +79,8 @@ def batches(values, size):
         yield values[start:start+size]
 
 
-def collect(original_catalog: Path, output: Path, cache: Path, mappings: Path) -> dict:
+def collect(original_catalog: Path, output: Path, cache: Path, mappings: Path,
+            cache_max_age_hours: float = 18, refresh: bool = False) -> dict:
     originals=[]
     for file in sorted(original_catalog.glob("*.ban.json")):
         team=json.loads(file.read_text(encoding="utf8"))
@@ -87,7 +91,8 @@ def collect(original_catalog: Path, output: Path, cache: Path, mappings: Path) -
     for team in originals:
         index.setdefault((team["country"],key(team["name"])),[]).append(team)
     def request_standings(ids):
-        return fetch("standings",cache,competitions=",".join(map(str,ids)))
+        return fetch("standings",cache,max_age_hours=cache_max_age_hours,force_refresh=refresh,
+                     competitions=",".join(map(str,ids)))
     source_teams={}
     competitions={}
     countries={}
@@ -117,7 +122,8 @@ def collect(original_catalog: Path, output: Path, cache: Path, mappings: Path) -
     extra_ids = [int(ident) for ident in manual if int(ident) not in source_teams]
     for ids in batches(extra_ids, 20):
         try:
-            record=fetch("competitors",cache,competitors=",".join(map(str,ids)))
+            record=fetch("competitors",cache,max_age_hours=cache_max_age_hours,force_refresh=refresh,
+                         competitors=",".join(map(str,ids)))
             extra=record["data"]
             countries.update({x["id"]:x["name"] for x in extra.get("countries",[])})
             competitions.update({x["id"]:x for x in extra.get("competitions",[])})
@@ -151,7 +157,8 @@ def collect(original_catalog: Path, output: Path, cache: Path, mappings: Path) -
             unmapped.append({"sourceTeamId":source_id,"name":team["name"],
                              "country":countries.get(team.get("countryId")),"leagueId":team["leagueId"]})
     def request_squads(teams):
-        return fetch("squads",cache,competitors=",".join(str(x["id"]) for x in teams))
+        return fetch("squads",cache,max_age_hours=cache_max_age_hours,force_refresh=refresh,
+                     competitors=",".join(str(x["id"]) for x in teams))
     metadata={x["id"]:x for x in matched}
     clubs=[]
     with ThreadPoolExecutor(max_workers=3) as pool:
@@ -193,11 +200,30 @@ def collect(original_catalog: Path, output: Path, cache: Path, mappings: Path) -
                     "sourceUrl":"https://www.365scores.com/football/team/"+team["nameForURL"]+"-"+str(team["id"])+"/squad",
                     "apiUrl":record["url"],"observedAt":record["observedAt"],"sourceResponseSha256":record["sha256"],
                     "players":players,"staff":staff})
-    result={"schemaVersion":1,"version":"2026.4.1","provider":"365Scores public squad service",
+    clubs_by_file={club["teamFile"]:club for club in clubs}
+    matched_files={team["teamFile"] for team in matched}
+    catalog_coverage=[]
+    for original in originals:
+        club=clubs_by_file.get(original["teamFile"])
+        if club:
+            complete=len(club["players"]) >= 16 and sum(p.get("positionCode") == 0 for p in club["players"]) >= 2
+            status="source-complete" if complete else "source-partial-preserve-roster"
+        elif original["teamFile"] in matched_files:
+            status="source-unavailable-preserve-roster"
+        else:
+            status="identification-pending-preserve-roster"
+        catalog_coverage.append({"teamFile":original["teamFile"],"name":original["name"],
+            "countryCode":original["country"],"status":status,
+            "sourceUrl":club.get("sourceUrl") if club else None,
+            "observedAt":club.get("observedAt") if club else None})
+    result={"schemaVersion":1,"version":VERSION,"provider":"365Scores public squad service",
             "collectedAt":datetime.now(timezone.utc).isoformat(),"leaguesRequested":LEAGUES,
+            "cachePolicy":{"maxAgeHours":cache_max_age_hours,"refreshRequested":refresh,
+                           "staleCacheRetainedOnFailure":True},
             "policy":{"unknownAttributes":"preserve uniquely matched original; otherwise explicitly derived game defaults",
                       "foot":"not represented separately by Brasfoot 22-23","gameplayTested":False},
             "clubs":sorted(clubs,key=lambda x:x["teamFile"]),"failures":failures,
+            "catalogCoverage":catalog_coverage,
             "sourceTeamsWithoutGameMatch":unmapped,
             "originalEuropeanTeamsWithoutCurrentSquad":[x for x in originals if x["country"] in set(GAME_COUNTRIES.values())-{29} and x["teamFile"] not in {c["teamFile"] for c in clubs}]}
     output.parent.mkdir(parents=True,exist_ok=True)
@@ -211,8 +237,11 @@ def main():
     parser.add_argument("--output",type=Path,default=ROOT/"config/rosters-2026.4.1.json")
     parser.add_argument("--cache",type=Path,default=ROOT/"data/private/live-roster-cache")
     parser.add_argument("--mappings",type=Path,default=ROOT/"config/live-roster-team-map.json")
+    parser.add_argument("--cache-max-age-hours",type=float,default=18)
+    parser.add_argument("--refresh",action="store_true",help="attempt a fresh request while retaining cache fallback")
     args=parser.parse_args()
-    result=collect(args.original_catalog,args.output,args.cache,args.mappings)
+    result=collect(args.original_catalog,args.output,args.cache,args.mappings,
+                   args.cache_max_age_hours,args.refresh)
     print(json.dumps({"clubs":len(result["clubs"]),"players":sum(len(x["players"]) for x in result["clubs"]),
                       "failures":result["failures"],"unmatchedOriginalEurope":len(result["originalEuropeanTeamsWithoutCurrentSquad"])}))
 

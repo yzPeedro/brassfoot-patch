@@ -22,7 +22,8 @@ def export(report_path):
                               'players':[p['name'] for p in result['finalPlayers']],
                               'positionCodes':[p['positionCode'] for p in result['finalPlayers']]}
     version=report['version']
-    public={'schemaVersion':3,'season':2026,'sourceRelease':version,'includedInPackage':True,
+    season=int(version[:4])
+    public={'schemaVersion':3,'season':season,'sourceRelease':version,'includedInPackage':True,
             'totalClubs':len(clubs),'totalPlayers':sum(len(c['players'])for c in clubs.values()),'clubs':clubs}
     write(ROOT/'site/data/published-rosters-2026.json',public)
     target_path=ROOT/'site/data/target-abc-2026.json'
@@ -44,7 +45,7 @@ def export(report_path):
                   {k:c[k] for k in ('teamFile','club','countryCode','sourceUrl','observedAt','rosterPolicy','compiledPlayers')}
                   for c in report['clubs'] if c['sourceUrl']], 'testsExecuted':False}
     write(ROOT/'site/data/roster-coverage.json',coverage)
-    write(ROOT/'config/roster-build-2026.4.1.json',coverage)
+    write(ROOT/f'config/roster-build-{version}.json',coverage)
     print(json.dumps({'publicBrazilClubs':len(clubs),'publicBrazilPlayers':public['totalPlayers'],
                       'sourceSquads':report['counts']['sourceSquads']}))
 

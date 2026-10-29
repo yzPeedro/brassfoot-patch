@@ -1,7 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-28T12:09:24.280283+00:00",
+  "updatedAt": "2026-10-29T21:04:18Z",
   "entries": [
+    {
+      "id": "patch-2026-4-2",
+      "version": "2026.4.2",
+      "date": "2026-10-29T21:04:18Z",
+      "title": "Plantéis renovados com preservação segura",
+      "kind": "patch",
+      "summary": "28 clubes receberam mudanças reais de elenco ou posição sem apagar fontes parciais.",
+      "changes": [
+        "Quatro entradas, cinco saídas e 19 registros de atletas corrigidos a partir da consulta de 29/10/2026.",
+        "Respostas parciais continuam preservando o elenco publicado; Barcelona e outros clubes sem retorno não sofreram remoções.",
+        "O catálogo registra a situação de pesquisa dos 704 clubes, com 300 elencos substituídos, 54 fontes parciais e 350 preservados.",
+        "O cache de plantéis pode ser renovado explicitamente e conserva o último dado confiável quando a fonte falha.",
+        "Atualização direta preservada para bases originais, V4, 2026.3.5, 2026.4.0 e 2026.4.1 reconhecidas por SHA-256."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.4.2"
+    },
     {
       "id": "site-celeste-2026-10-28",
       "version": "2026.4.1",

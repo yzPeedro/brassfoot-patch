@@ -73,7 +73,7 @@ def publish(directory, notes):
                             "--json", "isDraft,tagName"], cwd=ROOT, capture_output=True, text=True)
     if probe.returncode:
         gh("release", "create", tag, "--repo", REPO, "--target", commit, "--draft",
-           "--title", f"Brasfoot Mega Patch 2026 — {tag}", "--notes-file", str(notes))
+           "--title", f"Brasfoot Mega Patch {manifest['patchYear']} — {tag}", "--notes-file", str(notes))
     ref = json.loads(gh("api", f"repos/{REPO}/git/ref/tags/{tag}"))["object"]
     if ref["type"] == "tag":
         ref = json.loads(gh("api", f"repos/{REPO}/git/tags/{ref['sha']}"))["object"]
@@ -116,7 +116,8 @@ def publish(directory, notes):
               "downloadUrl": windows["downloadUrl"], "fileSizeBytes": windows["sizeBytes"],
               "sha256": windows["sha256"], "competitionSeason": manifest["patchYear"],
               "editionStatus": "stable", "compatibilityVerifiedInGame": False,
-              "gameplayVerified": False, "releaseNotes": "Instalação direta, elencos atuais e tela inicial 2026."}
+              "gameplayVerified": False,
+              "releaseNotes": f"Instalação direta, elencos atuais e tela inicial {manifest['patchYear']}."}
     (ROOT / "site/data/release.json").write_text(
         json.dumps(legacy, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(release["html_url"])

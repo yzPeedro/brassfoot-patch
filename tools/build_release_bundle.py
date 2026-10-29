@@ -51,7 +51,7 @@ def update_menu(source: Path, destination: Path, image: Path):
     return destination
 
 
-def build(original, base, previous, teams, executable, destination, version):
+def build(original, base, previous, teams, executable, destination, version, inherit_bundle=None):
     if destination.exists():
         raise FileExistsError('use a new output bundle directory')
     recipes = destination / 'patches'
@@ -63,7 +63,7 @@ def build(original, base, previous, teams, executable, destination, version):
     for relative, source in sorted(paths.items()):
         target = source.read_bytes()
         inputs = {}
-        for root in (original, base, previous):
+        for root in (original, base, *previous):
             path = root / relative
             if path.is_file():
                 body = path.read_bytes()
@@ -83,10 +83,32 @@ def build(original, base, previous, teams, executable, destination, version):
                              'originalSha256': digest, 'targetSha256': sha(target),
                              'originalSize': len(body), 'targetSize': len(target),
                              'operations': operations})
+        if inherit_bundle:
+            inherited_path = inherit_bundle / 'patches' / (source.name + '.json')
+            if inherited_path.is_file():
+                inherited = json.loads(inherited_path.read_text(encoding='utf-8'))
+                legacy_variants = inherited.get('variants', [inherited])
+                bridge_by_original = {v['originalSha256']: v for v in variants}
+                existing = {v['originalSha256'] for v in variants}
+                for legacy in legacy_variants:
+                    if legacy.get('originalSha256') in existing:
+                        continue
+                    if legacy.get('targetSha256') == sha(target):
+                        variants.append(legacy)
+                        existing.add(legacy['originalSha256'])
+                    elif legacy.get('targetSha256') in bridge_by_original:
+                        bridge = bridge_by_original[legacy['targetSha256']]
+                        variants.append({'schemaVersion': 3, 'path': relative,
+                            'originalSha256': legacy['originalSha256'],
+                            'targetSha256': bridge['targetSha256'],
+                            'originalSize': legacy['originalSize'],
+                            'targetSize': bridge['targetSize'],
+                            'steps': [legacy, bridge]})
+                        existing.add(legacy['originalSha256'])
         recipe = {'schemaVersion': 2, 'path': relative, 'variants': variants}
         (recipes / (source.name + '.json')).write_text(
             json.dumps(recipe, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
-        originals = [digest for digest, body in inputs.items() if body]
+        originals = [v['originalSha256'] for v in variants if v['originalSha256'] != sha(b'')]
         files.append({'operation': 'replace' if originals else 'add', 'path': relative, 'size': len(target),
                       'sha256': sha(target), 'acceptedOriginalSha256':
                       originals,
@@ -103,11 +125,16 @@ def build(original, base, previous, teams, executable, destination, version):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    for name in ('original', 'base', 'previous', 'teams', 'executable', 'output'):
+    for name in ('original', 'base', 'teams', 'executable', 'output'):
         p.add_argument('--' + name, type=Path, required=True)
-    p.add_argument('--version', default='2026.4.1')
+    p.add_argument('--previous', type=Path, action='append', required=True,
+                   help='recognized previously published base; repeat to preserve all upgrade paths')
+    p.add_argument('--inherit-bundle', type=Path,
+                   help='previous release bundle whose recognized variants remain valid through chained deltas')
+    edition=json.loads((Path(__file__).resolve().parents[1]/'config/edition.json').read_text(encoding='utf8'))
+    p.add_argument('--version', default=edition['version'])
     a = p.parse_args()
-    build(a.original, a.base, a.previous, a.teams, a.executable, a.output, a.version)
+    build(a.original, a.base, a.previous, a.teams, a.executable, a.output, a.version, a.inherit_bundle)
 
 
 if __name__ == '__main__':

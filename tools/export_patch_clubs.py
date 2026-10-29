@@ -38,7 +38,7 @@ def export(report_path, output):
         catalog = {x['id']:x for x in read(ROOT/'site/data/target-abc-2026.json')['clubs']}
         brazil = {row['teamFile']:dict(catalog[ident],clubId=ident) for ident,row in published.items()}
     sources = {}
-    for filename in ('rosters-2026.4.1.json','live-rosters-supplement.json'):
+    for filename in (f"rosters-{edition['version']}.json",'live-rosters-supplement.json'):
         for club in read(ROOT/'config'/filename)['clubs']:
             sources[club['teamFile']] = club
     known_targets = {x['path']: x['sha256'] for x in manifest['files']}

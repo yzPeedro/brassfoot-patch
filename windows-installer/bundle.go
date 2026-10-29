@@ -33,6 +33,7 @@ type patchRecipe struct {
 	TargetSize     int           `json:"targetSize"`
 	Operations     []patchOp     `json:"operations"`
 	Variants       []patchRecipe `json:"variants,omitempty"`
+	Steps          []patchRecipe `json:"steps,omitempty"`
 }
 
 func digestBytes(b []byte) string {
@@ -58,11 +59,31 @@ func applyRecipe(original []byte, raw []byte, wanted ManifestFile) ([]byte, erro
 			return nil, fmt.Errorf("base não reconhecida para %s", wanted.Path)
 		}
 	}
-	if recipe.SchemaVersion != 1 || recipe.Path != wanted.Path ||
-		recipe.TargetSHA256 != wanted.SHA256 || recipe.TargetSize != int(wanted.Size) ||
+	if recipe.SchemaVersion == 3 {
+		current := original
+		if len(recipe.Steps) < 2 || len(recipe.Steps) > 8 {
+			return nil, fmt.Errorf("cadeia de instruções incompatível para %s", wanted.Path)
+		}
+		for _, step := range recipe.Steps {
+			var err error
+			current, err = applyRecipeV1(current, step, wanted.Path)
+			if err != nil {
+				return nil, err
+			}
+		}
+		if digestBytes(current) != wanted.SHA256 || int64(len(current)) != wanted.Size {
+			return nil, fmt.Errorf("o resultado encadeado não confere com SHA-256 de %s", wanted.Path)
+		}
+		return current, nil
+	}
+	return applyRecipeV1(original, recipe, wanted.Path)
+}
+
+func applyRecipeV1(original []byte, recipe patchRecipe, wantedPath string) ([]byte, error) {
+	if recipe.SchemaVersion != 1 || recipe.Path != wantedPath ||
 		recipe.OriginalSize != len(original) || digestBytes(original) != recipe.OriginalSHA256 ||
 		len(recipe.Operations) == 0 || len(recipe.Operations) > 10000 {
-		return nil, fmt.Errorf("instruções incompatíveis para %s", wanted.Path)
+		return nil, fmt.Errorf("instruções incompatíveis para %s", wantedPath)
 	}
 	var output bytes.Buffer
 	output.Grow(recipe.TargetSize)
@@ -70,24 +91,24 @@ func applyRecipe(original []byte, raw []byte, wanted ManifestFile) ([]byte, erro
 		if len(op.Copy) == 2 && op.Add == "" {
 			start, size := op.Copy[0], op.Copy[1]
 			if start < 0 || size <= 0 || start > len(original) || size > len(original)-start {
-				return nil, fmt.Errorf("intervalo inválido em %s", wanted.Path)
+				return nil, fmt.Errorf("intervalo inválido em %s", wantedPath)
 			}
 			output.Write(original[start : start+size])
 		} else if len(op.Copy) == 0 && op.Add != "" {
 			b, err := base64.StdEncoding.DecodeString(op.Add)
 			if err != nil {
-				return nil, fmt.Errorf("dado inválido em %s: %w", wanted.Path, err)
+				return nil, fmt.Errorf("dado inválido em %s: %w", wantedPath, err)
 			}
 			output.Write(b)
 		} else {
-			return nil, fmt.Errorf("operação inválida em %s", wanted.Path)
+			return nil, fmt.Errorf("operação inválida em %s", wantedPath)
 		}
 		if output.Len() > recipe.TargetSize {
-			return nil, fmt.Errorf("tamanho excedido em %s", wanted.Path)
+			return nil, fmt.Errorf("tamanho excedido em %s", wantedPath)
 		}
 	}
 	if output.Len() != recipe.TargetSize || digestBytes(output.Bytes()) != recipe.TargetSHA256 {
-		return nil, fmt.Errorf("o resultado não confere com SHA-256 de %s", wanted.Path)
+		return nil, fmt.Errorf("o resultado não confere com SHA-256 de %s", wantedPath)
 	}
 	return output.Bytes(), nil
 }
