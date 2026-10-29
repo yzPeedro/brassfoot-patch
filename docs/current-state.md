@@ -1,4 +1,21 @@
-# Estado do Brasfoot Mega Patch — 28/10/2026
+# Estado do Brasfoot Mega Patch — 29/10/2026
+
+## Manutenção 2026.4.2
+
+Release final publicada após consulta nova dos plantéis em 29/10/2026. O catálogo completo registra 704 clubes: 288 retornos completos do coletor ao vivo, 54 fontes parciais e 362 identidades ainda sem fonte completa; suplementos datados elevam o resultado compilado a 300 elencos substituídos, 54 parciais preservados e 350 preservados.
+
+A comparação normalizada eliminou alterações apenas de ordem e consulta. O pacote final altera materialmente 28 clubes frente à 2026.4.1: quatro entradas, cinco saídas e 19 registros corrigidos, além de diferenças com nomes duplicados. Respostas parciais ou ausentes não apagaram atletas; Barcelona foi preservado quando não apareceu na coleta atual.
+
+O cache de plantéis passou a aceitar renovação explícita com validade padrão de 18 horas e fallback para o último dado confiável. A compilação usa a data corrente de São Paulo, preserva idade da última release quando não há nascimento e evita reserialização por simples ordem. O gerador aceita múltiplas bases anteriores e encadeia receitas 2026.4.1 para manter os hashes reconhecidos de original, V4, 2026.3.5/4.0 e 2026.4.1.
+
+Publicação confirmada:
+
+- Release final/latest: https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.4.2; `prerelease=false`, `draft=false`.
+- Commit-fonte: `0f44dd3716dcf772ba20cb192fe4a2fc3189ddf5`.
+- Windows: 4.752.384 bytes; SHA-256 `598c8b750b8674ede7ad39b1633a2fa98eba6a7bf4008cd78cef115a0d3964fc`.
+- Cinco artefatos versionados, cinco aliases permanentes, catálogo, manifesto e checksums carregados com digest confirmado pelo GitHub.
+- `release.json` e `distribution.json` identificam 2026.4.2 e o download continua em `releases/latest/download`.
+- Nenhum teste funcional, suíte, navegador ou gameplay foi executado. Coleta, compilação produtiva, geração e integridade/publicação foram realizadas.
 
 ## Entrega corretiva 2026.4.1
 
