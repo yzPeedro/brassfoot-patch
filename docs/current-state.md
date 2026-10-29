@@ -15,6 +15,7 @@ Publicação confirmada:
 - Windows: 4.752.384 bytes; SHA-256 `598c8b750b8674ede7ad39b1633a2fa98eba6a7bf4008cd78cef115a0d3964fc`.
 - Cinco artefatos versionados, cinco aliases permanentes, catálogo, manifesto e checksums carregados com digest confirmado pelo GitHub.
 - `release.json` e `distribution.json` identificam 2026.4.2 e o download continua em `releases/latest/download`.
+- Site em `gh-pages`: `945b0f2d8dfea8d7c945e746dd889cc6fee3c5ff`; Pages confirmou `built`, sem erro.
 - Nenhum teste funcional, suíte, navegador ou gameplay foi executado. Coleta, compilação produtiva, geração e integridade/publicação foram realizadas.
 
 ## Entrega corretiva 2026.4.1
