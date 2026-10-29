@@ -27,7 +27,7 @@
       "country": "Inglaterra",
       "error": null,
       "id": "openfootball-en-1",
-      "lastCheckedAt": "2026-10-28T16:09:50.462499+00:00",
+      "lastCheckedAt": "2026-10-29T16:15:54.478396+00:00",
       "lastFetchedAt": "2026-10-28T16:09:50.462499+00:00",
       "license": "CC0-1.0",
       "name": "Premier League",
@@ -35,14 +35,14 @@
       "season": "2026-27",
       "sha256": "bb91f0ab3e8359df163bb9ec98549bfed85e200dd4c32f3bd606b5890d932dd2",
       "sourceUrl": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/en.1.json",
-      "status": "changed"
+      "status": "unchanged"
     },
     {
       "cached": true,
       "country": "Inglaterra",
       "error": null,
       "id": "openfootball-en-2",
-      "lastCheckedAt": "2026-10-28T16:09:50.528308+00:00",
+      "lastCheckedAt": "2026-10-29T16:15:54.535620+00:00",
       "lastFetchedAt": "2026-10-28T16:09:50.528308+00:00",
       "license": "CC0-1.0",
       "name": "Championship",
@@ -50,14 +50,14 @@
       "season": "2026-27",
       "sha256": "869f91d6f0c3d48e50c3a7c05d5a220e309077c47ff48a15f3848b78bc346d45",
       "sourceUrl": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/en.2.json",
-      "status": "changed"
+      "status": "unchanged"
     },
     {
       "cached": true,
       "country": "Alemanha",
       "error": null,
       "id": "openfootball-de-1",
-      "lastCheckedAt": "2026-10-28T16:09:50.618961+00:00",
+      "lastCheckedAt": "2026-10-29T16:15:54.643654+00:00",
       "lastFetchedAt": "2026-10-28T16:09:50.618961+00:00",
       "license": "CC0-1.0",
       "name": "Bundesliga",
@@ -65,14 +65,14 @@
       "season": "2026-27",
       "sha256": "07fab65d4a1de8ce4c8472da9ccf4d1d2b145ecd5abdc5b6d4250a5c119d7681",
       "sourceUrl": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/de.1.json",
-      "status": "changed"
+      "status": "unchanged"
     },
     {
       "cached": true,
       "country": "Espanha",
       "error": null,
       "id": "openfootball-es-1",
-      "lastCheckedAt": "2026-10-28T16:09:50.724788+00:00",
+      "lastCheckedAt": "2026-10-29T16:15:54.737882+00:00",
       "lastFetchedAt": "2026-10-28T16:09:50.724788+00:00",
       "license": "CC0-1.0",
       "name": "La Liga",
@@ -80,14 +80,14 @@
       "season": "2026-27",
       "sha256": "4b1a9906e3f2b279a1f25497a38f2f58e21ec19ea726b882fa646da7c07bc0e0",
       "sourceUrl": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/es.1.json",
-      "status": "changed"
+      "status": "unchanged"
     },
     {
       "cached": true,
       "country": "França",
       "error": null,
       "id": "openfootball-fr-1",
-      "lastCheckedAt": "2026-10-28T16:09:50.833998+00:00",
+      "lastCheckedAt": "2026-10-29T16:15:54.795354+00:00",
       "lastFetchedAt": "2026-10-28T16:09:50.833998+00:00",
       "license": "CC0-1.0",
       "name": "Ligue 1",
@@ -95,14 +95,14 @@
       "season": "2026-27",
       "sha256": "f875275f835e378fc8c4e7d48c7a2f327e7d426237bd057fe652fd47f30b5a4f",
       "sourceUrl": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/fr.1.json",
-      "status": "changed"
+      "status": "unchanged"
     },
     {
       "cached": true,
       "country": "Itália",
       "error": null,
       "id": "openfootball-it-1",
-      "lastCheckedAt": "2026-10-28T16:09:50.915104+00:00",
+      "lastCheckedAt": "2026-10-29T16:15:54.902944+00:00",
       "lastFetchedAt": "2026-10-28T16:09:50.915104+00:00",
       "license": "CC0-1.0",
       "name": "Serie A",
@@ -110,14 +110,14 @@
       "season": "2026-27",
       "sha256": "721a6c220fecb8208287e41401fa2fce652cd23765ce58a39bf98cdaa3d528ad",
       "sourceUrl": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/it.1.json",
-      "status": "changed"
+      "status": "unchanged"
     },
     {
       "cached": true,
       "country": "Países Baixos",
       "error": null,
       "id": "openfootball-nl-1",
-      "lastCheckedAt": "2026-10-28T16:09:51.001276+00:00",
+      "lastCheckedAt": "2026-10-29T16:15:54.958234+00:00",
       "lastFetchedAt": "2026-10-28T16:09:51.001276+00:00",
       "license": "CC0-1.0",
       "name": "Eredivisie",
@@ -125,14 +125,14 @@
       "season": "2026-27",
       "sha256": "970507a228aa4ccd2968d52a9862b0d2844148bc548bc7ffe5e83d1c0d8f0517",
       "sourceUrl": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/nl.1.json",
-      "status": "changed"
+      "status": "unchanged"
     },
     {
       "cached": true,
       "country": "Portugal",
       "error": null,
       "id": "openfootball-pt-1",
-      "lastCheckedAt": "2026-10-28T16:09:51.089379+00:00",
+      "lastCheckedAt": "2026-10-29T16:15:55.020509+00:00",
       "lastFetchedAt": "2026-10-28T16:09:51.089379+00:00",
       "license": "CC0-1.0",
       "name": "Primeira Liga",
@@ -140,9 +140,9 @@
       "season": "2026-27",
       "sha256": "57cac2d6caab5a303d0b846ce523462b4571da10766a128ac0a5102bd0182e7e",
       "sourceUrl": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/pt.1.json",
-      "status": "changed"
+      "status": "unchanged"
     }
   ],
-  "status": "changed",
-  "updatedAt": "2026-10-28T16:09:50.457154+00:00"
+  "status": "unchanged",
+  "updatedAt": "2026-10-29T16:15:54.468156+00:00"
 }
