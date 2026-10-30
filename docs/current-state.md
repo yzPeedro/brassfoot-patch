@@ -12,6 +12,7 @@ Publicação confirmada:
 - Commit-fonte: `d17cda9d04fc7bd752077d5343fc6222e6951d92`.
 - Windows: 5.081.088 bytes; SHA-256 `ece1c0d0cb482f08d1e10031133c970502ac775b86732012cd3e828508f47f0c`.
 - Cinco artefatos versionados, cinco aliases permanentes, catálogo, manifesto e checksums foram carregados com digest confirmado pelo GitHub.
+- Site em `gh-pages`: `d988714e2122200999abe96b30f8c83f4678091c`; Pages confirmou `built`, sem erro.
 - Nenhum teste funcional, suíte, navegador ou gameplay foi executado; foram realizadas compilação produtiva, inspeção do código compilado e conferência de integridade.
 
 ## Correção da Copa do Mundo 2026 — versão 2026.4.3
