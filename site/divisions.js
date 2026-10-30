@@ -30,9 +30,10 @@
   const collator = new Intl.Collator('pt-BR', {sensitivity: 'base', numeric: true});
   const number = value => value.toLocaleString('pt-BR');
   const coverageLabels = Object.freeze({
-    updated: 'Atualizado', partial: 'Parcial', preserved: 'Preservado'
+    updated: 'Atualizado', partial: 'Parcial', preserved: 'Preservado',
+    unavailable: 'Sem elenco catalogado'
   });
-  const coverageOrder = Object.freeze({updated: 0, partial: 1, preserved: 2});
+  const coverageOrder = Object.freeze({updated: 0, partial: 1, preserved: 2, unavailable: 3});
   const roleLabels = ['Goleiro', 'Lateral', 'Zagueiro', 'Meio-campo', 'Atacante'];
   const sortKeys = ['name', 'country', 'competition', 'coverage', 'playerCount'];
   const controls = [elements.search, elements.country, elements.competition, elements.coverage,
@@ -40,6 +41,9 @@
   const quickFilters = [...document.querySelectorAll('[data-country-filter], [data-coverage-filter]')];
   const table = elements.grid.closest('table');
   let catalog = null;
+  let extraCatalog = null;
+  let allCountries = [];
+  let cupLookup = new Map();
   let records = [];
   let recordsById = new Map();
   let loading = null;
@@ -116,22 +120,85 @@
     return data;
   }
 
-  function indexCatalog(data) {
-    records = data.clubs.map(club => {
+  // Competition memberships are keyed to the game's team filenames, not fuzzy names.
+  function teamKey(file) {
+    return String(file).split('/').pop().replace(/\.ban$/i, '').toLowerCase();
+  }
+
+  function validateExtraCatalog(data) {
+    if (data?.schemaVersion !== 1 || data.season !== 2026 ||
+        !Array.isArray(data.nations) || data.nations.length !== 224 ||
+        !Array.isArray(data.cups) || data.cups.length !== 8 ||
+        new Set(data.nations.map(n => n.id)).size !== 224 ||
+        data.nations.some(n => !Number.isInteger(n.id) || typeof n.name !== 'string' || !n.name.trim()) ||
+        new Set(data.cups.map(cup => cup.id)).size !== 8) {
+      throw new Error('Seleções ou copas indisponíveis');
+    }
+    const countries = new Set(data.nations.map(n => n.id));
+    for (const cup of data.cups) {
+      if (!cup || !cup.id || typeof cup.label !== 'string' ||
+          (cup.kind === 'selection' && (!Array.isArray(cup.countryIds) ||
+            cup.countryIds.some(id => !countries.has(id)))) ||
+          (cup.kind === 'club' && (!Array.isArray(cup.teamKeys) ||
+            cup.teamKeys.some(key => typeof key !== 'string' || !key.trim()))) ||
+          !['selection', 'club'].includes(cup.kind)) throw new Error('Copa inválida');
+    }
+    return data;
+  }
+
+  function indexCatalog(data, extra) {
+    extraCatalog = extra;
+    const cupsByTeam = new Map();
+    const cupsByCountry = new Map();
+    cupLookup = new Map(extra.cups.map(cup => [cup.id, cup]));
+    for (const cup of extra.cups) {
+      if (cup.kind === 'club') {
+        for (const key of cup.teamKeys) {
+          const normalizedKey = key.toLowerCase();
+          if (!cupsByTeam.has(normalizedKey)) cupsByTeam.set(normalizedKey, []);
+          cupsByTeam.get(normalizedKey).push(cup.id);
+        }
+      } else {
+        for (const id of cup.countryIds) {
+          if (!cupsByCountry.has(id)) cupsByCountry.set(id, []);
+          cupsByCountry.get(id).push(cup.id);
+        }
+      }
+    }
+    const countries = new Map(data.countries.map(country => [country.id, {...country}]));
+    const entries = data.clubs.map(club => ({
+      ...club, kind: 'club', cupIds: cupsByTeam.get(teamKey(club.teamFile)) || []
+    }));
+    for (const nation of extra.nations) {
+      const previous = countries.get(nation.id);
+      const name = previous?.name || nation.name;
+      if (previous) previous.count++;
+      else countries.set(nation.id, {id: nation.id, name, count: 1});
+      entries.push({
+        id: 'selection:' + nation.id, kind: 'selection', name, country: name,
+        countryId: nation.id, aliases: ['Seleção ' + name],
+        competition: 'Seleção nacional', cupIds: cupsByCountry.get(nation.id) || [],
+        coverage: 'unavailable', division: null, state: null, players: [],
+        playerCount: 0, teamFile: '', sourceUrl: null, observedAt: null
+      });
+    }
+    allCountries = [...countries.values()];
+    records = entries.map(club => {
+      const cupNames = club.cupIds.map(id => cupLookup.get(id)?.label || '');
       const metadata = normalize([club.name, ...club.aliases, club.country, club.competition,
-        club.division, club.state].join(' '));
+        club.division, club.state, ...cupNames].join(' '));
       const players = club.players.map(player => normalize(player.name));
-      return {club, metadata, players, searchText: metadata + ' ' + players.join(' ')};
+      return {club, metadata, players, cupIds: club.cupIds, searchText: metadata + ' ' + players.join(' ')};
     });
     recordsById = new Map(records.map(record => [record.club.id, record]));
   }
 
   function populateCountries() {
     const fragment = document.createDocumentFragment();
-    const all = textElement('option', 'Todos os países');
+    const all = textElement('option', 'Todos os países e seleções');
     all.value = '';
     fragment.appendChild(all);
-    for (const country of [...catalog.countries].sort((a, b) => collator.compare(a.name, b.name))) {
+    for (const country of [...allCountries].sort((a, b) => collator.compare(a.name, b.name))) {
       const option = textElement('option', country.name + ' (' + number(country.count) + ')');
       option.value = String(country.id);
       fragment.appendChild(option);
@@ -142,25 +209,40 @@
   function populateCompetitions() {
     const selected = elements.competition.value;
     const countryId = elements.country.value;
-    const values = new Map();
-    for (const {club} of records) {
+    const leagues = new Map();
+    const cups = new Map();
+    for (const record of records) {
+      const {club} = record;
       if (countryId && String(club.countryId) !== countryId) continue;
-      values.set(club.competition, competitionLabel(club));
+      if (club.kind !== 'selection' && club.competition) {
+        leagues.set(club.competition, competitionLabel(club));
+      }
+      for (const id of record.cupIds) cups.set(id, (cups.get(id) || 0) + 1);
     }
     const fragment = document.createDocumentFragment();
     const all = textElement('option', 'Todas as competições');
     all.value = '';
     fragment.appendChild(all);
-    // The empty value belongs to the all-competitions option; unknown competitions
-    // remain visible in results without being presented as a named competition.
-    for (const [value, label] of [...values].filter(([value]) => value !== '')
-      .sort((a, b) => collator.compare(a[1], b[1]))) {
+    const selections = textElement('option', 'Seleções nacionais (' + extraCatalog.nations.length + ')');
+    selections.value = 'type:selection';
+    fragment.appendChild(selections);
+    for (const cup of extraCatalog.cups) {
+      const count = cups.get(cup.id);
+      if (!count) continue;
+      const option = textElement('option', cup.label + ' (' + number(count) + ')');
+      option.value = 'cup:' + cup.id;
+      fragment.appendChild(option);
+    }
+    for (const [value, label] of [...leagues].sort((a, b) => collator.compare(a[1], b[1]))) {
       const option = textElement('option', label);
       option.value = value;
       fragment.appendChild(option);
     }
     elements.competition.replaceChildren(fragment);
-    if (selected && values.has(selected)) elements.competition.value = selected;
+    if (selected === 'type:selection' ||
+        (selected.startsWith('cup:') ? cups.has(selected.slice(4)) : leagues.has(selected))) {
+      elements.competition.value = selected;
+    }
   }
 
   function searchTokens() {
@@ -209,15 +291,18 @@
     const parts = [];
     if (elements.search.value.trim()) parts.push('Busca: ' + elements.search.value.trim());
     if (elements.country.value) {
-      parts.push('País: ' + catalog.countries.find(c => String(c.id) === elements.country.value)?.name);
+      parts.push('País: ' + allCountries.find(c => String(c.id) === elements.country.value)?.name);
     }
-    if (elements.competition.value) parts.push('Competição: ' + elements.competition.value);
+    if (elements.competition.value) {
+      const selected = elements.competition.selectedOptions?.[0];
+      parts.push('Competição: ' + (selected?.textContent || elements.competition.value));
+    }
     if (elements.coverage.value) parts.push('Elenco: ' + coverageLabels[elements.coverage.value]);
     if (elements.activeFilters) elements.activeFilters.textContent = parts.length ? parts.join(' · ') : 'Todos os clubes do pacote';
     if (elements.reset) elements.reset.disabled = !parts.length;
     for (const button of quickFilters) {
       const country = button.dataset.countryFilter;
-      const active = country !== undefined ? catalog.countries.some(c =>
+      const active = country !== undefined ? allCountries.some(c =>
         String(c.id) === elements.country.value && (String(c.id) === country || normalize(c.name) === normalize(country)))
         : elements.coverage.value === button.dataset.coverageFilter;
       button.setAttribute('aria-pressed', String(active));
@@ -241,7 +326,9 @@
     const filtered = records.filter(record => {
       const {club, searchText, metadata, players} = record;
       if ((country && String(club.countryId) !== country) ||
-          (competition && club.competition !== competition) ||
+          (competition && (competition === 'type:selection' ? club.kind !== 'selection' :
+            competition.startsWith('cup:') ? !record.cupIds.includes(competition.slice(4)) :
+            club.competition !== competition)) ||
           (coverage && club.coverage !== coverage) || !tokens.every(token => searchText.includes(token))) return false;
       const playerTerms = tokens.filter(token => !metadata.includes(token));
       return !playerTerms.length || players.some(name => playerTerms.every(token => name.includes(token)));
@@ -268,26 +355,29 @@
       }
       row.appendChild(nameCell);
       row.appendChild(textElement('td', club.country, 'club-country'));
-      row.appendChild(textElement('td', competitionLabel(club), 'club-competition'));
+      const selectedCup = competition.startsWith('cup:') ? cupLookup.get(competition.slice(4)) : null;
+      const shownCompetition = selectedCup ? selectedCup.label : competitionLabel(club);
+      row.appendChild(textElement('td', shownCompetition, 'club-competition'));
       const status = textElement('td', '', 'club-roster-state');
       status.appendChild(badge(club));
       row.appendChild(status);
-      row.appendChild(textElement('td', number(club.playerCount), 'club-player-count'));
+      row.appendChild(textElement('td', club.kind === 'selection' ? '—' : number(club.playerCount), 'club-player-count'));
       const action = document.createElement('td');
-      const button = textElement('button', 'Ver elenco', 'club-row-button club-detail-trigger');
+      const button = textElement('button', club.kind === 'selection' ? 'Ver seleção' : 'Ver elenco', 'club-row-button club-detail-trigger');
       button.type = 'button';
       button.dataset.clubId = club.id;
-      button.setAttribute('aria-label', 'Ver elenco de ' + club.name + ', ' + club.country);
+      button.setAttribute('aria-label', (club.kind === 'selection' ? 'Ver seleção de ' : 'Ver elenco de ') + club.name + ', ' + club.country);
       action.appendChild(button);
       row.appendChild(action);
       fragment.appendChild(row);
     }
     elements.grid.replaceChildren(fragment);
-    if (!visible.length) statusRow('Nenhum clube encontrado. Altere a busca ou limpe os filtros.');
+    if (!visible.length) statusRow('Nenhuma equipe encontrada. Altere a busca ou limpe os filtros.');
     const from = filtered.length ? start + 1 : 0;
     const to = filtered.length ? start + visible.length : 0;
-    elements.summary.textContent = number(filtered.length) + ' clubes encontrados · exibindo ' + number(from) + '–' + number(to) +
-      ' de ' + number(catalog.totalClubs) + ' no pacote';
+    elements.summary.textContent = number(filtered.length) + ' equipes encontradas · exibindo ' + number(from) + '–' + number(to) +
+      ' de ' + number(records.length) + ' no explorador (' + number(catalog.totalClubs) +
+      ' clubes + ' + number(extraCatalog.nations.length) + ' seleções)';
     elements.pageLabel.textContent = 'Página ' + page + ' de ' + pages;
     elements.previous.disabled = page <= 1;
     elements.next.disabled = page >= pages;
@@ -311,19 +401,26 @@
     lastFocus = document.activeElement;
     lastClubId = club.id;
     elements.modalTitle.textContent = club.name;
+    const cups = club.cupIds.map(id => cupLookup.get(id)?.label).filter(Boolean);
     elements.modalCompetition.textContent = competitionLabel(club) + ' · versão ' + catalog.version;
     elements.modalCountry.textContent = club.country;
     elements.modalStatus.replaceChildren(badge(club));
-    elements.modalCount.textContent = number(club.playerCount);
-    elements.modalDescription.textContent = 'Elenco incluído no pacote publicado. ' +
-      (club.division ? 'Divisão: ' + club.division + '. ' : '') + (club.state ? 'Estado: ' + club.state + '.' : '');
+    elements.modalCount.textContent = club.kind === 'selection' ? 'Não catalogado' : number(club.playerCount);
+    elements.modalDescription.textContent = club.kind === 'selection'
+      ? 'Seleção cadastrada no jogo. ' + (cups.length ? 'Competições de referência: ' + cups.join(', ') + '.' : 'Sem participação mapeada nas copas disponíveis.')
+      : 'Elenco de clube incluído no pacote publicado. ' +
+        (club.division ? 'Divisão: ' + club.division + '. ' : '') +
+        (club.state ? 'Estado: ' + club.state + '. ' : '') +
+        (cups.length ? 'Participações mapeadas: ' + cups.join(', ') + '.' : '');
     elements.modalRosterTitle.textContent = 'Jogadores do pacote';
     const notices = {
       updated: 'Elenco substituído na atualização. As características do jogo podem incluir valores derivados da função do atleta.',
       partial: 'Atualização parcial: o elenco anterior foi preservado com correções pontuais. A fonte não confirmou um elenco completo.',
       preserved: 'Elenco anterior preservado nesta versão. A presença no pacote não indica atualização completa para 2026.'
     };
-    elements.modalNotice.textContent = notices[club.coverage] + ' Lado indica a posição de atuação no jogo.';
+    elements.modalNotice.textContent = club.kind === 'selection'
+      ? 'Os atletas das seleções não estão disponibilizados neste catálogo. A presença nesta lista não garante elenco atualizado nem participação jogável; copas exibem os mapeamentos disponíveis.'
+      : notices[club.coverage] + ' Lado indica a posição de atuação no jogo. As copas refletem o mapeamento de participantes, não a garantia de jogabilidade.';
     const source = safeSource(club.sourceUrl);
     if (elements.sourceBox) elements.sourceBox.hidden = !source;
     if (elements.sourceLink) {
@@ -356,7 +453,8 @@
       item.appendChild(textElement('span', 'Características: ' + (traits.length ? traits.join(' / ') : 'não informadas'), 'club-player-traits'));
       fragment.appendChild(item);
     }
-    if (!club.players.length) fragment.appendChild(textElement('li', 'Nenhum jogador registrado neste pacote.'));
+    if (!club.players.length) fragment.appendChild(textElement('li',
+      club.kind === 'selection' ? 'Lista de convocados não disponível neste explorador.' : 'Nenhum jogador registrado neste pacote.'));
     elements.modalPlayers.replaceChildren(fragment);
     if (!elements.dialog.open) elements.dialog.showModal();
     elements.dialog.scrollTop = 0;
@@ -382,10 +480,14 @@
     const timeout = setTimeout(() => controller.abort(), 25000);
     loading = (async () => {
       try {
-        const response = await fetch('./data/patch-clubs.json', {signal: controller.signal});
-        if (!response.ok) throw new Error('Catálogo indisponível');
+        const [response, extraResponse] = await Promise.all([
+          fetch('./data/patch-clubs.json', {signal: controller.signal}),
+          fetch('./data/explorer-cups.json', {signal: controller.signal})
+        ]);
+        if (!response.ok || !extraResponse.ok) throw new Error('Catálogo indisponível');
         const data = validateCatalog(await response.json());
-        indexCatalog(data);
+        const extra = validateExtraCatalog(await extraResponse.json());
+        indexCatalog(data, extra);
         catalog = data;
         populateCountries();
         populateCompetitions();
@@ -393,10 +495,11 @@
         render();
       } catch (_) {
         catalog = null;
+        extraCatalog = null;
         records = [];
         recordsById.clear();
         if (table) table.setAttribute('aria-busy', 'false');
-        elements.summary.textContent = 'Não foi possível carregar o catálogo de clubes.';
+        elements.summary.textContent = 'Não foi possível carregar o catálogo de clubes e seleções.';
         elements.pageLabel.textContent = 'Catálogo indisponível';
         statusRow('Falha ao carregar os dados. Use “Tentar novamente” para recarregar o catálogo.');
         if (elements.retry) elements.retry.hidden = false;
