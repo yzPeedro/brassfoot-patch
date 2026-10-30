@@ -1,5 +1,20 @@
 # Estado do Brasfoot Mega Patch — 30/10/2026
 
+## Manutenção diária de plantéis — versão 2026.4.6
+
+A consulta de 30/10/2026 renovou as fontes públicas sem falhas e comparou o conteúdo normalizado com a última base publicada. Foram consultados 342 clubes com 8.708 atletas; o catálogo completo de 704 clubes registra 288 fontes completas, 54 respostas parciais preservadas e 362 identidades ainda pendentes de fonte completa. O catálogo complementar fez oito requisições sem falhas e permaneceu sem mudança material.
+
+A compilação produtiva alterou 23 arquivos de clubes. Foram confirmadas duas entradas (Fernando Costa no RB Bragantino e Yoann Prigent no Derry City), três saídas (Stavros Panagi, Savvas Sofokleous e Eren Kaya), quinze correções de posição e dezessete atualizações de idade na data de referência. Respostas parciais não apagaram plantéis. O executável da 2026.4.5, a Copa do Mundo de 2026 e as listas de copas continentais foram preservados.
+
+Publicação confirmada:
+
+- Release final/latest: https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.4.6; `prerelease=false`, `draft=false`.
+- Commit-fonte: `4c92c1909123947656d5e0715e341c08cd8254b6`.
+- Windows: 5.363.712 bytes; SHA-256 `062517a674f54c7c97e6aa70634af23b41223e3cad29ceaf65758872e8923d26`.
+- Cinco artefatos versionados, cinco aliases permanentes, catálogo, manifesto e checksums foram carregados com digest confirmado pelo GitHub.
+- Site em `gh-pages`: `8ae1af02e08a1d5293560b8988a2366f8b239485`; Pages confirmou `built`, sem erro, e o endereço público serve a 2026.4.6.
+- Nenhum teste funcional, suíte, navegador ou gameplay foi executado; foram realizadas coleta, compilação produtiva e conferência de integridade e publicação.
+
 ## Copas continentais de 2026 — versão 2026.4.5
 
 A primeira temporada passa a priorizar os participantes oficiais disponíveis no catálogo do Brasfoot para Libertadores, Sul-Americana, Champions League, Europa League, Conference League e Champions Cup da Concacaf. Foram mapeadas 241 entradas oficiais existentes nos 704 arquivos de clubes do patch. Nas temporadas seguintes, a qualificação dinâmica original permanece ativa.
