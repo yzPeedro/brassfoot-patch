@@ -1,7 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-29T21:04:18Z",
+  "updatedAt": "2026-10-30T14:08:24-03:00",
   "entries": [
+    {
+      "id": "patch-2026-4-3",
+      "version": "2026.4.3",
+      "date": "2026-10-30T14:08:24-03:00",
+      "title": "A Copa do Mundo de 2026 no jogo",
+      "kind": "patch",
+      "summary": "A opção da Copa agora usa a edição de 2026, com 48 seleções nos 12 grupos oficiais.",
+      "changes": [
+        "O texto da configuração passa a mostrar “Usar grupos da Copa do Mundo 2026”.",
+        "A escolha fica permanentemente ativada para a primeira Copa da carreira iniciada em 2026.",
+        "As 48 seleções participantes substituem a lista fixa de 32 países da edição de 2022.",
+        "Os grupos A a L seguem a composição oficial de 2026, com quatro seleções por grupo.",
+        "Os dois primeiros de cada grupo e os oito melhores terceiros avançam à fase de 32."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.4.3"
+    },
     {
       "id": "patch-2026-4-2",
       "version": "2026.4.2",

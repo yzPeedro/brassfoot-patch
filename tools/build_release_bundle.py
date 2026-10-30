@@ -56,6 +56,10 @@ def build(original, base, previous, teams, executable, destination, version, inh
         raise FileExistsError('use a new output bundle directory')
     recipes = destination / 'patches'
     recipes.mkdir(parents=True)
+    inherited_files = {}
+    if inherit_bundle:
+        inherited_manifest = json.loads((inherit_bundle / 'manifest.json').read_text(encoding='utf-8'))
+        inherited_files = {item['path']: item for item in inherited_manifest.get('files', [])}
     paths = {'bf22-23.exe': executable,
              'conf_ligas_nacionais/BRA.cfg': base / 'conf_ligas_nacionais/BRA.cfg'}
     paths.update({'teams/' + p.name: p for p in teams.glob('*.ban')})
@@ -73,6 +77,15 @@ def build(original, base, previous, teams, executable, destination, version, inh
             inputs[sha(b'')] = b''
         inputs.pop(sha(target), None)
         if not inputs:
+            inherited_path = (inherit_bundle / 'patches' / (source.name + '.json')) if inherit_bundle else None
+            inherited_file = inherited_files.get(relative)
+            if inherited_path and inherited_path.is_file() and inherited_file:
+                inherited = json.loads(inherited_path.read_text(encoding='utf-8'))
+                variants = inherited.get('variants', [inherited])
+                if not variants or any(item.get('targetSha256') != sha(target) for item in variants):
+                    raise ValueError('unchanged inherited recipe target differs: ' + relative)
+                (recipes / (source.name + '.json')).write_bytes(inherited_path.read_bytes())
+                files.append(copy.deepcopy(inherited_file))
             continue
         variants = []
         for digest, body in inputs.items():

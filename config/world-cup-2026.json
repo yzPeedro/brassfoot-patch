@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "competition": "FIFA World Cup 2026",
+  "referenceEdition": 2026,
+  "referenceStatus": "completed",
+  "observedAt": "2026-10-30",
+  "format": {
+    "participants": 48,
+    "groups": 12,
+    "teamsPerGroup": 4,
+    "advancePerGroup": 2,
+    "bestThirdPlacedAdvance": 8,
+    "knockoutEntrants": 32
+  },
+  "sources": {
+    "groups": "https://www.fifa.com/es/es/mens/worldcup/canadamexicousa2026/articles/copa-mundial-fifa-2026-estados-unidos-canada-mexico-todo-lo-que-tenes-que-saber",
+    "squads": "https://fdp.fifa.org/assetspublic/ce281/pdf/SquadLists-English.pdf"
+  },
+  "groups": [
+    {"id":"A","teams":[{"gameCountry":131,"name":"México"},{"gameCountry":1,"name":"África do Sul"},{"gameCountry":49,"name":"Coreia do Sul"},{"gameCountry":159,"name":"República Tcheca"}]},
+    {"id":"B","teams":[{"gameCountry":38,"name":"Canadá"},{"gameCountry":27,"name":"Bósnia e Herzegovina"},{"gameCountry":39,"name":"Qatar"},{"gameCountry":180,"name":"Suíça"}]},
+    {"id":"C","teams":[{"gameCountry":29,"name":"Brasil"},{"gameCountry":129,"name":"Marrocos"},{"gameCountry":84,"name":"Haiti"},{"gameCountry":62,"name":"Escócia"}]},
+    {"id":"D","teams":[{"gameCountry":68,"name":"Estados Unidos"},{"gameCountry":150,"name":"Paraguai"},{"gameCountry":14,"name":"Austrália"},{"gameCountry":192,"name":"Turquia"}]},
+    {"id":"E","teams":[{"gameCountry":3,"name":"Alemanha"},{"gameCountry":8,"name":"Curaçao"},{"gameCountry":50,"name":"Costa do Marfim"},{"gameCountry":60,"name":"Equador"}]},
+    {"id":"F","teams":[{"gameCountry":85,"name":"Holanda"},{"gameCountry":107,"name":"Japão"},{"gameCountry":179,"name":"Suécia"},{"gameCountry":190,"name":"Tunísia"}]},
+    {"id":"G","teams":[{"gameCountry":21,"name":"Bélgica"},{"gameCountry":57,"name":"Egito"},{"gameCountry":98,"name":"Irã"},{"gameCountry":143,"name":"Nova Zelândia"}]},
+    {"id":"H","teams":[{"gameCountry":65,"name":"Espanha"},{"gameCountry":35,"name":"Cabo Verde"},{"gameCountry":9,"name":"Arábia Saudita"},{"gameCountry":195,"name":"Uruguai"}]},
+    {"id":"I","teams":[{"gameCountry":72,"name":"França"},{"gameCountry":169,"name":"Senegal"},{"gameCountry":99,"name":"Iraque"},{"gameCountry":142,"name":"Noruega"}]},
+    {"id":"J","teams":[{"gameCountry":11,"name":"Argentina"},{"gameCountry":10,"name":"Argélia"},{"gameCountry":15,"name":"Áustria"},{"gameCountry":108,"name":"Jordânia"}]},
+    {"id":"K","teams":[{"gameCountry":154,"name":"Portugal"},{"gameCountry":157,"name":"República Democrática do Congo"},{"gameCountry":196,"name":"Uzbequistão"},{"gameCountry":46,"name":"Colômbia"}]},
+    {"id":"L","teams":[{"gameCountry":97,"name":"Inglaterra"},{"gameCountry":52,"name":"Croácia"},{"gameCountry":75,"name":"Gana"},{"gameCountry":147,"name":"Panamá"}]}
+  ]
+}
