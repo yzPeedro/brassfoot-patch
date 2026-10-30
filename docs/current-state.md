@@ -6,7 +6,14 @@ A primeira temporada passa a priorizar os participantes oficiais disponíveis no
 
 Os formatos internos antigos foram preservados. Quando um participante oficial não existe no catálogo ou quando a quantidade de vagas de 2026 difere da estrutura da engine, as vagas restantes continuam sendo preenchidas pela lógica original do jogo. A lista reproduzível, as ausências e as fontes oficiais estão registradas em `config/continental-cups-2026.json`.
 
-A publicação da 2026.4.5 será registrada neste documento após a confirmação dos assets e do site. Nenhum teste funcional, suíte, navegador ou gameplay será executado; a produção se limita a compilação, geração e conferência de integridade.
+Publicação confirmada:
+
+- Release final/latest: https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.4.5; `prerelease=false`, `draft=false`.
+- Commit-fonte: `63a6245680614e7134b60f0072e06b884c3fcbfb`.
+- Windows: 5.323.776 bytes; SHA-256 `1423ccafdf798a3c22fa313d59919844ecf0fd587e56bb0bcc13e2fc731e21a3`.
+- Cinco artefatos versionados, cinco aliases permanentes, catálogo, manifesto e checksums foram carregados com digest confirmado pelo GitHub.
+- O site aguarda a implantação dos metadados desta release.
+- Nenhum teste funcional, suíte, navegador ou gameplay foi executado; foram realizadas compilação produtiva, inspeção do código compilado e conferência de integridade.
 
 ## Correção emergencial da nova carreira — versão 2026.4.4
 

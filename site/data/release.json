@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.4.4",
-  "publishedAt": "2026-10-30T17:20:24.896677+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.4.4-windows-x64.exe",
+  "publishedVersion": "2026.4.5",
+  "publishedAt": "2026-10-30T19:00:42.868853+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.4.5-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
-  "fileSizeBytes": 5081088,
-  "sha256": "ece1c0d0cb482f08d1e10031133c970502ac775b86732012cd3e828508f47f0c",
+  "fileSizeBytes": 5323776,
+  "sha256": "1423ccafdf798a3c22fa313d59919844ecf0fd587e56bb0bcc13e2fc731e21a3",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Correção emergencial da nova carreira, com a Copa do Mundo de 2026 preservada."
+  "releaseNotes": "Participantes de 2026 priorizados na Libertadores, Sul-Americana, Champions, Europa, Conference e Champions Cup da Concacaf."
 }
