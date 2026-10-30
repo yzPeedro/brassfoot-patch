@@ -1,4 +1,18 @@
-# Estado do Brasfoot Mega Patch — 29/10/2026
+# Estado do Brasfoot Mega Patch — 30/10/2026
+
+## Correção da Copa do Mundo 2026 — versão 2026.4.3
+
+A tela inicial agora escreve `Usar grupos da Copa do Mundo 2026` e mantém a escolha ativada. A primeira Copa da carreira iniciada em 2026 substitui a lista fixa de 32 participantes de 2022 pelas 48 seleções da edição concluída de 2026, distribuídas nos 12 grupos oficiais de quatro equipes. Avançam os dois primeiros de cada grupo e os oito melhores terceiros para a fase de 32.
+
+Os identificadores internos e a composição A–L estão em `config/world-cup-2026.json`, com fonte oficial da FIFA. A adaptação do executável é reproduzível, exige o SHA-256 exato da versão 2026.4.2 e modifica somente quatro classes Java; saves, licenças e a instalação de origem não foram alterados durante a produção.
+
+Publicação confirmada:
+
+- Release final/latest: https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.4.3; `prerelease=false`, `draft=false`.
+- Commit-fonte: `ed2b2bbac3b4c6787b932bf80c04aefb3fd280c2`.
+- Windows: 4.954.112 bytes; SHA-256 `8ec902aa2b7ffe6a3f8d0770fc7021e581ac195f05035ce4b5b25c042c40bd9a`.
+- Cinco artefatos versionados, cinco aliases permanentes, catálogo, manifesto e checksums foram carregados com digest confirmado pelo GitHub.
+- Nenhum teste funcional, suíte, navegador ou gameplay foi executado. Foram realizadas compilação produtiva, leitura do código compilado e conferência de integridade e hashes.
 
 ## Manutenção 2026.4.2
 
