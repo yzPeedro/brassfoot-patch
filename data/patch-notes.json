@@ -1,7 +1,21 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-30T19:05:20-03:00",
+  "updatedAt": "2026-10-30T22:33:35Z",
   "entries": [
+    {
+      "id": "site-explorer-selections-2026",
+      "date": "2026-10-30T22:33:35Z",
+      "kind": "site",
+      "title": "Clubes, seleções e copas no explorador",
+      "summary": "A pesquisa agora abrange seleções nacionais e participantes mapeados das competições, com navegação mais clara e destaques decorativos não selecionáveis.",
+      "changes": [
+        "Adicionadas 224 seleções referenciadas pelo cadastro de países do jogo, sem inventar listas de convocados.",
+        "O filtro de competições inclui Copa do Mundo 2026, Eurocopa 2024 (histórica), Libertadores, Sul-Americana, Champions, Europa League, Conference League e Champions Cup da CONCACAF.",
+        "Os filtros por país, competição, elenco e a busca textual operam sobre o catálogo expandido, mantendo a paginação.",
+        "Títulos decorativos, faixas e animações deixam de ser selecionáveis, preservando a cópia de informações úteis.",
+        "A versão do executável permanece 2026.4.6. Participação mapeada não significa jogabilidade ou elenco verificado."
+      ]
+    },
     {
       "id": "patch-2026-4-6",
       "version": "2026.4.6",
