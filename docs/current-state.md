@@ -12,7 +12,7 @@ Publicação confirmada:
 - Commit-fonte: `63a6245680614e7134b60f0072e06b884c3fcbfb`.
 - Windows: 5.323.776 bytes; SHA-256 `1423ccafdf798a3c22fa313d59919844ecf0fd587e56bb0bcc13e2fc731e21a3`.
 - Cinco artefatos versionados, cinco aliases permanentes, catálogo, manifesto e checksums foram carregados com digest confirmado pelo GitHub.
-- O site aguarda a implantação dos metadados desta release.
+- Site em `gh-pages`: `05fc18f7ce9b0304052d0f058f128d7967e7dfc1`; Pages confirmou `built`, sem erro, e o endereço público serve a 2026.4.5.
 - Nenhum teste funcional, suíte, navegador ou gameplay foi executado; foram realizadas compilação produtiva, inspeção do código compilado e conferência de integridade.
 
 ## Correção emergencial da nova carreira — versão 2026.4.4
