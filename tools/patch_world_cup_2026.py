@@ -49,18 +49,6 @@ def patch_ui(body: bytes) -> bytes:
     return bytes(klass.data)
 
 
-def force_real_groups(body: bytes) -> bytes:
-    klass = ClassFile(body)
-    start, size = klass.methods.get("isUsarGruposReaisCopa", (None, None))
-    if start is None or size != 5:
-        raise ParseError("unexpected real-groups getter")
-    code = bytes(klass.data[start:start + size])
-    if code[0] != 0x2A or code[1] != 0xB4 or code[4] != 0xAC:
-        raise ParseError("real-groups getter fingerprint changed")
-    klass.data[start:start + size] = b"\x04\xac\x00\x00\x00"
-    return bytes(klass.data)
-
-
 def transplant(java: str, transformer: Path, original: Path, template: Path,
                method: str, output: Path) -> None:
     exports = [
@@ -123,6 +111,8 @@ def build(source: Path, destination: Path, java: str, javac: str) -> dict:
         transformer.mkdir()
         run([javac, "--release", "8", "-cp", source, "-d", templates,
              sources / "f" / "q.java", sources / "a" / "ia.java"])
+        run([javac, "--release", "8", "-cp", source, "-d", templates,
+             sources / "best" / "f.java"])
         exports = [
             "--add-exports", "java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED",
             "--add-exports", "java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED",
@@ -137,15 +127,18 @@ def build(source: Path, destination: Path, java: str, javac: str) -> dict:
             extracted[name] = path
         patched_q = work / "patched-q.class"
         patched_ia = work / "patched-ia.class"
+        patched_options = work / "patched-options.class"
         transplant(java, transformer / "WorldCup2026Transformer.class", extracted["f/q.class"],
                    templates / "f" / "q.class", "ya", patched_q)
         transplant(java, transformer / "WorldCup2026Transformer.class", extracted["a/ia.class"],
                    templates / "a" / "ia.class", "actionPerformed", patched_ia)
+        transplant(java, transformer / "WorldCup2026Transformer.class", extracted["best/f.class"],
+                   templates / "best" / "f.class", "isUsarGruposReaisCopa", patched_options)
         replacements = {
             "f/q.class": patched_q.read_bytes(),
             "a/hU.class": patch_ui(originals["a/hU.class"]),
             "a/ia.class": patched_ia.read_bytes(),
-            "best/f.class": force_real_groups(originals["best/f.class"]),
+            "best/f.class": patched_options.read_bytes(),
         }
         write_executable(source, destination, replacements)
 

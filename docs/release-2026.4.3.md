@@ -1,5 +1,7 @@
 # Brasfoot Mega Patch 2026.4.3
 
+> **Versão substituída:** a 2026.4.3 impede a abertura da nova carreira. Instale a correção 2026.4.4.
+
 Esta correção troca a referência fixa da Copa de 2022 pela última Copa masculina concluída, a edição de 2026.
 
 ## Alterações

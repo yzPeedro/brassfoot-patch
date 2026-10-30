@@ -1,7 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-30T14:08:24-03:00",
+  "updatedAt": "2026-10-30T14:16:22-03:00",
   "entries": [
+    {
+      "id": "patch-2026-4-4",
+      "version": "2026.4.4",
+      "date": "2026-10-30T14:16:22-03:00",
+      "title": "Nova carreira corrigida",
+      "kind": "patch",
+      "summary": "Correção emergencial elimina o carregamento infinito da 2026.4.3 e preserva a Copa do Mundo de 2026.",
+      "changes": [
+        "Corrigido o erro de verificação da JVM que impedia a abertura da tela de nova carreira.",
+        "A opção “Usar grupos da Copa do Mundo 2026” permanece sempre ativada.",
+        "As 48 seleções, os 12 grupos oficiais e a classificação dos oito melhores terceiros foram preservados.",
+        "A versão 2026.4.4 substitui integralmente a 2026.4.3 com defeito."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.4.4"
+    },
     {
       "id": "patch-2026-4-3",
       "version": "2026.4.3",
@@ -10,6 +25,7 @@
       "kind": "patch",
       "summary": "A opção da Copa agora usa a edição de 2026, com 48 seleções nos 12 grupos oficiais.",
       "changes": [
+        "Esta versão foi substituída pela 2026.4.4 devido a um erro que impedia a abertura da nova carreira.",
         "O texto da configuração passa a mostrar “Usar grupos da Copa do Mundo 2026”.",
         "A escolha fica permanentemente ativada para a primeira Copa da carreira iniciada em 2026.",
         "As 48 seleções participantes substituem a lista fixa de 32 países da edição de 2022.",

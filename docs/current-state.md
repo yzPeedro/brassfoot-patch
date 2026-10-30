@@ -1,6 +1,16 @@
 # Estado do Brasfoot Mega Patch — 30/10/2026
 
+## Correção emergencial da nova carreira — versão 2026.4.4
+
+A versão 2026.4.3 foi substituída porque a alteração que mantinha a opção da Copa marcada acrescentou bytes inválidos após o retorno do método `best.f.isUsarGruposReaisCopa`. A JVM recusava a classe com `VerifyError: Expecting a stack map frame`, interrompendo a criação da carreira antes da tela de configurações.
+
+Na 2026.4.4, o método inteiro é transplantado a partir de um molde Java compilado válido e contém somente `iconst_1; ireturn`. A inspeção estrutural também confirmou a preservação dos 48 participantes, 12 grupos, melhores terceiros, texto de 2026 e seleção obrigatória. A instalação existente não foi modificada durante a produção.
+
+Publicação: em andamento. Nenhum teste funcional, suíte, navegador ou gameplay foi executado; foram realizadas compilação produtiva, inspeção do código compilado e conferência de integridade.
+
 ## Correção da Copa do Mundo 2026 — versão 2026.4.3
+
+Esta versão foi substituída pela 2026.4.4 por impedir a abertura da tela de nova carreira.
 
 A tela inicial agora escreve `Usar grupos da Copa do Mundo 2026` e mantém a escolha ativada. A primeira Copa da carreira iniciada em 2026 substitui a lista fixa de 32 participantes de 2022 pelas 48 seleções da edição concluída de 2026, distribuídas nos 12 grupos oficiais de quatro equipes. Avançam os dois primeiros de cada grupo e os oito melhores terceiros para a fase de 32.
 
