@@ -1,7 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-30T14:16:22-03:00",
+  "updatedAt": "2026-10-30T15:58:31-03:00",
   "entries": [
+    {
+      "id": "patch-2026-4-5",
+      "version": "2026.4.5",
+      "date": "2026-10-30T15:58:31-03:00",
+      "title": "Copas continentais com os participantes de 2026",
+      "kind": "patch",
+      "summary": "Os clubes oficiais disponíveis no jogo passam a ter prioridade nas copas das Américas e da Europa na primeira temporada.",
+      "changes": [
+        "Libertadores e Sul-Americana passam a priorizar os classificados oficiais de 2026 presentes no catálogo do jogo.",
+        "Champions League, Europa League e Conference League recebem as listas oficiais da temporada 2026/27 compatíveis com a estrutura do Brasfoot.",
+        "A Champions Cup da Concacaf também prioriza os participantes oficiais de 2026 disponíveis no patch.",
+        "Clubes ausentes dos 704 arquivos do jogo e vagas excedentes aos formatos antigos continuam sendo preenchidos pela seleção original da engine.",
+        "A atualização vale para a primeira temporada; as temporadas seguintes mantêm a classificação dinâmica do jogo."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.4.5"
+    },
     {
       "id": "patch-2026-4-4",
       "version": "2026.4.4",

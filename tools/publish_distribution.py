@@ -31,6 +31,7 @@ def file_hash(path):
 def publish(directory, notes):
     manifest_path = directory / "distribution.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    edition = json.loads((ROOT / "config/edition.json").read_text(encoding="utf-8"))
     version, commit = manifest["version"], manifest["sourceCommit"]
     if not re.fullmatch(r"20\d{2}\.\d+\.\d+", version) or not re.fullmatch(r"[0-9a-f]{40}", commit):
         raise ValueError("invalid release identity")
@@ -117,7 +118,10 @@ def publish(directory, notes):
               "sha256": windows["sha256"], "competitionSeason": manifest["patchYear"],
               "editionStatus": "stable", "compatibilityVerifiedInGame": False,
               "gameplayVerified": False,
-              "releaseNotes": f"Instalação direta, elencos atuais e tela inicial {manifest['patchYear']}."}
+              "releaseNotes": edition.get(
+                  "releaseNotes",
+                  f"Instalação direta, elencos atuais e tela inicial {manifest['patchYear']}.",
+              )}
     (ROOT / "site/data/release.json").write_text(
         json.dumps(legacy, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(release["html_url"])

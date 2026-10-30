@@ -2,8 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.4.4",
+  "version": "2026.4.5",
   "channel": "stable",
+  "releaseNotes": "Participantes de 2026 priorizados na Libertadores, Sul-Americana, Champions, Europa, Conference e Champions Cup da Concacaf.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [

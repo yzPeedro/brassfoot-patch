@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "season": 2026,
+  "observedAt": "2026-10-30T16:00:00-03:00",
+  "scope": "First career season only; later seasons keep the game's dynamic qualification",
+  "sources": {
+    "conmebolLibertadores": "https://gol.conmebol.com/libertadores/es/news/sorteo-de-la-fase-de-grupos-de-la-conmebol-libertadores-2026-fecha-horario-clasificados",
+    "conmebolSudamericana": "https://gol.conmebol.com/sudamericana/es/news/confira-como-ficou-primeira-fase-da-conmebol-sudamericana",
+    "concacafChampionsCup": "https://www.concacaf.com/competitions/champions-cup/clubs/index",
+    "uefaChampionsLeague": "https://www.uefa.com/uefachampionsleague/clubs/",
+    "uefaEuropaLeague": "https://www.uefa.com/uefaeuropaleague/clubs/",
+    "uefaConferenceLeague": "https://www.uefa.com/uefaconferenceleague/clubs/"
+  },
+  "competitions": {
+    "libertadores": {
+      "officialEntrants": 47,
+      "engineSlots": 47,
+      "directIds": [
+        "bocajuniors_arg", "estudiantes_ar", "lanus_arg", "rosariocentral_arg",
+        "alwaysready_bol", "bolivar_bol", "corinthians_bra", "cruzeiro_bra",
+        "flarj", "flurj", "miirassol_sp", "palmeiras", "universidadcatolica_chi",
+        "junior_col", "independiente_equ", "ldu_equ", "cerroporteno_par",
+        "libertad_par", "universitario_per", "nacional_uru", "penarol_uru",
+        "deplaguaira_ven"
+      ],
+      "qualifyingIds": [
+        "deptachira_ven", "thestrongest_bol", "alianzalima_per",
+        "univcatolicaquito_equ", "indepmedellin_col", "liverpool_uru",
+        "sportingcristal_per", "deportestolima_col", "bahia", "barcelona_equ",
+        "argentinojnrs_arg", "botafogorj_bra", "nacionalpotosi_bol", "guarani_par"
+      ],
+      "notInGame": [
+        "Independiente Rivadavia", "Platense", "Coquimbo Unido", "Santa Fe",
+        "Cusco FC", "Universidad Central", "2 de Mayo", "Juventud de Las Piedras",
+        "Carabobo", "Huachipato", "O'Higgins"
+      ]
+    },
+    "sudamericana": {
+      "officialEntrants": 44,
+      "engineSlots": 44,
+      "directIds": [
+        "riverplate_arg", "racing_arg", "saopaulo_bra", "gremio",
+        "bragantino_bra", "atleticomg_bra", "santos", "vasco"
+      ],
+      "qualifyingIds": [
+        "clubdeportivoguabirá_bol", "indeppetro_ba_bol", "universidadchile_chi",
+        "audax_chi", "millionarios_col", "nacional_col", "americacali_col",
+        "macara_equ", "nacional_par", "olimpia_par", "melgar_per",
+        "cienciano_per", "montevideotorque_uru", "monaguas_ven", "caracas_ven",
+        "metropolitanos_ven"
+      ],
+      "notInGame": [
+        "San Lorenzo", "Tigre", "Barracas Central", "Deportivo Riestra",
+        "San Antonio Bulo Bulo", "Blooming", "Palestino", "Cobresal",
+        "Atlético Bucaramanga", "Deportivo Cuenca", "Orense", "Libertad Ecuador",
+        "Sportivo Trinidense", "Recoleta", "Deportivo Garcilaso", "Alianza Atlético",
+        "Boston River", "Racing Montevideo", "Defensor Sporting", "Academia Puerto Cabello"
+      ]
+    },
+    "champions": {
+      "officialEntrants": 81,
+      "engineSlots": 78,
+      "directIds": [
+        "aek_gre", "arsenal", "atleticomadrid_esp", "barcelona_esp", "bayern_ale",
+        "bodoglimt_nor", "borussia_ale", "brugge_bel", "fenerbahce_tur",
+        "feynoord_hol", "galatasaray_tur", "inter_it", "lask_aut", "leipzig_ale",
+        "lille_fra", "liverpool_ing", "machestercity_ing", "machester_ing",
+        "napoli_it", "parissaintgermain_fr", "porto", "psv_hol", "betis_esp",
+        "realmadrid_esp", "roma_it", "shakhtar_ucr"
+      ],
+      "qualifyingIds": [
+        "slavia_cze", "slovan_slk", "sporting_por", "viking_nor", "villareal_esp",
+        "celje_elv", "glasgowceltic_esc", "dinamozagreb_cro", "hapoelbeersheva_isr",
+        "lyon", "araraterewan_arm", "estrelavermelha_ser", "kairat_caz",
+        "kauno_lit", "olympiakos_gre", "sparta_tch", "sturmgraz_aut", "aarhus_den",
+        "Saburtalo_Geo", "klaksvik_fro", "kups_fin", "lincoln_gib", "Larne_irn",
+        "lechpoznan_pol", "omonianicosia_chp", "shamrock_irl", "craiova_rom",
+        "vikingur_isl", "borac_bih", "Drita_kos", "floratallinn_est", "floriana_mta",
+        "inter_and", "petrocub_mol", "riga_let", "sutjeska_mon", "thenewsaints_wal",
+        "trefiori_smr"
+      ],
+      "notInGame": [
+        "Aston Villa", "Como", "Lens", "Sabah", "Stuttgart", "Levski Sofia",
+        "N.E.C.", "Union Saint-Gilloise", "Egnatia", "Hearts", "Thun", "Vardar"
+      ]
+    },
+    "europa": {
+      "officialEntrants": 76,
+      "engineInitialSlots": 21,
+      "directIds": [
+        "milan_it", "juventus_it", "realsociedad_esp", "celtadevigo_esp",
+        "hoffebheim_ale", "bayerleverkusen_ale", "olympiquemarseile_fra",
+        "rennes_fr", "azalkmaar_hol"
+      ],
+      "qualifyingIds": [
+        "anderlecht_bel", "araraterewan_arm", "benfica_por", "besiktas_tur",
+        "celje_elv", "glasgowceltic_esc", "ferencvaros_hun", "dinamozagreb_cro",
+        "hapoelbeersheva_isr"
+      ],
+      "notInGame": [
+        "Bournemouth", "Crystal Palace", "Jagiellonia", "Levski Sofia",
+        "Lillestrøm", "N.E.C.", "Sunderland", "Torreense", "Union Saint-Gilloise"
+      ]
+    },
+    "conference": {
+      "officialEntrants": 166,
+      "engineSlots": 134,
+      "qualifyingIds": [
+        "aarhus_den", "ajax_hol", "atalanta_it", "borac_bih", "sportingbraga_por",
+        "copenhague_din", "estrelavermelha_ser", "cskasofia_bul", "hajduk_cro",
+        "Saburtalo_Geo", "inter_and", "jablonec_tch", "kairat_caz", "kauno_lit",
+        "kups_fin", "lincoln_gib", "midtjylland_din", "monaco_fr", "riga_let",
+        "twente_hol", "craiova_rom", "getafe_esp",
+        "Drita_kos", "hibernian_esc", "interturku_fin", "klaksvik_fro", "Larne_irn",
+        "MaccaiTel_isr", "motherwell_esc", "paok_gre", "partizan_ser", "qarabag_aze",
+        "rangers_esc", "rijeka_cro", "shamrock_irl", "rapidviena_aut", "stgallen_sui",
+        "vikingur_isl", "apollonlemesos_chp", "BeitarJer_isr", "bohemians_irl",
+        "cfrcluj_rom", "dacdunajskastreda_slk", "debrecen_hun", "dinamominsk_bie",
+        "dinamokiev_ucr", "floratallinn_est", "hammarby_sue", "helsinki_fin",
+        "gotenborg_sue", "ilves_fin", "Noah_Arm", "paide_est", "rfs_let",
+        "nsirunavik_fro", "sherifftiraspol_mol", "shkendija_mkd", "trefiori_smr",
+        "vaduz_lie", "zalgiris_lit", "alashkertyerevan_arm", "basaksehir_tur",
+        "bateborisov_bie", "Coleraine_irn", "derry_irl", "dinamotbilisi_geo",
+        "SantaColoma_AND", "steua_bucaresti_rom", "floriana_mta", "hbtorshavn_fro",
+        "kalju_est", "levadia_est", "liepaja_let", "ludogorets_bul", "neftci_aze",
+        "petrocub_mol", "sutjeska_mon", "thenewsaints_wal", "valletta_mta",
+        "vojvodina_srb", "zilina_slk", "zrinjski_bos", "astana_caz", "connahsquay_wal",
+        "Differdange_Lux", "europa_gib", "Glentoran_irn", "lafiorita_smr", "Linfield_irn",
+        "saraievo_bos", "sileks_mkd", "stjosephs_gib"
+      ],
+      "notInGame": [
+        "Brighton", "Brann", "Egnatia", "Freiburg", "Gent", "Hearts", "Lugano",
+        "Mjällby", "Nordsjælland", "Pafos", "Panathinaikos", "Sint-Truidense",
+        "Thun", "Trabzonspor"
+      ]
+    },
+    "concacaf": {
+      "officialEntrants": 27,
+      "engineSlots": 24,
+      "directIds": [
+        "america_mex", "monterrey_mex", "cruzazul_mex", "philadelphiaunion_eua",
+        "alajuelense_crc", "olimpia_hon", "tigres_mex"
+      ],
+      "notInGame": [
+        "Club Xelajú", "CS Cartaginés", "Defence Force", "FC Cincinnati", "Forge FC",
+        "Inter Miami", "LA Galaxy", "Los Angeles FC", "Mount Pleasant", "Nashville SC",
+        "O&M FC", "Atlético Ottawa", "Pumas UNAM", "Real España", "San Diego FC",
+        "Seattle Sounders", "Sporting San Miguelito", "Toluca", "Vancouver FC",
+        "Vancouver Whitecaps"
+      ]
+    }
+  },
+  "limitations": [
+    "The game contains 704 club files and cannot select an official entrant that has no club file.",
+    "The legacy competition formats have different slot counts from the 2026 Concacaf and 2026/27 UEFA formats.",
+    "Mapped official entrants are seeded first; remaining legacy slots use the original game selection logic.",
+    "No gameplay verification was performed at the owner's request."
+  ]
+}

@@ -1,5 +1,13 @@
 # Estado do Brasfoot Mega Patch — 30/10/2026
 
+## Copas continentais de 2026 — versão 2026.4.5
+
+A primeira temporada passa a priorizar os participantes oficiais disponíveis no catálogo do Brasfoot para Libertadores, Sul-Americana, Champions League, Europa League, Conference League e Champions Cup da Concacaf. Foram mapeadas 241 entradas oficiais existentes nos 704 arquivos de clubes do patch. Nas temporadas seguintes, a qualificação dinâmica original permanece ativa.
+
+Os formatos internos antigos foram preservados. Quando um participante oficial não existe no catálogo ou quando a quantidade de vagas de 2026 difere da estrutura da engine, as vagas restantes continuam sendo preenchidas pela lógica original do jogo. A lista reproduzível, as ausências e as fontes oficiais estão registradas em `config/continental-cups-2026.json`.
+
+A publicação da 2026.4.5 será registrada neste documento após a confirmação dos assets e do site. Nenhum teste funcional, suíte, navegador ou gameplay será executado; a produção se limita a compilação, geração e conferência de integridade.
+
 ## Correção emergencial da nova carreira — versão 2026.4.4
 
 A versão 2026.4.3 foi substituída porque a alteração que mantinha a opção da Copa marcada acrescentou bytes inválidos após o retorno do método `best.f.isUsarGruposReaisCopa`. A JVM recusava a classe com `VerifyError: Expecting a stack map frame`, interrompendo a criação da carreira antes da tela de configurações.
