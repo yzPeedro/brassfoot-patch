@@ -6,7 +6,13 @@ A versão 2026.4.3 foi substituída porque a alteração que mantinha a opção 
 
 Na 2026.4.4, o método inteiro é transplantado a partir de um molde Java compilado válido e contém somente `iconst_1; ireturn`. A inspeção estrutural também confirmou a preservação dos 48 participantes, 12 grupos, melhores terceiros, texto de 2026 e seleção obrigatória. A instalação existente não foi modificada durante a produção.
 
-Publicação: em andamento. Nenhum teste funcional, suíte, navegador ou gameplay foi executado; foram realizadas compilação produtiva, inspeção do código compilado e conferência de integridade.
+Publicação confirmada:
+
+- Release final/latest: https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.4.4; `prerelease=false`, `draft=false`.
+- Commit-fonte: `d17cda9d04fc7bd752077d5343fc6222e6951d92`.
+- Windows: 5.081.088 bytes; SHA-256 `ece1c0d0cb482f08d1e10031133c970502ac775b86732012cd3e828508f47f0c`.
+- Cinco artefatos versionados, cinco aliases permanentes, catálogo, manifesto e checksums foram carregados com digest confirmado pelo GitHub.
+- Nenhum teste funcional, suíte, navegador ou gameplay foi executado; foram realizadas compilação produtiva, inspeção do código compilado e conferência de integridade.
 
 ## Correção da Copa do Mundo 2026 — versão 2026.4.3
 
