@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.4.5",
-  "publishedAt": "2026-10-30T19:00:42.868853+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.4.5-windows-x64.exe",
+  "publishedVersion": "2026.4.6",
+  "publishedAt": "2026-10-30T22:10:44.826804+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.4.6-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
-  "fileSizeBytes": 5323776,
-  "sha256": "1423ccafdf798a3c22fa313d59919844ecf0fd587e56bb0bcc13e2fc731e21a3",
+  "fileSizeBytes": 5363712,
+  "sha256": "062517a674f54c7c97e6aa70634af23b41223e3cad29ceaf65758872e8923d26",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Participantes de 2026 priorizados na Libertadores, Sul-Americana, Champions, Europa, Conference e Champions Cup da Concacaf."
+  "releaseNotes": "Plantéis renovados em 23 clubes, com duas entradas, três saídas, posições corrigidas e idades atualizadas."
 }
