@@ -18,7 +18,7 @@
     "doNotInstallAnySerieDTeam": false,
     "nameNormalizationIncluded": true
   },
-  "activeBaselineRelease": "2026.4.2",
+  "activeBaselineRelease": "2026.4.6",
   "completedReal2026BAndCSquads": 0,
   "blockers": [],
   "status": "published",
@@ -444,6 +444,6 @@
       "rosterStatus": "included-current-snapshot"
     }
   ],
-  "publishedRosterVersion": "2026.4.2",
+  "publishedRosterVersion": "2026.4.6",
   "publishedRosterSnapshot": true
 }

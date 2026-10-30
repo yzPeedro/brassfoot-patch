@@ -1,7 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-30T15:58:31-03:00",
+  "updatedAt": "2026-10-30T19:05:20-03:00",
   "entries": [
+    {
+      "id": "patch-2026-4-6",
+      "version": "2026.4.6",
+      "date": "2026-10-30T19:05:20-03:00",
+      "title": "Plantéis renovados em 23 clubes",
+      "kind": "patch",
+      "summary": "A consulta diária confirmou entradas, saídas, posições e idades que alteram os arquivos do jogo.",
+      "changes": [
+        "Fernando Costa chegou ao RB Bragantino e Yoann Prigent ao Derry City nas fontes consultadas.",
+        "Stavros Panagi, Savvas Sofokleous e Eren Kaya deixaram os plantéis publicados de seus clubes.",
+        "Quinze atletas receberam correções de posição e dezessete tiveram a idade recalculada na data de referência de 30/10/2026.",
+        "A consulta cobriu os 704 clubes: 288 fontes completas, 54 parciais preservadas e 362 identidades ainda pendentes de uma fonte completa.",
+        "O executável, a Copa do Mundo de 2026 e as listas de copas continentais da 2026.4.5 foram preservados."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.4.6"
+    },
     {
       "id": "patch-2026-4-5",
       "version": "2026.4.5",

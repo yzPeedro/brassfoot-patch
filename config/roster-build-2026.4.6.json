@@ -1,0 +1,3221 @@
+{
+  "schemaVersion": 1,
+  "version": "2026.4.6",
+  "date": "2026-10-30",
+  "counts": {
+    "unsourcedSquadsPreserved": 350,
+    "playersTotal": 16971,
+    "teamsTotal": 704,
+    "sourceSquads": 300,
+    "internationalSourceSquads": 240,
+    "attributesPreserved": 8641,
+    "sourcePlayersCompiled": 8643,
+    "sourcedFlanks": 2572,
+    "sourcedFullbacks": 1314,
+    "sourcedWingersAsAttackers": 1212,
+    "primaryNamesShortened": 262,
+    "partialSquadsPreserved": 54,
+    "partialSourceCorrections": 82,
+    "brazilSourceSquads": 60,
+    "default_traits": 2,
+    "default_statusAndHash": 2,
+    "default_flank": 2,
+    "default_roleIncompatibleTraits": 1
+  },
+  "limitations": [
+    "Individual traits unavailable at squad sources; preserved attributes or explicitly derived role defaults.",
+    "Brasfoot stores right/left side, not a distinct preferred-foot field.",
+    "Jersey and exact birth date retained in provenance; game stores age but has no jersey/DOB field.",
+    "Incomplete source squads preserve previous rosters; retained memberships may be historical.",
+    "No test suites or gameplay tests were executed."
+  ],
+  "clubs": [
+    {
+      "teamFile": "teams/BeitarJer_isr.ban",
+      "club": "Beitar Jerusalem",
+      "countryCode": 103,
+      "sourceUrl": "https://www.365scores.com/football/team/beitar-jerusalem-559/squad",
+      "observedAt": "2026-10-30T22:06:25.378236+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/Coleraine_irn.ban",
+      "club": "Coleraine",
+      "countryCode": 101,
+      "sourceUrl": "https://www.365scores.com/football/team/coleraine-fc-10380/squad",
+      "observedAt": "2026-10-30T22:06:28.693188+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/DBatumi_Geo.ban",
+      "club": "Dinamo Batumi",
+      "countryCode": 76,
+      "sourceUrl": "https://www.365scores.com/football/team/dinamo-batumi-14218/squad",
+      "observedAt": "2026-10-30T22:06:28.783782+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/Differdange_Lux.ban",
+      "club": "Differdange 03",
+      "countryCode": 120,
+      "sourceUrl": "https://www.365scores.com/football/team/differdange-03-7533/squad",
+      "observedAt": "2026-10-30T22:06:28.186849+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/Drita_kos.ban",
+      "club": "Drita Gjilan",
+      "countryCode": 110,
+      "sourceUrl": "https://www.365scores.com/football/team/drita-45033/squad",
+      "observedAt": "2026-10-30T22:06:29.166369+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/Fola_Lux.ban",
+      "club": "Fola Esch",
+      "countryCode": 120,
+      "sourceUrl": "https://www.365scores.com/football/team/cs-fola-esch-8455/squad",
+      "observedAt": "2026-10-30T22:06:28.237790+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/Glentoran_irn.ban",
+      "club": "Glentoran",
+      "countryCode": 101,
+      "sourceUrl": "https://www.365scores.com/football/team/glentoran-5443/squad",
+      "observedAt": "2026-10-30T22:06:27.602455+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/Hafnarfjordur_isl.ban",
+      "club": "Hafnarfjördur",
+      "countryCode": 102,
+      "sourceUrl": "https://www.365scores.com/football/team/fh-hafnarfjordur-2090/squad",
+      "observedAt": "2026-10-30T22:06:27.200408+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/Larne_irn.ban",
+      "club": "Larne",
+      "countryCode": 101,
+      "sourceUrl": "https://www.365scores.com/football/team/larne-fc-17048/squad",
+      "observedAt": "2026-10-30T22:06:28.836024+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 39
+    },
+    {
+      "teamFile": "teams/Linfield_irn.ban",
+      "club": "Linfield",
+      "countryCode": 101,
+      "sourceUrl": "https://www.365scores.com/football/team/linfield-5594/squad",
+      "observedAt": "2026-10-30T22:06:27.912836+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/LocoTbilisi_Geo.ban",
+      "club": "Locomotive Tbilisi",
+      "countryCode": 76,
+      "sourceUrl": "https://www.365scores.com/football/team/lokomotivi-tbilisi-5628/squad",
+      "observedAt": "2026-10-30T22:06:27.942275+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 22
+    },
+    {
+      "teamFile": "teams/MaccaiTel_isr.ban",
+      "club": "Maccabi Tel Aviv",
+      "countryCode": 103,
+      "sourceUrl": "https://www.365scores.com/football/team/maccabi-tel-aviv-566/squad",
+      "observedAt": "2026-10-30T22:06:25.378236+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/Noah_Arm.ban",
+      "club": "Noah Yerevan",
+      "countryCode": 12,
+      "sourceUrl": "https://www.365scores.com/football/team/noah-56933/squad",
+      "observedAt": "2026-10-30T22:06:29.225755+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/Prishtina_kos.ban",
+      "club": "Pristina",
+      "countryCode": 110,
+      "sourceUrl": "https://www.365scores.com/football/team/prishtina-45035/squad",
+      "observedAt": "2026-10-30T22:06:29.166369+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 35
+    },
+    {
+      "teamFile": "teams/ProgrèsNiederkorn_lux.ban",
+      "club": "Progrès Niedercorn",
+      "countryCode": 120,
+      "sourceUrl": "https://www.365scores.com/football/team/progres-niedercorn-24761/squad",
+      "observedAt": "2026-10-30T22:06:29.071422+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 19
+    },
+    {
+      "teamFile": "teams/Saburtalo_Geo.ban",
+      "club": "Saburtalo",
+      "countryCode": 76,
+      "sourceUrl": "https://www.365scores.com/football/team/fc-iberia-1999-14390/squad",
+      "observedAt": "2026-10-30T22:06:28.783782+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/SantaColoma_AND.ban",
+      "club": "Santa Coloma",
+      "countryCode": 4,
+      "sourceUrl": "https://www.365scores.com/football/team/santa-coloma-5585/squad",
+      "observedAt": "2026-10-30T22:06:27.912836+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 18
+    },
+    {
+      "teamFile": "teams/Shirak_Arm.ban",
+      "club": "Shirak Giumri",
+      "countryCode": 12,
+      "sourceUrl": "https://www.365scores.com/football/team/shirak-fc-9322/squad",
+      "observedAt": "2026-10-30T22:06:28.488377+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 22
+    },
+    {
+      "teamFile": "teams/UPetange_Lux.ban",
+      "club": "Union Pétange",
+      "countryCode": 120,
+      "sourceUrl": "https://www.365scores.com/football/team/petange-28305/squad",
+      "observedAt": "2026-10-30T22:06:29.166369+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 19
+    },
+    {
+      "teamFile": "teams/aarhus_den.ban",
+      "club": "Aarhus",
+      "countryCode": 54,
+      "sourceUrl": "https://www.365scores.com/football/team/aarhus-1831/squad",
+      "observedAt": "2026-10-30T22:06:26.896556+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/aberdeen_esc.ban",
+      "club": "Aberdeen",
+      "countryCode": 62,
+      "sourceUrl": "https://www.365scores.com/football/team/aberdeen-761/squad",
+      "observedAt": "2026-10-30T22:06:25.678551+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/aek_gre.ban",
+      "club": "AEK Atenas",
+      "countryCode": 78,
+      "sourceUrl": "https://www.365scores.com/football/team/aek-athens-1024/squad",
+      "observedAt": "2026-10-30T22:06:25.968446+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/ajax_hol.ban",
+      "club": "Ajax",
+      "countryCode": 85,
+      "sourceUrl": "https://www.365scores.com/football/team/ajax-690/squad",
+      "observedAt": "2026-10-30T22:06:25.378236+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/alanyaspor_tur.ban",
+      "club": "Alanyaspor",
+      "countryCode": 192,
+      "sourceUrl": "https://www.365scores.com/football/team/alanyaspor-1009/squad",
+      "observedAt": "2026-10-30T22:06:25.968446+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/alashkertyerevan_arm.ban",
+      "club": "Alashkert Yerevan",
+      "countryCode": 12,
+      "sourceUrl": "https://www.365scores.com/football/team/alashkert-martuni-14387/squad",
+      "observedAt": "2026-10-30T22:06:28.783782+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/alaves_esp.ban",
+      "club": "Alavés",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/alaves-168/squad",
+      "observedAt": "2026-10-30T22:06:25.048900+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/albacete_esp.ban",
+      "club": "Albacete",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/albacete-170/squad",
+      "observedAt": "2026-10-30T22:06:25.048900+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/alcorcon_esp.ban",
+      "club": "Alcorcón",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/alcorcon-6159/squad",
+      "observedAt": "2026-10-30T22:06:28.025933+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/almeria_esp.ban",
+      "club": "Almería",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/almeria-138/squad",
+      "observedAt": "2026-10-30T22:06:24.743615+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/amazonas_am.ban",
+      "club": "Amazonas FC",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/pt-br/football/team/amazonas-fc-57477/squad;",
+      "observedAt": "2026-10-25",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 39
+    },
+    {
+      "teamFile": "teams/americamg_bra.ban",
+      "club": "América-MG",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/america-mineiro-8514/squad",
+      "observedAt": "2026-10-30T22:06:28.237790+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/anapolisgo_bra.ban",
+      "club": "Anápolis",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/anapolis-10278/squad;",
+      "observedAt": "2026-10-25",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/anderlecht_bel.ban",
+      "club": "Anderlecht",
+      "countryCode": 21,
+      "sourceUrl": "https://www.365scores.com/football/team/anderlecht-1173/squad",
+      "observedAt": "2026-10-30T22:06:26.259202+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/anorthosisfamag_cyp.ban",
+      "club": "Anorthosis Famagusta",
+      "countryCode": 44,
+      "sourceUrl": "https://www.365scores.com/football/team/anorthosis-2260/squad",
+      "observedAt": "2026-10-30T22:06:27.689397+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/apoel_chp.ban",
+      "club": "APOEL",
+      "countryCode": 44,
+      "sourceUrl": "https://www.365scores.com/football/team/apoel-nicosia-2261/squad",
+      "observedAt": "2026-10-30T22:06:27.689397+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/apollonlemesos_chp.ban",
+      "club": "Apollon Limassol",
+      "countryCode": 44,
+      "sourceUrl": "https://www.365scores.com/football/team/apollon-limassol-2263/squad",
+      "observedAt": "2026-10-30T22:06:27.689397+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/araraterewan_arm.ban",
+      "club": "Ararat-Armenia",
+      "countryCode": 12,
+      "sourceUrl": "https://www.365scores.com/football/team/fc-ararat-armenia-48879/squad",
+      "observedAt": "2026-10-30T22:06:29.225755+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/aris_gre.ban",
+      "club": "Aris ",
+      "countryCode": 78,
+      "sourceUrl": "https://www.365scores.com/football/team/aris-salonica-1025/squad",
+      "observedAt": "2026-10-30T22:06:25.968446+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/arislimassol_chp.ban",
+      "club": "Aris Limassol",
+      "countryCode": 44,
+      "sourceUrl": "https://www.365scores.com/football/team/aris-limasol-2270/squad",
+      "observedAt": "2026-10-30T22:06:27.689397+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/arsenal.ban",
+      "club": "Arsenal",
+      "countryCode": 97,
+      "sourceUrl": "https://www.365scores.com/football/team/arsenal-104/squad",
+      "observedAt": "2026-10-30T22:06:24.794940+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/astana_caz.ban",
+      "club": "Astana",
+      "countryCode": 40,
+      "sourceUrl": "https://www.365scores.com/football/team/astana-10785/squad",
+      "observedAt": "2026-10-30T22:06:28.693188+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/atalanta_it.ban",
+      "club": "Atalanta",
+      "countryCode": 104,
+      "sourceUrl": "https://www.365scores.com/football/team/atalanta-232/squad",
+      "observedAt": "2026-10-30T22:06:25.460574+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/athleticclub_mg.ban",
+      "club": "Athletic Club",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/athletic-club-67683/squad",
+      "observedAt": "2026-10-30T22:06:29.225755+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 35
+    },
+    {
+      "teamFile": "teams/atleticobilbao_esp.ban",
+      "club": "Athletic Bilbao",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/athletic-bilbao-144/squad",
+      "observedAt": "2026-10-30T22:06:24.725611+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/atleticogo_bra.ban",
+      "club": "Atlético-GO",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/atletico-goianiense-5918/squad",
+      "observedAt": "2026-10-30T22:06:27.942275+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/atleticomadrid_esp.ban",
+      "club": "Atlético Madri ",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/atletico-madrid-134/squad",
+      "observedAt": "2026-10-30T22:06:24.743615+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/atleticomg_bra.ban",
+      "club": "Atlético-MG",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/atletico-mineiro-1209/squad",
+      "observedAt": "2026-10-30T22:06:26.295286+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/atleticopr_bra.ban",
+      "club": "Athletico-PR",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/athletico-paranaense-1210/squad",
+      "observedAt": "2026-10-30T22:06:26.295286+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/avai_bra.ban",
+      "club": "Avaí",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/avai-1777/squad",
+      "observedAt": "2026-10-30T22:06:26.680077+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/azalkmaar_hol.ban",
+      "club": "AZ Alkmaar",
+      "countryCode": 85,
+      "sourceUrl": "https://www.365scores.com/football/team/az-alkmaar-699/squad",
+      "observedAt": "2026-10-30T22:06:25.645964+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/b36torshavn_fro.ban",
+      "club": "B36 Tórshavn",
+      "countryCode": 92,
+      "sourceUrl": "https://www.365scores.com/football/team/b36-torshavn-5626/squad",
+      "observedAt": "2026-10-30T22:06:27.942275+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/backa_srb.ban",
+      "club": "Backa Topola",
+      "countryCode": 171,
+      "sourceUrl": "https://www.365scores.com/football/team/tsc-backa-topola-56890/squad",
+      "observedAt": "2026-10-30T22:06:29.225755+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/bahia.ban",
+      "club": "Bahia",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/bahia-1767/squad",
+      "observedAt": "2026-10-30T22:06:26.680077+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/balatown_wal.ban",
+      "club": "Bala Town",
+      "countryCode": 145,
+      "sourceUrl": "https://www.365scores.com/football/team/bala-town-12670/squad",
+      "observedAt": "2026-10-30T22:06:28.576797+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 18
+    },
+    {
+      "teamFile": "teams/barra_sc.ban",
+      "club": "Barra-SC",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/barra-fc-69132/squad;",
+      "observedAt": "2026-10-25",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/barrytown_wal.ban",
+      "club": "Barry Town",
+      "countryCode": 145,
+      "sourceUrl": "https://www.365scores.com/football/team/barry-town-13625/squad",
+      "observedAt": "2026-10-30T22:06:28.783782+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 18
+    },
+    {
+      "teamFile": "teams/basaksehir_tur.ban",
+      "club": "Istanbul Basaksehir",
+      "countryCode": 192,
+      "sourceUrl": "https://www.365scores.com/football/team/basaksehir-958/squad",
+      "observedAt": "2026-10-30T22:06:25.968446+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/basel_sui.ban",
+      "club": "Basel",
+      "countryCode": 180,
+      "sourceUrl": "https://www.365scores.com/football/team/fc-basel-1893-1138/squad",
+      "observedAt": "2026-10-30T22:06:25.975089+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/bateborisov_bie.ban",
+      "club": "BATE Borisov",
+      "countryCode": 25,
+      "sourceUrl": "https://www.365scores.com/football/team/bate-borisov-5441/squad",
+      "observedAt": "2026-10-30T22:06:27.602455+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/bayerleverkusen_ale.ban",
+      "club": "Bayer Leverkusen",
+      "countryCode": 3,
+      "sourceUrl": "https://www.365scores.com/football/team/bayer-leverkusen-333/squad",
+      "observedAt": "2026-10-30T22:06:25.460574+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/bayern_ale.ban",
+      "club": "Bayern Munique",
+      "countryCode": 3,
+      "sourceUrl": "https://www.365scores.com/football/team/bayern-munich-331/squad",
+      "observedAt": "2026-10-30T22:06:25.460574+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/benfica_por.ban",
+      "club": "Benfica",
+      "countryCode": 154,
+      "sourceUrl": "https://www.365scores.com/football/team/benfica-888/squad",
+      "observedAt": "2026-10-30T22:06:25.678551+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/besiktas_tur.ban",
+      "club": "Besiktas",
+      "countryCode": 192,
+      "sourceUrl": "https://www.365scores.com/football/team/besiktas-947/squad",
+      "observedAt": "2026-10-30T22:06:26.053655+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/betis_esp.ban",
+      "club": "Real Bétis",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/real-betis-146/squad",
+      "observedAt": "2026-10-30T22:06:24.725611+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/bodoglimt_nor.ban",
+      "club": "Bodo Glimt",
+      "countryCode": 142,
+      "sourceUrl": "https://www.365scores.com/football/team/bodo-glimt-1978/squad",
+      "observedAt": "2026-10-30T22:06:27.143396+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/bohemians_irl.ban",
+      "club": "Bohemians",
+      "countryCode": 100,
+      "sourceUrl": "https://www.365scores.com/football/team/bohemians-836/squad",
+      "observedAt": "2026-10-30T22:06:25.678551+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/borac_bih.ban",
+      "club": "Borac Banja Luka",
+      "countryCode": 27,
+      "sourceUrl": "https://www.365scores.com/football/team/borac-banjaluka-7528/squad",
+      "observedAt": "2026-10-30T22:06:28.186849+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/borussia_ale.ban",
+      "club": "Borussia Dortmund",
+      "countryCode": 3,
+      "sourceUrl": "https://www.365scores.com/football/team/borussia-dortmund-341/squad",
+      "observedAt": "2026-10-30T22:06:25.460574+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/botafogopb_bra.ban",
+      "club": "Botafogo PB",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/botafogo-pb-9203/squad",
+      "observedAt": "2026-10-30T22:06:28.488377+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 40
+    },
+    {
+      "teamFile": "teams/botafogorj_bra.ban",
+      "club": "Botafogo",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/botafogo-1211/squad",
+      "observedAt": "2026-10-30T22:06:26.295286+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 36
+    },
+    {
+      "teamFile": "teams/botafogosp_bra.ban",
+      "club": "Botafogo SP",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/botafogo-sp-1773/squad",
+      "observedAt": "2026-10-30T22:06:26.680077+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/botev_bul.ban",
+      "club": "Botev Plovdiv",
+      "countryCode": 31,
+      "sourceUrl": "https://www.365scores.com/football/team/botev-plovdiv-2286/squad",
+      "observedAt": "2026-10-30T22:06:27.627165+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/botosani_rom.ban",
+      "club": "FC Botosani ",
+      "countryCode": 160,
+      "sourceUrl": "https://www.365scores.com/football/team/fc-botosani-12365/squad",
+      "observedAt": "2026-10-30T22:06:28.576797+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/bragantino_bra.ban",
+      "club": "RB Bragantino",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/rb-bragantino-1273/squad",
+      "observedAt": "2026-10-30T22:06:26.552277+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/breidablik_isl.ban",
+      "club": "Breidablik",
+      "countryCode": 102,
+      "sourceUrl": "https://www.365scores.com/football/team/breidablik-2089/squad",
+      "observedAt": "2026-10-30T22:06:27.200408+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/brondby_din.ban",
+      "club": "Bröndby",
+      "countryCode": 54,
+      "sourceUrl": "https://www.365scores.com/football/team/brøndby-if-1829/squad",
+      "observedAt": "2026-10-30T22:06:26.896556+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/brugge_bel.ban",
+      "club": "Club Brugge",
+      "countryCode": 21,
+      "sourceUrl": "https://www.365scores.com/football/team/club-brugge-1169/squad",
+      "observedAt": "2026-10-30T22:06:26.259202+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/brusquesc_bra.ban",
+      "club": "Brusque",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/brusque-9149/squad",
+      "observedAt": "2026-10-30T22:06:28.319552+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/budapeste_hun.ban",
+      "club": "Budapest Honvéd",
+      "countryCode": 88,
+      "sourceUrl": "https://www.365scores.com/football/team/budapest-honved-2069/squad",
+      "observedAt": "2026-10-30T22:06:27.200408+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/buducnost_mon.ban",
+      "club": "Buducnost",
+      "countryCode": 105,
+      "sourceUrl": "https://www.365scores.com/football/team/buducnost-podgorica-5440/squad",
+      "observedAt": "2026-10-30T22:06:27.602455+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/burgos_esp.ban",
+      "club": "Burgos",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/burgos-cf-180/squad",
+      "observedAt": "2026-10-30T22:06:25.089782+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/cadiz_esp.ban",
+      "club": "Cádiz",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/cadiz-cf-163/squad",
+      "observedAt": "2026-10-30T22:06:25.048900+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/cartagena_esp.ban",
+      "club": "Cartagena",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/cartagena-5999/squad",
+      "observedAt": "2026-10-30T22:06:28.025933+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 17
+    },
+    {
+      "teamFile": "teams/caxias.ban",
+      "club": "Caxias",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/pt-br/football/team/caxias-9083/squad",
+      "observedAt": "2026-10-25",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/ceara_bra.ban",
+      "club": "Ceará",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/ceara-1781/squad",
+      "observedAt": "2026-10-30T22:06:26.680077+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/celje_elv.ban",
+      "club": "NK Celje",
+      "countryCode": 64,
+      "sourceUrl": "https://www.365scores.com/football/team/nk-celje-2345/squad",
+      "observedAt": "2026-10-30T22:06:27.627165+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 35
+    },
+    {
+      "teamFile": "teams/celtadevigo_esp.ban",
+      "club": "Celta de Vigo",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/celta-vigo-158/squad",
+      "observedAt": "2026-10-30T22:06:25.026129+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/cfrcluj_rom.ban",
+      "club": "CFR Cluj",
+      "countryCode": 160,
+      "sourceUrl": "https://www.365scores.com/football/team/cfr-cluj-2040/squad",
+      "observedAt": "2026-10-30T22:06:27.143396+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 36
+    },
+    {
+      "teamFile": "teams/chapecoense_bra.ban",
+      "club": "Chapecoense",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/chapecoense-7387/squad",
+      "observedAt": "2026-10-30T22:06:28.186849+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 36
+    },
+    {
+      "teamFile": "teams/charleroi_bel.ban",
+      "club": "Charleroi",
+      "countryCode": 21,
+      "sourceUrl": "https://www.365scores.com/football/team/charleroi-1178/squad",
+      "observedAt": "2026-10-30T22:06:26.259202+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/chelsea.ban",
+      "club": "Chelsea",
+      "countryCode": 97,
+      "sourceUrl": "https://www.365scores.com/football/team/chelsea-106/squad",
+      "observedAt": "2026-10-30T22:06:24.794940+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/confianca_se.ban",
+      "club": "Confiança",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/pt-br/football/team/confianca-9210/squad",
+      "observedAt": "2026-10-25",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 38
+    },
+    {
+      "teamFile": "teams/connahsquay_wal.ban",
+      "club": "Connah's Quay",
+      "countryCode": 145,
+      "sourceUrl": "https://www.365scores.com/football/team/gap-connah's-quay-13587/squad",
+      "observedAt": "2026-10-30T22:06:28.783782+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/copenhague_din.ban",
+      "club": "Copenhague",
+      "countryCode": 54,
+      "sourceUrl": "https://www.365scores.com/football/team/fc-copenhagen-1824/squad",
+      "observedAt": "2026-10-30T22:06:26.896556+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/corinthians_bra.ban",
+      "club": "Corinthians",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/corinthians-1267/squad",
+      "observedAt": "2026-10-30T22:06:26.552277+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/coritiba_bra.ban",
+      "club": "Coritiba",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/coritiba-1212/squad",
+      "observedAt": "2026-10-30T22:06:26.295286+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/cracóvia_pl.ban",
+      "club": "Cracovia",
+      "countryCode": 152,
+      "sourceUrl": "https://www.365scores.com/football/team/cracovia-krakow-2215/squad",
+      "observedAt": "2026-10-30T22:06:27.312444+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/craiova_rom.ban",
+      "club": "Universitatea Craiova",
+      "countryCode": 160,
+      "sourceUrl": "https://www.365scores.com/football/team/cs-universitatea-craiova-2048/squad",
+      "observedAt": "2026-10-30T22:06:27.143396+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/crb_bra.ban",
+      "club": "CRB",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/crb-1784/squad",
+      "observedAt": "2026-10-30T22:06:26.825798+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/criciuma_bra.ban",
+      "club": "Criciúma",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/criciuma-1780/squad",
+      "observedAt": "2026-10-30T22:06:26.680077+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/cruzeiro_bra.ban",
+      "club": "Cruzeiro",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/cruzeiro-1213/squad",
+      "observedAt": "2026-10-30T22:06:26.295286+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/cskamoscow_rus.ban",
+      "club": "CSKA Moscow",
+      "countryCode": 162,
+      "sourceUrl": "https://www.365scores.com/football/team/cska-moscow-1077/squad",
+      "observedAt": "2026-10-30T22:06:25.975089+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/cskasofia_bul.ban",
+      "club": "CSKA Sofia",
+      "countryCode": 31,
+      "sourceUrl": "https://www.365scores.com/football/team/cska-sofia-2276/squad",
+      "observedAt": "2026-10-30T22:06:27.689397+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/cuiaba_bra.ban",
+      "club": "Cuiabá",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/cuiaba-9188/squad",
+      "observedAt": "2026-10-30T22:06:28.488377+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/dacdunajskastreda_slk.ban",
+      "club": "Dunajská Streda",
+      "countryCode": 63,
+      "sourceUrl": "https://www.365scores.com/football/team/dunajska-streda-2119/squad",
+      "observedAt": "2026-10-30T22:06:27.312444+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/debrecen_hun.ban",
+      "club": "Debrecen",
+      "countryCode": 88,
+      "sourceUrl": "https://www.365scores.com/football/team/debreceni-vsc-2064/squad",
+      "observedAt": "2026-10-30T22:06:27.200408+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/deportivolacoruna_esp.ban",
+      "club": "La Coruña",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/deportivo-la-coruna-148/squad",
+      "observedAt": "2026-10-30T22:06:24.725611+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/derry_irl.ban",
+      "club": "Derry City",
+      "countryCode": 100,
+      "sourceUrl": "https://www.365scores.com/football/team/derry-city-840/squad",
+      "observedAt": "2026-10-30T22:06:25.678551+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/dinamoauto_mol.ban",
+      "club": "Dinamo-Auto",
+      "countryCode": 134,
+      "sourceUrl": "https://www.365scores.com/football/team/dinamo-auto-tiraspol-13155/squad",
+      "observedAt": "2026-10-30T22:06:28.783782+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 19
+    },
+    {
+      "teamFile": "teams/dinamokiev_ucr.ban",
+      "club": "Dinamo Kiev",
+      "countryCode": 193,
+      "sourceUrl": "https://www.365scores.com/football/team/dynamo-kyiv-1956/squad",
+      "observedAt": "2026-10-30T22:06:26.976879+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 39
+    },
+    {
+      "teamFile": "teams/dinamominsk_bie.ban",
+      "club": "Dinamo Minsk",
+      "countryCode": 25,
+      "sourceUrl": "https://www.365scores.com/football/team/dinamo-minsk-5426/squad",
+      "observedAt": "2026-10-30T22:06:27.602455+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/dinamotbilisi_geo.ban",
+      "club": "Dinamo Tbilisi",
+      "countryCode": 76,
+      "sourceUrl": "https://www.365scores.com/football/team/dinamo-tbilisi-5428/squad",
+      "observedAt": "2026-10-30T22:06:27.602455+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/dinamozagreb_cro.ban",
+      "club": "Dinamo Zagreb ",
+      "countryCode": 52,
+      "sourceUrl": "https://www.365scores.com/football/team/dinamo-zagreb-2245/squad",
+      "observedAt": "2026-10-30T22:06:27.312444+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/djurgardens_sue.ban",
+      "club": "Djurgardens IF",
+      "countryCode": 179,
+      "sourceUrl": "https://www.365scores.com/football/team/djurgardens-if-1892/squad",
+      "observedAt": "2026-10-30T22:06:26.896556+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/dnipro1_ucr.ban",
+      "club": "Dnipro-1",
+      "countryCode": 193,
+      "sourceUrl": "https://www.365scores.com/football/team/dnipro-1-48814/squad",
+      "observedAt": "2026-10-30T22:06:29.166369+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 19
+    },
+    {
+      "teamFile": "teams/dundalk_irl.ban",
+      "club": "Dundalk",
+      "countryCode": 100,
+      "sourceUrl": "https://www.365scores.com/football/team/dundalk-846/squad",
+      "observedAt": "2026-10-30T22:06:25.678551+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 36
+    },
+    {
+      "teamFile": "teams/dynamo_rus.ban",
+      "club": "Dynamo Moscow",
+      "countryCode": 162,
+      "sourceUrl": "https://www.365scores.com/football/team/dynamo-moscow-1080/squad",
+      "observedAt": "2026-10-30T22:06:25.975089+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/dynamobrest_bie.ban",
+      "club": "Dynamo Brest",
+      "countryCode": 25,
+      "sourceUrl": "https://www.365scores.com/football/team/dinamo-brest-8722/squad",
+      "observedAt": "2026-10-30T22:06:28.319552+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 20
+    },
+    {
+      "teamFile": "teams/eibar_esp.ban",
+      "club": "Eibar",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/eibar-164/squad",
+      "observedAt": "2026-10-30T22:06:25.048900+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/elche_esp.ban",
+      "club": "Elche",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/elche-156/squad",
+      "observedAt": "2026-10-30T22:06:25.026129+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/engordany_and.ban",
+      "club": "Engordany",
+      "countryCode": 4,
+      "sourceUrl": "https://www.365scores.com/football/team/engordany-6914/squad",
+      "observedAt": "2026-10-30T22:06:28.025933+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 18
+    },
+    {
+      "teamFile": "teams/espanyol_esp.ban",
+      "club": "Espanyol",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/espanyol-136/squad",
+      "observedAt": "2026-10-30T22:06:24.743615+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/estrelavermelha_ser.ban",
+      "club": "Estrela Vermelha",
+      "countryCode": 171,
+      "sourceUrl": "https://www.365scores.com/football/team/fk-crvena-zvezda-8957/squad",
+      "observedAt": "2026-10-30T22:06:28.319552+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/europa_gib.ban",
+      "club": "Europa FC",
+      "countryCode": 216,
+      "sourceUrl": "https://www.365scores.com/football/team/europa-fc-16041/squad",
+      "observedAt": "2026-10-30T22:06:28.836024+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 22
+    },
+    {
+      "teamFile": "teams/fcandorra_esp.ban",
+      "club": "FC Andorra",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/andorra-cf-9256/squad",
+      "observedAt": "2026-10-30T22:06:28.488377+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/fenerbahce_tur.ban",
+      "club": "Fenerbahce",
+      "countryCode": 192,
+      "sourceUrl": "https://www.365scores.com/football/team/fenerbahce-sk-946/squad",
+      "observedAt": "2026-10-30T22:06:26.053655+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/ferencvaros_hun.ban",
+      "club": "Ferencváros",
+      "countryCode": 88,
+      "sourceUrl": "https://www.365scores.com/football/team/ferencvaros-6020/squad",
+      "observedAt": "2026-10-30T22:06:28.025933+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 36
+    },
+    {
+      "teamFile": "teams/ferroviaria_sp.ban",
+      "club": "Ferroviária",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/ferroviaria-9182/squad",
+      "observedAt": "2026-10-30T22:06:28.319552+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/feynoord_hol.ban",
+      "club": "Feyenoord",
+      "countryCode": 85,
+      "sourceUrl": "https://www.365scores.com/football/team/feyenoord-691/squad",
+      "observedAt": "2026-10-30T22:06:25.378236+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/figueirense.ban",
+      "club": "Figueirense",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/pt-br/football/team/figueirense-1214/squad",
+      "observedAt": "2026-10-25",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 39
+    },
+    {
+      "teamFile": "teams/fkkukesi_alb.ban",
+      "club": "FK Kukësi",
+      "countryCode": 2,
+      "sourceUrl": "https://www.365scores.com/football/team/kukesi-12665/squad",
+      "observedAt": "2026-10-30T22:06:28.576797+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 18
+    },
+    {
+      "teamFile": "teams/flarj.ban",
+      "club": "Flamengo",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/flamengo-1215/squad",
+      "observedAt": "2026-10-30T22:06:26.295286+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/floratallinn_est.ban",
+      "club": "Flora Tallinn",
+      "countryCode": 66,
+      "sourceUrl": "https://www.365scores.com/football/team/flora-tallinn-5445/squad",
+      "observedAt": "2026-10-30T22:06:27.602455+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 22
+    },
+    {
+      "teamFile": "teams/florestace.ban",
+      "club": "Floresta",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/floresta-ec-50729/squad",
+      "observedAt": "2026-10-30T22:06:29.225755+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 36
+    },
+    {
+      "teamFile": "teams/floriana_mta.ban",
+      "club": "Floriana",
+      "countryCode": 128,
+      "sourceUrl": "https://www.365scores.com/football/team/floriana-fc-8489/squad",
+      "observedAt": "2026-10-30T22:06:28.237790+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/flurj.ban",
+      "club": "Fluminense",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/fluminense-1216/squad",
+      "observedAt": "2026-10-30T22:06:26.295286+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 35
+    },
+    {
+      "teamFile": "teams/fortaleza.ban",
+      "club": "Fortaleza",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/fortaleza-1778/squad",
+      "observedAt": "2026-10-30T22:06:26.680077+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/fsvfrankfurt_ale.ban",
+      "club": "Eintracht Frankfurt",
+      "countryCode": 3,
+      "sourceUrl": "https://www.365scores.com/football/team/eintracht-frankfurt-337/squad",
+      "observedAt": "2026-10-30T22:06:25.460574+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/galatasaray_tur.ban",
+      "club": "Galatasaray ",
+      "countryCode": 192,
+      "sourceUrl": "https://www.365scores.com/football/team/galatasaray-945/squad",
+      "observedAt": "2026-10-30T22:06:26.053655+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/genk_bel.ban",
+      "club": "Genk",
+      "countryCode": 21,
+      "sourceUrl": "https://www.365scores.com/football/team/krc-genk-1177/squad",
+      "observedAt": "2026-10-30T22:06:26.259202+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/getafe_esp.ban",
+      "club": "Getafe",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/getafe-140/squad",
+      "observedAt": "2026-10-30T22:06:24.725611+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/gilvicente_por.ban",
+      "club": "Gil Vicente",
+      "countryCode": 154,
+      "sourceUrl": "https://www.365scores.com/football/team/gil-vicente-fc-905/squad",
+      "observedAt": "2026-10-30T22:06:26.053655+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/gimnastic_esp.ban",
+      "club": "Gimnástic",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/gimnastic-169/squad",
+      "observedAt": "2026-10-30T22:06:25.048900+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/girona_esp.ban",
+      "club": "Girona",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/girona-175/squad",
+      "observedAt": "2026-10-30T22:06:25.048900+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/gjilani_kos.ban",
+      "club": "Gjilani",
+      "countryCode": 110,
+      "sourceUrl": "https://www.365scores.com/football/team/kf-gjilani-19301/squad",
+      "observedAt": "2026-10-30T22:06:28.967867+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/glasgowceltic_esc.ban",
+      "club": "Celtic",
+      "countryCode": 62,
+      "sourceUrl": "https://www.365scores.com/football/team/celtic-754/squad",
+      "observedAt": "2026-10-30T22:06:25.645964+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/goias.ban",
+      "club": "Goiás",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/goias-1217/squad",
+      "observedAt": "2026-10-30T22:06:26.295286+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/gotenborg_sue.ban",
+      "club": "IFK Göteborg",
+      "countryCode": 179,
+      "sourceUrl": "https://www.365scores.com/football/team/ifk-goteborg-1888/squad",
+      "observedAt": "2026-10-30T22:06:26.896556+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/granada_esp.ban",
+      "club": "Granada",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/granada-159/squad",
+      "observedAt": "2026-10-30T22:06:25.026129+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 20
+    },
+    {
+      "teamFile": "teams/gremio.ban",
+      "club": "Grêmio",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/gremio-1218/squad",
+      "observedAt": "2026-10-30T22:06:26.503932+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/guaranisp_bra.ban",
+      "club": "Guarani",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/pt-br/football/team/guarani-1276/squad",
+      "observedAt": "2026-10-25",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/hajduk_cro.ban",
+      "club": "Hajduk Split",
+      "countryCode": 52,
+      "sourceUrl": "https://www.365scores.com/football/team/hnk-hajduk-split-2249/squad",
+      "observedAt": "2026-10-30T22:06:27.689397+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 35
+    },
+    {
+      "teamFile": "teams/hammarby_sue.ban",
+      "club": "Hammarby IF",
+      "countryCode": 179,
+      "sourceUrl": "https://www.365scores.com/football/team/hammarby-1895/squad",
+      "observedAt": "2026-10-30T22:06:26.976879+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/hapoelbeersheva_isr.ban",
+      "club": "Hapoel Be'er Sheva",
+      "countryCode": 103,
+      "sourceUrl": "https://www.365scores.com/football/team/hapoel-beer-sheva-579/squad",
+      "observedAt": "2026-10-30T22:06:25.378236+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/hbtorshavn_fro.ban",
+      "club": "HB Tórshavn",
+      "countryCode": 92,
+      "sourceUrl": "https://www.365scores.com/football/team/hb-torshavn-20161/squad",
+      "observedAt": "2026-10-30T22:06:28.967867+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/helsinki_fin.ban",
+      "club": "HJK Helsinki",
+      "countryCode": 70,
+      "sourceUrl": "https://www.365scores.com/football/team/hjk-helsinki-1925/squad",
+      "observedAt": "2026-10-30T22:06:26.976879+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/hibernian_esc.ban",
+      "club": "Hibernian",
+      "countryCode": 62,
+      "sourceUrl": "https://www.365scores.com/football/team/hibernian-757/squad",
+      "observedAt": "2026-10-30T22:06:25.645964+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/hibernians_mta.ban",
+      "club": "Hibernians",
+      "countryCode": 128,
+      "sourceUrl": "https://www.365scores.com/football/team/hibernians-paola-12820/squad",
+      "observedAt": "2026-10-30T22:06:28.576797+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/hoffebheim_ale.ban",
+      "club": "Hoffenheim",
+      "countryCode": 3,
+      "sourceUrl": "https://www.365scores.com/football/team/hoffenheim-351/squad",
+      "observedAt": "2026-10-30T22:06:25.342412+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/honka_fin.ban",
+      "club": "Honka",
+      "countryCode": 70,
+      "sourceUrl": "https://www.365scores.com/football/team/honka-1928/squad",
+      "observedAt": "2026-10-30T22:06:26.976879+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/huesca_esp.ban",
+      "club": "Huesca",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/sd-huesca-176/squad",
+      "observedAt": "2026-10-30T22:06:25.089782+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 18
+    },
+    {
+      "teamFile": "teams/ibiza_esp.ban",
+      "club": "Ibiza",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/ibiza-cf-49471/squad",
+      "observedAt": "2026-10-30T22:06:29.225755+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 19
+    },
+    {
+      "teamFile": "teams/ilves_fin.ban",
+      "club": "Ilves Tampere",
+      "countryCode": 70,
+      "sourceUrl": "https://www.365scores.com/football/team/ilves-10553/squad",
+      "observedAt": "2026-10-30T22:06:28.693188+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/inter_and.ban",
+      "club": "Inter d'Escaldes",
+      "countryCode": 4,
+      "sourceUrl": "https://www.365scores.com/football/team/inter-escaldes-6913/squad",
+      "observedAt": "2026-10-30T22:06:28.025933+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/inter_it.ban",
+      "club": "Internazionale ",
+      "countryCode": 104,
+      "sourceUrl": "https://www.365scores.com/football/team/inter-milan-224/squad",
+      "observedAt": "2026-10-30T22:06:25.089782+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/interlimeirasp_bra.ban",
+      "club": "Inter de Limeira",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/inter-de-limeira-23975/squad",
+      "observedAt": "2026-10-30T22:06:29.071422+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 37
+    },
+    {
+      "teamFile": "teams/internacional_bra.ban",
+      "club": "Internacional",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/internacional-1219/squad",
+      "observedAt": "2026-10-30T22:06:26.503932+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/interturku_fin.ban",
+      "club": "Inter Turku",
+      "countryCode": 70,
+      "sourceUrl": "https://www.365scores.com/football/team/inter-turku-1923/squad",
+      "observedAt": "2026-10-30T22:06:26.976879+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/iskra_mon.ban",
+      "club": "Iskra Danilovgrad",
+      "countryCode": 105,
+      "sourceUrl": "https://www.365scores.com/football/team/iskra-20821/squad",
+      "observedAt": "2026-10-30T22:06:28.967867+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 22
+    },
+    {
+      "teamFile": "teams/itabaiana_se.ban",
+      "club": "Itabaiana",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/pt-br/football/team/itabaiana-9206/squad",
+      "observedAt": "2026-10-25",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 35
+    },
+    {
+      "teamFile": "teams/ituano_sp.ban",
+      "club": "Ituano",
+      "countryCode": 29,
+      "sourceUrl": "https://ituanofc.com/profissional",
+      "observedAt": "2026-10-25",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/jablonec_tch.ban",
+      "club": "FK Jablonec",
+      "countryCode": 159,
+      "sourceUrl": "https://www.365scores.com/football/team/jablonec-97-1800/squad",
+      "observedAt": "2026-10-30T22:06:26.825798+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/juventude.ban",
+      "club": "Juventude",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/juventude-1775/squad",
+      "observedAt": "2026-10-30T22:06:26.680077+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 35
+    },
+    {
+      "teamFile": "teams/juventus_it.ban",
+      "club": "Juventus",
+      "countryCode": 104,
+      "sourceUrl": "https://www.365scores.com/football/team/juventus-226/squad",
+      "observedAt": "2026-10-30T22:06:25.089782+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/kairat_caz.ban",
+      "club": "Kairat Almaty",
+      "countryCode": 40,
+      "sourceUrl": "https://www.365scores.com/football/team/kairat-almaty-10564/squad",
+      "observedAt": "2026-10-30T22:06:28.693188+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/kaisar_caz.ban",
+      "club": "Kaysar Kyzylorda",
+      "countryCode": 40,
+      "sourceUrl": "https://www.365scores.com/football/team/kaysar-kyzylorda-10787/squad",
+      "observedAt": "2026-10-30T22:06:28.693188+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 22
+    },
+    {
+      "teamFile": "teams/kalju_est.ban",
+      "club": "Kalju",
+      "countryCode": 66,
+      "sourceUrl": "https://www.365scores.com/football/team/kalju-nomme-5930/squad",
+      "observedAt": "2026-10-30T22:06:27.942275+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 20
+    },
+    {
+      "teamFile": "teams/kauno_lit.ban",
+      "club": "Kauno Zalgiris",
+      "countryCode": 119,
+      "sourceUrl": "https://www.365scores.com/football/team/kauno-zalgiris-29716/squad",
+      "observedAt": "2026-10-30T22:06:29.166369+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/keshla_azb.ban",
+      "club": "Keshla",
+      "countryCode": 16,
+      "sourceUrl": "https://www.365scores.com/football/team/shamakhi-fk-5584/squad",
+      "observedAt": "2026-10-30T22:06:27.912836+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/kflaci_alb.ban",
+      "club": "KF Laçi",
+      "countryCode": 2,
+      "sourceUrl": "https://www.365scores.com/football/team/kf-laci-16048/squad",
+      "observedAt": "2026-10-30T22:06:28.836024+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/kfteuta_alb.ban",
+      "club": "KF Teuta",
+      "countryCode": 2,
+      "sourceUrl": "https://www.365scores.com/football/team/teuta-durres-9318/squad",
+      "observedAt": "2026-10-30T22:06:28.488377+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 17
+    },
+    {
+      "teamFile": "teams/kftirana_alb.ban",
+      "club": "Tirana",
+      "countryCode": 2,
+      "sourceUrl": "https://www.365scores.com/football/team/kf-tirana-16051/squad",
+      "observedAt": "2026-10-30T22:06:28.836024+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/klaksvik_fro.ban",
+      "club": "Klaksvík",
+      "countryCode": 92,
+      "sourceUrl": "https://www.365scores.com/football/team/ki-klaksvik-19260/squad",
+      "observedAt": "2026-10-30T22:06:28.967867+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/kolos_ucr.ban",
+      "club": "Kolos Kovalivka",
+      "countryCode": 193,
+      "sourceUrl": "https://www.365scores.com/football/team/kolos-kovalivka-25550/squad",
+      "observedAt": "2026-10-30T22:06:29.071422+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/krreykjavic_isl.ban",
+      "club": "KR Reykjavík",
+      "countryCode": 102,
+      "sourceUrl": "https://www.365scores.com/football/team/kr-reykjavik-2098/squad",
+      "observedAt": "2026-10-30T22:06:27.200408+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/kups_fin.ban",
+      "club": "Kuopion Palloseura",
+      "countryCode": 70,
+      "sourceUrl": "https://www.365scores.com/football/team/kups-1935/squad",
+      "observedAt": "2026-10-30T22:06:26.976879+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/lafiorita_smr.ban",
+      "club": "La Fiorita 1967",
+      "countryCode": 164,
+      "sourceUrl": "https://www.365scores.com/football/team/sp-la-fiorita-9325/squad",
+      "observedAt": "2026-10-30T22:06:28.693188+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/lask_aut.ban",
+      "club": "LASK Linz",
+      "countryCode": 15,
+      "sourceUrl": "https://www.365scores.com/football/team/lask-linz-1743/squad",
+      "observedAt": "2026-10-30T22:06:26.680077+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/laspalmas_esp.ban",
+      "club": "Las Palmas",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/las-palmas-167/squad",
+      "observedAt": "2026-10-30T22:06:25.048900+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/lazio_it.ban",
+      "club": "Lazio",
+      "countryCode": 104,
+      "sourceUrl": "https://www.365scores.com/football/team/lazio-236/squad",
+      "observedAt": "2026-10-30T22:06:25.460574+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/lechpoznan_pol.ban",
+      "club": "Lech Poznań",
+      "countryCode": 152,
+      "sourceUrl": "https://www.365scores.com/football/team/lech-poznan-2211/squad",
+      "observedAt": "2026-10-30T22:06:27.312444+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/leganes_esp.ban",
+      "club": "Leganés",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/cd-leganes-9242/squad",
+      "observedAt": "2026-10-30T22:06:28.488377+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/legiawarsaw.ban",
+      "club": "Legia Warsaw",
+      "countryCode": 152,
+      "sourceUrl": "https://www.365scores.com/football/team/legia-warszawa-2209/squad",
+      "observedAt": "2026-10-30T22:06:27.312444+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/leicestercity_ing.ban",
+      "club": "Leicester City",
+      "countryCode": 97,
+      "sourceUrl": "https://www.365scores.com/football/team/leicester-city-22/squad",
+      "observedAt": "2026-10-30T22:06:24.794940+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/leipzig_ale.ban",
+      "club": "Leipzig",
+      "countryCode": 3,
+      "sourceUrl": "https://www.365scores.com/football/team/rb-leipzig-7171/squad",
+      "observedAt": "2026-10-30T22:06:28.186849+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/levadia_est.ban",
+      "club": "FCI Levadia",
+      "countryCode": 66,
+      "sourceUrl": "https://www.365scores.com/football/team/levadia-tallinn-5444/squad",
+      "observedAt": "2026-10-30T22:06:27.602455+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/levante_esp.ban",
+      "club": "Levante",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/levante-150/squad",
+      "observedAt": "2026-10-30T22:06:25.026129+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/liapi_kos.ban",
+      "club": "Llapi",
+      "countryCode": 110,
+      "sourceUrl": "https://www.365scores.com/football/team/llapi-45031/squad",
+      "observedAt": "2026-10-30T22:06:29.166369+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/liepaja_let.ban",
+      "club": "Liepāja",
+      "countryCode": 114,
+      "sourceUrl": "https://www.365scores.com/football/team/fk-liepaja-22826/squad",
+      "observedAt": "2026-10-30T22:06:29.071422+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/lille_fra.ban",
+      "club": "Lille",
+      "countryCode": 72,
+      "sourceUrl": "https://www.365scores.com/football/team/lille-478/squad",
+      "observedAt": "2026-10-30T22:06:25.342412+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/linares_esp.ban",
+      "club": "Linares",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/linares-deportivo-18038/squad",
+      "observedAt": "2026-10-30T22:06:28.967867+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 18
+    },
+    {
+      "teamFile": "teams/lincoln_gib.ban",
+      "club": "Lincoln Red Imps",
+      "countryCode": 216,
+      "sourceUrl": "https://www.365scores.com/football/team/lincoln-red-imps-16037/squad",
+      "observedAt": "2026-10-30T22:06:28.836024+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/liverpool_ing.ban",
+      "club": "Liverpool",
+      "countryCode": 97,
+      "sourceUrl": "https://www.365scores.com/football/team/liverpool-108/squad",
+      "observedAt": "2026-10-30T22:06:24.794940+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/logrones_esp.ban",
+      "club": "Logroñés",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/ud-logrones-7813/squad",
+      "observedAt": "2026-10-30T22:06:28.237790+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/lokomotiv_rus.ban",
+      "club": "Lokomotiv Moscow",
+      "countryCode": 162,
+      "sourceUrl": "https://www.365scores.com/football/team/lokomotiv-moscow-1081/squad",
+      "observedAt": "2026-10-30T22:06:25.975089+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/lokoplovdiv_bul.ban",
+      "club": "Lokomotiv Plovdiv",
+      "countryCode": 31,
+      "sourceUrl": "https://www.365scores.com/football/team/lokomotiv-plovdiv-2284/squad",
+      "observedAt": "2026-10-30T22:06:27.627165+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/londrina_pr.ban",
+      "club": "Londrina",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/londrina-9113/squad",
+      "observedAt": "2026-10-30T22:06:28.319552+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 40
+    },
+    {
+      "teamFile": "teams/ludogorets_bul.ban",
+      "club": "Ludogorets",
+      "countryCode": 31,
+      "sourceUrl": "https://www.365scores.com/football/team/ludogorets-8528/squad",
+      "observedAt": "2026-10-30T22:06:28.319552+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/lugo_esp.ban",
+      "club": "Lugo",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/cd-lugo-9232/squad",
+      "observedAt": "2026-10-30T22:06:28.488377+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 17
+    },
+    {
+      "teamFile": "teams/luzern_sui.ban",
+      "club": "Luzern",
+      "countryCode": 180,
+      "sourceUrl": "https://www.365scores.com/football/team/luzern-1142/squad",
+      "observedAt": "2026-10-30T22:06:25.975089+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/lyon.ban",
+      "club": "Lyon",
+      "countryCode": 72,
+      "sourceUrl": "https://www.365scores.com/football/team/lyon-465/squad",
+      "observedAt": "2026-10-30T22:06:25.342412+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/maccabihaifa_isr.ban",
+      "club": "Maccabi Haifa",
+      "countryCode": 103,
+      "sourceUrl": "https://www.365scores.com/football/team/maccabi-haifa-562/squad",
+      "observedAt": "2026-10-30T22:06:25.378236+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/machester_ing.ban",
+      "club": "Manchester United",
+      "countryCode": 97,
+      "sourceUrl": "https://www.365scores.com/football/team/manchester-united-105/squad",
+      "observedAt": "2026-10-30T22:06:24.794940+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/machestercity_ing.ban",
+      "club": "Manchester City",
+      "countryCode": 97,
+      "sourceUrl": "https://www.365scores.com/football/team/manchester-city-110/squad",
+      "observedAt": "2026-10-30T22:06:24.794940+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/malaga_esp.ban",
+      "club": "Málaga",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/malaga-152/squad",
+      "observedAt": "2026-10-30T22:06:25.026129+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/mallorca_esp.ban",
+      "club": "Mallorca",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/mallorca-142/squad",
+      "observedAt": "2026-10-30T22:06:24.725611+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/malmo_sue.ban",
+      "club": "Malmo",
+      "countryCode": 179,
+      "sourceUrl": "https://www.365scores.com/football/team/malmo-ff-1891/squad",
+      "observedAt": "2026-10-30T22:06:26.896556+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/maranhao_ma.ban",
+      "club": "Maranhão",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/pt-br/football/team/maranhao-ma-12748/squad",
+      "observedAt": "2026-10-25",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/maribor_esl.ban",
+      "club": "Maribor",
+      "countryCode": 64,
+      "sourceUrl": "https://www.365scores.com/football/team/maribor-2346/squad",
+      "observedAt": "2026-10-30T22:06:27.627165+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/maringapr.ban",
+      "club": "Maringá",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/maringa-18884/squad",
+      "observedAt": "2026-10-30T22:06:28.967867+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/midtjylland_din.ban",
+      "club": "Midtjylland",
+      "countryCode": 54,
+      "sourceUrl": "https://www.365scores.com/football/team/fc-midtjylland-1823/squad",
+      "observedAt": "2026-10-30T22:06:26.825798+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/miirassol_sp.ban",
+      "club": "Mirassol",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/mirassol-1269/squad",
+      "observedAt": "2026-10-30T22:06:26.552277+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/milan_it.ban",
+      "club": "Milan",
+      "countryCode": 104,
+      "sourceUrl": "https://www.365scores.com/football/team/ac-milan-227/squad",
+      "observedAt": "2026-10-30T22:06:25.089782+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/mirandes_esp.ban",
+      "club": "Mirandés",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/mirandes-8800/squad",
+      "observedAt": "2026-10-30T22:06:28.319552+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 17
+    },
+    {
+      "teamFile": "teams/molde_nor.ban",
+      "club": "Molde FK",
+      "countryCode": 142,
+      "sourceUrl": "https://www.365scores.com/football/team/molde-1983/squad",
+      "observedAt": "2026-10-30T22:06:27.143396+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/molvidi_hun.ban",
+      "club": "Fehérvár",
+      "countryCode": 88,
+      "sourceUrl": "https://www.365scores.com/football/team/mol-fehervar-2066/squad",
+      "observedAt": "2026-10-30T22:06:27.200408+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/monaco_fr.ban",
+      "club": "Monaco ",
+      "countryCode": 72,
+      "sourceUrl": "https://www.365scores.com/football/team/monaco-471/squad",
+      "observedAt": "2026-10-30T22:06:25.342412+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/monchengladbach_ale.ban",
+      "club": "B. Mönchengladbach",
+      "countryCode": 3,
+      "sourceUrl": "https://www.365scores.com/football/team/borussia-monchengladbach-349/squad",
+      "observedAt": "2026-10-30T22:06:25.342412+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/monscalpe_gib.ban",
+      "club": "Mons Calpe",
+      "countryCode": 216,
+      "sourceUrl": "https://www.365scores.com/football/team/mons-calpe-28894/squad",
+      "observedAt": "2026-10-30T22:06:29.166369+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 18
+    },
+    {
+      "teamFile": "teams/motherwell_esc.ban",
+      "club": "Motherwell",
+      "countryCode": 62,
+      "sourceUrl": "https://www.365scores.com/football/team/motherwell-755/squad",
+      "observedAt": "2026-10-30T22:06:25.645964+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/napoli_it.ban",
+      "club": "Napoli",
+      "countryCode": 104,
+      "sourceUrl": "https://www.365scores.com/football/team/napoli-234/squad",
+      "observedAt": "2026-10-30T22:06:25.460574+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/nautico.ban",
+      "club": "Náutico",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/nautico-1221/squad",
+      "observedAt": "2026-10-30T22:06:26.503932+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/neftci_aze.ban",
+      "club": "Neftçi Baku",
+      "countryCode": 16,
+      "sourceUrl": "https://www.365scores.com/football/team/neftchi-baku-5425/squad",
+      "observedAt": "2026-10-30T22:06:27.627165+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/nice_fra.ban",
+      "club": "Nice",
+      "countryCode": 72,
+      "sourceUrl": "https://www.365scores.com/football/team/ogc-nice-470/squad",
+      "observedAt": "2026-10-30T22:06:25.342412+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/nkzagreb_cro.ban",
+      "club": "Lokomotiva Zagreb ",
+      "countryCode": 52,
+      "sourceUrl": "https://www.365scores.com/football/team/nk-lokomotiva-zagreb-23330/squad",
+      "observedAt": "2026-10-30T22:06:29.071422+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 40
+    },
+    {
+      "teamFile": "teams/novorinzontino_sp.ban",
+      "club": "Novorizontino",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/novorizontino-23765/squad",
+      "observedAt": "2026-10-30T22:06:29.071422+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 35
+    },
+    {
+      "teamFile": "teams/nsirunavik_fro.ban",
+      "club": "NSÍ Runavík",
+      "countryCode": 92,
+      "sourceUrl": "https://www.365scores.com/football/team/nk-runavik-5595/squad",
+      "observedAt": "2026-10-30T22:06:27.912836+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 20
+    },
+    {
+      "teamFile": "teams/nsmura_elv.ban",
+      "club": "Mura",
+      "countryCode": 64,
+      "sourceUrl": "https://www.365scores.com/football/team/mura-05-8487/squad",
+      "observedAt": "2026-10-30T22:06:28.237790+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/ofi_gre.ban",
+      "club": "OFI Crete",
+      "countryCode": 78,
+      "sourceUrl": "https://www.365scores.com/football/team/ofi-crete-1032/squad",
+      "observedAt": "2026-10-30T22:06:25.968446+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/olimpia_esl.ban",
+      "club": "Olimpija Ljubljana",
+      "countryCode": 64,
+      "sourceUrl": "https://www.365scores.com/football/team/nk-olimpija-ljubljana-5986/squad",
+      "observedAt": "2026-10-30T22:06:28.025933+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/olympiakos_gre.ban",
+      "club": "Olympiakos",
+      "countryCode": 78,
+      "sourceUrl": "https://www.365scores.com/football/team/olympiacos-1023/squad",
+      "observedAt": "2026-10-30T22:06:25.968446+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/olympiquemarseile_fra.ban",
+      "club": "Olympique Marseille",
+      "countryCode": 72,
+      "sourceUrl": "https://www.365scores.com/football/team/olympique-de-marseille-469/squad",
+      "observedAt": "2026-10-30T22:06:25.342412+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/omonianicosia_chp.ban",
+      "club": "Omonia Nicosia",
+      "countryCode": 44,
+      "sourceUrl": "https://www.365scores.com/football/team/omonia-2262/squad",
+      "observedAt": "2026-10-30T22:06:27.689397+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/operario_pr.ban",
+      "club": "Operário PR",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/operario-pr-9109/squad",
+      "observedAt": "2026-10-30T22:06:28.319552+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/ordabasy_caz.ban",
+      "club": "Ordabasy",
+      "countryCode": 40,
+      "sourceUrl": "https://www.365scores.com/football/team/ordabasy-shymkent-9317/squad",
+      "observedAt": "2026-10-30T22:06:28.488377+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/osasuna_esp.ban",
+      "club": "Osasuna",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/osasuna-143/squad",
+      "observedAt": "2026-10-30T22:06:24.725611+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/osijek_cro.ban",
+      "club": "Osijek",
+      "countryCode": 52,
+      "sourceUrl": "https://www.365scores.com/football/team/nk-osijek-2247/squad",
+      "observedAt": "2026-10-30T22:06:27.312444+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/paide_est.ban",
+      "club": "Paide Linnameeskond",
+      "countryCode": 66,
+      "sourceUrl": "https://www.365scores.com/football/team/paide-linnameeskond-12977/squad",
+      "observedAt": "2026-10-30T22:06:28.783782+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 20
+    },
+    {
+      "teamFile": "teams/palmeiras.ban",
+      "club": "Palmeiras",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/palmeiras-1222/squad",
+      "observedAt": "2026-10-30T22:06:26.503932+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/paok_gre.ban",
+      "club": "PAOK Thessaloniki",
+      "countryCode": 78,
+      "sourceUrl": "https://www.365scores.com/football/team/paok-1029/squad",
+      "observedAt": "2026-10-30T22:06:25.968446+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/parissaintgermain_fr.ban",
+      "club": "Paris Saint Germain",
+      "countryCode": 72,
+      "sourceUrl": "https://www.365scores.com/football/team/psg-480/squad",
+      "observedAt": "2026-10-30T22:06:25.378236+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/partizan_ser.ban",
+      "club": "Partizan",
+      "countryCode": 171,
+      "sourceUrl": "https://www.365scores.com/football/team/partizan-belgrade-5437/squad",
+      "observedAt": "2026-10-30T22:06:27.602455+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/paysandu.ban",
+      "club": "Paysandu",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/paysandu-7390/squad",
+      "observedAt": "2026-10-30T22:06:28.186849+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 37
+    },
+    {
+      "teamFile": "teams/petrocub_mol.ban",
+      "club": "Petrocub",
+      "countryCode": 134,
+      "sourceUrl": "https://www.365scores.com/football/team/petrocub-s-g-21847/squad",
+      "observedAt": "2026-10-30T22:06:28.967867+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 38
+    },
+    {
+      "teamFile": "teams/piast_pol.ban",
+      "club": "Piast Gliwice",
+      "countryCode": 152,
+      "sourceUrl": "https://www.365scores.com/football/team/piast-gliwice-2226/squad",
+      "observedAt": "2026-10-30T22:06:27.312444+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/ponferradina_esp.ban",
+      "club": "Ponferradina",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/ponferradina-201/squad",
+      "observedAt": "2026-10-30T22:06:25.089782+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 22
+    },
+    {
+      "teamFile": "teams/pontepreta_bra.ban",
+      "club": "Ponte Preta",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/ponte-preta-1266/squad",
+      "observedAt": "2026-10-30T22:06:26.552277+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/porto.ban",
+      "club": "Porto",
+      "countryCode": 154,
+      "sourceUrl": "https://www.365scores.com/football/team/fc-porto-887/squad",
+      "observedAt": "2026-10-30T22:06:25.678551+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/psv_hol.ban",
+      "club": "PSV",
+      "countryCode": 85,
+      "sourceUrl": "https://www.365scores.com/football/team/psv-eindhoven-725/squad",
+      "observedAt": "2026-10-30T22:06:25.645964+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/puskás_hun.ban",
+      "club": "Puskás Akadémia",
+      "countryCode": 88,
+      "sourceUrl": "https://www.365scores.com/football/team/puskas-fc-academy-11248/squad",
+      "observedAt": "2026-10-30T22:06:28.576797+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/qarabag_aze.ban",
+      "club": "Qarabağ Ağdam",
+      "countryCode": 16,
+      "sourceUrl": "https://www.365scores.com/football/team/qarabag-agdam-7521/squad",
+      "observedAt": "2026-10-30T22:06:28.186849+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/racing_esp.ban",
+      "club": "Racing Santander",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/racing-santander-137/squad",
+      "observedAt": "2026-10-30T22:06:24.743615+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/randers_den.ban",
+      "club": "Randers",
+      "countryCode": 54,
+      "sourceUrl": "https://www.365scores.com/football/team/randers-fc-1830/squad",
+      "observedAt": "2026-10-30T22:06:26.896556+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/rangers_esc.ban",
+      "club": "Rangers",
+      "countryCode": 62,
+      "sourceUrl": "https://www.365scores.com/football/team/rangers-753/squad",
+      "observedAt": "2026-10-30T22:06:25.645964+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/rapidviena_aut.ban",
+      "club": "Rapid Viena",
+      "countryCode": 15,
+      "sourceUrl": "https://www.365scores.com/football/team/rapid-vienna-1738/squad",
+      "observedAt": "2026-10-30T22:06:26.552277+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/rayovallecano_esp.ban",
+      "club": "Rayo Vallecano",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/rayo-vallecano-174/squad",
+      "observedAt": "2026-10-30T22:06:25.048900+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/realmadrid_esp.ban",
+      "club": "Real Madrid",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/real-madrid-131/squad",
+      "observedAt": "2026-10-30T22:06:24.743615+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/realoviedo_esp.ban",
+      "club": "Real Oviedo",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/real-oviedo-193/squad",
+      "observedAt": "2026-10-30T22:06:25.089782+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/realsociedad_esp.ban",
+      "club": "Real Sociedad",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/real-sociedad-154/squad",
+      "observedAt": "2026-10-30T22:06:25.026129+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/realzaragoza_esp.ban",
+      "club": "Real Zaragoza",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/real-zaragoza-145/squad",
+      "observedAt": "2026-10-30T22:06:24.725611+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 16
+    },
+    {
+      "teamFile": "teams/remo.ban",
+      "club": "Remo",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/remo-7383/squad",
+      "observedAt": "2026-10-30T22:06:28.186849+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/rennes_fr.ban",
+      "club": "Rennes",
+      "countryCode": 72,
+      "sourceUrl": "https://www.365scores.com/football/team/rennes-477/squad",
+      "observedAt": "2026-10-30T22:06:25.342412+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/renova_mkd.ban",
+      "club": "Renova Dzepciste",
+      "countryCode": 122,
+      "sourceUrl": "https://www.365scores.com/football/team/fk-renova-5630/squad",
+      "observedAt": "2026-10-30T22:06:27.942275+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 17
+    },
+    {
+      "teamFile": "teams/rfs_let.ban",
+      "club": "FK RFS",
+      "countryCode": 114,
+      "sourceUrl": "https://www.365scores.com/football/team/rigas-fs-24801/squad",
+      "observedAt": "2026-10-30T22:06:29.071422+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/riga_let.ban",
+      "club": "Riga",
+      "countryCode": 114,
+      "sourceUrl": "https://www.365scores.com/football/team/riga-29362/squad",
+      "observedAt": "2026-10-30T22:06:29.166369+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/rijeka_cro.ban",
+      "club": "Rijeka",
+      "countryCode": 52,
+      "sourceUrl": "https://www.365scores.com/football/team/hnk-rijeka-2248/squad",
+      "observedAt": "2026-10-30T22:06:27.689397+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/rioave_por.ban",
+      "club": "Rio Ave",
+      "countryCode": 154,
+      "sourceUrl": "https://www.365scores.com/football/team/rio-ave-904/squad",
+      "observedAt": "2026-10-30T22:06:26.053655+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 35
+    },
+    {
+      "teamFile": "teams/riteriai_lit.ban",
+      "club": "Riteriai",
+      "countryCode": 119,
+      "sourceUrl": "https://www.365scores.com/football/team/fk-riteriai-14820/squad",
+      "observedAt": "2026-10-30T22:06:28.836024+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 22
+    },
+    {
+      "teamFile": "teams/roma_it.ban",
+      "club": "Roma",
+      "countryCode": 104,
+      "sourceUrl": "https://www.365scores.com/football/team/as-roma-225/squad",
+      "observedAt": "2026-10-30T22:06:25.089782+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/rosenborg_nor.ban",
+      "club": "Rosenborg",
+      "countryCode": 142,
+      "sourceUrl": "https://www.365scores.com/football/team/rosenborg-1986/squad",
+      "observedAt": "2026-10-30T22:06:27.143396+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/royalantwerp_bel.ban",
+      "club": "Royal Antwerp",
+      "countryCode": 21,
+      "sourceUrl": "https://www.365scores.com/football/team/royal-antwerp-fc-1191/squad",
+      "observedAt": "2026-10-30T22:06:26.259202+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/ruzomberok_slk.ban",
+      "club": "Ruzomberok",
+      "countryCode": 63,
+      "sourceUrl": "https://www.365scores.com/football/team/mfk-ruzomberok-2113/squad",
+      "observedAt": "2026-10-30T22:06:27.312444+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/salzburg_aut.ban",
+      "club": "RB Salzburg",
+      "countryCode": 15,
+      "sourceUrl": "https://www.365scores.com/football/team/red-bull-salzburg-1739/squad",
+      "observedAt": "2026-10-30T22:06:26.552277+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/santa.ban",
+      "club": "Santa Cruz",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/santa-cruz-7384/squad",
+      "observedAt": "2026-10-30T22:06:28.186849+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 38
+    },
+    {
+      "teamFile": "teams/santos.ban",
+      "club": "Santos",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/santos-1224/squad",
+      "observedAt": "2026-10-30T22:06:26.503932+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 35
+    },
+    {
+      "teamFile": "teams/saobernardo_sp.ban",
+      "club": "São Bernardo",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/sao-bernardo-10253/squad",
+      "observedAt": "2026-10-30T22:06:28.693188+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 35
+    },
+    {
+      "teamFile": "teams/saopaulo_bra.ban",
+      "club": "São Paulo",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/sao-paulo-1225/squad",
+      "observedAt": "2026-10-30T22:06:26.503932+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 40
+    },
+    {
+      "teamFile": "teams/saraievo_bos.ban",
+      "club": "Sarajevo",
+      "countryCode": 27,
+      "sourceUrl": "https://www.365scores.com/football/team/fk-sarajevo-5977/squad",
+      "observedAt": "2026-10-30T22:06:28.025933+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/servette_sui.ban",
+      "club": "Servette",
+      "countryCode": 180,
+      "sourceUrl": "https://www.365scores.com/football/team/servette-fc-1154/squad",
+      "observedAt": "2026-10-30T22:06:26.259202+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/sevilla_esp.ban",
+      "club": "Sevilla",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/sevilla-135/squad",
+      "observedAt": "2026-10-30T22:06:24.743615+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/sfintul_mol.ban",
+      "club": "Sfântul Gheorghe",
+      "countryCode": 134,
+      "sourceUrl": "https://www.365scores.com/football/team/fc-sfintul-gheorghe-16626/squad",
+      "observedAt": "2026-10-30T22:06:28.836024+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 19
+    },
+    {
+      "teamFile": "teams/shakhtar_ucr.ban",
+      "club": "Shakhtar Donetsk",
+      "countryCode": 193,
+      "sourceUrl": "https://www.365scores.com/football/team/shakhtar-donetsk-1955/squad",
+      "observedAt": "2026-10-30T22:06:26.976879+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/shamrock_irl.ban",
+      "club": "Shamrock Rovers",
+      "countryCode": 100,
+      "sourceUrl": "https://www.365scores.com/football/team/shamrock-838/squad",
+      "observedAt": "2026-10-30T22:06:25.678551+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 35
+    },
+    {
+      "teamFile": "teams/sherifftiraspol_mol.ban",
+      "club": "Sheriff Tiraspol",
+      "countryCode": 134,
+      "sourceUrl": "https://www.365scores.com/football/team/sheriff-tiraspol-5582/squad",
+      "observedAt": "2026-10-30T22:06:27.912836+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/shkendija_mkd.ban",
+      "club": "Shkendija Tetovo",
+      "countryCode": 122,
+      "sourceUrl": "https://www.365scores.com/football/team/kf-shkendija-79-8486/squad",
+      "observedAt": "2026-10-30T22:06:28.237790+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/shkupi_mkd.ban",
+      "club": "Shkupi",
+      "countryCode": 122,
+      "sourceUrl": "https://www.365scores.com/football/team/shkupi-20961/squad",
+      "observedAt": "2026-10-30T22:06:28.967867+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/sileks_mkd.ban",
+      "club": "Sileks Kratovo",
+      "countryCode": 122,
+      "sourceUrl": "https://www.365scores.com/football/team/sileks-kratovo-12883/squad",
+      "observedAt": "2026-10-30T22:06:28.576797+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/sirens_mta.ban",
+      "club": "Sirens",
+      "countryCode": 128,
+      "sourceUrl": "https://www.365scores.com/football/team/sirens-28133/squad",
+      "observedAt": "2026-10-30T22:06:29.071422+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 19
+    },
+    {
+      "teamFile": "teams/sivasspor_tur.ban",
+      "club": "Sivasspor",
+      "countryCode": 192,
+      "sourceUrl": "https://www.365scores.com/football/team/sivasspor-948/squad",
+      "observedAt": "2026-10-30T22:06:26.053655+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 35
+    },
+    {
+      "teamFile": "teams/slavia_cze.ban",
+      "club": "Slavia Praga",
+      "countryCode": 159,
+      "sourceUrl": "https://www.365scores.com/football/team/slavia-praha-1789/squad",
+      "observedAt": "2026-10-30T22:06:26.825798+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/slaviasofia_bul.ban",
+      "club": "Slavia Sofia",
+      "countryCode": 31,
+      "sourceUrl": "https://www.365scores.com/football/team/slavia-sofia-2280/squad",
+      "observedAt": "2026-10-30T22:06:27.627165+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/slovan_slk.ban",
+      "club": "Slovan Bratislava",
+      "countryCode": 63,
+      "sourceUrl": "https://www.365scores.com/football/team/slovan-bratislava-2112/squad",
+      "observedAt": "2026-10-30T22:06:27.200408+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/slovanliberec_cze.ban",
+      "club": "Slovan Liberec",
+      "countryCode": 159,
+      "sourceUrl": "https://www.365scores.com/football/team/slovan-liberec-1794/squad",
+      "observedAt": "2026-10-30T22:06:26.825798+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/soligorsk_bie.ban",
+      "club": "Shakhter Soligorsk",
+      "countryCode": 25,
+      "sourceUrl": "https://www.365scores.com/football/team/shakhter-soligorsk-1971/squad",
+      "observedAt": "2026-10-30T22:06:27.143396+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 20
+    },
+    {
+      "teamFile": "teams/sonderjyske_din.ban",
+      "club": "SönderjyskE",
+      "countryCode": 54,
+      "sourceUrl": "https://www.365scores.com/football/team/sonderjyske-1835/squad",
+      "observedAt": "2026-10-30T22:06:26.896556+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/sparta_tch.ban",
+      "club": "Sparta Praga",
+      "countryCode": 159,
+      "sourceUrl": "https://www.365scores.com/football/team/sparta-praha-1788/squad",
+      "observedAt": "2026-10-30T22:06:26.825798+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/spartak_rus.ban",
+      "club": "Spartak Moscow",
+      "countryCode": 162,
+      "sourceUrl": "https://www.365scores.com/football/team/spartak-moscow-1076/squad",
+      "observedAt": "2026-10-30T22:06:25.975089+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/sport.ban",
+      "club": "Sport",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/sport-recife-1226/squad",
+      "observedAt": "2026-10-30T22:06:26.503932+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/sporting_por.ban",
+      "club": "Sporting",
+      "countryCode": 154,
+      "sourceUrl": "https://www.365scores.com/football/team/sporting-cp-890/squad",
+      "observedAt": "2026-10-30T22:06:26.053655+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/sportingbraga_por.ban",
+      "club": "Sporting Braga",
+      "countryCode": 154,
+      "sourceUrl": "https://www.365scores.com/football/team/sc-braga-895/squad",
+      "observedAt": "2026-10-30T22:06:26.053655+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/sportinggijon_esp.ban",
+      "club": "Sporting Gijón",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/sporting-gijon-153/squad",
+      "observedAt": "2026-10-30T22:06:25.026129+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/standardliege_bel.ban",
+      "club": "Standard Liège",
+      "countryCode": 21,
+      "sourceUrl": "https://www.365scores.com/football/team/standard-de-liege-1170/squad",
+      "observedAt": "2026-10-30T22:06:26.259202+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/steua_bucaresti_rom.ban",
+      "club": "Steaua Bucuresti",
+      "countryCode": 160,
+      "sourceUrl": "https://www.365scores.com/football/team/fcsb-2041/squad",
+      "observedAt": "2026-10-30T22:06:27.143396+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/stgallen_sui.ban",
+      "club": "St. Gallen",
+      "countryCode": 180,
+      "sourceUrl": "https://www.365scores.com/football/team/fc-st.-gallen-1146/squad",
+      "observedAt": "2026-10-30T22:06:25.975089+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/stjosephs_gib.ban",
+      "club": "St Joseph's",
+      "countryCode": 216,
+      "sourceUrl": "https://www.365scores.com/football/team/st-joseph's-16044/squad",
+      "observedAt": "2026-10-30T22:06:28.836024+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 20
+    },
+    {
+      "teamFile": "teams/strasbourg_fra.ban",
+      "club": "Strasbourg",
+      "countryCode": 72,
+      "sourceUrl": "https://www.365scores.com/football/team/strasbourg-479/squad",
+      "observedAt": "2026-10-30T22:06:25.378236+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/sturmgraz_aut.ban",
+      "club": "Sturm Graz",
+      "countryCode": 15,
+      "sourceUrl": "https://www.365scores.com/football/team/sturm-graz-1741/squad",
+      "observedAt": "2026-10-30T22:06:26.552277+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/suduva_lit.ban",
+      "club": "Suduva",
+      "countryCode": 119,
+      "sourceUrl": "https://www.365scores.com/football/team/suduva-2316/squad",
+      "observedAt": "2026-10-30T22:06:27.627165+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 22
+    },
+    {
+      "teamFile": "teams/sumqayit_azb.ban",
+      "club": "Sumgayit",
+      "countryCode": 16,
+      "sourceUrl": "https://www.365scores.com/football/team/sumqayit-13803/squad",
+      "observedAt": "2026-10-30T22:06:28.783782+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/sutjeska_mon.ban",
+      "club": "Sutjeska",
+      "countryCode": 105,
+      "sourceUrl": "https://www.365scores.com/football/team/sutjeska-niksic-5934/squad",
+      "observedAt": "2026-10-30T22:06:27.942275+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/tenerife_esp.ban",
+      "club": "Tenerife",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/tenerife-160/squad",
+      "observedAt": "2026-10-30T22:06:25.026129+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/thenewsaints_wal.ban",
+      "club": "The New Saints",
+      "countryCode": 145,
+      "sourceUrl": "https://www.365scores.com/football/team/the-new-saints-5652/squad",
+      "observedAt": "2026-10-30T22:06:27.942275+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/tottenhamhotspur_ing.ban",
+      "club": "Tottenham",
+      "countryCode": 97,
+      "sourceUrl": "https://www.365scores.com/football/team/tottenham-114/squad",
+      "observedAt": "2026-10-30T22:06:24.794940+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/trepenne_smr.ban",
+      "club": "Tre Penne",
+      "countryCode": 164,
+      "sourceUrl": "https://www.365scores.com/football/team/tre-penne-7534/squad",
+      "observedAt": "2026-10-30T22:06:28.237790+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 22
+    },
+    {
+      "teamFile": "teams/tsvhartberg_aut.ban",
+      "club": "Hartberg",
+      "countryCode": 15,
+      "sourceUrl": "https://www.365scores.com/football/team/tsv-hartberg-5969/squad",
+      "observedAt": "2026-10-30T22:06:28.025933+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/twente_hol.ban",
+      "club": "Twente",
+      "countryCode": 85,
+      "sourceUrl": "https://www.365scores.com/football/team/twente-696/squad",
+      "observedAt": "2026-10-30T22:06:25.645964+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/vaduz_lie.ban",
+      "club": "Vaduz",
+      "countryCode": 118,
+      "sourceUrl": "https://www.365scores.com/football/team/fc-vaduz-1148/squad",
+      "observedAt": "2026-10-30T22:06:26.259202+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/valencia_esp.ban",
+      "club": "Valencia",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/valencia-139/squad",
+      "observedAt": "2026-10-30T22:06:24.743615+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/valladolid_esp.ban",
+      "club": "Real Valladolid",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/real-valladolid-141/squad",
+      "observedAt": "2026-10-30T22:06:24.725611+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/valletta_mta.ban",
+      "club": "Valletta",
+      "countryCode": 128,
+      "sourceUrl": "https://www.365scores.com/football/team/valletta-fc-5590/squad",
+      "observedAt": "2026-10-30T22:06:27.912836+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 18
+    },
+    {
+      "teamFile": "teams/valmiera_let.ban",
+      "club": "Valmiera Glass",
+      "countryCode": 114,
+      "sourceUrl": "https://www.365scores.com/football/team/valmieras-fk-11230/squad",
+      "observedAt": "2026-10-30T22:06:28.576797+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 19
+    },
+    {
+      "teamFile": "teams/vasco.ban",
+      "club": "Vasco",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/vasco-da-gama-1227/squad",
+      "observedAt": "2026-10-30T22:06:26.503932+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 37
+    },
+    {
+      "teamFile": "teams/viking_nor.ban",
+      "club": "Viking Stavanger",
+      "countryCode": 142,
+      "sourceUrl": "https://www.365scores.com/football/team/viking-1980/squad",
+      "observedAt": "2026-10-30T22:06:27.143396+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/vikingur_isl.ban",
+      "club": "Víkingur Ólafsvík",
+      "countryCode": 102,
+      "sourceUrl": "https://www.365scores.com/football/team/vikingur-olafsvik-12759/squad",
+      "observedAt": "2026-10-30T22:06:28.576797+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 20
+    },
+    {
+      "teamFile": "teams/viktoria_rep.ban",
+      "club": "Viktoria Plzeň",
+      "countryCode": 159,
+      "sourceUrl": "https://www.365scores.com/football/team/viktoria-plzen-1796/squad",
+      "observedAt": "2026-10-30T22:06:26.825798+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/vilago.ban",
+      "club": "Vila Nova",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/vila-nova-1782/squad",
+      "observedAt": "2026-10-30T22:06:26.825798+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/villareal_esp.ban",
+      "club": "Villareal",
+      "countryCode": 65,
+      "sourceUrl": "https://www.365scores.com/football/team/villarreal-133/squad",
+      "observedAt": "2026-10-30T22:06:24.743615+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/vitesse_hol.ban",
+      "club": "Vitesse",
+      "countryCode": 85,
+      "sourceUrl": "https://www.365scores.com/football/team/vitesse-697/squad",
+      "observedAt": "2026-10-30T22:06:25.645964+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/vitoria.ban",
+      "club": "Vitória",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/vitoria-1228/squad",
+      "observedAt": "2026-10-30T22:06:26.552277+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 39
+    },
+    {
+      "teamFile": "teams/vitoriaguimaraes_por.ban",
+      "club": "Vitória Guimarães",
+      "countryCode": 154,
+      "sourceUrl": "https://www.365scores.com/football/team/guimaraes-889/squad",
+      "observedAt": "2026-10-30T22:06:25.678551+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/vojvodina_srb.ban",
+      "club": "Vojvodina",
+      "countryCode": 171,
+      "sourceUrl": "https://www.365scores.com/football/team/vojvodina-5447/squad",
+      "observedAt": "2026-10-30T22:06:27.912836+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/voltaredondarj_bra.ban",
+      "club": "Volta Redonda",
+      "countryCode": 29,
+      "sourceUrl": "https://www.voltaco.com.br/",
+      "observedAt": "2026-10-25",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/westham_eng.ban",
+      "club": "West Ham",
+      "countryCode": 97,
+      "sourceUrl": "https://www.365scores.com/football/team/west-ham-united-113/squad",
+      "observedAt": "2026-10-30T22:06:24.794940+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/wolfsbergerac_aut.ban",
+      "club": "Wolfsberger",
+      "countryCode": 15,
+      "sourceUrl": "https://www.365scores.com/football/team/wolfsberger-ac-9376/squad",
+      "observedAt": "2026-10-30T22:06:28.693188+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/wolfsburg_ale.ban",
+      "club": "VfL Wolfsburg",
+      "countryCode": 3,
+      "sourceUrl": "https://www.365scores.com/football/team/wolfsburg-339/squad",
+      "observedAt": "2026-10-30T22:06:25.460574+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/youngboys_sui.ban",
+      "club": "Young Boys",
+      "countryCode": 180,
+      "sourceUrl": "https://www.365scores.com/football/team/young-boys-1139/squad",
+      "observedAt": "2026-10-30T22:06:25.975089+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/ypiranga_rs.ban",
+      "club": "Ypiranga",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/pt/football/team/ypiranga-rs-9100/squad",
+      "observedAt": "2026-10-25",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/zalgiris_lit.ban",
+      "club": "Zalgiris Vilnius",
+      "countryCode": 119,
+      "sourceUrl": "https://www.365scores.com/football/team/fk-zalgiris-2319/squad",
+      "observedAt": "2026-10-30T22:06:27.627165+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/zeljeznicar_bih.ban",
+      "club": "Zeljeznicar",
+      "countryCode": 27,
+      "sourceUrl": "https://www.365scores.com/football/team/zeljeznicar-sarajevo-7536/squad",
+      "observedAt": "2026-10-30T22:06:28.237790+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/zenit_rus.ban",
+      "club": "Zenit St. Petersburg",
+      "countryCode": 162,
+      "sourceUrl": "https://www.365scores.com/football/team/zenit-1075/squad",
+      "observedAt": "2026-10-30T22:06:25.968446+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/zeta_mon.ban",
+      "club": "Zeta Golubovac",
+      "countryCode": 105,
+      "sourceUrl": "https://www.365scores.com/football/team/zeta-5449/squad",
+      "observedAt": "2026-10-30T22:06:27.912836+00:00",
+      "rosterPolicy": "preserve-previous-roster",
+      "compiledPlayers": 19
+    },
+    {
+      "teamFile": "teams/zilina_slk.ban",
+      "club": "Zilina",
+      "countryCode": 63,
+      "sourceUrl": "https://www.365scores.com/football/team/msk-zilina-2108/squad",
+      "observedAt": "2026-10-30T22:06:27.200408+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/zorya_ucr.ban",
+      "club": "Zorya Lugansk",
+      "countryCode": 193,
+      "sourceUrl": "https://www.365scores.com/football/team/zorya-luhansk-1967/squad",
+      "observedAt": "2026-10-30T22:06:26.976879+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/zrinjski_bos.ban",
+      "club": "Zrinjski",
+      "countryCode": 27,
+      "sourceUrl": "https://www.365scores.com/football/team/zrinjski-5650/squad",
+      "observedAt": "2026-10-30T22:06:27.942275+00:00",
+      "rosterPolicy": "source-replacement",
+      "compiledPlayers": 28
+    }
+  ],
+  "testsExecuted": false
+}
