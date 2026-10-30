@@ -223,9 +223,13 @@
     const all = textElement('option', 'Todas as competições');
     all.value = '';
     fragment.appendChild(all);
-    const selections = textElement('option', 'Seleções nacionais (' + extraCatalog.nations.length + ')');
-    selections.value = 'type:selection';
-    fragment.appendChild(selections);
+    const selectionCount = records.filter(record => record.club.kind === 'selection' &&
+      (!countryId || String(record.club.countryId) === countryId)).length;
+    if (selectionCount) {
+      const selections = textElement('option', 'Seleções nacionais (' + number(selectionCount) + ')');
+      selections.value = 'type:selection';
+      fragment.appendChild(selections);
+    }
     for (const cup of extraCatalog.cups) {
       const count = cups.get(cup.id);
       if (!count) continue;
@@ -407,7 +411,7 @@
     elements.modalStatus.replaceChildren(badge(club));
     elements.modalCount.textContent = club.kind === 'selection' ? 'Não catalogado' : number(club.playerCount);
     elements.modalDescription.textContent = club.kind === 'selection'
-      ? 'Seleção cadastrada no jogo. ' + (cups.length ? 'Competições de referência: ' + cups.join(', ') + '.' : 'Sem participação mapeada nas copas disponíveis.')
+      ? 'Seleção referenciada pelo cadastro de países do jogo. ' + (cups.length ? 'Competições de referência: ' + cups.join(', ') + '.' : 'Sem participação mapeada nas copas disponíveis.')
       : 'Elenco de clube incluído no pacote publicado. ' +
         (club.division ? 'Divisão: ' + club.division + '. ' : '') +
         (club.state ? 'Estado: ' + club.state + '. ' : '') +
