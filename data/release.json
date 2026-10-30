@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.4.2",
-  "publishedAt": "2026-10-29T21:14:26.556216+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.4.2-windows-x64.exe",
+  "publishedVersion": "2026.4.3",
+  "publishedAt": "2026-10-30T17:09:54.921750+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.4.3-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
-  "fileSizeBytes": 4752384,
-  "sha256": "598c8b750b8674ede7ad39b1633a2fa98eba6a7bf4008cd78cef115a0d3964fc",
+  "fileSizeBytes": 4954112,
+  "sha256": "8ec902aa2b7ffe6a3f8d0770fc7021e581ac195f05035ce4b5b25c042c40bd9a",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Instalação direta, elencos atuais e tela inicial 2026."
+  "releaseNotes": "Copa do Mundo 2026 com 48 seleções nos 12 grupos oficiais."
 }
