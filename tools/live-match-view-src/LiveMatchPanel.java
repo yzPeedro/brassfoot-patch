@@ -151,6 +151,9 @@ public final class LiveMatchPanel extends JPanel {
     private int cardFoulTaker;
     private long cardFoulReadyAfter;
     private long cardFoulDeadline;
+    private String cardFoulEvent;
+    private String cardFoulKey;
+    private boolean cardFoulRed;
     private final int[] officialShots = {-1, -1};
     private final int[] officialTackles = {-1, -1};
     private final int[] officialPassErrors = {-1, -1};
@@ -351,7 +354,7 @@ public final class LiveMatchPanel extends JPanel {
             ballY = ballFromY + (ballToY - ballFromY) * eased;
             if (t >= 1.0) handleBallArrival(now);
         } else if (penaltyPhase == 0 && freeKickPhase == 0 && ambientShotPhase == 0
-                && cardFoulPhase == 0 && !restartActive) {
+                && cardFoulPhase <= 1 && !restartActive) {
             if (looseBall) {
                 updateLooseBall(now);
             } else {
@@ -710,12 +713,13 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private boolean applyPendingStatCue(long now) {
+        if (cardFoulPhase != 0) return false;
         if (pendingStatFoulOffenderSide >= 0) {
             int offenderSide = pendingStatFoulOffenderSide;
             pendingStatFoulOffenderSide = -1;
             Dot[] offenders = offenderSide == 0 ? home : away;
             int offender = nearestActive(offenders, ballX, ballY, -1, false);
-            startCardFoul(now, offenderSide, offender);
+            startCardFoul(now, offenderSide, offender, "Falta de " + offenders[offender].fullName, null, false);
             return true;
         }
         if (pendingStatTackleSide >= 0) {
@@ -968,38 +972,52 @@ public final class LiveMatchPanel extends JPanel {
                 keeperSide, 0);
     }
 
-    private void startCardFoul(long now, int offenderSide, int offender) {
+    private void startCardFoul(long now, int offenderSide, int offender, String foulEvent,
+                               String cardKey, boolean red) {
         holdGameClock();
         plannedRoute.clear();
         plannedActionKey = null;
         cardFoulPhase = 1;
         cardFoulOffenderSide = offenderSide;
         cardFoulOffender = offender;
-        int takerSide = 1 - offenderSide;
-        Dot[] takerTeam = takerSide == 0 ? home : away;
-        cardFoulTaker = nearestActive(takerTeam, ballX, ballY, -1, false);
-        cardFoulReadyAfter = now + 1200L;
-        cardFoulDeadline = now + 4500L;
-        tackleActive = false;
-        looseBall = false;
-        receivingSide = -1;
-        receivingPlayer = -1;
-        ballInFlight = false;
-        ballFromX = ballToX = ballX;
-        ballFromY = ballToY = ballY;
-        controlUntil = Long.MAX_VALUE;
+        cardFoulEvent = foulEvent;
+        cardFoulKey = cardKey;
+        cardFoulRed = red;
+        cardFoulTaker = -1;
+        cardFoulReadyAfter = 0;
+        cardFoulDeadline = now + 6000L;
     }
 
     private void updateCardFoul(long now) {
-        if (cardFoulPhase != 1 || now < cardFoulReadyAfter
-                || (!formationReady() && now < cardFoulDeadline)) return;
+        if (cardFoulPhase == 0) return;
         int takerSide = 1 - cardFoulOffenderSide;
         Dot[] takerTeam = takerSide == 0 ? home : away;
+        Dot[] offenders = cardFoulOffenderSide == 0 ? home : away;
+        if (cardFoulPhase == 1) {
+            if (cardFoulOffender < 0 || cardFoulOffender >= offenders.length
+                    || !offenders[cardFoulOffender].active) {
+                cardFoulOffender = nearestActive(offenders, ballX, ballY, -1, false);
+            }
+            if (possessingSide == cardFoulOffenderSide && !looseBall && !ballInFlight && !tackleActive) {
+                startTackle(now, takerSide, nearestActive(takerTeam, ballX, ballY, -1, false));
+            }
+            Dot offender = offenders[cardFoulOffender];
+            boolean contact = !ballInFlight && possessingSide == takerSide && !looseBall
+                    && distance(offender.currentX, offender.currentY, ballX, ballY) <= CONTACT * 1.6;
+            if (contact || now >= cardFoulDeadline) blowCardFoul(now);
+            return;
+        }
+        if (cardFoulPhase == 2) {
+            if (now < cardFoulReadyAfter) return;
+            cardFoulPhase = 3;
+            cardFoulDeadline = now + 5000L;
+            return;
+        }
         Dot taker = takerTeam[cardFoulTaker];
         if (distance(taker.currentX, taker.currentY, ballX, ballY) > CONTACT) {
-            if (now < cardFoulDeadline + 5000L) return;
+            if (now < cardFoulDeadline) return;
             cardFoulTaker = nearestActive(takerTeam, ballX, ballY, -1, false);
-            cardFoulDeadline = now;
+            cardFoulDeadline = now + 5000L;
             return;
         }
         possessingSide = takerSide;
@@ -1008,6 +1026,46 @@ public final class LiveMatchPanel extends JPanel {
         cardFoulPhase = 0;
         controlUntil = now;
         beginPassTo(takerSide, receiver, now, 720 + random.nextInt(260));
+    }
+
+    private void blowCardFoul(long now) {
+        int takerSide = 1 - cardFoulOffenderSide;
+        Dot[] takerTeam = takerSide == 0 ? home : away;
+        tackleActive = false;
+        if (ballInFlight) {
+            ballInFlight = false;
+            ballFromX = ballToX = ballX;
+            ballFromY = ballToY = ballY;
+        }
+        receivingSide = -1;
+        receivingPlayer = -1;
+        cardFoulTaker = possessingSide == takerSide && !looseBall
+                ? possessingPlayer : nearestActive(takerTeam, ballX, ballY, -1, false);
+        looseBall = false;
+        possessingSide = takerSide;
+        possessingPlayer = cardFoulTaker;
+        controlUntil = Long.MAX_VALUE;
+        if (cardFoulEvent != null) event = cardFoulEvent;
+        if (cardFoulKey != null) {
+            if (cardFoulRed) {
+                yellowCarded.remove(cardFoulKey);
+                redCarded.add(cardFoulKey);
+            } else {
+                yellowCarded.add(cardFoulKey);
+            }
+        }
+        glideToStop(home);
+        glideToStop(away);
+        cardFoulPhase = 2;
+        cardFoulReadyAfter = now + (cardFoulKey == null ? 900L : 1600L);
+    }
+
+    private void glideToStop(Dot[] team) {
+        for (Dot dot : team) {
+            if (!dot.active) continue;
+            dot.targetX = clamp(dot.currentX + dot.velocityX * .45, .03, .97);
+            dot.targetY = clamp(dot.currentY + dot.velocityY * .45, .05, .95);
+        }
     }
 
     private void beginGoalRestart(long now, int scoringSide) {
@@ -1616,7 +1674,8 @@ public final class LiveMatchPanel extends JPanel {
             return;
         }
         if (type == 8) return;
-        if (isUsableEvent(description)) event = description;
+        boolean cardType = type == 2 || type == 3 || type == 4;
+        if (isUsableEvent(description) && !cardType) event = description;
         if (type < 1 || type > 7) return;
         receivingSide = -1;
         receivingPlayer = -1;
@@ -1679,15 +1738,11 @@ public final class LiveMatchPanel extends JPanel {
                 receivingPlayer = actor;
             }
         } else if (type == 2) {
-            event = "Cartão amarelo: " + actorName;
-            yellowCarded.add(playerKey(side, players[actor].fullName));
-            startCardFoul(now, side, actor);
+            startCardFoul(now, side, actor, isUsableEvent(description) ? description : "Cartão amarelo: " + actorName,
+                    playerKey(side, players[actor].fullName), false);
         } else if (type == 3 || type == 4) {
-            event = "Expulsão: " + actorName;
-            String cardKey = playerKey(side, players[actor].fullName);
-            yellowCarded.remove(cardKey);
-            redCarded.add(cardKey);
-            startCardFoul(now, side, actor);
+            startCardFoul(now, side, actor, isUsableEvent(description) ? description : "Expulsão: " + actorName,
+                    playerKey(side, players[actor].fullName), true);
         } else if (type == 5) {
             event = "Lesão: " + actorName;
             holdGameClock();
@@ -1974,7 +2029,7 @@ public final class LiveMatchPanel extends JPanel {
                 setFreeKickTarget(dot, i, sideIndex, awaySide);
                 continue;
             }
-            if (cardFoulPhase != 0) {
+            if (cardFoulPhase == 2) {
                 setCardFoulTarget(dot, i, sideIndex);
                 continue;
             }
@@ -2103,12 +2158,37 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private void refreshBallRoleTargets() {
-        if (penaltyPhase != 0 || freeKickPhase != 0 || cardFoulPhase != 0 || restartActive) return;
+        if (penaltyPhase != 0 || freeKickPhase != 0 || cardFoulPhase == 2 || restartActive) return;
         for (int i = 0; i < home.length; i++) if (home[i].active) applyBallRoleTarget(home[i], i, 0);
         for (int i = 0; i < away.length; i++) if (away[i].active) applyBallRoleTarget(away[i], i, 1);
     }
 
     private void applyBallRoleTarget(Dot dot, int index, int sideIndex) {
+        if (cardFoulPhase == 1) {
+            if (sideIndex == cardFoulOffenderSide && index == cardFoulOffender
+                    && possessingSide != cardFoulOffenderSide) {
+                if (index == 0) {
+                    dot.targetX = cardFoulOffenderSide == 0 ? clamp(ballX, .045, .17) : clamp(ballX, .83, .955);
+                    dot.targetY = clamp(ballY, .30, .70);
+                } else {
+                    dot.targetX = ballX;
+                    dot.targetY = ballY;
+                }
+                return;
+            }
+            if (cardFoulOffender == 0 && sideIndex != cardFoulOffenderSide && sideIndex == possessingSide
+                    && index == possessingPlayer && !looseBall && !ballInFlight) {
+                Dot[] keepers = cardFoulOffenderSide == 0 ? home : away;
+                dot.targetX = keepers[0].currentX;
+                dot.targetY = keepers[0].currentY;
+                return;
+            }
+        } else if (cardFoulPhase == 3 && sideIndex == 1 - cardFoulOffenderSide && index == cardFoulTaker) {
+            double direction = sideIndex == 0 ? 1.0 : -1.0;
+            dot.targetX = clamp(ballX - direction * .010, .03, .97);
+            dot.targetY = ballY;
+            return;
+        }
         if (pendingGoalStage == 1 && sideIndex == pendingGoalSide && index == pendingGoalActor) {
             boolean carrying = !looseBall && !ballInFlight && possessingSide == sideIndex
                     && possessingPlayer == index;
@@ -2143,7 +2223,7 @@ public final class LiveMatchPanel extends JPanel {
         if (restartActive && side == kickoffSide && (index == kickoffPlayerA || index == kickoffPlayerB)) return true;
         if (penaltyPhase != 0 && side == penaltySide && index == penaltyActor) return true;
         if (freeKickPhase != 0 && side == freeKickSide && index == freeKickActor) return true;
-        if (cardFoulPhase != 0 && side == 1 - cardFoulOffenderSide && index == cardFoulTaker) return true;
+        if (cardFoulPhase >= 2 && side == 1 - cardFoulOffenderSide && index == cardFoulTaker) return true;
         return cardFoulPhase != 0 && side == cardFoulOffenderSide && index == cardFoulOffender;
     }
 
@@ -2193,23 +2273,13 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private void setCardFoulTarget(Dot dot, int index, int sideIndex) {
-        int takerSide = 1 - cardFoulOffenderSide;
         if (sideIndex == cardFoulOffenderSide && index == cardFoulOffender) {
-            if (index == 0) {
-                dot.targetX = cardFoulOffenderSide == 0 ? clamp(ballX - .025, .045, .18)
-                        : clamp(ballX + .025, .82, .955);
-                dot.targetY = clamp(ballY, .30, .70);
-            } else {
-                dot.targetX = clamp(ballX + (cardFoulOffenderSide == 0 ? .018 : -.018), .05, .95);
-                dot.targetY = clamp(ballY + .018, .08, .92);
-            }
-        } else if (sideIndex == takerSide && index == cardFoulTaker) {
-            double direction = takerSide == 0 ? 1.0 : -1.0;
-            dot.targetX = clamp(ballX - direction * .010, .03, .97);
-            dot.targetY = ballY;
-        } else {
-            dot.targetX = dot.x;
-            dot.targetY = dot.y;
+            double back = cardFoulOffenderSide == 0 ? -.022 : .022;
+            dot.targetX = clamp(dot.currentX + back * .4, .03, .97);
+            dot.targetY = dot.currentY;
+        } else if (sideIndex == 1 - cardFoulOffenderSide && index == cardFoulTaker) {
+            dot.targetX = dot.currentX;
+            dot.targetY = dot.currentY;
         }
     }
 
