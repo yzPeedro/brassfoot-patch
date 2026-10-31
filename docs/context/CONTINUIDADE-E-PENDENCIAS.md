@@ -37,7 +37,7 @@ Dependências ou bloqueadores:
 
 ## F1 — Campo animado da partida (prévia PRIVADA) · prioridade P0
 
-**Checkpoint:** 31/10/2026 ~19h40 (Brasília), Claude Code. Estado: prévia **2026.4.29 compilada** (a 4.28 foi instalada pelo proprietário), sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
+**Checkpoint:** 31/10/2026 ~19h40 (Brasília), Claude Code. Estado: prévia **2026.4.30 compilada** (a 4.29 foi instalada pelo proprietário), sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
 
 - **Objetivo final:** desenhar um campo 2D dentro da tela original de partida, abaixo do placar e acima da tabela de outros jogos, com os 22 jogadores, bola e eventos sincronizados com a engine, **sem alterar o resultado simulado**. A entrega é sempre um instalador local para o proprietário testar.
 - **Onde está o código:** branch `live-match-preview` (no GitHub, sem merge na `main`), commits reescritos em 31/10 sem coautoria:
@@ -52,6 +52,43 @@ Dependências ou bloqueadores:
   - `config/edition-live-match-preview.json`;
   - ajustes em `tools/build_distribution.py` (canal lido da edição) e `tools/build_release_bundle.py`.
 - **Contexto histórico:** manual §6 e Apêndice A do [contexto mestre](BRASFOOT-MEGA-PATCH-CONTEXTO-MESTRE.md) (transcript do Work, L891–3085).
+
+### Regra permanente: ressincronização da bola em toda mudança
+
+O proprietário observou que **a bola dessincroniza dos jogadores e eventos sempre que algo é alterado**. Em toda mudança no Live Match, antes de gerar uma prévia, revisar e garantir:
+
+1. **Posse.** Toda transição de posse passa por contato: passe → bola livre → domínio, desarme, ou cobrança com o cobrador encostado na bola. Nenhum caminho atribui `possessingPlayer` sem contato, exceto em bola parada já posicionada.
+2. **Bola nunca abandonada.**
+   - Fora de voo e sem bola livre, ela fica no pé do portador.
+   - Ao fim de cada fase (gol, pênalti, falta, chute, reinício), estado explícito: receptor definido, bola livre com perseguidor, ou portador em contato.
+3. **Eventos.**
+   - Eventos do motor durante paralisações vão para a fila.
+   - Placar e texto do gol no painel só aparecem quando a bola entra (`visibleScore`, `goalEventText`).
+   - Cartão só no apito.
+4. **`reconcileBall` a cada quadro.** Corrige receptor inativo, bola livre abandonada e bola fora do campo. Ao criar um estado novo, incluí-lo ali e em `isAnchored`/`applyBallRoleTarget`.
+5. **Saídas.** Toda fase nova precisa de condição de conclusão e prazo de segurança, sem impasse do relógio.
+
+### Atualização 2026.4.30 (31/10/2026 ~20h), gols naturais e ressincronização
+
+- **Pedido:**
+  - bola dessincronizada dos acontecimentos;
+  - o artilheiro previsto pegava a bola na defesa e conduzia até o gol, o que deixava o gol óbvio.
+- **Mudança** (commit `7278e14` no branch `live-match-preview`):
+  - **sem rota prévia** para o artilheiro;
+  - ele só se movimenta no minuto do gol, em direção à entrada da área, sem ir ao ponto exato antes;
+  - no evento, os **companheiros** constroem a jogada com 0–1 passe progressivo, passando pelo assistente oficial quando o motor informa;
+  - segue o **passe final em profundidade**, cronometrado com a corrida do artilheiro;
+  - o artilheiro só conduz sozinho a partir do terço ofensivo (progresso ≥ .62); mais atrás, faz tabela;
+  - placar e texto do gol no painel só aparecem quando a bola entra;
+  - `reconcileBall` a cada quadro.
+- **Build:**
+  - EXE de jogo `data/private/live-match-preview-20261031-natural-goals/bf22-23.exe`, SHA `4421b77c…1d79`;
+  - instalador `dist/live-match-preview-2026.4.30/Brasfoot-Mega-Patch-2026.4.30-windows-x64.exe`, 7.875.072 bytes, SHA-256 `7e71bd58d5518cc0c0a2d59926bafcf645ea51eab49504c0deb19d4a93fbdd59`;
+  - 26 origens, incluindo a 4.29 que estava instalada (`852bfdc7…`);
+  - bytecode verificado na JVM 1.8.0_441.
+- **Estado:** compilada, não testada em jogo.
+- **Limitação conhecida:** o placar do cabeçalho original do Brasfoot (fora do painel) muda no instante do evento do motor, antes da animação terminar. Não dá para segurá-lo sem alterar o motor.
+- **Próxima build:** incluir `natural-goals` entre os `--previous-preview-executable`.
 
 ### Atualização 2026.4.29 (31/10/2026 ~19h40), cartões naturais
 

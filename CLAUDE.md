@@ -70,6 +70,8 @@ Compilação, geração de hashes, leitura de código e conferência de publica�
 - Segredos (tokens, `NINEROUTER_API_KEY`, `.env`) nunca entram em logs, docs ou commits. Dados pessoais só com necessidade técnica (LGPD).
 - Não executar testes, suítes, navegador ou gameplay enquanto vigorar a dispensa do proprietário registrada em `AGENTS.md`.
 - Código sem comentários explicativos (preferência do proprietário); documentação em Markdown é livre.
+- Live Match: em toda alteração, seguir a regra de ressincronização da bola (frente F1 de CONTINUIDADE) antes de gerar prévia.
+- Commits deste projeto saem no nome do proprietário (yzPeedro), sem linha de coautoria do Claude.
 
 ## Ao encerrar uma sessão
 
