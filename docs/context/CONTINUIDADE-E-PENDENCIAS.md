@@ -2,7 +2,7 @@
 
 Arquivo carregado automaticamente pelo `CLAUDE.md` da raiz. Registra, por frente ativa, o último estado **verificado** e a próxima ação. Checkpoints antigos não são o estado atual: confira a data de cada frente e revalide no Git e no disco antes de agir.
 
-**Última revisão:** 31/10/2026 ~19h (Brasília), pelo Claude Code, durante a integração da base de conhecimento.
+**Última revisão:** 31/10/2026 ~19h35 (Brasília), pelo Claude Code, após gerar a prévia privada 2026.4.28.
 
 ## Protocolo de retomada (toda sessão)
 
@@ -37,77 +37,111 @@ Dependências ou bloqueadores:
 
 ## F1 — Campo animado da partida (prévia PRIVADA) · prioridade P0
 
-- **Objetivo final:** desenhar um campo 2D dentro da tela original de partida, abaixo do placar e acima da tabela de outros jogos, com jogadores, bola e eventos sincronizados com a engine, **sem alterar o resultado simulado**. Entrega somente como instalador local para o proprietário testar. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
-- **Contexto completo:**
-  - Manual §6: [manual operacional](BRASFOOT-MEGA-PATCH-MANUAL-OPERACIONAL.md) (linhas 537–697).
-  - Transcript do Work: Apêndice A do [contexto mestre](BRASFOOT-MEGA-PATCH-CONTEXTO-MESTRE.md), linhas 891–3085.
-  - Os números de linha "L" abaixo referem-se ao contexto mestre.
-- **Arquivos (todos locais e não commitados, preservados):**
-  - `tools/live-match-view-src/LiveMatchPanel.java`: painel, estado, física e eventos.
-  - `tools/live-match-view-src/LiveMatchTransformer.java`: ASM; injeta `mega/LiveMatchPanel.install(JPanel)` no construtor `a.dV.<init>(Ljavax/swing/JFrame;I)V`.
-  - `tools/patch_live_match_view.py`: exige base SHA `8193758a…a119`, o EXE publicado desde a 4.5/4.6, em `data/private/continental-cups-2026.4.5-final/`.
-  - `tools/build_live_match_preview_bundle.py`.
-  - `config/edition-live-match-preview.json`: `version=2026.4.27`, `channel=local-preview`.
-  - Ajustes locais em `tools/build_distribution.py` (canal lido da edição) e `tools/build_release_bundle.py` (ignora a variante cuja origem é o próprio alvo).
-  - Artefatos: `data/private/live-match-preview-20261031-*` e `dist/live-match-preview-2026.4.*`. Ambos ficam **fora do Git**; existe só a cópia local.
-- **Arquitetura confirmada no código:**
-  - A tela real da partida é `a.dV`. Até a 4.13 a injeção ia para `a.hk`, que é a tela errada.
-  - Classes compiladas para Java 7 (`-source 7 -target 7`, major 51); o transformer roda no JDK 17.
-  - O painel fica no `JLayeredPane.PALETTE_LAYER` em y=165. Um timer próprio a 30–144 Hz aproxima a taxa do monitor; não é VSync.
-  - O timer para quando a tela sai.
-  - Eventos oficiais vêm de `best.A` via `hE()`, tipos 1–8. As estatísticas vêm dos vetores `hz…hD` de `best.I`.
-  - Passes, conduções, laterais, posicionamento e local do chute são **reconstrução sintética**.
-  - Durante paralisações visuais, o relógio da engine (`GO`, um `javax.swing.Timer`) é parado.
-- **Última alteração concluída:** prévia **2026.4.27**, gerada às 18:39–18:40 de 31/10. Verificado em disco:
-  - instalador `dist/live-match-preview-2026.4.27/Brasfoot-Mega-Patch-2026.4.27-windows-x64.exe`, 7.476.224 bytes, SHA-256 `29ae6bca272197521a8912f7c486d78fa145fcc1465bef3050f6fb1725d80eb7`, igual ao `SHA256SUMS.txt`;
-  - EXE de destino `9544506c841a0e40b76c8fc1ae702dbf0534bf23cb05b0b2967e96e30dd29fe0`;
-  - manifest `BRASFOOT_HOMOLOGATION_PATCH` com `publicationAllowed=false`, 398 arquivos;
-  - aceita 23 origens: prévias anteriores, originais e publicadas.
-  - O `LiveMatchPanel.java` (mtime 18:39:24) **não foi editado depois** desse build.
-  - O comando completo de geração está no transcript, L3071.
-- **Estado:**
-  - A 4.27 está **compilada**, sem teste e sem homologação.
-  - A sessão do Work terminou por limite de uso (L3075–3082) **antes de entregar** a 4.26 e a 4.27 ao proprietário.
-  - O jogo instalado em `C:\Brasfoot22-23` está com o EXE da **prévia 4.25**, SHA `4c8c46c6…` (`stat-synced-stoppages`); a 4.26 e a 4.27 não foram instaladas.
-- **Problemas relatados pelo proprietário na última rodada (L3007–3034):**
-  - gols de muito longe;
-  - bola fora de sincronia, com jogador marcando sem tocar na bola;
-  - impossível pausar ou substituir durante a recomposição;
-  - saída de bola após gol pelo jogador errado;
-  - loop de passes entre adversários;
-  - tooltip indevido;
-  - gol durante a recomposição.
-- **Correções tentadas e presentes no código da 4.27** (respostas a esses pedidos; nenhuma observada em jogo):
-  - identidade pelo nome completo (`findPlayer`);
-  - posse só por contato (`handleBallArrival`);
-  - chute só com o autor a ≤ 0,025 da bola;
-  - zonas de chute plausíveis (`isPlausibleShot`, `choosePlannedSpot`);
-  - relógio bloqueado a cada quadro durante paralisação;
-  - click-through (`contains()` retorna `false`);
-  - tooltip removido;
-  - saída do time que sofreu o gol com dois jogadores no centro;
-  - reinício do 2º tempo detectado por `dB`.
-- **Riscos e dúvidas identificados na leitura do código (não verificados em execução):**
-  1. `resumeGameClock()` chama `GO.restart()` sem verificar a pausa manual do Brasfoot. O campo `GU:Z` foi estudado (L3015) mas não é usado; o relógio pode voltar a correr com o jogo pausado.
-  2. O caminho de fallback textual `applyEvent` ainda sorteia o alvo do passe (`random.nextInt`). Só roda quando não há objeto de lance.
-  3. O "loop de passes entre adversários" foi tratado só pela separação passador/receptor. Não há evidência de que foi resolvido.
-  4. O desfecho do pênalti perdido (defesa, trave ou fora) é sorteado, porque a engine não informa.
-  5. Os nomes de instalador da 4.8 e da 4.24 não refletem o conteúdo: os bundles saíram com versão anterior porque o build do bundle falhou e a distribuição rodou mesmo assim (comandos encadeados com `;`). **Encadear com verificação de código de saída.**
-  6. O código e os scripts da prévia contêm comentários e docstrings em prosa, o que contraria a preferência do proprietário. Remover ao retomar a edição.
-- **Validações pendentes:**
-  - instalação da 4.27 pelo proprietário sobre a 4.25 instalada;
-  - checklist comportamental do manual §6.8;
-  - ausência de deadlock na pausa manual e na substituição;
-  - pós-jogo sem travar.
-- **Próxima ação recomendada:**
-  1. Entregar ao proprietário o caminho e o SHA da 4.27 já gerada (sem novo build), com as ressalvas acima.
-  2. Coletar o resultado do teste dele.
-  3. Antes de uma 4.28, corrigir o risco 1 (respeitar a pausa manual) e remover os comentários.
-  4. Gerar com `patch_live_match_view.py` → `build_live_match_preview_bundle` → `build_distribution --target windows/amd64 --edition config/edition-live-match-preview.json`, abortando em erro.
-  5. Atualizar a versão em `config/edition-live-match-preview.json` e o padrão `--version` do bundle.
-- **Dependências e bloqueadores:**
-  - Base pública atual: a 4.7 manteve o EXE da 4.5, então a trava SHA `8193758a…` continua válida. Se uma release futura trocar o EXE, o patcher precisa ser adaptado.
-  - Decisão do proprietário sobre versionar no Git o código da prévia. Hoje só existe neste disco; o repositório é público.
+**Checkpoint:** 31/10/2026 ~19h35 (Brasília), Claude Code. Estado: prévia **2026.4.28 compilada**, sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
+
+- **Objetivo final:** desenhar um campo 2D dentro da tela original de partida, abaixo do placar e acima da tabela de outros jogos, com os 22 jogadores, bola e eventos sincronizados com a engine, **sem alterar o resultado simulado**. A entrega é sempre um instalador local para o proprietário testar.
+- **Onde está o código:** branch **local** `live-match-preview` (sem push), commits:
+  - `179858b`: máquina de estados;
+  - `7844545`: edição 2026.4.28.
+  - Para editar: `git switch live-match-preview`. Na `main` esses arquivos não existem.
+- **Arquivos:**
+  - `tools/live-match-view-src/LiveMatchPanel.java`;
+  - `tools/live-match-view-src/LiveMatchTransformer.java` (ASM; injeta `mega/LiveMatchPanel.install(JPanel)` antes de cada `RETURN` de `a.dV.<init>(Ljavax/swing/JFrame;I)V`);
+  - `tools/patch_live_match_view.py` (exige base SHA `8193758a…a119`, EXE público da 4.5/4.6/4.7 em `data/private/continental-cups-2026.4.5-final/`);
+  - `tools/build_live_match_preview_bundle.py`;
+  - `config/edition-live-match-preview.json`;
+  - ajustes em `tools/build_distribution.py` (canal lido da edição) e `tools/build_release_bundle.py`.
+- **Contexto histórico:** manual §6 e Apêndice A do [contexto mestre](BRASFOOT-MEGA-PATCH-CONTEXTO-MESTRE.md) (transcript do Work, L891–3085).
+
+### Mecânica do motor confirmada por bytecode (a.dV original)
+
+- `GO` é um `javax.swing.Timer` **sem repetição**. Cada disparo chama `qa()`, que soma 1 a `GT` (minuto) e depois `aa(false)`, que processa os lances e, se `GZ` for verdadeiro, chama `oR()` para reagendar o `GO`.
+- **Pedido de pausa ou substituição** (clique nos rótulos do placar via `a/dX`, atalho `a/dW` → `qh()`, ou clique na tabela de jogos via `a/ef`) grava `GV >= 0`. No fim do minuto corrente, `aa()` faz `GZ=false`, abre o diálogo modal `e(GV)`, depois volta `GZ=true`, `GV=-1` e chama `oR()`.
+- `GU` é o **fim de partida** (definido em `qc()`), não pausa. `dB` é o tempo (1/2); `d` é o intervalo de cada minuto, alterado pelos atalhos de velocidade.
+- Os rótulos do placar (`Hr`, até y≈130) ficam fora da área do painel (y≥165).
+
+### O que a 2026.4.28 mudou (sobre a 4.27)
+
+1. **Relógio.**
+   - `holdGameClock`/`releaseGameClock` só param o `GO` se ele estava rodando, e só o religam se o painel o parou.
+   - Nunca religam após o fim (`GU`) ou com diálogo aberto (`GZ=false`).
+   - Se houver pedido de pausa (`GV>=0`) durante uma paralisação visual, o relógio é liberado para o minuto terminar e o Brasfoot abrir a substituição. **Era essa a causa de "não dá para pausar durante a recomposição".**
+2. **Posse por contato.**
+   - Após um passe, a bola fica **livre** até o receptor tocá-la (`CONTACT = .024`). Só então recebe a posse e um tempo de domínio antes de agir.
+   - A condução mantém a bola no pé, na direção do movimento.
+   - O passe exige o passador em contato.
+3. **Desarme físico** (`startTackle`/`updateTackle`): substitui os passes deliberados ao adversário que causavam o pingue-pongue. Ele é usado:
+   - para trocas de posse;
+   - para o aumento oficial de desarmes (`hB`);
+   - para o início de jogadas planejadas de outro time.
+   - Erros de passe oficiais (`hC`) continuam como passe errado ao adversário.
+4. **Gol.**
+   - O autor recebe a bola livre ou conduz até o ponto planejado.
+   - O chute só sai com o autor em contato **e** em posição plausível (90% dentro da área).
+   - Prazos de segurança: 7 s, depois a bola rola até o autor; mais 6 s e ele finaliza de onde estiver, sem impasse.
+5. **Pênalti e chute defendido ou para fora:** a bola não teletransporta mais para o goleiro. Volta rolando (rebote ou tiro de meta) e o goleiro a domina por contato.
+6. **Saída de bola após gol, no início do 2º tempo e no início do jogo:**
+   - dois jogadores do time que sofreu o gol (ou do time da vez) vão ao centro;
+   - o adversário fica fora do círculo;
+   - toque com contato para o companheiro e, em seguida, passe para o meio-campista mais recuado.
+   - O relógio só volta quando o companheiro domina, com prazo de 5 s.
+7. **Eventos do motor durante paralisações** vão para uma fila e são aplicados ao fim da paralisação. Substituição (6) e assistência (8) são aplicadas na hora.
+8. **Substituição, lesão e expulsão:**
+   - a escalação é casada pelo **nome completo**;
+   - quem entra surge na lateral e corre até a posição;
+   - expulsos saem de campo ao fim do lance da falta;
+   - quem sai deixa de participar;
+   - cartões ficam marcados pela identidade completa;
+   - lesão e substituição não passam mais a posse ao jogador que sai.
+9. **Estatísticas:** removidos os chutes sintéticos aleatórios. Só os aumentos oficiais de finalizações (`hA`) geram finalização visual. O fallback por texto não move mais a bola.
+10. **Tática:**
+    - quem tem papel com a bola (receptor, perseguidor, desarmador, condutor, autor do gol, cobradores) é **âncora**: o espaçamento empurra só os outros;
+    - os alvos dessas âncoras são recalculados a cada quadro.
+    - O `dt` passou a ser o tempo real entre quadros.
+11. **Mouse:**
+    - sem tooltip;
+    - o painel consome os cliques na própria área (embaixo dele só há componentes invisíveis);
+    - **cliques na cópia da tabela de outros jogos são repassados à tabela original** com coordenadas convertidas.
+12. **Limpeza:** comentários e docstrings removidos dos fontes da prévia; cores e traços pré-alocados no desenho.
+
+### Build 2026.4.28 (verificado em disco em 31/10/2026 ~19h31)
+
+- **EXE de jogo:** `data/private/live-match-preview-20261031-state-machine/bf22-23.exe`, 7.206.683 bytes, SHA-256 `3676b40e2ad2f2aba983912b1965eb25420771c82d48d390846d380609ca4d64`.
+- **Bundle:** `…/bundle-2026.4.28`.
+  - `BRASFOOT_HOMOLOGATION_PATCH`, `publicationAllowed=false`, `channel=local-preview`, 398 arquivos.
+  - **24 origens aceitas**, entre elas a 4.25 instalada (`4c8c46c6…`), a 4.27 e o EXE público `8193758a…`.
+  - Cadeias contínuas, com ≤ 8 etapas.
+- **Instalador:** `dist/live-match-preview-2026.4.28/Brasfoot-Mega-Patch-2026.4.28-windows-x64.exe`.
+  - 7.710.720 bytes, SHA-256 `b7cc5d0e88fd5ca5046e686d36bb659862aacab8509b001897f022292878a1ee`.
+  - `SHA256SUMS.txt` confere; subsistema PE 2 (GUI, sem console).
+  - `sourceCommit 7844545…`.
+- **Comandos** (todos com saída 0):
+  1. `python tools/patch_live_match_view.py --source data/private/continental-cups-2026.4.5-final/bf22-23.exe --output <dir>/bf22-23.exe`
+  2. `python -m tools.build_live_match_preview_bundle --inherit-bundle data/private/live-match-preview-20261031-fluid-natural/bundle-2026.4.19 --published-executable data/private/live-match-preview-20261031-fluid-natural/bf22-23.exe --preview-executable <dir>/bf22-23.exe` + `--previous-preview-executable` para `tactical-physics`, `tactical-physics-final`, `kickoff-reset`, `possession-kits`, `set-pieces`, `stat-synced-stoppages`, `contact-synced`, `contact-synced-clickthrough` + `--output <dir>/bundle-2026.4.28 --version 2026.4.28`
+  3. `python tools/build_distribution.py --bundle <dir>/bundle-2026.4.28 --output dist/live-match-preview-2026.4.28 --edition config/edition-live-match-preview.json --source-commit <commit> --target windows/amd64`
+- **Verificações estáticas realizadas (não são testes de jogo):**
+  - `javac -source 7 -target 7` sem erro (classfile major 51);
+  - carga e inicialização de `mega/*` (6 classes) e de `a.dV` com `-Xverify:all` na JVM 1.8.0_441 do sistema (headless, log redirecionado);
+  - nenhum texto de tooltip do painel;
+  - manifesto, variantes e hashes conferidos.
+
+### Pendências e riscos
+
+- **Nada foi observado em jogo.** Homologação manual pendente com o checklist do manual §6.8 e os pontos abaixo.
+- **Fallback de prazos:**
+  - pênalti e falta não têm prazo extra se o cobrador não alcançar a bola (é âncora, deve alcançar);
+  - a falta com cartão troca de cobrador após 5 s.
+- **Expulsão:** se o motor mantiver o expulso na lista `hl/hm`, ele sai pelo conjunto `redCarded`. O goleiro (posição 0) nunca é desativado.
+- **Desfecho de pênalti perdido** (defesa, trave ou fora) continua sorteado, porque a engine não informa.
+- **Posse visual:** as trocas sintéticas (a cada 8–14 passes, conforme a posse oficial) são reconstrução visual, não estatística.
+- **Layout:** a disposição aprovada nas prévias anteriores foi mantida (campo em y=165 cobrindo a área inferior). O painel original de estatísticas fica sob o campo; a tabela de jogos aparece como cópia clicável.
+
+### Próxima ação recomendada
+
+1. Proprietário instala a 4.28 sobre a 4.25 (jogo fechado) e testa.
+2. Corrigir pelo relato no branch `live-match-preview`.
+3. Gerar a 4.29 em pasta nova, incluindo `live-match-preview-20261031-state-machine/bf22-23.exe` entre os `--previous-preview-executable`.
+4. Ajustar a versão em `config/edition-live-match-preview.json` e o padrão `--version`.
 
 ## F2 — Manutenção diária pública (elencos, release, site) · operacional
 
@@ -149,4 +183,4 @@ Dependências ou bloqueadores:
 - Correções do manual que valem sobre o texto original:
   - em §5.5 o destino do bundle é `--output`, não `--destination`;
   - em §7.1 as duas tarefas agendadas estão desabilitadas;
-  - em §6.7 a 4.27 foi gerada por completo.
+  - em §6.7 a 4.27 foi gerada por completo, mas nunca entregue; a 4.28 a substitui como prévia corrente.
