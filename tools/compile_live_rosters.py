@@ -126,6 +126,16 @@ def compile_rosters(base_game, original_game, output, snapshot, supplements, fal
         run([java,"-cp",classes,"app.Main","export-directory",fallback_game/"teams",prior_export])
         prior=load_catalog(prior_export)
     data=json.loads(snapshot.read_text(encoding="utf8"))
+    status_path=ROOT/f"config/player-status-{reference.year}.json"
+    status_data=json.loads(status_path.read_text(encoding="utf8")) if status_path.exists() else None
+    status_targets={}
+    status_matches=Counter()
+    status_audit=[]
+    if status_data:
+        for entry in status_data["players"]:
+            target=(entry["teamFile"],key(entry["playerName"]))
+            if target in status_targets:raise ValueError("Duplicate player status target: "+str(target))
+            status_targets[target]=entry
     clubs={x["teamFile"]:x for x in data["clubs"]}
     for supplement in supplements:
         extra=json.loads(supplement.read_text(encoding="utf8"))
@@ -283,6 +293,20 @@ def compile_rosters(base_game, original_game, output, snapshot, supplements, fal
                 player["g"], player["h"] = DERIVED_TRAITS[player["e"]]
                 report["defaults"]["roleIncompatibleTraits"] += 1
             original_name=player["name"]
+            if status_data:
+                previous_star=bool(player.get("b",False))
+                previous_top=bool(player.get("j",False))
+                target=status_targets.get((file,key(original_name)))
+                player["b"]=bool(target and target["star"])
+                player["j"]=bool(target and target["topWorld"])
+                if target:status_matches[(file,key(original_name))]+=1
+                if previous_star!=player["b"] or previous_top!=player["j"] or target:
+                    status_audit.append({"teamFile":file,"playerName":original_name,
+                        "previous":{"star":previous_star,"topWorld":previous_top},
+                        "current":{"star":player["b"],"topWorld":player["j"]},
+                        "reason":target["reason"] if target else status_data["removalReason"],
+                        "sourceUrl":target["sourceUrl"] if target else status_data["sourceUrl"],
+                        "sourcePublishedAt":status_data["sourcePublishedAt"]})
             player["name"]=display_player_name(original_name)
             if player["name"]!=original_name:
                 counts["primaryNamesShortened"]+=1
@@ -311,10 +335,18 @@ def compile_rosters(base_game, original_game, output, snapshot, supplements, fal
         counts["teamsTotal"]+=1
         for label,number in report["defaults"].items():counts["default_"+label]+=number
         club_reports.append(report)
+    if status_data:
+        missing=[{"teamFile":team,"playerName":status_targets[(team,name)]["playerName"]}
+                 for team,name in status_targets if status_matches[(team,name)]!=1]
+        if missing:raise ValueError("Player status targets not matched exactly once: "+json.dumps(missing,ensure_ascii=False))
     compiler=run([java,"-cp",classes,"app.Main","batch-rosters",base_game/"teams",tsvs,output/"teams"])
     result={"schemaVersion":1,"version":version,"referenceDate":reference.isoformat(),
         "snapshotSha256":hashlib.sha256(snapshot.read_bytes()).hexdigest(),"compilerOutput":json.loads(compiler),
         "counts":dict(counts),"clubs":club_reports,"fullNameProvenance":full_name_records,
+        "playerStatusAudit":{"config":str(status_path.relative_to(ROOT)) if status_data else None,
+                             "policy":status_data.get("policy") if status_data else None,
+                             "changes":status_audit,
+                             "unavailable":status_data.get("unavailable",[]) if status_data else []},
         "limitations":["Individual traits unavailable at squad sources; preserved attributes or explicitly derived role defaults.",
                         "Brasfoot stores right/left side, not a distinct preferred-foot field.",
                         "Jersey and exact birth date retained in provenance; game stores age but has no jersey/DOB field.",

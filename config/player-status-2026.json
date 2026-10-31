@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "editionYear": 2026,
+  "observedAt": "2026-10-31",
+  "sourcePublishedAt": "2026-10-26",
+  "sourceUrl": "https://www.uefa.com/uefachampionsleague/news/02aa-21ec47378e70-b29defb43769-1000--harry-kane-wins-2026-mens-ballon-d-or/",
+  "policy": {
+    "star": "Top 10 masculino do Ballon d'Or 2026, somente quando o atleta e o clube estão identificados no catálogo do patch.",
+    "topWorld": "Vencedor masculino do Ballon d'Or 2026.",
+    "uncertainty": "Não marcar homônimos, atletas ausentes do catálogo ou identidades sem correspondência única. Remover flags herdadas fora dos critérios atuais."
+  },
+  "removalReason": "Marcação herdada removida: o atleta não integra o Top 10 masculino do Ballon d'Or 2026.",
+  "players": [
+    {
+      "teamFile": "teams/bayern_ale.ban",
+      "playerName": "Harry Kane",
+      "star": true,
+      "topWorld": true,
+      "reason": "1º no Ballon d'Or masculino 2026; vencedor e integrante do Top 10.",
+      "sourceUrl": "https://www.uefa.com/uefachampionsleague/news/02aa-21ec47378e70-b29defb43769-1000--harry-kane-wins-2026-mens-ballon-d-or/"
+    },
+    {
+      "teamFile": "teams/realmadrid_esp.ban",
+      "playerName": "Kylian Mbappe",
+      "star": true,
+      "topWorld": false,
+      "reason": "2º no Ballon d'Or masculino 2026; integrante do Top 10, não vencedor.",
+      "sourceUrl": "https://www.uefa.com/uefachampionsleague/news/02aa-21ec47378e70-b29defb43769-1000--harry-kane-wins-2026-mens-ballon-d-or/"
+    },
+    {
+      "teamFile": "teams/barcelona_esp.ban",
+      "playerName": "Lamine Yamal",
+      "star": true,
+      "topWorld": false,
+      "reason": "3º no Ballon d'Or masculino 2026; integrante do Top 10, não vencedor.",
+      "sourceUrl": "https://www.uefa.com/uefachampionsleague/news/02aa-21ec47378e70-b29defb43769-1000--harry-kane-wins-2026-mens-ballon-d-or/"
+    },
+    {
+      "teamFile": "teams/barcelona_esp.ban",
+      "playerName": "Rodri Hernández",
+      "star": true,
+      "topWorld": false,
+      "reason": "4º no Ballon d'Or masculino 2026; identidade única no Barcelona do patch.",
+      "sourceUrl": "https://www.uefa.com/uefachampionsleague/news/02aa-21ec47378e70-b29defb43769-1000--harry-kane-wins-2026-mens-ballon-d-or/"
+    },
+    {
+      "teamFile": "teams/parissaintgermain_fr.ban",
+      "playerName": "Khvicha Kvaratskhelia",
+      "star": true,
+      "topWorld": false,
+      "reason": "6º no Ballon d'Or masculino 2026; integrante do Top 10, não vencedor.",
+      "sourceUrl": "https://www.uefa.com/uefachampionsleague/news/02aa-21ec47378e70-b29defb43769-1000--harry-kane-wins-2026-mens-ballon-d-or/"
+    },
+    {
+      "teamFile": "teams/parissaintgermain_fr.ban",
+      "playerName": "Ousmane Dembélé",
+      "star": true,
+      "topWorld": false,
+      "reason": "7º no Ballon d'Or masculino 2026; integrante do Top 10, não vencedor.",
+      "sourceUrl": "https://www.uefa.com/uefachampionsleague/news/02aa-21ec47378e70-b29defb43769-1000--harry-kane-wins-2026-mens-ballon-d-or/"
+    },
+    {
+      "teamFile": "teams/machestercity_ing.ban",
+      "playerName": "Erling Haaland",
+      "star": true,
+      "topWorld": false,
+      "reason": "8º no Ballon d'Or masculino 2026; integrante do Top 10, não vencedor.",
+      "sourceUrl": "https://www.uefa.com/uefachampionsleague/news/02aa-21ec47378e70-b29defb43769-1000--harry-kane-wins-2026-mens-ballon-d-or/"
+    },
+    {
+      "teamFile": "teams/bayern_ale.ban",
+      "playerName": "Michael Olise",
+      "star": true,
+      "topWorld": false,
+      "reason": "9º no Ballon d'Or masculino 2026; integrante do Top 10, não vencedor.",
+      "sourceUrl": "https://www.uefa.com/uefachampionsleague/news/02aa-21ec47378e70-b29defb43769-1000--harry-kane-wins-2026-mens-ballon-d-or/"
+    },
+    {
+      "teamFile": "teams/parissaintgermain_fr.ban",
+      "playerName": "Fabián Ruiz",
+      "star": true,
+      "topWorld": false,
+      "reason": "10º no Ballon d'Or masculino 2026; integrante do Top 10, não vencedor.",
+      "sourceUrl": "https://www.uefa.com/uefachampionsleague/news/02aa-21ec47378e70-b29defb43769-1000--harry-kane-wins-2026-mens-ballon-d-or/"
+    }
+  ],
+  "unavailable": [
+    {
+      "playerName": "Lionel Messi",
+      "rank": 5,
+      "reason": "Inter Miami não existe no catálogo de 704 clubes; nenhuma flag foi inventada em outro clube."
+    }
+  ]
+}

@@ -1,7 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-30T22:33:35Z",
+  "updatedAt": "2026-10-31T17:58:23-03:00",
   "entries": [
+    {
+      "id": "patch-2026-4-7",
+      "version": "2026.4.7",
+      "date": "2026-10-31T17:58:23-03:00",
+      "title": "Estrelas revistas com a temporada atual",
+      "kind": "patch",
+      "summary": "Plantéis renovados e flags de estrela e Top Mundial auditadas com evidência oficial de 2026.",
+      "changes": [
+        "Augustine Chima entrou no Apollon Limassol, Eryk Śledziński no Lech Poznań e Fernando Costa saiu do RB Bragantino.",
+        "Corsin Konietzke foi transferido do St. Gallen para o Vaduz e 25 idades foram atualizadas na data de referência de 31/10/2026.",
+        "O Top 10 masculino oficial do Ballon d'Or 2026 passou a definir os jogadores estrela identificados no catálogo; oito marcações foram incluídas e sete herdadas foram removidas.",
+        "Harry Kane, vencedor do Ballon d'Or 2026, foi marcado como Top Mundial; Lionel Messi permaneceu sem alteração porque o Inter Miami não existe no catálogo.",
+        "A consulta cobriu os 704 clubes: 288 fontes completas, 54 parciais preservadas e 362 identidades ainda pendentes de uma fonte completa."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.4.7"
+    },
     {
       "id": "site-explorer-selections-2026",
       "date": "2026-10-30T22:33:35Z",

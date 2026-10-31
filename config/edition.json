@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.4.6",
+  "version": "2026.4.7",
   "channel": "stable",
-  "releaseNotes": "Plantéis renovados em 23 clubes, com duas entradas, três saídas, posições corrigidas e idades atualizadas.",
+  "releaseNotes": "Plantéis renovados e classificações de estrela e Top Mundial auditadas com o Ballon d'Or 2026.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [
