@@ -1,5 +1,7 @@
 # Estado do Brasfoot Mega Patch — 31/10/2026
 
+> Registro do estado **publicado**. Frentes em andamento, prévias privadas e protocolo de retomada: [context/CONTINUIDADE-E-PENDENCIAS.md](context/CONTINUIDADE-E-PENDENCIAS.md). Decisões vigentes e substituídas: [context/HISTORICO-E-DECISOES.md](context/HISTORICO-E-DECISOES.md).
+
 ## Manutenção diária e auditoria de estrelas — versão 2026.4.7
 
 A consulta de 31/10/2026 renovou as fontes públicas sem falhas nem fallback antigo e comparou o conteúdo normalizado com a 2026.4.6. Foram consultados 342 clubes com 8.709 atletas; o catálogo completo de 704 clubes registra 288 fontes completas, 54 respostas parciais preservadas e 362 identidades ainda pendentes de fonte completa. O catálogo complementar fez oito requisições sem falhas e permaneceu sem mudança material.
