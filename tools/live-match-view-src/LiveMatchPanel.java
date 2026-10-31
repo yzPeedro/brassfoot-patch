@@ -79,6 +79,8 @@ public final class LiveMatchPanel extends JPanel {
     private String homeName = "Mandante";
     private String awayName = "Visitante";
     private String score = "0 x 0";
+    private String visibleScore = "0 x 0";
+    private String goalEventText;
     private String minute = "";
     private String event = "A partida está em andamento";
     private Object homeTeamRef;
@@ -180,6 +182,10 @@ public final class LiveMatchPanel extends JPanel {
     private int kickoffBackPass = -1;
     private boolean openingKickoffDone;
     private long goalStageDeadline;
+    private int goalBuildPasses;
+    private int goalBuildTarget;
+    private boolean goalFinalPassed;
+    private Object matchRef;
     private boolean clockHeld;
     private final List<Object> queuedEngineActions = new ArrayList<Object>();
     private Rectangle otherMatchesArea;
@@ -327,6 +333,7 @@ public final class LiveMatchPanel extends JPanel {
         if (!hasClockStoppage() && !queuedEngineActions.isEmpty()) {
             applyEngineAction(queuedEngineActions.remove(0));
         }
+        if (!hasClockStoppage() && queuedEngineActions.isEmpty() && pendingGoalStage == 0) visibleScore = score;
         if (simpleStoppageUntil != 0 && now >= simpleStoppageUntil) {
             simpleStoppageUntil = 0;
             controlUntil = now + 500L;
@@ -347,6 +354,7 @@ public final class LiveMatchPanel extends JPanel {
         updateFreeKick(now);
         updateAmbientShot(now);
         updateCardFoul(now);
+        reconcileBall(now);
         if (ballInFlight) {
             double t = Math.min(1.0, (now - moveStarted) / (double) moveDuration);
             double eased = t * t * (3.0 - 2.0 * t);
@@ -360,9 +368,10 @@ public final class LiveMatchPanel extends JPanel {
             } else {
                 if (tackleActive) updateTackle(now);
                 followBallCarrier();
-                if (!tackleActive && !kickoffInProgress && pendingGoalStage == 0
-                        && now >= controlUntil && engineRunning() && carrierHasBall()) {
-                    advanceBall(now);
+                if (!tackleActive && !kickoffInProgress && now >= controlUntil
+                        && engineRunning() && carrierHasBall()) {
+                    if (pendingGoalStage == 1) goalBuildStep(now);
+                    else if (pendingGoalStage == 0) advanceBall(now);
                 }
             }
         }
@@ -404,8 +413,31 @@ public final class LiveMatchPanel extends JPanel {
         if (looseBall) updateLooseBall(now);
     }
 
+    private void reconcileBall(long now) {
+        if (ballInFlight) {
+            if (moveDuration <= 0) moveDuration = 300;
+            if (receivingSide >= 0) {
+                Dot[] team = receivingSide == 0 ? home : away;
+                if (receivingPlayer < 0 || receivingPlayer >= team.length || !team[receivingPlayer].active) {
+                    receivingPlayer = nearestActive(team, ballToX, ballToY, -1, true);
+                }
+            }
+            return;
+        }
+        ballX = clamp(ballX, .005, .995);
+        ballY = clamp(ballY, .01, .99);
+        if (looseBall) {
+            if (looseSide != 0 && looseSide != 1) looseSide = possessingSide;
+            if (now - looseSince > 6000L) {
+                Dot[] team = looseSide == 0 ? home : away;
+                looseChaser = nearestActive(team, ballX, ballY, -1, true);
+                looseSince = now;
+            }
+        }
+    }
+
     private void updateLooseBall(long now) {
-        if (!looseBall || pendingGoalStage == 1) return;
+        if (!looseBall) return;
         Dot[] team = looseSide == 0 ? home : away;
         if (looseChaser < 0 || looseChaser >= team.length || !team[looseChaser].active) {
             looseChaser = nearestActive(team, ballX, ballY, -1, true);
@@ -672,30 +704,26 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private void updatePendingGoal(long now) {
-        if (pendingGoalStage != 1 || ballInFlight || pendingGoalActor < 0) return;
+        if (pendingGoalStage != 1 || ballInFlight || looseBall || pendingGoalActor < 0) return;
         Dot[] scoring = pendingGoalSide == 0 ? home : away;
         Dot actor = scoring[Math.min(scoring.length - 1, pendingGoalActor)];
-        double toBall = distance(actor.currentX, actor.currentY, ballX, ballY);
-        if (toBall > CONTACT) {
-            if (looseBall) {
-                looseSide = pendingGoalSide;
-                looseChaser = pendingGoalActor;
-            }
-            if (goalStageDeadline > 0 && now >= goalStageDeadline) {
-                goalStageDeadline = now + 4000L;
+        boolean actorHasBall = possessingSide == pendingGoalSide && possessingPlayer == pendingGoalActor
+                && distance(actor.currentX, actor.currentY, ballX, ballY) <= CONTACT;
+        if (!actorHasBall) {
+            if (goalStageDeadline > 0 && now >= goalStageDeadline + 9000L && !tackleActive) {
+                goalStageDeadline = now;
+                double toBall = distance(actor.currentX, actor.currentY, ballX, ballY);
                 sendBallTo(now, actor.currentX, actor.currentY,
                         (int) Math.max(450, Math.min(1600, toBall / .5 * 1000.0)),
                         pendingGoalSide, pendingGoalActor);
             }
             return;
         }
-        looseBall = false;
-        possessingSide = pendingGoalSide;
-        possessingPlayer = pendingGoalActor;
         boolean atSpot = distance(actor.currentX, actor.currentY, plannedSpotX, plannedSpotY) <= .035;
-        if (!atSpot && !isPlausibleShot(pendingGoalSide, plannedSubtype, actor.currentX, actor.currentY)) {
-            followBallCarrier();
-            if (goalStageDeadline > 0 && now >= goalStageDeadline + 6000L) {
+        boolean plausible = isPlausibleShot(pendingGoalSide, plannedSubtype, actor.currentX, actor.currentY);
+        if (!atSpot && !plausible) {
+            if (goalStageDeadline > 0 && now >= goalStageDeadline + 8000L
+                    && attackProgress(pendingGoalSide, actor.currentX) >= .60) {
                 plannedSpotX = actor.currentX;
                 plannedSpotY = actor.currentY;
             }
@@ -710,6 +738,71 @@ public final class LiveMatchPanel extends JPanel {
         moveStarted = now;
         moveDuration = 720;
         ballInFlight = true;
+    }
+
+    private double attackProgress(int side, double x) {
+        return side == 0 ? x : 1.0 - x;
+    }
+
+    private void goalBuildStep(long now) {
+        int side = pendingGoalSide;
+        int scorer = pendingGoalActor;
+        Dot[] team = side == 0 ? home : away;
+        if (possessingSide != side) {
+            startTackle(now, side, nearestActive(team, ballX, ballY, scorer, false));
+            return;
+        }
+        Dot carrier = team[Math.max(0, Math.min(team.length - 1, possessingPlayer))];
+        double progress = attackProgress(side, carrier.currentX);
+        if (possessingPlayer == scorer) {
+            if (progress >= .62) {
+                controlUntil = now + 250L;
+                return;
+            }
+            int partner = aheadTeammate(team, side, carrier, possessingPlayer, scorer);
+            goalBuildPasses++;
+            beginPassTo(side, partner, now, 560 + random.nextInt(260));
+            return;
+        }
+        boolean timeUp = now >= goalStageDeadline;
+        boolean assistReady = plannedAssist >= 0 && possessingPlayer == plannedAssist;
+        boolean finalPass = timeUp || goalBuildPasses >= goalBuildTarget && (progress >= .45 || assistReady)
+                || progress >= .66;
+        if (!finalPass && plannedAssist >= 0 && plannedAssist != scorer && !assistReady
+                && team[plannedAssist].active && goalBuildPasses + 1 >= goalBuildTarget) {
+            goalBuildPasses++;
+            beginPassTo(side, plannedAssist, now, 560 + random.nextInt(300));
+            return;
+        }
+        if (!finalPass) {
+            goalBuildPasses++;
+            beginPassTo(side, aheadTeammate(team, side, carrier, possessingPlayer, scorer), now,
+                    560 + random.nextInt(320));
+            return;
+        }
+        Dot actor = team[scorer];
+        double ballTravel = distance(ballX, ballY, plannedSpotX, plannedSpotY);
+        double runTravel = distance(actor.currentX, actor.currentY, plannedSpotX, plannedSpotY);
+        int duration = (int) Math.max(650, Math.min(2600,
+                Math.max(ballTravel / .55 * 1000.0, runTravel / .135 * 1000.0 * .9)));
+        goalFinalPassed = true;
+        sendBallTo(now, plannedSpotX, plannedSpotY, duration, side, scorer);
+    }
+
+    private int aheadTeammate(Dot[] team, int side, Dot carrier, int carrierIndex, int excluded) {
+        int best = -1;
+        double bestScore = Double.MAX_VALUE;
+        double direction = side == 0 ? 1.0 : -1.0;
+        for (int i = 1; i < team.length; i++) {
+            if (i == carrierIndex || i == excluded || !team[i].active) continue;
+            double dx = (team[i].currentX - carrier.currentX) * direction;
+            double dy = team[i].currentY - carrier.currentY;
+            double d = Math.sqrt(dx * dx + dy * dy);
+            if (d > .36 || dx < -.03) continue;
+            double score = d * .6 - dx * .9 + random.nextDouble() * .08;
+            if (score < bestScore) { bestScore = score; best = i; }
+        }
+        return best >= 0 ? best : nearestProgressivePlayer(team, carrier, carrierIndex);
     }
 
     private boolean applyPendingStatCue(long now) {
@@ -1069,6 +1162,11 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private void beginGoalRestart(long now, int scoringSide) {
+        visibleScore = score;
+        if (goalEventText != null) {
+            event = goalEventText;
+            goalEventText = null;
+        }
         beginKickoffReset(now, 1 - scoringSide);
     }
 
@@ -1163,7 +1261,7 @@ public final class LiveMatchPanel extends JPanel {
         Dot[] side = plannedSide == 0 ? home : away;
         if (plannedType == 2 || plannedType == 3 || plannedType == 4) {
             if (plannedActor == 0 && plannedCardVictim >= 0
-                    && plannedMinute - engineMinute <= 2) {
+                    && plannedMinute - engineMinute <= 1) {
                 int attackingSide = 1 - plannedSide;
                 if (possessingSide != attackingSide) {
                     Dot[] attackers = attackingSide == 0 ? home : away;
@@ -1171,43 +1269,35 @@ public final class LiveMatchPanel extends JPanel {
                 } else if (possessingPlayer != plannedCardVictim) {
                     beginPassTo(attackingSide, plannedCardVictim, now, 650 + random.nextInt(250));
                 } else {
-                    ballInFlight = false;
                     controlUntil = now + 700L;
-                    followBallCarrier();
                 }
                 return;
             }
             startContextPass(now);
             return;
         }
-        plannedCirculationPasses++;
-        if ((plannedType == 1 || plannedType == 5 || plannedType == 7)
-                && plannedMinute - engineMinute <= 1 && plannedActor >= 0) {
-            if (possessingSide != plannedSide) {
-                startTackle(now, plannedSide, nearestActive(side, ballX, ballY, -1, false));
-            } else if (possessingPlayer != plannedActor) {
-                beginPassTo(plannedSide, plannedActor, now, 650 + random.nextInt(240));
+        boolean imminent = plannedMinute - engineMinute <= 1;
+        if (!imminent || plannedActor < 0 || (plannedType != 1 && plannedType != 7)) {
+            startContextPass(now);
+            return;
+        }
+        if (possessingSide != plannedSide) {
+            if (random.nextInt(3) == 0) {
+                startTackle(now, plannedSide, nearestActive(side, ballX, ballY, plannedActor, false));
             } else {
-                ballInFlight = false;
-                controlUntil = now + 650;
-                followBallCarrier();
+                startContextPass(now);
             }
             return;
         }
-        int next;
-        if (plannedActor >= 0 && plannedCirculationPasses % 3 == 0) {
-            next = plannedActor;
-        } else {
-            Dot focus = side[plannedActor >= 0 ? plannedActor : 9];
-            next = nearestPlayer(side, focus.currentX + (random.nextDouble() - .5) * .16,
-                    focus.currentY + (random.nextDouble() - .5) * .22,
-                    possessingPlayer, plannedActor);
-        }
-        if (possessingSide != plannedSide) {
-            startTackle(now, plannedSide, nearestActive(side, ballX, ballY, -1, false));
+        Dot carrier = side[Math.max(0, Math.min(side.length - 1, possessingPlayer))];
+        if (attackProgress(plannedSide, carrier.currentX) >= .60) {
+            int next = recyclePlayer(side, carrier, possessingPlayer);
+            if (next == plannedActor) next = nearestProgressivePlayer(side, carrier, possessingPlayer);
+            beginPassTo(plannedSide, next, now, 560 + random.nextInt(360));
             return;
         }
-        beginPassTo(plannedSide, next, now, 560 + random.nextInt(360));
+        beginPassTo(plannedSide, aheadTeammate(side, plannedSide, carrier, possessingPlayer, plannedActor),
+                now, 560 + random.nextInt(360));
     }
 
     private void beginPassTo(int sideIndex, int next, long now, int duration) {
@@ -1220,13 +1310,7 @@ public final class LiveMatchPanel extends JPanel {
         Dot target = side[next];
         ballFromX = ballX;
         ballFromY = ballY;
-        if (hasPlannedShotSpot() && sideIndex == plannedSide && next == plannedActor) {
-            ballToX = plannedSpotX;
-            ballToY = plannedSpotY;
-            int actorTravel = (int) Math.min(3000, distance(target.currentX, target.currentY,
-                    plannedSpotX, plannedSpotY) / .13 * 1000.0);
-            duration = Math.max(duration, Math.max(780, actorTravel));
-        } else if (plannedActionKey != null && plannedActor == 0
+        if (plannedActionKey != null && plannedActor == 0
                 && plannedType >= 2 && plannedType <= 4
                 && sideIndex != plannedSide && next == plannedCardVictim) {
             ballToX = plannedSpotX;
@@ -1323,6 +1407,7 @@ public final class LiveMatchPanel extends JPanel {
             Object liveRow = currentLiveRow();
             if (match == null) match = matchFromLiveRow(liveRow);
             if (match != null) {
+                matchRef = match;
                 Object homeTeam = invoke(match, "hc");
                 Object awayTeam = invoke(match, "hd");
                 homeTeamRef = homeTeam;
@@ -1519,24 +1604,6 @@ public final class LiveMatchPanel extends JPanel {
             return;
         }
 
-        if (possessingSide != plannedSide) {
-            plannedRoute.add(Integer.valueOf(nearestPlayer(players, ballX, ballY, -1, actor)));
-        }
-        if (type == 1 && subtype == 3 || type == 7) {
-            int carrier = nearestPlayer(players, plannedSide == 0 ? .78 : .22,
-                    .45 + random.nextDouble() * .10, actor, -1);
-            addRoute(carrier);
-        } else {
-            double targetX = plannedSpotX;
-            int first = nearestPlayer(players, ballX + (targetX - ballX) * .38,
-                    ballY + (plannedSpotY - ballY) * .38, actor, -1);
-            int second = nearestPlayer(players, ballX + (targetX - ballX) * .68,
-                    ballY + (plannedSpotY - ballY) * .68, actor, first);
-            addRoute(first);
-            addRoute(second);
-            if (plannedAssist >= 0 && plannedAssist != actor) addRoute(plannedAssist);
-        }
-        addRoute(actor);
     }
 
     private void choosePlannedSpot(int type, int subtype) {
@@ -1563,8 +1630,12 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private boolean hasPlannedShotSpot() {
-        return (plannedActionKey != null && (plannedType == 1 || plannedType == 7))
-                || pendingGoalStage == 1;
+        return (plannedActionKey != null && (plannedType == 1 || plannedType == 7)
+                && plannedMinute - engineMinute <= 1) || pendingGoalStage == 1;
+    }
+
+    private double runInX(int side) {
+        return clamp(plannedSpotX - (side == 0 ? 1.0 : -1.0) * .075, .10, .90);
     }
 
     private int findAssistPlayer(Object match, Object target, Dot[] players) {
@@ -1653,6 +1724,7 @@ public final class LiveMatchPanel extends JPanel {
         boolean preparedGoal = plannedActionKey != null && plannedType == 1;
         double preparedX = plannedSpotX;
         double preparedY = plannedSpotY;
+        int preparedAssist = preparedGoal ? plannedAssist : -1;
         int type = integer(invoke(action, "b"), -1);
         int subtype = integer(invoke(action, "el"), -1);
         Object team = invoke(action, "cu");
@@ -1675,7 +1747,9 @@ public final class LiveMatchPanel extends JPanel {
         }
         if (type == 8) return;
         boolean cardType = type == 2 || type == 3 || type == 4;
-        if (isUsableEvent(description) && !cardType) event = description;
+        boolean openPlayGoal = type == 1 && subtype != 3 && subtype != 4;
+        if (openPlayGoal) goalEventText = isUsableEvent(description) ? description : "Gol de " + actorName;
+        else if (isUsableEvent(description) && !cardType) event = description;
         if (type < 1 || type > 7) return;
         receivingSide = -1;
         receivingPlayer = -1;
@@ -1685,7 +1759,6 @@ public final class LiveMatchPanel extends JPanel {
         plannedAssist = -1;
         plannedCirculationPasses = 0;
         if (actor < 0) actor = nearestActive(players, ballX, ballY, -1, type == 7 || type == 1);
-        Dot source = players[actor];
         if (type == 1 || type == 7) pendingStatShotSide = -1;
         if (type == 2 || type == 3 || type == 4) pendingStatFoulOffenderSide = -1;
         if (type == 1 && subtype == 3) {
@@ -1712,31 +1785,14 @@ public final class LiveMatchPanel extends JPanel {
             pendingGoalStage = 1;
             pendingGoalSide = side;
             pendingGoalActor = actor;
+            plannedAssist = preparedAssist >= 0 ? preparedAssist
+                    : matchRef == null ? -1 : findAssistPlayer(matchRef, action, players);
+            if (plannedAssist == actor) plannedAssist = -1;
             goalStageDeadline = now + 7000L;
-            boolean actorHasBall = !ballInFlight && !looseBall && possessingSide == side
-                    && possessingPlayer == actor
-                    && distance(ballX, ballY, source.currentX, source.currentY) <= CONTACT * 1.5;
-            if (actorHasBall) {
-                controlUntil = Long.MAX_VALUE;
-            } else if (!ballInFlight) {
-                Dot[] holders = possessingSide == 0 ? home : away;
-                Dot holder = holders[Math.max(0, Math.min(holders.length - 1, possessingPlayer))];
-                boolean passerReady = !looseBall
-                        && distance(holder.currentX, holder.currentY, ballX, ballY) <= CONTACT * 1.5;
-                double travel = distance(ballX, ballY, plannedSpotX, plannedSpotY);
-                int duration = (int) Math.max(650, Math.min(2600, travel / .45 * 1000.0));
-                if (passerReady) {
-                    sendBallTo(now, plannedSpotX, plannedSpotY, duration, side, actor);
-                } else {
-                    looseBall = true;
-                    looseSide = side;
-                    looseChaser = actor;
-                    looseSince = now;
-                }
-            } else {
-                receivingSide = side;
-                receivingPlayer = actor;
-            }
+            goalBuildPasses = 0;
+            goalBuildTarget = random.nextInt(2);
+            goalFinalPassed = false;
+            if (!ballInFlight && !looseBall) controlUntil = Math.min(controlUntil, now + 300L);
         } else if (type == 2) {
             startCardFoul(now, side, actor, isUsableEvent(description) ? description : "Cartão amarelo: " + actorName,
                     playerKey(side, players[actor].fullName), false);
@@ -2100,7 +2156,7 @@ public final class LiveMatchPanel extends JPanel {
                 targetY = targetY * .87 + marked.currentY * .13;
             }
 
-            if (plannedActionKey != null || pendingGoalStage == 1) {
+            if ((plannedActionKey != null && plannedMinute - engineMinute <= 1) || pendingGoalStage == 1) {
                 if (plannedActionKey != null && plannedType >= 2 && plannedType <= 5
                         && sideIndex == plannedSide && i == plannedActor) {
                     if (plannedActor == 0 && plannedType <= 4) {
@@ -2116,8 +2172,8 @@ public final class LiveMatchPanel extends JPanel {
                     targetX = plannedSpotX;
                     targetY = plannedSpotY;
                 } else if (hasPlannedShotSpot() && sideIndex == plannedSide && i == plannedActor) {
-                    targetX = plannedSpotX;
-                    targetY = plannedSpotY;
+                    targetX = targetX * .35 + runInX(plannedSide) * .65;
+                    targetY = targetY * .35 + plannedSpotY * .65;
                 } else if (sideIndex == plannedSide && i == plannedAssist) {
                     targetX = plannedSpotX - direction * .075;
                     targetY = clamp(plannedSpotY + (plannedSpotY < .5 ? .12 : -.12), .14, .86);
@@ -2192,15 +2248,18 @@ public final class LiveMatchPanel extends JPanel {
         if (pendingGoalStage == 1 && sideIndex == pendingGoalSide && index == pendingGoalActor) {
             boolean carrying = !looseBall && !ballInFlight && possessingSide == sideIndex
                     && possessingPlayer == index;
-            if (ballInFlight) {
+            if (ballInFlight && receivingSide == sideIndex && receivingPlayer == index) {
                 dot.targetX = ballToX;
                 dot.targetY = ballToY;
+            } else if (looseBall && looseSide == sideIndex && looseChaser == index) {
+                dot.targetX = ballX;
+                dot.targetY = ballY;
             } else if (carrying) {
                 dot.targetX = plannedSpotX;
                 dot.targetY = plannedSpotY;
             } else {
-                dot.targetX = ballX;
-                dot.targetY = ballY;
+                dot.targetX = runInX(sideIndex);
+                dot.targetY = plannedSpotY;
             }
         } else if (looseBall && sideIndex == looseSide && index == looseChaser) {
             dot.targetX = ballX;
@@ -2492,7 +2551,7 @@ public final class LiveMatchPanel extends JPanel {
         g.fillRoundRect(10, y, width - 20, 29, 10, 10);
         g.setFont(EVENT_FONT);
         g.setColor(EVENT_TITLE);
-        String title = homeName + "  " + score + "  " + awayName;
+        String title = homeName + "  " + visibleScore + "  " + awayName;
         g.drawString(title, 22, y + 20);
         String info = (minute.length() == 0 ? "" : minute + "  •  ") + event;
         FontMetrics fm = g.getFontMetrics();
