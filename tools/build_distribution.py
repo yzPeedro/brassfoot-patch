@@ -108,7 +108,7 @@ def build(args: argparse.Namespace) -> Path:
                 "version": version, "patchYear": year, "sourceCommit": source_commit,
                 "sourceTreeSha256": source_tree_hash, "bundleSha256": bundle_hash,
                 "sourceBundleVersion": original.get("version"), "files": len(manifest.get("files", [])),
-                "channel": "stable", "compatibility": "not-verified",
+                "channel": edition.get("channel", "stable"), "compatibility": "not-verified",
                 "tests": "not-run-at-owner-request", "gameRuntime": target["gameRuntime"],
                 "interface": target["interface"], "requires": "legitimate-Brasfoot-22-23-original-or-recognized-patch",
                 "nativeGamePort": False,
@@ -157,7 +157,7 @@ def build(args: argparse.Namespace) -> Path:
     write_json(manifest_path, {
         "schemaVersion": 1, "productName": edition["productName"], "version": version,
         "patchYear": year, "sourceCommit": source_commit, "editionSha256": sha256(edition_path),
-        "channel": "stable", "tests": "not-run-at-owner-request", "artifacts": artifacts,
+        "channel": edition.get("channel", "stable"), "tests": "not-run-at-owner-request", "artifacts": artifacts,
         "attachments": attachments, "snapshot": snapshot.get("content_hash") if snapshot else None,
     })
     (output / "SHA256SUMS.txt").write_text(

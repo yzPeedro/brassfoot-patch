@@ -104,6 +104,8 @@ def build(original, base, previous, teams, executable, destination, version, inh
                 bridge_by_original = {v['originalSha256']: v for v in variants}
                 existing = {v['originalSha256'] for v in variants}
                 for legacy in legacy_variants:
+                    if legacy.get('originalSha256') == sha(target):
+                        continue
                     if legacy.get('originalSha256') in existing:
                         continue
                     if legacy.get('targetSha256') == sha(target):
