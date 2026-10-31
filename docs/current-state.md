@@ -1,4 +1,19 @@
-# Estado do Brasfoot Mega Patch — 30/10/2026
+# Estado do Brasfoot Mega Patch — 31/10/2026
+
+## Manutenção diária e auditoria de estrelas — versão 2026.4.7
+
+A consulta de 31/10/2026 renovou as fontes públicas sem falhas nem fallback antigo e comparou o conteúdo normalizado com a 2026.4.6. Foram consultados 342 clubes com 8.709 atletas; o catálogo completo de 704 clubes registra 288 fontes completas, 54 respostas parciais preservadas e 362 identidades ainda pendentes de fonte completa. O catálogo complementar fez oito requisições sem falhas e permaneceu sem mudança material.
+
+A compilação produtiva alterou 40 arquivos: Augustine Chima entrou no Apollon Limassol, Eryk Śledziński no Lech Poznań, Fernando Costa saiu do RB Bragantino, Corsin Konietzke foi transferido do St. Gallen para o Vaduz e 25 idades foram recalculadas. A auditoria individual baseada no Top 10 masculino oficial do Ballon d'Or 2026 incluiu oito novas estrelas, removeu sete flags herdadas, manteve Kylian Mbappé e marcou o vencedor Harry Kane como Top Mundial. Lionel Messi não foi inventado em outro clube porque o Inter Miami não existe no catálogo.
+
+Publicação confirmada:
+
+- Release final/latest: https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.4.7; `prerelease=false`, `draft=false`.
+- Commit-fonte: `2d61dc557eb0a3988c20e2cc141fb263d46198ea`.
+- Windows: 5.470.720 bytes; SHA-256 `6c0ebbaf082b95e651b40a6091666e764d7b672a4c8bf11496e87074dcb009f7`.
+- Cinco artefatos versionados, cinco aliases permanentes, catálogo, manifesto e checksums foram carregados com digest confirmado pelo GitHub.
+- Site em `gh-pages`: `fd0ca2c6bbd2090f22d53735612583c33d8ae5f9`; Pages confirmou `built`, sem erro, e o endereço público serve a 2026.4.7.
+- Nenhum teste funcional, suíte, navegador ou gameplay foi executado; foram realizadas coleta, compilação produtiva e conferência de integridade e publicação.
 
 ## Manutenção diária de plantéis — versão 2026.4.6
 
