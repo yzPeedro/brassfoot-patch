@@ -40,9 +40,9 @@ Dependências ou bloqueadores:
 **Checkpoint:** 31/10/2026 ~19h40 (Brasília), Claude Code. Estado: prévia **2026.4.29 compilada** (a 4.28 foi instalada pelo proprietário), sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
 
 - **Objetivo final:** desenhar um campo 2D dentro da tela original de partida, abaixo do placar e acima da tabela de outros jogos, com os 22 jogadores, bola e eventos sincronizados com a engine, **sem alterar o resultado simulado**. A entrega é sempre um instalador local para o proprietário testar.
-- **Onde está o código:** branch **local** `live-match-preview` (sem push), commits:
-  - `179858b`: máquina de estados;
-  - `7844545`: edição 2026.4.28.
+- **Onde está o código:** branch `live-match-preview` (no GitHub, sem merge na `main`), commits reescritos em 31/10 sem coautoria:
+  - `55823a1` (antes `179858b`): máquina de estados;
+  - `2968a54` (antes `7844545`): edição 2026.4.28.
   - Para editar: `git switch live-match-preview`. Na `main` esses arquivos não existem.
 - **Arquivos:**
   - `tools/live-match-view-src/LiveMatchPanel.java`;
@@ -56,7 +56,7 @@ Dependências ou bloqueadores:
 ### Atualização 2026.4.29 (31/10/2026 ~19h40), cartões naturais
 
 - **Pedido do proprietário:** a falta com cartão parava tudo; o jogador ia ao lance e levava o cartão de forma artificial.
-- **Mudança** (commit local `d51efe8` no branch `live-match-preview`): a falta tem três fases.
+- **Mudança** (commit `f7a3f67`, antes `d51efe8`, no branch `live-match-preview`; o `sourceCommit` gravado nos instaladores 4.28/4.29 aponta para os hashes antigos): a falta tem três fases.
   1. **Lance vivo.** O jogo segue; o infrator persegue o portador adversário e, se o próprio time tiver a bola, o adversário a recupera antes. O relógio do motor fica segurado.
   2. **Apito no contato**, com prazo de 6 s. Os jogadores desaceleram a partir de onde estão (sem voltar à formação). O texto e o marcador do cartão só aparecem nesse momento.
   3. **Reinício.** O jogador que sofreu a falta cobra com contato e os demais voltam ao posicionamento tático normal.
