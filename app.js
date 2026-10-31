@@ -257,7 +257,7 @@
         Array.isArray(entry.changes) && !Number.isNaN(Date.parse(entry.date)));
       if (!valid.length) return;
       const content = document.createDocumentFragment();
-      valid.forEach(entry => {
+      valid.sort((a, b) => Date.parse(b.date) - Date.parse(a.date)).slice(0, 5).forEach(entry => {
         const article = node('article', 'patch-note');
         const date = node('div', 'patch-note-date');
         date.append(node('span', 'note-orbit'));

@@ -1,0 +1,1285 @@
+{
+  "schemaVersion": 1,
+  "season": 2026,
+  "gameCountrySource": "config/brasfoot-country-names.json",
+  "worldCupSource": "config/world-cup-2026.json",
+  "continentalSource": "config/continental-cups-2026.json",
+  "selectionRosterStatus": "not-cataloged",
+  "nations": [
+    {
+      "id": 0,
+      "name": "Afeganistão"
+    },
+    {
+      "id": 1,
+      "name": "Africa do Sul"
+    },
+    {
+      "id": 2,
+      "name": "Albânia"
+    },
+    {
+      "id": 3,
+      "name": "Alemanha"
+    },
+    {
+      "id": 4,
+      "name": "Andorra"
+    },
+    {
+      "id": 5,
+      "name": "Angola"
+    },
+    {
+      "id": 6,
+      "name": "Anguilla"
+    },
+    {
+      "id": 7,
+      "name": "Antigua"
+    },
+    {
+      "id": 8,
+      "name": "Curaçao"
+    },
+    {
+      "id": 9,
+      "name": "Arábia Saudita"
+    },
+    {
+      "id": 10,
+      "name": "Argélia"
+    },
+    {
+      "id": 11,
+      "name": "Argentina"
+    },
+    {
+      "id": 12,
+      "name": "Armênia"
+    },
+    {
+      "id": 13,
+      "name": "Aruba"
+    },
+    {
+      "id": 14,
+      "name": "Austrália"
+    },
+    {
+      "id": 15,
+      "name": "Áustria"
+    },
+    {
+      "id": 16,
+      "name": "Azerbaijão"
+    },
+    {
+      "id": 17,
+      "name": "Bahamas"
+    },
+    {
+      "id": 18,
+      "name": "Bahrain"
+    },
+    {
+      "id": 19,
+      "name": "Bangladesh"
+    },
+    {
+      "id": 20,
+      "name": "Barbados"
+    },
+    {
+      "id": 21,
+      "name": "Bélgica"
+    },
+    {
+      "id": 22,
+      "name": "Belize"
+    },
+    {
+      "id": 23,
+      "name": "Benin"
+    },
+    {
+      "id": 24,
+      "name": "Bermudas"
+    },
+    {
+      "id": 25,
+      "name": "Belarus"
+    },
+    {
+      "id": 26,
+      "name": "Bolivia"
+    },
+    {
+      "id": 27,
+      "name": "Bósnia"
+    },
+    {
+      "id": 28,
+      "name": "Botsuana"
+    },
+    {
+      "id": 29,
+      "name": "Brasil"
+    },
+    {
+      "id": 30,
+      "name": "Brunei"
+    },
+    {
+      "id": 31,
+      "name": "Bulgária"
+    },
+    {
+      "id": 32,
+      "name": "Burkina Faso"
+    },
+    {
+      "id": 33,
+      "name": "Burundi"
+    },
+    {
+      "id": 34,
+      "name": "Butão"
+    },
+    {
+      "id": 35,
+      "name": "Cabo Verde"
+    },
+    {
+      "id": 36,
+      "name": "Camarões"
+    },
+    {
+      "id": 37,
+      "name": "Camboja"
+    },
+    {
+      "id": 38,
+      "name": "Canadá"
+    },
+    {
+      "id": 39,
+      "name": "Catar"
+    },
+    {
+      "id": 40,
+      "name": "Cazaquistão"
+    },
+    {
+      "id": 41,
+      "name": "Chade"
+    },
+    {
+      "id": 42,
+      "name": "Chile"
+    },
+    {
+      "id": 43,
+      "name": "China"
+    },
+    {
+      "id": 44,
+      "name": "Chipre"
+    },
+    {
+      "id": 45,
+      "name": "Timor-Leste"
+    },
+    {
+      "id": 46,
+      "name": "Colômbia"
+    },
+    {
+      "id": 47,
+      "name": "Congo"
+    },
+    {
+      "id": 48,
+      "name": "Coreia do Norte"
+    },
+    {
+      "id": 49,
+      "name": "Coreia do Sul"
+    },
+    {
+      "id": 50,
+      "name": "Costa do Marfim"
+    },
+    {
+      "id": 51,
+      "name": "Costa Rica"
+    },
+    {
+      "id": 52,
+      "name": "Croácia"
+    },
+    {
+      "id": 53,
+      "name": "Cuba"
+    },
+    {
+      "id": 54,
+      "name": "Dinamarca"
+    },
+    {
+      "id": 55,
+      "name": "Djibuti"
+    },
+    {
+      "id": 56,
+      "name": "Dominica"
+    },
+    {
+      "id": 57,
+      "name": "Egito"
+    },
+    {
+      "id": 58,
+      "name": "El Salvador"
+    },
+    {
+      "id": 59,
+      "name": "Emirados Árabes"
+    },
+    {
+      "id": 60,
+      "name": "Equador"
+    },
+    {
+      "id": 61,
+      "name": "Eritréia"
+    },
+    {
+      "id": 62,
+      "name": "Escócia"
+    },
+    {
+      "id": 63,
+      "name": "Eslováquia"
+    },
+    {
+      "id": 64,
+      "name": "Eslovênia"
+    },
+    {
+      "id": 65,
+      "name": "Espanha"
+    },
+    {
+      "id": 66,
+      "name": "Estônia"
+    },
+    {
+      "id": 67,
+      "name": "Etiópia"
+    },
+    {
+      "id": 68,
+      "name": "EUA"
+    },
+    {
+      "id": 69,
+      "name": "Fiji"
+    },
+    {
+      "id": 70,
+      "name": "Finlândia"
+    },
+    {
+      "id": 71,
+      "name": "Filipinas"
+    },
+    {
+      "id": 72,
+      "name": "França"
+    },
+    {
+      "id": 73,
+      "name": "Gabão"
+    },
+    {
+      "id": 74,
+      "name": "Gâmbia"
+    },
+    {
+      "id": 75,
+      "name": "Gana"
+    },
+    {
+      "id": 76,
+      "name": "Georgia"
+    },
+    {
+      "id": 77,
+      "name": "Granada"
+    },
+    {
+      "id": 78,
+      "name": "Grécia"
+    },
+    {
+      "id": 79,
+      "name": "Guatemala"
+    },
+    {
+      "id": 80,
+      "name": "Guiana"
+    },
+    {
+      "id": 81,
+      "name": "Guiné"
+    },
+    {
+      "id": 82,
+      "name": "Guiné-Bissau"
+    },
+    {
+      "id": 83,
+      "name": "Guiné Equatorial"
+    },
+    {
+      "id": 84,
+      "name": "Haiti"
+    },
+    {
+      "id": 85,
+      "name": "Holanda"
+    },
+    {
+      "id": 86,
+      "name": "Honduras"
+    },
+    {
+      "id": 87,
+      "name": "Hong Kong"
+    },
+    {
+      "id": 88,
+      "name": "Hungria"
+    },
+    {
+      "id": 89,
+      "name": "Iêmen"
+    },
+    {
+      "id": 90,
+      "name": "Ilhas Cayman"
+    },
+    {
+      "id": 91,
+      "name": "Ilhas Cook"
+    },
+    {
+      "id": 92,
+      "name": "Ilhas Faroe"
+    },
+    {
+      "id": 93,
+      "name": "Ilhas Salomão"
+    },
+    {
+      "id": 94,
+      "name": "Ilhas Virgens Britânicas"
+    },
+    {
+      "id": 95,
+      "name": "Índia"
+    },
+    {
+      "id": 96,
+      "name": "Indonésia"
+    },
+    {
+      "id": 97,
+      "name": "Inglaterra"
+    },
+    {
+      "id": 98,
+      "name": "Irã"
+    },
+    {
+      "id": 99,
+      "name": "Iraque"
+    },
+    {
+      "id": 100,
+      "name": "Irlanda"
+    },
+    {
+      "id": 101,
+      "name": "Irlanda do Norte"
+    },
+    {
+      "id": 102,
+      "name": "Islândia"
+    },
+    {
+      "id": 103,
+      "name": "Israel"
+    },
+    {
+      "id": 104,
+      "name": "Itália"
+    },
+    {
+      "id": 105,
+      "name": "Montenegro"
+    },
+    {
+      "id": 106,
+      "name": "Jamaica"
+    },
+    {
+      "id": 107,
+      "name": "Japão"
+    },
+    {
+      "id": 108,
+      "name": "Jordânia"
+    },
+    {
+      "id": 109,
+      "name": "Quênia"
+    },
+    {
+      "id": 110,
+      "name": "Kosovo"
+    },
+    {
+      "id": 111,
+      "name": "Kuwait"
+    },
+    {
+      "id": 112,
+      "name": "Laos"
+    },
+    {
+      "id": 113,
+      "name": "Lesoto"
+    },
+    {
+      "id": 114,
+      "name": "Letônia"
+    },
+    {
+      "id": 115,
+      "name": "Libano"
+    },
+    {
+      "id": 116,
+      "name": "Líbia"
+    },
+    {
+      "id": 117,
+      "name": "Libéria"
+    },
+    {
+      "id": 118,
+      "name": "Liechtenstein"
+    },
+    {
+      "id": 119,
+      "name": "Lituânia"
+    },
+    {
+      "id": 120,
+      "name": "Luxemburgo"
+    },
+    {
+      "id": 121,
+      "name": "Macau"
+    },
+    {
+      "id": 122,
+      "name": "Macedônia do Norte"
+    },
+    {
+      "id": 123,
+      "name": "Madagascar"
+    },
+    {
+      "id": 124,
+      "name": "Malásia"
+    },
+    {
+      "id": 125,
+      "name": "Malawi"
+    },
+    {
+      "id": 126,
+      "name": "Maldivas"
+    },
+    {
+      "id": 127,
+      "name": "Mali"
+    },
+    {
+      "id": 128,
+      "name": "Malta"
+    },
+    {
+      "id": 129,
+      "name": "Marrocos"
+    },
+    {
+      "id": 130,
+      "name": "Mauritânia"
+    },
+    {
+      "id": 131,
+      "name": "México"
+    },
+    {
+      "id": 132,
+      "name": "Mianmar"
+    },
+    {
+      "id": 133,
+      "name": "Moçambique"
+    },
+    {
+      "id": 134,
+      "name": "Moldávia"
+    },
+    {
+      "id": 135,
+      "name": "Mônaco"
+    },
+    {
+      "id": 136,
+      "name": "Mongolia"
+    },
+    {
+      "id": 137,
+      "name": "Namíbia"
+    },
+    {
+      "id": 138,
+      "name": "Nepal"
+    },
+    {
+      "id": 139,
+      "name": "Nicaragua"
+    },
+    {
+      "id": 140,
+      "name": "Níger"
+    },
+    {
+      "id": 141,
+      "name": "Nigéria"
+    },
+    {
+      "id": 142,
+      "name": "Noruega"
+    },
+    {
+      "id": 143,
+      "name": "Nova Zelândia"
+    },
+    {
+      "id": 144,
+      "name": "Omã"
+    },
+    {
+      "id": 145,
+      "name": "País de Gales"
+    },
+    {
+      "id": 146,
+      "name": "Palestina"
+    },
+    {
+      "id": 147,
+      "name": "Panamá"
+    },
+    {
+      "id": 148,
+      "name": "Papua Nova Guiné"
+    },
+    {
+      "id": 149,
+      "name": "Paquistão"
+    },
+    {
+      "id": 150,
+      "name": "Paraguai"
+    },
+    {
+      "id": 151,
+      "name": "Peru"
+    },
+    {
+      "id": 152,
+      "name": "Polônia"
+    },
+    {
+      "id": 153,
+      "name": "Porto Rico"
+    },
+    {
+      "id": 154,
+      "name": "Portugal"
+    },
+    {
+      "id": 155,
+      "name": "Quirguistão"
+    },
+    {
+      "id": 156,
+      "name": "Rep. Centro-Africana"
+    },
+    {
+      "id": 157,
+      "name": "Rep. Dem. Congo"
+    },
+    {
+      "id": 158,
+      "name": "Rep. Dominicana"
+    },
+    {
+      "id": 159,
+      "name": "República Tcheca"
+    },
+    {
+      "id": 160,
+      "name": "Romênia"
+    },
+    {
+      "id": 161,
+      "name": "Ruanda"
+    },
+    {
+      "id": 162,
+      "name": "Rússia"
+    },
+    {
+      "id": 163,
+      "name": "Samoa"
+    },
+    {
+      "id": 164,
+      "name": "San Marino"
+    },
+    {
+      "id": 165,
+      "name": "Santa Lúcia"
+    },
+    {
+      "id": 166,
+      "name": "São Cristovão e Neves"
+    },
+    {
+      "id": 167,
+      "name": "São Tomé e Príncipe"
+    },
+    {
+      "id": 168,
+      "name": "São Vicente e Granadinas"
+    },
+    {
+      "id": 169,
+      "name": "Senegal"
+    },
+    {
+      "id": 170,
+      "name": "Serra Leoa"
+    },
+    {
+      "id": 171,
+      "name": "Sérvia"
+    },
+    {
+      "id": 172,
+      "name": "Seychelles"
+    },
+    {
+      "id": 173,
+      "name": "Singapura"
+    },
+    {
+      "id": 174,
+      "name": "Síria"
+    },
+    {
+      "id": 175,
+      "name": "Somália"
+    },
+    {
+      "id": 176,
+      "name": "Sri Lanka"
+    },
+    {
+      "id": 177,
+      "name": "Essuatíni"
+    },
+    {
+      "id": 178,
+      "name": "Sudão"
+    },
+    {
+      "id": 179,
+      "name": "Suécia"
+    },
+    {
+      "id": 180,
+      "name": "Suiça"
+    },
+    {
+      "id": 181,
+      "name": "Suriname"
+    },
+    {
+      "id": 182,
+      "name": "Tadjquistão"
+    },
+    {
+      "id": 183,
+      "name": "Tailândia"
+    },
+    {
+      "id": 184,
+      "name": "Taiti"
+    },
+    {
+      "id": 185,
+      "name": "Taipé Chinês"
+    },
+    {
+      "id": 186,
+      "name": "Tânzania"
+    },
+    {
+      "id": 187,
+      "name": "Togo"
+    },
+    {
+      "id": 188,
+      "name": "Tonga"
+    },
+    {
+      "id": 189,
+      "name": "Trinidad e Tobago"
+    },
+    {
+      "id": 190,
+      "name": "Tunísia"
+    },
+    {
+      "id": 191,
+      "name": "Turcomenistão"
+    },
+    {
+      "id": 192,
+      "name": "Turquia"
+    },
+    {
+      "id": 193,
+      "name": "Ucrânia"
+    },
+    {
+      "id": 194,
+      "name": "Uganda"
+    },
+    {
+      "id": 195,
+      "name": "Uruguai"
+    },
+    {
+      "id": 196,
+      "name": "Uzbequistão"
+    },
+    {
+      "id": 197,
+      "name": "Vanuatu"
+    },
+    {
+      "id": 198,
+      "name": "Venezuela"
+    },
+    {
+      "id": 199,
+      "name": "Vietnã"
+    },
+    {
+      "id": 200,
+      "name": "Zâmbia"
+    },
+    {
+      "id": 201,
+      "name": "Zimbabue"
+    },
+    {
+      "id": 202,
+      "name": "Comores"
+    },
+    {
+      "id": 203,
+      "name": "Micronésia"
+    },
+    {
+      "id": 204,
+      "name": "Ilhas Marshall"
+    },
+    {
+      "id": 205,
+      "name": "Maurícia"
+    },
+    {
+      "id": 206,
+      "name": "Nauru"
+    },
+    {
+      "id": 207,
+      "name": "Palau"
+    },
+    {
+      "id": 208,
+      "name": "Kiribati"
+    },
+    {
+      "id": 209,
+      "name": "Sudão do Sul"
+    },
+    {
+      "id": 210,
+      "name": "Tuvalu"
+    },
+    {
+      "id": 211,
+      "name": "Ilhas Virgens Americanas"
+    },
+    {
+      "id": 212,
+      "name": "Montserrat"
+    },
+    {
+      "id": 213,
+      "name": "Ilhas Turks e Caicos"
+    },
+    {
+      "id": 214,
+      "name": "Samoa Americana"
+    },
+    {
+      "id": 215,
+      "name": "Nova Caledônia"
+    },
+    {
+      "id": 216,
+      "name": "Gibraltar"
+    },
+    {
+      "id": 217,
+      "name": "Guadalupe"
+    },
+    {
+      "id": 218,
+      "name": "Guam"
+    },
+    {
+      "id": 219,
+      "name": "Martinica"
+    },
+    {
+      "id": 220,
+      "name": "Guiana Francesa"
+    },
+    {
+      "id": 221,
+      "name": "Bonaire"
+    },
+    {
+      "id": 222,
+      "name": "São Martinho Francês"
+    },
+    {
+      "id": 223,
+      "name": "São Martinho Holandês"
+    }
+  ],
+  "cups": [
+    {
+      "id": "world-cup-2026",
+      "label": "Copa do Mundo 2026",
+      "kind": "selection",
+      "countryIds": [
+        131,
+        1,
+        49,
+        159,
+        38,
+        27,
+        39,
+        180,
+        29,
+        129,
+        84,
+        62,
+        68,
+        150,
+        14,
+        192,
+        3,
+        8,
+        50,
+        60,
+        85,
+        107,
+        179,
+        190,
+        21,
+        57,
+        98,
+        143,
+        65,
+        35,
+        9,
+        195,
+        72,
+        169,
+        99,
+        142,
+        11,
+        10,
+        15,
+        108,
+        154,
+        157,
+        196,
+        46,
+        97,
+        52,
+        75,
+        147
+      ],
+      "sourceUrl": "https://www.fifa.com/es/es/mens/worldcup/canadamexicousa2026/articles/copa-mundial-fifa-2026-estados-unidos-canada-mexico-todo-lo-que-tenes-que-saber"
+    },
+    {
+      "id": "euro-2024",
+      "label": "Eurocopa 2024 (histórico)",
+      "kind": "selection",
+      "countryIds": [
+        3,
+        62,
+        88,
+        180,
+        65,
+        52,
+        104,
+        2,
+        64,
+        54,
+        171,
+        97,
+        152,
+        85,
+        15,
+        72,
+        21,
+        63,
+        160,
+        193,
+        154,
+        76,
+        192,
+        159
+      ],
+      "sourceUrl": "https://www.uefa.com/uefaeuro/history/seasons/2024/teams/"
+    },
+    {
+      "id": "libertadores-2026",
+      "label": "Libertadores 2026",
+      "kind": "club",
+      "teamKeys": [
+        "bocajuniors_arg",
+        "estudiantes_ar",
+        "lanus_arg",
+        "rosariocentral_arg",
+        "alwaysready_bol",
+        "bolivar_bol",
+        "corinthians_bra",
+        "cruzeiro_bra",
+        "flarj",
+        "flurj",
+        "miirassol_sp",
+        "palmeiras",
+        "universidadcatolica_chi",
+        "junior_col",
+        "independiente_equ",
+        "ldu_equ",
+        "cerroporteno_par",
+        "libertad_par",
+        "universitario_per",
+        "nacional_uru",
+        "penarol_uru",
+        "deplaguaira_ven",
+        "deptachira_ven",
+        "thestrongest_bol",
+        "alianzalima_per",
+        "univcatolicaquito_equ",
+        "indepmedellin_col",
+        "liverpool_uru",
+        "sportingcristal_per",
+        "deportestolima_col",
+        "bahia",
+        "barcelona_equ",
+        "argentinojnrs_arg",
+        "botafogorj_bra",
+        "nacionalpotosi_bol",
+        "guarani_par"
+      ],
+      "sourceUrl": "https://gol.conmebol.com/libertadores/es/news/sorteo-de-la-fase-de-grupos-de-la-conmebol-libertadores-2026-fecha-horario-clasificados"
+    },
+    {
+      "id": "sudamericana-2026",
+      "label": "Sul-Americana 2026",
+      "kind": "club",
+      "teamKeys": [
+        "riverplate_arg",
+        "racing_arg",
+        "saopaulo_bra",
+        "gremio",
+        "bragantino_bra",
+        "atleticomg_bra",
+        "santos",
+        "vasco",
+        "clubdeportivoguabirá_bol",
+        "indeppetro_ba_bol",
+        "universidadchile_chi",
+        "audax_chi",
+        "millionarios_col",
+        "nacional_col",
+        "americacali_col",
+        "macara_equ",
+        "nacional_par",
+        "olimpia_par",
+        "melgar_per",
+        "cienciano_per",
+        "montevideotorque_uru",
+        "monaguas_ven",
+        "caracas_ven",
+        "metropolitanos_ven"
+      ],
+      "sourceUrl": "https://gol.conmebol.com/sudamericana/es/news/confira-como-ficou-primeira-fase-da-conmebol-sudamericana"
+    },
+    {
+      "id": "champions-2026",
+      "label": "Champions League 2026/27",
+      "kind": "club",
+      "teamKeys": [
+        "aek_gre",
+        "arsenal",
+        "atleticomadrid_esp",
+        "barcelona_esp",
+        "bayern_ale",
+        "bodoglimt_nor",
+        "borussia_ale",
+        "brugge_bel",
+        "fenerbahce_tur",
+        "feynoord_hol",
+        "galatasaray_tur",
+        "inter_it",
+        "lask_aut",
+        "leipzig_ale",
+        "lille_fra",
+        "liverpool_ing",
+        "machestercity_ing",
+        "machester_ing",
+        "napoli_it",
+        "parissaintgermain_fr",
+        "porto",
+        "psv_hol",
+        "betis_esp",
+        "realmadrid_esp",
+        "roma_it",
+        "shakhtar_ucr",
+        "slavia_cze",
+        "slovan_slk",
+        "sporting_por",
+        "viking_nor",
+        "villareal_esp",
+        "celje_elv",
+        "glasgowceltic_esc",
+        "dinamozagreb_cro",
+        "hapoelbeersheva_isr",
+        "lyon",
+        "araraterewan_arm",
+        "estrelavermelha_ser",
+        "kairat_caz",
+        "kauno_lit",
+        "olympiakos_gre",
+        "sparta_tch",
+        "sturmgraz_aut",
+        "aarhus_den",
+        "Saburtalo_Geo",
+        "klaksvik_fro",
+        "kups_fin",
+        "lincoln_gib",
+        "Larne_irn",
+        "lechpoznan_pol",
+        "omonianicosia_chp",
+        "shamrock_irl",
+        "craiova_rom",
+        "vikingur_isl",
+        "borac_bih",
+        "Drita_kos",
+        "floratallinn_est",
+        "floriana_mta",
+        "inter_and",
+        "petrocub_mol",
+        "riga_let",
+        "sutjeska_mon",
+        "thenewsaints_wal",
+        "trefiori_smr"
+      ],
+      "sourceUrl": "https://www.uefa.com/uefachampionsleague/clubs/"
+    },
+    {
+      "id": "europa-2026",
+      "label": "Europa League 2026/27",
+      "kind": "club",
+      "teamKeys": [
+        "milan_it",
+        "juventus_it",
+        "realsociedad_esp",
+        "celtadevigo_esp",
+        "hoffebheim_ale",
+        "bayerleverkusen_ale",
+        "olympiquemarseile_fra",
+        "rennes_fr",
+        "azalkmaar_hol",
+        "anderlecht_bel",
+        "araraterewan_arm",
+        "benfica_por",
+        "besiktas_tur",
+        "celje_elv",
+        "glasgowceltic_esc",
+        "ferencvaros_hun",
+        "dinamozagreb_cro",
+        "hapoelbeersheva_isr"
+      ],
+      "sourceUrl": "https://www.uefa.com/uefaeuropaleague/clubs/"
+    },
+    {
+      "id": "conference-2026",
+      "label": "Conference League 2026/27",
+      "kind": "club",
+      "teamKeys": [
+        "aarhus_den",
+        "ajax_hol",
+        "atalanta_it",
+        "borac_bih",
+        "sportingbraga_por",
+        "copenhague_din",
+        "estrelavermelha_ser",
+        "cskasofia_bul",
+        "hajduk_cro",
+        "Saburtalo_Geo",
+        "inter_and",
+        "jablonec_tch",
+        "kairat_caz",
+        "kauno_lit",
+        "kups_fin",
+        "lincoln_gib",
+        "midtjylland_din",
+        "monaco_fr",
+        "riga_let",
+        "twente_hol",
+        "craiova_rom",
+        "getafe_esp",
+        "Drita_kos",
+        "hibernian_esc",
+        "interturku_fin",
+        "klaksvik_fro",
+        "Larne_irn",
+        "MaccaiTel_isr",
+        "motherwell_esc",
+        "paok_gre",
+        "partizan_ser",
+        "qarabag_aze",
+        "rangers_esc",
+        "rijeka_cro",
+        "shamrock_irl",
+        "rapidviena_aut",
+        "stgallen_sui",
+        "vikingur_isl",
+        "apollonlemesos_chp",
+        "BeitarJer_isr",
+        "bohemians_irl",
+        "cfrcluj_rom",
+        "dacdunajskastreda_slk",
+        "debrecen_hun",
+        "dinamominsk_bie",
+        "dinamokiev_ucr",
+        "floratallinn_est",
+        "hammarby_sue",
+        "helsinki_fin",
+        "gotenborg_sue",
+        "ilves_fin",
+        "Noah_Arm",
+        "paide_est",
+        "rfs_let",
+        "nsirunavik_fro",
+        "sherifftiraspol_mol",
+        "shkendija_mkd",
+        "trefiori_smr",
+        "vaduz_lie",
+        "zalgiris_lit",
+        "alashkertyerevan_arm",
+        "basaksehir_tur",
+        "bateborisov_bie",
+        "Coleraine_irn",
+        "derry_irl",
+        "dinamotbilisi_geo",
+        "SantaColoma_AND",
+        "steua_bucaresti_rom",
+        "floriana_mta",
+        "hbtorshavn_fro",
+        "kalju_est",
+        "levadia_est",
+        "liepaja_let",
+        "ludogorets_bul",
+        "neftci_aze",
+        "petrocub_mol",
+        "sutjeska_mon",
+        "thenewsaints_wal",
+        "valletta_mta",
+        "vojvodina_srb",
+        "zilina_slk",
+        "zrinjski_bos",
+        "astana_caz",
+        "connahsquay_wal",
+        "Differdange_Lux",
+        "europa_gib",
+        "Glentoran_irn",
+        "lafiorita_smr",
+        "Linfield_irn",
+        "saraievo_bos",
+        "sileks_mkd",
+        "stjosephs_gib"
+      ],
+      "sourceUrl": "https://www.uefa.com/uefaconferenceleague/clubs/"
+    },
+    {
+      "id": "concacaf-2026",
+      "label": "Champions Cup CONCACAF 2026",
+      "kind": "club",
+      "teamKeys": [
+        "america_mex",
+        "monterrey_mex",
+        "cruzazul_mex",
+        "philadelphiaunion_eua",
+        "alajuelense_crc",
+        "olimpia_hon",
+        "tigres_mex"
+      ],
+      "sourceUrl": "https://www.concacaf.com/competitions/champions-cup/clubs/index"
+    }
+  ]
+}

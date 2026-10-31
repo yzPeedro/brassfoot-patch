@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.4.6",
-  "publishedAt": "2026-10-30T22:10:44.826804+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.4.6-windows-x64.exe",
+  "publishedVersion": "2026.4.7",
+  "publishedAt": "2026-10-31T21:02:02.635878+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.4.7-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
-  "fileSizeBytes": 5363712,
-  "sha256": "062517a674f54c7c97e6aa70634af23b41223e3cad29ceaf65758872e8923d26",
+  "fileSizeBytes": 5470720,
+  "sha256": "6c0ebbaf082b95e651b40a6091666e764d7b672a4c8bf11496e87074dcb009f7",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Plantéis renovados em 23 clubes, com duas entradas, três saídas, posições corrigidas e idades atualizadas."
+  "releaseNotes": "Plantéis renovados e classificações de estrela e Top Mundial auditadas com o Ballon d'Or 2026."
 }
