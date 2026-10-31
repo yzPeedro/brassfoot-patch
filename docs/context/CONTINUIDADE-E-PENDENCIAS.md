@@ -37,7 +37,7 @@ Dependências ou bloqueadores:
 
 ## F1 — Campo animado da partida (prévia PRIVADA) · prioridade P0
 
-**Checkpoint:** 31/10/2026 ~19h35 (Brasília), Claude Code. Estado: prévia **2026.4.28 compilada**, sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
+**Checkpoint:** 31/10/2026 ~19h40 (Brasília), Claude Code. Estado: prévia **2026.4.29 compilada** (a 4.28 foi instalada pelo proprietário), sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
 
 - **Objetivo final:** desenhar um campo 2D dentro da tela original de partida, abaixo do placar e acima da tabela de outros jogos, com os 22 jogadores, bola e eventos sincronizados com a engine, **sem alterar o resultado simulado**. A entrega é sempre um instalador local para o proprietário testar.
 - **Onde está o código:** branch **local** `live-match-preview` (sem push), commits:
@@ -52,6 +52,22 @@ Dependências ou bloqueadores:
   - `config/edition-live-match-preview.json`;
   - ajustes em `tools/build_distribution.py` (canal lido da edição) e `tools/build_release_bundle.py`.
 - **Contexto histórico:** manual §6 e Apêndice A do [contexto mestre](BRASFOOT-MEGA-PATCH-CONTEXTO-MESTRE.md) (transcript do Work, L891–3085).
+
+### Atualização 2026.4.29 (31/10/2026 ~19h40), cartões naturais
+
+- **Pedido do proprietário:** a falta com cartão parava tudo; o jogador ia ao lance e levava o cartão de forma artificial.
+- **Mudança** (commit local `d51efe8` no branch `live-match-preview`): a falta tem três fases.
+  1. **Lance vivo.** O jogo segue; o infrator persegue o portador adversário e, se o próprio time tiver a bola, o adversário a recupera antes. O relógio do motor fica segurado.
+  2. **Apito no contato**, com prazo de 6 s. Os jogadores desaceleram a partir de onde estão (sem voltar à formação). O texto e o marcador do cartão só aparecem nesse momento.
+  3. **Reinício.** O jogador que sofreu a falta cobra com contato e os demais voltam ao posicionamento tático normal.
+  - O texto do cartão não é mais exibido antes do lance.
+- **Build:**
+  - EXE de jogo `data/private/live-match-preview-20261031-natural-cards/bf22-23.exe`, SHA `852bfdc7…db73`;
+  - instalador `dist/live-match-preview-2026.4.29/Brasfoot-Mega-Patch-2026.4.29-windows-x64.exe`, 7.790.080 bytes, SHA-256 `5654973b24c31314a69747ed50ca9bb3b0b7582d013903b6ddae25f756a16eb7`;
+  - 25 origens aceitas, incluindo a 4.28, que estava instalada (`3676b40e…`) no momento da build;
+  - verificação de bytecode na JVM 1.8.0_441 sem erro.
+- **Estado:** compilada, não testada em jogo.
+- **Próxima build:** incluir `natural-cards` entre os `--previous-preview-executable`.
 
 ### Mecânica do motor confirmada por bytecode (a.dV original)
 
