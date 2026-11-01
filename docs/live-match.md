@@ -45,7 +45,18 @@ python tools/patch_live_match_view.py --source <bf22-23.exe> --output <pasta>/bf
 ## Velocidade e tempos
 
 - **O relógio é do Brasfoot.** O painel não para, não reinicia e não adianta o temporizador da partida. A duração de cada minuto é sempre a da velocidade escolhida pelo jogador, e pausa e substituições acontecem no tempo original do jogo.
-- **A animação se adapta à velocidade.** O painel lê o intervalo de minuto da partida e roda a animação em um relógio próprio, proporcional a esse intervalo: nas velocidades rápidas os lances são encenados mais depressa, e nas lentas, com mais calma. Nas velocidades mais rápidas, lances menores das estatísticas deixam de ser encenados para que os eventos principais caibam no minuto.
+- **A animação se adapta à velocidade sem acelerar o movimento.** Jogadores e bola mantêm o ritmo natural até a velocidade Bem rápido. O que se ajusta são as decisões: esperas, pausas de bola parada e reinícios ficam mais curtos, e os gols saem de jogadas mais diretas, para que os lances caibam no tempo do minuto.
+
+  | Velocidade do jogo | Intervalo por minuto | Comportamento do campo |
+  |---|---|---|
+  | Lento | 2000 ms | Jogadas completas; até 3 lances de estatística por minuto |
+  | Normal | 1200 ms | Melhor experiência; até 2 lances de estatística por minuto |
+  | Rápido | 700 ms | Jogadas mais diretas; 1 lance de estatística por minuto |
+  | Bem rápido | 450 ms | Jogadas diretas, ainda fluidas e realistas |
+  | Super rápido | 220 ms | Movimento levemente acelerado; jogadas podem ficar irreais; sem lances de estatística |
+  | Ultra rápido | 100 ms | Movimento acelerado; jogadas irreais; sem lances de estatística |
+
+  Em Rápido ou mais, cartões e lesões acumulados são aplicados direto no jogador (cartão ou saída de campo) para não atrasar o campo; gols são sempre encenados.
 - **Troca de lado.** No segundo tempo os times invertem o campo de ataque.
 
 ## Garantias de execução

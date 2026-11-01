@@ -245,10 +245,10 @@ public final class LiveMatchPanel extends JPanel {
     private double otherMatchesScale;
     private long lastTickNanos;
     private double frameSeconds = .016;
-    private static final double PACE_BASE_MS = 4200.0;
     private long virtualNow = System.currentTimeMillis();
     private long lastRealMillis;
-    private double pace = 1.0;
+    private double urgency = 1.0;
+    private double motion = 1.0;
     private int frames;
     private boolean everShown;
     private boolean laidOut;
@@ -546,13 +546,76 @@ public final class LiveMatchPanel extends JPanel {
         long real = System.currentTimeMillis();
         long elapsed = lastRealMillis == 0 ? 0 : Math.max(0L, Math.min(100L, real - lastRealMillis));
         lastRealMillis = real;
-        pace = clamp(PACE_BASE_MS / Math.max(50, minuteDelay()), 1.0, 40.0);
-        if (running) virtualNow += Math.round(elapsed * pace);
+        int delay = minuteDelay();
+        urgency = urgencyFor(delay);
+        motion = motionFor(delay);
+        if (running) virtualNow += Math.round(elapsed * urgency);
+    }
+
+    private static double urgencyFor(int delay) {
+        if (delay >= 2000) return 1.0;
+        if (delay >= 1200) return 1.5;
+        if (delay >= 700) return 2.2;
+        if (delay >= 450) return 3.0;
+        if (delay >= 220) return 4.0;
+        return 5.0;
+    }
+
+    private static double motionFor(int delay) {
+        if (delay >= 450) return 1.0;
+        if (delay >= 220) return 1.35;
+        return 1.7;
     }
 
     private int maxStatCues() {
         int delay = minuteDelay();
-        return delay >= 1200 ? 3 : delay >= 700 ? 2 : delay >= 450 ? 1 : 0;
+        return delay >= 2000 ? 3 : delay >= 1200 ? 2 : delay >= 450 ? 1 : 0;
+    }
+
+    private void expediteBacklog() {
+        if (urgency < 2.2 || queuedEngineActions.size() < 2) return;
+        for (int i = queuedEngineActions.size() - 2; i >= 0; i--) {
+            Object action = queuedEngineActions.get(i);
+            int type = integer(invoke(action, "b"), -1);
+            if (type == 2 || type == 3 || type == 4 || type == 5) {
+                queuedEngineActions.remove(i);
+                applyQuietly(action, type);
+            }
+        }
+    }
+
+    private void applyQuietly(Object action, int type) {
+        String actorName = playerName(invoke(action, "eo"));
+        int side = sameTeam(invoke(action, "cu"), awayTeamRef) ? 1 : 0;
+        Dot[] players = side == 0 ? home : away;
+        int actor = findPlayer(actorName, players);
+        if (actor < 0) {
+            int other = findPlayer(actorName, side == 0 ? away : home);
+            if (other < 0) return;
+            side = 1 - side;
+            players = side == 0 ? home : away;
+            actor = other;
+        }
+        String key = playerKey(side, players[actor].fullName);
+        String description = cleanEvent(string(invoke(action, "er"), null));
+        if (type == 2) {
+            yellowCarded.add(key);
+            event = isUsableEvent(description) ? description : "Cartão amarelo: " + actorName;
+        } else if (type == 5) {
+            injured.add(key);
+            event = "Lesão: " + actorName;
+        } else {
+            yellowCarded.remove(key);
+            redCarded.add(key);
+            event = isUsableEvent(description) ? description : "Expulsão: " + actorName;
+            if (possessingSide == side && possessingPlayer == actor && !ballInFlight && !looseBall) {
+                looseBall = true;
+                looseSide = 1 - side;
+                Dot[] rivals = side == 0 ? away : home;
+                looseChaser = nearestActive(rivals, ballX, ballY, -1, false);
+                looseSince = clockNow();
+            }
+        }
     }
 
     private double viewX(double x) {
@@ -745,9 +808,10 @@ public final class LiveMatchPanel extends JPanel {
         long now = clockNow();
         updatePreSimulation(now);
         if (preEventActive && (now >= preEventDeadline || now - preEventStarted > 40000L)) fireEngineMinute();
-        if (frames % Math.max(1, (int) Math.round(12 / pace)) == 0) updatePlayerTargets();
+        if (frames % Math.max(1, (int) Math.round(12 / motion)) == 0) updatePlayerTargets();
         else refreshBallRoleTargets();
         updatePlayerPositions();
+        expediteBacklog();
         if (!hasAnimationStoppage() && !queuedEngineActions.isEmpty()) {
             if (preEventActive && preEventDeadline == Long.MAX_VALUE) preEventDeadline = now + 16000L;
             applyEngineAction(queuedEngineActions.remove(0));
@@ -782,7 +846,7 @@ public final class LiveMatchPanel extends JPanel {
         lastBallX = ballX;
         lastBallY = ballY;
         if (ballInFlight) {
-            double t = Math.min(1.0, (now - moveStarted) / (double) moveDuration);
+            double t = Math.min(1.0, (now - moveStarted) / (moveDuration * urgency / motion));
             double eased = t * t * (3.0 - 2.0 * t);
             if (curveActive) {
                 double inv = 1.0 - eased;
@@ -1552,7 +1616,7 @@ public final class LiveMatchPanel extends JPanel {
         penaltyPhase = 2;
         SecondaryLoop loop = Toolkit.getDefaultToolkit().getSystemEventQueue().createSecondaryLoop();
         penaltyLoop = loop;
-        Timer guard = new Timer((int) Math.max(1500, 10000 / pace), new ActionListener() {
+        Timer guard = new Timer((int) Math.max(1500, 10000 / urgency), new ActionListener() {
             @Override public void actionPerformed(ActionEvent event) { exitPenaltyLoop(); }
         });
         guard.setRepeats(false);
@@ -2138,13 +2202,15 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private boolean formationReady() {
-        for (Dot dot : home) {
-            if (dot.active && distance(dot.currentX, dot.currentY, dot.targetX, dot.targetY) > .040) return false;
+        double tolerance = .040 * urgency;
+        int allowed = urgency >= 2.2 ? 4 : urgency >= 1.5 ? 2 : 0;
+        int missing = 0;
+        for (Dot[] team : new Dot[][] { home, away }) {
+            for (Dot dot : team) {
+                if (dot.active && distance(dot.currentX, dot.currentY, dot.targetX, dot.targetY) > tolerance) missing++;
+            }
         }
-        for (Dot dot : away) {
-            if (dot.active && distance(dot.currentX, dot.currentY, dot.targetX, dot.targetY) > .040) return false;
-        }
-        return true;
+        return missing <= allowed;
     }
 
     private double distance(double x1, double y1, double x2, double y2) {
@@ -2734,7 +2800,7 @@ public final class LiveMatchPanel extends JPanel {
                 penaltyFoulDeadline = 0;
                 goalStageDeadline = now + 7000L;
                 goalBuildPasses = 0;
-                goalBuildTarget = random.nextInt(2);
+                goalBuildTarget = urgency >= 2.0 ? 0 : random.nextInt(2);
                 goalVariant = 0;
                 if (!ballInFlight && !looseBall) controlUntil = Math.min(controlUntil, now + 300L);
             } else {
@@ -2769,7 +2835,7 @@ public final class LiveMatchPanel extends JPanel {
             if (plannedAssist == actor) plannedAssist = -1;
             goalStageDeadline = now + 7000L;
             goalBuildPasses = 0;
-            goalBuildTarget = random.nextInt(2);
+            goalBuildTarget = urgency >= 2.0 ? 0 : random.nextInt(2);
             goalFinalPassed = false;
             goalReboundPhase = 0;
             int roll = random.nextInt(100);
@@ -3545,7 +3611,7 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private void updatePlayerPositions() {
-        double total = frameSeconds * pace;
+        double total = frameSeconds * motion;
         int steps = Math.max(1, Math.min(60, (int) Math.ceil(total / .02)));
         double dt = total / steps;
         for (int step = 0; step < steps; step++) {
@@ -3793,7 +3859,7 @@ public final class LiveMatchPanel extends JPanel {
             plannedAssist = -1;
             goalStageDeadline = now + 7000L;
             goalBuildPasses = 0;
-            goalBuildTarget = random.nextInt(2);
+            goalBuildTarget = urgency >= 2.0 ? 0 : random.nextInt(2);
             goalFinalPassed = false;
             goalReboundPhase = 0;
             goalVariant = ownGoalDebug ? 1 : random.nextInt(3);
