@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.5.1",
+  "version": "2026.5.3",
   "channel": "local-preview",
-  "releaseNotes": "Prévia privada do hub: instalação por componentes, backups completos e nova identidade visual.",
+  "releaseNotes": "Prévia privada do campo animado: reinício só com todos posicionados, faltas com contato real e cartões só para quem participa do lance.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [
