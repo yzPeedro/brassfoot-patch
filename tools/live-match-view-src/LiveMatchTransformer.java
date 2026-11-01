@@ -16,6 +16,7 @@ public final class LiveMatchTransformer {
         ClassWriter writer = new ClassWriter(reader, 0);
         final boolean[] patched = {false};
         final int[] steps = {0};
+        final int[] penalty = {0};
         ClassVisitor visitor = new ClassVisitor(Opcodes.ASM7, writer) {
             @Override public MethodVisitor visitMethod(int access, String name, String descriptor,
                                                        String signature, String[] exceptions) {
@@ -35,6 +36,18 @@ public final class LiveMatchTransformer {
                         }
                     };
                 }
+                if ("b".equals(name) && "(Lcomponents/v;Lbest/A;)V".equals(descriptor)) {
+                    return new MethodVisitor(Opcodes.ASM7, delegate) {
+                        @Override public void visitCode() {
+                            super.visitCode();
+                            super.visitVarInsn(Opcodes.ALOAD, 1);
+                            super.visitVarInsn(Opcodes.ALOAD, 2);
+                            super.visitMethodInsn(Opcodes.INVOKESTATIC, "mega/LiveMatchPanel", "beforePenaltyKick",
+                                    "(Ljava/lang/Object;Ljava/lang/Object;)V", false);
+                            penalty[0]++;
+                        }
+                    };
+                }
                 if (!"<init>".equals(name) || !"(Ljavax/swing/JFrame;I)V".equals(descriptor)) return delegate;
                 return new MethodVisitor(Opcodes.ASM7, delegate) {
                     @Override public void visitInsn(int opcode) {
@@ -51,6 +64,7 @@ public final class LiveMatchTransformer {
         };
         reader.accept(visitor, 0);
         if (!patched[0]) throw new IllegalStateException("recognized match-screen constructor not found");
+        if (penalty[0] != 1) throw new IllegalStateException("expected one penalty kick method, found " + penalty[0]);
         if (steps[0] != 1) throw new IllegalStateException("expected one engine step call in aa, found " + steps[0]);
         Files.createDirectories(output.getParent());
         Files.write(output, writer.toByteArray());
