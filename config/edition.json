@@ -2,16 +2,16 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.5.0",
+  "version": "2026.5.1",
   "channel": "stable",
-  "releaseNotes": "Novo campo animado ao vivo na tela da partida, sincronizado com os lances do Brasfoot.",
+  "releaseNotes": "Novo hub do Brasfoot: instale o Patch 2026, o campo animado ou os dois, crie e restaure backups e jogue pelo aplicativo. Campo animado sincronizado em qualquer velocidade.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [
     {
       "os": "windows",
       "arch": "amd64",
-      "interface": "win32",
+      "interface": "webview2-hub-with-win32-fallback",
       "gameRuntime": "windows"
     },
     {

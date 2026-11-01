@@ -1,7 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-01T17:14:53-03:00",
+  "updatedAt": "2026-11-01T17:45:00-03:00",
   "entries": [
+    {
+      "id": "patch-2026-5-1",
+      "version": "2026.5.1",
+      "date": "2026-11-01T17:45:00-03:00",
+      "title": "Hub do Brasfoot e campo animado em qualquer velocidade",
+      "kind": "patch",
+      "summary": "O instalador virou um hub para cuidar do seu Brasfoot, e o campo animado passou a acompanhar a velocidade escolhida no jogo.",
+      "changes": [
+        "Escolha instalar o Patch 2026, o campo animado ou os dois; o botão Atualizar aparece quando há uma versão nova do que você já tem.",
+        "Backups completos do jogo e das carreiras, com restauração em um clique e o botão Jogar no próprio aplicativo.",
+        "O campo animado respeita a velocidade do Brasfoot: jogadores e bola em tempo real e uma pausa curta nos gols, pênaltis, cartões e lesões para o lance acontecer junto com o placar.",
+        "No segundo tempo os times trocam de lado.",
+        "Corrigida a instalação em um Brasfoot recém-instalado, que era recusada em alguns clubes."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.5.1"
+    },
     {
       "id": "site-redesign-hub-2026-11",
       "date": "2026-11-01T18:00:00-03:00",
