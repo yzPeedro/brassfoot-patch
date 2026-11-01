@@ -21,7 +21,7 @@ def main() -> None:
     parser.add_argument("--preview-executable", type=Path, required=True)
     parser.add_argument("--previous-preview-executable", type=Path, action="append", default=[])
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--version", default="2026.4.36")
+    parser.add_argument("--version", default="2026.4.37")
     args = parser.parse_args()
     source = args.inherit_bundle.resolve()
     output = args.output.resolve()

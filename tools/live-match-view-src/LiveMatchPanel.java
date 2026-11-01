@@ -258,7 +258,36 @@ public final class LiveMatchPanel extends JPanel {
     private boolean endHandled;
     private boolean clearanceAfterTackle;
     private boolean actionsBaselined;
-    private final int ballStyle = new Random().nextInt(5);
+    private static final String[] BALL_MODELS = {
+        "Adidas Telstar 1970", "Adidas Tango 1978", "Adidas Azteca 1986", "Adidas Fevernova 2002",
+        "Adidas Teamgeist 2006", "Adidas Jabulani 2010", "Adidas Brazuca 2014", "Adidas Telstar 18",
+        "Adidas Al Rihla 2022", "Adidas UCL Finale", "Nike Ordem", "Penalty S11"
+    };
+    private static final Color[] BALL_ACCENTS = {
+        new Color(20, 20, 20), new Color(20, 45, 140), new Color(205, 25, 35), new Color(240, 120, 20),
+        new Color(25, 140, 60), new Color(120, 40, 160), new Color(200, 160, 20), new Color(0, 150, 200)
+    };
+    private static final Color[] REFEREE_KITS = {
+        new Color(18, 18, 18), new Color(235, 235, 40), new Color(205, 25, 40), new Color(35, 75, 200),
+        new Color(140, 210, 40), new Color(230, 80, 160), new Color(120, 125, 135)
+    };
+    private static final String[] REFEREES = {
+        "Arnaldo Cezar Coelho", "José Roberto Wright", "Armando Marques", "Romualdo Arppi Filho",
+        "Dulcídio Wanderley Boschilia", "Margarida", "Carlos Eugênio Simon", "Márcio Rezende de Freitas",
+        "Oscar Roberto Godói", "Leonardo Gaciba", "Sálvio Spínola Fagundes Filho", "Wilson Luiz Seneme",
+        "Heber Roberto Lopes", "Paulo César de Oliveira", "Sandro Meira Ricci", "Wilton Pereira Sampaio",
+        "Anderson Daronco", "Raphael Claus", "Leandro Pedro Vuaden", "Marcelo de Lima Henrique",
+        "Ramon Abatti Abel", "Bruno Arleu de Araújo", "Savio Pereira Sampaio", "Rafael Rodrigo Klein",
+        "Paulo Cesar Zanovelli", "Edina Alves Batista", "Luiz Flávio de Oliveira", "Flávio Rodrigues de Souza"
+    };
+    private final int ballStyle = new Random().nextInt(BALL_MODELS.length);
+    private Color ballAccent;
+    private Color refereeKit;
+    private final String refereeName = REFEREES[new Random().nextInt(REFEREES.length)];
+    private double refX = .45;
+    private double refY = .62;
+    private double refVX;
+    private double refVY;
     private double ballSpin;
     private double lastBallX = .5;
     private double lastBallY = .5;
@@ -2797,10 +2826,10 @@ public final class LiveMatchPanel extends JPanel {
             if (d < 0) continue;
             Dot dot = dots[d];
             boolean replaced = dot.known && !names[p].equals(dot.fullName);
+            if (replaced && dot.active && d != 0) addGhost(dot, teamSide);
             boolean returning = !dot.active;
             dot.fullName = names[p];
             dot.name = shortName(names[p]);
-            if (replaced && dot.active && d != 0) addGhost(dot, teamSide);
             if (dot.known && (replaced || returning) && d != 0) {
                 dot.currentX = .50 + (mirror ? .03 : -.03);
                 dot.currentY = .975;
@@ -3308,6 +3337,53 @@ public final class LiveMatchPanel extends JPanel {
         return best;
     }
 
+    private void updateReferee(double dt) {
+        double targetX, targetY;
+        double direction = possessingSide == 0 ? 1.0 : -1.0;
+        if (cardFoulPhase >= 2) {
+            Dot[] offenders = cardFoulOffenderSide == 0 ? home : away;
+            Dot offender = offenders[Math.max(0, Math.min(offenders.length - 1, cardFoulOffender))];
+            targetX = offender.currentX + (offender.currentX < .5 ? .035 : -.035);
+            targetY = offender.currentY + (offender.currentY < .5 ? .05 : -.05);
+        } else if (penaltyPhase != 0) {
+            targetX = penaltySide == 0 ? .80 : .20;
+            targetY = .30;
+        } else if (freeKickPhase != 0) {
+            targetX = clamp(wallCenterX + (freeKickSide == 0 ? .02 : -.02), .05, .95);
+            targetY = clamp(wallCenterY + (wallCenterY < .5 ? .14 : -.14), .08, .92);
+        } else if (restartActive || kickoffInProgress) {
+            targetX = .50 + (kickoffSide == 0 ? .06 : -.06);
+            targetY = .40;
+        } else {
+            targetX = clamp(ballX - direction * .07, .08, .92);
+            targetY = clamp(ballY + (ballY < .5 ? .13 : -.13), .08, .92);
+        }
+        double dx = targetX - refX, dy = targetY - refY;
+        double d = Math.sqrt(dx * dx + dy * dy);
+        double speed = .10 * Math.min(1.0, d / .06);
+        double wantX = d < .0005 ? 0 : dx / d * speed, wantY = d < .0005 ? 0 : dy / d * speed;
+        refVX += clamp(wantX - refVX, -.30 * dt, .30 * dt);
+        refVY += clamp(wantY - refVY, -.30 * dt, .30 * dt);
+        refX = clamp(refX + refVX * dt, .02, .98);
+        refY = clamp(refY + refVY * dt, .03, .97);
+    }
+
+    private double colorGap(Color a, Color b) {
+        double dr = a.getRed() - b.getRed(), dg = a.getGreen() - b.getGreen(), db = a.getBlue() - b.getBlue();
+        return Math.sqrt(dr * dr * .3 + dg * dg * .59 + db * db * .11);
+    }
+
+    private Color mostDistinct(Color[] palette, int offset) {
+        Color best = palette[0];
+        double bestGap = -1;
+        for (int i = 0; i < palette.length; i++) {
+            Color candidate = palette[(i + offset) % palette.length];
+            double gap = Math.min(colorGap(candidate, homeColor), colorGap(candidate, awayColor));
+            if (gap > bestGap + 8) { bestGap = gap; best = candidate; }
+        }
+        return best;
+    }
+
     private void addGhost(Dot dot, int side) {
         Ghost ghost = new Ghost();
         ghost.x = dot.currentX;
@@ -3331,6 +3407,7 @@ public final class LiveMatchPanel extends JPanel {
     private void updatePlayerPositions() {
         double dt = frameSeconds;
         updateGhosts(dt);
+        updateReferee(dt);
         updateTeamPositions(home, away, 0, dt);
         updateTeamPositions(away, home, 1, dt);
     }
@@ -3427,6 +3504,27 @@ public final class LiveMatchPanel extends JPanel {
         long now = System.currentTimeMillis();
         drawTeam(g, home, homeColor, homeAccent, left, top, fieldW, fieldH, now);
         drawTeam(g, away, awayColor, awayAccent, left, top, fieldW, fieldH, now);
+        if (homeTeamRef != null) {
+            if (refereeKit == null) refereeKit = mostDistinct(REFEREE_KITS, 0);
+            if (ballAccent == null) ballAccent = mostDistinct(BALL_ACCENTS, ballStyle);
+        }
+        Color kit = refereeKit == null ? REFEREE_KITS[0] : refereeKit;
+        int rx = left + (int) (refX * fieldW), ry = top + (int) (refY * fieldH);
+        g.setColor(SHADOW);
+        g.fillOval(rx - 7, ry - 5, 16, 16);
+        g.setColor(kit);
+        g.fillOval(rx - 8, ry - 8, 16, 16);
+        g.setColor(kit.getRed() + kit.getGreen() + kit.getBlue() < 200 ? Color.WHITE : new Color(20, 20, 20));
+        g.setStroke(STROKE_2);
+        g.drawOval(rx - 8, ry - 8, 16, 16);
+        g.setFont(NAME_FONT);
+        String refLabel = shortName(refereeName);
+        int refW = g.getFontMetrics().stringWidth(refLabel);
+        g.setColor(NAME_BACK);
+        g.fillRoundRect(rx - refW / 2 - 3, ry - 12 - g.getFontMetrics().getAscent(), refW + 6,
+                g.getFontMetrics().getHeight(), 6, 6);
+        g.setColor(new Color(255, 236, 140));
+        g.drawString(refLabel, rx - refW / 2, ry - 12);
         for (Ghost ghost : ghosts) {
             int gx = left + (int) (ghost.x * fieldW);
             int gy = top + (int) (clamp(ghost.y, 0, 1) * fieldH);
@@ -3566,12 +3664,8 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private void drawBall(Graphics2D g, int cx, int cy, int radius) {
-        Color base = ballStyle == 2 ? new Color(255, 196, 40) : ballStyle == 4 ? new Color(250, 250, 250)
-                : Color.WHITE;
-        Color mark = ballStyle == 0 || ballStyle == 4 ? new Color(25, 25, 25)
-                : ballStyle == 1 ? new Color(30, 90, 200) : ballStyle == 2 ? new Color(200, 40, 40)
-                : new Color(215, 30, 45);
-        g.setColor(base);
+        Color mark = ballAccent == null ? BALL_ACCENTS[0] : ballAccent;
+        g.setColor(Color.WHITE);
         g.fillOval(cx - radius, cy - radius, radius * 2, radius * 2);
         Graphics2D ball = (Graphics2D) g.create();
         ball.clip(new java.awt.geom.Ellipse2D.Double(cx - radius, cy - radius, radius * 2, radius * 2));
@@ -3579,32 +3673,96 @@ public final class LiveMatchPanel extends JPanel {
         ball.rotate(ballSpin);
         ball.setColor(mark);
         int r = radius;
-        if (ballStyle == 0 || ballStyle == 4) {
-            ball.fillPolygon(pentagon(0, 0, r * .42));
-            for (int k = 0; k < 5; k++) {
-                double a = k * Math.PI * 2 / 5;
-                ball.fillPolygon(pentagon(Math.cos(a) * r * 1.05, Math.sin(a) * r * 1.05, r * .38));
-            }
-        } else if (ballStyle == 1) {
-            ball.setStroke(new BasicStroke(Math.max(1.5f, r * .35f)));
-            ball.drawArc(-r, -r / 2, r * 2, r * 2, 20, 140);
-            ball.drawArc(-r, -r * 3 / 2, r * 2, r * 2, 200, 140);
-        } else if (ballStyle == 2) {
-            ball.setStroke(new BasicStroke(Math.max(1.2f, r * .25f)));
-            ball.drawLine(-r, 0, r, 0);
-            ball.drawOval(-r / 2, -r / 2, r, r);
-        } else {
-            for (int k = 0; k < 3; k++) {
-                double a = k * Math.PI * 2 / 3;
-                ball.fillOval((int) (Math.cos(a) * r * .55) - r / 3, (int) (Math.sin(a) * r * .55) - r / 3,
-                        r * 2 / 3, r * 2 / 3);
-            }
+        switch (ballStyle) {
+            case 0:
+                ball.fillPolygon(pentagon(0, 0, r * .40));
+                for (int k = 0; k < 5; k++) {
+                    double a = k * Math.PI * 2 / 5;
+                    ball.fillPolygon(pentagon(Math.cos(a) * r * 1.05, Math.sin(a) * r * 1.05, r * .36));
+                }
+                break;
+            case 1:
+            case 2:
+                for (int k = 0; k < 3; k++) {
+                    double a = k * Math.PI * 2 / 3;
+                    Graphics2D arm = (Graphics2D) ball.create();
+                    arm.rotate(a);
+                    arm.fillArc(r / 6, -r / 2, r, r, 90, 180);
+                    if (ballStyle == 2) arm.fillRect(r / 2, -1, r / 2, 2);
+                    arm.dispose();
+                }
+                break;
+            case 3:
+                for (int k = 0; k < 4; k++) {
+                    double a = k * Math.PI / 2;
+                    java.awt.Polygon tri = new java.awt.Polygon();
+                    tri.addPoint((int) (Math.cos(a) * r * .25), (int) (Math.sin(a) * r * .25));
+                    tri.addPoint((int) (Math.cos(a + .35) * r * .95), (int) (Math.sin(a + .35) * r * .95));
+                    tri.addPoint((int) (Math.cos(a - .35) * r * .95), (int) (Math.sin(a - .35) * r * .95));
+                    ball.fillPolygon(tri);
+                }
+                break;
+            case 4:
+                ball.setStroke(new BasicStroke(Math.max(1f, r * .18f)));
+                ball.drawOval(-r / 2, -r / 2, r, r);
+                ball.drawLine(-r, 0, -r / 2, 0);
+                ball.drawLine(r / 2, 0, r, 0);
+                break;
+            case 5:
+                ball.setStroke(new BasicStroke(Math.max(1f, r * .20f)));
+                ball.drawArc(-r, -r, r * 2, r * 2, 30, 70);
+                ball.drawArc(-r, -r, r * 2, r * 2, 210, 70);
+                ball.drawArc(-r / 2, -r / 2, r, r, 120, 60);
+                break;
+            case 6:
+                ball.setStroke(new BasicStroke(Math.max(1.2f, r * .26f)));
+                ball.drawArc(-r, -r / 3, r * 2, r * 2, 30, 120);
+                ball.drawArc(-r, -r * 5 / 3, r * 2, r * 2, 210, 120);
+                break;
+            case 7:
+                for (int k = 0; k < 4; k++) {
+                    double a = k * Math.PI / 2 + .4;
+                    ball.fillRect((int) (Math.cos(a) * r * .55) - r / 5, (int) (Math.sin(a) * r * .55) - 1, r * 2 / 5, 3);
+                }
+                break;
+            case 8:
+                for (int k = 0; k < 6; k++) {
+                    double a = k * Math.PI / 3;
+                    ball.fillOval((int) (Math.cos(a) * r * .62) - 1, (int) (Math.sin(a) * r * .62) - 1, 3, 3);
+                }
+                ball.fillOval(-2, -2, 4, 4);
+                break;
+            case 9:
+                for (int k = 0; k < 3; k++) {
+                    double a = k * Math.PI * 2 / 3;
+                    ball.fillPolygon(star(Math.cos(a) * r * .55, Math.sin(a) * r * .55, r * .35));
+                }
+                break;
+            case 10:
+                ball.setStroke(new BasicStroke(Math.max(1f, r * .18f)));
+                ball.drawLine(-r, -r / 3, r, -r / 3);
+                ball.drawLine(-r, r / 3, r, r / 3);
+                break;
+            default:
+                ball.fillArc(-r, -r, r * 2, r * 2, 20, 50);
+                ball.fillArc(-r, -r, r * 2, r * 2, 200, 50);
+                break;
         }
         ball.dispose();
         g.setColor(new Color(0, 0, 0, 170));
         g.drawOval(cx - radius, cy - radius, radius * 2, radius * 2);
-        g.setColor(new Color(255, 255, 255, 120));
+        g.setColor(new Color(255, 255, 255, 140));
         g.fillOval(cx - radius / 2, cy - radius * 3 / 4, Math.max(2, radius / 2), Math.max(2, radius / 3));
+    }
+
+    private java.awt.Polygon star(double cx, double cy, double size) {
+        java.awt.Polygon polygon = new java.awt.Polygon();
+        for (int k = 0; k < 10; k++) {
+            double a = -Math.PI / 2 + k * Math.PI / 5;
+            double rr = k % 2 == 0 ? size : size * .45;
+            polygon.addPoint((int) Math.round(cx + Math.cos(a) * rr), (int) Math.round(cy + Math.sin(a) * rr));
+        }
+        return polygon;
     }
 
     private java.awt.Polygon pentagon(double cx, double cy, double size) {
