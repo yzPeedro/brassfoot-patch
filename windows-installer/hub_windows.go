@@ -127,15 +127,16 @@ func hubRefresh() {
 	go func() {
 		state := map[string]any{"game": game, "valid": false}
 		if game != "" {
-			current, err := detectState(bundledManifestFromFS(), game)
+			manifest := bundledManifestFromFS()
+			current, err := detectState(manifest, game)
 			if err != nil {
 				d := diagnose(err)
 				state["error"] = map[string]string{"title": d.Title, "reason": d.Reason, "action": d.Action}
 			} else {
 				state["valid"] = true
 				state["game"] = current.Game
-				state["patch"] = current.PatchStatus()
-				state["live"] = current.Live
+				state["patch"], state["live"] = componentStatus(manifest, current)
+				state["version"] = manifest.Version
 				state["executableKnown"] = current.ExecutableKnown || current.ExecutableMissing
 				state["teamsInstalled"] = current.TeamsInstalled
 				state["teamsTotal"] = current.TeamsTotal

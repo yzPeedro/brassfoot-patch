@@ -21,8 +21,9 @@ O código fica em [`windows-installer/`](../windows-installer/) (módulo Go). O 
 
 O hub abre em uma janela própria, sem a barra do Windows, com botões de minimizar e fechar na barra superior (que também arrasta a janela). Ele tem três áreas:
 
-- **Início:** pasta do Brasfoot (detectada automaticamente ou escolhida), situação do Patch 2026 e do campo animado, botão **Jogar**.
-- **Instalar:** duas opções marcáveis, Patch 2026 e campo animado ao vivo. O hub instala o que estiver marcado e mantém o que já estiver instalado.
+- **Início:** pasta do Brasfoot (detectada automaticamente ou escolhida), situação de cada componente (instalado, atualização disponível ou não instalado) e os botões **Jogar**, **Instalar** e **Atualizar**.
+- **Instalar:** oferece só o que ainda não está instalado. Componentes já instalados aparecem bloqueados.
+- **Atualizar:** disponível apenas quando a versão instalada de algum componente é diferente da versão do pacote. Os componentes desatualizados são sempre incluídos, e os que faltam podem ser adicionados na mesma operação. A atualização segue as mesmas garantias da instalação: backup dos arquivos alterados, substituição atômica e conferência por SHA-256.
 - **Backups:** lista de backups, criação de backup completo, restauração e abertura da pasta do backup.
 
 O hub requer o Microsoft Edge WebView2 Runtime, presente no Windows 11 e na maioria das instalações do Windows 10. Sem ele, o hub oferece a página oficial de instalação e abre a interface Win32 simples, que tem as mesmas garantias de instalação.
@@ -34,7 +35,7 @@ Brasfoot-Mega-Patch.exe --classic  interface simples
 
 ## Instalação por componentes
 
-1. O hub detecta o estado atual pelo SHA-256 do `bf22-23.exe` e dos arquivos de equipe do manifesto.
+1. O hub detecta o estado atual pelo SHA-256 do `bf22-23.exe` e dos arquivos de equipe do manifesto. Um componente está **atual** quando o executável e os arquivos são exatamente os do pacote, **desatualizado** quando é de uma versão anterior reconhecida e **ausente** quando não foi instalado.
 2. A seleção é somada ao que já está instalado. O executável final é escolhido na seção `components` do manifesto (veja a tabela em [Arquitetura](architecture.md#componentes)).
 3. O manifesto da seleção é preparado em uma pasta temporária; cada arquivo é gerado pela receita correspondente e conferido.
 4. Se a versão de origem do executável não estiver na receita do componente, o hub aplica primeiro a receita completa e depois a do componente, conferindo o executável intermediário.

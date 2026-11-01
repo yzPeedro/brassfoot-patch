@@ -49,15 +49,39 @@ type GameState struct {
 	TeamsTotal        int    `json:"teamsTotal"`
 }
 
-func (s GameState) PatchStatus() string {
-	switch {
-	case s.TeamsTotal > 0 && s.TeamsInstalled == s.TeamsTotal && s.Patch:
-		return "installed"
-	case s.Patch || s.TeamsInstalled > 0:
-		return "partial"
-	default:
-		return "absent"
+const (
+	statusCurrent  = "current"
+	statusOutdated = "outdated"
+	statusAbsent   = "absent"
+)
+
+func componentStatus(m Manifest, s GameState) (string, string) {
+	full, _ := executableEntry(m)
+	patchCurrent := map[string]bool{full.SHA256: true}
+	liveCurrent := map[string]bool{full.SHA256: true}
+	if c := m.Components; c != nil {
+		if target, ok := c.Executables[componentPatch]; ok {
+			patchCurrent[target.SHA256] = true
+		}
+		if target, ok := c.Executables[componentLive]; ok {
+			liveCurrent[target.SHA256] = true
+		}
 	}
+	live := statusAbsent
+	if s.Live {
+		live = statusOutdated
+		if liveCurrent[s.ExecutableSHA256] {
+			live = statusCurrent
+		}
+	}
+	patch := statusAbsent
+	if s.Patch || s.TeamsInstalled > 0 {
+		patch = statusOutdated
+		if patchCurrent[s.ExecutableSHA256] && s.TeamsTotal > 0 && s.TeamsInstalled == s.TeamsTotal {
+			patch = statusCurrent
+		}
+	}
+	return patch, live
 }
 
 func contains(values []string, wanted string) bool {

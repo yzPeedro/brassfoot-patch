@@ -51,7 +51,14 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 .badge.ok{background:var(--ok-soft);color:var(--ok)}
 .badge.partial{background:var(--warn-soft);color:var(--warn)}
 .badge.off{background:var(--surface);color:var(--muted);border:1px solid var(--line)}
-.actions{display:grid;grid-template-columns:auto 1fr;gap:10px;margin-top:auto}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto}
+.actions .play{grid-column:1/-1}
+.btn.ready{border-color:var(--brand);color:var(--brand);background:var(--brand-soft)}
+.btn .pip{width:8px;height:8px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 3px #0b4be026}
+.option[aria-disabled=true]{cursor:default;opacity:.62;box-shadow:none}
+.option[aria-disabled=true]:hover{border-color:var(--line)}
+.option.locked[aria-checked=true]{opacity:1}
+.option.locked[aria-checked=true] .check{background:#7f9be6;border-color:#7f9be6}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:0 22px;border-radius:12px;font-weight:700;transition:background .2s,transform .2s,box-shadow .2s}
 .btn.primary{background:var(--brand);color:white;box-shadow:0 10px 24px #0b4be038}
 .btn.primary:not(:disabled):hover{background:var(--brand-strong);transform:translateY(-1px)}
@@ -161,8 +168,9 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
               <div class="status-row"><div><strong>Campo animado</strong><small>Partidas ao vivo na tela de jogo</small></div><span class="badge off" id="badge-live">—</span></div>
             </div>
             <div class="actions">
-              <button class="btn primary big" id="play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15a1 1 0 0 0 1.5.9l12-7.5a1 1 0 0 0 0-1.8l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>Jogar</button>
-              <button class="btn ghost big" data-goto="install">Instalar ou atualizar</button>
+              <button class="btn primary big play" id="play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15a1 1 0 0 0 1.5.9l12-7.5a1 1 0 0 0 0-1.8l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>Jogar</button>
+              <button class="btn ghost" id="go-install">Instalar</button>
+              <button class="btn ghost" id="go-update"><span class="pip" id="update-pip" hidden></span>Atualizar</button>
             </div>
           </div>
           <div class="card preview">
@@ -174,9 +182,9 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
       </section>
 
       <section class="view" id="view-install">
-        <div class="eyebrow">Instalar</div>
-        <h1>O que você quer instalar?</h1>
-        <p class="lead">Marque uma ou as duas opções. O que já estiver instalado é mantido.</p>
+        <div class="eyebrow" id="mode-eyebrow">Instalar</div>
+        <h1 id="mode-title">O que você quer instalar?</h1>
+        <p class="lead" id="mode-lead">Marque o que quer adicionar ao seu Brasfoot.</p>
         <div class="options">
           <button class="option" role="checkbox" aria-checked="true" data-option="patch">
             <div class="option-top"><span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><span class="badge off" id="opt-patch">—</span></div>
@@ -212,8 +220,8 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 <script>
 (() => {
   const $ = id => document.getElementById(id);
-  const state = {info: null, game: null, selection: {patch: true, live: true}, busy: false, pendingRestore: null};
-  const labels = {installed: ['Instalado', 'ok'], partial: ['Parcial', 'partial'], absent: ['Não instalado', 'off']};
+  const state = {info: null, game: null, mode: 'install', selection: {patch: true, live: true}, busy: false};
+  const names = {patch: 'o Patch 2026', live: 'o campo animado'};
   const icons = {
     ok: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>',
     error: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 8v5m0 4h.01"/><circle cx="12" cy="12" r="9"/></svg>',
@@ -248,13 +256,36 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
   function closeModal() { $('overlay').classList.remove('show'); }
   $('overlay').addEventListener('click', event => { if (event.target === $('overlay') && !state.busy) closeModal(); });
 
+  function statusOf(name) {
+    const game = state.game;
+    if (!game?.valid) return 'absent';
+    const value = game[name];
+    if (value === true) return 'current';
+    return value === 'current' || value === 'outdated' ? value : 'absent';
+  }
+  function anyStatus(status) { return statusOf('patch') === status || statusOf('live') === status; }
+  function openMode(mode) {
+    state.mode = mode;
+    state.selection = {patch: mode === 'install', live: mode === 'install'};
+    show('install');
+    render();
+  }
+  function included(name) {
+    const status = statusOf(name);
+    if (status === 'outdated') return state.mode === 'update';
+    return status === 'absent' && !!state.selection[name];
+  }
   function show(view) {
     document.querySelectorAll('.view').forEach(section => section.classList.toggle('active', section.id === 'view-' + view));
     document.querySelectorAll('.nav[data-view]').forEach(item => item.dataset.view === view ? item.setAttribute('aria-current', 'page') : item.removeAttribute('aria-current'));
     if (view === 'backups') loadBackups();
   }
-  document.querySelectorAll('[data-view]').forEach(item => item.addEventListener('click', () => show(item.dataset.view)));
-  document.querySelectorAll('[data-goto]').forEach(item => item.addEventListener('click', () => show(item.dataset.goto)));
+  document.querySelectorAll('[data-view]').forEach(item => item.addEventListener('click', () => {
+    if (item.dataset.view === 'install') openMode(anyStatus('outdated') ? 'update' : 'install');
+    else show(item.dataset.view);
+  }));
+  $('go-install').addEventListener('click', () => openMode('install'));
+  $('go-update').addEventListener('click', () => openMode('update'));
   document.querySelectorAll('[data-link]').forEach(item => item.addEventListener('click', () => call('hubOpenLink', item.dataset.link)));
 
   $('titlebar').addEventListener('mousedown', event => {
@@ -263,37 +294,68 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
   $('minimize').addEventListener('click', () => call('hubMinimize'));
   $('close').addEventListener('click', () => call('hubClose').then(ok => { if (!ok) toast('Aguarde a operação terminar antes de fechar.'); }));
 
-  function setBadge(id, status) {
-    const [text, tone] = labels[status] || labels.absent;
+  function setBadge(id, text, tone) {
     const element = $(id);
     element.textContent = text;
     element.className = 'badge ' + tone;
+  }
+  const homeBadges = {current: ['Instalado', 'ok'], outdated: ['Atualização disponível', 'partial'], absent: ['Não instalado', 'off']};
+  function optionBadge(name) {
+    const status = statusOf(name);
+    if (status === 'current') return ['Instalado', 'ok'];
+    if (status === 'outdated') return state.mode === 'update' ? ['Será atualizado', 'partial'] : ['Atualização disponível', 'partial'];
+    return state.mode === 'update' ? ['Disponível para adicionar', 'off'] : ['Não instalado', 'off'];
   }
   function render() {
     const game = state.game;
     const valid = !!game?.valid;
     $('game-path').textContent = game?.game || 'Nenhuma pasta selecionada';
     $('choose').textContent = game?.game ? 'Alterar' : 'Escolher pasta';
-    const patch = valid ? game.patch : 'absent';
-    const live = valid && game.live ? 'installed' : 'absent';
-    setBadge('badge-patch', patch); setBadge('badge-live', live);
-    setBadge('opt-patch', patch); setBadge('opt-live', live);
+    for (const name of ['patch', 'live']) {
+      const [text, tone] = homeBadges[statusOf(name)];
+      setBadge('badge-' + name, text, tone);
+      const [optionText, optionTone] = optionBadge(name);
+      setBadge('opt-' + name, optionText, optionTone);
+    }
     $('running').classList.toggle('show', !!game?.running);
+    const outdated = valid && anyStatus('outdated');
+    const absent = valid && anyStatus('absent');
     if (!game?.game) $('home-title').textContent = 'Onde está o seu Brasfoot?';
     else if (!valid) $('home-title').textContent = game.error?.title || 'Pasta não reconhecida.';
-    else if (patch === 'installed' && live === 'installed') $('home-title').textContent = 'Tudo pronto para jogar.';
+    else if (outdated) $('home-title').textContent = 'Há uma atualização disponível.';
+    else if (!absent) $('home-title').textContent = 'Tudo pronto para jogar.';
     else $('home-title').textContent = 'Seu Brasfoot foi encontrado.';
     $('play').disabled = !valid || state.busy;
-    const nothing = !state.selection.patch && !state.selection.live;
-    const done = valid && (!state.selection.patch || patch === 'installed') && (!state.selection.live || live === 'installed');
-    $('install').disabled = !valid || nothing || state.busy || done;
-    $('install').textContent = done && !nothing ? 'Já instalado' : 'Instalar';
-    $('install-hint').textContent = !valid ? 'Escolha a pasta do Brasfoot no Início.' : nothing ? 'Marque ao menos uma opção.' : '';
+    $('go-install').disabled = !valid || state.busy || !absent;
+    $('go-update').disabled = !valid || state.busy || !outdated;
+    $('go-update').classList.toggle('ready', outdated && !state.busy);
+    $('update-pip').hidden = !outdated;
+    const update = state.mode === 'update';
+    $('mode-eyebrow').textContent = update ? 'Atualizar' : 'Instalar';
+    $('mode-title').textContent = update ? 'Atualizar para a versão ' + (game?.version || state.info?.bundleVersion || '') : 'O que você quer instalar?';
+    $('mode-lead').textContent = update ? 'O que você já tem será atualizado. Se quiser, adicione também o que ainda não está instalado.' : 'Marque o que quer adicionar ao seu Brasfoot.';
+    document.querySelectorAll('.option').forEach(option => {
+      const name = option.dataset.option;
+      const status = statusOf(name);
+      const locked = !valid || status !== 'absent' || state.busy;
+      option.setAttribute('aria-disabled', String(locked));
+      option.classList.toggle('locked', status === 'outdated' && update);
+      option.setAttribute('aria-checked', String(included(name)));
+    });
+    const chosen = ['patch', 'live'].filter(included);
+    const button = $('install');
+    button.textContent = update ? 'Atualizar' : 'Instalar';
+    button.disabled = !valid || state.busy || chosen.length === 0;
+    let hint = '';
+    if (!valid) hint = 'Escolha a pasta do Brasfoot no Início.';
+    else if (update && !outdated) hint = 'Você já está na versão mais recente.';
+    else if (!update && !absent) hint = outdated ? 'Tudo já está instalado. Use Atualizar para ir à nova versão.' : 'Tudo já está instalado.';
+    else if (chosen.length === 0) hint = 'Marque ao menos uma opção.';
+    $('install-hint').textContent = hint;
     $('backup-create').disabled = !valid || state.busy;
-    document.querySelectorAll('.option').forEach(option => option.setAttribute('aria-checked', String(state.selection[option.dataset.option])));
   }
   document.querySelectorAll('.option').forEach(option => option.addEventListener('click', () => {
-    if (state.busy) return;
+    if (option.getAttribute('aria-disabled') === 'true') return;
     state.selection[option.dataset.option] = !state.selection[option.dataset.option];
     render();
   }));
@@ -309,12 +371,19 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
   $('choose').addEventListener('click', () => call('hubChooseGame'));
   $('play').addEventListener('click', () => call('hubLaunchGame').then(() => toast('Abrindo o Brasfoot. Bom jogo!')).catch(error => toast(error.message || error)));
   $('install').addEventListener('click', () => {
-    const items = [state.selection.patch && 'o Patch 2026', state.selection.live && 'o campo animado'].filter(Boolean).join(' e ');
-    modal('restore', '<h3>Instalar ' + escape(items) + '?</h3><p>Feche o Brasfoot antes de continuar. Um backup dos arquivos alterados é criado automaticamente.</p>', [
+    const chosen = ['patch', 'live'].filter(included);
+    const updating = chosen.filter(name => statusOf(name) === 'outdated').map(name => names[name]);
+    const adding = chosen.filter(name => statusOf(name) === 'absent').map(name => names[name]);
+    const parts = [];
+    if (updating.length) parts.push('atualizar ' + updating.join(' e '));
+    if (adding.length) parts.push((updating.length ? 'adicionar ' : 'instalar ') + adding.join(' e '));
+    const sentence = parts.join(' e ');
+    const label = state.mode === 'update' ? 'Atualizar' : 'Instalar';
+    modal('restore', '<h3>' + escape(sentence.charAt(0).toUpperCase() + sentence.slice(1)) + '?</h3><p>Feche o Brasfoot antes de continuar. Um backup dos arquivos alterados é criado automaticamente e seus saves não são alterados.</p>', [
       {label: 'Cancelar'},
-      {label: 'Instalar', primary: true, action: () => {
+      {label: label, primary: true, action: () => {
         setBusy('install');
-        call('hubInstall', state.selection).catch(error => { setBusy(''); toast(error.message || error); });
+        call('hubInstall', {patch: included('patch'), live: included('live')}).catch(error => { setBusy(''); toast(error.message || error); });
       }}
     ]);
   });
@@ -382,8 +451,9 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
       $('progress-value').textContent = '100%';
       setTimeout(() => setBusy(''), 400);
       if (event.operation === 'install') {
-        modal('success', event.already ? '<h3>Já está tudo instalado</h3><p>Nenhum arquivo precisou ser alterado.</p>' :
-          '<h3>Instalação concluída</h3><p>' + escape(event.files) + ' arquivos conferidos. O backup ficou guardado em Backups.</p>',
+        const done = state.mode === 'update' ? 'Atualização concluída' : 'Instalação concluída';
+        modal('success', event.already ? '<h3>Já está tudo em dia</h3><p>Nenhum arquivo precisou ser alterado.</p>' :
+          '<h3>' + done + '</h3><p>' + escape(event.files) + ' arquivos conferidos. O backup ficou guardado em Backups.</p>',
           [{label: 'Ver backups', action: () => show('backups')}, {label: 'Jogar agora', primary: true, action: () => $('play').click()}]);
       } else if (event.operation === 'backup') {
         toast('Backup completo criado.');
