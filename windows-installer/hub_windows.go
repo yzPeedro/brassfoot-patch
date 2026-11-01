@@ -32,8 +32,8 @@ var hubMark string
 var hubPitch []byte
 
 const (
-	hubWidth          = 1040
-	hubHeight         = 680
+	hubWidth          = 1240
+	hubHeight         = 820
 	gwlStyle          = -16
 	gwlWndProc        = -4
 	wsPopup           = 0x80000000
