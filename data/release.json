@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.5.1",
-  "publishedAt": "2026-11-01T19:30:20.116292+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.5.1-windows-x64.exe",
+  "publishedVersion": "2026.5.2",
+  "publishedAt": "2026-11-01T19:57:53.723600+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.5.2-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
-  "fileSizeBytes": 19044864,
-  "sha256": "ecff754f56d2cad5764c5ab3950b9d0513b116d97517b8bb0f466c26d1bf98e2",
+  "fileSizeBytes": 18171904,
+  "sha256": "4de3451259f95fa11751a42e63e04e4f687ca4c4de2aad76b7e6c3bc485b3a15",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Novo hub do Brasfoot: instale o Patch 2026, o campo animado ou os dois, crie e restaure backups e jogue pelo aplicativo. Campo animado sincronizado em qualquer velocidade."
+  "releaseNotes": "Quatro atletas confirmados por fontes oficiais, 17 idades atualizadas e preservação de cinco mudanças sem evidência suficiente."
 }
