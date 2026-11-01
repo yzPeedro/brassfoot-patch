@@ -1058,8 +1058,9 @@ public final class LiveMatchPanel extends JPanel {
 
     private void advanceBall(long now) {
         if (restartActive) return;
-        if (cardFoulPhase == 1 && possessingSide != cardFoulOffenderSide && !cardFoulEngaged) {
-            steerTowardOffender(now);
+        if (cardFoulPhase == 1 && possessingSide != cardFoulOffenderSide) {
+            if (!cardFoulEngaged) steerTowardOffender(now);
+            else controlUntil = now + 300L;
             return;
         }
         if (engineMinute <= 0 && !openingKickoffDone) return;
@@ -1810,10 +1811,10 @@ public final class LiveMatchPanel extends JPanel {
             }
             Dot offender = offenders[cardFoulOffender];
             double gap = distance(offender.currentX, offender.currentY, ballX, ballY);
-            if (!cardFoulEngaged && (gap < .20 || now >= cardFoulDeadline - 4000L)) cardFoulEngaged = true;
+            if (!cardFoulEngaged && (gap < .20 || now >= cardFoulDeadline - 6000L)) cardFoulEngaged = true;
             boolean contact = cardFoulEngaged && !ballInFlight && possessingSide == takerSide && !looseBall
                     && gap <= CONTACT * 1.6;
-            if (contact || now >= cardFoulDeadline) blowCardFoul(now);
+            if (contact || now >= cardFoulDeadline + 4000L) blowCardFoul(now);
             return;
         }
         if (cardFoulPhase == 2) {
@@ -2754,10 +2755,16 @@ public final class LiveMatchPanel extends JPanel {
         for (int p = 0; p < count; p++) names[p] = playerName(players.get(p));
         int[] slotOf = new int[count];
         boolean[] taken = new boolean[dots.length];
-        for (int p = 0; p < count; p++) slotOf[p] = -1;
+        int teamSide = mirror ? 1 : 0;
+        boolean[] expelled = new boolean[count];
+        for (int p = 0; p < count; p++) {
+            slotOf[p] = -1;
+            expelled[p] = p > 0 && cardFoulPhase == 0 && redCarded.contains(playerKey(teamSide, names[p]));
+        }
         slotOf[0] = 0;
         taken[0] = true;
         for (int p = 1; p < count; p++) {
+            if (expelled[p]) continue;
             for (int d = 1; d < dots.length; d++) {
                 if (!taken[d] && dots[d].known && names[p].equals(dots[d].fullName)) {
                     slotOf[p] = d;
@@ -2767,7 +2774,7 @@ public final class LiveMatchPanel extends JPanel {
             }
         }
         for (int p = 1; p < count; p++) {
-            if (slotOf[p] >= 0) continue;
+            if (slotOf[p] >= 0 || expelled[p]) continue;
             int preferred = p < dots.length && !taken[p] ? p : -1;
             if (preferred < 0) {
                 for (int d = 1; d < dots.length; d++) {
@@ -2780,6 +2787,7 @@ public final class LiveMatchPanel extends JPanel {
         }
         for (int d = 0; d < dots.length; d++) {
             if (!taken[d] && dots[d].active) {
+                if (dots[d].known) addGhost(dots[d], teamSide);
                 dots[d].active = false;
                 if (receivingPlayer == d) receivingPlayer = -1;
             }
@@ -2792,6 +2800,7 @@ public final class LiveMatchPanel extends JPanel {
             boolean returning = !dot.active;
             dot.fullName = names[p];
             dot.name = shortName(names[p]);
+            if (replaced && dot.active && d != 0) addGhost(dot, teamSide);
             if (dot.known && (replaced || returning) && d != 0) {
                 dot.currentX = .50 + (mirror ? .03 : -.03);
                 dot.currentY = .975;
@@ -2801,10 +2810,10 @@ public final class LiveMatchPanel extends JPanel {
             dot.active = true;
             dot.known = names[p].length() > 0;
         }
-        int teamSide = mirror ? 1 : 0;
         if (cardFoulPhase == 0) {
             for (int d = 1; d < dots.length; d++) {
                 if (dots[d].active && redCarded.contains(playerKey(teamSide, dots[d].fullName))) {
+                    addGhost(dots[d], teamSide);
                     dots[d].active = false;
                 }
             }
@@ -3299,8 +3308,29 @@ public final class LiveMatchPanel extends JPanel {
         return best;
     }
 
+    private void addGhost(Dot dot, int side) {
+        Ghost ghost = new Ghost();
+        ghost.x = dot.currentX;
+        ghost.y = dot.currentY;
+        ghost.side = side;
+        ghost.name = dot.name;
+        ghost.key = playerKey(side, dot.fullName);
+        ghosts.add(ghost);
+        if (ghosts.size() > 6) ghosts.remove(0);
+    }
+
+    private void updateGhosts(double dt) {
+        for (int i = ghosts.size() - 1; i >= 0; i--) {
+            Ghost ghost = ghosts.get(i);
+            double targetY = ghost.y < .5 ? -.03 : 1.03;
+            ghost.y += (targetY > ghost.y ? 1 : -1) * .075 * dt;
+            if (ghost.y < -.02 || ghost.y > 1.02) ghosts.remove(i);
+        }
+    }
+
     private void updatePlayerPositions() {
         double dt = frameSeconds;
+        updateGhosts(dt);
         updateTeamPositions(home, away, 0, dt);
         updateTeamPositions(away, home, 1, dt);
     }
@@ -3397,6 +3427,20 @@ public final class LiveMatchPanel extends JPanel {
         long now = System.currentTimeMillis();
         drawTeam(g, home, homeColor, homeAccent, left, top, fieldW, fieldH, now);
         drawTeam(g, away, awayColor, awayAccent, left, top, fieldW, fieldH, now);
+        for (Ghost ghost : ghosts) {
+            int gx = left + (int) (ghost.x * fieldW);
+            int gy = top + (int) (clamp(ghost.y, 0, 1) * fieldH);
+            Color fill = ghost.side == 0 ? homeColor : awayColor;
+            g.setColor(new Color(fill.getRed(), fill.getGreen(), fill.getBlue(), 150));
+            g.fillOval(gx - 10, gy - 10, 20, 20);
+            if (redCarded.contains(ghost.key)) {
+                g.setColor(CARD_RED);
+                g.fillRoundRect(gx + 8, gy - 13, 6, 10, 2, 2);
+            }
+            g.setFont(NAME_FONT);
+            g.setColor(new Color(255, 255, 255, 170));
+            g.drawString(ghost.name, gx - g.getFontMetrics().stringWidth(ghost.name) / 2, gy - 14);
+        }
         int bx = left + (int) (ballX * fieldW);
         int by = top + (int) (ballY * fieldH);
         int radius = 7 + (int) Math.round(ballLift * 3);
@@ -3837,6 +3881,16 @@ public final class LiveMatchPanel extends JPanel {
         if (value == null) return fallback;
         String text = String.valueOf(value).trim();
         return text.length() == 0 ? fallback : text;
+    }
+
+    private final List<Ghost> ghosts = new ArrayList<Ghost>();
+
+    private static final class Ghost {
+        double x;
+        double y;
+        int side;
+        String name;
+        String key;
     }
 
     private static final class Dot {
