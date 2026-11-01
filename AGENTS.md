@@ -42,7 +42,8 @@ Regras para qualquer agente que trabalhe neste repositório. A documentação t�
 - Commits, push, releases e atualização do site estão autorizados dentro da manutenção diária descrita em [`docs/scheduled-maintenance.md`](docs/scheduled-maintenance.md), executada às 18h de Brasília.
 - Fora desse ciclo, mudanças de produto (site, hub, campo animado) são entregues primeiro como prévia privada em `dist/` e só são publicadas quando o proprietário pedir.
 - Publicar artefatos verificados antes de manifestos e site; vincular cada versão a commit e hashes; recuperar falhas parciais de forma idempotente.
-- Releases seguintes partem do executável publicado mais recente, que contém o campo animado.
+- Releases seguintes partem do executável publicado mais recente, que contém o campo animado. Base atual (2026.5.1): executável `data/private/live-match-release-2026.5.1/bf22-23.exe` (SHA-256 `d2e69ca3154ea998b7b6d4ae62ab4baef1d56beb68768cf82e46044c90fc32f3`), executável só com o campo `data/private/live-match-release-2026.5.1/bf22-23-live-only.exe` e bundle `data/private/release-bundle-2026.5.1-final`.
+- Toda release precisa manter os componentes do hub: depois de `tools/build_release_bundle.py` (herdando o bundle anterior), rode `tools/build_component_bundle.py --release` com o original, o executável do patch sem campo, o completo e o só-campo, como descrito em [`docs/release.md`](docs/release.md).
 
 ## Campo animado
 
