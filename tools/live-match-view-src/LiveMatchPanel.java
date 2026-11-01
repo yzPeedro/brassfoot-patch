@@ -32,9 +32,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.LinkedHashMap;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import javax.swing.JLabel;
@@ -75,6 +73,20 @@ public final class LiveMatchPanel extends JPanel {
     private final Dot[] away = new Dot[11];
     private final Set<String> yellowCarded = new HashSet<String>();
     private final Set<String> redCarded = new HashSet<String>();
+    private final Set<String> injured = new HashSet<String>();
+    private static final List<Object[]> SKIPPED_STEPS = new ArrayList<Object[]>();
+    private Object preSimMatch;
+    private int preSimMinute = -99;
+    private int preSimHalf = -99;
+    private boolean preEventActive;
+    private int preEventRemaining;
+    private long preEventDeadline;
+    private long preEventStarted;
+    private int preEventMinute = -99;
+    private int preEventHalf = -99;
+    private final Set<String> animatedKeys = new HashSet<String>();
+    private int[] homeTactics;
+    private int[] awayTactics;
     private List<String> previousLog = Collections.emptyList();
     private String homeName = "Mandante";
     private String awayName = "Visitante";
@@ -233,6 +245,117 @@ public final class LiveMatchPanel extends JPanel {
                 point.x, point.y, event.getClickCount(), event.isPopupTrigger(), event.getButton()));
     }
 
+    public static void engineStep(Object match, int minute, int half) throws Throwable {
+        synchronized (SKIPPED_STEPS) {
+            for (int i = 0; i < SKIPPED_STEPS.size(); i++) {
+                Object[] entry = SKIPPED_STEPS.get(i);
+                if (entry[0] == match && ((Integer) entry[1]).intValue() == minute
+                        && ((Integer) entry[2]).intValue() == half) {
+                    SKIPPED_STEPS.remove(i);
+                    return;
+                }
+            }
+        }
+        runEngineStep(match, minute, half);
+    }
+
+    private static void runEngineStep(Object match, int minute, int half) throws Throwable {
+        Method method = match.getClass().getMethod("q", int.class, int.class);
+        try {
+            method.invoke(match, Integer.valueOf(minute), Integer.valueOf(half));
+        } catch (java.lang.reflect.InvocationTargetException error) {
+            throw error.getCause() == null ? error : error.getCause();
+        }
+    }
+
+    private void updatePreSimulation(long now) {
+        if (matchEnded()) return;
+        Object clock = readField(host, "GO");
+        if (!(clock instanceof Timer)) return;
+        if (!((Timer) clock).isRunning() && !clockHeld) return;
+        if (Boolean.FALSE.equals(readField(host, "GZ"))) return;
+        Object row = currentLiveRow();
+        Object match = matchFromLiveRow(row);
+        if (row == null || match == null || match == row) return;
+        int minuteNow = integer(readField(host, "GT"), -1);
+        int half = integer(readField(host, "dB"), 1);
+        if (minuteNow < 0) return;
+        int next = minuteNow + 1;
+        if ((half == 1 && next > 48) || (half == 2 && next >= 51)) return;
+        if (!(preSimMatch == match && preSimMinute == next && preSimHalf == half)) {
+            preSimMatch = match;
+            preSimMinute = next;
+            preSimHalf = half;
+            if (!Boolean.TRUE.equals(invoke(row, "ei"))) return;
+            int[] limits = intArray(invoke(match, "ib"));
+            if (limits == null || limits.length <= half || limits[half] > next) return;
+            try {
+                runEngineStep(match, next, half);
+                synchronized (SKIPPED_STEPS) {
+                    SKIPPED_STEPS.add(new Object[] { match, Integer.valueOf(next), Integer.valueOf(half) });
+                    while (SKIPPED_STEPS.size() > 8) SKIPPED_STEPS.remove(0);
+                }
+            } catch (Throwable error) {
+                diagnostic("presim_failed", error);
+                return;
+            }
+        }
+        if (preEventMinute == next && preEventHalf == half) return;
+        Object value = invoke(match, "hE");
+        if (!(value instanceof List<?>)) return;
+        List<Object> visual = new ArrayList<Object>();
+        for (Object candidate : (List<?>) value) {
+            if (Boolean.TRUE.equals(invoke(candidate, "isDone"))) continue;
+            if (integer(invoke(candidate, "em"), -1) != next || integer(invoke(candidate, "en"), -1) != half) continue;
+            int type = integer(invoke(candidate, "b"), -1);
+            if (type != 1 && type != 2 && type != 3 && type != 4 && type != 5 && type != 7) continue;
+            String key = engineActionKey(candidate);
+            if (key == null || animatedKeys.contains(key)) continue;
+            visual.add(candidate);
+        }
+        preEventMinute = next;
+        preEventHalf = half;
+        if (visual.isEmpty()) return;
+        preEventActive = true;
+        preEventRemaining = visual.size();
+        preEventDeadline = Long.MAX_VALUE;
+        preEventStarted = now;
+        for (Object action : visual) {
+            animatedKeys.add(engineActionKey(action));
+            queuedEngineActions.add(action);
+        }
+        holdGameClock();
+    }
+
+    private void onClimax() {
+        if (!preEventActive) return;
+        preEventRemaining--;
+        if (preEventRemaining <= 0) fireEngineMinute();
+    }
+
+    private void fireEngineMinute() {
+        preEventActive = false;
+        preEventRemaining = 0;
+        if (matchEnded() || Boolean.FALSE.equals(readField(host, "GZ"))) return;
+        Object clock = readField(host, "GO");
+        if (clock instanceof Timer) ((Timer) clock).stop();
+        clockHeld = false;
+        try {
+            Method step = host.getClass().getMethod("qa");
+            step.invoke(host);
+        } catch (Throwable error) {
+            diagnostic("fire_minute_failed", error);
+            if (clock instanceof Timer) ((Timer) clock).restart();
+        }
+        score = labelText(host, "Hn", labelText(host, "Lm", score));
+    }
+
+    private int tactic(int side, int index, int fallback) {
+        int[] values = side == 0 ? homeTactics : awayTactics;
+        if (values == null || values.length <= index) return fallback;
+        return values[index];
+    }
+
     private static int frameDelay() {
         try {
             int refresh = GraphicsEnvironment.getLocalGraphicsEnvironment()
@@ -319,18 +442,21 @@ public final class LiveMatchPanel extends JPanel {
             decisionPause = false;
             shiftAnimationDeadlines(System.currentTimeMillis() - decisionPauseStarted);
         }
+        long now = System.currentTimeMillis();
+        updatePreSimulation(now);
+        if (preEventActive && (now >= preEventDeadline || now - preEventStarted > 40000L)) fireEngineMinute();
         if (hasClockStoppage()) {
-            if (pauseRequested()) releaseGameClock();
+            if (pauseRequested() && !preEventActive) releaseGameClock();
             else holdGameClock();
         } else {
             releaseGameClock();
         }
-        long now = System.currentTimeMillis();
         if (frames % 30 == 0) captureOtherMatches();
         if (frames % 12 == 0) updatePlayerTargets();
         else refreshBallRoleTargets();
         updatePlayerPositions();
-        if (!hasClockStoppage() && !queuedEngineActions.isEmpty()) {
+        if (!hasAnimationStoppage() && !queuedEngineActions.isEmpty()) {
+            if (preEventActive && preEventDeadline == Long.MAX_VALUE) preEventDeadline = now + 16000L;
             applyEngineAction(queuedEngineActions.remove(0));
         }
         if (!hasClockStoppage() && queuedEngineActions.isEmpty() && pendingGoalStage == 0) visibleScore = score;
@@ -403,6 +529,7 @@ public final class LiveMatchPanel extends JPanel {
         if (pendingGoalStage == 2) {
             looseBall = false;
             pendingGoalStage = 0;
+            onClimax();
             beginGoalRestart(now, pendingGoalSide);
             return;
         }
@@ -567,6 +694,10 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private boolean hasClockStoppage() {
+        return preEventActive || hasAnimationStoppage();
+    }
+
+    private boolean hasAnimationStoppage() {
         return restartActive || kickoffInProgress || pendingGoalStage != 0 || penaltyPhase != 0
                 || freeKickPhase != 0 || cardFoulPhase != 0 || simpleStoppageUntil != 0;
     }
@@ -799,7 +930,9 @@ public final class LiveMatchPanel extends JPanel {
             double dy = team[i].currentY - carrier.currentY;
             double d = Math.sqrt(dx * dx + dy * dy);
             if (d > .36 || dx < -.03) continue;
-            double score = d * .6 - dx * .9 + random.nextDouble() * .08;
+            double focusBias = tactic(side, 3, 0) == 1 ? (team[i].wideRole ? -.07 : 0)
+                    : (team[i].wideRole ? .05 : 0);
+            double score = d * .6 - dx * .9 + focusBias + random.nextDouble() * .08;
             if (score < bestScore) { bestScore = score; best = i; }
         }
         return best >= 0 ? best : nearestProgressivePlayer(team, carrier, carrierIndex);
@@ -941,6 +1074,7 @@ public final class LiveMatchPanel extends JPanel {
             ballFromY = ballToY = ballY = .50;
             controlUntil = Long.MAX_VALUE;
         } else if (penaltyPhase == 3) {
+            onClimax();
             if (penaltyOutcome == 0) {
                 penaltyPhase = 0;
                 beginGoalRestart(now, penaltySide);
@@ -1010,6 +1144,7 @@ public final class LiveMatchPanel extends JPanel {
             controlUntil = Long.MAX_VALUE;
         } else if (freeKickPhase == 3) {
             freeKickPhase = 0;
+            onClimax();
             beginGoalRestart(now, freeKickSide);
         }
     }
@@ -1139,6 +1274,7 @@ public final class LiveMatchPanel extends JPanel {
         possessingPlayer = cardFoulTaker;
         controlUntil = Long.MAX_VALUE;
         if (cardFoulEvent != null) event = cardFoulEvent;
+        if (cardFoulKey != null) onClimax();
         if (cardFoulKey != null) {
             if (cardFoulRed) {
                 yellowCarded.remove(cardFoulKey);
@@ -1412,6 +1548,8 @@ public final class LiveMatchPanel extends JPanel {
                 Object awayTeam = invoke(match, "hd");
                 homeTeamRef = homeTeam;
                 awayTeamRef = awayTeam;
+                homeTactics = intArray(invoke(homeTeam, "kj"));
+                awayTactics = intArray(invoke(awayTeam, "kj"));
                 homeName = string(invoke(homeTeam, "getNome"), homeName);
                 awayName = string(invoke(awayTeam, "getNome"), awayName);
                 updateLineup(home, lineupPlayers(match, "hl", homeTeam), false);
@@ -1436,6 +1574,7 @@ public final class LiveMatchPanel extends JPanel {
                     int actionMinute = integer(invoke(upcoming, "em"), -1);
                     int currentMinute = integer(readField(host, "GT"), 0);
                     String upcomingKey = engineActionKey(upcoming);
+                    if (animatedKeys.contains(upcomingKey)) upcomingKey = null;
                     if (actionMinute >= currentMinute && actionMinute - currentMinute <= 8
                             && upcomingKey != null && !upcomingKey.equals(plannedActionKey)
                             && !upcomingKey.equals(previousActionKey)) {
@@ -1450,6 +1589,9 @@ public final class LiveMatchPanel extends JPanel {
             List<String> current = new ArrayList<String>();
             Object action = invoke(liveRow, "tV");
             String actionKey = engineActionKey(action);
+            if (actionKey != null && !actionKey.equals(previousActionKey) && animatedKeys.contains(actionKey)) {
+                previousActionKey = actionKey;
+            }
             if (actionKey != null && !actionKey.equals(previousActionKey)) {
                 previousActionKey = actionKey;
                 int actionType = integer(invoke(action, "b"), -1);
@@ -1702,7 +1844,9 @@ public final class LiveMatchPanel extends JPanel {
             double distance = Math.sqrt(dx * dx + dy * dy);
             if (distance > .34) continue;
             double backwards = direction * dx < -.10 ? .35 : 0.0;
-            double scoreValue = distance + backwards + random.nextDouble() * .08;
+            double focusBias = tactic(possessingSide, 3, 0) == 1 ? (team[i].wideRole ? -.07 : 0)
+                    : (team[i].wideRole ? .05 : 0);
+            double scoreValue = distance + backwards + focusBias + random.nextDouble() * .08;
             if (scoreValue < bestScore) { bestScore = scoreValue; best = i; }
         }
         return best >= 0 ? best : nearestPlayer(team, current.currentX, current.currentY, excluded, -1);
@@ -1801,6 +1945,8 @@ public final class LiveMatchPanel extends JPanel {
                     playerKey(side, players[actor].fullName), true);
         } else if (type == 5) {
             event = "Lesão: " + actorName;
+            injured.add(playerKey(side, players[actor].fullName));
+            onClimax();
             holdGameClock();
             simpleStoppageUntil = now + 2200L;
             if (possessingSide == side && possessingPlayer == actor && !ballInFlight) {
@@ -1965,41 +2111,72 @@ public final class LiveMatchPanel extends JPanel {
         dots[0].y = .50;
         dots[0].roleLine = 0;
         dots[0].wideRole = false;
-        Map<Integer, List<Integer>> groups = new LinkedHashMap<Integer, List<Integer>>();
+        List<Integer> fullbacks = new ArrayList<Integer>();
+        List<Integer> centreBacks = new ArrayList<Integer>();
+        List<Integer> midfielders = new ArrayList<Integer>();
+        List<Integer> forwards = new ArrayList<Integer>();
         for (int p = 1; p < count; p++) {
             if (slotOf[p] < 0) continue;
-            int position = integer(invoke(players.get(p), "getPosicao"), p < 5 ? 1 : p < 9 ? 2 : 3);
-            List<Integer> group = groups.get(Integer.valueOf(position));
-            if (group == null) {
-                group = new ArrayList<Integer>();
-                groups.put(Integer.valueOf(position), group);
-            }
-            group.add(Integer.valueOf(p));
+            int position = integer(invoke(players.get(p), "getPosicao"), -1);
+            Integer boxed = Integer.valueOf(p);
+            if (position == 1) fullbacks.add(boxed);
+            else if (position == 2) centreBacks.add(boxed);
+            else if (position == 3) midfielders.add(boxed);
+            else if (position == 4) forwards.add(boxed);
+            else if (p <= 4) centreBacks.add(boxed);
+            else if (p <= 8) midfielders.add(boxed);
+            else forwards.add(boxed);
         }
-        int groupIndex = 0;
-        int groupCount = Math.max(1, groups.size());
-        for (List<Integer> group : groups.values()) {
-            final List<?> selectedPlayers = players;
-            Collections.sort(group, new Comparator<Integer>() {
-                @Override public int compare(Integer left, Integer right) {
-                    int a = integer(invoke(selectedPlayers.get(left.intValue()), "getLado"), left.intValue());
-                    int b = integer(invoke(selectedPlayers.get(right.intValue()), "getLado"), right.intValue());
-                    return a == b ? left.intValue() - right.intValue() : a - b;
-                }
-            });
-            double progress = groupCount == 1 ? .5 : groupIndex / (double) (groupCount - 1);
-            double baseX = .17 + progress * .31;
-            int roleLine = groupCount == 1 ? 2 : 1 + (int) Math.round(progress * 2.0);
-            for (int order = 0; order < group.size(); order++) {
-                int index = slotOf[group.get(order).intValue()];
-                double y = (order + 1.0) / (group.size() + 1.0);
-                dots[index].x = mirror ? 1.0 - baseX : baseX;
-                dots[index].y = y;
-                dots[index].roleLine = roleLine;
-                dots[index].wideRole = y <= .27 || y >= .73;
-            }
-            groupIndex++;
+        sortBySide(fullbacks, players);
+        sortBySide(centreBacks, players);
+        sortBySide(midfielders, players);
+        sortBySide(forwards, players);
+        if (fullbacks.size() > 2) {
+            while (fullbacks.size() > 2) midfielders.add(fullbacks.remove(fullbacks.size() - 1));
+            sortBySide(midfielders, players);
         }
+        if (fullbacks.size() == 2) {
+            placeDot(dots, slotOf[fullbacks.get(0).intValue()], .20, .14, 1, true, mirror);
+            placeDot(dots, slotOf[fullbacks.get(1).intValue()], .20, .86, 1, true, mirror);
+        } else if (fullbacks.size() == 1) {
+            int index = fullbacks.get(0).intValue();
+            int side = integer(invoke(players.get(index), "getLado"), 0);
+            placeDot(dots, slotOf[index], .20, side == 0 ? .14 : .86, 1, true, mirror);
+        }
+        double backLow = fullbacks.isEmpty() ? .22 : .32;
+        double backHigh = fullbacks.isEmpty() ? .78 : .68;
+        spreadLine(dots, slotOf, centreBacks, .17, backLow, backHigh, 1, mirror);
+        spreadLine(dots, slotOf, midfielders, .33, .16, .84, 2, mirror);
+        spreadLine(dots, slotOf, forwards, .46, forwards.size() >= 3 ? .20 : .34,
+                forwards.size() >= 3 ? .80 : .66, 3, mirror);
+    }
+
+    private void sortBySide(List<Integer> group, final List<?> players) {
+        Collections.sort(group, new Comparator<Integer>() {
+            @Override public int compare(Integer left, Integer right) {
+                int a = integer(invoke(players.get(left.intValue()), "getLado"), 1);
+                int b = integer(invoke(players.get(right.intValue()), "getLado"), 1);
+                return a == b ? left.intValue() - right.intValue() : a - b;
+            }
+        });
+    }
+
+    private void spreadLine(Dot[] dots, int[] slotOf, List<Integer> group, double x,
+                            double low, double high, int roleLine, boolean mirror) {
+        int size = group.size();
+        for (int order = 0; order < size; order++) {
+            double y = size == 1 ? .50 : low + (high - low) * order / (double) (size - 1);
+            boolean wide = roleLine == 2 && (y <= .27 || y >= .73);
+            placeDot(dots, slotOf[group.get(order).intValue()], x, y, roleLine, wide, mirror);
+        }
+    }
+
+    private void placeDot(Dot[] dots, int index, double x, double y, int roleLine, boolean wide, boolean mirror) {
+        if (index < 0 || index >= dots.length) return;
+        dots[index].x = mirror ? 1.0 - x : x;
+        dots[index].y = y;
+        dots[index].roleLine = roleLine;
+        dots[index].wideRole = wide;
     }
 
     private String shortName(String name) {
@@ -2075,6 +2252,14 @@ public final class LiveMatchPanel extends JPanel {
         double direction = awaySide ? -1.0 : 1.0;
         int primaryPresser = nearestPlayer(team, ballX, ballY, -1, -1);
         int secondaryPresser = nearestPlayer(team, ballX, ballY, primaryPresser, -1);
+        int marking = Math.max(0, Math.min(2, tactic(sideIndex, 2, 0)));
+        int focus = tactic(sideIndex, 3, 0) == 1 ? 1 : 0;
+        int style = tactic(sideIndex, 1, 0);
+        int tertiaryPresser = marking == 2 ? nearestPlayer(team, ballX, ballY, primaryPresser, secondaryPresser) : -1;
+        double secondaryPress = marking == 0 ? .10 : marking == 1 ? .25 : .40;
+        double markTightness = marking == 0 ? .08 : marking == 1 ? .16 : .26;
+        double lineShift = (style == 1 ? .035 : style == 2 ? -.035 : 0)
+                + (marking == 0 ? -.02 : marking == 2 ? .02 : 0);
         for (int i = 0; i < team.length; i++) {
             Dot dot = team[i];
             if (penaltyPhase != 0) {
@@ -2121,6 +2306,9 @@ public final class LiveMatchPanel extends JPanel {
                     : dot.roleLine == 2 ? .13 : .19;
             shift += Math.max(-.05, Math.min(.09, (attackProgress - .5) * .18));
             if (!hasBall) shift -= dot.roleLine == 3 ? .07 : .045;
+            if (dot.roleLine > 0) shift += hasBall ? lineShift * .6 : lineShift;
+            if (hasBall && style == 2 && dot.roleLine == 3) shift += .03;
+            if (hasBall && focus == 1 && dot.wideRole) shift += .04;
             double targetX = dot.x + direction * shift;
             double targetY;
             if (dot.wideRole) {
@@ -2129,6 +2317,10 @@ public final class LiveMatchPanel extends JPanel {
                 targetY = dot.y + (ballY - dot.y) * (hasBall ? .14 : .10) + dot.wanderY;
             }
             targetX += dot.wanderX;
+            if (hasBall && dot.roleLine >= 2) {
+                if (focus == 1 && dot.wideRole) targetY = targetY * .85 + (dot.y < .5 ? .07 : .93) * .15;
+                else if (focus == 0 && !dot.wideRole) targetY = targetY * .82 + .50 * .18;
+            }
 
             if (i == 0) {
                 targetX = dot.x + (ballX - dot.x) * .025;
@@ -2148,12 +2340,15 @@ public final class LiveMatchPanel extends JPanel {
                 targetX = ballX - direction * .025;
                 targetY = ballY;
             } else if (!hasBall && i == secondaryPresser) {
-                targetX = targetX * .75 + ballX * .25;
-                targetY = targetY * .72 + ballY * .28;
+                targetX = targetX * (1 - secondaryPress) + ballX * secondaryPress;
+                targetY = targetY * (1 - secondaryPress - .03) + ballY * (secondaryPress + .03);
+            } else if (!hasBall && i == tertiaryPresser) {
+                targetX = targetX * .78 + ballX * .22;
+                targetY = targetY * .75 + ballY * .25;
             } else if (!hasBall) {
                 Dot marked = opponents[Math.min(i, opponents.length - 1)];
-                targetX = targetX * .88 + (marked.currentX - direction * .035) * .12;
-                targetY = targetY * .87 + marked.currentY * .13;
+                targetX = targetX * (1 - markTightness) + (marked.currentX - direction * .035) * markTightness;
+                targetY = targetY * (1 - markTightness) + marked.currentY * markTightness;
             }
 
             if ((plannedActionKey != null && plannedMinute - engineMinute <= 1) || pendingGoalStage == 1) {
@@ -2526,6 +2721,13 @@ public final class LiveMatchPanel extends JPanel {
             g.setStroke(STROKE_2);
             g.drawOval(x - 10, y - 10, 20, 20);
             String key = playerKey(side, dot.fullName);
+            if (injured.contains(key)) {
+                g.setColor(Color.WHITE);
+                g.fillOval(x - 17, y - 15, 9, 9);
+                g.setColor(CARD_RED);
+                g.fillRect(x - 13, y - 13, 2, 6);
+                g.fillRect(x - 15, y - 11, 6, 2);
+            }
             if (yellowCarded.contains(key) || redCarded.contains(key)) {
                 g.setColor(redCarded.contains(key) ? CARD_RED : CARD_YELLOW);
                 g.fillRoundRect(x + 8, y - 13, 6, 10, 2, 2);

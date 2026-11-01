@@ -15,10 +15,26 @@ public final class LiveMatchTransformer {
         ClassReader reader = new ClassReader(Files.readAllBytes(input));
         ClassWriter writer = new ClassWriter(reader, 0);
         final boolean[] patched = {false};
+        final int[] steps = {0};
         ClassVisitor visitor = new ClassVisitor(Opcodes.ASM7, writer) {
             @Override public MethodVisitor visitMethod(int access, String name, String descriptor,
                                                        String signature, String[] exceptions) {
                 MethodVisitor delegate = super.visitMethod(access, name, descriptor, signature, exceptions);
+                if ("aa".equals(name) && "(Z)V".equals(descriptor)) {
+                    return new MethodVisitor(Opcodes.ASM7, delegate) {
+                        @Override public void visitMethodInsn(int opcode, String owner, String method,
+                                                              String desc, boolean isInterface) {
+                            if (opcode == Opcodes.INVOKEVIRTUAL && "best/I".equals(owner)
+                                    && "q".equals(method) && "(II)V".equals(desc)) {
+                                super.visitMethodInsn(Opcodes.INVOKESTATIC, "mega/LiveMatchPanel", "engineStep",
+                                        "(Ljava/lang/Object;II)V", false);
+                                steps[0]++;
+                                return;
+                            }
+                            super.visitMethodInsn(opcode, owner, method, desc, isInterface);
+                        }
+                    };
+                }
                 if (!"<init>".equals(name) || !"(Ljavax/swing/JFrame;I)V".equals(descriptor)) return delegate;
                 return new MethodVisitor(Opcodes.ASM7, delegate) {
                     @Override public void visitInsn(int opcode) {
@@ -35,6 +51,7 @@ public final class LiveMatchTransformer {
         };
         reader.accept(visitor, 0);
         if (!patched[0]) throw new IllegalStateException("recognized match-screen constructor not found");
+        if (steps[0] != 1) throw new IllegalStateException("expected one engine step call in aa, found " + steps[0]);
         Files.createDirectories(output.getParent());
         Files.write(output, writer.toByteArray());
     }
