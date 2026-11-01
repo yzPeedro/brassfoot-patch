@@ -37,7 +37,7 @@ Dependências ou bloqueadores:
 
 ## F1 — Campo animado da partida (prévia PRIVADA) · prioridade P0
 
-**Checkpoint:** 31/10/2026 ~19h40 (Brasília), Claude Code. Estado: prévia **2026.4.36 compilada** (a 4.34 foi instalada pelo proprietário), sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
+**Checkpoint:** 31/10/2026 ~19h40 (Brasília), Claude Code. Estado: prévia **2026.4.37 compilada** (a 4.36 foi instalada pelo proprietário), sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
 
 - **Objetivo final:** desenhar um campo 2D dentro da tela original de partida, abaixo do placar e acima da tabela de outros jogos, com os 22 jogadores, bola e eventos sincronizados com a engine, **sem alterar o resultado simulado**. A entrega é sempre um instalador local para o proprietário testar.
 - **Onde está o código:** branch `live-match-preview` (no GitHub, sem merge na `main`), commits reescritos em 31/10 sem coautoria:
@@ -52,6 +52,24 @@ Dependências ou bloqueadores:
   - `config/edition-live-match-preview.json`;
   - ajustes em `tools/build_distribution.py` (canal lido da edição) e `tools/build_release_bundle.py`.
 - **Contexto histórico:** manual §6 e Apêndice A do [contexto mestre](BRASFOOT-MEGA-PATCH-CONTEXTO-MESTRE.md) (transcript do Work, L891–3085).
+
+### Atualização 2026.4.37 (01/11/2026), bolas, árbitro e nome na substituição
+
+- **Bola:**
+  - sempre branca, com detalhes numa cor de `BALL_ACCENTS` escolhida pela maior distância das cores dos dois times (`mostDistinct`);
+  - 12 desenhos simplificados inspirados em bolas oficiais reais (`BALL_MODELS`: Telstar 1970, Tango 1978, Azteca 1986, Fevernova 2002, Teamgeist 2006, Jabulani 2010, Brazuca 2014, Telstar 18, Al Rihla 2022, UCL Finale, Nike Ordem, Penalty S11), sorteados por partida;
+  - é uma representação estilizada, não reprodução dos produtos.
+- **Árbitro:**
+  - em campo, acompanha o lance em diagonal, posiciona-se na falta, no pênalti e na saída de bola, e vai até o infrator no cartão;
+  - camisa em cor real de arbitragem (preto, amarelo, vermelho, azul, verde-limão, rosa, cinza) com maior contraste em relação aos dois times;
+  - nome sorteado de `REFEREES` (árbitros brasileiros conhecidos; apelido só quando notório, como "Margarida"), exibido pela mesma regra de nome dos jogadores.
+- **Substituição:** a "sombra" de quem sai é criada antes da troca do nome. Antes, quem saía aparecia com o nome de quem entrava.
+- **Build:**
+  - EXE de jogo `data/private/live-match-preview-20261101-referee/bf22-23.exe`, SHA `f27072a1…4181`;
+  - instalador `dist/live-match-preview-2026.4.37/`;
+  - 33 origens; bytecode verificado; commit `d9dc17f`.
+- **Estado:** compilada, não testada em jogo.
+- **Próxima build:** incluir `20261101-referee` entre os `--previous-preview-executable`.
 
 ### Atualização 2026.4.35–4.36 (01/11/2026), garantia de não travar, gols sem reinício, realismo, bola e expulsões
 
