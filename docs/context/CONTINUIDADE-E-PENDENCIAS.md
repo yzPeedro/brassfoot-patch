@@ -2,7 +2,7 @@
 
 Arquivo carregado automaticamente pelo `CLAUDE.md` da raiz. Registra, por frente ativa, o último estado **verificado** e a próxima ação. Checkpoints antigos não são o estado atual: confira a data de cada frente e revalide no Git e no disco antes de agir.
 
-**Última revisão:** 31/10/2026 ~19h35 (Brasília), pelo Claude Code, após gerar a prévia privada 2026.4.28.
+**Última revisão:** 01/11/2026, pelo Claude Code, após gerar a prévia privada 2026.4.31.
 
 ## Protocolo de retomada (toda sessão)
 
@@ -37,7 +37,7 @@ Dependências ou bloqueadores:
 
 ## F1 — Campo animado da partida (prévia PRIVADA) · prioridade P0
 
-**Checkpoint:** 31/10/2026 ~19h40 (Brasília), Claude Code. Estado: prévia **2026.4.30 compilada** (a 4.29 foi instalada pelo proprietário), sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
+**Checkpoint:** 31/10/2026 ~19h40 (Brasília), Claude Code. Estado: prévia **2026.4.31 compilada** (a 4.30 foi instalada pelo proprietário), sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
 
 - **Objetivo final:** desenhar um campo 2D dentro da tela original de partida, abaixo do placar e acima da tabela de outros jogos, com os 22 jogadores, bola e eventos sincronizados com a engine, **sem alterar o resultado simulado**. A entrega é sempre um instalador local para o proprietário testar.
 - **Onde está o código:** branch `live-match-preview` (no GitHub, sem merge na `main`), commits reescritos em 31/10 sem coautoria:
@@ -52,6 +52,41 @@ Dependências ou bloqueadores:
   - `config/edition-live-match-preview.json`;
   - ajustes em `tools/build_distribution.py` (canal lido da edição) e `tools/build_release_bundle.py`.
 - **Contexto histórico:** manual §6 e Apêndice A do [contexto mestre](BRASFOOT-MEGA-PATCH-CONTEXTO-MESTRE.md) (transcript do Work, L891–3085).
+
+### Atualização 2026.4.31 (01/11/2026), sincronia com o motor, lesão, formação e táticas
+
+- **Pedido:**
+  - todos os acontecimentos apareciam no topo antes da animação, como no gol e no amarelo do goleiro;
+  - ícone de lesão;
+  - laterais e zagueiros invertidos, com zagueiro no ataque;
+  - marcação e foco de ataque refletidos na animação.
+- **Causa da dessincronia** (bytecode):
+  - a partida assistida é simulada **ao vivo**: `aa()` chama `best/I.q(GT, dB)` a cada minuto, e `c/b.vO()` gera o lance na hora (com `Random` próprio da partida), que é processado no mesmo passo;
+  - o painel só via o lance junto com o topo;
+  - `V()` pré-simula partidas inteiras, mas não é o caminho da partida assistida.
+- **Solução** (commit `5221614` no branch `live-match-preview`):
+  - logo após cada minuto, com `GZ` verdadeiro e sem diálogo, o painel executa o **mesmo** `q(GT+1, dB)`, só para a partida assistida e com a mesma condição de `aa()` (`ei()` e `ib()[dB] <= minuto`). Não é feito quando o próximo minuto dispara o intervalo (`dB=1`, `>48`) ou o fim (`dB=2`, `>=51`);
+  - o transformer troca a chamada `best/I.q(II)V` dentro de `a.dV.aa(Z)V` por `mega/LiveMatchPanel.engineStep`, que pula o passo já antecipado e chama `q` nos demais casos;
+  - lances visuais do próximo minuto (tipos 1, 2, 3, 4, 5, 7) seguram o relógio e são animados;
+  - no **clímax** (bola na rede, pênalti executado, apito do cartão, lesão), o painel chama `a.dV.qa()`, o passo de minuto do próprio Brasfoot, e topo e campo mudam juntos;
+  - prazo: 16 s a partir do início da animação, com teto de 40 s;
+  - lances já animados não são reaplicados (`animatedKeys`).
+- **Também nesta versão:**
+  - ícone de lesão (cruz vermelha) no jogador lesionado;
+  - formação montada pelo código de posição (`getPosicao`: 1 lateral nos corredores da linha defensiva, 2 zagueiro central, 3 meia, 4 atacante), sem depender da ordem da lista;
+  - táticas lidas de `best/ah.kj()`: `[1]` estilo (equilibrado, ataque total, contra-ataque) muda a altura do bloco; `[2]` marcação (leve, pesada, muito pesada) muda pressionadores e encaixe; `[3]` foco (meio, laterais) muda a escolha de passe e o posicionamento.
+- **Build:**
+  - EXE de jogo `data/private/live-match-preview-20261101-engine-sync/bf22-23.exe`, SHA `9549481d…1b1f`;
+  - instalador `dist/live-match-preview-2026.4.31/Brasfoot-Mega-Patch-2026.4.31-windows-x64.exe`, 9.436.672 bytes, SHA-256 `a9402c97557f9309e3acd9aa741033fe8d75d89db937bb7c7d311c0ac753e2e7`;
+  - 27 origens, incluindo a 4.30 que estava instalada (`4421b77c…`);
+  - bytecode verificado na JVM 1.8.0_441;
+  - `a.dV` com 1 chamada `engineStep` e 0 chamadas diretas a `best/I.q`.
+- **Estado:** compilada, não testada em jogo.
+- **Riscos a observar na homologação:**
+  - diálogo de substituição aberto dentro do clímax (o `qa()` roda dentro do quadro do painel, e a animação congela durante o diálogo);
+  - eventos de partidas não assistidas não são antecipados (não aparecem no campo);
+  - troca de partida assistida durante um pré-evento.
+- **Próxima build:** incluir `20261101-engine-sync` entre os `--previous-preview-executable`.
 
 ### Regra permanente: ressincronização da bola em toda mudança
 
