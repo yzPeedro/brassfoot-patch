@@ -37,7 +37,7 @@ Dependências ou bloqueadores:
 
 ## F1 — Campo animado da partida (prévia PRIVADA) · prioridade P0
 
-**Checkpoint:** 31/10/2026 ~19h40 (Brasília), Claude Code. Estado: prévia **2026.4.32 compilada** (a 4.31 foi instalada pelo proprietário), sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
+**Checkpoint:** 31/10/2026 ~19h40 (Brasília), Claude Code. Estado: prévia **2026.4.33 compilada** (a 4.32 foi instalada pelo proprietário), sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
 
 - **Objetivo final:** desenhar um campo 2D dentro da tela original de partida, abaixo do placar e acima da tabela de outros jogos, com os 22 jogadores, bola e eventos sincronizados com a engine, **sem alterar o resultado simulado**. A entrega é sempre um instalador local para o proprietário testar.
 - **Onde está o código:** branch `live-match-preview` (no GitHub, sem merge na `main`), commits reescritos em 31/10 sem coautoria:
@@ -52,6 +52,39 @@ Dependências ou bloqueadores:
   - `config/edition-live-match-preview.json`;
   - ajustes em `tools/build_distribution.py` (canal lido da edição) e `tools/build_release_bundle.py`.
 - **Contexto histórico:** manual §6 e Apêndice A do [contexto mestre](BRASFOOT-MEGA-PATCH-CONTEXTO-MESTRE.md) (transcript do Work, L891–3085).
+
+### Atualização 2026.4.33 (01/11/2026), faltas reais, gol contra, debug por time e fluidez
+
+- **Pedido:**
+  - faltas com barreira erradas (embolamento, relógio sem parar, cobrança sem ir ao gol);
+  - lances absurdos (passe da área adversária para o próprio goleiro);
+  - gol contra errado;
+  - debug para os dois times, com pênalti e gol contra;
+  - lances previsíveis;
+  - a falta que vira chute ao gol deve nascer como as faltas de cartão.
+- **Falta com barreira** (`computeFreeKickLayout`), na escala do campo de 105 × 68 m (`FIELD_RATIO`):
+  - barreira de N jogadores a 9,15 m da bola, perpendicular à linha bola–gol e deslocada para a trave próxima; meias e atacantes do time que defende vão primeiro para a barreira;
+  - goleiro na linha, cobrindo o lado oposto;
+  - time que bate: 4 na área, 1 ao lado da bola, 2 na entrada da área, os demais na sobra;
+  - time que defende: marcadores lado a lado com os atacantes, do lado do gol, e o restante perto do meio-campo;
+  - cobrador recua, para 1 s, toma distância e bate em curva (bézier quadrática, bola "sobe" no desenho);
+  - relógio parado durante toda a fase;
+  - **o gol de falta do motor nasce de uma falta em jogo corrido** (o mesmo fluxo da falta com cartão, sem cartão), marcada fora da área no ponto do contato.
+- **Gol contra:**
+  - o lado é sempre o de `cu` (time beneficiado);
+  - se o autor só existe no outro time, o time beneficiado ataca e o defensor desvia para o próprio gol.
+- **Fluidez:**
+  - removidas as jogadas ambientes (lateral, escanteio e "tiro de meta e saída curta"), que recuavam a bola ao goleiro de qualquer ponto;
+  - inversões de jogo (12%), conduções mais longas, recuos e passes com duração proporcional à distância;
+  - corridas sem bola de meias e atacantes;
+  - sem posicionamento antecipado de assistente, apoio ou defesa antes do gol.
+- **Debug:** duas colunas (mandante e visitante): falta com 4, 3, 2 e 1 na barreira (resultado sorteado: gol, defesa ou barreira), pênalti, falta, amarelo, vermelho, lesão, gol, gol contra e substituição.
+- **Build:**
+  - EXE de jogo `data/private/live-match-preview-20261101-free-kicks/bf22-23.exe`, SHA `20b7be3a…b024`;
+  - instalador `dist/live-match-preview-2026.4.33/Brasfoot-Mega-Patch-2026.4.33-windows-x64.exe`;
+  - 29 origens; bytecode verificado; commit `369d314`.
+- **Estado:** compilada, não testada em jogo.
+- **Próxima build:** incluir `20261101-free-kicks` entre os `--previous-preview-executable`.
 
 ### Atualização 2026.4.32 (01/11/2026), pênalti, pausa instantânea, naturalidade e debug
 
