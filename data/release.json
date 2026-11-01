@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.5.2",
-  "publishedAt": "2026-11-01T19:57:53.723600+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.5.2-windows-x64.exe",
+  "publishedVersion": "2026.5.3",
+  "publishedAt": "2026-11-01T23:49:38.567525+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.5.3-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
-  "fileSizeBytes": 18171904,
-  "sha256": "4de3451259f95fa11751a42e63e04e4f687ca4c4de2aad76b7e6c3bc485b3a15",
+  "fileSizeBytes": 7586816,
+  "sha256": "f1ba2bf09e1ca74a4a84bfc731603974b45fa4246390cd965f51b9dd42e6ddad",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Quatro atletas confirmados por fontes oficiais, 17 idades atualizadas e preservação de cinco mudanças sem evidência suficiente."
+  "releaseNotes": "Hub único que se atualiza pelo GitHub e campo animado com reinícios, faltas, cartões e substituições corrigidos."
 }
