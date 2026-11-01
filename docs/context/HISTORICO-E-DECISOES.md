@@ -50,6 +50,7 @@ Abreviações de evidência: **CM** = `BRASFOOT-MEGA-PATCH-CONTEXTO-MESTRE.md`, 
 | Execução por agentes | Alethe em perfil `savings`, no máximo 2 workers, um escritor por vez; workers não fazem commit nem publicam; sem bypass de cota | AGENTS.md "Execução" |
 | Campo animado | **Prévia privada** para teste local do proprietário. Sem release, tag, asset ou site; exceção explícita à autorização geral de publicação | CM §6.1 (l. 541–543), §7.4 (l. 734) |
 | Retomada | Não recomeçar o projeto; não repetir auditorias concluídas; não substituir soluções por versões mais simples que percam funcionalidade | AGENTS.md; Apêndice B §3 |
+| Live Match: sincronia com o motor | O passo de simulação do próximo minuto da partida assistida é executado antecipadamente com os mesmos argumentos e a mesma condição; o motor pula o passo já executado (gancho na classe de interface `a.dV`); o minuto do Brasfoot é disparado no clímax da animação. A ordem e a regra da simulação não mudam, só o instante em que o mesmo passo roda (01/11/2026, prévia privada 2026.4.31) | CONTINUIDADE F1; commit `5221614` no branch `live-match-preview` |
 
 ## Decisões substituídas ou flexibilizadas
 
