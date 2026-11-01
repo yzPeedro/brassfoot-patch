@@ -236,6 +236,7 @@ public final class LiveMatchPanel extends JPanel {
     private long kickoffDeadline;
     private int kickoffBackPass = -1;
     private boolean openingKickoffDone;
+    private boolean halfStartPending;
     private long goalStageDeadline;
     private int goalBuildPasses;
     private int goalBuildTarget;
@@ -365,7 +366,7 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private void updatePreSimulation(long now) {
-        if (matchEnded() || insideEngineStep() || penaltyPhase != 0) return;
+        if (matchEnded() || insideEngineStep() || penaltyPhase != 0 || halfStartPending || !openingKickoffDone) return;
         Object clock = readField(host, "GO");
         if (!(clock instanceof Timer)) return;
         if (!((Timer) clock).isRunning() && !clockHeld) return;
@@ -645,7 +646,7 @@ public final class LiveMatchPanel extends JPanel {
             stoppageSignature = signature;
             stoppageSince = now;
         }
-        if ((hasAnimationStoppage() || preEventActive) && !dialog && penaltyLoop == null
+        if ((hasAnimationStoppage() || preEventActive) && !dialog && penaltyLoop == null && !halfStartPending
                 && now - stoppageSince > 15000L) {
             failSafeReset("stoppage_timeout " + signature);
         }
@@ -1023,15 +1024,53 @@ public final class LiveMatchPanel extends JPanel {
 
     private void maybeStartOpeningKickoff(long now) {
         if (openingKickoffDone || !engineStateInitialized) return;
-        if (engineMinute > 2 || engineHalf != 1) {
-            openingKickoffDone = true;
-            return;
-        }
-        if (!engineRunning()) return;
         openingKickoffDone = true;
-        event = "Saída de bola";
-        beginKickoffReset(now, 0);
-        restartEarliest = now + 900L;
+        if (engineMinute > 2 || engineHalf != 1) return;
+        event = "Os times entram em campo";
+        beginHalfStart(now, 0);
+    }
+
+    private void beginHalfStart(long now, int side) {
+        clearSetPieces();
+        resetBallControl();
+        plannedRoute.clear();
+        plannedActionKey = null;
+        int entry = 0;
+        for (Dot[] team : new Dot[][] { home, away }) {
+            boolean awaySide = team == away;
+            for (int i = 0; i < team.length; i++) {
+                Dot dot = team[i];
+                if (!dot.active) continue;
+                dot.currentX = .5 + (awaySide ? .012 : -.012) * (1 + entry % 4);
+                dot.currentY = .975 - (entry % 3) * .008;
+                dot.velocityX = 0;
+                dot.velocityY = 0;
+                entry++;
+            }
+        }
+        refX = .5;
+        refY = .985;
+        refVX = 0;
+        refVY = 0;
+        ballInFlight = false;
+        curveActive = false;
+        ballLift = 0;
+        ballX = ballFromX = ballToX = .5;
+        ballY = ballFromY = ballToY = .5;
+        restartActive = true;
+        kickoffInProgress = false;
+        halfStartPending = true;
+        restartStarted = now;
+        restartEarliest = now + 2500L;
+        restartDeadline = now + 9000L;
+        kickoffSide = side;
+        Dot[] kickoffTeam = side == 0 ? home : away;
+        kickoffPlayerA = nearestActive(kickoffTeam, .50, .46, -1, false);
+        kickoffPlayerB = nearestActive(kickoffTeam, .50, .54, kickoffPlayerA, false);
+        possessingSide = side;
+        possessingPlayer = kickoffPlayerA;
+        possessionPasses = 0;
+        holdGameClock();
     }
 
     private boolean isDecisionDialogOpen() {
@@ -2103,6 +2142,7 @@ public final class LiveMatchPanel extends JPanel {
     private void updateGoalRestart(long now) {
         if (!restartActive || ballInFlight) return;
         if (now < restartEarliest) return;
+        if (halfStartPending && !engineRunning()) return;
         if (!formationReady() && now < restartDeadline) return;
         Dot[] kickoffTeam = kickoffSide == 0 ? home : away;
         Dot taker = kickoffTeam[kickoffPlayerA];
@@ -2113,6 +2153,7 @@ public final class LiveMatchPanel extends JPanel {
             return;
         }
         restartActive = false;
+        halfStartPending = false;
         kickoffInProgress = true;
         kickoffDeadline = now + 5000L;
         possessingSide = kickoffSide;
@@ -2349,8 +2390,7 @@ public final class LiveMatchPanel extends JPanel {
                 int observedHalf = integer(readField(host, "dB"), 1);
                 if (engineStateInitialized && engineHalf == 1 && observedHalf == 2) {
                     event = "Início do 2º tempo";
-                    clearSetPieces();
-                    beginKickoffReset(System.currentTimeMillis(), 1);
+                    beginHalfStart(System.currentTimeMillis(), 1);
                 }
                 engineMinute = observedMinute;
                 engineHalf = observedHalf;
@@ -3117,7 +3157,7 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private void updateTeamTargets(Dot[] team, boolean awaySide) {
-        boolean kickoff = engineMinute <= 0;
+        boolean kickoff = !openingKickoffDone;
         boolean hasBall = possessingSide == (awaySide ? 1 : 0);
         Dot[] opponents = awaySide ? home : away;
         int sideIndex = awaySide ? 1 : 0;
