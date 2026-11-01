@@ -35,9 +35,9 @@ Dependências ou bloqueadores:
 
 ---
 
-## F1 — Campo animado da partida (prévia PRIVADA) · prioridade P0
+## F1 — Campo animado da partida · publicado na 2026.5.0
 
-**Checkpoint:** 31/10/2026 ~19h40 (Brasília), Claude Code. Estado: prévia **2026.4.41 compilada** (a 4.40 foi instalada pelo proprietário), sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
+**Checkpoint:** 01/11/2026, Claude Code. Estado: **publicado na release 2026.5.0** por instrução do proprietário (PR `live-match-preview` mergeado na `main`). Base: prévia 2026.4.41, executável `bcdc27a4…7f6c`. Novas mudanças: gerar prévia privada primeiro; release só quando o proprietário pedir.
 
 - **Objetivo final:** desenhar um campo 2D dentro da tela original de partida, abaixo do placar e acima da tabela de outros jogos, com os 22 jogadores, bola e eventos sincronizados com a engine, **sem alterar o resultado simulado**. A entrega é sempre um instalador local para o proprietário testar.
 - **Onde está o código:** branch `live-match-preview` (no GitHub, sem merge na `main`), commits reescritos em 31/10 sem coautoria:

@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.4.7",
+  "version": "2026.5.0",
   "channel": "stable",
-  "releaseNotes": "Plantéis renovados e classificações de estrela e Top Mundial auditadas com o Ballon d'Or 2026.",
+  "releaseNotes": "Novo campo animado ao vivo na tela da partida, sincronizado com os lances do Brasfoot.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [
