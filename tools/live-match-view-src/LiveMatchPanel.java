@@ -63,7 +63,7 @@ public final class LiveMatchPanel extends JPanel {
     private static final Font NAME_FONT = new Font("Tahoma", Font.BOLD, 10);
     private static final Font EVENT_FONT = new Font("Tahoma", Font.BOLD, 13);
     private static final double CONTACT = .024;
-    private static final boolean DEBUG_TOOLS = true;
+    private static final boolean DEBUG_TOOLS = false;
     private static final String[] DEBUG_LABELS = {
         "Falta 4 na barreira", "Falta 3 na barreira", "Falta 2 na barreira", "Falta 1 na barreira",
         "Pênalti", "Falta comum", "Cartão amarelo", "Cartão vermelho", "Lesão", "Gol", "Gol contra",
@@ -250,6 +250,7 @@ public final class LiveMatchPanel extends JPanel {
     private double frameSeconds = .016;
     private int frames;
     private boolean everShown;
+    private boolean laidOut;
 
     private LiveMatchPanel(JPanel host) {
         this.host = host;
@@ -273,7 +274,7 @@ public final class LiveMatchPanel extends JPanel {
             @Override public void mouseReleased(MouseEvent event) { forwardMouse(event); }
             @Override public void mouseClicked(MouseEvent event) { forwardMouse(event); }
         };
-        addMouseListener(forwarder);
+        if (DEBUG_TOOLS) addMouseListener(forwarder);
         timer.start();
     }
 
@@ -435,18 +436,9 @@ public final class LiveMatchPanel extends JPanel {
                 for (Component child : host.getComponents()) {
                     if (child instanceof LiveMatchPanel) return;
                 }
-                LiveMatchPanel panel = new LiveMatchPanel(host);
-                Class<?> constraintType = Class.forName("components.a");
-                Constructor<?> constructor = constraintType.getDeclaredConstructor(
-                        int.class, int.class, int.class, int.class);
-                constructor.setAccessible(true);
-                Object constraint = constructor.newInstance(15, 165, 994, 480);
-                host.add(panel, constraint);
-                host.setComponentZOrder(panel, 0);
-                host.revalidate();
-                host.repaint();
-                diagnostic("panel_added parent=" + panel.getParent().getClass().getName()
-                        + " bounds=" + panel.getBounds(), null);
+                if (active != null && active.host == host) return;
+                new LiveMatchPanel(host);
+                diagnostic("panel_created", null);
             } catch (Throwable error) {
                 showInstallError(host, error);
             }
@@ -514,7 +506,6 @@ public final class LiveMatchPanel extends JPanel {
             if (hasClockStoppage()) holdGameClock();
             else releaseGameClock();
         }
-        if (frames % 30 == 0) captureOtherMatches();
         if (frames % 12 == 0) updatePlayerTargets();
         else refreshBallRoleTargets();
         updatePlayerPositions();
@@ -843,39 +834,80 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private void ensureVisibleLayer() {
-        if (!firstLayerCheck) {
-            firstLayerCheck = true;
-            diagnostic("layer_check showing=" + host.isShowing()
-                    + " root=" + (host.getRootPane() == null ? "null" : "present")
-                    + " hostBounds=" + host.getBounds(), null);
-        }
-        if (!host.isShowing() || host.getRootPane() == null) {
-            setVisible(false);
+        if (!host.isShowing()) {
             if (everShown) {
                 timer.stop();
                 if (getParent() != null) getParent().remove(this);
+                if (active == this) active = null;
                 diagnostic("panel_stopped host_no_longer_showing", null);
             }
             return;
         }
         everShown = true;
-        JLayeredPane layer = host.getRootPane().getLayeredPane();
-        int panelY = 165;
-        int panelHeight = Math.max(520, host.getHeight() - panelY - 10);
-        Point origin = SwingUtilities.convertPoint(host, 15, panelY, layer);
-        if (getParent() != layer) {
-            if (getParent() != null) getParent().remove(this);
-            layer.add(this, JLayeredPane.PALETTE_LAYER);
+        if (laidOut) return;
+        if (host.getWidth() <= 0 || host.getHeight() <= 0) return;
+        laidOut = true;
+        try {
+            openFieldSpace();
+        } catch (Throwable error) {
+            diagnostic("layout_failed", error);
         }
-        setBounds(origin.x, origin.y, 994, panelHeight);
-        layer.setLayer(this, JLayeredPane.PALETTE_LAYER.intValue());
-        layer.moveToFront(this);
+    }
+
+    private void openFieldSpace() {
+        int width = host.getWidth();
+        int height = host.getHeight();
+        Component[] children = host.getComponents();
+        Rectangle[] bounds = new Rectangle[children.length];
+        StringBuilder before = new StringBuilder("layout_before host=" + width + "x" + height);
+        int headerBottom = 0;
+        for (int i = 0; i < children.length; i++) {
+            bounds[i] = children[i].getBounds();
+            before.append(" | ").append(children[i].getClass().getName()).append(' ').append(bounds[i]);
+            Rectangle r = bounds[i];
+            if (r.y < 150 && r.height < height / 2 && r.width > 0) {
+                headerBottom = Math.max(headerBottom, r.y + r.height);
+            }
+        }
+        diagnostic(before.toString(), null);
+        if (headerBottom <= 0) headerBottom = 165;
+        List<Integer> lower = new ArrayList<Integer>();
+        int lowerTop = Integer.MAX_VALUE;
+        for (int i = 0; i < children.length; i++) {
+            Rectangle r = bounds[i];
+            if (r.height >= height - 20 && r.y <= 2) continue;
+            if (r.y >= headerBottom - 4) {
+                lower.add(Integer.valueOf(i));
+                lowerTop = Math.min(lowerTop, r.y);
+            }
+        }
+        int tableHeight = Math.max(150, (int) (height * .25));
+        int fieldTop = headerBottom + 6;
+        int fieldBottom = height - tableHeight - 6;
+        if (fieldBottom - fieldTop < 280) fieldBottom = Math.min(height - 120, fieldTop + 280);
+        host.setLayout(null);
+        for (int i = 0; i < children.length; i++) children[i].setBounds(bounds[i]);
+        if (!lower.isEmpty()) {
+            int shift = fieldBottom + 6 - lowerTop;
+            for (Integer boxed : lower) {
+                int i = boxed.intValue();
+                Rectangle r = bounds[i];
+                int y = r.y + shift;
+                int h = Math.max(24, Math.min(r.height, height - y - 2));
+                children[i].setBounds(r.x, y, r.width, h);
+            }
+        }
+        host.add(this);
+        setBounds(15, fieldTop, width - 30, fieldBottom - fieldTop);
         setVisible(true);
-        if (!attachedLogged) {
-            attachedLogged = true;
-            diagnostic("layer_visible bounds=" + getBounds() + " layerSize="
-                    + layer.getWidth() + "x" + layer.getHeight(), null);
+        host.revalidate();
+        host.repaint();
+        StringBuilder after = new StringBuilder("layout_after field=" + getBounds());
+        for (Integer boxed : lower) {
+            after.append(" | ").append(children[boxed.intValue()].getClass().getName())
+                    .append(' ').append(children[boxed.intValue()].getBounds());
         }
+        diagnostic(after.toString(), null);
     }
 
     private static synchronized void diagnostic(String stage, Throwable error) {
@@ -3167,9 +3199,8 @@ public final class LiveMatchPanel extends JPanel {
         Graphics2D g = (Graphics2D) graphics.create();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         int w = getWidth(), h = getHeight();
-        int top = 8;
-        int fieldHeight = Math.min(410, Math.max(330, h - 240));
-        int bottom = top + fieldHeight, left = 10, right = w - 10;
+        int top = 4;
+        int bottom = h - 4, left = 4, right = w - 4;
         int fieldW = right - left, fieldH = bottom - top;
         for (int i = 0; i < 10; i++) {
             g.setColor((i & 1) == 0 ? GRASS : GRASS_ALT);
@@ -3198,9 +3229,8 @@ public final class LiveMatchPanel extends JPanel {
         g.fillOval(bx - radius, by - radius - (int) Math.round(ballLift * 5), radius * 2, radius * 2);
         g.setColor(Color.BLACK);
         g.drawOval(bx - radius, by - radius - (int) Math.round(ballLift * 5), radius * 2, radius * 2);
-        int eventBarY = bottom + 7;
-        drawEventBar(g, w, eventBarY);
-        drawOtherMatches(g, w, h, eventBarY + 37);
+
+
         if (DEBUG_TOOLS) drawDebugButtons(g, w);
         g.dispose();
         Toolkit.getDefaultToolkit().sync();
