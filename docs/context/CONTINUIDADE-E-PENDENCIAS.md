@@ -37,7 +37,7 @@ Dependências ou bloqueadores:
 
 ## F1 — Campo animado da partida (prévia PRIVADA) · prioridade P0
 
-**Checkpoint:** 31/10/2026 ~19h40 (Brasília), Claude Code. Estado: prévia **2026.4.37 compilada** (a 4.36 foi instalada pelo proprietário), sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
+**Checkpoint:** 31/10/2026 ~19h40 (Brasília), Claude Code. Estado: prévia **2026.4.38 compilada** (a 4.37 foi instalada pelo proprietário), sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
 
 - **Objetivo final:** desenhar um campo 2D dentro da tela original de partida, abaixo do placar e acima da tabela de outros jogos, com os 22 jogadores, bola e eventos sincronizados com a engine, **sem alterar o resultado simulado**. A entrega é sempre um instalador local para o proprietário testar.
 - **Onde está o código:** branch `live-match-preview` (no GitHub, sem merge na `main`), commits reescritos em 31/10 sem coautoria:
@@ -52,6 +52,28 @@ Dependências ou bloqueadores:
   - `config/edition-live-match-preview.json`;
   - ajustes em `tools/build_distribution.py` (canal lido da edição) e `tools/build_release_bundle.py`.
 - **Contexto histórico:** manual §6 e Apêndice A do [contexto mestre](BRASFOOT-MEGA-PATCH-CONTEXTO-MESTRE.md) (transcript do Work, L891–3085).
+
+### Atualização 2026.4.38 (01/11/2026), gramado, nomes mais leves e estatísticas sincronizadas
+
+- **Gramado:**
+  - desenhado pela condição do jogo, `best.I.dX()` (índice em `best/aq.pb`: Excelente, Muito Boa, Ruim, Precária; o jogo associa as imagens `campo2`, `campo`, `campo3`, `campo4`);
+  - Excelente: faixas vivas; Muito Boa: desgaste leve; Ruim: falhas amareladas e terra nas áreas; Precária: lama espalhada;
+  - imagem gerada uma vez por partida e tamanho (`pitch`).
+- **Nomes:**
+  - destaque (fonte em negrito e fundo suave) só para quem participa do lance (`inFocus`: portador, receptor, perseguidor, autor do evento, cobradores e quem está a menos de 0,10 da bola);
+  - os demais aparecem em fonte menor e semitransparente, sem caixa;
+  - brilho sutil nas bolinhas; nome do árbitro no mesmo estilo leve.
+- **Estatísticas:**
+  - a antecipação do minuto (`capturePreSimStats`) captura o que `q()` soma em finalizações (`hA`), desarmes (`hB`), erros de passe (`hC`) e faltas (`hD`), até 3 lances por minuto, priorizando finalização e falta;
+  - descontados os que já fazem parte de gol, cartão ou gol de falta;
+  - cada lance é animado no pré-evento (`startStatCue`) e o minuto do Brasfoot avança no clímax (chute, desarme, passe errado chegando ao rival, apito da falta), atualizando o cabeçalho junto;
+  - as linhas de base das estatísticas são atualizadas na antecipação para não gerar lances duplicados.
+- **Build:**
+  - EXE de jogo `data/private/live-match-preview-20261101-stat-sync/bf22-23.exe`, SHA `6fffc987…f678`;
+  - instalador `dist/live-match-preview-2026.4.38/`;
+  - 34 origens; bytecode verificado; commit `e395652`.
+- **Estado:** compilada, não testada em jogo.
+- **Próxima build:** incluir `20261101-stat-sync` entre os `--previous-preview-executable`.
 
 ### Atualização 2026.4.37 (01/11/2026), bolas, árbitro e nome na substituição
 
