@@ -6,7 +6,7 @@ O campo animado desenha um campo 2D dentro da tela de partida original do Brasfo
 
 ## Princípio: o motor do Brasfoot não muda
 
-- O motor de simulação, as regras, os sorteios e os resultados continuam sendo os do Brasfoot.
+- O motor de simulação, as regras, os sorteios e os resultados continuam sendo os do Brasfoot. O painel só segura o relógio por alguns segundos nos lances principais; ele não altera o que acontece na partida.
 - O painel apenas **lê** informações que o próprio jogo mantém durante a partida e as representa visualmente.
 - Nenhum evento é criado pelo painel: gols, cartões, pênaltis, lesões e substituições só aparecem quando o Brasfoot os registra.
 
@@ -44,37 +44,24 @@ python tools/patch_live_match_view.py --source <bf22-23.exe> --output <pasta>/bf
 
 ## Velocidade e tempos
 
-- **O relógio é do Brasfoot.** O painel não para, não reinicia e não adianta o temporizador da partida. A duração de cada minuto é sempre a da velocidade escolhida pelo jogador, e pausa e substituições acontecem no tempo original do jogo.
-- **Movimento sempre no ritmo normal.** Jogadores e bola se movem na mesma velocidade em qualquer configuração do jogo. O que se adapta à velocidade é a forma de montar as jogadas, e a sincronia com o jogo sempre tem prioridade sobre o realismo.
+- **Movimento sempre no ritmo normal.** Jogadores e bola se movem na mesma velocidade em qualquer configuração do jogo, e cada lance é feito pelo jogador que o Brasfoot registrou.
+- **Pausa curta nos lances do jogo.** O painel conhece os lances com um minuto de antecedência. Quando o próximo minuto tem gol, pênalti, cartão ou lesão, o painel segura o relógio da partida enquanto a jogada acontece no campo e só deixa o minuto virar no clímax (bola na rede, apito, falta no pênalti). Assim, placar e campo mudam juntos.
+- **Depois do gol.** O relógio continua parado enquanto os jogadores voltam às posições e dão a saída de bola. No início de cada tempo vale o mesmo para a entrada em campo.
+- **O minuto nunca fica mais curto.** Ao soltar o relógio, o painel executa o próprio passo de minuto do Brasfoot, nunca antes do horário em que o jogo o executaria. Fora dessas pausas, a partida corre na velocidade escolhida pelo jogador, e substituições e lances de estatística não pausam o jogo.
+- **Quanto tempo a mais.** Cerca de 3 a 6 segundos por gol (jogada e saída de bola) e até 2,5 segundos por cartão; numa partida típica, de 15 a 30 segundos a mais. A proporção pesa mais nas velocidades rápidas, em que a partida inteira dura menos.
 
-  | Velocidade do jogo | Intervalo por minuto | Comportamento do campo |
-  |---|---|---|
-  | Lento | 2000 ms | Realista e sincronizado; até 3 lances de estatística por minuto |
-  | Normal | 1200 ms | Experiência ideal: realista e sincronizado; até 2 lances de estatística por minuto |
-  | Rápido | 700 ms | Realista, com esperas menores e gols sem troca de passes; 1 lance de estatística por minuto |
-  | Bem rápido | 450 ms | Linha divisória: realista enquanto couber no tempo; perto do prazo, o lance é resolvido de forma irreal |
-  | Super rápido | 220 ms | Sincronia acima de tudo; jogadas irreais frequentes; sem lances de estatística |
-  | Ultra rápido | 100 ms | Sincronia acima de tudo; jogadas irreais frequentes; sem lances de estatística |
+| Velocidade do jogo | Intervalo por minuto | Lances de estatística encenados |
+|---|---|---|
+| Lento | 2000 ms | até 2 por minuto |
+| Normal | 1200 ms | 1 por minuto; experiência ideal |
+| Rápido, Bem rápido, Super rápido, Ultra rápido | 700 a 100 ms | não encenados; gols com jogada direta |
 
-- **Modo de sincronia (Bem rápido ou mais rápido).** Todo lance ativo recebe um prazo, que é o momento em que o Brasfoot vira o minuto daquele lance (com tolerância de um minuto em Bem rápido). Até o prazo a jogada corre normalmente. Perto dele, o lance é resolvido na hora, vale para todos os eventos:
-
-  | Evento | Resolução no prazo |
-  |---|---|
-  | Gol e gol contra | A bola vai direto ao autor e ele finaliza de onde estiver, inclusive de longe |
-  | Pênalti | O lance vai direto para a cobrança |
-  | Cartão | O apito sai imediatamente |
-  | Falta com barreira | A cobrança sai imediatamente |
-  | Desarme, finalização e erro de passe | O lance é concluído imediatamente |
-  | Lesão | O jogo segue logo |
-  | Saída de bola, reinício e entrada em campo | Os jogadores se reposicionam com transição suave e a bola sai |
-
-  Cartões e lesões acumulados são aplicados direto no jogador (cartão ou saída de campo); gols são sempre encenados.
-- **Sincronia com o minuto do jogo.** O painel registra em que minuto cada lance deve aparecer. O gol é montado para chegar ao chute na virada desse minuto, e a entrada em campo e os reinícios ficam mais curtos nas velocidades rápidas (no Rápido ou mais os jogadores surgem já posicionados). Se o campo ficar para trás, as esperas encurtam até alcançar o jogo e lances menores deixam de ser encenados nesse intervalo; a velocidade do movimento não muda.
 - **Troca de lado.** No segundo tempo os times invertem o campo de ataque.
 
 ## Garantias de execução
 
-- **Nunca travar o jogo:** qualquer erro no quadro do painel zera as animações; cada fase tem prazo máximo e o painel nunca segura a partida.
+- **Nunca travar o jogo:** qualquer erro no quadro do painel zera as animações e devolve o relógio ao Brasfoot; cada fase tem prazo máximo, e uma pausa de lance dura no máximo 9 segundos.
+- **Diálogos e pausa:** com diálogos do jogo abertos o painel não segura o relógio, e um pedido de pausa ou substituição libera o relógio na hora.
 - **Bola sempre ancorada:** a posse só muda por contato (passe, domínio, desarme ou cobrança), e cada fase termina em um estado explícito.
 - **Diagnóstico:** eventos de integração são registrados em `%LOCALAPPDATA%\BrassfootPatch2026\live-match-debug.log`.
 

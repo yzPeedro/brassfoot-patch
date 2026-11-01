@@ -564,10 +564,10 @@ a{color:inherit}
 .speed-note-icon{display:grid;place-items:center;width:56px;height:56px;border-radius:16px;background:#fdf3df;color:#94620f}
 .speed-note h3{font-size:22px;margin-bottom:8px;color:var(--ink)}
 .speed-note p{font-size:16px;line-height:1.7;color:var(--ink-2);margin-bottom:14px;max-width:860px}
-.speed-scale{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0;margin:0;list-style:none}
+.speed-scale{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0;margin:0;list-style:none}
 .speed-scale li{padding:12px 14px;border-radius:14px;background:var(--surface);border:1px solid var(--line);font-size:14px;color:var(--muted);line-height:1.5}
 .speed-scale strong{display:block;color:var(--ink);font-size:14px;margin-bottom:2px}
 .speed-scale li:first-child{border-color:#b9cdfb;background:var(--brand-soft)}
-@media(max-width:1150px){.speed-scale{grid-template-columns:1fr 1fr}}
+@media(max-width:850px){.speed-scale{grid-template-columns:1fr}}
 @media(max-width:600px){.speed-scale{grid-template-columns:1fr}}
 @media(max-width:600px){.speed-note{grid-template-columns:1fr;padding:24px}}
