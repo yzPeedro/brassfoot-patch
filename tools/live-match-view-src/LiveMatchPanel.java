@@ -288,6 +288,13 @@ public final class LiveMatchPanel extends JPanel {
     private double refY = .62;
     private double refVX;
     private double refVY;
+    private int pitchCondition = -1;
+    private BufferedImage pitchImage;
+    private String pitchKey = "";
+    private final List<int[]> statCueQueue = new ArrayList<int[]>();
+    private final List<int[]> pendingStatCues = new ArrayList<int[]>();
+    private int statCueActive;
+    private static final Font NAME_FONT_LIGHT = new Font("Tahoma", Font.PLAIN, 9);
     private double ballSpin;
     private double lastBallX = .5;
     private double lastBallY = .5;
@@ -376,6 +383,7 @@ public final class LiveMatchPanel extends JPanel {
             if (!Boolean.TRUE.equals(invoke(row, "ei"))) return;
             int[] limits = intArray(invoke(match, "ib"));
             if (limits == null || limits.length <= half || limits[half] > next) return;
+            int[][] before = statArrays(match);
             try {
                 runEngineStep(match, next, half);
                 synchronized (SKIPPED_STEPS) {
@@ -386,6 +394,7 @@ public final class LiveMatchPanel extends JPanel {
                 diagnostic("presim_failed", error);
                 return;
             }
+            capturePreSimStats(match, before);
         }
         if (preEventMinute == next && preEventHalf == half) return;
         Object value = invoke(match, "hE");
@@ -402,9 +411,21 @@ public final class LiveMatchPanel extends JPanel {
         }
         preEventMinute = next;
         preEventHalf = half;
-        if (visual.isEmpty()) return;
+        List<int[]> cues = new ArrayList<int[]>(pendingStatCues);
+        pendingStatCues.clear();
+        for (Object action : visual) {
+            int type = integer(invoke(action, "b"), -1);
+            int subtype = integer(invoke(action, "el"), -1);
+            int side = sameTeam(invoke(action, "cu"), awayTeamRef) ? 1 : 0;
+            if (type == 1 && subtype != 3) removeCue(cues, 1, side);
+            if (type == 1 && subtype == 4) removeCue(cues, 4, 1 - side);
+            if (type == 2 || type == 3 || type == 4) removeCue(cues, 4, side);
+        }
+        if (visual.isEmpty() && cues.isEmpty()) return;
         preEventActive = true;
-        preEventRemaining = visual.size();
+        preEventRemaining = visual.size() + cues.size();
+        statCueQueue.clear();
+        statCueQueue.addAll(cues);
         preEventDeadline = Long.MAX_VALUE;
         preEventStarted = now;
         for (Object action : visual) {
@@ -412,6 +433,83 @@ public final class LiveMatchPanel extends JPanel {
             queuedEngineActions.add(action);
         }
         holdGameClock();
+    }
+
+    private int[][] statArrays(Object match) {
+        String[] names = {"hA", "hB", "hC", "hD"};
+        int[][] result = new int[4][];
+        for (int i = 0; i < 4; i++) {
+            int[] value = intArray(invoke(match, names[i]));
+            result[i] = value == null ? null : value.clone();
+        }
+        return result;
+    }
+
+    private void capturePreSimStats(Object match, int[][] before) {
+        pendingStatCues.clear();
+        int[][] after = statArrays(match);
+        int[] kinds = {1, 2, 3, 4};
+        for (int i = 0; i < 4; i++) {
+            if (before[i] == null || after[i] == null) continue;
+            for (int side = 0; side < 2 && side < after[i].length && side < before[i].length; side++) {
+                int delta = after[i][side] - before[i][side];
+                for (int k = 0; k < delta && k < 2; k++) pendingStatCues.add(new int[] { kinds[i], side });
+            }
+        }
+        if (after[0] != null && after[0].length >= 2) { officialShots[0] = after[0][0]; officialShots[1] = after[0][1]; }
+        if (after[1] != null && after[1].length >= 2) { officialTackles[0] = after[1][0]; officialTackles[1] = after[1][1]; }
+        if (after[2] != null && after[2].length >= 2) { officialPassErrors[0] = after[2][0]; officialPassErrors[1] = after[2][1]; }
+        if (after[3] != null && after[3].length >= 2) { officialFouls[0] = after[3][0]; officialFouls[1] = after[3][1]; }
+        Collections.sort(pendingStatCues, new Comparator<int[]>() {
+            @Override public int compare(int[] a, int[] b) {
+                int pa = a[0] == 1 ? 0 : a[0] == 4 ? 1 : 2, pb = b[0] == 1 ? 0 : b[0] == 4 ? 1 : 2;
+                return pa - pb;
+            }
+        });
+        while (pendingStatCues.size() > 3) pendingStatCues.remove(pendingStatCues.size() - 1);
+    }
+
+    private void removeCue(List<int[]> cues, int kind, int side) {
+        for (int i = 0; i < cues.size(); i++) {
+            if (cues.get(i)[0] == kind && cues.get(i)[1] == side) {
+                cues.remove(i);
+                return;
+            }
+        }
+    }
+
+    private void startStatCue(long now, int[] cue) {
+        int kind = cue[0], side = cue[1];
+        if (preEventDeadline == Long.MAX_VALUE) preEventDeadline = now + 16000L;
+        plannedActionKey = null;
+        plannedRoute.clear();
+        Dot[] team = side == 0 ? home : away;
+        Dot[] rivals = side == 0 ? away : home;
+        if (kind == 1) {
+            statCueActive = 1;
+            pendingStatShotSide = side;
+            controlUntil = Math.min(controlUntil, now + 200L);
+        } else if (kind == 2) {
+            if (possessingSide == side) { onClimax(); return; }
+            statCueActive = 2;
+            startTackle(now, side, nearestActive(team, ballX, ballY, -1, false));
+        } else if (kind == 3) {
+            if (possessingSide != side || !carrierHasBall()) { onClimax(); return; }
+            statCueActive = 3;
+            double ahead = ballX + (side == 0 ? .14 : -.14);
+            int rival = nearestActive(rivals, ahead, ballY, -1, false);
+            beginPassTo(1 - side, rival, now, 520 + random.nextInt(260));
+        } else {
+            statCueActive = 4;
+            int offender = nearestActive(team, ballX, ballY, -1, false);
+            startCardFoul(now, side, offender, "Falta de " + team[offender].name, null, false);
+        }
+    }
+
+    private void completeStatCue(int kind) {
+        if (statCueActive != kind) return;
+        statCueActive = 0;
+        onClimax();
     }
 
     private void onClimax() {
@@ -585,6 +683,9 @@ public final class LiveMatchPanel extends JPanel {
         preEventActive = false;
         preEventRemaining = 0;
         queuedEngineActions.clear();
+        statCueQueue.clear();
+        pendingStatCues.clear();
+        statCueActive = 0;
         curveActive = false;
         ballLift = 0;
         ballInFlight = false;
@@ -653,6 +754,9 @@ public final class LiveMatchPanel extends JPanel {
         if (!hasAnimationStoppage() && !queuedEngineActions.isEmpty()) {
             if (preEventActive && preEventDeadline == Long.MAX_VALUE) preEventDeadline = now + 16000L;
             applyEngineAction(queuedEngineActions.remove(0));
+        } else if (preEventActive && queuedEngineActions.isEmpty() && statCueActive == 0 && !statCueQueue.isEmpty()
+                && !hasAnimationStoppage() && !ballInFlight && !looseBall && !tackleActive) {
+            startStatCue(now, statCueQueue.remove(0));
         }
         if (!hasClockStoppage() && queuedEngineActions.isEmpty() && pendingGoalStage == 0) visibleScore = score;
         if (simpleStoppageUntil != 0 && now >= simpleStoppageUntil) {
@@ -715,6 +819,7 @@ public final class LiveMatchPanel extends JPanel {
         ballInFlight = false;
         curveActive = false;
         ballLift = 0;
+        completeStatCue(3);
         if (receivingSide >= 0 && receivingPlayer >= 0) {
             looseBall = true;
             looseSide = receivingSide;
@@ -860,6 +965,7 @@ public final class LiveMatchPanel extends JPanel {
         if (distance(dot.currentX, dot.currentY, ballX, ballY) <= CONTACT) {
             tackleActive = false;
             possessionPasses = 0;
+            completeStatCue(2);
             if (clearanceAfterTackle) {
                 clearanceAfterTackle = false;
                 double direction = tackleSide == 0 ? 1.0 : -1.0;
@@ -881,6 +987,7 @@ public final class LiveMatchPanel extends JPanel {
         }
         if (now >= tackleDeadline) {
             tackleActive = false;
+            completeStatCue(2);
             sendBallTo(now, dot.currentX, dot.currentY, 520, tackleSide, tackler);
         }
     }
@@ -1782,6 +1889,7 @@ public final class LiveMatchPanel extends JPanel {
     private void handleAmbientShotArrival(long now) {
         ambientShotPhase = 2;
         controlUntil = now + 420L;
+        completeStatCue(1);
     }
 
     private void updateAmbientShot(long now) {
@@ -1869,6 +1977,7 @@ public final class LiveMatchPanel extends JPanel {
 
     private void blowCardFoul(long now) {
         int takerSide = 1 - cardFoulOffenderSide;
+        completeStatCue(4);
         if (cardFoulFreeKick) {
             cardFoulFreeKick = false;
             cardFoulPhase = 0;
@@ -2199,6 +2308,8 @@ public final class LiveMatchPanel extends JPanel {
             if (match == null) match = matchFromLiveRow(liveRow);
             if (match != null) {
                 matchRef = match;
+                int condition = integer(invoke(match, "dX"), -1);
+                if (condition >= 0 && condition <= 3) pitchCondition = condition;
                 Object homeTeam = invoke(match, "hc");
                 Object awayTeam = invoke(match, "hd");
                 homeTeamRef = homeTeam;
@@ -3487,10 +3598,7 @@ public final class LiveMatchPanel extends JPanel {
         int top = 4;
         int bottom = h - 4, left = 4, right = w - 4;
         int fieldW = right - left, fieldH = bottom - top;
-        for (int i = 0; i < 10; i++) {
-            g.setColor((i & 1) == 0 ? GRASS : GRASS_ALT);
-            g.fillRect(left + i * fieldW / 10, top, fieldW / 10 + 1, fieldH);
-        }
+        g.drawImage(pitch(fieldW, fieldH), left, top, null);
         g.setColor(LINE);
         g.setStroke(STROKE_2);
         g.drawRect(left + 2, top + 2, fieldW - 4, fieldH - 4);
@@ -3520,10 +3628,11 @@ public final class LiveMatchPanel extends JPanel {
         g.setFont(NAME_FONT);
         String refLabel = shortName(refereeName);
         int refW = g.getFontMetrics().stringWidth(refLabel);
-        g.setColor(NAME_BACK);
-        g.fillRoundRect(rx - refW / 2 - 3, ry - 12 - g.getFontMetrics().getAscent(), refW + 6,
-                g.getFontMetrics().getHeight(), 6, 6);
-        g.setColor(new Color(255, 236, 140));
+        g.setFont(NAME_FONT_LIGHT);
+        refW = g.getFontMetrics().stringWidth(refLabel);
+        g.setColor(new Color(0, 0, 0, 80));
+        g.drawString(refLabel, rx - refW / 2 + 1, ry - 11);
+        g.setColor(new Color(255, 236, 140, 170));
         g.drawString(refLabel, rx - refW / 2, ry - 12);
         for (Ghost ghost : ghosts) {
             int gx = left + (int) (ghost.x * fieldW);
@@ -3661,6 +3770,55 @@ public final class LiveMatchPanel extends JPanel {
             dot.velocityX = 0;
             dot.velocityY = 0;
         }
+    }
+
+    private BufferedImage pitch(int width, int height) {
+        int condition = pitchCondition < 0 ? 0 : pitchCondition;
+        String key = width + "x" + height + ":" + condition;
+        if (pitchImage != null && key.equals(pitchKey)) return pitchImage;
+        BufferedImage image = new BufferedImage(Math.max(1, width), Math.max(1, height), BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = image.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        Color[][] stripes = {
+            { new Color(34, 142, 62), new Color(28, 124, 54) },
+            { new Color(42, 128, 58), new Color(36, 114, 52) },
+            { new Color(70, 118, 54), new Color(62, 108, 50) },
+            { new Color(92, 112, 56), new Color(84, 102, 52) }
+        };
+        int bands = condition == 0 ? 14 : 12;
+        for (int i = 0; i < bands; i++) {
+            g.setColor(stripes[condition][i & 1]);
+            g.fillRect(i * width / bands, 0, width / bands + 1, height);
+        }
+        Random seeded = new Random(System.identityHashCode(matchRef) * 31L + condition);
+        int patches = condition == 0 ? 0 : condition == 1 ? 10 : condition == 2 ? 28 : 55;
+        for (int i = 0; i < patches; i++) {
+            boolean worn = seeded.nextInt(100) < (condition == 3 ? 70 : condition == 2 ? 45 : 20);
+            double zone = seeded.nextDouble();
+            double px = zone < .35 ? (seeded.nextBoolean() ? .02 + seeded.nextDouble() * .12 : .86 + seeded.nextDouble() * .12)
+                    : zone < .55 ? .42 + seeded.nextDouble() * .16 : seeded.nextDouble();
+            double py = .15 + seeded.nextDouble() * .70;
+            int pw = (int) (width * (.02 + seeded.nextDouble() * (condition == 3 ? .07 : .04)));
+            int ph = (int) (height * (.03 + seeded.nextDouble() * (condition == 3 ? .10 : .06)));
+            int alpha = condition == 1 ? 45 : condition == 2 ? 85 : 130;
+            g.setColor(worn ? new Color(122, 92, 58, alpha) : new Color(150, 150, 70, alpha));
+            g.fillOval((int) (px * width) - pw / 2, (int) (py * height) - ph / 2, pw, ph);
+        }
+        g.dispose();
+        pitchImage = image;
+        pitchKey = key;
+        return image;
+    }
+
+    private boolean inFocus(int side, int index, Dot dot) {
+        if (!looseBall && side == possessingSide && index == possessingPlayer) return true;
+        if (ballInFlight && side == receivingSide && index == receivingPlayer) return true;
+        if (looseBall && side == looseSide && index == looseChaser) return true;
+        if (pendingGoalStage != 0 && side == pendingGoalSide && index == pendingGoalActor) return true;
+        if (cardFoulPhase != 0 && side == cardFoulOffenderSide && index == cardFoulOffender) return true;
+        if (penaltyPhase >= 2 && side == penaltySide && index == penaltyActor) return true;
+        if (freeKickPhase != 0 && side == freeKickSide && index == freeKickActor) return true;
+        return distance(dot.currentX, dot.currentY, ballX, ballY) < .10;
     }
 
     private void drawBall(Graphics2D g, int cx, int cy, int radius) {
@@ -3801,6 +3959,8 @@ public final class LiveMatchPanel extends JPanel {
             g.fillOval(x - 9, y - 7, 20, 20);
             g.setColor(fill);
             g.fillOval(x - 10, y - 10, 20, 20);
+            g.setColor(new Color(255, 255, 255, 70));
+            g.fillOval(x - 7, y - 8, 9, 6);
             g.setColor(accent);
             g.setStroke(STROKE_2);
             g.drawOval(x - 10, y - 10, 20, 20);
@@ -3820,12 +3980,21 @@ public final class LiveMatchPanel extends JPanel {
                 g.setColor(CARD_EDGE);
                 g.drawRoundRect(x + 8, y - 13, 6, 10, 2, 2);
             }
-            int textW = metrics.stringWidth(dot.name);
+            boolean focus = inFocus(side, i, dot);
+            g.setFont(focus ? NAME_FONT : NAME_FONT_LIGHT);
+            FontMetrics fm = g.getFontMetrics();
+            int textW = fm.stringWidth(dot.name);
             int tx = x - textW / 2;
-            int ty = y - 14;
-            g.setColor(NAME_BACK);
-            g.fillRoundRect(tx - 3, ty - metrics.getAscent(), textW + 6, metrics.getHeight(), 6, 6);
-            g.setColor(Color.WHITE);
+            int ty = y - 13;
+            if (focus) {
+                g.setColor(new Color(0, 0, 0, 90));
+                g.fillRoundRect(tx - 4, ty - fm.getAscent(), textW + 8, fm.getHeight(), 10, 10);
+                g.setColor(Color.WHITE);
+            } else {
+                g.setColor(new Color(0, 0, 0, 80));
+                g.drawString(dot.name, tx + 1, ty + 1);
+                g.setColor(new Color(255, 255, 255, 135));
+            }
             g.drawString(dot.name, tx, ty);
         }
     }
