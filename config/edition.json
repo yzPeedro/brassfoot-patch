@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.5.1",
+  "version": "2026.5.2",
   "channel": "stable",
-  "releaseNotes": "Novo hub do Brasfoot: instale o Patch 2026, o campo animado ou os dois, crie e restaure backups e jogue pelo aplicativo. Campo animado sincronizado em qualquer velocidade.",
+  "releaseNotes": "Quatro atletas confirmados por fontes oficiais, 17 idades atualizadas e preservação de cinco mudanças sem evidência suficiente.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [

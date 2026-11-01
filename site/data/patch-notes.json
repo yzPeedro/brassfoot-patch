@@ -1,7 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-01T17:45:00-03:00",
+  "updatedAt": "2026-11-01T16:55:00-03:00",
   "entries": [
+    {
+      "id": "patch-2026-5-2",
+      "version": "2026.5.2",
+      "date": "2026-11-01T16:55:00-03:00",
+      "title": "Quatro elencos e idades atualizados",
+      "kind": "patch",
+      "summary": "A coleta diária confirmou quatro atletas em fontes oficiais e atualizou 17 idades sem aceitar mudanças incertas.",
+      "changes": [
+        "Savvas Sofokleous entrou no Apollon Limassol, Teodor Afilipoaie no FC Botoșani, Boris Dimitrov no Mura e Luken Beitia na Real Sociedad.",
+        "Dezessete atletas tiveram a idade recalculada na data de referência de 01/11/2026.",
+        "Cinco mudanças sugeridas pela coleta foram preservadas ou rejeitadas por falta de confirmação oficial ou conflito com fontes oficiais recentes.",
+        "A consulta cobriu os 704 clubes: 288 fontes completas, 54 parciais preservadas e 362 identidades ainda pendentes de uma fonte completa.",
+        "O executável, a Copa do Mundo de 2026, as copas continentais, o hub e o campo animado foram preservados."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.5.2"
+    },
     {
       "id": "patch-2026-5-1",
       "version": "2026.5.1",

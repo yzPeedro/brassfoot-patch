@@ -104,7 +104,33 @@ def curated_clubs(existing):
     return result
 
 
-def compile_rosters(base_game, original_game, output, snapshot, supplements, fallback_game, java, javac, reference, version):
+def load_club_identities(path, output):
+    if not path or not path.exists():return None
+    data=json.loads(path.read_text(encoding="utf8"))
+    rows=[]
+    allowed={"name","stadium","manager","primaryColor","secondaryColor","divisionLevel"}
+    for club in data["clubs"]:
+        fields=club.get("fields",{})
+        unknown=set(fields)-allowed
+        if unknown:raise ValueError("Unknown club identity fields: "+str(sorted(unknown)))
+        values=[]
+        for field in ["name","stadium","manager","primaryColor","secondaryColor"]:
+            fact=fields.get(field)
+            if fact:
+                if not all(fact.get(key) for key in ("sourceUrl","sourcePublishedAt","sourceLevel")):
+                    raise ValueError(f"Incomplete identity evidence for {club['teamFile']} {field}")
+                values.append(base64.b64encode(str(fact["value"]).encode()).decode())
+            else:values.append("")
+        division=fields.get("divisionLevel")
+        if division and not all(division.get(key) for key in ("sourceUrl","sourcePublishedAt","sourceLevel")):
+            raise ValueError(f"Incomplete identity evidence for {club['teamFile']} divisionLevel")
+        rows.append("\t".join([Path(club["teamFile"]).name,*values,str(division["value"]) if division else ""]))
+    target=output/"club-identities.tsv"
+    target.write_text("\n".join(rows)+("\n" if rows else ""),encoding="utf8")
+    return target
+
+
+def compile_rosters(base_game, original_game, output, snapshot, supplements, fallback_game, java, javac, reference, version, club_identities):
     output=output.resolve()
     for protected in [base_game,original_game,fallback_game]:
         if protected and (output.is_relative_to(protected.resolve()) or protected.resolve().is_relative_to(output)):
@@ -339,7 +365,10 @@ def compile_rosters(base_game, original_game, output, snapshot, supplements, fal
         missing=[{"teamFile":team,"playerName":status_targets[(team,name)]["playerName"]}
                  for team,name in status_targets if status_matches[(team,name)]!=1]
         if missing:raise ValueError("Player status targets not matched exactly once: "+json.dumps(missing,ensure_ascii=False))
-    compiler=run([java,"-cp",classes,"app.Main","batch-rosters",base_game/"teams",tsvs,output/"teams"])
+    identities=load_club_identities(club_identities,output)
+    compiler_command=[java,"-cp",classes,"app.Main","batch-rosters",base_game/"teams",tsvs,output/"teams"]
+    if identities:compiler_command.append(identities)
+    compiler=run(compiler_command)
     result={"schemaVersion":1,"version":version,"referenceDate":reference.isoformat(),
         "snapshotSha256":hashlib.sha256(snapshot.read_bytes()).hexdigest(),"compilerOutput":json.loads(compiler),
         "counts":dict(counts),"clubs":club_reports,"fullNameProvenance":full_name_records,
@@ -370,10 +399,12 @@ def main():
     parser.add_argument("--reference-date",type=date.fromisoformat,
                         default=sao_paulo_today())
     parser.add_argument("--version",default=edition["version"])
+    parser.add_argument("--club-identities",type=Path)
     args=parser.parse_args()
     snapshot=args.snapshot or ROOT/f"config/rosters-{args.version}.json"
     report=compile_rosters(args.base_game,args.original_game,args.output,snapshot,args.supplement,
-                           args.fallback_game,args.java,args.javac,args.reference_date,args.version)
+                           args.fallback_game,args.java,args.javac,args.reference_date,args.version,
+                           args.club_identities or ROOT/f"config/club-identity-{args.reference_date.year}.json")
     print(json.dumps(report["counts"],ensure_ascii=True))
 
 

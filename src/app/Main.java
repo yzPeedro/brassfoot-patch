@@ -191,7 +191,45 @@ public final class Main {
 
     /** One production compiler invocation; preserves every base team field and
      * secondary player field except the explicitly requested display-name rule. */
-    private static void batchRosters(Path sourceDir, Path rosterDir, Path destinationDir) throws Exception {
+    private static Map<String, String[]> readIdentities(Path path) throws Exception {
+        Map<String, String[]> result = new HashMap<>();
+        if (path == null) return result;
+        for (String row : Files.readAllLines(path, StandardCharsets.UTF_8)) {
+            String[] values = row.split("\t", -1);
+            if (values.length != 7) throw new IllegalArgumentException("Expected 7 columns in identity row");
+            if (result.put(values[0], values) != null) throw new IllegalArgumentException("Duplicate team identity: " + values[0]);
+        }
+        return result;
+    }
+
+    private static String identityString(String value, String label, int maximum) {
+        if (value.isEmpty()) return null;
+        String decoded = new String(Base64.getDecoder().decode(value), StandardCharsets.UTF_8).strip();
+        if (decoded.isEmpty() || decoded.length() > maximum) throw new IllegalArgumentException("Invalid " + label);
+        return decoded;
+    }
+
+    private static void applyIdentity(t team, String[] values) {
+        String name = identityString(values[1], "club name", 40);
+        String stadium = identityString(values[2], "stadium", 60);
+        String manager = identityString(values[3], "manager", 60);
+        String primary = identityString(values[4], "primary color", 7);
+        String secondary = identityString(values[5], "secondary color", 7);
+        if (name != null) team.e = name;
+        if (stadium != null) team.f = stadium;
+        if (manager != null) team.h = manager;
+        if (primary != null) {
+            if (!primary.matches("#[0-9a-fA-F]{6}")) throw new IllegalArgumentException("Invalid primary color");
+            team.cor1 = primary.toLowerCase(Locale.ROOT);
+        }
+        if (secondary != null) {
+            if (!secondary.matches("#[0-9a-fA-F]{6}")) throw new IllegalArgumentException("Invalid secondary color");
+            team.cor2 = secondary.toLowerCase(Locale.ROOT);
+        }
+        if (!values[6].isEmpty()) team.c = parseIntField(values[6], "division level", 0, 100);
+    }
+
+    private static void batchRosters(Path sourceDir, Path rosterDir, Path destinationDir, Path identityPath) throws Exception {
         sourceDir = sourceDir.toAbsolutePath().normalize();
         rosterDir = rosterDir.toAbsolutePath().normalize();
         destinationDir = destinationDir.toAbsolutePath().normalize();
@@ -199,8 +237,9 @@ public final class Main {
                 || destinationDir.startsWith(rosterDir) || Files.exists(destinationDir))
             throw new IOException("Batch destination must be new and separate from its inputs");
         List<Path> sources = teamFiles(sourceDir);
+        Map<String, String[]> identities = readIdentities(identityPath);
         Files.createDirectories(destinationDir);
-        int updated = 0, players = 0;
+        int updated = 0, identityUpdates = 0, players = 0;
         for (Path source : sources) {
             t team = load(source);
             Path roster = rosterDir.resolve(source.getFileName() + ".tsv");
@@ -208,13 +247,19 @@ public final class Main {
                 team.l = readRoster(roster);
                 updated++;
             }
+            String[] identity = identities.remove(source.getFileName().toString());
+            if (identity != null) {
+                applyIdentity(team, identity);
+                identityUpdates++;
+            }
             shortenNames(team.l);
             shortenNames(team.m);
             players += team.l == null ? 0 : team.l.size();
             store(team, destinationDir.resolve(source.getFileName()));
         }
+        if (!identities.isEmpty()) throw new IllegalArgumentException("Unknown team identities: " + identities.keySet());
         System.out.println("{\"teams\":" + sources.size() + ",\"rostersSupplied\":" + updated
-                + ",\"players\":" + players + "}");
+                + ",\"identitiesSupplied\":" + identityUpdates + ",\"players\":" + players + "}");
     }
 
     private static void usage() {
@@ -225,15 +270,15 @@ public final class Main {
         System.err.println("  audit-directory <installation/teams>");
         System.err.println("  export-directory <installation/teams> <out-json-directory>");
         System.err.println("  replace-roster <original.ban> <roster.tsv> <new.ban>");
-        System.err.println("  batch-rosters <base-teams-dir> <tsv-dir> <new-teams-dir>");
+        System.err.println("  batch-rosters <base-teams-dir> <tsv-dir> <new-teams-dir> [identities.tsv]");
     }
 
     public static void main(String[] args) throws Exception {
         if (args.length < 2) {usage(); System.exit(2);}
         switch (args[0]) {
             case "batch-rosters": {
-                if (args.length != 4) {usage(); System.exit(2);}
-                batchRosters(Path.of(args[1]), Path.of(args[2]), Path.of(args[3]));
+                if (args.length != 4 && args.length != 5) {usage(); System.exit(2);}
+                batchRosters(Path.of(args[1]), Path.of(args[2]), Path.of(args[3]), args.length == 5 ? Path.of(args[4]) : null);
                 break;
             }
             case "inspect": {

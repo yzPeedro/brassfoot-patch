@@ -225,7 +225,7 @@ Contadores principais de `counts`:
 
 A divisão de cada clube brasileiro é um atributo da própria equipe no `.ban`, um nível numérico. O plano de transição de 2026 em `tools/year-division-lab/changes.tsv` classifica `>= 16` como A, `12–15` como B e `10–11` como C.
 
-Esses campos vêm do **jogo-base** (`--base-game`), porque `batch-rosters` preserva tudo da equipe exceto a lista de jogadores. Mudar a composição das divisões é, portanto, mudar a base, não o snapshot de elencos.
+Esses campos vêm do **jogo-base** (`--base-game`). Quando `config/club-identity-<ano>.json` contém fatos aceitos, `compile_live_rosters.py` também aplica nome exibido, estádio, técnico, cores e nível de divisão no mesmo passe de `batch-rosters`; campos ausentes preservam a base. Cada valor exige URL, data e nível da fonte.
 
 Arquivos de referência versionados:
 

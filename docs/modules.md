@@ -77,9 +77,10 @@ Gera os arquivos de equipe `.ban` a partir do snapshot, fora do jogo.
 | `--java`, `--javac` | `java`, `javac` | JDK usado para compilar `src/` |
 | `--reference-date AAAA-MM-DD` | hoje em São Paulo | data de cálculo das idades |
 | `--version` | `config/edition.json` | versão gravada no relatório |
+| `--club-identities PATH` | `config/club-identity-<ano>.json` | fatos aceitos de nome, estádio, técnico, cores e nível de divisão |
 
 - **Saída:** `<output>/teams/*.ban` e `<output>/report.json`, com contagens, provenance por jogador, auditoria de estrela/Top Mundial e limitações. Também ficam no diretório as pastas intermediárias `classes/`, `base-json/`, `original-json/`, `prior-json/` e `roster-tsv/`.
-- **Dependências:** `src/app/Main.java` (subcomandos `export-directory` e `batch-rosters`), `tools/roster_position_map.py` e `tools/audit_official_roster_tsv.py`.
+- **Dependências:** `src/app/Main.java` (subcomandos `export-directory` e `batch-rosters`), `tools/roster_position_map.py`, `tools/audit_official_roster_tsv.py` e `config/club-identity-<ano>.json`.
 - **Restrições:** aborta se um alvo de `config/player-status-<ano>.json` não casar exatamente uma vez; recusa saída dentro das bases.
 
 ### `tools/roster_position_map.py`
