@@ -128,6 +128,30 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 .toast.show{opacity:1}
 .alert{display:none;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;background:var(--warn-soft);color:var(--warn);font-size:13px;font-weight:600;margin-bottom:18px}
 .alert.show{display:flex}
+.banners{display:grid;gap:10px;margin-bottom:18px}
+.banners:empty{display:none}
+.banner{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;border:1px solid #c9d8fb;background:var(--brand-soft);color:var(--ink-2);font-size:13px}
+.banner svg{flex:none;color:var(--brand)}
+.banner .text{flex:1;min-width:0}
+.banner strong{display:block;color:var(--ink);font-size:14px}
+.banner .btn{min-height:34px;padding:0 14px;font-size:13px}
+.banner.hub{border-color:#bfe6d5;background:var(--ok-soft)}
+.banner.hub svg{color:var(--ok)}
+.banner.muted{border-color:var(--line);background:var(--surface)}
+.banner.muted svg{color:var(--muted)}
+.banner.warn{border-color:#f1d9a6;background:var(--warn-soft)}
+.banner.warn svg{color:var(--warn)}
+.available{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:-6px 0 16px;font-size:12.5px;color:var(--muted)}
+.modal.wide{width:min(620px,calc(100% - 40px))}
+.notes{max-height:min(52vh,420px);overflow:auto;padding:4px 14px 4px 2px;margin:6px 0 0;color:var(--ink-2);font-size:13.5px;user-select:text}
+.notes h4{margin:14px 0 6px;font-size:15px;color:var(--ink)}
+.notes h5{margin:12px 0 4px;font-size:13.5px;color:var(--ink)}
+.notes p{margin:0 0 8px;color:var(--ink-2)}
+.notes ul{margin:0 0 10px;padding-left:20px}
+.notes li{margin:3px 0}
+.notes code{font:500 12px var(--mono);background:var(--surface);padding:1px 5px;border-radius:5px}
+.notes a{color:var(--brand);cursor:pointer;font-weight:600}
+.meta{font:600 11px var(--mono);letter-spacing:.06em;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
 @keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 @keyframes pulse{0%{opacity:.9;transform:scale(.6)}100%{opacity:0;transform:scale(2.2)}}
@@ -155,6 +179,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
       </div>
     </aside>
     <main>
+      <div class="banners" id="banners"></div>
       <div class="alert" id="running"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span>O Brasfoot está aberto. Feche o jogo antes de instalar ou restaurar.</span></div>
 
       <section class="view active" id="view-home">
@@ -167,6 +192,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
               <div class="status-row"><div><strong>Patch 2026</strong><small>Elencos, ano 2026 e copas</small></div><span class="badge off" id="badge-patch">—</span></div>
               <div class="status-row"><div><strong>Campo animado</strong><small>Partidas ao vivo na tela de jogo</small></div><span class="badge off" id="badge-live">—</span></div>
             </div>
+            <div class="available" id="available"></div>
             <div class="actions">
               <button class="btn primary big play" id="play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15a1 1 0 0 0 1.5.9l12-7.5a1 1 0 0 0 0-1.8l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>Jogar</button>
               <button class="btn ghost" id="go-install">Instalar</button>
@@ -220,12 +246,13 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 <script>
 (() => {
   const $ = id => document.getElementById(id);
-  const state = {info: null, game: null, mode: 'install', selection: {patch: true, live: true}, busy: false};
+  const state = {info: null, game: null, feed: {loading: true}, feedPercent: null, mode: 'install', selection: {patch: true, live: true}, busy: false};
   const names = {patch: 'o Patch 2026', live: 'o campo animado'};
   const icons = {
     ok: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>',
     error: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 8v5m0 4h.01"/><circle cx="12" cy="12" r="9"/></svg>',
     restore: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>',
+    news: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-5-5 5 5 5-5M5 21h14"/></svg>',
     pix: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4z"/></svg>'
   };
   const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
@@ -238,9 +265,41 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
     clearTimeout(toast.timer);
     toast.timer = setTimeout(() => element.classList.remove('show'), 3200);
   }
-  function modal(kind, html, buttons) {
+  function inline(text) {
+    return escape(text)
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/\[([^\]]+)\]\((https:\/\/[^)\s]+)\)/g, '<a data-url="$2">$1</a>');
+  }
+  function markdown(text) {
+    const out = [];
+    let list = false;
+    const close = () => { if (list) { out.push('</ul>'); list = false; } };
+    String(text || '').split(/\r?\n/).forEach(raw => {
+      const line = raw.trim();
+      if (!line) { close(); return; }
+      const heading = line.match(/^(#{1,4})\s+(.*)$/);
+      if (heading) {
+        close();
+        const tag = heading[1].length <= 2 ? 'h4' : 'h5';
+        out.push('<' + tag + '>' + inline(heading[2]) + '</' + tag + '>');
+        return;
+      }
+      const item = line.match(/^[-*]\s+(.*)$/);
+      if (item) {
+        if (!list) { out.push('<ul>'); list = true; }
+        out.push('<li>' + inline(item[1]) + '</li>');
+        return;
+      }
+      close();
+      out.push('<p>' + inline(line) + '</p>');
+    });
+    close();
+    return out.join('') || '<p>Sem notas para esta versão.</p>';
+  }
+  function modal(kind, html, buttons, wide) {
     const box = $('modal');
-    box.className = 'modal ' + kind;
+    box.className = 'modal ' + kind + (wide ? ' wide' : '');
     box.innerHTML = '<div class="icon">' + (icons[kind] || icons.restore) + '</div>' + html + '<div class="actions"></div>';
     const actions = box.querySelector('.actions');
     buttons.forEach(button => {
@@ -250,6 +309,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
       element.addEventListener('click', () => { closeModal(); button.action?.(); });
       actions.append(element);
     });
+    box.querySelectorAll('[data-url]').forEach(link => link.addEventListener('click', () => call('hubOpenExternal', link.dataset.url)));
     $('overlay').classList.add('show');
     actions.lastChild?.focus();
   }
@@ -261,6 +321,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
     if (!game?.valid) return 'absent';
     const value = game[name];
     if (value === true) return 'current';
+    if (value === 'unknown') return 'unknown';
     return value === 'current' || value === 'outdated' ? value : 'absent';
   }
   function anyStatus(status) { return statusOf('patch') === status || statusOf('live') === status; }
@@ -299,14 +360,93 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
     element.textContent = text;
     element.className = 'badge ' + tone;
   }
-  const homeBadges = {current: ['Instalado', 'ok'], outdated: ['Atualização disponível', 'partial'], absent: ['Não instalado', 'off']};
+  const homeBadges = {current: ['Instalado', 'ok'], outdated: ['Atualização disponível', 'partial'], absent: ['Não instalado', 'off'], unknown: ['Verificando…', 'off']};
   function optionBadge(name) {
     const status = statusOf(name);
+    if (status === 'unknown') return ['Verificando…', 'off'];
     if (status === 'current') return ['Instalado', 'ok'];
     if (status === 'outdated') return state.mode === 'update' ? ['Será atualizado', 'partial'] : ['Atualização disponível', 'partial'];
     return state.mode === 'update' ? ['Disponível para adicionar', 'off'] : ['Não instalado', 'off'];
   }
+  const dayFormat = new Intl.DateTimeFormat('pt-BR', {day: '2-digit', month: 'long', year: 'numeric'});
+  function publishedLabel(feed) {
+    const when = Date.parse(feed?.publishedAt || '');
+    return Number.isNaN(when) ? '' : 'Publicada em ' + dayFormat.format(when);
+  }
+  function showPatchNotes() {
+    const feed = state.feed || {};
+    const outdated = !!state.game?.valid && anyStatus('outdated');
+    const buttons = [{label: 'Fechar'}];
+    if (outdated) buttons.push({label: 'Atualizar agora', primary: true, action: () => openMode('update')});
+    modal('news', '<div class="meta">' + escape(publishedLabel(feed)) + '</div><h3>Novidades da versão ' + escape(feed.patchVersion || '') + '</h3><div class="notes">' + markdown(feed.notes) + '</div>', buttons, true);
+  }
+  function showHubNotes() {
+    const feed = state.feed || {};
+    const buttons = [{label: 'Agora não'}];
+    if (feed.hubUpdate) buttons.push({label: 'Atualizar instalador', primary: true, action: updateHub});
+    modal('news', '<div class="meta">Você está com a versão ' + escape(feed.hubVersion || state.info?.hubVersion || '') + '</div><h3>O que mudou no instalador ' + escape(feed.hubRemote || '') + '</h3><div class="notes">' + markdown(feed.hubNotes) + '</div><p style="margin-top:12px">O instalador baixa a nova versão, confere o arquivo e reabre sozinho. Seu jogo e seus backups não são alterados.</p>', buttons, true);
+  }
+  function updateHub() {
+    setBusy('hub-update');
+    call('hubUpdateHub').catch(error => { setBusy(''); toast(error.message || error); });
+  }
+  function banner(kind, icon, title, text, actions) {
+    const element = document.createElement('div');
+    element.className = 'banner ' + kind;
+    element.innerHTML = icon + '<div class="text"><strong>' + escape(title) + '</strong>' + escape(text) + '</div>';
+    actions.forEach(action => {
+      const button = document.createElement('button');
+      button.className = 'btn ' + (action.primary ? 'primary' : 'ghost');
+      button.textContent = action.label;
+      button.disabled = state.busy;
+      button.addEventListener('click', action.run);
+      element.append(button);
+    });
+    return element;
+  }
+  const bannerIcons = {
+    hub: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>',
+    patch: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-5-5 5 5 5-5M5 21h14"/></svg>',
+    info: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M12 11v5"/></svg>'
+  };
+  function renderBanners() {
+    const box = $('banners');
+    box.innerHTML = '';
+    const feed = state.feed || {};
+    if (feed.loading) {
+      const percent = state.feedPercent == null ? '' : ' · ' + state.feedPercent + '%';
+      box.append(banner('muted', bannerIcons.info, 'Buscando a versão mais recente' + percent, 'O hub confere no GitHub se há patch ou instalador novo.', []));
+      return;
+    }
+    if (feed.hubUpdate) {
+      box.append(banner('hub', bannerIcons.hub, 'Nova versão do instalador: ' + feed.hubRemote, 'Atualize pelo próprio hub, sem baixar nada no site.', [
+        {label: 'O que mudou', run: showHubNotes},
+        {label: 'Atualizar instalador', primary: true, run: updateHub}
+      ]));
+    }
+    if (feed.loaded && state.game?.valid && anyStatus('outdated')) {
+      box.append(banner('', bannerIcons.patch, 'Nova versão do patch: ' + feed.patchVersion, publishedLabel(feed) || 'Já disponível para instalar.', [
+        {label: 'Ver novidades', run: showPatchNotes},
+        {label: 'Atualizar', primary: true, run: () => openMode('update')}
+      ]));
+    }
+    if (feed.problem) {
+      const offline = feed.cached && feed.loaded;
+      box.append(banner('warn', bannerIcons.info, offline ? 'Sem conexão: usando a versão ' + feed.patchVersion + ' guardada' : 'Não foi possível buscar a versão mais recente', offline ? 'Quando a internet voltar, o hub confere se há novidades.' : feed.problem, [
+        {label: 'Tentar de novo', run: () => call('hubCheckUpdates').catch(error => toast(error.message || error))}
+      ]));
+    }
+  }
+  function renderAvailable() {
+    const feed = state.feed || {};
+    const element = $('available');
+    if (!feed.patchVersion || feed.loading) { element.innerHTML = ''; return; }
+    element.innerHTML = '<span>Versão mais recente: <strong>' + escape(feed.patchVersion) + '</strong>' + (feed.preview ? ' · prévia local' : '') + '</span><button class="link" id="news-open">Ver novidades</button>';
+    $('news-open').addEventListener('click', showPatchNotes);
+  }
   function render() {
+    renderBanners();
+    renderAvailable();
     const game = state.game;
     const valid = !!game?.valid;
     $('game-path').textContent = game?.game || 'Nenhuma pasta selecionada';
@@ -322,12 +462,14 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
     const absent = valid && anyStatus('absent');
     if (!game?.game) $('home-title').textContent = 'Onde está o seu Brasfoot?';
     else if (!valid) $('home-title').textContent = game.error?.title || 'Pasta não reconhecida.';
+    else if (anyStatus('unknown')) $('home-title').textContent = state.feed?.loading ? 'Conferindo a versão mais recente…' : 'Sem versão do patch disponível agora.';
     else if (outdated) $('home-title').textContent = 'Há uma atualização disponível.';
     else if (!absent) $('home-title').textContent = 'Tudo pronto para jogar.';
     else $('home-title').textContent = 'Seu Brasfoot foi encontrado.';
     $('play').disabled = !valid || state.busy;
-    $('go-install').disabled = !valid || state.busy || !absent;
-    $('go-update').disabled = !valid || state.busy || !outdated;
+    const ready = !!state.feed?.loaded;
+    $('go-install').disabled = !valid || state.busy || !absent || !ready;
+    $('go-update').disabled = !valid || state.busy || !outdated || !ready;
     $('go-update').classList.toggle('ready', outdated && !state.busy);
     $('update-pip').hidden = !outdated;
     const update = state.mode === 'update';
@@ -345,9 +487,10 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
     const chosen = ['patch', 'live'].filter(included);
     const button = $('install');
     button.textContent = update ? 'Atualizar' : 'Instalar';
-    button.disabled = !valid || state.busy || chosen.length === 0;
+    button.disabled = !valid || state.busy || chosen.length === 0 || !ready;
     let hint = '';
     if (!valid) hint = 'Escolha a pasta do Brasfoot no Início.';
+    else if (!ready) hint = state.feed?.loading ? 'Buscando a versão mais recente…' : 'Conecte-se à internet para baixar o patch.';
     else if (update && !outdated) hint = 'Você já está na versão mais recente.';
     else if (!update && !absent) hint = outdated ? 'Tudo já está instalado. Use Atualizar para ir à nova versão.' : 'Tudo já está instalado.';
     else if (chosen.length === 0) hint = 'Marque ao menos uma opção.';
@@ -433,6 +576,8 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 
   window.hubEvent = event => {
     if (event.type === 'state') { state.game = event.state; render(); return; }
+    if (event.type === 'feed') { state.feed = event.feed; state.feedPercent = null; render(); return; }
+    if (event.type === 'feed-progress') { state.feedPercent = event.percent; renderBanners(); return; }
     if (event.type === 'toast') { toast(event.message); return; }
     if (event.type === 'progress') {
       if (!state.busy) setBusy(event.operation);
@@ -465,7 +610,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
     }
   };
 
-  call('hubInfo').then(info => { state.info = info; $('version').textContent = 'v' + info.version; }).catch(() => {});
+  call('hubInfo').then(info => { state.info = info; $('version').textContent = 'Hub ' + info.hubVersion + (info.preview ? ' · prévia' : ''); }).catch(() => {});
   render();
   call('hubRefresh');
 })();

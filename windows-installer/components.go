@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io/fs"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -203,6 +204,9 @@ func componentManifest(m Manifest, selection Selection, state GameState) (Manife
 
 func stageComponents(root, gamePath string, selection Selection) (Plan, error) {
 	m := bundledManifestFromFS()
+	if len(m.Files) == 0 {
+		return Plan{}, errors.New("nenhuma versão do patch foi carregada; conecte-se à internet e tente de novo")
+	}
 	state, err := detectState(m, gamePath)
 	if err != nil {
 		return Plan{}, err
@@ -222,7 +226,7 @@ func stageComponents(root, gamePath string, selection Selection) (Plan, error) {
 	if err = os.WriteFile(filepath.Join(staged, "manifest.json"), body, 0600); err != nil {
 		return Plan{}, err
 	}
-	if err = preparePayloadManifest(deltaPayload, cm, state.Game, staged); err != nil {
+	if err = preparePayloadManifest(currentPayload(), cm, state.Game, staged); err != nil {
 		return Plan{}, err
 	}
 	return inspect(staged, state.Game)
@@ -230,7 +234,7 @@ func stageComponents(root, gamePath string, selection Selection) (Plan, error) {
 
 func bundledManifestFromFS() Manifest {
 	var m Manifest
-	body, err := deltaPayload.ReadFile("bundled_release/manifest.json")
+	body, err := fs.ReadFile(currentPayload(), "bundled_release/manifest.json")
 	if err == nil {
 		_ = json.Unmarshal(body, &m)
 	}

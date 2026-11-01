@@ -106,7 +106,7 @@ Gera o explorador público de clubes (`site/data/patch-clubs.json`) com todos os
 | `--report PATH` | obrigatório (o `report.json` da compilação, com `teams/` ao lado) |
 | `--output PATH` | `site/data/patch-clubs.json` |
 
-Exige que a versão do relatório, de `config/edition.json` e de `windows-installer/bundled_release/manifest.json` sejam iguais, e que cada `.ban` compilado tenha o SHA-256 registrado no manifesto embutido. Lê `config/rosters-<versão>.json`, `config/live-rosters-supplement.json` e `config/brasfoot-country-names.json`.
+Exige que a versão do relatório, de `config/edition.json` e de `windows-installer/bundled_release/manifest.json` sejam iguais, e que cada `.ban` compilado tenha o SHA-256 registrado no manifesto do pacote. Lê `config/rosters-<versão>.json`, `config/live-rosters-supplement.json` e `config/brasfoot-country-names.json`.
 
 ### Catálogo mundial diário
 
@@ -349,7 +349,7 @@ Módulo Go (`go 1.23`, dependência `github.com/jchv/go-webview2`). O mesmo cód
 | Arquivo | Função |
 |---|---|
 | `engine.go` | estruturas `Manifest`/`ManifestFile`, validação da pasta do jogo (`options.bcf`, `teams/`), `inspect` (plano de instalação), `install` com backup em `%LOCALAPPDATA%\BrassfootPatch2026\backups`, substituição verificada e rollback |
-| `bundle.go` | embute `bundled_release/manifest.json` e `bundled_release/patches/*.json`; aplica receitas `schemaVersion` 1 (operações), 2 (variantes) e 3 (cadeia de 2 a 8 etapas), conferindo tamanho e SHA-256 do resultado |
+| `bundle.go` | mantém em memória o pacote da versão carregado pelo `feed.go` (`bundled_release/manifest.json` e `bundled_release/patches/*.json`); aplica receitas `schemaVersion` 1 (operações), 2 (variantes) e 3 (cadeia de 2 a 8 etapas), conferindo tamanho e SHA-256 do resultado |
 | `components.go` | instalação por componentes `patch`, `live` e `patch+live`: detecta o estado do jogo pelo SHA do executável e monta um manifesto restrito à seleção |
 | `snapshots.go` | backups completos da pasta do jogo em ZIP (`...\BrassfootPatch2026\snapshots`, até 4 GiB), listagem, verificação por SHA-256 e restauração; na restauração, só remove arquivos extras dentro de `teams/`, `conf_ligas_nacionais/` e `conf_estadual/` |
 | `restore.go` | localiza o backup de instalação compatível e restaura os arquivos anteriores |
@@ -363,7 +363,9 @@ Módulo Go (`go 1.23`, dependência `github.com/jchv/go-webview2`). O mesmo cód
 | `ui/` | `hub.html` (interface), `mark.svg` e `pitch.jpg`, embutidos no binário |
 | `winres/` | `winres.json` e ícones `icon-*.png` para os recursos do executável Windows |
 | `assets/app-icon.svg` | fonte vetorial do ícone |
-| `bundled_release/` | bundle da release atual embutido no build (`--bundle windows-installer/bundled_release` no fluxo de publicação) |
+| `bundled_release/` | bundle da release atual no repositório; `build_distribution.py --bundle windows-installer/bundled_release` o publica como `Brasfoot-Mega-Patch-<versão>-bundle.zip` (não é mais embutido no hub) |
+| `feed.go` | lê o `release.json` da release mais recente (ou de `--feed`), baixa e guarda em cache o pacote conferido por SHA-256, compara versões do hub e do patch |
+| `hub_setup_windows.go` | instala o hub em `%LOCALAPPDATA%\Programs\Brasfoot Mega Patch`, cria atalhos, registra em Aplicativos, remove (`--uninstall-hub`) e aplica a autoatualização |
 | `*_test.go` | testes Go do motor, restauração, preservação e integração |
 
 ```bash
