@@ -37,7 +37,7 @@ Dependências ou bloqueadores:
 
 ## F1 — Campo animado da partida (prévia PRIVADA) · prioridade P0
 
-**Checkpoint:** 31/10/2026 ~19h40 (Brasília), Claude Code. Estado: prévia **2026.4.34 compilada** (a 4.33 foi instalada pelo proprietário), sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
+**Checkpoint:** 31/10/2026 ~19h40 (Brasília), Claude Code. Estado: prévia **2026.4.36 compilada** (a 4.34 foi instalada pelo proprietário), sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
 
 - **Objetivo final:** desenhar um campo 2D dentro da tela original de partida, abaixo do placar e acima da tabela de outros jogos, com os 22 jogadores, bola e eventos sincronizados com a engine, **sem alterar o resultado simulado**. A entrega é sempre um instalador local para o proprietário testar.
 - **Onde está o código:** branch `live-match-preview` (no GitHub, sem merge na `main`), commits reescritos em 31/10 sem coautoria:
@@ -52,6 +52,38 @@ Dependências ou bloqueadores:
   - `config/edition-live-match-preview.json`;
   - ajustes em `tools/build_distribution.py` (canal lido da edição) e `tools/build_release_bundle.py`.
 - **Contexto histórico:** manual §6 e Apêndice A do [contexto mestre](BRASFOOT-MEGA-PATCH-CONTEXTO-MESTRE.md) (transcript do Work, L891–3085).
+
+### Atualização 2026.4.35–4.36 (01/11/2026), garantia de não travar, gols sem reinício, realismo, bola e expulsões
+
+- **Pedido:**
+  - pênalti nos acréscimos travou tudo (relógio parado até o fim), e **a prévia nunca pode travar o jogo**;
+  - gols sem reinício (o jogo seguia de onde estava);
+  - passes infinitos ou para trás sem motivo, troca de passes ofensiva sem lance previsto, ignorando a estratégia;
+  - bola com textura, rotação e modelo diferente por partida;
+  - expulso sem participar do lance e sumindo do campo.
+- **Garantia de não travar** (`tick` → `tickUnsafe` + `watchdog`):
+  - qualquer exceção no quadro chama `failSafeReset`, que zera todas as fases, sai do laço do pênalti, deixa a bola livre e devolve o relógio ao Brasfoot;
+  - vigia por fase: a mesma fase parada mais de 15 s sem modal é zerada;
+  - teto de 45 s com relógio segurado;
+  - pênalti com limite de 25 s fora do modal; laço do pênalti com 10 s;
+  - fim de jogo (`GU`) zera tudo uma vez.
+- **Gol sem reinício:** a detecção usava só `tV()` (último lance). Como o motor registra a assistência logo após o gol, um gol não antecipado se perdia. Agora `scanEngineActions` varre todos os lances concluídos do minuto atual e do anterior em `hE` (com linha de base na criação do painel).
+- **Posse e progressão:**
+  - sem lance ofensivo previsto (finalização oficial pendente, gol ou pênalti do minuto), a progressão é limitada (equilibrado 0,67; ataque total 0,71; contra-ataque 0,63);
+  - acima de 0,76 sem lance previsto, um defensor afasta a bola;
+  - posse encerrada por desarme após N passes (conforme estilo e % de posse oficial);
+  - passe para trás só sob pressão;
+  - inversões e conduções mantidas.
+- **Bola:** 5 modelos (clássica, azul, laranja, vermelha, Telstar) sorteados por partida, com rotação proporcional ao deslocamento.
+- **Expulsão e substituição:**
+  - apito da falta com cartão só com contato; após 4 s, infrator e portador convergem; prazo extremo de 14 s;
+  - expulso não é reativado pela lista do motor;
+  - expulsos e substituídos saem caminhando até a lateral (`Ghost`).
+- **Builds:**
+  - 4.35 (`20261101-failsafe`, `dd11f39`) não entregue;
+  - **4.36** `dist/live-match-preview-2026.4.36/`, EXE de jogo `data/private/live-match-preview-20261101-walk-off/bf22-23.exe` (`dd7241be…5582`), 32 origens, bytecode verificado, commit `eb49c1c`.
+- **Estado:** compilada, não testada em jogo.
+- **Próxima build:** incluir `20261101-walk-off` entre os `--previous-preview-executable`.
 
 ### Atualização 2026.4.34 (01/11/2026), espaço próprio no layout original e debug desligado
 
