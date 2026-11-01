@@ -15,6 +15,7 @@ import (
 	"strings"
 	"sync"
 	"syscall"
+	"time"
 	"unsafe"
 
 	webview2 "github.com/jchv/go-webview2"
@@ -31,8 +32,8 @@ var hubMark string
 var hubPitch []byte
 
 const (
-	hubWidth          = 1040
-	hubHeight         = 680
+	hubWidth          = 1240
+	hubHeight         = 820
 	gwlStyle          = -16
 	gwlWndProc        = -4
 	wsPopup           = 0x80000000
@@ -126,8 +127,17 @@ func hubRefresh() {
 	game := hubCurrentGame()
 	go func() {
 		state := map[string]any{"game": game, "valid": false}
-		if game != "" {
-			manifest := bundledManifestFromFS()
+		manifest := bundledManifestFromFS()
+		if game != "" && len(manifest.Files) == 0 {
+			if resolved, _, err := validGame(game); err != nil {
+				d := diagnose(err)
+				state["error"] = map[string]string{"title": d.Title, "reason": d.Reason, "action": d.Action}
+			} else {
+				state["valid"] = true
+				state["game"] = resolved
+				state["patch"], state["live"] = "unknown", "unknown"
+			}
+		} else if game != "" {
 			current, err := detectState(manifest, game)
 			if err != nil {
 				d := diagnose(err)
@@ -155,9 +165,93 @@ func hubRefresh() {
 func hubInfo() map[string]any {
 	m := bundledManifestFromFS()
 	return map[string]any{
-		"product": productName, "version": productVersion, "year": patchYearText,
+		"product": productName, "hubVersion": hubVersion, "year": patchYearText,
 		"bundleVersion": m.Version, "files": len(m.Files), "components": m.Components != nil,
+		"installed": runningFromInstallDir(), "preview": feedIsLocal(),
 		"pixPayload": pixPayload, "pixSvg": pixSVG(),
+	}
+}
+
+func hubFeedInfo(loading bool) map[string]any {
+	status := feedStatus()
+	feed := status.Feed
+	info := map[string]any{
+		"loading": loading, "online": status.Online, "cached": status.Cached, "loaded": status.Loaded,
+		"problem": status.Problem, "preview": feedIsLocal(), "hubVersion": hubVersion,
+	}
+	if feed.PatchVersion != "" {
+		info["patchVersion"] = feed.PatchVersion
+		info["publishedAt"] = feed.PublishedAt
+		info["notes"] = feed.Notes
+		info["hubRemote"] = feed.Hub.Version
+		info["hubNotes"] = feed.Hub.Notes
+		info["hubUpdate"] = hubUpdateAvailable(feed)
+		info["requiresHub"] = feed.RequiresHub
+	}
+	return info
+}
+
+func hubCheckUpdates() error {
+	if !hubSetBusy("feed") {
+		return errors.New("Aguarde a operação em andamento terminar.")
+	}
+	go func() {
+		defer func() {
+			hubSetBusy("")
+			hubRefresh()
+		}()
+		hubEmit(map[string]any{"type": "feed", "feed": hubFeedInfo(true)})
+		last := int64(-1)
+		refreshFeed(func(done, total int64) {
+			if total <= 0 {
+				return
+			}
+			percent := done * 100 / total
+			if percent == last {
+				return
+			}
+			last = percent
+			hubEmit(map[string]any{"type": "feed-progress", "percent": percent})
+		})
+		hubEmit(map[string]any{"type": "feed", "feed": hubFeedInfo(false)})
+	}()
+	return nil
+}
+
+func hubUpdateHub() error {
+	feed := feedStatus().Feed
+	if !hubUpdateAvailable(feed) {
+		return errors.New("Você já está com o instalador mais recente.")
+	}
+	if !hubSetBusy("hub-update") {
+		return errors.New("Aguarde a operação em andamento terminar.")
+	}
+	go func() {
+		progress := hubProgress("hub-update", 0, 95, func(done, total int) string { return "Baixando o instalador " + feed.Hub.Version })
+		err := applyHubUpdate(feed, func(done, total int64) {
+			if total > 0 {
+				progress(int(done*1000/total), 1000)
+			}
+		})
+		if err != nil {
+			hubSetBusy("")
+			hubFail("hub-update", err)
+			return
+		}
+		hubEmit(map[string]any{"type": "progress", "operation": "hub-update", "percent": 100, "label": "Reabrindo o instalador"})
+		hubSetBusy("")
+		postMessage.Call(hubWindow, wmClose, 0, 0)
+	}()
+	return nil
+}
+
+func hubOpenExternal(url string) {
+	allowed := []string{repositoryURL + "/", siteURL}
+	for _, prefix := range allowed {
+		if strings.HasPrefix(url, prefix) {
+			shellExecute.Call(hubWindow, uintptr(unsafe.Pointer(strPtr("open"))), uintptr(unsafe.Pointer(strPtr(url))), 0, 0, swShow)
+			return
+		}
 	}
 }
 
@@ -281,7 +375,7 @@ func hubCreateBackup() error {
 	}
 	go func() {
 		defer hubSetBusy("")
-		entry, err := createGameSnapshot(game, "Backup completo", productVersion, hubProgress("backup", 0, 100, func(done, total int) string {
+		entry, err := createGameSnapshot(game, "Backup completo", bundledManifestFromFS().Version, hubProgress("backup", 0, 100, func(done, total int) string {
 			return fmt.Sprintf("Copiando · %d de %d arquivos", done, total)
 		}))
 		if err != nil {
@@ -314,7 +408,7 @@ func hubRestoreBackup(id string) error {
 			hubEmit(map[string]any{"type": "error", "operation": "restore", "code": "BF-112", "title": "Feche o Brasfoot", "reason": "O jogo está aberto (" + process + ").", "action": "Salve sua carreira, feche o jogo e tente de novo."})
 			return
 		}
-		safety, err := createGameSnapshot(game, "Automático, antes de restaurar", productVersion, hubProgress("restore", 0, 45, func(int, int) string {
+		safety, err := createGameSnapshot(game, "Automático, antes de restaurar", bundledManifestFromFS().Version, hubProgress("restore", 0, 45, func(int, int) string {
 			return "Guardando o estado atual"
 		}))
 		if err != nil {
@@ -494,6 +588,10 @@ func runHub() bool {
 		"hubLaunchGame":   hubLaunchGame,
 		"hubOpenLink":     hubOpenLink,
 		"hubCopyPix":      hubCopyPix,
+		"hubFeed":         func() map[string]any { return hubFeedInfo(false) },
+		"hubCheckUpdates": hubCheckUpdates,
+		"hubUpdateHub":    hubUpdateHub,
+		"hubOpenExternal": hubOpenExternal,
 		"hubMinimize":     func() { showWindow.Call(hubWindow, swMinimize) },
 		"hubClose": func() bool {
 			if hubIsBusy() {
@@ -517,6 +615,12 @@ func runHub() bool {
 		"{{PITCH}}", "data:image/jpeg;base64,"+base64.StdEncoding.EncodeToString(hubPitch),
 	).Replace(hubPage)
 	view.SetHtml(page)
+	go func() {
+		time.Sleep(300 * time.Millisecond)
+		if err := hubCheckUpdates(); err != nil {
+			hubRefresh()
+		}
+	}()
 	view.Run()
 	return true
 }
@@ -528,7 +632,15 @@ func main() {
 		setDpiAwarenessCtx.Call(^uintptr(3))
 	}
 	o32.NewProc("OleInitialize").Call(0)
-	if len(os.Args) > 1 && strings.EqualFold(os.Args[1], "--classic") {
+	options := parseHubArgs(os.Args[1:])
+	if options.Uninstall {
+		uninstallHub()
+		return
+	}
+	if ensureHubInstalled(options) {
+		return
+	}
+	if options.Classic {
 		runClassic()
 		return
 	}

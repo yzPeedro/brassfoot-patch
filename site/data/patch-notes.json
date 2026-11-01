@@ -1,7 +1,24 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-01T16:55:00-03:00",
+  "updatedAt": "2026-11-01T21:00:00-03:00",
   "entries": [
+    {
+      "id": "patch-2026-5-3",
+      "version": "2026.5.3",
+      "date": "2026-11-01T21:00:00-03:00",
+      "title": "Hub único e lances do campo animado corrigidos",
+      "kind": "patch",
+      "summary": "Baixe o hub uma vez: ele busca as novas versões no GitHub, mostra o que mudou e se atualiza sozinho. O campo animado ganhou reinícios, faltas e cartões mais fiéis ao lance.",
+      "changes": [
+        "Hub único: instala-se no seu usuário, confere a versão mais recente a cada abertura e avisa patch e instalador novos com as novidades.",
+        "Downloads conferidos pelo SHA-256 publicado; sem internet, o hub usa a última versão já baixada.",
+        "Depois do gol, a saída de bola espera todos os jogadores voltarem às posições.",
+        "Faltas e cartões só com contato real e para quem participou do lance; gol de falta nasce de jogada no campo de ataque.",
+        "Jogador substituído com a bola toca para um companheiro antes de sair.",
+        "Elencos e cobertura iguais aos da 2026.5.2; carreiras salvas não são alteradas."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.5.3"
+    },
     {
       "id": "patch-2026-5-2",
       "version": "2026.5.2",

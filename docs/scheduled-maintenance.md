@@ -17,6 +17,8 @@ O projeto tem um ciclo automático executado todos os dias às 18h (horário de 
 5. **Release.** Havendo mudança material, incrementar a versão, gerar bundle e pacotes e publicar como descrito em [Release e publicação](release.md). O executável publicado mais recente, com o campo animado, é sempre a base das versões seguintes.
 6. **Site.** Atualizar dados, contagens, notas de versão (`site/data/patch-notes.json`) e publicar no GitHub Pages.
 
+Os usuários recebem a release diária pelo hub: ao virar `latest`, o `release.json` publicado passa a ser lido por todos os hubs, que mostram o aviso de nova versão com as notas de `docs/releases/v<versão>.md`. Por isso as notas precisam estar corretas antes da publicação. A rotina não sobe a versão do hub (`config/hub.json`); ela só muda quando o código do hub muda, fora da rotina.
+
 ## Regras de dados
 
 - Rumores não são transferências confirmadas.

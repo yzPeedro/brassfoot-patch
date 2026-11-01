@@ -3,11 +3,14 @@
 package main
 
 import (
+	"archive/zip"
 	"bufio"
+	"bytes"
 	"encoding/json"
 	"errors"
 	"flag"
 	"fmt"
+	"io/fs"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -106,12 +109,14 @@ func runPortable() error {
 	inspectOnly := flag.Bool("inspect", false, "mostrar compatibilidade sem modificar o jogo")
 	version := flag.Bool("version", false, "mostrar edição e commit do instalador")
 	only := flag.String("only", "", "instalar só um componente: patch ou live")
+	feed := flag.String("feed", "", "pasta local com release.json e o pacote, em vez do GitHub")
+	bundle := flag.String("bundle", "", "arquivo .zip do pacote baixado da release, para uso sem internet")
 	flag.Parse()
 	if flag.NArg() != 0 {
 		return errors.New("argumentos inesperados; consulte --help")
 	}
 	if *version {
-		fmt.Printf("%s %s / edição %s / %s-%s / %s\n", productName, productVersion, patchYearText, runtime.GOOS, runtime.GOARCH, sourceCommit)
+		fmt.Printf("%s / atualizador %s / edição %s / %s-%s / %s\n", productName, hubVersion, patchYearText, runtime.GOOS, runtime.GOARCH, sourceCommit)
 		return nil
 	}
 	if *restore && *inspectOnly {
@@ -143,8 +148,11 @@ func runPortable() error {
 	if strings.EqualFold(filepath.Base(filepath.Clean(*game)), "teams") {
 		*game = filepath.Dir(filepath.Clean(*game))
 	}
-	fmt.Printf("%s %s\nAtualizador Brasfoot Mega Patch. O jogo Windows requer uma camada de compatibilidade já configurada.\n", productName, productVersion)
+	fmt.Printf("%s · atualizador %s\nO jogo Windows requer uma camada de compatibilidade já configurada.\n", productName, hubVersion)
 	if err := checkPortableGameClosed(); err != nil && !*inspectOnly {
+		return err
+	}
+	if err := loadPortablePayload(*feed, *bundle); err != nil {
 		return err
 	}
 	payload, err := stageBundledPayload()
@@ -163,7 +171,7 @@ func runPortable() error {
 	}
 	if *inspectOnly {
 		return json.NewEncoder(os.Stdout).Encode(map[string]any{
-			"product": productName, "version": productVersion, "payloadVersion": plan.Manifest.Version,
+			"product": productName, "version": hubVersion, "payloadVersion": plan.Manifest.Version,
 			"game": plan.Game, "files": len(plan.Items), "alreadyInstalled": plan.AlreadyInstalled,
 			"platform": runtime.GOOS, "architecture": runtime.GOARCH, "gameplayVerified": false,
 		})
@@ -197,6 +205,56 @@ func runPortable() error {
 	fmt.Printf("Atualização concluída: %s.\n", result.Version)
 	if result.BackupPath != "" {
 		fmt.Println("Backup e relatório: " + result.BackupPath)
+	}
+	return nil
+}
+
+func loadPortablePayload(feed, bundle string) error {
+	if bundle != "" {
+		data, err := os.ReadFile(bundle)
+		if err != nil {
+			return err
+		}
+		feedOverride = filepath.Dir(bundle)
+		reader, err := zip.NewReader(bytes.NewReader(data), int64(len(data)))
+		if err != nil {
+			return fmt.Errorf("pacote inválido: %w", err)
+		}
+		body, err := fs.ReadFile(reader, "bundled_release/manifest.json")
+		if err != nil {
+			return errors.New("pacote sem manifesto")
+		}
+		var manifest Manifest
+		if err = json.Unmarshal(body, &manifest); err != nil {
+			return err
+		}
+		payload, err := bundleFromZip(data, ReleaseFeed{PatchVersion: manifest.Version})
+		if err != nil {
+			return err
+		}
+		setPayload(payload)
+		fmt.Printf("Pacote local: versão %s.\n", manifest.Version)
+		return nil
+	}
+	if feed != "" {
+		absolute, err := filepath.Abs(feed)
+		if err != nil {
+			return err
+		}
+		feedOverride = absolute
+	}
+	fmt.Println("Buscando a versão mais recente no GitHub...")
+	status := refreshFeed(nil)
+	if !status.Loaded {
+		return fmt.Errorf("não foi possível obter a versão mais recente: %s", status.Problem)
+	}
+	if status.Cached {
+		fmt.Printf("Sem conexão: usando a versão %s guardada neste computador.\n", status.Feed.PatchVersion)
+	} else {
+		fmt.Printf("Versão do patch: %s.\n", status.Feed.PatchVersion)
+	}
+	if hubUpdateAvailable(status.Feed) {
+		fmt.Printf("Há um atualizador mais novo (%s): %s\n", status.Feed.Hub.Version, "https://github.com/yzPeedro/brassfoot-patch/releases/latest")
 	}
 	return nil
 }

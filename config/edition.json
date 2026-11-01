@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.5.2",
+  "version": "2026.5.3",
   "channel": "stable",
-  "releaseNotes": "Quatro atletas confirmados por fontes oficiais, 17 idades atualizadas e preservação de cinco mudanças sem evidência suficiente.",
+  "releaseNotes": "Hub único que se atualiza pelo GitHub e campo animado com reinícios, faltas, cartões e substituições corrigidos.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [

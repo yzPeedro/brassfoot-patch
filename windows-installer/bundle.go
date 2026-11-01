@@ -3,22 +3,35 @@ package main
 import (
 	"bytes"
 	"crypto/sha256"
-	"embed"
 	"encoding/base64"
 	"encoding/hex"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/fs"
 	"os"
 	"path/filepath"
 	"strings"
+	"sync"
+	"testing/fstest"
 )
 
-// Only delta operations are shipped. The installer needs the user's own
-// licensed Brasfoot installation and never distributes original .ban files.
-//
-//go:embed bundled_release/manifest.json bundled_release/patches/*.json
-var deltaPayload embed.FS
+var (
+	payloadMutex sync.Mutex
+	deltaPayload fs.FS = fstest.MapFS{}
+)
+
+func setPayload(fsys fs.FS) {
+	payloadMutex.Lock()
+	deltaPayload = fsys
+	payloadMutex.Unlock()
+}
+
+func currentPayload() fs.FS {
+	payloadMutex.Lock()
+	defer payloadMutex.Unlock()
+	return deltaPayload
+}
 
 type patchOp struct {
 	Copy []int  `json:"copy,omitempty"`
@@ -142,10 +155,10 @@ func stageBundledPayload() (string, error) {
 		os.RemoveAll(base)
 		return "", err
 	}
-	body, err := deltaPayload.ReadFile("bundled_release/manifest.json")
+	body, err := fs.ReadFile(currentPayload(), "bundled_release/manifest.json")
 	if err != nil {
 		os.RemoveAll(base)
-		return "", err
+		return "", errors.New("nenhuma versão do patch foi carregada")
 	}
 	if err = os.WriteFile(filepath.Join(target, "manifest.json"), body, 0600); err != nil {
 		os.RemoveAll(base)
@@ -157,7 +170,7 @@ func stageBundledPayload() (string, error) {
 // Produces temporary patched files only AFTER comparing against the local
 // originals. No game files are modified here; inspect() then validates them.
 func prepareBundledPayload(gamePath, staged string) error {
-	return preparePayloadWithFS(deltaPayload, gamePath, staged)
+	return preparePayloadWithFS(currentPayload(), gamePath, staged)
 }
 
 // preparePayloadWithFS accepts a variable-size validated manifest and allows tests
