@@ -6,6 +6,7 @@ import "strconv"
 // Defaults keep a source checkout usable without running a code generator.
 var productName = "Brasfoot Mega Patch"
 var productVersion = "2026.4.1"
+var hubVersion = "0.0.0-dev"
 var patchYearText = "2026"
 var sourceCommit = "development"
 

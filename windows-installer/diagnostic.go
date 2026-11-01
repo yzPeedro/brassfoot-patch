@@ -36,7 +36,7 @@ func recordDiagnostic(d Diagnostic) {
 	defer file.Close()
 	_ = json.NewEncoder(file).Encode(map[string]any{
 		"at": time.Now().UTC().Format(time.RFC3339), "product": productName,
-		"version": productVersion, "diagnostic": d,
+		"version": productVersion, "hubVersion": hubVersion, "diagnostic": d,
 	})
 }
 
@@ -64,18 +64,24 @@ func diagnose(err error) Diagnostic {
 	}
 	lower := strings.ToLower(raw)
 	switch {
+	case strings.Contains(lower, "sem conexão") || strings.Contains(lower, "o github respondeu"):
+		return Diagnostic{"BF-120", "Sem conexão com o GitHub", "O hub não conseguiu baixar a versão mais recente do patch.", "Confira a internet e tente de novo. Você ainda pode jogar e restaurar backups sem conexão.", raw}
+	case strings.Contains(lower, "sha-256 publicado") || strings.Contains(lower, "não corresponde à versão publicada") || strings.Contains(lower, "não é uma release final"):
+		return Diagnostic{"BF-121", "Download não conferiu", "O arquivo baixado não bate com a identificação publicada na release. Nada foi instalado.", "Tente de novo em alguns minutos. Se continuar, avise no GitHub do projeto.", raw}
+	case strings.Contains(lower, "nenhuma versão do patch foi carregada") || strings.Contains(lower, "precisa do instalador"):
+		return Diagnostic{"BF-122", "Versão do patch indisponível", "O hub ainda não tem uma versão do patch para instalar.", "Conecte-se à internet e abra o hub de novo. Se pedir, atualize o instalador primeiro.", raw}
 	case strings.Contains(lower, "pasta do jogo não encontrada") || strings.Contains(lower, "the system cannot find the path") || strings.Contains(lower, "no such file or directory") && strings.Contains(lower, "pasta do jogo"):
 		return Diagnostic{"BF-101", "Pasta do Brasfoot não encontrada", "O caminho selecionado não existe ou não está acessível.", "Clique em PROCURAR e selecione a pasta onde o Brasfoot está instalado (a que contém options.bcf e teams).", raw}
 	case strings.Contains(lower, "options.bcf"):
 		return Diagnostic{"BF-102", "Esta não é a pasta principal do Brasfoot", "O arquivo options.bcf está ausente ou não é um arquivo normal.", "Selecione a pasta raiz do jogo, por exemplo C:\\Brasfoot22-23, e não a subpasta teams.", raw}
 	case strings.Contains(lower, "instruções") || strings.Contains(lower, "base não reconhecida") || strings.Contains(lower, "resultado não confere") || strings.Contains(lower, "resultado encadeado"):
-		return Diagnostic{"BF-113", "Não foi possível preparar um arquivo do patch", "As instruções de atualização de um arquivo não se aplicaram à versão encontrada no seu jogo. Nenhum arquivo foi alterado.", "Baixe o instalador mais recente. Se o erro continuar, envie os detalhes deste diagnóstico.", raw}
+		return Diagnostic{"BF-113", "Não foi possível preparar um arquivo do patch", "As instruções de atualização de um arquivo não se aplicaram à versão encontrada no seu jogo. Nenhum arquivo foi alterado.", "Atualize o hub e tente de novo. Se o erro continuar, envie os detalhes deste diagnóstico.", raw}
 	case strings.Contains(lower, "não encontrei teams") || strings.Contains(lower, "estrutura de equipes"):
 		return Diagnostic{"BF-103", "Estrutura de equipes não reconhecida", "A pasta teams não existe ou não contém arquivos .ban válidos suficientes.", "Verifique se escolheu o Brasfoot 2022-2023, e não uma pasta de saves, Downloads ou outro jogo.", raw}
 	case strings.Contains(lower, "arquivo ausente") || strings.Contains(lower, "arquivo não encontrado na instalação"):
 		return Diagnostic{"BF-105", "Faltam arquivos do clube no seu Brasfoot", "Um dos clubes de 2026 não existe na pasta teams ou não pode ser lido.", "Confirme que o Brasfoot foi instalado corretamente. Não copie arquivos aleatórios de outras versões.", raw}
 	case strings.Contains(lower, "pacote") || strings.Contains(lower, "manifest") || strings.Contains(lower, "hash corrompido"):
-		return Diagnostic{"BF-106", "Pacote de elencos inválido", "A verificação de integridade do conteúdo embutido falhou.", "Baixe novamente o instalador mais recente. Não altere manualmente os arquivos.", raw}
+		return Diagnostic{"BF-106", "Pacote de elencos inválido", "A verificação de integridade do pacote da versão falhou.", "Abra o hub de novo para baixar a versão mais recente. Não altere manualmente os arquivos.", raw}
 	case strings.Contains(lower, "permission") || strings.Contains(lower, "permissão") || strings.Contains(lower, "access is denied") || errors.Is(err, os.ErrPermission):
 		return Diagnostic{"BF-107", "Sem permissão para atualizar os arquivos", "O Windows negou o acesso a um arquivo ou pasta necessária para a instalação.", "Feche o Brasfoot. Verifique a permissão de gravação da pasta do jogo; se necessário, execute o instalador como administrador.", raw}
 	case strings.Contains(lower, "rollback incompleto"):

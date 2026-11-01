@@ -13,8 +13,6 @@ import (
 	"unsafe"
 )
 
-// Only a single folder is requested from the user. The private candidate is
-// already embedded and is verified before any game data is changed.
 const (
 	wsChild           = 0x40000000
 	wsVisible         = 0x10000000
@@ -586,7 +584,7 @@ func setupControls() {
 	gameBrowse = create("BUTTON", "Escolher pasta", wsChild|wsVisible|wsTabStop, 735, 206, 143, 40, idChooseGame, smallFont)
 	textLabel("Escolha a pasta onde o Brasfoot está instalado.", 41, 254, 835, 25, muted, smallFont)
 
-	textLabel(fmt.Sprintf("Atualização %s · %d arquivos", productVersion, len(manifest.Files)), 40, 302, 835, 29, accent, strongFont)
+	textLabel(fmt.Sprintf("Atualização %s · %d arquivos", manifest.Version, len(manifest.Files)), 40, 302, 835, 29, accent, strongFont)
 	textLabel("Edição 2026. Backup automático antes de qualquer alteração.", 41, 340, 835, 28, muted, smallFont)
 	installButton = create("BUTTON", "Atualizar Brasfoot", wsChild|wsVisible|wsTabStop, 40, 389, 322, 48, idInstall, strongFont)
 	playButton = create("BUTTON", "Jogar", wsChild|wsVisible|wsTabStop, 376, 390, 148, 46, idPlay, bodyFont)
@@ -679,9 +677,21 @@ func runClassic() {
 	oleUninitialize := o32.NewProc("OleUninitialize")
 	oleInitialize.Call(0)
 	defer oleUninitialize.Call()
+	status := refreshFeed(nil)
+	if !status.Loaded {
+		msgbox("Não foi possível obter a versão mais recente do patch no GitHub.\n\n"+status.Problem+"\n\nConfira a internet e abra o instalador de novo. Nenhum arquivo do jogo foi alterado.", "Brasfoot Mega Patch — Sem versão disponível", mbOK|mbIconWarning)
+		return
+	}
+	if hubUpdateAvailable(status.Feed) && msgbox("Há um instalador mais novo ("+status.Feed.Hub.Version+").\n\nDeseja atualizar o instalador agora? Ele será reaberto em seguida.", productName, mbYesNo|mbIconInfo) == 6 {
+		if err := applyHubUpdate(status.Feed, nil); err == nil {
+			return
+		} else {
+			msgbox("Não foi possível atualizar o instalador.\n\n"+err.Error(), productName, mbOK|mbIconWarning)
+		}
+	}
 	payload, err := stageBundledPayload()
 	if err != nil {
-		msgbox("O pacote interno não pôde ser extraído. Instalação cancelada.\n\n"+err.Error(), "Brasfoot Mega Patch — Falha do pacote", mbOK|mbIconWarning)
+		msgbox("O pacote da versão não pôde ser preparado. Instalação cancelada.\n\n"+err.Error(), "Brasfoot Mega Patch — Falha do pacote", mbOK|mbIconWarning)
 		return
 	}
 	embeddedPayload = payload
