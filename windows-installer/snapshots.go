@@ -342,7 +342,7 @@ func writeVerified(target string, source io.Reader, expected string) error {
 		err = errors.New("arquivo restaurado não conferiu")
 	}
 	if err == nil {
-		err = os.Rename(name, target)
+		err = swapReplace(name, target)
 	}
 	if err != nil {
 		os.Remove(name)
