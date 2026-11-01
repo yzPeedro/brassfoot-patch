@@ -35,3 +35,4 @@ __pycache__/
 *.p12
 *.key
 PROMPT.md
+windows-installer/*.syso

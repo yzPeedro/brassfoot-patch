@@ -144,16 +144,60 @@ func prepareBundledPayload(gamePath, staged string) error {
 // preparePayloadWithFS accepts a variable-size validated manifest and allows tests
 // to inject a synthetic release without changing production embedded assets.
 func preparePayloadWithFS(fsys fs.FS, gamePath, staged string) error {
-	game, _, err := validGame(gamePath)
-	if err != nil {
-		return err
-	}
 	body, err := fs.ReadFile(fsys, "bundled_release/manifest.json")
 	if err != nil {
 		return err
 	}
 	var manifest Manifest
 	if err = json.Unmarshal(body, &manifest); err != nil {
+		return err
+	}
+	return preparePayloadManifest(fsys, manifest, gamePath, staged)
+}
+
+func readRecipe(fsys fs.FS, f ManifestFile) ([]byte, error) {
+	name := filepath.Base(f.Path) + ".json"
+	if f.Recipe != "" {
+		if !recipeName.MatchString(f.Recipe) {
+			return nil, fmt.Errorf("instruções com nome inválido: %s", f.Recipe)
+		}
+		name = f.Recipe
+	}
+	if strings.ContainsAny(name, "/\\") {
+		return nil, fmt.Errorf("nome de equipe inválido")
+	}
+	data, err := fs.ReadFile(fsys, "bundled_release/patches/"+name)
+	if err != nil {
+		return nil, fmt.Errorf("instruções de %s ausentes: %w", f.Path, err)
+	}
+	return data, nil
+}
+
+func buildFromRecipe(fsys fs.FS, original []byte, f ManifestFile) ([]byte, error) {
+	data, err := readRecipe(fsys, f)
+	if err != nil {
+		return nil, err
+	}
+	output, err := applyRecipe(original, data, f)
+	if err == nil || f.Via == nil {
+		return output, err
+	}
+	via := *f.Via
+	via.Via = nil
+	viaData, viaErr := readRecipe(fsys, via)
+	if viaErr != nil {
+		return nil, err
+	}
+	intermediate, viaErr := applyRecipe(original, viaData, via)
+	if viaErr != nil || digestBytes(intermediate) != via.SHA256 {
+		return nil, err
+	}
+	return applyRecipe(intermediate, data, f)
+}
+
+func preparePayloadManifest(fsys fs.FS, manifest Manifest, gamePath, staged string) error {
+	game, _, err := validGame(gamePath)
+	if err != nil {
 		return err
 	}
 	if (manifest.SchemaVersion != 2 && manifest.SchemaVersion != 3 && manifest.SchemaVersion != 4) || manifest.PatchSeason != patchYear() || !validVersion.MatchString(manifest.Version) || !strings.HasPrefix(manifest.Version, patchYearText+".") {
@@ -234,15 +278,8 @@ func preparePayloadWithFS(fsys fs.FS, gamePath, staged string) error {
 			} else if len(f.AcceptedOriginalSHA256) != 0 {
 				return fmt.Errorf("adição com hashes de originais indevidos: %s", f.Path)
 			}
-			name := filepath.Base(f.Path)
-			if strings.ContainsAny(name, "/\\") {
-				return fmt.Errorf("nome de equipe inválido")
-			}
-			data, e := fs.ReadFile(fsys, "bundled_release/patches/"+name+".json")
-			if e != nil {
-				return fmt.Errorf("instruções de %s ausentes: %w", f.Path, e)
-			}
-			output, e = applyRecipe(original, data, f)
+			var e error
+			output, e = buildFromRecipe(fsys, original, f)
 			if e != nil {
 				return e
 			}

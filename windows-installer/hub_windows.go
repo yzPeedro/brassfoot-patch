@@ -1,0 +1,526 @@
+//go:build windows
+
+package main
+
+import (
+	_ "embed"
+	"encoding/base64"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"runtime"
+	"strings"
+	"sync"
+	"syscall"
+	"unsafe"
+
+	webview2 "github.com/jchv/go-webview2"
+	"github.com/jchv/go-webview2/webviewloader"
+)
+
+//go:embed ui/hub.html
+var hubPage string
+
+//go:embed ui/mark.svg
+var hubMark string
+
+//go:embed ui/pitch.jpg
+var hubPitch []byte
+
+const (
+	hubWidth          = 1040
+	hubHeight         = 680
+	gwlStyle          = -16
+	gwlWndProc        = -4
+	wsPopup           = 0x80000000
+	wsClipChildren    = 0x02000000
+	wsThickFrame      = 0x00040000
+	swpNoZOrder       = 0x0004
+	swpNoActivate     = 0x0010
+	swpFrameChanged   = 0x0020
+	swMinimize        = 6
+	wmNcCalcSize      = 0x0083
+	wmNcLButtonDown   = 0x00A1
+	htCaption         = 2
+	dwmCornerAttr     = 33
+	dwmCornerRound    = 2
+	dwmBorderColor    = 34
+	cfUnicodeText     = 13
+	gmemMoveable      = 0x0002
+	siteURL           = "https://yzpeedro.github.io/brassfoot-patch/"
+	repositoryURL     = "https://github.com/yzPeedro/brassfoot-patch"
+	webviewRuntimeURL = "https://developer.microsoft.com/microsoft-edge/webview2/"
+)
+
+var (
+	dwm                  = syscall.NewLazyDLL("dwmapi.dll")
+	setWindowLong        = u32.NewProc("SetWindowLongPtrW")
+	getWindowLong        = u32.NewProc("GetWindowLongPtrW")
+	callWindowProc       = u32.NewProc("CallWindowProcW")
+	setWindowPos         = u32.NewProc("SetWindowPos")
+	releaseCapture       = u32.NewProc("ReleaseCapture")
+	openClipboard        = u32.NewProc("OpenClipboard")
+	emptyClipboard       = u32.NewProc("EmptyClipboard")
+	setClipboardData     = u32.NewProc("SetClipboardData")
+	closeClipboard       = u32.NewProc("CloseClipboard")
+	globalAlloc          = k32.NewProc("GlobalAlloc")
+	globalLock           = k32.NewProc("GlobalLock")
+	globalUnlock         = k32.NewProc("GlobalUnlock")
+	dwmSetAttribute      = dwm.NewProc("DwmSetWindowAttribute")
+	dwmExtendFrame       = dwm.NewProc("DwmExtendFrameIntoClientArea")
+	setDpiAwarenessCtx   = u32.NewProc("SetProcessDpiAwarenessContext")
+	hubView              webview2.WebView
+	hubWindow            uintptr
+	hubOriginalProc      uintptr
+	hubMutex             sync.Mutex
+	hubGame              string
+	hubBusy              string
+	hubState             = map[string]any{}
+	hubStagingRoot       string
+)
+
+type margins struct{ Left, Right, Top, Bottom int32 }
+
+func hubEmit(event map[string]any) {
+	body, err := json.Marshal(event)
+	if err != nil || hubView == nil {
+		return
+	}
+	hubView.Dispatch(func() {
+		hubView.Eval("window.hubEvent && window.hubEvent(" + string(body) + ")")
+	})
+}
+
+func hubSetBusy(operation string) bool {
+	hubMutex.Lock()
+	defer hubMutex.Unlock()
+	if operation != "" && hubBusy != "" {
+		return false
+	}
+	hubBusy = operation
+	return true
+}
+
+func hubIsBusy() bool {
+	hubMutex.Lock()
+	defer hubMutex.Unlock()
+	return hubBusy != ""
+}
+
+func hubCurrentGame() string {
+	hubMutex.Lock()
+	defer hubMutex.Unlock()
+	return hubGame
+}
+
+func hubFail(operation string, err error) {
+	d := diagnose(err)
+	recordDiagnostic(d)
+	hubEmit(map[string]any{"type": "error", "operation": operation, "code": d.Code, "title": d.Title, "reason": d.Reason, "action": d.Action})
+}
+
+func hubRefresh() {
+	game := hubCurrentGame()
+	go func() {
+		state := map[string]any{"game": game, "valid": false}
+		if game != "" {
+			current, err := detectState(bundledManifestFromFS(), game)
+			if err != nil {
+				d := diagnose(err)
+				state["error"] = map[string]string{"title": d.Title, "reason": d.Reason, "action": d.Action}
+			} else {
+				state["valid"] = true
+				state["game"] = current.Game
+				state["patch"] = current.PatchStatus()
+				state["live"] = current.Live
+				state["executableKnown"] = current.ExecutableKnown || current.ExecutableMissing
+				state["teamsInstalled"] = current.TeamsInstalled
+				state["teamsTotal"] = current.TeamsTotal
+			}
+		}
+		if process, err := runningBrasfoot(); err == nil && process != "" {
+			state["running"] = process
+		}
+		hubMutex.Lock()
+		hubState = state
+		hubMutex.Unlock()
+		hubEmit(map[string]any{"type": "state", "state": state})
+	}()
+}
+
+func hubInfo() map[string]any {
+	m := bundledManifestFromFS()
+	return map[string]any{
+		"product": productName, "version": productVersion, "year": patchYearText,
+		"bundleVersion": m.Version, "files": len(m.Files), "components": m.Components != nil,
+		"pixPayload": pixPayload, "pixSvg": pixSVG(),
+	}
+}
+
+func pixSVG() string {
+	data, err := base64.StdEncoding.DecodeString(pixQRBitsBase64)
+	if err != nil || len(data) != (pixQRSize*pixQRSize+7)/8 {
+		return ""
+	}
+	var path strings.Builder
+	for y := 0; y < pixQRSize; y++ {
+		for x := 0; x < pixQRSize; x++ {
+			offset := y*pixQRSize + x
+			if data[offset/8]&(1<<uint(7-offset%8)) != 0 {
+				fmt.Fprintf(&path, "M%d %dh1v1h-1z", x, y)
+			}
+		}
+	}
+	return fmt.Sprintf(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" shape-rendering="crispEdges"><rect width="100%%" height="100%%" fill="#fff"/><path d="%s" fill="#0b1633"/></svg>`, pixQRSize, pixQRSize, path.String())
+}
+
+func hubChooseGame() string {
+	if hubIsBusy() {
+		return hubCurrentGame()
+	}
+	if path := chooseFolder("Selecione a pasta principal do Brasfoot"); path != "" {
+		hubMutex.Lock()
+		hubGame = normalizeGameSelection(path)
+		hubMutex.Unlock()
+		hubRefresh()
+	}
+	return hubCurrentGame()
+}
+
+func hubInstall(selection Selection) error {
+	game := hubCurrentGame()
+	if game == "" {
+		return errors.New("Escolha a pasta do Brasfoot antes de instalar.")
+	}
+	if !selection.Patch && !selection.Live {
+		return errors.New("Marque ao menos uma opção para instalar.")
+	}
+	if !hubSetBusy("install") {
+		return errors.New("Aguarde a operação em andamento terminar.")
+	}
+	go func() {
+		defer func() {
+			hubSetBusy("")
+			hubRefresh()
+		}()
+		hubEmit(map[string]any{"type": "progress", "operation": "install", "percent": 3, "label": "Conferindo o jogo e o pacote"})
+		if process, err := runningBrasfoot(); err == nil && process != "" {
+			hubEmit(map[string]any{"type": "error", "operation": "install", "code": "BF-112", "title": "Feche o Brasfoot", "reason": "O jogo está aberto (" + process + ").", "action": "Salve sua carreira, feche o jogo e tente de novo."})
+			return
+		}
+		plan, err := stageComponents(hubStagingRoot, game, selection)
+		if err != nil {
+			hubFail("install", err)
+			return
+		}
+		if plan.AlreadyInstalled {
+			hubEmit(map[string]any{"type": "done", "operation": "install", "already": true, "version": plan.Manifest.Version})
+			return
+		}
+		result, err := install(plan, InstallOptions{Progress: func(stage string, done, total int) {
+			if total <= 0 {
+				return
+			}
+			percent, label := 100, "Tudo conferido"
+			switch stage {
+			case "backup":
+				percent, label = 10+40*done/total, fmt.Sprintf("Guardando backup · %d de %d", done, total)
+			case "install":
+				percent, label = 50+49*done/total, fmt.Sprintf("Instalando · %d de %d", done, total)
+			}
+			hubEmit(map[string]any{"type": "progress", "operation": "install", "percent": percent, "label": label})
+		}})
+		if err != nil {
+			hubFail("install", err)
+			return
+		}
+		hubEmit(map[string]any{"type": "done", "operation": "install", "version": result.Version, "files": result.Files, "backup": filepath.Base(result.BackupPath)})
+	}()
+	return nil
+}
+
+func hubListBackups() []BackupEntry {
+	entries, _ := listBackups()
+	game := hubCurrentGame()
+	if game == "" {
+		return entries
+	}
+	filtered := []BackupEntry{}
+	for _, entry := range entries {
+		if entry.Game == "" || sameFolder(entry.Game, game) {
+			filtered = append(filtered, entry)
+		}
+	}
+	return filtered
+}
+
+func hubCreateBackup() error {
+	game := hubCurrentGame()
+	if game == "" {
+		return errors.New("Escolha a pasta do Brasfoot primeiro.")
+	}
+	if !hubSetBusy("backup") {
+		return errors.New("Aguarde a operação em andamento terminar.")
+	}
+	go func() {
+		defer hubSetBusy("")
+		entry, err := createGameSnapshot(game, "Backup completo", productVersion, func(done, total int) {
+			hubEmit(map[string]any{"type": "progress", "operation": "backup", "percent": 100 * done / total, "label": fmt.Sprintf("Copiando · %d de %d arquivos", done, total)})
+		})
+		if err != nil {
+			hubFail("backup", err)
+			return
+		}
+		hubEmit(map[string]any{"type": "done", "operation": "backup", "backup": entry})
+	}()
+	return nil
+}
+
+func hubRestoreBackup(id string) error {
+	game := hubCurrentGame()
+	if game == "" {
+		return errors.New("Escolha a pasta do Brasfoot primeiro.")
+	}
+	entry, err := findBackup(id)
+	if err != nil {
+		return err
+	}
+	if !hubSetBusy("restore") {
+		return errors.New("Aguarde a operação em andamento terminar.")
+	}
+	go func() {
+		defer func() {
+			hubSetBusy("")
+			hubRefresh()
+		}()
+		if process, err := runningBrasfoot(); err == nil && process != "" {
+			hubEmit(map[string]any{"type": "error", "operation": "restore", "code": "BF-112", "title": "Feche o Brasfoot", "reason": "O jogo está aberto (" + process + ").", "action": "Salve sua carreira, feche o jogo e tente de novo."})
+			return
+		}
+		safety, err := createGameSnapshot(game, "Automático, antes de restaurar", productVersion, func(done, total int) {
+			hubEmit(map[string]any{"type": "progress", "operation": "restore", "percent": 45 * done / total, "label": "Guardando o estado atual"})
+		})
+		if err != nil {
+			hubFail("restore", err)
+			return
+		}
+		progress := func(done, total int) {
+			hubEmit(map[string]any{"type": "progress", "operation": "restore", "percent": 45 + 55*done/total, "label": fmt.Sprintf("Restaurando · %d de %d", done, total)})
+		}
+		if entry.Kind == backupKindSnapshot {
+			err = restoreSnapshot(entry, game, progress)
+		} else {
+			err = restoreInstallBackup(entry, game, progress)
+		}
+		if err != nil {
+			hubFail("restore", fmt.Errorf("%w (o estado anterior foi guardado no backup de %s)", err, safety.CreatedAt))
+			return
+		}
+		hubEmit(map[string]any{"type": "done", "operation": "restore", "backup": entry, "safety": safety})
+	}()
+	return nil
+}
+
+func hubOpenBackup(id string) error {
+	entry, err := findBackup(id)
+	if err != nil {
+		return err
+	}
+	if entry.Kind == backupKindSnapshot {
+		return exec.Command("explorer.exe", "/select,", entry.Path).Start()
+	}
+	return exec.Command("explorer.exe", entry.Path).Start()
+}
+
+func hubLaunchGame() error {
+	game := hubCurrentGame()
+	if _, _, err := validGame(game); err != nil {
+		return errors.New("Escolha uma pasta válida do Brasfoot.")
+	}
+	if hubIsBusy() {
+		return errors.New("Aguarde a operação em andamento terminar.")
+	}
+	executable := filepath.Join(game, gameExecutablePath)
+	if err := checkRegular(executable); err != nil {
+		return errors.New("Não encontrei o bf22-23.exe nesta pasta.")
+	}
+	result, _, _ := shellExecute.Call(hubWindow, uintptr(unsafe.Pointer(strPtr("open"))), uintptr(unsafe.Pointer(strPtr(executable))), 0, uintptr(unsafe.Pointer(strPtr(game))), swShow)
+	if result <= 32 {
+		return errors.New("Não foi possível abrir o jogo. Abra o Brasfoot pelo atalho da sua instalação.")
+	}
+	return nil
+}
+
+func hubOpenLink(kind string) {
+	links := map[string]string{"site": siteURL, "github": repositoryURL, "guide": siteURL + "como-instalar/", "compat": siteURL + "compatibilidade/"}
+	if url, ok := links[kind]; ok {
+		shellExecute.Call(hubWindow, uintptr(unsafe.Pointer(strPtr("open"))), uintptr(unsafe.Pointer(strPtr(url))), 0, 0, swShow)
+	}
+}
+
+func hubCopyPix() bool {
+	text, err := syscall.UTF16FromString(pixPayload)
+	if err != nil {
+		return false
+	}
+	if ok, _, _ := openClipboard.Call(hubWindow); ok == 0 {
+		return false
+	}
+	defer closeClipboard.Call()
+	emptyClipboard.Call()
+	size := uintptr(len(text) * 2)
+	memory, _, _ := globalAlloc.Call(gmemMoveable, size)
+	if memory == 0 {
+		return false
+	}
+	pointer, _, _ := globalLock.Call(memory)
+	if pointer == 0 {
+		return false
+	}
+	copy(unsafe.Slice((*uint16)(unsafe.Pointer(pointer)), len(text)), text)
+	globalUnlock.Call(memory)
+	result, _, _ := setClipboardData.Call(cfUnicodeText, memory)
+	return result != 0
+}
+
+func hubWindowProcedure(window uintptr, message uint32, w, l uintptr) uintptr {
+	switch message {
+	case wmNcCalcSize:
+		if w != 0 {
+			return 0
+		}
+	case wmClose:
+		if hubIsBusy() {
+			hubEmit(map[string]any{"type": "toast", "message": "Aguarde a operação terminar antes de fechar."})
+			return 0
+		}
+	}
+	result, _, _ := callWindowProc.Call(hubOriginalProc, window, uintptr(message), w, l)
+	return result
+}
+
+func hubFrameless(window uintptr) {
+	styleOffset, procOffset := int32(gwlStyle), int32(gwlWndProc)
+	styleIndex, procIndex := uintptr(styleOffset), uintptr(procOffset)
+	style, _, _ := getWindowLong.Call(window, styleIndex)
+	style = (style | wsPopup | wsClipChildren | wsCaption | wsSysMenu | wsMinimizeBox) &^ (wsThickFrame | 0x00010000)
+	setWindowLong.Call(window, styleIndex, style)
+	hubOriginalProc, _, _ = getWindowLong.Call(window, procIndex)
+	setWindowLong.Call(window, procIndex, syscall.NewCallback(hubWindowProcedure))
+	if dwm.Load() == nil {
+		corner := uint32(dwmCornerRound)
+		dwmSetAttribute.Call(window, dwmCornerAttr, uintptr(unsafe.Pointer(&corner)), 4)
+		border := uint32(0x00f3e7e1)
+		dwmSetAttribute.Call(window, dwmBorderColor, uintptr(unsafe.Pointer(&border)), 4)
+		frame := margins{0, 0, 1, 0}
+		dwmExtendFrame.Call(window, uintptr(unsafe.Pointer(&frame)))
+	}
+	dpi := uintptr(96)
+	if getDpiForSystem.Find() == nil {
+		dpi, _, _ = getDpiForSystem.Call()
+	}
+	w, h := hubWidth*int(dpi)/96, hubHeight*int(dpi)/96
+	sw, _, _ := getSystemMetrics.Call(0)
+	sh, _, _ := getSystemMetrics.Call(1)
+	if w > int(sw)-24 {
+		w = int(sw) - 24
+	}
+	if h > int(sh)-48 {
+		h = int(sh) - 48
+	}
+	setWindowPos.Call(window, 0, uintptr((int(sw)-w)/2), uintptr((int(sh)-h)/2), uintptr(w), uintptr(h), swpNoZOrder|swpFrameChanged)
+}
+
+func hubDataPath() string {
+	root, err := backupRoot()
+	if err != nil {
+		return ""
+	}
+	return filepath.Join(filepath.Dir(root), "webview")
+}
+
+func runHub() bool {
+	if _, err := webviewloader.GetInstalledVersion(); err != nil {
+		return false
+	}
+	root, err := os.MkdirTemp("", "brasfoot-mega-patch-hub-")
+	if err != nil {
+		return false
+	}
+	hubStagingRoot = root
+	defer os.RemoveAll(root)
+	view := webview2.NewWithOptions(webview2.WebViewOptions{
+		DataPath:  hubDataPath(),
+		AutoFocus: true,
+		WindowOptions: webview2.WindowOptions{
+			Title: productName, Width: hubWidth, Height: hubHeight, IconId: 1, Center: true,
+		},
+	})
+	if view == nil {
+		return false
+	}
+	hubView = view
+	hubWindow = uintptr(view.Window())
+	hwnd = hubWindow
+	hubFrameless(hubWindow)
+	hubGame = findGame()
+	bindings := map[string]any{
+		"hubInfo":         hubInfo,
+		"hubRefresh":      hubRefresh,
+		"hubChooseGame":   hubChooseGame,
+		"hubInstall":      hubInstall,
+		"hubListBackups":  hubListBackups,
+		"hubCreateBackup": hubCreateBackup,
+		"hubRestore":      hubRestoreBackup,
+		"hubOpenBackup":   hubOpenBackup,
+		"hubLaunchGame":   hubLaunchGame,
+		"hubOpenLink":     hubOpenLink,
+		"hubCopyPix":      hubCopyPix,
+		"hubMinimize":     func() { showWindow.Call(hubWindow, swMinimize) },
+		"hubClose": func() bool {
+			if hubIsBusy() {
+				return false
+			}
+			postMessage.Call(hubWindow, wmClose, 0, 0)
+			return true
+		},
+		"hubDrag": func() {
+			releaseCapture.Call()
+			postMessage.Call(hubWindow, wmNcLButtonDown, htCaption, 0)
+		},
+	}
+	for name, function := range bindings {
+		if err := view.Bind(name, function); err != nil {
+			return false
+		}
+	}
+	page := strings.NewReplacer(
+		"{{MARK}}", "data:image/svg+xml;base64,"+base64.StdEncoding.EncodeToString([]byte(hubMark)),
+		"{{PITCH}}", "data:image/jpeg;base64,"+base64.StdEncoding.EncodeToString(hubPitch),
+	).Replace(hubPage)
+	view.SetHtml(page)
+	view.Run()
+	return true
+}
+
+func main() {
+	runtime.LockOSThread()
+	defer runtime.UnlockOSThread()
+	if setDpiAwarenessCtx.Find() == nil {
+		setDpiAwarenessCtx.Call(^uintptr(3))
+	}
+	if len(os.Args) > 1 && strings.EqualFold(os.Args[1], "--classic") {
+		runClassic()
+		return
+	}
+	if runHub() {
+		return
+	}
+	if msgbox("A interface moderna precisa do Microsoft Edge WebView2, que não foi encontrado neste computador.\n\nDeseja abrir a página oficial para instalá-lo? Você também pode continuar na interface simples.", productName, mbYesNo|mbIconInfo) == 6 {
+		shellExecute.Call(0, uintptr(unsafe.Pointer(strPtr("open"))), uintptr(unsafe.Pointer(strPtr(webviewRuntimeURL))), 0, 0, swShow)
+	}
+	runClassic()
+}

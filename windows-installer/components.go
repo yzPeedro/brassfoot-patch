@@ -1,0 +1,222 @@
+package main
+
+import (
+	"encoding/json"
+	"errors"
+	"fmt"
+	"os"
+	"path/filepath"
+	"regexp"
+	"strings"
+)
+
+const (
+	componentPatch     = "patch"
+	componentLive      = "live"
+	componentPatchLive = "patch+live"
+)
+
+var recipeName = regexp.MustCompile(`^[A-Za-z0-9._-]+\.json$`)
+
+type ComponentConfig struct {
+	SchemaVersion            int                            `json:"schemaVersion"`
+	OriginalExecutableSHA256 string                         `json:"originalExecutableSha256"`
+	LiveExecutableSHA256     []string                       `json:"liveExecutableSha256"`
+	Executables              map[string]ComponentExecutable `json:"executables"`
+}
+
+type ComponentExecutable struct {
+	SHA256                 string   `json:"sha256"`
+	Size                   int64    `json:"size"`
+	Recipe                 string   `json:"recipe"`
+	AcceptedOriginalSHA256 []string `json:"acceptedOriginalSha256,omitempty"`
+}
+
+type Selection struct {
+	Patch bool `json:"patch"`
+	Live  bool `json:"live"`
+}
+
+type GameState struct {
+	Game              string `json:"game"`
+	ExecutableSHA256  string `json:"executableSha256"`
+	ExecutableKnown   bool   `json:"executableKnown"`
+	ExecutableMissing bool   `json:"executableMissing"`
+	Patch             bool   `json:"patch"`
+	Live              bool   `json:"live"`
+	TeamsInstalled    int    `json:"teamsInstalled"`
+	TeamsTotal        int    `json:"teamsTotal"`
+}
+
+func (s GameState) PatchStatus() string {
+	switch {
+	case s.TeamsTotal > 0 && s.TeamsInstalled == s.TeamsTotal && s.Patch:
+		return "installed"
+	case s.Patch || s.TeamsInstalled > 0:
+		return "partial"
+	default:
+		return "absent"
+	}
+}
+
+func contains(values []string, wanted string) bool {
+	for _, value := range values {
+		if value == wanted {
+			return true
+		}
+	}
+	return false
+}
+
+func executableEntry(m Manifest) (ManifestFile, bool) {
+	for _, f := range m.Files {
+		if f.Path == gameExecutablePath {
+			return f, true
+		}
+	}
+	return ManifestFile{}, false
+}
+
+func detectState(m Manifest, gamePath string) (GameState, error) {
+	game, _, err := validGame(gamePath)
+	if err != nil {
+		return GameState{}, err
+	}
+	state := GameState{Game: game}
+	full, hasExecutable := executableEntry(m)
+	if hasExecutable {
+		hash, e := sha(filepath.Join(game, gameExecutablePath))
+		if e != nil {
+			state.ExecutableMissing = true
+		} else {
+			state.ExecutableSHA256 = hash
+			known := hash == full.SHA256 || contains(full.AcceptedOriginalSHA256, hash)
+			if c := m.Components; c != nil {
+				for _, target := range c.Executables {
+					if hash == target.SHA256 || contains(target.AcceptedOriginalSHA256, hash) {
+						known = true
+					}
+				}
+				state.Live = contains(c.LiveExecutableSHA256, hash)
+				liveOnly := c.Executables[componentLive].SHA256
+				state.Patch = known && hash != c.OriginalExecutableSHA256 && hash != liveOnly
+			} else {
+				state.Patch = hash == full.SHA256
+			}
+			state.ExecutableKnown = known
+		}
+	}
+	for _, f := range m.Files {
+		if f.Path == gameExecutablePath {
+			continue
+		}
+		state.TeamsTotal++
+		if hash, e := sha(filepath.Join(game, filepath.FromSlash(f.Path))); e == nil && hash == f.SHA256 {
+			state.TeamsInstalled++
+		}
+	}
+	return state, nil
+}
+
+func componentKey(patch, live bool) string {
+	switch {
+	case patch && live:
+		return componentPatchLive
+	case patch:
+		return componentPatch
+	case live:
+		return componentLive
+	}
+	return ""
+}
+
+func componentManifest(m Manifest, selection Selection, state GameState) (Manifest, error) {
+	if !selection.Patch && !selection.Live {
+		return Manifest{}, errors.New("selecione ao menos um item para instalar")
+	}
+	out := m
+	out.Files = nil
+	full, hasExecutable := executableEntry(m)
+	for _, f := range m.Files {
+		if f.Path != gameExecutablePath && selection.Patch {
+			out.Files = append(out.Files, f)
+		}
+	}
+	if hasExecutable {
+		key := componentKey(selection.Patch || state.Patch, selection.Live || state.Live)
+		switch {
+		case key == componentPatchLive || m.Components == nil:
+			out.Files = append(out.Files, full)
+		default:
+			target, ok := m.Components.Executables[key]
+			if !ok || !validHash.MatchString(target.SHA256) || !recipeName.MatchString(target.Recipe) {
+				return Manifest{}, fmt.Errorf("componente %s indisponível neste pacote", key)
+			}
+			accepted := []string{}
+			for _, hash := range append(append([]string{}, target.AcceptedOriginalSHA256...), full.AcceptedOriginalSHA256...) {
+				if hash != target.SHA256 && !contains(accepted, hash) {
+					accepted = append(accepted, hash)
+				}
+			}
+			if len(accepted) > 64 {
+				accepted = accepted[:64]
+			}
+			via := full
+			via.Recipe = ""
+			via.Via = nil
+			out.Files = append(out.Files, ManifestFile{
+				Operation: "replace", Path: gameExecutablePath, Size: target.Size, SHA256: target.SHA256,
+				AcceptedOriginalSHA256: accepted, Recipe: target.Recipe, Via: &via,
+			})
+		}
+	}
+	if len(out.Files) == 0 {
+		return Manifest{}, errors.New("nada a instalar para a seleção escolhida")
+	}
+	return out, nil
+}
+
+func stageComponents(root, gamePath string, selection Selection) (Plan, error) {
+	m := bundledManifestFromFS()
+	state, err := detectState(m, gamePath)
+	if err != nil {
+		return Plan{}, err
+	}
+	cm, err := componentManifest(m, selection, state)
+	if err != nil {
+		return Plan{}, err
+	}
+	staged, err := os.MkdirTemp(root, "selection-")
+	if err != nil {
+		return Plan{}, err
+	}
+	body, err := json.MarshalIndent(cm, "", "  ")
+	if err != nil {
+		return Plan{}, err
+	}
+	if err = os.WriteFile(filepath.Join(staged, "manifest.json"), body, 0600); err != nil {
+		return Plan{}, err
+	}
+	if err = preparePayloadManifest(deltaPayload, cm, state.Game, staged); err != nil {
+		return Plan{}, err
+	}
+	return inspect(staged, state.Game)
+}
+
+func bundledManifestFromFS() Manifest {
+	var m Manifest
+	body, err := deltaPayload.ReadFile("bundled_release/manifest.json")
+	if err == nil {
+		_ = json.Unmarshal(body, &m)
+	}
+	return m
+}
+
+func sameFolder(a, b string) bool {
+	ca, ea := canonical(a)
+	cb, eb := canonical(b)
+	if ea != nil || eb != nil {
+		return strings.EqualFold(filepath.Clean(a), filepath.Clean(b))
+	}
+	return strings.EqualFold(ca, cb)
+}
