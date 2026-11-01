@@ -37,7 +37,7 @@ Dependências ou bloqueadores:
 
 ## F1 — Campo animado da partida (prévia PRIVADA) · prioridade P0
 
-**Checkpoint:** 31/10/2026 ~19h40 (Brasília), Claude Code. Estado: prévia **2026.4.31 compilada** (a 4.30 foi instalada pelo proprietário), sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
+**Checkpoint:** 31/10/2026 ~19h40 (Brasília), Claude Code. Estado: prévia **2026.4.32 compilada** (a 4.31 foi instalada pelo proprietário), sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
 
 - **Objetivo final:** desenhar um campo 2D dentro da tela original de partida, abaixo do placar e acima da tabela de outros jogos, com os 22 jogadores, bola e eventos sincronizados com a engine, **sem alterar o resultado simulado**. A entrega é sempre um instalador local para o proprietário testar.
 - **Onde está o código:** branch `live-match-preview` (no GitHub, sem merge na `main`), commits reescritos em 31/10 sem coautoria:
@@ -52,6 +52,49 @@ Dependências ou bloqueadores:
   - `config/edition-live-match-preview.json`;
   - ajustes em `tools/build_distribution.py` (canal lido da edição) e `tools/build_release_bundle.py`.
 - **Contexto histórico:** manual §6 e Apêndice A do [contexto mestre](BRASFOOT-MEGA-PATCH-CONTEXTO-MESTRE.md) (transcript do Work, L891–3085).
+
+### Atualização 2026.4.32 (01/11/2026), pênalti, pausa instantânea, naturalidade e debug
+
+- **Pedido:**
+  - o jogador atravessava o campo para levar cartão;
+  - a pausa com espaço tinha atraso;
+  - eventos previsíveis (bola parando, artilheiro atravessando o campo, "popadas");
+  - pênalti na ordem errada (cobrança dupla);
+  - botões de debug;
+  - cores mais vivas;
+  - ícone de lesão no canto inferior direito;
+  - substituições não refletidas.
+- **Pênalti:**
+  - bytecode: `a.dV.a(v,I,A,int)` toca o som `dk(4)`; para o time humano abre `a.gh` (escolha do batedor, `A.f(F)`); depois `b(v,A)` abre `a.gb`, que **decide o resultado** (`Random`), soma o placar (`v.dJ`) e registra o lance;
+  - o transformer injeta `LiveMatchPanel.beforePenaltyKick(v, A)` no início de `b(v,A)`;
+  - fluxo: pré-evento com falta na área (atacante leva a bola, defensor faz contato) → clímax → modal do Brasfoot, com os jogadores se organizando fora da área durante o modal → escolha do batedor → gancho em `SecondaryLoop`: o batedor sai da multidão, para 1 s e bate → a tela `a.gb` decide → o painel lê o placar e mostra gol, defesa ou bola para fora;
+  - lances de resultado do pênalti não são reaplicados;
+  - pênalti não é mais pré-animado com um batedor provisório.
+- **Pausa instantânea:** espaço (`GV >= 0`) dispara `qa()` na hora (via `invokeLater`), e o Brasfoot abre a tela de pausa ao fim desse minuto, como no fluxo original. O minuto em curso é fechado imediatamente.
+- **Cartão:** o infrator só persegue a bola a menos de 0,20 dela (ou após 6 s); antes disso, os passes e a condução do adversário se aproximam dele. Prazo de 10 s.
+- **Gols:**
+  - variações por sorteio (55% profundidade, 27% cruzamento, 18% rebote);
+  - foco "laterais" favorece o cruzamento;
+  - passe final só com o artilheiro a ≤ 0,32 do ponto;
+  - o artilheiro só acelera depois do passe final;
+  - domínios mais curtos;
+  - direção da bola no pé suavizada.
+- **Escalação:** lida de `I.hp()`/`I.hq()` (jogadores em campo, as listas que a tela de substituição altera), com fallback em `hl`/`hm`; goleiro identificado por `getPosicao()==0`.
+- **Visual:** cor dominante do uniforme com saturação reforçada; ícone de lesão no canto inferior direito.
+- **Debug temporário:**
+  - `DEBUG_TOOLS = true` em `LiveMatchPanel`;
+  - 11 botões à direita do campo: faltas com 4, 3, 2 e 1 na barreira, pênalti, falta comum, amarelo, vermelho, lesão, gol e substituição;
+  - efeito só visual, sem chamar o motor;
+  - **desligar antes de qualquer release.**
+- **Build:**
+  - EXE de jogo `data/private/live-match-preview-20261101-penalty-flow/bf22-23.exe`, SHA `cbe2513a…2d4f`;
+  - instalador `dist/live-match-preview-2026.4.32/Brasfoot-Mega-Patch-2026.4.32-windows-x64.exe`, 9.880.064 bytes, SHA-256 `fc2845504e254c21700a86647d6f63140b332776378759933669f67567edd24b`;
+  - 28 origens, incluindo a 4.31 que estava instalada (`9549481d…`);
+  - bytecode verificado na JVM 1.8.0_441 (8 classes `mega`);
+  - `a.dV` com 1 `engineStep`, 1 gancho de pênalti e 0 chamadas diretas a `q`;
+  - commit `0d3dde7`.
+- **Estado:** compilada, não testada em jogo.
+- **Próxima build:** incluir `20261101-penalty-flow` entre os `--previous-preview-executable`.
 
 ### Atualização 2026.4.31 (01/11/2026), sincronia com o motor, lesão, formação e táticas
 
