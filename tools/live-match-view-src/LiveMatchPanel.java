@@ -257,6 +257,10 @@ public final class LiveMatchPanel extends JPanel {
     private final Map<Object, Integer> actionDue = new IdentityHashMap<Object, Integer>();
     private int activeDue = -1;
     private int restartDue = -1;
+    private int cueDue = -1;
+    private long syncDeadlineReal;
+    private boolean syncForced;
+    private boolean syncGoalPrepared;
     private int frames;
     private boolean everShown;
     private boolean laidOut;
@@ -437,6 +441,7 @@ public final class LiveMatchPanel extends JPanel {
         preEventRemaining = visual.size() + cues.size();
         statCueQueue.clear();
         statCueQueue.addAll(cues);
+        cueDue = gameTick + 1;
         preEventDeadline = Long.MAX_VALUE;
         preEventStarted = now;
         for (Object action : visual) {
@@ -490,6 +495,7 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private void startStatCue(long now, int[] cue) {
+        scheduleSync(cueDue < 0 ? gameTick : cueDue);
         int kind = cue[0], side = cue[1];
         if (preEventDeadline == Long.MAX_VALUE) preEventDeadline = now + 16000L;
         plannedActionKey = null;
@@ -559,7 +565,7 @@ public final class LiveMatchPanel extends JPanel {
         observeGameMinute(real);
         int late = lateness();
         urgency = urgencyFor(delay) * Math.min(4.0, 1.0 + .7 * late);
-        motion = motionFor(delay) * Math.min(1.6, 1.0 + .2 * late);
+        motion = 1.0;
         if (running) virtualNow += Math.round(elapsed * urgency);
     }
 
@@ -600,10 +606,138 @@ public final class LiveMatchPanel extends JPanel {
         return 5.0;
     }
 
-    private static double motionFor(int delay) {
-        if (delay >= 450) return 1.0;
-        if (delay >= 220) return 1.35;
-        return 1.7;
+    private boolean syncMode() {
+        return minuteDelay() <= 450;
+    }
+
+    private void scheduleSync(int due) {
+        if (!syncMode()) {
+            syncDeadlineReal = 0;
+            return;
+        }
+        long real = System.currentTimeMillis();
+        int delay = minuteDelay();
+        int tolerance = delay >= 450 ? 1 : 0;
+        long deadline = due > gameTick
+                ? minuteStartedReal + (long) delay * (due - gameTick + tolerance)
+                : real + 350L + (long) delay * tolerance;
+        deadline = Math.max(real + 350L, deadline);
+        if (syncDeadlineReal == 0 || real >= syncDeadlineReal - 300L) {
+            syncDeadlineReal = deadline;
+            syncForced = false;
+        } else {
+            syncDeadlineReal = Math.min(syncDeadlineReal, deadline);
+        }
+    }
+
+    private boolean choreographyActive() {
+        return hasAnimationStoppage() || pendingGoalStage != 0 || tackleActive || ambientShotPhase != 0
+                || statCueActive != 0;
+    }
+
+    private void enforceSync(long now) {
+        if (syncDeadlineReal == 0) return;
+        if (!choreographyActive()) {
+            syncDeadlineReal = 0;
+            syncForced = false;
+            syncGoalPrepared = false;
+            return;
+        }
+        long real = System.currentTimeMillis();
+        if (pendingGoalStage == 1 && !penaltyBuild && real >= syncDeadlineReal - 650L) prepareSyncGoal(now);
+        if (syncForced || real < syncDeadlineReal - 300L) return;
+        syncForced = true;
+        forceClimax(now);
+    }
+
+    private void prepareSyncGoal(long now) {
+        if (syncGoalPrepared || ballInFlight || pendingGoalActor < 0) return;
+        Dot[] team = pendingGoalSide == 0 ? home : away;
+        Dot actor = team[Math.min(team.length - 1, pendingGoalActor)];
+        syncGoalPrepared = true;
+        plannedSpotX = actor.currentX;
+        plannedSpotY = actor.currentY;
+        boolean hasBall = !looseBall && possessingSide == pendingGoalSide && possessingPlayer == pendingGoalActor;
+        if (hasBall) return;
+        tackleActive = false;
+        sendBallTo(now, actor.currentX, actor.currentY, 260, pendingGoalSide, pendingGoalActor);
+    }
+
+    private void forceSyncShot(long now) {
+        if (ballInFlight && receivingSide == pendingGoalSide && receivingPlayer == pendingGoalActor) return;
+        ballInFlight = false;
+        looseBall = false;
+        curveActive = false;
+        tackleActive = false;
+        possessingSide = pendingGoalSide;
+        possessingPlayer = pendingGoalActor;
+        ballFromX = ballX;
+        ballFromY = ballY;
+        ballToX = pendingGoalSide == 0 ? .985 : .015;
+        ballToY = .42 + random.nextDouble() * .16;
+        pendingGoalStage = 2;
+        goalStageDeadline = 0;
+        ownGoalStage = 0;
+        moveStarted = now;
+        moveDuration = 300;
+        ballInFlight = true;
+    }
+
+    private void forceClimax(long now) {
+        if (pendingGoalStage == 1 && penaltyBuild) {
+            int side = pendingGoalSide;
+            int fouled = pendingGoalActor;
+            pendingGoalStage = 0;
+            penaltyBuild = false;
+            penaltyFouler = -1;
+            startPenaltySetup(now, side, fouled);
+            onClimax();
+        } else if (pendingGoalStage == 1) {
+            forceSyncShot(now);
+        }
+        if (cardFoulPhase == 1) blowCardFoul(now);
+        if (cardFoulPhase >= 2) {
+            cardFoulReadyAfter = now;
+            cardFoulDeadline = now;
+        }
+        if (freeKickPhase != 0) {
+            freeKickReadyAfter = now;
+            freeKickDeadline = now - 6001L;
+            freeKickPauseUntil = 0;
+        }
+        if (tackleActive) tackleDeadline = now;
+        if (simpleStoppageUntil != 0) simpleStoppageUntil = now;
+        if (ambientShotPhase != 0) controlUntil = now;
+        if (restartActive) snapToFormation(now);
+        if (statCueActive != 0) completeStatCue(statCueActive);
+    }
+
+    private void snapToFormation(long now) {
+        long real = System.currentTimeMillis();
+        for (Dot[] team : new Dot[][] { home, away }) {
+            for (Dot dot : team) {
+                if (!dot.active) continue;
+                if (distance(dot.currentX, dot.currentY, dot.targetX, dot.targetY) > .05) {
+                    dot.currentX = dot.targetX;
+                    dot.currentY = dot.targetY;
+                    dot.velocityX = 0;
+                    dot.velocityY = 0;
+                    dot.fadeStart = real;
+                }
+                dot.entering = false;
+            }
+        }
+        Dot[] kickoffTeam = kickoffSide == 0 ? home : away;
+        if (kickoffPlayerA >= 0 && kickoffPlayerA < kickoffTeam.length && !ballInFlight) {
+            Dot taker = kickoffTeam[kickoffPlayerA];
+            if (distance(taker.currentX, taker.currentY, ballX, ballY) > CONTACT) {
+                taker.currentX = ballX - (kickoffSide == 0 ? .012 : -.012);
+                taker.currentY = ballY;
+                taker.fadeStart = real;
+            }
+        }
+        restartEarliest = now;
+        restartDeadline = now;
     }
 
     private int maxStatCues() {
@@ -808,6 +942,9 @@ public final class LiveMatchPanel extends JPanel {
         pendingStatCues.clear();
         activeDue = -1;
         restartDue = -1;
+        syncDeadlineReal = 0;
+        syncForced = false;
+        syncGoalPrepared = false;
         statCueActive = 0;
         curveActive = false;
         ballLift = 0;
@@ -855,6 +992,7 @@ public final class LiveMatchPanel extends JPanel {
         else refreshBallRoleTargets();
         updatePlayerPositions();
         expediteBacklog();
+        if (syncMode()) enforceSync(now);
         if (lateness() > 0) statCueQueue.clear();
         if (!hasAnimationStoppage() && !queuedEngineActions.isEmpty()) {
             if (preEventActive && preEventDeadline == Long.MAX_VALUE) preEventDeadline = now + 16000L;
@@ -1173,6 +1311,7 @@ public final class LiveMatchPanel extends JPanel {
         restartEarliest = now + (walked >= 1.0 ? 400L : 2500L);
         restartDeadline = now + 25000L;
         restartDue = gameTick + 1;
+        scheduleSync(restartDue);
         kickoffSide = side;
         Dot[] kickoffTeam = side == 0 ? home : away;
         kickoffPlayerA = nearestActive(kickoffTeam, .50, .46, -1, false);
@@ -1393,7 +1532,8 @@ public final class LiveMatchPanel extends JPanel {
             }
             return;
         }
-        boolean atSpot = distance(actor.currentX, actor.currentY, plannedSpotX, plannedSpotY) <= .035;
+        boolean atSpot = syncGoalPrepared || syncForced
+                || distance(actor.currentX, actor.currentY, plannedSpotX, plannedSpotY) <= .035;
         boolean plausible = isPlausibleShot(pendingGoalSide, plannedSubtype, actor.currentX, actor.currentY);
         if (ownGoalActive && ownGoalDefender >= 0 && (atSpot || plausible)) {
             Dot[] defenders = pendingGoalSide == 0 ? away : home;
@@ -1437,7 +1577,7 @@ public final class LiveMatchPanel extends JPanel {
         pendingGoalStage = 2;
         goalStageDeadline = 0;
         moveStarted = now;
-        moveDuration = 720;
+        moveDuration = syncGoalPrepared || syncForced ? 300 : 720;
         ballInFlight = true;
     }
 
@@ -1465,6 +1605,7 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private void goalBuildStep(long now) {
+        if (syncGoalPrepared) return;
         int side = pendingGoalSide;
         int scorer = pendingGoalActor;
         Dot[] team = side == 0 ? home : away;
@@ -1918,7 +2059,7 @@ public final class LiveMatchPanel extends JPanel {
     private void updateFreeKick(long now) {
         if (freeKickPhase == 0) return;
         if (freeKickPhase == 1) {
-            if (!ballInFlight && now >= freeKickReadyAfter && (formationReady() || now >= freeKickDeadline)) {
+            if (!ballInFlight && (syncForced || now >= freeKickReadyAfter && (formationReady() || now >= freeKickDeadline))) {
                 freeKickPhase = 2;
                 controlUntil = Long.MAX_VALUE;
             }
@@ -1934,10 +2075,10 @@ public final class LiveMatchPanel extends JPanel {
                 freeKickPauseUntil = now + 1000L;
             }
             if (freeKickPauseUntil != 0 && now >= freeKickPauseUntil) freeKickPhase = 3;
-            if (freeKickPauseUntil == 0 && now >= freeKickDeadline + 6000L) freeKickPhase = 3;
+            if (freeKickPauseUntil == 0 && (syncForced || now >= freeKickDeadline + 6000L)) freeKickPhase = 3;
             return;
         }
-        if (freeKickPhase != 3 || distance(taker.currentX, taker.currentY, ballX, ballY) > .022) return;
+        if (freeKickPhase != 3 || (!syncForced && distance(taker.currentX, taker.currentY, ballX, ballY) > .022)) return;
         int side = freeKickSide;
         double goalX = side == 0 ? .992 : .008;
         double nearSign = plannedSpotY < .5 ? -1.0 : 1.0;
@@ -1963,7 +2104,7 @@ public final class LiveMatchPanel extends JPanel {
             curveCX = midX;
             curveCY = clamp(midY + bendSign * (.07 + random.nextDouble() * .03), .03, .97);
             curveActive = true;
-            moveDuration = 900 + random.nextInt(150);
+            moveDuration = syncForced ? 380 : 900 + random.nextInt(150);
             event = "Cobrança de falta: " + taker.name;
         }
         moveStarted = now;
@@ -2085,12 +2226,21 @@ public final class LiveMatchPanel extends JPanel {
             return;
         }
         if (cardFoulPhase == 2) {
-            if (now < cardFoulReadyAfter) return;
+            if (now < cardFoulReadyAfter && !syncForced) return;
             cardFoulPhase = 3;
             cardFoulDeadline = now + 5000L;
             return;
         }
         Dot taker = takerTeam[cardFoulTaker];
+        if (syncForced && distance(taker.currentX, taker.currentY, ballX, ballY) > CONTACT) {
+            cardFoulPhase = 0;
+            looseBall = true;
+            looseSide = takerSide;
+            looseChaser = nearestActive(takerTeam, ballX, ballY, -1, false);
+            looseSince = now;
+            controlUntil = now;
+            return;
+        }
         if (distance(taker.currentX, taker.currentY, ballX, ballY) > CONTACT) {
             if (now < cardFoulDeadline) return;
             cardFoulTaker = nearestActive(takerTeam, ballX, ballY, -1, false);
@@ -2189,6 +2339,7 @@ public final class LiveMatchPanel extends JPanel {
         restartEarliest = now + 3200L;
         restartDeadline = now + 12000L;
         restartDue = gameTick + 1;
+        scheduleSync(restartDue);
         kickoffSide = restartSide;
         Dot[] kickoffTeam = kickoffSide == 0 ? home : away;
         kickoffPlayerA = nearestActive(kickoffTeam, .50, .46, -1, false);
@@ -2205,7 +2356,7 @@ public final class LiveMatchPanel extends JPanel {
         ballToX = .50;
         ballToY = .50;
         moveStarted = now;
-        moveDuration = 900;
+        moveDuration = syncMode() ? 350 : 900;
         ballInFlight = true;
     }
 
@@ -2789,6 +2940,8 @@ public final class LiveMatchPanel extends JPanel {
     private void applyEngineAction(Object action) {
         Integer due = actionDue.remove(action);
         activeDue = due == null ? gameTick : due.intValue();
+        syncGoalPrepared = false;
+        scheduleSync(activeDue);
         boolean preparedGoal = plannedActionKey != null && plannedType == 1;
         double preparedX = plannedSpotX;
         double preparedY = plannedSpotY;

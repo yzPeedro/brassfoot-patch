@@ -45,19 +45,31 @@ python tools/patch_live_match_view.py --source <bf22-23.exe> --output <pasta>/bf
 ## Velocidade e tempos
 
 - **O relógio é do Brasfoot.** O painel não para, não reinicia e não adianta o temporizador da partida. A duração de cada minuto é sempre a da velocidade escolhida pelo jogador, e pausa e substituições acontecem no tempo original do jogo.
-- **A animação se adapta à velocidade sem acelerar o movimento.** Jogadores e bola mantêm o ritmo natural até a velocidade Bem rápido. O que se ajusta são as decisões: esperas, pausas de bola parada e reinícios ficam mais curtos, e os gols saem de jogadas mais diretas, para que os lances caibam no tempo do minuto.
+- **Movimento sempre no ritmo normal.** Jogadores e bola se movem na mesma velocidade em qualquer configuração do jogo. O que se adapta à velocidade é a forma de montar as jogadas, e a sincronia com o jogo sempre tem prioridade sobre o realismo.
 
   | Velocidade do jogo | Intervalo por minuto | Comportamento do campo |
   |---|---|---|
-  | Lento | 2000 ms | Jogadas completas; até 3 lances de estatística por minuto |
-  | Normal | 1200 ms | Melhor experiência; até 2 lances de estatística por minuto |
-  | Rápido | 700 ms | Jogadas mais diretas; 1 lance de estatística por minuto |
-  | Bem rápido | 450 ms | Jogadas diretas, ainda fluidas e realistas |
-  | Super rápido | 220 ms | Movimento levemente acelerado; jogadas podem ficar irreais; sem lances de estatística |
-  | Ultra rápido | 100 ms | Movimento acelerado; jogadas irreais; sem lances de estatística |
+  | Lento | 2000 ms | Realista e sincronizado; até 3 lances de estatística por minuto |
+  | Normal | 1200 ms | Experiência ideal: realista e sincronizado; até 2 lances de estatística por minuto |
+  | Rápido | 700 ms | Realista, com esperas menores e gols sem troca de passes; 1 lance de estatística por minuto |
+  | Bem rápido | 450 ms | Linha divisória: realista enquanto couber no tempo; perto do prazo, o lance é resolvido de forma irreal |
+  | Super rápido | 220 ms | Sincronia acima de tudo; jogadas irreais frequentes; sem lances de estatística |
+  | Ultra rápido | 100 ms | Sincronia acima de tudo; jogadas irreais frequentes; sem lances de estatística |
 
-  Em Rápido ou mais, cartões e lesões acumulados são aplicados direto no jogador (cartão ou saída de campo) para não atrasar o campo; gols são sempre encenados.
-- **Sincronia com o minuto do jogo.** O painel registra em que minuto cada lance deve aparecer. O gol é montado para chegar ao chute na virada desse minuto, e a entrada em campo e os reinícios ficam mais curtos nas velocidades rápidas (no Rápido ou mais os jogadores surgem já posicionados). Se o campo ficar para trás, as decisões e o movimento aceleram levemente até alcançar o jogo, e lances menores deixam de ser encenados nesse intervalo.
+- **Modo de sincronia (Bem rápido ou mais rápido).** Todo lance ativo recebe um prazo, que é o momento em que o Brasfoot vira o minuto daquele lance (com tolerância de um minuto em Bem rápido). Até o prazo a jogada corre normalmente. Perto dele, o lance é resolvido na hora, vale para todos os eventos:
+
+  | Evento | Resolução no prazo |
+  |---|---|
+  | Gol e gol contra | A bola vai direto ao autor e ele finaliza de onde estiver, inclusive de longe |
+  | Pênalti | O lance vai direto para a cobrança |
+  | Cartão | O apito sai imediatamente |
+  | Falta com barreira | A cobrança sai imediatamente |
+  | Desarme, finalização e erro de passe | O lance é concluído imediatamente |
+  | Lesão | O jogo segue logo |
+  | Saída de bola, reinício e entrada em campo | Os jogadores se reposicionam com transição suave e a bola sai |
+
+  Cartões e lesões acumulados são aplicados direto no jogador (cartão ou saída de campo); gols são sempre encenados.
+- **Sincronia com o minuto do jogo.** O painel registra em que minuto cada lance deve aparecer. O gol é montado para chegar ao chute na virada desse minuto, e a entrada em campo e os reinícios ficam mais curtos nas velocidades rápidas (no Rápido ou mais os jogadores surgem já posicionados). Se o campo ficar para trás, as esperas encurtam até alcançar o jogo e lances menores deixam de ser encenados nesse intervalo; a velocidade do movimento não muda.
 - **Troca de lado.** No segundo tempo os times invertem o campo de ataque.
 
 ## Garantias de execução
