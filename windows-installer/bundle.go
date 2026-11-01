@@ -61,10 +61,11 @@ func applyRecipe(original []byte, raw []byte, wanted ManifestFile) ([]byte, erro
 	}
 	if recipe.SchemaVersion == 3 {
 		current := original
-		if len(recipe.Steps) < 2 || len(recipe.Steps) > 8 {
+		steps, ok := flattenSteps(recipe, 0)
+		if !ok || len(steps) < 2 || len(steps) > 8 {
 			return nil, fmt.Errorf("cadeia de instruções incompatível para %s", wanted.Path)
 		}
-		for _, step := range recipe.Steps {
+		for _, step := range steps {
 			var err error
 			current, err = applyRecipeV1(current, step, wanted.Path)
 			if err != nil {
@@ -77,6 +78,24 @@ func applyRecipe(original []byte, raw []byte, wanted ManifestFile) ([]byte, erro
 		return current, nil
 	}
 	return applyRecipeV1(original, recipe, wanted.Path)
+}
+
+func flattenSteps(recipe patchRecipe, depth int) ([]patchRecipe, bool) {
+	if recipe.SchemaVersion == 1 {
+		return []patchRecipe{recipe}, true
+	}
+	if recipe.SchemaVersion != 3 || depth > 4 {
+		return nil, false
+	}
+	steps := []patchRecipe{}
+	for _, step := range recipe.Steps {
+		inner, ok := flattenSteps(step, depth+1)
+		if !ok {
+			return nil, false
+		}
+		steps = append(steps, inner...)
+	}
+	return steps, true
 }
 
 func applyRecipeV1(original []byte, recipe patchRecipe, wantedPath string) ([]byte, error) {

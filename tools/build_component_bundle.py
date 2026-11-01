@@ -40,6 +40,43 @@ def write_recipe(path: Path, variants: list[dict]) -> None:
                                ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
 
+def flatten_steps(recipe: dict) -> list[dict]:
+    if recipe.get("schemaVersion") == 1:
+        return [recipe]
+    if recipe.get("schemaVersion") != 3:
+        raise ValueError("unsupported recipe schema in chain")
+    steps = []
+    for step in recipe.get("steps", []):
+        steps.extend(flatten_steps(step))
+    return steps
+
+
+def normalize_chains(patches: Path) -> int:
+    changed = 0
+    for path in sorted(patches.glob("*.json")):
+        data = json.loads(path.read_text(encoding="utf-8"))
+        variants = data.get("variants", []) if data.get("schemaVersion") == 2 else []
+        touched = False
+        for variant in variants:
+            if variant.get("schemaVersion") != 3:
+                continue
+            steps = flatten_steps(variant)
+            if len(steps) < 2 or len(steps) > 8:
+                raise ValueError("chain length unsupported: " + path.name)
+            for left, right in zip(steps, steps[1:]):
+                if left["targetSha256"] != right["originalSha256"] or left["targetSize"] != right["originalSize"]:
+                    raise ValueError("discontinuous chain: " + path.name)
+            if steps[0]["originalSha256"] != variant["originalSha256"] or steps[-1]["targetSha256"] != variant["targetSha256"]:
+                raise ValueError("chain endpoints differ: " + path.name)
+            if steps != variant["steps"]:
+                variant["steps"] = steps
+                touched = True
+        if touched:
+            path.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+            changed += 1
+    return changed
+
+
 def build(args: argparse.Namespace) -> dict:
     output = args.output.resolve()
     if output.exists():
@@ -74,6 +111,7 @@ def build(args: argparse.Namespace) -> dict:
     live_variants = [recipe(original, live)] + [recipe(item, live) for item in live_only]
     write_recipe(patches / LIVE_RECIPE, live_variants)
 
+    normalized = normalize_chains(patches)
     live_hashes = {full_sha, live_sha} | {sha(item) for item in live_only}
     for path in args.previous_live_executable:
         live_hashes.add(sha(path.read_bytes()))
@@ -114,6 +152,7 @@ def build(args: argparse.Namespace) -> dict:
         "full": full_sha, "patch": patch_sha, "live": live_sha, "original": original_sha,
         "mainVariants": len(main_variants), "patchVariants": len(patch_variants),
         "liveHashes": len(live_hashes),
+        "normalizedRecipes": normalized,
     }
 
 
