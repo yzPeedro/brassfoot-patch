@@ -37,7 +37,7 @@ Dependências ou bloqueadores:
 
 ## F1 — Campo animado da partida (prévia PRIVADA) · prioridade P0
 
-**Checkpoint:** 31/10/2026 ~19h40 (Brasília), Claude Code. Estado: prévia **2026.4.33 compilada** (a 4.32 foi instalada pelo proprietário), sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
+**Checkpoint:** 31/10/2026 ~19h40 (Brasília), Claude Code. Estado: prévia **2026.4.34 compilada** (a 4.33 foi instalada pelo proprietário), sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
 
 - **Objetivo final:** desenhar um campo 2D dentro da tela original de partida, abaixo do placar e acima da tabela de outros jogos, com os 22 jogadores, bola e eventos sincronizados com a engine, **sem alterar o resultado simulado**. A entrega é sempre um instalador local para o proprietário testar.
 - **Onde está o código:** branch `live-match-preview` (no GitHub, sem merge na `main`), commits reescritos em 31/10 sem coautoria:
@@ -52,6 +52,22 @@ Dependências ou bloqueadores:
   - `config/edition-live-match-preview.json`;
   - ajustes em `tools/build_distribution.py` (canal lido da edição) e `tools/build_release_bundle.py`.
 - **Contexto histórico:** manual §6 e Apêndice A do [contexto mestre](BRASFOOT-MEGA-PATCH-CONTEXTO-MESTRE.md) (transcript do Work, L891–3085).
+
+### Atualização 2026.4.34 (01/11/2026), espaço próprio no layout original e debug desligado
+
+- **Pedido:** parar de montar o campo por cima da tela original; manter o original e abrir um espaço entre o cabeçalho e a tabela de outros jogos. Retirar o debug.
+- **Mudança** (commit `aeb26ca`):
+  - quando a tela aparece, `openFieldSpace()` lê as posições dos filhos de `a.dV` (layout absoluto `components.a`), troca o layout por `null` mantendo exatamente as posições, desce os componentes abaixo do cabeçalho para a parte inferior (área de ~25% da altura, com a rolagem original) e adiciona o campo como filho normal no vão;
+  - sem `JLayeredPane`, sem cópia da tabela, sem barra de eventos própria; o painel não captura cliques;
+  - `DEBUG_TOOLS = false` (o código continua presente para religar em testes);
+  - as posições antes e depois são gravadas em `%LOCALAPPDATA%\BrassfootPatch2026\live-match-debug.log` (`layout_before`/`layout_after`) para ajuste fino;
+  - a classificação "cabeçalho" é heurística: filhos com `y < 150` e altura menor que metade da tela.
+- **Build:**
+  - EXE de jogo `data/private/live-match-preview-20261101-field-space/bf22-23.exe`, SHA `ae33b2b0…4dd9`;
+  - instalador `dist/live-match-preview-2026.4.34/`;
+  - 30 origens; bytecode verificado.
+- **Estado:** compilada, não testada em jogo.
+- **Próxima build:** incluir `20261101-field-space` entre os `--previous-preview-executable`.
 
 ### Atualização 2026.4.33 (01/11/2026), faltas reais, gol contra, debug por time e fluidez
 
