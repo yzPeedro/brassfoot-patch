@@ -114,7 +114,6 @@ Painel de cobertura de uma fase anterior. Lê `data/coverage-2026.json` e só ag
 | `mark.svg` | marca do projeto; também é o favicon. O hub do instalador usa uma cópia idêntica (`windows-installer/ui/mark.svg`) |
 | `live/pitch-0.jpg` … `pitch-3.jpg` | quadros do campo animado, um por condição de gramado, gerados por `tools/render_live_match_preview.py` |
 | `og-card.jpg` | cartão social 1200×630, gerado por `tools/render_brand_assets.py` |
-| `og-card.svg`, `celestial-ball.svg` | artes vetoriais sem referência nas páginas atuais |
 
 Os quadros do campo são desenhados pelo próprio código do painel (`tools/live-match-view-src/LiveMatchPanel.java`) por meio de `tools/live-match-render/mega/RenderFrame.java`, em modo headless e sem o jogo:
 
