@@ -22,6 +22,7 @@ type ComponentConfig struct {
 	SchemaVersion            int                            `json:"schemaVersion"`
 	OriginalExecutableSHA256 string                         `json:"originalExecutableSha256"`
 	LiveExecutableSHA256     []string                       `json:"liveExecutableSha256"`
+	LiveOnlyExecutableSHA256 []string                       `json:"liveOnlyExecutableSha256,omitempty"`
 	Executables              map[string]ComponentExecutable `json:"executables"`
 }
 
@@ -98,8 +99,8 @@ func detectState(m Manifest, gamePath string) (GameState, error) {
 					}
 				}
 				state.Live = contains(c.LiveExecutableSHA256, hash)
-				liveOnly := c.Executables[componentLive].SHA256
-				state.Patch = known && hash != c.OriginalExecutableSHA256 && hash != liveOnly
+				liveOnly := hash == c.Executables[componentLive].SHA256 || contains(c.LiveOnlyExecutableSHA256, hash)
+				state.Patch = known && hash != c.OriginalExecutableSHA256 && !liveOnly
 			} else {
 				state.Patch = hash == full.SHA256
 			}

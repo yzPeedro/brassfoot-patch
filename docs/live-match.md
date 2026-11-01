@@ -28,7 +28,7 @@ O patch é aplicado por [`tools/patch_live_match_view.py`](../tools/patch_live_m
 | Ponto de integração | O que acontece |
 |---|---|
 | Construtor da tela de partida | Instala o painel (`mega.LiveMatchPanel.install`) e abre um espaço próprio no layout original, sem cobrir controles do jogo |
-| Passo do minuto | A chamada ao passo de simulação do minuto passa por `LiveMatchPanel.engineStep`. O painel executa o mesmo método do jogo no início do minuto, uma única vez, para conhecer os lances antes de exibi-los; o temporizador do jogo pula o passo já executado |
+| Passo do minuto | A chamada ao passo de simulação do minuto passa por `LiveMatchPanel.engineStep`. O painel executa o mesmo método do jogo um minuto antes, uma única vez, para conhecer os lances antes de exibi-los; quando o temporizador do jogo chega ao minuto, o passo já executado é pulado |
 | Cobrança de pênalti | `LiveMatchPanel.beforePenaltyKick` anima a preparação da cobrança; o resultado continua sendo decidido pela tela original de pênalti |
 
 O transformador ([`LiveMatchTransformer.java`](../tools/live-match-view-src/LiveMatchTransformer.java)) usa ASM e confere o SHA-256 da classe original antes de alterar qualquer coisa. O patch aceita dois executáveis de origem:
@@ -42,10 +42,15 @@ O transformador ([`LiveMatchTransformer.java`](../tools/live-match-view-src/Live
 python tools/patch_live_match_view.py --source <bf22-23.exe> --output <pasta>/bf22-23.exe
 ```
 
+## Velocidade e tempos
+
+- **O relógio é do Brasfoot.** O painel não para, não reinicia e não adianta o temporizador da partida. A duração de cada minuto é sempre a da velocidade escolhida pelo jogador, e pausa e substituições acontecem no tempo original do jogo.
+- **A animação se adapta à velocidade.** O painel lê o intervalo de minuto da partida e roda a animação em um relógio próprio, proporcional a esse intervalo: nas velocidades rápidas os lances são encenados mais depressa, e nas lentas, com mais calma. Nas velocidades mais rápidas, lances menores das estatísticas deixam de ser encenados para que os eventos principais caibam no minuto.
+- **Troca de lado.** No segundo tempo os times invertem o campo de ataque.
+
 ## Garantias de execução
 
-- **Nunca travar o jogo:** qualquer erro no quadro do painel zera as animações e devolve o relógio ao Brasfoot; cada fase tem prazo máximo, e o relógio nunca fica retido por mais de alguns segundos.
-- **Pausa e substituições:** pedidos de pausa e substituição são atendidos no tempo original do jogo.
+- **Nunca travar o jogo:** qualquer erro no quadro do painel zera as animações; cada fase tem prazo máximo e o painel nunca segura a partida.
 - **Bola sempre ancorada:** a posse só muda por contato (passe, domínio, desarme ou cobrança), e cada fase termina em um estado explícito.
 - **Diagnóstico:** eventos de integração são registrados em `%LOCALAPPDATA%\BrassfootPatch2026\live-match-debug.log`.
 

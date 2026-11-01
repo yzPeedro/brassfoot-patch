@@ -69,9 +69,12 @@ def build(args: argparse.Namespace) -> dict:
         patch_variants.append(recipe(original, patch))
     patch_variants.append(recipe(full, patch))
     write_recipe(patches / PATCH_RECIPE, patch_variants)
-    write_recipe(patches / LIVE_RECIPE, [recipe(original, live)])
+    live_only = [path.read_bytes() for path in args.previous_live_only_executable]
+    live_only = [item for item in live_only if sha(item) not in {live_sha, original_sha, full_sha, patch_sha}]
+    live_variants = [recipe(original, live)] + [recipe(item, live) for item in live_only]
+    write_recipe(patches / LIVE_RECIPE, live_variants)
 
-    live_hashes = {full_sha, live_sha}
+    live_hashes = {full_sha, live_sha} | {sha(item) for item in live_only}
     for path in args.previous_live_executable:
         live_hashes.add(sha(path.read_bytes()))
 
@@ -96,12 +99,13 @@ def build(args: argparse.Namespace) -> dict:
         "schemaVersion": 1,
         "originalExecutableSha256": original_sha,
         "liveExecutableSha256": sorted(live_hashes),
+        "liveOnlyExecutableSha256": sorted(sha(item) for item in live_only),
         "executables": {
             "patch+live": {"sha256": full_sha, "size": len(full), "recipe": EXECUTABLE + ".json"},
             "patch": {"sha256": patch_sha, "size": len(patch), "recipe": PATCH_RECIPE,
                       "acceptedOriginalSha256": [variant["originalSha256"] for variant in patch_variants]},
             "live": {"sha256": live_sha, "size": len(live), "recipe": LIVE_RECIPE,
-                     "acceptedOriginalSha256": [original_sha]},
+                     "acceptedOriginalSha256": [variant["originalSha256"] for variant in live_variants]},
         },
     }
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -122,6 +126,7 @@ def main() -> None:
     parser.add_argument("--live-executable", type=Path, required=True)
     parser.add_argument("--patch-recipe", type=Path, required=True)
     parser.add_argument("--previous-live-executable", type=Path, action="append", default=[])
+    parser.add_argument("--previous-live-only-executable", type=Path, action="append", default=[])
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--version")
     parser.add_argument("--release", action="store_true")
