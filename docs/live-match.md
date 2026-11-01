@@ -57,6 +57,7 @@ python tools/patch_live_match_view.py --source <bf22-23.exe> --output <pasta>/bf
   | Ultra rápido | 100 ms | Movimento acelerado; jogadas irreais; sem lances de estatística |
 
   Em Rápido ou mais, cartões e lesões acumulados são aplicados direto no jogador (cartão ou saída de campo) para não atrasar o campo; gols são sempre encenados.
+- **Sincronia com o minuto do jogo.** O painel registra em que minuto cada lance deve aparecer. O gol é montado para chegar ao chute na virada desse minuto, e a entrada em campo e os reinícios ficam mais curtos nas velocidades rápidas (no Rápido ou mais os jogadores surgem já posicionados). Se o campo ficar para trás, as decisões e o movimento aceleram levemente até alcançar o jogo, e lances menores deixam de ser encenados nesse intervalo.
 - **Troca de lado.** No segundo tempo os times invertem o campo de ataque.
 
 ## Garantias de execução

@@ -32,8 +32,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import javax.swing.JLabel;
@@ -249,6 +251,12 @@ public final class LiveMatchPanel extends JPanel {
     private long lastRealMillis;
     private double urgency = 1.0;
     private double motion = 1.0;
+    private int gameTick;
+    private String gameTickKey = "";
+    private long minuteStartedReal;
+    private final Map<Object, Integer> actionDue = new IdentityHashMap<Object, Integer>();
+    private int activeDue = -1;
+    private int restartDue = -1;
     private int frames;
     private boolean everShown;
     private boolean laidOut;
@@ -433,6 +441,7 @@ public final class LiveMatchPanel extends JPanel {
         preEventStarted = now;
         for (Object action : visual) {
             animatedKeys.add(engineActionKey(action));
+            actionDue.put(action, Integer.valueOf(gameTick + 1));
             queuedEngineActions.add(action);
         }
     }
@@ -547,9 +556,39 @@ public final class LiveMatchPanel extends JPanel {
         long elapsed = lastRealMillis == 0 ? 0 : Math.max(0L, Math.min(100L, real - lastRealMillis));
         lastRealMillis = real;
         int delay = minuteDelay();
-        urgency = urgencyFor(delay);
-        motion = motionFor(delay);
+        observeGameMinute(real);
+        int late = lateness();
+        urgency = urgencyFor(delay) * Math.min(4.0, 1.0 + .7 * late);
+        motion = motionFor(delay) * Math.min(1.6, 1.0 + .2 * late);
         if (running) virtualNow += Math.round(elapsed * urgency);
+    }
+
+    private void observeGameMinute(long real) {
+        String key = readField(host, "dB") + ":" + readField(host, "GT");
+        if (key.equals(gameTickKey)) return;
+        gameTickKey = key;
+        gameTick++;
+        minuteStartedReal = real;
+    }
+
+    private int lateness() {
+        if (activeDue >= 0 && !hasAnimationStoppage() && pendingGoalStage == 0 && !ballInFlight) activeDue = -1;
+        if (restartDue >= 0 && !restartActive && !kickoffInProgress) restartDue = -1;
+        int due = Integer.MAX_VALUE;
+        for (Object action : queuedEngineActions) {
+            Integer value = actionDue.get(action);
+            due = Math.min(due, value == null ? gameTick : value.intValue());
+        }
+        if (activeDue >= 0) due = Math.min(due, activeDue);
+        if (restartDue >= 0) due = Math.min(due, restartDue);
+        if (due == Integer.MAX_VALUE || gameTick < due) return 0;
+        return gameTick - due + 1;
+    }
+
+    private long goalBudget() {
+        if (lateness() > 0) return 300L;
+        long remaining = minuteStartedReal + minuteDelay() - System.currentTimeMillis();
+        return (long) Math.min(7000.0, Math.max(400.0, remaining * urgency));
     }
 
     private static double urgencyFor(int delay) {
@@ -579,6 +618,7 @@ public final class LiveMatchPanel extends JPanel {
             int type = integer(invoke(action, "b"), -1);
             if (type == 2 || type == 3 || type == 4 || type == 5) {
                 queuedEngineActions.remove(i);
+                actionDue.remove(action);
                 applyQuietly(action, type);
             }
         }
@@ -763,8 +803,11 @@ public final class LiveMatchPanel extends JPanel {
         preEventActive = false;
         preEventRemaining = 0;
         queuedEngineActions.clear();
+        actionDue.clear();
         statCueQueue.clear();
         pendingStatCues.clear();
+        activeDue = -1;
+        restartDue = -1;
         statCueActive = 0;
         curveActive = false;
         ballLift = 0;
@@ -812,6 +855,7 @@ public final class LiveMatchPanel extends JPanel {
         else refreshBallRoleTargets();
         updatePlayerPositions();
         expediteBacklog();
+        if (lateness() > 0) statCueQueue.clear();
         if (!hasAnimationStoppage() && !queuedEngineActions.isEmpty()) {
             if (preEventActive && preEventDeadline == Long.MAX_VALUE) preEventDeadline = now + 16000L;
             applyEngineAction(queuedEngineActions.remove(0));
@@ -1093,17 +1137,23 @@ public final class LiveMatchPanel extends JPanel {
         resetBallControl();
         plannedRoute.clear();
         plannedActionKey = null;
+        double baseUrgency = urgencyFor(minuteDelay());
+        double walked = baseUrgency >= 2.2 ? 1.0 : baseUrgency >= 1.5 ? .7 : .45;
+        long real = System.currentTimeMillis();
         int entry = 0;
         for (Dot[] team : new Dot[][] { home, away }) {
             boolean awaySide = team == away;
             for (int i = 0; i < team.length; i++) {
                 Dot dot = team[i];
                 if (!dot.active) continue;
-                dot.currentX = .5 + (awaySide ? .012 : -.012) * (1 + entry % 4);
-                dot.currentY = .975 - (entry % 3) * .008;
+                double sideX = .5 + (awaySide ? .012 : -.012) * (1 + entry % 4);
+                double sideY = .975 - (entry % 3) * .008;
+                dot.currentX = sideX + (dot.x - sideX) * walked;
+                dot.currentY = sideY + (dot.y - sideY) * walked;
                 dot.velocityX = 0;
                 dot.velocityY = 0;
-                dot.entering = true;
+                dot.entering = walked < 1.0;
+                dot.fadeStart = walked < 1.0 ? 0 : real;
                 entry++;
             }
         }
@@ -1120,8 +1170,9 @@ public final class LiveMatchPanel extends JPanel {
         kickoffInProgress = false;
         halfStartPending = true;
         restartStarted = now;
-        restartEarliest = now + 2500L;
+        restartEarliest = now + (walked >= 1.0 ? 400L : 2500L);
         restartDeadline = now + 25000L;
+        restartDue = gameTick + 1;
         kickoffSide = side;
         Dot[] kickoffTeam = side == 0 ? home : away;
         kickoffPlayerA = nearestActive(kickoffTeam, .50, .46, -1, false);
@@ -2137,6 +2188,7 @@ public final class LiveMatchPanel extends JPanel {
         restartStarted = now;
         restartEarliest = now + 3200L;
         restartDeadline = now + 12000L;
+        restartDue = gameTick + 1;
         kickoffSide = restartSide;
         Dot[] kickoffTeam = kickoffSide == 0 ? home : away;
         kickoffPlayerA = nearestActive(kickoffTeam, .50, .46, -1, false);
@@ -2488,8 +2540,13 @@ public final class LiveMatchPanel extends JPanel {
             int type = integer(invoke(action, "b"), -1);
             previousActionKey = engineActionKey(action);
             if (type == 6 || type == 8) applyEngineAction(action);
-            else if (hasClockStoppage() || !queuedEngineActions.isEmpty()) queuedEngineActions.add(action);
-            else applyEngineAction(action);
+            else if (hasClockStoppage() || !queuedEngineActions.isEmpty()) {
+                actionDue.put(action, Integer.valueOf(gameTick));
+                queuedEngineActions.add(action);
+            } else {
+                actionDue.put(action, Integer.valueOf(gameTick));
+                applyEngineAction(action);
+            }
         }
     }
 
@@ -2726,9 +2783,12 @@ public final class LiveMatchPanel extends JPanel {
         kickoffInProgress = false;
         tackleActive = false;
         queuedEngineActions.clear();
+        actionDue.clear();
     }
 
     private void applyEngineAction(Object action) {
+        Integer due = actionDue.remove(action);
+        activeDue = due == null ? gameTick : due.intValue();
         boolean preparedGoal = plannedActionKey != null && plannedType == 1;
         double preparedX = plannedSpotX;
         double preparedY = plannedSpotY;
@@ -2798,7 +2858,7 @@ public final class LiveMatchPanel extends JPanel {
                 penaltyBuild = true;
                 penaltyFouler = -1;
                 penaltyFoulDeadline = 0;
-                goalStageDeadline = now + 7000L;
+                goalStageDeadline = now + goalBudget();
                 goalBuildPasses = 0;
                 goalBuildTarget = urgency >= 2.0 ? 0 : random.nextInt(2);
                 goalVariant = 0;
@@ -2833,7 +2893,7 @@ public final class LiveMatchPanel extends JPanel {
             plannedAssist = preparedAssist >= 0 ? preparedAssist
                     : matchRef == null ? -1 : findAssistPlayer(matchRef, action, players);
             if (plannedAssist == actor) plannedAssist = -1;
-            goalStageDeadline = now + 7000L;
+            goalStageDeadline = now + goalBudget();
             goalBuildPasses = 0;
             goalBuildTarget = urgency >= 2.0 ? 0 : random.nextInt(2);
             goalFinalPassed = false;
@@ -3857,7 +3917,7 @@ public final class LiveMatchPanel extends JPanel {
             pendingGoalSide = scoringSide;
             pendingGoalActor = scorer;
             plannedAssist = -1;
-            goalStageDeadline = now + 7000L;
+            goalStageDeadline = now + goalBudget();
             goalBuildPasses = 0;
             goalBuildTarget = urgency >= 2.0 ? 0 : random.nextInt(2);
             goalFinalPassed = false;
@@ -4110,8 +4170,13 @@ public final class LiveMatchPanel extends JPanel {
             int x = left + (int) (viewX(dot.currentX) * width);
             int y = top + (int) (dot.currentY * height);
             int fade = dot.entering ? 110 : 255;
+            if (dot.fadeStart > 0) {
+                long age = System.currentTimeMillis() - dot.fadeStart;
+                if (age < 450) fade = (int) Math.max(20, 255 * age / 450);
+                else dot.fadeStart = 0;
+            }
             g.setColor(SHADOW);
-            if (!dot.entering) g.fillOval(x - 9, y - 7, 20, 20);
+            if (!dot.entering && fade == 255) g.fillOval(x - 9, y - 7, 20, 20);
             g.setColor(new Color(fill.getRed(), fill.getGreen(), fill.getBlue(), fade));
             g.fillOval(x - 10, y - 10, 20, 20);
             g.setColor(new Color(255, 255, 255, dot.entering ? 35 : 70));
@@ -4395,6 +4460,7 @@ public final class LiveMatchPanel extends JPanel {
         boolean active = true;
         boolean known;
         boolean entering;
+        long fadeStart;
         String name;
         String fullName;
         final boolean away;
