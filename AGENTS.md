@@ -1,37 +1,53 @@
-# Brasfoot Mega Patch — continuidade
+# Instruções para agentes
 
-## Fonte e retomada
-- Missão integral: `docs/mega-patch-specification.md`, cópia byte a byte de `PROMPT.md`; hash em `config/mega-patch-specification.json`. Não remover requisitos.
-- Leia `docs/current-state.md`, `config/backlog.json`, `docs/context/CONTINUIDADE-E-PENDENCIAS.md` e o checkpoint local mais recente em `data/private/scheduled-maintenance/<data>/` antes de trabalhar. `data/private/continuity/` é usado apenas pelo serviço de continuidade, quando ativo.
-- Base de conhecimento: `docs/context/` (índice em `CLAUDE.md`). Contexto mestre `docs/context/BRASFOOT-MEGA-PATCH-CONTEXTO-MESTRE.md` (manual operacional + histórico do Work e missões de 25–26/10), manual `docs/context/BRASFOOT-MEGA-PATCH-MANUAL-OPERACIONAL.md`, módulos `docs/context/GUIA-DE-MODULOS.md`, decisões `docs/context/HISTORICO-E-DECISOES.md`. Precedência: instrução recente do proprietário > estado verificado (código/Git/releases) > `current-state` e checkpoints > Work não publicado > contexto mestre > especificação e histórico, sem descartar requisitos.
-- Campo animado ao vivo (`tools/live-match-view-src/`) publicado na 2026.5.0 por instrução do proprietário (01/11/2026). Builds de prévia (`dist/live-match-preview-*`) continuam privadas; novas mudanças no campo animado só vão a release quando o proprietário pedir. Releases seguintes devem partir do executável com o campo animado (ver `docs/scheduled-maintenance.md`).
-- Manutenção recorrente autorizada: seguir `docs/scheduled-maintenance.md` na execução diária das 18h de Brasília; pesquisa de todos os clubes, publicação automática, datas/ano e patch notes fazem parte do mesmo ciclo.
-- Evidências anteriores: `docs/implementation-progress.md`, `docs/release-2026.3.5.md`, `docs/365scores-roster-policy.md`. Não repetir auditorias concluídas. Documentos antigos podem descrever releases anteriores; consultar manifesto e GitHub para situação publicada.
+Regras para qualquer agente que trabalhe neste repositório. A documentação técnica está em [`docs/`](docs/README.md); este arquivo trata apenas de como operar.
 
-## Execução
-- Alethe local é o mecanismo de delegação; perfil savings, ondas economy, no máximo dois workers e preferencialmente um escritor por vez. Planos/telemetria fora do Git.
-- Workers recebem objetivo delimitado, caminhos de propriedade e checks. Não delegam novamente nem fazem commits/publicações.
-- Coordenador integra somente após revisão de diff e validações. Preserve mudanças preexistentes do usuário.
-- Cota ausente, desatualizada ou acima do limite operacional adia novas ondas. Nunca usar bypass de cota, trocar para cobrança API ou contratar serviços.
-- Checkpoints devem registrar implementação, validação e operação separadamente. Não inventar testes, fontes, compatibilidade ou cobertura.
+## Contexto
 
-## Publicação autorizada
-- Commits, push, releases e atualização do site estão autorizados pelo proprietário dentro desta missão; não criar homologação humana recorrente.
-- Nesta entrega o proprietário dispensou todos os testes e determinou releases finais. Compilar e publicar artefatos com integridade e proveniência, sem alegar testes ou compatibilidade funcional não observados.
-- Não substituir saves, remover ativação ou redistribuir binários proprietários sem autorização aplicável.
-- Publicar artefatos verificados antes do manifesto/site. Vincular versão a commit, snapshot e hashes; recuperar falhas parciais de forma idempotente.
-- API-Football desativada por padrão. Não inventar dados esportivos; conservar último dado confiável se uma fonte falhar.
-- Identidade visual atual solicitada: Brasfoot Mega Patch com estética celeste inspirada no Cruzeiro, azul profundo, ciano, branco e constelações; projeto independente. PIX existente opcional, sem PayPal.
+- Projeto: atualizador gratuito e independente de uma instalação existente do Brasfoot 22-23. Repositório `yzPeedro/brassfoot-patch`; código em `main`, site em `gh-pages` (https://yzpeedro.github.io/brassfoot-patch/).
+- Idioma de trabalho e de documentação: português do Brasil.
+- Base de conhecimento operacional (histórico, decisões, continuidade e checkpoints): `data/private/knowledge/` no checkout de produção. É local e fica fora do Git; não copie seu conteúdo para o repositório.
+- Ao retomar trabalho, leia `data/private/knowledge/context/CONTINUIDADE-E-PENDENCIAS.md` e o checkpoint mais recente em `data/private/scheduled-maintenance/<data>/`.
+
+## Precedência de fontes
+
+1. Instrução mais recente e explícita do proprietário.
+2. Estado verificado: código, Git (`main`, `origin/main`, `gh-pages`), releases do GitHub, `dist/` e `data/private/`.
+3. Checkpoints e a base de conhecimento local.
+4. Documentação em `docs/`.
+
+## Antes de alterar o checkout
+
+- `git status --short --branch`, `git fetch origin` e `git log --oneline -5 origin/main`. A rotina diária publica a partir de outro worktree, então este checkout pode estar atrás do remoto.
+- Nunca descarte alterações locais: faça backup em `data/private/working-tree-backup-<data>/`, compare com o remoto e avance com `git merge --ff-only`. Nada de `reset --hard`, `clean` ou `stash pop` às cegas.
+
+## Regras invioláveis
+
+- Não modificar o jogo instalado, saves, ativação, licenças ou backups do usuário; trabalhar sempre em cópias em `data/private/`.
+- Não redistribuir binários proprietários; distribuir apenas receitas delta reconhecidas por SHA-256.
+- O motor de simulação do Brasfoot não é alterado; recursos visuais usam apenas informações expostas pelo jogo.
+- Não inventar dados esportivos, transferências, testes, compatibilidade ou porcentagens.
+- Segredos (tokens, `.env`, chaves) nunca entram em commits, logs ou documentos. Dados pessoais só com necessidade técnica.
+- Código sem comentários explicativos.
+- Commits saem no nome do proprietário (`yzPeedro`), sem linhas de coautoria de ferramentas.
 
 ## Verificações
-- Por solicitação explícita do proprietário, não executar testes nesta manutenção, incluindo suítes Python/JavaScript/Go, testes de navegador e gameplay.
-- Realizar apenas compilação produtiva, geração de dados, leitura de código, integridade/proveniência dos artefatos e conferência do estado de publicação. Não descrever essas atividades como testes funcionais.
-- Não afirmar validação de gameplay, temporadas, macOS ou Linux sem evidência real.
 
-## Entrega corretiva 2026.4.1
-- Estado atual por seção: `config/specification-coverage.json`; conclusão integral explicitamente falsa.
-- O mantenedor dispensou execução de testes nesta entrega. Não descrever compilação, hashes ou inspeção de código como testes executados.
-- Build: `tools/build_distribution.py`; publicação: `tools/publish_distribution.py` e `tools/publish_pages.py`, ou `release.ps1`.
-- `site/data/release.json` e `site/data/distribution.json` identificam a mesma release final mais recente. Downloads usam aliases permanentes em `releases/latest/download`.
-- Receitas 2026.4.1 aceitam originais, V4 e 2026.3.5/4.0 reconhecidos por SHA. Fonte: `tools/build_release_bundle.py`. Os dados atuais vêm do coletor e compilador de elencos; cobertura e campos derivados ficam registrados no relatório.
-- Coleta: `python -m tools.daily_update`; agendamento local usa `--report-output data/private/daily/world-status.json` para não sujar o checkout. O código de continuidade não deve depender de uma chave de provider para executar coleta pública.
+- Por instrução do proprietário, testes, suítes, testes de navegador e gameplay não são executados, salvo pedido explícito. Conferência visual de páginas no navegador é permitida quando solicitada.
+- Compilação, geração de hashes, leitura de código e conferência de publicação não são testes; não as descreva como tal.
+- Vocabulário de estado, sem misturar: solicitada → planejada → parcialmente implementada → implementada → compilada → testada (dizer onde) → homologada pelo proprietário → publicada.
+
+## Publicação
+
+- Commits, push, releases e atualização do site estão autorizados dentro da manutenção diária descrita em [`docs/scheduled-maintenance.md`](docs/scheduled-maintenance.md), executada às 18h de Brasília.
+- Fora desse ciclo, mudanças de produto (site, hub, campo animado) são entregues primeiro como prévia privada em `dist/` e só são publicadas quando o proprietário pedir.
+- Publicar artefatos verificados antes de manifestos e site; vincular cada versão a commit e hashes; recuperar falhas parciais de forma idempotente.
+- Releases seguintes partem do executável publicado mais recente, que contém o campo animado.
+
+## Campo animado
+
+Toda mudança no campo animado precisa preservar a sincronização da bola: posse só por contato, bola nunca abandonada, eventos do jogo enfileirados durante paralisações, placar do painel atualizado somente quando a bola entra e toda fase nova com condição de saída e prazo de segurança. Detalhes em [`docs/live-match.md`](docs/live-match.md).
+
+## Ao encerrar
+
+Atualize a frente correspondente em `data/private/knowledge/context/CONTINUIDADE-E-PENDENCIAS.md` e registre decisões novas em `data/private/knowledge/context/HISTORICO-E-DECISOES.md`. Logs, planos e telemetria ficam em `data/private/`.

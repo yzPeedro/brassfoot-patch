@@ -3,6 +3,18 @@
   "updatedAt": "2026-11-01T17:14:53-03:00",
   "entries": [
     {
+      "id": "site-redesign-hub-2026-11",
+      "date": "2026-11-01T18:00:00-03:00",
+      "title": "Novo visual e o campo animado em destaque",
+      "kind": "site",
+      "summary": "O site ganhou um visual em branco e azul, mais leve de ler, e uma seção dedicada ao campo animado ao vivo.",
+      "changes": [
+        "O campo animado aparece em destaque, com imagens geradas pelo próprio código do painel em quatro condições de gramado.",
+        "A página explica que o motor do Brasfoot continua o mesmo e que o campo usa só informações do próprio jogo.",
+        "O guia de instalação descreve a escolha entre o Patch 2026, o campo animado ou os dois."
+      ]
+    },
+    {
       "id": "patch-2026-5-0",
       "version": "2026.5.0",
       "date": "2026-11-01T17:14:53-03:00",
