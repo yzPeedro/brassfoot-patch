@@ -284,7 +284,7 @@ Gera `site/data/patch-clubs.json` com **todos** os clubes do jogo resultante, in
 Verificações de consistência:
 
 - versões iguais em relatório, `config/edition.json` e `windows-installer/bundled_release/manifest.json`;
-- cada `.ban` compilado com o SHA-256 registrado no manifesto embutido;
+- cada `.ban` compilado com o SHA-256 registrado no manifesto do pacote;
 - totais iguais aos `teamsTotal` e `playersTotal` do relatório.
 
 Por isso, execute-o depois de colocar o bundle da versão em `windows-installer/bundled_release/`.

@@ -26,12 +26,12 @@ O Brasfoot Mega Patch atualiza uma instalação **existente e legítima** do Bra
 |---|---|
 | **Campo animado ao vivo** | Um campo 2D na tela de partida original com os 22 jogadores, a bola e o árbitro acompanhando cada lance. O motor de simulação do Brasfoot continua o mesmo: o campo é montado apenas com informações que o próprio jogo oferece durante a partida (lances, estatísticas, escalações, táticas e condição do gramado). |
 | **Patch 2026** | 704 clubes, elencos atualizados no Brasil e na Europa, ano 2026 na carreira e as competições da temporada. |
-| **Hub do Brasfoot** | Instalador para Windows que também cuida do jogo: escolha o que instalar, crie e restaure backups completos e abra o Brasfoot. |
+| **Hub do Brasfoot** | Um único hub para Windows: baixe uma vez, escolha o que instalar, crie e restaure backups e abra o Brasfoot. Ele busca sozinho as versões novas do patch e do próprio hub e mostra o que mudou. |
 | **Transparência** | Fontes registradas, cobertura publicada no site e nenhum dado esportivo inventado para preencher lacunas. |
 
 ## Download
 
-Baixe a versão mais recente pelo [site](https://yzpeedro.github.io/brassfoot-patch/), que escolhe o pacote do seu sistema automaticamente, ou diretamente na página de [releases](https://github.com/yzPeedro/brassfoot-patch/releases/latest).
+Baixe o hub pelo [site](https://yzpeedro.github.io/brassfoot-patch/), que escolhe o pacote do seu sistema automaticamente, ou diretamente na página de [releases](https://github.com/yzPeedro/brassfoot-patch/releases/latest). Só é preciso baixar uma vez: o hub consulta a release mais recente a cada abertura, avisa quando há patch ou instalador novo e atualiza conferindo o SHA-256 de cada arquivo.
 
 | Sistema | Pacote | Interface |
 |---|---|---|
@@ -49,15 +49,15 @@ flowchart LR
   B --> C[Arquivos de equipe .ban]
   D[Patches do executável<br>ano, copas, campo animado] --> E[Receitas delta<br>SHA-256]
   C --> E
-  E --> F[Hub / atualizador]
+  E --> H[Release no GitHub<br>pacote .zip e release.json]
+  H --> F[Hub / atualizador]
   F -->|backup + verificação| G[Brasfoot do usuário]
-  E --> H[Release no GitHub]
   H --> I[Site]
 ```
 
 1. Os elencos são coletados de fontes públicas, conferidos e compilados nos arquivos de equipe do jogo.
 2. As mudanças são empacotadas como **receitas delta**: cada arquivo resultante só é gerado a partir de um original com hash conhecido e é conferido por SHA-256 antes de ser escrito.
-3. O hub detecta a instalação, mostra o que já está instalado, guarda um backup e aplica somente o que foi escolhido.
+3. O hub baixa da release mais recente o pacote com as receitas, confere o SHA-256, detecta a instalação, mostra o que já está instalado, guarda um backup e aplica somente o que foi escolhido.
 4. Cada release registra versão, commit de origem, hashes dos artefatos e o estado de verificação.
 
 Detalhes em [Arquitetura](docs/architecture.md).

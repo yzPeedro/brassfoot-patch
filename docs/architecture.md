@@ -22,9 +22,9 @@ flowchart TB
   B --> CB[build_component_bundle.py]
   L2 --> CB
   CB --> D[build_distribution.py]
-  D --> R[GitHub Release]
+  D --> R[GitHub Release: hub, pacote .zip e release.json]
   R --> P[Site no GitHub Pages]
-  D --> H[Hub / atualizador]
+  R -->|release.json e pacote, conferidos por SHA-256| H[Hub / atualizador]
   H -->|backup, receita, SHA-256| G[Instalação do usuário]
 ```
 
@@ -35,14 +35,14 @@ flowchart TB
 | Dados | `tools/collect_live_rosters.py`, `tools/compile_live_rosters.py`, `config/` | Coletar elencos de fontes públicas, aplicar a política de dados e gerar os arquivos de equipe |
 | Executável | `tools/patch_*.py`, `tools/*-src/` | Ajustes reproduzíveis do executável: ano da carreira, Copa do Mundo, copas continentais e campo animado |
 | Bundle | `tools/build_release_bundle.py`, `tools/build_component_bundle.py` | Transformar arquivos compilados em receitas delta, aceitar várias versões de origem e definir os componentes selecionáveis |
-| Distribuição | `tools/build_distribution.py` | Compilar o hub e os atualizadores com o bundle embutido, recursos do Windows e assinatura opcional |
+| Distribuição | `tools/build_distribution.py` | Compilar o hub e os atualizadores (sem patch embutido), gerar o pacote `.zip` da versão e o `release.json`, recursos do Windows e assinatura opcional |
 | Publicação | `tools/publish_distribution.py`, `tools/publish_pages.py` | Criar a release, enviar e conferir artefatos, atualizar manifestos e site |
-| Cliente | `windows-installer/` | Detectar a instalação, instalar componentes, gerenciar backups e abrir o jogo |
+| Cliente | `windows-installer/` | Buscar a release mais recente, detectar a instalação, instalar componentes, gerenciar backups, atualizar o próprio hub e abrir o jogo |
 | Site | `site/` | Download, catálogo de clubes, cobertura de dados e notas de versão |
 
 ## Receitas delta
 
-Cada arquivo alterado é descrito por uma receita JSON em `bundled_release/patches/`:
+Cada arquivo alterado é descrito por uma receita JSON em `bundled_release/patches/`. A pasta `windows-installer/bundled_release/` guarda o pacote da release atual no repositório; na publicação ele vira o arquivo `Brasfoot-Mega-Patch-<versão>-bundle.zip`, que o hub baixa (veja [Hub e instalador](installer.md#como-o-hub-obtém-a-versão-mais-recente)):
 
 - **schema 1:** sequência de operações `copy` (intervalo do original) e `add` (bytes novos em base64), com SHA-256 e tamanho do original e do resultado;
 - **schema 2:** lista de variantes schema 1, uma por versão de origem reconhecida;
