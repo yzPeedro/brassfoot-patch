@@ -1,6 +1,21 @@
-# Estado do Brasfoot Mega Patch — 31/10/2026
+# Estado do Brasfoot Mega Patch — 01/11/2026
 
 > Registro do estado **publicado**. Frentes em andamento, prévias privadas e protocolo de retomada: [context/CONTINUIDADE-E-PENDENCIAS.md](context/CONTINUIDADE-E-PENDENCIAS.md). Decisões vigentes e substituídas: [context/HISTORICO-E-DECISOES.md](context/HISTORICO-E-DECISOES.md).
+
+## Campo animado ao vivo — versão 2026.5.0
+
+A tela da partida ganhou o campo animado ao vivo, desenvolvido como prévia privada (2026.4.8 a 2026.4.41) e publicado por instrução do proprietário em 01/11/2026. O campo ocupa um espaço próprio entre o cabeçalho e a tabela de outros jogos, mostra jogadores, bola e árbitro e anima gols, cartões, faltas com barreira, pênaltis, lesões, substituições e as estatísticas oficiais no momento em que o Brasfoot os registra. Os resultados continuam sendo os do motor; para sincronizar, o passo de simulação do minuto seguinte da partida assistida é executado antes, com os mesmos dados, e o minuto avança no clímax do lance. Uma proteção reinicia a animação e devolve o relógio ao jogo em qualquer falha.
+
+Os elencos são os mesmos da 2026.4.7. O bundle estável herda a 2026.4.7 e aceita o original, as versões anteriores e as prévias do campo animado; todos os 398 arquivos da instalação de referência foram reconhecidos pelo manifesto.
+
+Publicação confirmada:
+
+- PR: https://github.com/yzPeedro/brassfoot-patch/pull/16, mergeado na `main` (merge `c38c05205f30db60af6668afe121b875f5dd91cb`).
+- Release final/latest: https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.5.0; `prerelease=false`, `draft=false`; 13 assets.
+- Windows: 10.576.384 bytes; SHA-256 `5b6b96540bdb1024fdb6cbd7e7a295c16ac31d661218f289b79d0cf7a4affc34`. O alias `releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe` serve esse arquivo.
+- Executável do jogo após o patch: SHA-256 `bcdc27a44985ca01a37fab50e73d587d78b171814f53f045cb51dfc6c0647f6c`.
+- Manifestos: `e631ee9`. Site em `gh-pages`: `c52ee046962b9e290b885503550d28c01c161242`; Pages confirmou `built`, sem erro, e o endereço público serve a 2026.5.0.
+- Nenhum teste funcional, suíte, navegador ou gameplay foi executado; foram realizadas compilação produtiva, verificação de bytecode na JVM 1.8, conferência do manifesto contra a instalação de referência e conferência de integridade e publicação.
 
 ## Manutenção diária e auditoria de estrelas — versão 2026.4.7
 
