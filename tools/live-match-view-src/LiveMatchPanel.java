@@ -288,13 +288,15 @@ public final class LiveMatchPanel extends JPanel {
     private double refY = .62;
     private double refVX;
     private double refVY;
+    private double refAnchorX = .5;
+    private double refAnchorY = .5;
     private int pitchCondition = -1;
     private BufferedImage pitchImage;
     private String pitchKey = "";
     private final List<int[]> statCueQueue = new ArrayList<int[]>();
     private final List<int[]> pendingStatCues = new ArrayList<int[]>();
     private int statCueActive;
-    private static final Font NAME_FONT_LIGHT = new Font("Tahoma", Font.PLAIN, 9);
+    private static final Font NAME_FONT_LIGHT = new Font("Tahoma", Font.BOLD, 9);
     private double ballSpin;
     private double lastBallX = .5;
     private double lastBallY = .5;
@@ -1120,6 +1122,24 @@ public final class LiveMatchPanel extends JPanel {
         }
     }
 
+    private void fitScrollPanes(Component component) {
+        if (component instanceof JScrollPane) {
+            JScrollPane scroll = (JScrollPane) component;
+            scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+            scroll.getVerticalScrollBar().setUnitIncrement(16);
+            Container parent = scroll.getParent();
+            if (parent != null && parent != host && scroll.getY() + scroll.getHeight() > parent.getHeight()) {
+                scroll.setBounds(scroll.getX(), scroll.getY(), scroll.getWidth(),
+                        Math.max(24, parent.getHeight() - scroll.getY()));
+            }
+            scroll.revalidate();
+            return;
+        }
+        if (component instanceof Container) {
+            for (Component child : ((Container) component).getComponents()) fitScrollPanes(child);
+        }
+    }
+
     private void openFieldSpace() {
         int width = host.getWidth();
         int height = host.getHeight();
@@ -1163,6 +1183,7 @@ public final class LiveMatchPanel extends JPanel {
                 children[i].setBounds(r.x, y, r.width, h);
             }
         }
+        for (Integer boxed : lower) fitScrollPanes(children[boxed.intValue()]);
         host.add(this);
         setBounds(15, fieldTop, width - 30, fieldBottom - fieldTop);
         setVisible(true);
@@ -3450,31 +3471,46 @@ public final class LiveMatchPanel extends JPanel {
 
     private void updateReferee(double dt) {
         double targetX, targetY;
-        double direction = possessingSide == 0 ? 1.0 : -1.0;
         if (cardFoulPhase >= 2) {
             Dot[] offenders = cardFoulOffenderSide == 0 ? home : away;
             Dot offender = offenders[Math.max(0, Math.min(offenders.length - 1, cardFoulOffender))];
-            targetX = offender.currentX + (offender.currentX < .5 ? .035 : -.035);
-            targetY = offender.currentY + (offender.currentY < .5 ? .05 : -.05);
+            targetX = offender.currentX + (offender.currentX < .5 ? .05 : -.05);
+            targetY = offender.currentY + (offender.currentY < .5 ? .07 : -.07);
         } else if (penaltyPhase != 0) {
             targetX = penaltySide == 0 ? .80 : .20;
-            targetY = .30;
+            targetY = .26;
         } else if (freeKickPhase != 0) {
-            targetX = clamp(wallCenterX + (freeKickSide == 0 ? .02 : -.02), .05, .95);
-            targetY = clamp(wallCenterY + (wallCenterY < .5 ? .14 : -.14), .08, .92);
+            targetX = clamp(wallCenterX + (freeKickSide == 0 ? .03 : -.03), .05, .95);
+            targetY = clamp(wallCenterY + (wallCenterY < .5 ? .18 : -.18), .08, .92);
         } else if (restartActive || kickoffInProgress) {
-            targetX = .50 + (kickoffSide == 0 ? .06 : -.06);
-            targetY = .40;
+            targetX = .50 + (kickoffSide == 0 ? .08 : -.08);
+            targetY = .36;
         } else {
-            targetX = clamp(ballX - direction * .07, .08, .92);
-            targetY = clamp(ballY + (ballY < .5 ? .13 : -.13), .08, .92);
+            if (distance(refAnchorX, refAnchorY, ballX, ballY) > .08) {
+                refAnchorX = ballX;
+                refAnchorY = ballY;
+            }
+            double direction = possessingSide == 0 ? 1.0 : -1.0;
+            targetX = clamp(refAnchorX - direction * .10, .08, .92);
+            targetY = clamp(refAnchorY + (refAnchorY < .5 ? .13 : -.13), .08, .92);
+        }
+        for (Dot[] team : new Dot[][] { home, away }) {
+            for (Dot dot : team) {
+                if (!dot.active) continue;
+                double dx = refX - dot.currentX, dy = refY - dot.currentY;
+                double d = Math.sqrt(dx * dx + dy * dy);
+                if (d > .0005 && d < .035) {
+                    targetX += dx / d * .03;
+                    targetY += dy / d * .03;
+                }
+            }
         }
         double dx = targetX - refX, dy = targetY - refY;
         double d = Math.sqrt(dx * dx + dy * dy);
-        double speed = .10 * Math.min(1.0, d / .06);
+        double speed = .085 * Math.min(1.0, d / .08);
         double wantX = d < .0005 ? 0 : dx / d * speed, wantY = d < .0005 ? 0 : dy / d * speed;
-        refVX += clamp(wantX - refVX, -.30 * dt, .30 * dt);
-        refVY += clamp(wantY - refVY, -.30 * dt, .30 * dt);
+        refVX += clamp(wantX - refVX, -.22 * dt, .22 * dt);
+        refVY += clamp(wantY - refVY, -.22 * dt, .22 * dt);
         refX = clamp(refX + refVX * dt, .02, .98);
         refY = clamp(refY + refVY * dt, .03, .97);
     }
@@ -3776,38 +3812,82 @@ public final class LiveMatchPanel extends JPanel {
         int condition = pitchCondition < 0 ? 0 : pitchCondition;
         String key = width + "x" + height + ":" + condition;
         if (pitchImage != null && key.equals(pitchKey)) return pitchImage;
-        BufferedImage image = new BufferedImage(Math.max(1, width), Math.max(1, height), BufferedImage.TYPE_INT_RGB);
-        Graphics2D g = image.createGraphics();
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        Color[][] stripes = {
-            { new Color(34, 142, 62), new Color(28, 124, 54) },
-            { new Color(42, 128, 58), new Color(36, 114, 52) },
-            { new Color(70, 118, 54), new Color(62, 108, 50) },
-            { new Color(92, 112, 56), new Color(84, 102, 52) }
-        };
+        width = Math.max(1, width);
+        height = Math.max(1, height);
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        int[][] lightGreen = { {38, 146, 64}, {44, 134, 60}, {72, 124, 56}, {90, 116, 58} };
+        int[][] darkGreen = { {30, 126, 55}, {37, 118, 53}, {63, 112, 51}, {80, 105, 53} };
+        int[] dry = {150, 146, 82};
+        int[] dirt = {124, 96, 64};
+        double[] wearAmount = {0, .30, .70, 1.15};
+        double[] dryAmount = {0, .05, .35, .55};
+        double[] grain = {5, 6, 9, 12};
+        long seed = System.identityHashCode(matchRef) * 31L + condition;
+        double[] coarse = noiseGrid(seed, 13, 9);
+        double[] fine = noiseGrid(seed + 7, 41, 25);
+        Random speck = new Random(seed + 11);
         int bands = condition == 0 ? 14 : 12;
-        for (int i = 0; i < bands; i++) {
-            g.setColor(stripes[condition][i & 1]);
-            g.fillRect(i * width / bands, 0, width / bands + 1, height);
+        int[] pixels = new int[width * height];
+        for (int y = 0; y < height; y++) {
+            double ny = y / (double) height;
+            for (int x = 0; x < width; x++) {
+                double nx = x / (double) width;
+                int band = (int) (nx * bands);
+                int[] base = (band & 1) == 0 ? lightGreen[condition] : darkGreen[condition];
+                double smooth = sample(coarse, 13, 9, nx, ny);
+                double detail = sample(fine, 41, 25, nx, ny);
+                double zone = wearZone(nx, ny);
+                double wear = clamp(zone * wearAmount[condition] * (.55 + smooth * .9) - (1 - detail) * .25, 0, 1);
+                double dryness = clamp(dryAmount[condition] * (smooth * 1.2 - .2), 0, 1);
+                double jitter = (speck.nextDouble() - .5) * grain[condition] + (detail - .5) * grain[condition];
+                double r = base[0] + (dry[0] - base[0]) * dryness;
+                double gr = base[1] + (dry[1] - base[1]) * dryness;
+                double b = base[2] + (dry[2] - base[2]) * dryness;
+                r += (dirt[0] - r) * wear;
+                gr += (dirt[1] - gr) * wear;
+                b += (dirt[2] - b) * wear;
+                int ri = (int) clamp(r + jitter, 0, 255), gi = (int) clamp(gr + jitter, 0, 255),
+                        bi = (int) clamp(b + jitter * .6, 0, 255);
+                pixels[y * width + x] = (ri << 16) | (gi << 8) | bi;
+            }
         }
-        Random seeded = new Random(System.identityHashCode(matchRef) * 31L + condition);
-        int patches = condition == 0 ? 0 : condition == 1 ? 10 : condition == 2 ? 28 : 55;
-        for (int i = 0; i < patches; i++) {
-            boolean worn = seeded.nextInt(100) < (condition == 3 ? 70 : condition == 2 ? 45 : 20);
-            double zone = seeded.nextDouble();
-            double px = zone < .35 ? (seeded.nextBoolean() ? .02 + seeded.nextDouble() * .12 : .86 + seeded.nextDouble() * .12)
-                    : zone < .55 ? .42 + seeded.nextDouble() * .16 : seeded.nextDouble();
-            double py = .15 + seeded.nextDouble() * .70;
-            int pw = (int) (width * (.02 + seeded.nextDouble() * (condition == 3 ? .07 : .04)));
-            int ph = (int) (height * (.03 + seeded.nextDouble() * (condition == 3 ? .10 : .06)));
-            int alpha = condition == 1 ? 45 : condition == 2 ? 85 : 130;
-            g.setColor(worn ? new Color(122, 92, 58, alpha) : new Color(150, 150, 70, alpha));
-            g.fillOval((int) (px * width) - pw / 2, (int) (py * height) - ph / 2, pw, ph);
-        }
-        g.dispose();
+        image.setRGB(0, 0, width, height, pixels, 0, width);
         pitchImage = image;
         pitchKey = key;
         return image;
+    }
+
+    private double wearZone(double x, double y) {
+        double zone = 0;
+        for (double goal : new double[] { .045, .955 }) {
+            double dx = (x - goal) / .07, dy = (y - .5) / .16;
+            zone = Math.max(zone, Math.exp(-(dx * dx + dy * dy)));
+            double sx = (x - (goal < .5 ? .11 : .89)) / .03, sy = (y - .5) / .05;
+            zone = Math.max(zone, .8 * Math.exp(-(sx * sx + sy * sy)));
+        }
+        double cx = (x - .5) / .07, cy = (y - .5) / .18;
+        zone = Math.max(zone, .7 * Math.exp(-(cx * cx + cy * cy)));
+        double lane = Math.exp(-Math.pow((y - .5) / .22, 2)) * .35;
+        return Math.max(zone, lane);
+    }
+
+    private double[] noiseGrid(long seed, int columns, int rows) {
+        Random grid = new Random(seed);
+        double[] values = new double[columns * rows];
+        for (int i = 0; i < values.length; i++) values[i] = grid.nextDouble();
+        return values;
+    }
+
+    private double sample(double[] grid, int columns, int rows, double x, double y) {
+        double gx = x * (columns - 1), gy = y * (rows - 1);
+        int x0 = (int) Math.floor(gx), y0 = (int) Math.floor(gy);
+        int x1 = Math.min(columns - 1, x0 + 1), y1 = Math.min(rows - 1, y0 + 1);
+        double tx = gx - x0, ty = gy - y0;
+        tx = tx * tx * (3 - 2 * tx);
+        ty = ty * ty * (3 - 2 * ty);
+        double a = grid[y0 * columns + x0], b = grid[y0 * columns + x1];
+        double c = grid[y1 * columns + x0], d = grid[y1 * columns + x1];
+        return (a + (b - a) * tx) + ((c + (d - c) * tx) - (a + (b - a) * tx)) * ty;
     }
 
     private boolean inFocus(int side, int index, Dot dot) {
@@ -3991,9 +4071,9 @@ public final class LiveMatchPanel extends JPanel {
                 g.fillRoundRect(tx - 4, ty - fm.getAscent(), textW + 8, fm.getHeight(), 10, 10);
                 g.setColor(Color.WHITE);
             } else {
-                g.setColor(new Color(0, 0, 0, 80));
+                g.setColor(new Color(0, 0, 0, 120));
                 g.drawString(dot.name, tx + 1, ty + 1);
-                g.setColor(new Color(255, 255, 255, 135));
+                g.setColor(new Color(255, 255, 255, 190));
             }
             g.drawString(dot.name, tx, ty);
         }
