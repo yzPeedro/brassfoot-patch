@@ -37,7 +37,7 @@ Dependências ou bloqueadores:
 
 ## F1 — Campo animado da partida (prévia PRIVADA) · prioridade P0
 
-**Checkpoint:** 31/10/2026 ~19h40 (Brasília), Claude Code. Estado: prévia **2026.4.38 compilada** (a 4.37 foi instalada pelo proprietário), sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
+**Checkpoint:** 31/10/2026 ~19h40 (Brasília), Claude Code. Estado: prévia **2026.4.39 compilada** (a 4.38 foi instalada pelo proprietário), sem teste e sem homologação, aguardando o teste manual do proprietário. **Proibido publicar** (release, tag, asset ou site) sem nova instrução explícita.
 
 - **Objetivo final:** desenhar um campo 2D dentro da tela original de partida, abaixo do placar e acima da tabela de outros jogos, com os 22 jogadores, bola e eventos sincronizados com a engine, **sem alterar o resultado simulado**. A entrega é sempre um instalador local para o proprietário testar.
 - **Onde está o código:** branch `live-match-preview` (no GitHub, sem merge na `main`), commits reescritos em 31/10 sem coautoria:
@@ -52,6 +52,26 @@ Dependências ou bloqueadores:
   - `config/edition-live-match-preview.json`;
   - ajustes em `tools/build_distribution.py` (canal lido da edição) e `tools/build_release_bundle.py`.
 - **Contexto histórico:** manual §6 e Apêndice A do [contexto mestre](BRASFOOT-MEGA-PATCH-CONTEXTO-MESTRE.md) (transcript do Work, L891–3085).
+
+### Atualização 2026.4.39 (01/11/2026), textura do gramado, nomes legíveis, árbitro e rolagem
+
+- **Gramado:**
+  - a condição passou a fazer parte da textura (`pitch`): listras, grão fino por pixel e desgaste orgânico gerado por ruído suave (`noiseGrid`/`sample`);
+  - o desgaste se concentra nas pequenas áreas, nas marcas do pênalti, no círculo central e no corredor central (`wearZone`); intensidade e ressecamento crescem de Excelente a Precária;
+  - sem círculos sobrepostos;
+  - prévia renderizada com o próprio código em `data/private/pitch-conditions-preview-2026.4.39.png`.
+- **Nomes afastados da bola:** Tahoma em negrito, tamanho 9, com opacidade maior e sombra.
+- **Árbitro:**
+  - a ~0,10 atrás da bola e 0,13 lateral, do lado do centro;
+  - só reposiciona quando a bola se desloca mais de 0,08;
+  - velocidade menor e afastamento de jogadores próximos.
+- **Rolagem das outras partidas:** depois do reposicionamento, `fitScrollPanes` garante a barra vertical quando necessária, incremento de 16 px e altura do `JScrollPane` ajustada ao contêiner.
+- **Build:**
+  - EXE de jogo `data/private/live-match-preview-20261101-pitch-texture/bf22-23.exe`, SHA `0364c28c…86a1`;
+  - instalador `dist/live-match-preview-2026.4.39/`;
+  - 35 origens; bytecode verificado; commit `ed5be69`.
+- **Estado:** compilada, não testada em jogo.
+- **Próxima build:** incluir `20261101-pitch-texture` entre os `--previous-preview-executable`.
 
 ### Atualização 2026.4.38 (01/11/2026), gramado, nomes mais leves e estatísticas sincronizadas
 
