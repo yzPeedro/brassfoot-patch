@@ -111,6 +111,7 @@ public final class LiveMatchPanel extends JPanel {
     private double cardFoulSpotX = .5;
     private double cardFoulSpotY = .5;
     private long penaltySettleDeadline;
+    private long substitutionHoldSince;
     private int goalVariant;
     private int goalReboundPhase;
     private double footDirX = 1.0;
@@ -3083,9 +3084,10 @@ public final class LiveMatchPanel extends JPanel {
         int count = Math.min(dots.length, players.size());
         String[] names = new String[count];
         for (int p = 0; p < count; p++) names[p] = playerName(players.get(p));
+        int teamSide = mirror ? 1 : 0;
+        if (holdOutgoingBall(dots, names, teamSide)) return;
         int[] slotOf = new int[count];
         boolean[] taken = new boolean[dots.length];
-        int teamSide = mirror ? 1 : 0;
         boolean[] expelled = new boolean[count];
         for (int p = 0; p < count; p++) {
             slotOf[p] = -1;
@@ -3118,6 +3120,7 @@ public final class LiveMatchPanel extends JPanel {
         for (int d = 0; d < dots.length; d++) {
             if (!taken[d] && dots[d].active) {
                 if (dots[d].known) addGhost(dots[d], teamSide);
+                detachBall(teamSide, d);
                 dots[d].active = false;
                 if (receivingPlayer == d) receivingPlayer = -1;
             }
@@ -3127,7 +3130,10 @@ public final class LiveMatchPanel extends JPanel {
             if (d < 0) continue;
             Dot dot = dots[d];
             boolean replaced = dot.known && !names[p].equals(dot.fullName);
-            if (replaced && dot.active && d != 0) addGhost(dot, teamSide);
+            if (replaced && dot.active && d != 0) {
+                addGhost(dot, teamSide);
+                detachBall(teamSide, d);
+            }
             boolean returning = !dot.active;
             dot.fullName = names[p];
             dot.name = shortName(names[p]);
@@ -3145,6 +3151,7 @@ public final class LiveMatchPanel extends JPanel {
             for (int d = 1; d < dots.length; d++) {
                 if (dots[d].active && redCarded.contains(playerKey(teamSide, dots[d].fullName))) {
                     addGhost(dots[d], teamSide);
+                    detachBall(teamSide, d);
                     dots[d].active = false;
                 }
             }
@@ -3191,6 +3198,81 @@ public final class LiveMatchPanel extends JPanel {
         spreadLine(dots, slotOf, midfielders, .33, .16, .84, 2, mirror);
         spreadLine(dots, slotOf, forwards, .46, forwards.size() >= 3 ? .20 : .34,
                 forwards.size() >= 3 ? .80 : .66, 3, mirror);
+    }
+
+    private boolean holdOutgoingBall(Dot[] dots, String[] names, int side) {
+        int outgoing = -1;
+        for (int d = 1; d < dots.length && outgoing < 0; d++) {
+            if (!dots[d].active || !dots[d].known || !hasBallRole(side, d)) continue;
+            boolean present = false;
+            for (String name : names) {
+                if (name.equals(dots[d].fullName)) { present = true; break; }
+            }
+            if (!present) outgoing = d;
+        }
+        if (outgoing < 0) {
+            substitutionHoldSince = 0;
+            return false;
+        }
+        long now = clockNow();
+        if (substitutionHoldSince == 0) substitutionHoldSince = now;
+        if (now - substitutionHoldSince > 4000L) {
+            substitutionHoldSince = 0;
+            return false;
+        }
+        releaseBallFrom(side, outgoing, now);
+        return true;
+    }
+
+    private boolean hasBallRole(int side, int index) {
+        if (ballInFlight && receivingSide == side && receivingPlayer == index) return true;
+        if (looseBall && looseSide == side && looseChaser == index) return true;
+        if (tackleActive && tackleSide == side && tackler == index) return true;
+        return !looseBall && !ballInFlight && possessingSide == side && possessingPlayer == index;
+    }
+
+    private void releaseBallFrom(int side, int index, long now) {
+        Dot[] team = side == 0 ? home : away;
+        Dot outgoing = team[index];
+        double gap = distance(outgoing.currentX, outgoing.currentY, ballX, ballY);
+        if (tackleActive && tackleSide == side && tackler == index) {
+            tackler = nearestActive(team, ballX, ballY, index, false);
+            return;
+        }
+        if (looseBall && looseSide == side && looseChaser == index) {
+            if (gap > .08) {
+                looseChaser = nearestActive(team, ballX, ballY, index, true);
+                looseSince = now;
+            }
+            return;
+        }
+        if (ballInFlight || hasAnimationStoppage() || cardFoulPhase != 0) return;
+        if (gap > CONTACT * 1.5) return;
+        int next = nearestProgressivePlayer(team, outgoing, index);
+        if (next < 0 || next == index) return;
+        double travel = distance(team[next].currentX, team[next].currentY, outgoing.currentX, outgoing.currentY);
+        beginPassTo(side, next, now, (int) (420 + travel * 1500));
+    }
+
+    private void detachBall(int side, int index) {
+        if (hasAnimationStoppage()) return;
+        Dot[] team = side == 0 ? home : away;
+        if (ballInFlight && receivingSide == side && receivingPlayer == index) {
+            receivingPlayer = nearestActive(team, ballToX, ballToY, index, true);
+        }
+        if (tackleActive && tackleSide == side && tackler == index) {
+            tackler = nearestActive(team, ballX, ballY, index, false);
+        }
+        if (!looseBall && !ballInFlight && possessingSide == side && possessingPlayer == index) {
+            looseBall = true;
+            looseSide = side;
+            looseChaser = index;
+            looseSince = clockNow();
+        }
+        if (looseBall && looseSide == side && looseChaser == index) {
+            looseChaser = nearestActive(team, ballX, ballY, index, true);
+            looseSince = clockNow();
+        }
     }
 
     private void sortBySide(List<Integer> group, final List<?> players) {
