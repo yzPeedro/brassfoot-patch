@@ -56,30 +56,30 @@ const (
 )
 
 var (
-	dwm                  = syscall.NewLazyDLL("dwmapi.dll")
-	setWindowLong        = u32.NewProc("SetWindowLongPtrW")
-	getWindowLong        = u32.NewProc("GetWindowLongPtrW")
-	callWindowProc       = u32.NewProc("CallWindowProcW")
-	setWindowPos         = u32.NewProc("SetWindowPos")
-	releaseCapture       = u32.NewProc("ReleaseCapture")
-	openClipboard        = u32.NewProc("OpenClipboard")
-	emptyClipboard       = u32.NewProc("EmptyClipboard")
-	setClipboardData     = u32.NewProc("SetClipboardData")
-	closeClipboard       = u32.NewProc("CloseClipboard")
-	globalAlloc          = k32.NewProc("GlobalAlloc")
-	globalLock           = k32.NewProc("GlobalLock")
-	globalUnlock         = k32.NewProc("GlobalUnlock")
-	dwmSetAttribute      = dwm.NewProc("DwmSetWindowAttribute")
-	dwmExtendFrame       = dwm.NewProc("DwmExtendFrameIntoClientArea")
-	setDpiAwarenessCtx   = u32.NewProc("SetProcessDpiAwarenessContext")
-	hubView              webview2.WebView
-	hubWindow            uintptr
-	hubOriginalProc      uintptr
-	hubMutex             sync.Mutex
-	hubGame              string
-	hubBusy              string
-	hubState             = map[string]any{}
-	hubStagingRoot       string
+	dwm                = syscall.NewLazyDLL("dwmapi.dll")
+	setWindowLong      = u32.NewProc("SetWindowLongPtrW")
+	getWindowLong      = u32.NewProc("GetWindowLongPtrW")
+	callWindowProc     = u32.NewProc("CallWindowProcW")
+	setWindowPos       = u32.NewProc("SetWindowPos")
+	releaseCapture     = u32.NewProc("ReleaseCapture")
+	openClipboard      = u32.NewProc("OpenClipboard")
+	emptyClipboard     = u32.NewProc("EmptyClipboard")
+	setClipboardData   = u32.NewProc("SetClipboardData")
+	closeClipboard     = u32.NewProc("CloseClipboard")
+	globalAlloc        = k32.NewProc("GlobalAlloc")
+	globalLock         = k32.NewProc("GlobalLock")
+	globalUnlock       = k32.NewProc("GlobalUnlock")
+	dwmSetAttribute    = dwm.NewProc("DwmSetWindowAttribute")
+	dwmExtendFrame     = dwm.NewProc("DwmExtendFrameIntoClientArea")
+	setDpiAwarenessCtx = u32.NewProc("SetProcessDpiAwarenessContext")
+	hubView            webview2.WebView
+	hubWindow          uintptr
+	hubOriginalProc    uintptr
+	hubMutex           sync.Mutex
+	hubGame            string
+	hubBusy            string
+	hubState           = map[string]any{}
+	hubStagingRoot     string
 )
 
 type margins struct{ Left, Right, Top, Bottom int32 }
@@ -177,17 +177,33 @@ func pixSVG() string {
 	return fmt.Sprintf(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" shape-rendering="crispEdges"><rect width="100%%" height="100%%" fill="#fff"/><path d="%s" fill="#0b1633"/></svg>`, pixQRSize, pixQRSize, path.String())
 }
 
-func hubChooseGame() string {
+func hubChooseGame() {
 	if hubIsBusy() {
-		return hubCurrentGame()
+		return
 	}
-	if path := chooseFolder("Selecione a pasta principal do Brasfoot"); path != "" {
-		hubMutex.Lock()
-		hubGame = normalizeGameSelection(path)
-		hubMutex.Unlock()
-		hubRefresh()
+	hubView.Dispatch(func() {
+		if path := chooseFolder("Selecione a pasta principal do Brasfoot"); path != "" {
+			hubMutex.Lock()
+			hubGame = normalizeGameSelection(path)
+			hubMutex.Unlock()
+			hubRefresh()
+		}
+	})
+}
+
+func hubProgress(operation string, base, span int, label func(done, total int) string) func(done, total int) {
+	last := -1
+	return func(done, total int) {
+		if total <= 0 {
+			return
+		}
+		percent := base + span*done/total
+		if percent == last && done != total {
+			return
+		}
+		last = percent
+		hubEmit(map[string]any{"type": "progress", "operation": operation, "percent": percent, "label": label(done, total)})
 	}
-	return hubCurrentGame()
 }
 
 func hubInstall(selection Selection) error {
@@ -220,18 +236,15 @@ func hubInstall(selection Selection) error {
 			hubEmit(map[string]any{"type": "done", "operation": "install", "already": true, "version": plan.Manifest.Version})
 			return
 		}
+		backupProgress := hubProgress("install", 10, 40, func(done, total int) string { return fmt.Sprintf("Guardando backup · %d de %d", done, total) })
+		installProgress := hubProgress("install", 50, 49, func(done, total int) string { return fmt.Sprintf("Instalando · %d de %d", done, total) })
 		result, err := install(plan, InstallOptions{Progress: func(stage string, done, total int) {
-			if total <= 0 {
-				return
-			}
-			percent, label := 100, "Tudo conferido"
 			switch stage {
 			case "backup":
-				percent, label = 10+40*done/total, fmt.Sprintf("Guardando backup · %d de %d", done, total)
+				backupProgress(done, total)
 			case "install":
-				percent, label = 50+49*done/total, fmt.Sprintf("Instalando · %d de %d", done, total)
+				installProgress(done, total)
 			}
-			hubEmit(map[string]any{"type": "progress", "operation": "install", "percent": percent, "label": label})
 		}})
 		if err != nil {
 			hubFail("install", err)
@@ -267,9 +280,9 @@ func hubCreateBackup() error {
 	}
 	go func() {
 		defer hubSetBusy("")
-		entry, err := createGameSnapshot(game, "Backup completo", productVersion, func(done, total int) {
-			hubEmit(map[string]any{"type": "progress", "operation": "backup", "percent": 100 * done / total, "label": fmt.Sprintf("Copiando · %d de %d arquivos", done, total)})
-		})
+		entry, err := createGameSnapshot(game, "Backup completo", productVersion, hubProgress("backup", 0, 100, func(done, total int) string {
+			return fmt.Sprintf("Copiando · %d de %d arquivos", done, total)
+		}))
 		if err != nil {
 			hubFail("backup", err)
 			return
@@ -300,16 +313,14 @@ func hubRestoreBackup(id string) error {
 			hubEmit(map[string]any{"type": "error", "operation": "restore", "code": "BF-112", "title": "Feche o Brasfoot", "reason": "O jogo está aberto (" + process + ").", "action": "Salve sua carreira, feche o jogo e tente de novo."})
 			return
 		}
-		safety, err := createGameSnapshot(game, "Automático, antes de restaurar", productVersion, func(done, total int) {
-			hubEmit(map[string]any{"type": "progress", "operation": "restore", "percent": 45 * done / total, "label": "Guardando o estado atual"})
-		})
+		safety, err := createGameSnapshot(game, "Automático, antes de restaurar", productVersion, hubProgress("restore", 0, 45, func(int, int) string {
+			return "Guardando o estado atual"
+		}))
 		if err != nil {
 			hubFail("restore", err)
 			return
 		}
-		progress := func(done, total int) {
-			hubEmit(map[string]any{"type": "progress", "operation": "restore", "percent": 45 + 55*done/total, "label": fmt.Sprintf("Restaurando · %d de %d", done, total)})
-		}
+		progress := hubProgress("restore", 45, 55, func(done, total int) string { return fmt.Sprintf("Restaurando · %d de %d", done, total) })
 		if entry.Kind == backupKindSnapshot {
 			err = restoreSnapshot(entry, game, progress)
 		} else {
@@ -329,10 +340,13 @@ func hubOpenBackup(id string) error {
 	if err != nil {
 		return err
 	}
+	command := exec.Command("explorer.exe")
 	if entry.Kind == backupKindSnapshot {
-		return exec.Command("explorer.exe", "/select,", entry.Path).Start()
+		command.SysProcAttr = &syscall.SysProcAttr{CmdLine: `explorer.exe /select,"` + entry.Path + `"`}
+	} else {
+		command.SysProcAttr = &syscall.SysProcAttr{CmdLine: `explorer.exe "` + entry.Path + `"`}
 	}
-	return exec.Command("explorer.exe", entry.Path).Start()
+	return command.Start()
 }
 
 func hubLaunchGame() error {
@@ -512,6 +526,7 @@ func main() {
 	if setDpiAwarenessCtx.Find() == nil {
 		setDpiAwarenessCtx.Call(^uintptr(3))
 	}
+	o32.NewProc("OleInitialize").Call(0)
 	if len(os.Args) > 1 && strings.EqualFold(os.Args[1], "--classic") {
 		runClassic()
 		return
