@@ -1045,6 +1045,7 @@ public final class LiveMatchPanel extends JPanel {
                 dot.currentY = .975 - (entry % 3) * .008;
                 dot.velocityX = 0;
                 dot.velocityY = 0;
+                dot.entering = true;
                 entry++;
             }
         }
@@ -1062,7 +1063,7 @@ public final class LiveMatchPanel extends JPanel {
         halfStartPending = true;
         restartStarted = now;
         restartEarliest = now + 2500L;
-        restartDeadline = now + 9000L;
+        restartDeadline = now + 25000L;
         kickoffSide = side;
         Dot[] kickoffTeam = side == 0 ? home : away;
         kickoffPlayerA = nearestActive(kickoffTeam, .50, .46, -1, false);
@@ -2143,6 +2144,7 @@ public final class LiveMatchPanel extends JPanel {
         if (!restartActive || ballInFlight) return;
         if (now < restartEarliest) return;
         if (halfStartPending && !engineRunning()) return;
+        if (halfStartPending && anyEntering() && now < restartDeadline) return;
         if (!formationReady() && now < restartDeadline) return;
         Dot[] kickoffTeam = kickoffSide == 0 ? home : away;
         Dot taker = kickoffTeam[kickoffPlayerA];
@@ -3003,6 +3005,7 @@ public final class LiveMatchPanel extends JPanel {
             dot.fullName = names[p];
             dot.name = shortName(names[p]);
             if (dot.known && (replaced || returning) && d != 0) {
+                dot.entering = true;
                 dot.currentX = .50 + (mirror ? .03 : -.03);
                 dot.currentY = .975;
                 dot.velocityX = 0;
@@ -3599,10 +3602,20 @@ public final class LiveMatchPanel extends JPanel {
         updateTeamPositions(away, home, 1, dt);
     }
 
+    private boolean anyEntering() {
+        for (Dot dot : home) if (dot.active && dot.entering) return true;
+        for (Dot dot : away) if (dot.active && dot.entering) return true;
+        return false;
+    }
+
     private void updateTeamPositions(Dot[] team, Dot[] opponents, int side, double dt) {
         for (int index = 0; index < team.length; index++) {
             Dot dot = team[index];
             if (!dot.active) continue;
+            if (dot.entering && distance(dot.currentX, dot.currentY, dot.targetX, dot.targetY) < .03
+                    && dot.currentY < .95) {
+                dot.entering = false;
+            }
             boolean anchored = isAnchored(side, index);
             double dx = dot.targetX - dot.currentX;
             double dy = dot.targetY - dot.currentY;
@@ -3619,6 +3632,7 @@ public final class LiveMatchPanel extends JPanel {
             if (anchored && !(index == possessingPlayer && side == possessingSide && !looseBall)) {
                 maxSpeed = Math.max(maxSpeed, ballRole ? (index == 0 ? .10 : .135) : .112);
             }
+            if (dot.entering) maxSpeed = Math.max(maxSpeed, .14);
             double arrival = anchored ? .030 : .065;
             double desiredSpeed = maxSpeed * Math.min(1.0, distance / arrival);
             double desiredVX = distance < .0005 ? 0 : dx / distance * desiredSpeed;
@@ -4075,13 +4089,14 @@ public final class LiveMatchPanel extends JPanel {
             if (!dot.active) continue;
             int x = left + (int) (dot.currentX * width);
             int y = top + (int) (dot.currentY * height);
+            int fade = dot.entering ? 110 : 255;
             g.setColor(SHADOW);
-            g.fillOval(x - 9, y - 7, 20, 20);
-            g.setColor(fill);
+            if (!dot.entering) g.fillOval(x - 9, y - 7, 20, 20);
+            g.setColor(new Color(fill.getRed(), fill.getGreen(), fill.getBlue(), fade));
             g.fillOval(x - 10, y - 10, 20, 20);
-            g.setColor(new Color(255, 255, 255, 70));
+            g.setColor(new Color(255, 255, 255, dot.entering ? 35 : 70));
             g.fillOval(x - 7, y - 8, 9, 6);
-            g.setColor(accent);
+            g.setColor(new Color(accent.getRed(), accent.getGreen(), accent.getBlue(), fade));
             g.setStroke(STROKE_2);
             g.drawOval(x - 10, y - 10, 20, 20);
             String key = playerKey(side, dot.fullName);
@@ -4113,7 +4128,7 @@ public final class LiveMatchPanel extends JPanel {
             } else {
                 g.setColor(new Color(0, 0, 0, 120));
                 g.drawString(dot.name, tx + 1, ty + 1);
-                g.setColor(new Color(255, 255, 255, 190));
+                g.setColor(new Color(255, 255, 255, dot.entering ? 110 : 190));
             }
             g.drawString(dot.name, tx, ty);
         }
@@ -4359,6 +4374,7 @@ public final class LiveMatchPanel extends JPanel {
         boolean wideRole;
         boolean active = true;
         boolean known;
+        boolean entering;
         String name;
         String fullName;
         final boolean away;
