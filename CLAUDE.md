@@ -66,7 +66,7 @@ Compilação, geração de hashes, leitura de código e conferência de publica�
 - Não redistribuir binários proprietários; distribuir somente receitas de delta reconhecidas por SHA-256.
 - Não inventar dados esportivos, transferências, testes, compatibilidade ou porcentagens.
 - Não descartar alterações locais não commitadas; antes de `pull`/`reset`/`clean`, fazer backup e comparar com o remoto.
-- **Prévia do campo animado é privada**: nunca criar release, tag, asset ou atualização do site para ela sem nova instrução explícita do proprietário.
+- **Campo animado:** publicado na 2026.5.0. Prévias de novas mudanças continuam privadas até o proprietário pedir release. Releases seguintes devem partir do executável com o campo animado.
 - Segredos (tokens, `NINEROUTER_API_KEY`, `.env`) nunca entram em logs, docs ou commits. Dados pessoais só com necessidade técnica (LGPD).
 - Não executar testes, suítes, navegador ou gameplay enquanto vigorar a dispensa do proprietário registrada em `AGENTS.md`.
 - Código sem comentários explicativos (preferência do proprietário); documentação em Markdown é livre.

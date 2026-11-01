@@ -22,6 +22,7 @@ def main() -> None:
     parser.add_argument("--previous-preview-executable", type=Path, action="append", default=[])
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--version", default="2026.4.41")
+    parser.add_argument("--release", action="store_true")
     args = parser.parse_args()
     source = args.inherit_bundle.resolve()
     output = args.output.resolve()
@@ -97,9 +98,9 @@ def main() -> None:
     manifest = json.loads(manifest_path.read_text(encoding="utf-8-sig"))
     manifest.update({
         "version": args.version,
-        "kind": "BRASFOOT_HOMOLOGATION_PATCH",
-        "publicationAllowed": False,
-        "channel": "local-preview",
+        "kind": "BRASFOOT_RELEASE_PATCH" if args.release else "BRASFOOT_HOMOLOGATION_PATCH",
+        "publicationAllowed": bool(args.release),
+        "channel": "stable" if args.release else "local-preview",
         "compatibilityTestedInGame": False,
         "tests": "not-run-at-owner-request",
     })
