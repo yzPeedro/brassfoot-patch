@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.5.0",
-  "publishedAt": "2026-11-01T17:17:04.869390+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.5.0-windows-x64.exe",
+  "publishedVersion": "2026.5.1",
+  "publishedAt": "2026-11-01T19:30:20.116292+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.5.1-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
-  "fileSizeBytes": 10576384,
-  "sha256": "5b6b96540bdb1024fdb6cbd7e7a295c16ac31d661218f289b79d0cf7a4affc34",
+  "fileSizeBytes": 19044864,
+  "sha256": "ecff754f56d2cad5764c5ab3950b9d0513b116d97517b8bb0f466c26d1bf98e2",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Novo campo animado ao vivo na tela da partida, sincronizado com os lances do Brasfoot."
+  "releaseNotes": "Novo hub do Brasfoot: instale o Patch 2026, o campo animado ou os dois, crie e restaure backups e jogue pelo aplicativo. Campo animado sincronizado em qualquer velocidade."
 }
