@@ -51,6 +51,17 @@ def update_menu(source: Path, destination: Path, image: Path):
     return destination
 
 
+def flatten_steps(recipe):
+    if recipe.get('schemaVersion') == 1:
+        return [recipe]
+    if recipe.get('schemaVersion') != 3:
+        raise ValueError('unsupported recipe schema in chain')
+    steps = []
+    for step in recipe.get('steps', []):
+        steps.extend(flatten_steps(step))
+    return steps
+
+
 def build(original, base, previous, teams, executable, destination, version, inherit_bundle=None):
     if destination.exists():
         raise FileExistsError('use a new output bundle directory')
@@ -118,7 +129,7 @@ def build(original, base, previous, teams, executable, destination, version, inh
                             'targetSha256': bridge['targetSha256'],
                             'originalSize': legacy['originalSize'],
                             'targetSize': bridge['targetSize'],
-                            'steps': [legacy, bridge]})
+                            'steps': flatten_steps(legacy) + flatten_steps(bridge)})
                         existing.add(legacy['originalSha256'])
         recipe = {'schemaVersion': 2, 'path': relative, 'variants': variants}
         (recipes / (source.name + '.json')).write_text(

@@ -23,7 +23,6 @@
     if (event.target.closest('a')) closeNavigation();
   });
 
-  // Ordinary links remain usable before JavaScript or the manifest has loaded.
   const releaseBase = 'https://github.com/yzPeedro/brassfoot-patch/releases/';
   const currentVersion = '2026.4.1';
   const platforms = {windows: 'Windows', linux: 'Linux', darwin: 'macOS'};
@@ -50,7 +49,6 @@
     return manifest?.artifacts.find(artifact => packageKey(artifact) === packageKey(item));
   }
   function artifactUrl(item) {
-    // The stable alias follows the newest release even if metadata is cached.
     return releaseBase + 'latest/download/Brasfoot-Mega-Patch-' + item.file;
   }
   function sizeLabel(bytes) {
@@ -110,7 +108,6 @@
       refreshDownloads();
       closeChoices();
       choice.querySelector('summary')?.focus();
-      // Preserve the link's native navigation: selecting an option downloads it.
     });
   });
   document.addEventListener('click', event => {
@@ -125,7 +122,6 @@
   });
   refreshDownloads();
 
-  // Browsers that expose architecture can refine the default; explicit choices win.
   if (detectedOS && navigator.userAgentData?.getHighEntropyValues) {
     navigator.userAgentData.getHighEntropyValues(['architecture', 'bitness']).then(info => {
       if (userSelected || !info.architecture) return;
@@ -135,7 +131,6 @@
     }).catch(() => {});
   }
 
-  // A finite entrance animation keeps text readable and avoids perpetual motion.
   const hero = byId('inicio');
   if (hero && !motion.matches) hero.classList.add('hero-animate');
   const revealElements = all('[data-reveal], .section-heading, .coverage-grid article, .principles > div, .guide-band .wrap, .faq > div');
@@ -156,10 +151,9 @@
     });
   }
 
-  // Only decorative layers follow the pointer; controls and copy remain stable.
   let pointerFrame = 0;
   let pointerTarget = null;
-  const board = hero?.querySelector('.season-board');
+  const board = hero?.querySelector('.live-window');
   function resetPointer() {
     cancelAnimationFrame(pointerFrame);
     pointerFrame = 0;
@@ -236,7 +230,6 @@
   }).catch(() => {});
 })();
 
-// Patch notes progressively replace a complete, readable static fallback.
 (() => {
   'use strict';
   const list = document.getElementById('patch-notes-list');
@@ -316,4 +309,21 @@
     requestAnimationFrame(frame);
   }), {threshold: .5});
   document.querySelectorAll('[data-countup]').forEach(el => observer.observe(el));
+})();
+
+(() => {
+  const image = document.getElementById('pitch-image');
+  const buttons = [...document.querySelectorAll('[data-pitch]')];
+  if (!image || !buttons.length) return;
+  const labels = ['excelente', 'muito boa', 'ruim', 'precária'];
+  const source = index => new URL('./assets/live/pitch-' + index + '.jpg', image.baseURI).href;
+  buttons.forEach(button => button.addEventListener('click', () => {
+    const index = Number(button.dataset.pitch);
+    if (!Number.isInteger(index) || !labels[index]) return;
+    buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    image.src = source(index);
+    image.alt = 'Campo animado com gramado em condição ' + labels[index];
+  }));
+  const preload = () => labels.forEach((_, index) => { const next = new Image(); next.src = source(index); });
+  if ('requestIdleCallback' in window) requestIdleCallback(preload); else setTimeout(preload, 1500);
 })();

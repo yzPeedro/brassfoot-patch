@@ -8,7 +8,6 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-	"runtime"
 	"strings"
 	"syscall"
 	"unsafe"
@@ -655,9 +654,7 @@ func windowProcedure(h uintptr, msg uint32, w, l uintptr) uintptr {
 	ret, _, _ := defWindow.Call(h, uintptr(msg), w, l)
 	return ret
 }
-func main() {
-	runtime.LockOSThread()
-	defer runtime.UnlockOSThread()
+func runClassic() {
 	setProcessDpiAware.Call()
 	if getDpiForSystem.Find() == nil {
 		dpi, _, _ := getDpiForSystem.Call()

@@ -68,7 +68,9 @@ func diagnose(err error) Diagnostic {
 		return Diagnostic{"BF-101", "Pasta do Brasfoot não encontrada", "O caminho selecionado não existe ou não está acessível.", "Clique em PROCURAR e selecione a pasta onde o Brasfoot está instalado (a que contém options.bcf e teams).", raw}
 	case strings.Contains(lower, "options.bcf"):
 		return Diagnostic{"BF-102", "Esta não é a pasta principal do Brasfoot", "O arquivo options.bcf está ausente ou não é um arquivo normal.", "Selecione a pasta raiz do jogo, por exemplo C:\\Brasfoot22-23, e não a subpasta teams.", raw}
-	case strings.Contains(lower, "teams/") || strings.Contains(lower, "estrutura de equipes"):
+	case strings.Contains(lower, "instruções") || strings.Contains(lower, "base não reconhecida") || strings.Contains(lower, "resultado não confere") || strings.Contains(lower, "resultado encadeado"):
+		return Diagnostic{"BF-113", "Não foi possível preparar um arquivo do patch", "As instruções de atualização de um arquivo não se aplicaram à versão encontrada no seu jogo. Nenhum arquivo foi alterado.", "Baixe o instalador mais recente. Se o erro continuar, envie os detalhes deste diagnóstico.", raw}
+	case strings.Contains(lower, "não encontrei teams") || strings.Contains(lower, "estrutura de equipes"):
 		return Diagnostic{"BF-103", "Estrutura de equipes não reconhecida", "A pasta teams não existe ou não contém arquivos .ban válidos suficientes.", "Verifique se escolheu o Brasfoot 2022-2023, e não uma pasta de saves, Downloads ou outro jogo.", raw}
 	case strings.Contains(lower, "arquivo ausente") || strings.Contains(lower, "arquivo não encontrado na instalação"):
 		return Diagnostic{"BF-105", "Faltam arquivos do clube no seu Brasfoot", "Um dos clubes de 2026 não existe na pasta teams ou não pode ser lido.", "Confirme que o Brasfoot foi instalado corretamente. Não copie arquivos aleatórios de outras versões.", raw}

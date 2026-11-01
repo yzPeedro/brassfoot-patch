@@ -12,7 +12,10 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "tools" / "live-match-view-src"
-EXECUTABLE_SHA256 = "8193758a822282588548b263c5e29772bbb25e8d905fa882b21e2e5ce38ca119"
+PATCH_EXECUTABLE_SHA256 = "8193758a822282588548b263c5e29772bbb25e8d905fa882b21e2e5ce38ca119"
+ORIGINAL_EXECUTABLE_SHA256 = "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c"
+EXECUTABLE_SHA256 = PATCH_EXECUTABLE_SHA256
+ACCEPTED_BASES = {PATCH_EXECUTABLE_SHA256: "patch-2026", ORIGINAL_EXECUTABLE_SHA256: "original"}
 MATCH_CLASS_PATH = "a/dV.class"
 MATCH_CLASS_SHA256 = "658d5d031a0178ece38470840f8fa99dc8da0b20f2473ef2874c06f44dfc62f5"
 
@@ -94,8 +97,8 @@ def replace_zip_entries(source: Path, destination: Path, replacements: dict[str,
 
 def build(source: Path, destination: Path, javac: str, java: str) -> Path:
     source_bytes = source.read_bytes()
-    if sha256_bytes(source_bytes) != EXECUTABLE_SHA256:
-        raise ValueError("requires the exact published 2026.4.6 executable")
+    if sha256_bytes(source_bytes) not in ACCEPTED_BASES:
+        raise ValueError("requires the original Brasfoot 22-23 executable or the published 2026 patch executable")
     with zipfile.ZipFile(source) as archive:
         match_class = archive.read(MATCH_CLASS_PATH)
     if sha256_bytes(match_class) != MATCH_CLASS_SHA256:

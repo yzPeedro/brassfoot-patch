@@ -15,8 +15,6 @@ import (
 	"strings"
 )
 
-// This updater patches the user's Windows game files. It does not port the
-// game or install Wine, CrossOver, Rosetta, or third-party executables.
 func main() {
 	if err := runPortable(); err != nil {
 		recordDiagnostic(diagnose(err))
@@ -107,6 +105,7 @@ func runPortable() error {
 	restore := flag.Bool("restore", false, "restaurar o backup íntegro desta edição")
 	inspectOnly := flag.Bool("inspect", false, "mostrar compatibilidade sem modificar o jogo")
 	version := flag.Bool("version", false, "mostrar edição e commit do instalador")
+	only := flag.String("only", "", "instalar só um componente: patch ou live")
 	flag.Parse()
 	if flag.NArg() != 0 {
 		return errors.New("argumentos inesperados; consulte --help")
@@ -117,6 +116,12 @@ func runPortable() error {
 	}
 	if *restore && *inspectOnly {
 		return errors.New("escolha --restore ou --inspect")
+	}
+	if *only != "" && *only != componentPatch && *only != componentLive {
+		return errors.New("--only aceita patch ou live")
+	}
+	if *only != "" && *restore {
+		return errors.New("--only não se aplica à restauração")
 	}
 	graphical := *game == "" && !*yes && !*inspectOnly
 	if *game == "" {
@@ -147,10 +152,12 @@ func runPortable() error {
 		return err
 	}
 	defer os.RemoveAll(filepath.Dir(payload))
-	if err = prepareBundledPayload(*game, payload); err != nil {
-		return err
+	var plan Plan
+	if *only != "" {
+		plan, err = stageComponents(filepath.Dir(payload), *game, Selection{Patch: *only == componentPatch, Live: *only == componentLive})
+	} else if err = prepareBundledPayload(*game, payload); err == nil {
+		plan, err = inspect(payload, *game)
 	}
-	plan, err := inspect(payload, *game)
 	if err != nil {
 		return err
 	}

@@ -1,7 +1,7 @@
 {
   "stateDir": "data/private/continuity",
   "aletheScript": "~/.agents/skills/alethe/scripts/orchestrate.py",
-  "backlog": "config/backlog.json",
+  "backlog": "data/private/knowledge/archive/config/backlog.json",
   "dailyHour": 6,
   "timezone": "America/Sao_Paulo",
   "maxDailyCalls": 2,

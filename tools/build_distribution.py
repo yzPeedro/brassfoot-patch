@@ -1,8 +1,3 @@
-"""Build final patch installers from an explicit delta bundle, without tests.
-
-The game is never bundled. Cross-compilation does not demonstrate gameplay or
-platform compatibility. Each artifact carries the exact source/bundle hashes.
-"""
 from __future__ import annotations
 
 import argparse
@@ -19,6 +14,9 @@ import tempfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
+DESCRIPTION = "Build the Brasfoot Mega Patch installers from an explicit delta bundle"
+WINRES = "github.com/tc-hib/go-winres@v0.3.3"
+TIMESTAMP_URL = "http://timestamp.digicert.com"
 
 
 def sha256(path: Path) -> str:
@@ -36,6 +34,18 @@ def tree_hash(path: Path) -> str:
 
 def write_json(path: Path, value: object) -> None:
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def sign(binary: Path, args: argparse.Namespace) -> None:
+    thumbprint = args.sign_thumbprint or os.environ.get("MEGA_PATCH_SIGN_THUMBPRINT", "")
+    if not thumbprint:
+        return
+    if not re.fullmatch(r"[0-9A-Fa-f]{40}", thumbprint):
+        raise ValueError("signing thumbprint must be a SHA-1 certificate thumbprint")
+    signtool = args.signtool or os.environ.get("MEGA_PATCH_SIGNTOOL", "signtool")
+    subprocess.run([signtool, "sign", "/sha1", thumbprint, "/fd", "SHA256", "/tr", args.timestamp_url, "/td", "SHA256",
+                    "/d", "Brasfoot Mega Patch", "/du", "https://yzpeedro.github.io/brassfoot-patch/", str(binary)], check=True)
+    subprocess.run([signtool, "verify", "/pa", str(binary)], check=True)
 
 
 def build(args: argparse.Namespace) -> Path:
@@ -68,10 +78,8 @@ def build(args: argparse.Namespace) -> Path:
         temporary_root = Path(temporary)
         source = temporary_root / "source"
         shutil.copytree(ROOT / "windows-installer", source,
-                        ignore=shutil.ignore_patterns("bundled_release", "*_test.go", "*.exe", "*.log"))
+                        ignore=shutil.ignore_patterns("bundled_release", "*_test.go", "*.exe", "*.log", "*.syso"))
         shutil.copytree(bundle, source / "bundled_release")
-        # Version the updater, preserving all compatibility/publication evidence.
-        # Recipe bytes and their required original hashes remain unchanged.
         manifest = dict(original, version=version)
         write_json(source / "bundled_release" / "manifest.json", manifest)
         source_tree_hash = tree_hash(source)
@@ -100,9 +108,15 @@ def build(args: argparse.Namespace) -> Path:
             ])
             if goos == "windows":
                 linker += " -H=windowsgui"
-            # Compilation produces the requested deliverable; no test or vet commands.
+                numeric = version + ".0"
+                subprocess.run([args.go, "run", WINRES, "make", "--in", "winres/winres.json", "--arch", goarch,
+                                "--product-version", numeric, "--file-version", numeric], cwd=source, check=True)
             subprocess.run([args.go, "build", "-trimpath", "-buildvcs=false", "-ldflags", linker,
                             "-o", str(binary), "."], cwd=source, env=env, check=True)
+            if goos == "windows":
+                for generated in source.glob("rsrc_windows_*.syso"):
+                    generated.unlink()
+                sign(binary, args)
             info = {
                 "platform": platform, "architecture": architecture,
                 "version": version, "patchYear": year, "sourceCommit": source_commit,
@@ -167,7 +181,7 @@ def build(args: argparse.Namespace) -> Path:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(description=DESCRIPTION)
     parser.add_argument("--bundle", required=True, help="explicit delta bundle directory; no game binaries")
     parser.add_argument("--output", required=True, help="new release artifact directory")
     parser.add_argument("--edition", default=str(ROOT / "config" / "edition.json"))
@@ -175,6 +189,9 @@ def main() -> None:
     parser.add_argument("--snapshot", help="exact normalized catalog snapshot to attach to the release")
     parser.add_argument("--target", action="append", help="optional target, e.g. linux/amd64 (repeatable)")
     parser.add_argument("--go", default="go", help="Go compiler executable")
+    parser.add_argument("--sign-thumbprint", help="Authenticode certificate thumbprint in the current user store")
+    parser.add_argument("--signtool", help="signtool.exe path")
+    parser.add_argument("--timestamp-url", default=TIMESTAMP_URL)
     print(build(parser.parse_args()))
 
 

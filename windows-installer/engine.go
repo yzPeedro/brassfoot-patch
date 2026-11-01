@@ -23,8 +23,9 @@ type Manifest struct {
 	PatchSeason               int            `json:"patchSeason"`
 	Version                   string         `json:"version"`
 	PublicationAllowed        bool           `json:"publicationAllowed"`
-	CompatibilityTestedInGame bool           `json:"compatibilityTestedInGame"`
-	Files                     []ManifestFile `json:"files"`
+	CompatibilityTestedInGame bool             `json:"compatibilityTestedInGame"`
+	Files                     []ManifestFile   `json:"files"`
+	Components                *ComponentConfig `json:"components,omitempty"`
 }
 type ManifestFile struct {
 	Operation              string   `json:"operation,omitempty"`
@@ -32,7 +33,9 @@ type ManifestFile struct {
 	Size                   int64    `json:"size"`
 	SHA256                 string   `json:"sha256"`
 	AcceptedOriginalSHA256 []string `json:"acceptedOriginalSha256"`
-	AllowMissing           bool     `json:"allowMissing,omitempty"`
+	AllowMissing           bool          `json:"allowMissing,omitempty"`
+	Recipe                 string        `json:"recipe,omitempty"`
+	Via                    *ManifestFile `json:"via,omitempty"`
 }
 type Item struct {
 	File             ManifestFile
