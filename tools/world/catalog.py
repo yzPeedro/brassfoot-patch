@@ -4,7 +4,8 @@ from collections import Counter, defaultdict
 import re
 
 from tools.world.common import (CATALOG, CONFEDERATIONS, FIFA_TO_ISO_OVERRIDE, GAME_COUNTRIES_FILE, TODAY,
-                                UK_NATIONS, EXTRA_TERRITORIES, best_name_score, core, key, load_raw, read_json,
+                                UK_NATIONS, EXTRA_TERRITORIES, TERRITORY_ALIASES, DEPENDENT_TERRITORIES,
+                                best_name_score, core, key, load_raw, read_json,
                                 slug, write_json, write_jsonl)
 from tools.world.fetch import now
 from tools.world_snapshot import create_snapshot, load_snapshot
@@ -24,6 +25,8 @@ NOT_LEAGUE_365 = re.compile(r"\b(copa|supercopa|ta[cç]a|cup|repescagem|play-?of
 RANK = {"official": 1, "wikidata-season": 2, "wikidata": 2, "derived": 2, "wikipedia": 2, "365scores-table": 2,
         "wikidata-p118-top": 3, "wikidata-p118": 4, "365scores": 3, "wikipedia-chain": 3, "365scores-colors": 3}
 WP_LABEL = {"en": "Level on pyramid", "pt": "Nível", "es": "Nivel"}
+NOT_CLUB_TEAM = re.compile(r"\b(beach soccer|futsal|futebol de areia|f[uú]tbol playa|women|women's|ladies|"
+                           r"feminino|femenino|frauen)\b", re.I)
 
 
 class NameIndex:
@@ -66,6 +69,19 @@ def unique_best(scored: list[tuple[float, str]], threshold: float, margin: float
     if len(close) == 1:
         return scored[0][1], scored[0][0], []
     return None, scored[0][0], close
+
+
+def founded_year(value) -> int | None:
+    text = str(value or "")[:4]
+    return int(text) if text.isdigit() else None
+
+
+def match_score(names, founded, club: dict, in_league: bool) -> float:
+    score = best_name_score(names, [club["name"], *club["names"].values()])
+    year, own = founded_year(founded), founded_year(club.get("founded"))
+    if year and own:
+        score += 0.1 if abs(year - own) <= 1 else -0.08
+    return score + (0.08 if in_league else 0.0)
 
 
 def legacy_seed() -> dict[str, int]:
@@ -169,6 +185,11 @@ def build() -> dict:
         info["aliases"].update(a for a in [t.get("pt"), *t.get("ptAliases", [])] if a)
         info.setdefault("rid", t.get("rid"))
 
+    for qid, iso in TERRITORY_ALIASES.items():
+        territory_iso.setdefault(qid, iso)
+    dependent_name = {iso: re.compile(r"(?<!new )(?<!north )(?<!south )\b(" + "|".join(re.escape(n) for n in sorted(
+                          {iso_info[iso]["en"], iso_info[iso]["pt"]} - {None}, key=len, reverse=True)) + r")\b", re.I)
+                      for iso in DEPENDENT_TERRITORIES if iso_info.get(iso, {}).get("en")}
     fifa_iso: dict[str, str] = {}
     fifa_country: dict[str, dict] = {}
     for c in F.get("countries", []):
@@ -260,6 +281,15 @@ def build() -> dict:
     competitions: dict[str, dict] = {}
 
     def league_country(l: dict) -> tuple[str | None, str, list[str]]:
+        iso, method, multi = base_league_country(l)
+        if iso and iso not in DEPENDENT_TERRITORIES:
+            names = [l.get("en"), l.get("pt"), l.get("native")]
+            named = {t for t, pattern in dependent_name.items() if t != iso and any(n and pattern.search(n) for n in names)}
+            if len(named) == 1:
+                return named.pop(), f"nome cita território dependente ({method} aponta {iso})", []
+        return iso, method, multi
+
+    def base_league_country(l: dict) -> tuple[str | None, str, list[str]]:
         if uk_league.get(l["qid"]) and len(uk_league[l["qid"]]) == 1:
             return next(iter(uk_league[l["qid"]])), "P1001/P131 (nação do Reino Unido)", []
         juris = {territory_iso[q] for q in l.get("jurisdictions", []) if q in territory_iso} - {"GB"}
@@ -268,6 +298,9 @@ def build() -> dict:
         orgs = {federation_iso[q] for q in l.get("organizers", []) if q in federation_iso}
         if len(orgs) == 1:
             return next(iter(orgs)), "P664 (federação organizadora)", []
+        places = {territory_iso[q] for q in l.get("locations", []) if q in territory_iso} - {"GB"}
+        if len(places) == 1 and places & DEPENDENT_TERRITORIES:
+            return next(iter(places)), "P276/P131 (território dependente)", []
         isos = {territory_iso[q] for q in l.get("countries", []) if q in territory_iso}
         if "GB" in isos:
             nations = Counter(n for m in members_by_league.get(l["qid"], []) for n in uk_club.get(m["club"], []))
@@ -655,9 +688,12 @@ def build() -> dict:
         comp["_level365"] = claims["level365"]
         comp.pop("_rid", None)
 
+    member_count = {lg for lg, rows in members_by_league.items() if rows}
+
     def chain_candidate(comp: dict) -> bool:
         return (comp["kind"] == "league" and comp["level"] is None and comp.get("levelStatus") != "conflito"
-                and not comp["excluded"] and not comp["defunct"] and comp["country"] is not None)
+                and not comp["excluded"] and not comp["defunct"] and comp["country"] is not None
+                and bool(comp["teamCounts"] or comp["clubs"] or comp["id"] in member_count))
 
     for _ in range(12):
         proposals: dict[str, set[tuple[int, str, str]]] = defaultdict(set)
@@ -738,7 +774,7 @@ def build() -> dict:
 
     for club_qid, rows in club_rows.items():
         active = [r for r in rows if r["league"] in competitions]
-        if not active:
+        if not active or any(NOT_CLUB_TEAM.search(r.get(f) or "") for r in rows[:1] for f in ("en", "pt")):
             continue
         club = clubs.setdefault(club_qid, new_club(club_qid))
         first = rows[0]
@@ -819,31 +855,59 @@ def build() -> dict:
                 by_country_clubs[comp["country"]].append(club)
                 break
 
+    closed_lists: set[str] = set()
     for cid, link in fifa_links.items():
         season = link["season"]
         teams = season.get("teams", [])
         comp = competitions[link["target"]]
         if not teams or comp["kind"] not in ("league", "unknown"):
             continue
+        closed_lists.add(comp["id"])
         pool_league = [clubs[r["club"]] for r in members_by_league.get(comp["ids"]["wikidata"] or "", [])
                        if r["club"] in clubs]
         pool_country = by_country_clubs.get(comp["country"] or link["iso"], [])
+        league_ids = {c["id"] for c in pool_league}
+        pool = {c["id"]: c for c in [*pool_country, *pool_league]}
+        ranked_teams = []
         for team in teams:
             names = [team["name"], team.get("shortName")]
-            target = None
-            for pool, threshold in ((pool_league, 0.85), (pool_country, 0.92)):
-                scored = sorted(((best_name_score(names, [c["name"], *c["names"].values()]), c["id"]) for c in pool),
-                                reverse=True)
-                if scored and scored[0][0] >= threshold and (len(scored) == 1 or scored[0][1] == scored[1][1]
-                                                             or scored[0][0] - scored[1][0] >= 0.04):
-                    target = scored[0][1]
-                    break
+            scored = sorted(((match_score(names, team.get("founded"), c, c["id"] in league_ids), c["id"])
+                             for c in pool.values()), reverse=True)
+            ranked_teams.append((scored[0][0] if scored else 0.0, team, scored))
+        taken: set[str] = set()
+        chosen: dict[str, str] = {}
+        for _, team, scored in sorted(ranked_teams, key=lambda x: -x[0]):
+            free = [s for s in scored if s[1] not in taken]
+            if free:
+                best, ident = free[0]
+                threshold = 0.85 if ident in league_ids else 0.92
+                if best >= threshold and (len(free) == 1 or best - free[1][0] >= 0.04):
+                    chosen[team["id"]] = ident
+                    taken.add(ident)
+        for _, team, scored in sorted(ranked_teams, key=lambda x: -x[0]):
+            if team["id"] in chosen:
+                continue
+            free = [s for s in scored if s[1] not in taken and s[1] in league_ids]
+            year = founded_year(team.get("founded"))
+            if free and free[0][0] >= 0.7 and (len(free) == 1 or free[0][0] - free[1][0] >= 0.04):
+                own = founded_year(pool[free[0][1]].get("founded"))
+                if not (year and own) or abs(year - own) <= 1:
+                    chosen[team["id"]] = free[0][1]
+                    taken.add(free[0][1])
+        for _, team, scored in ranked_teams:
+            target = chosen.get(team["id"])
+            free = [s for s in scored if s[1] not in taken]
             if not target:
                 target = f"x-{(link['iso'] or 'xx').lower()}-{slug(team['name'])}"
                 club = clubs.setdefault(target, new_club(target))
                 club["name"] = club["name"] or team["name"]
                 if "sem QID do Wikidata" not in club["needsReview"]:
                     club["needsReview"].append("sem QID do Wikidata")
+                close = [ident for score, ident in free[:5] if score >= 0.75]
+                if close:
+                    club["possibleDuplicates"] = close
+                    if "possível duplicata de clube do Wikidata na mesma liga" not in club["needsReview"]:
+                        club["needsReview"].append("possível duplicata de clube do Wikidata na mesma liga")
             club = clubs[target]
             club["names"]["fifa"] = team["name"]
             club["ids"]["fifa"] = team["id"]
@@ -952,6 +1016,7 @@ def build() -> dict:
                     club["scores365Colors"] = {"home": team.get("color"), "away": team.get("awayColor")}
             season_text = f"classificação {table.get('season') or ''} no 365Scores".replace("  ", " ")
             if is_placed:
+                closed_lists.add(cids[0])
                 club["_league"].append(ledger.claim("365scores", table["rid"], cids[0], rank="365scores-table",
                                                     method=season_text))
             elif multi:
@@ -962,7 +1027,13 @@ def build() -> dict:
         leftover = sorted(q for q in league_pool - matched_here if q.startswith("Q"))
         if created_here and leftover:
             for target in created_here:
-                clubs[target]["possibleDuplicates"] = leftover[:10]
+                own = [clubs[target]["name"], *clubs[target]["names"].values()]
+                close = sorted(((best_name_score(own, [clubs[q]["name"], *clubs[q]["names"].values()]), q)
+                                for q in leftover), reverse=True)
+                close = [q for score, q in close[:5] if score >= 0.6]
+                if not close:
+                    continue
+                clubs[target]["possibleDuplicates"] = close
                 note = "possível duplicata de clube do Wikidata na mesma liga"
                 if note not in clubs[target]["needsReview"]:
                     clubs[target]["needsReview"].append(note)
@@ -1045,6 +1116,16 @@ def build() -> dict:
         club["country"] = ledger.resolve("club", club["id"], "country", club.pop("_country"))
         claims = club.pop("_league")
         regional = club.pop("_regional")
+        stale = [c for c in claims if c["source"] == "wikidata" and c["method"].startswith("P118")
+                 and c["value"] in closed_lists]
+        if stale:
+            claims = [c for c in claims if c not in stale]
+            club["staleLeagues"] = sorted({c["value"] for c in stale})
+            for c in stale:
+                ledger.lines.append({"entity": club["id"], "field": "league", "status": "stale",
+                                     **ledger.slim(c) | {"method": c["method"] + "; fora da lista oficial da temporada"}})
+            if not claims:
+                club["needsReview"].append("liga do Wikidata fora da lista oficial da temporada")
         if claims:
             top = min(c["rank"] for c in claims)
             best = {c["value"] for c in claims if c["rank"] == top}

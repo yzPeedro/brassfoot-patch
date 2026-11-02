@@ -149,6 +149,10 @@ def load_raw(source: str) -> dict | None:
 FIFA_TO_ISO_OVERRIDE = {"ENG": "GB-ENG", "SCO": "GB-SCT", "WAL": "GB-WLS", "NIR": "GB-NIR", "KVX": "XK"}
 UK_NATIONS = {"Q21": "GB-ENG", "Q22": "GB-SCT", "Q25": "GB-WLS", "Q26": "GB-NIR"}
 EXTRA_TERRITORIES = {"Q1246": "XK"}
+TERRITORY_ALIASES = {"Q42000": "PF"}
+DEPENDENT_TERRITORIES = {"AI", "AS", "AW", "BL", "BM", "BQ", "CK", "CW", "FK", "FO", "GF", "GG", "GI", "GL",
+                         "GP", "GU", "HK", "IM", "JE", "KY", "MF", "MO", "MP", "MQ", "MS", "NC", "NU", "PF",
+                         "PM", "PR", "RE", "SX", "TC", "VG", "VI", "WF", "YT"}
 CONFEDERATIONS = {"Q35572": "UEFA", "Q83276": "AFC", "Q160549": "CONCACAF", "Q58733": "CONMEBOL",
                   "Q168360": "CAF", "Q180344": "OFC"}
 SEASON_RE = re.compile(r"(20\d\d)")
