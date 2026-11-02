@@ -8,6 +8,7 @@ from tools.world.common import (CATALOG, CONFEDERATIONS, FIFA_TO_ISO_OVERRIDE, G
                                 best_name_score, core, key, load_raw, read_json,
                                 slug, write_json, write_jsonl)
 from tools.world.fetch import now
+from tools.roster_position_map import position_flank, resolve_positions
 from tools.world_snapshot import create_snapshot, load_snapshot
 
 SCHEMA = 1
@@ -82,6 +83,44 @@ def match_score(names, founded, club: dict, in_league: bool) -> float:
     if year and own:
         score += 0.1 if abs(year - own) <= 1 else -0.08
     return score + (0.08 if in_league else 0.0)
+
+
+def squad_player(p: dict, countries: dict) -> dict:
+    role = p.get("formationPosition") or p.get("position") or ""
+    try:
+        code = resolve_positions(role, p.get("secondaryPositions", []))
+    except ValueError:
+        code = None
+    return {"sourceId": p.get("id"), "name": p.get("name"), "shortName": p.get("shortName"),
+            "birthDate": p.get("birthDate"), "nationality": countries.get(p.get("nationalityId")),
+            "nationalityId": p.get("nationalityId"), "jersey": p.get("jerseyNum"), "position": p.get("position"),
+            "formationPosition": p.get("formationPosition"), "secondaryPositions": p.get("secondaryPositions", []),
+            "positionCode": code, "flank": position_flank(role) if role else None}
+
+
+def attach_squads(clubs: dict, raw: dict, ledger) -> list[dict]:
+    data = raw.get("data") or {}
+    countries = {c["id"]: c.get("name") for c in data.get("countries", [])}
+    by_team = {s["competitor"]: s for s in data.get("squads", []) if s.get("players")}
+    rows = []
+    for ident in sorted(clubs):
+        club = clubs[ident]
+        value = club["ids"].get("scores365")
+        squad = by_team.get(int(value)) if isinstance(value, (int, str)) and str(value).isdigit() else None
+        if not squad:
+            continue
+        ref = ledger.ref("365squads", squad["rid"])
+        players = [squad_player(p, countries) for p in squad["players"]]
+        keepers = sum(1 for p in players if p["positionCode"] == 0)
+        unresolved = sum(1 for p in players if p["positionCode"] is None)
+        club["squad"] = {"players": len(players), "goalkeepers": keepers, "unresolvedPositions": unresolved,
+                         "complete": len(players) >= 16 and keepers >= 2, "source": "365scores",
+                         "observedAt": ref.get("observedAt"), "response": squad["rid"]}
+        ledger.lines.append({"entity": ident, "field": "squad", "status": "chosen", "value": len(players),
+                             "source": "365scores", "method": "squads (competitor)", **ref})
+        rows.append({"club": ident, "scores365": squad["competitor"], **ref, "players": players,
+                     "staff": squad.get("staff", [])})
+    return rows
 
 
 def legacy_seed() -> dict[str, int]:
@@ -160,7 +199,8 @@ def build() -> dict:
     ue = load_raw("uefa") or {}
     sc = load_raw("365scores") or {}
     wp = load_raw("wikipedia") or {}
-    raws = {"wikidata": wd, "fifa": fi, "uefa": ue, "365scores": sc, "wikipedia": wp}
+    sq = load_raw("365squads") or {}
+    raws = {"wikidata": wd, "fifa": fi, "uefa": ue, "365scores": sc, "wikipedia": wp, "365squads": sq}
     ledger = Ledger(raws)
     W, F, U, S, P = wd.get("data", {}), fi.get("data", {}), ue.get("data", {}), sc.get("data", {}), wp.get("data", {})
     sitelinks: dict[str, dict[str, str]] = defaultdict(dict)
@@ -1335,6 +1375,8 @@ def build() -> dict:
                                             "gameCountries": game_rows})
     write_json(CATALOG / "competitions.json", {**meta, "competitions": [competitions[k] for k in sorted(competitions)],
                                                "continental": sorted(continental, key=lambda c: c["id"])})
+    squad_rows = attach_squads(clubs, sq, ledger)
+    write_jsonl(CATALOG / "squads.jsonl", squad_rows)
     clubs_count = write_jsonl(CATALOG / "clubs.jsonl", (clubs[k] for k in sorted(clubs)))
     write_json(CATALOG / "conflicts.json", {**meta, "conflicts": sorted(
         ledger.conflicts, key=lambda c: (c["resolution"] is not None, c["kind"], c["entity"], c["field"]))})

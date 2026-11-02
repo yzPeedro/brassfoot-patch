@@ -40,11 +40,16 @@ def club_stats(keys, clubs) -> dict:
     colors365 = sum(1 for c in rows if (c.get("scores365Colors") or {}).get("home"))
     s365 = sum(1 for c in rows if c["ids"].get("scores365"))
     provisional = sum(1 for c in rows if not c.get("wikidata"))
+    squads = [c["squad"] for c in rows if c.get("squad")]
+    complete = sum(1 for q in squads if q["complete"])
     return {"clubs": total, "withQid": qid, "withTransfermarkt": tm, "withColors": colors, "withKit": kit,
             "withAnyColor": any_color, "with365Colors": colors365, "withScores365Id": s365,
             "provisional": provisional, "pctQid": pct(qid, total), "pctTransfermarkt": pct(tm, total),
             "pctColors": pct(colors, total), "pctKit": pct(kit, total), "pctAnyColor": pct(any_color, total),
-            "pct365Colors": pct(colors365, total), "pctScores365Id": pct(s365, total)}
+            "pct365Colors": pct(colors365, total), "pctScores365Id": pct(s365, total),
+            "withSquad": len(squads), "withCompleteSquad": complete, "players": sum(q["players"] for q in squads),
+            "unresolvedPositions": sum(q["unresolvedPositions"] for q in squads),
+            "pctSquad": pct(len(squads), total), "pctCompleteSquad": pct(complete, total)}
 
 
 def build() -> dict:
@@ -134,6 +139,9 @@ def build() -> dict:
         "levelConflicts": sum(1 for c in all_national if c.get("levelStatus") == "conflito"),
         "clubsTotal": len(clubs), "clubsInNationalLeagues": club_stats(in_league, clubs),
         "clubsAll": club_stats(sorted(clubs), clubs),
+        "clubsInCompletePyramids": club_stats(sorted(k for k in in_league if clubs.get(k, {}).get("association") in
+                                                     {r["country"] for r in rows if r["pyramid"]["state"] == "completa"}),
+                                              clubs),
         "scores365ClubCompetitions": len(club365), "scores365Countries": len({c["countryId"] for c in club365}),
         "scores365Tables": sum(1 for t in tables365.values() if t.get("teams")),
         "scores365TableTeams": len({t["id"] for x in tables365.values() for t in x.get("teams", [])}),
@@ -187,6 +195,7 @@ def render(report: dict) -> str:
     statuses = ", ".join(f"{k}: {v}" for k, v in t["levelStatus"].items())
     states = ", ".join(f"{k}: {v}" for k, v in t["pyramidStates"].items())
     nl = t["clubsInNationalLeagues"]
+    pc = t["clubsInCompletePyramids"]
     sources = "".join(f"<li>{e(k)}: {e(str(v.get('status')))} ({v.get('errors')} erro(s))</li>"
                       for k, v in (report.get("sources") or {}).items())
     return f"""<!doctype html>
@@ -205,7 +214,7 @@ td.ok{{color:var(--ok)}} td.warn{{color:var(--warn)}} td.bad{{color:var(--bad)}}
 b{{color:var(--accent)}} small{{color:var(--muted)}}
 </style></head><body>
 <h1>Cobertura do catálogo mundial (prévia)</h1>
-<p>Gerado em {e(report['generatedAt'])}. Estrutura de ligas e clubes da temporada corrente; elencos não fazem parte desta etapa.
+<p>Gerado em {e(report['generatedAt'])}. Estrutura de ligas e clubes da temporada corrente, com elencos do 365Scores.
 Pirâmide "completa" = níveis contínuos de 1 até o último nível do catálogo, todas as divisões com contagem de clubes de alguma fonte e infobox da Wikipedia na divisão mais baixa sem liga nacional sem nível abaixo dela.</p>
 <ul>
 <li>Países/territórios: {t['countries']} · membros da FIFA: {t['fifaMembers']} · federações com item no Wikidata: {t['federationsWithWikidata']} · com código de país do jogo: {t['countriesWithGameCountry']}</li>
@@ -213,6 +222,7 @@ Pirâmide "completa" = níveis contínuos de 1 até o último nível do catálog
 <li>Ligas nacionais: {t['nationalLeagues']} ({e(by_level)}; sem nível: {t['nationalLeaguesWithoutLevel']}; conflito de nível: {t['levelConflicts']}) · ligas de âmbito não determinado: {t['undeterminedLeagues']} · regionais: {t['regionalLeagues']}</li>
 <li>Origem do nível: {e(statuses)}</li>
 <li>Clubes no catálogo: {t['clubsTotal']} · em ligas nacionais: {nl['clubs']} (QID {nl['pctQid']}%, Transfermarkt {nl['pctTransfermarkt']}%, cores Wikidata {nl['pctColors']}%, camisa Wikipedia {nl['pctKit']}%, alguma cor {nl['pctAnyColor']}%, cores 365Scores {nl['pct365Colors']}%, id 365Scores {nl['pctScores365Id']}%, provisórios {nl['provisional']})</li>
+<li>Elencos (365Scores): {nl['withSquad']} clubes de ligas nacionais com elenco ({nl['pctSquad']}%), {nl['withCompleteSquad']} completos com 16+ jogadores e 2+ goleiros ({nl['pctCompleteSquad']}%), {nl['players']} jogadores, {nl['unresolvedPositions']} sem posição do Brasfoot · nas pirâmides completas: {pc['withSquad']} de {pc['clubs']} clubes ({pc['pctSquad']}%), {pc['withCompleteSquad']} completos</li>
 <li>365Scores: {t['scores365ClubCompetitions']} competições de clubes em {t['scores365Countries']} países; {t['scores365Tables']} classificações com {t['scores365TableTeams']} times; {t['scores365CompetitionsLinked']} competições associadas ao catálogo ({t['nationalLeaguesWith365']} ligas nacionais)</li>
 <li>Membros da FIFA sem liga nacional no catálogo: {e(', '.join(t['fifaMembersWithoutNationalLeague']) or 'nenhum')}</li>
 </ul>

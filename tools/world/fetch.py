@@ -39,6 +39,7 @@ SOURCES = {
     },
     "uefa": {"interval": 1.0, "parallel": 2, "timeout": 60, "maxAgeHours": 168, "robots": {}},
     "365scores": {"interval": 1.0, "parallel": 2, "timeout": 60, "maxAgeHours": 168, "robots": {}},
+    "365squads": {"interval": 1.0, "parallel": 2, "timeout": 60, "maxAgeHours": 72, "robots": {}},
     "wikipedia": {"interval": 1.0, "parallel": 1, "timeout": 60, "maxAgeHours": 168, "gzip": True,
                   "noRetry": [404], "robots": {}},
 }
