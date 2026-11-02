@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.5.5",
-  "publishedAt": "2026-11-02T00:58:39.772852+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.5.5-windows-x64.exe",
+  "publishedVersion": "2026.5.6",
+  "publishedAt": "2026-11-02T01:46:31.990444+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.5.6-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
-  "fileSizeBytes": 7586816,
-  "sha256": "bed1f0597363d1df0018969aba28aeb7b0a81257bb61f50e1ee80a6f39d99fad",
+  "fileSizeBytes": 7667712,
+  "sha256": "ee5f3382d6a1fb2d6bca455b15f9398b2574cf9ef71c79a32be559cb57c41277",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Corrige a atualização da 2026.5.4 no hub e mantém os uniformes novos do campo animado."
+  "releaseNotes": "Hub 1.1.0: escolha o que instalar, remova o patch inteiro ou só uma parte mantendo as carreiras, e configure tema e avisos de versão nova."
 }
