@@ -7,6 +7,8 @@ Regras para qualquer agente que trabalhe neste repositório. A documentação t�
 - Projeto: atualizador gratuito e independente de uma instalação existente do Brasfoot 22-23. Repositório `yzPeedro/brassfoot-patch`; código em `main`, site em `gh-pages` (https://yzpeedro.github.io/brassfoot-patch/).
 - Idioma de trabalho e de documentação: português do Brasil.
 - Base de conhecimento operacional (histórico, decisões, continuidade e checkpoints): `data/private/knowledge/` no checkout de produção. É local e fica fora do Git; não copie seu conteúdo para o repositório.
+- Referência do jogo original: `data/private/vanilla-22-23/` é uma instalação limpa do Brasfoot 22-23 (executável `2fa65476…bb1c`, 703 times). Use-a só para leitura, como base de engenharia reversa, comparação de hashes e `--original-game` de `build_component_bundle.py`; nunca a modifique nem a inclua em pacotes. Se ela faltar, peça ao proprietário uma cópia limpa.
+- Saves: o patch não muda o formato dos saves e o hub nunca grava em `sav/`. Toda mudança no executável precisa manter iguais os campos das classes serializadas (`best/*`, `f/*`), para que a carreira abra com e sem o patch.
 - Ao retomar trabalho, leia `data/private/knowledge/context/CONTINUIDADE-E-PENDENCIAS.md` e o checkpoint mais recente em `data/private/scheduled-maintenance/<data>/`.
 
 ## Precedência de fontes

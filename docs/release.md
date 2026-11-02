@@ -25,7 +25,8 @@ Os usuários não precisam baixar cada release: o hub instalado lê o `release.j
    python -m tools.build_component_bundle --inherit-bundle <bundle> \
      --original-executable <original> --patch-executable <patch-2026> \
      --full-executable <patch-2026-com-campo> --live-executable <original-com-campo> \
-     --patch-recipe <receita-do-patch-sem-campo> --output <bundle-final> --version <versao> --release
+     --patch-recipe <receita-do-patch-sem-campo> --original-game data/private/vanilla-22-23 \
+     --output <bundle-final> --version <versao> --release
    ```
 
 3. **Notas da versão.** Escreva `docs/releases/v<versao>.md` e acrescente a entrada correspondente em `site/data/patch-notes.json`.
