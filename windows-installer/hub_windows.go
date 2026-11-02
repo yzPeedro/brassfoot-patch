@@ -154,6 +154,7 @@ func hubRefresh() {
 					harvestOriginals(manifest, current.Game)
 				}
 				state["components"] = componentReport(manifest, current.Game)
+				state["recommendation"] = recommendFor(current.Game)
 				state["version"] = manifest.Version
 				state["executableKnown"] = current.ExecutableKnown || current.ExecutableMissing
 				state["teamsInstalled"] = current.TeamsInstalled
@@ -254,6 +255,9 @@ func hubSetSetting(key string, value any) (HubSettings, error) {
 				settings.LastSeenHub = status.Feed.Hub.Version
 			}
 		}
+	case "autoInstall":
+		enabled, _ := value.(bool)
+		settings.AutoInstall = enabled
 	default:
 		return settings, errors.New("configuração desconhecida")
 	}

@@ -105,6 +105,13 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 .mode-box strong{display:block;color:var(--ink);font-size:14px}
 .mode-box.remove{border-color:#bfe6d5;background:var(--ok-soft)}
 .mode-box.remove svg{color:var(--ok)}
+.switch{position:relative;flex:none;width:44px;height:24px;border-radius:999px;background:#c4d0ea;transition:background .2s}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px #0b163340;transition:transform .2s}
+.switch[aria-checked=true]{background:var(--brand)}
+.switch[aria-checked=true]::after{transform:translateX(20px)}
+.switch:disabled{opacity:.45}
+.option p.why{font-size:12px;color:var(--brand-strong);margin-top:auto}
+.option p.why.off{color:var(--warn)}
 .thumb.season{background:linear-gradient(135deg,var(--warm-a),var(--warm-b));display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px}
 .thumb.season div{border-radius:10px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;padding:0 10px}
 .thumb.season strong{font-size:18px;color:var(--warn);letter-spacing:-.03em;line-height:1.1}
@@ -278,31 +285,35 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
         <div class="eyebrow" id="mode-eyebrow">Instalar</div>
         <h1 id="mode-title">O que você quer instalar?</h1>
         <p class="lead" id="mode-lead">Marque o que quer adicionar ao seu Brasfoot.</p>
-        <div class="mode-box" id="auto-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg><div><strong id="auto-title">Instalação automática (recomendada)</strong><span id="auto-text">Instala tudo o que falta e atualiza o que você já tem.</span></div><button class="link" id="customize">Personalizar</button></div>
+        <div class="mode-box" id="auto-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg><div><strong id="auto-title">Instalação automática (recomendada)</strong><span id="auto-text"></span></div><button class="link" id="customize">Remover tudo</button><button class="switch" id="auto-switch" role="switch" aria-checked="false" aria-label="Escolha automática"></button></div>
         <div class="options" id="options">
           <button class="option" role="checkbox" aria-checked="true" data-option="rosters">
             <div class="option-top"><span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><span class="badge off" id="opt-rosters">—</span></div>
             <div class="thumb patch"><div><strong>704</strong><span>CLUBES</span></div><div><strong>301</strong><span>ELENCOS</span></div></div>
             <h2>Elencos 2026</h2>
             <p>Jogadores atualizados nos clubes do Brasil e da Europa.</p>
+            <p class="why" id="why-rosters" hidden></p>
           </button>
           <button class="option" role="checkbox" aria-checked="true" data-option="season">
             <div class="option-top"><span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><span class="badge off" id="opt-season">—</span></div>
             <div class="thumb season"><div><strong>2026</strong><span>ANO</span></div><div><strong>48</strong><span>COPA</span></div><div><strong>+</strong><span>COPAS</span></div></div>
             <h2>Temporada 2026</h2>
             <p>Carreira em 2026, Copa do Mundo com 48 seleções, copas continentais e divisões.</p>
+            <p class="why" id="why-season" hidden></p>
           </button>
           <button class="option" role="checkbox" aria-checked="true" data-option="live">
             <div class="option-top"><span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><span class="badge off" id="opt-live">—</span></div>
             <div class="thumb" style="background-image:url('{{PITCH}}')"></div>
             <h2>Campo animado ao vivo</h2>
             <p>Jogadores, bola e árbitro na tela de partida. Melhor na velocidade Normal.</p>
+            <p class="why" id="why-live" hidden></p>
           </button>
           <button class="option" role="checkbox" aria-checked="true" data-option="crests" hidden>
             <div class="option-top"><span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><span class="badge off" id="opt-crests">—</span></div>
             <div class="thumb patch crests"><div><strong id="crest-count">—</strong><span>ESCUDOS</span></div><div><strong>2026</strong><span>ATUAIS</span></div></div>
             <h2>Escudos atualizados</h2>
             <p>Troca os escudos antigos pelos atuais. Escudo que você mudou por conta própria fica como está.</p>
+            <p class="why" id="why-crests" hidden></p>
           </button>
         </div>
         <div class="note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg><span id="install-note">Antes de mudar qualquer arquivo, guardamos um backup. Seus saves não são alterados e continuam abrindo com ou sem o patch.</span></div>
@@ -358,7 +369,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 <script>
 (() => {
   const $ = id => document.getElementById(id);
-  const state = {info: null, game: null, feed: {loading: true}, feedPercent: null, mode: 'install', custom: false, selection: {rosters: true, season: true, live: true, crests: true}, busy: false};
+  const state = {info: null, game: null, feed: {loading: true}, feedPercent: null, mode: 'install', custom: false, selection: {rosters: false, season: false, live: false, crests: false}, auto: false, busy: false};
   const ALL_COMPONENTS = ['rosters', 'season', 'live', 'crests'];
   const offered = name => name !== 'crests' || (targets() && components().crestsTotal > 0);
   const activeComponents = () => ALL_COMPONENTS.filter(offered);
@@ -446,10 +457,37 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
   function installed(name) { const status = statusOf(name); return status === 'current' || status === 'outdated'; }
   function anyStatus(status) { return activeComponents().some(name => statusOf(name) === status); }
   function removable(name) { return installed(name) && (!targets() || components().removable?.[name] !== false); }
+  function recommendation() { return state.game?.recommendation || null; }
+  function recommended(name) { const value = recommendation()?.components?.[name]; return value === undefined ? true : !!value; }
+  function applyAuto() {
+    if (state.mode === 'remove' || !state.auto) return;
+    for (const name of activeComponents()) if (statusOf(name) === 'absent') state.selection[name] = recommended(name);
+  }
+  const SPEEDS = ['Lento', 'Normal', 'Rápido', 'Bem rápido', 'Super rápido', 'Ultra rápido'];
+  function memoryText(bytes) { return bytes ? (Math.round(bytes / 1073741824 * 10) / 10).toLocaleString('pt-BR') + ' GB' : 'memória não identificada'; }
+  function careersText(count) { return count === 1 ? 'sua carreira salva continua' : 'suas ' + count + ' carreiras salvas continuam'; }
+  function reasonFor(name) {
+    const r = recommendation();
+    if (!r) return null;
+    const careers = (r.careers || []).length;
+    if (name === 'live') {
+      const pc = memoryText(r.memoryBytes) + ' e ' + r.cores + (r.cores === 1 ? ' núcleo' : ' núcleos');
+      if (r.lowHardware) return {on: false, text: 'Fica de fora: este PC tem ' + pc + '. O campo animado pede pelo menos 4 GB e 3 núcleos.'};
+      if (r.fastSpeed) return {on: false, text: 'Fica de fora: sua velocidade padrão é ' + SPEEDS[r.speed] + '. O campo pausa nos lances e rende melhor no Normal.'};
+      return {on: true, text: 'Recomendado: ' + (r.speedKnown ? 'velocidade padrão ' + SPEEDS[r.speed] + ' e ' : '') + 'PC com ' + pc + '.'};
+    }
+    if (name === 'rosters') return {on: true, text: careers ? 'Recomendado: ' + careersText(careers) + ' abrindo; os elencos novos valem nas carreiras novas.' : 'Recomendado: elencos atuais para a próxima carreira.'};
+    if (name === 'season') return {on: true, text: careers ? 'Recomendado: ' + careersText(careers) + ' abrindo com ou sem a Temporada 2026.' : 'Recomendado: a próxima carreira começa em 2026.'};
+    if (name === 'crests') {
+      const custom = components().crestsCustom || 0;
+      return {on: true, text: custom ? 'Recomendado: ' + (custom === 1 ? 'o escudo que você trocou fica como está.' : 'os ' + custom + ' escudos que você trocou ficam como estão.') : 'Recomendado: troca só os escudos antigos do jogo.'};
+    }
+    return null;
+  }
   function openMode(mode) {
     state.mode = mode;
-    state.custom = false;
-    state.selection = {rosters: mode === 'install', season: mode === 'install', live: mode === 'install', crests: mode === 'install'};
+    state.selection = {rosters: false, season: false, live: false, crests: false};
+    applyAuto();
     show('install');
     document.querySelectorAll('.nav[data-view]').forEach(item => {
       const current = mode === 'remove' ? item.dataset.view === 'remove' : item.dataset.view === 'install';
@@ -462,7 +500,6 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
     if (state.mode === 'remove') return installed(name) && removable(name) && !!state.selection[name];
     if (status === 'outdated') return true;
     if (status !== 'absent') return false;
-    if (state.mode === 'install' && !state.custom) return true;
     return !!state.selection[name];
   }
   function targetState() {
@@ -486,13 +523,14 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
   $('go-update').addEventListener('click', () => openMode('update'));
   $('go-remove').addEventListener('click', () => openMode('remove'));
   $('customize').addEventListener('click', () => {
-    if (state.mode === 'remove') {
-      for (const name of activeComponents()) state.selection[name] = removable(name);
-    } else {
-      state.custom = !state.custom;
-      for (const name of activeComponents()) state.selection[name] = !state.custom;
-    }
+    for (const name of activeComponents()) state.selection[name] = removable(name);
     render();
+  });
+  $('auto-switch').addEventListener('click', () => {
+    state.auto = !state.auto;
+    applyAuto();
+    render();
+    call('hubSetSetting', 'autoInstall', state.auto).then(settings => { state.settings = settings; }).catch(() => {});
   });
   document.querySelectorAll('[data-link]').forEach(item => item.addEventListener('click', () => call('hubOpenLink', item.dataset.link)));
 
@@ -637,19 +675,25 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
     $('mode-title').textContent = remove ? 'O que você quer remover?' : update ? 'Atualizar para a versão ' + (game?.version || state.info?.bundleVersion || '') : 'O que você quer instalar?';
     $('mode-lead').textContent = remove ? 'Marque o que quer tirar do seu Brasfoot. O resto continua como está.' : update ? 'O que você já tem será atualizado. Se quiser, adicione também o que ainda não está instalado.' : 'Escolha o que quer no seu Brasfoot.';
     $('auto-box').classList.toggle('remove', remove);
-    $('auto-title').textContent = remove ? 'Seus saves continuam valendo' : state.custom ? 'Instalação personalizada' : 'Instalação automática (recomendada)';
+    $('auto-title').textContent = remove ? 'Seus saves continuam valendo' : 'Escolha automática';
     const summary = activeComponents().filter(included).map(name => labels[name]).join(', ');
-    $('auto-text').textContent = remove ? 'As carreiras salvas abrem com ou sem o patch, com todo o progresso.' : state.custom ? 'Marque só o que quiser. O que você já tem continua instalado.' : summary ? (update ? 'Será atualizado: ' : 'Será instalado: ') + summary + '.' : 'Tudo já está instalado e em dia.';
-    $('customize').textContent = remove ? 'Remover tudo' : state.custom ? 'Voltar ao automático' : 'Escolher o que instalar';
-    $('customize').hidden = update;
-    $('options').hidden = !remove && !state.custom;
+    $('auto-text').textContent = remove ? 'As carreiras salvas abrem com ou sem o patch, com todo o progresso.' : state.auto ? (summary ? 'O hub marcou o ideal para o seu Brasfoot: ' + summary + '. Você pode mudar qualquer item.' : 'Tudo o que é recomendado já está instalado e em dia.') : 'Marque o que quer. Ligue para o hub escolher pela velocidade das partidas, suas carreiras, seus escudos e o seu PC.';
+    $('customize').hidden = !remove;
+    $('auto-switch').hidden = remove;
+    $('auto-switch').setAttribute('aria-checked', String(!!state.auto));
+    $('auto-switch').disabled = !valid || state.busy;
+    $('options').hidden = false;
     $('options').classList.toggle('compact', remove);
     document.querySelectorAll('.option').forEach(option => {
       const name = option.dataset.option;
       const status = statusOf(name);
       let locked = !valid || state.busy;
       if (remove) locked = locked || !removable(name);
-      else locked = locked || status !== 'absent' || (state.mode === 'install' && !state.custom);
+      else locked = locked || status !== 'absent';
+      const why = $('why-' + name);
+      const reason = !remove && state.auto && status === 'absent' ? reasonFor(name) : null;
+      why.hidden = !reason;
+      if (reason) { why.textContent = reason.text; why.classList.toggle('off', !reason.on); }
       option.setAttribute('aria-disabled', String(locked));
       option.classList.toggle('locked', !remove && status === 'outdated');
       option.setAttribute('aria-checked', String(included(name)));
@@ -675,6 +719,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
   document.querySelectorAll('.option').forEach(option => option.addEventListener('click', () => {
     if (option.getAttribute('aria-disabled') === 'true') return;
     state.selection[option.dataset.option] = !state.selection[option.dataset.option];
+    if (state.mode !== 'remove') state.auto = false;
     render();
   }));
 
@@ -827,7 +872,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
   }));
 
   window.hubEvent = event => {
-    if (event.type === 'state') { state.game = event.state; render(); hideSplash(); return; }
+    if (event.type === 'state') { state.game = event.state; applyAuto(); render(); hideSplash(); return; }
     if (event.type === 'settings') { state.settings = event.settings; renderSettings(); return; }
     if (event.type === 'feed') { state.feed = event.feed; state.feedPercent = null; render(); return; }
     if (event.type === 'feed-progress') { state.feedPercent = event.percent; renderBanners(); return; }
@@ -865,7 +910,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 
   function hideSplash() { $('splash')?.classList.add('gone'); }
   setTimeout(hideSplash, 10000);
-  call('hubGetSettings').then(settings => { state.settings = settings; applyTheme(settings.theme); renderSettings(); }).catch(() => applyTheme('system'));
+  call('hubGetSettings').then(settings => { state.settings = settings; state.auto = !!settings.autoInstall; applyAuto(); applyTheme(settings.theme); render(); }).catch(() => applyTheme('system'));
   call('hubInfo').then(info => { state.info = info; $('version').textContent = 'Hub ' + info.hubVersion + (info.preview ? ' · prévia' : ''); }).catch(() => {});
   render();
   call('hubRefresh');
