@@ -1,7 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-01T21:00:00-03:00",
+  "updatedAt": "2026-11-01T21:30:00-03:00",
   "entries": [
+    {
+      "id": "patch-2026-5-4",
+      "version": "2026.5.4",
+      "date": "2026-11-01T21:30:00-03:00",
+      "title": "Uniformes do campo animado",
+      "kind": "patch",
+      "summary": "Os times entram em campo com a camisa certa: o visitante troca de uniforme quando a cor é parecida com a do mandante, e camisas listradas aparecem listradas.",
+      "changes": [
+        "Mandante com a camisa 1; visitante com a camisa 1, 2, 3 ou as cores oficiais, conforme o contraste com o mandante.",
+        "Camisas listradas desenhadas com listras no campo.",
+        "Cores oficiais do clube no preenchimento e no aro, sempre visíveis contra o gramado.",
+        "Goleiros com cor própria, diferente dos dois times e do gramado.",
+        "Elencos, cobertura e hub iguais aos da 2026.5.3; carreiras salvas não são alteradas."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.5.4"
+    },
     {
       "id": "patch-2026-5-3",
       "version": "2026.5.3",
