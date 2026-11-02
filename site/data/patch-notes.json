@@ -1,7 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-01T22:10:00-03:00",
+  "updatedAt": "2026-11-02T00:30:00-03:00",
   "entries": [
+    {
+      "id": "patch-2026-5-6",
+      "version": "2026.5.6",
+      "date": "2026-11-02T00:30:00-03:00",
+      "title": "Escolha o que instalar e o que remover",
+      "kind": "patch",
+      "summary": "O hub 1.1.0 separa o patch em Elencos, Temporada e Campo animado: instale tudo de uma vez ou só o que quiser, e remova quando quiser sem perder o progresso das carreiras.",
+      "changes": [
+        "Três partes independentes: Elencos 2026, Temporada 2026 e Campo animado ao vivo.",
+        "Nova área Remover: o patch inteiro ou só uma parte; as carreiras salvas abrem com ou sem o patch.",
+        "Restaurar um backup completo não sobrescreve mais saves nem opções do jogo.",
+        "Nova tela Configurações: instalação original, tema claro, escuro ou do sistema e aviso de versão nova pelo Windows.",
+        "Elencos, cobertura e campo animado iguais aos da 2026.5.5."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.5.6"
+    },
     {
       "id": "patch-2026-5-5",
       "version": "2026.5.5",
