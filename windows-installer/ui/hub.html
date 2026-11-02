@@ -67,6 +67,24 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 .btn.big{min-height:50px;font-size:15px;padding:0 22px}
 .preview{position:relative;overflow:hidden;padding:12px;display:flex;flex-direction:column;gap:12px}
 .preview img{display:block;width:100%;border-radius:12px;aspect-ratio:900/420;object-fit:cover}
+.watch{position:relative;display:block;border-radius:12px;overflow:hidden}
+.watch img{transition:transform .5s var(--ease),filter .3s}
+.watch:hover img{transform:scale(1.02);filter:brightness(.82)}
+.watch-hint{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:9px;padding:10px 16px;border-radius:999px;background:#0b1633d9;color:#fff;font-weight:700;font-size:13px;box-shadow:0 10px 30px #0b163359;opacity:0;transition:opacity .25s}
+.watch:hover .watch-hint,.watch:focus-visible .watch-hint{opacity:1}
+.stadium{position:fixed;inset:0;background:#0b1633b3;display:none;place-items:center;z-index:12;animation:fade .2s}
+.stadium.show{display:grid}
+.stadium-box{width:min(1120px,calc(100% - 56px));background:var(--card);border-radius:22px;padding:16px 18px 14px;box-shadow:0 40px 100px #0b163366;animation:in .3s var(--ease)}
+.stadium-top{display:flex;align-items:center;gap:14px;padding:2px 2px 14px}
+.stadium-top h3{margin:0;font-size:17px;letter-spacing:-.02em;flex:1}
+.stadium-tabs{display:flex;align-items:center;gap:6px}
+.stadium-tabs button{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.stadium-tabs button:hover{border-color:var(--brand);color:var(--brand)}
+.stadium-tabs button[aria-pressed=true]{background:var(--brand);border-color:var(--brand);color:#fff}
+.stadium-close{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;border:1px solid var(--line);color:var(--muted);flex:none}
+.stadium-close:hover{color:var(--ink);background:var(--surface)}
+.stadium canvas{display:block;width:100%;aspect-ratio:900/420;border-radius:14px;background:#155b30}
+.stadium-note{margin:12px 4px 0;color:var(--muted);font-size:12.5px}
 .preview .caption{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:2px 6px 4px}
 .preview .caption strong{font-size:15px}
 .preview .caption small{display:block;color:var(--muted);font-size:12.5px}
@@ -241,8 +259,8 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
             </div>
           </div>
           <div class="card preview">
-            <img src="{{PITCH}}" alt="Campo animado na tela de partida do Brasfoot">
-            <div class="caption"><div><strong>Campo animado ao vivo</strong><small>Jogadores, bola e árbitro acompanhando cada lance.</small></div><span class="live"><span class="pulse"></span>AO VIVO</span></div>
+            <button class="watch" id="watch-live" aria-haspopup="dialog" aria-controls="stadium"><img src="{{PITCH}}" alt="Campo animado na tela de partida do Brasfoot"><span class="watch-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15a1 1 0 0 0 1.5.9l12-7.5a1 1 0 0 0 0-1.8l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>Ver em movimento</span></button>
+            <div class="caption"><div><strong>Campo animado ao vivo</strong><small>Clique no campo para ver jogadores, bola e árbitro em movimento.</small></div><span class="live"><span class="pulse"></span>AO VIVO</span></div>
             <div class="engine"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg><span>O motor do Brasfoot continua o mesmo. O campo é montado só com informações que o próprio jogo oferece durante a partida.</span></div>
           </div>
         </div>
@@ -315,6 +333,13 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 
 <div class="overlay" id="overlay"><div class="modal" id="modal" role="dialog" aria-modal="true"></div></div>
 <div class="toast" id="toast" role="status"></div>
+<div class="stadium" id="stadium"><div class="stadium-box" role="dialog" aria-modal="true" aria-labelledby="stadium-title">
+  <div class="stadium-top"><span class="live"><span class="pulse"></span>AO VIVO</span><h3 id="stadium-title">Campo animado</h3><div class="stadium-tabs" role="group" aria-label="Condição do gramado"><button data-stadium-pitch="0" aria-pressed="true">Excelente</button><button data-stadium-pitch="1" aria-pressed="false">Muito boa</button><button data-stadium-pitch="2" aria-pressed="false">Ruim</button><button data-stadium-pitch="3" aria-pressed="false">Precária</button></div><button class="stadium-close" id="stadium-close" aria-label="Fechar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <canvas id="stadium-canvas" role="img" aria-label="Campo animado com os 22 jogadores, o árbitro e a bola em movimento"></canvas>
+  <p class="stadium-note">Demonstração com o mesmo desenho do campo animado. Na partida, cada lance vem do motor do Brasfoot.</p>
+</div></div>
+
+<script>{{LIVEPITCH}}</script>
 
 <script>
 (() => {
@@ -757,6 +782,28 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
       {label: 'Copiar código Pix', primary: true, action: () => call('hubCopyPix').then(ok => toast(ok ? 'Código Pix copiado.' : 'Não foi possível copiar.'))}
     ]);
   });
+
+  let stadium = null;
+  function openStadium() {
+    $('stadium').classList.add('show');
+    if (!stadium && window.LivePitch) stadium = window.LivePitch.mount($('stadium-canvas'));
+    stadium?.play();
+    $('stadium-close').focus();
+  }
+  function closeStadium() {
+    if (!$('stadium').classList.contains('show')) return;
+    $('stadium').classList.remove('show');
+    stadium?.pause();
+    $('watch-live').focus();
+  }
+  $('watch-live').addEventListener('click', openStadium);
+  $('stadium-close').addEventListener('click', closeStadium);
+  $('stadium').addEventListener('click', event => { if (event.target === $('stadium')) closeStadium(); });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape') closeStadium(); });
+  document.querySelectorAll('[data-stadium-pitch]').forEach(button => button.addEventListener('click', () => {
+    document.querySelectorAll('[data-stadium-pitch]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    stadium?.setCondition(Number(button.dataset.stadiumPitch));
+  }));
 
   window.hubEvent = event => {
     if (event.type === 'state') { state.game = event.state; render(); return; }
