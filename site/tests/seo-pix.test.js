@@ -44,7 +44,7 @@ assert.match(js, /observer\.observe\(openButton\)/);
 assert.match(js, /floatingButton\.hidden = footerPixVisible/);
 assert.ok(html.includes('id="pix-dialog"'));
 assert.ok(html.includes('id="pix-qr"'));
-assert.ok(html.includes('id="pix-code"'));
+assert.ok(!html.includes('id="pix-code"'));
 assert.ok(html.includes('id="pix-copy"'));
 assert.ok(styles.includes('.pix-dialog'));
 assert.ok(!/window\.open|fetch\(|XMLHttpRequest|sendBeacon/.test(js),'Pix cannot send payload to remote sites');

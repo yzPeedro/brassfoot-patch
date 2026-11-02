@@ -17,6 +17,7 @@ site/
 ├── compatibilidade/index.html
 ├── versoes/index.html
 ├── app.js                  downloads, contadores, notas de versão, campo animado (todas as páginas)
+├── live-pitch.js           campo animado em movimento (canvas), também usado pelo hub
 ├── divisions.js            explorador de clubes e seleções
 ├── pix.js                  contribuição voluntária
 ├── coverage.js             painel de cobertura antigo (não carregado)
@@ -64,7 +65,7 @@ Comportamento da página principal:
 - **Contadores:** preenche os elementos `data-roster-count` com os `counts` de `data/roster-coverage.json`.
 - **Catálogo mundial:** lê `data/world-status.json` só se a página tiver o elemento `world-countries`. A página principal atual não tem esse elemento.
 - **Notas de versão:** carrega `data/patch-notes.json` e exibe as entradas válidas (`kind` igual a `site` ou `patch`, `date` válida, `changes` em lista).
-- **Interações:** menu móvel, animações de entrada, contadores animados (`data-countup`) e troca de imagem do campo animado entre `assets/live/pitch-0.jpg` e `pitch-3.jpg`. As animações respeitam `prefers-reduced-motion`.
+- **Interações:** menu móvel, animações de entrada, contadores animados (`data-countup`) e os campos animados do topo (`hero-canvas`) e da seção `campo-ao-vivo` (`pitch-canvas`), montados com `live-pitch.js`. As abas de gramado trocam a condição do campo da seção, e **Pausar movimento** pausa os dois. Com `prefers-reduced-motion`, a página começa pausada. Se o script não carregar, ficam as imagens `assets/live/pitch-0.jpg` … `pitch-3.jpg`.
 
 Os textos estáticos do HTML servem de fallback: se um JSON não carregar, a página continua funcional com os links permanentes.
 
@@ -78,9 +79,15 @@ Explorador de clubes e seleções. Na carga da página, busca `data/patch-clubs.
 - **Diálogo do clube:** elenco com posição (Goleiro, Lateral, Zagueiro, Meio-campo, Atacante), lado e características, link da fonte e data de consulta.
 - **Falhas:** se o catálogo não carregar, a tabela mostra o erro e um botão "Tentar novamente".
 
+### `live-pitch.js`
+
+Desenha o campo animado num `<canvas>` com o mesmo traçado do painel do jogo (`tools/live-match-view-src/LiveMatchPanel.java`): textura do gramado por condição, linhas, jogadores com aro e nome, árbitro e os desenhos de bola. O movimento é uma partida de demonstração gerada no navegador, com posse só por contato, passes, conduções, desarmes, cruzamentos, chutes, tiro de meta e saída de bola depois do gol; não representa uma partida real. `window.LivePitch.mount(canvas, opções)` devolve um controle com `setCondition`, `play`, `pause` e `restart`. A animação para fora da tela e com a aba oculta e mantém o tempo real mesmo com quadros lentos.
+
+O hub usa uma cópia idêntica em `windows-installer/ui/live-pitch.js`; `windows-installer/live_pitch_test.go` confere que as duas são iguais.
+
 ### `pix.js`
 
-Contribuição voluntária. O código PIX e a matriz do QR Code são constantes no próprio arquivo e o QR é desenhado localmente: sem bibliotecas remotas, cookies, analytics ou chamadas a provedores de pagamento. O script controla o diálogo, o botão flutuante e a cópia do código.
+Contribuição voluntária. O código PIX e a matriz do QR Code são constantes no próprio arquivo e o QR é desenhado localmente: sem bibliotecas remotas, cookies, analytics ou chamadas a provedores de pagamento. O script controla o diálogo, o botão flutuante e a cópia do código pelo botão **Copiar código Pix**; o diálogo mostra só o QR Code e o botão, sem o texto do código.
 
 ### `coverage.js`
 

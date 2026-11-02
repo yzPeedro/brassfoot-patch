@@ -12,12 +12,8 @@
   const dialog = document.getElementById('pix-dialog');
   const closeButton = document.getElementById('pix-close');
   const copyButton = document.getElementById('pix-copy');
-  const code = document.getElementById('pix-code');
   const copyStatus = document.getElementById('pix-copy-status');
-  if (!qrTarget || !dialog || !openButton || !floatingButton || !closeButton || !copyButton || !code || !copyStatus) return;
-
-  // A mesma sequência fica legível para a pessoa, inclusive se o Clipboard API falhar.
-  code.value = PIX;
+  if (!qrTarget || !dialog || !openButton || !floatingButton || !closeButton || !copyButton || !copyStatus) return;
 
   const bytes = Uint8Array.from(atob(QR_BITS), char => char.charCodeAt(0));
   if (bytes.length !== Math.ceil(QR_SIZE * QR_SIZE / 8)) return;
@@ -92,14 +88,27 @@
       else dialog.removeAttribute('open');
     }
   });
+  const copyFallback = () => {
+    const buffer = document.createElement('textarea');
+    buffer.value = PIX;
+    buffer.setAttribute('readonly', '');
+    buffer.style.position = 'fixed';
+    buffer.style.opacity = '0';
+    dialog.appendChild(buffer);
+    buffer.select();
+    let copied = false;
+    try { copied = document.execCommand('copy'); } catch { copied = false; }
+    buffer.remove();
+    return copied;
+  };
   copyButton.addEventListener('click', async () => {
+    let copied = false;
     try {
       await navigator.clipboard.writeText(PIX);
-      copyStatus.textContent = 'Código Pix copiado.';
+      copied = true;
     } catch {
-      code.focus();
-      code.select();
-      copyStatus.textContent = 'Selecione e copie o código acima manualmente.';
+      copied = copyFallback();
     }
+    copyStatus.textContent = copied ? 'Código Pix copiado.' : 'Não foi possível copiar. Use o QR Code.';
   });
 })();

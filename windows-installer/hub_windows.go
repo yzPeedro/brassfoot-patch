@@ -31,6 +31,9 @@ var hubMark string
 //go:embed ui/pitch.jpg
 var hubPitch []byte
 
+//go:embed ui/live-pitch.js
+var hubLivePitch string
+
 const (
 	hubWidth          = 1240
 	hubHeight         = 820
@@ -757,6 +760,7 @@ func runHub() bool {
 	page := strings.NewReplacer(
 		"{{MARK}}", "data:image/svg+xml;base64,"+base64.StdEncoding.EncodeToString([]byte(hubMark)),
 		"{{PITCH}}", "data:image/jpeg;base64,"+base64.StdEncoding.EncodeToString(hubPitch),
+		"{{LIVEPITCH}}", hubLivePitch,
 	).Replace(hubPage)
 	view.SetHtml(page)
 	if loadSettings().Notify {

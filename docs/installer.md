@@ -18,6 +18,7 @@ Desde o hub 1.0.0 existe **um único hub**. Ele não carrega o patch dentro do e
 | `targets.go` | Estado-alvo por componente (instalar, atualizar, remover), variantes do executável, cofre de originais |
 | `hub_setup_windows.go` | Instalação do próprio hub em pasta fixa, atalhos, registro em Aplicativos, remoção e autoatualização |
 | `ui/hub.html` | Interface do hub (HTML, CSS e JavaScript em um único arquivo) |
+| `ui/live-pitch.js` | Campo animado em movimento, cópia idêntica de `site/live-pitch.js`, embutida na página por `{{LIVEPITCH}}` |
 | `main_windows.go` | Interface Win32 simples, usada quando o WebView2 não está disponível ou com `--classic` |
 | `main_other.go` | Atualizador de linha de comando para Linux e macOS |
 | `winres/` | Ícone, manifesto do aplicativo e informações de versão do executável |
@@ -53,7 +54,7 @@ Sem internet, o hub usa a última versão guardada e avisa. Sem nenhuma versão 
 
 O hub abre em uma janela própria, sem a barra do Windows, com botões de minimizar e fechar na barra superior (que também arrasta a janela). A barra mostra a versão do hub. Ele tem três áreas:
 
-- **Início:** pasta do Brasfoot (detectada automaticamente ou escolhida), situação de cada componente (instalado, atualização disponível ou não instalado), a versão mais recente com o link **Ver novidades** e os botões **Jogar**, **Instalar** e **Atualizar**.
+- **Início:** pasta do Brasfoot (detectada automaticamente ou escolhida), situação de cada componente (instalado, atualização disponível ou não instalado), a versão mais recente com o link **Ver novidades** e os botões **Jogar**, **Instalar** e **Atualizar**. Clicar no campo animado abre um painel grande com o campo em movimento e as quatro condições de gramado (demonstração; fecha com o X, Esc ou clique fora).
 - **Instalar:** oferece só o que ainda não está instalado. Componentes já instalados aparecem bloqueados.
 - **Atualizar:** disponível apenas quando a versão instalada de algum componente é diferente da versão publicada. Os componentes desatualizados são sempre incluídos, e os que faltam podem ser adicionados na mesma operação. A atualização segue as mesmas garantias da instalação: backup dos arquivos alterados, substituição atômica e conferência por SHA-256.
 - **Backups:** lista de backups, criação de backup completo, restauração e abertura da pasta do backup.
