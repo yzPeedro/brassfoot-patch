@@ -1,7 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-02T10:40:00-03:00",
+  "updatedAt": "2026-11-02T13:30:00-03:00",
   "entries": [
+    {
+      "id": "patch-2026-5-9",
+      "version": "2026.5.9",
+      "date": "2026-11-02T13:30:00-03:00",
+      "title": "Escudos atualizados e hub 1.2.0",
+      "kind": "patch",
+      "summary": "73 clubes recebem o escudo atual, como novo componente do hub, e o hub passa a abrir com o ícone do Mega Patch pulsando.",
+      "changes": [
+        "Novo componente Escudos atualizados: 73 clubes com o escudo atual, no tamanho grande e no mini.",
+        "Escudo que você trocou por conta própria fica como está, e o original é guardado para poder voltar.",
+        "Hub 1.2.0: abertura com o ícone pulsando na cor do tema, em vez da tela branca.",
+        "Elencos, temporada e campo animado iguais aos da 2026.5.8."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.5.9"
+    },
     {
       "id": "patch-2026-5-8",
       "version": "2026.5.8",

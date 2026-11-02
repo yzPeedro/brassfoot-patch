@@ -112,9 +112,9 @@ O hub requer o Microsoft Edge WebView2 Runtime, presente no Windows 11 e na maio
 
 ## Instalação e remoção por componentes
 
-O hub trabalha com três componentes: **Elencos 2026**, **Temporada 2026** e **Campo animado** (veja [Arquitetura](architecture.md#componentes)).
+O hub trabalha com os componentes **Elencos 2026**, **Temporada 2026**, **Campo animado** e, desde o hub 1.2.0, **Escudos atualizados** (veja [Arquitetura](architecture.md#componentes)). O cartão dos escudos só aparece quando o pacote traz escudos.
 
-- **Instalar:** a instalação automática (recomendada) instala tudo o que falta e atualiza o que já existe, com um só botão. **Escolher o que instalar** é opcional e mostra os três componentes para marcar.
+- **Instalar:** a instalação automática (recomendada) instala tudo o que falta e atualiza o que já existe, com um só botão. **Escolher o que instalar** é opcional e mostra os componentes para marcar.
 - **Atualizar:** os componentes desatualizados são sempre incluídos; os ausentes podem ser adicionados.
 - **Remover:** marque o que tirar ou use **Remover tudo**. O resto continua como está. As carreiras salvas não mudam.
 
@@ -126,11 +126,13 @@ Toda operação calcula um estado-alvo (o que deve ficar instalado) e aplica só
 4. Se a versão de origem do executável não estiver na receita do componente, o hub aplica primeiro a receita completa e depois a do componente, conferindo o executável intermediário.
 5. A instalação copia os arquivos que serão alterados para um backup, substitui cada arquivo de forma atômica e confere o resultado. Em qualquer falha, os originais são restaurados.
 
+Cada escudo é uma receita sobre o PNG original do clube. Um escudo cujo SHA-256 não é o original, nem o do pacote, nem o de uma versão anterior do pacote, foi trocado pelo usuário: o hub não o instala nem o remove, e ele não impede o resto da operação.
+
 O jogo precisa estar fechado; o hub verifica os processos `bf22-23.exe`, `brasfoot.exe` e `brasfoot22-23.exe` antes de escrever.
 
 ### Cofre de originais
 
-Para devolver os elencos originais, o hub guarda em `%LOCALAPPDATA%\BrassfootPatch2026\originals\` uma cópia de cada arquivo do jogo cujo SHA-256 é o do jogo original (`vanillaSha256` no manifesto), nomeada pelo próprio hash. As cópias vêm do jogo antes da primeira instalação, dos backups de instalação e dos backups completos já existentes. Se faltar alguma, a remoção dos elencos fica indisponível e a tela Remover leva a **Configurações > Instalação original**, onde o usuário escolhe uma pasta do Brasfoot sem patch e o hub copia apenas os arquivos idênticos aos originais. O projeto nunca distribui arquivos originais.
+Para devolver os elencos e os escudos originais, o hub guarda em `%LOCALAPPDATA%\BrassfootPatch2026\originals\` uma cópia de cada arquivo do jogo cujo SHA-256 é o do jogo original (`vanillaSha256` no manifesto), nomeada pelo próprio hash. As cópias vêm do jogo antes da primeira instalação, dos backups de instalação e dos backups completos já existentes. Se faltar alguma, a remoção dos elencos fica indisponível e a tela Remover leva a **Configurações > Instalação original**, onde o usuário escolhe uma pasta do Brasfoot sem patch e o hub copia apenas os arquivos idênticos aos originais. O projeto nunca distribui arquivos originais.
 
 ## Backups
 
@@ -169,7 +171,7 @@ O atualizador de terminal usa o mesmo feed: a cada execução busca a release ma
 | `--inspect` | Mostra a compatibilidade em JSON sem alterar nada |
 | `--restore` | Restaura o backup da instalação completa |
 | `--bundle <zip>` | Usa um pacote baixado da página da release, sem internet |
-| `--remove rosters,season,live` | Remove componentes (`all` remove tudo); as carreiras salvas não mudam |
+| `--remove rosters,season,live,crests` | Remove componentes (`all` remove tudo); as carreiras salvas não mudam |
 | `--feed <pasta>` | Usa `release.json` e pacote de uma pasta local |
 | `--yes` | Confirma sem pergunta interativa |
 | `--version` | Mostra a versão do atualizador, edição, plataforma e commit |

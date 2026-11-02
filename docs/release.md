@@ -31,6 +31,14 @@ Os usuários não precisam baixar cada release: o hub instalado lê o `release.j
      --output <bundle-final> --version <versao> --release
    ```
 
+   Depois, acrescente os escudos aprovados em `config/crest-updates-2026.json`. `build_release_bundle` só coleta `.ban`, por isso o script recebe também o pacote publicado anterior: os escudos dele viram origens aceitas, para que quem tem a versão antiga continue sendo reconhecido, e um escudo que saiu da lista continua no pacote para poder ser removido:
+
+   ```bash
+   python -m tools.build_crest_bundle bundle --inherit-bundle <bundle-final> --previous-bundle <bundle-publicado-anterior>      --output <bundle-com-escudos> --version <versao>
+   ```
+
+   Pacotes com escudos exigem `requiresHub` 1.2.0 ou mais novo, porque hubs anteriores recusam o pacote inteiro.
+
 3. **Notas da versão.** Escreva `docs/releases/v<versao>.md` e acrescente a entrada correspondente em `site/data/patch-notes.json`.
 
 4. **Commit.** Faça commit e push do código e das notas. O build registra o commit de origem em cada artefato.

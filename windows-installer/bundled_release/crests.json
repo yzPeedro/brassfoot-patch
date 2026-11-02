@@ -1,0 +1,1322 @@
+{
+ "schemaVersion": 1,
+ "component": "crests",
+ "approved": "crest-updates-2026.json",
+ "clubs": [
+  {
+   "teamFile": "teams/Differdange_Lux.ban",
+   "name": "Differdange 03",
+   "source": "transfermarkt",
+   "sourceId": "11914",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/11914.png",
+   "sourceSha256": "1cd59a7588fb75466ae8a01a7d4164442e3ee9d64999b9f06325d666679bf5f1",
+   "files": [
+    {
+     "path": "teams/escudos/Differdange_Lux.png",
+     "sha256": "1d4a66175a7dc932e23cd169e36e761b838ebc32bbafb599c5d05680c48b7524"
+    },
+    {
+     "path": "teams/escudosMini/Differdange_Lux.png",
+     "sha256": "4a4bca3f4246204f62b544a968edd58170e4b08be1664474ee83bbaf132b8917"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/Saburtalo_Geo.ban",
+   "name": "Saburtalo",
+   "source": "transfermarkt",
+   "sourceId": "41133",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/41133.png",
+   "sourceSha256": "736b3048ac8ca67dbe06b97c046ab3692ff59dbef3732745fc67b1b332d1f62f",
+   "files": [
+    {
+     "path": "teams/escudos/Saburtalo_Geo.png",
+     "sha256": "12af40aedc126fd2aa7d1299a29296ea1037dfbc7af69b391b9feaa01c043c57"
+    },
+    {
+     "path": "teams/escudosMini/Saburtalo_Geo.png",
+     "sha256": "76e0994e39e1baa7e9faa8592d2a37948b69bd0478847af74f2a199a3b2d0343"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/agmk_uzb.ban",
+   "name": "FC AGMK",
+   "source": "transfermarkt",
+   "sourceId": "31216",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/31216.png",
+   "sourceSha256": "c0e2d5cea6839a536cbd326a04f2ce4c96649de5f8026c37296d88228eb86277",
+   "files": [
+    {
+     "path": "teams/escudos/agmk_uzb.png",
+     "sha256": "543c1f432fedcc1b3c2fac722526eedbac5d5bde029589173f6a27b72bea8011"
+    },
+    {
+     "path": "teams/escudosMini/agmk_uzb.png",
+     "sha256": "bae3efc250c7b4a2b0153535996c966565c32df405cf0069afa55adf859ba04d"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/ajax_hol.ban",
+   "name": "Ajax",
+   "source": "transfermarkt",
+   "sourceId": "610",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/610.png",
+   "sourceSha256": "c2b64287591709e86fa76e2607c6e39f5d42f97da5dc601cd00574f09f286cfa",
+   "files": [
+    {
+     "path": "teams/escudos/ajax_hol.png",
+     "sha256": "e43d50947411eeb08fd998e71ed987590eba1132d1825182ef6776f8f7df1f9a"
+    },
+    {
+     "path": "teams/escudosMini/ajax_hol.png",
+     "sha256": "fe29803c2c830ff6ceccfa737e39a3ac730df6b02f7b7f68a0398b6cb56b32c8"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/al_ahli_ara.ban",
+   "name": "Al-Ahli",
+   "source": "transfermarkt",
+   "sourceId": "18487",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/18487.png",
+   "sourceSha256": "64889d6b04c788f7be813978fbb804ce8f13979e06b9089ae954b880a5cf7f1c",
+   "files": [
+    {
+     "path": "teams/escudos/al_ahli_ara.png",
+     "sha256": "acc5f17619fbe52d2e3c6921b59dcd431a7da28aa059b8cc1d8fddff50e0688d"
+    },
+    {
+     "path": "teams/escudosMini/al_ahli_ara.png",
+     "sha256": "abff99e9af4358394beee0bdf71e4656712411add37965dd8c786afd9bc7853c"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/al_hilal.ban",
+   "name": "Al-Hilal",
+   "source": "transfermarkt",
+   "sourceId": "1114",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/1114.png",
+   "sourceSha256": "da8d7c55764fd47c08d3918670d508c150916107c96e532b4867f81fc674dce2",
+   "files": [
+    {
+     "path": "teams/escudos/al_hilal.png",
+     "sha256": "123d8a3da327587920e056a8ea17dc630c2578e5be13ac5c7945b2e1bc0ee28c"
+    },
+    {
+     "path": "teams/escudosMini/al_hilal.png",
+     "sha256": "d0cdb6b19080c25fae7d657f96ed6b5b703642e2e25032f7f335f1b7665cc708"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/alaves_esp.ban",
+   "name": "Alavés",
+   "source": "transfermarkt",
+   "sourceId": "1108",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/1108.png",
+   "sourceSha256": "cdb3725c224c1bd5742f084845ed6a14f407aac37807758191f225146dd47378",
+   "files": [
+    {
+     "path": "teams/escudos/alaves_esp.png",
+     "sha256": "9d994261b048fc29a99c081f19165073fd0ed5fd74527be752123ca4d00353b5"
+    },
+    {
+     "path": "teams/escudosMini/alaves_esp.png",
+     "sha256": "82844437ccc6cffbf3160497bb594f90e93d3ed87d487ff79c9fd359ffdda045"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/alnassr_ara.ban",
+   "name": "Al Nassr",
+   "source": "transfermarkt",
+   "sourceId": "18544",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/18544.png",
+   "sourceSha256": "56a8c544ef74a15042766c82e87c2f126164bab1eb1db144c480ecd9385fe2d0",
+   "files": [
+    {
+     "path": "teams/escudos/alnassr_ara.png",
+     "sha256": "bc5b0ed595f63d37bbc2af962f5bfdc70bd01c97f4e9bc2e277d70dbbe75b3a8"
+    },
+    {
+     "path": "teams/escudosMini/alnassr_ara.png",
+     "sha256": "45e9cb830a37c5be7365e238fca8ecdd603b40790fa77cbe8bfe1456c2a8e3c3"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/americamg_bra.ban",
+   "name": "América-MG",
+   "source": "transfermarkt",
+   "sourceId": "2863",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/2863.png",
+   "sourceSha256": "8bab4186aa30ad35f7a587b9455d7ed251fbbe82932b1f60f969d4947baefb49",
+   "files": [
+    {
+     "path": "teams/escudos/americamg_bra.png",
+     "sha256": "38c1db81ad617992f43273dc06466fe9950c67a15c93a3cae9b5e3a706354718"
+    },
+    {
+     "path": "teams/escudosMini/americamg_bra.png",
+     "sha256": "e4068ca8cfafd29443f08b32f442b5c1cbe770d8cefee6ab79aeb697091cf57c"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/anderlecht_bel.ban",
+   "name": "Anderlecht",
+   "source": "transfermarkt",
+   "sourceId": "58",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/58.png",
+   "sourceSha256": "37cf4f81efa9fb414494d96ab53da97d4dcebd51ca533c052f6b6041420f7675",
+   "files": [
+    {
+     "path": "teams/escudos/anderlecht_bel.png",
+     "sha256": "84cddb0689335af01da8879b70ebd4a61e9971fe54f0ab76132f0efa8ddfd70d"
+    },
+    {
+     "path": "teams/escudosMini/anderlecht_bel.png",
+     "sha256": "77a79f38792d27c3ff2dcff3855727230cc6e95a93b437c6d22abd5a2d2dabab"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/apoel_chp.ban",
+   "name": "APOEL",
+   "source": "transfermarkt",
+   "sourceId": "2784",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/2784.png",
+   "sourceSha256": "7d5b229f03ea5c9386331e8e36b4809a302638bd91427cec546e11cd81fbe6aa",
+   "files": [
+    {
+     "path": "teams/escudos/apoel_chp.png",
+     "sha256": "11c880f315e2745f2de543fd11b9fc1f66f4ba28ab63df5eb6a036b90fbe67f9"
+    },
+    {
+     "path": "teams/escudosMini/apoel_chp.png",
+     "sha256": "0418ce4b7134ef6eda0f08226e74ff0a6cb31851be6c5bfd1e44988667503236"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/assurn.ban",
+   "name": "ASSU",
+   "source": "transfermarkt",
+   "sourceId": "84063",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/84063.png",
+   "sourceSha256": "e467f70593d1be8fe83a6b8f9cb073fb3afe0b30be88f9915077608e216f670e",
+   "files": [
+    {
+     "path": "teams/escudos/assurn.png",
+     "sha256": "3a8b6e89eb58d6d15236bb040037024e8c82f47211a2614d13b058ec72612887"
+    },
+    {
+     "path": "teams/escudosMini/assurn.png",
+     "sha256": "b4c3a1235f84ee6792961385b139075a3ab53291356904794631033af23093f0"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/astana_caz.ban",
+   "name": "Astana",
+   "source": "transfermarkt",
+   "sourceId": "22220",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/22220.png",
+   "sourceSha256": "d4d7dc10c29799c649f09df6cc55895dba3622069ee5ea29ccacad944acf9336",
+   "files": [
+    {
+     "path": "teams/escudos/astana_caz.png",
+     "sha256": "d2ca077a9e5009045368ed78af04f80b8d9d55c393123d8d2c0a2efde0b17de9"
+    },
+    {
+     "path": "teams/escudosMini/astana_caz.png",
+     "sha256": "a7982c89aafcd0cb527d9001c8d9168dd935d9d032b77d65e42f718391794e04"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/atalanta_it.ban",
+   "name": "Atalanta",
+   "source": "transfermarkt",
+   "sourceId": "800",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/800.png",
+   "sourceSha256": "4c349dfb0de734061a42cbcd220235ede0f28fc3d738aa9312cb0faf692cec15",
+   "files": [
+    {
+     "path": "teams/escudos/atalanta_it.png",
+     "sha256": "2b0b0718b950979dfbbd76b91cf9b5e78fe3a50d8724fdfbc384fb0cbe04c015"
+    },
+    {
+     "path": "teams/escudosMini/atalanta_it.png",
+     "sha256": "4fc647b1821089c940015bbf286f7a9fab227b3da532607bb26bea9118467aa1"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/atleticoalagoinhas_bra.ban",
+   "name": "Atlético Alagoinhas",
+   "source": "transfermarkt",
+   "sourceId": "25229",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/25229.png",
+   "sourceSha256": "fe7da53ab939f63a7bb43394ca2c8362ac9d6fe5606c4429ede654092a6c3f4b",
+   "files": [
+    {
+     "path": "teams/escudos/atleticoalagoinhas_bra.png",
+     "sha256": "1bc0b10205381f6f8aa326cc9be8ad1deb819ea2c6d1a0c38c960e9c60b5c244"
+    },
+    {
+     "path": "teams/escudosMini/atleticoalagoinhas_bra.png",
+     "sha256": "0474649e4104fd7f682f9400f3c958c608edd533115e60c5488a2acbd02f806b"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/audax_chi.ban",
+   "name": "Audax Italiano",
+   "source": "transfermarkt",
+   "sourceId": "6363",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/6363.png",
+   "sourceSha256": "c093a1e56dea148125d30047abd7fe47b47c89b3806d8b6af2b6637f43fc229e",
+   "files": [
+    {
+     "path": "teams/escudos/audax_chi.png",
+     "sha256": "57c43b2f858126a682d038c584bcfbc92913d52fc512f7a755257670ffb74c71"
+    },
+    {
+     "path": "teams/escudosMini/audax_chi.png",
+     "sha256": "403c2fffd77ac705fca5ebbbf797de74d5cefa3359a4bf9bf2d468337ea54e3e"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/b36torshavn_fro.ban",
+   "name": "B36 Tórshavn",
+   "source": "transfermarkt",
+   "sourceId": "10532",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/10532.png",
+   "sourceSha256": "58cbc8eab492aca63006401b1f3146f077924457a46b199acdc7d2913a3627cc",
+   "files": [
+    {
+     "path": "teams/escudos/b36torshavn_fro.png",
+     "sha256": "917bfd3f1e4fb03aaa57dddb4ec55a8e850f085174e2360a623daf13406e3f43"
+    },
+    {
+     "path": "teams/escudosMini/b36torshavn_fro.png",
+     "sha256": "5368cdb95f41721be5d35e21558e36bbd87f5a329db81b52aa25d803dfc8f6e9"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/bahiafeira_ba.ban",
+   "name": "Bahia de Feira",
+   "source": "transfermarkt",
+   "sourceId": "28707",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/28707.png",
+   "sourceSha256": "774e5f8c1259d29e75c9c7163df6c69bfbd3616bcfefd100547f0201f4fbe6ed",
+   "files": [
+    {
+     "path": "teams/escudos/bahiafeira_ba.png",
+     "sha256": "ac0144732d5ea4e7c77c5df1f8395ddd34ad1abd97c4890e1c0f4e9f1d1587a6"
+    },
+    {
+     "path": "teams/escudosMini/bahiafeira_ba.png",
+     "sha256": "09a8159addc30995cfa4ad3a1d7f79339bd79e4a389540e7a80dbaa8f461eeaa"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/boavista_bra.ban",
+   "name": "Boavista",
+   "source": "transfermarkt",
+   "sourceId": "11266",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/11266.png",
+   "sourceSha256": "d1a31bfd6f2b68d7217971e2ed6acc9376c24cdbd152a5e3edf33266fc1b319d",
+   "files": [
+    {
+     "path": "teams/escudos/boavista_bra.png",
+     "sha256": "f239adc35bc04b99003c37a274a245ea8805cb79b13d3c8be79a89686d98b754"
+    },
+    {
+     "path": "teams/escudosMini/boavista_bra.png",
+     "sha256": "e5a2763e176d4ef91c19f0fa9b472f0a21b74fc902b367966c1d0c4f33d3fc75"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/botafogopb_bra.ban",
+   "name": "Botafogo PB",
+   "source": "transfermarkt",
+   "sourceId": "17964",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/17964.png",
+   "sourceSha256": "18d1ef903944f2ad48c743a3975caa694baa6a10a01871378f069b3ea364a2fb",
+   "files": [
+    {
+     "path": "teams/escudos/botafogopb_bra.png",
+     "sha256": "a56ef2d23c189aca30e26391b34703e43c5c82175e800e2f45b45985032c848d"
+    },
+    {
+     "path": "teams/escudosMini/botafogopb_bra.png",
+     "sha256": "77ab45febde755623285e918dd906e0afd30bd291da6ae82cf09c1ba82b2440b"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/budapeste_hun.ban",
+   "name": "Budapest Honvéd",
+   "source": "transfermarkt",
+   "sourceId": "709",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/709.png",
+   "sourceSha256": "8e880aac25961ad8ec9b8586d2b2d4fb72fd98aa7d875168035775d1973461dc",
+   "files": [
+    {
+     "path": "teams/escudos/budapeste_hun.png",
+     "sha256": "76e0d0c0ea4e55da2ef54164752c7f97ab4e8aef44bb67be08e500e44321a4ee"
+    },
+    {
+     "path": "teams/escudosMini/budapeste_hun.png",
+     "sha256": "4264c2fcc83da6f0bb6597036c2833edf0a821f66484f759e57202ce71e558fb"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/crbelouizdad_arl.ban",
+   "name": "CR Belouizdad",
+   "source": "transfermarkt",
+   "sourceId": "13365",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/13365.png",
+   "sourceSha256": "81d45e0ba1c9d6ebaf86eff251e38db4987e0afff0a9ac4690fe9ae7e2e0126c",
+   "files": [
+    {
+     "path": "teams/escudos/crbelouizdad_arl.png",
+     "sha256": "25d12277ce0e20d6091c748fb2188e590e14c9126f125eafd93a00675d14d565"
+    },
+    {
+     "path": "teams/escudosMini/crbelouizdad_arl.png",
+     "sha256": "07181a7ef8cbcd7316d0bfef1fa872cf6a15fb07783977f63a7d29bf6df5dbb5"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/dacdunajskastreda_slk.ban",
+   "name": "Dunajská Streda",
+   "source": "transfermarkt",
+   "sourceId": "4529",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/4529.png",
+   "sourceSha256": "0a0dacd53d0edfaa0a60b140aef6264f0d93f3f79df8905bcdb79301a19be0c9",
+   "files": [
+    {
+     "path": "teams/escudos/dacdunajskastreda_slk.png",
+     "sha256": "7fb854ecc77eca088585784c09ec71f8ecf4aaceae1c978e0c63f16d91f07c4a"
+    },
+    {
+     "path": "teams/escudosMini/dacdunajskastreda_slk.png",
+     "sha256": "1f078b1ca2f17a3d19a925b8833b4958c141542ffc6bc4681385ac69fba317b5"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/dundalk_irl.ban",
+   "name": "Dundalk",
+   "source": "transfermarkt",
+   "sourceId": "6066",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/6066.png",
+   "sourceSha256": "af177310c085ca0f7e9f8ab90aaa1e284099a5f840efb4648da3418e1cefbcd9",
+   "files": [
+    {
+     "path": "teams/escudos/dundalk_irl.png",
+     "sha256": "6dfbc1290709d2702edd110f167c6cb22863bbdcd5c8a9861fc45a2b9f11210a"
+    },
+    {
+     "path": "teams/escudosMini/dundalk_irl.png",
+     "sha256": "5422fec776888a502d31c984c3166770c84b8717808b938a6eb222e7a05f2e9c"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/enyimba_nig.ban",
+   "name": "Enyimba",
+   "source": "transfermarkt",
+   "sourceId": "645",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/645.png",
+   "sourceSha256": "500d675f7d05cc275b53fa3f8ac9a2fa9ccdf7a5e01921a9715bd79fec66b972",
+   "files": [
+    {
+     "path": "teams/escudos/enyimba_nig.png",
+     "sha256": "5d4d97af6a6a854866bdd010016f2c7204ce42f79d220a497ba5b7ba6f8e85aa"
+    },
+    {
+     "path": "teams/escudosMini/enyimba_nig.png",
+     "sha256": "5af4602aca18008a49cd72dd6dcc5d3b42f785ea5ed12b3471bba43f9dae1d67"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/essetif_arl.ban",
+   "name": "ES Sétif",
+   "source": "transfermarkt",
+   "sourceId": "18272",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/18272.png",
+   "sourceSha256": "75c77602611f133f45f660c137d791248159f306412285011965b87aed81e73c",
+   "files": [
+    {
+     "path": "teams/escudos/essetif_arl.png",
+     "sha256": "3467c0eaa55dccbc36d402a3a2ead46176cf33ebd6576c0f1e2e7499c8d6382b"
+    },
+    {
+     "path": "teams/escudosMini/essetif_arl.png",
+     "sha256": "467dadb2aacab61e86ac1b6e16691c5d7ef9b5d87fc582fda7d92460f0764944"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/estrelavermelha_ser.ban",
+   "name": "Estrela Vermelha",
+   "source": "transfermarkt",
+   "sourceId": "159",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/159.png",
+   "sourceSha256": "c5613a0d30183f89d61c4ccd66e6fe8777a72d5bead61624876f51bd2754cd12",
+   "files": [
+    {
+     "path": "teams/escudos/estrelavermelha_ser.png",
+     "sha256": "8e3b7440eb7b0fdcb747c324f4dbe79edb67435d6d7be4e24073e6dff116fc58"
+    },
+    {
+     "path": "teams/escudosMini/estrelavermelha_ser.png",
+     "sha256": "7aa8f35e26d49ca651bdebd5f3fbb531baddfc5c87cd35be6213a84da8892925"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/far_mar.ban",
+   "name": "FAR Rabat",
+   "source": "transfermarkt",
+   "sourceId": "9099",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/9099.png",
+   "sourceSha256": "7623e15c92edb8b94f0b615185b7172b97bdd2720378d580e22fc372be309774",
+   "files": [
+    {
+     "path": "teams/escudos/far_mar.png",
+     "sha256": "4db1fb07a5ee2867717ea77d4bff7c2d56d65d13a587eecf9758e5c831825153"
+    },
+    {
+     "path": "teams/escudosMini/far_mar.png",
+     "sha256": "3de9fab759f553b6e5ecb46d12b81032124ab0a41c29e3e2573e922e64fd5555"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/fortaleza.ban",
+   "name": "Fortaleza",
+   "source": "transfermarkt",
+   "sourceId": "10870",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/10870.png",
+   "sourceSha256": "4db4b34629c589742e7dadc3ece0d18d6d1c5c268b769ec9e9af253c73d25a21",
+   "files": [
+    {
+     "path": "teams/escudos/fortaleza.png",
+     "sha256": "512eeae5cd4192caeb9a2d5f55e176d1492f3ffc44263b617bac8eba4469777c"
+    },
+    {
+     "path": "teams/escudosMini/fortaleza.png",
+     "sha256": "28e208caaafaaf8e3c80db70cb7109f2d0820b0f9ac2da78ff1685b90bb9ea9b"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/gambaosaka_jap.ban",
+   "name": "Gamba Osaka",
+   "source": "transfermarkt",
+   "sourceId": "596",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/596.png",
+   "sourceSha256": "1757c51d94617bf4385f94080bc4b97c0ae1dbab10b0325d3b87f2bd744ccf9e",
+   "files": [
+    {
+     "path": "teams/escudos/gambaosaka_jap.png",
+     "sha256": "6b88c8982d5e2f2feb9062211f68cd222f5e854e26d5c5e4ad96d3f3d526c41c"
+    },
+    {
+     "path": "teams/escudosMini/gambaosaka_jap.png",
+     "sha256": "49748cfdf98f9f2624359247a2c4679a0365bff96348ac6db13e28047473e3c2"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/girona_esp.ban",
+   "name": "Girona",
+   "source": "transfermarkt",
+   "sourceId": "12321",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/12321.png",
+   "sourceSha256": "0c479a8b85defc39e179e223a3385d5db0daaeced250b004a08b452b6ff49047",
+   "files": [
+    {
+     "path": "teams/escudos/girona_esp.png",
+     "sha256": "38fb61990b63bba852562e1484f421098e6c818e73ef6b19dde927221cf74f49"
+    },
+    {
+     "path": "teams/escudosMini/girona_esp.png",
+     "sha256": "6f227597373d345b23dc791c954276c96567204c77cad0a8cda3870352168a4e"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/goias.ban",
+   "name": "Goiás",
+   "source": "transfermarkt",
+   "sourceId": "3197",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/3197.png",
+   "sourceSha256": "8374d4c1c95c6f082bf644c7159a60490d2be730164b0f2021ea3787a03be5f5",
+   "files": [
+    {
+     "path": "teams/escudos/goias.png",
+     "sha256": "d02e970f5ee4dc1920fe3fd9fe9282f48ae6662dd39e3462f1ed893045fe403e"
+    },
+    {
+     "path": "teams/escudosMini/goias.png",
+     "sha256": "baea66638eab2c7c5c592ea2a7e5f78cd83d0640c84fb6a34880614bd85828b7"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/gremioanapolisgo_bra.ban",
+   "name": "Grêmio Anápolis",
+   "source": "transfermarkt",
+   "sourceId": "25243",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/25243.png",
+   "sourceSha256": "90990b060d2b8b60e36b33f5ffaa174ee6cb6ae7f4f0bb3a81bca7043206ae6d",
+   "files": [
+    {
+     "path": "teams/escudos/gremioanapolisgo_bra.png",
+     "sha256": "c1195f88b7f2c07e4d6b07ab1c81dfcca890cc149bd5e7eafa0fed84e1f4e848"
+    },
+    {
+     "path": "teams/escudosMini/gremioanapolisgo_bra.png",
+     "sha256": "dacc07617ba6ac133e80b3cdfbedb6764a4f1d653ce9de313b775eae0a68b357"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/guaranyrs_bra.ban",
+   "name": "Guarany-RS",
+   "source": "transfermarkt",
+   "sourceId": "24903",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/24903.png",
+   "sourceSha256": "ffd75a10ae0ec00227ced076db729ced0e7411614b328a2e7abc1d7761b4a254",
+   "files": [
+    {
+     "path": "teams/escudos/guaranyrs_bra.png",
+     "sha256": "8998a19d1c9c3289a47d20dbac0f1b35923e6c3f7fa6915b1ba14477b447e09b"
+    },
+    {
+     "path": "teams/escudosMini/guaranyrs_bra.png",
+     "sha256": "654d55039e06cc0e116c6f992706c14ad0e9eafe5d218f0d4521a9ec946f4f16"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/hanoi_vie.ban",
+   "name": "Hanoi FC",
+   "source": "transfermarkt",
+   "sourceId": "24971",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/24971.png",
+   "sourceSha256": "6a9a2e6c23c05be7ece7a2fc8c3eea0f1cc5fbdafc8c20774d26d09a0fe806a1",
+   "files": [
+    {
+     "path": "teams/escudos/hanoi_vie.png",
+     "sha256": "1469a6d1f7dd7d3a4df6348acfac1a6e73d6eaeb007389734a0da1a5eb23b5e8"
+    },
+    {
+     "path": "teams/escudosMini/hanoi_vie.png",
+     "sha256": "fe045aee79e97fcc096271a8fc501c70fcf39538b89370f33626b6bb2251cb5c"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/helsinki_fin.ban",
+   "name": "HJK Helsinki",
+   "source": "transfermarkt",
+   "sourceId": "1008",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/1008.png",
+   "sourceSha256": "b49b2a5ec3f58db291432c4a2178a25f1aa7f950dc21a69e70babbe5a06d4a85",
+   "files": [
+    {
+     "path": "teams/escudos/helsinki_fin.png",
+     "sha256": "e914d06d4dc0ab3b44395392390e7143465260f0f4d5a340fb9e3643ff8a7580"
+    },
+    {
+     "path": "teams/escudosMini/helsinki_fin.png",
+     "sha256": "55af28c6a86f2ed5ec8a43b5a68a310f2fe0082c4ea4690ca82086e6c6580ee9"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/iguatu_ce.ban",
+   "name": "Iguatu",
+   "source": "transfermarkt",
+   "sourceId": "39555",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/39555.png",
+   "sourceSha256": "322bba185903e7815384a468d4eae7454ba61f9a73c5ce1a2f66aefaa4311035",
+   "files": [
+    {
+     "path": "teams/escudos/iguatu_ce.png",
+     "sha256": "ae2422d90faa9f8ab87147a0898deb271601d625432910b33f580ef200401868"
+    },
+    {
+     "path": "teams/escudosMini/iguatu_ce.png",
+     "sha256": "c1f2cbaf11343c2b5893cdc1cea2c1c22954e1109cb45215b27b463d6f1ed170"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/itabaiana_se.ban",
+   "name": "Itabaiana",
+   "source": "transfermarkt",
+   "sourceId": "8547",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/8547.png",
+   "sourceSha256": "2f66ccffa2abd1c8dc2be19bc14f0cba9af8d2f16868b1ba39f5660bb091a8bb",
+   "files": [
+    {
+     "path": "teams/escudos/itabaiana_se.png",
+     "sha256": "1cc870f2331ed4eb37bf0fcfa091a0b4ba142dae64cd02192896704bce76335b"
+    },
+    {
+     "path": "teams/escudosMini/itabaiana_se.png",
+     "sha256": "691986e2596cf11e1e35b48695d868f6ed971ea49d347c3b53583fa278c85d30"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/ituano_sp.ban",
+   "name": "Ituano",
+   "source": "transfermarkt",
+   "sourceId": "4773",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/4773.png",
+   "sourceSha256": "32ce0cc7f8dc6879b41ef1447c1213c71b212dbd1fdd96633378d65bf961a8cf",
+   "files": [
+    {
+     "path": "teams/escudos/ituano_sp.png",
+     "sha256": "af806f061590de6154abaf8075dcac9f0f16e7fc12af9bfcc788785c2489ebae"
+    },
+    {
+     "path": "teams/escudosMini/ituano_sp.png",
+     "sha256": "92d2654f9d4003f616ddd677a5f426095e1fa5cb6445ed228c57f0a9992d357d"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/juazeirense_ba.ban",
+   "name": "Juazeirense",
+   "source": "transfermarkt",
+   "sourceId": "32991",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/32991.png",
+   "sourceSha256": "02988e6993f54b5db976ba2d1a9dc02aec056f97bb46df29c782326d3c2b6418",
+   "files": [
+    {
+     "path": "teams/escudos/juazeirense_ba.png",
+     "sha256": "98ff61c13b62bb2693d12677e76e58d6c144ecb9085cf7c0343cfa68c9981b18"
+    },
+    {
+     "path": "teams/escudosMini/juazeirense_ba.png",
+     "sha256": "264a2ceabceec06dd48af03aeb34dd29352d66e4346cb846d00fd9e4d082a05b"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/kitchee_hkg.ban",
+   "name": "Kitchee",
+   "source": "transfermarkt",
+   "sourceId": "15979",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/15979.png",
+   "sourceSha256": "e29df84819db9d4d634a260259afe0cca0d756a7ced9b16e67769278bc4dd272",
+   "files": [
+    {
+     "path": "teams/escudos/kitchee_hkg.png",
+     "sha256": "05c4f6a458277d2d05452d2536e626385a7aaca0095c3c2433444c9d70822cd1"
+    },
+    {
+     "path": "teams/escudosMini/kitchee_hkg.png",
+     "sha256": "790158d1a1041abc698894075be2f5af90e95c2748acb85ba34a4f277fdda56a"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/lagarto_se.ban",
+   "name": "Lagarto",
+   "source": "transfermarkt",
+   "sourceId": "56341",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/56341.png",
+   "sourceSha256": "5b7bd8234de17f6a3f7ce6daa01dd8eeb7808e14599d404d747109d86d227951",
+   "files": [
+    {
+     "path": "teams/escudos/lagarto_se.png",
+     "sha256": "e4102965e9740327f84a6ded9cea2923e98748416bc846eb92d5079a1ecaf1b4"
+    },
+    {
+     "path": "teams/escudosMini/lagarto_se.png",
+     "sha256": "01dff70848bf5bd2e1f849ad6ddb98507fada3562e2381709e10a840ac115683"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/ldu_equ.ban",
+   "name": "LDU",
+   "source": "transfermarkt",
+   "sourceId": "9855",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/9855.png",
+   "sourceSha256": "47a5537c06230d0672487804e58f6cdf76740073578113c6a2eccf927a3f34e7",
+   "files": [
+    {
+     "path": "teams/escudos/ldu_equ.png",
+     "sha256": "ae5d5b7bad7eb960c5573401737b2b456cc117c0ade35613f3a567686017d211"
+    },
+    {
+     "path": "teams/escudosMini/ldu_equ.png",
+     "sha256": "7440d6d505154f672f10d8a0b5a127bb5252572d2c284faf55027b96240f1a43"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/leipzig_ale.ban",
+   "name": "Leipzig",
+   "source": "transfermarkt",
+   "sourceId": "23826",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/23826.png",
+   "sourceSha256": "d7aff81d6e7f491547f2a2fb48b19f548b8d8ddd374bbb757798d34133546e3d",
+   "files": [
+    {
+     "path": "teams/escudos/leipzig_ale.png",
+     "sha256": "7fbe86206440cb59f00f06b1ff027c084d0e15adbd980e65103cb9701644d86a"
+    },
+    {
+     "path": "teams/escudosMini/leipzig_ale.png",
+     "sha256": "2a2e0150701fc6aac4b3f01fa362079a423bfbba0976ada08a9698594f316591"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/liverpool_ing.ban",
+   "name": "Liverpool",
+   "source": "transfermarkt",
+   "sourceId": "31",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/31.png",
+   "sourceSha256": "bc0cdab4ad7fca467fbaf3c5b5280c92fc517ed5ee7392595286b89e64f2e91a",
+   "files": [
+    {
+     "path": "teams/escudos/liverpool_ing.png",
+     "sha256": "c983d1267bcf7ef4f239e805208dfca9e77b10a1763ce7d633cae1596b42c667"
+    },
+    {
+     "path": "teams/escudosMini/liverpool_ing.png",
+     "sha256": "174f1642d7179319d48558665ab49a6d79c38c1f6c03ec1003b2c1008713791e"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/lokoplovdiv_bul.ban",
+   "name": "Lokomotiv Plovdiv",
+   "source": "transfermarkt",
+   "sourceId": "2259",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/2259.png",
+   "sourceSha256": "aab0f6c331aa31d4f5842e773cb9a0d106de16ab75a752e16af5774186a10d57",
+   "files": [
+    {
+     "path": "teams/escudos/lokoplovdiv_bul.png",
+     "sha256": "bf4fbe19b49009bf40ac0b097a838cb9fa26067e91a54142373e3111ca15f8c2"
+    },
+    {
+     "path": "teams/escudosMini/lokoplovdiv_bul.png",
+     "sha256": "b6b8467219c90501033f4cd046eb91cf00d6c4645f31c6ce2a6ac41adedc93e9"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/nagoyagrampus_jap.ban",
+   "name": "Nagoya Grampus",
+   "source": "transfermarkt",
+   "sourceId": "1066",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/1066.png",
+   "sourceSha256": "25fe4de5643d7d7f8f10d4cd8996f3a66fdaec9995b69d1b454fd7ce8a7a513a",
+   "files": [
+    {
+     "path": "teams/escudos/nagoyagrampus_jap.png",
+     "sha256": "ce68bf5ed16a9cb6db29a4d416a91a8afbf50977e4cb6edea233536e71d44864"
+    },
+    {
+     "path": "teams/escudosMini/nagoyagrampus_jap.png",
+     "sha256": "2a5064b9226d84875dc129553e26d54e9c78557ca77eb8d572369f8f63452512"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/napoli_it.ban",
+   "name": "Napoli",
+   "source": "transfermarkt",
+   "sourceId": "6195",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/6195.png",
+   "sourceSha256": "7382d0fa4e186d4592c8ad9ac6fdc0973ea2f93c431fa65d5c5dbf2f1ab5eec7",
+   "files": [
+    {
+     "path": "teams/escudos/napoli_it.png",
+     "sha256": "f0ca5ca38db89845e5dc30ebe69da09fbec074b37e922d9f61078af3002f6c98"
+    },
+    {
+     "path": "teams/escudosMini/napoli_it.png",
+     "sha256": "c8f83193e926ccb8f98600f1c54d10ff1bf463da58cd20f61cccfdd810029b04"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/neftci_aze.ban",
+   "name": "Neftçi Baku",
+   "source": "transfermarkt",
+   "sourceId": "8031",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/8031.png",
+   "sourceSha256": "b71280f96081073795be73020645e1b315f05b477fe33b36b46d00982ed14a41",
+   "files": [
+    {
+     "path": "teams/escudos/neftci_aze.png",
+     "sha256": "1e038e1aab2d6500f604325d0ce7944381b2eaa2ae3177524c5367f65e24348d"
+    },
+    {
+     "path": "teams/escudosMini/neftci_aze.png",
+     "sha256": "4f64d3c06279c6e2760b0d5c96fd29a067534b5bf479a7ca7fbf657c31705584"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/olympiakos_gre.ban",
+   "name": "Olympiakos",
+   "source": "transfermarkt",
+   "sourceId": "683",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/683.png",
+   "sourceSha256": "9e77956cb30201e497b4a49ff12f62d961b3c26bc81c273478001a77e3573e10",
+   "files": [
+    {
+     "path": "teams/escudos/olympiakos_gre.png",
+     "sha256": "f31f006f704a5537fb91369513a20cac3ba3ecc636190d4e9f212f7c1fcf7fb2"
+    },
+    {
+     "path": "teams/escudosMini/olympiakos_gre.png",
+     "sha256": "890674c3c43cbccbf79baf55b431c34dafeee45416ce8c5900101d2b293d2e2c"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/olympiquemarseile_fra.ban",
+   "name": "Olympique Marseille",
+   "source": "transfermarkt",
+   "sourceId": "244",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/244.png",
+   "sourceSha256": "11b088a814fa0926dcce6d8c6111ed3e4cea33c0838aac1200368abf6dfc5e43",
+   "files": [
+    {
+     "path": "teams/escudos/olympiquemarseile_fra.png",
+     "sha256": "63e8d3a96314d4bfabf73102851db4928c7f4d5a3dad17eab846b91c1cb310ff"
+    },
+    {
+     "path": "teams/escudosMini/olympiquemarseile_fra.png",
+     "sha256": "4f3bbadbbc7954e08a2c637045926614959058081c3223d9bbfb55df0a15cbcd"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/palmeirrn_bra.ban",
+   "name": "Palmeira",
+   "source": "transfermarkt",
+   "sourceId": "1023",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/1023.png",
+   "sourceSha256": "55089d01f65feaa51dfb49a3a1e5654e87e448b5b1573620dfcd570b2afaf957",
+   "files": [
+    {
+     "path": "teams/escudos/palmeirrn_bra.png",
+     "sha256": "23130669ae1100ee09e71ff4cccb877cd2e3b838c86da4f242addbb439eaf9e5"
+    },
+    {
+     "path": "teams/escudosMini/palmeirrn_bra.png",
+     "sha256": "8860250a63380cdb3616f017b4cafba3f2e785095f43fb93a16bd2220506b3da"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/partizan_ser.ban",
+   "name": "Partizan",
+   "source": "transfermarkt",
+   "sourceId": "669",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/669.png",
+   "sourceSha256": "2e79c9460d5346998742e4f06f0259a21cef9b9eb2450b9010c4c9eadc521468",
+   "files": [
+    {
+     "path": "teams/escudos/partizan_ser.png",
+     "sha256": "7e35f3764cf89f2e64f67aaf30b798aa86c3bb60e714321de7d3cf3caaac8579"
+    },
+    {
+     "path": "teams/escudosMini/partizan_ser.png",
+     "sha256": "ddb0e2d86597ead30cbcef822ad6dd60922b6fe75fd99cb4c4b4176e978648b5"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/patrocinense_mg.ban",
+   "name": "Patrocinense",
+   "source": "transfermarkt",
+   "sourceId": "60817",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/60817.png",
+   "sourceSha256": "babfd8ef8c03305ab15af6f787ab38c449c8ff6e44a056b7a7a5eded10f45dc4",
+   "files": [
+    {
+     "path": "teams/escudos/patrocinense_mg.png",
+     "sha256": "8bad28247c09f12a5eae3131203e31cd7d4831c5c9ac8bf3b32427aa4233d87a"
+    },
+    {
+     "path": "teams/escudosMini/patrocinense_mg.png",
+     "sha256": "3e88564eccb14939a549c6583a1b9c5b9b94435fbd3b3bf7fe5aaa325b1669f4"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/penarol_am.ban",
+   "name": "Penarol - AM",
+   "source": "transfermarkt",
+   "sourceId": "32500",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/32500.png",
+   "sourceSha256": "9ea0abf5bae9c034aee835d3caf17b97f3ad4185b89cec62be924f18871245fa",
+   "files": [
+    {
+     "path": "teams/escudos/penarol_am.png",
+     "sha256": "16c3469c45a6e193040127263ff63ebe24d48f5291049261da55fc5517dd08fb"
+    },
+    {
+     "path": "teams/escudosMini/penarol_am.png",
+     "sha256": "15f7b16425ad9f0ec22eb50a7bcc130db79977f3d2f6398e122e1e7bbc74777f"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/persepolis_irn.ban",
+   "name": "Persepolis",
+   "source": "transfermarkt",
+   "sourceId": "6079",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/6079.png",
+   "sourceSha256": "32a8bdff8c292d12fab2f6168c2f775130d4010caa1b0cc12b8bf782bd6d5954",
+   "files": [
+    {
+     "path": "teams/escudos/persepolis_irn.png",
+     "sha256": "95f9cbb8142d2066194d9811fb889838681ae4cf2b9788a27654d48b2df0d1ea"
+    },
+    {
+     "path": "teams/escudosMini/persepolis_irn.png",
+     "sha256": "8d220c749bc4cf3db2f49889e49cbe6a1dd06085eae9a06b3a1b55d5a42c5050"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/randers_den.ban",
+   "name": "Randers",
+   "source": "transfermarkt",
+   "sourceId": "5724",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/5724.png",
+   "sourceSha256": "9976eb167b1fdb73b8dd15ebd016cb73a579eec8ee3387e1a7fee2e195995108",
+   "files": [
+    {
+     "path": "teams/escudos/randers_den.png",
+     "sha256": "6ffede2cdced79a34efc9b38626b159b3a5d290cd94d52cfd3c42c08edd61a77"
+    },
+    {
+     "path": "teams/escudosMini/randers_den.png",
+     "sha256": "79f0e2bec05c3854e47777ac87e0ae11393d6075ab4874a21e0c5ee93418d2f3"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/retrope_bra.ban",
+   "name": "Retrô",
+   "source": "transfermarkt",
+   "sourceId": "76156",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/76156.png",
+   "sourceSha256": "9f1f739d83ef8202986e987c391da6db717a6b0bf330b48429d5c05338f78fcb",
+   "files": [
+    {
+     "path": "teams/escudos/retrope_bra.png",
+     "sha256": "a0ff537dcee25d938f5c1d4ce5b217c191df76abd7e99163830149ef740bd65b"
+    },
+    {
+     "path": "teams/escudosMini/retrope_bra.png",
+     "sha256": "a9dca30959655de96c96e85e6f7bf4e9757dd16e5e5ef07738cf10fec6ac91be"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/rfs_let.ban",
+   "name": "FK RFS",
+   "source": "transfermarkt",
+   "sourceId": "33783",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/33783.png",
+   "sourceSha256": "0a49c2765136a503f360bd2e834005d9de11ec5fbfc883cb128b9c593a188873",
+   "files": [
+    {
+     "path": "teams/escudos/rfs_let.png",
+     "sha256": "f1ea4d626b7b2ec9354c91dd39fb21c1f9baf300f039b9ca42f06054084ca46e"
+    },
+    {
+     "path": "teams/escudosMini/rfs_let.png",
+     "sha256": "3fbc356d98975019f7203f8580ba163c5594cf6312dc372318d760e34fa7cc30"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/santos.ban",
+   "name": "Santos",
+   "source": "transfermarkt",
+   "sourceId": "221",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/221.png",
+   "sourceSha256": "6ea04ac3292b0b517418d0bdf5353359756020b25c0a0af0ffb0c916a0be1e05",
+   "files": [
+    {
+     "path": "teams/escudos/santos.png",
+     "sha256": "627f89c65b552015c80ce4d603a9dd7a180794022c5a9c14f66e1f60b40da28a"
+    },
+    {
+     "path": "teams/escudosMini/santos.png",
+     "sha256": "0f718a4641ef279d1740192cb343a8d26db9d4b32700c60366a6a863385506a0"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/saocaetano_bra.ban",
+   "name": "São Caetano",
+   "source": "transfermarkt",
+   "sourceId": "291",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/291.png",
+   "sourceSha256": "c5773c2f9c4bf3c1aa909d044a0d4e3761cdd709888992a0230870660aacee4a",
+   "files": [
+    {
+     "path": "teams/escudos/saocaetano_bra.png",
+     "sha256": "1de81c80fad600713111c0c941378c0bd3a24e02089c54e6e6984c716e7cc05e"
+    },
+    {
+     "path": "teams/escudosMini/saocaetano_bra.png",
+     "sha256": "f88d2e0e5511450051dcc741c657c6d0e32e4a2b6b168fa10b2e26815a8505b6"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/slavia_cze.ban",
+   "name": "Slavia Praga",
+   "source": "transfermarkt",
+   "sourceId": "62",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/62.png",
+   "sourceSha256": "8e810a8c44dbe8b7c04a030bf80d797400b96eddc4b46d7a546edff7c1ecb9a3",
+   "files": [
+    {
+     "path": "teams/escudos/slavia_cze.png",
+     "sha256": "3121f7db77b856ef6dfcdcc40b28ab63fd8ebaebbd372ba7441f8c541377037b"
+    },
+    {
+     "path": "teams/escudosMini/slavia_cze.png",
+     "sha256": "6b53c79842c63b83cd41b3dbd2c857201a8fb3de2e4d3f3672d779e30658f069"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/slovanliberec_cze.ban",
+   "name": "Slovan Liberec",
+   "source": "transfermarkt",
+   "sourceId": "697",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/697.png",
+   "sourceSha256": "433bbff4b8a7565e70d5c438f5dbbfdf04daa99d0005f1eec72365b68c1f4e1c",
+   "files": [
+    {
+     "path": "teams/escudos/slovanliberec_cze.png",
+     "sha256": "592e0f2c4b11768ac4e6f2fb6d136daabb5e601c4b2fc5ce2174489262ecb83c"
+    },
+    {
+     "path": "teams/escudosMini/slovanliberec_cze.png",
+     "sha256": "82ecd513e15f861798190a8e37e39b418315d79fee028b681fa9badf7241f446"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/sparta_tch.ban",
+   "name": "Sparta Praga",
+   "source": "transfermarkt",
+   "sourceId": "197",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/197.png",
+   "sourceSha256": "2bab7b03541b8abdc1330fe5311f3f03011d8f678fb768a3801859ffb1504eca",
+   "files": [
+    {
+     "path": "teams/escudos/sparta_tch.png",
+     "sha256": "50bf1165acb6a8ad98edf0b1701ca100488b3c0d68e18f88a6db99f4fcf4dcea"
+    },
+    {
+     "path": "teams/escudosMini/sparta_tch.png",
+     "sha256": "966a1c4d4dd8ad9712f36362f48b552394b3bf2a9487390ee5dd560c560fe9dc"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/sport.ban",
+   "name": "Sport",
+   "source": "transfermarkt",
+   "sourceId": "8718",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/8718.png",
+   "sourceSha256": "bced880cee06b1035730e213534af5918686a428c4979b7b95b38c9d22aee3fb",
+   "files": [
+    {
+     "path": "teams/escudos/sport.png",
+     "sha256": "6800ccd30f82378898542040c1ee26760730c0cda41a91c115f60b987b3bf586"
+    },
+    {
+     "path": "teams/escudosMini/sport.png",
+     "sha256": "ca5a7681ed8b4855131364971d70fff5a3c1748ba1b3fd15ee34c487a4625eb8"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/steua_bucaresti_rom.ban",
+   "name": "Steaua Bucuresti",
+   "source": "transfermarkt",
+   "sourceId": "301",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/301.png",
+   "sourceSha256": "142c96ecb746b40c617887bb8edd9db116e93667bc40e37a79a322168f440bb6",
+   "files": [
+    {
+     "path": "teams/escudos/steua_bucaresti_rom.png",
+     "sha256": "bf3a0734cc037c493565b62415b9e9709e087f571270c2b07f63574606b2cc97"
+    },
+    {
+     "path": "teams/escudosMini/steua_bucaresti_rom.png",
+     "sha256": "da4ba32c4b8d1608b2f48b671761cba99fa2608a38956ed520792e35f6e96287"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/tottenhamhotspur_ing.ban",
+   "name": "Tottenham",
+   "source": "transfermarkt",
+   "sourceId": "148",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/148.png",
+   "sourceSha256": "33b6b4f1baafcecd88f8499b250fe28ee55eaf60f67020c716b12418d4b6f555",
+   "files": [
+    {
+     "path": "teams/escudos/tottenhamhotspur_ing.png",
+     "sha256": "fd4e8877336a471165fdd19a6ac08b219db413ae9eb84404405c1db0643ba7a1"
+    },
+    {
+     "path": "teams/escudosMini/tottenhamhotspur_ing.png",
+     "sha256": "d9a3e157c97cd26056543b53df0a1d712504ba4ce745a50c0a22e394fbc719e8"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/ulsan_jap.ban",
+   "name": "Ulsan Hyundai",
+   "source": "transfermarkt",
+   "sourceId": "3535",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/3535.png",
+   "sourceSha256": "5428fa40ac954aaf1ccd8623795bf0f15a79e0cf8d53420f00f1cf43179039d1",
+   "files": [
+    {
+     "path": "teams/escudos/ulsan_jap.png",
+     "sha256": "0ebc4d3dc2848eb28ab6d3f8027f919afa585d2668f41195d80f6e6b7c2dfb5d"
+    },
+    {
+     "path": "teams/escudosMini/ulsan_jap.png",
+     "sha256": "4c90138510cdab05c264e4e92b6bb90d0eac1facdb625234fa7f8ae47e74c07b"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/unionlacalera_chi.ban",
+   "name": "Unión La Calera",
+   "source": "transfermarkt",
+   "sourceId": "20514",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/20514.png",
+   "sourceSha256": "0b041295c85b13325c955a09dfcb414f8644470afc7e60db99dab6f9b41c5456",
+   "files": [
+    {
+     "path": "teams/escudos/unionlacalera_chi.png",
+     "sha256": "b31df316817f398b5d4d498a6b571be15b55ec1e855acbe2b715fee20187a155"
+    },
+    {
+     "path": "teams/escudosMini/unionlacalera_chi.png",
+     "sha256": "3892fe2a0b49550c013b075d323e3558eebd14707626cc1d4cb8e1c6bc2e767d"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/valmiera_let.ban",
+   "name": "Valmiera Glass",
+   "source": "transfermarkt",
+   "sourceId": "5084",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/5084.png",
+   "sourceSha256": "b7cef2d10f70564c1b01f782224c15e75b97760367248ae6e7ef9e9381703095",
+   "files": [
+    {
+     "path": "teams/escudos/valmiera_let.png",
+     "sha256": "eb17af7a688a79c0dd64debc8b0b0e1f4f5a54a9e952ffeab95fb52c4ae1bdf8"
+    },
+    {
+     "path": "teams/escudosMini/valmiera_let.png",
+     "sha256": "07aa96c11e23d964471594c0b3138866660548e46fd2786ce2daf7b144fce3ea"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/viettel_vie.ban",
+   "name": "Viettel",
+   "source": "transfermarkt",
+   "sourceId": "57443",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/57443.png",
+   "sourceSha256": "c20b75d7f0e24c5cb9594a20f51d90e5dd74d5d638b1a37a563a5fd81c4ac06f",
+   "files": [
+    {
+     "path": "teams/escudos/viettel_vie.png",
+     "sha256": "7cebb549ad9bad2527369be25ee27b029b8ba4dfcf091ceb4185f7fbb1fdd75e"
+    },
+    {
+     "path": "teams/escudosMini/viettel_vie.png",
+     "sha256": "ed35a97b6bbfebb5ea19dc8b694679df07a80be327519b98a9ac81973e5e186a"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/vikingur_isl.ban",
+   "name": "Víkingur Ólafsvík",
+   "source": "transfermarkt",
+   "sourceId": "12118",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/12118.png",
+   "sourceSha256": "f0839a605c23c1befaff15c63540d782df1fb578be62a621b145b6bc35ebe373",
+   "files": [
+    {
+     "path": "teams/escudos/vikingur_isl.png",
+     "sha256": "32ea3938b3635eb73f06f76bcecdfae819b3d5f6c3fec38b45ff16a0db74f3d6"
+    },
+    {
+     "path": "teams/escudosMini/vikingur_isl.png",
+     "sha256": "cc59a06618989572d4ed36a6719c3e69407a0c416d9b6a3ddc5cd81b056875fe"
+    }
+   ]
+  },
+  {
+   "teamFile": "teams/wac_mar.ban",
+   "name": "Wydad Casablanca",
+   "source": "transfermarkt",
+   "sourceId": "6603",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/6603.png",
+   "sourceSha256": "1b51c8387e9173159b7f16906f9c799ed82eeb09a8b65242909c2e55e07d9fb3",
+   "files": [
+    {
+     "path": "teams/escudos/wac_mar.png",
+     "sha256": "413e7ca9a42a075d4b4ffe78a6a41778171488ffe342c381d15e4453ce5de251"
+    },
+    {
+     "path": "teams/escudosMini/wac_mar.png",
+     "sha256": "4c6798c1e22a5ce9bcdc500b7cb5bb5dfd1ed90ca2fd91d46176f7d28aa41756"
+    }
+   ]
+  }
+ ],
+ "skipped": []
+}
