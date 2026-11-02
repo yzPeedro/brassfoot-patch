@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Brasfoot Mega Patch</title>
 <style>
-:root{--bg:#fff;--card:#fff;--soft-a:#eaf0ff;--soft-b:#f8faff;--warm-a:#fff4e0;--warm-b:#fffaf0;--danger-soft:#fff0f3;--brand:#0b4be0;--brand-strong:#0837b5;--brand-soft:#eaf0ff;--ink:#0b1633;--ink-2:#2c3a5c;--muted:#5b6885;--line:#e1e7f3;--surface:#f4f7fd;--ok:#0b7a55;--ok-soft:#e3f8ef;--warn:#94620f;--warn-soft:#fdf3df;--danger:#d6203f;--font:"Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;--mono:"Cascadia Code",Consolas,monospace;--ease:cubic-bezier(.22,1,.36,1)}
+:root{--toast-bg:#0b1633;--toast-ink:#fff;--toast-line:#0b1633;--bg:#fff;--card:#fff;--soft-a:#eaf0ff;--soft-b:#f8faff;--warm-a:#fff4e0;--warm-b:#fffaf0;--danger-soft:#fff0f3;--brand:#0b4be0;--brand-strong:#0837b5;--brand-soft:#eaf0ff;--ink:#0b1633;--ink-2:#2c3a5c;--muted:#5b6885;--line:#e1e7f3;--surface:#f4f7fd;--ok:#0b7a55;--ok-soft:#e3f8ef;--warn:#94620f;--warn-soft:#fdf3df;--danger:#d6203f;--font:"Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;--mono:"Cascadia Code",Consolas,monospace;--ease:cubic-bezier(.22,1,.36,1)}
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
 body{font:14px/1.55 var(--font);color:var(--ink);background:var(--bg);overflow:hidden;user-select:none;-webkit-font-smoothing:antialiased}
@@ -134,7 +134,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 .modal.success .icon{background:var(--ok-soft);color:var(--ok)}
 .qr{width:200px;margin:8px auto 14px;padding:10px;border:1px solid var(--line);border-radius:14px}
 .qr svg{display:block;width:100%;height:auto}
-.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--ink);color:white;padding:10px 16px;border-radius:12px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .25s}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--toast-bg);color:var(--toast-ink);border:1px solid var(--toast-line);box-shadow:0 12px 30px #0b163340;padding:10px 16px;border-radius:12px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .25s}
 .toast.show{opacity:1}
 .alert{display:none;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;background:var(--warn-soft);color:var(--warn);font-size:13px;font-weight:600;margin-bottom:18px}
 .alert.show{display:flex}
@@ -162,7 +162,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 .notes code{font:500 12px var(--mono);background:var(--surface);padding:1px 5px;border-radius:5px}
 .notes a{color:var(--brand);cursor:pointer;font-weight:600}
 .meta{font:600 11px var(--mono);letter-spacing:.06em;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
-:root[data-theme=dark]{--bg:#0b1220;--card:#111a2c;--surface:#0e1626;--line:#22314f;--ink:#e7edfb;--ink-2:#c2cce4;--muted:#8d9aba;--brand:#5b8cff;--brand-strong:#7aa2ff;--brand-soft:#16244a;--ok:#4fd1a1;--ok-soft:#0f2a22;--warn:#f0b75c;--warn-soft:#2e2412;--danger:#ff6b81;--danger-soft:#33141c;--soft-a:#16244a;--soft-b:#111a2c;--warm-a:#2e2412;--warm-b:#111a2c}
+:root[data-theme=dark]{--toast-bg:#1f2d4d;--toast-ink:#f1f5ff;--toast-line:#34476f;--bg:#0b1220;--card:#111a2c;--surface:#0e1626;--line:#22314f;--ink:#e7edfb;--ink-2:#c2cce4;--muted:#8d9aba;--brand:#5b8cff;--brand-strong:#7aa2ff;--brand-soft:#16244a;--ok:#4fd1a1;--ok-soft:#0f2a22;--warn:#f0b75c;--warn-soft:#2e2412;--danger:#ff6b81;--danger-soft:#33141c;--soft-a:#16244a;--soft-b:#111a2c;--warm-a:#2e2412;--warm-b:#111a2c}
 :root[data-theme=dark] .check{border-color:#3a4a6e}
 :root[data-theme=dark] .speed strong{color:var(--warn)}
 :root[data-theme=dark] .overlay{background:#00000099}
