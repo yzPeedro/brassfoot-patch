@@ -66,9 +66,11 @@ type InstallOptions struct { // TestFailAfter is for automated rollback tests, n
 
 var (
 	teamName           = regexp.MustCompile(`^teams/[\p{L}\p{N}_ -]+\.ban$`)
+	crestName          = regexp.MustCompile(`^teams/(escudos|escudosMini)/[\p{L}\p{N}_ -]+\.png$`)
 	nationalConfigPath = "conf_ligas_nacionais/BRA.cfg"
 	gameExecutablePath = "bf22-23.exe"
 	validHash          = regexp.MustCompile(`^[0-9a-f]{64}$`)
+	pngHeader          = [4]byte{0x89, 0x50, 0x4e, 0x47}
 	validVersion       = regexp.MustCompile(`^[0-9]{4}\.[0-9]+\.[0-9]+$`)
 )
 
@@ -194,7 +196,8 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		// O executável só pode ser atualizado por manifesto v4 e assinatura SHA reconhecida.
 		isNationalConfig := entry.Path == nationalConfigPath && m.SchemaVersion >= 3
 		isExecutable := entry.Path == gameExecutablePath && m.SchemaVersion == 4
-		if !teamName.MatchString(entry.Path) && !isNationalConfig && !isExecutable {
+		isCrest := crestName.MatchString(entry.Path) && m.SchemaVersion == 4
+		if !teamName.MatchString(entry.Path) && !isNationalConfig && !isExecutable && !isCrest {
 			return Plan{}, fmt.Errorf("caminho de patch proibido: %s", entry.Path)
 		}
 		mode := entry.Operation
@@ -207,8 +210,8 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		if m.SchemaVersion == 2 && mode == "add" {
 			return Plan{}, errors.New("schema 2 não permite adicionar equipes")
 		}
-		if (isNationalConfig || isExecutable) && mode != "replace" {
-			return Plan{}, errors.New("configuração nacional e executável só podem substituir originais conhecidos")
+		if (isNationalConfig || isExecutable || isCrest) && mode != "replace" {
+			return Plan{}, errors.New("configuração nacional, executável e escudos só podem substituir originais conhecidos")
 		}
 		if entry.AllowMissing && (!teamName.MatchString(entry.Path) || mode != "replace") {
 			return Plan{}, errors.New("adição opcional permitida somente para equipes")
@@ -292,7 +295,8 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		_, err = io.ReadFull(f, h[:])
 		f.Close()
 		if err != nil || (isExecutable && (h[0] != 0x4d || h[1] != 0x5a)) ||
-			(!isExecutable && h != [4]byte{0xac, 0xed, 0x00, 0x05}) {
+			(isCrest && h != pngHeader) ||
+			(!isExecutable && !isCrest && h != [4]byte{0xac, 0xed, 0x00, 0x05}) {
 			return Plan{}, fmt.Errorf("assinatura inválida de arquivo autorizado: %s", entry.Path)
 		}
 		result, err := sha(source)

@@ -135,7 +135,7 @@ func detectState(m Manifest, gamePath string) (GameState, error) {
 		}
 	}
 	for _, f := range m.Files {
-		if f.Path == gameExecutablePath {
+		if f.Path == gameExecutablePath || isCrestFile(f) {
 			continue
 		}
 		state.TeamsTotal++
@@ -166,7 +166,7 @@ func componentManifest(m Manifest, selection Selection, state GameState) (Manife
 	out.Files = nil
 	full, hasExecutable := executableEntry(m)
 	for _, f := range m.Files {
-		if f.Path != gameExecutablePath && selection.Patch {
+		if f.Path != gameExecutablePath && !isCrestFile(f) && selection.Patch {
 			out.Files = append(out.Files, f)
 		}
 	}

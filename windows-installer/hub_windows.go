@@ -20,6 +20,7 @@ import (
 
 	webview2 "github.com/jchv/go-webview2"
 	"github.com/jchv/go-webview2/webviewloader"
+	"golang.org/x/sys/windows/registry"
 )
 
 //go:embed ui/hub.html
@@ -684,6 +685,22 @@ func hubFrameless(window uintptr) {
 	setWindowPos.Call(window, 0, uintptr((int(sw)-w)/2), uintptr((int(sh)-h)/2), uintptr(w), uintptr(h), swpNoZOrder|swpFrameChanged)
 }
 
+func hubStartsDark() bool {
+	switch loadSettings().Theme {
+	case "dark":
+		return true
+	case "light":
+		return false
+	}
+	key, err := registry.OpenKey(registry.CURRENT_USER, `Software\Microsoft\Windows\CurrentVersion\Themes\Personalize`, registry.QUERY_VALUE)
+	if err != nil {
+		return false
+	}
+	defer key.Close()
+	value, _, err := key.GetIntegerValue("AppsUseLightTheme")
+	return err == nil && value == 0
+}
+
 func hubDataPath() string {
 	root, err := backupRoot()
 	if err != nil {
@@ -702,6 +719,12 @@ func runHub() bool {
 	}
 	hubStagingRoot = root
 	defer os.RemoveAll(root)
+	dark := hubStartsDark()
+	theme, background := "light", "FFFFFFFF"
+	if dark {
+		theme, background = "dark", "FF0B1220"
+	}
+	_ = os.Setenv("WEBVIEW2_DEFAULT_BACKGROUND_COLOR", background)
 	view := webview2.NewWithOptions(webview2.WebViewOptions{
 		DataPath:  hubDataPath(),
 		AutoFocus: true,
@@ -716,6 +739,7 @@ func runHub() bool {
 	hubWindow = uintptr(view.Window())
 	hwnd = hubWindow
 	hubFrameless(hubWindow)
+	hubSetFrameTheme(dark)
 	hubGame = findGame()
 	bindings := map[string]any{
 		"hubInfo":            hubInfo,
@@ -761,6 +785,7 @@ func runHub() bool {
 		"{{MARK}}", "data:image/svg+xml;base64,"+base64.StdEncoding.EncodeToString([]byte(hubMark)),
 		"{{PITCH}}", "data:image/jpeg;base64,"+base64.StdEncoding.EncodeToString(hubPitch),
 		"{{LIVEPITCH}}", hubLivePitch,
+		"{{THEME}}", theme,
 	).Replace(hubPage)
 	view.SetHtml(page)
 	if loadSettings().Notify {

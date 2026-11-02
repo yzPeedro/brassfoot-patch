@@ -184,7 +184,18 @@ func preparePayloadWithFS(fsys fs.FS, gamePath, staged string) error {
 	if err = json.Unmarshal(body, &manifest); err != nil {
 		return err
 	}
-	return preparePayloadManifest(fsys, manifest, gamePath, staged)
+	game, _, err := validGame(gamePath)
+	if err != nil {
+		return err
+	}
+	filtered := withoutForeignCrests(manifest, game)
+	if body, err = json.MarshalIndent(filtered, "", "  "); err != nil {
+		return err
+	}
+	if err = os.WriteFile(filepath.Join(staged, "manifest.json"), body, 0600); err != nil {
+		return err
+	}
+	return preparePayloadManifest(fsys, filtered, gamePath, staged)
 }
 
 func readRecipe(fsys fs.FS, f ManifestFile) ([]byte, error) {
@@ -242,11 +253,15 @@ func preparePayloadManifest(fsys fs.FS, manifest Manifest, gamePath, staged stri
 	for _, f := range manifest.Files {
 		isNationalConfig := manifest.SchemaVersion >= 3 && f.Path == nationalConfigPath
 		isExecutable := manifest.SchemaVersion == 4 && f.Path == gameExecutablePath
-		if !teamName.MatchString(f.Path) && !isNationalConfig && !isExecutable {
+		isCrest := manifest.SchemaVersion == 4 && crestName.MatchString(f.Path)
+		if !teamName.MatchString(f.Path) && !isNationalConfig && !isExecutable && !isCrest {
 			return fmt.Errorf("arquivo não autorizado no pacote: %s", f.Path)
 		}
-		if (isNationalConfig || isExecutable) && f.Operation != "replace" {
-			return fmt.Errorf("BRA.cfg somente pode ser substituído: %s", f.Path)
+		if isCrest && f.LocalSource == "" && !recipeName.MatchString(f.Recipe) {
+			return fmt.Errorf("escudo sem instruções nomeadas: %s", f.Path)
+		}
+		if (isNationalConfig || isExecutable || isCrest) && f.Operation != "replace" {
+			return fmt.Errorf("este arquivo só pode substituir um original conhecido: %s", f.Path)
 		}
 		key := strings.ToLower(f.Path)
 		if seen[key] {

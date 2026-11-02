@@ -1,0 +1,1337 @@
+{
+ "schemaVersion": 1,
+ "season": 2026,
+ "generatedAt": "2026-11-02T15:00:56.801766+00:00",
+ "auditGeneratedAt": "2026-11-02T14:47:42.951305+00:00",
+ "statuses": [
+  "provavelmente desatualizado"
+ ],
+ "clubs": [
+  {
+   "teamFile": "teams/Differdange_Lux.ban",
+   "stem": "Differdange_Lux",
+   "name": "Differdange 03",
+   "country": "Luxemburgo",
+   "source": "transfermarkt",
+   "sourceId": "11914",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/11914.png",
+   "transfermarktId": "11914",
+   "scoresId": "7533",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2938,
+    "game365": 0.2998,
+    "transfermarkt365": 0.0327
+   },
+   "sourceSha256": "1cd59a7588fb75466ae8a01a7d4164442e3ee9d64999b9f06325d666679bf5f1"
+  },
+  {
+   "teamFile": "teams/Saburtalo_Geo.ban",
+   "stem": "Saburtalo_Geo",
+   "name": "Saburtalo",
+   "country": "Georgia",
+   "source": "transfermarkt",
+   "sourceId": "41133",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/41133.png",
+   "transfermarktId": "41133",
+   "scoresId": "14390",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2184,
+    "game365": 0.2169,
+    "transfermarkt365": 0.0161
+   },
+   "sourceSha256": "736b3048ac8ca67dbe06b97c046ab3692ff59dbef3732745fc67b1b332d1f62f"
+  },
+  {
+   "teamFile": "teams/agmk_uzb.ban",
+   "stem": "agmk_uzb",
+   "name": "FC AGMK",
+   "country": "Uzbequistão",
+   "source": "transfermarkt",
+   "sourceId": "31216",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/31216.png",
+   "transfermarktId": "31216",
+   "scoresId": "15113",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.3044,
+    "game365": 0.3074,
+    "transfermarkt365": 0.0055
+   },
+   "sourceSha256": "c0e2d5cea6839a536cbd326a04f2ce4c96649de5f8026c37296d88228eb86277"
+  },
+  {
+   "teamFile": "teams/ajax_hol.ban",
+   "stem": "ajax_hol",
+   "name": "Ajax",
+   "country": "Holanda",
+   "source": "transfermarkt",
+   "sourceId": "610",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/610.png",
+   "transfermarktId": "610",
+   "scoresId": "690",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1492,
+    "game365": 0.1331,
+    "transfermarkt365": 0.0376
+   },
+   "sourceSha256": "c2b64287591709e86fa76e2607c6e39f5d42f97da5dc601cd00574f09f286cfa"
+  },
+  {
+   "teamFile": "teams/al_ahli_ara.ban",
+   "stem": "al_ahli_ara",
+   "name": "Al-Ahli",
+   "country": "Arábia Saudita",
+   "source": "transfermarkt",
+   "sourceId": "18487",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/18487.png",
+   "transfermarktId": "18487",
+   "scoresId": "8946",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1462,
+    "game365": 0.14,
+    "transfermarkt365": 0.0187
+   },
+   "sourceSha256": "64889d6b04c788f7be813978fbb804ce8f13979e06b9089ae954b880a5cf7f1c"
+  },
+  {
+   "teamFile": "teams/al_hilal.ban",
+   "stem": "al_hilal",
+   "name": "Al-Hilal",
+   "country": "Arábia Saudita",
+   "source": "transfermarkt",
+   "sourceId": "1114",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/1114.png",
+   "transfermarktId": "1114",
+   "scoresId": "5457",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1879,
+    "game365": 0.1891,
+    "transfermarkt365": 0.0061
+   },
+   "sourceSha256": "da8d7c55764fd47c08d3918670d508c150916107c96e532b4867f81fc674dce2"
+  },
+  {
+   "teamFile": "teams/alaves_esp.ban",
+   "stem": "alaves_esp",
+   "name": "Alavés",
+   "country": "Espanha",
+   "source": "transfermarkt",
+   "sourceId": "1108",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/1108.png",
+   "transfermarktId": "1108",
+   "scoresId": "168",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.3363,
+    "game365": 0.3237,
+    "transfermarkt365": 0.0165
+   },
+   "sourceSha256": "cdb3725c224c1bd5742f084845ed6a14f407aac37807758191f225146dd47378"
+  },
+  {
+   "teamFile": "teams/alnassr_ara.ban",
+   "stem": "alnassr_ara",
+   "name": "Al Nassr",
+   "country": "Arábia Saudita",
+   "source": "transfermarkt",
+   "sourceId": "18544",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/18544.png",
+   "transfermarktId": "18544",
+   "scoresId": "7549",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.3332,
+    "game365": 0.3271,
+    "transfermarkt365": 0.0126
+   },
+   "sourceSha256": "56a8c544ef74a15042766c82e87c2f126164bab1eb1db144c480ecd9385fe2d0"
+  },
+  {
+   "teamFile": "teams/americamg_bra.ban",
+   "stem": "americamg_bra",
+   "name": "América-MG",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "2863",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/2863.png",
+   "transfermarktId": "2863",
+   "scoresId": "8514",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1553,
+    "game365": 0.1534,
+    "transfermarkt365": 0.037
+   },
+   "sourceSha256": "8bab4186aa30ad35f7a587b9455d7ed251fbbe82932b1f60f969d4947baefb49"
+  },
+  {
+   "teamFile": "teams/anderlecht_bel.ban",
+   "stem": "anderlecht_bel",
+   "name": "Anderlecht",
+   "country": "Bélgica",
+   "source": "transfermarkt",
+   "sourceId": "58",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/58.png",
+   "transfermarktId": "58",
+   "scoresId": "1173",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1933,
+    "game365": 0.2023,
+    "transfermarkt365": 0.0113
+   },
+   "sourceSha256": "37cf4f81efa9fb414494d96ab53da97d4dcebd51ca533c052f6b6041420f7675"
+  },
+  {
+   "teamFile": "teams/apoel_chp.ban",
+   "stem": "apoel_chp",
+   "name": "APOEL",
+   "country": "Chipre",
+   "source": "transfermarkt",
+   "sourceId": "2784",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/2784.png",
+   "transfermarktId": "2784",
+   "scoresId": "2261",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1397,
+    "game365": 0.1352,
+    "transfermarkt365": 0.0156
+   },
+   "sourceSha256": "7d5b229f03ea5c9386331e8e36b4809a302638bd91427cec546e11cd81fbe6aa"
+  },
+  {
+   "teamFile": "teams/assurn.ban",
+   "stem": "assurn",
+   "name": "ASSU",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "84063",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/84063.png",
+   "transfermarktId": "84063",
+   "scoresId": "7295",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1532,
+    "game365": 0.1935,
+    "transfermarkt365": 0.0543
+   },
+   "sourceSha256": "e467f70593d1be8fe83a6b8f9cb073fb3afe0b30be88f9915077608e216f670e"
+  },
+  {
+   "teamFile": "teams/astana_caz.ban",
+   "stem": "astana_caz",
+   "name": "Astana",
+   "country": "Cazaquistão",
+   "source": "transfermarkt",
+   "sourceId": "22220",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/22220.png",
+   "transfermarktId": "22220",
+   "scoresId": "10785",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.3442,
+    "game365": 0.3388,
+    "transfermarkt365": 0.0164
+   },
+   "sourceSha256": "d4d7dc10c29799c649f09df6cc55895dba3622069ee5ea29ccacad944acf9336"
+  },
+  {
+   "teamFile": "teams/atalanta_it.ban",
+   "stem": "atalanta_it",
+   "name": "Atalanta",
+   "country": "Itália",
+   "source": "transfermarkt",
+   "sourceId": "800",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/800.png",
+   "transfermarktId": "800",
+   "scoresId": "232",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.3023,
+    "game365": 0.2986,
+    "transfermarkt365": 0.0071
+   },
+   "sourceSha256": "4c349dfb0de734061a42cbcd220235ede0f28fc3d738aa9312cb0faf692cec15"
+  },
+  {
+   "teamFile": "teams/atleticoalagoinhas_bra.ban",
+   "stem": "atleticoalagoinhas_bra",
+   "name": "Atlético Alagoinhas",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "25229",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/25229.png",
+   "transfermarktId": "25229",
+   "scoresId": "9118",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1493,
+    "game365": 0.1519,
+    "transfermarkt365": 0.052
+   },
+   "sourceSha256": "fe7da53ab939f63a7bb43394ca2c8362ac9d6fe5606c4429ede654092a6c3f4b"
+  },
+  {
+   "teamFile": "teams/audax_chi.ban",
+   "stem": "audax_chi",
+   "name": "Audax Italiano",
+   "country": "Chile",
+   "source": "transfermarkt",
+   "sourceId": "6363",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/6363.png",
+   "transfermarktId": "6363",
+   "scoresId": "1229",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1425,
+    "game365": 0.1462,
+    "transfermarkt365": 0.0222
+   },
+   "sourceSha256": "c093a1e56dea148125d30047abd7fe47b47c89b3806d8b6af2b6637f43fc229e"
+  },
+  {
+   "teamFile": "teams/b36torshavn_fro.ban",
+   "stem": "b36torshavn_fro",
+   "name": "B36 Tórshavn",
+   "country": "Ilhas Faroe",
+   "source": "transfermarkt",
+   "sourceId": "10532",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/10532.png",
+   "transfermarktId": "10532",
+   "scoresId": "5626",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2316,
+    "game365": 0.2278,
+    "transfermarkt365": 0.009
+   },
+   "sourceSha256": "58cbc8eab492aca63006401b1f3146f077924457a46b199acdc7d2913a3627cc"
+  },
+  {
+   "teamFile": "teams/bahiafeira_ba.ban",
+   "stem": "bahiafeira_ba",
+   "name": "Bahia de Feira",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "28707",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/28707.png",
+   "transfermarktId": "28707",
+   "scoresId": "9084",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1546,
+    "game365": 0.1538,
+    "transfermarkt365": 0.0193
+   },
+   "sourceSha256": "774e5f8c1259d29e75c9c7163df6c69bfbd3616bcfefd100547f0201f4fbe6ed"
+  },
+  {
+   "teamFile": "teams/boavista_bra.ban",
+   "stem": "boavista_bra",
+   "name": "Boavista",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "11266",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/11266.png",
+   "transfermarktId": "11266",
+   "scoresId": "7070",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1381,
+    "game365": 0.134,
+    "transfermarkt365": 0.015
+   },
+   "sourceSha256": "d1a31bfd6f2b68d7217971e2ed6acc9376c24cdbd152a5e3edf33266fc1b319d"
+  },
+  {
+   "teamFile": "teams/botafogopb_bra.ban",
+   "stem": "botafogopb_bra",
+   "name": "Botafogo PB",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "17964",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/17964.png",
+   "transfermarktId": "17964",
+   "scoresId": "9203",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1884,
+    "game365": 0.1788,
+    "transfermarkt365": 0.0497
+   },
+   "sourceSha256": "18d1ef903944f2ad48c743a3975caa694baa6a10a01871378f069b3ea364a2fb"
+  },
+  {
+   "teamFile": "teams/budapeste_hun.ban",
+   "stem": "budapeste_hun",
+   "name": "Budapest Honvéd",
+   "country": "Hungria",
+   "source": "transfermarkt",
+   "sourceId": "709",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/709.png",
+   "transfermarktId": "709",
+   "scoresId": "2069",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2337,
+    "game365": 0.234,
+    "transfermarkt365": 0.0081
+   },
+   "sourceSha256": "8e880aac25961ad8ec9b8586d2b2d4fb72fd98aa7d875168035775d1973461dc"
+  },
+  {
+   "teamFile": "teams/crbelouizdad_arl.ban",
+   "stem": "crbelouizdad_arl",
+   "name": "CR Belouizdad",
+   "country": "Argélia",
+   "source": "transfermarkt",
+   "sourceId": "13365",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/13365.png",
+   "transfermarktId": "13365",
+   "scoresId": "8225",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2695,
+    "game365": 0.2693,
+    "transfermarkt365": 0.0066
+   },
+   "sourceSha256": "81d45e0ba1c9d6ebaf86eff251e38db4987e0afff0a9ac4690fe9ae7e2e0126c"
+  },
+  {
+   "teamFile": "teams/dacdunajskastreda_slk.ban",
+   "stem": "dacdunajskastreda_slk",
+   "name": "Dunajská Streda",
+   "country": "Eslováquia",
+   "source": "transfermarkt",
+   "sourceId": "4529",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/4529.png",
+   "transfermarktId": "4529",
+   "scoresId": "2119",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.138,
+    "game365": 0.1363,
+    "transfermarkt365": 0.0168
+   },
+   "sourceSha256": "0a0dacd53d0edfaa0a60b140aef6264f0d93f3f79df8905bcdb79301a19be0c9"
+  },
+  {
+   "teamFile": "teams/dundalk_irl.ban",
+   "stem": "dundalk_irl",
+   "name": "Dundalk",
+   "country": "Irlanda",
+   "source": "transfermarkt",
+   "sourceId": "6066",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/6066.png",
+   "transfermarktId": "6066",
+   "scoresId": "846",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2388,
+    "game365": 0.2318,
+    "transfermarkt365": 0.0132
+   },
+   "sourceSha256": "af177310c085ca0f7e9f8ab90aaa1e284099a5f840efb4648da3418e1cefbcd9"
+  },
+  {
+   "teamFile": "teams/enyimba_nig.ban",
+   "stem": "enyimba_nig",
+   "name": "Enyimba",
+   "country": "Nigéria",
+   "source": "transfermarkt",
+   "sourceId": "645",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/645.png",
+   "transfermarktId": "645",
+   "scoresId": "6886",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2177,
+    "game365": 0.2024,
+    "transfermarkt365": 0.0239
+   },
+   "sourceSha256": "500d675f7d05cc275b53fa3f8ac9a2fa9ccdf7a5e01921a9715bd79fec66b972"
+  },
+  {
+   "teamFile": "teams/essetif_arl.ban",
+   "stem": "essetif_arl",
+   "name": "ES Sétif",
+   "country": "Argélia",
+   "source": "transfermarkt",
+   "sourceId": "18272",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/18272.png",
+   "transfermarktId": "18272",
+   "scoresId": "8222",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2713,
+    "game365": 0.2895,
+    "transfermarkt365": 0.0349
+   },
+   "sourceSha256": "75c77602611f133f45f660c137d791248159f306412285011965b87aed81e73c"
+  },
+  {
+   "teamFile": "teams/estrelavermelha_ser.ban",
+   "stem": "estrelavermelha_ser",
+   "name": "Estrela Vermelha",
+   "country": "Sérvia",
+   "source": "transfermarkt",
+   "sourceId": "159",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/159.png",
+   "transfermarktId": "159",
+   "scoresId": "8957",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1892,
+    "game365": 0.203,
+    "transfermarkt365": 0.0198
+   },
+   "sourceSha256": "c5613a0d30183f89d61c4ccd66e6fe8777a72d5bead61624876f51bd2754cd12"
+  },
+  {
+   "teamFile": "teams/far_mar.ban",
+   "stem": "far_mar",
+   "name": "FAR Rabat",
+   "country": "Marrocos",
+   "source": "transfermarkt",
+   "sourceId": "9099",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/9099.png",
+   "transfermarktId": "9099",
+   "scoresId": "5455",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2198,
+    "game365": 0.2154,
+    "transfermarkt365": 0.0139
+   },
+   "sourceSha256": "7623e15c92edb8b94f0b615185b7172b97bdd2720378d580e22fc372be309774"
+  },
+  {
+   "teamFile": "teams/fortaleza.ban",
+   "stem": "fortaleza",
+   "name": "Fortaleza",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "10870",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/10870.png",
+   "transfermarktId": "10870",
+   "scoresId": "1778",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1651,
+    "game365": 0.157,
+    "transfermarkt365": 0.026
+   },
+   "sourceSha256": "4db4b34629c589742e7dadc3ece0d18d6d1c5c268b769ec9e9af253c73d25a21"
+  },
+  {
+   "teamFile": "teams/gambaosaka_jap.ban",
+   "stem": "gambaosaka_jap",
+   "name": "Gamba Osaka",
+   "country": "Japão",
+   "source": "transfermarkt",
+   "sourceId": "596",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/596.png",
+   "transfermarktId": "596",
+   "scoresId": "2150",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.3252,
+    "game365": 0.3198,
+    "transfermarkt365": 0.0286
+   },
+   "sourceSha256": "1757c51d94617bf4385f94080bc4b97c0ae1dbab10b0325d3b87f2bd744ccf9e"
+  },
+  {
+   "teamFile": "teams/girona_esp.ban",
+   "stem": "girona_esp",
+   "name": "Girona",
+   "country": "Espanha",
+   "source": "transfermarkt",
+   "sourceId": "12321",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/12321.png",
+   "transfermarktId": "12321",
+   "scoresId": "175",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2525,
+    "game365": 0.2365,
+    "transfermarkt365": 0.0344
+   },
+   "sourceSha256": "0c479a8b85defc39e179e223a3385d5db0daaeced250b004a08b452b6ff49047"
+  },
+  {
+   "teamFile": "teams/goias.ban",
+   "stem": "goias",
+   "name": "Goiás",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "3197",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/3197.png",
+   "transfermarktId": "3197",
+   "scoresId": "1217",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1438,
+    "game365": 0.1349,
+    "transfermarkt365": 0.0117
+   },
+   "sourceSha256": "8374d4c1c95c6f082bf644c7159a60490d2be730164b0f2021ea3787a03be5f5"
+  },
+  {
+   "teamFile": "teams/gremioanapolisgo_bra.ban",
+   "stem": "gremioanapolisgo_bra",
+   "name": "Grêmio Anápolis",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "25243",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/25243.png",
+   "transfermarktId": "25243",
+   "scoresId": "10279",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2441,
+    "game365": 0.2406,
+    "transfermarkt365": 0.0117
+   },
+   "sourceSha256": "90990b060d2b8b60e36b33f5ffaa174ee6cb6ae7f4f0bb3a81bca7043206ae6d"
+  },
+  {
+   "teamFile": "teams/guaranyrs_bra.ban",
+   "stem": "guaranyrs_bra",
+   "name": "Guarany-RS",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "24903",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/24903.png",
+   "transfermarktId": "24903",
+   "scoresId": "26220",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1851,
+    "game365": 0.1454,
+    "transfermarkt365": 0.0945
+   },
+   "sourceSha256": "ffd75a10ae0ec00227ced076db729ced0e7411614b328a2e7abc1d7761b4a254"
+  },
+  {
+   "teamFile": "teams/hanoi_vie.ban",
+   "stem": "hanoi_vie",
+   "name": "Hanoi FC",
+   "country": "Vietnã",
+   "source": "transfermarkt",
+   "sourceId": "24971",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/24971.png",
+   "transfermarktId": "24971",
+   "scoresId": "9012",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2274,
+    "game365": 0.2281,
+    "transfermarkt365": 0.0175
+   },
+   "sourceSha256": "6a9a2e6c23c05be7ece7a2fc8c3eea0f1cc5fbdafc8c20774d26d09a0fe806a1"
+  },
+  {
+   "teamFile": "teams/helsinki_fin.ban",
+   "stem": "helsinki_fin",
+   "name": "HJK Helsinki",
+   "country": "Finlândia",
+   "source": "transfermarkt",
+   "sourceId": "1008",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/1008.png",
+   "transfermarktId": "1008",
+   "scoresId": "1925",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1527,
+    "game365": 0.1528,
+    "transfermarkt365": 0.0137
+   },
+   "sourceSha256": "b49b2a5ec3f58db291432c4a2178a25f1aa7f950dc21a69e70babbe5a06d4a85"
+  },
+  {
+   "teamFile": "teams/iguatu_ce.ban",
+   "stem": "iguatu_ce",
+   "name": "Iguatu",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "39555",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/39555.png",
+   "transfermarktId": "39555",
+   "scoresId": "50730",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2153,
+    "game365": 0.2322,
+    "transfermarkt365": 0.0818
+   },
+   "sourceSha256": "322bba185903e7815384a468d4eae7454ba61f9a73c5ce1a2f66aefaa4311035"
+  },
+  {
+   "teamFile": "teams/itabaiana_se.ban",
+   "stem": "itabaiana_se",
+   "name": "Itabaiana",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "8547",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/8547.png",
+   "transfermarktId": "8547",
+   "scoresId": "9206",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1742,
+    "game365": 0.1951,
+    "transfermarkt365": 0.0404
+   },
+   "sourceSha256": "2f66ccffa2abd1c8dc2be19bc14f0cba9af8d2f16868b1ba39f5660bb091a8bb"
+  },
+  {
+   "teamFile": "teams/ituano_sp.ban",
+   "stem": "ituano_sp",
+   "name": "Ituano",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "4773",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/4773.png",
+   "transfermarktId": "4773",
+   "scoresId": "24160",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1542,
+    "game365": 0.151,
+    "transfermarkt365": 0.0179
+   },
+   "sourceSha256": "32ce0cc7f8dc6879b41ef1447c1213c71b212dbd1fdd96633378d65bf961a8cf"
+  },
+  {
+   "teamFile": "teams/juazeirense_ba.ban",
+   "stem": "juazeirense_ba",
+   "name": "Juazeirense",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "32991",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/32991.png",
+   "transfermarktId": "32991",
+   "scoresId": "9123",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2536,
+    "game365": 0.2543,
+    "transfermarkt365": 0.0053
+   },
+   "sourceSha256": "02988e6993f54b5db976ba2d1a9dc02aec056f97bb46df29c782326d3c2b6418"
+  },
+  {
+   "teamFile": "teams/kitchee_hkg.ban",
+   "stem": "kitchee_hkg",
+   "name": "Kitchee",
+   "country": "Hong Kong",
+   "source": "transfermarkt",
+   "sourceId": "15979",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/15979.png",
+   "transfermarktId": "15979",
+   "scoresId": "8521",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1306,
+    "game365": 0.132,
+    "transfermarkt365": 0.009
+   },
+   "sourceSha256": "e29df84819db9d4d634a260259afe0cca0d756a7ced9b16e67769278bc4dd272"
+  },
+  {
+   "teamFile": "teams/lagarto_se.ban",
+   "stem": "lagarto_se",
+   "name": "Lagarto",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "56341",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/56341.png",
+   "transfermarktId": "56341",
+   "scoresId": "9211",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.161,
+    "game365": 0.1457,
+    "transfermarkt365": 0.0316
+   },
+   "sourceSha256": "5b7bd8234de17f6a3f7ce6daa01dd8eeb7808e14599d404d747109d86d227951"
+  },
+  {
+   "teamFile": "teams/ldu_equ.ban",
+   "stem": "ldu_equ",
+   "name": "LDU",
+   "country": "Equador",
+   "source": "transfermarkt",
+   "sourceId": "9855",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/9855.png",
+   "transfermarktId": "9855",
+   "scoresId": "1282",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1755,
+    "game365": 0.1537,
+    "transfermarkt365": 0.0297
+   },
+   "sourceSha256": "47a5537c06230d0672487804e58f6cdf76740073578113c6a2eccf927a3f34e7"
+  },
+  {
+   "teamFile": "teams/leipzig_ale.ban",
+   "stem": "leipzig_ale",
+   "name": "Leipzig",
+   "country": "Alemanha",
+   "source": "transfermarkt",
+   "sourceId": "23826",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/23826.png",
+   "transfermarktId": "23826",
+   "scoresId": "7171",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1927,
+    "game365": 0.1932,
+    "transfermarkt365": 0.0144
+   },
+   "sourceSha256": "d7aff81d6e7f491547f2a2fb48b19f548b8d8ddd374bbb757798d34133546e3d"
+  },
+  {
+   "teamFile": "teams/liverpool_ing.ban",
+   "stem": "liverpool_ing",
+   "name": "Liverpool",
+   "country": "Inglaterra",
+   "source": "transfermarkt",
+   "sourceId": "31",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/31.png",
+   "transfermarktId": "31",
+   "scoresId": "108",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2073,
+    "game365": 0.211,
+    "transfermarkt365": 0.0137
+   },
+   "sourceSha256": "bc0cdab4ad7fca467fbaf3c5b5280c92fc517ed5ee7392595286b89e64f2e91a"
+  },
+  {
+   "teamFile": "teams/lokoplovdiv_bul.ban",
+   "stem": "lokoplovdiv_bul",
+   "name": "Lokomotiv Plovdiv",
+   "country": "Bulgária",
+   "source": "transfermarkt",
+   "sourceId": "2259",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/2259.png",
+   "transfermarktId": "2259",
+   "scoresId": "2284",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2223,
+    "game365": 0.2144,
+    "transfermarkt365": 0.0362
+   },
+   "sourceSha256": "aab0f6c331aa31d4f5842e773cb9a0d106de16ab75a752e16af5774186a10d57"
+  },
+  {
+   "teamFile": "teams/nagoyagrampus_jap.ban",
+   "stem": "nagoyagrampus_jap",
+   "name": "Nagoya Grampus",
+   "country": "Japão",
+   "source": "transfermarkt",
+   "sourceId": "1066",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/1066.png",
+   "transfermarktId": "1066",
+   "scoresId": "2142",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1998,
+    "game365": 0.199,
+    "transfermarkt365": 0.0088
+   },
+   "sourceSha256": "25fe4de5643d7d7f8f10d4cd8996f3a66fdaec9995b69d1b454fd7ce8a7a513a"
+  },
+  {
+   "teamFile": "teams/napoli_it.ban",
+   "stem": "napoli_it",
+   "name": "Napoli",
+   "country": "Itália",
+   "source": "transfermarkt",
+   "sourceId": "6195",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/6195.png",
+   "transfermarktId": "6195",
+   "scoresId": "234",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1935,
+    "game365": 0.1955,
+    "transfermarkt365": 0.0073
+   },
+   "sourceSha256": "7382d0fa4e186d4592c8ad9ac6fdc0973ea2f93c431fa65d5c5dbf2f1ab5eec7"
+  },
+  {
+   "teamFile": "teams/neftci_aze.ban",
+   "stem": "neftci_aze",
+   "name": "Neftçi Baku",
+   "country": "Azerbaijão",
+   "source": "transfermarkt",
+   "sourceId": "8031",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/8031.png",
+   "transfermarktId": "8031",
+   "scoresId": "5425",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2417,
+    "game365": 0.2448,
+    "transfermarkt365": 0.02
+   },
+   "sourceSha256": "b71280f96081073795be73020645e1b315f05b477fe33b36b46d00982ed14a41"
+  },
+  {
+   "teamFile": "teams/olympiakos_gre.ban",
+   "stem": "olympiakos_gre",
+   "name": "Olympiakos",
+   "country": "Grécia",
+   "source": "transfermarkt",
+   "sourceId": "683",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/683.png",
+   "transfermarktId": "683",
+   "scoresId": "1023",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2151,
+    "game365": 0.1979,
+    "transfermarkt365": 0.0549
+   },
+   "sourceSha256": "9e77956cb30201e497b4a49ff12f62d961b3c26bc81c273478001a77e3573e10"
+  },
+  {
+   "teamFile": "teams/olympiquemarseile_fra.ban",
+   "stem": "olympiquemarseile_fra",
+   "name": "Olympique Marseille",
+   "country": "França",
+   "source": "transfermarkt",
+   "sourceId": "244",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/244.png",
+   "transfermarktId": "244",
+   "scoresId": "469",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1939,
+    "game365": 0.1884,
+    "transfermarkt365": 0.0135
+   },
+   "sourceSha256": "11b088a814fa0926dcce6d8c6111ed3e4cea33c0838aac1200368abf6dfc5e43"
+  },
+  {
+   "teamFile": "teams/palmeirrn_bra.ban",
+   "stem": "palmeirrn_bra",
+   "name": "Palmeira",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "1023",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/1023.png",
+   "transfermarktId": "1023",
+   "scoresId": "1222",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2384,
+    "game365": 0.2161,
+    "transfermarkt365": 0.0396
+   },
+   "sourceSha256": "55089d01f65feaa51dfb49a3a1e5654e87e448b5b1573620dfcd570b2afaf957"
+  },
+  {
+   "teamFile": "teams/partizan_ser.ban",
+   "stem": "partizan_ser",
+   "name": "Partizan",
+   "country": "Sérvia",
+   "source": "transfermarkt",
+   "sourceId": "669",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/669.png",
+   "transfermarktId": "669",
+   "scoresId": "5437",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1381,
+    "game365": 0.1338,
+    "transfermarkt365": 0.0234
+   },
+   "sourceSha256": "2e79c9460d5346998742e4f06f0259a21cef9b9eb2450b9010c4c9eadc521468"
+  },
+  {
+   "teamFile": "teams/patrocinense_mg.ban",
+   "stem": "patrocinense_mg",
+   "name": "Patrocinense",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "60817",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/60817.png",
+   "transfermarktId": "60817",
+   "scoresId": "50738",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1953,
+    "game365": 0.156,
+    "transfermarkt365": 0.0759
+   },
+   "sourceSha256": "babfd8ef8c03305ab15af6f787ab38c449c8ff6e44a056b7a7a5eded10f45dc4"
+  },
+  {
+   "teamFile": "teams/penarol_am.ban",
+   "stem": "penarol_am",
+   "name": "Penarol - AM",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "32500",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/32500.png",
+   "transfermarktId": "32500",
+   "scoresId": "19545",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1738,
+    "game365": 0.1764,
+    "transfermarkt365": 0.0185
+   },
+   "sourceSha256": "9ea0abf5bae9c034aee835d3caf17b97f3ad4185b89cec62be924f18871245fa"
+  },
+  {
+   "teamFile": "teams/persepolis_irn.ban",
+   "stem": "persepolis_irn",
+   "name": "Persepolis",
+   "country": "Irã",
+   "source": "transfermarkt",
+   "sourceId": "6079",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/6079.png",
+   "transfermarktId": "6079",
+   "scoresId": "9355",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1658,
+    "game365": 0.1947,
+    "transfermarkt365": 0.0496
+   },
+   "sourceSha256": "32a8bdff8c292d12fab2f6168c2f775130d4010caa1b0cc12b8bf782bd6d5954"
+  },
+  {
+   "teamFile": "teams/randers_den.ban",
+   "stem": "randers_den",
+   "name": "Randers",
+   "country": "Dinamarca",
+   "source": "transfermarkt",
+   "sourceId": "5724",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/5724.png",
+   "transfermarktId": "5724",
+   "scoresId": "1830",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.216,
+    "game365": 0.2208,
+    "transfermarkt365": 0.0316
+   },
+   "sourceSha256": "9976eb167b1fdb73b8dd15ebd016cb73a579eec8ee3387e1a7fee2e195995108"
+  },
+  {
+   "teamFile": "teams/retrope_bra.ban",
+   "stem": "retrope_bra",
+   "name": "Retrô",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "76156",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/76156.png",
+   "transfermarktId": "76156",
+   "scoresId": "57479",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1365,
+    "game365": 0.1458,
+    "transfermarkt365": 0.0134
+   },
+   "sourceSha256": "9f1f739d83ef8202986e987c391da6db717a6b0bf330b48429d5c05338f78fcb"
+  },
+  {
+   "teamFile": "teams/rfs_let.ban",
+   "stem": "rfs_let",
+   "name": "FK RFS",
+   "country": "Letônia",
+   "source": "transfermarkt",
+   "sourceId": "33783",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/33783.png",
+   "transfermarktId": "33783",
+   "scoresId": "24801",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1796,
+    "game365": 0.1474,
+    "transfermarkt365": 0.0978
+   },
+   "sourceSha256": "0a49c2765136a503f360bd2e834005d9de11ec5fbfc883cb128b9c593a188873"
+  },
+  {
+   "teamFile": "teams/santos.ban",
+   "stem": "santos",
+   "name": "Santos",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "221",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/221.png",
+   "transfermarktId": "221",
+   "scoresId": "1224",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.163,
+    "game365": 0.1508,
+    "transfermarkt365": 0.0219
+   },
+   "sourceSha256": "6ea04ac3292b0b517418d0bdf5353359756020b25c0a0af0ffb0c916a0be1e05"
+  },
+  {
+   "teamFile": "teams/saocaetano_bra.ban",
+   "stem": "saocaetano_bra",
+   "name": "São Caetano",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "291",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/291.png",
+   "transfermarktId": "291",
+   "scoresId": "1275",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2231,
+    "game365": 0.2262,
+    "transfermarkt365": 0.0329
+   },
+   "sourceSha256": "c5773c2f9c4bf3c1aa909d044a0d4e3761cdd709888992a0230870660aacee4a"
+  },
+  {
+   "teamFile": "teams/slavia_cze.ban",
+   "stem": "slavia_cze",
+   "name": "Slavia Praga",
+   "country": "República Tcheca",
+   "source": "transfermarkt",
+   "sourceId": "62",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/62.png",
+   "transfermarktId": "62",
+   "scoresId": "1789",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1923,
+    "game365": 0.1962,
+    "transfermarkt365": 0.0079
+   },
+   "sourceSha256": "8e810a8c44dbe8b7c04a030bf80d797400b96eddc4b46d7a546edff7c1ecb9a3"
+  },
+  {
+   "teamFile": "teams/slovanliberec_cze.ban",
+   "stem": "slovanliberec_cze",
+   "name": "Slovan Liberec",
+   "country": "República Tcheca",
+   "source": "transfermarkt",
+   "sourceId": "697",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/697.png",
+   "transfermarktId": "697",
+   "scoresId": "1794",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2224,
+    "game365": 0.2061,
+    "transfermarkt365": 0.0321
+   },
+   "sourceSha256": "433bbff4b8a7565e70d5c438f5dbbfdf04daa99d0005f1eec72365b68c1f4e1c"
+  },
+  {
+   "teamFile": "teams/sparta_tch.ban",
+   "stem": "sparta_tch",
+   "name": "Sparta Praga",
+   "country": "República Tcheca",
+   "source": "transfermarkt",
+   "sourceId": "197",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/197.png",
+   "transfermarktId": "197",
+   "scoresId": "1788",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2304,
+    "game365": 0.2395,
+    "transfermarkt365": 0.0496
+   },
+   "sourceSha256": "2bab7b03541b8abdc1330fe5311f3f03011d8f678fb768a3801859ffb1504eca"
+  },
+  {
+   "teamFile": "teams/sport.ban",
+   "stem": "sport",
+   "name": "Sport",
+   "country": "Brasil",
+   "source": "transfermarkt",
+   "sourceId": "8718",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/8718.png",
+   "transfermarktId": "8718",
+   "scoresId": "1226",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.144,
+    "game365": 0.1361,
+    "transfermarkt365": 0.0155
+   },
+   "sourceSha256": "bced880cee06b1035730e213534af5918686a428c4979b7b95b38c9d22aee3fb"
+  },
+  {
+   "teamFile": "teams/steua_bucaresti_rom.ban",
+   "stem": "steua_bucaresti_rom",
+   "name": "Steaua Bucuresti",
+   "country": "Romênia",
+   "source": "transfermarkt",
+   "sourceId": "301",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/301.png",
+   "transfermarktId": "301",
+   "scoresId": "2041",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2211,
+    "game365": 0.2289,
+    "transfermarkt365": 0.0298
+   },
+   "sourceSha256": "142c96ecb746b40c617887bb8edd9db116e93667bc40e37a79a322168f440bb6"
+  },
+  {
+   "teamFile": "teams/tottenhamhotspur_ing.ban",
+   "stem": "tottenhamhotspur_ing",
+   "name": "Tottenham",
+   "country": "Inglaterra",
+   "source": "transfermarkt",
+   "sourceId": "148",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/148.png",
+   "transfermarktId": "148",
+   "scoresId": "114",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2922,
+    "game365": 0.2884,
+    "transfermarkt365": 0.0131
+   },
+   "sourceSha256": "33b6b4f1baafcecd88f8499b250fe28ee55eaf60f67020c716b12418d4b6f555"
+  },
+  {
+   "teamFile": "teams/ulsan_jap.ban",
+   "stem": "ulsan_jap",
+   "name": "Ulsan Hyundai",
+   "country": "Coreia do Sul",
+   "source": "transfermarkt",
+   "sourceId": "3535",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/3535.png",
+   "transfermarktId": "3535",
+   "scoresId": "8967",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1892,
+    "game365": 0.1918,
+    "transfermarkt365": 0.0152
+   },
+   "sourceSha256": "5428fa40ac954aaf1ccd8623795bf0f15a79e0cf8d53420f00f1cf43179039d1"
+  },
+  {
+   "teamFile": "teams/unionlacalera_chi.ban",
+   "stem": "unionlacalera_chi",
+   "name": "Unión La Calera",
+   "country": "Chile",
+   "source": "transfermarkt",
+   "sourceId": "20514",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/20514.png",
+   "transfermarktId": "20514",
+   "scoresId": "8409",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2784,
+    "game365": 0.2816,
+    "transfermarkt365": 0.0126
+   },
+   "sourceSha256": "0b041295c85b13325c955a09dfcb414f8644470afc7e60db99dab6f9b41c5456"
+  },
+  {
+   "teamFile": "teams/valmiera_let.ban",
+   "stem": "valmiera_let",
+   "name": "Valmiera Glass",
+   "country": "Letônia",
+   "source": "transfermarkt",
+   "sourceId": "5084",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/5084.png",
+   "transfermarktId": "5084",
+   "scoresId": "11230",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.2838,
+    "game365": 0.2855,
+    "transfermarkt365": 0.0293
+   },
+   "sourceSha256": "b7cef2d10f70564c1b01f782224c15e75b97760367248ae6e7ef9e9381703095"
+  },
+  {
+   "teamFile": "teams/viettel_vie.ban",
+   "stem": "viettel_vie",
+   "name": "Viettel",
+   "country": "Vietnã",
+   "source": "transfermarkt",
+   "sourceId": "57443",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/57443.png",
+   "transfermarktId": "57443",
+   "scoresId": "29873",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.3737,
+    "game365": 0.4119,
+    "transfermarkt365": 0.0446
+   },
+   "sourceSha256": "c20b75d7f0e24c5cb9594a20f51d90e5dd74d5d638b1a37a563a5fd81c4ac06f"
+  },
+  {
+   "teamFile": "teams/vikingur_isl.ban",
+   "stem": "vikingur_isl",
+   "name": "Víkingur Ólafsvík",
+   "country": "Islândia",
+   "source": "transfermarkt",
+   "sourceId": "12118",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/12118.png",
+   "transfermarktId": "12118",
+   "scoresId": "12759",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.243,
+    "game365": 0.2808,
+    "transfermarkt365": 0.0984
+   },
+   "sourceSha256": "f0839a605c23c1befaff15c63540d782df1fb578be62a621b145b6bc35ebe373"
+  },
+  {
+   "teamFile": "teams/wac_mar.ban",
+   "stem": "wac_mar",
+   "name": "Wydad Casablanca",
+   "country": "Marrocos",
+   "source": "transfermarkt",
+   "sourceId": "6603",
+   "imageUrl": "https://tmssl.akamaized.net/images/wappen/head/6603.png",
+   "transfermarktId": "6603",
+   "scoresId": "8326",
+   "auditStatus": "provavelmente desatualizado",
+   "distances": {
+    "gameTransfermarkt": 0.1639,
+    "game365": 0.165,
+    "transfermarkt365": 0.0204
+   },
+   "sourceSha256": "1b51c8387e9173159b7f16906f9c799ed82eeb09a8b65242909c2e55e07d9fb3"
+  }
+ ],
+ "excluded": [
+  {
+   "teamFile": "teams/uniaopr_bra.ban",
+   "reason": "Transfermarkt 28199 e 365Scores 20015 parecem ser outro União (escudo vermelho \"UEC\"); o jogo tem o \"CEU\" azul do Paraná.",
+   "excludedAt": "2026-11-02"
+  },
+  {
+   "teamFile": "teams/generalcaballero_par.ban",
+   "reason": "Transfermarkt 95573 parece ser outro General Caballero; o escudo do jogo é azul e vermelho.",
+   "excludedAt": "2026-11-02"
+  }
+ ]
+}
