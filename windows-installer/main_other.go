@@ -111,7 +111,7 @@ func runPortable() error {
 	only := flag.String("only", "", "instalar só um componente: patch ou live")
 	feed := flag.String("feed", "", "pasta local com release.json e o pacote, em vez do GitHub")
 	bundle := flag.String("bundle", "", "arquivo .zip do pacote baixado da release, para uso sem internet")
-	remove := flag.String("remove", "", "remover componentes: rosters, season, live ou all (separados por vírgula)")
+	remove := flag.String("remove", "", "remover componentes: rosters, season, live, crests ou all (separados por vírgula)")
 	flag.Parse()
 	if flag.NArg() != 0 {
 		return errors.New("argumentos inesperados; consulte --help")
@@ -278,8 +278,9 @@ func runPortableRemoval(game, remove string, yes, graphical bool) error {
 		componentRosters: report.Rosters != statusAbsent,
 		componentSeason:  report.Season != statusAbsent,
 		componentLive:    report.Live != statusAbsent,
+		componentCrests:  report.Crests != "" && report.Crests != statusAbsent,
 	}
-	target := TargetState{Rosters: installed[componentRosters], Season: installed[componentSeason], Live: installed[componentLive]}
+	target := TargetState{Rosters: installed[componentRosters], Season: installed[componentSeason], Live: installed[componentLive], Crests: installed[componentCrests]}
 	for _, name := range strings.Split(remove, ",") {
 		switch strings.TrimSpace(strings.ToLower(name)) {
 		case "all":
@@ -290,8 +291,10 @@ func runPortableRemoval(game, remove string, yes, graphical bool) error {
 			target.Season = false
 		case componentLive:
 			target.Live = false
+		case componentCrests:
+			target.Crests = false
 		default:
-			return fmt.Errorf("componente desconhecido em --remove: %s (use rosters, season, live ou all)", name)
+			return fmt.Errorf("componente desconhecido em --remove: %s (use rosters, season, live, crests ou all)", name)
 		}
 	}
 	question := "Remover os componentes escolhidos? Um backup dos arquivos alterados será criado. Suas carreiras salvas continuam abrindo com ou sem o patch.\nPasta: " + resolved

@@ -15,6 +15,7 @@ import (
 const (
 	componentRosters = "rosters"
 	componentSeason  = "season"
+	componentCrests  = "crests"
 	variantOriginal  = "original"
 	variantSeason    = "season"
 	variantLive      = "live"
@@ -25,6 +26,7 @@ type TargetState struct {
 	Rosters bool `json:"rosters"`
 	Season  bool `json:"season"`
 	Live    bool `json:"live"`
+	Crests  bool `json:"crests"`
 }
 
 type ComponentReport struct {
@@ -32,6 +34,10 @@ type ComponentReport struct {
 	Rosters         string          `json:"rosters"`
 	Season          string          `json:"season"`
 	Live            string          `json:"live"`
+	Crests          string          `json:"crests,omitempty"`
+	CrestsTotal     int             `json:"crestsTotal"`
+	CrestsCustom    int             `json:"crestsCustom"`
+	CrestsClubs     int             `json:"crestsClubs"`
 	Removable       map[string]bool `json:"removable"`
 	Missing         map[string]int  `json:"missingOriginals"`
 	OriginalsTotal  int             `json:"originalsTotal"`
@@ -59,6 +65,9 @@ func supportsTargets(m Manifest) bool {
 }
 
 func fileComponent(f ManifestFile) string {
+	if crestName.MatchString(f.Path) {
+		return componentCrests
+	}
 	if f.Component != "" {
 		return f.Component
 	}
@@ -66,6 +75,25 @@ func fileComponent(f ManifestFile) string {
 		return componentSeason
 	}
 	return componentRosters
+}
+
+func isCrestFile(f ManifestFile) bool {
+	return fileComponent(f) == componentCrests
+}
+
+func withoutForeignCrests(m Manifest, game string) Manifest {
+	out := m
+	out.Files = nil
+	for _, f := range m.Files {
+		if isCrestFile(f) {
+			hash, err := sha(filepath.Join(game, filepath.FromSlash(f.Path)))
+			if err != nil || (hash != f.SHA256 && !contains(f.AcceptedOriginalSHA256, hash)) {
+				continue
+			}
+		}
+		out.Files = append(out.Files, f)
+	}
+	return out
 }
 
 func variantFor(target TargetState) string {
@@ -232,7 +260,8 @@ func componentReport(m Manifest, game string) ComponentReport {
 	seasonFeature := contains(m.Components.SeasonExecutableSHA256, exeHash) || exeHash == variants[variantFull].SHA256 || exeHash == variants[variantSeason].SHA256
 	liveFeature := contains(m.Components.LiveExecutableSHA256, exeHash) || exeHash == variants[variantFull].SHA256 || exeHash == variants[variantLive].SHA256
 	exeCurrent := exeHash == variants[variantFull].SHA256 || exeHash == variants[variantSeason].SHA256 || exeHash == variants[variantLive].SHA256
-	counts := map[string]map[string]int{componentRosters: {}, componentSeason: {}}
+	counts := map[string]map[string]int{componentRosters: {}, componentSeason: {}, componentCrests: {}}
+	crestClubs := map[string]bool{}
 	for _, f := range m.Files {
 		if f.Path == gameExecutablePath {
 			continue
@@ -247,6 +276,16 @@ func componentReport(m Manifest, game string) ComponentReport {
 			state = "vanilla"
 		case err == nil && hash == f.VanillaSHA256:
 			state = "vanilla"
+		}
+		if component == componentCrests {
+			if state == "other" {
+				if err != nil || !contains(f.AcceptedOriginalSHA256, hash) {
+					report.CrestsCustom++
+					continue
+				}
+				state = "outdated"
+			}
+			crestClubs[strings.ToLower(filepath.Base(f.Path))] = true
 		}
 		counts[component][state]++
 		counts[component]["total"]++
@@ -290,6 +329,20 @@ func componentReport(m Manifest, game string) ComponentReport {
 	default:
 		report.Live = statusAbsent
 	}
+	crests := counts[componentCrests]
+	report.CrestsTotal = crests["total"]
+	report.CrestsClubs = len(crestClubs)
+	if report.CrestsTotal > 0 {
+		switch {
+		case crests["current"] == crests["total"]:
+			report.Crests = statusCurrent
+		case crests["vanilla"] == crests["total"]:
+			report.Crests = statusAbsent
+		default:
+			report.Crests = statusOutdated
+		}
+		report.Removable[componentCrests] = report.Crests != statusAbsent && report.Missing[componentCrests] == 0
+	}
 	report.Removable[componentRosters] = report.Rosters != statusAbsent && report.Missing[componentRosters] == 0
 	report.Removable[componentSeason] = report.Season != statusAbsent && report.Missing[componentSeason] == 0
 	report.Removable[componentLive] = report.Live != statusAbsent
@@ -308,8 +361,15 @@ func targetManifest(m Manifest, game string, target TargetState) (Manifest, []st
 		if fileComponent(f) == componentSeason {
 			want = target.Season
 		}
+		crest := isCrestFile(f)
+		if crest {
+			want = target.Crests
+		}
 		path := filepath.Join(game, filepath.FromSlash(f.Path))
 		hash, err := sha(path)
+		if crest && (err != nil || (hash != f.SHA256 && hash != f.VanillaSHA256 && !contains(f.AcceptedOriginalSHA256, hash))) {
+			continue
+		}
 		if want {
 			if err == nil && hash == f.SHA256 {
 				continue
@@ -334,6 +394,9 @@ func targetManifest(m Manifest, game string, target TargetState) (Manifest, []st
 			return Manifest{}, nil, &UnknownOriginalError{Relative: f.Path, Actual: hash, Accepted: f.AcceptedOriginalSHA256}
 		}
 		source, ok := storedOriginal(f.VanillaSHA256)
+		if !ok && crest {
+			continue
+		}
 		if !ok {
 			return Manifest{}, nil, fmt.Errorf("cópia original indisponível neste computador: %s", f.Path)
 		}

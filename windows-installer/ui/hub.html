@@ -93,7 +93,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 .pulse:after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--danger);animation:pulse 1.8s var(--ease) infinite}
 .engine{margin-top:2px;padding:12px 14px;border-radius:12px;background:var(--brand-soft);color:var(--ink-2);font-size:12.5px;display:flex;gap:10px;align-items:flex-start}
 .engine svg{flex:none;color:var(--brand);margin-top:1px}
-.options{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+.options{display:grid;grid-template-columns:repeat(var(--cols,3),1fr);gap:14px;margin-bottom:18px}
 .mode-box{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:14px;border:1px solid #c9d8fb;background:var(--brand-soft);margin-bottom:16px;font-size:13px;color:var(--ink-2)}
 .mode-box svg{flex:none;color:var(--brand)}
 .mode-box div{flex:1}
@@ -117,6 +117,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 .thumb.patch div{border-radius:10px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;padding:0 10px}
 .thumb.patch strong{font-size:18px;color:var(--brand);letter-spacing:-.03em;line-height:1.1}
 .thumb.patch span{font:600 10px var(--mono);color:var(--muted)}
+.thumb.crests{grid-template-columns:repeat(2,1fr)}
 .speed{display:flex;gap:8px;align-items:flex-start;padding:9px 11px;border-radius:10px;background:var(--warn-soft);color:var(--warn);font-size:12px;line-height:1.45}
 .speed svg{flex:none;margin-top:1px}
 .speed strong{color:#7a500c}
@@ -249,6 +250,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
               <div class="status-row"><div><strong>Elencos 2026</strong><small>Jogadores atualizados nos clubes</small></div><span class="badge off" id="badge-rosters">—</span></div>
               <div class="status-row"><div><strong>Temporada 2026</strong><small>Ano 2026, Copa do Mundo, copas e divisões</small></div><span class="badge off" id="badge-season">—</span></div>
               <div class="status-row"><div><strong>Campo animado</strong><small>Partidas ao vivo na tela de jogo</small></div><span class="badge off" id="badge-live">—</span></div>
+              <div class="status-row" id="row-crests" hidden><div><strong>Escudos atualizados</strong><small>Escudos atuais dos clubes que mudaram de escudo</small></div><span class="badge off" id="badge-crests">—</span></div>
             </div>
             <div class="available" id="available"></div>
             <div class="actions">
@@ -289,6 +291,12 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
             <div class="thumb" style="background-image:url('{{PITCH}}')"></div>
             <h2>Campo animado ao vivo</h2>
             <p>Jogadores, bola e árbitro na tela de partida. Melhor na velocidade Normal.</p>
+          </button>
+          <button class="option" role="checkbox" aria-checked="true" data-option="crests" hidden>
+            <div class="option-top"><span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><span class="badge off" id="opt-crests">—</span></div>
+            <div class="thumb patch crests"><div><strong id="crest-count">—</strong><span>ESCUDOS</span></div><div><strong>2026</strong><span>ATUAIS</span></div></div>
+            <h2>Escudos atualizados</h2>
+            <p>Troca os escudos antigos pelos atuais. Escudo que você mudou por conta própria fica como está.</p>
           </button>
         </div>
         <div class="note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg><span id="install-note">Antes de mudar qualquer arquivo, guardamos um backup. Seus saves não são alterados e continuam abrindo com ou sem o patch.</span></div>
@@ -344,9 +352,12 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 <script>
 (() => {
   const $ = id => document.getElementById(id);
-  const state = {info: null, game: null, feed: {loading: true}, feedPercent: null, mode: 'install', custom: false, selection: {rosters: true, season: true, live: true}, busy: false};
-  const COMPONENTS = ['rosters', 'season', 'live'];
-  const names = {rosters: 'os Elencos 2026', season: 'a Temporada 2026', live: 'o campo animado'};
+  const state = {info: null, game: null, feed: {loading: true}, feedPercent: null, mode: 'install', custom: false, selection: {rosters: true, season: true, live: true, crests: true}, busy: false};
+  const ALL_COMPONENTS = ['rosters', 'season', 'live', 'crests'];
+  const offered = name => name !== 'crests' || (targets() && components().crestsTotal > 0);
+  const activeComponents = () => ALL_COMPONENTS.filter(offered);
+  const names = {rosters: 'os Elencos 2026', season: 'a Temporada 2026', live: 'o campo animado', crests: 'os escudos atualizados'};
+  const labels = {rosters: 'Elencos 2026', season: 'Temporada 2026', live: 'Campo animado', crests: 'Escudos atualizados'};
   const icons = {
     ok: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>',
     error: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 8v5m0 4h.01"/><circle cx="12" cy="12" r="9"/></svg>',
@@ -421,18 +432,18 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
     const game = state.game;
     if (!game?.valid) return 'absent';
     let value = components()[name];
-    if (!targets()) value = name === 'live' ? game.live : game.patch;
+    if (!targets()) value = name === 'live' ? game.live : name === 'crests' ? 'absent' : game.patch;
     if (value === true) return 'current';
     if (value === 'unknown') return 'unknown';
     return value === 'current' || value === 'outdated' ? value : 'absent';
   }
   function installed(name) { const status = statusOf(name); return status === 'current' || status === 'outdated'; }
-  function anyStatus(status) { return COMPONENTS.some(name => statusOf(name) === status); }
+  function anyStatus(status) { return activeComponents().some(name => statusOf(name) === status); }
   function removable(name) { return installed(name) && (!targets() || components().removable?.[name] !== false); }
   function openMode(mode) {
     state.mode = mode;
     state.custom = false;
-    state.selection = {rosters: mode === 'install', season: mode === 'install', live: mode === 'install'};
+    state.selection = {rosters: mode === 'install', season: mode === 'install', live: mode === 'install', crests: mode === 'install'};
     show('install');
     document.querySelectorAll('.nav[data-view]').forEach(item => {
       const current = mode === 'remove' ? item.dataset.view === 'remove' : item.dataset.view === 'install';
@@ -450,7 +461,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
   }
   function targetState() {
     const target = {};
-    for (const name of COMPONENTS) target[name] = state.mode === 'remove' ? installed(name) && !included(name) : installed(name) || included(name);
+    for (const name of ALL_COMPONENTS) target[name] = !offered(name) ? false : state.mode === 'remove' ? installed(name) && !included(name) : installed(name) || included(name);
     if (!targets()) target.season = target.rosters;
     return target;
   }
@@ -470,10 +481,10 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
   $('go-remove').addEventListener('click', () => openMode('remove'));
   $('customize').addEventListener('click', () => {
     if (state.mode === 'remove') {
-      for (const name of COMPONENTS) state.selection[name] = removable(name);
+      for (const name of activeComponents()) state.selection[name] = removable(name);
     } else {
       state.custom = !state.custom;
-      for (const name of COMPONENTS) state.selection[name] = !state.custom;
+      for (const name of activeComponents()) state.selection[name] = !state.custom;
     }
     render();
   });
@@ -586,7 +597,11 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
     const valid = !!game?.valid;
     $('game-path').textContent = game?.game || 'Nenhuma pasta selecionada';
     $('choose').textContent = game?.game ? 'Alterar' : 'Escolher pasta';
-    for (const name of COMPONENTS) {
+    $('row-crests').hidden = !offered('crests');
+    document.querySelector('.option[data-option="crests"]').hidden = !offered('crests');
+    $('options').style.setProperty('--cols', activeComponents().length);
+    $('crest-count').textContent = components().crestsClubs || '—';
+    for (const name of activeComponents()) {
       const [text, tone] = homeBadges[statusOf(name)];
       setBadge('badge-' + name, text, tone);
       const [optionText, optionTone] = optionBadge(name);
@@ -607,7 +622,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
     $('go-update').disabled = !valid || state.busy || !outdated || !ready;
     $('go-update').classList.toggle('ready', outdated && !state.busy);
     $('update-pip').hidden = !outdated;
-    const anyInstalled = valid && COMPONENTS.some(installed);
+    const anyInstalled = valid && activeComponents().some(installed);
     $('go-remove').disabled = !valid || state.busy || !anyInstalled || !ready;
     document.querySelector('.nav[data-view="remove"]').disabled = !valid || state.busy;
     const update = state.mode === 'update';
@@ -617,7 +632,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
     $('mode-lead').textContent = remove ? 'Marque o que quer tirar do seu Brasfoot. O resto continua como está.' : update ? 'O que você já tem será atualizado. Se quiser, adicione também o que ainda não está instalado.' : 'Escolha o que quer no seu Brasfoot.';
     $('auto-box').classList.toggle('remove', remove);
     $('auto-title').textContent = remove ? 'Seus saves continuam valendo' : state.custom ? 'Instalação personalizada' : 'Instalação automática (recomendada)';
-    const summary = COMPONENTS.filter(included).map(name => ({rosters: 'Elencos 2026', season: 'Temporada 2026', live: 'Campo animado'})[name]).join(', ');
+    const summary = activeComponents().filter(included).map(name => labels[name]).join(', ');
     $('auto-text').textContent = remove ? 'As carreiras salvas abrem com ou sem o patch, com todo o progresso.' : state.custom ? 'Marque só o que quiser. O que você já tem continua instalado.' : summary ? (update ? 'Será atualizado: ' : 'Será instalado: ') + summary + '.' : 'Tudo já está instalado e em dia.';
     $('customize').textContent = remove ? 'Remover tudo' : state.custom ? 'Voltar ao automático' : 'Escolher o que instalar';
     $('customize').hidden = update;
@@ -633,7 +648,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
       option.classList.toggle('locked', !remove && status === 'outdated');
       option.setAttribute('aria-checked', String(included(name)));
     });
-    const chosen = COMPONENTS.filter(included);
+    const chosen = activeComponents().filter(included);
     const button = $('install');
     button.textContent = remove ? 'Remover' : update ? 'Atualizar' : 'Instalar';
     button.disabled = !valid || state.busy || chosen.length === 0 || !ready;
@@ -641,13 +656,13 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
     if (!valid) hint = 'Escolha a pasta do Brasfoot no Início.';
     else if (!ready) hint = state.feed?.loading ? 'Buscando a versão mais recente…' : 'Conecte-se à internet para baixar o patch.';
     else if (remove && !anyInstalled) hint = 'Nada do patch está instalado.';
-    else if (remove && COMPONENTS.some(name => installed(name) && !removable(name))) hint = 'Para remover os elencos, indique uma instalação original do Brasfoot em Configurações.';
+    else if (remove && activeComponents().some(name => installed(name) && !removable(name))) hint = 'Para remover ' + activeComponents().filter(name => installed(name) && !removable(name)).map(name => names[name]).join(' e ') + ', indique uma instalação original do Brasfoot em Configurações.';
     else if (remove && chosen.length === 0) hint = 'Marque o que quer remover.';
     else if (update && !outdated) hint = 'Você já está na versão mais recente.';
     else if (!remove && !update && !absent) hint = outdated ? 'Tudo já está instalado. Use Atualizar para ir à nova versão.' : 'Tudo já está instalado.';
     else if (chosen.length === 0) hint = 'Marque ao menos uma opção.';
     $('install-hint').textContent = hint;
-    $('open-settings').hidden = !(remove && targets() && COMPONENTS.some(name => installed(name) && !removable(name)));
+    $('open-settings').hidden = !(remove && targets() && activeComponents().some(name => installed(name) && !removable(name)));
     renderSettings();
     $('backup-create').disabled = !valid || state.busy;
   }
@@ -668,7 +683,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
   $('choose').addEventListener('click', () => call('hubChooseGame'));
   $('play').addEventListener('click', () => call('hubLaunchGame').then(() => toast('Abrindo o Brasfoot. Bom jogo!')).catch(error => toast(error.message || error)));
   $('install').addEventListener('click', () => {
-    const chosen = COMPONENTS.filter(included);
+    const chosen = activeComponents().filter(included);
     if (state.mode === 'remove') {
       const list = chosen.map(name => names[name]).join(', ').replace(/, ([^,]*)$/, ' e $1');
       modal('restore', '<h3>Remover ' + escape(list) + '?</h3><p>Feche o Brasfoot antes de continuar. Antes de mudar qualquer arquivo, guardamos um backup dos arquivos alterados.</p><p>Suas carreiras salvas não mudam: elas continuam abrindo com ou sem o patch, com todo o progresso.</p>', [
