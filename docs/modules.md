@@ -165,7 +165,7 @@ Produz o bundle de release a partir de cópias privadas e licenciadas.
 - **Saída:** `manifest.json` (`schemaVersion=4`, `kind=BRASFOOT_RELEASE_PATCH`, `channel=stable`) e `patches/<arquivo>.json`, com uma variante por origem reconhecida.
 - **Restrições:**
   - recusa a receita do executável se os bytes literais passarem de 30% do alvo;
-  - variantes legadas do bundle herdado são encadeadas (`schemaVersion: 3`, campo `steps`) até o novo alvo;
+  - variantes legadas do bundle herdado são encadeadas (`schemaVersion: 3`, campo `steps`) até o novo alvo; cadeias com mais de 8 passos têm passos consecutivos compostos por `tools/recipe_chain.py`;
   - variantes cuja origem já é o próprio alvo são descartadas.
 
 ### `tools/build_component_bundle.py`
@@ -188,7 +188,7 @@ Grava `patches/bf22-23.exe.patch.json`, `patches/bf22-23.exe.live.json` e a seç
 
 ### `tools/build_live_match_preview_bundle.py`
 
-Gera bundles de prévia do campo animado: herda um bundle, acrescenta a ponte do executável publicado para o executável de prévia e encadeia as variantes antigas (até 8 etapas).
+Gera bundles de prévia do campo animado: herda um bundle, acrescenta a ponte do executável publicado para o executável de prévia e encadeia as variantes antigas (até 8 etapas, compondo passos consecutivos com `tools/recipe_chain.py` quando necessário).
 
 | Opção | Padrão |
 |---|---|

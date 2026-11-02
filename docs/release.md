@@ -19,6 +19,8 @@ Os usuários não precisam baixar cada release: o hub instalado lê o `release.j
      --executable <bf22-23.exe-final> --previous <base-anterior> --inherit-bundle <bundle-anterior> --output <bundle>
    ```
 
+   As versões anteriores chegam ao executável novo por cadeias de receitas. O hub aceita no máximo 8 passos por cadeia; quando uma cadeia passaria disso, as ferramentas juntam passos consecutivos ([`tools/recipe_chain.py`](../tools/recipe_chain.py)), sem precisar dos executáveis intermediários.
+
 2. **Componentes.** Acrescente as variantes do executável para instalação seletiva (Patch 2026, campo animado ou os dois):
 
    ```bash

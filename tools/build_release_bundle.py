@@ -12,6 +12,7 @@ from pathlib import Path
 import zipfile
 
 from tools.build_inplace_bundle import match_ops
+from tools.recipe_chain import fit_chain
 
 
 def sha(data):
@@ -129,7 +130,7 @@ def build(original, base, previous, teams, executable, destination, version, inh
                             'targetSha256': bridge['targetSha256'],
                             'originalSize': legacy['originalSize'],
                             'targetSize': bridge['targetSize'],
-                            'steps': flatten_steps(legacy) + flatten_steps(bridge)})
+                            'steps': fit_chain(flatten_steps(legacy) + flatten_steps(bridge))})
                         existing.add(legacy['originalSha256'])
         recipe = {'schemaVersion': 2, 'path': relative, 'variants': variants}
         (recipes / (source.name + '.json')).write_text(
