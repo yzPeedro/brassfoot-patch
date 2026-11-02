@@ -1,7 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-02T14:30:00-03:00",
+  "updatedAt": "2026-11-02T19:30:00-03:00",
   "entries": [
+    {
+      "id": "patch-2026-5-11",
+      "version": "2026.5.11",
+      "date": "2026-11-02T19:30:00-03:00",
+      "title": "Dois jogadores e 16 idades atualizados",
+      "kind": "patch",
+      "summary": "Fernando Costa entra no RB Bragantino, Freddie Lantz no IFK Göteborg e 16 jogadores recebem a idade atual.",
+      "changes": [
+        "Fernando Costa no elenco do RB Bragantino.",
+        "Freddie Lantz no elenco do IFK Göteborg.",
+        "16 idades recalculadas com as datas de nascimento já confirmadas.",
+        "Retiradas sem confirmação foram descartadas e os últimos dados confiáveis foram preservados."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.5.11"
+    },
     {
       "id": "patch-2026-5-10",
       "version": "2026.5.10",
