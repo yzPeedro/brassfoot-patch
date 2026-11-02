@@ -10,6 +10,7 @@ import (
 type HubSettings struct {
 	Theme             string `json:"theme"`
 	Notify            bool   `json:"notify"`
+	OriginalFolder    string `json:"originalFolder,omitempty"`
 	LastSeenPatch     string `json:"lastSeenPatch,omitempty"`
 	LastSeenHub       string `json:"lastSeenHub,omitempty"`
 	LastNotifiedPatch string `json:"lastNotifiedPatch,omitempty"`

@@ -290,7 +290,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
           <div class="card setting-card wide">
             <h2>Seu Brasfoot</h2>
             <div class="setting-row"><div><strong>Pasta do jogo</strong><small class="path" id="set-game">—</small></div><button class="btn ghost" id="set-choose">Alterar</button></div>
-            <div class="setting-row"><div><strong>Instalação original</strong><small id="set-originals">—</small></div><button class="btn ghost" id="set-import">Indicar pasta original</button></div>
+            <div class="setting-row"><div><strong>Instalação original</strong><small class="path" id="set-original-path" hidden></small><small id="set-originals">—</small></div><button class="btn ghost" id="set-import">Indicar pasta original</button></div>
           </div>
           <div class="card setting-card">
             <h2>Aparência</h2>
@@ -675,6 +675,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
   function applyTheme(theme) {
     const dark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
     document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+    call('hubSetFrameTheme', dark).catch(() => {});
   }
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => applyTheme(state.settings?.theme || 'system'));
   function renderSettings() {
@@ -687,6 +688,9 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
     else if (comps.originalsTotal && comps.originalsStored >= comps.originalsTotal) $('set-originals').textContent = 'Cópias originais completas (' + comps.originalsStored + ' de ' + comps.originalsTotal + '). Dá para remover qualquer parte do patch.';
     else $('set-originals').textContent = 'Faltam cópias originais (' + (comps.originalsStored || 0) + ' de ' + (comps.originalsTotal || 0) + '). Para poder remover os elencos, escolha uma pasta do Brasfoot sem patch; só os arquivos idênticos aos originais são copiados.';
     $('set-import').disabled = state.busy || !targets();
+    $('set-original-path').textContent = settings.originalFolder || '';
+    $('set-original-path').hidden = !settings.originalFolder;
+    $('set-import').textContent = settings.originalFolder ? 'Alterar' : 'Indicar pasta original';
     document.querySelectorAll('[data-theme-option]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.themeOption === settings.theme)));
     $('set-notify').setAttribute('aria-checked', String(!!settings.notify));
     const feed = state.feed || {};
@@ -756,6 +760,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 
   window.hubEvent = event => {
     if (event.type === 'state') { state.game = event.state; render(); return; }
+    if (event.type === 'settings') { state.settings = event.settings; renderSettings(); return; }
     if (event.type === 'feed') { state.feed = event.feed; state.feedPercent = null; render(); return; }
     if (event.type === 'feed-progress') { state.feedPercent = event.percent; renderBanners(); return; }
     if (event.type === 'toast') { toast(event.message); return; }

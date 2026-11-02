@@ -256,6 +256,19 @@ func hubSetSetting(key string, value any) (HubSettings, error) {
 	return settings, saveSettings(settings)
 }
 
+func hubSetFrameTheme(dark bool) {
+	if hubWindow == 0 || dwm.Load() != nil {
+		return
+	}
+	border := uint32(0x00f3e7e1)
+	if dark {
+		border = 0x0020120b
+	}
+	hubView.Dispatch(func() {
+		dwmSetAttribute.Call(hubWindow, dwmBorderColor, uintptr(unsafe.Pointer(&border)), 4)
+	})
+}
+
 func hubUninstallHub() error {
 	if hubIsBusy() {
 		return errors.New("Aguarde a operação em andamento terminar.")
@@ -459,11 +472,16 @@ func hubImportOriginals() {
 			return
 		}
 		go func() {
-			imported, err := importOriginalsFrom(bundledManifestFromFS(), normalizeGameSelection(path))
+			folder := normalizeGameSelection(path)
+			imported, err := importOriginalsFrom(bundledManifestFromFS(), folder)
 			if err != nil {
 				hubFail("originals", err)
 				return
 			}
+			settings := loadSettings()
+			settings.OriginalFolder = folder
+			_ = saveSettings(settings)
+			hubEmit(map[string]any{"type": "settings", "settings": settings})
 			hubEmit(map[string]any{"type": "toast", "message": fmt.Sprintf("%d arquivos originais guardados para a remoção.", imported)})
 			hubRefresh()
 		}()
@@ -706,6 +724,7 @@ func runHub() bool {
 		"hubGetSettings":     hubGetSettings,
 		"hubSetSetting":      hubSetSetting,
 		"hubUninstallHub":    hubUninstallHub,
+		"hubSetFrameTheme":   hubSetFrameTheme,
 		"hubListBackups":     hubListBackups,
 		"hubCreateBackup":    hubCreateBackup,
 		"hubRestore":         hubRestoreBackup,
