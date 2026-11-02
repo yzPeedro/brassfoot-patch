@@ -177,6 +177,12 @@ public final class LiveMatchPanel extends JPanel {
     private Color awayColor = new Color(235, 238, 242);
     private Color homeAccent = Color.WHITE;
     private Color awayAccent = new Color(30, 42, 54);
+    private Color homeStripe;
+    private Color awayStripe;
+    private Color homeKeeper = new Color(57, 255, 20);
+    private Color awayKeeper = new Color(255, 140, 0);
+    private Object kitHomeRef;
+    private Object kitAwayRef;
     private double ballX = .50;
     private double ballY = .50;
     private double ballFromX = .50;
@@ -2504,10 +2510,11 @@ public final class LiveMatchPanel extends JPanel {
                 awayName = string(invoke(awayTeam, "getNome"), awayName);
                 updateLineup(home, lineupPlayers(match, "hp", "hl", homeTeam), false);
                 updateLineup(away, lineupPlayers(match, "hq", "hm", awayTeam), true);
-                Color[] hc = kitColors(homeTeam, 1, homeColor, homeAccent);
-                Color[] ac = kitColors(awayTeam, 2, awayColor, awayAccent);
-                homeColor = hc[0]; homeAccent = hc[1];
-                awayColor = ac[0]; awayAccent = ac[1];
+                if (homeTeam != kitHomeRef || awayTeam != kitAwayRef) {
+                    kitHomeRef = homeTeam;
+                    kitAwayRef = awayTeam;
+                    chooseKits(homeTeam, awayTeam);
+                }
                 int observedMinute = integer(readField(host, "GT"), 0);
                 int observedHalf = integer(readField(host, "dB"), 1);
                 if (engineStateInitialized && engineHalf == 1 && observedHalf == 2) {
@@ -3912,8 +3919,8 @@ public final class LiveMatchPanel extends JPanel {
         drawPenaltyArea(g, left, top, fieldW, fieldH, false);
         drawPenaltyArea(g, left, top, fieldW, fieldH, true);
         long now = clockNow();
-        drawTeam(g, home, homeColor, homeAccent, left, top, fieldW, fieldH, now);
-        drawTeam(g, away, awayColor, awayAccent, left, top, fieldW, fieldH, now);
+        drawTeam(g, home, homeColor, homeAccent, homeStripe, homeKeeper, left, top, fieldW, fieldH, now);
+        drawTeam(g, away, awayColor, awayAccent, awayStripe, awayKeeper, left, top, fieldW, fieldH, now);
         if (homeTeamRef != null) {
             if (refereeKit == null) refereeKit = mostDistinct(REFEREE_KITS, 0);
             if (ballAccent == null) ballAccent = mostDistinct(BALL_ACCENTS, ballStyle);
@@ -4291,7 +4298,7 @@ public final class LiveMatchPanel extends JPanel {
         g.drawRect(goalX, top + height / 2 - height / 10, 8, height / 5);
     }
 
-    private void drawTeam(Graphics2D g, Dot[] team, Color fill, Color accent,
+    private void drawTeam(Graphics2D g, Dot[] team, Color kitFill, Color kitAccent, Color stripe, Color keeper,
                           int left, int top, int width, int height, long now) {
         g.setFont(NAME_FONT);
         FontMetrics metrics = g.getFontMetrics();
@@ -4307,10 +4314,19 @@ public final class LiveMatchPanel extends JPanel {
                 if (age < 450) fade = (int) Math.max(20, 255 * age / 450);
                 else dot.fadeStart = 0;
             }
+            Color fill = i == 0 ? keeper : kitFill;
+            Color accent = i == 0 ? contrastRing(keeper) : kitAccent;
             g.setColor(SHADOW);
             if (!dot.entering && fade == 255) g.fillOval(x - 9, y - 7, 20, 20);
             g.setColor(new Color(fill.getRed(), fill.getGreen(), fill.getBlue(), fade));
             g.fillOval(x - 10, y - 10, 20, 20);
+            if (i != 0 && stripe != null) {
+                java.awt.Shape clip = g.getClip();
+                g.clip(new java.awt.geom.Ellipse2D.Double(x - 10, y - 10, 20, 20));
+                g.setColor(new Color(stripe.getRed(), stripe.getGreen(), stripe.getBlue(), fade));
+                for (int sx = x - 9; sx < x + 10; sx += 6) g.fillRect(sx, y - 10, 3, 20);
+                g.setClip(clip);
+            }
             g.setColor(new Color(255, 255, 255, dot.entering ? 35 : 70));
             g.fillOval(x - 7, y - 8, 9, 6);
             g.setColor(new Color(accent.getRed(), accent.getGreen(), accent.getBlue(), fade));
@@ -4410,61 +4426,210 @@ public final class LiveMatchPanel extends JPanel {
         }
     }
 
-    private Color[] teamColors(Object team, Color fallback, Color fallbackAccent) {
-        Color primary = parseColor(readField(team, "cor1"), fallback);
-        Color accent = parseColor(readField(team, "cor2"), fallbackAccent);
-        return new Color[] { primary, accent };
+    private static final Color PITCH_GREEN = new Color(46, 125, 50);
+    private static final Color KIT_DARK = new Color(18, 24, 31);
+    private static final Color[] KEEPER_PALETTE = {
+        new Color(57, 255, 20), new Color(255, 140, 0), new Color(214, 38, 160), new Color(0, 200, 230),
+        new Color(250, 225, 0), new Color(28, 28, 28), new Color(124, 64, 214), new Color(255, 92, 92)
+    };
+    private static final double KIT_CLASH = 42;
+
+    private void chooseKits(Object homeTeam, Object awayTeam) {
+        Color[] homeKit = kitOptions(homeTeam).get(0);
+        Color[] awayKit = null;
+        double bestGap = -1;
+        for (Color[] option : kitOptions(awayTeam)) {
+            double gap = kitGap(homeKit, option);
+            if (gap >= KIT_CLASH) {
+                awayKit = option;
+                break;
+            }
+            if (gap > bestGap) {
+                bestGap = gap;
+                awayKit = option;
+            }
+        }
+        homeColor = homeKit[0];
+        homeStripe = homeKit[2];
+        homeAccent = kitRing(homeKit);
+        awayColor = awayKit[0];
+        awayStripe = awayKit[2];
+        awayAccent = kitRing(awayKit);
+        homeKeeper = keeperColor(homeKit, awayKit, null);
+        awayKeeper = keeperColor(homeKit, awayKit, homeKeeper);
     }
 
-    private Color[] kitColors(Object team, int kit, Color fallback, Color fallbackAccent) {
-        Object value = invokeInt(team, "bU", kit);
-        if (!(value instanceof ImageIcon)) return vivid(teamColors(team, fallback, fallbackAccent));
-        ImageIcon icon = (ImageIcon) value;
-        if (icon.getIconWidth() <= 0 || icon.getIconHeight() <= 0) {
-            return vivid(teamColors(team, fallback, fallbackAccent));
+    private List<Color[]> kitOptions(Object team) {
+        List<Color[]> options = new ArrayList<Color[]>();
+        Color primary = parseColor(readField(team, "cor1"), null);
+        Color secondary = parseColor(readField(team, "cor2"), null);
+        for (int kit = 1; kit <= 3; kit++) {
+            Object value = invokeInt(team, "bU", kit);
+            Color[] sampled = value instanceof ImageIcon ? sampleKit((ImageIcon) value) : null;
+            if (sampled != null) options.add(anchorKit(sampled, primary, secondary));
         }
-        BufferedImage sample = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D graphics = sample.createGraphics();
-        graphics.drawImage(icon.getImage(), 0, 0, 32, 32, null);
+        if (primary != null) options.add(new Color[] { polish(primary), secondary == null ? null : polish(secondary), null });
+        if (secondary != null) options.add(new Color[] { polish(secondary), primary == null ? null : polish(primary), null });
+        if (options.isEmpty()) options.add(new Color[] { new Color(43, 137, 214), Color.WHITE, null });
+        return options;
+    }
+
+    private Color[] sampleKit(ImageIcon icon) {
+        int width = icon.getIconWidth(), height = icon.getIconHeight();
+        if (width <= 0 || height <= 0) return null;
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D graphics = image.createGraphics();
+        graphics.drawImage(icon.getImage(), 0, 0, null);
         graphics.dispose();
         int[] counts = new int[512];
         long[] sums = new long[512 * 3];
-        for (int y = 0; y < 32; y++) {
-            for (int x = 0; x < 32; x++) {
-                int pixel = sample.getRGB(x, y);
-                if ((pixel >>> 24) < 120) continue;
+        int total = 0;
+        for (int y = (int) (height * .30); y < (int) (height * .88); y++) {
+            for (int x = (int) (width * .28); x < (int) (width * .72); x++) {
+                int pixel = image.getRGB(x, y);
+                if ((pixel >>> 24) < 200) continue;
                 int r = (pixel >> 16) & 255, gr = (pixel >> 8) & 255, b = pixel & 255;
                 int bucket = (r >> 5) << 6 | (gr >> 5) << 3 | (b >> 5);
                 counts[bucket]++;
                 sums[bucket * 3] += r;
                 sums[bucket * 3 + 1] += gr;
                 sums[bucket * 3 + 2] += b;
+                total++;
             }
         }
-        int best = -1;
-        for (int i = 0; i < counts.length; i++) if (counts[i] > 0 && (best < 0 || counts[i] > counts[best])) best = i;
-        if (best < 0) return vivid(teamColors(team, fallback, fallbackAccent));
-        Color primary = new Color((int) (sums[best * 3] / counts[best]), (int) (sums[best * 3 + 1] / counts[best]),
-                (int) (sums[best * 3 + 2] / counts[best]));
-        return vivid(new Color[] { primary, Color.WHITE });
+        if (total < 20) return null;
+        Integer[] order = new Integer[512];
+        for (int i = 0; i < 512; i++) order[i] = Integer.valueOf(i);
+        final int[] weights = counts;
+        java.util.Arrays.sort(order, new Comparator<Integer>() {
+            @Override public int compare(Integer a, Integer b) { return weights[b.intValue()] - weights[a.intValue()]; }
+        });
+        int first = order[0].intValue();
+        Color primary = bucketColor(sums, counts, first);
+        int primaryCount = counts[first];
+        Color second = null;
+        int secondCount = 0;
+        for (int i = 1; i < 512 && counts[order[i].intValue()] > 0; i++) {
+            int bucket = order[i].intValue();
+            Color candidate = bucketColor(sums, counts, bucket);
+            if (colorGap(candidate, primary) < 70) {
+                primaryCount += counts[bucket];
+                continue;
+            }
+            if (second == null) {
+                second = candidate;
+                secondCount = counts[bucket];
+            } else if (colorGap(candidate, second) < 70) {
+                secondCount += counts[bucket];
+            }
+        }
+        boolean striped = second != null && secondCount >= total * .25 && primaryCount >= total * .25;
+        boolean detail = second != null && secondCount >= total * .06;
+        return new Color[] { polish(primary), detail ? polish(second) : null, striped ? polish(second) : null };
     }
 
-    private Color[] vivid(Color[] colors) {
-        float[] hsb = Color.RGBtoHSB(colors[0].getRed(), colors[0].getGreen(), colors[0].getBlue(), null);
-        float saturation = hsb[1];
-        float brightness = hsb[2];
-        if (saturation > .18f) {
-            saturation = Math.min(1f, Math.max(.72f, saturation * 1.35f));
-            brightness = Math.max(.78f, brightness);
-        } else if (brightness > .55f) {
-            brightness = Math.max(.96f, brightness);
-        } else {
-            brightness = Math.min(.22f, brightness);
+    private Color[] anchorKit(Color[] kit, Color official, Color officialSecond) {
+        Color[] result = kit.clone();
+        Color[] palette = { official, officialSecond };
+        for (int i = 0; i < 3; i += 2) {
+            if (result[i] == null) continue;
+            for (Color candidate : palette) {
+                if (candidate != null && labGap(polish(candidate), result[i]) < 28) {
+                    result[i] = polish(candidate);
+                    break;
+                }
+            }
         }
-        Color primary = Color.getHSBColor(hsb[0], saturation, brightness);
-        double luminance = primary.getRed() * .2126 + primary.getGreen() * .7152 + primary.getBlue() * .0722;
-        Color accent = luminance < 145 ? Color.WHITE : new Color(18, 24, 31);
-        return new Color[] { primary, accent };
+        if (result[2] == null) {
+            Color ring = null;
+            double best = 30;
+            for (Color candidate : palette) {
+                if (candidate == null) continue;
+                double gap = labGap(polish(candidate), result[0]);
+                if (gap > best) {
+                    best = gap;
+                    ring = polish(candidate);
+                }
+            }
+            if (ring != null) result[1] = ring;
+        }
+        return result;
+    }
+
+    private Color bucketColor(long[] sums, int[] counts, int bucket) {
+        return new Color((int) (sums[bucket * 3] / counts[bucket]), (int) (sums[bucket * 3 + 1] / counts[bucket]),
+                (int) (sums[bucket * 3 + 2] / counts[bucket]));
+    }
+
+    private Color polish(Color color) {
+        float[] hsb = Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), null);
+        float saturation = hsb[1], brightness = hsb[2];
+        if (saturation > .25f) {
+            saturation = Math.min(1f, saturation * 1.12f);
+            brightness = Math.max(.50f, brightness);
+        } else if (brightness >= .45f) {
+            brightness = Math.max(.95f, brightness);
+            saturation = Math.min(saturation, .06f);
+        } else {
+            brightness = Math.min(.16f, brightness);
+        }
+        return Color.getHSBColor(hsb[0], saturation, brightness);
+    }
+
+    private double kitGap(Color[] a, Color[] b) {
+        double gap = labGap(a[0], b[0]);
+        if (a[2] != null) gap = Math.min(gap, (labGap(a[0], b[0]) + labGap(a[2], b[0])) / 2);
+        if (b[2] != null) gap = Math.min(gap, (labGap(a[0], b[0]) + labGap(a[0], b[2])) / 2);
+        return gap;
+    }
+
+    private double[] lab(Color color) {
+        double[] rgb = { color.getRed() / 255.0, color.getGreen() / 255.0, color.getBlue() / 255.0 };
+        for (int i = 0; i < 3; i++) rgb[i] = rgb[i] > .04045 ? Math.pow((rgb[i] + .055) / 1.055, 2.4) : rgb[i] / 12.92;
+        double x = (rgb[0] * .4124 + rgb[1] * .3576 + rgb[2] * .1805) / .95047;
+        double y = rgb[0] * .2126 + rgb[1] * .7152 + rgb[2] * .0722;
+        double z = (rgb[0] * .0193 + rgb[1] * .1192 + rgb[2] * .9505) / 1.08883;
+        double fx = x > .008856 ? Math.cbrt(x) : 7.787 * x + 16 / 116.0;
+        double fy = y > .008856 ? Math.cbrt(y) : 7.787 * y + 16 / 116.0;
+        double fz = z > .008856 ? Math.cbrt(z) : 7.787 * z + 16 / 116.0;
+        return new double[] { 116 * fy - 16, 500 * (fx - fy), 200 * (fy - fz) };
+    }
+
+    private double labGap(Color a, Color b) {
+        double[] p = lab(a), q = lab(b);
+        double dl = p[0] - q[0], da = p[1] - q[1], db = p[2] - q[2];
+        return Math.sqrt(dl * dl + da * da + db * db);
+    }
+
+    private double luminance(Color color) {
+        return color.getRed() * .2126 + color.getGreen() * .7152 + color.getBlue() * .0722;
+    }
+
+    private Color contrastRing(Color fill) {
+        return luminance(fill) < 140 ? Color.WHITE : KIT_DARK;
+    }
+
+    private Color kitRing(Color[] kit) {
+        if (kit[2] != null) return luminance(kit[0]) + luminance(kit[2]) < 200 ? Color.WHITE : KIT_DARK;
+        Color ring = kit[1];
+        if (ring == null || labGap(ring, kit[0]) < 30 || labGap(ring, PITCH_GREEN) < 30) ring = contrastRing(kit[0]);
+        return ring;
+    }
+
+    private Color keeperColor(Color[] homeKit, Color[] awayKit, Color other) {
+        Color best = KEEPER_PALETTE[0];
+        double bestScore = -1;
+        for (Color candidate : KEEPER_PALETTE) {
+            double score = Math.min(kitGap(homeKit, new Color[] { candidate, null, null }),
+                    kitGap(awayKit, new Color[] { candidate, null, null }));
+            score = Math.min(score, labGap(candidate, PITCH_GREEN) * 1.4);
+            if (other != null) score = Math.min(score, labGap(candidate, other));
+            if (score > bestScore) {
+                bestScore = score;
+                best = candidate;
+            }
+        }
+        return best;
     }
 
     private Color parseColor(Object value, Color fallback) {
