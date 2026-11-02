@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timedelta, timezone
 import json
 
-from tools.world.common import CATALOG, Raw, read_json
+from tools.world.common import CATALOG, Raw, load_raw, read_json
 from tools.world.fetch import Client, Failed, Refused
 from tools.world.scores365 import url
 
@@ -48,8 +49,19 @@ def collect(refresh: bool = False, max_age_hours: float | None = None) -> dict:
     raw = Raw("365squads")
     client = Client("365squads", refresh=refresh, max_age_hours=max_age_hours)
     wanted = targets()
-    batches = [wanted[i:i + BATCH] for i in range(0, len(wanted), BATCH)]
-    countries: dict[int, str] = {}
+    previous = load_raw("365squads") or {}
+    limit = timedelta(hours=client.max_age / 3600)
+    kept, countries = {}, {}
+    if not refresh:
+        for c in (previous.get("data") or {}).get("countries", []):
+            countries[c["id"]] = c.get("name")
+        for squad in (previous.get("data") or {}).get("squads", []):
+            seen = (previous.get("responses") or {}).get(squad["rid"], {}).get("observedAt")
+            if seen and datetime.now(timezone.utc) - datetime.fromisoformat(seen) < limit:
+                kept[squad["competitor"]] = squad
+                raw.responses[squad["rid"]] = previous["responses"][squad["rid"]]
+    missing = [ident for ident in wanted if ident not in kept]
+    batches = [missing[i:i + BATCH] for i in range(0, len(missing), BATCH)]
 
     def request(batch: list[int]) -> list[dict]:
         target = url("squads", langId=1, competitors=",".join(map(str, batch)))
@@ -73,10 +85,13 @@ def collect(refresh: bool = False, max_age_hours: float | None = None) -> dict:
 
     with ThreadPoolExecutor(max_workers=2) as pool:
         results = list(pool.map(request, batches))
-    squads = sorted((s for batch in results for s in batch), key=lambda s: s["competitor"] or 0)
+    fresh = {s["competitor"]: s for batch in results for s in batch}
+    squads = sorted((fresh.get(i) or kept[i] for i in set(wanted) & (set(fresh) | set(kept))),
+                    key=lambda s: s["competitor"] or 0)
     raw.data = {"requested": wanted, "countries": [{"id": k, "name": v} for k, v in sorted(countries.items())],
                 "squads": squads}
     path = raw.save(client.stats)
     return {"source": "365squads", "path": str(path), "stats": client.stats, "errors": len(raw.errors),
-            "requested": len(wanted), "squads": len(squads), "withPlayers": sum(1 for s in squads if s["players"]),
+            "requested": len(wanted), "fetched": len(missing), "squads": len(squads),
+            "withPlayers": sum(1 for s in squads if s["players"]),
             "players": sum(len(s["players"]) for s in squads)}

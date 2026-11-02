@@ -73,7 +73,15 @@ def collect(refresh: bool = False, max_age_hours: float | None = None) -> dict:
                   "hasStandingsGroups": info.get("hasStandingsGroups"), "tables": [], "teams": [], "rid": rid,
                   "ok": data is not None}
         teams = {}
-        for table in (data or {}).get("standings", []):
+        pages = [data]
+        stages = {t.get("stageNum") for t in (data or {}).get("standings", [])}
+        if data and info.get("currentSeasonNum") and stages and 1 not in stages:
+            first, frid = get(url("standings", langId=1, competitions=comp["id"], seasonNum=info["currentSeasonNum"],
+                                  stageNum=1), f"standings:{comp['id']}:stage1")
+            if first:
+                pages.append(first)
+                record["stage1Rid"] = frid
+        for table in (t for page in pages for t in (page or {}).get("standings", [])):
             record["tables"].append({"seasonNum": table.get("seasonNum"), "stageNum": table.get("stageNum"),
                                      "displayName": table.get("displayName"), "rows": len(table.get("rows", [])),
                                      "destinations": [d.get("name") for d in table.get("destinations", [])],

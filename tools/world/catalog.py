@@ -72,6 +72,12 @@ def unique_best(scored: list[tuple[float, str]], threshold: float, margin: float
     return None, scored[0][0], close
 
 
+def expected_teams(comp: dict) -> int | None:
+    values = [v for v in [comp.get("teamsDeclared"), *(comp.get("teamCounts") or {}).values()]
+              if isinstance(v, int) and v > 0]
+    return max(values) if values else None
+
+
 def founded_year(value) -> int | None:
     text = str(value or "")[:4]
     return int(text) if text.isdigit() else None
@@ -614,6 +620,10 @@ def build() -> dict:
         index = NameIndex((q, [n for m in club_rows[q] for n in club_names(m)]) for q in club_leagues)
         with_members = {lg for ls in club_leagues.values() for lg in ls}
         pairs = []
+        official_names = {c["id"]: [n for t in fifa_links[c["ids"]["fifa"]]["season"].get("teams", [])
+                                    for n in (t.get("name"), t.get("shortName")) if n]
+                          for c in pool if c["ids"].get("fifa") in fifa_links}
+        official_names = {cid: names for cid, names in official_names.items() if names}
         overlaps: dict[int, tuple[Counter, int, bool]] = {}
         for sc365 in comps:
             if sc365.get("competitorsType") != 1:
@@ -632,8 +642,27 @@ def build() -> dict:
             cup365 = bool(CUP_NAME.search(f"{sc365['name'] or ''} {(table or {}).get('nameEn') or ''}")
                           or NOT_LEAGUE_365.search(f"{sc365['name'] or ''} {(table or {}).get('nameEn') or ''}"))
             overlaps[sc365["id"]] = (overlap, size, cup365)
+            for cid, names_of in official_names.items():
+                if cup365 or not size:
+                    continue
+                hits = sum(1 for team in table["teams"]
+                           if best_name_score([team.get("name"), team.get("longName"), team.get("shortName")],
+                                              names_of) >= 0.85)
+                ratio = hits / size
+                if ratio >= 0.5:
+                    pairs.append((1.0 + ratio + 0.6 * label_of.get(cid, 0.0), sc365["id"], cid,
+                                  f"sobreposição com a lista da FIFA {ratio:.2f} ({hits}/{size})", "fifa"))
             for cid, hits in overlap.items():
                 ratio = hits / size
+                expected = expected_teams(competitions[cid])
+                if expected and size < 0.5 * expected:
+                    continue
+                sized = bool(expected) and 0.5 <= size / expected <= 2
+                named = bool(labels) and labels[0][1] == cid and labels[0][0] >= 0.75
+                if 0.2 <= ratio < 0.4 and not cup365 and sized and named:
+                    pairs.append((ratio + 0.6 * label_of.get(cid, 0.0), sc365["id"], cid,
+                                  f"sobreposição de times {ratio:.2f} ({hits}/{size}), nome {label_of.get(cid, 0.0):.2f}, "
+                                  f"tamanho {size}/{expected}", "overlap"))
                 if ratio >= 0.4 and not cup365:
                     pairs.append((ratio + 0.6 * label_of.get(cid, 0.0), sc365["id"], cid,
                                   f"sobreposição de times {ratio:.2f} ({hits}/{size}), nome {label_of.get(cid, 0.0):.2f}",
@@ -657,7 +686,7 @@ def build() -> dict:
             if table:
                 target["teamCounts"]["365scores"] = len(table["teams"])
                 target["scores365Season"] = table.get("season")
-            if how == "overlap" or score >= 0.6 * 0.95:
+            if how in ("overlap", "fifa") or score >= 0.6 * 0.95:
                 level365_claim(target, sc365)
         for sc365 in comps:
             sid, table = sc365["id"], s365_tables.get(sc365["id"])
@@ -1080,6 +1109,31 @@ def build() -> dict:
         if unmatched:
             comp["scores365Unmatched"] = unmatched
             comp["needsReview"].append(f"{len(unmatched)} time(s) do 365Scores sem associação única")
+
+    linked_tables = {sid for _, sid, _ in order365}
+    for sid in sorted(set(s365_tables) - linked_tables):
+        table = s365_tables[sid]
+        for team in table["teams"]:
+            if team["id"] in s365_team_target or by_p12939.get(team["id"]):
+                continue
+            iso = s365_iso.get(team.get("countryId")) or s365_iso.get(table.get("countryId"))
+            pool = country_pool.get(iso or "", set())
+            if not pool:
+                continue
+            names = [team.get("name"), team.get("longName"), team.get("shortName")]
+            hit, best, _ = unique_best(club_index.scored(names, pool), 0.92, 0.04)
+            if not hit or clubs[hit]["ids"].get("scores365"):
+                continue
+            club = clubs[hit]
+            club["ids"]["scores365"] = team["id"]
+            s365_team_target[team["id"]] = hit
+            method = f"nome no país ({best:.2f}), classificação sem liga do catálogo"
+            club["scores365Match"] = {"method": method, "score": round(best, 3), "competition": sid}
+            club["names"]["scores365"] = team.get("longName") or team.get("name")
+            ledger.lines.append({"entity": hit, "field": "scores365", "status": "chosen", "value": team["id"],
+                                 "source": "365scores", "method": method, **ledger.ref("365scores", table["rid"])})
+            if not club.get("scores365Colors") and (team.get("color") or team.get("awayColor")):
+                club["scores365Colors"] = {"home": team.get("color"), "away": team.get("awayColor")}
 
     for r in P.get("clubs", []):
         club = clubs.get(r["qid"])
