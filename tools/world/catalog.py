@@ -104,28 +104,53 @@ def squad_player(p: dict, countries: dict) -> dict:
             "positionCode": code, "flank": position_flank(role) if role else None}
 
 
-def attach_squads(clubs: dict, raw: dict, ledger) -> list[dict]:
+def wiki_player(p: dict) -> dict:
+    code = {"Goalkeeper": 0, "Midfielder": 3, "Forward": 4}.get(p.get("position"))
+    return {"sourceId": None, "name": p.get("name"), "shortName": None, "birthDate": p.get("birthDate"),
+            "nationality": p.get("nationality"), "nationalityId": None, "jersey": p.get("jerseyNum"),
+            "position": p.get("position"), "formationPosition": None, "secondaryPositions": [],
+            "positionLabel": p.get("positionLabel"), "article": p.get("article"), "positionCode": code, "flank": None}
+
+
+def attach_squads(clubs: dict, raw: dict, wiki_raw: dict, ledger) -> list[dict]:
     data = raw.get("data") or {}
     countries = {c["id"]: c.get("name") for c in data.get("countries", [])}
     by_team = {s["competitor"]: s for s in data.get("squads", []) if s.get("players")}
+    by_qid: dict[str, dict] = {}
+    for s in (wiki_raw.get("data") or {}).get("squads", []):
+        if len(s["players"]) > len(by_qid.get(s["qid"], {}).get("players", [])):
+            by_qid[s["qid"]] = s
     rows = []
     for ident in sorted(clubs):
         club = clubs[ident]
         value = club["ids"].get("scores365")
         squad = by_team.get(int(value)) if isinstance(value, (int, str)) and str(value).isdigit() else None
-        if not squad:
+        players365 = [squad_player(p, countries) for p in squad["players"]] if squad else []
+        complete365 = len(players365) >= 16 and sum(1 for p in players365 if p["positionCode"] == 0) >= 2
+        wiki = by_qid.get(club.get("wikidata") or "")
+        if wiki and not complete365 and len(wiki["players"]) > len(players365):
+            ref = ledger.ref("wikisquads", wiki["rid"])
+            ref["url"] = wiki["url"]
+            players = [wiki_player(p) for p in wiki["players"]]
+            source, method, extra = "wikipedia", f"seção de elenco ({wiki['wiki']}: {wiki['heading']})", {
+                "wiki": wiki["wiki"], "heading": wiki["heading"], "revision": wiki["revision"]}
+            year = max((int(y) for y in re.findall(r"(20\d\d)", wiki["heading"] or "")), default=None)
+            if year and year < int(TODAY[:4]):
+                club["needsReview"].append(f"elenco da Wikipedia com cabeçalho de {year}")
+        elif squad:
+            ref = ledger.ref("365squads", squad["rid"])
+            players, source, method, extra = players365, "365scores", "squads (competitor)", {
+                "scores365": squad["competitor"], "staff": squad.get("staff", [])}
+        else:
             continue
-        ref = ledger.ref("365squads", squad["rid"])
-        players = [squad_player(p, countries) for p in squad["players"]]
         keepers = sum(1 for p in players if p["positionCode"] == 0)
         unresolved = sum(1 for p in players if p["positionCode"] is None)
         club["squad"] = {"players": len(players), "goalkeepers": keepers, "unresolvedPositions": unresolved,
-                         "complete": len(players) >= 16 and keepers >= 2, "source": "365scores",
-                         "observedAt": ref.get("observedAt"), "response": squad["rid"]}
+                         "complete": len(players) >= 16 and keepers >= 2, "source": source,
+                         "observedAt": ref.get("observedAt"), "response": ref.get("response")}
         ledger.lines.append({"entity": ident, "field": "squad", "status": "chosen", "value": len(players),
-                             "source": "365scores", "method": "squads (competitor)", **ref})
-        rows.append({"club": ident, "scores365": squad["competitor"], **ref, "players": players,
-                     "staff": squad.get("staff", [])})
+                             "source": source, "method": method, **ref})
+        rows.append({"club": ident, "source": source, **ref, **extra, "players": players})
     return rows
 
 
@@ -206,7 +231,9 @@ def build() -> dict:
     sc = load_raw("365scores") or {}
     wp = load_raw("wikipedia") or {}
     sq = load_raw("365squads") or {}
-    raws = {"wikidata": wd, "fifa": fi, "uefa": ue, "365scores": sc, "wikipedia": wp, "365squads": sq}
+    ws = load_raw("wikisquads") or {}
+    raws = {"wikidata": wd, "fifa": fi, "uefa": ue, "365scores": sc, "wikipedia": wp, "365squads": sq,
+            "wikisquads": ws}
     ledger = Ledger(raws)
     W, F, U, S, P = wd.get("data", {}), fi.get("data", {}), ue.get("data", {}), sc.get("data", {}), wp.get("data", {})
     sitelinks: dict[str, dict[str, str]] = defaultdict(dict)
@@ -1497,7 +1524,7 @@ def build() -> dict:
                                             "gameCountries": game_rows})
     write_json(CATALOG / "competitions.json", {**meta, "competitions": [competitions[k] for k in sorted(competitions)],
                                                "continental": sorted(continental, key=lambda c: c["id"])})
-    squad_rows = attach_squads(clubs, sq, ledger)
+    squad_rows = attach_squads(clubs, sq, ws, ledger)
     write_jsonl(CATALOG / "squads.jsonl", squad_rows)
     clubs_count = write_jsonl(CATALOG / "clubs.jsonl", (clubs[k] for k in sorted(clubs)))
     write_json(CATALOG / "conflicts.json", {**meta, "conflicts": sorted(
