@@ -71,6 +71,21 @@ No topo de todas as telas:
 
 As notas aparecem em um modal com Markdown simples (títulos, listas, negrito, código e links para o repositório ou o site).
 
+### Configurações
+
+A tela **Configurações** reúne o que não precisa estar no caminho principal:
+
+| Opção | Efeito |
+|---|---|
+| Pasta do jogo | Troca a instalação do Brasfoot usada pelo hub |
+| Instalação original | Mostra quantas cópias originais o hub guarda (necessárias para remover os elencos) e permite indicar uma pasta do Brasfoot sem patch |
+| Tema | Sistema (acompanha o Windows), claro ou escuro |
+| Avisar quando sair uma versão nova | Liga a conferência com o hub fechado: valor `BrasfootMegaPatchNovidades` em `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` (ao entrar no Windows) e tarefa agendada `Brasfoot Mega Patch\Novidades` (todo dia às 19h, depois da publicação diária). As duas executam o hub com `--notify-check`, que lê o `release.json` e mostra uma notificação do Windows quando há patch ou instalador ainda não visto; clicar na notificação abre o hub pelo protocolo `brasfootmegapatch:` |
+| Procurar novidades agora | Repete a consulta à release mais recente |
+| Remover o hub | Mesmo efeito de `--uninstall-hub` |
+
+As preferências ficam em `%LOCALAPPDATA%\BrassfootPatch2026\hub-settings.json`, junto das últimas versões vistas e avisadas.
+
 ### Instalação do próprio hub
 
 Na primeira execução, o hub se copia para `%LOCALAPPDATA%\Programs\Brasfoot Mega Patch\Brasfoot-Mega-Patch.exe`, grava `hub.json` com a versão, cria atalhos no Menu Iniciar e na área de trabalho, registra-se em **Configurações > Aplicativos** (chave `HKCU\...\Uninstall\BrasfootMegaPatchHub`, sem pedir administrador) e reabre a partir da pasta fixa. Se já houver um hub instalado mais novo, o executável baixado apenas abre o instalado. Se a pasta fixa estiver em uso, o hub roda de onde foi aberto.
@@ -89,6 +104,7 @@ Brasfoot-Mega-Patch.exe --classic           interface simples
 Brasfoot-Mega-Patch.exe --portable          roda sem se instalar
 Brasfoot-Mega-Patch.exe --feed <pasta>      usa release.json e pacote de uma pasta local (prévias)
 Brasfoot-Mega-Patch.exe --uninstall-hub     remove o hub do computador
+Brasfoot-Mega-Patch.exe --notify-check      confere a versão mais recente e notifica, sem abrir janela
 ```
 
 O hub requer o Microsoft Edge WebView2 Runtime, presente no Windows 11 e na maioria das instalações do Windows 10. Sem ele, o hub oferece a página oficial de instalação e abre a interface Win32 simples, que também busca a versão mais recente, oferece atualizar o instalador e tem as mesmas garantias de instalação.
@@ -97,7 +113,7 @@ O hub requer o Microsoft Edge WebView2 Runtime, presente no Windows 11 e na maio
 
 O hub trabalha com três componentes: **Elencos 2026**, **Temporada 2026** e **Campo animado** (veja [Arquitetura](architecture.md#componentes)).
 
-- **Instalar:** a instalação automática (recomendada) instala tudo o que falta e atualiza o que já existe. **Personalizar** é opcional e permite marcar só algumas partes.
+- **Instalar:** a instalação automática (recomendada) instala tudo o que falta e atualiza o que já existe, com um só botão. **Escolher o que instalar** é opcional e mostra os três componentes para marcar.
 - **Atualizar:** os componentes desatualizados são sempre incluídos; os ausentes podem ser adicionados.
 - **Remover:** marque o que tirar ou use **Remover tudo**. O resto continua como está. As carreiras salvas não mudam.
 
@@ -113,7 +129,7 @@ O jogo precisa estar fechado; o hub verifica os processos `bf22-23.exe`, `brasfo
 
 ### Cofre de originais
 
-Para devolver os elencos originais, o hub guarda em `%LOCALAPPDATA%\BrassfootPatch2026\originals\` uma cópia de cada arquivo do jogo cujo SHA-256 é o do jogo original (`vanillaSha256` no manifesto), nomeada pelo próprio hash. As cópias vêm do jogo antes da primeira instalação, dos backups de instalação e dos backups completos já existentes. Se faltar alguma, a remoção dos elencos fica indisponível e o hub oferece **Indicar instalação original**: o usuário escolhe uma pasta do Brasfoot sem patch e o hub copia apenas os arquivos idênticos aos originais. O projeto nunca distribui arquivos originais.
+Para devolver os elencos originais, o hub guarda em `%LOCALAPPDATA%\BrassfootPatch2026\originals\` uma cópia de cada arquivo do jogo cujo SHA-256 é o do jogo original (`vanillaSha256` no manifesto), nomeada pelo próprio hash. As cópias vêm do jogo antes da primeira instalação, dos backups de instalação e dos backups completos já existentes. Se faltar alguma, a remoção dos elencos fica indisponível e a tela Remover leva a **Configurações > Instalação original**, onde o usuário escolhe uma pasta do Brasfoot sem patch e o hub copia apenas os arquivos idênticos aos originais. O projeto nunca distribui arquivos originais.
 
 ## Backups
 
