@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.5.7",
-  "publishedAt": "2026-11-02T04:25:46.703883+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.5.7-windows-x64.exe",
+  "publishedVersion": "2026.5.8",
+  "publishedAt": "2026-11-02T13:41:12.362546+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.5.8-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
-  "fileSizeBytes": 7667712,
-  "sha256": "97fe441d97f351e1d7edabe02f0c9bc748d204176ae12c3737160691eb2787dd",
+  "fileSizeBytes": 7712768,
+  "sha256": "60736ed3e69da3e3b1a993dfba71830a6ab0ef602f29e0a350cd17c139aa9f0b",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Campo animado com faltas fora da área, gols da virada de tempo sempre mostrados e jogadas de gol variadas."
+  "releaseNotes": "Hub 1.1.1 com o campo animado em movimento num painel grande; jogo e elencos iguais aos da 2026.5.7."
 }

@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-02T03:30:00-03:00",
+  "updatedAt": "2026-11-02T10:40:00-03:00",
   "entries": [
     {
       "id": "patch-2026-5-8",
       "version": "2026.5.8",
-      "date": "2026-11-02T03:30:00-03:00",
+      "date": "2026-11-02T10:40:00-03:00",
       "title": "Campo animado em movimento no site e no hub",
       "kind": "patch",
       "summary": "O campo do site passa a se mexer como no jogo, e o hub 1.1.1 abre o campo animado num painel grande ao clicar nele.",
