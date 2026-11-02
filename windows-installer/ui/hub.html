@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <title>Brasfoot Mega Patch</title>
 <style>
-:root{--brand:#0b4be0;--brand-strong:#0837b5;--brand-soft:#eaf0ff;--ink:#0b1633;--ink-2:#2c3a5c;--muted:#5b6885;--line:#e1e7f3;--surface:#f4f7fd;--ok:#0b7a55;--ok-soft:#e3f8ef;--warn:#94620f;--warn-soft:#fdf3df;--danger:#d6203f;--font:"Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;--mono:"Cascadia Code",Consolas,monospace;--ease:cubic-bezier(.22,1,.36,1)}
+:root{--toast-bg:#0b1633;--toast-ink:#fff;--toast-line:#0b1633;--bg:#fff;--card:#fff;--soft-a:#eaf0ff;--soft-b:#f8faff;--warm-a:#fff4e0;--warm-b:#fffaf0;--danger-soft:#fff0f3;--brand:#0b4be0;--brand-strong:#0837b5;--brand-soft:#eaf0ff;--ink:#0b1633;--ink-2:#2c3a5c;--muted:#5b6885;--line:#e1e7f3;--surface:#f4f7fd;--ok:#0b7a55;--ok-soft:#e3f8ef;--warn:#94620f;--warn-soft:#fdf3df;--danger:#d6203f;--font:"Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;--mono:"Cascadia Code",Consolas,monospace;--ease:cubic-bezier(.22,1,.36,1)}
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
-body{font:14px/1.55 var(--font);color:var(--ink);background:white;overflow:hidden;user-select:none;-webkit-font-smoothing:antialiased}
+body{font:14px/1.55 var(--font);color:var(--ink);background:var(--bg);overflow:hidden;user-select:none;-webkit-font-smoothing:antialiased}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 button:disabled{cursor:default;opacity:.45}
 :focus-visible{outline:2px solid var(--brand);outline-offset:3px}
 .app{display:grid;grid-template-rows:52px 1fr;height:100%}
-.titlebar{display:flex;align-items:center;gap:12px;padding:0 6px 0 18px;border-bottom:1px solid var(--line);background:white}
+.titlebar{display:flex;align-items:center;gap:12px;padding:0 6px 0 18px;border-bottom:1px solid var(--line);background:var(--card)}
 .titlebar img{width:26px;height:26px;border-radius:8px;pointer-events:none}
 .titlebar .name{font-size:13px;font-weight:700;letter-spacing:.01em}
 .titlebar .name span{color:var(--brand)}
@@ -25,8 +25,8 @@ button:disabled{cursor:default;opacity:.45}
 .sidebar{display:flex;flex-direction:column;gap:4px;padding:18px 14px;border-right:1px solid var(--line);background:var(--surface)}
 .nav{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;font-weight:600;color:var(--ink-2);text-align:left}
 .nav svg{flex:none;color:var(--muted)}
-.nav:hover{background:white}
-.nav[aria-current=page]{background:white;color:var(--brand);box-shadow:0 4px 14px #0b16330d,inset 3px 0 0 var(--brand)}
+.nav:hover{background:var(--card)}
+.nav[aria-current=page]{background:var(--card);color:var(--brand);box-shadow:0 4px 14px #0b16330d,inset 3px 0 0 var(--brand)}
 .nav[aria-current=page] svg{color:var(--brand)}
 .sidebar .bottom{margin-top:auto;display:grid;gap:4px}
 .sidebar .small{font-size:13px;font-weight:500;padding:9px 14px}
@@ -36,7 +36,7 @@ main{position:relative;overflow:auto;padding:26px 28px 90px}
 h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 .lead{color:var(--muted);margin:0 0 24px;font-size:15px}
 .eyebrow{font:600 11px var(--mono);letter-spacing:.14em;color:var(--brand);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.card{border:1px solid var(--line);border-radius:18px;background:white}
+.card{border:1px solid var(--line);border-radius:18px;background:var(--card)}
 .home{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
 .home-main{padding:22px;display:flex;flex-direction:column}
 .folder{display:flex;align-items:center;gap:10px;margin:12px 0 16px;padding:10px 12px;border-radius:12px;background:var(--surface);border:1px solid var(--line)}
@@ -51,7 +51,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 .badge.ok{background:var(--ok-soft);color:var(--ok)}
 .badge.partial{background:var(--warn-soft);color:var(--warn)}
 .badge.off{background:var(--surface);color:var(--muted);border:1px solid var(--line)}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto}
+.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:auto}
 .actions .play{grid-column:1/-1}
 .btn.ready{border-color:var(--brand);color:var(--brand);background:var(--brand-soft)}
 .btn .pip{width:8px;height:8px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 3px #0b4be026}
@@ -62,7 +62,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:0 22px;border-radius:12px;font-weight:700;transition:background .2s,transform .2s,box-shadow .2s}
 .btn.primary{background:var(--brand);color:white;box-shadow:0 10px 24px #0b4be038}
 .btn.primary:not(:disabled):hover{background:var(--brand-strong);transform:translateY(-1px)}
-.btn.ghost{border:1px solid var(--line);background:white;color:var(--ink)}
+.btn.ghost{border:1px solid var(--line);background:var(--card);color:var(--ink)}
 .btn.ghost:not(:disabled):hover{border-color:var(--brand);color:var(--brand)}
 .btn.big{min-height:50px;font-size:15px;padding:0 22px}
 .preview{position:relative;overflow:hidden;padding:12px;display:flex;flex-direction:column;gap:12px}
@@ -70,13 +70,23 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 .preview .caption{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:2px 6px 4px}
 .preview .caption strong{font-size:15px}
 .preview .caption small{display:block;color:var(--muted);font-size:12.5px}
-.live{flex:none;white-space:nowrap;display:inline-flex;align-items:center;gap:7px;font:700 11px var(--mono);letter-spacing:.12em;color:var(--danger);background:#fff0f3;border:1px solid #ffd0d8;padding:5px 9px;border-radius:999px}
+.live{flex:none;white-space:nowrap;display:inline-flex;align-items:center;gap:7px;font:700 11px var(--mono);letter-spacing:.12em;color:var(--danger);background:var(--danger-soft);border:1px solid var(--danger-soft);padding:5px 9px;border-radius:999px}
 .pulse{position:relative;width:7px;height:7px;border-radius:50%;background:var(--danger)}
 .pulse:after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--danger);animation:pulse 1.8s var(--ease) infinite}
 .engine{margin-top:2px;padding:12px 14px;border-radius:12px;background:var(--brand-soft);color:var(--ink-2);font-size:12.5px;display:flex;gap:10px;align-items:flex-start}
 .engine svg{flex:none;color:var(--brand);margin-top:1px}
-.options{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
-.option{position:relative;display:flex;flex-direction:column;gap:10px;text-align:left;padding:18px;border-radius:18px;border:1.5px solid var(--line);background:white;transition:border-color .2s,box-shadow .2s}
+.options{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+.mode-box{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:14px;border:1px solid #c9d8fb;background:var(--brand-soft);margin-bottom:16px;font-size:13px;color:var(--ink-2)}
+.mode-box svg{flex:none;color:var(--brand)}
+.mode-box div{flex:1}
+.mode-box strong{display:block;color:var(--ink);font-size:14px}
+.mode-box.remove{border-color:#bfe6d5;background:var(--ok-soft)}
+.mode-box.remove svg{color:var(--ok)}
+.thumb.season{background:linear-gradient(135deg,var(--warm-a),var(--warm-b));display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px}
+.thumb.season div{border-radius:10px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;padding:0 10px}
+.thumb.season strong{font-size:18px;color:var(--warn);letter-spacing:-.03em;line-height:1.1}
+.thumb.season span{font:600 10px var(--mono);color:var(--muted)}
+.option{position:relative;display:flex;flex-direction:column;gap:10px;text-align:left;padding:18px;border-radius:18px;border:1.5px solid var(--line);background:var(--card);transition:border-color .2s,box-shadow .2s}
 .option:hover{border-color:#b9cdfb}
 .option[aria-checked=true]{border-color:var(--brand);box-shadow:0 12px 30px #0b4be01f}
 .option-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
@@ -85,8 +95,8 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 .option h2{margin:0;font-size:18px;letter-spacing:-.02em}
 .option p{margin:0;color:var(--muted);font-size:13px}
 .option .thumb{height:84px;border-radius:12px;background-size:cover;background-position:center}
-.thumb.patch{background:linear-gradient(135deg,#eaf0ff,#f8faff);display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px}
-.thumb.patch div{border-radius:10px;background:white;border:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;padding:0 10px}
+.thumb.patch{background:linear-gradient(135deg,var(--soft-a),var(--soft-b));display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px}
+.thumb.patch div{border-radius:10px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;padding:0 10px}
 .thumb.patch strong{font-size:18px;color:var(--brand);letter-spacing:-.03em;line-height:1.1}
 .thumb.patch span{font:600 10px var(--mono);color:var(--muted)}
 .speed{display:flex;gap:8px;align-items:flex-start;padding:9px 11px;border-radius:10px;background:var(--warn-soft);color:var(--warn);font-size:12px;line-height:1.45}
@@ -107,7 +117,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 .item .btn{min-height:36px;padding:0 14px;font-size:13px}
 .empty{padding:40px;text-align:center;color:var(--muted)}
 .empty strong{display:block;color:var(--ink);font-size:16px;margin-bottom:4px}
-.progress{position:absolute;left:34px;right:34px;bottom:20px;padding:14px 18px;border-radius:16px;background:white;border:1px solid var(--line);box-shadow:0 18px 40px #0b16331a;display:none;animation:in .3s var(--ease)}
+.progress{position:absolute;left:34px;right:34px;bottom:20px;padding:14px 18px;border-radius:16px;background:var(--card);border:1px solid var(--line);box-shadow:0 18px 40px #0b16331a;display:none;animation:in .3s var(--ease)}
 .progress.show{display:block}
 .progress-top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px}
 .progress-top span:last-child{font:600 12px var(--mono);color:var(--brand)}
@@ -115,16 +125,16 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 .bar{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--brand),#2f8bff);transition:width .3s var(--ease)}
 .overlay{position:fixed;inset:0;background:#0b163352;display:none;place-items:center;z-index:10;animation:fade .2s}
 .overlay.show{display:grid}
-.modal{width:min(440px,calc(100% - 40px));background:white;border-radius:20px;padding:26px;box-shadow:0 30px 80px #0b163340;animation:in .3s var(--ease)}
+.modal{width:min(440px,calc(100% - 40px));background:var(--card);border-radius:20px;padding:26px;box-shadow:0 30px 80px #0b163340;animation:in .3s var(--ease)}
 .modal h3{margin:0 0 8px;font-size:20px;letter-spacing:-.02em}
 .modal p{margin:0 0 10px;color:var(--muted)}
 .modal .actions{display:flex;justify-content:flex-end;margin-top:20px}
 .modal .icon{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;margin-bottom:14px;background:var(--brand-soft);color:var(--brand)}
-.modal.error .icon{background:#fff0f3;color:var(--danger)}
+.modal.error .icon{background:var(--danger-soft);color:var(--danger)}
 .modal.success .icon{background:var(--ok-soft);color:var(--ok)}
 .qr{width:200px;margin:8px auto 14px;padding:10px;border:1px solid var(--line);border-radius:14px}
 .qr svg{display:block;width:100%;height:auto}
-.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--ink);color:white;padding:10px 16px;border-radius:12px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .25s}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--toast-bg);color:var(--toast-ink);border:1px solid var(--toast-line);box-shadow:0 12px 30px #0b163340;padding:10px 16px;border-radius:12px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .25s}
 .toast.show{opacity:1}
 .alert{display:none;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;background:var(--warn-soft);color:var(--warn);font-size:13px;font-weight:600;margin-bottom:18px}
 .alert.show{display:flex}
@@ -152,6 +162,33 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 .notes code{font:500 12px var(--mono);background:var(--surface);padding:1px 5px;border-radius:5px}
 .notes a{color:var(--brand);cursor:pointer;font-weight:600}
 .meta{font:600 11px var(--mono);letter-spacing:.06em;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+:root[data-theme=dark]{--toast-bg:#1f2d4d;--toast-ink:#f1f5ff;--toast-line:#34476f;--bg:#0b1220;--card:#111a2c;--surface:#0e1626;--line:#22314f;--ink:#e7edfb;--ink-2:#c2cce4;--muted:#8d9aba;--brand:#5b8cff;--brand-strong:#7aa2ff;--brand-soft:#16244a;--ok:#4fd1a1;--ok-soft:#0f2a22;--warn:#f0b75c;--warn-soft:#2e2412;--danger:#ff6b81;--danger-soft:#33141c;--soft-a:#16244a;--soft-b:#111a2c;--warm-a:#2e2412;--warm-b:#111a2c}
+:root[data-theme=dark] .check{border-color:#3a4a6e}
+:root[data-theme=dark] .speed strong{color:var(--warn)}
+:root[data-theme=dark] .overlay{background:#00000099}
+:root[data-theme=dark] .mode-box,:root[data-theme=dark] .banner,:root[data-theme=dark] .option:hover{border-color:var(--line)}
+:root[data-theme=dark] .btn.primary{color:#fff}
+[hidden]{display:none!important}
+.settings{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.settings .wide{grid-column:1/-1}
+.setting-card{padding:6px 20px}
+.setting-card h2{font-size:12px;font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin:14px 0 4px}
+.setting-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:11px 0;border-top:1px solid var(--line)}
+.setting-card h2+.setting-row{border-top:0}
+.setting-row strong{display:block;font-size:14px}
+.setting-row small{display:block;color:var(--muted);font-size:12.5px;max-width:520px}
+.setting-row .btn{min-height:38px;padding:0 16px;font-size:13px;flex:none}
+.segmented{display:inline-flex;border:1px solid var(--line);border-radius:12px;padding:3px;background:var(--surface);flex:none}
+.segmented button{padding:7px 14px;border-radius:9px;font-weight:600;font-size:13px;color:var(--muted)}
+.segmented button[aria-pressed=true]{background:var(--card);color:var(--brand);box-shadow:0 2px 8px #0b16331a}
+.switch{flex:none;width:44px;height:26px;border-radius:999px;background:var(--line);position:relative;transition:background .2s}
+.switch:after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px #0003;transition:transform .2s var(--ease)}
+.switch[aria-checked=true]{background:var(--brand)}
+.switch[aria-checked=true]:after{transform:translateX(18px)}
+.path{font:500 12.5px var(--mono);color:var(--ink-2);word-break:break-all;user-select:text}
+.options.compact .thumb,.options.compact .option p{display:none}
+.options.compact .option{padding:14px 16px;gap:8px}
+.options.compact .option h2{font-size:16px}
 @keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 @keyframes pulse{0%{opacity:.9;transform:scale(.6)}100%{opacity:0;transform:scale(2.2)}}
@@ -172,9 +209,11 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
     <aside class="sidebar">
       <button class="nav" data-view="home" aria-current="page"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Início</button>
       <button class="nav" data-view="install"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-5-5 5 5 5-5M5 21h14"/></svg>Instalar</button>
+      <button class="nav" data-view="remove"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>Remover</button>
       <button class="nav" data-view="backups"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/></svg>Backups</button>
       <div class="bottom">
         <button class="nav small" id="pix-open"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4z"/></svg>Apoiar com Pix</button>
+        <button class="nav small" data-view="settings"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Configurações</button>
         <button class="nav small" data-link="site"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>Site do projeto</button>
       </div>
     </aside>
@@ -189,7 +228,8 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
             <h1 id="home-title">Tudo pronto para jogar.</h1>
             <div class="folder"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5b6885" stroke-width="1.8" stroke-linejoin="round"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><code id="game-path">Procurando o jogo…</code><button class="link" id="choose">Alterar</button></div>
             <div class="status">
-              <div class="status-row"><div><strong>Patch 2026</strong><small>Elencos, ano 2026 e copas</small></div><span class="badge off" id="badge-patch">—</span></div>
+              <div class="status-row"><div><strong>Elencos 2026</strong><small>Jogadores atualizados nos clubes</small></div><span class="badge off" id="badge-rosters">—</span></div>
+              <div class="status-row"><div><strong>Temporada 2026</strong><small>Ano 2026, Copa do Mundo, copas e divisões</small></div><span class="badge off" id="badge-season">—</span></div>
               <div class="status-row"><div><strong>Campo animado</strong><small>Partidas ao vivo na tela de jogo</small></div><span class="badge off" id="badge-live">—</span></div>
             </div>
             <div class="available" id="available"></div>
@@ -197,6 +237,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
               <button class="btn primary big play" id="play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15a1 1 0 0 0 1.5.9l12-7.5a1 1 0 0 0 0-1.8l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>Jogar</button>
               <button class="btn ghost" id="go-install">Instalar</button>
               <button class="btn ghost" id="go-update"><span class="pip" id="update-pip" hidden></span>Atualizar</button>
+              <button class="btn ghost" id="go-remove">Remover</button>
             </div>
           </div>
           <div class="card preview">
@@ -211,28 +252,60 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
         <div class="eyebrow" id="mode-eyebrow">Instalar</div>
         <h1 id="mode-title">O que você quer instalar?</h1>
         <p class="lead" id="mode-lead">Marque o que quer adicionar ao seu Brasfoot.</p>
-        <div class="options">
-          <button class="option" role="checkbox" aria-checked="true" data-option="patch">
-            <div class="option-top"><span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><span class="badge off" id="opt-patch">—</span></div>
-            <div class="thumb patch"><div><strong>704</strong><span>CLUBES</span></div><div><strong>301</strong><span>ELENCOS</span></div><div><strong>2026</strong><span>TEMPORADA</span></div></div>
-            <h2>Patch 2026</h2>
-            <p>Elencos atualizados, ano 2026 na carreira e as copas da temporada.</p>
+        <div class="mode-box" id="auto-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg><div><strong id="auto-title">Instalação automática (recomendada)</strong><span id="auto-text">Instala tudo o que falta e atualiza o que você já tem.</span></div><button class="link" id="customize">Personalizar</button></div>
+        <div class="options" id="options">
+          <button class="option" role="checkbox" aria-checked="true" data-option="rosters">
+            <div class="option-top"><span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><span class="badge off" id="opt-rosters">—</span></div>
+            <div class="thumb patch"><div><strong>704</strong><span>CLUBES</span></div><div><strong>301</strong><span>ELENCOS</span></div></div>
+            <h2>Elencos 2026</h2>
+            <p>Jogadores atualizados nos clubes do Brasil e da Europa.</p>
+          </button>
+          <button class="option" role="checkbox" aria-checked="true" data-option="season">
+            <div class="option-top"><span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><span class="badge off" id="opt-season">—</span></div>
+            <div class="thumb season"><div><strong>2026</strong><span>ANO</span></div><div><strong>48</strong><span>COPA</span></div><div><strong>+</strong><span>COPAS</span></div></div>
+            <h2>Temporada 2026</h2>
+            <p>Carreira em 2026, Copa do Mundo com 48 seleções, copas continentais e divisões.</p>
           </button>
           <button class="option" role="checkbox" aria-checked="true" data-option="live">
             <div class="option-top"><span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><span class="badge off" id="opt-live">—</span></div>
             <div class="thumb" style="background-image:url('{{PITCH}}')"></div>
             <h2>Campo animado ao vivo</h2>
-            <p>Jogadores, bola e árbitro na tela de partida. O motor do Brasfoot continua o mesmo.</p>
-            <span class="speed"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 13 16 8"/><path d="M3.5 17a9 9 0 1 1 17 0"/></svg><span><strong>Melhor na velocidade Normal.</strong> Em gols, cartões e pênaltis o jogo pausa por alguns segundos para o lance acontecer junto com o placar.</span></span>
+            <p>Jogadores, bola e árbitro na tela de partida. Melhor na velocidade Normal.</p>
           </button>
         </div>
-        <div class="note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>Antes de mudar qualquer arquivo, guardamos um backup. Seus saves não são alterados.</div>
-        <div class="install-bar"><button class="btn primary big" id="install">Instalar</button><span class="lead" style="margin:0" id="install-hint"></span></div>
+        <div class="note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg><span id="install-note">Antes de mudar qualquer arquivo, guardamos um backup. Seus saves não são alterados e continuam abrindo com ou sem o patch.</span></div>
+        <div class="install-bar"><button class="btn primary big" id="install">Instalar</button><button class="btn ghost" id="open-settings" hidden>Abrir configurações</button><span class="lead" style="margin:0" id="install-hint"></span></div>
       </section>
 
       <section class="view" id="view-backups">
         <div class="backups-head"><div><div class="eyebrow">Backups</div><h1>Seus backups</h1><p class="lead">Volte para qualquer versão guardada do seu Brasfoot.</p></div><button class="btn primary" id="backup-create"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Criar backup completo</button></div>
         <div class="list" id="backup-list"></div>
+      </section>
+
+      <section class="view" id="view-settings">
+        <div class="eyebrow">Configurações</div>
+        <h1>Configurações</h1>
+        <p class="lead">Ajuste o hub do seu jeito. Nada aqui altera o jogo.</p>
+        <div class="settings">
+          <div class="card setting-card wide">
+            <h2>Seu Brasfoot</h2>
+            <div class="setting-row"><div><strong>Pasta do jogo</strong><small class="path" id="set-game">—</small></div><button class="btn ghost" id="set-choose">Alterar</button></div>
+            <div class="setting-row"><div><strong>Instalação original</strong><small class="path" id="set-original-path" hidden></small><small id="set-originals">—</small></div><button class="btn ghost" id="set-import">Indicar pasta original</button></div>
+          </div>
+          <div class="card setting-card">
+            <h2>Aparência</h2>
+            <div class="setting-row"><div><strong>Tema</strong><small>O modo Sistema acompanha o tema do Windows.</small></div><div class="segmented" id="set-theme"><button data-theme-option="system">Sistema</button><button data-theme-option="light">Claro</button><button data-theme-option="dark">Escuro</button></div></div>
+          </div>
+          <div class="card setting-card">
+            <h2>Hub</h2>
+            <div class="setting-row"><div><strong>Remover o hub deste computador</strong><small>Apaga o hub e os atalhos. O jogo, as carreiras e os backups ficam onde estão.</small></div><button class="btn ghost" id="set-uninstall">Remover hub</button></div>
+          </div>
+          <div class="card setting-card wide">
+            <h2>Atualizações</h2>
+            <div class="setting-row"><div><strong>Avisar quando sair uma versão nova</strong><small>O Windows mostra uma notificação mesmo com o hub fechado. A conferência acontece quando você entra no Windows e todo dia às 19h, logo depois da publicação diária.</small></div><button class="switch" role="switch" aria-checked="false" id="set-notify" aria-label="Avisar quando sair uma versão nova"></button></div>
+            <div class="setting-row"><div><strong>Procurar novidades agora</strong><small id="set-versions">—</small></div><button class="btn ghost" id="set-check">Procurar</button></div>
+          </div>
+        </div>
       </section>
 
       <div class="progress" id="progress"><div class="progress-top"><span id="progress-label">Preparando…</span><span id="progress-value">0%</span></div><div class="track"><div class="bar" id="progress-bar"></div></div></div>
@@ -246,8 +319,9 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 <script>
 (() => {
   const $ = id => document.getElementById(id);
-  const state = {info: null, game: null, feed: {loading: true}, feedPercent: null, mode: 'install', selection: {patch: true, live: true}, busy: false};
-  const names = {patch: 'o Patch 2026', live: 'o campo animado'};
+  const state = {info: null, game: null, feed: {loading: true}, feedPercent: null, mode: 'install', custom: false, selection: {rosters: true, season: true, live: true}, busy: false};
+  const COMPONENTS = ['rosters', 'season', 'live'];
+  const names = {rosters: 'os Elencos 2026', season: 'a Temporada 2026', live: 'o campo animado'};
   const icons = {
     ok: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>',
     error: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 8v5m0 4h.01"/><circle cx="12" cy="12" r="9"/></svg>',
@@ -316,25 +390,44 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
   function closeModal() { $('overlay').classList.remove('show'); }
   $('overlay').addEventListener('click', event => { if (event.target === $('overlay') && !state.busy) closeModal(); });
 
+  function components() { return state.game?.components || {}; }
+  function targets() { return !!components().targets; }
   function statusOf(name) {
     const game = state.game;
     if (!game?.valid) return 'absent';
-    const value = game[name];
+    let value = components()[name];
+    if (!targets()) value = name === 'live' ? game.live : game.patch;
     if (value === true) return 'current';
     if (value === 'unknown') return 'unknown';
     return value === 'current' || value === 'outdated' ? value : 'absent';
   }
-  function anyStatus(status) { return statusOf('patch') === status || statusOf('live') === status; }
+  function installed(name) { const status = statusOf(name); return status === 'current' || status === 'outdated'; }
+  function anyStatus(status) { return COMPONENTS.some(name => statusOf(name) === status); }
+  function removable(name) { return installed(name) && (!targets() || components().removable?.[name] !== false); }
   function openMode(mode) {
     state.mode = mode;
-    state.selection = {patch: mode === 'install', live: mode === 'install'};
+    state.custom = false;
+    state.selection = {rosters: mode === 'install', season: mode === 'install', live: mode === 'install'};
     show('install');
+    document.querySelectorAll('.nav[data-view]').forEach(item => {
+      const current = mode === 'remove' ? item.dataset.view === 'remove' : item.dataset.view === 'install';
+      if (current) item.setAttribute('aria-current', 'page'); else item.removeAttribute('aria-current');
+    });
     render();
   }
   function included(name) {
     const status = statusOf(name);
-    if (status === 'outdated') return state.mode === 'update';
-    return status === 'absent' && !!state.selection[name];
+    if (state.mode === 'remove') return installed(name) && removable(name) && !!state.selection[name];
+    if (status === 'outdated') return true;
+    if (status !== 'absent') return false;
+    if (state.mode === 'install' && !state.custom) return true;
+    return !!state.selection[name];
+  }
+  function targetState() {
+    const target = {};
+    for (const name of COMPONENTS) target[name] = state.mode === 'remove' ? installed(name) && !included(name) : installed(name) || included(name);
+    if (!targets()) target.season = target.rosters;
+    return target;
   }
   function show(view) {
     document.querySelectorAll('.view').forEach(section => section.classList.toggle('active', section.id === 'view-' + view));
@@ -343,10 +436,22 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
   }
   document.querySelectorAll('[data-view]').forEach(item => item.addEventListener('click', () => {
     if (item.dataset.view === 'install') openMode(anyStatus('outdated') ? 'update' : 'install');
+    else if (item.dataset.view === 'remove') openMode('remove');
+    else if (item.dataset.view === 'settings') { show('settings'); renderSettings(); }
     else show(item.dataset.view);
   }));
   $('go-install').addEventListener('click', () => openMode('install'));
   $('go-update').addEventListener('click', () => openMode('update'));
+  $('go-remove').addEventListener('click', () => openMode('remove'));
+  $('customize').addEventListener('click', () => {
+    if (state.mode === 'remove') {
+      for (const name of COMPONENTS) state.selection[name] = removable(name);
+    } else {
+      state.custom = !state.custom;
+      for (const name of COMPONENTS) state.selection[name] = !state.custom;
+    }
+    render();
+  });
   document.querySelectorAll('[data-link]').forEach(item => item.addEventListener('click', () => call('hubOpenLink', item.dataset.link)));
 
   $('titlebar').addEventListener('mousedown', event => {
@@ -364,6 +469,11 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
   function optionBadge(name) {
     const status = statusOf(name);
     if (status === 'unknown') return ['Verificando…', 'off'];
+    if (state.mode === 'remove') {
+      if (!installed(name)) return ['Não instalado', 'off'];
+      if (!removable(name)) return ['Originais indisponíveis', 'partial'];
+      return included(name) ? ['Será removido', 'partial'] : ['Fica instalado', 'ok'];
+    }
     if (status === 'current') return ['Instalado', 'ok'];
     if (status === 'outdated') return state.mode === 'update' ? ['Será atualizado', 'partial'] : ['Atualização disponível', 'partial'];
     return state.mode === 'update' ? ['Disponível para adicionar', 'off'] : ['Não instalado', 'off'];
@@ -451,7 +561,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
     const valid = !!game?.valid;
     $('game-path').textContent = game?.game || 'Nenhuma pasta selecionada';
     $('choose').textContent = game?.game ? 'Alterar' : 'Escolher pasta';
-    for (const name of ['patch', 'live']) {
+    for (const name of COMPONENTS) {
       const [text, tone] = homeBadges[statusOf(name)];
       setBadge('badge-' + name, text, tone);
       const [optionText, optionTone] = optionBadge(name);
@@ -472,29 +582,48 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
     $('go-update').disabled = !valid || state.busy || !outdated || !ready;
     $('go-update').classList.toggle('ready', outdated && !state.busy);
     $('update-pip').hidden = !outdated;
+    const anyInstalled = valid && COMPONENTS.some(installed);
+    $('go-remove').disabled = !valid || state.busy || !anyInstalled || !ready;
+    document.querySelector('.nav[data-view="remove"]').disabled = !valid || state.busy;
     const update = state.mode === 'update';
-    $('mode-eyebrow').textContent = update ? 'Atualizar' : 'Instalar';
-    $('mode-title').textContent = update ? 'Atualizar para a versão ' + (game?.version || state.info?.bundleVersion || '') : 'O que você quer instalar?';
-    $('mode-lead').textContent = update ? 'O que você já tem será atualizado. Se quiser, adicione também o que ainda não está instalado.' : 'Marque o que quer adicionar ao seu Brasfoot.';
+    const remove = state.mode === 'remove';
+    $('mode-eyebrow').textContent = remove ? 'Remover' : update ? 'Atualizar' : 'Instalar';
+    $('mode-title').textContent = remove ? 'O que você quer remover?' : update ? 'Atualizar para a versão ' + (game?.version || state.info?.bundleVersion || '') : 'O que você quer instalar?';
+    $('mode-lead').textContent = remove ? 'Marque o que quer tirar do seu Brasfoot. O resto continua como está.' : update ? 'O que você já tem será atualizado. Se quiser, adicione também o que ainda não está instalado.' : 'Escolha o que quer no seu Brasfoot.';
+    $('auto-box').classList.toggle('remove', remove);
+    $('auto-title').textContent = remove ? 'Seus saves continuam valendo' : state.custom ? 'Instalação personalizada' : 'Instalação automática (recomendada)';
+    const summary = COMPONENTS.filter(included).map(name => ({rosters: 'Elencos 2026', season: 'Temporada 2026', live: 'Campo animado'})[name]).join(', ');
+    $('auto-text').textContent = remove ? 'As carreiras salvas abrem com ou sem o patch, com todo o progresso.' : state.custom ? 'Marque só o que quiser. O que você já tem continua instalado.' : summary ? (update ? 'Será atualizado: ' : 'Será instalado: ') + summary + '.' : 'Tudo já está instalado e em dia.';
+    $('customize').textContent = remove ? 'Remover tudo' : state.custom ? 'Voltar ao automático' : 'Escolher o que instalar';
+    $('customize').hidden = update;
+    $('options').hidden = !remove && !state.custom;
+    $('options').classList.toggle('compact', remove);
     document.querySelectorAll('.option').forEach(option => {
       const name = option.dataset.option;
       const status = statusOf(name);
-      const locked = !valid || status !== 'absent' || state.busy;
+      let locked = !valid || state.busy;
+      if (remove) locked = locked || !removable(name);
+      else locked = locked || status !== 'absent' || (state.mode === 'install' && !state.custom);
       option.setAttribute('aria-disabled', String(locked));
-      option.classList.toggle('locked', status === 'outdated' && update);
+      option.classList.toggle('locked', !remove && status === 'outdated');
       option.setAttribute('aria-checked', String(included(name)));
     });
-    const chosen = ['patch', 'live'].filter(included);
+    const chosen = COMPONENTS.filter(included);
     const button = $('install');
-    button.textContent = update ? 'Atualizar' : 'Instalar';
+    button.textContent = remove ? 'Remover' : update ? 'Atualizar' : 'Instalar';
     button.disabled = !valid || state.busy || chosen.length === 0 || !ready;
     let hint = '';
     if (!valid) hint = 'Escolha a pasta do Brasfoot no Início.';
     else if (!ready) hint = state.feed?.loading ? 'Buscando a versão mais recente…' : 'Conecte-se à internet para baixar o patch.';
+    else if (remove && !anyInstalled) hint = 'Nada do patch está instalado.';
+    else if (remove && COMPONENTS.some(name => installed(name) && !removable(name))) hint = 'Para remover os elencos, indique uma instalação original do Brasfoot em Configurações.';
+    else if (remove && chosen.length === 0) hint = 'Marque o que quer remover.';
     else if (update && !outdated) hint = 'Você já está na versão mais recente.';
-    else if (!update && !absent) hint = outdated ? 'Tudo já está instalado. Use Atualizar para ir à nova versão.' : 'Tudo já está instalado.';
+    else if (!remove && !update && !absent) hint = outdated ? 'Tudo já está instalado. Use Atualizar para ir à nova versão.' : 'Tudo já está instalado.';
     else if (chosen.length === 0) hint = 'Marque ao menos uma opção.';
     $('install-hint').textContent = hint;
+    $('open-settings').hidden = !(remove && targets() && COMPONENTS.some(name => installed(name) && !removable(name)));
+    renderSettings();
     $('backup-create').disabled = !valid || state.busy;
   }
   document.querySelectorAll('.option').forEach(option => option.addEventListener('click', () => {
@@ -514,7 +643,18 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
   $('choose').addEventListener('click', () => call('hubChooseGame'));
   $('play').addEventListener('click', () => call('hubLaunchGame').then(() => toast('Abrindo o Brasfoot. Bom jogo!')).catch(error => toast(error.message || error)));
   $('install').addEventListener('click', () => {
-    const chosen = ['patch', 'live'].filter(included);
+    const chosen = COMPONENTS.filter(included);
+    if (state.mode === 'remove') {
+      const list = chosen.map(name => names[name]).join(', ').replace(/, ([^,]*)$/, ' e $1');
+      modal('restore', '<h3>Remover ' + escape(list) + '?</h3><p>Feche o Brasfoot antes de continuar. Antes de mudar qualquer arquivo, guardamos um backup dos arquivos alterados.</p><p>Suas carreiras salvas não mudam: elas continuam abrindo com ou sem o patch, com todo o progresso.</p>', [
+        {label: 'Cancelar'},
+        {label: 'Remover', primary: true, action: () => {
+          setBusy('install');
+          call('hubApply', targetState(), 'remove').catch(error => { setBusy(''); toast(error.message || error); });
+        }}
+      ]);
+      return;
+    }
     const updating = chosen.filter(name => statusOf(name) === 'outdated').map(name => names[name]);
     const adding = chosen.filter(name => statusOf(name) === 'absent').map(name => names[name]);
     const parts = [];
@@ -526,10 +666,54 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
       {label: 'Cancelar'},
       {label: label, primary: true, action: () => {
         setBusy('install');
-        call('hubInstall', {patch: included('patch'), live: included('live')}).catch(error => { setBusy(''); toast(error.message || error); });
+        const request = targets() ? call('hubApply', targetState(), state.mode) : call('hubInstall', {patch: included('rosters') || included('season'), live: included('live')});
+        request.catch(error => { setBusy(''); toast(error.message || error); });
       }}
     ]);
   });
+  $('open-settings').addEventListener('click', () => { show('settings'); renderSettings(); });
+  function applyTheme(theme) {
+    const dark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+    call('hubSetFrameTheme', dark).catch(() => {});
+  }
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => applyTheme(state.settings?.theme || 'system'));
+  function renderSettings() {
+    const settings = state.settings || {theme: 'system', notify: false};
+    const game = state.game;
+    const comps = components();
+    $('set-game').textContent = game?.game || 'Nenhuma pasta selecionada';
+    $('set-choose').disabled = state.busy;
+    if (!targets()) $('set-originals').textContent = 'Disponível quando o hub carregar a versão mais recente do patch.';
+    else if (comps.originalsTotal && comps.originalsStored >= comps.originalsTotal) $('set-originals').textContent = 'Cópias originais completas (' + comps.originalsStored + ' de ' + comps.originalsTotal + '). Dá para remover qualquer parte do patch.';
+    else $('set-originals').textContent = 'Faltam cópias originais (' + (comps.originalsStored || 0) + ' de ' + (comps.originalsTotal || 0) + '). Para poder remover os elencos, escolha uma pasta do Brasfoot sem patch; só os arquivos idênticos aos originais são copiados.';
+    $('set-import').disabled = state.busy || !targets();
+    $('set-original-path').textContent = settings.originalFolder || '';
+    $('set-original-path').hidden = !settings.originalFolder;
+    $('set-import').textContent = settings.originalFolder ? 'Alterar' : 'Indicar pasta original';
+    document.querySelectorAll('[data-theme-option]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.themeOption === settings.theme)));
+    $('set-notify').setAttribute('aria-checked', String(!!settings.notify));
+    const feed = state.feed || {};
+    $('set-versions').textContent = 'Hub ' + (state.info?.hubVersion || '') + (feed.patchVersion ? ' · patch mais recente ' + feed.patchVersion : '');
+    $('set-check').disabled = state.busy;
+    $('set-uninstall').disabled = state.busy || !state.info?.installed;
+  }
+  function changeSetting(key, value) {
+    call('hubSetSetting', key, value).then(settings => { state.settings = settings; applyTheme(settings.theme); renderSettings(); }).catch(error => toast(error.message || error));
+  }
+  document.querySelectorAll('[data-theme-option]').forEach(button => button.addEventListener('click', () => changeSetting('theme', button.dataset.themeOption)));
+  $('set-notify').addEventListener('click', () => {
+    const enabled = !state.settings?.notify;
+    changeSetting('notify', enabled);
+    toast(enabled ? 'Pronto: você vai receber um aviso quando sair uma versão nova.' : 'Avisos de versão nova desligados.');
+  });
+  $('set-choose').addEventListener('click', () => call('hubChooseGame'));
+  $('set-import').addEventListener('click', () => call('hubImportOriginals'));
+  $('set-check').addEventListener('click', () => call('hubCheckUpdates').then(() => toast('Procurando novidades…')).catch(error => toast(error.message || error)));
+  $('set-uninstall').addEventListener('click', () => modal('restore', '<h3>Remover o hub?</h3><p>O hub e os atalhos saem deste computador. O jogo, as carreiras e os backups ficam onde estão.</p>', [
+    {label: 'Cancelar'},
+    {label: 'Remover hub', primary: true, action: () => call('hubUninstallHub').catch(error => toast(error.message || error))}
+  ]));
   $('backup-create').addEventListener('click', () => {
     setBusy('backup');
     call('hubCreateBackup').catch(error => { setBusy(''); toast(error.message || error); });
@@ -576,6 +760,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 
   window.hubEvent = event => {
     if (event.type === 'state') { state.game = event.state; render(); return; }
+    if (event.type === 'settings') { state.settings = event.settings; renderSettings(); return; }
     if (event.type === 'feed') { state.feed = event.feed; state.feedPercent = null; render(); return; }
     if (event.type === 'feed-progress') { state.feedPercent = event.percent; renderBanners(); return; }
     if (event.type === 'toast') { toast(event.message); return; }
@@ -596,7 +781,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
       $('progress-value').textContent = '100%';
       setTimeout(() => setBusy(''), 400);
       if (event.operation === 'install') {
-        const done = state.mode === 'update' ? 'Atualização concluída' : 'Instalação concluída';
+        const done = event.mode === 'remove' ? 'Remoção concluída' : state.mode === 'update' ? 'Atualização concluída' : 'Instalação concluída';
         modal('success', event.already ? '<h3>Já está tudo em dia</h3><p>Nenhum arquivo precisou ser alterado.</p>' :
           '<h3>' + done + '</h3><p>' + escape(event.files) + ' arquivos conferidos. O backup ficou guardado em Backups.</p>',
           [{label: 'Ver backups', action: () => show('backups')}, {label: 'Jogar agora', primary: true, action: () => $('play').click()}]);
@@ -610,6 +795,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
     }
   };
 
+  call('hubGetSettings').then(settings => { state.settings = settings; applyTheme(settings.theme); renderSettings(); }).catch(() => applyTheme('system'));
   call('hubInfo').then(info => { state.info = info; $('version').textContent = 'Hub ' + info.hubVersion + (info.preview ? ' · prévia' : ''); }).catch(() => {});
   render();
   call('hubRefresh');

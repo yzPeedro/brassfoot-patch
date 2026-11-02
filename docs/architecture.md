@@ -52,15 +52,28 @@ O manifesto (`bundled_release/manifest.json`) lista cada arquivo com o hash fina
 
 ## Componentes
 
-A partir da 2026.5.1 o manifesto declara a seção `components`, que permite instalar o **Patch 2026**, o **campo animado** ou os dois:
+O manifesto declara a seção `components`. Desde o schema 2 (hub 1.1.0), o patch tem três componentes independentes, que podem ser instalados e removidos em qualquer combinação:
 
-| Seleção (somada ao que já está instalado) | Executável final | Receita |
+| Componente | Arquivos | Como é removido |
 |---|---|---|
-| Patch 2026 + campo animado | patch completo com campo animado | `bf22-23.exe.json` |
-| Somente Patch 2026 | patch 2026 sem o campo animado | `bf22-23.exe.patch.json` |
-| Somente campo animado | original com o campo animado | `bf22-23.exe.live.json` |
+| **Elencos 2026** (`rosters`) | `teams/*.ban` | cópias originais do próprio usuário (cofre de originais); arquivos que não existem no jogo original são apagados |
+| **Temporada 2026** (`season`) | recursos do executável (ano 2026, Copa do Mundo de 48 seleções, copas continentais) e `conf_ligas_nacionais/BRA.cfg` quando o pacote o incluir | receita do executável |
+| **Campo animado** (`live`) | recursos do executável | receita do executável |
 
-Os arquivos de equipe e a configuração nacional pertencem ao Patch 2026. Componentes já instalados nunca são removidos por uma instalação; para voltar atrás, o usuário restaura um backup. Detalhes em [Hub e instalador](installer.md).
+O executável tem quatro variantes, todas reconhecidas por SHA-256 e com receita a partir das outras (`components.variants`):
+
+| Temporada | Campo animado | Variante | Receita |
+|---|---|---|---|
+| sim | sim | `full` | `bf22-23.exe.json` |
+| sim | não | `season` | `bf22-23.exe.patch.json` |
+| não | sim | `live` | `bf22-23.exe.live.json` |
+| não | não | `original` | `bf22-23.exe.original.json` |
+
+Cada arquivo do manifesto traz o componente (`component`) e o hash do arquivo no jogo original (`vanillaSha256`, `vanillaSize` ou `vanillaMissing`), calculados por `build_component_bundle.py --original-game` a partir de uma instalação original. Os pacotes nunca contêm arquivos de equipe originais. Hubs 1.0.0 continuam instalando pelos campos antigos (`executables`), sem a remoção. Detalhes em [Hub e instalador](installer.md).
+
+### Saves e compatibilidade
+
+O patch não altera o formato dos saves: as classes serializadas pelo Brasfoot (o mundo `best.f` e as competições do pacote `f`) têm os mesmos campos no executável original e no do patch; o patch muda apenas métodos, como a montagem de competições novas. Por isso uma carreira salva abre e continua com ou sem o patch, nos dois sentidos, e o hub nunca grava em `sav/`. A verificação foi feita lendo e regravando uma cópia de save com os dois executáveis.
 
 ## Estados de verificação
 

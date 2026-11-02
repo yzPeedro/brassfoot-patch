@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.5.5",
+  "version": "2026.5.6",
   "channel": "stable",
-  "releaseNotes": "Corrige a atualização da 2026.5.4 no hub e mantém os uniformes novos do campo animado.",
+  "releaseNotes": "Hub 1.1.0: escolha o que instalar, remova o patch inteiro ou só uma parte mantendo as carreiras, e configure tema e avisos de versão nova.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [

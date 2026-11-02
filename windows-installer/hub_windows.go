@@ -146,6 +146,10 @@ func hubRefresh() {
 				state["valid"] = true
 				state["game"] = current.Game
 				state["patch"], state["live"] = componentStatus(manifest, current)
+				if supportsTargets(manifest) {
+					harvestOriginals(manifest, current.Game)
+				}
+				state["components"] = componentReport(manifest, current.Game)
 				state["version"] = manifest.Version
 				state["executableKnown"] = current.ExecutableKnown || current.ExecutableMissing
 				state["teamsInstalled"] = current.TeamsInstalled
@@ -213,8 +217,70 @@ func hubCheckUpdates() error {
 			last = percent
 			hubEmit(map[string]any{"type": "feed-progress", "percent": percent})
 		})
+		if status := feedStatus(); status.Online {
+			rememberSeenVersions(status.Feed)
+		}
 		hubEmit(map[string]any{"type": "feed", "feed": hubFeedInfo(false)})
 	}()
+	return nil
+}
+
+func hubGetSettings() HubSettings {
+	return loadSettings()
+}
+
+func hubSetSetting(key string, value any) (HubSettings, error) {
+	settings := loadSettings()
+	switch key {
+	case "theme":
+		theme, _ := value.(string)
+		if theme != "light" && theme != "dark" {
+			theme = "system"
+		}
+		settings.Theme = theme
+	case "notify":
+		enabled, _ := value.(bool)
+		if err := setNotifications(enabled); err != nil {
+			return settings, errors.New("O Windows não permitiu ativar os avisos de versão nova.")
+		}
+		settings.Notify = enabled
+		if enabled {
+			if status := feedStatus(); status.Feed.PatchVersion != "" {
+				settings.LastSeenPatch = status.Feed.PatchVersion
+				settings.LastSeenHub = status.Feed.Hub.Version
+			}
+		}
+	default:
+		return settings, errors.New("configuração desconhecida")
+	}
+	return settings, saveSettings(settings)
+}
+
+func hubSetFrameTheme(dark bool) {
+	if hubWindow == 0 || dwm.Load() != nil {
+		return
+	}
+	border := uint32(0x00f3e7e1)
+	if dark {
+		border = 0x0020120b
+	}
+	hubView.Dispatch(func() {
+		dwmSetAttribute.Call(hubWindow, dwmBorderColor, uintptr(unsafe.Pointer(&border)), 4)
+	})
+}
+
+func hubUninstallHub() error {
+	if hubIsBusy() {
+		return errors.New("Aguarde a operação em andamento terminar.")
+	}
+	exe, err := os.Executable()
+	if err != nil {
+		return err
+	}
+	if err = startHub(exe, []string{"--uninstall-hub"}); err != nil {
+		return err
+	}
+	postMessage.Call(hubWindow, wmClose, 0, 0)
 	return nil
 }
 
@@ -348,6 +414,78 @@ func hubInstall(selection Selection) error {
 		hubEmit(map[string]any{"type": "done", "operation": "install", "version": result.Version, "files": result.Files, "backup": filepath.Base(result.BackupPath)})
 	}()
 	return nil
+}
+
+func hubApply(target TargetState, operation string) error {
+	game := hubCurrentGame()
+	if game == "" {
+		return errors.New("Escolha a pasta do Brasfoot antes de continuar.")
+	}
+	if !hubSetBusy("install") {
+		return errors.New("Aguarde a operação em andamento terminar.")
+	}
+	go func() {
+		defer func() {
+			hubSetBusy("")
+			hubRefresh()
+		}()
+		hubEmit(map[string]any{"type": "progress", "operation": "install", "percent": 3, "label": "Conferindo o jogo e o pacote"})
+		if process, err := runningBrasfoot(); err == nil && process != "" {
+			hubEmit(map[string]any{"type": "error", "operation": "install", "code": "BF-112", "title": "Feche o Brasfoot", "reason": "O jogo está aberto (" + process + ").", "action": "Salve sua carreira, feche o jogo e tente de novo."})
+			return
+		}
+		plan, err := stageTarget(hubStagingRoot, game, target)
+		if err != nil {
+			hubFail("install", err)
+			return
+		}
+		if plan.Empty || (plan.Plan.AlreadyInstalled && len(plan.Deletes) == 0) {
+			hubEmit(map[string]any{"type": "done", "operation": "install", "mode": operation, "already": true, "version": plan.Plan.Manifest.Version})
+			return
+		}
+		backupProgress := hubProgress("install", 10, 40, func(done, total int) string { return fmt.Sprintf("Guardando backup · %d de %d", done, total) })
+		installProgress := hubProgress("install", 50, 49, func(done, total int) string { return fmt.Sprintf("Aplicando · %d de %d", done, total) })
+		result, err := applyTarget(plan, InstallOptions{Progress: func(stage string, done, total int) {
+			switch stage {
+			case "backup":
+				backupProgress(done, total)
+			case "install":
+				installProgress(done, total)
+			}
+		}})
+		if err != nil {
+			hubFail("install", err)
+			return
+		}
+		hubEmit(map[string]any{"type": "done", "operation": "install", "mode": operation, "version": result.Version, "files": result.Files, "backup": filepath.Base(result.BackupPath)})
+	}()
+	return nil
+}
+
+func hubImportOriginals() {
+	if hubIsBusy() {
+		return
+	}
+	hubView.Dispatch(func() {
+		path := chooseFolder("Selecione uma instalação original do Brasfoot (sem patch)")
+		if path == "" {
+			return
+		}
+		go func() {
+			folder := normalizeGameSelection(path)
+			imported, err := importOriginalsFrom(bundledManifestFromFS(), folder)
+			if err != nil {
+				hubFail("originals", err)
+				return
+			}
+			settings := loadSettings()
+			settings.OriginalFolder = folder
+			_ = saveSettings(settings)
+			hubEmit(map[string]any{"type": "settings", "settings": settings})
+			hubEmit(map[string]any{"type": "toast", "message": fmt.Sprintf("%d arquivos originais guardados para a remoção.", imported)})
+			hubRefresh()
+		}()
+	})
 }
 
 func hubListBackups() []BackupEntry {
@@ -577,22 +715,28 @@ func runHub() bool {
 	hubFrameless(hubWindow)
 	hubGame = findGame()
 	bindings := map[string]any{
-		"hubInfo":         hubInfo,
-		"hubRefresh":      hubRefresh,
-		"hubChooseGame":   hubChooseGame,
-		"hubInstall":      hubInstall,
-		"hubListBackups":  hubListBackups,
-		"hubCreateBackup": hubCreateBackup,
-		"hubRestore":      hubRestoreBackup,
-		"hubOpenBackup":   hubOpenBackup,
-		"hubLaunchGame":   hubLaunchGame,
-		"hubOpenLink":     hubOpenLink,
-		"hubCopyPix":      hubCopyPix,
-		"hubFeed":         func() map[string]any { return hubFeedInfo(false) },
-		"hubCheckUpdates": hubCheckUpdates,
-		"hubUpdateHub":    hubUpdateHub,
-		"hubOpenExternal": hubOpenExternal,
-		"hubMinimize":     func() { showWindow.Call(hubWindow, swMinimize) },
+		"hubInfo":            hubInfo,
+		"hubRefresh":         hubRefresh,
+		"hubChooseGame":      hubChooseGame,
+		"hubInstall":         hubInstall,
+		"hubApply":           hubApply,
+		"hubImportOriginals": hubImportOriginals,
+		"hubGetSettings":     hubGetSettings,
+		"hubSetSetting":      hubSetSetting,
+		"hubUninstallHub":    hubUninstallHub,
+		"hubSetFrameTheme":   hubSetFrameTheme,
+		"hubListBackups":     hubListBackups,
+		"hubCreateBackup":    hubCreateBackup,
+		"hubRestore":         hubRestoreBackup,
+		"hubOpenBackup":      hubOpenBackup,
+		"hubLaunchGame":      hubLaunchGame,
+		"hubOpenLink":        hubOpenLink,
+		"hubCopyPix":         hubCopyPix,
+		"hubFeed":            func() map[string]any { return hubFeedInfo(false) },
+		"hubCheckUpdates":    hubCheckUpdates,
+		"hubUpdateHub":       hubUpdateHub,
+		"hubOpenExternal":    hubOpenExternal,
+		"hubMinimize":        func() { showWindow.Call(hubWindow, swMinimize) },
 		"hubClose": func() bool {
 			if hubIsBusy() {
 				return false
@@ -615,6 +759,9 @@ func runHub() bool {
 		"{{PITCH}}", "data:image/jpeg;base64,"+base64.StdEncoding.EncodeToString(hubPitch),
 	).Replace(hubPage)
 	view.SetHtml(page)
+	if loadSettings().Notify {
+		go func() { _ = setNotifications(true) }()
+	}
 	go func() {
 		time.Sleep(300 * time.Millisecond)
 		if err := hubCheckUpdates(); err != nil {
@@ -633,6 +780,10 @@ func main() {
 	}
 	o32.NewProc("OleInitialize").Call(0)
 	options := parseHubArgs(os.Args[1:])
+	if options.NotifyCheck {
+		runNotifyCheck()
+		return
+	}
 	if options.Uninstall {
 		uninstallHub()
 		return

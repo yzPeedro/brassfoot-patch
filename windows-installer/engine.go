@@ -36,6 +36,11 @@ type ManifestFile struct {
 	AllowMissing           bool          `json:"allowMissing,omitempty"`
 	Recipe                 string        `json:"recipe,omitempty"`
 	Via                    *ManifestFile `json:"via,omitempty"`
+	Component              string        `json:"component,omitempty"`
+	VanillaSHA256          string        `json:"vanillaSha256,omitempty"`
+	VanillaSize            int64         `json:"vanillaSize,omitempty"`
+	VanillaMissing         bool          `json:"vanillaMissing,omitempty"`
+	LocalSource            string        `json:"-"`
 }
 type Item struct {
 	File             ManifestFile

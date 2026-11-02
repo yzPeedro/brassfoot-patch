@@ -23,10 +23,11 @@ const (
 )
 
 type hubOptions struct {
-	Classic   bool
-	Portable  bool
-	Uninstall bool
-	Updated   bool
+	NotifyCheck bool
+	Classic     bool
+	Portable    bool
+	Uninstall   bool
+	Updated     bool
 }
 
 func parseHubArgs(args []string) hubOptions {
@@ -41,6 +42,8 @@ func parseHubArgs(args []string) hubOptions {
 			options.Uninstall = true
 		case "--updated":
 			options.Updated = true
+		case "--notify-check":
+			options.NotifyCheck = true
 		case "--feed":
 			if i+1 < len(args) {
 				i++
@@ -194,6 +197,7 @@ func registerHubUninstall(executable string) {
 	for _, name := range []string{"NoModify", "NoRepair"} {
 		_ = hiddenCommand("reg.exe", "add", hubUninstallKey, "/v", name, "/t", "REG_DWORD", "/d", "1", "/f").Run()
 	}
+	registerProtocol(executable)
 }
 
 func ensureHubInstalled(options hubOptions) bool {
@@ -236,6 +240,8 @@ func uninstallHub() {
 		return
 	}
 	removeHubShortcuts()
+	_ = setNotifications(false)
+	_ = hiddenCommand("reg.exe", "delete", protocolKey, "/f").Run()
 	_ = hiddenCommand("reg.exe", "delete", hubUninstallKey, "/f").Run()
 	dir := hubInstallDir()
 	if dir != "" && runningFromInstallDir() {

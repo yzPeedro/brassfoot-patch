@@ -295,6 +295,17 @@ func preparePayloadManifest(fsys fs.FS, manifest Manifest, gamePath, staged stri
 		var output []byte
 		if current == f.SHA256 && int64(len(original)) == f.Size {
 			output = original
+		} else if f.LocalSource != "" {
+			if !contains(f.AcceptedOriginalSHA256, current) {
+				return &UnknownOriginalError{Relative: f.Path, Actual: current, Accepted: f.AcceptedOriginalSHA256}
+			}
+			output, err = os.ReadFile(f.LocalSource)
+			if err != nil {
+				return fmt.Errorf("cópia original de %s indisponível: %w", f.Path, err)
+			}
+			if digestBytes(output) != f.SHA256 || int64(len(output)) != f.Size {
+				return fmt.Errorf("cópia original de %s não confere", f.Path)
+			}
 		} else {
 			if mode == "replace" {
 				allowed := f.AllowMissing && len(original) == 0

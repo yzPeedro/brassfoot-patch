@@ -15,6 +15,7 @@ Desde o hub 1.0.0 existe **um único hub**. Ele não carrega o patch dentro do e
 | `snapshots.go` | Backups completos em `.zip`, listagem e restauração de backups |
 | `restore.go` | Restauração do backup criado pela instalação do patch completo |
 | `hub_windows.go` | Janela sem moldura com WebView2, ligação entre a interface e o motor |
+| `targets.go` | Estado-alvo por componente (instalar, atualizar, remover), variantes do executável, cofre de originais |
 | `hub_setup_windows.go` | Instalação do próprio hub em pasta fixa, atalhos, registro em Aplicativos, remoção e autoatualização |
 | `ui/hub.html` | Interface do hub (HTML, CSS e JavaScript em um único arquivo) |
 | `main_windows.go` | Interface Win32 simples, usada quando o WebView2 não está disponível ou com `--classic` |
@@ -70,6 +71,21 @@ No topo de todas as telas:
 
 As notas aparecem em um modal com Markdown simples (títulos, listas, negrito, código e links para o repositório ou o site).
 
+### Configurações
+
+A tela **Configurações** reúne o que não precisa estar no caminho principal:
+
+| Opção | Efeito |
+|---|---|
+| Pasta do jogo | Troca a instalação do Brasfoot usada pelo hub |
+| Instalação original | Mostra quantas cópias originais o hub guarda (necessárias para remover os elencos) e permite indicar uma pasta do Brasfoot sem patch |
+| Tema | Sistema (acompanha o Windows), claro ou escuro |
+| Avisar quando sair uma versão nova | Liga a conferência com o hub fechado: valor `BrasfootMegaPatchNovidades` em `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` (ao entrar no Windows) e tarefa agendada `Brasfoot Mega Patch\Novidades` (todo dia às 19h, depois da publicação diária). As duas executam o hub com `--notify-check`, que lê o `release.json` e mostra uma notificação do Windows quando há patch ou instalador ainda não visto; clicar na notificação abre o hub pelo protocolo `brasfootmegapatch:` |
+| Procurar novidades agora | Repete a consulta à release mais recente |
+| Remover o hub | Mesmo efeito de `--uninstall-hub` |
+
+As preferências ficam em `%LOCALAPPDATA%\BrassfootPatch2026\hub-settings.json`, junto das últimas versões vistas e avisadas.
+
 ### Instalação do próprio hub
 
 Na primeira execução, o hub se copia para `%LOCALAPPDATA%\Programs\Brasfoot Mega Patch\Brasfoot-Mega-Patch.exe`, grava `hub.json` com a versão, cria atalhos no Menu Iniciar e na área de trabalho, registra-se em **Configurações > Aplicativos** (chave `HKCU\...\Uninstall\BrasfootMegaPatchHub`, sem pedir administrador) e reabre a partir da pasta fixa. Se já houver um hub instalado mais novo, o executável baixado apenas abre o instalado. Se a pasta fixa estiver em uso, o hub roda de onde foi aberto.
@@ -88,19 +104,32 @@ Brasfoot-Mega-Patch.exe --classic           interface simples
 Brasfoot-Mega-Patch.exe --portable          roda sem se instalar
 Brasfoot-Mega-Patch.exe --feed <pasta>      usa release.json e pacote de uma pasta local (prévias)
 Brasfoot-Mega-Patch.exe --uninstall-hub     remove o hub do computador
+Brasfoot-Mega-Patch.exe --notify-check      confere a versão mais recente e notifica, sem abrir janela
 ```
 
 O hub requer o Microsoft Edge WebView2 Runtime, presente no Windows 11 e na maioria das instalações do Windows 10. Sem ele, o hub oferece a página oficial de instalação e abre a interface Win32 simples, que também busca a versão mais recente, oferece atualizar o instalador e tem as mesmas garantias de instalação.
 
-## Instalação por componentes
+## Instalação e remoção por componentes
 
-1. O hub detecta o estado atual pelo SHA-256 do `bf22-23.exe` e dos arquivos de equipe do manifesto. Um componente está **atual** quando o executável e os arquivos são exatamente os do pacote, **desatualizado** quando é de uma versão anterior reconhecida e **ausente** quando não foi instalado.
-2. A seleção é somada ao que já está instalado. O executável final é escolhido na seção `components` do manifesto (veja a tabela em [Arquitetura](architecture.md#componentes)).
+O hub trabalha com três componentes: **Elencos 2026**, **Temporada 2026** e **Campo animado** (veja [Arquitetura](architecture.md#componentes)).
+
+- **Instalar:** a instalação automática (recomendada) instala tudo o que falta e atualiza o que já existe, com um só botão. **Escolher o que instalar** é opcional e mostra os três componentes para marcar.
+- **Atualizar:** os componentes desatualizados são sempre incluídos; os ausentes podem ser adicionados.
+- **Remover:** marque o que tirar ou use **Remover tudo**. O resto continua como está. As carreiras salvas não mudam.
+
+Toda operação calcula um estado-alvo (o que deve ficar instalado) e aplica só a diferença:
+
+1. O hub detecta o estado atual pelo SHA-256 do `bf22-23.exe` e dos arquivos do manifesto. Um componente está **atual** quando os arquivos são exatamente os do pacote, **desatualizado** quando são de uma versão anterior reconhecida e **ausente** quando estão como no jogo original.
+2. O executável final é a variante que corresponde a Temporada e Campo animado no alvo. Os arquivos de equipe recebem a receita do pacote (Elencos no alvo) ou voltam à cópia original (Elencos removidos).
 3. O manifesto da seleção é preparado em uma pasta temporária; cada arquivo é gerado pela receita correspondente e conferido.
 4. Se a versão de origem do executável não estiver na receita do componente, o hub aplica primeiro a receita completa e depois a do componente, conferindo o executável intermediário.
 5. A instalação copia os arquivos que serão alterados para um backup, substitui cada arquivo de forma atômica e confere o resultado. Em qualquer falha, os originais são restaurados.
 
 O jogo precisa estar fechado; o hub verifica os processos `bf22-23.exe`, `brasfoot.exe` e `brasfoot22-23.exe` antes de escrever.
+
+### Cofre de originais
+
+Para devolver os elencos originais, o hub guarda em `%LOCALAPPDATA%\BrassfootPatch2026\originals\` uma cópia de cada arquivo do jogo cujo SHA-256 é o do jogo original (`vanillaSha256` no manifesto), nomeada pelo próprio hash. As cópias vêm do jogo antes da primeira instalação, dos backups de instalação e dos backups completos já existentes. Se faltar alguma, a remoção dos elencos fica indisponível e a tela Remover leva a **Configurações > Instalação original**, onde o usuário escolhe uma pasta do Brasfoot sem patch e o hub copia apenas os arquivos idênticos aos originais. O projeto nunca distribui arquivos originais.
 
 ## Backups
 
@@ -116,7 +145,8 @@ Regras da restauração:
 
 - Antes de restaurar, o hub cria automaticamente um backup completo do estado atual.
 - Cada arquivo restaurado é escrito em um arquivo temporário, conferido por SHA-256 e então movido para o lugar.
-- Em backups completos, arquivos que não existiam no backup são removidos apenas das pastas de dados (`teams/`, `conf_ligas_nacionais/`, `conf_estadual/`). Saves criados depois do backup são mantidos.
+- Em backups completos, arquivos que não existiam no backup são removidos apenas das pastas de dados (`teams/`, `conf_ligas_nacionais/`, `conf_estadual/`).
+- Restaurar um backup completo nunca sobrescreve saves (`sav/`) nem `options.bcf` que já existam: o progresso das carreiras é sempre mantido. Saves que não existem mais são devolvidos.
 - Um backup de instalação só é restaurado na mesma pasta de jogo em que foi criado.
 
 ## Linux e macOS
@@ -138,6 +168,7 @@ O atualizador de terminal usa o mesmo feed: a cada execução busca a release ma
 | `--inspect` | Mostra a compatibilidade em JSON sem alterar nada |
 | `--restore` | Restaura o backup da instalação completa |
 | `--bundle <zip>` | Usa um pacote baixado da página da release, sem internet |
+| `--remove rosters,season,live` | Remove componentes (`all` remove tudo); as carreiras salvas não mudam |
 | `--feed <pasta>` | Usa `release.json` e pacote de uma pasta local |
 | `--yes` | Confirma sem pergunta interativa |
 | `--version` | Mostra a versão do atualizador, edição, plataforma e commit |
