@@ -146,6 +146,10 @@ func hubRefresh() {
 				state["valid"] = true
 				state["game"] = current.Game
 				state["patch"], state["live"] = componentStatus(manifest, current)
+				if supportsTargets(manifest) {
+					harvestOriginals(manifest, current.Game)
+				}
+				state["components"] = componentReport(manifest, current.Game)
 				state["version"] = manifest.Version
 				state["executableKnown"] = current.ExecutableKnown || current.ExecutableMissing
 				state["teamsInstalled"] = current.TeamsInstalled
@@ -348,6 +352,73 @@ func hubInstall(selection Selection) error {
 		hubEmit(map[string]any{"type": "done", "operation": "install", "version": result.Version, "files": result.Files, "backup": filepath.Base(result.BackupPath)})
 	}()
 	return nil
+}
+
+func hubApply(target TargetState, operation string) error {
+	game := hubCurrentGame()
+	if game == "" {
+		return errors.New("Escolha a pasta do Brasfoot antes de continuar.")
+	}
+	if !hubSetBusy("install") {
+		return errors.New("Aguarde a operação em andamento terminar.")
+	}
+	go func() {
+		defer func() {
+			hubSetBusy("")
+			hubRefresh()
+		}()
+		hubEmit(map[string]any{"type": "progress", "operation": "install", "percent": 3, "label": "Conferindo o jogo e o pacote"})
+		if process, err := runningBrasfoot(); err == nil && process != "" {
+			hubEmit(map[string]any{"type": "error", "operation": "install", "code": "BF-112", "title": "Feche o Brasfoot", "reason": "O jogo está aberto (" + process + ").", "action": "Salve sua carreira, feche o jogo e tente de novo."})
+			return
+		}
+		plan, err := stageTarget(hubStagingRoot, game, target)
+		if err != nil {
+			hubFail("install", err)
+			return
+		}
+		if plan.Empty || (plan.Plan.AlreadyInstalled && len(plan.Deletes) == 0) {
+			hubEmit(map[string]any{"type": "done", "operation": "install", "mode": operation, "already": true, "version": plan.Plan.Manifest.Version})
+			return
+		}
+		backupProgress := hubProgress("install", 10, 40, func(done, total int) string { return fmt.Sprintf("Guardando backup · %d de %d", done, total) })
+		installProgress := hubProgress("install", 50, 49, func(done, total int) string { return fmt.Sprintf("Aplicando · %d de %d", done, total) })
+		result, err := applyTarget(plan, InstallOptions{Progress: func(stage string, done, total int) {
+			switch stage {
+			case "backup":
+				backupProgress(done, total)
+			case "install":
+				installProgress(done, total)
+			}
+		}})
+		if err != nil {
+			hubFail("install", err)
+			return
+		}
+		hubEmit(map[string]any{"type": "done", "operation": "install", "mode": operation, "version": result.Version, "files": result.Files, "backup": filepath.Base(result.BackupPath)})
+	}()
+	return nil
+}
+
+func hubImportOriginals() {
+	if hubIsBusy() {
+		return
+	}
+	hubView.Dispatch(func() {
+		path := chooseFolder("Selecione uma instalação original do Brasfoot (sem patch)")
+		if path == "" {
+			return
+		}
+		go func() {
+			imported, err := importOriginalsFrom(bundledManifestFromFS(), normalizeGameSelection(path))
+			if err != nil {
+				hubFail("originals", err)
+				return
+			}
+			hubEmit(map[string]any{"type": "toast", "message": fmt.Sprintf("%d arquivos originais guardados para a remoção.", imported)})
+			hubRefresh()
+		}()
+	})
 }
 
 func hubListBackups() []BackupEntry {
@@ -577,22 +648,24 @@ func runHub() bool {
 	hubFrameless(hubWindow)
 	hubGame = findGame()
 	bindings := map[string]any{
-		"hubInfo":         hubInfo,
-		"hubRefresh":      hubRefresh,
-		"hubChooseGame":   hubChooseGame,
-		"hubInstall":      hubInstall,
-		"hubListBackups":  hubListBackups,
-		"hubCreateBackup": hubCreateBackup,
-		"hubRestore":      hubRestoreBackup,
-		"hubOpenBackup":   hubOpenBackup,
-		"hubLaunchGame":   hubLaunchGame,
-		"hubOpenLink":     hubOpenLink,
-		"hubCopyPix":      hubCopyPix,
-		"hubFeed":         func() map[string]any { return hubFeedInfo(false) },
-		"hubCheckUpdates": hubCheckUpdates,
-		"hubUpdateHub":    hubUpdateHub,
-		"hubOpenExternal": hubOpenExternal,
-		"hubMinimize":     func() { showWindow.Call(hubWindow, swMinimize) },
+		"hubInfo":            hubInfo,
+		"hubRefresh":         hubRefresh,
+		"hubChooseGame":      hubChooseGame,
+		"hubInstall":         hubInstall,
+		"hubApply":           hubApply,
+		"hubImportOriginals": hubImportOriginals,
+		"hubListBackups":     hubListBackups,
+		"hubCreateBackup":    hubCreateBackup,
+		"hubRestore":         hubRestoreBackup,
+		"hubOpenBackup":      hubOpenBackup,
+		"hubLaunchGame":      hubLaunchGame,
+		"hubOpenLink":        hubOpenLink,
+		"hubCopyPix":         hubCopyPix,
+		"hubFeed":            func() map[string]any { return hubFeedInfo(false) },
+		"hubCheckUpdates":    hubCheckUpdates,
+		"hubUpdateHub":       hubUpdateHub,
+		"hubOpenExternal":    hubOpenExternal,
+		"hubMinimize":        func() { showWindow.Call(hubWindow, swMinimize) },
 		"hubClose": func() bool {
 			if hubIsBusy() {
 				return false

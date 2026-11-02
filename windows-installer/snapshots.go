@@ -27,6 +27,11 @@ var (
 	snapshotPrunedDir = map[string]bool{"teams": true, "conf_ligas_nacionais": true, "conf_estadual": true}
 )
 
+func userOwned(name string) bool {
+	clean := strings.ToLower(filepath.ToSlash(name))
+	return strings.HasPrefix(clean, "sav/") || clean == "options.bcf"
+}
+
 type BackupEntry struct {
 	ID        string `json:"id"`
 	Kind      string `json:"kind"`
@@ -377,7 +382,8 @@ func restoreSnapshot(entry BackupEntry, game string, progress func(done, total i
 		if err != nil {
 			return err
 		}
-		if current, e := sha(target); e == nil && current == expected[f.Name] {
+		current, e := sha(target)
+		if (e == nil && current == expected[f.Name]) || (e == nil && userOwned(f.Name)) {
 			if progress != nil {
 				progress(index+1, len(reader.File))
 			}

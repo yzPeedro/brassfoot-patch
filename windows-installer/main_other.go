@@ -111,6 +111,7 @@ func runPortable() error {
 	only := flag.String("only", "", "instalar só um componente: patch ou live")
 	feed := flag.String("feed", "", "pasta local com release.json e o pacote, em vez do GitHub")
 	bundle := flag.String("bundle", "", "arquivo .zip do pacote baixado da release, para uso sem internet")
+	remove := flag.String("remove", "", "remover componentes: rosters, season, live ou all (separados por vírgula)")
 	flag.Parse()
 	if flag.NArg() != 0 {
 		return errors.New("argumentos inesperados; consulte --help")
@@ -154,6 +155,9 @@ func runPortable() error {
 	}
 	if err := loadPortablePayload(*feed, *bundle); err != nil {
 		return err
+	}
+	if *remove != "" {
+		return runPortableRemoval(*game, *remove, *yes, graphical)
 	}
 	payload, err := stageBundledPayload()
 	if err != nil {
@@ -256,5 +260,64 @@ func loadPortablePayload(feed, bundle string) error {
 	if hubUpdateAvailable(status.Feed) {
 		fmt.Printf("Há um atualizador mais novo (%s): %s\n", status.Feed.Hub.Version, "https://github.com/yzPeedro/brassfoot-patch/releases/latest")
 	}
+	return nil
+}
+
+func runPortableRemoval(game, remove string, yes, graphical bool) error {
+	m := bundledManifestFromFS()
+	if !supportsTargets(m) {
+		return errors.New("esta versão do patch ainda não permite remover componentes")
+	}
+	resolved, _, err := validGame(game)
+	if err != nil {
+		return err
+	}
+	harvestOriginals(m, resolved)
+	report := componentReport(m, resolved)
+	installed := map[string]bool{
+		componentRosters: report.Rosters != statusAbsent,
+		componentSeason:  report.Season != statusAbsent,
+		componentLive:    report.Live != statusAbsent,
+	}
+	target := TargetState{Rosters: installed[componentRosters], Season: installed[componentSeason], Live: installed[componentLive]}
+	for _, name := range strings.Split(remove, ",") {
+		switch strings.TrimSpace(strings.ToLower(name)) {
+		case "all":
+			target = TargetState{}
+		case componentRosters:
+			target.Rosters = false
+		case componentSeason:
+			target.Season = false
+		case componentLive:
+			target.Live = false
+		default:
+			return fmt.Errorf("componente desconhecido em --remove: %s (use rosters, season, live ou all)", name)
+		}
+	}
+	question := "Remover os componentes escolhidos? Um backup dos arquivos alterados será criado. Suas carreiras salvas continuam abrindo com ou sem o patch.\nPasta: " + resolved
+	if !yes && !portableConfirmation(question, graphical) {
+		fmt.Println("Operação cancelada. Nenhum arquivo do jogo foi alterado.")
+		return nil
+	}
+	root, err := os.MkdirTemp("", "brasfoot-mega-patch-remove-")
+	if err != nil {
+		return err
+	}
+	defer os.RemoveAll(root)
+	plan, err := stageTarget(root, resolved, target)
+	if err != nil {
+		return err
+	}
+	if plan.Empty || (plan.Plan.AlreadyInstalled && len(plan.Deletes) == 0) {
+		fmt.Println("Nada a remover: o jogo já está como pedido.")
+		return nil
+	}
+	result, err := applyTarget(plan, InstallOptions{Progress: func(stage string, done, total int) {
+		fmt.Printf("%s: %d/%d\n", map[string]string{"backup": "Criando backup", "install": "Aplicando", "done": "Finalizando"}[stage], done, total)
+	}})
+	if err != nil {
+		return err
+	}
+	fmt.Println("Remoção concluída. Backup em: " + result.BackupPath)
 	return nil
 }

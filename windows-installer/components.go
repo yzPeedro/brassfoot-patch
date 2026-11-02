@@ -24,7 +24,9 @@ type ComponentConfig struct {
 	OriginalExecutableSHA256 string                         `json:"originalExecutableSha256"`
 	LiveExecutableSHA256     []string                       `json:"liveExecutableSha256"`
 	LiveOnlyExecutableSHA256 []string                       `json:"liveOnlyExecutableSha256,omitempty"`
+	SeasonExecutableSHA256   []string                       `json:"seasonExecutableSha256,omitempty"`
 	Executables              map[string]ComponentExecutable `json:"executables"`
+	Variants                 map[string]ComponentExecutable `json:"variants,omitempty"`
 }
 
 type ComponentExecutable struct {

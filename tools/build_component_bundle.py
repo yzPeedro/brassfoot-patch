@@ -13,6 +13,8 @@ from tools.bundle_limits import check_bundle
 EXECUTABLE = "bf22-23.exe"
 PATCH_RECIPE = "bf22-23.exe.patch.json"
 LIVE_RECIPE = "bf22-23.exe.live.json"
+ORIGINAL_RECIPE = "bf22-23.exe.original.json"
+NATIONAL_CONFIG = "conf_ligas_nacionais/BRA.cfg"
 
 
 def sha(value: bytes) -> str:
@@ -110,7 +112,10 @@ def build(args: argparse.Namespace) -> dict:
     live_only = [path.read_bytes() for path in args.previous_live_only_executable]
     live_only = [item for item in live_only if sha(item) not in {live_sha, original_sha, full_sha, patch_sha}]
     live_variants = [recipe(original, live)] + [recipe(item, live) for item in live_only]
+    live_variants += [recipe(full, live), recipe(patch, live)]
     write_recipe(patches / LIVE_RECIPE, live_variants)
+    original_variants = [recipe(full, original), recipe(patch, original), recipe(live, original)]
+    write_recipe(patches / ORIGINAL_RECIPE, original_variants)
 
     normalized = normalize_chains(patches)
     live_hashes = {full_sha, live_sha} | {sha(item) for item in live_only}
@@ -134,8 +139,24 @@ def build(args: argparse.Namespace) -> dict:
             break
     else:
         raise ValueError("executable is absent from inherited manifest")
+    live_only_hashes = {sha(item) for item in live_only} | {live_sha}
+    season_hashes = ({variant["originalSha256"] for variant in main_variants} | {full_sha, patch_sha}) - live_only_hashes - {original_sha}
+    vanilla_game = args.original_game.resolve() if args.original_game else None
+    for item in manifest["files"]:
+        if item["path"] != EXECUTABLE:
+            item["component"] = "season" if item["path"] == NATIONAL_CONFIG else "rosters"
+        if vanilla_game is None:
+            continue
+        source = vanilla_game / item["path"]
+        if source.is_file():
+            data = source.read_bytes()
+            item["vanillaSha256"] = sha(data)
+            item["vanillaSize"] = len(data)
+            item.pop("vanillaMissing", None)
+        else:
+            item["vanillaMissing"] = True
     manifest["components"] = {
-        "schemaVersion": 1,
+        "schemaVersion": 2 if vanilla_game else 1,
         "originalExecutableSha256": original_sha,
         "liveExecutableSha256": sorted(live_hashes),
         "liveOnlyExecutableSha256": sorted(sha(item) for item in live_only),
@@ -147,6 +168,18 @@ def build(args: argparse.Namespace) -> dict:
                      "acceptedOriginalSha256": [variant["originalSha256"] for variant in live_variants]},
         },
     }
+    if vanilla_game:
+        manifest["components"]["seasonExecutableSha256"] = sorted(season_hashes)
+        manifest["components"]["variants"] = {
+            "full": {"sha256": full_sha, "size": len(full), "recipe": EXECUTABLE + ".json",
+                     "acceptedOriginalSha256": [variant["originalSha256"] for variant in main_variants]},
+            "season": {"sha256": patch_sha, "size": len(patch), "recipe": PATCH_RECIPE,
+                       "acceptedOriginalSha256": [variant["originalSha256"] for variant in patch_variants]},
+            "live": {"sha256": live_sha, "size": len(live), "recipe": LIVE_RECIPE,
+                     "acceptedOriginalSha256": [variant["originalSha256"] for variant in live_variants]},
+            "original": {"sha256": original_sha, "size": len(original), "recipe": ORIGINAL_RECIPE,
+                         "acceptedOriginalSha256": [variant["originalSha256"] for variant in original_variants]},
+        }
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     check_bundle(output)
     return {
@@ -168,6 +201,7 @@ def main() -> None:
     parser.add_argument("--patch-recipe", type=Path, required=True)
     parser.add_argument("--previous-live-executable", type=Path, action="append", default=[])
     parser.add_argument("--previous-live-only-executable", type=Path, action="append", default=[])
+    parser.add_argument("--original-game", type=Path, help="instalação original do Brasfoot (somente leitura) para marcar o hash original de cada arquivo")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--version")
     parser.add_argument("--release", action="store_true")
