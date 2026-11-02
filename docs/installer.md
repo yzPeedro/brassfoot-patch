@@ -55,7 +55,7 @@ Sem internet, o hub usa a última versão guardada e avisa. Sem nenhuma versão 
 O hub abre em uma janela própria, sem a barra do Windows, com botões de minimizar e fechar na barra superior (que também arrasta a janela). A barra mostra a versão do hub. Ele tem três áreas:
 
 - **Início:** pasta do Brasfoot (detectada automaticamente ou escolhida), situação de cada componente (instalado, atualização disponível ou não instalado), a versão mais recente com o link **Ver novidades** e os botões **Jogar**, **Instalar** e **Atualizar**. Clicar no campo animado abre um painel grande com o campo em movimento e as quatro condições de gramado (demonstração; fecha com o X, Esc ou clique fora).
-- **Instalar:** oferece só o que ainda não está instalado. Componentes já instalados aparecem bloqueados.
+- **Instalar:** mostra os componentes para marcar; os já instalados aparecem bloqueados. O switch **Escolha automática** (desde o hub 1.3.0) marca a recomendação e mostra o motivo em cada componente.
 - **Atualizar:** disponível apenas quando a versão instalada de algum componente é diferente da versão publicada. Os componentes desatualizados são sempre incluídos, e os que faltam podem ser adicionados na mesma operação. A atualização segue as mesmas garantias da instalação: backup dos arquivos alterados, substituição atômica e conferência por SHA-256.
 - **Backups:** lista de backups, criação de backup completo, restauração e abertura da pasta do backup.
 
@@ -114,7 +114,9 @@ O hub requer o Microsoft Edge WebView2 Runtime, presente no Windows 11 e na maio
 
 O hub trabalha com os componentes **Elencos 2026**, **Temporada 2026**, **Campo animado** e, desde o hub 1.2.0, **Escudos atualizados** (veja [Arquitetura](architecture.md#componentes)). O cartão dos escudos só aparece quando o pacote traz escudos.
 
-- **Instalar:** a instalação automática (recomendada) instala tudo o que falta e atualiza o que já existe, com um só botão. **Escolher o que instalar** é opcional e mostra os componentes para marcar.
+- **Instalar:** os componentes aparecem para marcar, sem nada pré-marcado. Com o switch **Escolha automática** ligado, o hub marca a recomendação e mostra o motivo em cada cartão; o usuário pode mudar qualquer cartão, o que desliga o switch. A escolha do switch fica em `hub-settings.json` (`autoInstall`).
+  - **Campo animado:** fica de fora com menos de 4 GB de memória instalada (`GetPhysicallyInstalledSystemMemory`), até 2 processadores lógicos ou com a velocidade padrão de partida em Super ou Ultra rápido. A velocidade vem de `options.bcf` (`est.Options.velocidade`, índice 0 Lento a 5 Ultra rápido), que o jogo copia para cada carreira nova.
+  - **Elencos, Temporada 2026 e escudos:** sempre recomendados. Os motivos citam as carreiras salvas (`sav/*.s22`), que continuam abrindo, e os escudos trocados pelo usuário, que não são alterados.
 - **Atualizar:** os componentes desatualizados são sempre incluídos; os ausentes podem ser adicionados.
 - **Remover:** marque o que tirar ou use **Remover tudo**. O resto continua como está. As carreiras salvas não mudam.
 
