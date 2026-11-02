@@ -20,7 +20,8 @@ TODAY = datetime.now(timezone.utc).date().isoformat()
 STOP = {"fc", "cf", "sc", "ac", "ec", "ca", "se", "cd", "ud", "sd", "afc", "fk", "sk", "nk", "bk", "if", "ik",
         "as", "us", "ss", "ssc", "cs", "gd", "sv", "vfb", "vfl", "tsv", "club", "clube", "futebol", "football",
         "futbol", "de", "do", "da", "dos", "das", "del", "la", "el", "e", "y", "the", "esporte", "esportes",
-        "associacao", "sociedade", "kf", "ks", "sad", "cp", "cfc", "jk", "bc", "calcio", "1"}
+        "associacao", "sociedade", "kf", "ks", "sad", "cp", "cfc", "jk", "bc", "calcio", "1", "apf", "auf",
+        "anfp", "afa", "fpf"}
 
 
 def key(value: str | None) -> str:
@@ -53,6 +54,8 @@ def name_score(a: str | None, b: str | None) -> float:
     if not x or not y:
         return 0.0
     if (set(x) & RESERVE) != (set(y) & RESERVE):
+        return min(0.5, difflib.SequenceMatcher(None, "".join(x), "".join(y)).ratio())
+    if {t for t in x if len(t) == 1} != {t for t in y if len(t) == 1}:
         return min(0.5, difflib.SequenceMatcher(None, "".join(x), "".join(y)).ratio())
     if "".join(x) == "".join(y):
         return 1.0

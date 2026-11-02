@@ -21,7 +21,7 @@ EXCLUDED_NAME = re.compile(r"\b(women|womens|women's|ladies|feminin[oa]|femenin[
                            re.I)
 CUP_NAME = re.compile(r"\b(cup|copa|coupe|pokal|coppa|ta[cç]a|beker|kupa|puchar|super ?cup|supercopa|trophy|"
                       r"shield|play-?offs?)\b", re.I)
-DIVISION_365 = re.compile(r"^\s*(\d+)\s*ª\s*Divis", re.I)
+DIVISION_365 = re.compile(r"^\s*(\d+)\s*ª\s*Divis|^\s*Liga\s*(\d)\s*$", re.I)
 NOT_LEAGUE_365 = re.compile(r"\b(copa|supercopa|ta[cç]a|cup|repescagem|play-?offs?|playout|qualifica[cç][aã]o)\b", re.I)
 RANK = {"official": 1, "wikidata-season": 2, "wikidata": 2, "derived": 2, "wikipedia": 2, "365scores-table": 2,
         "wikidata-p118-top": 3, "wikidata-p118": 4, "365scores": 3, "wikipedia-chain": 3, "365scores-colors": 3}
@@ -605,7 +605,7 @@ def build() -> dict:
     def level365_claim(target: dict, sc365: dict) -> None:
         found = DIVISION_365.search(sc365["name"] or "")
         if found and not NOT_LEAGUE_365.search(sc365["name"] or ""):
-            target["_claims"]["level365"].append(ledger.claim("365scores", sc365["rid"], int(found.group(1)),
+            target["_claims"]["level365"].append(ledger.claim("365scores", sc365["rid"], int(found.group(1) or found.group(2)),
                                                               rank="365scores",
                                                               method=f"nome da competição no 365Scores ({sc365['name']})"))
 
@@ -650,7 +650,8 @@ def build() -> dict:
                                               names_of) >= 0.85)
                 ratio = hits / size
                 if ratio >= 0.5:
-                    pairs.append((1.0 + ratio + 0.6 * label_of.get(cid, 0.0), sc365["id"], cid,
+                    weight = 1.0 + ratio + 0.6 * label_of.get(cid, 0.0) if competitions[cid]["ids"]["wikidata"] else 0.01 * ratio
+                    pairs.append((weight, sc365["id"], cid,
                                   f"sobreposição com a lista da FIFA {ratio:.2f} ({hits}/{size})", "fifa"))
             for cid, hits in overlap.items():
                 ratio = hits / size
@@ -670,7 +671,9 @@ def build() -> dict:
             if labels and labels[0][0] >= 0.85 and (len(labels) == 1 or labels[0][0] - labels[1][0] >= 0.05):
                 cid = labels[0][1]
                 ratio = overlap.get(cid, 0) / size if size and cid in with_members else None
-                if ratio is None or ratio >= 0.2:
+                expected = expected_teams(competitions[cid])
+                sized = bool(size and expected) and 0.5 <= size / expected <= 2
+                if ratio is None or ratio >= 0.2 or sized:
                     method = f"nome {labels[0][0]:.2f}" + (f", sobreposição {ratio:.2f}" if ratio is not None else "")
                     pairs.append((0.6 * labels[0][0], sc365["id"], cid, method, "name"))
         taken_s, taken_c = set(), set()
@@ -706,7 +709,27 @@ def build() -> dict:
                         {"competition": sid, "teams": size, "matched": overlap[cid], "with": [x for x in parts if x != cid]})
                     competitions[cid]["needsReview"].append("classificação do 365Scores reúne mais de uma liga do catálogo")
                 continue
-            if not DIVISION_365.search(sc365["name"] or "") or NOT_LEAGUE_365.search(sc365["name"] or ""):
+            division = DIVISION_365.search(sc365["name"] or "")
+            if not division or NOT_LEAGUE_365.search(sc365["name"] or ""):
+                continue
+            number = int(division.group(1) or division.group(2))
+            same = [c for c in pool if c["kind"] == "league" and c["scope"] == "national" and c["id"] not in taken_c
+                    and not c["ids"].get("scores365") and {x["value"] for x in c["_claims"]["level"]} == {number}]
+            same = [c for c in same if not expected_teams(c) or 0.5 <= size / expected_teams(c) <= 2]
+            if len(same) > 1:
+                best_hits = max(overlap.get(c["id"], 0) for c in same)
+                leaders = [c for c in same if overlap.get(c["id"], 0) == best_hits]
+                same = leaders if best_hits and len(leaders) == 1 else []
+            if len(same) == 1:
+                target = same[0]
+                taken_c.add(target["id"])
+                target["ids"]["scores365"] = sid
+                target["scores365Match"] = (f"nível {number} no nome do 365Scores; única liga do país nesse nível sem "
+                                            f"vínculo (sobreposição {overlap.get(target['id'], 0)}/{size})")
+                target["teamCounts"]["365scores"] = size
+                target["scores365Season"] = table.get("season")
+                target["needsReview"].append("ligação ao 365Scores pelo nível do nome")
+                s365_link[sid] = target["id"]
                 continue
             cid = f"s365-{sid}"
             competitions[cid] = {"id": cid, "name": table.get("nameEn") or sc365["name"],
@@ -1135,6 +1158,51 @@ def build() -> dict:
             if not club.get("scores365Colors") and (team.get("color") or team.get("awayColor")):
                 club["scores365Colors"] = {"home": team.get("color"), "away": team.get("awayColor")}
 
+    current_home: dict[str, set[str]] = defaultdict(set)
+    season_leagues: set[str] = set()
+    for club in clubs.values():
+        for c in club["_league"]:
+            if c["source"] in ("fifa", "365scores"):
+                current_home[club["id"]].add(c["value"])
+            elif c["method"].startswith("P1923"):
+                season_leagues.add(c["value"])
+    linked_365 = set(s365_link.values()) | {c for cids in s365_multi.values() for c in cids}
+    shadowed: dict[str, str] = {}
+    with_evidence = (closed_lists | linked_365 | season_leagues
+                     | {c["id"] for c in competitions.values() if c["ids"].get("fifa")})
+    national_by_iso: dict[str, list[dict]] = defaultdict(list)
+    for comp in competitions.values():
+        if (comp["kind"] == "league" and comp["scope"] == "national" and comp["country"] and not comp["excluded"]
+                and not comp["defunct"]):
+            national_by_iso[comp["country"]].append(comp)
+    for group in national_by_iso.values():
+        keys = {c["id"]: {key(n) for n in [c["name"], *c["names"].values()] if n} - {""} for c in group}
+        for comp in group:
+            if comp["id"] in with_evidence:
+                continue
+            twins = [c for c in group if c["id"] != comp["id"] and c["id"] in with_evidence
+                     and keys[comp["id"]] & keys[c["id"]]]
+            if len(twins) == 1:
+                shadowed[comp["id"]] = twins[0]["id"]
+                comp["excluded"] = [f"item duplicado: mesmo nome normalizado de {twins[0]['name']} ({twins[0]['id']})"]
+                comp["needsReview"].append("liga duplicada no Wikidata")
+    for comp in competitions.values():
+        cid = comp["id"]
+        if (comp["kind"] != "league" or comp["excluded"] or comp["defunct"] or cid in closed_lists
+                or cid in linked_365 or cid in season_leagues):
+            continue
+        members = {r["club"] for r in members_by_league.get(comp["ids"]["wikidata"] or "", []) if r["club"] in clubs}
+        if len(members) < 4:
+            continue
+        elsewhere = Counter(lg for q in members for lg in current_home.get(q, ()) if lg != cid)
+        moved = sum(1 for q in members if current_home.get(q, set()) - {cid})
+        if moved / len(members) >= 0.5:
+            top = elsewhere.most_common(1)[0][0]
+            shadowed[cid] = top
+            comp["excluded"] = [f"sem evidência da temporada; {moved} de {len(members)} clubes estão em ligas com "
+                                f"lista oficial (sobretudo {competitions[top]['name']})"]
+            comp["needsReview"].append("liga provavelmente renomeada, extinta ou guarda-chuva")
+
     for r in P.get("clubs", []):
         club = clubs.get(r["qid"])
         parts = r.get("kit") or {}
@@ -1211,7 +1279,7 @@ def build() -> dict:
         claims = club.pop("_league")
         regional = club.pop("_regional")
         stale = [c for c in claims if c["source"] == "wikidata" and c["method"].startswith("P118")
-                 and c["value"] in closed_lists]
+                 and (c["value"] in closed_lists or c["value"] in shadowed)]
         if stale:
             claims = [c for c in claims if c not in stale]
             club["staleLeagues"] = sorted({c["value"] for c in stale})
