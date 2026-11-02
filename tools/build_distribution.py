@@ -14,6 +14,11 @@ import tarfile
 import tempfile
 import zipfile
 
+try:
+    from tools.bundle_limits import check_bundle
+except ImportError:
+    from bundle_limits import check_bundle
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DESCRIPTION = "Build the Brasfoot Mega Patch installers from an explicit delta bundle"
@@ -86,6 +91,7 @@ def build(args: argparse.Namespace) -> Path:
     original = json.loads((bundle / "manifest.json").read_text(encoding="utf-8-sig"))
     if original.get("patchSeason") != year or not (bundle / "patches").is_dir():
         raise ValueError("explicit bundle must contain manifest.json, patches/ and the selected edition")
+    check_bundle(bundle)
     hub_config_path = Path(args.hub_config).resolve()
     hub_config = json.loads(hub_config_path.read_text(encoding="utf-8-sig"))
     hub_version = args.hub_version or hub_config["version"]

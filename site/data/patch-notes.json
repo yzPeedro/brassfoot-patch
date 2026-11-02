@@ -1,7 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-01T21:30:00-03:00",
+  "updatedAt": "2026-11-01T22:10:00-03:00",
   "entries": [
+    {
+      "id": "patch-2026-5-5",
+      "version": "2026.5.5",
+      "date": "2026-11-01T22:10:00-03:00",
+      "title": "Correção da atualização pelo hub",
+      "kind": "patch",
+      "summary": "A atualização para a 2026.5.4 era recusada pelo hub sem alterar o jogo. O pacote foi corrigido e traz os uniformes novos do campo animado.",
+      "changes": [
+        "O pacote aceita apenas as versões publicadas e atualiza todas elas a partir do hub.",
+        "A publicação passa a recusar pacotes fora das regras do hub.",
+        "Mantém os uniformes da 2026.5.4: mandante e visitante, listras, cores oficiais e goleiros com cor própria.",
+        "Elencos, cobertura e hub iguais aos da 2026.5.4; carreiras salvas não são alteradas."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.5.5"
+    },
     {
       "id": "patch-2026-5-4",
       "version": "2026.5.4",

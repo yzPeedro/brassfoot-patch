@@ -7,6 +7,7 @@ from pathlib import Path
 import shutil
 
 from tools.build_inplace_bundle import match_ops
+from tools.bundle_limits import check_bundle
 
 
 EXECUTABLE = "bf22-23.exe"
@@ -147,6 +148,7 @@ def build(args: argparse.Namespace) -> dict:
         },
     }
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    check_bundle(output)
     return {
         "bundle": str(output), "version": manifest["version"],
         "full": full_sha, "patch": patch_sha, "live": live_sha, "original": original_sha,
