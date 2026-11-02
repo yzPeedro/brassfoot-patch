@@ -1,7 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-02T00:30:00-03:00",
+  "updatedAt": "2026-11-02T01:40:00-03:00",
   "entries": [
+    {
+      "id": "patch-2026-5-7",
+      "version": "2026.5.7",
+      "date": "2026-11-02T01:40:00-03:00",
+      "title": "Faltas no lugar certo e gols mais variados",
+      "kind": "patch",
+      "summary": "O campo animado tira as faltas comuns de dentro da área, não deixa mais gols sumirem na virada de tempo e varia as jogadas que terminam em gol.",
+      "changes": [
+        "Faltas comuns e com cartão acontecem fora da área; falta de goleiro fora da área e pênalti só dentro dela.",
+        "Gols no início do 2º tempo, no fim de um tempo e no apito final aparecem no campo.",
+        "Gols com tabela, drible, chapéu, cruzamento, linha de fundo, chute de fora e arrancada; outros atacantes também entram na área.",
+        "Dribles, tabelas e ataques pela ponta durante o jogo, sem criar finalizações fora das estatísticas.",
+        "Elencos, temporada e hub iguais aos da 2026.5.6."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.5.7"
+    },
     {
       "id": "patch-2026-5-6",
       "version": "2026.5.6",

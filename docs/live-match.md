@@ -48,19 +48,21 @@ python tools/patch_live_match_view.py --source <bf22-23.exe> --output <pasta>/bf
 - **Pausa curta nos lances do jogo.** O painel conhece os lances com um minuto de antecedência. Quando o próximo minuto tem gol, pênalti, cartão ou lesão, o painel segura o relógio da partida enquanto a jogada acontece no campo e só deixa o minuto virar no clímax (bola na rede, apito, falta no pênalti). Assim, placar e campo mudam juntos.
 - **Depois do gol.** O relógio continua parado enquanto os jogadores voltam às posições e dão a saída de bola. No início de cada tempo vale o mesmo para a entrada em campo.
 - **O minuto nunca fica mais curto.** Ao soltar o relógio, o painel executa o próprio passo de minuto do Brasfoot, nunca antes do horário em que o jogo o executaria. Fora dessas pausas, a partida corre na velocidade escolhida pelo jogador, e substituições e lances de estatística não pausam o jogo.
-- **Quanto tempo a mais.** Cerca de 3 a 6 segundos por gol (jogada e saída de bola) e até 2,5 segundos por cartão; numa partida típica, de 15 a 30 segundos a mais. A proporção pesa mais nas velocidades rápidas, em que a partida inteira dura menos.
+- **Quanto tempo a mais.** Cerca de 3 a 8 segundos por gol (jogada e saída de bola) e até 2,5 segundos por cartão; numa partida típica, de 15 a 30 segundos a mais. A proporção pesa mais nas velocidades rápidas, em que a partida inteira dura menos.
 
 | Velocidade do jogo | Intervalo por minuto | Lances de estatística encenados |
 |---|---|---|
 | Lento | 2000 ms | até 2 por minuto |
 | Normal | 1200 ms | 1 por minuto; experiência ideal |
-| Rápido, Bem rápido, Super rápido, Ultra rápido | 700 a 100 ms | não encenados; gols com jogada direta |
+| Rápido, Bem rápido, Super rápido, Ultra rápido | 700 a 100 ms | não encenados; gols com jogadas mais curtas |
 
 - **Troca de lado.** No segundo tempo os times invertem o campo de ataque.
 
 ## Garantias de execução
 
-- **Nunca travar o jogo:** qualquer erro no quadro do painel zera as animações e devolve o relógio ao Brasfoot; cada fase tem prazo máximo, e uma pausa de lance dura no máximo 9 segundos.
+- **Nunca travar o jogo:** qualquer erro no quadro do painel zera as animações e devolve o relógio ao Brasfoot; cada fase tem prazo máximo, e uma pausa de lance dura no máximo 9 segundos (14 segundos na jogada de um gol).
+- **Nenhum gol perdido:** lances do jogo ficam na fila durante paralisações, na virada de tempo e depois de uma proteção contra travamento; a antecipação do minuto só acontece depois que o painel registra a troca de tempo; um gol pendente do 1º tempo é mostrado antes da entrada para o 2º tempo, e um gol interrompido é refeito uma vez.
+- **Faltas no lugar certo:** faltas comuns e com cartão nunca são marcadas dentro da área de quem comete; a falta que gera pênalti é marcada dentro da área.
 - **Diálogos e pausa:** com diálogos do jogo abertos o painel não segura o relógio, e um pedido de pausa ou substituição libera o relógio na hora.
 - **Bola sempre ancorada:** a posse só muda por contato (passe, domínio, desarme ou cobrança), e cada fase termina em um estado explícito.
 - **Diagnóstico:** eventos de integração são registrados em `%LOCALAPPDATA%\BrassfootPatch2026\live-match-debug.log`.

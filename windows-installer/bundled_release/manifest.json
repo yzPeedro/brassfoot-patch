@@ -2,7 +2,7 @@
   "schemaVersion": 4,
   "kind": "BRASFOOT_RELEASE_PATCH",
   "patchSeason": 2026,
-  "version": "2026.5.6",
+  "version": "2026.5.7",
   "publicationAllowed": true,
   "compatibilityTestedInGame": false,
   "channel": "stable",
@@ -12,9 +12,10 @@
     {
       "operation": "replace",
       "path": "bf22-23.exe",
-      "size": 7240416,
-      "sha256": "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
+      "size": 7247598,
+      "sha256": "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414",
       "acceptedOriginalSha256": [
+        "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
         "b572ab3370daa18a8753d5f6c9a4687fba6f5785a2be85ec3558bb5732179507",
         "4ae89b42c5bd18cfcc76025133e6ac5b9c85c5e72eabf7c490da2a35cd570bde",
         "3fa5e69666961f32a01224c1204f8f28f516109b6cf3fc29162fcd3f6f38d017",
@@ -29,7 +30,8 @@
         "31383d9d7085980be8b8b156546f1c068de873c7de4b03ee717e3a7f74f0c87b",
         "4ae89b42c5bd18cfcc76025133e6ac5b9c85c5e72eabf7c490da2a35cd570bde",
         "3fa5e69666961f32a01224c1204f8f28f516109b6cf3fc29162fcd3f6f38d017",
-        "2159798376f670db9a99a19c85fd4cba3bbd9128f0a4b3c8b9ffb4b61d189d4a"
+        "2159798376f670db9a99a19c85fd4cba3bbd9128f0a4b3c8b9ffb4b61d189d4a",
+        "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9"
       ],
       "vanillaSha256": "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
       "vanillaSize": 7320384
@@ -5004,22 +5006,18 @@
     "schemaVersion": 2,
     "originalExecutableSha256": "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
     "liveExecutableSha256": [
+      "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
       "2159798376f670db9a99a19c85fd4cba3bbd9128f0a4b3c8b9ffb4b61d189d4a",
-      "3fa5e69666961f32a01224c1204f8f28f516109b6cf3fc29162fcd3f6f38d017",
-      "4ae89b42c5bd18cfcc76025133e6ac5b9c85c5e72eabf7c490da2a35cd570bde",
       "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
-      "b572ab3370daa18a8753d5f6c9a4687fba6f5785a2be85ec3558bb5732179507",
-      "bcdc27a44985ca01a37fab50e73d587d78b171814f53f045cb51dfc6c0647f6c",
-      "d2e69ca3154ea998b7b6d4ae62ab4baef1d56beb68768cf82e46044c90fc32f3"
+      "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414"
     ],
     "liveOnlyExecutableSha256": [
-      "3fa5e69666961f32a01224c1204f8f28f516109b6cf3fc29162fcd3f6f38d017",
-      "4ae89b42c5bd18cfcc76025133e6ac5b9c85c5e72eabf7c490da2a35cd570bde"
+      "2159798376f670db9a99a19c85fd4cba3bbd9128f0a4b3c8b9ffb4b61d189d4a"
     ],
     "executables": {
       "patch+live": {
-        "sha256": "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
-        "size": 7240416,
+        "sha256": "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414",
+        "size": 7247598,
         "recipe": "bf22-23.exe.json"
       },
       "patch": {
@@ -5036,18 +5034,18 @@
           "d2e69ca3154ea998b7b6d4ae62ab4baef1d56beb68768cf82e46044c90fc32f3",
           "b572ab3370daa18a8753d5f6c9a4687fba6f5785a2be85ec3558bb5732179507",
           "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
-          "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc"
+          "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
+          "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414"
         ]
       },
       "live": {
-        "sha256": "2159798376f670db9a99a19c85fd4cba3bbd9128f0a4b3c8b9ffb4b61d189d4a",
-        "size": 7394660,
+        "sha256": "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
+        "size": 7401842,
         "recipe": "bf22-23.exe.live.json",
         "acceptedOriginalSha256": [
           "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
-          "4ae89b42c5bd18cfcc76025133e6ac5b9c85c5e72eabf7c490da2a35cd570bde",
-          "3fa5e69666961f32a01224c1204f8f28f516109b6cf3fc29162fcd3f6f38d017",
-          "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
+          "2159798376f670db9a99a19c85fd4cba3bbd9128f0a4b3c8b9ffb4b61d189d4a",
+          "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414",
           "8193758a822282588548b263c5e29772bbb25e8d905fa882b21e2e5ce38ca119"
         ]
       }
@@ -5055,20 +5053,24 @@
     "seasonExecutableSha256": [
       "2e4aaa4d5db93603546d5528455657e5ea81814600d4d00c5d9b850efd5fe604",
       "31383d9d7085980be8b8b156546f1c068de873c7de4b03ee717e3a7f74f0c87b",
+      "3fa5e69666961f32a01224c1204f8f28f516109b6cf3fc29162fcd3f6f38d017",
+      "4ae89b42c5bd18cfcc76025133e6ac5b9c85c5e72eabf7c490da2a35cd570bde",
       "574772163c9cd1be9aa1af48cf30f045a219d2825b7f8735314247f247f987e6",
       "5ba1bff7a563cb8bdab28735696b22edac388c90edce4ac8a8caa75919d2b3ae",
       "8193758a822282588548b263c5e29772bbb25e8d905fa882b21e2e5ce38ca119",
       "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
       "b572ab3370daa18a8753d5f6c9a4687fba6f5785a2be85ec3558bb5732179507",
       "bcdc27a44985ca01a37fab50e73d587d78b171814f53f045cb51dfc6c0647f6c",
-      "d2e69ca3154ea998b7b6d4ae62ab4baef1d56beb68768cf82e46044c90fc32f3"
+      "d2e69ca3154ea998b7b6d4ae62ab4baef1d56beb68768cf82e46044c90fc32f3",
+      "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414"
     ],
     "variants": {
       "full": {
-        "sha256": "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
-        "size": 7240416,
+        "sha256": "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414",
+        "size": 7247598,
         "recipe": "bf22-23.exe.json",
         "acceptedOriginalSha256": [
+          "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
           "b572ab3370daa18a8753d5f6c9a4687fba6f5785a2be85ec3558bb5732179507",
           "4ae89b42c5bd18cfcc76025133e6ac5b9c85c5e72eabf7c490da2a35cd570bde",
           "3fa5e69666961f32a01224c1204f8f28f516109b6cf3fc29162fcd3f6f38d017",
@@ -5083,7 +5085,8 @@
           "31383d9d7085980be8b8b156546f1c068de873c7de4b03ee717e3a7f74f0c87b",
           "4ae89b42c5bd18cfcc76025133e6ac5b9c85c5e72eabf7c490da2a35cd570bde",
           "3fa5e69666961f32a01224c1204f8f28f516109b6cf3fc29162fcd3f6f38d017",
-          "2159798376f670db9a99a19c85fd4cba3bbd9128f0a4b3c8b9ffb4b61d189d4a"
+          "2159798376f670db9a99a19c85fd4cba3bbd9128f0a4b3c8b9ffb4b61d189d4a",
+          "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9"
         ]
       },
       "season": {
@@ -5100,18 +5103,18 @@
           "d2e69ca3154ea998b7b6d4ae62ab4baef1d56beb68768cf82e46044c90fc32f3",
           "b572ab3370daa18a8753d5f6c9a4687fba6f5785a2be85ec3558bb5732179507",
           "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
-          "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc"
+          "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
+          "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414"
         ]
       },
       "live": {
-        "sha256": "2159798376f670db9a99a19c85fd4cba3bbd9128f0a4b3c8b9ffb4b61d189d4a",
-        "size": 7394660,
+        "sha256": "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
+        "size": 7401842,
         "recipe": "bf22-23.exe.live.json",
         "acceptedOriginalSha256": [
           "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
-          "4ae89b42c5bd18cfcc76025133e6ac5b9c85c5e72eabf7c490da2a35cd570bde",
-          "3fa5e69666961f32a01224c1204f8f28f516109b6cf3fc29162fcd3f6f38d017",
-          "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
+          "2159798376f670db9a99a19c85fd4cba3bbd9128f0a4b3c8b9ffb4b61d189d4a",
+          "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414",
           "8193758a822282588548b263c5e29772bbb25e8d905fa882b21e2e5ce38ca119"
         ]
       },
@@ -5120,9 +5123,9 @@
         "size": 7320384,
         "recipe": "bf22-23.exe.original.json",
         "acceptedOriginalSha256": [
-          "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
+          "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414",
           "8193758a822282588548b263c5e29772bbb25e8d905fa882b21e2e5ce38ca119",
-          "2159798376f670db9a99a19c85fd4cba3bbd9128f0a4b3c8b9ffb4b61d189d4a"
+          "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9"
         ]
       }
     }
