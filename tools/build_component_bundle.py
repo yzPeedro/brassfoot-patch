@@ -144,6 +144,8 @@ def build(args: argparse.Namespace) -> dict:
     season_hashes = ({variant["originalSha256"] for variant in main_variants} | {full_sha, patch_sha}) - live_only_hashes - {original_sha}
     vanilla_game = args.original_game.resolve() if args.original_game else None
     for item in manifest["files"]:
+        if item.get("component") == "crests":
+            continue
         if item["path"] != EXECUTABLE:
             item["component"] = "season" if item["path"] == NATIONAL_CONFIG else "rosters"
         if vanilla_game is None:
