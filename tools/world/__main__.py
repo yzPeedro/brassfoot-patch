@@ -4,9 +4,10 @@ import argparse
 import json
 import time
 
-from tools.world import catalog, fifa, report, scores365, uefa, wikidata
+from tools.world import catalog, fifa, report, scores365, uefa, wikidata, wikipedia
 
-COLLECTORS = {"wikidata": wikidata.collect, "fifa": fifa.collect, "uefa": uefa.collect, "365scores": scores365.collect}
+COLLECTORS = {"wikidata": wikidata.collect, "fifa": fifa.collect, "uefa": uefa.collect, "365scores": scores365.collect,
+              "wikipedia": wikipedia.collect}
 
 
 def main() -> None:

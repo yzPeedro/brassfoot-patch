@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime, timezone
+import gzip
 import hashlib
 import json
 from pathlib import Path
@@ -38,6 +39,8 @@ SOURCES = {
     },
     "uefa": {"interval": 1.0, "parallel": 2, "timeout": 60, "maxAgeHours": 168, "robots": {}},
     "365scores": {"interval": 1.0, "parallel": 2, "timeout": 60, "maxAgeHours": 168, "robots": {}},
+    "wikipedia": {"interval": 1.0, "parallel": 1, "timeout": 60, "maxAgeHours": 168, "gzip": True,
+                  "noRetry": [404], "robots": {}},
 }
 
 BLOCK_STATUS = {401, 403, 407, 451}
@@ -123,13 +126,17 @@ class Client:
         body = body_path.read_bytes()
         return Response(url, meta["status"], body, meta["observedAt"], meta["sha256"], True)
 
-    def store(self, url: str, status: int, body: bytes) -> Response:
+    def store(self, url: str, status: int, body: bytes, keep=None) -> Response:
         body_path, meta_path = self.paths(url)
         observed = now()
         digest = hashlib.sha256(body).hexdigest()
+        meta = {"url": url, "status": status, "observedAt": observed, "sha256": digest, "userAgent": USER_AGENT}
+        if keep:
+            body = keep(body)
+            meta["stored"] = "extrato"
+            meta["storedSha256"] = hashlib.sha256(body).hexdigest()
         body_path.write_bytes(body)
-        meta_path.write_text(json.dumps({"url": url, "status": status, "observedAt": observed,
-                                         "sha256": digest, "userAgent": USER_AGENT}), encoding="utf8")
+        meta_path.write_text(json.dumps(meta), encoding="utf8")
         return Response(url, status, body, observed, digest, False)
 
     def throttle(self) -> None:
@@ -141,12 +148,17 @@ class Client:
 
     def raw(self, url: str, accept: str) -> tuple[int, dict, bytes]:
         self.throttle()
-        request = Request(url, headers={"User-Agent": USER_AGENT, "Accept": accept})
+        headers = {"User-Agent": USER_AGENT, "Accept": accept}
+        if self.config.get("gzip"):
+            headers["Accept-Encoding"] = "gzip"
+        request = Request(url, headers=headers)
         try:
             with urlopen(request, timeout=self.config["timeout"]) as response:
                 body = response.read(MAX_BODY + 1)
                 if len(body) > MAX_BODY:
                     raise Failed(url, "resposta grande demais")
+                if (response.headers.get("Content-Encoding") or "").lower() == "gzip":
+                    body = gzip.decompress(body)
                 return response.status, dict(response.headers), body
         except HTTPError as exc:
             try:
@@ -195,7 +207,7 @@ class Client:
             return
         raise Refused(url, "bloqueado por robots.txt")
 
-    def get(self, url: str, accept: str = "application/json") -> Response:
+    def get(self, url: str, accept: str = "application/json", keep=None) -> Response:
         hit = self.cached(url)
         if hit:
             self.stats["cache"] += 1
@@ -224,7 +236,7 @@ class Client:
                                           "observedAt": now()})
                     raise Refused(url, f"acesso recusado pela fonte ({marker}); não contornado", status)
                 if status == 200:
-                    return self.store(url, status, body)
+                    return self.store(url, status, body, keep)
                 if (status in RETRY_STATUS or status == 0) and status not in self.config.get("noRetry", []):
                     retry_after = headers.get("Retry-After") or headers.get("retry-after")
                     pause = float(retry_after) if retry_after and retry_after.isdigit() else delay

@@ -15,13 +15,57 @@ COMMONS = "https://commons.wikimedia.org/wiki/Special:FilePath/"
 EXCLUDED_CLASSES = {"Q606060": "feminino", "Q1711289": "base", "Q44418152": "sub-18", "Q44417630": "sub-21",
                     "Q28954": "futebol de salão", "Q15991269": "amador"}
 EXCLUDED_NAME = re.compile(r"\b(women|womens|women's|ladies|feminin[oa]|femenin[oa]|frauen|female|youth|junior|"
-                           r"juvenil|reserve|reserves|u-?\d\d|sub-?\d\d|under-?\d\d|futsal|beach|indoor|amateur)\b",
+                           r"juvenil|reserve|reserves|u-?\d\d|sub-?\d\d|under-?\d\d|futsal|beach|indoor|arena|amateur)\b",
                            re.I)
 CUP_NAME = re.compile(r"\b(cup|copa|coupe|pokal|coppa|ta[cç]a|beker|kupa|puchar|super ?cup|supercopa|trophy|"
                       r"shield|play-?offs?)\b", re.I)
-DIVISION_365 = re.compile(r"(\d+)\s*ª\s*Divis", re.I)
-RANK = {"official": 1, "wikidata-season": 2, "wikidata": 2, "derived": 2, "wikidata-p118-top": 3, "wikidata-p118": 4,
-        "365scores": 3}
+DIVISION_365 = re.compile(r"^\s*(\d+)\s*ª\s*Divis", re.I)
+NOT_LEAGUE_365 = re.compile(r"\b(copa|supercopa|ta[cç]a|cup|repescagem|play-?offs?|playout|qualifica[cç][aã]o)\b", re.I)
+RANK = {"official": 1, "wikidata-season": 2, "wikidata": 2, "derived": 2, "wikipedia": 2, "365scores-table": 2,
+        "wikidata-p118-top": 3, "wikidata-p118": 4, "365scores": 3, "wikipedia-chain": 3, "365scores-colors": 3}
+WP_LABEL = {"en": "Level on pyramid", "pt": "Nível", "es": "Nivel"}
+
+
+class NameIndex:
+    def __init__(self, entries):
+        self.names: dict[str, list[str]] = {}
+        self.tokens: dict[str, set[str]] = defaultdict(set)
+        for ident, names in entries:
+            names = [n for n in names if n]
+            if not names:
+                continue
+            self.names[ident] = names
+            for n in names:
+                tokens = core(n)
+                for t in tokens:
+                    self.tokens[t].add(ident)
+                self.tokens["#" + "".join(tokens)[:4]].add(ident)
+
+    def candidates(self, names) -> set[str]:
+        found = set()
+        for n in names:
+            if not n:
+                continue
+            tokens = core(n)
+            for t in tokens:
+                found |= self.tokens.get(t, set())
+            found |= self.tokens.get("#" + "".join(tokens)[:4], set())
+        return found
+
+    def scored(self, names, within=None) -> list[tuple[float, str]]:
+        pool = self.candidates(names)
+        if within is not None:
+            pool &= within
+        return sorted(((best_name_score(names, self.names[i]), i) for i in pool), reverse=True)
+
+
+def unique_best(scored: list[tuple[float, str]], threshold: float, margin: float) -> tuple[str | None, float, list[str]]:
+    if not scored or scored[0][0] < threshold:
+        return None, scored[0][0] if scored else 0.0, []
+    close = [i for s, i in scored if scored[0][0] - s < margin]
+    if len(close) == 1:
+        return scored[0][1], scored[0][0], []
+    return None, scored[0][0], close
 
 
 def legacy_seed() -> dict[str, int]:
@@ -49,13 +93,30 @@ class Ledger:
             ref["url"] = url
         return {"value": value, "source": source, "rank": RANK[rank], "method": method, **ref}
 
-    def resolve(self, kind: str, entity: str, field: str, claims: list[dict], record_divergence: bool = True):
+    def resolve(self, kind: str, entity: str, field: str, claims: list[dict], record_divergence: bool = True,
+                majority: bool = False):
         claims = [c for c in claims if c and c["value"] is not None]
         if not claims:
             return None
         top = min(c["rank"] for c in claims)
         best = [c for c in claims if c["rank"] == top]
         values = {repr(c["value"]) for c in best}
+        if len(values) > 1 and majority:
+            support = defaultdict(set)
+            for c in best:
+                support[repr(c["value"])].add(c["source"])
+            ranked = sorted(support.items(), key=lambda kv: -len(kv[1]))
+            if len(ranked[0][1]) > len(ranked[1][1]):
+                winner = ranked[0][0]
+                chosen = next(c for c in best if repr(c["value"]) == winner)
+                self.conflicts.append({"kind": kind, "entity": entity, "field": field,
+                                       "resolution": "maioria de fontes", "chosen": self.slim(chosen),
+                                       "claims": [self.slim(c) for c in claims]})
+                for c in claims:
+                    self.lines.append({"entity": entity, "field": field,
+                                       "status": "chosen" if repr(c["value"]) == winner else "overridden",
+                                       **self.slim(c)})
+                return chosen["value"]
         if len(values) > 1:
             self.conflicts.append({"kind": kind, "entity": entity, "field": field, "resolution": None,
                                    "claims": [self.slim(c) for c in claims]})
@@ -82,9 +143,13 @@ def build() -> dict:
     fi = load_raw("fifa") or {}
     ue = load_raw("uefa") or {}
     sc = load_raw("365scores") or {}
-    raws = {"wikidata": wd, "fifa": fi, "uefa": ue, "365scores": sc}
+    wp = load_raw("wikipedia") or {}
+    raws = {"wikidata": wd, "fifa": fi, "uefa": ue, "365scores": sc, "wikipedia": wp}
     ledger = Ledger(raws)
-    W, F, U, S = wd.get("data", {}), fi.get("data", {}), ue.get("data", {}), sc.get("data", {})
+    W, F, U, S, P = wd.get("data", {}), fi.get("data", {}), ue.get("data", {}), sc.get("data", {}), wp.get("data", {})
+    sitelinks: dict[str, dict[str, str]] = defaultdict(dict)
+    for s in W.get("sitelinks", []):
+        sitelinks[s["qid"]][s["wiki"]] = s["title"]
     source_status = {name: {"status": (raw or {}).get("status", "missing"), "errors": len((raw or {}).get("errors", [])),
                             "finishedAt": (raw or {}).get("finishedAt"), "stats": (raw or {}).get("stats")}
                      for name, raw in raws.items()}
@@ -225,7 +290,9 @@ def build() -> dict:
         regional = any(q not in territory_iso and q not in UK_NATIONS
                        for q in l.get("jurisdictions", []) + l.get("locations", []))
         comp = {"id": qid, "name": l.get("en") or l.get("pt") or l.get("native") or qid,
-                "names": {"en": l.get("en"), "pt": l.get("pt"), "native": l.get("native")},
+                "names": {"en": l.get("en"), "pt": l.get("pt"), "native": l.get("native"),
+                          **{"wikipedia-" + w: t for w, t in sitelinks.get(qid, {}).items()}},
+                "teamCounts": {"wikidata": l.get("teams")} if l.get("teams") else {},
                 "ids": {"wikidata": qid, "fifa": None, "uefa": None, "scores365": None},
                 "country": None, "countryMethod": method, "countryCandidates": multi,
                 "kind": "league", "scope": "regional" if regional else "national",
@@ -239,6 +306,21 @@ def build() -> dict:
             comp["_claims"]["level"].append(ledger.claim("wikidata", l["rid"], level, rank="wikidata",
                                                          method="P3983", url=WD_PAGE + qid))
         competitions[qid] = comp
+
+    label_use = Counter((iso_of, key(c["names"]["en"])) for c in competitions.values()
+                        if c["names"].get("en") and not c["excluded"] and not c["defunct"]
+                        for iso_of in {x["value"] for x in c["_claims"]["country"]})
+    for comp in competitions.values():
+        if comp["excluded"] or comp["defunct"]:
+            continue
+        isos = {x["value"] for x in comp["_claims"]["country"]}
+        en = comp["names"].get("en")
+        if en and any(label_use[(i, key(en))] > 1 for i in isos):
+            better = comp["names"].get("wikipedia-en") or comp["names"].get("pt") or comp["names"].get("native")
+            if better and key(better) != key(en):
+                comp["name"] = better
+                comp["nameMethod"] = "rótulo em inglês repetido no país; título da Wikipedia ou rótulo pt"
+                comp["needsReview"].append("rótulo em inglês do Wikidata repetido em outra liga do país")
 
     seasons_by_league = defaultdict(list)
     for s in W.get("seasons", []):
@@ -312,7 +394,7 @@ def build() -> dict:
                                     "country": None, "countryMethod": "FIFA IdMemberAssociation",
                                     "countryCandidates": [], "kind": fc["kind"], "scope": "national",
                                     "excluded": None, "defunct": False, "level": None, "levelStatus": None,
-                                    "teamsDeclared": None, "season": None, "clubs": [],
+                                    "teamsDeclared": None, "season": None, "clubs": [], "teamCounts": {},
                                     "needsReview": ["sem item correspondente no Wikidata"],
                                     "_claims": defaultdict(list), "_rid": fc["rid"]}
             comp = competitions[target]
@@ -323,6 +405,8 @@ def build() -> dict:
                 comp["needsReview"].append("tipo inferido pelo nome")
         link["target"] = target
         comp["ids"]["fifa"] = cid
+        if season.get("teams"):
+            comp["teamCounts"]["fifa"] = len(season["teams"])
         comp["fifaLink"] = link["method"]
         comp["fifaDisplayOrder"] = fc.get("displayOrder")
         comp["_claims"]["country"].append(ledger.claim("fifa", fc["rid"], link["iso"], rank="official",
@@ -371,7 +455,7 @@ def build() -> dict:
                                  "country": None, "countryMethod": "UEFA countryCode", "countryCandidates": [],
                                  "kind": uefa_kind, "scope": "national", "excluded": None, "defunct": False,
                                  "level": None, "levelStatus": None, "teamsDeclared": None, "season": None,
-                                 "clubs": [], "needsReview": ["só na lista da UEFA; sem vínculo"],
+                                 "clubs": [], "teamCounts": {}, "needsReview": ["só na lista da UEFA; sem vínculo"],
                                  "linkStatus": "sem vínculo",
                                  "_claims": defaultdict(list), "_rid": comp["rid"]}
             competitions[cid]["_claims"]["country"].append(ledger.claim("uefa", comp["rid"], iso, rank="official",
@@ -402,28 +486,142 @@ def build() -> dict:
         iso = s365_iso.get(comp["countryId"])
         if iso:
             s365_by_iso[iso].append(comp)
-    for iso, comps in s365_by_iso.items():
+    wp_links = P.get("linkTargets", {})
+    for r in P.get("leagues", []):
+        comp = competitions.get(r["qid"])
+        if not comp or comp.get("wikipedia") or (r.get("pageQid") and r["pageQid"] != r["qid"]):
+            continue
+        info = r.get("fields", {})
+        related = {}
+        for field in ("promotion", "relegation"):
+            if field in info:
+                related[field] = sorted({wp_links[f"{r['wiki']}:{t}"]["qid"] for t in info[field]["links"]
+                                         if f"{r['wiki']}:{t}" in wp_links} - {r["qid"]})
+        comp["wikipedia"] = {"wiki": r["wiki"], "title": r["title"], "url": r["url"], "hasInfobox": r["hasInfobox"],
+                             "levelText": (info.get("level") or {}).get("text"),
+                             "promotionText": (info.get("promotion") or {}).get("text"),
+                             "relegationText": (info.get("relegation") or {}).get("text"), **related}
+        if r.get("teams"):
+            comp["teamCounts"]["wikipedia"] = r["teams"]
+        if info.get("region") and comp["scope"] != "regional":
+            comp["scope"] = "regional"
+            comp["scopeMethod"] = f"infobox Wikipedia ({r['wiki']}) com campo regional: {info['region']['text'][:60]}"
+            ledger.lines.append({"entity": comp["id"], "field": "scope", "status": "chosen", "value": "regional",
+                                 "source": "wikipedia", "method": comp["scopeMethod"],
+                                 **ledger.ref("wikipedia", r["rid"]), "url": r["url"]})
+        if r.get("level") is not None:
+            comp["_claims"]["level"].append(ledger.claim("wikipedia", r["rid"], r["level"], rank="wikipedia",
+                                                         method=f"infobox ({r['wiki']}): {WP_LABEL[r['wiki']]}",
+                                                         url=r["url"]))
+
+    s365_tables = {t["competition"]: t for t in S.get("standings", []) if t.get("teams")}
+    s365_by_id = {c["id"]: c for c in S.get("competitions", [])}
+    s365_link: dict[int, str] = {}
+    s365_multi: dict[int, list[str]] = {}
+    s365_iso_of: dict[int, str] = {}
+
+    def comp_iso(c: dict) -> str | None:
+        return c["country"] or wikidata_country_of(c) or fifa_links.get(c["ids"]["fifa"] or "", {}).get("iso")
+
+    def level365_claim(target: dict, sc365: dict) -> None:
+        found = DIVISION_365.search(sc365["name"] or "")
+        if found and not NOT_LEAGUE_365.search(sc365["name"] or ""):
+            target["_claims"]["level365"].append(ledger.claim("365scores", sc365["rid"], int(found.group(1)),
+                                                              rank="365scores",
+                                                              method=f"nome da competição no 365Scores ({sc365['name']})"))
+
+    for iso, comps in sorted(s365_by_iso.items()):
         if iso in countries:
             countries[iso]["scores365CountryId"] = next(c["countryId"] for c in comps)
-        pool = [c for c in competitions.values() if (c["country"] or wikidata_country_of(c) or
-                (fifa_links.get(c["ids"]["fifa"] or "", {}).get("iso"))) == iso and not c["excluded"]
-                and not c["defunct"]]
+        pool = [c for c in competitions.values() if comp_iso(c) == iso and not c["excluded"] and not c["defunct"]]
+        club_leagues: dict[str, set[str]] = defaultdict(set)
+        for c in pool:
+            for m in members_by_league.get(c["ids"]["wikidata"] or "", []):
+                club_leagues[m["club"]].add(c["id"])
+        index = NameIndex((q, [n for m in club_rows[q] for n in club_names(m)]) for q in club_leagues)
+        with_members = {lg for ls in club_leagues.values() for lg in ls}
+        pairs = []
+        overlaps: dict[int, tuple[Counter, int, bool]] = {}
         for sc365 in comps:
             if sc365.get("competitorsType") != 1:
                 continue
-            names = [sc365["name"], (sc365.get("nameForURL") or "").replace("-", " ")]
-            scored = sorted(((best_name_score(names, [c["name"], *[v for v in c["names"].values() if v]]), c["id"])
+            s365_iso_of[sc365["id"]] = iso
+            table = s365_tables.get(sc365["id"])
+            names = [sc365["name"], (sc365.get("nameForURL") or "").replace("-", " "), (table or {}).get("nameEn")]
+            overlap: Counter = Counter()
+            size = len(table["teams"]) if table else 0
+            for team in (table or {}).get("teams", []):
+                hit, _, close = unique_best(index.scored([team.get("name"), team.get("longName")]), 0.85, 0.04)
+                overlap.update({lg for q in ([hit] if hit else close) for lg in club_leagues[q]})
+            labels = sorted(((best_name_score(names, [c["name"], *[v for v in c["names"].values() if v]]), c["id"])
                              for c in pool), reverse=True)
-            if scored and scored[0][0] >= 0.85 and (len(scored) == 1 or scored[0][0] - scored[1][0] >= 0.05):
-                target = competitions[scored[0][1]]
-                if target["ids"]["scores365"] is None:
-                    target["ids"]["scores365"] = sc365["id"]
-                    target["scores365Match"] = f"nome {scored[0][0]:.2f}"
-                    found = DIVISION_365.search(sc365["name"] or "")
-                    if found and scored[0][0] >= 0.95:
-                        target["_claims"]["level365"].append(ledger.claim("365scores", sc365["rid"],
-                                                                          int(found.group(1)), rank="365scores",
-                                                                          method="nome da competição"))
+            label_of = {cid: s for s, cid in labels}
+            cup365 = bool(CUP_NAME.search(f"{sc365['name'] or ''} {(table or {}).get('nameEn') or ''}")
+                          or NOT_LEAGUE_365.search(f"{sc365['name'] or ''} {(table or {}).get('nameEn') or ''}"))
+            overlaps[sc365["id"]] = (overlap, size, cup365)
+            for cid, hits in overlap.items():
+                ratio = hits / size
+                if ratio >= 0.4 and not cup365:
+                    pairs.append((ratio + 0.6 * label_of.get(cid, 0.0), sc365["id"], cid,
+                                  f"sobreposição de times {ratio:.2f} ({hits}/{size}), nome {label_of.get(cid, 0.0):.2f}",
+                                  "overlap"))
+            if labels and labels[0][0] >= 0.85 and (len(labels) == 1 or labels[0][0] - labels[1][0] >= 0.05):
+                cid = labels[0][1]
+                ratio = overlap.get(cid, 0) / size if size and cid in with_members else None
+                if ratio is None or ratio >= 0.2:
+                    method = f"nome {labels[0][0]:.2f}" + (f", sobreposição {ratio:.2f}" if ratio is not None else "")
+                    pairs.append((0.6 * labels[0][0], sc365["id"], cid, method, "name"))
+        taken_s, taken_c = set(), set()
+        for score, sid, cid, method, how in sorted(pairs, key=lambda p: (-p[0], p[1], p[2])):
+            if sid in taken_s or cid in taken_c:
+                continue
+            taken_s.add(sid)
+            taken_c.add(cid)
+            target, sc365, table = competitions[cid], s365_by_id[sid], s365_tables.get(sid)
+            target["ids"]["scores365"] = sid
+            target["scores365Match"] = method
+            s365_link[sid] = cid
+            if table:
+                target["teamCounts"]["365scores"] = len(table["teams"])
+                target["scores365Season"] = table.get("season")
+            if how == "overlap" or score >= 0.6 * 0.95:
+                level365_claim(target, sc365)
+        for sc365 in comps:
+            sid, table = sc365["id"], s365_tables.get(sc365["id"])
+            if sid in s365_link or not table or sc365.get("competitorsType") != 1:
+                continue
+            overlap, size, cup365 = overlaps.get(sid, (Counter(), 0, True))
+            if cup365:
+                continue
+            parts = sorted((cid for cid, hits in overlap.items() if hits / size >= 0.1 and cid not in taken_c
+                            and competitions[cid]["kind"] == "league"), key=lambda c: -overlap[c])
+            part_levels = [{x["value"] for x in competitions[c]["_claims"]["level"]} for c in parts]
+            same_level = all(len(lv) == 1 for lv in part_levels) and len(set().union(*part_levels)) == 1
+            if len(parts) >= 2 and same_level and sum(overlap[c] for c in parts) / size >= 0.35:
+                s365_multi[sid] = parts
+                for cid in parts:
+                    competitions[cid].setdefault("scores365Shared", []).append(
+                        {"competition": sid, "teams": size, "matched": overlap[cid], "with": [x for x in parts if x != cid]})
+                    competitions[cid]["needsReview"].append("classificação do 365Scores reúne mais de uma liga do catálogo")
+                continue
+            if not DIVISION_365.search(sc365["name"] or "") or NOT_LEAGUE_365.search(sc365["name"] or ""):
+                continue
+            cid = f"s365-{sid}"
+            competitions[cid] = {"id": cid, "name": table.get("nameEn") or sc365["name"],
+                                 "names": {"en": table.get("nameEn"), "pt": sc365["name"]},
+                                 "ids": {"wikidata": None, "fifa": None, "uefa": None, "scores365": sid},
+                                 "country": None, "countryMethod": "365Scores countryId", "countryCandidates": [],
+                                 "kind": "league", "scope": "national", "excluded": None, "defunct": False,
+                                 "level": None, "levelStatus": None, "teamsDeclared": None,
+                                 "season": {"name": table.get("season"), "source": "365scores"} if table.get("season") else None,
+                                 "clubs": [], "teamCounts": {"365scores": len(table["teams"])},
+                                 "scores365Season": table.get("season"),
+                                 "needsReview": ["só no 365Scores; sem vínculo"], "linkStatus": "sem vínculo",
+                                 "_claims": defaultdict(list), "_rid": sc365["rid"]}
+            competitions[cid]["_claims"]["country"].append(ledger.claim("365scores", sc365["rid"], iso,
+                                                                        rank="365scores", method="countryId"))
+            level365_claim(competitions[cid], sc365)
+            s365_link[sid] = cid
 
     for comp in competitions.values():
         claims = comp.pop("_claims")
@@ -438,19 +636,87 @@ def build() -> dict:
         if comp["kind"] != "league":
             comp["level"] = None
             continue
-        level = ledger.resolve("competition", comp["id"], "level", claims["level"], record_divergence=False)
+        level = ledger.resolve("competition", comp["id"], "level", claims["level"], record_divergence=False,
+                               majority=True)
         if level is not None:
             comp["level"] = level
             sources = sorted({c["source"] for c in claims["level"] if c["value"] == level})
-            comp["levelStatus"] = "confirmado" if len(sources) > 1 else ("oficial-derivado" if sources == ["fifa"]
-                                                                         else "wikidata")
+            comp["levelSources"] = sources
+            if len({c["value"] for c in claims["level"]}) > 1:
+                comp["levelStatus"] = "maioria"
+                comp["needsReview"].append("nível escolhido pela maioria das fontes")
+            elif len(sources) > 1:
+                comp["levelStatus"] = "confirmado"
+            else:
+                comp["levelStatus"] = {"fifa": "oficial-derivado"}.get(sources[0], sources[0])
         elif claims["level"]:
             comp["levelStatus"] = "conflito"
             comp["needsReview"].append("nível divergente entre fontes")
-        elif claims["level365"]:
-            comp["level"] = ledger.resolve("competition", comp["id"], "level", claims["level365"])
-            comp["levelStatus"] = "365scores-nome"
+        comp["_level365"] = claims["level365"]
         comp.pop("_rid", None)
+
+    def chain_candidate(comp: dict) -> bool:
+        return (comp["kind"] == "league" and comp["level"] is None and comp.get("levelStatus") != "conflito"
+                and not comp["excluded"] and not comp["defunct"] and comp["country"] is not None)
+
+    for _ in range(12):
+        proposals: dict[str, set[tuple[int, str, str]]] = defaultdict(set)
+        for comp in competitions.values():
+            wiki = comp.get("wikipedia") or {}
+            if comp["kind"] != "league" or comp["excluded"] or comp["defunct"]:
+                continue
+            for field, delta in (("relegation", 1), ("promotion", -1)):
+                for target in wiki.get(field, []):
+                    other = competitions.get(target)
+                    if not other or other["country"] != comp["country"]:
+                        continue
+                    if comp["level"] is not None and chain_candidate(other):
+                        proposals[target].add((comp["level"] + delta, comp["id"], field))
+                    if other["level"] is not None and chain_candidate(comp):
+                        proposals[comp["id"]].add((other["level"] - delta, target, field + " (próprio)"))
+        changed = False
+        for target, found in sorted(proposals.items()):
+            comp = competitions[target]
+            values = {lv for lv, _, _ in found}
+            if len(values) != 1 or min(values) < 1:
+                if len(values) > 1 and not comp.get("levelChainConflict"):
+                    comp["levelChainConflict"] = sorted(values)
+                    comp["needsReview"].append("cadeia de acesso/rebaixamento da Wikipedia indica níveis diferentes")
+                    ledger.conflicts.append({"kind": "competition", "entity": target, "field": "level",
+                                             "resolution": None, "claims": [
+                                                 {"value": lv, "source": "wikipedia", "method": f"{field} de {src}",
+                                                  "url": (competitions[src].get("wikipedia") or {}).get("url")}
+                                                 for lv, src, field in sorted(found)]})
+                continue
+            level = values.pop()
+            comp["level"] = level
+            comp["levelStatus"] = "wikipedia-cadeia"
+            comp["levelChain"] = [{"from": src, "field": field} for _, src, field in sorted(found)]
+            for _, src, field in sorted(found):
+                ledger.lines.append({"entity": target, "field": "level", "status": "chosen", "value": level,
+                                     "source": "wikipedia", "method": f"cadeia: {field} de {src}",
+                                     "url": (competitions[src].get("wikipedia") or {}).get("url")
+                                     if "próprio" not in field else (comp.get("wikipedia") or {}).get("url"),
+                                     "observedAt": None, "sha256": None, "response": None})
+            changed = True
+        if not changed:
+            break
+
+    for comp in competitions.values():
+        claims365 = comp.pop("_level365", [])
+        if not claims365:
+            continue
+        if comp["level"] is None and comp.get("levelStatus") != "conflito":
+            comp["level"] = ledger.resolve("competition", comp["id"], "level", claims365)
+            if comp["level"] is not None:
+                comp["levelStatus"] = "365scores-nome"
+        elif comp["level"] is not None and any(c["value"] != comp["level"] for c in claims365):
+            ledger.conflicts.append({"kind": "competition", "entity": comp["id"], "field": "level",
+                                     "resolution": "precedence",
+                                     "chosen": {"value": comp["level"], "source": comp.get("levelStatus")},
+                                     "claims": [ledger.slim(c) for c in claims365]})
+            comp["needsReview"].append(f"nome no 365Scores sugere nível {claims365[0]['value']}; "
+                                       f"adotado {comp['level']} ({comp.get('levelStatus')})")
 
     for comp in competitions.values():
         comp.pop("_rid", None)
@@ -467,6 +733,7 @@ def build() -> dict:
                 "names": {}, "country": None, "association": None, "league": None, "leagueBasis": None,
                 "leagueCandidates": [], "regionalLeagues": [], "otherLeagues": [], "ids": {}, "colors": [],
                 "logo": None, "venue": None, "founded": None, "dissolved": None, "needsReview": [],
+                "kit": None, "scores365Colors": None, "scores365Match": None,
                 "unplacedLeagues": [], "_league": [], "_regional": [], "_country": [], "_unplaced": []}
 
     for club_qid, rows in club_rows.items():
@@ -589,6 +856,135 @@ def build() -> dict:
                                                 method=f"elenco de times da temporada {season.get('current')}"))
             if team.get("founded") and not club["founded"]:
                 club["founded"] = str(team["founded"])
+
+    country_pool: dict[str, set[str]] = defaultdict(set)
+    for club in clubs.values():
+        isos = ({competitions[c["value"]]["country"] for c in club["_league"] if c["value"] in competitions}
+                | {competitions[x]["country"] for x in club["_regional"]} | {c["value"] for c in club["_country"]})
+        for iso in isos - {None}:
+            country_pool[iso].add(club["id"])
+    club_index = NameIndex((c["id"], [c["name"], *c["names"].values()]) for c in clubs.values())
+    by_p12939: dict[int, set[str]] = defaultdict(set)
+    for club in clubs.values():
+        value = club["ids"].get("scores365")
+        for v in (value if isinstance(value, list) else [value] if value else []):
+            if str(v).isdigit():
+                by_p12939[int(v)].add(club["id"])
+    fifa_members: dict[str, set[str]] = defaultdict(set)
+    for (fc, _), target in fifa_team_target.items():
+        fifa_members[fifa_links[fc]["target"]].add(target)
+    s365_team_target: dict[int, str] = {}
+
+    def placed(comp: dict) -> bool:
+        return (comp["kind"] == "league" and comp["level"] is not None and comp["scope"] != "regional"
+                and not comp["excluded"] and not comp["defunct"] and comp["country"] is not None)
+
+    def members_of(cid: str) -> set[str]:
+        return ({r["club"] for r in members_by_league.get(competitions[cid]["ids"]["wikidata"] or "", [])
+                 if r["club"] in clubs} | fifa_members.get(cid, set()))
+
+    order365 = sorted(((not placed(competitions[cids[0]]), competitions[cids[0]]["level"] or 99, sid), sid, cids)
+                      for sid, cids in [*((s, [c]) for s, c in s365_link.items()), *s365_multi.items()]
+                      if sid in s365_tables)
+    for _, sid, cids in order365:
+        table, comp = s365_tables[sid], competitions[cids[0]]
+        multi = len(cids) > 1
+        iso = comp["country"] or s365_iso_of.get(sid)
+        pools = {cid: members_of(cid) for cid in cids}
+        league_pool = set().union(*pools.values())
+        is_placed = placed(comp) and not multi
+        unmatched = []
+        matched_here, created_here = set(), []
+        for team in table["teams"]:
+            names = [team.get("name"), team.get("longName"), team.get("shortName")]
+            target, method, score, close = None, None, None, []
+            if team["id"] in s365_team_target:
+                target, method, score = s365_team_target[team["id"]], "id 365Scores já associado", None
+            elif len(by_p12939.get(team["id"], ())) == 1:
+                target, method, score = next(iter(by_p12939[team["id"]])), "P12939 (Wikidata)", 1.0
+            else:
+                for pool, threshold, label in ((league_pool, 0.85, "nome na liga"),
+                                               (country_pool.get(iso or "", set()), 0.92, "nome no país")):
+                    if not pool:
+                        continue
+                    hit, best, close = unique_best(club_index.scored(names, pool), threshold, 0.04)
+                    if hit:
+                        target, method, score = hit, f"{label} ({best:.2f})", round(best, 3)
+                        break
+                    if close:
+                        break
+            if not target and close:
+                unmatched.append({"team": team["id"], "name": team.get("name"), "candidates": close[:5],
+                                  "reason": "ambíguo"})
+                continue
+            if not target and not (is_placed and iso and not multi):
+                unmatched.append({"team": team["id"], "name": team.get("name"), "candidates": [],
+                                  "reason": "sem correspondência"})
+                continue
+            if not target:
+                target = f"x-{iso.lower()}-{slug(team.get('longName') or team.get('name'))}"
+                created_here.append(target)
+                club = clubs.setdefault(target, new_club(target))
+                club["name"] = club["name"] or team.get("longName") or team.get("name")
+                club["_country"].append(ledger.claim("365scores", table["rid"], iso, rank="365scores",
+                                                     method="countryId da competição"))
+                if "sem QID do Wikidata" not in club["needsReview"]:
+                    club["needsReview"].append("sem QID do Wikidata")
+                method, score = "provisório (365Scores)", None
+            club = clubs[target]
+            matched_here.add(target)
+            s365_team_target[team["id"]] = target
+            previous = club["ids"].get("scores365")
+            if previous and str(previous) != str(team["id"]) and method != "id 365Scores já associado":
+                ledger.conflicts.append({"kind": "club", "entity": target, "field": "scores365", "resolution": None,
+                                         "claims": [{"value": previous, "source": "wikidata", "method": "P12939"},
+                                                    {"value": team["id"], "source": "365scores", "method": method,
+                                                     **ledger.ref("365scores", table["rid"])}]})
+                club["needsReview"].append("id 365Scores do Wikidata difere da classificação")
+            elif not previous:
+                club["ids"]["scores365"] = team["id"]
+            if not club.get("scores365Match"):
+                club["scores365Match"] = {"method": method, "score": score, "competition": sid}
+                club["names"]["scores365"] = team.get("longName") or team.get("name")
+                ledger.lines.append({"entity": target, "field": "scores365", "status": "chosen", "value": team["id"],
+                                     "source": "365scores", "method": method, **ledger.ref("365scores", table["rid"])})
+                if team.get("color") or team.get("awayColor"):
+                    club["scores365Colors"] = {"home": team.get("color"), "away": team.get("awayColor")}
+            season_text = f"classificação {table.get('season') or ''} no 365Scores".replace("  ", " ")
+            if is_placed:
+                club["_league"].append(ledger.claim("365scores", table["rid"], cids[0], rank="365scores-table",
+                                                    method=season_text))
+            elif multi:
+                homes = [cid for cid in cids if target in pools[cid] and placed(competitions[cid])]
+                if len(homes) == 1:
+                    club["_league"].append(ledger.claim("365scores", table["rid"], homes[0], rank="365scores-table",
+                                                        method=season_text + " (classificação conjunta; liga pelo Wikidata)"))
+        leftover = sorted(q for q in league_pool - matched_here if q.startswith("Q"))
+        if created_here and leftover:
+            for target in created_here:
+                clubs[target]["possibleDuplicates"] = leftover[:10]
+                note = "possível duplicata de clube do Wikidata na mesma liga"
+                if note not in clubs[target]["needsReview"]:
+                    clubs[target]["needsReview"].append(note)
+        if unmatched:
+            comp["scores365Unmatched"] = unmatched
+            comp["needsReview"].append(f"{len(unmatched)} time(s) do 365Scores sem associação única")
+
+    for r in P.get("clubs", []):
+        club = clubs.get(r["qid"])
+        parts = r.get("kit") or {}
+        body = parts.get("body") or {}
+        if not club or club.get("kit") or not body.get("color") or (r.get("pageQid") and r["pageQid"] != r["qid"]):
+            continue
+        club["kit"] = {"body": body.get("color"), "shorts": (parts.get("shorts") or {}).get("color"),
+                       "socks": (parts.get("socks") or {}).get("color"),
+                       "leftArm": (parts.get("left_arm") or {}).get("color"),
+                       "rightArm": (parts.get("right_arm") or {}).get("color"), "patternBody": body.get("pattern"),
+                       "source": "wikipedia", "wiki": r["wiki"], "url": r["url"]}
+        ledger.lines.append({"entity": r["qid"], "field": "kit", "status": "chosen",
+                             "value": [club["kit"]["body"], club["kit"]["shorts"], club["kit"]["socks"]],
+                             "source": "wikipedia", "method": f"infobox ({r['wiki']}): body1, shorts1, socks1",
+                             **ledger.ref("wikipedia", r["rid"]), "url": r["url"]})
 
     continental = []
     uefa_index = {}
@@ -760,6 +1156,46 @@ def build() -> dict:
         if not entry["name"]:
             entry["name"] = iso_info.get(iso, {}).get("en")
 
+    def bottom_closed(c: dict) -> bool:
+        w = c.get("wikipedia") or {}
+        if not w.get("hasInfobox"):
+            return False
+        text = (w.get("relegationText") or "").strip().casefold()
+        if not text or text in ("none", "nenhum", "nenhuma", "ninguno", "ninguna", "n/a", "-", "—", "–"):
+            return True
+        targets = w.get("relegation") or []
+        return bool(targets) and all(t in competitions and (competitions[t]["scope"] == "regional"
+                                                            or competitions[t]["country"] != c["country"])
+                                     for t in targets)
+
+    def pyramid_status(iso: str, levels: dict[int, list[dict]]) -> dict:
+        if not levels:
+            return {"state": "sem níveis", "contiguous": False, "counted": False, "bottomConfirmed": None,
+                    "openBelow": [], "deepest": None}
+        deepest = max(levels)
+        contiguous = sorted(levels) == list(range(1, deepest + 1))
+        counted = all(any(c.get("teamCounts", {}).get(k) for k in ("fifa", "365scores", "wikipedia", "wikidata"))
+                      for comps in levels.values() for c in comps)
+        bottom = levels[deepest]
+        open_below = sorted({t for c in bottom for t in (c.get("wikipedia") or {}).get("relegation", [])
+                             if t in competitions and competitions[t]["kind"] == "league"
+                             and competitions[t]["level"] is None and competitions[t]["scope"] != "regional"
+                             and competitions[t]["country"] == iso and not competitions[t]["excluded"]
+                             and not competitions[t]["defunct"]})
+        confirmed = bool(bottom) and all(bottom_closed(c) for c in bottom)
+        if not contiguous:
+            state = "lacunas"
+        elif open_below:
+            state = "continua abaixo (liga sem nível)"
+        elif not counted:
+            state = "sem contagem de clubes"
+        elif not confirmed:
+            state = "fim não confirmado"
+        else:
+            state = "completa"
+        return {"state": state, "contiguous": contiguous, "counted": counted, "bottomConfirmed": confirmed,
+                "openBelow": open_below, "deepest": deepest}
+
     pyramids = {}
     for iso in sorted(countries):
         comps = [c for c in competitions.values() if c["country"] == iso and not c["excluded"] and not c["defunct"]]
@@ -776,8 +1212,11 @@ def build() -> dict:
                                                        "teamsDeclared": c["teamsDeclared"],
                                                        "levelStatus": c["levelStatus"], "season": c["season"],
                                                        "linked": not c.get("linkStatus"),
+                                                       "teamCounts": c.get("teamCounts") or {},
+                                                       "levelSources": c.get("levelSources"),
                                                        "ids": c["ids"]} for c in sorted(levels[lv], key=lambda c: c["id"])]}
                        for lv in sorted(levels)],
+            "status": pyramid_status(iso, levels),
             "unleveled": [{"id": c["id"], "name": c["name"], "clubs": len(c["clubs"]), "levelStatus": c["levelStatus"],
                            "ids": c["ids"]} for c in sorted(leagues, key=lambda c: c["id"])
                           if c["level"] is None and not c.get("linkStatus")],
@@ -802,10 +1241,12 @@ def build() -> dict:
                                     "otherCompetitions")):
             write_json(CATALOG / "pyramids" / f"{iso}.json", pyramid)
     meta = {"schemaVersion": SCHEMA, "generatedAt": now(), "sources": source_status,
-            "precedence": {"estrutura": "oficial (FIFA/UEFA) > Wikidata; nível: P3983 do Wikidata e DisplayOrder da "
-                                        "FIFA têm o mesmo peso (divergência vira conflito); nome da 365Scores só "
-                                        "quando não há outro",
-                           "liga atual do clube": "lista de times da temporada FIFA > P1923 da temporada 2026 no "
+            "precedence": {"estrutura": "oficial (FIFA/UEFA) > Wikidata; nível: P3983 do Wikidata, DisplayOrder da "
+                                        "FIFA e infobox da Wikipedia têm o mesmo peso (maioria de fontes decide; "
+                                        "empate vira conflito) > cadeia de acesso/rebaixamento da Wikipedia > nome "
+                                        "da competição no 365Scores",
+                           "liga atual do clube": "lista de times da temporada FIFA > classificação do 365Scores e "
+                                                  "P1923 da temporada 2026 no "
                                                   "Wikidata > P118 sem data de término",
                            "país do clube": "FIFA/UEFA > Wikidata (P17/P131)"},
             "clubKey": "QID do Wikidata; sem QID: x-<país>-<slug> com needsReview"}
@@ -826,7 +1267,10 @@ def build() -> dict:
                                                             "clubs": c["clubs"]}}
                 for k, c in competitions.items() if c["country"]]
     records += [{"type": "club", "id": k, "fields": {f: v for f, v in {"league": c["league"], "country": c["country"],
-                                                                       "name": c["name"]}.items() if v is not None}}
+                                                                       "name": c["name"],
+                                                                       "scores365": c["ids"].get("scores365"),
+                                                                       "kit": c.get("kit") and [c["kit"]["body"], c["kit"]["shorts"], c["kit"]["socks"]]}.items()
+                                                     if v is not None}}
                 for k, c in clubs.items()]
     records = [r for r in records if r["fields"]]
     previous = None

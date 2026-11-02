@@ -130,6 +130,17 @@ SELECT ?club ?l ?rank ?start ?en ?pt
 """
 
 
+SITELINKS = """
+SELECT ?item ?wiki ?title WHERE {
+  VALUES ?item { %s }
+  VALUES ?wiki { %s }
+  ?article schema:about ?item ; schema:isPartOf ?wiki ; schema:name ?title .
+}
+"""
+WIKIS = ("en", "pt", "es")
+SITELINK_BATCH = 300
+
+
 def qid(uri: str | None) -> str | None:
     return uri.rsplit("/", 1)[-1] if uri else None
 
@@ -245,6 +256,14 @@ def collect(refresh: bool = False, max_age_hours: float | None = None) -> dict:
                             % " ".join("wd:" + c for c in colors[i:i + 300]))
         color_rows += [{"qid": qid(r["c"]), "en": r.get("en"), "hex": r.get("hex"), "rid": rid} for r in rows]
     raw.data["colors"] = color_rows
+    items = sorted({x["qid"] for x in leagues} | {m["club"] for m in memberships})
+    wikis = " ".join(f"<https://{w}.wikipedia.org/>" for w in WIKIS)
+    links = []
+    for i in range(0, len(items), SITELINK_BATCH):
+        rows, rid = section("sitelinks", SITELINKS % (" ".join("wd:" + q for q in items[i:i + SITELINK_BATCH]), wikis))
+        links += [{"qid": qid(r["item"]), "wiki": r["wiki"].split("//", 1)[1].split(".", 1)[0], "title": r["title"],
+                   "rid": rid} for r in rows]
+    raw.data["sitelinks"] = sorted(links, key=lambda x: (x["qid"], x["wiki"]))
     path = raw.save(client.stats)
     return {"source": "wikidata", "path": str(path), "stats": client.stats, "errors": len(raw.errors),
-            "leagues": len(leagues), "memberships": len(memberships)}
+            "leagues": len(leagues), "memberships": len(memberships), "sitelinks": len(links)}
