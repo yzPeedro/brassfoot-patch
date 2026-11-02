@@ -8,6 +8,7 @@ import shutil
 
 from tools.build_inplace_bundle import match_ops
 from tools.bundle_limits import check_bundle
+from tools.recipe_chain import fit_chain
 
 
 EXECUTABLE = "bf22-23.exe"
@@ -63,8 +64,8 @@ def normalize_chains(patches: Path) -> int:
         for variant in variants:
             if variant.get("schemaVersion") != 3:
                 continue
-            steps = flatten_steps(variant)
-            if len(steps) < 2 or len(steps) > 8:
+            steps = fit_chain(flatten_steps(variant))
+            if len(steps) < 2:
                 raise ValueError("chain length unsupported: " + path.name)
             for left, right in zip(steps, steps[1:]):
                 if left["targetSha256"] != right["originalSha256"] or left["targetSize"] != right["originalSize"]:

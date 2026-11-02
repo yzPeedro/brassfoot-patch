@@ -8,6 +8,7 @@ from pathlib import Path
 import shutil
 
 from tools.build_inplace_bundle import match_ops
+from tools.recipe_chain import fit_chain
 
 
 def sha(value: bytes) -> str:
@@ -74,8 +75,8 @@ def main() -> None:
             "operations": previous_operations,
         })
     for legacy in inherited_variants:
-        steps = flatten(legacy) + [bridge]
-        if (len(steps) < 2 or len(steps) > 8 or
+        steps = fit_chain(flatten(legacy) + [bridge])
+        if (len(steps) < 2 or
                 any(step.get("schemaVersion") != 1 for step in steps)):
             raise ValueError("executable recipe cannot be flattened into a supported chain")
         for left, right in zip(steps, steps[1:]):
