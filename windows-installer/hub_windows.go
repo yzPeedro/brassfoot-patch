@@ -217,8 +217,57 @@ func hubCheckUpdates() error {
 			last = percent
 			hubEmit(map[string]any{"type": "feed-progress", "percent": percent})
 		})
+		if status := feedStatus(); status.Online {
+			rememberSeenVersions(status.Feed)
+		}
 		hubEmit(map[string]any{"type": "feed", "feed": hubFeedInfo(false)})
 	}()
+	return nil
+}
+
+func hubGetSettings() HubSettings {
+	return loadSettings()
+}
+
+func hubSetSetting(key string, value any) (HubSettings, error) {
+	settings := loadSettings()
+	switch key {
+	case "theme":
+		theme, _ := value.(string)
+		if theme != "light" && theme != "dark" {
+			theme = "system"
+		}
+		settings.Theme = theme
+	case "notify":
+		enabled, _ := value.(bool)
+		if err := setNotifications(enabled); err != nil {
+			return settings, errors.New("O Windows não permitiu ativar os avisos de versão nova.")
+		}
+		settings.Notify = enabled
+		if enabled {
+			if status := feedStatus(); status.Feed.PatchVersion != "" {
+				settings.LastSeenPatch = status.Feed.PatchVersion
+				settings.LastSeenHub = status.Feed.Hub.Version
+			}
+		}
+	default:
+		return settings, errors.New("configuração desconhecida")
+	}
+	return settings, saveSettings(settings)
+}
+
+func hubUninstallHub() error {
+	if hubIsBusy() {
+		return errors.New("Aguarde a operação em andamento terminar.")
+	}
+	exe, err := os.Executable()
+	if err != nil {
+		return err
+	}
+	if err = startHub(exe, []string{"--uninstall-hub"}); err != nil {
+		return err
+	}
+	postMessage.Call(hubWindow, wmClose, 0, 0)
 	return nil
 }
 
@@ -654,6 +703,9 @@ func runHub() bool {
 		"hubInstall":         hubInstall,
 		"hubApply":           hubApply,
 		"hubImportOriginals": hubImportOriginals,
+		"hubGetSettings":     hubGetSettings,
+		"hubSetSetting":      hubSetSetting,
+		"hubUninstallHub":    hubUninstallHub,
 		"hubListBackups":     hubListBackups,
 		"hubCreateBackup":    hubCreateBackup,
 		"hubRestore":         hubRestoreBackup,
@@ -688,6 +740,9 @@ func runHub() bool {
 		"{{PITCH}}", "data:image/jpeg;base64,"+base64.StdEncoding.EncodeToString(hubPitch),
 	).Replace(hubPage)
 	view.SetHtml(page)
+	if loadSettings().Notify {
+		go func() { _ = setNotifications(true) }()
+	}
 	go func() {
 		time.Sleep(300 * time.Millisecond)
 		if err := hubCheckUpdates(); err != nil {
@@ -706,6 +761,10 @@ func main() {
 	}
 	o32.NewProc("OleInitialize").Call(0)
 	options := parseHubArgs(os.Args[1:])
+	if options.NotifyCheck {
+		runNotifyCheck()
+		return
+	}
 	if options.Uninstall {
 		uninstallHub()
 		return

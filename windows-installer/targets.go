@@ -28,12 +28,14 @@ type TargetState struct {
 }
 
 type ComponentReport struct {
-	Targets   bool            `json:"targets"`
-	Rosters   string          `json:"rosters"`
-	Season    string          `json:"season"`
-	Live      string          `json:"live"`
-	Removable map[string]bool `json:"removable"`
-	Missing   map[string]int  `json:"missingOriginals"`
+	Targets         bool            `json:"targets"`
+	Rosters         string          `json:"rosters"`
+	Season          string          `json:"season"`
+	Live            string          `json:"live"`
+	Removable       map[string]bool `json:"removable"`
+	Missing         map[string]int  `json:"missingOriginals"`
+	OriginalsTotal  int             `json:"originalsTotal"`
+	OriginalsStored int             `json:"originalsStored"`
 }
 
 type TargetPlan struct {
@@ -248,6 +250,12 @@ func componentReport(m Manifest, game string) ComponentReport {
 		}
 		counts[component][state]++
 		counts[component]["total"]++
+		if validHash.MatchString(f.VanillaSHA256) {
+			report.OriginalsTotal++
+			if _, ok := storedOriginal(f.VanillaSHA256); ok || state == "vanilla" {
+				report.OriginalsStored++
+			}
+		}
 		if state != "vanilla" && !f.VanillaMissing {
 			if _, ok := storedOriginal(f.VanillaSHA256); !ok {
 				report.Missing[component]++
