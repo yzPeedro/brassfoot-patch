@@ -243,7 +243,7 @@
     const keeper = match.teams[1 - side][0];
     const roll = Math.random();
     let outcome, tx, ty;
-    if (roll < .24) {
+    if (roll < .2) {
       outcome = 'goal';
       ty = Math.random() < .5 ? rand(.415, .46) : rand(.54, .585);
       tx = goalX + dir * .006;
@@ -498,7 +498,7 @@
       let [tx, ty] = shapeTarget(match, player, attacking, kickoff);
       let speed = dist(player.x, player.y, tx, ty) > .08 ? .085 : .05;
       if (player.i === 0) speed = .06;
-      if (kickoff) speed = .1;
+      if (kickoff) speed = .17;
       if (match.phase === 'goal') {
         const shooter = match.scorer;
         if (shooter && player.side === shooter.side && player !== shooter && player.i !== 0 && dist(player.x, player.y, shooter.x, shooter.y) < .3) {
@@ -558,17 +558,17 @@
       }
     }
     const anchored = player => player === match.owner || player === presser || chasers.has(player) || (match.flight && match.flight.receiver === player);
-    for (const team of match.teams) {
-      for (let a = 1; a < team.length; a++) {
-        for (let b = a + 1; b < team.length; b++) {
-          const p = team[a], q = team[b];
-          const d = dist(p.tx, p.ty, q.tx, q.ty);
-          if (d > .05 || d === 0) continue;
-          const push = (.05 - d) / 2;
-          const nx = (p.tx - q.tx) / d, ny = (p.ty - q.ty) * AY / d;
-          if (!anchored(p)) { p.tx += nx * push; p.ty += ny * push / AY; }
-          if (!anchored(q)) { q.tx -= nx * push; q.ty -= ny * push / AY; }
-        }
+    const everyone = all(match);
+    for (let a = 0; a < everyone.length; a++) {
+      for (let b = a + 1; b < everyone.length; b++) {
+        const p = everyone[a], q = everyone[b];
+        const limit = p.side === q.side ? (p.i === 0 || q.i === 0 ? 0 : .05) : .034;
+        const d = dist(p.tx, p.ty, q.tx, q.ty);
+        if (d > limit || d === 0) continue;
+        const push = (limit - d) / 2;
+        const nx = (p.tx - q.tx) / d, ny = (p.ty - q.ty) * AY / d;
+        if (!anchored(p)) { p.tx += nx * push; p.ty += ny * push / AY; }
+        if (!anchored(q)) { q.tx -= nx * push; q.ty -= ny * push / AY; }
       }
     }
   }
@@ -584,15 +584,27 @@
       ref.ty = match.phase === 'reset' ? .66 : clamp(ball.y + (ball.y < .5 ? .13 : -.13), .06, .94);
     }
     let tx = ref.tx, ty = ref.ty;
-    for (const player of all(match)) {
-      const d = dist(player.x, player.y, tx, ty);
-      if (d < .04 && d > 0) {
-        tx += (tx - player.x) / d * (.04 - d);
-        ty += (ty - player.y) / d * (.04 - d);
+    for (let pass = 0; pass < 2; pass++) {
+      for (const player of all(match)) {
+        for (const [px0, py0] of [[player.x, player.y], [player.tx, player.ty]]) {
+          const d = dist(px0, py0, tx, ty);
+          if (d >= .065 || d === 0) continue;
+          tx += (tx - px0) / d * (.065 - d);
+          ty += (ty - py0) * AY / d * (.065 - d) / AY;
+        }
       }
+      tx = clamp(tx, .03, .97);
+      ty = clamp(ty, .04, .96);
     }
     const temp = {x: ref.x, y: ref.y, vx: ref.vx, vy: ref.vy, tx, ty};
     steer(temp, dt, .075);
+    for (const player of all(match)) {
+      const d = dist(player.x, player.y, temp.x, temp.y);
+      if (d >= .03 || d === 0) continue;
+      const k = Math.min(1, dt * 6) * (.03 - d);
+      temp.x += (temp.x - player.x) / d * k;
+      temp.y += (temp.y - player.y) * AY / d * k / AY;
+    }
     Object.assign(ref, {x: temp.x, y: temp.y, vx: temp.vx, vy: temp.vy});
   }
 
@@ -614,7 +626,7 @@
         ball.alpha = Math.min(1, (fade - .35) / .35);
       }
       const ready = all(match).every(player => dist(player.x, player.y, player.tx, player.ty) < .03);
-      if (fade > 1 && (ready || match.time - match.phaseAt > 7)) {
+      if (fade > 1 && (ready || match.time - match.phaseAt > 5)) {
         ball.alpha = 1;
         match.phase = 'play';
         const taker = match.teams[match.kickoffSide][10];
@@ -931,9 +943,13 @@
     const loop = now => {
       frame = 0;
       if (!running()) return;
-      const dt = last ? Math.min(.05, (now - last) / 1000) : 0;
+      let dt = last ? Math.min(.25, (now - last) / 1000) : 0;
       last = now;
-      if (dt > 0) step(match, dt);
+      while (dt > 0) {
+        const slice = Math.min(dt, 1 / 30);
+        step(match, slice);
+        dt -= slice;
+      }
       render();
       frame = requestAnimationFrame(loop);
     };
