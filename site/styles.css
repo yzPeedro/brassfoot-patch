@@ -42,7 +42,7 @@ nav a:hover{color:var(--brand)}
 .nav-download:hover{background:var(--brand-strong)}
 .menu-button{display:none}
 
-.hero{position:relative;isolation:isolate;padding-block:84px 72px;display:grid;grid-template-columns:.95fr 1.1fr;gap:56px;align-items:center;min-height:740px;--spot-x:70%;--spot-y:35%}
+.hero{position:relative;z-index:2;isolation:isolate;padding-block:84px 72px;display:grid;grid-template-columns:.95fr 1.1fr;gap:56px;align-items:center;min-height:740px;--spot-x:70%;--spot-y:35%}
 .hero-atmosphere{position:absolute;inset:0 calc(50% - 50vw);z-index:-1;overflow:hidden;pointer-events:none;background:radial-gradient(ellipse 55% 60% at 90% 0,#e3ecff,transparent 70%),radial-gradient(ellipse 40% 50% at 0 100%,#eef6ff,transparent 70%),white}
 .hero-atmosphere:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 420px 340px at var(--spot-x) var(--spot-y),#0b4be00d,transparent 75%)}
 .hero-mesh{position:absolute;inset:0;background:linear-gradient(#0b4be00d 1px,transparent 1px),linear-gradient(90deg,#0b4be00d 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 65% 40%,#000 15%,transparent 70%)}
@@ -324,7 +324,7 @@ dialog[open]{animation:dialog-in .3s var(--ease)}
 .club-dialog h3{font-size:36px;margin:8px 0 12px}
 .club-dialog-eyebrow{font:600 12px var(--mono);color:var(--brand);letter-spacing:.1em}
 .club-dialog-header p,.club-dialog-roster p{font-size:14px;color:var(--muted)}
-.club-dialog-close,.pix-close{font-size:24px;line-height:1;background:var(--surface);border:1px solid var(--line);border-radius:12px;width:42px;height:42px;flex-shrink:0;color:var(--ink)}
+.club-dialog-close,.pix-close{display:grid;place-items:center;padding:0;line-height:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;width:42px;height:42px;flex-shrink:0;color:var(--ink)}
 .club-dialog-close:hover,.pix-close:hover{background:var(--brand-soft);color:var(--brand)}
 .club-dialog-metadata{display:flex;gap:16px;padding:0;margin:18px 0 26px}
 .club-dialog-metadata div{flex:1;padding:16px;border-radius:14px;background:var(--surface)}
