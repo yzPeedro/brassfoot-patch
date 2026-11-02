@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.5.7",
+  "version": "2026.5.8",
   "channel": "stable",
-  "releaseNotes": "Campo animado com faltas fora da área, gols da virada de tempo sempre mostrados e jogadas de gol variadas.",
+  "releaseNotes": "Hub 1.1.1 com o campo animado em movimento num painel grande; jogo e elencos iguais aos da 2026.5.7.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [
