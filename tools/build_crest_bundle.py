@@ -84,6 +84,15 @@ def build(args: argparse.Namespace) -> dict:
     if manifest.get("schemaVersion") != 4:
         raise ValueError("escudos exigem pacote schema 4")
     previous = {f["path"]: f for f in manifest["files"] if f.get("component") == COMPONENT}
+    if args.previous_bundle:
+        earlier_root = args.previous_bundle.resolve()
+        earlier = json.loads((earlier_root / "manifest.json").read_text(encoding="utf-8-sig"))
+        for f in earlier["files"]:
+            if f.get("component") == COMPONENT and f["path"] not in previous:
+                shutil.copyfile(earlier_root / "patches" / f["recipe"], output / "patches" / f["recipe"])
+                previous[f["path"]] = f
+        if not (output / "crests.json").exists() and (earlier_root / "crests.json").exists():
+            shutil.copyfile(earlier_root / "crests.json", output / "crests.json")
     manifest["files"] = [f for f in manifest["files"] if f.get("component") != COMPONENT]
     patches = output / "patches"
     origin_sizes = {}
@@ -167,6 +176,7 @@ def main() -> None:
     bundle = sub.add_parser("bundle", help="monta o pacote com os escudos aprovados")
     bundle.add_argument("--approved", type=Path, default=ROOT / "config/crest-updates-2026.json")
     bundle.add_argument("--inherit-bundle", type=Path, required=True)
+    bundle.add_argument("--previous-bundle", type=Path)
     bundle.add_argument("--output", type=Path, required=True)
     bundle.add_argument("--original-game", type=Path, default=ROOT / "data/private/vanilla-22-23")
     bundle.add_argument("--cache", type=Path, default=ROOT / "data/private/crest-audit-cache")

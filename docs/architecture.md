@@ -52,13 +52,14 @@ O manifesto (`bundled_release/manifest.json`) lista cada arquivo com o hash fina
 
 ## Componentes
 
-O manifesto declara a seção `components`. Desde o schema 2 (hub 1.1.0), o patch tem três componentes independentes, que podem ser instalados e removidos em qualquer combinação:
+O manifesto declara a seção `components`. Desde o schema 2 (hub 1.1.0), o patch tem componentes independentes, que podem ser instalados e removidos em qualquer combinação (os escudos desde o hub 1.2.0):
 
 | Componente | Arquivos | Como é removido |
 |---|---|---|
 | **Elencos 2026** (`rosters`) | `teams/*.ban` | cópias originais do próprio usuário (cofre de originais); arquivos que não existem no jogo original são apagados |
 | **Temporada 2026** (`season`) | recursos do executável (ano 2026, Copa do Mundo de 48 seleções, copas continentais) e `conf_ligas_nacionais/BRA.cfg` quando o pacote o incluir | receita do executável |
 | **Campo animado** (`live`) | recursos do executável | receita do executável |
+| **Escudos atualizados** (`crests`) | `teams/escudos/*.png` (60×60) e `teams/escudosMini/*.png` (18×18) | escudo original guardado no cofre; escudo personalizado pelo usuário nunca é trocado nem removido |
 
 O executável tem quatro variantes, todas reconhecidas por SHA-256 e com receita a partir das outras (`components.variants`):
 
