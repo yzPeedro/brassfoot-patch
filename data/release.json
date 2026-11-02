@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.5.8",
-  "publishedAt": "2026-11-02T13:41:12.362546+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.5.8-windows-x64.exe",
+  "publishedVersion": "2026.5.9",
+  "publishedAt": "2026-11-02T15:23:46.203380+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.5.9-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
-  "fileSizeBytes": 7712768,
-  "sha256": "60736ed3e69da3e3b1a993dfba71830a6ab0ef602f29e0a350cd17c139aa9f0b",
+  "fileSizeBytes": 7730688,
+  "sha256": "4655e46fecc4312c37e5c6c0c770bcb21c68b7ab488b25e9df37121f1de39332",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Hub 1.1.1 com o campo animado em movimento num painel grande; jogo e elencos iguais aos da 2026.5.7."
+  "releaseNotes": "Escudos atualizados como novo componente do hub 1.2.0, com 73 clubes; abertura do hub com o ícone pulsando."
 }
