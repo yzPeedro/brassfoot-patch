@@ -314,16 +314,47 @@
 (() => {
   const image = document.getElementById('pitch-image');
   const buttons = [...document.querySelectorAll('[data-pitch]')];
-  if (!image || !buttons.length) return;
+  const toggle = document.getElementById('motion-toggle');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
   const labels = ['excelente', 'muito boa', 'ruim', 'precária'];
+  const stages = [];
+  if (reduce.matches && toggle) {
+    document.body.classList.add('motion-paused');
+    toggle.setAttribute('aria-pressed', 'true');
+    toggle.textContent = 'Retomar movimento ▷';
+  }
+  const attach = (canvasId, host) => {
+    const canvas = document.getElementById(canvasId);
+    if (!window.LivePitch || !canvas || !host) return null;
+    const controller = window.LivePitch.mount(canvas, {
+      paused: document.body.classList.contains('motion-paused'),
+      onReady: () => host.classList.add('is-live')
+    });
+    if (controller) stages.push(controller);
+    return controller;
+  };
+  attach('hero-canvas', document.querySelector('.live-screen'));
+  const showcase = attach('pitch-canvas', document.querySelector('.live-stage'));
+  toggle?.addEventListener('click', () => {
+    const paused = document.body.classList.contains('motion-paused');
+    stages.forEach(stage => paused ? stage.pause() : stage.play());
+  });
+  if (!image || !buttons.length) return;
+  const canvas = document.getElementById('pitch-canvas');
   const source = index => new URL('./assets/live/pitch-' + index + '.jpg', image.baseURI).href;
   buttons.forEach(button => button.addEventListener('click', () => {
     const index = Number(button.dataset.pitch);
     if (!Number.isInteger(index) || !labels[index]) return;
     buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    if (showcase) {
+      showcase.setCondition(index);
+      canvas?.setAttribute('aria-label', 'Campo animado em movimento com gramado em condição ' + labels[index]);
+      return;
+    }
     image.src = source(index);
     image.alt = 'Campo animado com gramado em condição ' + labels[index];
   }));
+  if (showcase) return;
   const preload = () => labels.forEach((_, index) => { const next = new Image(); next.src = source(index); });
   if ('requestIdleCallback' in window) requestIdleCallback(preload); else setTimeout(preload, 1500);
 })();
