@@ -25,6 +25,9 @@ public final class SuperWorldTransformer {
     private static final String RUNTIME = "mega/SuperWorld";
     private static final List<String> DIVISION_TABLES = Arrays.asList("qg", "sC", "sD");
     private static final String NESTED_DIVISION_TABLE = "qK";
+    private static final String[][] LOCAL_INDEX_RULES = {
+        {"best/Z", "a", "(Ljava/util/ArrayList;Lbest/al;ZZ)V", "10", "3"},
+    };
 
     public static void main(String[] args) throws Exception {
         if (args.length != 2) throw new IllegalArgumentException("game.jar output-dir");
@@ -44,6 +47,7 @@ public final class SuperWorldTransformer {
                 int changes = 0;
                 for (MethodNode method : node.methods) {
                     changes += clampDivisionIndexes(method);
+                    changes += clampLocalIndexes(node.name, method);
                     if ("best/aq".equals(node.name) && "<clinit>".equals(method.name)) {
                         changes += padDivisionTables(method);
                     }
@@ -68,18 +72,77 @@ public final class SuperWorldTransformer {
     }
 
     private static int clampDivisionIndexes(MethodNode method) {
+        java.util.Set<Integer> divisionLocals = new java.util.HashSet<Integer>();
+        java.util.Set<Integer> otherLocals = new java.util.HashSet<Integer>();
+        for (AbstractInsnNode insn = method.instructions.getFirst(); insn != null; insn = insn.getNext()) {
+            if (insn.getOpcode() != Opcodes.ISTORE) continue;
+            int local = ((VarInsnNode) insn).var;
+            if (isDivision(previous(insn))) {
+                divisionLocals.add(local);
+            } else {
+                otherLocals.add(local);
+            }
+        }
+        divisionLocals.removeAll(otherLocals);
         int changes = 0;
         for (AbstractInsnNode insn = method.instructions.getFirst(); insn != null; insn = insn.getNext()) {
-            if (insn.getOpcode() != Opcodes.INVOKEVIRTUAL) continue;
-            MethodInsnNode call = (MethodInsnNode) insn;
-            if (!"best/ah".equals(call.owner) || !"getDivisao".equals(call.name) || !"()I".equals(call.desc)) continue;
-            AbstractInsnNode next = call.getNext();
-            while (next != null && next.getOpcode() < 0) next = next.getNext();
-            if (next == null || (next.getOpcode() != Opcodes.IALOAD && next.getOpcode() != Opcodes.AALOAD)) continue;
-            method.instructions.insert(call, new MethodInsnNode(Opcodes.INVOKESTATIC, RUNTIME, "tableDivision", "(I)I", false));
+            boolean source = isDivision(insn) || (insn.getOpcode() == Opcodes.ILOAD && divisionLocals.contains(((VarInsnNode) insn).var));
+            if (!source) continue;
+            AbstractInsnNode next = following(insn);
+            if (next == null || (next.getOpcode() != Opcodes.IALOAD && next.getOpcode() != Opcodes.AALOAD
+                    && next.getOpcode() != Opcodes.LALOAD)) continue;
+            method.instructions.insert(insn, new MethodInsnNode(Opcodes.INVOKESTATIC, RUNTIME, "tableDivision", "(I)I", false));
             changes++;
         }
         return changes;
+    }
+
+    private static int clampLocalIndexes(String owner, MethodNode method) {
+        int changes = 0;
+        for (String[] rule : LOCAL_INDEX_RULES) {
+            if (!rule[0].equals(owner) || !rule[1].equals(method.name) || !rule[2].equals(method.desc)) continue;
+            int local = Integer.parseInt(rule[3]);
+            int max = Integer.parseInt(rule[4]);
+            int found = 0;
+            for (AbstractInsnNode insn = method.instructions.getFirst(); insn != null; insn = insn.getNext()) {
+                if (insn.getOpcode() != Opcodes.ILOAD || ((VarInsnNode) insn).var != local) continue;
+                AbstractInsnNode next = following(insn);
+                if (next == null || next.getOpcode() != Opcodes.AALOAD) continue;
+                InsnList clamp = new InsnList();
+                clamp.add(new jdk.internal.org.objectweb.asm.tree.LdcInsnNode(max));
+                clamp.add(new MethodInsnNode(Opcodes.INVOKESTATIC, RUNTIME, "clampIndex", "(II)I", false));
+                method.instructions.insert(insn, clamp);
+                found++;
+            }
+            if (found == 0) throw new IllegalStateException("regra sem efeito: " + String.join(" ", rule));
+            changes += found;
+        }
+        return changes;
+    }
+
+    private static boolean isDivision(AbstractInsnNode insn) {
+        if (insn == null) return false;
+        if (insn.getOpcode() == Opcodes.INVOKEVIRTUAL) {
+            MethodInsnNode call = (MethodInsnNode) insn;
+            return "best/ah".equals(call.owner) && "getDivisao".equals(call.name) && "()I".equals(call.desc);
+        }
+        if (insn.getOpcode() == Opcodes.GETFIELD) {
+            FieldInsnNode field = (FieldInsnNode) insn;
+            return "best/ah".equals(field.owner) && "divisao".equals(field.name);
+        }
+        return false;
+    }
+
+    private static AbstractInsnNode previous(AbstractInsnNode insn) {
+        AbstractInsnNode item = insn.getPrevious();
+        while (item != null && item.getOpcode() < 0) item = item.getPrevious();
+        return item;
+    }
+
+    private static AbstractInsnNode following(AbstractInsnNode insn) {
+        AbstractInsnNode item = insn.getNext();
+        while (item != null && item.getOpcode() < 0) item = item.getNext();
+        return item;
     }
 
     private static int padDivisionTables(MethodNode method) {

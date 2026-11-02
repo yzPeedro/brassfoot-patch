@@ -121,6 +121,22 @@ def run(game: Path, label: str, countries: str, international: bool, save: str |
     return report
 
 
+def season(game: Path, label: str, countries: str, international: bool, seasons: int, max_steps: int, save: str | None, heap: str) -> dict:
+    runs = LAB / "runs"
+    runs.mkdir(parents=True, exist_ok=True)
+    output = runs / f"{label}.json"
+    command = [java("java"), f"-Xmx{heap}", "-Xss4m", "-cp", classpath(game), "mega.lab.SeasonHarness", str(output), countries, str(international).lower(), str(seasons), str(max_steps)]
+    if save:
+        command.append(save)
+    subprocess.run(command, check=True, cwd=game, timeout=7200)
+    report = json.loads(output.read_text(encoding="utf-8"))
+    report["label"] = label
+    report["game"] = str(game.relative_to(ROOT))
+    report["executableSha256"] = sha256(game / "bf22-23.exe")
+    output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + chr(10), encoding="utf-8")
+    return report
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="super_update_lab")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -143,11 +159,25 @@ def main(argv: list[str] | None = None) -> int:
     execute.add_argument("--international", action="store_true")
     execute.add_argument("--save")
     execute.add_argument("--heap", default="1024m")
+    sea = commands.add_parser("season")
+    sea.add_argument("--name", default="vanilla-copy")
+    sea.add_argument("--label", required=True)
+    sea.add_argument("--countries", default="all")
+    sea.add_argument("--international", action="store_true")
+    sea.add_argument("--seasons", type=int, default=1)
+    sea.add_argument("--max-steps", type=int, default=2000)
+    sea.add_argument("--save")
+    sea.add_argument("--heap", default="1024m")
     args = parser.parse_args(argv)
     if args.command == "prepare":
         print(prepare(args.name, args.executable))
     elif args.command == "synth":
         print(synth(LAB / args.name, args.template, args.countries, args.divisions, args.size, args.config))
+    elif args.command == "season":
+        report = season(LAB / args.name, args.label, args.countries, args.international, args.seasons, args.max_steps, args.save, args.heap)
+        print(json.dumps({key: report[key] for key in ("teamsInWorld", "steps", "peakHeapBytes", "saveBytes", "reloadedSameWorld")}, indent=2))
+        print(json.dumps([{k: v for k, v in item.items() if k != "leagues"} for item in report["seasons"]], indent=1))
+        print(report["failure"][:1500] if report["failure"] else "sem falha")
     elif args.command == "patch":
         print(json.dumps(patch(args.output.resolve()), indent=2))
     else:

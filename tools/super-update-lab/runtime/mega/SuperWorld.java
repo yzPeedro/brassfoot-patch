@@ -41,6 +41,10 @@ public final class SuperWorld {
         table[index] = padDivisions(table[index]);
     }
 
+    public static int clampIndex(int index, int max) {
+        return index > max ? max : index;
+    }
+
     public static int tableDivision(int division) {
         return division > TABLE_DIVISIONS ? TABLE_DIVISIONS : division;
     }
