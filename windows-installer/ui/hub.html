@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="{{THEME}}">
 <head>
 <meta charset="utf-8">
 <title>Brasfoot Mega Patch</title>
@@ -9,6 +9,11 @@
 html,body{height:100%;margin:0}
 body{font:14px/1.55 var(--font);color:var(--ink);background:var(--bg);overflow:hidden;user-select:none;-webkit-font-smoothing:antialiased}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+.splash{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;background:var(--bg);transition:opacity .35s ease,visibility .35s}
+.splash img{width:84px;height:84px;animation:splash-pulse 1.4s ease-in-out infinite}
+.splash.gone{opacity:0;visibility:hidden;pointer-events:none}
+@keyframes splash-pulse{0%,100%{transform:scale(.9);opacity:.7}50%{transform:scale(1.06);opacity:1}}
+@media (prefers-reduced-motion:reduce){.splash img{animation:splash-fade 1.6s ease-in-out infinite}@keyframes splash-fade{0%,100%{opacity:.6}50%{opacity:1}}}
 button:disabled{cursor:default;opacity:.45}
 :focus-visible{outline:2px solid var(--brand);outline-offset:3px}
 .app{display:grid;grid-template-rows:52px 1fr;height:100%}
@@ -215,6 +220,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 </style>
 </head>
 <body>
+<div class="splash" id="splash" role="status" aria-label="Carregando o Brasfoot Mega Patch"><img src="{{MARK}}" alt=""></div>
 <div class="app">
   <header class="titlebar" id="titlebar">
     <img src="{{MARK}}" alt="">
@@ -821,7 +827,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
   }));
 
   window.hubEvent = event => {
-    if (event.type === 'state') { state.game = event.state; render(); return; }
+    if (event.type === 'state') { state.game = event.state; render(); hideSplash(); return; }
     if (event.type === 'settings') { state.settings = event.settings; renderSettings(); return; }
     if (event.type === 'feed') { state.feed = event.feed; state.feedPercent = null; render(); return; }
     if (event.type === 'feed-progress') { state.feedPercent = event.percent; renderBanners(); return; }
@@ -857,6 +863,8 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
     }
   };
 
+  function hideSplash() { $('splash')?.classList.add('gone'); }
+  setTimeout(hideSplash, 10000);
   call('hubGetSettings').then(settings => { state.settings = settings; applyTheme(settings.theme); renderSettings(); }).catch(() => applyTheme('system'));
   call('hubInfo').then(info => { state.info = info; $('version').textContent = 'Hub ' + info.hubVersion + (info.preview ? ' · prévia' : ''); }).catch(() => {});
   render();
