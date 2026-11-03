@@ -108,6 +108,8 @@ Brasfoot-Mega-Patch.exe --uninstall-hub     remove o hub do computador
 Brasfoot-Mega-Patch.exe --notify-check      confere a versão mais recente e notifica, sem abrir janela
 ```
 
+Ao abrir, o hub mostra numa janela nativa o ícone pulsando enquanto o WebView2 inicia (desde o hub 1.4.1); a página assume a mesma animação na mesma fase e a janela nativa fecha.
+
 O hub requer o Microsoft Edge WebView2 Runtime, presente no Windows 11 e na maioria das instalações do Windows 10. Sem ele, o hub oferece a página oficial de instalação e abre a interface Win32 simples, que também busca a versão mais recente, oferece atualizar o instalador e tem as mesmas garantias de instalação.
 
 ## Instalação e remoção por componentes

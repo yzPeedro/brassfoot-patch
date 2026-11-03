@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.6.0",
+  "version": "2026.6.1",
   "channel": "stable",
-  "releaseNotes": "Super Update da América do Sul: divisões reais de 10 países, 253 clubes novos com elenco, escudo e camisa, força pelos titulares reais e hub 1.4.0.",
+  "releaseNotes": "Hub 1.4.1: abertura com o ícone pulsando desde o primeiro instante, sem janela vazia; jogo, ligas, elencos, escudos e camisas iguais aos da 2026.6.0.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [
