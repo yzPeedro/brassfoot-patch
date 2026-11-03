@@ -448,7 +448,7 @@ func restoreInstallBackup(entry BackupEntry, game string, progress func(done, to
 	sort.Strings(names)
 	total := len(names) + len(report.AddedPaths)
 	for index, name := range names {
-		if name != gameExecutablePath && name != nationalConfigPath && !teamName.MatchString(name) && !crestName.MatchString(name) {
+		if name != gameExecutablePath && !nationalConfigName.MatchString(name) && !teamName.MatchString(name) && !crestName.MatchString(name) {
 			return fmt.Errorf("arquivo não autorizado no backup: %s", name)
 		}
 		target, err := safeTarget(game, name)
@@ -473,7 +473,7 @@ func restoreInstallBackup(entry BackupEntry, game string, progress func(done, to
 		}
 	}
 	for index, name := range report.AddedPaths {
-		if !teamName.MatchString(name) {
+		if !teamName.MatchString(name) && !nationalConfigName.MatchString(name) {
 			continue
 		}
 		if target, e := safeTarget(game, name); e == nil {
