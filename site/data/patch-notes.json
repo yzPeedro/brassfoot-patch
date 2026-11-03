@@ -1,7 +1,21 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-02T23:30:00-03:00",
+  "updatedAt": "2026-11-03T12:40:00-03:00",
   "entries": [
+    {
+      "id": "patch-2026-6-1",
+      "version": "2026.6.1",
+      "date": "2026-11-03T12:40:00-03:00",
+      "title": "Hub 1.4.1 com abertura animada",
+      "kind": "patch",
+      "summary": "O hub mostra o ícone pulsando desde o primeiro instante, sem janela branca ou preta enquanto o Windows carrega.",
+      "changes": [
+        "Ícone pulsando assim que o hub abre, antes de a interface carregar.",
+        "Animação na taxa de atualização do monitor, com passagem sem salto para o hub.",
+        "Jogo, ligas, elencos, escudos e camisas iguais aos da 2026.6.0."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.6.1"
+    },
     {
       "id": "patch-2026-6-0",
       "version": "2026.6.0",
