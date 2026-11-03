@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "version": "2026.5.11",
+  "version": "2026.6.0",
   "date": "2026-11-02",
   "counts": {
     "unsourcedSquadsPreserved": 350,
-    "playersTotal": 16978,
-    "teamsTotal": 704,
-    "sourceSquads": 300,
+    "playersTotal": 24864,
+    "teamsTotal": 957,
+    "sourceSquads": 622,
     "internationalSourceSquads": 240,
     "attributesPreserved": 8648,
     "sourcePlayersCompiled": 8650,
@@ -16,17 +16,23 @@
     "primaryNamesShortened": 262,
     "partialSquadsPreserved": 54,
     "partialSourceCorrections": 82,
-    "brazilSourceSquads": 60,
+    "brazilSourceSquads": 73,
     "default_traits": 2,
     "default_statusAndHash": 2,
     "default_flank": 2,
-    "default_roleIncompatibleTraits": 1
+    "default_roleIncompatibleTraits": 1,
+    "southAmericaSourceSquads": 309,
+    "superUpdateSourceSquads": 322,
+    "superUpdateNewClubs": 253,
+    "superUpdateCountries": 10,
+    "superUpdateDivisions": 23
   },
   "limitations": [
     "Individual traits unavailable at squad sources; preserved attributes or explicitly derived role defaults.",
     "Brasfoot stores right/left side, not a distinct preferred-foot field.",
     "Jersey and exact birth date retained in provenance; game stores age but has no jersey/DOB field.",
     "Incomplete source squads preserve previous rosters; retained memberships may be historical.",
+    "South American squads come from 365Scores and Wikipedia; traits are preserved from matched game players or derived by position, and strength bonuses follow recent starting lineups.",
     "No test suites or gameplay tests were executed."
   ],
   "clubs": [
@@ -3215,6 +3221,2904 @@
       "observedAt": "2026-11-02T22:05:41.599039+00:00",
       "rosterPolicy": "source-replacement",
       "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/12dejuniovh_par.ban",
+      "club": "12 De Junio Vh",
+      "countryCode": 150,
+      "sourceUrl": "https://www.365scores.com/football/team/12-de-junio-vh-79743/squad",
+      "observedAt": "2026-11-02T22:36:32+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/2demayo_par.ban",
+      "club": "2 de Mayo",
+      "countryCode": 150,
+      "sourceUrl": "https://www.365scores.com/football/team/2-de-mayo-14642/squad",
+      "observedAt": "2026-11-02T22:34:42+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/9dejuliorafaela_arg.ban",
+      "club": "9 De Julio Rafaela",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/9-de-julio-rafaela-73550/squad",
+      "observedAt": "2026-11-02T22:36:20+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/aainternacionaldelimeira_bra.ban",
+      "club": "AA Internacional de Limeira",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/inter-de-limeira-23975/squad",
+      "observedAt": "2026-11-02T22:42:15+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 36
+    },
+    {
+      "teamFile": "teams/academiadelbalompie_bol.ban",
+      "club": "Academia del Balompie",
+      "countryCode": 26,
+      "sourceUrl": "https://www.365scores.com/football/team/abb-la-paz-72058/squad",
+      "observedAt": "2026-11-02T22:36:17+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 35
+    },
+    {
+      "teamFile": "teams/academiadeportivacantola_per.ban",
+      "club": "Academia Deportiva Cantolao",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/academia-cantolao-28447/squad",
+      "observedAt": "2026-11-02T22:35:28+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/academiapuertocabello_ven.ban",
+      "club": "Academia Puerto Cabello",
+      "countryCode": 198,
+      "sourceUrl": "https://www.365scores.com/football/team/puerto-cabello-25559/squad",
+      "observedAt": "2026-11-02T22:35:21+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/acassuso_arg.ban",
+      "club": "Acassuso",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/acassuso-7118/squad",
+      "observedAt": "2026-11-02T22:33:16+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/adajaen_per.ban",
+      "club": "ADA Jaen",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/ada-jaen-77416/squad",
+      "observedAt": "2026-11-02T22:36:27+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/adttarma_per.ban",
+      "club": "ADT Tarma",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/adt-tarma-57393/squad",
+      "observedAt": "2026-11-02T22:36:01+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/agropecuarioargentino_arg.ban",
+      "club": "Agropecuario Argentino",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/agropecuario-11924/squad",
+      "observedAt": "2026-11-02T22:34:11+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/aguilasdoradas_col.ban",
+      "club": "Águilas Doradas",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/aguilas-doradas-20841/squad",
+      "observedAt": "2026-11-02T22:30:50+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/albion_uru.ban",
+      "club": "Albion",
+      "countryCode": 195,
+      "sourceUrl": "https://www.365scores.com/football/team/albion-51522/squad",
+      "observedAt": "2026-11-02T22:35:49+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/aldosivi_arg.ban",
+      "club": "Aldosivi",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/midia's-cup-7223/squad",
+      "observedAt": "2026-11-02T22:33:19+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/alianzaatletico_per.ban",
+      "club": "Alianza Atletico",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/alianza-atletico-8418/squad",
+      "observedAt": "2026-11-02T22:33:42+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/alianzafc_col.ban",
+      "club": "Alianza FC",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/alianza-fc-10209/squad",
+      "observedAt": "2026-11-02T22:30:28+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/alianzalima_per.ban",
+      "club": "Alianza Lima",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/alianza-lima-7280/squad",
+      "observedAt": "2026-11-02T22:33:20+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/alianzauniversidad_per.ban",
+      "club": "Alianza Universidad",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/alianza-universidad-12045/squad",
+      "observedAt": "2026-11-02T22:34:13+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/allboys_arg.ban",
+      "club": "All Boys",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/all-boys-7789/squad",
+      "observedAt": "2026-11-02T22:33:28+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/almirantebrown_arg.ban",
+      "club": "Almirante Brown",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/almirante-brown-7112/squad",
+      "observedAt": "2026-11-02T22:33:15+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/alvarado_arg.ban",
+      "club": "Alvarado",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/alvarado-10348/squad",
+      "observedAt": "2026-11-02T22:11:16+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/alwaysready_bol.ban",
+      "club": "Always Ready",
+      "countryCode": 26,
+      "sourceUrl": "https://www.365scores.com/football/team/always-ready-45832/squad",
+      "observedAt": "2026-11-02T22:35:37+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/americacali_col.ban",
+      "club": "América de Cali",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/america-de-cali-8645/squad",
+      "observedAt": "2026-11-02T22:30:16+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/araguafc_ven.ban",
+      "club": "Aragua FC",
+      "countryCode": 198,
+      "sourceUrl": "https://www.365scores.com/football/team/aragua-fc-8700/squad",
+      "observedAt": "2026-11-02T22:33:48+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 35
+    },
+    {
+      "teamFile": "teams/araguaina_bra.ban",
+      "club": "Araguaína",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/araguaina-19181/squad",
+      "observedAt": "2026-11-02T22:30:47+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/argentinodequilmes_arg.ban",
+      "club": "Argentino de Quilmes",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/argentino-quilmes-11936/squad",
+      "observedAt": "2026-11-02T22:34:12+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 35
+    },
+    {
+      "teamFile": "teams/argentinojnrs_arg.ban",
+      "club": "Argentinos Juniors",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/argentinos-juniors-871/squad",
+      "observedAt": "2026-11-02T22:32:03+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/argentinomerlo_arg.ban",
+      "club": "Argentino Merlo",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/argentino-merlo-13683/squad",
+      "observedAt": "2026-11-02T22:34:32+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/argentinomontemaiz_arg.ban",
+      "club": "Argentino Monte Maíz",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/argentino-mm-69522/squad",
+      "observedAt": "2026-11-02T22:36:12+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/arsenalsarandi_arg.ban",
+      "club": "Arsenal Sarandi",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/arsenal-sarandi-5913/squad",
+      "observedAt": "2026-11-02T22:33:02+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/athleticoparanaense_bra.ban",
+      "club": "Athletico Paranaense",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/athletico-paranaense-1210/squad",
+      "observedAt": "2026-11-02T22:07:16+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/atlanta_arg.ban",
+      "club": "Atlanta",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/atlanta-7104/squad",
+      "observedAt": "2026-11-02T22:33:14+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/atleticocolina_chi.ban",
+      "club": "Atlético Colina",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/deportes-colina-56357/squad",
+      "observedAt": "2026-11-02T22:35:57+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/atleticoelvigia_ven.ban",
+      "club": "Atletico El Vigia",
+      "countryCode": 198,
+      "sourceUrl": "https://www.365scores.com/football/team/atletico-el-vigia-8698/squad",
+      "observedAt": "2026-11-02T22:33:48+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/atleticofc_col.ban",
+      "club": "Atlético FC",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/atletico-fc-10362/squad",
+      "observedAt": "2026-11-03T00:46:46+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/atleticogoianiense_bra.ban",
+      "club": "Atlético Goianiense",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/atletico-goianiense-5918/squad",
+      "observedAt": "2026-11-02T22:30:07+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/atleticograu_per.ban",
+      "club": "Atlético Grau",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/grau-50540/squad",
+      "observedAt": "2026-11-02T22:35:46+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/atleticomineiro_bra.ban",
+      "club": "Atlético Mineiro",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/atletico-mineiro-1209/squad",
+      "observedAt": "2026-11-02T22:07:16+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/atleticorafaela_arg.ban",
+      "club": "Atletico Rafaela",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/federation-cup-5968/squad",
+      "observedAt": "2026-11-02T22:33:03+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/atleticotembetary_par.ban",
+      "club": "Atlético Tembetary",
+      "countryCode": 150,
+      "sourceUrl": "https://www.365scores.com/football/team/atletico-tembetary-56592/squad",
+      "observedAt": "2026-11-02T22:35:58+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/atleticotucuman_arg.ban",
+      "club": "Atletico Tucuman",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/super-cup-6152/squad",
+      "observedAt": "2026-11-02T22:33:07+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/audax_chi.ban",
+      "club": "Audax Italiano",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/audax-italiano-1229/squad",
+      "observedAt": "2026-11-02T22:32:20+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/ayacucho_per.ban",
+      "club": "Ayacucho",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/ayacucho-fc-8422/squad",
+      "observedAt": "2026-11-02T22:33:42+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/banfield_arg.ban",
+      "club": "Banfield",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/banfield-878/squad",
+      "observedAt": "2026-11-02T22:32:04+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/barcelona_equ.ban",
+      "club": "Barcelona Guayaquil",
+      "countryCode": 60,
+      "sourceUrl": "https://www.365scores.com/football/team/barcelona-sc-9130/squad",
+      "observedAt": "2026-11-02T22:30:19+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 35
+    },
+    {
+      "teamFile": "teams/barracascentral_arg.ban",
+      "club": "Barracas Central",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/league-cup-9051/squad",
+      "observedAt": "2026-11-02T22:33:55+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/barranquillafc_col.ban",
+      "club": "Barranquilla FC",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/barranquilla-fc-13912/squad",
+      "observedAt": "2026-11-02T22:30:37+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 39
+    },
+    {
+      "teamFile": "teams/belgrano_arg.ban",
+      "club": "Belgrano",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/belgrano-5783/squad",
+      "observedAt": "2026-11-02T22:33:02+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/benjaminaceval_par.ban",
+      "club": "Benjamín Aceval",
+      "countryCode": 150,
+      "sourceUrl": "https://www.365scores.com/football/team/benjamin-aceval-68721/squad",
+      "observedAt": "2026-11-02T22:36:08+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/betimfutebol_bra.ban",
+      "club": "Betim Futebol",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/betim-ec-11618/squad",
+      "observedAt": "2026-11-02T22:30:32+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/blooming_bol.ban",
+      "club": "Blooming",
+      "countryCode": 26,
+      "sourceUrl": "https://www.365scores.com/football/team/ligue-1-7302/squad",
+      "observedAt": "2026-11-02T22:33:20+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/bocajuniors_arg.ban",
+      "club": "Boca Juniors",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/boca-juniors-866/squad",
+      "observedAt": "2026-11-02T22:32:02+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/bocajuniorsdecali_col.ban",
+      "club": "Boca Juniors de Cali",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/boca-juniors-cali-10346/squad",
+      "observedAt": "2026-11-02T22:30:29+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/bocaunidos_arg.ban",
+      "club": "Boca Unidos",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/boca-unidos-7224/squad",
+      "observedAt": "2026-11-02T22:33:19+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/bogotafc_col.ban",
+      "club": "Bogotá FC",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/bogota-fc-10226/squad",
+      "observedAt": "2026-11-02T22:30:28+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 40
+    },
+    {
+      "teamFile": "teams/bolivar_bol.ban",
+      "club": "Bolívar",
+      "countryCode": 26,
+      "sourceUrl": "https://www.365scores.com/football/team/bolivar-7278/squad",
+      "observedAt": "2026-11-02T22:33:20+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/bostonriver_uru.ban",
+      "club": "Boston River",
+      "countryCode": 195,
+      "sourceUrl": "https://www.365scores.com/football/team/boston-river-12673/squad",
+      "observedAt": "2026-11-02T22:34:20+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/boyacachico_col.ban",
+      "club": "Boyaca Chico",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/boyaca-chico-8641/squad",
+      "observedAt": "2026-11-02T22:30:15+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/brownadrogue_arg.ban",
+      "club": "Brown Adrogue",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/brown-adrogue-7119/squad",
+      "observedAt": "2026-11-02T22:33:16+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/brujassalamanca_chi.ban",
+      "club": "Brujas Salamanca",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/brujas-salamanca-69468/squad",
+      "observedAt": "2026-11-02T22:36:11+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/cabartolomemitreposadas_arg.ban",
+      "club": "CA Bartolomé Mitre (Posadas)",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/ca-bartolome-mitre-(posadas)-84187/squad",
+      "observedAt": "2026-11-02T22:36:39+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/caexcursionistas_arg.ban",
+      "club": "CA Excursionistas",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/excursionistas-10747/squad",
+      "observedAt": "2026-11-02T22:34:00+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/cafetalerosdebiscucuyfut_ven.ban",
+      "club": "Cafetaleros de Biscucuy Fútbol Club",
+      "countryCode": 198,
+      "sourceUrl": "https://es.wikipedia.org/w/index.php?title=Cafetaleros_de_Biscucuy_F%C3%BAtbol_Club&oldid=166120441",
+      "observedAt": "2026-11-02T23:46:35+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 22
+    },
+    {
+      "teamFile": "teams/capitalbrasilia_bra.ban",
+      "club": "Capital Brasilia",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/capital-55676/squad",
+      "observedAt": "2026-11-02T22:31:02+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 20
+    },
+    {
+      "teamFile": "teams/carabobofc_ven.ban",
+      "club": "Carabobo FC",
+      "countryCode": 198,
+      "sourceUrl": "https://www.365scores.com/football/team/carabobo-fc-8684/squad",
+      "observedAt": "2026-11-02T22:33:47+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/caracas_ven.ban",
+      "club": "Caracas",
+      "countryCode": 198,
+      "sourceUrl": "https://www.365scores.com/football/team/caracas-fc-8686/squad",
+      "observedAt": "2026-11-02T22:33:47+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/caracingdecordoba_arg.ban",
+      "club": "CA Racing de Córdoba",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/racing-cordoba-9287/squad",
+      "observedAt": "2026-11-02T22:11:05+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/carlosamannucci_per.ban",
+      "club": "Carlos A. Mannucci",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/carlos-a.-mannucci-20209/squad",
+      "observedAt": "2026-11-02T22:35:01+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/cdrealjuventudsanjoaquin_chi.ban",
+      "club": "CD Real Juventud San Joaquín",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/real-san-joaquin-69469/squad",
+      "observedAt": "2026-11-02T22:36:11+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 36
+    },
+    {
+      "teamFile": "teams/cdtrasandino_chi.ban",
+      "club": "CD Trasandino",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/cd-trasandino-10186/squad",
+      "observedAt": "2026-11-02T22:11:14+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 20
+    },
+    {
+      "teamFile": "teams/cdunionminas_per.ban",
+      "club": "CD Unión Minas",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/union-minas-90728/squad",
+      "observedAt": "2026-11-02T22:36:49+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/cduniversidadsanmartinde_per.ban",
+      "club": "CD Universidad San Martin de Porres",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/deportivo-san-martin-8419/squad",
+      "observedAt": "2026-11-02T22:33:42+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/centralcordobasde_arg.ban",
+      "club": "Central Córdoba SdE",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/central-cordoba-sde-14057/squad",
+      "observedAt": "2026-11-02T22:34:36+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/centralespanol_uru.ban",
+      "club": "Central Espanol",
+      "countryCode": 195,
+      "sourceUrl": "https://www.365scores.com/football/team/central-espanol-10193/squad",
+      "observedAt": "2026-11-02T22:11:14+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 37
+    },
+    {
+      "teamFile": "teams/centralnortedesalta_arg.ban",
+      "club": "Central Norte de Salta",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/central-norte-9809/squad",
+      "observedAt": "2026-11-02T22:11:09+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/cerro_uru.ban",
+      "club": "Cerro",
+      "countryCode": 195,
+      "sourceUrl": "https://www.365scores.com/football/team/cerro-7477/squad",
+      "observedAt": "2026-11-02T22:33:21+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/cerrolargo_uru.ban",
+      "club": "Cerro Largo",
+      "countryCode": 195,
+      "sourceUrl": "https://www.365scores.com/football/team/cerro-largo-8618/squad",
+      "observedAt": "2026-11-02T22:33:45+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/cerroporteno_par.ban",
+      "club": "Cerro Porteño",
+      "countryCode": 150,
+      "sourceUrl": "https://en.wikipedia.org/w/index.php?title=Cerro_Porte%C3%B1o&oldid=1371860826",
+      "observedAt": "2026-11-02T23:50:22+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 36
+    },
+    {
+      "teamFile": "teams/cesarvallejo_per.ban",
+      "club": "Univ. César Vallejo",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/cesar-vallejo-8545/squad",
+      "observedAt": "2026-11-02T22:33:43+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/chacoforever_arg.ban",
+      "club": "Chaco For Ever",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/chaco-for-ever-13870/squad",
+      "observedAt": "2026-11-02T22:34:34+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/cienciano_per.ban",
+      "club": "Cienciano",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/cienciano-8412/squad",
+      "observedAt": "2026-11-02T22:33:41+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/cipolletti_arg.ban",
+      "club": "Cipolletti",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/cipolletti-9280/squad",
+      "observedAt": "2026-11-02T22:11:05+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/circulodeportivo_arg.ban",
+      "club": "Circulo Deportivo",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/circulo-deportivo-57062/squad",
+      "observedAt": "2026-11-02T22:35:59+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 17
+    },
+    {
+      "teamFile": "teams/ciudaddebolivar_arg.ban",
+      "club": "Ciudad De Bolivar",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/ciudad-de-bolivar-67970/squad",
+      "observedAt": "2026-11-02T22:36:07+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/clubalmagro_arg.ban",
+      "club": "Club Almagro",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/almagro-7106/squad",
+      "observedAt": "2026-11-02T22:33:15+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/clubatleticoguemes_arg.ban",
+      "club": "Club Atletico Guemes",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/club-atletico-guemes-28949/squad",
+      "observedAt": "2026-11-02T22:35:29+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/clubatleticohuracan_arg.ban",
+      "club": "Club Atletico Huracan",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/huracan-884/squad",
+      "observedAt": "2026-11-02T22:32:04+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/clubatleticoportuguesa_ven.ban",
+      "club": "Club Atlético Portuguesa",
+      "countryCode": 198,
+      "sourceUrl": "https://es.wikipedia.org/w/index.php?title=Club_Atl%C3%A9tico_Portuguesa&oldid=167405963",
+      "observedAt": "2026-11-02T22:59:26+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/clubatleticosanmartintuc_arg.ban",
+      "club": "Club Atletico San Martin (Tucuman)",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/san-martin-de-tucuman-7271/squad",
+      "observedAt": "2026-11-02T22:33:20+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/clubaurora_bol.ban",
+      "club": "Club Aurora",
+      "countryCode": 26,
+      "sourceUrl": "https://www.365scores.com/football/team/club-aurora-1299/squad",
+      "observedAt": "2026-11-02T22:32:22+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/clubdeportesrengounido_chi.ban",
+      "club": "Club Deportes Rengo Unido",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/deportes-rengo-56356/squad",
+      "observedAt": "2026-11-02T22:35:57+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 38
+    },
+    {
+      "teamFile": "teams/clubdeportivoguabirá_bol.ban",
+      "club": "Guabirá",
+      "countryCode": 26,
+      "sourceUrl": "https://www.365scores.com/football/team/guabira-9066/squad",
+      "observedAt": "2026-11-02T22:33:55+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/clubdeportivollacuabamba_per.ban",
+      "club": "Club Deportivo Llacuabamba",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/club-deportivo-llacuabamba-57392/squad",
+      "observedAt": "2026-11-02T22:36:01+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/clubsocialydeporteslinar_chi.ban",
+      "club": "Club Social y Deportes Linares",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/deportes-linares-14601/squad",
+      "observedAt": "2026-11-02T22:34:41+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/clubsportivocarapegua_par.ban",
+      "club": "Club Sportivo Carapeguá",
+      "countryCode": 150,
+      "sourceUrl": "https://www.365scores.com/football/team/sportivo-carapegua-9306/squad",
+      "observedAt": "2026-11-02T22:11:07+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/clubsportivocerrito_uru.ban",
+      "club": "Club Sportivo Cerrito",
+      "countryCode": 195,
+      "sourceUrl": "https://www.365scores.com/football/team/club-sportivo-cerrito-8616/squad",
+      "observedAt": "2026-11-02T22:33:45+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 19
+    },
+    {
+      "teamFile": "teams/cobreloa_chi.ban",
+      "club": "Cobreloa",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/cobreloa-1240/squad",
+      "observedAt": "2026-11-02T22:32:21+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/cobresal_chi.ban",
+      "club": "Cobresal",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/cobresal-1231/squad",
+      "observedAt": "2026-11-02T22:32:20+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/colegiales_arg.ban",
+      "club": "Colegiales",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/colegiales-7105/squad",
+      "observedAt": "2026-11-02T22:33:14+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/colegionacionaldeiquitos_per.ban",
+      "club": "Colegio Nacional de Iquitos",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/colegio-nacional-de-iquitos-84290/squad",
+      "observedAt": "2026-11-02T22:36:39+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/colocolo_chi.ban",
+      "club": "Colo-Colo",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/colo-colo-1239/squad",
+      "observedAt": "2026-11-02T22:32:21+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/colon_arg.ban",
+      "club": "Colón",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/colon-870/squad",
+      "observedAt": "2026-11-02T22:32:03+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/comerciantesunidos_per.ban",
+      "club": "Comerciantes Unidos",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/comerciantes-unidos-20210/squad",
+      "observedAt": "2026-11-02T22:35:02+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/comunicaciones_arg.ban",
+      "club": "Comunicaciones",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/comunicaciones-7120/squad",
+      "observedAt": "2026-11-02T22:33:16+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/conconnational_chi.ban",
+      "club": "Concón National",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/concon-77364/squad",
+      "observedAt": "2026-11-02T22:36:26+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/coquimbounido_chi.ban",
+      "club": "Coquimbo Unido",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/coquimbo-unido-8625/squad",
+      "observedAt": "2026-11-02T22:33:46+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/cscydgimnasiayesgrimachi_arg.ban",
+      "club": "CSCyD Gimnasia y Esgrima (Chivilcoy)",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/cscyd-gimnasia-y-esgrima-(chivilcoy)-84460/squad",
+      "observedAt": "2026-11-02T22:36:39+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/cucutadeportivo_col.ban",
+      "club": "Cucuta Deportivo",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/cucuta-deportivo-8634/squad",
+      "observedAt": "2026-11-02T22:30:15+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/curicounido_chi.ban",
+      "club": "Curicó Unido",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/curico-unido-2038/squad",
+      "observedAt": "2026-11-02T22:32:38+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/cuscofc_per.ban",
+      "club": "Cusco FC",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/cusco-fc-9291/squad",
+      "observedAt": "2026-11-02T22:11:05+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/danubiofc_uru.ban",
+      "club": "Danubio FC",
+      "countryCode": 195,
+      "sourceUrl": "https://www.365scores.com/football/team/danubio-fc-8611/squad",
+      "observedAt": "2026-11-02T22:33:45+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/defensayjusticia_ar.ban",
+      "club": "Defensa y Justicia",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/defensa-y-justicia-7217/squad",
+      "observedAt": "2026-11-02T22:33:19+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/defensoresdebelgrano_arg.ban",
+      "club": "Defensores de Belgrano",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/defensores-de-belgrano-7183/squad",
+      "observedAt": "2026-11-02T22:33:17+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/defensoresunidos_arg.ban",
+      "club": "Defensores Unidos",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/defensores-unidos-11932/squad",
+      "observedAt": "2026-11-02T22:34:11+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/defensorsporting_uru.ban",
+      "club": "Defensor Sporting",
+      "countryCode": 195,
+      "sourceUrl": "https://www.365scores.com/football/team/defensor-sporting-7639/squad",
+      "observedAt": "2026-11-02T22:33:24+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/delfin_equ.ban",
+      "club": "Delfín",
+      "countryCode": 60,
+      "sourceUrl": "https://www.365scores.com/football/team/delfin-19160/squad",
+      "observedAt": "2026-11-02T22:30:47+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/deplaguaira_ven.ban",
+      "club": "La Guaira",
+      "countryCode": 198,
+      "sourceUrl": "https://www.365scores.com/football/team/deportivo-la-guaira-13146/squad",
+      "observedAt": "2026-11-02T22:34:26+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/deportesconcepcion_chi.ban",
+      "club": "Deportes Concepcion",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/deportes-concepcion-8629/squad",
+      "observedAt": "2026-11-02T22:33:46+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/deportescopiapo_chi.ban",
+      "club": "Deportes Copiapo",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/deportes-copiapo-8632/squad",
+      "observedAt": "2026-11-02T22:33:46+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/deporteslaserena_chi.ban",
+      "club": "Deportes La Serena",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/deportes-la-serena-1237/squad",
+      "observedAt": "2026-11-02T22:32:21+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/deporteslimache_chi.ban",
+      "club": "Deportes Limache",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/deportes-limache-51984/squad",
+      "observedAt": "2026-11-02T22:35:49+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/deportesquindio_col.ban",
+      "club": "Deportes Quindio",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/deportes-quindio-8636/squad",
+      "observedAt": "2026-11-02T22:30:15+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/deportesrecoleta_chi.ban",
+      "club": "Deportes Recoleta",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/deportes-recoleta-49303/squad",
+      "observedAt": "2026-11-02T22:35:43+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/deportessantacruz_chi.ban",
+      "club": "Deportes Santa Cruz",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/deportes-santa-cruz-26756/squad",
+      "observedAt": "2026-11-02T22:35:24+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/deportestolima_col.ban",
+      "club": "Deportes Tolima",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/primavera-1-7635/squad",
+      "observedAt": "2026-11-02T22:30:11+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/deportivoarmenio_arg.ban",
+      "club": "Deportivo Armenio",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/deportivo-armenio-7109/squad",
+      "observedAt": "2026-11-02T22:33:15+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/deportivobinacional_per.ban",
+      "club": "Deportivo Binacional",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/binacional-45850/squad",
+      "observedAt": "2026-11-02T22:35:37+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/deportivocali_col.ban",
+      "club": "Deportivo Cali",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/deportivo-cali-8639/squad",
+      "observedAt": "2026-11-02T22:30:15+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/deportivocamioneros_arg.ban",
+      "club": "Deportivo Camioneros",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/camioneros-17402/squad",
+      "observedAt": "2026-11-02T22:34:53+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/deportivocapiata_par.ban",
+      "club": "Deportivo Capiata",
+      "countryCode": 150,
+      "sourceUrl": "https://www.365scores.com/football/team/deportivo-capiata-10551/squad",
+      "observedAt": "2026-11-02T22:33:59+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 40
+    },
+    {
+      "teamFile": "teams/deportivocuenca_equ.ban",
+      "club": "Deportivo Cuenca",
+      "countryCode": 60,
+      "sourceUrl": "https://www.365scores.com/football/team/deportivo-cuenca-7281/squad",
+      "observedAt": "2026-11-02T22:30:09+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/deportivogarcilaso_per.ban",
+      "club": "Deportivo Garcilaso",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/deportivo-garcilaso-45849/squad",
+      "observedAt": "2026-11-02T22:35:37+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/deportivolaferrere_arg.ban",
+      "club": "Deportivo Laferrere",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/deportivo-laferrere-11882/squad",
+      "observedAt": "2026-11-02T22:34:09+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/deportivolaguairafutbolc_ven.ban",
+      "club": "Deportivo La Guaira Fútbol Club \"B\"",
+      "countryCode": 198,
+      "sourceUrl": "https://es.wikipedia.org/w/index.php?title=Deportivo_La_Guaira_F%C3%BAtbol_Club_%22B%22&oldid=175696174",
+      "observedAt": "2026-11-02T23:46:12+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 19
+    },
+    {
+      "teamFile": "teams/deportivomaipu_arg.ban",
+      "club": "Deportivo Maipu",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/deportivo-maipu-9283/squad",
+      "observedAt": "2026-11-02T22:11:05+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/deportivomaldonado_uru.ban",
+      "club": "Deportivo Maldonado",
+      "countryCode": 195,
+      "sourceUrl": "https://www.365scores.com/football/team/deportivo-maldonado-14062/squad",
+      "observedAt": "2026-11-02T22:34:36+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/deportivomerlo_arg.ban",
+      "club": "Deportivo Merlo",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/deportivo-merlo-7222/squad",
+      "observedAt": "2026-11-02T22:33:19+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/deportivomoquegua_per.ban",
+      "club": "Deportivo Moquegua",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/deportivo-moquegua-77447/squad",
+      "observedAt": "2026-11-02T22:36:28+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/deportivomoron_arg.ban",
+      "club": "Deportivo Moron",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/deportivo-moron-7110/squad",
+      "observedAt": "2026-11-02T22:33:15+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/deportivopasto_col.ban",
+      "club": "Deportivo Pasto",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/deportivo-pasto-9048/squad",
+      "observedAt": "2026-11-02T22:30:18+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/deportivopereira_col.ban",
+      "club": "Deportivo Pereira",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/deportivo-pereira-8638/squad",
+      "observedAt": "2026-11-02T22:30:15+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/deportivoriestra_arg.ban",
+      "club": "Deportivo Riestra",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/riestra-11940/squad",
+      "observedAt": "2026-11-02T22:34:12+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/deportivorincon_arg.ban",
+      "club": "Deportivo Rincón",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/deportivo-rincon-50949/squad",
+      "observedAt": "2026-11-02T22:35:48+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/deportivosantani_par.ban",
+      "club": "Deportivo Santaní",
+      "countryCode": 150,
+      "sourceUrl": "https://www.365scores.com/football/team/deportivo-santani-14638/squad",
+      "observedAt": "2026-11-02T22:34:41+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 16
+    },
+    {
+      "teamFile": "teams/deptachira_ven.ban",
+      "club": "Deportivo Táchira",
+      "countryCode": 198,
+      "sourceUrl": "https://www.365scores.com/football/team/deportivo-tachira-8685/squad",
+      "observedAt": "2026-11-02T22:33:47+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/douglashaig_arg.ban",
+      "club": "Douglas Haig",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/douglas-haig-9286/squad",
+      "observedAt": "2026-11-02T22:11:05+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/ellinqueno_arg.ban",
+      "club": "El Linqueño",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/el-linqueno-11925/squad",
+      "observedAt": "2026-11-02T22:34:11+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/emelec_equ.ban",
+      "club": "Emelec",
+      "countryCode": 60,
+      "sourceUrl": "https://www.365scores.com/football/team/emelec-7203/squad",
+      "observedAt": "2026-11-02T22:30:09+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/envigadofc_col.ban",
+      "club": "Envigado FC",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/envigado-fc-8642/squad",
+      "observedAt": "2026-11-02T22:30:16+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/estudiantes_ar.ban",
+      "club": "Estudiantes",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/estudiantes-de-la-plata-867/squad",
+      "observedAt": "2026-11-02T22:32:03+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/estudiantesdebuenosaires_arg.ban",
+      "club": "Estudiantes de Buenos Aires",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/estudiantes-buenos-aires-7116/squad",
+      "observedAt": "2026-11-02T22:33:16+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/estudiantesmerida_ven.ban",
+      "club": "Mérida",
+      "countryCode": 198,
+      "sourceUrl": "https://www.365scores.com/football/team/estudiantes-de-merida-8690/squad",
+      "observedAt": "2026-11-02T22:33:48+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 19
+    },
+    {
+      "teamFile": "teams/estudiantesriocuarto_arg.ban",
+      "club": "Estudiantes Río Cuarto",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/estudiantes-rio-cuarto-17405/squad",
+      "observedAt": "2026-11-02T22:34:53+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/everton_chi.ban",
+      "club": "Everton",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/everton-de-vina-1230/squad",
+      "observedAt": "2026-11-02T22:32:20+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/fccajamarca_per.ban",
+      "club": "FC Cajamarca",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/fc-cajamarca-77513/squad",
+      "observedAt": "2026-11-02T22:36:28+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/ferrocarrilmidland_arg.ban",
+      "club": "Ferrocarril Midland",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/ferrocarril-midland-11929/squad",
+      "observedAt": "2026-11-02T22:34:11+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/flandria_arg.ban",
+      "club": "Flandria",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/flandria-7114/squad",
+      "observedAt": "2026-11-02T22:33:16+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/fluminensepi_bra.ban",
+      "club": "Fluminense-PI",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/fluminense-pi-67754/squad",
+      "observedAt": "2026-11-02T22:31:07+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 40
+    },
+    {
+      "teamFile": "teams/fortalezafc_col.ban",
+      "club": "Fortaleza FC",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/fortaleza-fc.-9844/squad",
+      "observedAt": "2026-11-02T22:30:26+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/fundacionamigosporeldepo_arg.ban",
+      "club": "Fundación Amigos por el Deporte",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/fundacion-amigos-por-el-deporte-84140/squad",
+      "observedAt": "2026-11-02T22:36:39+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/gama_bra.ban",
+      "club": "Gama",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/gama-1779/squad",
+      "observedAt": "2026-11-02T22:30:01+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/generalcaballero_par.ban",
+      "club": "General Caballero",
+      "countryCode": 150,
+      "sourceUrl": "https://www.365scores.com/football/team/general-caballero-jlm-8777/squad",
+      "observedAt": "2026-11-02T22:33:50+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 18
+    },
+    {
+      "teamFile": "teams/generalvelasquez_chi.ban",
+      "club": "General Velásquez",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/general-velasquez-51896/squad",
+      "observedAt": "2026-11-02T22:35:49+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/gimnasiadeconcepciondelu_arg.ban",
+      "club": "Gimnasia de Concepcion del Uruguay",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/gimnasia-de-concepcion-del-uruguay-9285/squad",
+      "observedAt": "2026-11-02T22:11:05+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/gimnasiajujuy_arg.ban",
+      "club": "Gimnasia Jujuy",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/gimnasia-jujuy-881/squad",
+      "observedAt": "2026-11-02T22:32:04+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/gimnasiamendoza_arg.ban",
+      "club": "Gimnasia Mendoza",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/gimnasia-mendoza-11915/squad",
+      "observedAt": "2026-11-02T22:34:10+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/gimnasiayesgrimalaplata_arg.ban",
+      "club": "Gimnasia Y Esgrima La Plata",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/gimnasia-la-plata-880/squad",
+      "observedAt": "2026-11-02T22:32:04+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/gimnasiaytirodesalta_arg.ban",
+      "club": "Gimnasia y Tiro de Salta",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/gimnasia-y-tiro-9278/squad",
+      "observedAt": "2026-11-02T22:11:05+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/godoycruz_arg.ban",
+      "club": "Godoy Cruz",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/godoy-cruz-873/squad",
+      "observedAt": "2026-11-02T22:32:03+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/gremioesportivobrasil_bra.ban",
+      "club": "Grêmio Esportivo Brasil",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/brasil-pelotas-(rs)-18755/squad",
+      "observedAt": "2026-11-02T22:30:46+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/gualbertovillarroelsj_bol.ban",
+      "club": "Gualberto Villarroel SJ",
+      "countryCode": 26,
+      "sourceUrl": "https://www.365scores.com/football/team/gv-san-jose-74521/squad",
+      "observedAt": "2026-11-02T22:36:24+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/guarani_par.ban",
+      "club": "Guarani",
+      "countryCode": 150,
+      "sourceUrl": "https://www.365scores.com/football/team/club-guarani-7739/squad",
+      "observedAt": "2026-11-02T22:33:26+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/guayaquilcity_equ.ban",
+      "club": "Guayaquil City",
+      "countryCode": 60,
+      "sourceUrl": "https://www.365scores.com/football/team/guayaquil-city-14205/squad",
+      "observedAt": "2026-11-02T22:30:38+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/guillermobrown_arg.ban",
+      "club": "Guillermo Brown",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/guillermo-brown-8647/squad",
+      "observedAt": "2026-11-02T22:33:46+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/huachipato_chi.ban",
+      "club": "Huachipato",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/huachipato-1232/squad",
+      "observedAt": "2026-11-02T22:32:20+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/huracanlasheras_arg.ban",
+      "club": "Huracán Las Heras",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/huracan-las-heras-23194/squad",
+      "observedAt": "2026-11-02T22:35:15+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/independiente_arg.ban",
+      "club": "Independiente",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/independiente-874/squad",
+      "observedAt": "2026-11-02T22:32:03+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/independiente_equ.ban",
+      "club": "Indep. del Valle",
+      "countryCode": 60,
+      "sourceUrl": "https://www.365scores.com/football/team/independiente-del-valle-9142/squad",
+      "observedAt": "2026-11-02T22:30:20+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/independientechivilcoy_arg.ban",
+      "club": "Independiente Chivilcoy",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/independiente-chivilcoy-21915/squad",
+      "observedAt": "2026-11-02T22:35:10+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/independientefbc_par.ban",
+      "club": "Independiente FBC",
+      "countryCode": 150,
+      "sourceUrl": "https://www.365scores.com/football/team/independiente-fbc-8772/squad",
+      "observedAt": "2026-11-02T22:33:50+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/independienterivadavia_arg.ban",
+      "club": "Independiente Rivadavia",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/elite-cup-7227/squad",
+      "observedAt": "2026-11-02T22:33:20+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/independientesantafe_col.ban",
+      "club": "Independiente Santa Fe",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/independiente-santa-fe-7644/squad",
+      "observedAt": "2026-11-02T22:30:12+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/independientevalledelcau_col.ban",
+      "club": "Independiente Valle del Cauca",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/independiente-yumbo-7642/squad",
+      "observedAt": "2026-11-02T22:30:12+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/indepmedellin_col.ban",
+      "club": "Indep. Medellín",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/independiente-medellin-8643/squad",
+      "observedAt": "2026-11-02T22:30:16+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/indeppetro_ba_bol.ban",
+      "club": "Indep. Petrolero ",
+      "countryCode": 26,
+      "sourceUrl": "https://www.365scores.com/football/team/independiente-petrolero-53984/squad",
+      "observedAt": "2026-11-02T22:35:53+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 36
+    },
+    {
+      "teamFile": "teams/institutoaccordoba_arg.ban",
+      "club": "Instituto AC Cordoba",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/instituto-ac-cordoba-7272/squad",
+      "observedAt": "2026-11-02T22:33:20+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/internacionaldebogota_col.ban",
+      "club": "Internacional de Bogota",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/internacional-bogota-8542/squad",
+      "observedAt": "2026-11-02T22:30:14+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/internacionalpalmira_col.ban",
+      "club": "Internacional Palmira",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/internacional-fc-9836/squad",
+      "observedAt": "2026-11-02T22:30:25+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 39
+    },
+    {
+      "teamFile": "teams/internacionalturen_ven.ban",
+      "club": "Internacional Turén",
+      "countryCode": 198,
+      "sourceUrl": "https://es.wikipedia.org/w/index.php?title=Internacional_Tur%C3%A9n&oldid=166584373",
+      "observedAt": "2026-11-02T23:45:47+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/ituzaingo_arg.ban",
+      "club": "Ituzaingó",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/ituzaingo-11933/squad",
+      "observedAt": "2026-11-02T22:34:11+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/jaguaresdecordoba_col.ban",
+      "club": "Jaguares de Córdoba",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/jaguares-de-cordoba-10377/squad",
+      "observedAt": "2026-11-02T22:30:29+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/juanpabloiicollege_per.ban",
+      "club": "Juan Pablo II College",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/juan-pablo-ii-college-77429/squad",
+      "observedAt": "2026-11-02T22:36:27+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/junior_col.ban",
+      "club": "Junior Barranquilla",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/junior-fc-7204/squad",
+      "observedAt": "2026-11-02T22:30:09+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/juventudantoniana_arg.ban",
+      "club": "Juventud Antoniana",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/juventud-antoniana-9277/squad",
+      "observedAt": "2026-11-02T22:11:05+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/juventuddelaspiedras_uru.ban",
+      "club": "Juventud De Las Piedras",
+      "countryCode": 195,
+      "sourceUrl": "https://www.365scores.com/football/team/juventud-10192/squad",
+      "observedAt": "2026-11-02T22:11:14+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/juventudunidasanluis_arg.ban",
+      "club": "Juventud Unida San Luis",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/juventud-unida-san-luis-9281/squad",
+      "observedAt": "2026-11-02T22:11:05+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/kimberleymardelplata_arg.ban",
+      "club": "Kimberley Mar Del Plata",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/kimberley-mar-del-plata-47149/squad",
+      "observedAt": "2026-11-02T22:35:39+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/laluz_uru.ban",
+      "club": "La Luz",
+      "countryCode": 195,
+      "sourceUrl": "https://es.wikipedia.org/w/index.php?title=La_Luz_F%C3%BAtbol_Club&oldid=173343454",
+      "observedAt": "2026-11-02T23:45:48+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 36
+    },
+    {
+      "teamFile": "teams/lanus_arg.ban",
+      "club": "Lanús",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/lanus-869/squad",
+      "observedAt": "2026-11-02T22:32:03+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/ldu_equ.ban",
+      "club": "LDU",
+      "countryCode": 60,
+      "sourceUrl": "https://www.365scores.com/football/team/ldu-1282/squad",
+      "observedAt": "2026-11-02T22:30:00+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/leonesdelnorte_equ.ban",
+      "club": "Leones del Norte",
+      "countryCode": 60,
+      "sourceUrl": "https://www.365scores.com/football/team/leones-del-norte-69705/squad",
+      "observedAt": "2026-11-02T22:31:08+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/leonesfc_col.ban",
+      "club": "Leones FC",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/leones-fc-9829/squad",
+      "observedAt": "2026-11-02T22:30:25+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/libertad_equ.ban",
+      "club": "Libertad",
+      "countryCode": 60,
+      "sourceUrl": "https://www.365scores.com/football/team/libertad-69463/squad",
+      "observedAt": "2026-11-02T22:31:08+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/libertad_par.ban",
+      "club": "Libertad",
+      "countryCode": 150,
+      "sourceUrl": "https://www.365scores.com/football/team/libertad-1286/squad",
+      "observedAt": "2026-11-02T22:32:22+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/libertadsfc_ven.ban",
+      "club": "Libertad SFC",
+      "countryCode": 198,
+      "sourceUrl": "https://es.wikipedia.org/w/index.php?title=Libertad_SFC&oldid=171389305",
+      "observedAt": "2026-11-02T23:45:44+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/liniers_arg.ban",
+      "club": "Liniers",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/liniers-11938/squad",
+      "observedAt": "2026-11-02T22:34:12+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/liverpool_uru.ban",
+      "club": "Liverpool-URU",
+      "countryCode": 195,
+      "sourceUrl": "https://www.365scores.com/football/team/liverpool-montevideo-8358/squad",
+      "observedAt": "2026-11-02T22:33:40+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/llanerosfc_col.ban",
+      "club": "Llaneros FC",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/llaneros-fc-10378/squad",
+      "observedAt": "2026-11-02T22:30:29+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/losandes_arg.ban",
+      "club": "Los Andes",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/los-andes-7108/squad",
+      "observedAt": "2026-11-02T22:33:15+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/loschankas_per.ban",
+      "club": "Los Chankas",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/los-chankas-23055/squad",
+      "observedAt": "2026-11-02T22:35:15+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/lotaschwager_chi.ban",
+      "club": "Lota Schwager",
+      "countryCode": 42,
+      "sourceUrl": "https://es.wikipedia.org/w/index.php?title=Club_de_Deportes_Lota_Schwager&oldid=175733556",
+      "observedAt": "2026-11-02T23:45:45+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/macara_equ.ban",
+      "club": "Macará",
+      "countryCode": 60,
+      "sourceUrl": "https://www.365scores.com/football/team/macara-9140/squad",
+      "observedAt": "2026-11-02T22:30:19+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/magallanes_chi.ban",
+      "club": "Magallanes",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/magallanes-8622/squad",
+      "observedAt": "2026-11-02T22:33:45+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/melgar_per.ban",
+      "club": "Melgar",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/fbc-melgar-8413/squad",
+      "observedAt": "2026-11-02T22:33:41+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/metropolitanos_ven.ban",
+      "club": "Metropolitanos",
+      "countryCode": 198,
+      "sourceUrl": "https://www.365scores.com/football/team/metropolitanos-fc-13830/squad",
+      "observedAt": "2026-11-02T22:34:33+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/millionarios_col.ban",
+      "club": "Millonarios",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/millonarios-8637/squad",
+      "observedAt": "2026-11-02T22:30:15+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/miramarmisiones_uru.ban",
+      "club": "Miramar Misiones",
+      "countryCode": 195,
+      "sourceUrl": "https://www.365scores.com/football/team/miramar-misiones-12567/squad",
+      "observedAt": "2026-11-02T22:34:19+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 36
+    },
+    {
+      "teamFile": "teams/molinoselpirata_per.ban",
+      "club": "Molinos El Pirata",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/pirata-fc-55129/squad",
+      "observedAt": "2026-11-02T22:35:55+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/monaguas_ven.ban",
+      "club": "Monagas",
+      "countryCode": 198,
+      "sourceUrl": "https://www.365scores.com/football/team/monagas-sc-8701/squad",
+      "observedAt": "2026-11-02T22:33:48+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/montevideotorque_uru.ban",
+      "club": "Montevideo Torque",
+      "countryCode": 195,
+      "sourceUrl": "https://www.365scores.com/football/team/montevideo-city-torque-12675/squad",
+      "observedAt": "2026-11-02T22:34:20+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/mushucruna_equ.ban",
+      "club": "Mushuc Runa",
+      "countryCode": 60,
+      "sourceUrl": "https://www.365scores.com/football/team/mushuc-runa-18814/squad",
+      "observedAt": "2026-11-02T22:30:46+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/nacional_col.ban",
+      "club": "Atlético Nacional",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/africa-cup-of-nations-u17-8640/squad",
+      "observedAt": "2026-11-02T22:30:15+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/nacional_par.ban",
+      "club": "Nacional-PAR",
+      "countryCode": 150,
+      "sourceUrl": "https://www.365scores.com/football/team/club-nacional-1280/squad",
+      "observedAt": "2026-11-02T22:32:22+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/nacional_uru.ban",
+      "club": "Nacional",
+      "countryCode": 195,
+      "sourceUrl": "https://www.365scores.com/football/team/nacional-7478/squad",
+      "observedAt": "2026-11-02T22:33:21+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/nacionalpotosi_bol.ban",
+      "club": "Nacional Potosí",
+      "countryCode": 26,
+      "sourceUrl": "https://www.365scores.com/football/team/nacional-potosi-9065/squad",
+      "observedAt": "2026-11-02T22:33:55+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/newoldboys_ar.ban",
+      "club": "Newell's Old Boys",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/newell's-old-boys-877/squad",
+      "observedAt": "2026-11-02T22:32:04+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/nublense_chi.ban",
+      "club": "Ñublense ",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/nublense-1244/squad",
+      "observedAt": "2026-11-02T22:32:21+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/nuevachicago_arg.ban",
+      "club": "Nueva Chicago",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/nueva-chicago-1208/squad",
+      "observedAt": "2026-11-02T22:32:20+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 36
+    },
+    {
+      "teamFile": "teams/ohigginsfc_chi.ban",
+      "club": "O'Higgins F.C.",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/o-higgins-1234/squad",
+      "observedAt": "2026-11-02T22:32:20+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/olimpia_par.ban",
+      "club": "Olimpia",
+      "countryCode": 150,
+      "sourceUrl": "https://www.365scores.com/football/team/olimpia-8548/squad",
+      "observedAt": "2026-11-02T22:33:43+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/oncecaldas_col.ban",
+      "club": "Once Caldas",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/once-caldas-7289/squad",
+      "observedAt": "2026-11-02T22:30:10+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/orensesc_equ.ban",
+      "club": "Orense SC",
+      "countryCode": 60,
+      "sourceUrl": "https://www.365scores.com/football/team/orense-sc-51520/squad",
+      "observedAt": "2026-11-02T22:31:01+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/orientepetrolero_bol.ban",
+      "club": "Oriente Petrolero",
+      "countryCode": 26,
+      "sourceUrl": "https://www.365scores.com/football/team/oriente-petrolero-7641/squad",
+      "observedAt": "2026-11-02T22:33:25+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/orsomarsosc_col.ban",
+      "club": "Orsomarso SC",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/orsomarso-28953/squad",
+      "observedAt": "2026-11-02T22:30:55+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 36
+    },
+    {
+      "teamFile": "teams/palestino_chi.ban",
+      "club": "Palestino",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/palestino-1238/squad",
+      "observedAt": "2026-11-02T22:32:21+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/patronato_arg.ban",
+      "club": "Patronato",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/patronato-8274/squad",
+      "observedAt": "2026-11-02T22:33:34+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/penarol_uru.ban",
+      "club": "Peñarol",
+      "countryCode": 195,
+      "sourceUrl": "https://www.365scores.com/football/team/penarol-7766/squad",
+      "observedAt": "2026-11-02T22:33:27+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/platense_arg.ban",
+      "club": "Platense",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/platense-7207/squad",
+      "observedAt": "2026-11-02T22:33:18+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 36
+    },
+    {
+      "teamFile": "teams/plazacolonia_uru.ban",
+      "club": "Plaza Colonia",
+      "countryCode": 195,
+      "sourceUrl": "https://www.365scores.com/football/team/plaza-colonia-12774/squad",
+      "observedAt": "2026-11-02T22:34:22+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 22
+    },
+    {
+      "teamFile": "teams/portuguesadesportos_bra.ban",
+      "club": "Portuguesa Desportos",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/portuguesa-1223/squad",
+      "observedAt": "2026-11-02T22:29:57+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 39
+    },
+    {
+      "teamFile": "teams/portuguesafc_ven.ban",
+      "club": "Portuguesa FC",
+      "countryCode": 198,
+      "sourceUrl": "https://www.365scores.com/football/team/portuguesa-fc-9779/squad",
+      "observedAt": "2026-11-02T22:11:09+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/progreso_uru.ban",
+      "club": "Progreso",
+      "countryCode": 195,
+      "sourceUrl": "https://www.365scores.com/football/team/progreso-10191/squad",
+      "observedAt": "2026-11-02T22:11:14+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/provincialosorno_chi.ban",
+      "club": "Provincial Osorno",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/osorno-1242/squad",
+      "observedAt": "2026-11-02T22:32:21+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 20
+    },
+    {
+      "teamFile": "teams/puertocabellou20_ven.ban",
+      "club": "Puerto Cabello U20",
+      "countryCode": 198,
+      "sourceUrl": "https://www.365scores.com/football/team/puerto-cabello-u20-57783/squad",
+      "observedAt": "2026-11-02T22:36:02+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 22
+    },
+    {
+      "teamFile": "teams/quilmesatleticoclub_arg.ban",
+      "club": "Quilmes Atlético Club",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/copa-ecuador-7225/squad",
+      "observedAt": "2026-11-02T22:33:19+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/racing_arg.ban",
+      "club": "Racing",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/racing-club-876/squad",
+      "observedAt": "2026-11-02T22:32:04+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/racingclubmontevideo_uru.ban",
+      "club": "Racing Club Montevideo",
+      "countryCode": 195,
+      "sourceUrl": "https://www.365scores.com/football/team/racing-club-montevideo-7087/squad",
+      "observedAt": "2026-11-02T22:33:14+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/rangersdetalca_chi.ban",
+      "club": "Rangers De Talca",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/rangers-de-talca-1246/squad",
+      "observedAt": "2026-11-02T22:32:22+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/rayozuliano_ven.ban",
+      "club": "Rayo Zuliano",
+      "countryCode": 198,
+      "sourceUrl": "https://www.365scores.com/football/team/rayo-zuliano-68621/squad",
+      "observedAt": "2026-11-02T22:36:08+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 40
+    },
+    {
+      "teamFile": "teams/realcartagena_col.ban",
+      "club": "Real Cartagena",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/real-cartagena-8635/squad",
+      "observedAt": "2026-11-02T22:30:15+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/realcundinamarca_col.ban",
+      "club": "Real Cundinamarca",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/real-cundinamarca-9835/squad",
+      "observedAt": "2026-11-02T22:30:25+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 40
+    },
+    {
+      "teamFile": "teams/realoruro_bol.ban",
+      "club": "Real Oruro",
+      "countryCode": 26,
+      "sourceUrl": "https://www.365scores.com/football/team/real-oruro-72056/squad",
+      "observedAt": "2026-11-02T22:36:17+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/realpilar_arg.ban",
+      "club": "Real Pilar",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/real-pilar-49732/squad",
+      "observedAt": "2026-11-02T22:35:44+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/realpotosi_bol.ban",
+      "club": "Real Potosi",
+      "countryCode": 26,
+      "sourceUrl": "https://www.365scores.com/football/team/real-potosi-1285/squad",
+      "observedAt": "2026-11-02T22:32:22+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/realsantander_col.ban",
+      "club": "Real Santander",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/real-santander-9834/squad",
+      "observedAt": "2026-11-02T22:30:25+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 40
+    },
+    {
+      "teamFile": "teams/realtomayapo_bol.ban",
+      "club": "Real Tomayapo",
+      "countryCode": 26,
+      "sourceUrl": "https://www.365scores.com/football/team/real-tomayapo-56887/squad",
+      "observedAt": "2026-11-02T22:35:58+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/recoletafc_par.ban",
+      "club": "Recoleta FC",
+      "countryCode": 150,
+      "sourceUrl": "https://www.365scores.com/football/team/cd-recoleta-53209/squad",
+      "observedAt": "2026-11-02T22:35:51+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 37
+    },
+    {
+      "teamFile": "teams/rentistas_uru.ban",
+      "club": "Rentistas",
+      "countryCode": 195,
+      "sourceUrl": "https://www.365scores.com/football/team/rentistas-8617/squad",
+      "observedAt": "2026-11-02T22:33:45+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 36
+    },
+    {
+      "teamFile": "teams/riverplate_arg.ban",
+      "club": "River Plate",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/river-plate-868/squad",
+      "observedAt": "2026-11-02T22:32:03+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/rosariocentral_arg.ban",
+      "club": "Rosario Central",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/rosario-central-875/squad",
+      "observedAt": "2026-11-02T22:32:04+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/rubionu_par.ban",
+      "club": "Rubio Ñu",
+      "countryCode": 150,
+      "sourceUrl": "https://www.365scores.com/football/team/copa-governo-de-sergipe-8774/squad",
+      "observedAt": "2026-11-02T22:33:50+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/sanantoniobulobulo_bol.ban",
+      "club": "San Antonio Bulo Bulo",
+      "countryCode": 26,
+      "sourceUrl": "https://www.365scores.com/football/team/san-antonio-69041/squad",
+      "observedAt": "2026-11-02T22:36:10+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/sanlorenzo_arg.ban",
+      "club": "San Lorenzo",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/san-lorenzo-865/squad",
+      "observedAt": "2026-11-02T22:32:02+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/sanluisdequillota_chi.ban",
+      "club": "San Luis de Quillota",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/san-luis-de-quillota-7097/squad",
+      "observedAt": "2026-11-02T22:33:14+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/sanmarcosdearica_chi.ban",
+      "club": "San Marcos de Arica",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/san-marcos-8628/squad",
+      "observedAt": "2026-11-02T22:33:46+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/sanmartinburzaco_arg.ban",
+      "club": "San Martín Burzaco",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/san-martin-burzaco-14374/squad",
+      "observedAt": "2026-11-02T22:34:39+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/sanmartindeformosa_arg.ban",
+      "club": "San Martín de Formosa",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/san-martin-de-formosa-28940/squad",
+      "observedAt": "2026-11-02T22:35:29+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/sanmartinmendoza_arg.ban",
+      "club": "San Martín Mendoza",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/san-martin-mendoza-11916/squad",
+      "observedAt": "2026-11-02T22:34:10+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/santamarinatandil_arg.ban",
+      "club": "Santamarina Tandil",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/santamarina-tandil-9053/squad",
+      "observedAt": "2026-11-02T22:33:55+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/santelmo_arg.ban",
+      "club": "San Telmo",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/san-telmo-7111/squad",
+      "observedAt": "2026-11-02T22:33:15+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/santiagocityfc_chi.ban",
+      "club": "Santiago City FC",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/santiago-city-74030/squad",
+      "observedAt": "2026-11-02T22:36:22+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 22
+    },
+    {
+      "teamFile": "teams/santiagowanderers_chi.ban",
+      "club": "Santiago Wanderers",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/santiago-wanderers-7096/squad",
+      "observedAt": "2026-11-02T22:33:14+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/santosfc_per.ban",
+      "club": "Santos FC",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/santos-fc-55131/squad",
+      "observedAt": "2026-11-02T22:35:55+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/sarmientodelabanda_arg.ban",
+      "club": "Sarmiento De La Banda",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/sarmiento-de-la-banda-79559/squad",
+      "observedAt": "2026-11-02T22:36:32+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 36
+    },
+    {
+      "teamFile": "teams/sarmientoderesistencia_arg.ban",
+      "club": "Sarmiento de Resistencia",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/sarmiento-de-resistencia-9302/squad",
+      "observedAt": "2026-11-03T00:46:45+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/sarmientojunin_arg.ban",
+      "club": "Sarmiento Junin",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/sarmiento-junin-7117/squad",
+      "observedAt": "2026-11-02T22:33:16+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/sdaucas_equ.ban",
+      "club": "SD Aucas",
+      "countryCode": 60,
+      "sourceUrl": "https://www.365scores.com/football/team/sd-aucas-14201/squad",
+      "observedAt": "2026-11-02T22:30:38+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/solamerica_par.ban",
+      "club": "Sol de América",
+      "countryCode": 150,
+      "sourceUrl": "https://www.365scores.com/football/team/sol-de-america-8773/squad",
+      "observedAt": "2026-11-02T22:33:50+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 40
+    },
+    {
+      "teamFile": "teams/sportboys_per.ban",
+      "club": "Sport Boys",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/sport-boys-8414/squad",
+      "observedAt": "2026-11-02T22:33:41+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/sporthuncayo_per.ban",
+      "club": "Sport Huancayo",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/sport-huancayo-7640/squad",
+      "observedAt": "2026-11-02T22:33:25+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/sportingcristal_per.ban",
+      "club": "Sporting Cristal",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/sporting-cristal-8420/squad",
+      "observedAt": "2026-11-02T22:33:42+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 36
+    },
+    {
+      "teamFile": "teams/sportivoameliano_par.ban",
+      "club": "Sportivo Ameliano",
+      "countryCode": 150,
+      "sourceUrl": "https://www.365scores.com/football/team/sportivo-ameliano-56588/squad",
+      "observedAt": "2026-11-02T22:35:58+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/sportivobelgrano_arg.ban",
+      "club": "Sportivo Belgrano",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/sportivo-belgrano-9284/squad",
+      "observedAt": "2026-11-02T22:11:05+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/sportivodocksud_arg.ban",
+      "club": "Sportivo Dock Sud",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/sportivo-dock-sud-11884/squad",
+      "observedAt": "2026-11-02T22:34:09+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/sportivoitaliano_arg.ban",
+      "club": "Sportivo Italiano",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/sportivo-italiano-7226/squad",
+      "observedAt": "2026-11-02T22:33:19+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/sportivolasparejas_arg.ban",
+      "club": "Sportivo Las Parejas",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/sportivo-las-parejas-24409/squad",
+      "observedAt": "2026-11-02T22:35:17+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 35
+    },
+    {
+      "teamFile": "teams/sportivoluqueno_par.ban",
+      "club": "Sportivo Luqueño",
+      "countryCode": 150,
+      "sourceUrl": "https://www.365scores.com/football/team/supercopa-8778/squad",
+      "observedAt": "2026-11-02T22:33:51+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/sportivotrinidense_par.ban",
+      "club": "Sportivo Trinidense",
+      "countryCode": 150,
+      "sourceUrl": "https://www.365scores.com/football/team/sportivo-trinidense-14640/squad",
+      "observedAt": "2026-11-02T22:34:42+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/sportivoybibliotecaatena_arg.ban",
+      "club": "Sportivo y Biblioteca Atenas Rio Cuarto",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/scyb-atenas-73665/squad",
+      "observedAt": "2026-11-02T22:36:20+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/spsanlorenzo_par.ban",
+      "club": "Sp. San Lorenzo",
+      "countryCode": 150,
+      "sourceUrl": "https://www.365scores.com/football/team/cs-san-lorenzo-14634/squad",
+      "observedAt": "2026-11-02T22:34:41+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/tacnaheroica_per.ban",
+      "club": "Tacna Heroica",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/tacna-heroica-45859/squad",
+      "observedAt": "2026-11-02T22:35:37+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 32
+    },
+    {
+      "teamFile": "teams/tacuary_par.ban",
+      "club": "Tacuary",
+      "countryCode": 150,
+      "sourceUrl": "https://www.365scores.com/football/team/tacuary-8775/squad",
+      "observedAt": "2026-11-02T22:33:50+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 40
+    },
+    {
+      "teamFile": "teams/talleres_arg.ban",
+      "club": "Talleres",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/talleres-cordoba-9274/squad",
+      "observedAt": "2026-11-02T22:11:05+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/talleresremediosdeescala_arg.ban",
+      "club": "Talleres Remedios de Escalada",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/talleres-re-11899/squad",
+      "observedAt": "2026-11-02T22:34:10+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/temperley_arg.ban",
+      "club": "Temperley",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/temperley-7102/squad",
+      "observedAt": "2026-11-02T22:33:14+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/thestrongest_bol.ban",
+      "club": "The Strongest",
+      "countryCode": 26,
+      "sourceUrl": "https://www.365scores.com/football/team/the-strongest-8543/squad",
+      "observedAt": "2026-11-02T22:33:43+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/tigre_arg.ban",
+      "club": "Tigre",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/tigre-883/squad",
+      "observedAt": "2026-11-02T22:32:04+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/tigresfc_col.ban",
+      "club": "Tigres FC",
+      "countryCode": 46,
+      "sourceUrl": "https://www.365scores.com/football/team/tigres-10361/squad",
+      "observedAt": "2026-11-02T22:30:29+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/trem_bra.ban",
+      "club": "Trem",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/trem-30427/squad",
+      "observedAt": "2026-11-02T22:30:56+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/tristansuarez_arg.ban",
+      "club": "Tristan Suarez",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/tristan-suarez-7113/squad",
+      "observedAt": "2026-11-02T22:33:15+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/trujillanosfc_ven.ban",
+      "club": "Trujillanos FC",
+      "countryCode": 198,
+      "sourceUrl": "https://www.365scores.com/football/team/trujillanos-fc-8688/squad",
+      "observedAt": "2026-11-02T22:33:47+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/uaiurquiza_arg.ban",
+      "club": "UAI Urquiza",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/uai-urquiza-11629/squad",
+      "observedAt": "2026-11-02T22:34:08+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 28
+    },
+    {
+      "teamFile": "teams/unionatleticoaltoapure_ven.ban",
+      "club": "Unión Atlético Alto Apure",
+      "countryCode": 198,
+      "sourceUrl": "https://es.wikipedia.org/w/index.php?title=Uni%C3%B3n_Atl%C3%A9tico_Alto_Apure&oldid=175690430",
+      "observedAt": "2026-11-02T22:59:40+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 20
+    },
+    {
+      "teamFile": "teams/uniondesantafe_arg.ban",
+      "club": "Union de Santa Fe",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/union-santa-fe-7206/squad",
+      "observedAt": "2026-11-02T22:33:18+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/unionlacalera_chi.ban",
+      "club": "Unión La Calera",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/u.-la-calera-8409/squad",
+      "observedAt": "2026-11-02T22:33:41+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 29
+    },
+    {
+      "teamFile": "teams/unionsanfelipe_chi.ban",
+      "club": "Union San Felipe",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/union-san-felipe-7098/squad",
+      "observedAt": "2026-11-02T22:33:14+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/univcatolicaquito_equ.ban",
+      "club": "Univ. Católica-EQU",
+      "countryCode": 60,
+      "sourceUrl": "https://www.365scores.com/football/team/universidad-catolica-10197/squad",
+      "observedAt": "2026-11-02T22:30:28+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/universidadcatolica_chi.ban",
+      "club": "Universidad Católica",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/u.-catolica-1245/squad",
+      "observedAt": "2026-11-02T22:32:21+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/universidadchile_chi.ban",
+      "club": "Universidad Chile",
+      "countryCode": 42,
+      "sourceUrl": "https://www.365scores.com/football/team/universidad-de-chile-8541/squad",
+      "observedAt": "2026-11-02T22:33:43+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 23
+    },
+    {
+      "teamFile": "teams/universidaddeconcepcion_chi.ban",
+      "club": "Universidad de Concepción",
+      "countryCode": 42,
+      "sourceUrl": "https://es.wikipedia.org/w/index.php?title=Club_Deportivo_Universidad_de_Concepci%C3%B3n_%28f%C3%BAtbol%29&oldid=175597450",
+      "observedAt": "2026-11-02T23:49:56+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 34
+    },
+    {
+      "teamFile": "teams/universitario_per.ban",
+      "club": "Universitario",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/universitario-7169/squad",
+      "observedAt": "2026-11-02T22:33:16+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/universitariodevinto_bol.ban",
+      "club": "Universitario de Vinto",
+      "countryCode": 26,
+      "sourceUrl": "https://www.365scores.com/football/team/universitario-de-vinto-49843/squad",
+      "observedAt": "2026-11-02T22:35:45+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 33
+    },
+    {
+      "teamFile": "teams/urenasc_ven.ban",
+      "club": "Ureña SC",
+      "countryCode": 198,
+      "sourceUrl": "https://www.365scores.com/football/team/urena-sc-13835/squad",
+      "observedAt": "2026-11-02T22:34:33+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 38
+    },
+    {
+      "teamFile": "teams/utc_per.ban",
+      "club": "UTC",
+      "countryCode": 151,
+      "sourceUrl": "https://www.365scores.com/football/team/utc-10367/squad",
+      "observedAt": "2026-11-02T22:33:56+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 21
+    },
+    {
+      "teamFile": "teams/velezsarsfield_arg.ban",
+      "club": "Vélez Sársfield",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/velez-sarsfield-872/squad",
+      "observedAt": "2026-11-02T22:32:03+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 25
+    },
+    {
+      "teamFile": "teams/veloclube_bra.ban",
+      "club": "Velo Clube",
+      "countryCode": 29,
+      "sourceUrl": "https://www.365scores.com/football/team/velo-clube-19570/squad",
+      "observedAt": "2026-11-02T22:30:48+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 31
+    },
+    {
+      "teamFile": "teams/villadalmine_arg.ban",
+      "club": "Villa Dalmine",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/villa-dalmine-9808/squad",
+      "observedAt": "2026-11-02T22:11:09+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 27
+    },
+    {
+      "teamFile": "teams/villamitre_arg.ban",
+      "club": "Villa Mitre",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/villa-mitre-11905/squad",
+      "observedAt": "2026-11-02T22:34:10+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 26
+    },
+    {
+      "teamFile": "teams/villasancarlos_arg.ban",
+      "club": "Villa San Carlos",
+      "countryCode": 11,
+      "sourceUrl": "https://www.365scores.com/football/team/villa-san-carlos-7107/squad",
+      "observedAt": "2026-11-02T22:33:15+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 30
+    },
+    {
+      "teamFile": "teams/wanderers_uru.ban",
+      "club": "Wanderers",
+      "countryCode": 195,
+      "sourceUrl": "https://www.365scores.com/football/team/montevideo-wanderers-8614/squad",
+      "observedAt": "2026-11-02T22:33:45+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 24
+    },
+    {
+      "teamFile": "teams/yaracuyanos_ven.ban",
+      "club": "Yaracuyanos",
+      "countryCode": 198,
+      "sourceUrl": "https://www.365scores.com/football/team/yaracuyanos-8544/squad",
+      "observedAt": "2026-11-02T22:33:43+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 40
+    },
+    {
+      "teamFile": "teams/zamorafc_ven.ban",
+      "club": "Zamora FC",
+      "countryCode": 198,
+      "sourceUrl": "https://www.365scores.com/football/team/zamora-fc-8696/squad",
+      "observedAt": "2026-11-02T22:33:48+00:00",
+      "rosterPolicy": "super-update-replacement",
+      "compiledPlayers": 32
     }
   ],
   "testsExecuted": false
