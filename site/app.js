@@ -78,8 +78,8 @@
         : 'Para jogar: Brasfoot 22–23 e Wine/CrossOver configurado à parte. Execução neste sistema ainda não verificada.';
     });
     const detected = byId('detected-os');
-    if (detected) detected.textContent = userSelected ? 'DOWNLOAD PARA ' + platforms[selected.platform].toUpperCase()
-      : detectedOS ? platforms[detectedOS].toUpperCase() + ' IDENTIFICADO' : 'ESCOLHA O COMPUTADOR DE DESTINO';
+    if (detected) detected.textContent = userSelected ? 'Download para ' + platforms[selected.platform]
+      : detectedOS ? platforms[detectedOS] + ' identificado' : 'Escolha o computador de destino';
     all('[data-download-hint]').forEach(hint => {
       hint.textContent = !detectedOS && !userSelected ? 'Use a seta para escolher o sistema do seu computador.'
         : !architectureKnown && !userSelected && selected.platform !== 'windows'
@@ -255,11 +255,11 @@
         const date = node('div', 'patch-note-date');
         date.append(node('span', 'note-orbit'));
         const time = node('time', '', new Date(entry.date).toLocaleDateString('pt-BR',
-          {day: '2-digit', month: 'short', year: 'numeric', timeZone: 'America/Sao_Paulo'}).toUpperCase());
+          {day: '2-digit', month: 'short', year: 'numeric', timeZone: 'America/Sao_Paulo'}).replace(/ de |\./g, ' ').replace(/\s+/g, ' ').trim());
         time.dateTime = entry.date;
-        date.append(time, node('span', 'note-kind', entry.kind === 'site' ? 'SITE' : 'PATCH'));
+        date.append(time, node('span', 'note-kind', entry.kind === 'site' ? 'Site' : 'Patch'));
         const body = node('div', 'patch-note-body');
-        body.append(node('span', 'note-version', entry.version ? 'VERSÃO ' + entry.version : 'NOVIDADES DO PROJETO'),
+        body.append(node('span', 'note-version', entry.version ? 'Versão ' + entry.version : 'Novidades do projeto'),
           node('h3', '', entry.title), node('p', '', entry.summary));
         const changes = node('ul');
         entry.changes.filter(change => typeof change === 'string').forEach(change => changes.append(node('li', '', change)));
