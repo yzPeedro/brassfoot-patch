@@ -40,7 +40,8 @@ def build(inherit: Path, compiled: Path, original: Path, base: Path, output: Pat
                 inputs[sha(body)] = body
         if not vanilla.exists():
             inputs[sha(b"")] = b""
-        if sha(target) in inputs and len(inputs) == 1:
+        if (sha(target) in inputs and len(inputs) == 1) or (published.is_file() and sha(published.read_bytes()) == sha(target)
+                                                              and relative in entries):
             counts["unchanged"] += 1
             continue
         inputs.pop(sha(target), None)
