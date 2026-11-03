@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.5.10",
-  "publishedAt": "2026-11-02T16:40:08.415480+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.5.10-windows-x64.exe",
+  "publishedVersion": "2026.5.11",
+  "publishedAt": "2026-11-02T22:12:07.278268+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.5.11-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
   "fileSizeBytes": 7745536,
-  "sha256": "e1eb7802ee746d2544d3f92f3b3e5e49e954f3ad1dd694f486299b09124156c7",
+  "sha256": "122a3554448fdf65499bcca71a39bef5494c7180122df232ac07314ef71debbb",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Hub 1.3.0: escolha manual dos componentes e escolha automática pela velocidade, carreiras, escudos e PC; jogo, elencos e escudos iguais aos da 2026.5.9."
+  "releaseNotes": "Elencos: Fernando Costa no RB Bragantino, Freddie Lantz no IFK Göteborg e 16 idades atualizadas; temporada, campo animado, escudos e hub permanecem iguais."
 }
