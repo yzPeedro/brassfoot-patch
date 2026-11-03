@@ -112,6 +112,22 @@ def wiki_player(p: dict) -> dict:
             "positionLabel": p.get("positionLabel"), "article": p.get("article"), "positionCode": code, "flank": None}
 
 
+def merge_squads(primary: list[dict], extra: list[dict]) -> list[dict]:
+    names = {key(p["name"]) for p in primary if p.get("name")}
+    surnames = {(key((p.get("name") or "").split()[-1]), p.get("birthDate")) for p in primary
+                if p.get("name") and p.get("birthDate")}
+    merged = list(primary)
+    for p in extra:
+        name = p.get("name") or ""
+        if not name or key(name) in names:
+            continue
+        if p.get("birthDate") and (key(name.split()[-1]), p["birthDate"]) in surnames:
+            continue
+        merged.append(p | {"mergedFrom": "wikipedia"})
+        names.add(key(name))
+    return merged
+
+
 def attach_squads(clubs: dict, raw: dict, wiki_raw: dict, ledger) -> list[dict]:
     data = raw.get("data") or {}
     countries = {c["id"]: c.get("name") for c in data.get("countries", [])}
@@ -128,7 +144,18 @@ def attach_squads(clubs: dict, raw: dict, wiki_raw: dict, ledger) -> list[dict]:
         players365 = [squad_player(p, countries) for p in squad["players"]] if squad else []
         complete365 = len(players365) >= 16 and sum(1 for p in players365 if p["positionCode"] == 0) >= 2
         wiki = by_qid.get(club.get("wikidata") or "")
-        if wiki and not complete365 and len(wiki["players"]) > len(players365):
+        merged = merge_squads(players365, [wiki_player(p) for p in wiki["players"]]) if wiki and squad else []
+        if wiki and squad and not complete365 and len(merged) > max(len(players365), len(wiki["players"])):
+            ref = ledger.ref("365squads", squad["rid"])
+            players = merged
+            source, method, extra = "365scores+wikipedia", (f"squads (competitor) + seção de elenco "
+                                                           f"({wiki['wiki']}: {wiki['heading']})"), {
+                "scores365": squad["competitor"], "staff": squad.get("staff", []), "wiki": wiki["wiki"],
+                "wikiUrl": wiki["url"], "heading": wiki["heading"], "revision": wiki["revision"]}
+            year = max((int(y) for y in re.findall(r"(20\d\d)", wiki["heading"] or "")), default=None)
+            if year and year < int(TODAY[:4]):
+                club["needsReview"].append(f"elenco da Wikipedia com cabeçalho de {year}")
+        elif wiki and not complete365 and len(wiki["players"]) > len(players365):
             ref = ledger.ref("wikisquads", wiki["rid"])
             ref["url"] = wiki["url"]
             players = [wiki_player(p) for p in wiki["players"]]
@@ -232,8 +259,9 @@ def build() -> dict:
     wp = load_raw("wikipedia") or {}
     sq = load_raw("365squads") or {}
     ws = load_raw("wikisquads") or {}
+    se = load_raw("365search") or {}
     raws = {"wikidata": wd, "fifa": fi, "uefa": ue, "365scores": sc, "wikipedia": wp, "365squads": sq,
-            "wikisquads": ws}
+            "wikisquads": ws, "365search": se}
     ledger = Ledger(raws)
     W, F, U, S, P = wd.get("data", {}), fi.get("data", {}), ue.get("data", {}), sc.get("data", {}), wp.get("data", {})
     sitelinks: dict[str, dict[str, str]] = defaultdict(dict)
@@ -900,8 +928,10 @@ def build() -> dict:
         club["names"] = {k: v for k, v in {"en": first.get("en"), "pt": first.get("pt"),
                                            "short": first.get("shortName"),
                                            "official": first.get("officialName")}.items() if v}
+        titles = {w: re.sub(r"\s*\([^)]*\)\s*$", "", t).strip() for w, t in sitelinks.get(club_qid, {}).items()}
+        club["names"].update({"wikipedia-" + w: t for w, t in titles.items() if t})
         club["name"] = (first.get("en") or first.get("pt") or first.get("officialName") or first.get("shortName")
-                        or club_qid)
+                        or titles.get("es") or titles.get("en") or titles.get("pt") or club_qid)
         ids = {}
         for field in ("transfermarkt", "scores365", "uefa"):
             values = sorted({r[field] for r in rows if r.get(field)})
@@ -1184,6 +1214,18 @@ def build() -> dict:
                                  "source": "365scores", "method": method, **ledger.ref("365scores", table["rid"])})
             if not club.get("scores365Colors") and (team.get("color") or team.get("awayColor")):
                 club["scores365Colors"] = {"home": team.get("color"), "away": team.get("awayColor")}
+
+    for m in (se.get("data") or {}).get("matches", []):
+        club = clubs.get(m["club"])
+        if not club or club["ids"].get("scores365") or m["scores365"] in s365_team_target:
+            continue
+        club["ids"]["scores365"] = m["scores365"]
+        s365_team_target[m["scores365"]] = club["id"]
+        club["scores365Match"] = {"method": f"busca por nome no 365Scores ({m['score']:.2f})", "score": m["score"],
+                                  "competition": None}
+        ledger.lines.append({"entity": club["id"], "field": "scores365", "status": "chosen", "value": m["scores365"],
+                             "source": "365scores", "method": "busca por nome no país",
+                             **ledger.ref("365search", m["rid"])})
 
     current_home: dict[str, set[str]] = defaultdict(set)
     season_leagues: set[str] = set()

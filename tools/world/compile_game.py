@@ -12,11 +12,22 @@ import subprocess
 import unicodedata
 
 from tools.compile_live_rosters import DERIVED_TRAITS, age_on
-from tools.world.common import CATALOG, best_name_score, key, write_json
+from tools.world.common import CATALOG, best_name_score, key, load_raw, write_json
 
 ROOT = Path(__file__).resolve().parents[2]
-FOCUS = ("AR", "BO", "CL", "CO", "EC", "PY", "PE", "UY", "VE")
+FOCUS = ("AR", "BO", "BR", "CL", "CO", "EC", "PY", "PE", "UY", "VE")
 WIDTHS = (3, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1)
+COUNTRY_WIDTHS = {"BR": (4, 2, 4)}
+GROUP_COUNTS = (8, 4, 2)
+BR_DIVISION_NAMES = ("Série A", "Série B", "Série C", "Série D")
+GAME_STATES = ("AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI",
+               "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO")
+STATE_COMPETITIONS = {"acreano": "AC", "alagoano": "AL", "amapaense": "AP", "amazonense": "AM", "baiano": "BA",
+                      "brasiliense": "DF", "capixaba": "ES", "carioca": "RJ", "catarinense": "SC", "cearense": "CE",
+                      "gaucho": "RS", "goiano": "GO", "maranhense": "MA", "matogrossense": "MT", "mineiro": "MG",
+                      "paraense": "PA", "paraibano": "PB", "paranaense": "PR", "paulista": "SP",
+                      "pernambucano": "PE", "piauiense": "PI", "potiguar": "RN", "rondoniense": "RO",
+                      "roraimense": "RR", "sergipano": "SE", "sulmatogrossense": "MS", "tocantinense": "TO"}
 LEFTOVER_LEVEL = 1
 DEFAULT_FLOOR = 14
 MAX_PLAYERS = 40
@@ -33,7 +44,7 @@ QID = re.compile(r"^Q[0-9]+$")
 def schedulable(size: int, grouped: bool) -> bool:
     if size % 2 == 0 and size <= 24:
         return True
-    return not grouped and (size in SCHEDULED_ODD or size in SINGLE_TABLE)
+    return size in SCHEDULED_ODD or (not grouped and size in SINGLE_TABLE)
 
 
 def trusted_365(club: dict) -> bool:
@@ -47,7 +58,8 @@ def trusted_365(club: dict) -> bool:
 def display_name(club: dict) -> str | None:
     names = club["names"]
     order = ([names.get("scores365")] if trusted_365(club) else []) + [
-        names.get("fifa"), names.get("short"), names.get("en"), names.get("pt"), names.get("official"), club["name"]]
+        names.get("fifa"), names.get("short"), names.get("en"), names.get("pt"), names.get("wikipedia-es"),
+        names.get("wikipedia-pt"), names.get("wikipedia-en"), names.get("official"), club["name"]]
     return next((n.strip() for n in order if n and n.strip() and not QID.match(n.strip())), None)
 
 
@@ -147,16 +159,22 @@ def nationality_lookup() -> dict[str, int]:
     return {k: next(iter(v)) for k, v in found.items() if len(v) == 1}
 
 
-def bands(floor: int, divisions: int) -> list[tuple[int, int]]:
+def bands(floor: int, divisions: int, widths: tuple[int, ...] = WIDTHS) -> list[tuple[int, int]]:
     result = [(floor, 20)]
     top = floor - 1
-    for width in WIDTHS[:divisions - 1]:
+    for width in widths[:divisions - 1]:
         low = top - width + 1
         if low <= LEFTOVER_LEVEL:
             break
         result.append((low, top))
         top = low - 1
     return result
+
+
+def state_of(club: dict, states: dict[int, set[str]]) -> str | None:
+    value = club["ids"].get("scores365")
+    found = states.get(int(value), set()) if isinstance(value, int) or str(value).isdigit() else set()
+    return next(iter(found)) if len(found) == 1 else None
 
 
 def trim(entries: list, file_owner: set[str], counts: Counter) -> None:
@@ -260,6 +278,17 @@ def compile_world(base: Path, output: Path, countries: tuple[str, ...], jdk: Pat
     competitions = {c["id"]: c for c in json.loads((CATALOG / "competitions.json").read_text(encoding="utf8"))["competitions"]}
     clubs = {c["id"]: c for c in load_jsonl(CATALOG / "clubs.jsonl")}
     squads = {s["club"]: s for s in load_jsonl(CATALOG / "squads.jsonl")}
+    raw365 = (load_raw("365scores") or {}).get("data") or {}
+    standings = {t["competition"]: {team["id"]: (team.get("position") or 99, team.get("group") or 0)
+                                    for team in t.get("teams", [])}
+                 for t in raw365.get("standings", [])}
+    states: dict[int, set[str]] = defaultdict(set)
+    names365 = {c["id"]: c.get("name") or "" for c in raw365.get("competitions", [])}
+    for t in raw365.get("standings", []):
+        prefix = next((uf for name, uf in STATE_COMPETITIONS.items() if key(names365.get(t["competition"], "")).startswith(name)), None)
+        if prefix and t.get("countryId") == 21:
+            for team in t.get("teams", []):
+                states[team["id"]].add(prefix)
     catalog_countries = json.loads((CATALOG / "countries.json").read_text(encoding="utf8"))
     codes = {g["catalogCountry"]: (g["code"], g["gameCountry"]) for g in catalog_countries["gameCountries"]
              if g.get("gameCountry") is not None}
@@ -287,7 +316,8 @@ def compile_world(base: Path, output: Path, countries: tuple[str, ...], jdk: Pat
                     if cid in clubs and cid not in seen:
                         seen.add(cid)
                         members.append(clubs[cid])
-            divisions.append({"level": int(level), "leagues": [l["name"] for l in leagues], "members": members})
+            divisions.append({"level": int(level), "leagues": [l["name"] for l in leagues],
+                              "leagueIds": [l["id"] for l in leagues], "members": members})
         matched: dict[str, str] = {}
         for division in divisions:
             for club in division["members"]:
@@ -312,13 +342,14 @@ def compile_world(base: Path, output: Path, countries: tuple[str, ...], jdk: Pat
             matched[cid] = f
             taken.add(f)
             counts["matchedByName"] += 1
+        state_codes = {uf: index for index, uf in enumerate(GAME_STATES)} if iso == "BR" else {}
         chosen_by_division = []
         for division in divisions:
             chosen = []
             for club in division["members"]:
                 squad = squads.get(club["id"])
                 complete = bool((club.get("squad") or {}).get("complete")) and squad is not None
-                if complete and squad.get("source") == "365scores" and not trusted_365(club):
+                if complete and squad.get("source", "").startswith("365scores") and not trusted_365(club):
                     complete = False
                     counts["untrusted365Squad"] += 1
                 file = matched.get(club["id"])
@@ -328,23 +359,37 @@ def compile_world(base: Path, output: Path, countries: tuple[str, ...], jdk: Pat
                 if not file and display_name(club) is None:
                     counts["excludedNoName"] += 1
                     continue
+                if not file and iso == "BR" and state_codes.get(state_of(club, states)) is None:
+                    counts["excludedNoState"] += 1
+                    continue
                 chosen.append((club, file, squad if complete else None))
             if len(chosen) < 6:
                 counts["divisionsStoppedSmall"] += 1
                 break
             chosen_by_division.append(division | {"chosen": chosen})
-        country_report = {"code": code3, "gameCountry": country, "divisions": [], "leftovers": []}
+        country_report = {"code": code3, "gameCountry": country, "divisions": [], "leftovers": [],
+                          **({"stateCodes": state_codes} if state_codes else {})}
         if not chosen_by_division:
             country_report["skipped"] = "primeira divisão sem clubes suficientes; país não compilado"
             report["countries"][iso] = country_report
             continue
         existing_top = [own[f]["c"] for _, f, _ in chosen_by_division[0]["chosen"] if f]
-        ranges = bands(min(existing_top) if existing_top else DEFAULT_FLOOR, len(chosen_by_division))
+        ranges = bands(min(existing_top) if existing_top else DEFAULT_FLOOR, len(chosen_by_division),
+                       COUNTRY_WIDTHS.get(iso, WIDTHS))
         template = min(own, key=lambda f: own[f]["c"]) if own else "barcelona_esp"
         built = []
         for index, division in enumerate(chosen_by_division[:len(ranges)], start=1):
             low, high = ranges[index - 1]
             entries = []
+            tables = [standings.get(competitions[c]["ids"].get("scores365"), {}) for c in division.get("leagueIds", [])]
+            placed = []
+            for club, _, _ in division["chosen"]:
+                value = club["ids"].get("scores365")
+                spot = next((t[int(value)] for t in tables if isinstance(value, int) and int(value) in t), None)
+                if spot:
+                    placed.append((spot, club["id"]))
+            order = {cid: rank for rank, (_, cid) in enumerate(sorted(placed))}
+            ceiling = max([min(max(own[f]["c"], low), high) for _, f, _ in division["chosen"] if f] or [high])
             for club, file, squad in division["chosen"]:
                 original = own.get(file) if file else None
                 new = original is None
@@ -355,9 +400,17 @@ def compile_world(base: Path, output: Path, countries: tuple[str, ...], jdk: Pat
                     while file.lower() in used_files:
                         file, n = f"{stem}{n}", n + 1
                     used_files.add(file.lower())
-                level = min(max(original["c"], low), high) if original else low
+                if original:
+                    level = min(max(original["c"], low), high)
+                elif club["id"] in order and len(order) > 1:
+                    level = ceiling - round(order[club["id"]] / (len(order) - 1) * (ceiling - low))
+                    counts["levelFromStandings"] += 1
+                else:
+                    level = low
                 mode = "keep"
                 players = []
+                if original and iso == "BR":
+                    squad = None
                 if squad:
                     originals = {key(p["name"]): p for p in (original or {}).get("players", [])}
                     players = roster_rows(squad["players"], file, country, originals, nations, today, counts, issued)
@@ -369,7 +422,8 @@ def compile_world(base: Path, output: Path, countries: tuple[str, ...], jdk: Pat
                         continue
                 coach = next((s["name"] for s in (squad or {}).get("staff", []) if s.get("role") in COACH_ROLES), None)
                 background, text, color_source = club_colors(club)
-                entries.append(([file, (file if original else template) + ".ban", country, original["b"] if original else 0, level,
+                state = original["b"] if original else (state_codes[state_of(club, states)] if iso == "BR" else 0)
+                entries.append(([file, (file if original else template) + ".ban", country, state, level,
                                  original["n"] if original else max(0, 3 - index),
                                  original["internalId"] if original else stable(file, 800_000, 100_000),
                                  "" if original else b64(display[:40]),
@@ -383,12 +437,12 @@ def compile_world(base: Path, output: Path, countries: tuple[str, ...], jdk: Pat
                                  "players": len(players) if mode == "replace" else len((original or {}).get("players", [])),
                                  "source": squad.get("source") if mode == "replace" else "jogo",
                                  "colors": "jogo" if original else color_source, "_players": players}))
-            groups, template_division = 0, 2
+            groups, template_division = 0, index if iso == "BR" else 2
             if len(division["leagues"]) > 1 or len(entries) > max(SINGLE_TABLE):
                 while len(entries) >= 6:
-                    options = [g for g in range(2, 17) if len(entries) % g == 0 and schedulable(len(entries) // g, True)]
+                    options = [g for g in GROUP_COUNTS if len(entries) % g == 0 and schedulable(len(entries) // g, True)]
                     if options:
-                        groups, template_division = options[0], 4
+                        groups, template_division = options[0], index if iso == "BR" else 4
                         break
                     trim(entries, file_owner=used_files, counts=counts)
             else:
@@ -414,18 +468,22 @@ def compile_world(base: Path, output: Path, countries: tuple[str, ...], jdk: Pat
             last = position == len(built)
             relegated = 0 if last else min(4 if len(rows) >= 20 else 2, len(rows) // 4, len(built[position][6]) // 2)
             league_plan.append([code3, country, index, len(rows), groups, relegated,
-                                b64(built[0][1]["leagues"][0][:40]), b64(division["leagues"][0][:40]), template_division,
+                                b64("Brasileirão" if iso == "BR" else built[0][1]["leagues"][0][:40]),
+                                b64(BR_DIVISION_NAMES[index - 1] if iso == "BR" else division["leagues"][0][:40]),
+                                template_division,
                                 "true"])
             country_report["divisions"].append({"division": index, "catalogLevel": division["level"],
                                                 "leagues": division["leagues"], "levelBand": [low, high],
                                                 "clubs": len(rows), "groups": groups, "relegated": relegated,
                                                 "members": rows})
         planned = {row[0] for row in plan}
+        bottom = min((low for _, _, low, _, _, _, _ in built), default=LEFTOVER_LEVEL + 1)
         for file, team in own.items():
             if file not in planned:
-                plan.append([file, file + ".ban", country, team["b"], LEFTOVER_LEVEL, team["n"], team["internalId"],
+                level = max(LEFTOVER_LEVEL, min(team["c"], bottom - 1))
+                plan.append([file, file + ".ban", country, team["b"], level, team["n"], team["internalId"],
                              "", "", team["g"], "", team["i"], "", "", "keep", "keep"])
-                country_report["leftovers"].append({"file": file, "name": team["name"], "level": LEFTOVER_LEVEL})
+                country_report["leftovers"].append({"file": file, "name": team["name"], "level": level})
                 counts["leftoverClubs"] += 1
         report["countries"][iso] = country_report
     (output / "teams-plan.tsv").write_text("\n".join("\t".join(map(str, r)) for r in plan) + "\n", encoding="utf8")
