@@ -1,7 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-03T13:00:00-03:00",
+  "updatedAt": "2026-11-03T19:30:00-03:00",
   "entries": [
+    {
+      "id": "patch-2026-6-3",
+      "version": "2026.6.3",
+      "date": "2026-11-03T19:30:00-03:00",
+      "title": "Estrelas revistas com a lista oficial de 2026",
+      "kind": "patch",
+      "summary": "35 marcações de estrela herdadas fora do Top 10 masculino oficial do Ballon d'Or 2026 foram removidas.",
+      "changes": [
+        "35 marcações de estrela revisadas conforme o Top 10 masculino oficial do Ballon d'Or 2026.",
+        "Harry Kane permanece como Top Mundial; os atletas identificados no Top 10 continuam como estrela.",
+        "Alterações de elenco e idade sem confirmação independente foram preservadas para nova verificação.",
+        "Hub 1.4.2, executável, ligas, escudos, camisas e campo animado permanecem iguais."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.6.3"
+    },
     {
       "id": "patch-2026-6-2",
       "version": "2026.6.2",
