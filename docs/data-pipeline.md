@@ -289,6 +289,21 @@ Verificações de consistência:
 
 Por isso, execute-o depois de colocar o bundle da versão em `windows-installer/bundled_release/`.
 
+### `tools/world/site_export.py`
+
+Desde a 2026.6.0 o pacote também traz os clubes do Super Update, que não passam por `compile_live_rosters`. Depois de `export_release_rosters`, gere a tabela e a cobertura com o relatório diário e a compilação do Super Update publicada:
+
+```bash
+python -m tools.world.site_export --report data/private/compiled-<versão>/report.json --build data/private/super-update/build/sa-r3-a --java <JDK 17>/bin/java
+```
+
+- decodifica os `.ban` da compilação do Super Update e confere cada um com o SHA-256 do manifesto;
+- acrescenta os clubes novos e troca, nos clubes existentes, elenco, competição (liga do `.cfg`), divisão e estado;
+- clube com elenco trocado pelo Super Update fica `updated`, com a página do 365Scores ou a revisão da Wikipedia como fonte; os demais mantêm a cobertura do relatório diário;
+- atualiza `site/data/roster-coverage.json` com os totais (`southAmericaSourceSquads`, `superUpdateSourceSquads`, `superUpdateNewClubs`, `superUpdateDivisions`) e os clubes com fonte.
+
+Rodar só `export_patch_clubs.py` deixaria a tabela sem os clubes da América do Sul.
+
 O formato e o uso desses arquivos no site estão em [Site](site.md).
 
 ---

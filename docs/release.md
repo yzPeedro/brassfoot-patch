@@ -43,7 +43,7 @@ Os usuários não precisam baixar cada release: o hub instalado lê o `release.j
 
    **Super Update.** As ligas da América do Sul vêm do catálogo mundial (`python -m tools.world`). Para recompilá-las, use `python -m tools.world.compile_game --base <base publicada> --output <pasta>` e empacote com `python -m tools.world.build_preview_bundle --inherit <bundle-publicado> --compiled <pasta> --original data/private/vanilla-22-23 --base <base publicada> --output <bundle> --version <versão> --release`. Sem `--release` o pacote sai como prévia local.
 
-3. **Notas da versão.** Escreva `docs/releases/v<versao>.md` e acrescente a entrada correspondente em `site/data/patch-notes.json`.
+3. **Notas da versão.** Escreva `docs/releases/v<versao>.md` e acrescente a entrada correspondente em `site/data/patch-notes.json`. Depois de colocar o bundle em `windows-installer/bundled_release/`, gere os dados do site com `tools/export_release_rosters.py` e, em seguida, `python -m tools.world.site_export` (tabela de clubes e cobertura com o Super Update; ver [Dados](data-pipeline.md)).
 
 4. **Commit.** Faça commit e push do código e das notas. O build registra o commit de origem em cada artefato.
 

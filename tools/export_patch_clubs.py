@@ -22,11 +22,26 @@ def read(path):
     return json.loads(path.read_text(encoding='utf-8-sig'))
 
 
-def export(report_path, output):
+def world_entry(file, club, prior=None):
+    prior = prior or {}
+    coverage = 'updated' if club['replaced'] else prior.get('coverage', 'preserved')
+    keep = not club['replaced']
+    aliases = sorted({x for x in (*prior.get('aliases', ()), prior.get('name')) if x and x != club['name']})
+    return {'id':'club-' + hashlib.sha256(file.encode('utf8')).hexdigest()[:16],'name':club['name'],
+            'aliases':aliases,'countryId':club['countryId'],'competition':club['competition'],
+            'division':club['division'],'state':club['state'] or prior.get('state'),
+            'coverage':coverage,'coverageLabel':LABELS[coverage],'teamFile':file,
+            'playerCount':len(club['players']),'players':club['players'],
+            'sourceUrl':prior.get('sourceUrl') if keep else club['sourceUrl'],
+            'observedAt':prior.get('observedAt') if keep else club['observedAt']}
+
+
+def export(report_path, output, world=None, world_provenance=None):
+    world = dict(world or {})
     report = read(report_path)
     edition = read(ROOT/'config/edition.json')
     manifest = read(ROOT/'windows-installer/bundled_release/manifest.json')
-    if report['version'] != edition['version'] or manifest['version'] != edition['version']:
+    if manifest['version'] != edition['version'] or (report['version'] != edition['version'] and not world):
         raise ValueError('compiled roster, bundle and edition must refer to the same release')
     country_names = read(ROOT/'config/brasfoot-country-names.json')
     brazil_path = ROOT/'data/competitions/2026-abc-original-file-map.json'
@@ -38,7 +53,7 @@ def export(report_path, output):
         catalog = {x['id']:x for x in read(ROOT/'site/data/target-abc-2026.json')['clubs']}
         brazil = {row['teamFile']:dict(catalog[ident],clubId=ident) for ident,row in published.items()}
     sources = {}
-    for filename in (f"rosters-{edition['version']}.json",'live-rosters-supplement.json'):
+    for filename in (f"rosters-{report['version']}.json",'live-rosters-supplement.json'):
         for club in read(ROOT/'config'/filename)['clubs']:
             sources[club['teamFile']] = club
     known_targets = {x['path']: x['sha256'] for x in manifest['files']}
@@ -48,7 +63,7 @@ def export(report_path, output):
     for row in report['clubs']:
         file = row['teamFile']
         compiled = report_path.parent/'teams'/Path(file).name
-        if file in known_targets and hashlib.sha256(compiled.read_bytes()).hexdigest() != known_targets[file]:
+        if file in known_targets and file not in world and hashlib.sha256(compiled.read_bytes()).hexdigest() != known_targets[file]:
             raise ValueError('compiled roster differs from published patch: ' + file)
         source = sources.get(file,{})
         domestic = brazil.get(file,{})
@@ -65,25 +80,36 @@ def export(report_path, output):
         if len(players) != row['compiledPlayers']:
             raise ValueError('compiled player list is incomplete: '+file)
         club_id = 'club-' + hashlib.sha256(file.encode('utf8')).hexdigest()[:16]
-        clubs.append({'id':club_id,'name':name,'aliases':aliases,
-                      'countryId':country_id,'country':country,'competition':competition,
-                      'division':division,'state':domestic.get('state'),
-                      'coverage':coverage,'coverageLabel':LABELS[coverage],
-                      'teamFile':file,'playerCount':len(players),'players':players,
-                      'sourceUrl':row['sourceUrl'],'observedAt':row['observedAt']})
-        country_counts[country_id] += 1
-        coverage_counts[coverage] += 1
-    result = {'schemaVersion':1,'version':report['version'],
+        entry = {'id':club_id,'name':name,'aliases':aliases,
+                 'countryId':country_id,'country':country,'competition':competition,
+                 'division':division,'state':domestic.get('state'),
+                 'coverage':coverage,'coverageLabel':LABELS[coverage],
+                 'teamFile':file,'playerCount':len(players),'players':players,
+                 'sourceUrl':row['sourceUrl'],'observedAt':row['observedAt']}
+        if file in world:
+            entry = world_entry(file, world.pop(file), entry)
+        clubs.append(entry)
+    expected_clubs = report['counts']['teamsTotal'] + len(world)
+    for file, club in sorted(world.items()):
+        if not club['new']:
+            raise ValueError('world club missing from the roster report: ' + file)
+        clubs.append(world_entry(file, club))
+    for entry in clubs:
+        entry['country'] = country_names[str(entry['countryId'])]
+        country_counts[entry['countryId']] += 1
+        coverage_counts[entry['coverage']] += 1
+    result = {'schemaVersion':1,'version':edition['version'],
               'generatedAt':datetime.now(timezone.utc).isoformat(),
               'totalClubs':len(clubs),'totalPlayers':sum(c['playerCount'] for c in clubs),
               'totalCountries':len(country_counts),'coverage':dict(coverage_counts),
               'provenance':{'compilerReportSha256':hashlib.sha256(report_path.read_bytes()).hexdigest(),
                             'scope':'All clubs in the resulting game, including unchanged original squads',
-                            'individualAttributes':'Game values may be preserved or estimated; not independently verified'},
+                            'individualAttributes':'Game values may be preserved or estimated; not independently verified',
+                            **(world_provenance or {})},
               'countries':sorted([{'id':ident,'name':country_names[str(ident)],'count':count}
                                   for ident,count in country_counts.items()],key=lambda c:c['name']),
               'clubs':sorted(clubs,key=lambda c:c['name'].casefold())}
-    if (result['totalClubs'] != report['counts']['teamsTotal'] or
+    if result['totalClubs'] != expected_clubs or (not world_provenance and
             result['totalPlayers'] != report['counts']['playersTotal']):
         raise ValueError('export totals differ from the production compiler')
     output.parent.mkdir(parents=True,exist_ok=True)

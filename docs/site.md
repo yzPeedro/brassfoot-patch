@@ -143,9 +143,9 @@ O mesmo comando também regrava os ícones de `windows-installer/winres/` e o ba
 |---|---|---|---|
 | `distribution.json` | manifesto público da release: versão, commit, canal, `status: published`, cinco artefatos com tamanho, SHA-256 e `downloadUrl` | `tools/publish_distribution.py` | `app.js` |
 | `release.json` | resumo do pacote Windows: versão, data, arquivo, tamanho, SHA-256, `compatibilityVerifiedInGame: false`, `gameplayVerified: false`, notas | `tools/publish_distribution.py` | consulta e testes |
-| `patch-clubs.json` | todos os clubes do jogo resultante, com cobertura, país, competição e jogadores | `tools/export_patch_clubs.py` | `divisions.js` |
+| `patch-clubs.json` | todos os clubes do jogo resultante, com cobertura, país, competição e jogadores | `tools/world/site_export.py` (usa `tools/export_patch_clubs.py`) | `divisions.js` |
 | `explorer-cups.json` | seleções e copas exibidas no explorador; aponta `config/world-cup-2026.json` e `config/continental-cups-2026.json` como fonte | mantido com base nessas configurações (sem gerador no repositório) | `divisions.js` |
-| `roster-coverage.json` | contadores da compilação, limitações e clubes com fonte | `tools/export_release_rosters.py` | `app.js` |
+| `roster-coverage.json` | contadores da compilação, limitações e clubes com fonte | `tools/export_release_rosters.py`, completado por `tools/world/site_export.py` | `app.js` |
 | `published-rosters-2026.json` | os 60 clubes A/B/C com nomes e posições finais | `tools/export_release_rosters.py` | `export_patch_clubs.py`, testes |
 | `target-abc-2026.json` | alvo dos 60 clubes A/B/C e situação de cada elenco | `tools/export_release_rosters.py` (atualização) | ferramentas de exportação e auditoria |
 | `release-clubs-60.json` | versão e totais dos 60 clubes | `tools/export_release_rosters.py` (atualização) | consulta |

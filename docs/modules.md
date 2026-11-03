@@ -148,6 +148,7 @@ Ferramentas da fase em que as Séries B e C eram montadas a partir de planilhas 
 | Arquivo | Uso | Saída |
 |---|---|---|
 | `tools/world/compile_game.py` | `--base`, `--output`, `--jdk` (obrigatórios), `--countries`, `--date` | `.ban`, `.cfg`, escudos e camisas da América do Sul e `report.json` |
+| `tools/world/site_export.py` | `--report`, `--build`, `--java` (obrigatórios), `--output`, `--coverage` | `site/data/patch-clubs.json` e `site/data/roster-coverage.json` com os clubes do Super Update |
 | `tools/world/build_preview_bundle.py` | `--inherit`, `--compiled`, `--original`, `--base`, `--output`, `--version`, `--release` | pacote sobre o publicado, com receitas a partir do original, da base publicada e das versões anteriores |
 | `src/app/WorldBuild.java` | `<teams-base> <plan.tsv> <rosters> <saída>` | `.ban` com as classes réplica |
 | `tools/competition-codec/src/app/WorldLeagues.java` | `<modelo.cfg> <plan.tsv> <saída>` ou `dump <arquivo.cfg>` | `.cfg` por país |
