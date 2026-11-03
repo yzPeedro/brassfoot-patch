@@ -21,16 +21,20 @@ var splashIconPNG []byte
 
 const (
 	splashClassName    = "BrasfootMegaPatchSplash"
-	splashIconSize     = 84
-	splashMinScale     = 0.9
-	splashMaxScale     = 1.06
-	splashPulsePeriod  = 1400 * time.Millisecond
-	splashFadePeriod   = 1600 * time.Millisecond
-	splashTimerID      = 1
+	splashIconSize     = 84.0
+	splashRadius       = 21.0
+	splashStroke       = 3.0
+	splashPeriod       = 1600 * time.Millisecond
+	splashBreatheLow   = 0.94
+	splashBreatheHigh  = 1.04
+	splashRingFrom     = 0.96
+	splashRingTo       = 1.8
+	splashRingOpacity  = 0.42
 	splashTimeout      = 45 * time.Second
 	splashWmPaint      = 0x000F
 	splashWmEraseBkgnd = 0x0014
-	splashWmTimer      = 0x0113
+	splashWmQuit       = 0x0012
+	splashPmRemove     = 1
 	splashExTopmost    = 0x00000008
 	splashExToolWindow = 0x00000080
 	splashExNoActivate = 0x08000000
@@ -44,46 +48,52 @@ const (
 )
 
 var (
-	splashMsimg        = syscall.NewLazyDLL("msimg32.dll")
-	splashAlphaBlend   = splashMsimg.NewProc("AlphaBlend")
-	splashSetTimer     = u32.NewProc("SetTimer")
-	splashKillTimer    = u32.NewProc("KillTimer")
-	splashInvalidate   = u32.NewProc("InvalidateRect")
+	splashPeekMessage  = u32.NewProc("PeekMessageW")
 	splashLoadCursor   = u32.NewProc("LoadCursorW")
 	splashForeground   = u32.NewProc("GetForegroundWindow")
 	splashWindowThread = u32.NewProc("GetWindowThreadProcessId")
 	splashSystemParam  = u32.NewProc("SystemParametersInfoW")
-	splashCompatibleDC = g32.NewProc("CreateCompatibleDC")
-	splashCompatBitmap = g32.NewProc("CreateCompatibleBitmap")
-	splashDIBSection   = g32.NewProc("CreateDIBSection")
-	splashSelect       = g32.NewProc("SelectObject")
 	splashGetDC        = u32.NewProc("GetDC")
 	splashReleaseDC    = u32.NewProc("ReleaseDC")
+	splashCompatibleDC = g32.NewProc("CreateCompatibleDC")
+	splashDIBSection   = g32.NewProc("CreateDIBSection")
+	splashSelect       = g32.NewProc("SelectObject")
 	splashBitBlt       = g32.NewProc("BitBlt")
 	splashDeleteDC     = g32.NewProc("DeleteDC")
 	splashExcludeClip  = g32.NewProc("ExcludeClipRect")
+	splashDwmFlush     = dwm.NewProc("DwmFlush")
 	splashProcessID    = k32.NewProc("GetCurrentProcessId")
+	splashSleep        = k32.NewProc("Sleep")
 
-	splashMutex    sync.Mutex
-	splashHandle   uintptr
-	splashStart    time.Time
-	splashClosed   bool
-	splashBrush    uintptr
-	splashBuffer   uintptr
-	splashBufferBM uintptr
-	splashSide     int
-	splashFade     bool
-	splashTopmost  bool
-	splashFrames   map[int]splashFrame
-	splashWidth    int
-	splashHeight   int
-	splashProc     uintptr
-	splashBase     int
+	splashMutex   sync.Mutex
+	splashHandle  uintptr
+	splashStart   time.Time
+	splashClosed  bool
+	splashProc    uintptr
+	splashPainter *splashCanvas
 )
 
-type splashFrame struct {
-	dc, bitmap uintptr
-	size       int
+type splashCanvas struct {
+	dc, bitmap    uintptr
+	pixels        []byte
+	work          []float32
+	horizontal    []float32
+	source        []float32
+	sourceSize    int
+	side          int
+	width, height int
+	scale         float64
+	fade          bool
+	topmost       bool
+	brush         uintptr
+	background    [3]float32
+	accent        [3]float32
+	columns, rows []splashSpan
+	weights       []float32
+}
+
+type splashSpan struct {
+	first, count, offset int
 }
 
 type splashBitmapInfo struct {
@@ -93,10 +103,6 @@ type splashBitmapInfo struct {
 	Compression, ImageSize     uint32
 	XPerMeter, YPerMeter       int32
 	ColorsUsed, ColorImportant uint32
-}
-
-type splashBlend struct {
-	Op, Flags, Alpha, Format byte
 }
 
 func hubWindowRect() (int, int, int, int) {
@@ -144,7 +150,13 @@ func splashPhase() float64 {
 	if splashStart.IsZero() {
 		return 0
 	}
-	return float64(time.Since(splashStart).Milliseconds())
+	return float64(time.Since(splashStart).Microseconds()) / 1000
+}
+
+func splashAlive() bool {
+	splashMutex.Lock()
+	defer splashMutex.Unlock()
+	return splashHandle != 0
 }
 
 func splashRun(dark bool, ready chan struct{}) {
@@ -156,29 +168,32 @@ func splashRun(dark bool, ready chan struct{}) {
 	}
 	defer signal()
 	x, y, w, h := hubWindowRect()
-	splashWidth, splashHeight = w, h
 	dpi := uintptr(96)
 	if getDpiForSystem.Find() == nil {
 		dpi, _, _ = getDpiForSystem.Call()
 	}
 	var animate int32 = 1
 	splashSystemParam.Call(splashSpiAnimation, 0, uintptr(unsafe.Pointer(&animate)), 0)
-	splashFade = animate == 0
-	background := color(255, 255, 255)
+	canvas := &splashCanvas{width: w, height: h, scale: float64(dpi) / 96, fade: animate == 0, topmost: true}
+	background := [3]byte{0xff, 0xff, 0xff}
+	canvas.accent = [3]float32{0x0b, 0x4b, 0xe0}
 	border := uint32(0x00f3e7e1)
 	if dark {
-		background, border = color(0x0b, 0x12, 0x20), 0x0020120b
+		background, border = [3]byte{0x0b, 0x12, 0x20}, 0x0020120b
+		canvas.accent = [3]float32{0x5b, 0x8c, 0xff}
 	}
-	splashBrush, _, _ = newBrush.Call(background)
-	base := float64(splashIconSize) * float64(dpi) / 96
-	if !splashPrepare(base) {
+	canvas.background = [3]float32{float32(background[0]), float32(background[1]), float32(background[2])}
+	canvas.brush, _, _ = newBrush.Call(color(background[0], background[1], background[2]))
+	if !canvas.prepare() {
 		return
 	}
+	defer canvas.release()
+	splashPainter = canvas
 	instance, _, _ := getModule.Call(0)
 	cursor, _, _ := splashLoadCursor.Call(0, splashCursorArrow)
 	splashProc = syscall.NewCallback(splashWindowProcedure)
 	class := winClass{
-		Procedure: splashProc, Instance: instance, Cursor: cursor, Background: splashBrush,
+		Procedure: splashProc, Instance: instance, Cursor: cursor, Background: canvas.brush,
 		ClassName: strPtr(splashClassName),
 	}
 	class.Size = uint32(unsafe.Sizeof(class))
@@ -187,7 +202,6 @@ func splashRun(dark bool, ready chan struct{}) {
 		uintptr(unsafe.Pointer(strPtr(splashClassName))), uintptr(unsafe.Pointer(strPtr(productName))),
 		wsPopup, uintptr(x), uintptr(y), uintptr(w), uintptr(h), 0, 0, instance, 0)
 	if handle == 0 {
-		splashRelease()
 		return
 	}
 	if dwm.Load() == nil {
@@ -199,26 +213,41 @@ func splashRun(dark bool, ready chan struct{}) {
 	if splashClosed {
 		splashMutex.Unlock()
 		pixDestroyWindow.Call(handle)
-		splashRelease()
 		return
 	}
 	splashHandle = handle
-	splashTopmost = true
 	splashMutex.Unlock()
+	canvas.render(time.Since(splashStart))
 	showWindow.Call(handle, splashShowNoAct)
 	updateWindow.Call(handle)
-	splashSetTimer.Call(handle, splashTimerID, 16, 0)
 	signal()
+	flush := dwm.Load() == nil && splashDwmFlush.Find() == nil
 	var message winMessage
 	for {
-		result, _, _ := getMessage.Call(uintptr(unsafe.Pointer(&message)), 0, 0, 0)
-		if int32(result) <= 0 {
-			break
+		for {
+			result, _, _ := splashPeekMessage.Call(uintptr(unsafe.Pointer(&message)), 0, 0, 0, splashPmRemove)
+			if result == 0 {
+				break
+			}
+			if message.Msg == splashWmQuit {
+				return
+			}
+			translateMessage.Call(uintptr(unsafe.Pointer(&message)))
+			dispatchMessage.Call(uintptr(unsafe.Pointer(&message)))
 		}
-		translateMessage.Call(uintptr(unsafe.Pointer(&message)))
-		dispatchMessage.Call(uintptr(unsafe.Pointer(&message)))
+		if !splashAlive() {
+			splashSleep.Call(8)
+			continue
+		}
+		canvas.keepOrder(handle)
+		canvas.render(time.Since(splashStart))
+		canvas.present(handle)
+		if !flush {
+			splashSleep.Call(8)
+		} else if result, _, _ := splashDwmFlush.Call(); result != 0 {
+			splashSleep.Call(8)
+		}
 	}
-	splashRelease()
 }
 
 func splashWindowProcedure(window uintptr, message uint32, w, l uintptr) uintptr {
@@ -226,14 +255,19 @@ func splashWindowProcedure(window uintptr, message uint32, w, l uintptr) uintptr
 	case splashWmEraseBkgnd:
 		return 1
 	case splashWmPaint:
-		splashPaint(window)
-		return 0
-	case splashWmTimer:
-		splashKeepOrder(window)
-		splashInvalidateIcon(window)
+		ps := pixPaintStruct{}
+		hdc, _, _ := pixBeginPaint.Call(window, uintptr(unsafe.Pointer(&ps)))
+		if hdc != 0 {
+			if splashPainter != nil {
+				splashPainter.blit(hdc)
+				box := splashPainter.box()
+				splashExcludeClip.Call(hdc, uintptr(box.Left), uintptr(box.Top), uintptr(box.Right), uintptr(box.Bottom))
+				pixFillRect.Call(hdc, uintptr(unsafe.Pointer(&ps.Rectangle)), splashPainter.brush)
+			}
+			pixEndPaint.Call(window, uintptr(unsafe.Pointer(&ps)))
+		}
 		return 0
 	case wmClose:
-		splashKillTimer.Call(window, splashTimerID)
 		pixDestroyWindow.Call(window)
 		return 0
 	case wmDestroy:
@@ -247,7 +281,7 @@ func splashWindowProcedure(window uintptr, message uint32, w, l uintptr) uintptr
 	return result
 }
 
-func splashKeepOrder(window uintptr) {
+func (c *splashCanvas) keepOrder(window uintptr) {
 	foreground, _, _ := splashForeground.Call()
 	var owner uint32
 	if foreground != 0 {
@@ -255,7 +289,7 @@ func splashKeepOrder(window uintptr) {
 	}
 	self, _, _ := splashProcessID.Call()
 	ours := foreground == 0 || uintptr(owner) == self
-	if ours == splashTopmost {
+	if ours == c.topmost {
 		return
 	}
 	after := foreground
@@ -263,25 +297,84 @@ func splashKeepOrder(window uintptr) {
 		after = ^uintptr(0)
 	}
 	setWindowPos.Call(window, after, 0, 0, 0, 0, splashNoMove|splashNoSize|splashNoActivate)
-	splashTopmost = ours
+	c.topmost = ours
 }
 
-func splashBox() rect {
-	left := int32((splashWidth - splashSide) / 2)
-	top := int32((splashHeight - splashSide) / 2)
-	return rect{left, top, left + int32(splashSide), top + int32(splashSide)}
+func (c *splashCanvas) box() rect {
+	left := int32((c.width - c.side) / 2)
+	top := int32((c.height - c.side) / 2)
+	return rect{left, top, left + int32(c.side), top + int32(c.side)}
 }
 
-func splashInvalidateIcon(window uintptr) {
-	box := splashBox()
-	splashInvalidate.Call(window, uintptr(unsafe.Pointer(&box)), 0)
+func (c *splashCanvas) blit(hdc uintptr) {
+	box := c.box()
+	splashBitBlt.Call(hdc, uintptr(box.Left), uintptr(box.Top), uintptr(c.side), uintptr(c.side), c.dc, 0, 0, splashSrcCopy)
 }
 
-func splashEase(p float64) float64 {
+func (c *splashCanvas) present(window uintptr) {
+	hdc, _, _ := splashGetDC.Call(window)
+	if hdc == 0 {
+		return
+	}
+	c.blit(hdc)
+	splashReleaseDC.Call(window, hdc)
+}
+
+func (c *splashCanvas) prepare() bool {
+	decoded, err := png.Decode(bytes.NewReader(splashIconPNG))
+	if err != nil {
+		return false
+	}
+	source := image.NewNRGBA(decoded.Bounds())
+	draw.Draw(source, source.Bounds(), decoded, decoded.Bounds().Min, draw.Src)
+	if source.Bounds().Dx() != source.Bounds().Dy() {
+		return false
+	}
+	c.sourceSize = source.Bounds().Dx()
+	c.source = make([]float32, len(source.Pix))
+	for i := 0; i < len(source.Pix); i += 4 {
+		a := float32(source.Pix[i+3]) / 255
+		c.source[i] = float32(source.Pix[i]) * a
+		c.source[i+1] = float32(source.Pix[i+1]) * a
+		c.source[i+2] = float32(source.Pix[i+2]) * a
+		c.source[i+3] = a
+	}
+	reach := splashBreatheHigh
+	if !c.fade {
+		reach = splashRingTo
+	}
+	c.side = int(math.Ceil(splashIconSize*c.scale*reach)) + 4
+	c.side = min(c.side, c.width, c.height)
+	info := splashBitmapInfo{Width: int32(c.side), Height: -int32(c.side), Planes: 1, BitCount: 32}
+	info.Size = uint32(unsafe.Sizeof(info))
+	var bits unsafe.Pointer
+	c.bitmap, _, _ = splashDIBSection.Call(0, uintptr(unsafe.Pointer(&info)), 0, uintptr(unsafe.Pointer(&bits)), 0, 0)
+	if c.bitmap == 0 || bits == nil {
+		return false
+	}
+	c.pixels = unsafe.Slice((*byte)(bits), c.side*c.side*4)
+	c.dc, _, _ = splashCompatibleDC.Call(0)
+	splashSelect.Call(c.dc, c.bitmap)
+	c.work = make([]float32, c.side*c.side*3)
+	c.horizontal = make([]float32, c.side*c.sourceSize*4)
+	return true
+}
+
+func (c *splashCanvas) release() {
+	if c.dc != 0 {
+		splashDeleteDC.Call(c.dc)
+	}
+	if c.bitmap != 0 {
+		pixDeleteObject.Call(c.bitmap)
+	}
+	c.dc, c.bitmap, c.pixels = 0, 0, nil
+}
+
+func splashBezier(x1, y1, x2, y2, p float64) float64 {
 	low, high := 0.0, 1.0
-	for i := 0; i < 24; i++ {
+	for i := 0; i < 22; i++ {
 		t := (low + high) / 2
-		x := 3*(1-t)*(1-t)*t*0.42 + 3*(1-t)*t*t*0.58 + t*t*t
+		x := 3*(1-t)*(1-t)*t*x1 + 3*(1-t)*t*t*x2 + t*t*t
 		if x < p {
 			low = t
 		} else {
@@ -289,169 +382,152 @@ func splashEase(p float64) float64 {
 		}
 	}
 	t := (low + high) / 2
-	return 3*(1-t)*t*t + t*t*t
+	return 3*(1-t)*(1-t)*t*y1 + 3*(1-t)*t*t*y2 + t*t*t
 }
 
-func splashState() (float64, float64) {
-	period := splashPulsePeriod
-	if splashFade {
-		period = splashFadePeriod
-	}
-	cycle := float64(time.Since(splashStart)%period) / float64(period)
-	p := cycle * 2
-	if p > 1 {
-		p = 2 - p
-	}
-	e := splashEase(p)
-	if splashFade {
-		return 1, 0.6 + 0.4*e
-	}
-	return splashMinScale + (splashMaxScale-splashMinScale)*e, 0.7 + 0.3*e
+func splashRoundedDistance(x, y, half, radius float64) float64 {
+	qx := math.Abs(x) - (half - radius)
+	qy := math.Abs(y) - (half - radius)
+	outside := math.Hypot(math.Max(qx, 0), math.Max(qy, 0))
+	inside := math.Min(math.Max(qx, qy), 0)
+	return outside + inside - radius
 }
 
-func splashPaint(window uintptr) {
-	ps := pixPaintStruct{}
-	hdc, _, _ := pixBeginPaint.Call(window, uintptr(unsafe.Pointer(&ps)))
-	if hdc == 0 {
+func splashByte(value float32) byte {
+	return byte(math.Max(0, math.Min(255, float64(value)+0.5)))
+}
+
+func (c *splashCanvas) render(elapsed time.Duration) {
+	cycle := float64(elapsed%splashPeriod) / float64(splashPeriod)
+	swing := cycle * 2
+	if swing > 1 {
+		swing = 2 - swing
+	}
+	ease := splashBezier(0.42, 0, 0.58, 1, swing)
+	for i := 0; i < c.side*c.side; i++ {
+		c.work[i*3], c.work[i*3+1], c.work[i*3+2] = c.background[0], c.background[1], c.background[2]
+	}
+	scale, opacity := splashBreatheLow+(splashBreatheHigh-splashBreatheLow)*ease, 1.0
+	if c.fade {
+		scale, opacity = 1, 0.6+0.4*ease
+	} else {
+		c.ring(math.Mod(cycle+0.5, 1))
+		c.ring(cycle)
+	}
+	c.icon(scale, opacity)
+	for i := 0; i < c.side*c.side; i++ {
+		c.pixels[i*4] = splashByte(c.work[i*3+2])
+		c.pixels[i*4+1] = splashByte(c.work[i*3+1])
+		c.pixels[i*4+2] = splashByte(c.work[i*3])
+		c.pixels[i*4+3] = 255
+	}
+}
+
+func (c *splashCanvas) ring(progress float64) {
+	ease := splashBezier(0.2, 0.6, 0.35, 1, progress)
+	grow := splashRingFrom + (splashRingTo-splashRingFrom)*ease
+	alpha := splashRingOpacity * (1 - ease)
+	if alpha < 0.003 {
 		return
 	}
-	defer pixEndPaint.Call(window, uintptr(unsafe.Pointer(&ps)))
-	scale, alpha := splashState()
-	size := int(math.Round(float64(splashBase) * scale))
-	frame, ok := splashFrames[size]
-	full := rect{0, 0, int32(splashSide), int32(splashSide)}
-	pixFillRect.Call(splashBuffer, uintptr(unsafe.Pointer(&full)), splashBrush)
-	if ok {
-		offset := (splashSide - frame.size) / 2
-		blend := splashBlend{Alpha: byte(math.Round(alpha * 255)), Format: 1}
-		splashAlphaBlend.Call(splashBuffer, uintptr(offset), uintptr(offset), uintptr(frame.size), uintptr(frame.size),
-			frame.dc, 0, 0, uintptr(frame.size), uintptr(frame.size), *(*uintptr)(unsafe.Pointer(&blend)))
-	}
-	box := splashBox()
-	splashBitBlt.Call(hdc, uintptr(box.Left), uintptr(box.Top), uintptr(splashSide), uintptr(splashSide), splashBuffer, 0, 0, splashSrcCopy)
-	splashExcludeClip.Call(hdc, uintptr(box.Left), uintptr(box.Top), uintptr(box.Right), uintptr(box.Bottom))
-	pixFillRect.Call(hdc, uintptr(unsafe.Pointer(&ps.Rectangle)), splashBrush)
-}
-
-func splashPrepare(base float64) bool {
-	decoded, err := png.Decode(bytes.NewReader(splashIconPNG))
-	if err != nil {
-		return false
-	}
-	source := image.NewNRGBA(decoded.Bounds())
-	draw.Draw(source, source.Bounds(), decoded, decoded.Bounds().Min, draw.Src)
-	premultiplied := make([]float64, len(source.Pix))
-	for i := 0; i < len(source.Pix); i += 4 {
-		a := float64(source.Pix[i+3]) / 255
-		premultiplied[i] = float64(source.Pix[i+2]) * a
-		premultiplied[i+1] = float64(source.Pix[i+1]) * a
-		premultiplied[i+2] = float64(source.Pix[i]) * a
-		premultiplied[i+3] = a * 255
-	}
-	sw, sh := source.Bounds().Dx(), source.Bounds().Dy()
-	splashBase = int(math.Round(base))
-	smallest, largest := splashBase, splashBase
-	if !splashFade {
-		smallest = int(math.Floor(base * splashMinScale))
-		largest = int(math.Ceil(base * splashMaxScale))
-	}
-	splashSide = largest + 2
-	splashBuffer, _, _ = splashCompatibleDC.Call(0)
-	reference, _, _ := splashGetDC.Call(0)
-	splashBufferBM, _, _ = splashCompatBitmap.Call(reference, uintptr(splashSide), uintptr(splashSide))
-	splashReleaseDC.Call(0, reference)
-	splashSelect.Call(splashBuffer, splashBufferBM)
-	splashFrames = map[int]splashFrame{}
-	for size := smallest; size <= largest; size++ {
-		if frame, ok := splashRender(premultiplied, sw, sh, size); ok {
-			splashFrames[size] = frame
-		}
-	}
-	return len(splashFrames) > 0
-}
-
-func splashRender(premultiplied []float64, sw, sh, size int) (splashFrame, bool) {
-	info := splashBitmapInfo{Width: int32(size), Height: -int32(size), Planes: 1, BitCount: 32}
-	info.Size = uint32(unsafe.Sizeof(info))
-	var bits unsafe.Pointer
-	bitmap, _, _ := splashDIBSection.Call(0, uintptr(unsafe.Pointer(&info)), 0, uintptr(unsafe.Pointer(&bits)), 0, 0)
-	if bitmap == 0 || bits == nil {
-		return splashFrame{}, false
-	}
-	pixels := unsafe.Slice((*byte)(bits), size*size*4)
-	splashResample(premultiplied, sw, sh, size, pixels)
-	dc, _, _ := splashCompatibleDC.Call(0)
-	splashSelect.Call(dc, bitmap)
-	return splashFrame{dc: dc, bitmap: bitmap, size: size}, true
-}
-
-func splashResample(premultiplied []float64, sw, sh, size int, out []byte) {
-	columns := splashSpans(sw, size)
-	rows := splashSpans(sh, size)
-	horizontal := make([]float64, size*sh*4)
-	for y := 0; y < sh; y++ {
-		for x, span := range columns {
-			var sum [4]float64
-			for _, part := range span {
-				index := (y*sw + part.index) * 4
-				for c := 0; c < 4; c++ {
-					sum[c] += premultiplied[index+c] * part.weight
-				}
+	half := splashIconSize * c.scale / 2
+	radius := splashRadius * c.scale
+	stroke := splashStroke * c.scale * grow
+	center := float64(c.side) / 2
+	extent := half*grow + 2
+	first := int(math.Max(0, math.Floor(center-extent)))
+	last := int(math.Min(float64(c.side), math.Ceil(center+extent)))
+	inner := half*grow - stroke - 2
+	for y := first; y < last; y++ {
+		py := float64(y) + 0.5 - center
+		for x := first; x < last; x++ {
+			px := float64(x) + 0.5 - center
+			if math.Abs(px) < inner-radius*grow && math.Abs(py) < inner {
+				continue
 			}
-			copy(horizontal[(y*size+x)*4:], sum[:])
-		}
-	}
-	for y, span := range rows {
-		for x := 0; x < size; x++ {
-			var sum [4]float64
-			for _, part := range span {
-				index := (part.index*size + x) * 4
-				for c := 0; c < 4; c++ {
-					sum[c] += horizontal[index+c] * part.weight
-				}
+			d := splashRoundedDistance(px/grow, py/grow, half, radius) * grow
+			coverage := math.Max(0, math.Min(1, 0.5-d)) * math.Max(0, math.Min(1, 0.5+d+stroke))
+			if coverage <= 0 {
+				continue
 			}
-			for c := 0; c < 4; c++ {
-				out[(y*size+x)*4+c] = byte(math.Max(0, math.Min(255, math.Round(sum[c]))))
+			a := float32(coverage * alpha)
+			index := (y*c.side + x) * 3
+			for k := 0; k < 3; k++ {
+				c.work[index+k] += (c.accent[k] - c.work[index+k]) * a
 			}
 		}
 	}
 }
 
-type splashPart struct {
-	index  int
-	weight float64
-}
-
-func splashSpans(sourceSize, size int) [][]splashPart {
-	step := float64(sourceSize) / float64(size)
-	spans := make([][]splashPart, size)
-	for d := 0; d < size; d++ {
-		start, end := float64(d)*step, float64(d+1)*step
-		if step < 1 {
-			center := (start + end) / 2
-			index := int(math.Min(float64(sourceSize-1), math.Floor(center)))
-			spans[d] = []splashPart{{index, 1}}
-			continue
-		}
-		for j := int(math.Floor(start)); j < int(math.Ceil(end)) && j < sourceSize; j++ {
-			weight := math.Min(end, float64(j+1)) - math.Max(start, float64(j))
-			if weight > 0 {
-				spans[d] = append(spans[d], splashPart{j, weight / step})
+func (c *splashCanvas) spans(size, origin float64, spans []splashSpan) ([]splashSpan, int) {
+	step := float64(c.sourceSize) / size
+	first := int(math.Max(0, math.Floor(origin)))
+	last := int(math.Min(float64(c.side), math.Ceil(origin+size)))
+	spans = spans[:0]
+	for d := first; d < last; d++ {
+		low := math.Max(0, (float64(d)-origin)*step)
+		high := math.Min(float64(c.sourceSize), (float64(d+1)-origin)*step)
+		span := splashSpan{offset: len(c.weights)}
+		if high > low {
+			span.first = int(math.Floor(low))
+			for j := span.first; float64(j) < high && j < c.sourceSize; j++ {
+				weight := math.Min(high, float64(j+1)) - math.Max(low, float64(j))
+				c.weights = append(c.weights, float32(weight/step))
+				span.count++
 			}
 		}
+		spans = append(spans, span)
 	}
-	return spans
+	return spans, first
 }
 
-func splashRelease() {
-	for _, frame := range splashFrames {
-		splashDeleteDC.Call(frame.dc)
-		pixDeleteObject.Call(frame.bitmap)
+func (c *splashCanvas) icon(scale, opacity float64) {
+	size := splashIconSize * c.scale * scale
+	origin := float64(c.side)/2 - size/2
+	c.weights = c.weights[:0]
+	var x0, y0 int
+	c.columns, x0 = c.spans(size, origin, c.columns)
+	c.rows, y0 = c.spans(size, origin, c.rows)
+	n := c.sourceSize
+	width := len(c.columns)
+	for sy := 0; sy < n; sy++ {
+		row := c.source[sy*n*4 : (sy+1)*n*4]
+		out := c.horizontal[sy*width*4:]
+		for i, span := range c.columns {
+			var r, g, b, a float32
+			for k := 0; k < span.count; k++ {
+				w := c.weights[span.offset+k]
+				p := (span.first + k) * 4
+				r += row[p] * w
+				g += row[p+1] * w
+				b += row[p+2] * w
+				a += row[p+3] * w
+			}
+			out[i*4], out[i*4+1], out[i*4+2], out[i*4+3] = r, g, b, a
+		}
 	}
-	splashFrames = nil
-	if splashBuffer != 0 {
-		splashDeleteDC.Call(splashBuffer)
-		pixDeleteObject.Call(splashBufferBM)
-		splashBuffer, splashBufferBM = 0, 0
+	o := float32(opacity)
+	for j, span := range c.rows {
+		y := y0 + j
+		for i := 0; i < width; i++ {
+			var r, g, b, a float32
+			for k := 0; k < span.count; k++ {
+				w := c.weights[span.offset+k]
+				p := ((span.first+k)*width + i) * 4
+				r += c.horizontal[p] * w
+				g += c.horizontal[p+1] * w
+				b += c.horizontal[p+2] * w
+				a += c.horizontal[p+3] * w
+			}
+			if a <= 0 {
+				continue
+			}
+			a = min(a, 1)
+			index := (y*c.side + x0 + i) * 3
+			keep := 1 - a*o
+			c.work[index] = c.work[index]*keep + r*o
+			c.work[index+1] = c.work[index+1]*keep + g*o
+			c.work[index+2] = c.work[index+2]*keep + b*o
+		}
 	}
 }

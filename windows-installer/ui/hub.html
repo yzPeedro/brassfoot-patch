@@ -10,10 +10,14 @@ html,body{height:100%;margin:0}
 body{font:14px/1.55 var(--font);color:var(--ink);background:var(--bg);overflow:hidden;user-select:none;-webkit-font-smoothing:antialiased}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 .splash{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;background:var(--bg);transition:opacity .35s ease,visibility .35s}
-.splash img{width:84px;height:84px;animation:splash-pulse 1.4s ease-in-out infinite}
+.splash .pulse{position:relative;width:84px;height:84px}
+.splash img{position:relative;display:block;width:84px;height:84px;animation:splash-breathe 1.6s ease-in-out infinite}
+.splash .ring{position:absolute;inset:0;border:3px solid var(--brand);border-radius:21px;opacity:0;animation:splash-ring 1.6s cubic-bezier(.2,.6,.35,1) infinite}
+.splash .ring.late{animation-delay:-.8s}
 .splash.gone{opacity:0;visibility:hidden;pointer-events:none}
-@keyframes splash-pulse{0%,100%{transform:scale(.9);opacity:.7}50%{transform:scale(1.06);opacity:1}}
-@media (prefers-reduced-motion:reduce){.splash img{animation:splash-fade 1.6s ease-in-out infinite}@keyframes splash-fade{0%,100%{opacity:.6}50%{opacity:1}}}
+@keyframes splash-breathe{0%,100%{transform:scale(.94)}50%{transform:scale(1.04)}}
+@keyframes splash-ring{0%{transform:scale(.96);opacity:.42}100%{transform:scale(1.8);opacity:0}}
+@media (prefers-reduced-motion:reduce){.splash img{animation:splash-fade 1.6s ease-in-out infinite}.splash .ring{display:none}@keyframes splash-fade{0%,100%{opacity:.6}50%{opacity:1}}}
 button:disabled{cursor:default;opacity:.45}
 :focus-visible{outline:2px solid var(--brand);outline-offset:3px}
 .app{display:grid;grid-template-rows:52px 1fr;height:100%}
@@ -227,7 +231,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 </style>
 </head>
 <body>
-<div class="splash" id="splash" role="status" aria-label="Carregando o Brasfoot Mega Patch"><img src="{{MARK}}" alt=""></div>
+<div class="splash" id="splash" role="status" aria-label="Carregando o Brasfoot Mega Patch"><div class="pulse"><span class="ring"></span><span class="ring late"></span><img src="{{MARK}}" alt=""></div></div>
 <div class="app">
   <header class="titlebar" id="titlebar">
     <img src="{{MARK}}" alt="">
@@ -915,10 +919,10 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
     .then(() => call('hubSplashPhase')).catch(() => 0)
     .then(elapsed => {
       if (splashMark && elapsed > 0) {
-        splashMark.style.animation = 'none';
+        const parts = [[splashMark, 0], ...[...document.querySelectorAll('#splash .ring')].map((ring, i) => [ring, i * 800])];
+        parts.forEach(([part]) => { part.style.animation = 'none'; });
         void splashMark.offsetWidth;
-        splashMark.style.animation = '';
-        splashMark.style.animationDelay = -elapsed + 'ms';
+        parts.forEach(([part, lead]) => { part.style.animation = ''; part.style.animationDelay = -(elapsed + lead) + 'ms'; });
       }
       requestAnimationFrame(() => requestAnimationFrame(() => call('hubReady').catch(() => {})));
     });
