@@ -112,7 +112,7 @@ O hub requer o Microsoft Edge WebView2 Runtime, presente no Windows 11 e na maio
 
 ## Instalação e remoção por componentes
 
-O hub trabalha com os componentes **Elencos 2026**, **Temporada 2026**, **Campo animado** e, desde o hub 1.2.0, **Escudos atualizados** (veja [Arquitetura](architecture.md#componentes)). O cartão dos escudos só aparece quando o pacote traz escudos.
+O hub trabalha com os componentes **Elencos 2026**, **Temporada 2026**, **Campo animado** e, desde o hub 1.2.0, **Escudos e camisas** (veja [Arquitetura](architecture.md#componentes)). O cartão dos escudos só aparece quando o pacote traz escudos. Desde o hub 1.4.0, os elencos incluem as configurações de ligas de outros países (`conf_ligas_nacionais/<SIGLA>.cfg`) e os clubes acrescentados, e o componente de escudos também acrescenta escudos e camisas (`teams/escudos`, `escudosMini`, `camisas`, `camisas2`) dos clubes novos. Arquivos acrescentados são apagados ao remover o componente; o `BRA.cfg` continua só substituindo o original, no componente da temporada.
 
 - **Instalar:** os componentes aparecem para marcar, sem nada pré-marcado. Com o switch **Escolha automática** ligado, o hub marca a recomendação e mostra o motivo em cada cartão; o usuário pode mudar qualquer cartão, o que desliga o switch. A escolha do switch fica em `hub-settings.json` (`autoInstall`).
   - **Campo animado:** fica de fora com menos de 4 GB de memória instalada (`GetPhysicallyInstalledSystemMemory`), até 2 processadores lógicos ou com a velocidade padrão de partida em Super ou Ultra rápido. A velocidade vem de `options.bcf` (`est.Options.velocidade`, índice 0 Lento a 5 Ultra rápido), que o jogo copia para cada carreira nova.

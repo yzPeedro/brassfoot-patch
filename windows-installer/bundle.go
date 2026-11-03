@@ -251,7 +251,7 @@ func preparePayloadManifest(fsys fs.FS, manifest Manifest, gamePath, staged stri
 	}
 	seen := make(map[string]bool, len(manifest.Files))
 	for _, f := range manifest.Files {
-		isNationalConfig := manifest.SchemaVersion >= 3 && f.Path == nationalConfigPath
+		isNationalConfig := manifest.SchemaVersion >= 3 && nationalConfigName.MatchString(f.Path)
 		isExecutable := manifest.SchemaVersion == 4 && f.Path == gameExecutablePath
 		isCrest := manifest.SchemaVersion == 4 && crestName.MatchString(f.Path)
 		if !teamName.MatchString(f.Path) && !isNationalConfig && !isExecutable && !isCrest {
@@ -260,7 +260,7 @@ func preparePayloadManifest(fsys fs.FS, manifest Manifest, gamePath, staged stri
 		if isCrest && f.LocalSource == "" && !recipeName.MatchString(f.Recipe) {
 			return fmt.Errorf("escudo sem instruções nomeadas: %s", f.Path)
 		}
-		if (isNationalConfig || isExecutable || isCrest) && f.Operation != "replace" {
+		if (f.Path == nationalConfigPath || isExecutable) && f.Operation != "replace" {
 			return fmt.Errorf("este arquivo só pode substituir um original conhecido: %s", f.Path)
 		}
 		key := strings.ToLower(f.Path)

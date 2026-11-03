@@ -141,6 +141,17 @@ Ferramentas da fase em que as Séries B e C eram montadas a partir de planilhas 
 | `tools/build_v4_roster_deltas.py` | `--original-teams`, `--v4-teams`, `--output` | deltas de laboratório sobre a base V4 |
 | `tools/prepare_2026_roster_candidate.py` | `--game-teams`, `--bc-lab`, `--output` | candidato não publicável com 59 clubes |
 
+### Catálogo mundial e Super Update (`tools/world/`)
+
+`python -m tools.world collect --source <fonte>` coleta com cache em `data/private/super-update/cache/` e grava o bruto em `data/private/super-update/raw/`; `build` monta o catálogo em `data/private/super-update/catalog/` e `report` gera `coverage.html`. Fontes: `wikidata`, `fifa`, `uefa`, `365scores` (competições e classificações), `wikipedia` (infobox de ligas e clubes), `365squads` e `wikisquads` (elencos), `365search` (ID do 365Scores por nome), `365lineups` (escalações recentes e seleções), `crests` (escudos dos clubes novos) e `venues` (estádios).
+
+| Arquivo | Uso | Saída |
+|---|---|---|
+| `tools/world/compile_game.py` | `--base`, `--output`, `--jdk` (obrigatórios), `--countries`, `--date` | `.ban`, `.cfg`, escudos e camisas da América do Sul e `report.json` |
+| `tools/world/build_preview_bundle.py` | `--inherit`, `--compiled`, `--original`, `--base`, `--output`, `--version`, `--release` | pacote sobre o publicado, com receitas a partir do original, da base publicada e das versões anteriores |
+| `src/app/WorldBuild.java` | `<teams-base> <plan.tsv> <rosters> <saída>` | `.ban` com as classes réplica |
+| `tools/competition-codec/src/app/WorldLeagues.java` | `<modelo.cfg> <plan.tsv> <saída>` ou `dump <arquivo.cfg>` | `.cfg` por país |
+
 ---
 
 ## 2. Bundle e receitas de delta (`tools/`)

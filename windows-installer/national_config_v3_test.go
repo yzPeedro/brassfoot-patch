@@ -62,7 +62,8 @@ func TestV3NationalLeagueConfigPathRestrictions(t *testing.T) {
   os.MkdirAll(dir,0700)
   os.WriteFile(filepath.Join(dir,"BRA.cfg"),[]byte{0xac,0xed,0,5,1},0600)
   for _,c:=range []struct{p,op string}{
-    {"conf_ligas_nacionais/ESP.cfg","replace"},
+    {"conf_ligas_nacionais/esp.cfg","replace"},
+    {"conf_ligas_nacionais/ARGE.cfg","add"},
     {"conf_ligas_nacionais/BRA.cfg","add"},
     {"conf_ligas_nacionais/../BRA.cfg","replace"},
   } {

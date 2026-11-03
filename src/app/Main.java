@@ -10,7 +10,7 @@ import java.util.*;
 public final class Main {
     private Main() { }
 
-    private static t load(Path path) throws Exception {
+    static t load(Path path) throws Exception {
         if (Files.size(path) > 1024 * 1024) throw new IOException(".ban exceeds maximum expected size: " + path);
         try (ObjectInputStream in = new ObjectInputStream(Files.newInputStream(path))) {
             // Deserialization allowlist: no classes other than those observed in team samples.
@@ -31,7 +31,7 @@ public final class Main {
         }
     }
 
-    private static void store(t team, Path path) throws IOException {
+    static void store(t team, Path path) throws IOException {
         if (path.getParent() != null) Files.createDirectories(path.getParent());
         if (Files.exists(path)) throw new FileAlreadyExistsException(path.toString());
         try (ObjectOutputStream out = new ObjectOutputStream(Files.newOutputStream(path, StandardOpenOption.CREATE_NEW))) {
@@ -130,7 +130,7 @@ public final class Main {
                 + ",\"secondaryPlayers\":" + players(team.m) + "}";
     }
 
-    private static int parseIntField(String value, String label, int min, int max) {
+    static int parseIntField(String value, String label, int min, int max) {
         int parsed;
         try { parsed = Integer.parseInt(value); }
         catch (NumberFormatException ex) { throw new IllegalArgumentException("Invalid " + label + ": " + value); }
@@ -151,7 +151,7 @@ public final class Main {
                 + ",\"output\":" + str(destination.toAbsolutePath().toString()) + "}");
     }
 
-    private static ArrayList<g> readRoster(Path roster) throws Exception {
+    static ArrayList<g> readRoster(Path roster) throws Exception {
         List<String> rows = Files.readAllLines(roster, StandardCharsets.UTF_8);
         if (rows.size() < 16 || rows.size() > 40)
             throw new IllegalArgumentException("Expected 16..40 roster players, got " + rows.size());
@@ -180,7 +180,7 @@ public final class Main {
         return replacement;
     }
 
-    private static void shortenNames(ArrayList<g> players) {
+    static void shortenNames(ArrayList<g> players) {
         if (players == null) return;
         for (g player : players) {
             if (player.a == null) continue;

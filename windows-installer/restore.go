@@ -170,7 +170,7 @@ func restorePatch(plan Plan, progress func(int, int)) (string, error) {
 				return "", fmt.Errorf("não consigo restaurar o executável original: %w", err)
 			}
 		}
-		if item.File.Path == nationalConfigPath {
+		if nationalConfigName.MatchString(item.File.Path) {
 			if err = checkWritableDirectory(filepath.Join(fresh.Game, "conf_ligas_nacionais")); err != nil {
 				return "", fmt.Errorf("não consigo restaurar a configuração nacional: %w", err)
 			}

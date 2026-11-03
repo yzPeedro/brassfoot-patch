@@ -19,7 +19,7 @@ public final class CompetitionCodec {
     private static final int MAX_INPUT_BYTES = 1024 * 1024;
     private CompetitionCodec() {}
 
-    private static Object decode(byte[] data) throws Exception {
+    static Object decode(byte[] data) throws Exception {
         if (data.length < 8 || data.length > MAX_INPUT_BYTES) {
             throw new IOException("Invalid serialized file size: " + data.length);
         }
@@ -48,7 +48,7 @@ public final class CompetitionCodec {
         }
     }
 
-    private static byte[] encode(Object value) throws IOException {
+    static byte[] encode(Object value) throws IOException {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
         try (ObjectOutputStream output = new ObjectOutputStream(result)) {
             output.writeObject(value);

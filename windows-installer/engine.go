@@ -66,8 +66,9 @@ type InstallOptions struct { // TestFailAfter is for automated rollback tests, n
 
 var (
 	teamName           = regexp.MustCompile(`^teams/[\p{L}\p{N}_ -]+\.ban$`)
-	crestName          = regexp.MustCompile(`^teams/(escudos|escudosMini)/[\p{L}\p{N}_ -]+\.png$`)
+	crestName          = regexp.MustCompile(`^teams/(escudos|escudosMini|camisas|camisas2|camisas3)/[\p{L}\p{N}_ -]+\.png$`)
 	nationalConfigPath = "conf_ligas_nacionais/BRA.cfg"
+	nationalConfigName = regexp.MustCompile(`^conf_ligas_nacionais/[A-Z]{3}\.cfg$`)
 	gameExecutablePath = "bf22-23.exe"
 	validHash          = regexp.MustCompile(`^[0-9a-f]{64}$`)
 	pngHeader          = [4]byte{0x89, 0x50, 0x4e, 0x47}
@@ -194,7 +195,7 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 	states := map[bool]bool{}
 	for _, entry := range m.Files {
 		// O executável só pode ser atualizado por manifesto v4 e assinatura SHA reconhecida.
-		isNationalConfig := entry.Path == nationalConfigPath && m.SchemaVersion >= 3
+		isNationalConfig := nationalConfigName.MatchString(entry.Path) && m.SchemaVersion >= 3
 		isExecutable := entry.Path == gameExecutablePath && m.SchemaVersion == 4
 		isCrest := crestName.MatchString(entry.Path) && m.SchemaVersion == 4
 		if !teamName.MatchString(entry.Path) && !isNationalConfig && !isExecutable && !isCrest {
@@ -210,8 +211,8 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		if m.SchemaVersion == 2 && mode == "add" {
 			return Plan{}, errors.New("schema 2 não permite adicionar equipes")
 		}
-		if (isNationalConfig || isExecutable || isCrest) && mode != "replace" {
-			return Plan{}, errors.New("configuração nacional, executável e escudos só podem substituir originais conhecidos")
+		if (entry.Path == nationalConfigPath || isExecutable) && mode != "replace" {
+			return Plan{}, errors.New("configuração do Brasil e executável só podem substituir originais conhecidos")
 		}
 		if entry.AllowMissing && (!teamName.MatchString(entry.Path) || mode != "replace") {
 			return Plan{}, errors.New("adição opcional permitida somente para equipes")
@@ -445,7 +446,7 @@ func install(p Plan, opts InstallOptions) (InstallResult, error) {
 				return res, fmt.Errorf("não consigo atualizar o executável na pasta original do jogo: %w", err)
 			}
 		}
-		if item.File.Path == nationalConfigPath {
+		if nationalConfigName.MatchString(item.File.Path) {
 			if err = checkWritableDirectory(filepath.Join(p.Game, "conf_ligas_nacionais")); err != nil {
 				return res, fmt.Errorf("não consigo gravar a configuração nacional: %w", err)
 			}

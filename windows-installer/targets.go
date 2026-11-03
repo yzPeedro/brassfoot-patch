@@ -87,7 +87,8 @@ func withoutForeignCrests(m Manifest, game string) Manifest {
 	for _, f := range m.Files {
 		if isCrestFile(f) {
 			hash, err := sha(filepath.Join(game, filepath.FromSlash(f.Path)))
-			if err != nil || (hash != f.SHA256 && !contains(f.AcceptedOriginalSHA256, hash)) {
+			added := f.VanillaMissing && errors.Is(err, os.ErrNotExist)
+			if !added && (err != nil || (hash != f.SHA256 && !contains(f.AcceptedOriginalSHA256, hash))) {
 				continue
 			}
 		}
@@ -367,7 +368,8 @@ func targetManifest(m Manifest, game string, target TargetState) (Manifest, []st
 		}
 		path := filepath.Join(game, filepath.FromSlash(f.Path))
 		hash, err := sha(path)
-		if crest && (err != nil || (hash != f.SHA256 && hash != f.VanillaSHA256 && !contains(f.AcceptedOriginalSHA256, hash))) {
+		addedCrest := crest && f.VanillaMissing && errors.Is(err, os.ErrNotExist)
+		if crest && !addedCrest && (err != nil || (hash != f.SHA256 && hash != f.VanillaSHA256 && !contains(f.AcceptedOriginalSHA256, hash))) {
 			continue
 		}
 		if want {
