@@ -673,20 +673,8 @@ func hubFrameless(window uintptr) {
 		frame := margins{0, 0, 1, 0}
 		dwmExtendFrame.Call(window, uintptr(unsafe.Pointer(&frame)))
 	}
-	dpi := uintptr(96)
-	if getDpiForSystem.Find() == nil {
-		dpi, _, _ = getDpiForSystem.Call()
-	}
-	w, h := hubWidth*int(dpi)/96, hubHeight*int(dpi)/96
-	sw, _, _ := getSystemMetrics.Call(0)
-	sh, _, _ := getSystemMetrics.Call(1)
-	if w > int(sw)-24 {
-		w = int(sw) - 24
-	}
-	if h > int(sh)-48 {
-		h = int(sh) - 48
-	}
-	setWindowPos.Call(window, 0, uintptr((int(sw)-w)/2), uintptr((int(sh)-h)/2), uintptr(w), uintptr(h), swpNoZOrder|swpFrameChanged)
+	x, y, w, h := hubWindowRect()
+	setWindowPos.Call(window, 0, uintptr(x), uintptr(y), uintptr(w), uintptr(h), swpNoZOrder|swpFrameChanged)
 }
 
 func hubStartsDark() bool {
@@ -729,11 +717,14 @@ func runHub() bool {
 		theme, background = "dark", "FF0B1220"
 	}
 	_ = os.Setenv("WEBVIEW2_DEFAULT_BACKGROUND_COLOR", background)
+	showSplash(dark)
+	defer closeSplash()
+	_, _, width, height := hubWindowRect()
 	view := webview2.NewWithOptions(webview2.WebViewOptions{
 		DataPath:  hubDataPath(),
 		AutoFocus: true,
 		WindowOptions: webview2.WindowOptions{
-			Title: productName, Width: hubWidth, Height: hubHeight, IconId: 1, Center: true,
+			Title: productName, Width: uint(width), Height: uint(height), IconId: 1, Center: true,
 		},
 	})
 	if view == nil {
@@ -767,6 +758,8 @@ func runHub() bool {
 		"hubCheckUpdates":    hubCheckUpdates,
 		"hubUpdateHub":       hubUpdateHub,
 		"hubOpenExternal":    hubOpenExternal,
+		"hubSplashPhase":     splashPhase,
+		"hubReady":           closeSplash,
 		"hubMinimize":        func() { showWindow.Call(hubWindow, swMinimize) },
 		"hubClose": func() bool {
 			if hubIsBusy() {

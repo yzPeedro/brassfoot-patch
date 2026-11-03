@@ -910,6 +910,18 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
 
   function hideSplash() { $('splash')?.classList.add('gone'); }
   setTimeout(hideSplash, 10000);
+  const splashMark = document.querySelector('#splash img');
+  Promise.resolve(splashMark?.decode?.()).catch(() => {})
+    .then(() => call('hubSplashPhase')).catch(() => 0)
+    .then(elapsed => {
+      if (splashMark && elapsed > 0) {
+        splashMark.style.animation = 'none';
+        void splashMark.offsetWidth;
+        splashMark.style.animation = '';
+        splashMark.style.animationDelay = -elapsed + 'ms';
+      }
+      requestAnimationFrame(() => requestAnimationFrame(() => call('hubReady').catch(() => {})));
+    });
   call('hubGetSettings').then(settings => { state.settings = settings; state.auto = !!settings.autoInstall; applyAuto(); applyTheme(settings.theme); render(); }).catch(() => applyTheme('system'));
   call('hubInfo').then(info => { state.info = info; $('version').textContent = 'Hub ' + info.hubVersion + (info.preview ? ' · prévia' : ''); }).catch(() => {});
   render();
