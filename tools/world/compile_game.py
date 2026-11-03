@@ -39,6 +39,7 @@ COACH_ROLES = ("Coach", "Manager")
 SCHEDULED_ODD = {3, 5, 9, 11, 19, 25}
 SINGLE_TABLE = {26, 28, 30, 36}
 MAX_DIVISIONS = 4
+MIN_LINEUP_GAMES = 3
 KIT_MASK = "santos.png"
 QID = re.compile(r"^Q[0-9]+$")
 
@@ -179,6 +180,52 @@ def state_of(club: dict, states: dict[int, set[str]]) -> str | None:
     return next(iter(found)) if len(found) == 1 else None
 
 
+def strip_qualifier(text: str) -> str:
+    return re.sub(r"\s*\([^)]*\)\s*$", "", text or "").strip()
+
+
+def local_name(comp: dict) -> str:
+    names = comp.get("names") or {}
+    for value in (names.get("wikipedia-es"), names.get("native"), names.get("wikipedia-pt"), names.get("pt"), comp["name"]):
+        if value and strip_qualifier(value):
+            return strip_qualifier(value)
+    return comp["name"]
+
+
+def venue_name(club: dict, venues: dict, iso: str) -> str:
+    venue = club.get("venue") or {}
+    labels = venues.get(venue.get("wikidata") or "", {})
+    order = ("pt", "es") if iso == "BR" else ("es", "pt")
+    return next((labels[k] for k in order if labels.get(k)), None) or venue.get("name") or "-"
+
+
+def venue_capacity(club: dict, venues: dict) -> int | None:
+    values = venues.get((club.get("venue") or {}).get("wikidata") or "", {}).get("capacities") or []
+    values = [v for v in values if 500 <= v <= 250000]
+    return min(values) if values else None
+
+
+def apply_lineups(players: list[dict], lineup: dict | None, national: set[int], counts: Counter) -> None:
+    if not lineup or lineup["games"] < MIN_LINEUP_GAMES:
+        return
+    games = lineup["games"]
+    share = {r["tid"]: lineup["starts"].get(str(r.get("sourceId")), 0) / games for r in players}
+    rating = {r["tid"]: lineup["rating"].get(str(r.get("sourceId")), 0) for r in players}
+    regulars = sorted((r for r in players if share[r["tid"]] >= 0.5), key=lambda r: (-share[r["tid"]], -rating[r["tid"]]))
+    chosen = {r["tid"] for r in regulars[:11]}
+    stars = sorted((r for r in regulars if share[r["tid"]] >= 0.6 and r.get("sourceId") in national),
+                   key=lambda r: -rating[r["tid"]])[:3]
+    for r in players:
+        r["status"] = 1 if r["tid"] in chosen else 0
+        r["provenance"]["status"] = f"titular em {round(share[r['tid']] * games)} de {games} jogos recentes"
+        if r in stars:
+            r["star"] = True
+            r["provenance"]["star"] = "titular frequente e convocado para a seleção"
+    counts["lineupClubs"] += 1
+    counts["lineupStarters"] += len(chosen)
+    counts["lineupStars"] += len(stars)
+
+
 def trim(entries: list, file_owner: set[str], counts: Counter) -> None:
     index = max((i for i, (_, row) in enumerate(entries) if row["new"]), default=len(entries) - 1)
     plan_row, row = entries.pop(index)
@@ -239,6 +286,7 @@ def roster_rows(players: list[dict], club_file: str, country: int, originals: di
                      "status": status, "trait1": traits[0], "trait2": traits[1], "hash": digest,
                      "side": 1 if flank == "left" else (match["i"] if match and not flank else 0), "top": top,
                      "aid": match["aid"] if match else 0, "sid": match["sid"] if match else 0,
+                     "sourceId": p.get("sourceId"),
                      "tid": tid, "provenance": provenance})
     keepers = [r for r in rows if r["position"] == 0][:4]
     others = [r for r in rows if r["position"] != 0][:MAX_PLAYERS - len(keepers)]
@@ -330,6 +378,11 @@ def compile_world(base: Path, output: Path, countries: tuple[str, ...], jdk: Pat
             for team in t.get("teams", []):
                 states[team["id"]].add(prefix)
     catalog_countries = json.loads((CATALOG / "countries.json").read_text(encoding="utf8"))
+    venues = ((load_raw("venues") or {}).get("data") or {}).get("venues", {})
+    lineup_raw = (load_raw("365lineups") or {}).get("data") or {}
+    lineups = lineup_raw.get("clubs", {})
+    national = {iso: set(n["athletes"]) for iso, n in lineup_raw.get("national", {}).items()}
+    names_pt = {c["id"]: c.get("gameName") or c.get("namePt") or c.get("name") for c in catalog_countries["countries"]}
     codes = {g["catalogCountry"]: (g["code"], g["gameCountry"]) for g in catalog_countries["gameCountries"]
              if g.get("gameCountry") is not None}
     team_map = json.loads((ROOT / "config" / "live-roster-team-map.json").read_text(encoding="utf8"))
@@ -343,6 +396,7 @@ def compile_world(base: Path, output: Path, countries: tuple[str, ...], jdk: Pat
     issued: set[int] = set()
     for iso in countries:
         code3, country = codes[iso]
+        country_name = names_pt.get(iso) or code3
         entry = next(c for c in coverage["countries"] if c["country"] == iso)
         own = {f: t for f, t in game.items() if t["a"] == country}
         taken: set[str] = set()
@@ -454,6 +508,7 @@ def compile_world(base: Path, output: Path, countries: tuple[str, ...], jdk: Pat
                 if squad:
                     originals = {key(p["name"]): p for p in (original or {}).get("players", [])}
                     players = roster_rows(squad["players"], file, country, originals, nations, today, counts, issued)
+                    apply_lineups(players, lineups.get(str(squad.get("scores365"))), national.get(iso, set()), counts)
                     if len(players) >= MIN_PLAYERS and sum(1 for p in players if p["position"] == 0) >= 2:
                         mode = "replace"
                     elif new:
@@ -467,8 +522,8 @@ def compile_world(base: Path, output: Path, countries: tuple[str, ...], jdk: Pat
                                  original["n"] if original else max(0, 3 - index),
                                  original["internalId"] if original else stable(file, 800_000, 100_000),
                                  "" if original else b64(display[:40]),
-                                 "" if original else b64(((club.get("venue") or {}).get("name") or "-")[:60]),
-                                 original["g"] if original else CAPACITY.get(index, 5000),
+                                 "" if original else b64(venue_name(club, venues, iso)[:60]),
+                                 original["g"] if original else venue_capacity(club, venues) or CAPACITY.get(index, 5000),
                                  b64(coach[:60]) if coach else ("" if original else b64("-")),
                                  original["i"] if original else country,
                                  "" if original else background, "" if original else text,
@@ -508,8 +563,9 @@ def compile_world(base: Path, output: Path, countries: tuple[str, ...], jdk: Pat
             last = position == len(built)
             relegated = 0 if last else min(4 if len(rows) >= 20 else 2, len(rows) // 4, len(built[position][6]) // 2)
             league_plan.append([code3, country, index, len(rows), groups, relegated,
-                                b64("Brasileirão" if iso == "BR" else built[0][1]["leagues"][0][:40]),
-                                b64(BR_DIVISION_NAMES[index - 1] if iso == "BR" else division["leagues"][0][:40]),
+                                b64("Brasileirão" if iso == "BR" else country_name[:40]),
+                                b64(BR_DIVISION_NAMES[index - 1] if iso == "BR"
+                                    else local_name(competitions[division["leagueIds"][0]])[:40]),
                                 template_division,
                                 "true"])
             country_report["divisions"].append({"division": index, "catalogLevel": division["level"],
