@@ -1,7 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-02T19:30:00-03:00",
+  "updatedAt": "2026-11-02T23:30:00-03:00",
   "entries": [
+    {
+      "id": "patch-2026-6-0",
+      "version": "2026.6.0",
+      "date": "2026-11-02T23:30:00-03:00",
+      "title": "Super Update da América do Sul",
+      "kind": "patch",
+      "summary": "Divisões reais de 10 países sul-americanos, 253 clubes novos com elenco, escudo e camisa, e força pelos titulares reais.",
+      "changes": [
+        "Até 4 divisões por país na Argentina, Bolívia, Brasil, Chile, Colômbia, Equador, Paraguai, Peru, Uruguai e Venezuela.",
+        "Brasil com as Séries A, B, C e D da temporada.",
+        "253 clubes novos com elenco, escudo e camisa.",
+        "Bônus de titular e estrela pelas escalações recentes.",
+        "Hub 1.4.0 para instalar ligas de outros países e imagens novas."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.6.0"
+    },
     {
       "id": "patch-2026-5-11",
       "version": "2026.5.11",
