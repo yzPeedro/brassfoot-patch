@@ -140,6 +140,16 @@ def build(original, base, previous, teams, executable, destination, version, inh
                       'sha256': sha(target), 'acceptedOriginalSha256':
                       originals,
                       **({'allowMissing': True} if missing and originals else {})})
+    handled = {item['path'] for item in files}
+    for relative, item in sorted(inherited_files.items()):
+        if relative in handled or relative in paths or item.get('component') == 'crests':
+            continue
+        recipe = item.get('recipe') or Path(relative).name + '.json'
+        source = inherit_bundle / 'patches' / recipe
+        if not source.is_file():
+            raise ValueError('inherited recipe missing: ' + relative)
+        (recipes / recipe).write_bytes(source.read_bytes())
+        files.append(copy.deepcopy(item))
     manifest = {'schemaVersion': 4, 'kind': 'BRASFOOT_RELEASE_PATCH',
                 'patchSeason': int(version[:4]), 'version': version,
                 'publicationAllowed': True, 'compatibilityTestedInGame': False,

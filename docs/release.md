@@ -39,6 +39,10 @@ Os usuários não precisam baixar cada release: o hub instalado lê o `release.j
 
    Pacotes com escudos exigem `requiresHub` 1.2.0 ou mais novo, porque hubs anteriores recusam o pacote inteiro.
 
+   `build_release_bundle` só gera receitas para `.ban`, `BRA.cfg` e o executável; as demais entradas do pacote anterior (configurações de ligas de outros países e clubes acrescentados pelo Super Update) são herdadas como estão. Desde a 2026.6.0 o pacote tem `.cfg` de outros países e imagens acrescentadas, que exigem `requiresHub` 1.4.0.
+
+   **Super Update.** As ligas da América do Sul vêm do catálogo mundial (`python -m tools.world`). Para recompilá-las, use `python -m tools.world.compile_game --base <base publicada> --output <pasta>` e empacote com `python -m tools.world.build_preview_bundle --inherit <bundle-publicado> --compiled <pasta> --original data/private/vanilla-22-23 --base <base publicada> --output <bundle> --version <versão> --release`. Sem `--release` o pacote sai como prévia local.
+
 3. **Notas da versão.** Escreva `docs/releases/v<versao>.md` e acrescente a entrada correspondente em `site/data/patch-notes.json`.
 
 4. **Commit.** Faça commit e push do código e das notas. O build registra o commit de origem em cada artefato.
