@@ -6,6 +6,8 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
+	"unicode/utf16"
 )
 
 const (
@@ -49,6 +51,49 @@ func registerNotifyApp() {
 	_ = hiddenCommand("reg.exe", "add", notifyAppKey, "/v", "IconUri", "/t", "REG_SZ", "/d", icon, "/f").Run()
 }
 
+func registerNotifyTask(executable string) error {
+	definition := `<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <Triggers>
+    <TimeTrigger>
+      <Repetition><Interval>PT1H</Interval><StopAtDurationEnd>false</StopAtDurationEnd></Repetition>
+      <StartBoundary>` + time.Now().Add(time.Minute).Format("2006-01-02T15:04:05") + `</StartBoundary>
+      <Enabled>true</Enabled>
+    </TimeTrigger>
+  </Triggers>
+  <Principals><Principal id="Author"><LogonType>InteractiveToken</LogonType><RunLevel>LeastPrivilege</RunLevel></Principal></Principals>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>
+    <StartWhenAvailable>true</StartWhenAvailable>
+    <ExecutionTimeLimit>PT10M</ExecutionTimeLimit>
+    <Enabled>true</Enabled>
+  </Settings>
+  <Actions Context="Author"><Exec><Command>` + xmlText(executable) + `</Command><Arguments>--notify-check</Arguments></Exec></Actions>
+</Task>`
+	file, err := os.CreateTemp("", "brasfoot-mega-patch-task-*.xml")
+	if err != nil {
+		return err
+	}
+	path := file.Name()
+	defer os.Remove(path)
+	encoded := utf16.Encode([]rune(definition))
+	body := make([]byte, 2, 2+len(encoded)*2)
+	body[0], body[1] = 0xFF, 0xFE
+	for _, unit := range encoded {
+		body = append(body, byte(unit), byte(unit>>8))
+	}
+	_, err = file.Write(body)
+	if closeErr := file.Close(); err == nil {
+		err = closeErr
+	}
+	if err != nil {
+		return err
+	}
+	return hiddenCommand("schtasks.exe", "/Create", "/F", "/TN", notifyTaskName, "/XML", path).Run()
+}
+
 func setNotifications(enabled bool) error {
 	executable := notificationExecutable()
 	if !enabled || executable == "" {
@@ -61,7 +106,9 @@ func setNotifications(enabled bool) error {
 	if err := hiddenCommand("reg.exe", "add", notifyRunKey, "/v", notifyRunValue, "/t", "REG_SZ", "/d", command, "/f").Run(); err != nil {
 		return err
 	}
-	_ = hiddenCommand("schtasks.exe", "/Create", "/F", "/SC", "HOURLY", "/MO", "1", "/TN", notifyTaskName, "/TR", command).Run()
+	if registerNotifyTask(executable) != nil {
+		_ = hiddenCommand("schtasks.exe", "/Create", "/F", "/SC", "HOURLY", "/MO", "1", "/TN", notifyTaskName, "/TR", command).Run()
+	}
 	registerProtocol(executable)
 	registerNotifyApp()
 	return nil
