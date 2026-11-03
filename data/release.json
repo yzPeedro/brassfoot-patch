@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.6.0",
-  "publishedAt": "2026-11-03T02:48:19.926396+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.6.0-windows-x64.exe",
+  "publishedVersion": "2026.6.1",
+  "publishedAt": "2026-11-03T15:25:36.648572+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.6.1-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
-  "fileSizeBytes": 7746048,
-  "sha256": "7006c9b1fa01ab86a3b222bc09f3d7bb98196dbe53cd1673d62b05e0fa3b895e",
+  "fileSizeBytes": 7924736,
+  "sha256": "640d225dfb09778ebb1868b3c9568bf3be0bb56dddac9fddb20c0b9ef7b94c52",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Super Update da América do Sul: divisões reais de 10 países, 253 clubes novos com elenco, escudo e camisa, força pelos titulares reais e hub 1.4.0."
+  "releaseNotes": "Hub 1.4.1: abertura com o ícone pulsando desde o primeiro instante, sem janela vazia; jogo, ligas, elencos, escudos e camisas iguais aos da 2026.6.0."
 }
