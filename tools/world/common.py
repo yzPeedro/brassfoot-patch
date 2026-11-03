@@ -29,8 +29,12 @@ def key(value: str | None) -> str:
     return "".join(c for c in value if c.isalnum() and not unicodedata.combining(c))
 
 
+DOTTED = re.compile(r"\b(?:[^\W\d_]\.){2,}")
+
+
 def words(value: str | None) -> list[str]:
-    value = unicodedata.normalize("NFKD", value or "").casefold()
+    value = DOTTED.sub(lambda m: m.group(0).replace(".", "") + " ", value or "")
+    value = unicodedata.normalize("NFKD", value).casefold()
     value = "".join(c if c.isalnum() else " " for c in value if not unicodedata.combining(c))
     return value.split()
 
