@@ -66,7 +66,7 @@ type InstallOptions struct { // TestFailAfter is for automated rollback tests, n
 
 var (
 	teamName           = regexp.MustCompile(`^teams/[\p{L}\p{N}_ -]+\.ban$`)
-	crestName          = regexp.MustCompile(`^teams/(escudos|escudosMini)/[\p{L}\p{N}_ -]+\.png$`)
+	crestName          = regexp.MustCompile(`^teams/(escudos|escudosMini|camisas|camisas2|camisas3)/[\p{L}\p{N}_ -]+\.png$`)
 	nationalConfigPath = "conf_ligas_nacionais/BRA.cfg"
 	nationalConfigName = regexp.MustCompile(`^conf_ligas_nacionais/[A-Z]{3}\.cfg$`)
 	gameExecutablePath = "bf22-23.exe"
@@ -211,8 +211,8 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		if m.SchemaVersion == 2 && mode == "add" {
 			return Plan{}, errors.New("schema 2 não permite adicionar equipes")
 		}
-		if (entry.Path == nationalConfigPath || isExecutable || isCrest) && mode != "replace" {
-			return Plan{}, errors.New("configuração nacional, executável e escudos só podem substituir originais conhecidos")
+		if (entry.Path == nationalConfigPath || isExecutable) && mode != "replace" {
+			return Plan{}, errors.New("configuração do Brasil e executável só podem substituir originais conhecidos")
 		}
 		if entry.AllowMissing && (!teamName.MatchString(entry.Path) || mode != "replace") {
 			return Plan{}, errors.New("adição opcional permitida somente para equipes")

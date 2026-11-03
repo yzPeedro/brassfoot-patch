@@ -11,6 +11,7 @@ from tools.build_inplace_bundle import match_ops
 from tools.bundle_limits import check_bundle
 
 NATIONAL_CONFIG = "conf_ligas_nacionais/BRA.cfg"
+IMAGE_FOLDERS = ("escudos", "escudosMini", "camisas", "camisas2")
 
 
 def sha(data: bytes) -> str:
@@ -25,6 +26,8 @@ def build(inherit: Path, compiled: Path, original: Path, base: Path, output: Pat
     entries = {f["path"]: f for f in manifest["files"]}
     sources = [("teams/" + p.name, p) for p in sorted((compiled / "teams").glob("*.ban"))]
     sources += [("conf_ligas_nacionais/" + p.name, p) for p in sorted((compiled / "conf_ligas_nacionais").glob("*.cfg"))]
+    for folder in IMAGE_FOLDERS:
+        sources += [(f"teams/{folder}/" + p.name, p) for p in sorted((compiled / "teams" / folder).glob("*.png"))]
     counts = {"replaced": 0, "added": 0, "unchanged": 0}
     for relative, source in sources:
         target = source.read_bytes()
@@ -47,13 +50,18 @@ def build(inherit: Path, compiled: Path, original: Path, base: Path, output: Pat
             variants.append({"schemaVersion": 1, "path": relative, "originalSha256": digest,
                              "targetSha256": sha(target), "originalSize": len(body), "targetSize": len(target),
                              "operations": operations})
-        (output / "patches" / (source.name + ".json")).write_text(
+        image = relative.split("/")[1] in IMAGE_FOLDERS
+        recipe = ("crest-" + sha(relative.encode())[:20] + ".json") if image else source.name + ".json"
+        (output / "patches" / recipe).write_text(
             json.dumps({"schemaVersion": 2, "path": relative, "variants": variants}, ensure_ascii=False,
                        separators=(",", ":")), encoding="utf-8")
         accepted = [v["originalSha256"] for v in variants if v["originalSha256"] != sha(b"")]
         entry = copy.deepcopy(entries.get(relative, {}))
         for stale in ("recipe", "via", "allowMissing"):
             entry.pop(stale, None)
+        if image:
+            entry["recipe"] = recipe
+            entry["component"] = "crests"
         replace = vanilla.exists() or published.exists()
         entry.update({"operation": "replace" if replace else "add", "path": relative, "size": len(target),
                       "sha256": sha(target), "acceptedOriginalSha256": accepted if replace else []})
@@ -68,7 +76,7 @@ def build(inherit: Path, compiled: Path, original: Path, base: Path, output: Pat
             entry.pop("vanillaSize", None)
             entry["vanillaMissing"] = True
             if replace:
-                if not relative.startswith("teams/"):
+                if not relative.endswith(".ban"):
                     raise SystemExit(f"arquivo ausente no original só pode ser equipe: {relative}")
                 entry["allowMissing"] = True
                 counts["replaced"] += 1

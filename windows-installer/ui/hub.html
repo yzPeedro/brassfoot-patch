@@ -263,7 +263,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
               <div class="status-row"><div><strong>Elencos 2026</strong><small>Jogadores atualizados nos clubes</small></div><span class="badge off" id="badge-rosters">—</span></div>
               <div class="status-row"><div><strong>Temporada 2026</strong><small>Ano 2026, Copa do Mundo, copas e divisões</small></div><span class="badge off" id="badge-season">—</span></div>
               <div class="status-row"><div><strong>Campo animado</strong><small>Partidas ao vivo na tela de jogo</small></div><span class="badge off" id="badge-live">—</span></div>
-              <div class="status-row" id="row-crests" hidden><div><strong>Escudos atualizados</strong><small>Escudos atuais dos clubes que mudaram de escudo</small></div><span class="badge off" id="badge-crests">—</span></div>
+              <div class="status-row" id="row-crests" hidden><div><strong>Escudos e camisas</strong><small>Escudos atuais e camisas dos clubes novos</small></div><span class="badge off" id="badge-crests">—</span></div>
             </div>
             <div class="available" id="available"></div>
             <div class="actions">
@@ -311,8 +311,8 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
           <button class="option" role="checkbox" aria-checked="true" data-option="crests" hidden>
             <div class="option-top"><span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><span class="badge off" id="opt-crests">—</span></div>
             <div class="thumb patch crests"><div><strong id="crest-count">—</strong><span>ESCUDOS</span></div><div><strong>2026</strong><span>ATUAIS</span></div></div>
-            <h2>Escudos atualizados</h2>
-            <p>Troca os escudos antigos pelos atuais. Escudo que você mudou por conta própria fica como está.</p>
+            <h2>Escudos e camisas</h2>
+            <p>Troca os escudos antigos pelos atuais e acrescenta escudo e camisa aos clubes novos. Imagem que você mudou por conta própria fica como está.</p>
             <p class="why" id="why-crests" hidden></p>
           </button>
         </div>
@@ -373,8 +373,8 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
   const ALL_COMPONENTS = ['rosters', 'season', 'live', 'crests'];
   const offered = name => name !== 'crests' || (targets() && components().crestsTotal > 0);
   const activeComponents = () => ALL_COMPONENTS.filter(offered);
-  const names = {rosters: 'os Elencos 2026', season: 'a Temporada 2026', live: 'o campo animado', crests: 'os escudos atualizados'};
-  const labels = {rosters: 'Elencos 2026', season: 'Temporada 2026', live: 'Campo animado', crests: 'Escudos atualizados'};
+  const names = {rosters: 'os Elencos 2026', season: 'a Temporada 2026', live: 'o campo animado', crests: 'os escudos e camisas'};
+  const labels = {rosters: 'Elencos 2026', season: 'Temporada 2026', live: 'Campo animado', crests: 'Escudos e camisas'};
   const icons = {
     ok: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>',
     error: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 8v5m0 4h.01"/><circle cx="12" cy="12" r="9"/></svg>',

@@ -260,7 +260,7 @@ func preparePayloadManifest(fsys fs.FS, manifest Manifest, gamePath, staged stri
 		if isCrest && f.LocalSource == "" && !recipeName.MatchString(f.Recipe) {
 			return fmt.Errorf("escudo sem instruções nomeadas: %s", f.Path)
 		}
-		if (f.Path == nationalConfigPath || isExecutable || isCrest) && f.Operation != "replace" {
+		if (f.Path == nationalConfigPath || isExecutable) && f.Operation != "replace" {
 			return fmt.Errorf("este arquivo só pode substituir um original conhecido: %s", f.Path)
 		}
 		key := strings.ToLower(f.Path)

@@ -473,7 +473,7 @@ func restoreInstallBackup(entry BackupEntry, game string, progress func(done, to
 		}
 	}
 	for index, name := range report.AddedPaths {
-		if !teamName.MatchString(name) && !nationalConfigName.MatchString(name) {
+		if !teamName.MatchString(name) && !nationalConfigName.MatchString(name) && !crestName.MatchString(name) {
 			continue
 		}
 		if target, e := safeTarget(game, name); e == nil {

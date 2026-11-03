@@ -13,6 +13,7 @@ import unicodedata
 
 from tools.compile_live_rosters import DERIVED_TRAITS, age_on
 from tools.world.common import CATALOG, best_name_score, key, load_raw, write_json
+from tools.world.kits import render_crest, render_kit
 
 ROOT = Path(__file__).resolve().parents[2]
 FOCUS = ("AR", "BO", "BR", "CL", "CO", "EC", "PY", "PE", "UY", "VE")
@@ -38,6 +39,7 @@ COACH_ROLES = ("Coach", "Manager")
 SCHEDULED_ODD = {3, 5, 9, 11, 19, 25}
 SINGLE_TABLE = {26, 28, 30, 36}
 MAX_DIVISIONS = 4
+KIT_MASK = "santos.png"
 QID = re.compile(r"^Q[0-9]+$")
 
 
@@ -262,6 +264,44 @@ def tsv_row(r: dict) -> str:
     return "\t".join(map(str, [b64(r["name"][:120]), r["aid"], str(r["star"]).lower(), r["country"], r["age"],
                                r["position"], r["status"], r["trait1"], r["trait2"], r["hash"], r["side"],
                                str(r["top"]).lower(), r["sid"], r["tid"]]))
+
+
+def write_images(base: Path, output: Path, report: dict, clubs: dict, counts: Counter) -> list[dict]:
+    found = ((load_raw("crests") or {}).get("data") or {}).get("crests", [])
+    shared = Counter(c["url"] for c in found)
+    crests = {c["club"]: c for c in found if shared[c["url"]] == 1}
+    mask = base / "teams" / "camisas" / KIT_MASK
+    written = []
+    for country in report["countries"].values():
+        for division in country["divisions"]:
+            for member in division["members"]:
+                if not member["new"]:
+                    continue
+                club = clubs[member["club"]]
+                files = {}
+                crest = crests.get(club["id"])
+                if crest and Path(crest["cache"]).exists():
+                    source = Path(crest["cache"]).read_bytes()
+                    files["escudos"] = render_crest(source, 60)
+                    files["escudosMini"] = render_crest(source, 18)
+                    counts["crests"] += 1
+                background, text, origin = club_colors(club)
+                if origin != "padrão":
+                    pattern = (club.get("kit") or {}).get("patternBody")
+                    files["camisas"] = render_kit(mask, background, text, pattern)
+                    away = hex_color((club.get("scores365Colors") or {}).get("away"))
+                    if away and away != background:
+                        files["camisas2"] = render_kit(mask, away, background if contrast(away, background) >= 3 else
+                                                       max(("#ffffff", "#000000"), key=lambda c: contrast(away, c)), None)
+                    counts["kits"] += 1
+                for folder, data in files.items():
+                    target = output / "teams" / folder / f"{member['file']}.png"
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    target.write_bytes(data)
+                member["images"] = sorted(files)
+                written.append({"club": club["id"], "file": member["file"], "images": sorted(files),
+                                "crestSource": crest and {k: crest[k] for k in ("source", "url", "sha256")}})
+    return written
 
 
 def compile_world(base: Path, output: Path, countries: tuple[str, ...], jdk: Path, today: date) -> dict:
@@ -493,6 +533,8 @@ def compile_world(base: Path, output: Path, countries: tuple[str, ...], jdk: Pat
     report["leaguesBuild"] = json.loads(run([java, "-cp", leagues_cp, "app.WorldLeagues",
                                              str(base / "conf_ligas_nacionais" / "BRA.cfg"),
                                              str(output / "leagues-plan.tsv"), str(output / "conf_ligas_nacionais")]))
+    images = write_images(base, output, report, clubs, counts)
+    report["images"] = images
     report["counts"] = dict(sorted(counts.items()))
     write_json(output / "report.json", report)
     return {"output": str(output), **report["counts"], "teams": report["teamsBuild"], "leagues": report["leaguesBuild"]}
