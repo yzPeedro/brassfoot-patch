@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.6.1",
+  "version": "2026.6.2",
   "channel": "stable",
-  "releaseNotes": "Hub 1.4.1: abertura com o ícone pulsando desde o primeiro instante, sem janela vazia; jogo, ligas, elencos, escudos e camisas iguais aos da 2026.6.0.",
+  "releaseNotes": "Hub 1.4.2: aviso de versão nova conferido de hora em hora, também na bateria, com o nome e o ícone do Mega Patch; jogo, ligas, elencos, escudos e camisas iguais aos da 2026.6.0.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [
