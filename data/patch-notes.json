@@ -1,7 +1,21 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-03T19:30:00-03:00",
+  "updatedAt": "2026-11-07T04:30:00-03:00",
   "entries": [
+    {
+      "id": "patch-2026-6-4",
+      "version": "2026.6.4",
+      "date": "2026-11-07T04:30:00-03:00",
+      "title": "Seis idades confirmadas em fontes oficiais",
+      "kind": "patch",
+      "summary": "Vladislav Torop, Klemen Nemanič, Mark Kukk, Álex Millán, Milos Kerkez e Marcos Cuenca recebem a idade atual.",
+      "changes": [
+        "Seis idades recalculadas com datas de nascimento confirmadas em fontes oficiais.",
+        "Diferenças sem confirmação independente foram descartadas e os últimos dados confiáveis foram preservados.",
+        "Hub 1.4.2, executável, ligas, escudos, camisas e campo animado permanecem iguais."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.6.4"
+    },
     {
       "id": "patch-2026-6-3",
       "version": "2026.6.3",
