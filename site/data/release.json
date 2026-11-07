@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.6.3",
-  "publishedAt": "2026-11-03T22:28:09.851299+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.6.3-windows-x64.exe",
+  "publishedVersion": "2026.6.4",
+  "publishedAt": "2026-11-07T07:16:06.491957+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.6.4-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
   "fileSizeBytes": 7929344,
-  "sha256": "3724ef8a5219ebe14e7f265c507bc1b7ae6bc9d0e5d64002d79bc221cbc8eb1f",
+  "sha256": "e0e7d732771ff1dc4ce070913ff2d06e461349fb108f4e03177e8349f7af527f",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Revisão de estrelas: 35 marcações herdadas fora do Top 10 masculino oficial do Ballon d'Or 2026 foram removidas; elencos sem confirmação independente foram preservados."
+  "releaseNotes": "Seis jogadores tiveram a idade atualizada após confirmação da data de nascimento em fonte oficial; demais diferenças sem confirmação independente foram preservadas."
 }
