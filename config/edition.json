@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.6.3",
+  "version": "2026.6.4",
   "channel": "stable",
-  "releaseNotes": "Revisão de estrelas: 35 marcações herdadas fora do Top 10 masculino oficial do Ballon d'Or 2026 foram removidas; elencos sem confirmação independente foram preservados.",
+  "releaseNotes": "Seis jogadores tiveram a idade atualizada após confirmação da data de nascimento em fonte oficial; demais diferenças sem confirmação independente foram preservadas.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [
