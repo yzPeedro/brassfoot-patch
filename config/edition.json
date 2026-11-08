@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.6.4",
+  "version": "2026.6.5",
   "channel": "stable",
-  "releaseNotes": "Seis jogadores tiveram a idade atualizada após confirmação da data de nascimento em fonte oficial; demais diferenças sem confirmação independente foram preservadas.",
+  "releaseNotes": "Petar Stojanovic foi atualizado no empréstimo da Legia ao Maribor e seis jogadores tiveram a idade confirmada em fontes oficiais; demais diferenças foram preservadas.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [
