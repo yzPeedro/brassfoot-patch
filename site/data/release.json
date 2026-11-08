@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.6.4",
-  "publishedAt": "2026-11-07T07:16:06.491957+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.6.4-windows-x64.exe",
+  "publishedVersion": "2026.6.5",
+  "publishedAt": "2026-11-08T03:24:37.502434+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.6.5-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
   "fileSizeBytes": 7929344,
-  "sha256": "e0e7d732771ff1dc4ce070913ff2d06e461349fb108f4e03177e8349f7af527f",
+  "sha256": "64088c3a57d74624c4646015510b31fdc6c2804c12108dc043448c9e2cbc18ce",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Seis jogadores tiveram a idade atualizada após confirmação da data de nascimento em fonte oficial; demais diferenças sem confirmação independente foram preservadas."
+  "releaseNotes": "Petar Stojanovic foi atualizado no empréstimo da Legia ao Maribor e seis jogadores tiveram a idade confirmada em fontes oficiais; demais diferenças foram preservadas."
 }
