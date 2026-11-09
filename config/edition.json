@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.6.5",
+  "version": "2026.6.6",
   "channel": "stable",
-  "releaseNotes": "Petar Stojanovic foi atualizado no empréstimo da Legia ao Maribor e seis jogadores tiveram a idade confirmada em fontes oficiais; demais diferenças foram preservadas.",
+  "releaseNotes": "Teemu Pukki e Alexander Ring foram retirados do HJK após encerrarem as carreiras; 17 idades e a nacionalidade esportiva de Lilian Brassier foram atualizadas com fontes verificadas.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [
