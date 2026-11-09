@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.6.5",
-  "publishedAt": "2026-11-08T03:24:37.502434+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.6.5-windows-x64.exe",
+  "publishedVersion": "2026.6.6",
+  "publishedAt": "2026-11-09T22:24:26.113509+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.6.6-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
   "fileSizeBytes": 7929344,
-  "sha256": "64088c3a57d74624c4646015510b31fdc6c2804c12108dc043448c9e2cbc18ce",
+  "sha256": "7ee4d2199824549bcaf006223e7fe528cfccd6fcf6260233b12697db9524707b",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Petar Stojanovic foi atualizado no empréstimo da Legia ao Maribor e seis jogadores tiveram a idade confirmada em fontes oficiais; demais diferenças foram preservadas."
+  "releaseNotes": "Teemu Pukki e Alexander Ring foram retirados do HJK após encerrarem as carreiras; 17 idades e a nacionalidade esportiva de Lilian Brassier foram atualizadas com fontes verificadas."
 }
