@@ -1,7 +1,24 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-09T19:20:00-03:00",
+  "updatedAt": "2026-11-10T20:35:00-03:00",
   "entries": [
+    {
+      "id": "patch-2026-6-7",
+      "version": "2026.6.7",
+      "date": "2026-11-10T20:35:00-03:00",
+      "title": "Quatro vínculos e 20 idades atualizados",
+      "kind": "patch",
+      "summary": "Dois jogadores entram, dois saem, 20 idades e duas nacionalidades esportivas são atualizadas.",
+      "changes": [
+        "Edgar Piloyan e Zhasulan Amir adicionados a Alashkert e Ordabasy.",
+        "Fernando Costa e Wesley Santos retirados de Red Bull Bragantino e Mirassol.",
+        "Vinte idades recalculadas com datas de nascimento confirmadas.",
+        "Bleon Kurtulus e Mohamadou Kanté atualizados para Kosovo e Mali.",
+        "Diferenças sem confirmação independente foram descartadas e os últimos dados confiáveis foram preservados.",
+        "Hub 1.4.2, executável, ligas, escudos, camisas e campo animado permanecem iguais."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.6.7"
+    },
     {
       "id": "patch-2026-6-6",
       "version": "2026.6.6",

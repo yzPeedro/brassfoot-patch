@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.6.6",
+  "version": "2026.6.7",
   "channel": "stable",
-  "releaseNotes": "Teemu Pukki e Alexander Ring foram retirados do HJK após encerrarem as carreiras; 17 idades e a nacionalidade esportiva de Lilian Brassier foram atualizadas com fontes verificadas.",
+  "releaseNotes": "Edgar Piloyan e Zhasulan Amir foram adicionados, Fernando Costa e Wesley Santos foram retirados, 20 idades e duas nacionalidades esportivas foram atualizadas com fontes verificadas.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [
