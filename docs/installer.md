@@ -20,7 +20,8 @@ Desde o hub 1.0.0 existe **um único hub**. Ele não carrega o patch dentro do e
 | `ui/hub.html` | Interface do hub (HTML, CSS e JavaScript em um único arquivo) |
 | `ui/live-pitch.js` | Campo animado em movimento, cópia idêntica de `site/live-pitch.js`, embutida na página por `{{LIVEPITCH}}` |
 | `main_windows.go` | Interface Win32 simples, usada quando o WebView2 não está disponível ou com `--classic` |
-| `main_other.go` | Atualizador de linha de comando para Linux e macOS |
+| `portable.go`, `portable_unix.go` | Atualizador de linha de comando para Linux e macOS |
+| `portable_windows.go`, `state_dir_hubcli.go` | Build de desenvolvimento `hubcli`: atualizador de linha de comando no Windows e `--state-dir` (veja [Linha de comando para regressão](#linha-de-comando-para-regressão)) |
 | `winres/` | Ícone, manifesto do aplicativo e informações de versão do executável |
 
 ## Versões
@@ -179,6 +180,41 @@ O atualizador de terminal usa o mesmo feed: a cada execução busca a release ma
 | `--feed <pasta>` | Usa `release.json` e pacote de uma pasta local |
 | `--yes` | Confirma sem pergunta interativa |
 | `--version` | Mostra a versão do atualizador, edição, plataforma e commit |
+
+## Linha de comando para regressão
+
+A regressão diária instala e remove componentes em cópias descartáveis do jogo sem abrir o hub. Para isso existe um build de desenvolvimento, com a tag `hubcli`, que compila o atualizador de terminal (`portable.go`) também no Windows, sem WSL, com o mesmo motor do hub (`engine.go`, `bundle.go`, `components.go`, `targets.go`, `restore.go`). Esse binário não entra na distribuição: `tools/build_distribution.py` não usa a tag, e o hub e os atualizadores publicados continuam iguais.
+
+```powershell
+cd windows-installer
+go build -tags hubcli -o <pasta-fora-de-dist>\brasfoot-mega-patch-cli.exe .
+```
+
+No Linux, `go build -tags hubcli -o <saída> .` gera o equivalente. Sem `-H=windowsgui`, o executável é de console: escreve no terminal e devolve o código de saída (0 em sucesso, 1 em falha, 2 em opção inválida).
+
+As opções são as do atualizador de terminal (tabela acima) mais `--state-dir`, obrigatória nesse build:
+
+| Opção | Efeito |
+|---|---|
+| `--state-dir <pasta>` | Pasta descartável que substitui `%LOCALAPPDATA%\BrassfootPatch2026` (ou `~/.config/BrassfootPatch2026`): cofre de originais (`originals/`), backups (`backups/`), backups completos (`snapshots/`), cache do feed (`cache/`), relatórios (`reports/`), registros (`logs/`) e preferências ficam dentro dela, e os temporários vão para `<pasta>/tmp` |
+
+Sem `--state-dir`, o build `hubcli` recusa qualquer operação e não grava registro de erro em lugar nenhum. A pasta é recusada quando coincide com o estado real do hub, está dentro dele ou o contém. Nesse build, o atualizador não procura a instalação do jogo nem abre seletor de pasta: `--game` é sempre explícito. Antes de escrever, ele recusa a operação se o jogo estiver aberto: no Windows confere com `tasklist` os mesmos processos que o hub (`bf22-23.exe`, `brasfoot.exe` e `brasfoot22-23.exe`); no Linux usa a mesma conferência por `ps` do atualizador de terminal.
+
+Exemplo de matriz numa cópia do jogo, com o pacote da release em disco:
+
+```powershell
+$cli = "<pasta-fora-de-dist>\brasfoot-mega-patch-cli.exe"
+$estado = "<pasta-descartável>\estado"
+$jogo = "<pasta-descartável>\jogo"
+$pacote = "<bundle>.zip"
+& $cli --state-dir $estado --game $jogo --bundle $pacote --inspect
+& $cli --state-dir $estado --game $jogo --bundle $pacote --yes
+& $cli --state-dir $estado --game $jogo --bundle $pacote --remove live --yes
+& $cli --state-dir $estado --game $jogo --bundle $pacote --only live --yes
+& $cli --state-dir $estado --game $jogo --bundle $pacote --remove all --yes
+```
+
+Cada cenário deve usar uma pasta de estado nova, ou a mesma pasta reaproveitada de propósito quando o cenário depende do cofre de originais formado na instalação anterior.
 
 ## Recursos do executável e assinatura
 
