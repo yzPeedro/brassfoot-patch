@@ -371,7 +371,8 @@ Módulo Go (`go 1.23`, dependência `github.com/jchv/go-webview2`). O mesmo cód
 | `restore.go` | localiza o backup de instalação compatível e restaura os arquivos anteriores |
 | `hub_windows.go` | interface principal: janela WebView2 sem moldura (1040×680) com a página `ui/hub.html` e funções ligadas ao JavaScript (`hubInstall`, `hubCreateBackup`, `hubRestore`, `hubLaunchGame` e outras). Sem WebView2, oferece o download do runtime e cai na interface clássica |
 | `main_windows.go` | interface Win32 clássica (`runClassic`), aberta também com o argumento `--classic` |
-| `main_other.go` | atualizador portátil (`!windows`) com `--game`, `--yes`, `--restore`, `--inspect`, `--version` e `--only patch\|live` |
+| `portable.go`, `portable_unix.go` | atualizador portátil (`!windows`) com `--game`, `--yes`, `--restore`, `--inspect`, `--version`, `--only patch\|live`, `--remove`, `--feed` e `--bundle` |
+| `portable_windows.go`, `state_dir_hubcli.go` | build de desenvolvimento `hubcli` (fora da distribuição): o mesmo atualizador no Windows e `--state-dir` obrigatório para isolar cofre, backups, cache e temporários (veja [Hub e instalador](installer.md#linha-de-comando-para-regressão)) |
 | `diagnostic.go` | tradução de erros em códigos `BF-1xx` com título, causa e ação |
 | `edition.go` | `productName`, `productVersion`, `patchYearText` e `sourceCommit`, preenchidos por `-ldflags` em `build_distribution.py` |
 | `pix.go`, `pix_windows.go` | contribuição voluntária opcional |

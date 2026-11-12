@@ -398,7 +398,26 @@ func replaceVerified(source, target, expected string) error {
 	}
 	return nil
 }
+var (
+	stateDir         string
+	stateDirRequired bool
+)
+
 func backupRoot() (string, error) {
+	if stateDir != "" {
+		return filepath.Join(stateDir, "backups"), nil
+	}
+	if stateDirRequired {
+		return "", errors.New("diretório de estado não informado")
+	}
+	root, err := defaultStateDir()
+	if err != nil {
+		return "", err
+	}
+	return filepath.Join(root, "backups"), nil
+}
+
+func defaultStateDir() (string, error) {
 	root := os.Getenv("LOCALAPPDATA")
 	if root == "" {
 		var err error
@@ -407,7 +426,7 @@ func backupRoot() (string, error) {
 			return "", err
 		}
 	}
-	return filepath.Join(root, "BrassfootPatch2026", "backups"), nil
+	return filepath.Join(root, "BrassfootPatch2026"), nil
 }
 
 // Check permissions before backups or replacements.
