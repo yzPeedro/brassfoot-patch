@@ -12,10 +12,19 @@ import javax.imageio.stream.ImageOutputStream;
 import javax.swing.*;
 
 public final class RenderFrame {
-    static Field f(Class<?> c, String n) throws Exception { Field x = c.getDeclaredField(n); x.setAccessible(true);
-        Field m = Field.class.getDeclaredField("modifiers"); m.setAccessible(true); m.setInt(x, x.getModifiers() & ~Modifier.FINAL); return x; }
+    static Field f(Class<?> c, String n) throws Exception { Field x = c.getDeclaredField(n); x.setAccessible(true); return x; }
 
-    public static void main(String[] a) throws Exception {
+    public static void main(String[] a) {
+        try {
+            render(a);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            System.exit(1);
+        }
+        System.exit(0);
+    }
+
+    static void render(String[] a) throws Exception {
         String out = a[0]; int w = Integer.parseInt(a[1]), h = Integer.parseInt(a[2]); double s = Double.parseDouble(a[3]);
         int condition = Integer.parseInt(a[4]);
         Constructor<LiveMatchPanel> k = LiveMatchPanel.class.getDeclaredConstructor(JPanel.class);
@@ -55,7 +64,6 @@ public final class RenderFrame {
         paint.invoke(p, g);
         g.dispose();
         write(img, new File(out));
-        System.exit(0);
     }
 
     static void write(BufferedImage img, File out) throws Exception {

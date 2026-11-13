@@ -68,7 +68,7 @@ Os usuários não precisam baixar cada release: o hub instalado lê o `release.j
    python tools/publish_distribution.py --directory dist/<versao> --notes docs/releases/v<versao>.md
    ```
 
-   O publicador cria a tag no commit de origem, sobe os arquivos (inclusive o pacote `.zip` e o `release.json`) para uma release em rascunho, confere o digest de cada arquivo informado pelo GitHub, publica a release como final e `latest` e atualiza `site/data/distribution.json`. Enquanto a release é rascunho, os hubs continuam vendo a anterior; ao virar `latest`, eles passam a avisar a nova versão. Uma falha preserva a release anterior; a mesma pasta permite retomar os envios sem substituir arquivos já publicados.
+   O publicador cria a tag no commit de origem, sobe os arquivos (inclusive o pacote `.zip` e o `release.json`) para uma release em rascunho, confere o digest de cada arquivo informado pelo GitHub, publica a release como final e `latest` e atualiza `site/data/distribution.json`, `site/data/release.json` e o `softwareVersion` do JSON-LD em `site/index.html` (conferido antes de qualquer envio; o `seo-pix.test.js` exige que seja igual à versão publicada). Enquanto a release é rascunho, os hubs continuam vendo a anterior; ao virar `latest`, eles passam a avisar a nova versão. Uma falha preserva a release anterior; a mesma pasta permite retomar os envios sem substituir arquivos já publicados.
 
 7. **Site.** Faça commit dos manifestos do site e publique:
 

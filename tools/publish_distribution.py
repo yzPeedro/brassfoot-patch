@@ -28,6 +28,13 @@ def file_hash(path):
         return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
+def with_software_version(html, version):
+    updated, count = re.subn(r'"softwareVersion":"[^"]*"', '"softwareVersion":"' + version + '"', html)
+    if count != 1:
+        raise ValueError("site/index.html must declare softwareVersion exactly once")
+    return updated
+
+
 def publish(directory, notes):
     manifest_path = directory / "distribution.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -37,6 +44,8 @@ def publish(directory, notes):
         raise ValueError("invalid release identity")
     if manifest.get("channel") != "stable" or not manifest.get("artifacts"):
         raise ValueError("this publisher requires a nonempty final distribution")
+    index = ROOT / "site/index.html"
+    with_software_version(index.read_bytes().decode("utf-8"), version)
     tag = "v" + version
     assets = manifest["artifacts"] + manifest.get("attachments", [])
     identities = {}
@@ -124,6 +133,7 @@ def publish(directory, notes):
               )}
     (ROOT / "site/data/release.json").write_text(
         json.dumps(legacy, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    index.write_bytes(with_software_version(index.read_bytes().decode("utf-8"), version).encode("utf-8"))
     print(release["html_url"])
     return public
 

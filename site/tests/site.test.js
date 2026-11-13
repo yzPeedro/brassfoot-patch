@@ -3,22 +3,26 @@ const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const read = p => fs.readFileSync(path.join(root,p),'utf8');
+const escapeRegExp = value => value.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
 
 const html=read('index.html'),css=read('styles.css'),
       js=read('app.js'),clubsJs=read('divisions.js');
 const release=JSON.parse(read('data/release.json'));
+const distribution=JSON.parse(read('data/distribution.json'));
 const target=JSON.parse(read('data/target-abc-2026.json'));
 const historical=JSON.parse(read('data/competitions/2026-brazil.json'));
 const rosters=JSON.parse(read('data/published-rosters-2026-0-2.json'));
 const researched=JSON.parse(read('data/researched-rosters-2026.json'));
+const patchClubs=JSON.parse(read('data/patch-clubs.json'));
+const explorerCups=JSON.parse(read('data/explorer-cups.json'));
+const rosterCoverage=JSON.parse(read('data/roster-coverage.json'));
 
-
-for(const id of ['inicio','cobertura','clubes-2026','recursos','como-funciona','instalador','versao','faq'])
+for(const id of ['inicio','campo-ao-vivo','downloads','clubes-2026','atualizacoes','cobertura','faq'])
   assert.match(html,new RegExp('id="'+id+'"'));
+for(const [,anchor] of html.matchAll(/href="#([^"]+)"/g))
+  assert.match(html,new RegExp('id="'+escapeRegExp(anchor)+'"'),'broken anchor #'+anchor);
 assert.ok(['published','awaiting_release'].includes(release.status));
 assert.match(release.publishedVersion,/^2026\.\d+\.\d+$/);
-// The published V4 installs year/divisions but not current player rosters.
-// Keep the known-issue warning until a roster-verified installer replaces it.
 if (release.publishedVersion==='2026.3.4') {
   assert.match(html,/id="roster-known-issue"/);
   assert.match(html,/não instala os novos jogadores/);
@@ -36,18 +40,39 @@ if (release.publishedVersion==='2026.3.5') {
 }
 assert.match(release.sha256,/^[a-f0-9]{64}$/);
 assert.ok(Number.isInteger(release.fileSizeBytes)&&release.fileSizeBytes>0);
-const activeAssetUrl = 'https://github.com/yzPeedro/brassfoot-patch/releases/download/v' +
-  release.publishedVersion + '/' + release.assetName;
-assert.equal(release.downloadUrl,activeAssetUrl);
-assert.ok(/^Brasfoot-Patch-V4-Elencos-[0-9]{4}\.[0-9]+\.[0-9]+\.exe$/.test(release.assetName));
+const releaseBase='https://github.com/yzPeedro/brassfoot-patch/releases/';
+const permanentAsset=file=>releaseBase+'latest/download/Brasfoot-Mega-Patch-'+file;
+const versionedAsset=name=>releaseBase+'download/v'+release.publishedVersion+'/'+name;
+assert.ok([permanentAsset('windows-x64.exe'),versionedAsset(release.assetName)].includes(release.downloadUrl));
+assert.equal(release.assetName,'Brasfoot-Mega-Patch-'+release.publishedVersion+'-windows-x64.exe');
+assert.equal(release.compatibilityVerifiedInGame,false);
+assert.equal(release.gameplayVerified,false);
 if(release.publishedVersion==='2026.2.0') {
   assert.equal(release.sha256,'25264615120dba5681c5238b331d5012c40b3ffea1c933f1d23bdfe755b2cbd3');
   assert.equal(release.fileSizeBytes,967095);
 }
+assert.equal(distribution.version,release.publishedVersion);
+assert.equal(distribution.status,'published');
+assert.equal(distribution.channel,'stable');
+const packageFiles={'windows-amd64':'windows-x64.exe','linux-amd64':'linux-x64.tar.gz','linux-arm64':'linux-arm64.tar.gz',
+  'darwin-amd64':'macos-x64.tar.gz','darwin-arm64':'macos-arm64.tar.gz'};
+assert.deepEqual(distribution.artifacts.map(a=>a.platform+'-'+a.architecture).sort(),Object.keys(packageFiles).sort());
+for(const artifact of distribution.artifacts){
+  const key=artifact.platform+'-'+artifact.architecture;
+  assert.equal(artifact.name,'Brasfoot-Mega-Patch-'+release.publishedVersion+'-'+packageFiles[key]);
+  assert.ok([permanentAsset(packageFiles[key]),versionedAsset(artifact.name)].includes(artifact.downloadUrl));
+  assert.match(artifact.sha256,/^[a-f0-9]{64}$/);
+  assert.ok(Number.isSafeInteger(artifact.sizeBytes)&&artifact.sizeBytes>0);
+  assert.match(html,new RegExp('data-download-platform="'+key+'" href="'+escapeRegExp(permanentAsset(packageFiles[key]))+'"'));
+}
+const windowsArtifact=distribution.artifacts.find(a=>a.platform==='windows');
+assert.equal(windowsArtifact.name,release.assetName);
+assert.equal(windowsArtifact.sha256,release.sha256);
+assert.equal(windowsArtifact.sizeBytes,release.fileSizeBytes);
 assert.equal(target.season,2026);
 assert.equal(target.targetClubs,60);
 assert.deepEqual(target.targetDivisions,['A','B','C']);
-assert.equal(target.serieD.policy,'untouched');
+assert.ok(['untouched','configuration-preserved'].includes(target.serieD.policy));
 assert.deepEqual(target.serieD.originalBRAcfgExpected,{nTimes:64,nGrupos:8});
 assert.equal(target.clubs.length,60);
 assert.equal(new Set(target.clubs.map(c=>c.id)).size,60);
@@ -70,12 +95,12 @@ if(target.completedReal2026BAndCSquads === 40) {
 }
 assert.equal(historical.clubs.length,156);
 assert.equal(historical.counts.D,96);
-assert.match(html,/Série D/);
-assert.match(html,/data-division-count="C"/);
-assert.doesNotMatch(html,/data-division-count="D"/);
-assert.doesNotMatch(html,/<option value="D">/);
+assert.match(html,/Séries A, B, C e D/);
+assert.match(html,/<select id="clubs-competition" disabled><option value="">Todas as competições<\/option><\/select>/);
 assert.match(html,/<tbody id="clubs-grid">/);
-assert.match(html,/v2026\.1\.1 anterior não atende/);
+assert.doesNotMatch(html,/releases\/download\/v/);
+for(const [,file] of html.matchAll(/href="https:\/\/github\.com\/yzPeedro\/brassfoot-patch\/releases\/[^"]*Brasfoot-Mega-Patch-([^"]+)"/g))
+  assert.ok(Object.values(packageFiles).includes(file),'unexpected download '+file);
 assert.equal(researched.schemaVersion,1);
 assert.equal(researched.season,2026);
 assert.equal(researched.researchedClubs,40);
@@ -98,10 +123,11 @@ assert.ok(Object.entries(researched.clubs).every(([id,r])=>
   bcIds.includes(id) && r.scope==='internet-research-not-installed' &&
   r.completeSeason2026Verified===false && /^https:\/\//.test(r.sourceUrl) &&
   Array.isArray(r.players) && r.players.length>=16 && r.players.length<=60));
-assert.match(html,/id="clubs-group-by"/);
+assert.match(html,/id="clubs-sort"/);
 assert.match(html,/id="club-dialog-source"/);
-assert.match(html,/option value="researched"/);
-assert.match(clubsJs,/getJson\('\.\/data\/researched-rosters-2026\.json'\)/);
+for(const coverage of ['updated','partial','preserved','unavailable'])
+  assert.match(html,new RegExp('option value="'+coverage+'"'));
+assert.match(clubsJs,/fetch\('\.\/data\/explorer-cups\.json'/);
 assert.equal(rosters.schemaVersion,1);
 assert.equal(rosters.sourceRelease,'2026.0.2');
 assert.equal(rosters.totalClubs,20);
@@ -115,56 +141,82 @@ assert.ok(rosters.clubs['br-cruzeiro-mg'].players.includes('Cássio'));
 assert.ok(rosters.clubs['br-santos-sp'].players.includes('Neymar'));
 assert.ok(!Object.keys(rosters.clubs).some(id=>target.clubs.find(c=>c.id===id)?.division==='D'));
 for(const id of ['clubs-pagination','clubs-page-size','clubs-previous','clubs-next','clubs-page-label',
-  'clubs-roster-filter','club-dialog','club-dialog-title','club-dialog-players','club-dialog-close']) {
+  'clubs-roster-filter','club-dialog','club-dialog-title','club-dialog-players','club-dialog-close',
+  'clubs-search','clubs-country','clubs-competition','clubs-sort','clubs-count','clubs-reset','clubs-retry']) {
   assert.match(html,new RegExp('id="'+id+'"'));
 }
-for(const key of ['name','state','division','roster']){
-  assert.match(html,new RegExp('id="clubs-sort-'+key+'"'));
+for(const [,id] of clubsJs.matchAll(/byId\('([^']+)'\)/g))
+  assert.match(html,new RegExp('id="'+escapeRegExp(id)+'"'),'divisions.js expects #'+id);
+const sortKeys=['name','country','competition','coverage','playerCount'];
+for(const key of sortKeys){
+  assert.match(html,new RegExp('<option value="'+key+'"'));
   assert.match(html,new RegExp('id="clubs-heading-'+key+'"'));
 }
-assert.match(html,/id="clubs-group-by"/);
-for(const group of ['name','state','division','roster']){
- assert.match(html,new RegExp('value="'+group+'"'));
-}
-assert.match(clubsJs,/groupCounts\.get\(group\)/);
+assert.match(clubsJs,new RegExp(escapeRegExp("const sortKeys = ['name', 'country', 'competition', 'coverage', 'playerCount'];")));
 assert.match(clubsJs,/updateSortLabels\(\)/);
-assert.match(css,/\.clubs-sort\{/);
-assert.match(css,/\.clubs-group-header th\{/);
+assert.match(css,/\.club-filters\{/);
+for(const coverage of ['updated','partial','preserved','unavailable'])
+  assert.match(css,new RegExp('\\.coverage-badge\\[data-coverage='+coverage+'\\]\\{'));
 assert.match(html,/<dialog class="club-dialog"/);
 assert.match(html,/aria-labelledby="club-dialog-title"/);
-assert.match(html,/option value="10" selected/);
-assert.match(html,/option value="20"/);
+assert.match(html,/option value="25" selected/);
 assert.match(html,/option value="50"/);
-assert.match(clubsJs,/published-rosters-2026-0-2\.json/);
-assert.match(clubsJs,/published-rosters-2026\.json/); 
+assert.match(html,/option value="100"/);
+assert.match(clubsJs,/\[25, 50, 100\]\.includes\(selectedSize\)/);
+assert.match(clubsJs,/fetch\('\.\/data\/patch-clubs\.json'/);
+assert.match(clubsJs,/validateCatalog\(await response\.json\(\)\)/);
+assert.match(clubsJs,/validateExtraCatalog\(await extraResponse\.json\(\)\)/);
 assert.match(clubsJs,/showModal\(\)/);
 assert.match(clubsJs,/elements\.dialog\.close\(\)/);
-assert.match(clubsJs,/lastFocus\.focus\(\)/);
+assert.match(clubsJs,/lastFocus\?\.isConnected \? lastFocus/);
+assert.match(clubsJs,/target\?\.focus\(\)/);
 assert.match(clubsJs,/pageSize\.addEventListener\('change'/);
-assert.match(clubsJs,/rosterFilter\.addEventListener\('change'/);
+assert.match(clubsJs,/elements\.coverage\.addEventListener\('change'/);
 assert.match(clubsJs,/search\.addEventListener\('input'/);
 assert.match(clubsJs,/slice\(start, start \+ size\)/);
 assert.match(clubsJs,/replaceChildren\(fragment\)/);
-assert.match(clubsJs,/item\.textContent = name/);
+assert.match(clubsJs,/element\.textContent = text/);
+assert.match(clubsJs,/textElement\(matched\.has\(player\) \? 'mark' : 'strong', player\.name/);
 assert.doesNotMatch(clubsJs,/innerHTML|eval\(/);
 assert.match(css,/\.clubs-pagination\{/);
 assert.match(css,/\.club-dialog\{/);
 assert.match(css,/\.club-dialog::backdrop\{/);
-assert.match(clubsJs,/getJson\('\.\/data\/target-abc-2026\.json'\)/);
-assert.match(clubsJs,/addEventListener\('input', clearPageAndRender\)/);
+assert.match(clubsJs,/elements\.search\.addEventListener\('input', resetPage\)/);
 assert.match(clubsJs,/\.normalize\('NFD'\)/);
 assert.match(clubsJs,/replaceChildren\(fragment\)/);
 assert.doesNotMatch(clubsJs,/innerHTML|API_FOOTBALL_KEY|x-apisports-key/);
 assert.match(css,/\.clubs-table\{/);
-assert.match(css,/\.edition-counts\{/);
-assert.match(js,/api\.github\.com\/repos\/yzPeedro/);
-assert.match(js,/item\.digest === 'sha256:'/);
-assert.match(js,/const currentUrl = base/);
-assert.match(js,/item\.digest === 'sha256:'/);
+assert.match(css,/\.coverage-grid\{/);
+const rosterCountKeys=[...html.matchAll(/data-roster-count="([^"]+)"/g)].map(m=>m[1]);
+assert.ok(rosterCountKeys.length>0);
+for(const key of rosterCountKeys)
+  assert.ok(Number.isSafeInteger(rosterCoverage.counts[key])&&rosterCoverage.counts[key]>=0,'missing roster count '+key);
+assert.match(js,/const releaseBase = 'https:\/\/github\.com\/yzPeedro\/brassfoot-patch\/releases\/'/);
+assert.match(js,/fetch\(dataUrl\('distribution\.json'\)/);
+assert.match(js,/!\/\^\[a-f0-9\]\{64\}\$\/\.test\(item\.sha256\)/);
+assert.match(js,/releaseBase \+ 'latest\/download\/Brasfoot-Mega-Patch-' \+ item\.file/);
+assert.match(js,/data\.status !== 'published'/);
 assert.match(js,/\.catch\(\(\) =>/);
-assert.match(html,/id="download-hero" href="https:\/\/github\.com\/yzPeedro\/brassfoot-patch\/releases\/download\/v2026\.3\.5\/Brasfoot-Patch-V4-Elencos-2026\.3\.5\.exe"/);
-assert.match(html,/id="download-panel" href="https:\/\/github\.com\/yzPeedro\/brassfoot-patch\/releases\/download\/v2026\.3\.5\/Brasfoot-Patch-V4-Elencos-2026\.3\.5\.exe"/);
+assert.match(html,new RegExp('id="download-hero" data-download-primary href="'+escapeRegExp(permanentAsset('windows-x64.exe'))+'"'));
+assert.match(html,new RegExp('id="download-panel" data-download-primary href="'+escapeRegExp(permanentAsset('windows-x64.exe'))+'"'));
 assert.doesNotMatch(html,/VERIFICANDO DOWNLOAD|id="roster-known-issue"/);
 assert.doesNotMatch(html,/id="alfa-156"|class="ball"/);
 assert.doesNotMatch(html+js+clubsJs,/BEGIN PRIVATE KEY|x-apisports-key/);
-console.log('PASS: sortable/groupable A/B/C, 730 installed A player names plus researched B/C names kept separate, Série D untouched.');
+const versionParts=v=>v.split('.').map(Number);
+const notNewer=(a,b)=>{const x=versionParts(a),y=versionParts(b);const i=x.findIndex((p,k)=>p!==y[k]);return i===-1||x[i]<y[i];};
+assert.equal(patchClubs.schemaVersion,1);
+assert.match(patchClubs.version,/^2026\.\d+\.\d+$/);
+assert.equal(patchClubs.version,rosterCoverage.version);
+assert.ok(notNewer(patchClubs.version,release.publishedVersion));
+assert.equal(patchClubs.clubs.length,patchClubs.totalClubs);
+assert.equal(new Set(patchClubs.clubs.map(c=>c.id)).size,patchClubs.totalClubs);
+assert.equal(patchClubs.clubs.reduce((sum,c)=>sum+c.playerCount,0),patchClubs.totalPlayers);
+assert.ok(patchClubs.clubs.every(c=>c.playerCount===c.players.length&&['updated','partial','preserved','unavailable'].includes(c.coverage)));
+assert.ok(patchClubs.countries.every(country=>patchClubs.clubs.filter(c=>c.countryId===country.id).length===country.count));
+assert.equal(rosterCoverage.counts.teamsTotal,patchClubs.totalClubs);
+assert.equal(rosterCoverage.counts.playersTotal,patchClubs.totalPlayers);
+assert.equal(explorerCups.schemaVersion,1);
+assert.equal(explorerCups.season,2026);
+assert.equal(explorerCups.nations.length,224);
+assert.equal(explorerCups.cups.length,8);
+console.log('PASS: page sections, published release and five download aliases, '+patchClubs.totalClubs+'-club explorer controls and catalog, legacy A/B/C data and Série D configuration preserved.');

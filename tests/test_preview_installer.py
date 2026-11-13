@@ -10,6 +10,14 @@ from install_preview import install, manifest_entries
 def sha(raw): return hashlib.sha256(raw).hexdigest()
 
 
+def symlinks_supported():
+    with TemporaryDirectory() as td:
+        link=Path(td)/"link"
+        try:link.symlink_to(Path(td)/"target")
+        except (OSError,NotImplementedError):return False
+        return link.is_symlink()
+
+
 def make_fixture(root, count=2):
     game=root/"game"; game.mkdir(); (game/"teams").mkdir(); (game/"options.bcf").write_bytes(b"mock")
     preview=root/"preview"; preview.mkdir(); (preview/"teams").mkdir()
@@ -71,6 +79,7 @@ class InstallPreviewTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 manifest_entries(preview,game)
 
+    @unittest.skipUnless(symlinks_supported(), "OS forbids creating symlinks")
     def test_symlink_rejected(self):
         with TemporaryDirectory() as td:
             root=Path(td);game,preview,original=make_fixture(root)

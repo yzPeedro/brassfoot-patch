@@ -18,15 +18,26 @@ TEAM = re.compile(r"^teams/[a-zA-Z0-9_-]+\.ban$")
 EXPECTED = {"A": 20, "B": 20, "C": 20}
 OFFICIAL_SETUP_SHA = "8e3c7a77768d551a1f3c722ef2447c3e451af830613e8a65de33f35bc0e2b33d"
 MARANHAO_ID = "br-maranhao-ma"
+ORIGINAL_BRA_CFG = {"nTimes": 64, "nGrupos": 8}
 
 
 class InvalidOriginalMap(ValueError):
     pass
 
 
+def serie_d_preserved(target: dict) -> bool:
+    serie_d = target.get("serieD")
+    if not isinstance(serie_d, dict):
+        return False
+    if serie_d.get("policy") == "untouched":
+        return True
+    return (serie_d.get("policy") == "configuration-preserved"
+            and serie_d.get("originalBRAcfgExpected") == ORIGINAL_BRA_CFG)
+
+
 def check(target: dict, mapping: dict, game: Path | None = None) -> dict:
     if (target.get("season") != 2026 or target.get("targetClubs") != 60 or
-            target.get("serieD", {}).get("policy") != "untouched"):
+            not serie_d_preserved(target)):
         raise InvalidOriginalMap("Expected official 2026 A20/B20/C20 and untouched Serie D")
     if (mapping.get("schemaVersion") != 1 or mapping.get("season") != 2026 or
             mapping.get("serieDPolicy") != "unchanged" or

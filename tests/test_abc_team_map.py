@@ -73,6 +73,20 @@ class TeamMapTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             build(wrong, self.mock_audit())
 
+    def test_serie_d_policy_must_preserve_original_configuration(self):
+        self.assertEqual(CATALOG["serieD"]["policy"], "configuration-preserved")
+        for policy, expected in (("updated", {"nTimes": 64, "nGrupos": 8}),
+                                 ("configuration-preserved", {"nTimes": 96, "nGrupos": 8}),
+                                 ("configuration-preserved", None)):
+            wrong = copy.deepcopy(CATALOG)
+            wrong["serieD"]["policy"] = policy
+            wrong["serieD"]["originalBRAcfgExpected"] = expected
+            with self.assertRaisesRegex(ValueError, "Serie D untouched"):
+                build(wrong, self.mock_audit())
+        legacy = copy.deepcopy(CATALOG)
+        legacy["serieD"] = {"policy": "untouched"}
+        self.assertEqual(build(legacy, self.mock_audit())["existingFiles"], 59)
+
     def test_privacy_zip_can_be_read_without_team_binaries(self):
         with TemporaryDirectory() as d:
             zip_path = Path(d) / "private.zip"
