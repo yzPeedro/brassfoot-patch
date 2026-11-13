@@ -16,6 +16,7 @@ import zipfile
 
 SAFE_BAN = re.compile(r"^[a-zA-Z0-9_-]+\.ban$")
 SAFE_SHA = re.compile(r"^[0-9a-f]{64}$")
+ORIGINAL_BRA_CFG = {"nTimes": 64, "nGrupos": 8}
 
 
 def clean(value: str) -> str:
@@ -35,8 +36,18 @@ def read_private_report(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8-sig"))
 
 
+def serie_d_preserved(target: dict) -> bool:
+    serie_d = target.get("serieD")
+    if not isinstance(serie_d, dict):
+        return False
+    if serie_d.get("policy") == "untouched":
+        return True
+    return (serie_d.get("policy") == "configuration-preserved"
+            and serie_d.get("originalBRAcfgExpected") == ORIGINAL_BRA_CFG)
+
+
 def build(target: dict, audit: dict) -> dict:
-    if target.get("targetClubs") != 60 or target.get("serieD", {}).get("policy") != "untouched":
+    if target.get("targetClubs") != 60 or not serie_d_preserved(target):
         raise ValueError("Public target must be exactly A20 B20 C20 with Serie D untouched")
     if audit.get("schemaVersion") != 1 or audit.get("gameTeamFiles") != 703:
         raise ValueError("Unexpected private Brasfoot audit; no blind matching")

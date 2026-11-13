@@ -13,7 +13,8 @@ PANEL = ROOT / "tools" / "live-match-view-src" / "LiveMatchPanel.java"
 RENDERER = ROOT / "tools" / "live-match-render" / "mega" / "RenderFrame.java"
 
 
-def render(output: Path, width: int, height: int, scale: float, conditions: list[int], javac: str, java: str) -> list[Path]:
+def render(output: Path, width: int, height: int, scale: float, conditions: list[int], javac: str, java: str,
+           timeout: float = 180) -> list[Path]:
     output.mkdir(parents=True, exist_ok=True)
     written = []
     with tempfile.TemporaryDirectory(prefix="live-match-render-") as temporary:
@@ -21,12 +22,13 @@ def render(output: Path, width: int, height: int, scale: float, conditions: list
         classes = work / "classes"
         classes.mkdir()
         subprocess.run([javac, "--release", "8", "-encoding", "UTF-8", "-nowarn", "-d", str(classes),
-                        str(PANEL), str(RENDERER)], check=True)
+                        str(PANEL), str(RENDERER)], check=True, timeout=timeout)
         env = dict(os.environ, LOCALAPPDATA=str(work / "appdata"))
         for condition in conditions:
             target = output / f"pitch-{condition}.jpg"
             subprocess.run([java, "-Djava.awt.headless=true", "-cp", str(classes), "mega.RenderFrame",
-                            str(target), str(width), str(height), str(scale), str(condition)], check=True, env=env)
+                            str(target), str(width), str(height), str(scale), str(condition)], check=True, env=env,
+                           timeout=timeout)
             written.append(target)
     return written
 
@@ -40,8 +42,10 @@ def main() -> None:
     parser.add_argument("--condition", type=int, action="append", choices=[0, 1, 2, 3])
     parser.add_argument("--javac", default=shutil.which("javac") or "javac")
     parser.add_argument("--java", default=shutil.which("java") or "java")
+    parser.add_argument("--timeout", type=float, default=180)
     args = parser.parse_args()
-    for path in render(Path(args.output), args.width, args.height, args.scale, args.condition or [0, 1, 2, 3], args.javac, args.java):
+    for path in render(Path(args.output), args.width, args.height, args.scale, args.condition or [0, 1, 2, 3], args.javac, args.java,
+                       args.timeout):
         print(path)
 
 

@@ -25,11 +25,12 @@ class CompetitionCodecTests(unittest.TestCase):
             compiled.mkdir()
             subprocess.run(
                 ["javac", "-encoding", "UTF-8", "-d", str(compiled), *[str(p) for p in sources]],
-                check=True, timeout=45, capture_output=True, text=True
+                check=True, timeout=45, capture_output=True, encoding="utf-8", errors="replace"
             )
             run = subprocess.run(
-                [java_runtime(), "-cp", str(compiled), "app.CodecSelfTest"],
-                check=True, timeout=25, capture_output=True, text=True
+                [java_runtime(), "-Dstdout.encoding=UTF-8", "-Dsun.stdout.encoding=UTF-8",
+                 "-cp", str(compiled), "app.CodecSelfTest"],
+                check=True, timeout=25, capture_output=True, encoding="utf-8", errors="replace"
             )
             self.assertIn("PASS synthetic national/state codec", run.stdout)
 

@@ -9,16 +9,32 @@ const sitemap=read('sitemap.xml');
 
 assert.match(html,/<html lang="pt-BR">/);
 assert.match(html,/<link rel="canonical" href="https:\/\/yzpeedro.github.io\/brassfoot-patch\/"/);
-for(const tag of ['og:title','og:description','og:type','og:url','og:image','og:locale','og:site_name'])
-  assert.ok(html.includes('property="'+tag+'"'), 'missing '+tag);
-for(const tag of ['twitter:card','twitter:title','twitter:description','twitter:image'])
-  assert.ok(html.includes('name="'+tag+'"'), 'missing '+tag);
+const meta=(attribute,name)=>{
+  const found=html.match(new RegExp('<meta '+attribute+'="'+name+'" content="([^"]+)"'));
+  assert.ok(found,'missing '+name);
+  return found[1];
+};
+const canonical='https://yzpeedro.github.io/brassfoot-patch/';
+for(const tag of ['og:title','og:description','og:type','og:url','og:image','og:locale'])
+  assert.ok(meta('property',tag).trim().length>0);
+assert.equal(meta('property','og:url'),canonical);
+assert.equal(meta('property','og:locale'),'pt_BR');
+assert.equal(meta('property','og:image'),canonical+'assets/og-card.jpg');
+assert.ok(fs.existsSync(path.join(site,'assets','og-card.jpg')));
+assert.ok(meta('property','og:title').startsWith('Brasfoot Mega Patch'));
+for(const tag of ['twitter:card','twitter:image'])
+  assert.ok(meta('name',tag).trim().length>0);
+assert.equal(meta('name','twitter:card'),'summary_large_image');
+assert.equal(meta('name','twitter:image'),meta('property','og:image'));
 const structured=html.match(/<script type="application\/ld\+json">([\s\S]+?)<\/script>/);
 assert.ok(structured);
 const schema=JSON.parse(structured[1]);
 assert.equal(schema['@context'],'https://schema.org');
-assert.ok(schema['@graph'].some(x=>x['@type']==='WebSite'));
-const app=schema['@graph'].find(x=>x['@type']==='SoftwareApplication');
+const nodes=schema['@graph']??[schema];
+const app=nodes.find(x=>x['@type']==='SoftwareApplication');
+assert.ok(app);
+assert.equal(app.name,'Brasfoot Mega Patch');
+assert.equal(app.isAccessibleForFree,true);
 assert.equal(app.offers.price,'0');
 assert.equal(app.offers.priceCurrency,'BRL');
 assert.equal(app.softwareVersion,JSON.parse(read('data/release.json')).publishedVersion);
@@ -36,8 +52,7 @@ assert.ok(html.includes('id="pix-open"'));
 assert.ok(html.includes('id="pix-floating"'));
 assert.match(html, /id="pix-floating"[^>]+aria-controls="pix-dialog"/);
 assert.ok(styles.includes('.pix-floating{'));
-assert.ok(styles.includes('.pix-floating[hidden]'));
-assert.match(js, /floatingButton\.addEventListener\('click', openPixDialog\)/);
+assert.match(styles,/(^|[}\s,])\[hidden\]\{display:none!important\}/);assert.match(js, /floatingButton\.addEventListener\('click', openPixDialog\)/);
 assert.match(js, /openButton\.addEventListener\('click', openPixDialog\)/);
 assert.match(js, /new IntersectionObserver\(/);
 assert.match(js, /observer\.observe\(openButton\)/);

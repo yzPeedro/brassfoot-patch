@@ -59,6 +59,9 @@ func TestVariableBundleDuplicateIsRejectedBeforeStaging(t *testing.T){
     f:=ManifestFile{Path:"teams/team000.ban",Size:4,SHA256:strings.Repeat("a",64),AcceptedOriginalSHA256:[]string{strings.Repeat("b",64)}}
     body,_:=json.Marshal(Manifest{SchemaVersion:2,PatchSeason:2026,Version:"2026.1.0",Files:[]ManifestFile{f,f}})
     fsys:=fstest.MapFS{"bundled_release/manifest.json":{Data:body}}
-    err:=preparePayloadWithFS(fsys,game,filepath.Join(root,"stage"))
+    stage:=filepath.Join(root,"stage")
+    if err:=os.MkdirAll(stage,0700);err!=nil{t.Fatal(err)}
+    err:=preparePayloadWithFS(fsys,game,stage)
     if err==nil||!strings.Contains(err.Error(),"duplicado"){t.Fatalf("expected duplicate rejection, got %v",err)}
+    if _,err:=os.Stat(filepath.Join(stage,"teams"));!os.IsNotExist(err){t.Fatalf("team files staged before duplicate rejection: %v",err)}
 }

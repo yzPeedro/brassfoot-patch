@@ -76,6 +76,17 @@ class OriginalABCFileMapTests(unittest.TestCase):
         with self.assertRaisesRegex(InvalidOriginalMap, "SHA"):
             check(self.target, mapping)
 
+    def test_rejects_serie_d_policy_that_changes_original_configuration(self):
+        self.assertEqual(self.target["serieD"]["policy"], "configuration-preserved")
+        for policy, expected in (("updated", {"nTimes": 64, "nGrupos": 8}),
+                                 ("configuration-preserved", {"nTimes": 96, "nGrupos": 8}),
+                                 ("configuration-preserved", None)):
+            target = copy.deepcopy(self.target)
+            target["serieD"]["policy"] = policy
+            target["serieD"]["originalBRAcfgExpected"] = expected
+            with self.assertRaisesRegex(InvalidOriginalMap, "untouched Serie D"):
+                check(target, self.mapping)
+
     def test_rejects_country_and_club_alias_mismatch(self):
         mapping = copy.deepcopy(self.mapping)
         mapping["clubs"][0]["club"] = "Atletico Outra Equipe"

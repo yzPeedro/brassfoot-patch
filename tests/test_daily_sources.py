@@ -25,8 +25,11 @@ class DailySourcesTests(unittest.TestCase):
         self.assertEqual(result["cached"]["provenance"]["sha256"].__len__(), 64)
 
     def test_requires_https_and_bounds_sources(self):
-        with self.assertRaisesRegex(ValueError, "HTTPS"):
-            collect_cached_sources(self.root, [{**self.spec[0], "source_url": "http://invalid"}])
+        result = collect_cached_sources(self.root, [{**self.spec[0], "source_url": "http://invalid"}])
+        self.assertEqual(result["cached"]["status"], "failed")
+        self.assertEqual(result["cached"]["records"], [])
+        self.assertIn("HTTPS", result["cached"]["error"])
+        self.assertNotIn("provenance", result["cached"])
         with self.assertRaisesRegex(ValueError, "bound"):
             collect_cached_sources(self.root, self.spec, max_sources=0)
 
@@ -39,8 +42,17 @@ class DailySourcesTests(unittest.TestCase):
         self.assertFalse(second["snapshot"]["diff"]["content_changed"])
 
     def test_missing_cache_file_fails_closed(self):
-        with self.assertRaises(FileNotFoundError):
-            collect_cached_sources(self.root, [{**self.spec[0], "path": "missing.json"}])
+        missing = [{**self.spec[0], "path": "missing.json"}]
+        result = collect_cached_sources(self.root, missing)
+        self.assertEqual(result["cached"]["status"], "failed")
+        self.assertEqual(result["cached"]["records"], [])
+        self.assertIn("missing.json", result["cached"]["error"])
+        first = daily_snapshot(self.root, self.spec, observed_at="2026-10-26T00:00:00Z")
+        second = daily_snapshot(self.root, missing, previous=first["snapshot"],
+                                observed_at="2026-10-27T00:00:00Z")
+        self.assertEqual(second["snapshot"]["content"]["entities"], first["snapshot"]["content"]["entities"])
+        self.assertEqual(second["snapshot"]["content_hash"], first["snapshot"]["content_hash"])
+        self.assertEqual(second["snapshot"]["source_status"]["cached"]["status"], "failed")
 
 
 if __name__ == "__main__":
