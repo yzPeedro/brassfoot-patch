@@ -366,9 +366,7 @@ def retained_sentence(retained: dict) -> str:
         head = "Um clube com diferenças sugeridas ficou retido"
     else:
         head = capitalize(quantity(count, "clube", "clubes")) + " com diferenças sugeridas ficaram retidos"
-    head += " para nova verificação, com o último dado publicado preservado"
-    reasons = "; ".join(f"{item['reason']} ({item['clubs']})" for item in retained["reasons"])
-    return head + (f": {reasons}." if reasons else ".")
+    return head + " para nova verificação e mantêm o elenco publicado anteriormente."
 
 
 def render_notes(version: str, model: dict, hub: str, unchanged: list, images: int, when: datetime) -> dict:

@@ -111,8 +111,9 @@ class NotesTests(unittest.TestCase):
                       "Costa sai do elenco.\n", text)
         self.assertIn("## Idades atualizadas\n\n- Pedrinho (Alashkert): 27 anos.\n- Ewerthon: 26 anos.\n", text)
         self.assertIn("- Bleon Kurtulus: Kosovo (antes Suíça).", text)
-        self.assertIn("Dois clubes com diferenças sugeridas ficaram retidos para nova verificação, com o último dado "
-                      "publicado preservado: perde mais de 5 jogadores (2); sem fonte independente (1).", text)
+        self.assertIn("Dois clubes com diferenças sugeridas ficaram retidos para nova verificação e mantêm o elenco "
+                      "publicado anteriormente.", text)
+        self.assertNotIn("perde mais de 5 jogadores", text)
         self.assertIn("O executável, as ligas, os escudos, as camisas, o hub 1.4.2 e o campo animado não mudam.",
                       text)
         self.assertIn("`compatibilityVerifiedInGame=false` e `gameplayVerified=false`", text)
