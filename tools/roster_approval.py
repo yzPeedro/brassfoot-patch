@@ -12,7 +12,7 @@ import shutil
 from tools.collect_live_rosters import key
 from tools.compile_live_rosters import (COUNTRIES, DERIVED_TRAITS, ROOT, compile_rosters, load_catalog, run,
                                         sao_paulo_today)
-from tools.roster_position_map import display_player_name
+from tools.roster_position_map import display_player_name, legacy_display_name
 
 RULE = "source-complete-and-alarms"
 COMPLETE = "source-complete"
@@ -170,7 +170,7 @@ def undone_facts(published, candidate, facts):
     present_after = {key(p["name"]) for p in candidate["players"]}
     reasons = []
     for fact in sorted(facts or [], key=lambda f: (f["date"], f["player"])):
-        names = {key(fact["player"]), key(display_player_name(fact["player"]))}
+        names = {key(fact["player"]), key(display_player_name(fact["player"])), key(legacy_display_name(fact["player"]))}
         before, after = bool(names & present_before), bool(names & present_after)
         if (fact["action"] == "remove" and after and not before) or (fact["action"] == "add" and before and not after):
             reasons.append(f"desfaz fato publicado em {fact.get('version')} ({fact['date']}): {fact['player']}")

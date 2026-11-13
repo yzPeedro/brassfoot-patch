@@ -317,6 +317,7 @@ def describe(kind: str, value, countries: dict):
 def build_model(clubs: list, retained: list, countries: dict, name_counts: dict) -> dict:
     added, removed = [], []
     rows = {kind: [] for kind, *_ in UPDATES}
+    clubs = [{**club, "club": " ".join(club["club"].split())} for club in clubs]
     for club in sorted(clubs, key=lambda item: (fold(item["club"]), item["teamFile"])):
         changes = club["confirmed"]
         added += [{"name": name, "club": club["club"]} for name in changes.get("added", [])]

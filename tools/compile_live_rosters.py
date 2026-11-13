@@ -18,7 +18,7 @@ import subprocess
 from zoneinfo import ZoneInfo
 
 from tools.collect_live_rosters import GAME_COUNTRIES, key
-from tools.roster_position_map import display_player_name, resolve_positions
+from tools.roster_position_map import display_player_name, legacy_display_name, resolve_positions
 from tools.audit_official_roster_tsv import IDENTITIES
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -236,7 +236,7 @@ def compile_rosters(base_game, original_game, output, snapshot, supplements, fal
                 if nationality is None:nationality=COUNTRIES.get(raw.get("nationality"))
                 age=age_on(raw.get("birthDate"),reference) if raw.get("birthDate") else raw.get("age")
                 position=raw.get("positionCode")
-                match=prior_local.get(key(name)) or prior_local.get(key(display_player_name(name)))
+                match=prior_local.get(key(name)) or prior_local.get(key(display_player_name(name))) or prior_local.get(key(legacy_display_name(name)))
                 origin="previous-patch-identified-player" if match else None
                 if match is None:
                     match=local.get(key(name))
