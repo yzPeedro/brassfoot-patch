@@ -130,7 +130,7 @@ def load_club_identities(path, output):
     return target
 
 
-def compile_rosters(base_game, original_game, output, snapshot, supplements, fallback_game, java, javac, reference, version, club_identities):
+def compile_rosters(base_game, original_game, output, snapshot, supplements, fallback_game, java, javac, reference, version, club_identities, sources_allowed=None):
     output=output.resolve()
     for protected in [base_game,original_game,fallback_game]:
         if protected and (output.is_relative_to(protected.resolve()) or protected.resolve().is_relative_to(output)):
@@ -181,6 +181,7 @@ def compile_rosters(base_game, original_game, output, snapshot, supplements, fal
     full_name_records=[]
     for file,team in sorted(base.items()):
         source=clubs.get(file)
+        if source and sources_allowed is not None and file not in sources_allowed:source=dict(source,players=[])
         prior_team=prior.get(file,team)
         original=originals.get(file,{"players":[]})
         local={key(p["name"]):p for p in original["players"]}

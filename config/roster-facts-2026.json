@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "holdDays": 90,
+  "description": "Entradas e saídas de elenco publicadas. Uma mudança da coleta que desfaz um fato com menos de holdDays dias retém o clube. Fatos de 2026.5.2 a 2026.6.7 reconstruídos das notas docs/releases/v*.md em 13/11/2026; Fernando Costa entrou no RB Bragantino na 2026.5.11 e saiu na 2026.6.7, e só o fato mais recente vale.",
+  "facts": [
+    {
+      "version": "2026.5.2",
+      "date": "2026-11-01",
+      "player": "Savvas Sofokleous",
+      "teamFile": "teams/apollonlemesos_chp.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.5.2.md"
+    },
+    {
+      "version": "2026.5.2",
+      "date": "2026-11-01",
+      "player": "Teodor Afilipoaie",
+      "teamFile": "teams/botosani_rom.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.5.2.md"
+    },
+    {
+      "version": "2026.5.2",
+      "date": "2026-11-01",
+      "player": "Boris Dimitrov",
+      "teamFile": "teams/nsmura_elv.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.5.2.md"
+    },
+    {
+      "version": "2026.5.2",
+      "date": "2026-11-01",
+      "player": "Luken Beitia",
+      "teamFile": "teams/realsociedad_esp.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.5.2.md"
+    },
+    {
+      "version": "2026.5.11",
+      "date": "2026-11-02",
+      "player": "Freddie Lantz",
+      "teamFile": "teams/gotenborg_sue.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.5.11.md"
+    },
+    {
+      "version": "2026.6.5",
+      "date": "2026-11-08",
+      "player": "Petar Stojanovic",
+      "teamFile": "teams/legiawarsaw.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.5.md"
+    },
+    {
+      "version": "2026.6.5",
+      "date": "2026-11-08",
+      "player": "Petar Stojanovic",
+      "teamFile": "teams/maribor_esl.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.5.md"
+    },
+    {
+      "version": "2026.6.6",
+      "date": "2026-11-09",
+      "player": "Teemu Pukki",
+      "teamFile": "teams/helsinki_fin.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.6.md"
+    },
+    {
+      "version": "2026.6.6",
+      "date": "2026-11-09",
+      "player": "Alexander Ring",
+      "teamFile": "teams/helsinki_fin.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.6.md"
+    },
+    {
+      "version": "2026.6.7",
+      "date": "2026-11-10",
+      "player": "Edgar Piloyan",
+      "teamFile": "teams/alashkertyerevan_arm.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.7.md"
+    },
+    {
+      "version": "2026.6.7",
+      "date": "2026-11-10",
+      "player": "Zhasulan Amir",
+      "teamFile": "teams/ordabasy_caz.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.7.md"
+    },
+    {
+      "version": "2026.6.7",
+      "date": "2026-11-10",
+      "player": "Fernando Costa",
+      "teamFile": "teams/bragantino_bra.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.7.md"
+    },
+    {
+      "version": "2026.6.7",
+      "date": "2026-11-10",
+      "player": "Wesley Santos",
+      "teamFile": "teams/miirassol_sp.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.7.md"
+    }
+  ]
+}
