@@ -65,8 +65,23 @@ def position_flank(label: str) -> str | None:
     return None
 
 
+NAME_PARTICLES = {"de", "da", "do", "dos", "das", "di", "del", "della", "dello", "van", "von", "der", "den", "ter",
+                  "la", "le", "du", "des", "al", "el", "bin", "ben", "abu", "mac", "st.", "e", "y"}
+
+
 def display_player_name(full_name: str) -> str:
-    """The product's two-word rule, keeping the complete source name elsewhere."""
+    words = full_name.split()
+    if len(words) <= 2 and (len(words) < 2 or words[1].casefold() not in NAME_PARTICLES):
+        return " ".join(words)
+    rest = []
+    for word in words[1:]:
+        rest.append(word)
+        if word.casefold() not in NAME_PARTICLES:
+            break
+    return " ".join([words[0], *rest])
+
+
+def legacy_display_name(full_name: str) -> str:
     return " ".join(full_name.split()[:2])
 
 

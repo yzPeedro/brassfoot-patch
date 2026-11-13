@@ -207,7 +207,9 @@ const notNewer=(a,b)=>{const x=versionParts(a),y=versionParts(b);const i=x.findI
 assert.equal(patchClubs.schemaVersion,1);
 assert.match(patchClubs.version,/^2026\.\d+\.\d+$/);
 assert.equal(patchClubs.version,rosterCoverage.version);
-assert.ok(notNewer(patchClubs.version,release.publishedVersion));
+const edition=JSON.parse(fs.readFileSync(path.join(root,'..','config','edition.json'),'utf8'));
+assert.ok(notNewer(release.publishedVersion,edition.version));
+assert.ok(notNewer(patchClubs.version,edition.version));
 assert.equal(patchClubs.clubs.length,patchClubs.totalClubs);
 assert.equal(new Set(patchClubs.clubs.map(c=>c.id)).size,patchClubs.totalClubs);
 assert.equal(patchClubs.clubs.reduce((sum,c)=>sum+c.playerCount,0),patchClubs.totalPlayers);

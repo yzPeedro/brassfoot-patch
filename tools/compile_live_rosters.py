@@ -18,7 +18,7 @@ import subprocess
 from zoneinfo import ZoneInfo
 
 from tools.collect_live_rosters import GAME_COUNTRIES, key
-from tools.roster_position_map import display_player_name, resolve_positions
+from tools.roster_position_map import display_player_name, legacy_display_name, resolve_positions
 from tools.audit_official_roster_tsv import IDENTITIES
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -130,7 +130,7 @@ def load_club_identities(path, output):
     return target
 
 
-def compile_rosters(base_game, original_game, output, snapshot, supplements, fallback_game, java, javac, reference, version, club_identities):
+def compile_rosters(base_game, original_game, output, snapshot, supplements, fallback_game, java, javac, reference, version, club_identities, sources_allowed=None):
     output=output.resolve()
     for protected in [base_game,original_game,fallback_game]:
         if protected and (output.is_relative_to(protected.resolve()) or protected.resolve().is_relative_to(output)):
@@ -181,6 +181,7 @@ def compile_rosters(base_game, original_game, output, snapshot, supplements, fal
     full_name_records=[]
     for file,team in sorted(base.items()):
         source=clubs.get(file)
+        if source and sources_allowed is not None and file not in sources_allowed:source=dict(source,players=[])
         prior_team=prior.get(file,team)
         original=originals.get(file,{"players":[]})
         local={key(p["name"]):p for p in original["players"]}
@@ -235,7 +236,7 @@ def compile_rosters(base_game, original_game, output, snapshot, supplements, fal
                 if nationality is None:nationality=COUNTRIES.get(raw.get("nationality"))
                 age=age_on(raw.get("birthDate"),reference) if raw.get("birthDate") else raw.get("age")
                 position=raw.get("positionCode")
-                match=prior_local.get(key(name)) or prior_local.get(key(display_player_name(name)))
+                match=prior_local.get(key(name)) or prior_local.get(key(display_player_name(name))) or prior_local.get(key(legacy_display_name(name)))
                 origin="previous-patch-identified-player" if match else None
                 if match is None:
                     match=local.get(key(name))

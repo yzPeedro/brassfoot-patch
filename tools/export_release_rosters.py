@@ -12,12 +12,18 @@ def export(report_path):
     report=json.loads(report_path.read_text(encoding='utf8'))
     mapped=json.loads((ROOT/'data/competitions/2026-abc-original-file-map.json').read_text(encoding='utf8'))
     by_file={c['teamFile']:c for c in report['clubs']}
+    published_path=ROOT/'site/data/published-rosters-2026.json'
+    previous=json.loads(published_path.read_text(encoding='utf8'))['clubs'] if published_path.is_file() else {}
     clubs={}
     for row in mapped['clubs']:
         file=row['originalTeamFile'] or 'teams/maranhao_ma.ban'
         result=by_file[file]
+        prior=previous.get(row['clubId'],{})
+        observed=result['observedAt'][:10] if result['observedAt'] else prior.get('reviewedOn')
+        if not observed:
+            raise ValueError('club without source review: '+file)
         clubs[row['clubId']]={'division':row['division'],'teamFile':file,'includedInPackage':True,
-                              'sourceUrl':result['sourceUrl'],'reviewedOn':result['observedAt'][:10],
+                              'sourceUrl':result['sourceUrl'] or prior.get('sourceUrl'),'reviewedOn':observed,
                               'rosterPolicy':result['rosterPolicy'],
                               'players':[p['name'] for p in result['finalPlayers']],
                               'positionCodes':[p['positionCode'] for p in result['finalPlayers']]}

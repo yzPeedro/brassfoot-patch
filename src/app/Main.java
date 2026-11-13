@@ -184,9 +184,27 @@ public final class Main {
         if (players == null) return;
         for (g player : players) {
             if (player.a == null) continue;
-            String[] words = player.a.strip().split("\\s+");
-            player.a = words.length > 2 ? words[0] + " " + words[1] : String.join(" ", words);
+            player.a = displayName(player.a);
         }
+    }
+
+    static final java.util.Set<String> NAME_PARTICLES = new java.util.HashSet<>(java.util.Arrays.asList(
+            "de", "da", "do", "dos", "das", "di", "del", "della", "dello", "van", "von", "der", "den", "ter",
+            "la", "le", "du", "des", "al", "el", "bin", "ben", "abu", "mac", "st.", "e", "y"));
+
+    static boolean particle(String word) {
+        return NAME_PARTICLES.contains(word.toLowerCase(java.util.Locale.ROOT));
+    }
+
+    static String displayName(String name) {
+        String[] words = name.strip().split("\\s+");
+        if (words.length <= 2 && (words.length < 2 || !particle(words[1]))) return String.join(" ", words);
+        StringBuilder shown = new StringBuilder(words[0]);
+        for (int i = 1; i < words.length; i++) {
+            shown.append(' ').append(words[i]);
+            if (!particle(words[i])) break;
+        }
+        return shown.toString();
     }
 
     /** One production compiler invocation; preserves every base team field and

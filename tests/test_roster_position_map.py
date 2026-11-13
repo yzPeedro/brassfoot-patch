@@ -1,5 +1,6 @@
 import unittest
-from tools.roster_position_map import brasfoot_code, normalize, validate_source_url
+from tools.roster_position_map import (brasfoot_code, display_player_name, legacy_display_name, normalize,
+                                       validate_source_url)
 
 
 class PositionMappingTests(unittest.TestCase):
@@ -28,6 +29,16 @@ class PositionMappingTests(unittest.TestCase):
                       "https://www.365scores.com/pt-br/football/team/a-1/squad?redirect=x"]:
             with self.subTest(value=value), self.assertRaises(ValueError):
                 validate_source_url(value)
+
+
+class DisplayNameTests(unittest.TestCase):
+    def test_two_words_keep_particles_with_the_surname(self):
+        cases = {"João Pedro Silva": "João Pedro", "Neymar": "Neymar", "Vinícius Júnior": "Vinícius Júnior",
+                 "Matheus dos Santos Silva": "Matheus dos Santos", "David de Gea": "David de Gea",
+                 "Jesús de la Fuente": "Jesús de la Fuente", "Ibrahim Al Ahbabi": "Ibrahim Al Ahbabi"}
+        for full, shown in cases.items():
+            self.assertEqual(display_player_name(full), shown)
+        self.assertEqual(legacy_display_name("Matheus dos Santos Silva"), "Matheus dos")
 
 
 if __name__ == "__main__":
