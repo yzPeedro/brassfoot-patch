@@ -304,6 +304,23 @@ python -m tools.world.site_export --report data/private/compiled-<versão>/repor
 
 Rodar só `export_patch_clubs.py` deixaria a tabela sem os clubes da América do Sul.
 
+Com `--build`, acrescentar `--world-snapshot config/super-update-world-2026.json` grava também o retrato do mundo usado na exportação, para que a tabela possa ser refeita sem a compilação.
+
+#### Sem a compilação do Super Update
+
+Quando `data/private/super-update/build/` não está disponível, a exportação usa o retrato versionado em `config/super-update-world-2026.json`:
+
+```bash
+python -m tools.world.site_export --report data/private/compiled-<versão>/report.json --world-snapshot config/super-update-world-2026.json
+```
+
+- Os clubes com elenco do Super Update (substituídos ou novos) usam o nome e o elenco do retrato. Cada `.ban` precisa ter no manifesto do pacote o mesmo SHA-256 guardado no retrato. Se algum mudou, a exportação para e pede a recompilação do Super Update.
+- Os demais clubes dos 10 países mantêm do retrato só a competição, a divisão e o estado; nome e elenco vêm do relatório diário. A exportação com `--build` pararia se o `.ban` de um desses clubes mudasse; com o retrato, ela segue com o elenco novo.
+- Os totais do Super Update (países, divisões e países considerados sul-americanos) também vêm do retrato.
+- A proveniência da tabela mantém o `worldBuildReportSha256` da compilação original e acrescenta `worldSnapshotSha256`.
+
+O retrato atual foi reconstruído em 13/11/2026 a partir da tabela e da cobertura publicadas na 2026.6.7, com `python -m tools.world.world_snapshot --game-countries 11,26,29,42,46,60,150,151,195,198`, porque a compilação `sa-r3-a` se perdeu. O comando confere a reconstrução contra os totais publicados (`superUpdateSourceSquads`, `superUpdateNewClubs`, `southAmericaSourceSquads`) e para se algum não bater. Nas linhas da tabela publicada, ler o retrato reproduz exatamente as entradas e a cobertura da 2026.6.7.
+
 O formato e o uso desses arquivos no site estão em [Site](site.md).
 
 ---

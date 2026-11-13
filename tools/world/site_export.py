@@ -12,6 +12,7 @@ import unicodedata
 from tools.export_patch_clubs import TRAITS, export
 from tools.world.common import BASE, CATALOG, load_raw
 from tools.world.compile_game import BR_DIVISION_NAMES, GAME_STATES, ROOT
+from tools.world import world_snapshot
 
 SCORES_PAGE = "https://www.365scores.com/football/team/{}-{}/squad"
 
@@ -83,7 +84,7 @@ def decoded_teams(build: Path, java: Path) -> dict:
         return {"teams/" + p.name[:-5]: json.loads(p.read_text(encoding="utf8")) for p in out.glob("*.json")}
 
 
-def world_clubs(build: Path, java: Path) -> tuple[dict, dict]:
+def world_clubs(build: Path, java: Path) -> tuple[dict, dict, dict]:
     report = json.loads((build / "report.json").read_text(encoding="utf8"))
     manifest = json.loads((ROOT / "windows-installer/bundled_release/manifest.json").read_text(encoding="utf-8-sig"))
     targets = {f["path"]: f["sha256"] for f in manifest["files"]}
@@ -130,19 +131,21 @@ def world_clubs(build: Path, java: Path) -> tuple[dict, dict]:
         clubs[path] = {"name": team["name"], "countryId": game, "competition": competition, "division": letter,
                        "state": state, "replaced": replaced, "new": bool(member and member["new"]),
                        "players": players, "sourceUrl": source_url, "observedAt": observed}
-    return clubs, {"worldBuildReportSha256": hashlib.sha256((build / "report.json").read_bytes()).hexdigest(),
-                   "worldScope": "South American leagues and clubs from the Super Update compiler"}
+    provenance = {"worldBuildReportSha256": hashlib.sha256((build / "report.json").read_bytes()).hexdigest(),
+                  "worldScope": "South American leagues and clubs from the Super Update compiler"}
+    meta = {"games": {c["gameCountry"] for c in report["countries"].values()}, "countries": len(report["countries"]),
+            "divisions": sum(len(c["divisions"]) for c in report["countries"].values())}
+    return clubs, provenance, meta
 
 
-def coverage(report_path: Path, build: Path, world: dict, clubs_path: Path, path: Path) -> None:
+def coverage(report_path: Path, meta: dict, world: dict, clubs_path: Path, path: Path) -> None:
     daily = json.loads(report_path.read_text(encoding="utf-8-sig"))
     current = json.loads(path.read_text(encoding="utf8"))
     if current["version"] != daily["version"]:
         raise ValueError("roster coverage must come from the same daily report")
     table = json.loads(clubs_path.read_text(encoding="utf8"))
-    report = json.loads((build / "report.json").read_text(encoding="utf8"))
     replaced = {f: c for f, c in world.items() if c["replaced"]}
-    games = {c["gameCountry"] for c in report["countries"].values()}
+    games = meta["games"]
     entries = [c for c in current["clubs"] if c["teamFile"] not in replaced]
     entries += [{"teamFile": f, "club": c["name"], "countryCode": c["countryId"], "sourceUrl": c["sourceUrl"],
                  "observedAt": c["observedAt"], "rosterPolicy": "super-update-replacement",
@@ -153,8 +156,7 @@ def coverage(report_path: Path, build: Path, world: dict, clubs_path: Path, path
                   brazilSourceSquads=sum(c["countryId"] == 29 for c in updated),
                   southAmericaSourceSquads=sum(c["countryId"] in games - {29} for c in updated),
                   superUpdateSourceSquads=len(replaced), superUpdateNewClubs=sum(c["new"] for c in world.values()),
-                  superUpdateCountries=len(report["countries"]),
-                  superUpdateDivisions=sum(len(c["divisions"]) for c in report["countries"].values()))
+                  superUpdateCountries=meta["countries"], superUpdateDivisions=meta["divisions"])
     limitation = ("South American squads come from 365Scores and Wikipedia; traits are preserved from matched game "
                   "players or derived by position, and strength bonuses follow recent starting lineups.")
     current.update(version=table["version"], clubs=entries, counts=counts,
@@ -165,14 +167,27 @@ def coverage(report_path: Path, build: Path, world: dict, clubs_path: Path, path
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--report", type=Path, required=True)
-    parser.add_argument("--build", type=Path, required=True)
-    parser.add_argument("--java", type=Path, required=True)
+    parser.add_argument("--build", type=Path)
+    parser.add_argument("--java", type=Path)
+    parser.add_argument("--world-snapshot", type=Path)
     parser.add_argument("--output", type=Path, default=ROOT / "site/data/patch-clubs.json")
     parser.add_argument("--coverage", type=Path, default=ROOT / "site/data/roster-coverage.json")
     args = parser.parse_args()
-    clubs, provenance = world_clubs(args.build, args.java)
+    manifest = ROOT / "windows-installer/bundled_release/manifest.json"
+    targets = world_snapshot.manifest_targets(manifest)
+    if args.build:
+        if not args.java:
+            parser.error("--build requires --java")
+        clubs, provenance, meta = world_clubs(args.build, args.java)
+        if args.world_snapshot:
+            version = world_snapshot.read(manifest)["version"]
+            world_snapshot.save(args.world_snapshot, clubs, provenance, meta, targets, version)
+    elif args.world_snapshot:
+        clubs, provenance, meta = world_snapshot.load(args.world_snapshot, args.report, targets)
+    else:
+        parser.error("use --build with --java, or --world-snapshot")
     export(args.report, args.output, world=clubs, world_provenance=provenance)
-    coverage(args.report, args.build, clubs, args.output, args.coverage)
+    coverage(args.report, meta, clubs, args.output, args.coverage)
 
 
 if __name__ == "__main__":
