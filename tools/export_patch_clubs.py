@@ -22,6 +22,12 @@ def read(path):
     return json.loads(path.read_text(encoding='utf-8-sig'))
 
 
+def row_players(row):
+    return [{'name':p['name'],'position':p['positionCode'],
+             'side':'Esquerdo' if p['side']==1 else 'Direito',
+             'traits':[TRAITS[t] for t in p['traits']]} for p in row['finalPlayers']]
+
+
 def world_entry(file, club, prior=None):
     prior = prior or {}
     coverage = 'updated' if club['replaced'] else prior.get('coverage', 'preserved')
@@ -74,9 +80,7 @@ def export(report_path, output, world=None, world_provenance=None):
         aliases = sorted({x for x in (source.get('name'),domestic.get('club'),domestic.get('name')) if x and x != name})
         division = domestic.get('division')
         competition = 'Brasileirão Série '+division if division else source.get('league') or ''
-        players = [{'name':p['name'],'position':p['positionCode'],
-                    'side':'Esquerdo' if p['side']==1 else 'Direito',
-                    'traits':[TRAITS[t] for t in p['traits']]} for p in row['finalPlayers']]
+        players = row_players(row)
         if len(players) != row['compiledPlayers']:
             raise ValueError('compiled player list is incomplete: '+file)
         club_id = 'club-' + hashlib.sha256(file.encode('utf8')).hexdigest()[:16]

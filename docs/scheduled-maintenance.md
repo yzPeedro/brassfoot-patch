@@ -15,7 +15,7 @@ O projeto tem um ciclo automático executado todos os dias às 18h (horário de 
 3. **Comparação.** Comparar o conteúdo normalizado com a versão publicada. Mudanças apenas de data de consulta, ordenação ou metadados não geram release.
 4. **Compilação.** Gerar os arquivos de equipe com `tools/compile_live_rosters.py`, usando a data de referência corrente e a última release como base de preservação.
 5. **Release.** Havendo mudança material, incrementar a versão, gerar bundle e pacotes e publicar como descrito em [Release e publicação](release.md). O executável publicado mais recente, com o campo animado, é sempre a base das versões seguintes.
-6. **Site.** Atualizar dados, contagens, notas de versão (`site/data/patch-notes.json`) e publicar no GitHub Pages. A tabela de clubes sai de `python -m tools.world.site_export`, que junta o relatório diário com os clubes do Super Update.
+6. **Site.** Atualizar dados, contagens, notas de versão (`site/data/patch-notes.json`) e publicar no GitHub Pages. A tabela de clubes sai de `python -m tools.world.site_export`, que junta o relatório diário com os clubes do Super Update. Sem a compilação do Super Update em `data/private/super-update/build/`, use `--world-snapshot config/super-update-world-2026.json` (ver [Dados](data-pipeline.md#sem-a-compilação-do-super-update)).
 
 Os usuários recebem a release diária pelo hub: ao virar `latest`, o `release.json` publicado passa a ser lido por todos os hubs, que mostram o aviso de nova versão com as notas de `docs/releases/v<versão>.md`. Por isso as notas precisam estar corretas antes da publicação. A rotina não sobe a versão do hub (`config/hub.json`); ela só muda quando o código do hub muda, fora da rotina.
 
