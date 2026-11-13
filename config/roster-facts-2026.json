@@ -106,6 +106,238 @@
       "teamFile": "teams/miirassol_sp.ban",
       "action": "remove",
       "source": "docs/releases/v2026.6.7.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Nodari Kalichava",
+      "teamFile": "teams/DBatumi_Geo.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Itay Malma",
+      "teamFile": "teams/MaccaiTel_isr.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Jad Hakiki",
+      "teamFile": "teams/bohemians_irl.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Bruno Matias",
+      "teamFile": "teams/chapecoense_bra.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Dudu",
+      "teamFile": "teams/chapecoense_bra.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Rafael Santos",
+      "teamFile": "teams/chapecoense_bra.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Rafael Thyere",
+      "teamFile": "teams/chapecoense_bra.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Yannick Bolasie",
+      "teamFile": "teams/chapecoense_bra.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Ahmed Mulumba",
+      "teamFile": "teams/charleroi_bel.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Matei Goga",
+      "teamFile": "teams/craiova_rom.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Rodrigão",
+      "teamFile": "teams/estrelavermelha_ser.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Herbert",
+      "teamFile": "teams/londrina_pr.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Matheus dos Santos",
+      "teamFile": "teams/londrina_pr.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Hebert",
+      "teamFile": "teams/londrina_pr.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Kauê Leonardo",
+      "teamFile": "teams/londrina_pr.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Júnior Brumado",
+      "teamFile": "teams/midtjylland_din.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Nikollas",
+      "teamFile": "teams/nautico.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Pavle Smiljanić",
+      "teamFile": "teams/nkzagreb_cro.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Mody Boune",
+      "teamFile": "teams/nkzagreb_cro.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Dudu Mosconi",
+      "teamFile": "teams/operario_pr.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Leonardo Erig",
+      "teamFile": "teams/operario_pr.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Arthur Bar",
+      "teamFile": "teams/parissaintgermain_fr.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Gustavo Almeida",
+      "teamFile": "teams/pontepreta_bra.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Gustavo Telles",
+      "teamFile": "teams/pontepreta_bra.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "José Luiz",
+      "teamFile": "teams/pontepreta_bra.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Raul",
+      "teamFile": "teams/realmadrid_esp.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Eduardo Felicíssimo",
+      "teamFile": "teams/sporting_por.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Sergio Aragoneses",
+      "teamFile": "teams/tenerife_esp.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.8",
+      "date": "2026-11-13",
+      "player": "Jesús de",
+      "teamFile": "teams/tenerife_esp.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.8.md"
     }
   ]
 }
