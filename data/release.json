@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.6.7",
-  "publishedAt": "2026-11-10T22:28:54.919799+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.6.7-windows-x64.exe",
+  "publishedVersion": "2026.6.8",
+  "publishedAt": "2026-11-13T19:38:59.852508+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.6.8-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
-  "fileSizeBytes": 7929344,
-  "sha256": "c52da2ad5672a302d90fa932d383b3c03e983b23aed5b3541e0e6e2aa88436df",
+  "fileSizeBytes": 7396352,
+  "sha256": "ab8a101bbd4e538474a64cb89805c40dec88e853637243352d5369f38283063e",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Edgar Piloyan e Zhasulan Amir foram adicionados, Fernando Costa e Wesley Santos foram retirados, 20 idades e duas nacionalidades esportivas foram atualizadas com fontes verificadas."
+  "releaseNotes": "Adiciona 18 jogadores, retira 11 e atualiza 132 idades, quatro nacionalidades esportivas, uma posição e um lado de campo."
 }

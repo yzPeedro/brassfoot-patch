@@ -1,7 +1,26 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-10T20:35:00-03:00",
+  "updatedAt": "2026-11-13T16:29:29-03:00",
   "entries": [
+    {
+      "id": "patch-2026-6-8",
+      "version": "2026.6.8",
+      "date": "2026-11-13T16:29:29-03:00",
+      "title": "29 vínculos e 132 idades atualizados",
+      "kind": "patch",
+      "summary": "Adiciona 18 jogadores, retira 11 e atualiza 132 idades, quatro nacionalidades esportivas, uma posição e um lado de campo.",
+      "changes": [
+        "18 jogadores adicionados em 14 clubes.",
+        "11 jogadores retirados em seis clubes.",
+        "132 idades atualizadas.",
+        "Quatro nacionalidades esportivas atualizadas.",
+        "Uma posição atualizada.",
+        "Um lado de campo atualizado.",
+        "Diferenças sem confirmação ficaram retidas e os últimos dados publicados foram preservados.",
+        "Hub 1.4.2, executável, ligas, escudos, camisas e campo animado permanecem iguais."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.6.8"
+    },
     {
       "id": "patch-2026-6-7",
       "version": "2026.6.7",
