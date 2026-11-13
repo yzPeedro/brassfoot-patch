@@ -358,6 +358,38 @@ public final class LiveMatchPanel extends JPanel {
     private double ballSpin;
     private double lastBallX = .5;
     private double lastBallY = .5;
+    private static final int DRIBBLE_CUT = 0;
+    private static final int DRIBBLE_BURST = 1;
+    private static final int DRIBBLE_FEINT = 2;
+    private static final int DRIBBLE_NUTMEG = 3;
+    private static final int DRIBBLE_CHIP = 4;
+    private static final int DRIBBLE_TURN = 5;
+    private static final int DRIBBLE_RAINBOW = 6;
+    private static final int RESTART_THROW = 1;
+    private static final int RESTART_CORNER = 2;
+    private int dribbleKind;
+    private boolean dribbleWins = true;
+    private long dribbleSwingUntil;
+    private double swingX;
+    private double swingY;
+    private double carryX;
+    private double carryY;
+    private long carryUntil;
+    private int counterSide = -1;
+    private long counterUntil;
+    private int observedSide = -1;
+    private int lastPasser = -1;
+    private int lastPasserSide = -1;
+    private int restartPlay;
+    private int restartPhase;
+    private int restartPlaySide;
+    private int restartTaker = -1;
+    private double restartSpotX;
+    private double restartSpotY;
+    private long restartReadyAt;
+    private long restartLimit;
+    private long lastCornerAt;
+    private final int[][] markOf = new int[2][11];
 
     private LiveMatchPanel(JPanel host) {
         this.host = host;
@@ -539,6 +571,9 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private void startStatCue(long now, int[] cue) {
+        abortRestartPlay(now);
+        counterSide = -1;
+        carryUntil = 0;
         int kind = cue[0], side = cue[1];
         if (preEventDeadline == Long.MAX_VALUE) preEventDeadline = now + 16000L;
         plannedActionKey = null;
@@ -868,6 +903,12 @@ public final class LiveMatchPanel extends JPanel {
         simpleStoppageUntil = 0;
         tackleActive = false;
         clearanceAfterTackle = false;
+        restartPlay = 0;
+        restartPhase = 0;
+        restartReadyAt = 0;
+        restartTaker = -1;
+        counterSide = -1;
+        carryUntil = 0;
         ownGoalActive = false;
         ownGoalStage = 0;
         goalReboundPhase = 0;
@@ -963,7 +1004,9 @@ public final class LiveMatchPanel extends JPanel {
         updateAmbientShot(now);
         updateCardFoul(now);
         updateDribble(now);
+        updateRestartPlay(now);
         reconcileBall(now);
+        observePossession(now);
         double travelled = distance(lastBallX, lastBallY, ballX, ballY);
         if (travelled < .2) ballSpin += travelled * 160.0;
         lastBallX = ballX;
@@ -983,13 +1026,13 @@ public final class LiveMatchPanel extends JPanel {
             }
             if (t >= 1.0) handleBallArrival(now);
         } else if (penaltyPhase == 0 && freeKickPhase == 0 && ambientShotPhase == 0
-                && cardFoulPhase <= 1 && !restartActive) {
+                && cardFoulPhase <= 1 && !restartActive && restartPlay == 0) {
             if (looseBall) {
                 updateLooseBall(now);
             } else {
                 if (tackleActive) updateTackle(now);
                 followBallCarrier();
-                if (!tackleActive && !kickoffInProgress && now >= controlUntil
+                if (!tackleActive && !kickoffInProgress && !ballInFlight && !looseBall && restartPlay == 0 && now >= controlUntil
                         && (engineRunning() || pendingGoalStage == 1 || cardFoulPhase == 1 && cardFoulFreeKick)
                         && carrierHasBall()) {
                     if (pendingGoalStage == 1) goalBuildStep(now);
@@ -1012,6 +1055,10 @@ public final class LiveMatchPanel extends JPanel {
             looseSince = now;
             receivingSide = -1;
             receivingPlayer = -1;
+        }
+        if (restartPlay != 0 && restartPhase == 0) {
+            beginRestartPlay(now);
+            return;
         }
         if (penaltyPhase != 0) {
             handlePenaltyArrival(now);
@@ -1099,6 +1146,7 @@ public final class LiveMatchPanel extends JPanel {
             if (random.nextInt(100) < 22) control += 450 + random.nextInt(600);
             if (wallPasser >= 0 && looseSide == wallSide && looseChaser == wallReceiver) control = 90 + random.nextInt(90);
             if (clearanceSide == looseSide) control = 80 + random.nextInt(80);
+            if (looseChaser == 0 && pendingGoalStage == 0) control += 450 + random.nextInt(450);
             if (pendingGoalStage == 1 && looseSide == pendingGoalSide && goalStep >= 1) {
                 control = Math.min(control, 140 + random.nextInt(80));
             }
@@ -1161,6 +1209,19 @@ public final class LiveMatchPanel extends JPanel {
             if (clearanceAfterTackle) {
                 clearanceAfterTackle = false;
                 double direction = tackleSide == 0 ? 1.0 : -1.0;
+                possessingSide = tackleSide;
+                possessingPlayer = tackler;
+                if (inDefendedBox(tackleSide, ballX, ballY, .04) && now - lastCornerAt > 10000L && restartAllowed(1200)
+                        && random.nextInt(100) < 35) {
+                    double exitY = ballY < .5 ? .03 + random.nextDouble() * .09 : .97 - random.nextDouble() * .09;
+                    sendBallOut(now, tackleSide == 0 ? .004 : .996, exitY, RESTART_CORNER, 1 - tackleSide);
+                    return;
+                }
+                if (restartAllowed(700) && random.nextInt(100) < 25) {
+                    double outX = clamp(ballX + direction * (.08 + random.nextDouble() * .10), .06, .94);
+                    sendBallOut(now, outX, ballY < .5 ? .004 : .996, RESTART_THROW, 1 - tackleSide);
+                    return;
+                }
                 double targetX = clamp(ballX + direction * (.28 + random.nextDouble() * .16), .12, .88);
                 double targetY = .20 + random.nextDouble() * .60;
                 int receiver = nearestActive(team, targetX, targetY, tackler, false);
@@ -1222,6 +1283,9 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private void beginHalfStart(long now, int side) {
+        abortRestartPlay(now);
+        counterSide = -1;
+        carryUntil = 0;
         clearSetPieces();
         resetBallControl();
         plannedRoute.clear();
@@ -1602,6 +1666,9 @@ public final class LiveMatchPanel extends JPanel {
         if (carrier.currentY > .80) step = -1.0;
         else if (carrier.currentY < .20) step = 1.0;
         double low = pendingGoalStage == 1 ? .26 : .08;
+        dribbleKind = DRIBBLE_CUT;
+        dribbleWins = true;
+        dribbleSwingUntil = 0;
         dribbleSide = side;
         dribblePlayer = player;
         dribbleDefender = defender;
@@ -1616,14 +1683,127 @@ public final class LiveMatchPanel extends JPanel {
     private void updateDribble(long now) {
         if (dribbleUntil == 0) return;
         Dot[] team = dribbleSide == 0 ? home : away;
-        boolean holding = !looseBall && !ballInFlight && possessingSide == dribbleSide
-                && possessingPlayer == dribblePlayer && dribblePlayer >= 0 && dribblePlayer < team.length;
-        boolean arrived = holding && distance(team[dribblePlayer].currentX, team[dribblePlayer].currentY,
-                dribbleX, dribbleY) < .018;
-        if (!holding || arrived || now >= dribbleUntil) {
+        boolean valid = dribblePlayer >= 0 && dribblePlayer < team.length;
+        boolean possessing = valid && !looseBall && !ballInFlight && possessingSide == dribbleSide
+                && possessingPlayer == dribblePlayer;
+        if (isAerialDribble()) {
+            boolean chasing = valid && (ballInFlight && receivingSide == dribbleSide && receivingPlayer == dribblePlayer
+                    || looseBall && looseSide == dribbleSide && looseChaser == dribblePlayer);
+            if (chasing && now < dribbleUntil + 1500L) return;
             dribbleUntil = 0;
             dribbleDefender = -1;
-            if (holding) controlUntil = Math.min(controlUntil, now + 120L);
+            dribbleSwingUntil = 0;
+            if (possessing) controlUntil = Math.min(controlUntil, now + 160L);
+            return;
+        }
+        if (dribbleKind == DRIBBLE_FEINT && now < dribbleSwingUntil) return;
+        boolean arrived = possessing && distance(team[dribblePlayer].currentX, team[dribblePlayer].currentY,
+                dribbleX, dribbleY) < .018;
+        if (!possessing || arrived || now >= dribbleUntil) {
+            int defender = dribbleDefender;
+            dribbleUntil = 0;
+            dribbleDefender = -1;
+            dribbleSwingUntil = 0;
+            if (possessing && !dribbleWins && defender >= 0) {
+                possessionPasses = 0;
+                counterSide = -1;
+                startTackle(now, 1 - dribbleSide, defender);
+                controlUntil = now + 900L;
+                return;
+            }
+            if (possessing) controlUntil = Math.min(controlUntil, now + 120L);
+        }
+    }
+
+    private boolean isAerialDribble() {
+        return dribbleKind == DRIBBLE_NUTMEG || dribbleKind == DRIBBLE_CHIP || dribbleKind == DRIBBLE_RAINBOW;
+    }
+
+    private void startContextDribble(long now, int side, int player, int defender, int pressing) {
+        Dot[] team = side == 0 ? home : away;
+        Dot[] rivals = side == 0 ? away : home;
+        Dot carrier = team[player];
+        Dot rival = rivals[defender];
+        double direction = side == 0 ? 1.0 : -1.0;
+        double gap = distance(carrier.currentX, carrier.currentY, rival.currentX, rival.currentY);
+        double lateral = Math.abs(rival.currentY - carrier.currentY);
+        double carrierSpeed = Math.sqrt(carrier.velocityX * carrier.velocityX + carrier.velocityY * carrier.velocityY);
+        double closing = ((carrier.currentX - rival.currentX) * rival.velocityX + (carrier.currentY - rival.currentY) * rival.velocityY)
+                / Math.max(.001, gap);
+        double backward = carrier.velocityX * direction;
+        double behindX = clamp(rival.currentX + direction * .055, .04, .96);
+        double behindSpace = Tactics.space(behindX, rival.currentY, rivals);
+        double[] weights = new double[7];
+        weights[DRIBBLE_CUT] = 1.0;
+        weights[DRIBBLE_BURST] = behindSpace > .08 ? .7 : .15;
+        weights[DRIBBLE_FEINT] = .5;
+        boolean facingBack = backward < .005 || lastPasserSide == side && lastPasser >= 0 && lastPasser < team.length
+                && attackProgress(side, team[lastPasser].currentX) > attackProgress(side, carrier.currentX) + .03;
+        weights[DRIBBLE_TURN] = facingBack && carrier.roleLine >= 2 ? .7 : 0;
+        weights[DRIBBLE_NUTMEG] = lateral < .025 && gap < .06 ? .12 : 0;
+        weights[DRIBBLE_CHIP] = gap > .035 && gap < .075 && (closing > .02 || lateral < .03) ? .07 : 0;
+        weights[DRIBBLE_RAINBOW] = carrier.wideRole && carrierSpeed > .05 && gap < .075 ? .03 : 0;
+        double total = 0;
+        for (double weight : weights) total += weight;
+        double pick = random.nextDouble() * total;
+        int kind = DRIBBLE_CUT;
+        for (int i = 0; i < weights.length; i++) {
+            pick -= weights[i];
+            if (pick <= 0) { kind = i; break; }
+        }
+        double chance = .64 + (behindSpace > .10 ? .14 : 0) - Math.max(0, pressing - 1) * .15
+                - (kind == DRIBBLE_NUTMEG || kind == DRIBBLE_CHIP || kind == DRIBBLE_RAINBOW ? .08 : 0);
+        boolean wins = random.nextDouble() < chance;
+        carryUntil = 0;
+        if (kind == DRIBBLE_NUTMEG || kind == DRIBBLE_CHIP || kind == DRIBBLE_RAINBOW) {
+            dribbleKind = kind;
+            dribbleWins = wins;
+            dribbleSide = side;
+            dribblePlayer = player;
+            dribbleDefender = defender;
+            double landX = clamp(rival.currentX + direction * (kind == DRIBBLE_NUTMEG ? .045 : .065), .04, .96);
+            double landY = clamp(rival.currentY + (kind == DRIBBLE_NUTMEG ? 0 : (carrier.currentY - rival.currentY) * .3), .05, .95);
+            double swing = rival.currentY >= carrier.currentY ? -1.0 : 1.0;
+            if (rival.currentY < .12) swing = 1.0;
+            else if (rival.currentY > .88) swing = -1.0;
+            swingX = clamp(rival.currentX, .04, .96);
+            swingY = clamp(rival.currentY + swing * .035, .05, .95);
+            dribbleSwingUntil = now + (kind == DRIBBLE_NUTMEG ? 260L : 200L);
+            dribbleUntil = now + 900L;
+            lungeX = clamp(ballX + direction * .012, .03, .97);
+            lungeY = ballY;
+            lastPasser = -1;
+            if (dribbleWins) {
+                if (kind == DRIBBLE_NUTMEG) sendBallTo(now, landX, landY, 420, side, player);
+                else liftBallTo(now, landX, landY, kind == DRIBBLE_CHIP ? 560 : 620, side, player, 0, 0);
+            } else {
+                int rivalSide = 1 - side;
+                possessionPasses = 0;
+                counterSide = -1;
+                dribbleUntil = 0;
+                dribbleDefender = -1;
+                if (kind == DRIBBLE_NUTMEG) sendBallTo(now, rival.currentX, rival.currentY, 300, rivalSide, defender);
+                else liftBallTo(now, rival.currentX - direction * .01, rival.currentY, 380, rivalSide, defender, 0, 0);
+            }
+            return;
+        }
+        startDribble(now, side, player, defender);
+        dribbleKind = kind;
+        dribbleWins = wins;
+        if (kind == DRIBBLE_BURST) {
+            dribbleX = clamp(carrier.currentX + direction * .09, .04, .96);
+            dribbleY = clamp(carrier.currentY + (carrier.currentY >= rival.currentY ? .03 : -.03), .06, .94);
+        } else if (kind == DRIBBLE_TURN) {
+            double turn = carrier.currentY >= rival.currentY ? 1.0 : -1.0;
+            dribbleX = clamp(carrier.currentX + direction * .035, .04, .96);
+            dribbleY = clamp(carrier.currentY + turn * .06, .06, .94);
+        } else if (kind == DRIBBLE_FEINT) {
+            double fake = carrier.currentY >= rival.currentY ? -1.0 : 1.0;
+            swingX = clamp(carrier.currentX + direction * .012, .04, .96);
+            swingY = clamp(carrier.currentY + fake * .03, .06, .94);
+            dribbleSwingUntil = now + 300L;
+            dribbleUntil = now + 1300L;
+            controlUntil = Math.max(controlUntil, dribbleUntil);
         }
     }
 
@@ -2740,7 +2920,7 @@ public final class LiveMatchPanel extends JPanel {
                 current.currentX, current.currentY);
         boolean pressed = pressure < .055;
         boolean flair = cardFoulPhase == 0 && statCueActive == 0 && !preEventActive && pendingGoalStage == 0
-                && plannedActionKey == null && possessingPlayer != 0;
+                && !plannedImminent() && possessingPlayer != 0;
         if (raidStage != 0 && (raidSide != possessingSide || possessingPlayer != raidPlayer
                 || now > raidDeadline + 1500L)) raidStage = 0;
         if (wallPasser >= 0 && (wallSide != possessingSide || possessingPlayer != wallReceiver
@@ -2749,7 +2929,20 @@ public final class LiveMatchPanel extends JPanel {
         if (clearanceSide == possessingSide) {
             clearanceSide = -1;
             possessionPasses = 0;
+            counterSide = -1;
             double direction = possessingSide == 0 ? 1.0 : -1.0;
+            boolean inOwnBox = inDefendedBox(possessingSide, ballX, ballY, .03);
+            if (inOwnBox && now - lastCornerAt > 10000L && restartAllowed(1200) && random.nextInt(100) < 45) {
+                double endX = possessingSide == 0 ? .004 : .996;
+                double exitY = ballY < .5 ? .03 + random.nextDouble() * .09 : .97 - random.nextDouble() * .09;
+                sendBallOut(now, endX, exitY, RESTART_CORNER, 1 - possessingSide);
+                return;
+            }
+            if (restartAllowed(700) && random.nextInt(100) < 22) {
+                double outX = clamp(ballX + direction * (.10 + random.nextDouble() * .12), .08, .92);
+                sendBallOut(now, outX, ballY < .5 ? .004 : .996, RESTART_THROW, 1 - possessingSide);
+                return;
+            }
             double targetX = clamp(ballX + direction * (.30 + random.nextDouble() * .18), .12, .88);
             double targetY = .18 + random.nextDouble() * .64;
             int receiver = nearestActive(side, targetX, targetY, possessingPlayer, false);
@@ -2764,9 +2957,15 @@ public final class LiveMatchPanel extends JPanel {
             wallPasser = -1;
             int duration = 420 + random.nextInt(140);
             double lead = duration / 1000.0;
-            sendBallTo(now, runner.currentX + runner.velocityX * lead, runner.currentY + runner.velocityY * lead,
-                    duration, possessingSide, passer);
-            return;
+            double tx = runner.currentX + runner.velocityX * lead, ty = runner.currentY + runner.velocityY * lead;
+            double returnLine = Tactics.offsideLine(possessingSide, rivals, ballX);
+            boolean onside = attackProgress(possessingSide, tx) <= returnLine + .004;
+            if (onside && Tactics.laneRisk(ballX, ballY, tx, ty, duration, rivals, false) < .55) {
+                lastPasser = possessingPlayer;
+                lastPasserSide = possessingSide;
+                sendBallTo(now, tx, ty, duration, possessingSide, passer);
+                return;
+            }
         }
         if (raidStage == 1) {
             if (progress < .80 && now < raidDeadline && !pressed) {
@@ -2780,17 +2979,14 @@ public final class LiveMatchPanel extends JPanel {
         }
         possessionPasses++;
         int share = possessingSide == 0 ? homePossessionTarget : 100 - homePossessionTarget;
-        int basePasses = style == 1 ? 5 : style == 2 ? 3 : 6;
+        int basePasses = style == 1 ? 6 : style == 2 ? 4 : 7;
         int maxPasses = Math.max(2, (int) Math.round((basePasses + random.nextInt(4)) * share / 50.0));
         if (!license && possessionPasses >= maxPasses) {
             possessionPasses = 0;
-            startTackle(now, rivalSide, nearestActive(rivals, ballX, ballY, -1, false));
+            loseBallInContext(now, current, side, rivals, rivalSide);
             return;
         }
-        if (flair && pressed && progress < .82 && random.nextInt(100) < 20) {
-            startDribble(now, possessingSide, possessingPlayer, nearestRival);
-            return;
-        }
+        boolean counter = counterSide == possessingSide && now < counterUntil;
         int raidChance = style == 1 ? 11 : style == 2 ? 6 : 8;
         if (flair && !license && raidStage == 0 && !pressed && progress >= .52 && progress < .76
                 && random.nextInt(100) < raidChance) {
@@ -2809,45 +3005,196 @@ public final class LiveMatchPanel extends JPanel {
                 return;
             }
         }
-        if (!license && progress >= .76) {
+        if (!license && progress >= (counter ? .80 : .76)) {
             possessionPasses = 0;
-            clearanceAfterTackle = true;
-            startTackle(now, rivalSide, nearestActive(rivals, ballX, ballY, -1, false));
+            counterSide = -1;
+            finishFinalThird(now, current, side, rivals, rivalSide, pressed);
             return;
         }
-        int roll = random.nextInt(100);
-        if (!pressed && roll < 10 && progress < cap) {
-            int far = -1;
-            double bestFar = 0;
-            for (int i = 1; i < side.length; i++) {
-                if (i == possessingPlayer || !side[i].active) continue;
-                if (attackProgress(possessingSide, side[i].currentX) > cap) continue;
-                double dy = Math.abs(side[i].currentY - current.currentY);
-                double d = distance(side[i].currentX, side[i].currentY, current.currentX, current.currentY);
-                if (dy > .34 && d < .58 && dy > bestFar) { bestFar = dy; far = i; }
-            }
-            if (far >= 0) {
-                double d = distance(side[far].currentX, side[far].currentY, current.currentX, current.currentY);
-                beginPassTo(possessingSide, far, now, (int) (650 + d * 1300));
-                return;
+        decideOnBall(now, side, rivals, current, counter && !license ? Math.max(cap, .78) : cap, flair, counter);
+    }
+
+    private void decideOnBall(long now, Dot[] side, Dot[] rivals, Dot current, double cap, boolean flair, boolean counter) {
+        int team = possessingSide;
+        double here = attackProgress(team, current.currentX);
+        int pressing = Tactics.pressure(current.currentX, current.currentY, rivals, .065);
+        double line = Tactics.offsideLine(team, rivals, ballX);
+        int style = tactic(team, 1, 0);
+        int focus = tactic(team, 3, 0);
+        double crowd = Tactics.density(rivals, current.currentY, .22);
+        int best = -1;
+        double bestScore = -9;
+        double bestX = 0, bestY = 0;
+        int bestDuration = 0;
+        boolean bestLofted = false;
+        double direction = team == 0 ? 1.0 : -1.0;
+        for (int candidate = 0; candidate < side.length * 2; candidate++) {
+            int i = candidate % side.length;
+            boolean through = candidate >= side.length;
+            if (i == possessingPlayer || !side[i].active) continue;
+            Dot mate = side[i];
+            double standing = attackProgress(team, mate.currentX);
+            if (i > 0 && standing > line + .004 && standing > attackProgress(team, ballX)) continue;
+            if (i == 0 && !(here < .30 && pressing > 0)) continue;
+            if (through && (i == 0 || mate.roleLine < 2 || mate.velocityX * direction < .035 || line > .90)) continue;
+            double lead = counter || frames < mate.runUntil ? .40 : .12;
+            double tx = through ? clamp(mate.currentX + direction * .10, .03, .97)
+                    : clamp(mate.currentX + mate.velocityX * lead, .03, .97);
+            double ty = clamp(mate.currentY + mate.velocityY * lead, .05, .95);
+            double d = distance(current.currentX, current.currentY, tx, ty);
+            if (d < .05 || d > (here < .40 ? .62 : .50)) continue;
+            double there = attackProgress(team, tx);
+            boolean lofted = d > .38;
+            int duration = (int) (lofted ? 700 + d * 1300 : 420 + d * 1500);
+            double risk = Tactics.laneRisk(ballX, ballY, tx, ty, duration, rivals, lofted);
+            double room = Math.min(.12, Tactics.space(tx, ty, rivals));
+            double gain = there - here;
+            double score = clamp(gain, -.25, .30) * (counter ? 2.6 : pressing > 0 ? .8 : 1.5)
+                    + room * 2.2 - risk * (pressing > 0 ? 1.9 : 2.7) - Math.max(0, d - .28) * .7;
+            if (there > cap) score -= (there - cap) * 6.0;
+            if (gain < -.04 && pressing == 0 && !counter) score -= .10;
+            if (pressing >= 2 && gain < .02) score += .07;
+            if (Math.abs(ty - current.currentY) > .30 && Tactics.density(rivals, ty, .22) + .8 < crowd) score += .16;
+            if (focus == 1 && mate.wideRole) score += .05;
+            else if (focus == 0 && !mate.wideRole && mate.roleLine >= 2) score += .04;
+            if (style == 2 && gain > .10) score += .06;
+            if (lofted && here > .45) score -= .08;
+            if (i == lastPasser && lastPasserSide == team && gain < .03) score -= .22;
+            score += random.nextDouble() * .07;
+            if (score > bestScore) {
+                bestScore = score;
+                best = i;
+                bestX = tx;
+                bestY = ty;
+                bestDuration = duration;
+                bestLofted = lofted;
             }
         }
-        if (!pressed && roll >= 10 && roll < 26 && progress < cap - .04) {
-            controlUntil = now + 450L + random.nextInt(650);
+        double ahead = Tactics.spaceAhead(current, team, rivals);
+        double carryScore = -9;
+        if (here < cap - .03 && pressing == 0 && ahead > .09 && possessingPlayer != 0) {
+            carryScore = Math.min(.16, ahead) * (counter ? 2.6 : 1.4) + random.nextDouble() * .05;
+        }
+        int duel = defenderAhead(team, current, .075);
+        double dribbleScore = -9;
+        if (flair && duel >= 0 && pressing <= 1 && here < cap && here > .30) {
+            dribbleScore = .02 + (counter ? .08 : 0) + (current.roleLine == 3 ? .06 : 0) + random.nextDouble() * .14;
+        }
+        double shieldScore = pressing >= 1 && bestScore < 0 && possessingPlayer != 0 ? -.02 + random.nextDouble() * .06 : -9;
+        if (shieldScore > -9 && (current.currentY < .12 || current.currentY > .88) && restartAllowed(700)
+                && random.nextInt(100) < 50) {
+            int presser = nearestActive(rivals, current.currentX, current.currentY, -1, false);
+            double outX = clamp(current.currentX + (rivals[presser].currentX - current.currentX) * .5, .04, .96);
+            sendBallOut(now, outX, current.currentY < .5 ? .004 : .996, RESTART_THROW, team);
             return;
         }
-        int next = chooseReceiver(side, current, possessingPlayer, cap, pressed);
-        double d = distance(side[next].currentX, side[next].currentY, current.currentX, current.currentY);
-        double forward = (side[next].currentX - current.currentX) * (possessingSide == 0 ? 1.0 : -1.0);
-        if (flair && !pressed && next != 0 && d < .24 && forward > -.02 && progress < cap
-                && random.nextInt(100) < 14) {
-            wallSide = possessingSide;
+        if (dribbleScore > bestScore && dribbleScore >= carryScore && dribbleScore >= shieldScore) {
+            startContextDribble(now, team, possessingPlayer, duel, pressing);
+            return;
+        }
+        if (carryScore > bestScore && carryScore >= shieldScore) {
+            double drift = Tactics.space(current.currentX + direction * .08, clamp(current.currentY - .05, .05, .95), rivals)
+                    > Tactics.space(current.currentX + direction * .08, clamp(current.currentY + .05, .05, .95), rivals) ? -.03 : .03;
+            carryX = clamp(current.currentX + direction * Math.min(.11, ahead - .03), .05, .95);
+            carryY = clamp(current.currentY + drift, .06, .94);
+            if (attackProgress(team, carryX) > cap) carryX = team == 0 ? cap : 1.0 - cap;
+            carryUntil = now + 950L;
+            controlUntil = now + 650L + random.nextInt(250);
+            return;
+        }
+        if (shieldScore > bestScore || best < 0) {
+            controlUntil = now + 320L + random.nextInt(320);
+            return;
+        }
+        if (counter && attackProgress(team, bestX) < here - .04) counterSide = -1;
+        Dot receiver = side[best];
+        double forward = (receiver.currentX - current.currentX) * (team == 0 ? 1.0 : -1.0);
+        double passLength = distance(current.currentX, current.currentY, receiver.currentX, receiver.currentY);
+        if (flair && pressing == 0 && best != 0 && passLength < .24 && forward > -.02 && here < cap
+                && Tactics.spaceAhead(current, team, rivals) > .06 && random.nextInt(100) < 18) {
+            wallSide = team;
             wallPasser = possessingPlayer;
-            wallReceiver = next;
+            wallReceiver = best;
             current.runUntil = frames + 80 + random.nextInt(40);
-            current.runY = clamp(current.currentY + (side[next].currentY < current.currentY ? .07 : -.07), .10, .90);
+            current.runY = clamp(current.currentY + (receiver.currentY < current.currentY ? .07 : -.07), .10, .90);
         }
-        beginPassTo(possessingSide, next, now, (int) (420 + d * 1500 + random.nextInt(160)));
+        passTo(now, team, best, bestX, bestY, bestDuration + random.nextInt(140), bestLofted);
+    }
+
+    private void passTo(long now, int team, int receiver, double x, double y, int duration, boolean lofted) {
+        lastPasser = possessingPlayer;
+        lastPasserSide = team;
+        carryUntil = 0;
+        boolean cardTarget = plannedActionKey != null && plannedActor == 0 && plannedType >= 2 && plannedType <= 4
+                && team != plannedSide && receiver == plannedCardVictim;
+        if (cardTarget) {
+            beginPassTo(team, receiver, now, duration);
+        } else if (lofted) {
+            liftBallTo(now, x, y, duration, team, receiver, 0, 0);
+        } else {
+            sendBallTo(now, x, y, duration, team, receiver);
+        }
+    }
+
+    private void loseBallInContext(long now, Dot current, Dot[] side, Dot[] rivals, int rivalSide) {
+        counterSide = -1;
+        carryUntil = 0;
+        int presser = nearestActive(rivals, current.currentX, current.currentY, -1, false);
+        if ((current.currentY < .18 || current.currentY > .82) && restartAllowed(700) && random.nextInt(100) < 55) {
+            double direction = possessingSide == 0 ? 1.0 : -1.0;
+            double outX = clamp(current.currentX + direction * (.03 + random.nextDouble() * .06), .05, .95);
+            sendBallOut(now, outX, current.currentY < .5 ? .004 : .996, RESTART_THROW, rivalSide);
+            return;
+        }
+        if (distance(rivals[presser].currentX, rivals[presser].currentY, current.currentX, current.currentY) < .07
+                || random.nextInt(100) < 35) {
+            startTackle(now, rivalSide, presser);
+            return;
+        }
+        int team = possessingSide;
+        double here = attackProgress(team, current.currentX);
+        int target = -1;
+        double worst = -1;
+        for (int i = 1; i < side.length; i++) {
+            if (i == possessingPlayer || !side[i].active) continue;
+            double d = distance(current.currentX, current.currentY, side[i].currentX, side[i].currentY);
+            if (d < .08 || d > .40 || attackProgress(team, side[i].currentX) < here - .02) continue;
+            double risk = Tactics.laneRisk(ballX, ballY, side[i].currentX, side[i].currentY, (int) (420 + d * 1500), rivals, false);
+            if (risk > worst) { worst = risk; target = i; }
+        }
+        if (target < 0 || worst < .15) {
+            startTackle(now, rivalSide, presser);
+            return;
+        }
+        double tx = side[target].currentX, ty = side[target].currentY;
+        int cutter = Tactics.interceptor(ballX, ballY, tx, ty, rivals);
+        if (cutter < 0) {
+            startTackle(now, rivalSide, presser);
+            return;
+        }
+        double vx = tx - ballX, vy = ty - ballY;
+        double squared = Math.max(1e-8, vx * vx + vy * vy);
+        double t = clamp(((rivals[cutter].currentX - ballX) * vx + (rivals[cutter].currentY - ballY) * vy) / squared, .25, .95);
+        double d = Math.sqrt(squared) * t;
+        lastPasser = possessingPlayer;
+        lastPasserSide = team;
+        sendBallTo(now, ballX + vx * t, ballY + vy * t, (int) (380 + d * 1500), rivalSide, cutter);
+    }
+
+    private void finishFinalThird(long now, Dot current, Dot[] side, Dot[] rivals, int rivalSide, boolean pressed) {
+        int roll = random.nextInt(100);
+        boolean wide = current.currentY < .26 || current.currentY > .74;
+        if (wide && roll < 55) {
+            crossIntoBox(now, current);
+            return;
+        }
+        if (!pressed && roll < 80) {
+            double here = attackProgress(possessingSide, current.currentX);
+            decideOnBall(now, side, rivals, current, Math.max(.5, here - .06), false, false);
+            return;
+        }
+        clearanceAfterTackle = true;
+        startTackle(now, rivalSide, nearestActive(rivals, ballX, ballY, -1, false));
     }
 
     private int raidOutlet(Dot[] team, int side, Dot current, int currentIndex) {
@@ -2878,27 +3225,268 @@ public final class LiveMatchPanel extends JPanel {
                 crosser.currentY < .5 ? .05 : -.05);
     }
 
-    private int chooseReceiver(Dot[] team, Dot current, int excluded, double cap, boolean pressed) {
-        int best = -1;
-        double bestScore = Double.MAX_VALUE;
-        double direction = possessingSide == 0 ? 1.0 : -1.0;
-        double currentProgress = attackProgress(possessingSide, current.currentX);
-        for (int i = 1; i < team.length; i++) {
-            if (i == excluded || !team[i].active) continue;
-            double dx = (team[i].currentX - current.currentX) * direction;
-            double dy = team[i].currentY - current.currentY;
-            double d = Math.sqrt(dx * dx + dy * dy);
-            if (d > .36 || d < .04) continue;
-            double targetProgress = attackProgress(possessingSide, team[i].currentX);
-            double score = d * .7;
-            if (targetProgress > cap) score += (targetProgress - cap) * 4.0;
-            else if (currentProgress < cap - .05) score -= Math.max(0, dx) * .8;
-            if (dx < -.04) score += pressed ? .02 : .30;
-            score += tactic(possessingSide, 3, 0) == 1 ? (team[i].wideRole ? -.06 : 0) : (team[i].wideRole ? .04 : 0);
-            score += random.nextDouble() * .08;
-            if (score < bestScore) { bestScore = score; best = i; }
+    private boolean restartAllowed(int minimumDelay) {
+        return minuteDelay() >= minimumDelay && engineRunning() && !preEventActive && queuedEngineActions.isEmpty()
+                && !plannedImminent() && pendingGoalStage == 0 && statCueActive == 0 && cardFoulPhase == 0
+                && penaltyPhase == 0 && freeKickPhase == 0 && ambientShotPhase == 0 && !restartActive
+                && !kickoffInProgress && restartPlay == 0 && pendingStatShotSide < 0 && pendingStatTackleSide < 0
+                && pendingStatRecoverySide < 0 && pendingStatFoulOffenderSide < 0 && !penaltyBuild;
+    }
+
+    private boolean plannedImminent() {
+        return plannedActionKey != null && plannedMinute - engineMinute <= 1;
+    }
+
+    private void sendBallOut(long now, double x, double y, int type, int takingSide) {
+        curveActive = false;
+        ballLift = 0;
+        looseBall = false;
+        tackleActive = false;
+        clearanceAfterTackle = false;
+        receivingSide = -1;
+        receivingPlayer = -1;
+        carryUntil = 0;
+        counterSide = -1;
+        wallPasser = -1;
+        raidStage = 0;
+        clearanceSide = -1;
+        dribbleUntil = 0;
+        dribbleDefender = -1;
+        ballFromX = ballX;
+        ballFromY = ballY;
+        ballToX = clamp(x, .003, .997);
+        ballToY = clamp(y, .003, .997);
+        moveStarted = now;
+        moveDuration = (int) (420 + distance(ballX, ballY, ballToX, ballToY) * 1100);
+        ballInFlight = true;
+        restartPlay = type;
+        restartPhase = 0;
+        restartPlaySide = takingSide;
+        restartTaker = -1;
+        restartReadyAt = 0;
+        restartLimit = now + (type == RESTART_CORNER ? 11000L : 6000L);
+        if (type == RESTART_CORNER) {
+            restartSpotX = ballToX < .5 ? .006 : .994;
+            restartSpotY = ballToY < .5 ? .012 : .988;
+            lastCornerAt = now;
+        } else {
+            restartSpotX = ballToX;
+            restartSpotY = ballToY < .5 ? .01 : .99;
         }
-        return best >= 0 ? best : nearestProgressivePlayer(team, current, excluded);
+    }
+
+    private void beginRestartPlay(long now) {
+        Dot[] team = restartPlaySide == 0 ? home : away;
+        restartPhase = 1;
+        restartReadyAt = 0;
+        ballInFlight = false;
+        looseBall = false;
+        ballX = ballFromX = ballToX = clamp(ballToX, .005, .995);
+        ballY = ballFromY = ballToY = clamp(ballToY, .01, .99);
+        if (restartPlay == RESTART_THROW) {
+            restartSpotX = ballX;
+            restartSpotY = ballY;
+        }
+        int taker = -1;
+        double bestGap = Double.MAX_VALUE;
+        for (int i = 1; i < team.length; i++) {
+            if (!team[i].active) continue;
+            double gap = distance(team[i].currentX, team[i].currentY, restartSpotX, restartSpotY)
+                    - (team[i].wideRole ? .05 : 0) - (restartPlay == RESTART_CORNER && team[i].roleLine >= 2 ? .06 : 0);
+            if (gap < bestGap) { bestGap = gap; taker = i; }
+        }
+        restartTaker = Math.max(1, taker);
+        possessingSide = restartPlaySide;
+        possessingPlayer = restartTaker;
+        possessionPasses = 0;
+        observedSide = restartPlaySide;
+        lastPasser = -1;
+    }
+
+    private void updateRestartPlay(long now) {
+        if (restartPlay == 0) return;
+        if (preEventActive || now > restartLimit || !queuedEngineActions.isEmpty() || plannedImminent()) {
+            abortRestartPlay(now);
+            return;
+        }
+        if (restartPhase == 0) return;
+        Dot[] team = restartPlaySide == 0 ? home : away;
+        if (restartTaker < 0 || restartTaker >= team.length || !team[restartTaker].active) {
+            abortRestartPlay(now);
+            return;
+        }
+        Dot taker = team[restartTaker];
+        if (restartPhase == 1) {
+            if (distance(taker.currentX, taker.currentY, ballX, ballY) > CONTACT * 1.4) return;
+            restartPhase = distance(ballX, ballY, restartSpotX, restartSpotY) > .02 ? 2 : 3;
+            return;
+        }
+        if (restartPhase == 2) {
+            ballX += (taker.currentX - ballX) * .3;
+            ballY += (taker.currentY - ballY) * .3;
+            if (distance(taker.currentX, taker.currentY, restartSpotX, restartSpotY) <= CONTACT) restartPhase = 3;
+            return;
+        }
+        ballX += (restartSpotX - ballX) * .3;
+        ballY += (restartSpotY - ballY) * .3;
+        boolean atBall = distance(taker.currentX, taker.currentY, restartSpotX, restartSpotY) <= CONTACT * 1.4;
+        if (atBall && restartReadyAt == 0) {
+            restartReadyAt = now + (restartPlay == RESTART_CORNER ? 1400L : 450L) + random.nextInt(300);
+        }
+        if (restartReadyAt != 0 && now >= restartReadyAt) releaseRestartPlay(now);
+    }
+
+    private void releaseRestartPlay(long now) {
+        int side = restartPlaySide;
+        int kind = restartPlay;
+        Dot[] team = side == 0 ? home : away;
+        Dot[] rivals = side == 0 ? away : home;
+        Dot taker = team[restartTaker];
+        restartPlay = 0;
+        restartPhase = 0;
+        restartReadyAt = 0;
+        possessingSide = side;
+        possessingPlayer = restartTaker;
+        lastPasser = restartTaker;
+        lastPasserSide = side;
+        controlUntil = 0;
+        if (kind == RESTART_CORNER && random.nextInt(100) >= 15) {
+            int defending = 1 - side;
+            Dot[] defenders = defending == 0 ? home : away;
+            double depth = .88 + random.nextDouble() * .07;
+            double tx = side == 0 ? depth : 1.0 - depth;
+            double ty = .38 + random.nextDouble() * .24;
+            boolean keeperClaim = depth >= .92 && random.nextInt(100) < 40;
+            int catcher = keeperClaim ? 0 : nearestActive(defenders, tx, ty, -1, false);
+            clearanceSide = keeperClaim ? -1 : defending;
+            liftBallTo(now, tx, ty, 900 + random.nextInt(200), defending, catcher, 0, restartSpotY < .5 ? .06 : -.06);
+            return;
+        }
+        int receiver = -1;
+        double bestScore = -9;
+        for (int i = 1; i < team.length; i++) {
+            if (i == restartTaker || !team[i].active) continue;
+            double d = distance(taker.currentX, taker.currentY, team[i].currentX, team[i].currentY);
+            if (d < .05 || d > .30) continue;
+            double risk = Tactics.laneRisk(restartSpotX, restartSpotY, team[i].currentX, team[i].currentY,
+                    (int) (500 + d * 900), rivals, false);
+            double score = Math.min(.10, Tactics.space(team[i].currentX, team[i].currentY, rivals)) * 2 - risk
+                    + random.nextDouble() * .08;
+            if (score > bestScore) { bestScore = score; receiver = i; }
+        }
+        if (receiver < 0) receiver = nearestActive(team, restartSpotX, restartSpotY, restartTaker, false);
+        double d = distance(restartSpotX, restartSpotY, team[receiver].currentX, team[receiver].currentY);
+        if (kind == RESTART_THROW) {
+            liftBallTo(now, team[receiver].currentX, team[receiver].currentY, (int) (480 + d * 900), side, receiver, 0, 0);
+        } else {
+            sendBallTo(now, team[receiver].currentX, team[receiver].currentY, (int) (420 + d * 1400), side, receiver);
+        }
+    }
+
+    private void abortRestartPlay(long now) {
+        if (restartPlay == 0) return;
+        int side = restartPlaySide;
+        restartPlay = 0;
+        restartPhase = 0;
+        restartReadyAt = 0;
+        restartTaker = -1;
+        if (ballInFlight && receivingSide < 0) {
+            ballInFlight = false;
+            curveActive = false;
+            ballLift = 0;
+        }
+        ballX = clamp(ballX, .02, .98);
+        ballY = clamp(ballY, .03, .97);
+        ballFromX = ballToX = ballX;
+        ballFromY = ballToY = ballY;
+        if (!ballInFlight) {
+            Dot[] team = side == 0 ? home : away;
+            int holder = nearestActive(team, ballX, ballY, -1, false);
+            if (distance(team[holder].currentX, team[holder].currentY, ballX, ballY) <= CONTACT * 1.5) {
+                looseBall = false;
+                possessingSide = side;
+                possessingPlayer = holder;
+                controlUntil = now + 200L;
+                return;
+            }
+            looseBall = true;
+            looseSide = side;
+            looseChaser = holder;
+            looseSince = now;
+        }
+    }
+
+    private boolean applyRestartPlayTarget(Dot dot, int index, int sideIndex) {
+        boolean taking = sideIndex == restartPlaySide;
+        if (taking && index == restartTaker) {
+            if (restartPhase == 1) {
+                dot.targetX = ballX;
+                dot.targetY = ballY;
+                return true;
+            }
+            double outside = restartPlay == RESTART_CORNER ? .0 : (restartSpotY < .5 ? -.006 : .006);
+            dot.targetX = restartSpotX;
+            dot.targetY = restartSpotY + outside;
+            return true;
+        }
+        if (index == 0) {
+            if (restartPlay == RESTART_CORNER && !taking) {
+                dot.targetX = restartPlaySide == 0 ? .975 : .025;
+                dot.targetY = .5 + (restartSpotY < .5 ? -.03 : .03);
+                return true;
+            }
+            return false;
+        }
+        if (restartPlay == RESTART_THROW) {
+            if (!taking) return false;
+            Dot[] team = sideIndex == 0 ? home : away;
+            int first = nearestPlayer(team, restartSpotX, restartSpotY, restartTaker, -1);
+            int second = nearestPlayer(team, restartSpotX, restartSpotY, restartTaker, first);
+            if (index != first && index != second) return false;
+            double along = index == first ? .07 : -.05;
+            double inward = index == first ? .09 : .15;
+            dot.targetX = clamp(restartSpotX + along * (sideIndex == 0 ? 1.0 : -1.0), .05, .95);
+            dot.targetY = restartSpotY < .5 ? inward : 1.0 - inward;
+            return true;
+        }
+        double attackGoal = restartPlaySide == 0 ? 1.0 : 0.0;
+        double toward = restartPlaySide == 0 ? -1.0 : 1.0;
+        if (taking) {
+            if (dot.roleLine < 2 && !(dot.roleLine == 1 && !dot.wideRole && index % 2 == 0)) return false;
+            double depth = .045 + (index % 4) * .022;
+            dot.targetX = attackGoal + toward * depth;
+            dot.targetY = .36 + ((index * 5) % 7) * .045;
+            return true;
+        }
+        if (dot.roleLine > 2) return false;
+        double depth = .025 + (index % 3) * .025;
+        dot.targetX = attackGoal + toward * depth;
+        dot.targetY = .34 + ((index * 3) % 8) * .045;
+        return true;
+    }
+
+    private void observePossession(long now) {
+        if (looseBall || ballInFlight || possessingSide == observedSide) return;
+        observedSide = possessingSide;
+        counterSide = -1;
+        lastPasser = -1;
+        if (restartActive || kickoffInProgress || pendingGoalStage != 0 || penaltyPhase != 0 || freeKickPhase != 0
+                || cardFoulPhase != 0 || restartPlay != 0 || plannedImminent()) return;
+        double here = attackProgress(possessingSide, ballX);
+        if (here > .62) return;
+        Dot[] rivals = possessingSide == 0 ? away : home;
+        int goalSide = 0;
+        for (int i = 1; i < rivals.length; i++) {
+            if (rivals[i].active && attackProgress(possessingSide, rivals[i].currentX) > here + .02) goalSide++;
+        }
+        int style = tactic(possessingSide, 1, 0);
+        int allowed = style == 2 ? 7 : 6;
+        Dot[] owners = possessingSide == 0 ? home : away;
+        Dot carrier = owners[Math.max(0, Math.min(owners.length - 1, possessingPlayer))];
+        if (goalSide <= allowed && Tactics.spaceAhead(carrier, possessingSide, rivals) > .10) {
+            counterSide = possessingSide;
+            counterUntil = now + 4500L + random.nextInt(1500);
+        }
     }
 
     private int recyclePlayer(Dot[] team, Dot current, int excluded) {
@@ -3282,6 +3870,9 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private void applyEngineAction(Object action) {
+        abortRestartPlay(clockNow());
+        counterSide = -1;
+        carryUntil = 0;
         Integer due = actionDue.remove(action);
         activeDue = due == null ? gameTick : due.intValue();
         int heldType = integer(invoke(action, "b"), -1);
@@ -3923,6 +4514,24 @@ public final class LiveMatchPanel extends JPanel {
         double markTightness = marking == 0 ? .08 : marking == 1 ? .16 : .26;
         double lineShift = (style == 1 ? .035 : style == 2 ? -.035 : 0)
                 + (marking == 0 ? -.02 : marking == 2 ? .02 : 0);
+        double offside = Tactics.offsideLine(sideIndex, opponents, ballX);
+        long tickNow = clockNow();
+        boolean counterAttack = hasBall && counterSide == sideIndex && tickNow < counterUntil;
+        double ownGoalX = awaySide ? 1.0 : 0.0;
+        double ballFromOwn = Math.abs(ballX - ownGoalX);
+        double lineDepth = clamp(ballFromOwn * .55 + .02 + (marking == 2 ? .03 : 0) + (style == 1 ? .03 : style == 2 ? -.04 : 0), .10, .42);
+        double lineX = ownGoalX + direction * lineDepth;
+        if (!hasBall) assignMarking(team, opponents, sideIndex);
+        int supportA = -1, supportB = -1;
+        double supportSign = 1.0;
+        Dot carrierDot = null;
+        if (hasBall && !looseBall && possessingPlayer >= 0 && possessingPlayer < team.length) {
+            carrierDot = team[possessingPlayer];
+            supportA = nearestPlayer(team, carrierDot.currentX, carrierDot.currentY, possessingPlayer, -1);
+            supportB = nearestPlayer(team, carrierDot.currentX, carrierDot.currentY, possessingPlayer, supportA);
+            supportSign = Tactics.density(opponents, carrierDot.currentY - .12, .10)
+                    <= Tactics.density(opponents, carrierDot.currentY + .12, .10) ? -1.0 : 1.0;
+        }
         for (int i = 0; i < team.length; i++) {
             Dot dot = team[i];
             if (penaltyPhase != 0) {
@@ -3997,10 +4606,41 @@ public final class LiveMatchPanel extends JPanel {
             } else if (!hasBall) {
                 dot.runUntil = 0;
             }
+            if (!hasBall && i > 0) {
+                double depthOffset = dot.roleLine == 1 ? 0 : dot.roleLine == 2 ? .15 : .30;
+                targetX = lineX + direction * depthOffset + dot.wanderX * .5;
+                targetY = dot.y + (ballY - .5) * (dot.wideRole ? .22 : .32) + (ballY - dot.y) * .06 + dot.wanderY * .5;
+            }
+            if (hasBall && i > 0 && dot.roleLine <= 2) {
+                double ballProgress = attackProgress(sideIndex, ballX);
+                double floor = dot.roleLine == 1 ? clamp(ballProgress - .30, .12, .48) : clamp(ballProgress - .15, .25, .66);
+                if (attackProgress(sideIndex, targetX) < floor) targetX = awaySide ? 1.0 - floor : floor;
+            }
+            if (hasBall && i > 0 && carrierDot != null && i != possessingPlayer) {
+                if (i == supportA || i == supportB) {
+                    boolean back = i == supportA;
+                    double sign = back ? supportSign : -supportSign;
+                    double ax = carrierDot.currentX + direction * (back ? -.045 : .085);
+                    double ay = clamp(carrierDot.currentY + sign * (back ? .12 : .10), .07, .93);
+                    Dot near = nearestOpponent(opponents, ax, ay);
+                    if (distance(near.currentX, near.currentY, ax, ay) < .05) {
+                        ay = clamp(ay + (ay >= near.currentY ? .04 : -.04), .07, .93);
+                    }
+                    targetX = targetX * .35 + ax * .65;
+                    targetY = targetY * .35 + ay * .65;
+                } else if (dot.wideRole && attackProgress(sideIndex, ballX) > .35) {
+                    targetY = targetY * .6 + (dot.y < .5 ? .07 : .93) * .4;
+                }
+                if (counterAttack && dot.roleLine >= 2) {
+                    double deep = awaySide ? 1.0 - (offside - .012) : offside - .012;
+                    targetX = awaySide ? Math.min(targetX, deep) : Math.max(targetX, deep);
+                }
+            }
 
             if (i == 0) {
-                targetX = dot.x + (ballX - dot.x) * .025;
-                targetY = .50 + (ballY - .50) * .10;
+                double out = .035 + clamp(ballFromOwn - .30, 0, .50) * .08;
+                targetX = ownGoalX + direction * out;
+                targetY = .50 + (ballY - .50) * (ballFromOwn < .30 ? .30 : .15);
                 if (ambientShotPhase == 1 && sideIndex != ambientShotSide) {
                     targetX = ambientShotSide == 0 ? .955 : .045;
                     targetY = ambientShotY;
@@ -4013,18 +4653,36 @@ public final class LiveMatchPanel extends JPanel {
                 targetX = dot.currentX + direction * carry;
                 targetY = dot.currentY + dot.wanderY * .18;
             } else if (!hasBall && i == primaryPresser) {
-                targetX = ballX - direction * .025;
-                targetY = ballY;
+                double gx = ownGoalX - ballX, gy = .5 - ballY;
+                double gl = Math.max(.001, Math.sqrt(gx * gx + gy * gy));
+                targetX = ballX + gx / gl * .022;
+                targetY = ballY + gy / gl * .022;
             } else if (!hasBall && i == secondaryPresser) {
-                targetX = targetX * (1 - secondaryPress) + ballX * secondaryPress;
-                targetY = targetY * (1 - secondaryPress - .03) + ballY * (secondaryPress + .03);
+                boolean trap = marking >= 1 && (ballY < .20 || ballY > .80 || ballFromOwn < .40);
+                if (trap) {
+                    targetX = ballX + (ownGoalX - ballX) * .05;
+                    targetY = ballY + (ballY < .5 ? .034 : -.034);
+                } else {
+                    int danger = markOf[sideIndex][i] >= 0 ? markOf[sideIndex][i]
+                            : nearestPlayer(opponents, ballX - direction * .12, ballY, -1, -1);
+                    Dot lane = opponents[danger];
+                    double cutX = (ballX + lane.currentX) / 2, cutY = (ballY + lane.currentY) / 2;
+                    double weight = .35 + secondaryPress;
+                    targetX = targetX * (1 - weight) + cutX * weight;
+                    targetY = targetY * (1 - weight) + cutY * weight;
+                }
             } else if (!hasBall && i == tertiaryPresser) {
                 targetX = targetX * .78 + ballX * .22;
                 targetY = targetY * .75 + ballY * .25;
-            } else if (!hasBall) {
-                Dot marked = opponents[Math.min(i, opponents.length - 1)];
-                targetX = targetX * (1 - markTightness) + (marked.currentX - direction * .035) * markTightness;
-                targetY = targetY * (1 - markTightness) + marked.currentY * markTightness;
+            } else if (!hasBall && markOf[sideIndex][i] >= 0) {
+                Dot marked = opponents[markOf[sideIndex][i]];
+                double threat = Math.abs(marked.currentX - ownGoalX) < .40 ? 1.0 : .6;
+                double tight = (markTightness + .22) * threat;
+                double mx = marked.currentX - direction * .03 + (ballX - marked.currentX) * .06;
+                double my = marked.currentY + (ballY - marked.currentY) * .15;
+                if (dot.roleLine == 1 && Math.abs(mx - ownGoalX) > Math.abs(lineX - ownGoalX)) mx = lineX;
+                targetX = targetX * (1 - tight) + mx * tight;
+                targetY = targetY * (1 - tight) + my * tight;
             }
 
             if ((plannedActionKey != null && plannedMinute - engineMinute <= 1) || pendingGoalStage == 1) {
@@ -4052,6 +4710,11 @@ public final class LiveMatchPanel extends JPanel {
             }
 
             boolean eventActor = hasPlannedShotSpot() && sideIndex == plannedSide && i == plannedActor;
+            boolean goalRole = pendingGoalStage == 1 && sideIndex == pendingGoalSide && (i == pendingGoalActor || isGoalDecoy(i));
+            if (hasBall && i > 0 && !eventActor && !goalRole) {
+                double limit = Math.max(offside - .006, attackProgress(sideIndex, ballX));
+                if (attackProgress(sideIndex, targetX) > limit) targetX = awaySide ? 1.0 - limit : limit;
+            }
             if (dot.wideRole && !eventActor) {
                 if (dot.y < .5) targetY = clamp(targetY, .08, .38);
                 else targetY = clamp(targetY, .62, .92);
@@ -4095,6 +4758,12 @@ public final class LiveMatchPanel extends JPanel {
             return;
         }
         if (cardFoulPhase == 1) {
+            if (sideIndex == cardFoulOffenderSide && index == cardFoulOffender && !cardFoulEngaged && !cardFoulFreeKick
+                    && index != 0) {
+                dot.targetX = dot.targetX + (ballX - dot.targetX) * .6;
+                dot.targetY = dot.targetY + (ballY - dot.targetY) * .6;
+                return;
+            }
             if (sideIndex == cardFoulOffenderSide && index == cardFoulOffender
                     && possessingSide != cardFoulOffenderSide && cardFoulEngaged) {
                 double reachOut = BOX_DEPTH + .08;
@@ -4134,6 +4803,14 @@ public final class LiveMatchPanel extends JPanel {
             dot.targetY = ballY;
             return;
         }
+        if (restartPlay != 0 && restartPhase >= 1 && applyRestartPlayTarget(dot, index, sideIndex)) return;
+        long tickNow = clockNow();
+        if (dribbleUntil != 0 && dribbleSwingUntil != 0 && tickNow < dribbleSwingUntil
+                && sideIndex == dribbleSide && index == dribblePlayer) {
+            dot.targetX = swingX;
+            dot.targetY = swingY;
+            return;
+        }
         boolean carrying = !looseBall && !ballInFlight && possessingSide == sideIndex && possessingPlayer == index;
         if (dribbleUntil != 0 && carrying && sideIndex == dribbleSide && index == dribblePlayer) {
             dot.targetX = dribbleX;
@@ -4143,6 +4820,11 @@ public final class LiveMatchPanel extends JPanel {
         if (dribbleUntil != 0 && sideIndex != dribbleSide && index == dribbleDefender) {
             dot.targetX = lungeX;
             dot.targetY = lungeY;
+            return;
+        }
+        if (carrying && carryUntil != 0 && tickNow < carryUntil && pendingGoalStage == 0 && cardFoulPhase == 0) {
+            dot.targetX = carryX;
+            dot.targetY = carryY;
             return;
         }
         if (carrying && pendingGoalStage == 1 && sideIndex == pendingGoalSide && index == goalPartner
@@ -4195,7 +4877,30 @@ public final class LiveMatchPanel extends JPanel {
         }
     }
 
+    private void assignMarking(Dot[] team, Dot[] opponents, int side) {
+        int[] marks = markOf[side];
+        java.util.Arrays.fill(marks, -1);
+        boolean[] taken = new boolean[opponents.length];
+        double ownGoalX = side == 0 ? 0.0 : 1.0;
+        for (int round = 0; round < team.length; round++) {
+            double best = .30;
+            int defender = -1, attacker = -1;
+            for (int i = 1; i < team.length; i++) {
+                if (!team[i].active || marks[i] >= 0 || team[i].roleLine == 3) continue;
+                for (int j = 1; j < opponents.length; j++) {
+                    if (!opponents[j].active || taken[j] || Math.abs(opponents[j].currentX - ownGoalX) > .62) continue;
+                    double gap = distance(team[i].currentX, team[i].currentY, opponents[j].currentX, opponents[j].currentY);
+                    if (gap < best) { best = gap; defender = i; attacker = j; }
+                }
+            }
+            if (defender < 0) break;
+            marks[defender] = attacker;
+            taken[attacker] = true;
+        }
+    }
+
     private boolean isAnchored(int side, int index) {
+        if (restartPlay != 0 && restartPhase >= 1 && side == restartPlaySide && index == restartTaker) return true;
         if (ownGoalActive && pendingGoalStage == 1 && side != pendingGoalSide && index == ownGoalDefender) return true;
         if (penaltyBuild && penaltyFouler >= 0 && side != pendingGoalSide && index == penaltyFouler) return true;
         if (looseBall && side == looseSide && index == looseChaser) return true;
@@ -4435,6 +5140,13 @@ public final class LiveMatchPanel extends JPanel {
                         && !looseBall) {
                     maxSpeed = clockNow() - cardFoulStarted > 7000L ? .02 : .065;
                 }
+            }
+            if (index > 0 && counterSide >= 0 && clockNow() < counterUntil) {
+                if (side == counterSide && (dot.roleLine >= 2 || index == possessingPlayer)) maxSpeed = Math.max(maxSpeed, .128);
+                else if (side != counterSide && dot.roleLine >= 1 && !anchored) maxSpeed = Math.max(maxSpeed, .125);
+            }
+            if (dribbleUntil != 0 && dribbleKind == DRIBBLE_BURST && side == dribbleSide && index == dribblePlayer) {
+                maxSpeed = Math.max(maxSpeed, .14);
             }
             if (dot.entering) maxSpeed = Math.max(maxSpeed, .14);
             double arrival = anchored ? .030 : .065;
@@ -5320,6 +6032,110 @@ public final class LiveMatchPanel extends JPanel {
         int side;
         String name;
         String key;
+    }
+
+    private static final class Tactics {
+        static final double RIVAL_SPEED = .12;
+
+        static double progress(int side, double x) {
+            return side == 0 ? x : 1.0 - x;
+        }
+
+        static double laneRisk(double ax, double ay, double bx, double by, int duration, Dot[] rivals, boolean lofted) {
+            double vx = bx - ax, vy = by - ay;
+            double squared = vx * vx + vy * vy;
+            if (squared < 1e-8) return 0;
+            double length = Math.sqrt(squared);
+            double worst = 0;
+            for (int i = 0; i < rivals.length; i++) {
+                Dot rival = rivals[i];
+                if (!rival.active) continue;
+                double t = ((rival.currentX - ax) * vx + (rival.currentY - ay) * vy) / squared;
+                if (t <= 0 || t > 1.12) continue;
+                double clamped = Math.min(1.0, t);
+                if (clamped * length < .03) continue;
+                if (lofted && clamped < .82) continue;
+                double cx = ax + vx * clamped - rival.currentX, cy = ay + vy * clamped - rival.currentY;
+                double side = Math.sqrt(cx * cx + cy * cy);
+                double arrival = duration / 1000.0 * clamped;
+                double reach = .016 + RIVAL_SPEED * arrival * .5;
+                double risk = (reach - side) / reach;
+                if (t > 1.0) risk *= .85;
+                if (risk > worst) worst = risk;
+            }
+            return Math.max(0, Math.min(1, worst));
+        }
+
+        static int interceptor(double ax, double ay, double bx, double by, Dot[] rivals) {
+            double vx = bx - ax, vy = by - ay;
+            double squared = vx * vx + vy * vy;
+            int best = -1;
+            double bestGap = Double.MAX_VALUE;
+            for (int i = 1; i < rivals.length; i++) {
+                Dot rival = rivals[i];
+                if (!rival.active || squared < 1e-8) continue;
+                double t = Math.max(.25, Math.min(.95, ((rival.currentX - ax) * vx + (rival.currentY - ay) * vy) / squared));
+                double cx = ax + vx * t - rival.currentX, cy = ay + vy * t - rival.currentY;
+                double gap = Math.sqrt(cx * cx + cy * cy);
+                if (gap < bestGap) { bestGap = gap; best = i; }
+            }
+            return best;
+        }
+
+        static int pressure(double x, double y, Dot[] rivals, double radius) {
+            int count = 0;
+            for (int i = 0; i < rivals.length; i++) {
+                if (!rivals[i].active) continue;
+                double dx = rivals[i].currentX - x, dy = rivals[i].currentY - y;
+                if (dx * dx + dy * dy < radius * radius) count++;
+            }
+            return count;
+        }
+
+        static double space(double x, double y, Dot[] rivals) {
+            double best = 1.0;
+            for (int i = 0; i < rivals.length; i++) {
+                if (!rivals[i].active) continue;
+                double dx = rivals[i].currentX - x, dy = rivals[i].currentY - y;
+                best = Math.min(best, Math.sqrt(dx * dx + dy * dy));
+            }
+            return best;
+        }
+
+        static double spaceAhead(Dot carrier, int side, Dot[] rivals) {
+            double direction = side == 0 ? 1.0 : -1.0;
+            double best = .30;
+            for (int i = 0; i < rivals.length; i++) {
+                if (!rivals[i].active) continue;
+                double ahead = (rivals[i].currentX - carrier.currentX) * direction;
+                if (ahead < -.01) continue;
+                double lateral = Math.abs(rivals[i].currentY - carrier.currentY);
+                if (lateral > ahead * 1.3 + .04) continue;
+                best = Math.min(best, Math.sqrt(ahead * ahead + lateral * lateral));
+            }
+            return best;
+        }
+
+        static double offsideLine(int attackingSide, Dot[] defenders, double ballX) {
+            double first = -1, second = -1;
+            for (int i = 0; i < defenders.length; i++) {
+                if (!defenders[i].active) continue;
+                double p = progress(attackingSide, defenders[i].currentX);
+                if (p > first) { second = first; first = p; }
+                else if (p > second) second = p;
+            }
+            return Math.max(.5, Math.max(second, progress(attackingSide, ballX)));
+        }
+
+        static double density(Dot[] rivals, double y, double band) {
+            double total = 0;
+            for (int i = 1; i < rivals.length; i++) {
+                if (!rivals[i].active) continue;
+                double gap = Math.abs(rivals[i].currentY - y);
+                if (gap < band) total += 1.0 - gap / band;
+            }
+            return total;
+        }
     }
 
     private static final class Dot {

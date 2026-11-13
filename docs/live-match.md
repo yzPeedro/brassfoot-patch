@@ -67,6 +67,66 @@ python tools/patch_live_match_view.py --source <bf22-23.exe> --output <pasta>/bf
 - **Bola sempre ancorada:** a posse só muda por contato (passe, domínio, desarme ou cobrança), e cada fase termina em um estado explícito.
 - **Diagnóstico:** eventos de integração são registrados em `%LOCALAPPDATA%\BrassfootPatch2026\live-match-debug.log`.
 
+## Jogo corrido
+
+Fora dos lances do jogo (gol, pênalti, falta, cartão, lesão, lances de estatística e saídas de bola), a movimentação é uma reconstrução visual. Ela não cria finalização, cartão nem placar, e a troca de posse segue a proporção de posse oficial da partida.
+
+**Decisão com a bola.** Quando o portador fica livre para agir, o painel compara as ações possíveis e escolhe a de maior utilidade:
+
+| Ação | O que pesa |
+|---|---|
+| Passe no pé ou no espaço (para quem já corre) | progressão, espaço do receptor, risco de interceptação na linha de passe (cada adversário, pelo tempo que a bola leva até o ponto), distância e impedimento |
+| Inversão de corredor | vale mais quando o lado do receptor está menos povoado que o do portador |
+| Condução | espaço livre num cone à frente |
+| Drible | marcador à frente, sem dobra de marcação, fora da própria defesa |
+| Proteger a bola | pressionado e sem opção segura; perto da lateral, pode terminar em lateral |
+
+Passe para jogador em posição de impedimento no momento do passe é descartado; a posição é a do jogador, não a do ponto onde a bola chega. Devolver a bola a quem acabou de passar, sem ganho de terreno, é penalizado. Sob pressão dupla, recuar ou abrir para o lado ganha peso. Estilo de jogo (equilibrado, ataque total, contra-ataque) e foco de ataque (meio ou laterais) alteram os pesos.
+
+**Sem a bola.**
+
+- **Quem defende:**
+  - a linha defensiva fica alinhada, numa profundidade que acompanha a distância da bola ao gol, a marcação e o estilo;
+  - meio e ataque se posicionam a partir dessa linha, com o bloco deslizando para o lado da bola;
+  - o primeiro pressionador ataca pelo lado do próprio gol; o segundo dobra a marcação perto da lateral ou na própria defesa e, no resto do campo, fecha a linha de passe;
+  - os demais marcam por zona, cada defensor com o atacante mais próximo, pelo lado do gol.
+- **Quem ataca:**
+  - os dois companheiros mais próximos oferecem apoio em ângulo, um atrás e um à frente na diagonal, do lado com menos adversários;
+  - pontas abrem o campo, e a defesa sobe com a bola;
+  - nenhum jogador fica além da linha de impedimento (penúltimo adversário ou bola, o que estiver mais adiantado, e só no campo de ataque), exceto o autor e os acompanhantes de um gol do jogo.
+- **Goleiro:** cobre o ângulo e sai alguns metros quando a bola está longe.
+
+**Contra-ataque.** Quando a posse muda no próprio campo, com poucos adversários entre a bola e o gol e espaço à frente, o time acelera por até 6 segundos: atacantes correm até a linha de impedimento e quem perdeu a bola corre de volta.
+
+**Tabelas, dribles e perdas de bola.**
+
+- A tabela só é devolvida se a linha de volta estiver aberta e o jogador que se desmarcou não estiver impedido.
+- Os dribles são corte, arrancada, finta de corpo e giro de costas para o gol. Caneta, chapéu e carretilha são raros e dependem da geometria (marcador de frente e perto, marcador vindo em velocidade, ponta em velocidade no corredor).
+- O drible pode falhar, e o marcador desarma.
+- Quando a proporção de posse pede a troca, a bola é perdida para quem pressiona ou num passe interceptado pelo adversário mais próximo da linha.
+
+**Laterais e escanteios.**
+
+- Surgem de afastamentos, de desarmes que terminam em chutão e de bolas perdidas perto da lateral.
+- O cobrador vai até a bola (no escanteio, conduz até a bandeira), os companheiros se aproximam e o adversário se organiza na área; no escanteio, o cruzamento termina em corte ou na mão do goleiro.
+- Só começam com o jogo corrido livre: nenhum lance do jogo na fila nem iminente, nenhuma antecipação de minuto, nenhuma falta, gol ou pênalti em curso.
+- Lateral exige 700 ms ou mais por minuto e escanteio 1200 ms ou mais.
+- Um lance do jogo que chegue durante a cobrança a interrompe na hora; a bola fica onde está, com quem estiver em contato com ela.
+
+**Velocidades.** A tela de partida usa os intervalos de `best/aq.rz` (2000, 1200, 700, 450, 220 e 100 ms por minuto), os de `best/aq.rA` (1200, 700, 300, 100, 70 e 30 ms) e 1 ms no modo instantâneo. Jogadores e bola sempre se movem no ritmo normal; nas velocidades rápidas, laterais e escanteios não são encenados.
+
+### Simulação sem o jogo
+
+[`tools/live_match_simulation.py`](../tools/live_match_simulation.py) roda o painel quadro a quadro sobre uma tela de partida falsa e mede o jogo corrido, cenários táticos e lances injetados:
+
+```bash
+python tools/live_match_simulation.py --output <saída.json>
+python tools/live_match_simulation.py --ref <commit> --output <base.json>
+python tools/live_match_simulation.py --events 12 --speeds 2000,1200,700,220,30 --output <lances.json>
+```
+
+A simulação prova propriedades da apresentação (linhas de passe, impedimento, bola sempre ancorada, lances chegando ao clímax). Ela não executa o motor do Brasfoot e não substitui partida real.
+
 ## Imagens
 
 As imagens do site e da documentação são renderizadas pelo próprio código do painel, com elencos do patch, por [`tools/render_live_match_preview.py`](../tools/render_live_match_preview.py):
