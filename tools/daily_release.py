@@ -294,6 +294,12 @@ def confirm(claimed: dict, diff: dict, countries: dict) -> tuple[dict, list, lis
             else:
                 pool[kind].remove(match)
                 confirmed[kind].append(match)
+    for item in claimed.get("name") or []:
+        if item.get("from") in pool["removed"] and item.get("to") in pool["added"]:
+            pool["removed"].remove(item["from"])
+            pool["added"].remove(item["to"])
+        else:
+            dropped.append({"kind": "name", **item})
     unlisted = [{"kind": kind, "change": change} for kind in KINDS for change in pool[kind]]
     return confirmed, dropped, unlisted
 

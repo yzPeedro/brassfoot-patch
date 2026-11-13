@@ -92,8 +92,9 @@ def roster_changes(published, candidate):
         if old.get("d") != new.get("d"):
             changes["age"].append({"name": new["name"], "from": old.get("d"), "to": new.get("d")})
         if old.get("c") != new.get("c"):
-            changes["nationality"].append({"name": new["name"], "from": country_label(old.get("c")),
-                                           "to": country_label(new.get("c"))})
+            changes["nationality"].append({"name": new["name"], "from": old.get("c"), "to": new.get("c"),
+                                           "fromLabel": country_label(old.get("c")),
+                                           "toLabel": country_label(new.get("c"))})
         if old.get("e") != new.get("e"):
             changes["position"].append({"name": new["name"], "from": old.get("e"), "to": new.get("e")})
         if old.get("i") != new.get("i"):

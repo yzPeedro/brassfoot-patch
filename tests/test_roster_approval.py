@@ -53,7 +53,7 @@ class PairingTests(unittest.TestCase):
         self.assertEqual(changes["added"], ["Chegou"])
         self.assertEqual(changes["removed"], ["Saiu"])
         self.assertEqual(changes["age"], [{"name": "Goleiro", "from": 30, "to": 31}])
-        self.assertEqual(changes["nationality"], [{"name": "Goleiro", "from": "Brazil", "to": "Argentina"}])
+        self.assertEqual(changes["nationality"], [{"name": "Goleiro", "from": 29, "to": 11, "fromLabel": "Brazil", "toLabel": "Argentina"}])
         self.assertEqual(changes["position"], [{"name": "Lateral", "from": 1, "to": 4}])
         self.assertEqual(changes["side"], [{"name": "Lateral", "from": 0, "to": 1}])
         self.assertEqual(changes["name"], [])

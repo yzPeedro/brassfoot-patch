@@ -52,6 +52,13 @@ class ConfirmTests(unittest.TestCase):
         self.assertEqual(sorted(item.get("name") for item in dropped), ["A Um", "Fantasma"])
         self.assertEqual(unlisted, [])
 
+    def test_spelling_change_with_same_player_is_not_a_move(self):
+        old = team("West Ham", [player("Joel Piroe"), player("A Um")])
+        new = team("West Ham", [player("Joël Piroe"), player("A Um")])
+        claimed = {"name": [{"from": "Joel Piroe", "to": "Joël Piroe"}]}
+        confirmed, dropped, unlisted = dr.confirm(claimed, dr.roster_diff(old, new), COUNTRIES)
+        self.assertEqual((confirmed["added"], confirmed["removed"], dropped, unlisted), ([], [], [], []))
+
     def test_ban_change_missing_from_approval_is_reported(self):
         confirmed, dropped, unlisted = dr.confirm({"added": ["F Seis"]}, dr.roster_diff(self.old, self.new),
                                                   COUNTRIES)
