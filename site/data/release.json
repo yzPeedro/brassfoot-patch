@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.6.9",
-  "publishedAt": "2026-11-14T12:07:52.910345+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.6.9-windows-x64.exe",
+  "publishedVersion": "2026.6.10",
+  "publishedAt": "2026-11-14T16:37:22.914397+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.6.10-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
   "fileSizeBytes": 7396352,
-  "sha256": "6c07684efa3a8c2d37e70e0974c3c54623c6992446dc75495da282c4e754c588",
+  "sha256": "9cfd9b76269ddf2340c4a2ff789a0e72baa18419229aecca0edfcfbce3b2928a",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Atualiza 17 idades."
+  "releaseNotes": "Campo animado novo: sincronia com o placar, goleiros, minutos iniciais e jogadas de gol que terminam sem gol."
 }
