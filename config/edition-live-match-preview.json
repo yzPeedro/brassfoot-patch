@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch - Previa Jogo ao Vivo",
   "PATCH_YEAR": 2026,
-  "version": "2026.4.41",
+  "version": "2026.6.13",
   "channel": "local-preview",
-  "releaseNotes": "Previa privada do campo animado durante as partidas.",
+  "releaseNotes": "Previa privada do campo animado com jogadas de gol que terminam sem gol e lance gemeo para cada gol.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [
