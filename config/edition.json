@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.6.8",
+  "version": "2026.6.9",
   "channel": "stable",
-  "releaseNotes": "Adiciona 18 jogadores, retira 11 e atualiza 132 idades, quatro nacionalidades esportivas, uma posição e um lado de campo.",
+  "releaseNotes": "Atualiza 17 idades.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [

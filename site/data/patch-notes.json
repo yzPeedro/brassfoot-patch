@@ -1,7 +1,21 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-13T16:29:29-03:00",
+  "updatedAt": "2026-11-14T09:00:03-03:00",
   "entries": [
+    {
+      "id": "patch-2026-6-9",
+      "version": "2026.6.9",
+      "date": "2026-11-14T09:00:03-03:00",
+      "title": "17 idades atualizadas",
+      "kind": "patch",
+      "summary": "Atualiza 17 idades.",
+      "changes": [
+        "17 idades atualizadas.",
+        "Diferenças sem confirmação ficaram retidas e os últimos dados publicados foram preservados.",
+        "Hub 1.4.2, executável, ligas, escudos, camisas e campo animado permanecem iguais."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.6.9"
+    },
     {
       "id": "patch-2026-6-8",
       "version": "2026.6.8",
