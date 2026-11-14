@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.6.8",
-  "publishedAt": "2026-11-13T19:38:59.852508+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.6.8-windows-x64.exe",
+  "publishedVersion": "2026.6.9",
+  "publishedAt": "2026-11-14T12:07:52.910345+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.6.9-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
   "fileSizeBytes": 7396352,
-  "sha256": "ab8a101bbd4e538474a64cb89805c40dec88e853637243352d5369f38283063e",
+  "sha256": "6c07684efa3a8c2d37e70e0974c3c54623c6992446dc75495da282c4e754c588",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Adiciona 18 jogadores, retira 11 e atualiza 132 idades, quatro nacionalidades esportivas, uma posição e um lado de campo."
+  "releaseNotes": "Atualiza 17 idades."
 }
