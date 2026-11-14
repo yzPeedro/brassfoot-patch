@@ -48,7 +48,7 @@ python tools/patch_live_match_view.py --source <bf22-23.exe> --output <pasta>/bf
 - **Pausa curta nos lances do jogo.** O painel conhece os lances com um minuto de antecedência. Quando o próximo minuto tem gol, pênalti, cartão ou lesão, o painel segura o relógio da partida enquanto a jogada acontece no campo e só deixa o minuto virar no clímax (bola na rede, apito, falta no pênalti). Assim, placar e campo mudam juntos.
 - **Depois do gol.** O relógio continua parado enquanto os jogadores voltam às posições e dão a saída de bola. No início de cada tempo vale o mesmo para a entrada em campo.
 - **O minuto nunca fica mais curto.** Ao soltar o relógio, o painel executa o próprio passo de minuto do Brasfoot, nunca antes do horário em que o jogo o executaria. Fora dessas pausas, a partida corre na velocidade escolhida pelo jogador, e substituições e lances de estatística não pausam o jogo.
-- **Quanto tempo a mais.** Cerca de 3 a 8 segundos por gol (jogada e saída de bola) e até 2,5 segundos por cartão; numa partida típica, de 15 a 30 segundos a mais. A proporção pesa mais nas velocidades rápidas, em que a partida inteira dura menos.
+- **Quanto tempo a mais.** Cerca de 3 a 8 segundos por gol (jogada e saída de bola) e de 2,5 a 3 segundos por cartão em média (até cerca de 5, quando o infrator precisa chegar ao lance); numa partida típica, de 15 a 30 segundos a mais. A proporção pesa mais nas velocidades rápidas, em que a partida inteira dura menos.
 
 | Velocidade do jogo | Intervalo por minuto | Lances de estatística encenados |
 |---|---|---|
@@ -64,8 +64,30 @@ python tools/patch_live_match_view.py --source <bf22-23.exe> --output <pasta>/bf
 - **Nenhum gol perdido:** lances do jogo ficam na fila durante paralisações, na virada de tempo e depois de uma proteção contra travamento; a antecipação do minuto só acontece depois que o painel registra a troca de tempo; um gol pendente do 1º tempo é mostrado antes da entrada para o 2º tempo, e um gol interrompido é refeito uma vez.
 - **Faltas no lugar certo:** faltas comuns e com cartão nunca são marcadas dentro da área de quem comete; a falta que gera pênalti é marcada dentro da área.
 - **Diálogos e pausa:** com diálogos do jogo abertos o painel não segura o relógio, e um pedido de pausa ou substituição libera o relógio na hora.
-- **Bola sempre ancorada:** a posse só muda por contato (passe, domínio, desarme ou cobrança), e cada fase termina em um estado explícito.
+- **Bola sempre ancorada:** a posse só muda por contato (passe, domínio, desarme, interceptação ou cobrança), e cada fase termina em um estado explícito.
+- **Validação central:** antes de confirmar uma ação, o painel recusa desarme em goleiro com a bola e passe cujo destino seja um adversário, e decide laterais, escanteios e tiros de meta pelo último toque. Cada recusa é registrada no diagnóstico (`rule_*`).
 - **Diagnóstico:** eventos de integração são registrados em `%LOCALAPPDATA%\BrassfootPatch2026\live-match-debug.log`.
+
+## Regras do futebol e reconciliação com o motor
+
+O lance do Brasfoot define o destino da jogada; o painel escolhe uma sequência de futebol que leve até ele, sem atalhos visuais. O plano parte do lance e volta no tempo: quem precisa estar onde, e quando, considerando velocidade, aceleração e o tempo que a bola leva até o ponto de contato.
+
+| Situação | Como é representada |
+|---|---|
+| Último toque | O painel registra quem tocou a bola por último. Lateral e escanteio vão para o adversário de quem tocou por último; tiro de meta, para o goleiro de quem defendeu. Quando o adversário precisa ganhar o lateral, quem pressiona toca na bola antes de ela sair |
+| Goleiro com a bola | Nunca é desarmado. Se a posse precisa mudar, o goleiro repõe curto e um adversário que lê a linha intercepta; sem linha interceptável, ele chuta longe e a bola é disputada onde um adversário chega primeiro. A mesma regra vale com a bola nos pés (decisão de apresentação do projeto) |
+| Erro de passe e perda de posse | O passe sempre mira um companheiro. O adversário que chega antes a algum ponto da trajetória corre até ele e intercepta no meio do caminho; sem interceptação possível, o passe sai forte ou fraco demais e para onde um adversário chega primeiro |
+| Bola solta | Rola e desacelera depois do passe. O mais rápido de cada time vai até ela e quem toca primeiro fica com a posse; nos lances do jogo em que o time certo precisa ficar com a bola, o adversário fecha sem tocar |
+| Falta e cartão | O infrator marca a zona da jogada assim que o lance é conhecido e a falta só é apitada com contato. O portador continua no ritmo normal e protege a bola quando o infrator se aproxima. Se a bola não chega perto dele, a falta é sem bola, sobre o adversário mais próximo, e a bola é levada ao local durante a paralisação. O motor não informa o motivo do cartão; a representação é sempre de falta |
+| Substituição | Fica pendente até a próxima interrupção (bola fora, falta, gol, lesão, intervalo). Se o jogo não para, a próxima perda de posse sai pela lateral; nas velocidades rápidas, depois de 7 segundos a troca acontece com o jogador sem participação no lance. Quem entra vem pelo meio-campo |
+| Gol contra | O atacante chuta ou cruza numa trajetória que não entraria, ao lado da trave; o defensor se coloca na linha da bola e o desvio muda a direção para dentro do gol |
+| Passe para o gol | Sai só quando o autor consegue chegar ao ponto (até cerca de 1,9 s). A duração do passe é o tempo de chegada do autor: bola e jogador chegam juntos. Se o prazo vence com o autor longe, o ponto do chute é trazido para onde ele alcança, desde que continue sendo um chute plausível. O chute pode ser de primeira ou depois do domínio |
+| Desarme | O desarmador é o que intercepta o caminho do portador mais cedo, com rota de antecipação. O portador não é freado; quando o perseguidor vem por trás, ele corta para dentro. Sem contato no prazo, outro defensor tenta; depois disso, o portador dá um toque longo e a bola é disputada |
+| Passe para trás | Antes de passar para trás, o portador desacelera e gira; a bola contorna o corpo até o lado do passe |
+| Atacante livre | Sem finalização prevista pelo motor, o atacante livre conduz em direção ao gol em vez de recuar; perto da área, um defensor fecha e desarma ou afasta, ou o cruzamento é cortado |
+| Linha defensiva | Escalonada: o zagueiro do lado da bola sobe, o da sobra fica mais recuado e o lateral do lado oposto fecha por dentro, cada jogador com uma pequena variação própria. A linha sobe junta quando o portador adversário recua |
+
+As velocidades e acelerações usadas no planejamento são as mesmas do movimento dos jogadores, por isso o que o plano considera alcançável é o que o jogador consegue fazer em campo.
 
 ## Jogo corrido
 
@@ -86,7 +108,7 @@ Passe para jogador em posição de impedimento no momento do passe é descartado
 **Sem a bola.**
 
 - **Quem defende:**
-  - a linha defensiva fica alinhada, numa profundidade que acompanha a distância da bola ao gol, a marcação e o estilo;
+  - a linha defensiva fica escalonada em torno de uma profundidade que acompanha a distância da bola ao gol, a marcação e o estilo;
   - meio e ataque se posicionam a partir dessa linha, com o bloco deslizando para o lado da bola;
   - o primeiro pressionador ataca pelo lado do próprio gol; o segundo dobra a marcação perto da lateral ou na própria defesa e, no resto do campo, fecha a linha de passe;
   - os demais marcam por zona, cada defensor com o atacante mais próximo, pelo lado do gol.
@@ -103,14 +125,14 @@ Passe para jogador em posição de impedimento no momento do passe é descartado
 - A tabela só é devolvida se a linha de volta estiver aberta e o jogador que se desmarcou não estiver impedido.
 - Os dribles são corte, arrancada, finta de corpo e giro de costas para o gol. Caneta, chapéu e carretilha são raros e dependem da geometria (marcador de frente e perto, marcador vindo em velocidade, ponta em velocidade no corredor).
 - O drible pode falhar, e o marcador desarma.
-- Quando a proporção de posse pede a troca, a bola é perdida para quem pressiona ou num passe interceptado pelo adversário mais próximo da linha.
+- Quando a proporção de posse pede a troca, a bola é perdida para quem pressiona, num passe interceptado no meio da trajetória ou num passe forte ou fraco demais; o goleiro nunca perde a bola por desarme.
 
 **Laterais e escanteios.**
 
 - Surgem de afastamentos, de desarmes que terminam em chutão e de bolas perdidas perto da lateral.
 - O cobrador vai até a bola (no escanteio, conduz até a bandeira), os companheiros se aproximam e o adversário se organiza na área; no escanteio, o cruzamento termina em corte ou na mão do goleiro.
 - Só começam com o jogo corrido livre: nenhum lance do jogo na fila nem iminente, nenhuma antecipação de minuto, nenhuma falta, gol ou pênalti em curso.
-- Lateral exige 700 ms ou mais por minuto e escanteio 1200 ms ou mais.
+- Lateral exige 700 ms ou mais por minuto e escanteio 1200 ms ou mais, exceto o lateral usado para parar o jogo numa substituição pendente.
 - Um lance do jogo que chegue durante a cobrança a interrompe na hora; a bola fica onde está, com quem estiver em contato com ela.
 
 **Velocidades.** A tela de partida usa os intervalos de `best/aq.rz` (2000, 1200, 700, 450, 220 e 100 ms por minuto), os de `best/aq.rA` (1200, 700, 300, 100, 70 e 30 ms) e 1 ms no modo instantâneo. Jogadores e bola sempre se movem no ritmo normal; nas velocidades rápidas, laterais e escanteios não são encenados.
@@ -123,9 +145,13 @@ Passe para jogador em posição de impedimento no momento do passe é descartado
 python tools/live_match_simulation.py --output <saída.json>
 python tools/live_match_simulation.py --ref <commit> --output <base.json>
 python tools/live_match_simulation.py --events 12 --speeds 2000,1200,700,220,30 --output <lances.json>
+python tools/live_match_simulation.py --audit 8 --output <regras.json>
+python tools/live_match_simulation.py --ref <commit> --audit 8 --output <regras-base.json>
 ```
 
-A simulação prova propriedades da apresentação (linhas de passe, impedimento, bola sempre ancorada, lances chegando ao clímax). Ela não executa o motor do Brasfoot e não substitui partida real.
+O modo `--audit` confere as regras da seção anterior com um observador próprio, que não usa o registro de toque do painel: lateral e escanteio para o time do último toque, desarme e perda de bola do goleiro, passe com destino adversário, bola parada sem ninguém indo até ela, apito sem contato, velocidade do portador no desarme, passe para trás atravessando o corpo, recuo de atacante livre, linha defensiva rígida, bola esperando o autor do gol, último toque e trajetória no gol contra, substituição com bola rolando e recusas do validador do painel. Roda jogo corrido com lances de estatística, gols, gols contra, cartões e substituições em todas as velocidades, mais cinco cenários dirigidos (lateral sob pressão, goleiro com a bola, atacante livre, desarme por trás e passe para trás).
+
+A simulação prova propriedades da apresentação (linhas de passe, impedimento, bola sempre ancorada, lances chegando ao clímax, regras acima). Ela não executa o motor do Brasfoot e não substitui partida real.
 
 ## Imagens
 
