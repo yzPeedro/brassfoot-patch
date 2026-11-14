@@ -1371,11 +1371,11 @@ def main() -> None:
     prep.add_argument("--base-game", type=Path, required=True)
     prep.add_argument("--work", type=Path, required=True)
     prep.add_argument("--original-game", type=Path, default=PRIVATE / "vanilla-22-23")
-    prep.add_argument("--full-executable", type=Path, default=PRIVATE / "live-match-release-2026.5.7" / "bf22-23.exe")
+    prep.add_argument("--full-executable", type=Path, default=PRIVATE / "live-match-release-2026.6.10" / "bf22-23.exe")
     prep.add_argument("--live-executable", type=Path,
-                      default=PRIVATE / "live-match-release-2026.5.7" / "bf22-23-live-only.exe")
+                      default=PRIVATE / "live-match-release-2026.6.10" / "bf22-23-live-only.exe")
     prep.add_argument("--patch-executable", type=Path,
-                      default=PRIVATE / "live-match-release-2026.5.7" / "bf22-23-patch-only.exe")
+                      default=PRIVATE / "live-match-release-2026.6.10" / "bf22-23-patch-only.exe")
     prep.add_argument("--snapshot", type=Path, default=PRIVATE / "daily" / "snapshot.json")
     prep.add_argument("--world-snapshot", type=Path, default=ROOT / "config" / "super-update-world-2026.json")
     prep.add_argument("--super-update-build", type=Path)

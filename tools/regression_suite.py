@@ -692,7 +692,7 @@ def section_saves(ctx: Context) -> dict:
     if missing:
         return finish("saves", started, [check("entradas", False, "ausentes: " + ", ".join(missing))], [], notes)
     bases: dict[str, str | None] = {}
-    base_dir = Path(ctx.args.base_executables).resolve() if ctx.args.base_executables else ctx.vanilla.parent / "live-match-release-2026.5.7"
+    base_dir = Path(ctx.args.base_executables).resolve() if ctx.args.base_executables else ctx.vanilla.parent / "live-match-release-2026.6.10"
     for key, name in (("full", "bf22-23.exe"), ("live", "bf22-23-live-only.exe"), ("season", "bf22-23-patch-only.exe")):
         bases[key] = maybe_sha(base_dir / name)
     if not any(bases.values()):
