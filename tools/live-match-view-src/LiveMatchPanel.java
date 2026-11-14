@@ -250,6 +250,30 @@ public final class LiveMatchPanel extends JPanel {
     private int openingGoals;
     private int clearChanceShots;
     private int shownAtClimax;
+    private static final int SHOT_BLOCKED = 6;
+    private static final int DECOY_SHOT = 0;
+    private static final int DECOY_INTERCEPT = 1;
+    private static final int DECOY_KEEPER = 2;
+    private static final int DECOY_OVERHIT = 3;
+    private static final int DECOY_TACKLE = 4;
+    private static final int DECOY_BLOCK = 5;
+    private boolean decoyActive;
+    private boolean decoyStatShot;
+    private int decoyOutcome;
+    private long decoyDeadline;
+    private int lastDecoyTick = -99;
+    private long lastDecoyAt;
+    private int decoyCount;
+    private int decoyStatCount;
+    private int decoyAbandoned;
+    private final int[] decoyEndings = new int[6];
+    private int blockSide = -1;
+    private final List<int[]> pendingTwins = new ArrayList<int[]>();
+    private int twinsQueued;
+    private int twinsPlayed;
+    private boolean decoyTwin;
+    private boolean prepFinal;
+    private int blockPlayer = -1;
     private Method showMethod;
     private boolean firstTimeFinish;
     private double rollVX;
@@ -702,6 +726,7 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private void startStatCue(long now, int[] cue) {
+        endDecoy();
         counterSide = -1;
         carryUntil = 0;
         int kind = cue[0], side = cue[1];
@@ -714,6 +739,15 @@ public final class LiveMatchPanel extends JPanel {
             statCueActive = 1;
             pendingStatShotSide = side;
             controlUntil = Math.min(controlUntil, now + 200L);
+            int[] twin = twinFor(side);
+            if (possessingSide == side && possessingPlayer != 0 && carrierHasBall()
+                    && (twin != null || random.nextInt(100) < 70) && startDecoy(now, side, true, twin)) {
+                pendingStatShotSide = -1;
+                if (twin != null) {
+                    pendingTwins.remove(twin);
+                    twinsPlayed++;
+                }
+            }
         } else if (kind == 2) {
             if (possessingSide == side) { onClimax(); return; }
             statCueActive = 2;
@@ -958,6 +992,7 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private boolean firstHalfGoalOutstanding() {
+        if (decoyActive) endDecoy();
         if (activeGoalAction != null || pendingGoalStage != 0 || penaltyBuild || cardFoulFreeKick
                 || freeKickPhase != 0 || penaltyPhase != 0) return true;
         if (restartActive && !halfStartPending && clockNow() - restartStarted < 1500L) return true;
@@ -1164,6 +1199,8 @@ public final class LiveMatchPanel extends JPanel {
         activeGoalAction = null;
         activeEngineAction = null;
         engineEventOpen = false;
+        decoyActive = false;
+        decoyStatShot = false;
         escalation = 0;
         escalateAt = 0;
         forceShot = false;
@@ -1201,6 +1238,7 @@ public final class LiveMatchPanel extends JPanel {
         preEventActive = false;
         preEventRemaining = 0;
         prepPassUntil = 0;
+        prepFinal = false;
         keeperLossSide = -1;
         interceptSide = -1;
         interceptPlayer = -1;
@@ -1451,6 +1489,7 @@ public final class LiveMatchPanel extends JPanel {
             return;
         }
         if (pendingGoalStage == 2) {
+            queueTwin(pendingGoalSide, ownGoalActive ? GOAL_CROSS : goalVariant, ownGoalActive ? -1 : pendingGoalActor);
             looseBall = false;
             pendingGoalStage = 0;
             ownGoalActive = false;
@@ -2091,6 +2130,7 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private void beginHalfStart(long now, int side) {
+        endDecoy();
         abortRestartPlay(now);
         counterSide = -1;
         carryUntil = 0;
@@ -2157,7 +2197,7 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private boolean hasAnimationStoppage() {
-        return restartActive || kickoffInProgress || pendingGoalStage != 0 || penaltyPhase != 0
+        return restartActive || kickoffInProgress || pendingGoalStage != 0 && !decoyActive || penaltyPhase != 0
                 || freeKickPhase != 0 || cardFoulPhase != 0 || simpleStoppageUntil != 0 || injuryPhase != 0
                 || restartPlay != 0;
     }
@@ -2544,6 +2584,10 @@ public final class LiveMatchPanel extends JPanel {
             }
             return;
         }
+        if (decoyActive) {
+            decoyShot(now);
+            return;
+        }
         double toGoal = 1.0 - attackProgress(pendingGoalSide, ballX);
         double postSign = random.nextBoolean() ? 1.0 : -1.0;
         double shotY = .5 + postSign * (.015 + random.nextDouble() * .055);
@@ -2877,6 +2921,19 @@ public final class LiveMatchPanel extends JPanel {
         int side = pendingGoalSide;
         int scorer = pendingGoalActor;
         Dot[] team = side == 0 ? home : away;
+        if (decoyActive && (possessingSide != side || now > decoyDeadline)) {
+            if (possessingSide == side) decoyAbandoned++;
+            endDecoy();
+            return;
+        }
+        if (decoyActive && possessingPlayer != scorer && possessingPlayer > 0 && clearChance(side, carrierDot())) {
+            clearChanceShots++;
+            decoyEnding(DECOY_SHOT);
+            decoyStatShot = false;
+            endDecoy();
+            startShot(now, visualShotOutcome());
+            return;
+        }
         if (possessingSide != side) {
             Dot other = carrierDot();
             if (possessingPlayer != 0 && clearChance(possessingSide, other)) {
@@ -3124,11 +3181,17 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private void finalBall(long now, int side, int scorer, boolean lofted) {
+        if (!prepBypass && preparePass(now, side, scorer, plannedSpotX, plannedSpotY, 0, lofted, false)) {
+            prepFinal = true;
+            prepLofted = lofted;
+            return;
+        }
         double ballTravel = distance(ballX, ballY, plannedSpotX, plannedSpotY);
         double seconds = Math.max(ballTravel / (lofted ? .45 : .62), scorerEta(side, scorer) + .04);
         int duration = (int) Math.max(lofted ? 900 : 480, Math.min(goalVariant == GOAL_LONG_BALL ? 3000 : 2600,
                 seconds * 1000.0 * motion / urgency));
         goalFinalPassed = true;
+        if (decoyActive && decoyFinalBall(now, side, scorer, lofted, Math.max(duration, lofted ? 900 : 0))) return;
         if (lofted) {
             duration = Math.max(duration, 900);
             double inswing = (plannedSpotY - ballY) * -.18;
@@ -3209,7 +3272,15 @@ public final class LiveMatchPanel extends JPanel {
             }
             Dot carrier = shooting[Math.max(0, Math.min(shooting.length - 1, possessingPlayer))];
             boolean inRange = shotSide == 0 ? carrier.currentX >= .68 : carrier.currentX <= .32;
-            if (inRange) {
+            int[] twin = twinFor(shotSide);
+            if (statCueActive == 1 && possessingPlayer != 0 && (twin != null || random.nextInt(100) < 70)
+                    && startDecoy(now, shotSide, true, twin)) {
+                pendingStatShotSide = -1;
+                if (twin != null) {
+                    pendingTwins.remove(twin);
+                    twinsPlayed++;
+                }
+            } else if (inRange) {
                 pendingStatShotSide = -1;
                 startAmbientShot(now);
             } else {
@@ -3665,6 +3736,12 @@ public final class LiveMatchPanel extends JPanel {
         return fromY + (toY - fromY) * f;
     }
 
+    private double lineCrossTarget(double fromX, double fromY, double lineX, double crossY, double targetX) {
+        double span = lineX - fromX;
+        if (Math.abs(span) < 1e-6) return crossY;
+        return clamp(fromY + (crossY - fromY) * (targetX - fromX) / span, -.05, 1.05);
+    }
+
     private void beatenDive(int keeperSide, double fromX, double fromY, double toX, double toY, long now, int duration,
                             boolean lofted) {
         Dot keeper = (keeperSide == 0 ? home : away)[0];
@@ -3707,6 +3784,7 @@ public final class LiveMatchPanel extends JPanel {
         double fromX = ballX, fromY = ballY;
         double travel = Math.abs(lineX - fromX);
         int duration = (int) (430 + travel * 1400) + random.nextInt(120);
+        boolean loftedShot = travel > .25;
         double sign = random.nextBoolean() ? 1.0 : -1.0;
         if (outcome == SHOT_CATCH || outcome == SHOT_PARRY_CORNER || outcome == SHOT_PARRY_REBOUND) {
             double offset = (outcome == SHOT_CATCH ? .012 + random.nextDouble() * .03 : .035 + random.nextDouble() * .03)
@@ -3718,10 +3796,35 @@ public final class LiveMatchPanel extends JPanel {
             }
             int flight = (int) Math.max(380, duration * Math.abs(cx - fromX) / Math.max(.05, travel));
             ambientShotY = cy;
-            shootAt(now, cx, cy, flight, false, 0, 0);
+            shootAt(now, cx, cy, flight, loftedShot, 0, 0);
             long reaction = Math.min(180L, flight / 4);
             startKeeperDive(keeperSide, cx, cy, now + reaction, flight - reaction);
             return;
+        }
+        if (outcome == SHOT_BLOCKED) {
+            Dot[] defenders = keeperSide == 0 ? home : away;
+            int blocker = -1;
+            double best = Double.MAX_VALUE;
+            for (int i = 1; i < defenders.length; i++) {
+                if (!defenders[i].active) continue;
+                Dot d = defenders[i];
+                double ahead = attackProgress(shooterSide, d.currentX) - attackProgress(shooterSide, fromX);
+                if (ahead < .015 || ahead > .20) continue;
+                double lineY = crossingY(fromX, fromY, lineX, .5, d.currentX);
+                double gap = Math.abs(d.currentY - lineY);
+                if (gap < .09 && ahead + gap < best) { best = ahead + gap; blocker = i; }
+            }
+            if (blocker >= 0) {
+                Dot d = defenders[blocker];
+                blockSide = keeperSide;
+                blockPlayer = blocker;
+                double bx = d.currentX + (fromX - d.currentX) * .25, by = d.currentY + (fromY - d.currentY) * .25;
+                ambientShotY = by;
+                shootAt(now, bx, by, (int) (180 + distance(fromX, fromY, bx, by) * 900), false, 0, 0);
+                return;
+            }
+            outcome = SHOT_WIDE;
+            ambientShotOutcome = outcome;
         }
         double ty;
         double tx;
@@ -3729,12 +3832,13 @@ public final class LiveMatchPanel extends JPanel {
             ty = sign > 0 ? POST_HIGH : POST_LOW;
             tx = shooterSide == 0 ? .998 : .002;
         } else {
-            ty = .5 + sign * (.12 + random.nextDouble() * .07);
+            double crossY = .5 + sign * (POST_HIGH - .5 + .03 + random.nextDouble() * .09);
             tx = shooterSide == 0 ? GOAL_OUT : 1.0 - GOAL_OUT;
+            ty = lineCrossTarget(fromX, fromY, lineX, crossY, tx);
         }
         ambientShotY = ty;
-        shootAt(now, tx, ty, duration, false, 0, 0);
-        beatenDive(keeperSide, fromX, fromY, tx, ty, now, duration, false);
+        shootAt(now, tx, ty, duration, loftedShot, 0, 0);
+        beatenDive(keeperSide, fromX, fromY, tx, ty, now, duration, loftedShot);
     }
 
     private void handleAmbientShotArrival(long now) {
@@ -3779,6 +3883,30 @@ public final class LiveMatchPanel extends JPanel {
             double ry = clamp(ballY + (ballY < .5 ? -1 : 1) * (.08 + random.nextDouble() * .10), .12, .88);
             possessingSide = ambientShotSide;
             sendBallTo(now, rx, ry, 420 + random.nextInt(140), -1, -1);
+            return;
+        }
+        if (outcome == SHOT_BLOCKED) {
+            ambientShotPhase = 0;
+            event = "Chute bloqueado";
+            if (blockSide >= 0 && blockPlayer >= 0) touch(blockSide, blockPlayer);
+            int defendingSide = blockSide;
+            blockSide = -1;
+            blockPlayer = -1;
+            if (inDefendedBox(defendingSide, ballX, ballY, .06) && random.nextInt(100) < 45) {
+                double outX = defendingSide == 0 ? -.05 : 1.05;
+                double lineX = defendingSide == 0 ? 0.0 : 1.0;
+                double crossY = ballY < .5 ? POST_LOW - .05 - random.nextDouble() * .15 : POST_HIGH + .05 + random.nextDouble() * .15;
+                double outY = lineCrossTarget(ballX, ballY, lineX, crossY, outX);
+                possessingSide = ambientShotSide;
+                sendBallOut(now, outX, outY, RESTART_CORNER);
+                ballToY = outY;
+                return;
+            }
+            double direction = ambientShotSide == 0 ? 1.0 : -1.0;
+            double rx = clamp(ballX - direction * (.05 + random.nextDouble() * .08), .05, .95);
+            double ry = clamp(ballY + (random.nextDouble() - .5) * .22, .10, .90);
+            possessingSide = defendingSide;
+            sendBallTo(now, rx, ry, 380 + random.nextInt(160), -1, -1);
             return;
         }
         if (outcome == SHOT_POST) {
@@ -4033,6 +4161,7 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private void beginKickoffReset(long now, int restartSide) {
+        endDecoy();
         clearPlayVariety();
         restartActive = true;
         kickoffInProgress = false;
@@ -4212,6 +4341,14 @@ public final class LiveMatchPanel extends JPanel {
         boolean pressed = pressure < .055;
         boolean flair = cardFoulPhase == 0 && statCueActive == 0 && !preEventActive && pendingGoalStage == 0
                 && !plannedImminent() && possessingPlayer != 0;
+        int[] twin = twinFor(possessingSide);
+        if (twin != null && !license && cardFoulPhase == 0 && statCueActive == 0 && possessingPlayer != 0
+                && progress >= .10 && progress < .85 && decoyAllowed(now) && now - lastDecoyAt >= 2500L
+                && now - restartStarted >= 2500L && startDecoy(now, possessingSide, false, twin)) {
+            pendingTwins.remove(twin);
+            twinsPlayed++;
+            return;
+        }
         if (raidStage != 0 && (raidSide != possessingSide || possessingPlayer != raidPlayer
                 || now > raidDeadline + 1500L)) raidStage = 0;
         if (wallPasser >= 0 && (wallSide != possessingSide || possessingPlayer != wallReceiver
@@ -4285,6 +4422,11 @@ public final class LiveMatchPanel extends JPanel {
             return;
         }
         boolean counter = counterSide == possessingSide && now < counterUntil;
+        if (flair && !license && raidStage == 0 && progress >= .36 && progress < .70 && decoyAllowed(now)
+                && gameTick - lastDecoyTick >= 2 && now - lastDecoyAt >= 4000L && random.nextInt(100) < 40
+                && startDecoy(now, possessingSide, false)) {
+            return;
+        }
         int raidChance = style == 1 ? 11 : style == 2 ? 6 : 8;
         if (flair && !license && raidStage == 0 && !pressed && progress >= .52 && progress < .76
                 && random.nextInt(100) < raidChance) {
@@ -4454,6 +4596,7 @@ public final class LiveMatchPanel extends JPanel {
         if (cos > -.25) return false;
         Dot[] side = team == 0 ? home : away;
         prepPassUntil = now + 240L + (long) (Math.min(1.0, -cos) * 160) + random.nextInt(90);
+        prepFinal = false;
         prepSide = team;
         prepCarrier = possessingPlayer;
         prepReceiver = receiver;
@@ -4472,7 +4615,19 @@ public final class LiveMatchPanel extends JPanel {
 
     private void executePreparedPass(long now) {
         prepPassUntil = 0;
+        boolean finalPass = prepFinal;
+        prepFinal = false;
         if (prepSide != possessingSide || prepCarrier != possessingPlayer) return;
+        if (finalPass) {
+            if (pendingGoalStage != 1 || prepSide != pendingGoalSide || prepReceiver != pendingGoalActor) return;
+            prepBypass = true;
+            try {
+                finalBall(now, prepSide, prepReceiver, prepLofted);
+            } finally {
+                prepBypass = false;
+            }
+            return;
+        }
         Dot[] side = prepSide == 0 ? home : away;
         if (prepReceiver < 0 || prepReceiver >= side.length || !side[prepReceiver].active) return;
         Dot mate = side[prepReceiver];
@@ -4584,12 +4739,14 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private void sendBallOut(long now, double x, double y, int type) {
+        boolean olympicTwin = decoyActive && goalVariant == GOAL_OLYMPIC && type == RESTART_CORNER;
         int toucher = lastTouchSide >= 0 ? lastTouchSide : possessingSide;
         int takingSide = 1 - toucher;
         if (type == RESTART_CORNER) {
             int goalOwner = x < .5 ? 0 : 1;
             if (toucher != goalOwner) ruleViolation("corner_after_attacker_touch");
         }
+        if (!olympicTwin) endDecoy();
         curveActive = false;
         ballLift = 0;
         looseBall = false;
@@ -4724,6 +4881,35 @@ public final class LiveMatchPanel extends JPanel {
         if (kind == RESTART_CORNER && pendingGoalStage == 1 && side == pendingGoalSide
                 && (goalVariant == GOAL_OLYMPIC || ownGoalCorner)) {
             int defending = 1 - side;
+            if (goalVariant == GOAL_OLYMPIC && decoyActive) {
+                Dot keeper = (defending == 0 ? home : away)[0];
+                int roll = random.nextInt(100);
+                int outcome = roll < 45 ? SHOT_CATCH : roll < 70 ? SHOT_POST : SHOT_PARRY_CORNER;
+                double bend = restartSpotY < .5 ? .10 : -.10;
+                double bendX = side == 0 ? -.10 : .10;
+                int duration = 1150 + random.nextInt(200);
+                double fromX = ballX, fromY = ballY;
+                decoyEnding(DECOY_SHOT);
+                endDecoy();
+                ambientShotPhase = 1;
+                ambientShotSide = side;
+                ambientShotOutcome = outcome;
+                event = "Escanteio direto!";
+                if (outcome == SHOT_POST || !keeper.active) {
+                    ambientShotOutcome = SHOT_POST;
+                    double tx = side == 0 ? .998 : .002, ty = restartSpotY < .5 ? POST_LOW : POST_HIGH;
+                    ambientShotY = ty;
+                    shootAt(now, tx, ty, duration, true, bendX, bend);
+                    beatenDive(defending, fromX, fromY, tx, ty, now, duration, true);
+                } else {
+                    double tx = keeper.currentX;
+                    double ty = clamp(keeper.currentY + (restartSpotY < .5 ? -.02 : .02), POST_LOW + .01, POST_HIGH - .01);
+                    ambientShotY = ty;
+                    shootAt(now, tx, ty, duration, true, bendX, bend);
+                    startKeeperDive(defending, tx, ty, now + duration - 380L, 360L);
+                }
+                return;
+            }
             if (goalVariant == GOAL_OLYMPIC) {
                 double goalX = side == 0 ? GOAL_OUT : 1.0 - GOAL_OUT;
                 double nearY = restartSpotY < .5 ? .5 - .03 - random.nextDouble() * .03 : .5 + .03 + random.nextDouble() * .03;
@@ -5314,6 +5500,7 @@ public final class LiveMatchPanel extends JPanel {
             return;
         }
         if (type == 8) return;
+        endDecoy();
         abortRestartPlay(now);
         boolean cardType = type == 2 || type == 3 || type == 4;
         boolean openPlayGoal = type == 1 && subtype != 3 && subtype != 4;
@@ -5494,6 +5681,197 @@ public final class LiveMatchPanel extends JPanel {
             if (roll < 0) return i;
         }
         return GOAL_THROUGH;
+    }
+
+    private boolean decoyAllowed(long now) {
+        return !decoyActive && pendingGoalStage == 0 && cardFoulPhase == 0 && injuryPhase == 0 && restartPlay == 0
+                && !restartActive && !kickoffInProgress && penaltyPhase == 0 && freeKickPhase == 0 && !engineEventOpen
+                && queuedEngineActions.isEmpty() && !plannedImminent() && ambientShotPhase == 0 && !matchEnded();
+    }
+
+    private int chooseDecoyScorer(Dot[] team) {
+        int total = 0;
+        int[] weights = new int[team.length];
+        for (int i = 1; i < team.length; i++) {
+            if (!team[i].active) continue;
+            weights[i] = team[i].roleLine >= 3 ? 6 : team[i].roleLine == 2 ? 3 : 1;
+            total += weights[i];
+        }
+        if (total == 0) return -1;
+        int roll = random.nextInt(total);
+        for (int i = 1; i < team.length; i++) {
+            roll -= weights[i];
+            if (roll < 0) return i;
+        }
+        return -1;
+    }
+
+    private boolean startDecoy(long now, int side, boolean statShot) {
+        return startDecoy(now, side, statShot, null);
+    }
+
+    private int[] twinFor(int side) {
+        for (int[] twin : pendingTwins) if (twin[0] == side) return twin;
+        return null;
+    }
+
+    private void queueTwin(int side, int variant, int scorer) {
+        if (variant == GOAL_ERROR) variant = GOAL_THROUGH;
+        pendingTwins.add(new int[] {side, variant, scorer});
+        twinsQueued++;
+        while (pendingTwins.size() > 4) pendingTwins.remove(0);
+    }
+
+    private boolean startDecoy(long now, int side, boolean statShot, int[] twin) {
+        if (!decoyAllowed(now) || possessingSide != side || looseBall || ballInFlight || !carrierHasBall()) return false;
+        Dot[] team = side == 0 ? home : away;
+        int actor = twin != null && twin[2] > 0 && twin[2] < team.length && team[twin[2]].active ? twin[2] : chooseDecoyScorer(team);
+        if (actor < 0) return false;
+        clearPlayVariety();
+        decoyActive = true;
+        decoyStatShot = statShot;
+        decoyTwin = twin != null;
+        int roll = random.nextInt(100);
+        if (statShot) decoyOutcome = roll < 85 ? DECOY_SHOT : DECOY_BLOCK;
+        else if (twin != null) decoyOutcome = roll < 35 ? DECOY_SHOT : roll < 53 ? DECOY_INTERCEPT : roll < 68 ? DECOY_KEEPER
+                : roll < 75 ? DECOY_OVERHIT : roll < 85 ? DECOY_TACKLE : DECOY_BLOCK;
+        else decoyOutcome = roll < 30 ? DECOY_INTERCEPT : roll < 50 ? DECOY_KEEPER : roll < 62 ? DECOY_OVERHIT
+                : roll < 82 ? DECOY_TACKLE : DECOY_BLOCK;
+        decoyDeadline = now + 10000L;
+        lastDecoyTick = gameTick;
+        lastDecoyAt = now;
+        decoyCount++;
+        if (statShot) decoyStatCount++;
+        pendingGoalStage = 1;
+        pendingGoalSide = side;
+        pendingGoalActor = actor;
+        plannedSide = side;
+        plannedActor = actor;
+        plannedType = 1;
+        plannedSubtype = 0;
+        plannedAssist = -1;
+        goalBuildPasses = 0;
+        goalBuildTarget = minuteDelay() <= 700 ? 0 : random.nextInt(2);
+        goalFinalPassed = false;
+        goalReboundPhase = 0;
+        activeGoalAction = null;
+        ownGoalActive = false;
+        ownGoalCorner = false;
+        ownGoalDefender = -1;
+        forceShot = false;
+        goalVariant = twin != null ? twin[1] : chooseGoalVariant(side, actor);
+        if (goalVariant == GOAL_REBOUND && !statShot && twin == null) goalVariant = GOAL_THROUGH;
+        if (goalVariant == GOAL_OLYMPIC && statShot) goalVariant = GOAL_CROSS;
+        firstTimeFinish = random.nextInt(100) < 45;
+        if (goalVariant == GOAL_LOB_MIDFIELD) {
+            Dot lobber = team[actor];
+            double depth = clamp(attackProgress(side, lobber.currentX), .48, .58);
+            plannedSpotX = side == 0 ? depth : 1.0 - depth;
+            plannedSpotY = clamp(lobber.currentY, .30, .70);
+        } else if (goalVariant != GOAL_OLYMPIC) {
+            choosePlannedSpot(1, 0);
+            chooseGoalSpot(side, goalVariant);
+        }
+        olympicCorner = false;
+        chooseGoalDecoys(side);
+        goalStageDeadline = now + goalBudget();
+        if (!ballInFlight && !looseBall) controlUntil = Math.min(controlUntil, now + 300L);
+        return true;
+    }
+
+    private void endDecoy() {
+        if (!decoyActive) return;
+        if (decoyStatShot && statCueActive == 1 && ambientShotPhase == 0) pendingStatShotSide = pendingGoalSide;
+        decoyActive = false;
+        decoyStatShot = false;
+        decoyTwin = false;
+        pendingGoalStage = 0;
+        goalFinalPassed = false;
+        forceShot = false;
+        firstTimeFinish = false;
+        goalReboundPhase = 0;
+        goalStep = 0;
+        goalPartner = -1;
+        goalDecoys[0] = -1;
+        goalDecoys[1] = -1;
+    }
+
+    private void decoyEnding(int ending) {
+        if (ending >= 0 && ending < decoyEndings.length) decoyEndings[ending]++;
+    }
+
+    private boolean decoyFinalBall(long now, int side, int scorer, boolean lofted, int duration) {
+        int defending = 1 - side;
+        Dot[] rivals = defending == 0 ? home : away;
+        int outcome = decoyOutcome;
+        if (outcome == DECOY_KEEPER && (!inDefendedBox(defending, plannedSpotX, plannedSpotY, .02) || !rivals[0].active)) {
+            outcome = DECOY_INTERCEPT;
+        }
+        if (outcome != DECOY_INTERCEPT && outcome != DECOY_KEEPER && outcome != DECOY_OVERHIT) return false;
+        double goalX = defending == 0 ? 0.0 : 1.0;
+        double tx = plannedSpotX, ty = plannedSpotY;
+        double[] point = new double[3];
+        int cutter;
+        if (outcome == DECOY_OVERHIT) {
+            tx = goalX + (plannedSpotX - goalX) * .30;
+            ty = .5 + (plannedSpotY - .5) * .6;
+            cutter = rivals[0].active ? 0 : nearestActive(rivals, tx, ty, -1, false);
+            point[0] = tx;
+            point[1] = ty;
+        } else if (outcome == DECOY_KEEPER) {
+            cutter = 0;
+            point[0] = plannedSpotX + (goalX - plannedSpotX) * .25;
+            point[1] = plannedSpotY + (.5 - plannedSpotY) * .25;
+            double flight = duration * urgency / motion / 1000.0;
+            if (Tactics.arrival(rivals[0], point[0], point[1], .10, .42) > flight + .25) {
+                outcome = DECOY_INTERCEPT;
+                cutter = -1;
+            }
+        } else {
+            cutter = -1;
+        }
+        if (outcome == DECOY_INTERCEPT) {
+            cutter = planInterception(ballX, ballY, tx, ty, duration, lofted, rivals, false, point);
+            if (cutter < 0) {
+                cutter = nearestActive(rivals, tx, ty, -1, false);
+                double back = .035;
+                double dl = Math.max(.001, distance(ballX, ballY, tx, ty));
+                point[0] = tx + (ballX - tx) / dl * back;
+                point[1] = ty + (ballY - ty) / dl * back;
+            }
+        }
+        if (cutter < 0) return false;
+        decoyEnding(outcome);
+        if (lofted) liftBallTo(now, tx, ty, duration, side, scorer, side == 0 ? .03 : -.03, (ty - ballY) * -.18);
+        else sendBallTo(now, tx, ty, duration, side, scorer);
+        setInterception(defending, cutter, new double[] {point[0], point[1], 1});
+        return true;
+    }
+
+    private void decoyShot(long now) {
+        int side = pendingGoalSide;
+        int outcome = decoyOutcome;
+        boolean statShot = decoyStatShot;
+        decoyStatShot = false;
+        if (outcome == DECOY_TACKLE && !statShot) {
+            decoyEnding(DECOY_TACKLE);
+            endDecoy();
+            Dot[] rivals = side == 0 ? away : home;
+            startTackle(now, 1 - side, nearestActive(rivals, ballX, ballY, -1, false));
+            return;
+        }
+        int shot;
+        if (outcome == DECOY_BLOCK) {
+            shot = SHOT_BLOCKED;
+            decoyEnding(DECOY_BLOCK);
+        } else {
+            int roll = random.nextInt(100);
+            shot = roll < 32 ? SHOT_CATCH : roll < 52 ? SHOT_PARRY_CORNER : roll < 70 ? SHOT_PARRY_REBOUND
+                    : roll < 90 ? SHOT_WIDE : SHOT_POST;
+            decoyEnding(DECOY_SHOT);
+        }
+        endDecoy();
+        startShot(now, shot);
     }
 
     private int chooseOpeningVariant(int side, int actor) {

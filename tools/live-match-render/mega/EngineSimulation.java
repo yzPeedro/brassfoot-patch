@@ -121,6 +121,9 @@ public final class EngineSimulation {
         final ArrayList<Object> homePlayers = new ArrayList<Object>();
         final ArrayList<Object> awayPlayers = new ArrayList<Object>();
         final int[] score = new int[2];
+        final int[] shots = new int[2];
+        double shotRate;
+        Random shotRandom = new Random(7);
         Match() {
             int[] positions = {0, 1, 2, 2, 1, 3, 3, 3, 3, 4, 4};
             int[] lado = {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0};
@@ -132,11 +135,12 @@ public final class EngineSimulation {
         public ArrayList<Object> hE() { return actions; }
         public void q(int minute, int half) {
             calls.add(half + ":" + minute);
+            if (shotRate > 0 && shotRandom.nextDouble() < shotRate) shots[shotRandom.nextInt(2)]++;
             List<Act> list = script.get(half + ":" + minute);
             if (list != null) actions.addAll(list);
         }
         public int[] ib() { return new int[] {0, 0, 0}; }
-        public int[] hA() { return new int[] {0, 0}; }
+        public int[] hA() { return shots.clone(); }
         public int[] hB() { return new int[] {0, 0}; }
         public int[] hC() { return new int[] {0, 0}; }
         public int[] hD() { return new int[] {0, 0}; }
@@ -319,7 +323,7 @@ public final class EngineSimulation {
         boolean arrived = stageBefore == 2 && goalStage == 0 && Math.abs(y - .5) < .12;
         if (arrived || (x > 1.0 || x < 0) && Math.abs(y - .5) < .10) {
             if (now - lastGoalMoment > 2500L) {
-                if (System.getProperty("trace") != null) System.out.println(String.format(Locale.ROOT, "GOALMOMENT t=%d x=%.3f y=%.3f stage=%d restart=%d amb=%d", now, x, y, i("pendingGoalStage"), opt("restartPlay"), opt("ambientShotPhase")));
+                if (System.getProperty("trace") != null) System.out.println(String.format(Locale.ROOT, "GOALMOMENT t=%d x=%.3f y=%.3f stage=%d restart=%d amb=%d out=%d from=%.3f,%.3f to=%.3f,%.3f curve=%s c=%.3f,%.3f side=%d", now, x, y, i("pendingGoalStage"), opt("restartPlay"), opt("ambientShotPhase"), opt("ambientShotOutcome"), d("ballFromX"), d("ballFromY"), d("ballToX"), d("ballToY"), get("curveActive"), d("curveCX"), d("curveCY"), opt("ambientShotSide")));
                 goalMoments.add(Long.valueOf(now));
                 offFieldGoalX.add(Double.valueOf(x));
             } else if (!offFieldGoalX.isEmpty()) {
@@ -365,6 +369,8 @@ public final class EngineSimulation {
         return side + ":" + act.actor.getNome().toLowerCase(Locale.ROOT).trim();
     }
 
+    private int untilMinute = -1;
+
     private Map<String, Object> run(String name, double seconds, long requestPauseAfterActive) throws Exception {
         int frames = (int) (seconds * 1000 / FRAME_MS);
         long firstActive = -1;
@@ -379,6 +385,10 @@ public final class EngineSimulation {
                     pauseRequestedAt = SimClock.time;
                 }
             }
+            if (untilMinute > 0) {
+                if (Host.dB == 2 && Host.GT >= untilMinute || Boolean.TRUE.equals(host.GU)) break;
+                continue;
+            }
             boolean allShown = true;
             for (Act act : acts) if (!act.done) allShown = false;
             if (allShown && k > 60 && !SimClock.dialog && i("pendingGoalStage") == 0 && !b("restartActive")) {
@@ -391,7 +401,14 @@ public final class EngineSimulation {
         int shownBeforeVisual = 0, neverAnimated = 0, notShown = 0;
         double maxLag = 0;
         List<Map<String, Object>> events = new ArrayList<Map<String, Object>>();
-        for (Act act : acts) {
+        List<Act> ordered = new ArrayList<Act>(acts);
+        java.util.Collections.sort(ordered, new java.util.Comparator<Act>() {
+            @Override public int compare(Act a, Act b) {
+                long x = a.shownAt < 0 ? Long.MAX_VALUE : a.shownAt, y = b.shownAt < 0 ? Long.MAX_VALUE : b.shownAt;
+                return x < y ? -1 : x > y ? 1 : 0;
+            }
+        });
+        for (Act act : ordered) {
             long visual = -1;
             if (act.type == 1 && act.subtype == 3) {
                 visual = penaltyMoments.isEmpty() ? -1 : penaltyMoments.remove(0).longValue();
@@ -450,6 +467,24 @@ public final class EngineSimulation {
         out.put("goalsLeavingScreen", Integer.valueOf(offField));
         out.put("goalMoments", Integer.valueOf(goalMoments.size()));
         out.put("forcedReleases", Integer.valueOf(opt("syncForcedReleases")));
+        int goalsScripted = 0;
+        for (Act act : acts) if (act.type == 1) goalsScripted++;
+        out.put("phantomGoals", Integer.valueOf(Math.max(0, goalMoments.size() - goalsScripted)));
+        out.put("goalLikePlays", Integer.valueOf(opt("decoyCount")));
+        out.put("goalLikeFromShots", Integer.valueOf(opt("decoyStatCount")));
+        out.put("minutesPlayed", Integer.valueOf(Host.dB == 2 ? 45 + Math.min(45, Host.GT) : Host.GT));
+        if (has("decoyEndings")) {
+            int[] endings = (int[]) get("decoyEndings");
+            out.put("endingShot", Integer.valueOf(endings[0]));
+            out.put("endingIntercept", Integer.valueOf(endings[1]));
+            out.put("endingKeeper", Integer.valueOf(endings[2]));
+            out.put("endingOverhit", Integer.valueOf(endings[3]));
+            out.put("endingTackle", Integer.valueOf(endings[4]));
+            out.put("endingBlock", Integer.valueOf(endings[5]));
+            out.put("goalLikeAbandoned", Integer.valueOf(opt("decoyAbandoned")));
+            out.put("twinsQueued", Integer.valueOf(opt("twinsQueued")));
+            out.put("twinsPlayed", Integer.valueOf(opt("twinsPlayed")));
+        }
         out.put("panelRuleViolations", Integer.valueOf(opt("ruleViolations")));
         out.put("detail", events);
         return out;
@@ -461,7 +496,7 @@ public final class EngineSimulation {
         if (name.equals("vermelho-e-gol-dialogo-longo")) dialog = 30000;
         int startMinute = 0, startHalf = 1;
         if (name.startsWith("segundo-tempo")) startMinute = 46;
-        else if (!name.startsWith("abertura")) startMinute = 20;
+        else if (!name.startsWith("abertura") && !name.equals("tempo-completo")) startMinute = 20;
         EngineSimulation sim = new EngineSimulation(delay, seed, startMinute, startHalf, dialog);
         int side = pick.nextInt(2);
         int scorer = 9 + pick.nextInt(2);
@@ -497,6 +532,16 @@ public final class EngineSimulation {
             sim.add("lesao", 5, 0, 22, 1, side, side, 2 + pick.nextInt(8), true);
         } else if (name.equals("gol-olimpico")) {
             sim.add("gol olimpico", 1, 5, 22, 1, side, side, 7, false);
+        } else if (name.equals("tempo-completo")) {
+            sim.match.shotRate = .22;
+            sim.match.shotRandom = new Random(seed * 17L + delay);
+            for (int k = 0; k < 3; k++) {
+                int s2 = pick.nextInt(2);
+                int half = 1 + pick.nextInt(2);
+                sim.add("gol", 1, 0, 3 + pick.nextInt(40), half, s2, s2, 9 + pick.nextInt(2), false);
+            }
+            sim.untilMinute = 46;
+            seconds = 100 * delay / 1000.0 + 400;
         } else if (name.equals("gol-contra")) {
             sim.add("gol contra", 1, 0, 22, 1, side, 1 - side, 2 + pick.nextInt(2), false);
         }
@@ -508,7 +553,7 @@ public final class EngineSimulation {
     private static final String[] SCENARIOS = {
         "abertura-gol", "abertura-dois-gols", "abertura-amarelo", "abertura-lesao", "abertura-penalti",
         "segundo-tempo-minuto-zero", "pausa-durante-gol", "pausa-durante-amarelo", "vermelho-e-gol-dialogo-longo",
-        "lesao-no-jogo", "gol-olimpico", "gol-contra"
+        "lesao-no-jogo", "gol-olimpico", "gol-contra", "tempo-completo"
     };
 
     public static void main(String[] args) throws Exception {

@@ -111,7 +111,18 @@ def summarize_engine(rows: list[dict]) -> dict:
             "goalsLeavingScreen": sum(r.get("goalsLeavingScreen", 0) for r in ok),
             "forcedReleases": sum(r.get("forcedReleases", 0) for r in ok),
             "panelRuleViolations": sum(r.get("panelRuleViolations", 0) for r in ok),
+            "phantomGoals": sum(r.get("phantomGoals", 0) for r in ok),
         }
+        if any("twinsQueued" in r for r in ok):
+            entry["twinsQueued"] = sum(r.get("twinsQueued", 0) for r in ok)
+            entry["twinsPlayed"] = sum(r.get("twinsPlayed", 0) for r in ok)
+        if any("goalLikePlays" in r for r in ok) and name == "tempo-completo":
+            for key in ("goalLikePlays", "goalLikeFromShots", "minutesPlayed", "endingShot", "endingIntercept",
+                        "endingKeeper", "endingOverhit", "endingTackle", "endingBlock", "goalLikeAbandoned",
+                        "twinsQueued", "twinsPlayed"):
+                entry[key] = sum(r.get(key, 0) for r in ok)
+            goals = entry["goalMoments"]
+            entry["goalLikePlaysPerGoal"] = round(entry["goalLikePlays"] / goals, 2) if goals else None
         pauses = [r["pauseToVisualMs"] for r in ok if r.get("pauseToVisualMs", -1) >= 0]
         if any("pauseToVisualMs" in r for r in ok):
             entry["pauseToVisualMsMean"] = round(sum(pauses) / len(pauses)) if pauses else None

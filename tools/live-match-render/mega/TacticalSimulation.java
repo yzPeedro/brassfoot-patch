@@ -637,6 +637,8 @@ public final class TacticalSimulation {
         double idleRun, idleMs;
         boolean restartOut;
         int throwTaker = -1, throwWatchUntil = -1;
+        int goalMouthEntries;
+        boolean inMouth;
 
         String state() throws Exception {
             return String.format(Locale.ROOT, "side=%d player=%d loose=%s flight=%s tackle=%s cue=%d card=%d goal=%d restart=%d own=%d keeperLoss=%d last=%d ball=%.3f,%.3f to=%.3f,%.3f rs=%d rp=%d",
@@ -680,8 +682,11 @@ public final class TacticalSimulation {
             boolean flight = b("ballInFlight"), loose = b("looseBall");
             double bx = d("ballX"), by = d("ballY");
             int side = i("possessingSide"), player = i("possessingPlayer");
+            boolean mouth = (bx > 1.0 || bx < 0) && Math.abs(by - .5) < .10;
+            if (mouth && !inMouth) { goalMouthEntries++; trace("MOUTH"); }
+            inMouth = mouth;
             boolean wasOnField = pbx >= 0 && pbx <= 1 && pby >= 0 && pby <= 1;
-            if (Math.hypot(bx - pbx, by - pby) > .05 && wasOnField) { ballJumps++; trace("JUMP from=" + pbx + "," + pby); }
+            if (Math.hypot(bx - pbx, by - pby) > .05 && wasOnField) { ballJumps++; trace("JUMP from=" + pbx + "," + pby + " decoy=" + optFlag("decoyActive") + " amb=" + optFlag("ambientShotPhase") + " out=" + optFlag("ambientShotOutcome") + " dur=" + optFlag("moveDuration") + " curve=" + get("curveActive")); }
             if (preKeeperHands) keeperHeld = preSide;
             if (flight && !preFlight) {
                 keeperHeld = -1;
@@ -712,7 +717,7 @@ public final class TacticalSimulation {
                             py /= pl;
                             if (vs > .04 && (pvx * px + pvy * py) / vs < -.34) {
                                 backPasses++;
-                                if ((pbx - pcx) * px + (pby - pcy) * py < -.003) backPassesThroughBody++;
+                                if ((pbx - pcx) * px + (pby - pcy) * py < -.003) { backPassesThroughBody++; trace("BACKBODY decoy=" + optFlag("decoyActive") + " var=" + optFlag("goalVariant") + " stage=" + i("pendingGoalStage") + " prep=" + get("prepPassUntil")); }
                             }
                         }
                         double here = progress(passerSide, fx);
@@ -759,7 +764,7 @@ public final class TacticalSimulation {
             }
             if (finalWaiting) {
                 int scorerSide = i("pendingGoalSide"), scorer = i("pendingGoalActor");
-                if (scorerSide < 0 || scorer < 0 || flight
+                if (scorerSide < 0 || scorer < 0 || flight || i("pendingGoalStage") == 0 || touching(bx, by, CONTACT) >= 0
                         || Math.hypot(dx(dot(scorerSide, scorer)) - bx, dy(dot(scorerSide, scorer)) - by) <= CONTACT) {
                     finalWaiting = false;
                     if (finalWaitRun > 0) {
@@ -906,6 +911,7 @@ public final class TacticalSimulation {
 
         void put(Map<String, Object> out) {
             out.put("restarts", Integer.valueOf(restartsStarted));
+            out.put("ballIntoGoalMouth", Integer.valueOf(goalMouthEntries));
             out.put("restartsBallLeftField", Integer.valueOf(restartsLeftField));
             out.put("throwInsAimedAtGoal", Integer.valueOf(throwShotsAtGoal));
             out.put("clearChancePasses", Integer.valueOf(clearChancePasses));
@@ -952,8 +958,10 @@ public final class TacticalSimulation {
         Random pick = new Random(seed * 31L + delay);
         int frames = (int) Math.round(seconds * 1000 / FRAME_MS);
         int cueEvery = 6000 / FRAME_MS;
+        int minuteEvery = Math.max(1, delay / FRAME_MS);
         int cues = 0;
         for (int frame = 0; frame < frames; frame++) {
+            if (frame > 0 && frame % minuteEvery == 0 && !b("preEventActive")) FakeHost.GT++;
             if (frame > 0 && frame % cueEvery == 0 && !b("preEventActive") && i("cardFoulPhase") == 0 && i("pendingGoalStage") == 0) {
                 int kind = 1 + cues % 4;
                 int side = pick.nextInt(2);
@@ -979,6 +987,7 @@ public final class TacticalSimulation {
         out.put("panelKeeperSaves", Integer.valueOf(opt("keeperSaves")));
         out.put("panelClearChanceShots", Integer.valueOf(opt("clearChanceShots")));
         out.put("panelRestartShotsRefused", Integer.valueOf(opt("restartShots")));
+        out.put("panelGoalLikePlays", Integer.valueOf(opt("decoyCount")));
         return out;
     }
 
