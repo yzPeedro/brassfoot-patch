@@ -1,7 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-14T09:00:03-03:00",
+  "updatedAt": "2026-11-14T16:00:00-03:00",
   "entries": [
+    {
+      "id": "patch-2026-6-10",
+      "version": "2026.6.10",
+      "date": "2026-11-14T16:00:00-03:00",
+      "title": "Campo animado novo",
+      "kind": "patch",
+      "summary": "Campo animado sincronizado com o placar, com goleiros, minutos iniciais e jogadas de gol que terminam sem gol.",
+      "changes": [
+        "Cada lance aparece no placar no momento em que acontece no campo, inclusive com pausas e telas de substituição.",
+        "Lances dos minutos iniciais de cada tempo aparecem no campo.",
+        "Goleiro salta até a bola; gols e bolas fora saem do campo.",
+        "Jogadas de gol também terminam sem gol, e cada gol ganha uma repetição sem gol.",
+        "Elencos, ligas, escudos, camisas e hub 1.4.2 permanecem iguais."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.6.10"
+    },
     {
       "id": "patch-2026-6-9",
       "version": "2026.6.9",

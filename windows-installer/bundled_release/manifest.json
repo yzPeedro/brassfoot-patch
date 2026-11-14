@@ -2,7 +2,7 @@
   "schemaVersion": 4,
   "kind": "BRASFOOT_RELEASE_PATCH",
   "patchSeason": 2026,
-  "version": "2026.6.9",
+  "version": "2026.6.10",
   "publicationAllowed": true,
   "compatibilityTestedInGame": false,
   "channel": "stable",
@@ -12,10 +12,11 @@
     {
       "operation": "replace",
       "path": "bf22-23.exe",
-      "size": 7247598,
-      "sha256": "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414",
+      "size": 7286198,
+      "sha256": "3237e2ceaf56f81b14614109128a5133ee69db0fe954f738cd642806da09c7d0",
       "acceptedOriginalSha256": [
         "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
+        "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414",
         "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
         "b572ab3370daa18a8753d5f6c9a4687fba6f5785a2be85ec3558bb5732179507",
         "4ae89b42c5bd18cfcc76025133e6ac5b9c85c5e72eabf7c490da2a35cd570bde",
@@ -28,7 +29,8 @@
         "2e4aaa4d5db93603546d5528455657e5ea81814600d4d00c5d9b850efd5fe604",
         "31383d9d7085980be8b8b156546f1c068de873c7de4b03ee717e3a7f74f0c87b",
         "2159798376f670db9a99a19c85fd4cba3bbd9128f0a4b3c8b9ffb4b61d189d4a",
-        "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9"
+        "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
+        "d330a79a396ce24b509dec508a224b12e237eeb8e6c049040f8fa8f6be656955"
       ],
       "vanillaSha256": "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
       "vanillaSize": 7320384
@@ -20236,13 +20238,17 @@
     "originalExecutableSha256": "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
     "liveExecutableSha256": [
       "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
+      "3237e2ceaf56f81b14614109128a5133ee69db0fe954f738cd642806da09c7d0",
+      "d330a79a396ce24b509dec508a224b12e237eeb8e6c049040f8fa8f6be656955",
       "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414"
     ],
-    "liveOnlyExecutableSha256": [],
+    "liveOnlyExecutableSha256": [
+      "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9"
+    ],
     "executables": {
       "patch+live": {
-        "sha256": "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414",
-        "size": 7247598,
+        "sha256": "3237e2ceaf56f81b14614109128a5133ee69db0fe954f738cd642806da09c7d0",
+        "size": 7286198,
         "recipe": "bf22-23.exe.json"
       },
       "patch": {
@@ -20258,16 +20264,17 @@
           "d2e69ca3154ea998b7b6d4ae62ab4baef1d56beb68768cf82e46044c90fc32f3",
           "b572ab3370daa18a8753d5f6c9a4687fba6f5785a2be85ec3558bb5732179507",
           "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
-          "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414"
+          "3237e2ceaf56f81b14614109128a5133ee69db0fe954f738cd642806da09c7d0"
         ]
       },
       "live": {
-        "sha256": "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
-        "size": 7401842,
+        "sha256": "d330a79a396ce24b509dec508a224b12e237eeb8e6c049040f8fa8f6be656955",
+        "size": 7440442,
         "recipe": "bf22-23.exe.live.json",
         "acceptedOriginalSha256": [
           "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
-          "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414",
+          "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
+          "3237e2ceaf56f81b14614109128a5133ee69db0fe954f738cd642806da09c7d0",
           "8193758a822282588548b263c5e29772bbb25e8d905fa882b21e2e5ce38ca119"
         ]
       }
@@ -20276,6 +20283,7 @@
       "2159798376f670db9a99a19c85fd4cba3bbd9128f0a4b3c8b9ffb4b61d189d4a",
       "2e4aaa4d5db93603546d5528455657e5ea81814600d4d00c5d9b850efd5fe604",
       "31383d9d7085980be8b8b156546f1c068de873c7de4b03ee717e3a7f74f0c87b",
+      "3237e2ceaf56f81b14614109128a5133ee69db0fe954f738cd642806da09c7d0",
       "3fa5e69666961f32a01224c1204f8f28f516109b6cf3fc29162fcd3f6f38d017",
       "4ae89b42c5bd18cfcc76025133e6ac5b9c85c5e72eabf7c490da2a35cd570bde",
       "574772163c9cd1be9aa1af48cf30f045a219d2825b7f8735314247f247f987e6",
@@ -20289,11 +20297,12 @@
     ],
     "variants": {
       "full": {
-        "sha256": "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414",
-        "size": 7247598,
+        "sha256": "3237e2ceaf56f81b14614109128a5133ee69db0fe954f738cd642806da09c7d0",
+        "size": 7286198,
         "recipe": "bf22-23.exe.json",
         "acceptedOriginalSha256": [
           "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
+          "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414",
           "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
           "b572ab3370daa18a8753d5f6c9a4687fba6f5785a2be85ec3558bb5732179507",
           "4ae89b42c5bd18cfcc76025133e6ac5b9c85c5e72eabf7c490da2a35cd570bde",
@@ -20306,7 +20315,8 @@
           "2e4aaa4d5db93603546d5528455657e5ea81814600d4d00c5d9b850efd5fe604",
           "31383d9d7085980be8b8b156546f1c068de873c7de4b03ee717e3a7f74f0c87b",
           "2159798376f670db9a99a19c85fd4cba3bbd9128f0a4b3c8b9ffb4b61d189d4a",
-          "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9"
+          "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
+          "d330a79a396ce24b509dec508a224b12e237eeb8e6c049040f8fa8f6be656955"
         ]
       },
       "season": {
@@ -20322,16 +20332,17 @@
           "d2e69ca3154ea998b7b6d4ae62ab4baef1d56beb68768cf82e46044c90fc32f3",
           "b572ab3370daa18a8753d5f6c9a4687fba6f5785a2be85ec3558bb5732179507",
           "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
-          "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414"
+          "3237e2ceaf56f81b14614109128a5133ee69db0fe954f738cd642806da09c7d0"
         ]
       },
       "live": {
-        "sha256": "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
-        "size": 7401842,
+        "sha256": "d330a79a396ce24b509dec508a224b12e237eeb8e6c049040f8fa8f6be656955",
+        "size": 7440442,
         "recipe": "bf22-23.exe.live.json",
         "acceptedOriginalSha256": [
           "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
-          "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414",
+          "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
+          "3237e2ceaf56f81b14614109128a5133ee69db0fe954f738cd642806da09c7d0",
           "8193758a822282588548b263c5e29772bbb25e8d905fa882b21e2e5ce38ca119"
         ]
       },
@@ -20340,9 +20351,9 @@
         "size": 7320384,
         "recipe": "bf22-23.exe.original.json",
         "acceptedOriginalSha256": [
-          "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414",
+          "3237e2ceaf56f81b14614109128a5133ee69db0fe954f738cd642806da09c7d0",
           "8193758a822282588548b263c5e29772bbb25e8d905fa882b21e2e5ce38ca119",
-          "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9"
+          "d330a79a396ce24b509dec508a224b12e237eeb8e6c049040f8fa8f6be656955"
         ]
       }
     }

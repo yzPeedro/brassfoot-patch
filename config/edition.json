@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.6.9",
+  "version": "2026.6.10",
   "channel": "stable",
-  "releaseNotes": "Atualiza 17 idades.",
+  "releaseNotes": "Campo animado novo: sincronia com o placar, goleiros, minutos iniciais e jogadas de gol que terminam sem gol.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [
