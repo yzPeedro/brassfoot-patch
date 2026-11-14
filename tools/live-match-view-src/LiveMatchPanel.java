@@ -7213,23 +7213,24 @@ public final class LiveMatchPanel extends JPanel {
             }
             Color fill = i == 0 ? keeper : kitFill;
             Color accent = i == 0 ? contrastRing(keeper) : kitAccent;
-            if (i == 0 && diving(side, now) && now >= diveStart) {
-                double ddx = viewX(diveToX) - viewX(diveFromX), ddy = diveToY - diveFromY;
-                double angle = Math.atan2(ddy * height, ddx * width);
-                Graphics2D dg = (Graphics2D) g.create();
-                dg.translate(x, y);
-                dg.rotate(angle);
-                dg.setColor(SHADOW);
-                dg.fillOval(-14, -5, 30, 14);
-                dg.setColor(fill);
-                dg.fillOval(-15, -7, 30, 14);
-                dg.setColor(accent);
-                dg.setStroke(STROKE_2);
-                dg.drawOval(-15, -7, 30, 14);
-                dg.dispose();
+            if (i == 0 && diving(side, now) && now >= diveStart && now < diveStart + diveDuration) {
+                double f = clamp((now - diveStart) / (double) diveDuration, 0, 1);
+                double lift = Math.sin(Math.PI * f);
+                int rise = (int) Math.round(lift * 10);
+                int radius = 10 + (int) Math.round(lift * 2);
+                int shadow = 20 - (int) Math.round(lift * 6);
+                g.setColor(SHADOW);
+                g.fillOval(x - shadow / 2 + 1, y - 3 + (int) Math.round(lift * 3), shadow, shadow * 3 / 4);
+                g.setColor(fill);
+                g.fillOval(x - radius, y - radius - rise, radius * 2, radius * 2);
+                g.setColor(new Color(255, 255, 255, 70));
+                g.fillOval(x - radius + 3, y - radius - rise + 2, 9, 6);
+                g.setColor(accent);
+                g.setStroke(STROKE_2);
+                g.drawOval(x - radius, y - radius - rise, radius * 2, radius * 2);
                 g.setFont(NAME_FONT_LIGHT);
                 g.setColor(new Color(255, 255, 255, 190));
-                g.drawString(dot.name, x - g.getFontMetrics().stringWidth(dot.name) / 2, y - 13);
+                g.drawString(dot.name, x - g.getFontMetrics().stringWidth(dot.name) / 2, y - 13 - rise);
                 continue;
             }
             if (injuryPhase == 2 && side == injurySide && i == injuryPlayer) {
