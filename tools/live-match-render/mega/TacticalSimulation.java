@@ -528,12 +528,18 @@ public final class TacticalSimulation {
         int frames = 0, jumps = 0;
         boolean restartAborted = false, started = false;
         int climaxFrame = -1;
+        boolean restartOpen = restartBefore;
         for (; frames < 30000 / FRAME_MS; frames++) {
+            boolean flightBefore = b("ballInFlight");
             step();
-            if (restartBefore && opt("restartPlay") == 0) restartAborted = true;
+            if (restartOpen && opt("restartPlay") == 0) {
+                restartOpen = false;
+                if (!(b("ballInFlight") && !flightBefore)) restartAborted = true;
+            }
             if (i("pendingGoalStage") != 0 || i("cardFoulPhase") != 0) started = true;
             double x = d("ballX"), y = d("ballY");
-            if (Math.hypot(x - lastX, y - lastY) > .05) jumps++;
+            boolean wasOnField = lastX >= 0 && lastX <= 1 && lastY >= 0 && lastY <= 1;
+            if (Math.hypot(x - lastX, y - lastY) > .05 && wasOnField) jumps++;
             lastX = x;
             lastY = y;
             if (!b("preEventActive")) { climaxFrame = frames; break; }
@@ -553,7 +559,7 @@ public final class TacticalSimulation {
         out.put("restartBefore", Boolean.valueOf(restartBefore));
         out.put("counterBefore", Boolean.valueOf(counterBefore));
         out.put("dribbleBefore", Boolean.valueOf(dribbleBefore));
-        out.put("restartAborted", Boolean.valueOf(restartAborted || !restartBefore));
+        out.put("restartAborted", Boolean.valueOf(restartAborted));
         out.put("animationStarted", Boolean.valueOf(started));
         out.put("climaxSeconds", climaxFrame < 0 ? Double.valueOf(-1) : round(climaxFrame * FRAME_MS / 1000.0));
         out.put("ballInNetAtClimax", Boolean.valueOf(goalInNet));
@@ -626,6 +632,11 @@ public final class TacticalSimulation {
         int ownGoalActor = -1, ownGoalSide = -1;
         boolean defenderControlled;
         final List<double[]> flights = new ArrayList<double[]>();
+        int restartsStarted, restartsLeftField, throwShotsAtGoal, clearChancePasses, clearChanceBackPasses;
+        int idleEpisodes;
+        double idleRun, idleMs;
+        boolean restartOut;
+        int throwTaker = -1, throwWatchUntil = -1;
 
         String state() throws Exception {
             return String.format(Locale.ROOT, "side=%d player=%d loose=%s flight=%s tackle=%s cue=%d card=%d goal=%d restart=%d own=%d keeperLoss=%d last=%d ball=%.3f,%.3f to=%.3f,%.3f rs=%d rp=%d",
@@ -669,7 +680,8 @@ public final class TacticalSimulation {
             boolean flight = b("ballInFlight"), loose = b("looseBall");
             double bx = d("ballX"), by = d("ballY");
             int side = i("possessingSide"), player = i("possessingPlayer");
-            if (Math.hypot(bx - pbx, by - pby) > .05) ballJumps++;
+            boolean wasOnField = pbx >= 0 && pbx <= 1 && pby >= 0 && pby <= 1;
+            if (Math.hypot(bx - pbx, by - pby) > .05 && wasOnField) { ballJumps++; trace("JUMP from=" + pbx + "," + pby); }
             if (preKeeperHands) keeperHeld = preSide;
             if (flight && !preFlight) {
                 keeperHeld = -1;
@@ -681,7 +693,8 @@ public final class TacticalSimulation {
                 double tx = d("ballToX"), ty = d("ballToY");
                 flights.add(new double[] {pbx, pby, tx, ty, lastTouch});
                 int passer = lastTouch;
-                if (rs >= 0 && passer >= 0) {
+                boolean restartKick = preRestart != 0 && optFlag("restartPlay") == 0;
+                if (rs >= 0 && passer >= 0 && !restartKick) {
                     int passerSide = passer / 100;
                     if (rs != passerSide) {
                         passesToRival++;
@@ -707,6 +720,23 @@ public final class TacticalSimulation {
                         double nearest = 9;
                         for (int r = 1; r < 11; r++) {
                             if (active(rivals[r])) nearest = Math.min(nearest, Math.hypot(dx(rivals[r]) - fx, dy(rivals[r]) - fy));
+                        }
+                        if (here >= .80 && Math.abs(fy - .5) <= .22 && nearest > .06 && passer % 100 != 0) {
+                            boolean blocked = false;
+                            double goalX = passerSide == 0 ? 1.0 : 0.0;
+                            for (int r = 1; r < 11; r++) {
+                                if (!active(rivals[r])) continue;
+                                double rx = dx(rivals[r]), ry = dy(rivals[r]);
+                                if (progress(passerSide, rx) - here > -.01) {
+                                    double f = Math.abs(goalX - fx) < 1e-6 ? 1 : (rx - fx) / (goalX - fx);
+                                    double lineY = fy + (.5 - fy) * Math.max(0, Math.min(1, f));
+                                    if (Math.abs(ry - lineY) < .07) blocked = true;
+                                }
+                            }
+                            if (!blocked) {
+                                clearChancePasses++;
+                                if (progress(passerSide, tx) - progress(passerSide, pbx) < -.02) { clearChanceBackPasses++; trace("CLEARBACK"); }
+                            }
                         }
                         if (here > .60 && nearest > .07 && passer % 100 != 0) {
                             freeAttackerPasses++;
@@ -775,6 +805,19 @@ public final class TacticalSimulation {
                 }
             }
             int restart = optFlag("restartPlay");
+            if (restart != 0 && (bx < 0 || bx > 1 || by < 0 || by > 1)) restartOut = true;
+            if (restart == 0 && preRestart != 0) {
+                restartsStarted++;
+                if (restartOut) restartsLeftField++;
+                restartOut = false;
+                if (preRestart == 1) throwWatchUntil = frames + 90;
+            }
+            if (restart == 1 && optFlag("restartTaker") >= 0) throwTaker = i("restartPlaySide") * 100 + optFlag("restartTaker");
+            if (flight && !preFlight && frames <= throwWatchUntil && lastTouch == throwTaker) {
+                double tx = d("ballToX"), ty = d("ballToY");
+                if ((tx >= .94 || tx <= .06) && Math.abs(ty - .5) < .13) { throwShotsAtGoal++; trace("THROWSHOT"); }
+                throwWatchUntil = -1;
+            }
             if (restart != 0 && preRestart == 0) {
                 if (restart == 1) throwIns++;
                 if (restart == 2) corners++;
@@ -819,7 +862,8 @@ public final class TacticalSimulation {
             }
             if (!flight && !loose && side >= 0 && player >= 0 && player < 11) {
                 Object c = dot(side, player);
-                if (Math.hypot(dx(c) - bx, dy(c) - by) > CONTACT * 1.6 && optFlag("restartPlay") == 0) {
+                if (Math.hypot(dx(c) - bx, dy(c) - by) > CONTACT * 1.6 && optFlag("restartPlay") == 0
+                        && bx >= 0 && bx <= 1 && by >= 0 && by <= 1) {
                     carrierDetached++;
                     if (carrierDetached % 200 == 1) trace("DETACHED gap=" + Math.hypot(dx(c) - bx, dy(c) - by) + " ra=" + get("restartActive") + " ko=" + get("kickoffInProgress") + " fk=" + i("freeKickPhase") + " pen=" + i("penaltyPhase") + " amb=" + i("ambientShotPhase") + " simple=" + get("simpleStoppageUntil"));
                 }
@@ -830,6 +874,16 @@ public final class TacticalSimulation {
                 }
             }
             if (ownGoalSide >= 0 && !flight && !loose && side == ownGoalSide && player == ownGoalActor) defenderControlled = true;
+            boolean pending = optFlag("engineEventOpen") != 0 || b("preEventActive") || i("pendingGoalStage") == 1;
+            boolean idle = pending && nowInPlay && !flight && !loose && side >= 0 && player >= 0 && player < 11
+                    && Math.hypot(dx(dot(side, player)) - bx, dy(dot(side, player)) - by) <= CONTACT * 1.5
+                    && speedOf(dot(side, player)) < .01 && !(player == 0 && inOwnBox(side, bx, by));
+            if (idle) {
+                idleRun += FRAME_MS;
+            } else {
+                if (idleRun >= 1000) { idleEpisodes++; idleMs += idleRun; }
+                idleRun = 0;
+            }
             if (nowInPlay && !loose && !flight) {
                 int defending = 1 - side;
                 double low = 9, high = -9;
@@ -851,6 +905,13 @@ public final class TacticalSimulation {
         }
 
         void put(Map<String, Object> out) {
+            out.put("restarts", Integer.valueOf(restartsStarted));
+            out.put("restartsBallLeftField", Integer.valueOf(restartsLeftField));
+            out.put("throwInsAimedAtGoal", Integer.valueOf(throwShotsAtGoal));
+            out.put("clearChancePasses", Integer.valueOf(clearChancePasses));
+            out.put("clearChanceBackPasses", Integer.valueOf(clearChanceBackPasses));
+            out.put("idleCarrierEpisodes", Integer.valueOf(idleEpisodes));
+            out.put("idleCarrierMs", round(idleMs));
             out.put("throwIns", Integer.valueOf(throwIns));
             out.put("corners", Integer.valueOf(corners));
             out.put("restartsToLastTouchTeam", Integer.valueOf(wrongRestarts));
@@ -914,6 +975,10 @@ public final class TacticalSimulation {
         out.put("statCues", Integer.valueOf(cues));
         audit.put(out);
         out.put("panelRuleViolations", Integer.valueOf(opt("ruleViolations")));
+        out.put("panelKeeperWaits", Integer.valueOf(opt("keeperWaits")));
+        out.put("panelKeeperSaves", Integer.valueOf(opt("keeperSaves")));
+        out.put("panelClearChanceShots", Integer.valueOf(opt("clearChanceShots")));
+        out.put("panelRestartShotsRefused", Integer.valueOf(opt("restartShots")));
         return out;
     }
 
@@ -984,6 +1049,8 @@ public final class TacticalSimulation {
         }
         audit.put(out);
         out.put("panelRuleViolations", Integer.valueOf(opt("ruleViolations")));
+        out.put("panelEscalations", Integer.valueOf(opt("escalationCount")));
+        out.put("panelIdleResources", Integer.valueOf(opt("idleResources")));
         return out;
     }
 

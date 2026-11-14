@@ -28,7 +28,8 @@ O patch é aplicado por [`tools/patch_live_match_view.py`](../tools/patch_live_m
 | Ponto de integração | O que acontece |
 |---|---|
 | Construtor da tela de partida | Instala o painel (`mega.LiveMatchPanel.install`) e abre um espaço próprio no layout original, sem cobrir controles do jogo |
-| Passo do minuto | A chamada ao passo de simulação do minuto passa por `LiveMatchPanel.engineStep`. O painel executa o mesmo método do jogo um minuto antes, uma única vez, para conhecer os lances antes de exibi-los; quando o temporizador do jogo chega ao minuto, o passo já executado é pulado |
+| Passo do minuto | A chamada ao passo de simulação do minuto passa por `LiveMatchPanel.engineStep`. O painel executa o mesmo método do jogo um minuto antes, uma única vez, para conhecer os lances antes de exibi-los; quando o temporizador do jogo chega ao minuto, o passo já executado é pulado. O passo do minuto 0 do 2º tempo, que o jogo roda junto com o intervalo, é adiado para a entrada dos times, sempre antes do minuto 1 e na mesma ordem |
+| Exibição do lance | No clímax de cada lance o painel chama o método público da tela de partida que exibe um único lance (placar, som, texto e, quando o jogo prevê, a tela de substituição). É o mesmo método que o jogo usa ao virar o minuto; o lance fica marcado como exibido e o jogo não o repete |
 | Cobrança de pênalti | `LiveMatchPanel.beforePenaltyKick` anima a preparação da cobrança; o resultado continua sendo decidido pela tela original de pênalti |
 
 O transformador ([`LiveMatchTransformer.java`](../tools/live-match-view-src/LiveMatchTransformer.java)) usa ASM e confere o SHA-256 da classe original antes de alterar qualquer coisa. O patch aceita dois executáveis de origem:
@@ -45,7 +46,8 @@ python tools/patch_live_match_view.py --source <bf22-23.exe> --output <pasta>/bf
 ## Velocidade e tempos
 
 - **Movimento sempre no ritmo normal.** Jogadores e bola se movem na mesma velocidade em qualquer configuração do jogo, e cada lance é feito pelo jogador que o Brasfoot registrou.
-- **Pausa curta nos lances do jogo.** O painel conhece os lances com um minuto de antecedência. Quando o próximo minuto tem gol, pênalti, cartão ou lesão, o painel segura o relógio da partida enquanto a jogada acontece no campo e só deixa o minuto virar no clímax (bola na rede, apito, falta no pênalti). Assim, placar e campo mudam juntos.
+- **Pausa curta nos lances do jogo.** O painel conhece os lances com um minuto de antecedência. Quando o próximo minuto tem gol, pênalti, cartão ou lesão, o painel segura o relógio da partida enquanto a jogada acontece no campo. No clímax (bola na rede, apito, falta no pênalti, queda do lesionado) o painel exibe aquele lance pelo próprio método do jogo, e só depois deixa o minuto virar. Assim, placar e campo mudam juntos, inclusive quando o mesmo minuto tem mais de um lance.
+- **Minutos 0 e 1.** Os lances do primeiro minuto de cada tempo (e do minuto 0 do 2º tempo) são conhecidos durante a entrada dos times. O relógio fica em 0' até o último clímax desses minutos; depois volta ao ritmo normal. Gols nesses minutos usam jogadas de abertura: chute do meio-campo encobrindo o goleiro adiantado, lançamento longo nas costas da defesa, arrancada individual, chute de longe ou recuo errado do adversário interceptado.
 - **Depois do gol.** O relógio continua parado enquanto os jogadores voltam às posições e dão a saída de bola. No início de cada tempo vale o mesmo para a entrada em campo.
 - **O minuto nunca fica mais curto.** Ao soltar o relógio, o painel executa o próprio passo de minuto do Brasfoot, nunca antes do horário em que o jogo o executaria. Fora dessas pausas, a partida corre na velocidade escolhida pelo jogador, e substituições e lances de estatística não pausam o jogo.
 - **Quanto tempo a mais.** Cerca de 3 a 8 segundos por gol (jogada e saída de bola) e de 2,5 a 3 segundos por cartão em média (até cerca de 5, quando o infrator precisa chegar ao lance); numa partida típica, de 15 a 30 segundos a mais. A proporção pesa mais nas velocidades rápidas, em que a partida inteira dura menos.
@@ -60,12 +62,15 @@ python tools/patch_live_match_view.py --source <bf22-23.exe> --output <pasta>/bf
 
 ## Garantias de execução
 
-- **Nunca travar o jogo:** qualquer erro no quadro do painel zera as animações e devolve o relógio ao Brasfoot; cada fase tem prazo máximo, e uma pausa de lance dura no máximo 9 segundos (14 segundos na jogada de um gol).
+- **Nunca travar o jogo:** qualquer erro no quadro do painel zera as animações; cada fase tem prazo máximo. Quando o prazo de um lance vence, o painel não solta o relógio: acelera a jogada em degraus (sem passes opcionais, lance direto, autor recebendo e finalizando de onde está). Só depois de três degraus e de uma repetição do lance o relógio é liberado sem animação, o que fica registrado como `sync_forced_release`.
+- **Portão de sincronia:** toda liberação do relógio (fim de jogada, pedido de pausa, vigia, reset de segurança) passa por uma única verificação: o minuto só vira quando todos os lances antecipados chegaram ao clímax. Os prazos e o vigia contam o tempo do painel, que para enquanto há tela do jogo aberta; uma pausa longa não zera a jogada.
 - **Nenhum gol perdido:** lances do jogo ficam na fila durante paralisações, na virada de tempo e depois de uma proteção contra travamento; a antecipação do minuto só acontece depois que o painel registra a troca de tempo; um gol pendente do 1º tempo é mostrado antes da entrada para o 2º tempo, e um gol interrompido é refeito uma vez.
 - **Faltas no lugar certo:** faltas comuns e com cartão nunca são marcadas dentro da área de quem comete; a falta que gera pênalti é marcada dentro da área.
-- **Diálogos e pausa:** com diálogos do jogo abertos o painel não segura o relógio, e um pedido de pausa ou substituição libera o relógio na hora.
+- **Diálogos e pausa:** com diálogos do jogo abertos o painel não segura o relógio. Um pedido de pausa sem lance pendente libera o relógio na hora; com lance pendente, o painel mostra "Pausa solicitada", acelera a jogada até o clímax (em geral 2 a 3 segundos), exibe o lance e então libera o relógio, e o Brasfoot abre a pausa. A pausa não congela a jogada no meio porque o minuto seguinte já foi simulado: uma substituição feita antes do lance faria o jogo mostrar um lance de quem já saiu.
 - **Bola sempre ancorada:** a posse só muda por contato (passe, domínio, desarme, interceptação ou cobrança), e cada fase termina em um estado explícito.
-- **Validação central:** antes de confirmar uma ação, o painel recusa desarme em goleiro com a bola e passe cujo destino seja um adversário, e decide laterais, escanteios e tiros de meta pelo último toque. Cada recusa é registrada no diagnóstico (`rule_*`).
+- **Validação central:** antes de confirmar uma ação, o painel recusa desarme em goleiro com a bola, passe cujo destino seja um adversário e chute a partir de uma cobrança de lateral, e decide laterais, escanteios e tiros de meta pelo último toque. Também registra recuo em chance clara e bola esperando o goleiro. Cada ocorrência é registrada no diagnóstico (`rule_*`).
+- **Cobrança nunca é cancelada:** um lance do jogo que chega durante um lateral ou escanteio espera a cobrança terminar, com o arremesso ou o cruzamento acelerados.
+- **Sem espera parada:** portador parado com a bola por mais de 0,9 s com lance pendente aciona um recurso de futebol (condução, avanço do lance ou chute).
 - **Diagnóstico:** eventos de integração são registrados em `%LOCALAPPDATA%\BrassfootPatch2026\live-match-debug.log`.
 
 ## Regras do futebol e reconciliação com o motor
@@ -86,6 +91,14 @@ O lance do Brasfoot define o destino da jogada; o painel escolhe uma sequência 
 | Passe para trás | Antes de passar para trás, o portador desacelera e gira; a bola contorna o corpo até o lado do passe |
 | Atacante livre | Sem finalização prevista pelo motor, o atacante livre conduz em direção ao gol em vez de recuar; perto da área, um defensor fecha e desarma ou afasta, ou o cruzamento é cortado |
 | Linha defensiva | Escalonada: o zagueiro do lado da bola sobe, o da sobra fica mais recuado e o lateral do lado oposto fecha por dentro, cada jogador com uma pequena variação própria. A linha sobe junta quando o portador adversário recua |
+| Defesa do goleiro | No início do chute o painel calcula o ponto da trajetória que o goleiro alcança no tempo da bola. A bola termina no corpo dele no instante do contato e o goleiro aparece mergulhando: encaixa, espalma para escanteio (por fora da trave) ou espalma para rebote. Chutes que entram, vão na trave ou para fora têm mergulho que não alcança |
+| Gol | A bola atravessa a linha entre as traves desenhadas e sai da área visível; depois de uma pausa curta volta ao centro para a saída |
+| Bola fora | Em lateral, escanteio e tiro de meta a bola sai da área visível e reaparece no ponto de cobrança quando o cobrador chega |
+| Chance clara | Portador dentro ou na entrada da área, na faixa central, sem defensor entre ele e o gol: ele finaliza. Sem gol previsto pelo motor, o chute é só visual e não entra nas estatísticas: defesa, rebote para ele, trave ou para fora |
+| Lesão | O lesionado entra no lance (recebe e sofre a entrada, disputa a bola ou sente na arrancada), cai e o ícone aparece 2,2 segundos (tempo real, igual em todas as velocidades) antes de o jogo exibir a lesão e pausar |
+| Gol olímpico | Sempre nasce de escanteio: o goleiro espalma um chute para a linha de fundo, o autor cobra e a bola faz a curva direto para dentro do gol |
+| Bola aérea para o gol | O cruzamento ou lançamento só sai quando o autor alcança o ponto no tempo do voo (até cerca de 1,25 s de corrida; 1,6 s no lançamento longo), e o autor entra na área durante a construção |
+| Gol contra | O zagueiro do lance acompanha a jogada desde a antecipação, entre a bola e o gol. Se ele está na linha do chute, o chute sai na direção dele; se não, o atacante não espera: o goleiro espalma para escanteio e o desvio acontece no cruzamento. O desvio é mais lento que o chute para ficar visível |
 
 As velocidades e acelerações usadas no planejamento são as mesmas do movimento dos jogadores, por isso o que o plano considera alcançável é o que o jogador consegue fazer em campo.
 
@@ -151,7 +164,14 @@ python tools/live_match_simulation.py --ref <commit> --audit 8 --output <regras-
 
 O modo `--audit` confere as regras da seção anterior com um observador próprio, que não usa o registro de toque do painel: lateral e escanteio para o time do último toque, desarme e perda de bola do goleiro, passe com destino adversário, bola parada sem ninguém indo até ela, apito sem contato, velocidade do portador no desarme, passe para trás atravessando o corpo, recuo de atacante livre, linha defensiva rígida, bola esperando o autor do gol, último toque e trajetória no gol contra, substituição com bola rolando e recusas do validador do painel. Roda jogo corrido com lances de estatística, gols, gols contra, cartões e substituições em todas as velocidades, mais cinco cenários dirigidos (lateral sob pressão, goleiro com a bola, atacante livre, desarme por trás e passe para trás).
 
-A simulação prova propriedades da apresentação (linhas de passe, impedimento, bola sempre ancorada, lances chegando ao clímax, regras acima). Ela não executa o motor do Brasfoot e não substitui partida real.
+O modo `--engine N` mede a sincronia com um Brasfoot falso que imita o laço de minutos do jogo: o passo do minuto, a exibição dos lances, a pausa, as telas de substituição (inclusive uma de 30 segundos) e o intervalo, com o minuto 0 do 2º tempo dentro do mesmo passo. O painel é compilado numa cópia instrumentada (relógio, telas abertas e `invokeLater` controlados pela simulação); o código do produto não tem ganchos de teste. Para cada lance compara o momento em que o jogo o exibe com o momento em que ele aparece no campo (bola na rede, cartão, ícone de lesão, falta do pênalti), em doze cenários: gol, dois gols, amarelo, lesão e pênalti no minuto 1, minuto 0 do 2º tempo, pausa durante gol e durante cartão, vermelho seguido de gols com tela longa, lesão no jogo, gol olímpico e gol contra.
+
+```bash
+python tools/live_match_simulation.py --engine 5 --speeds 2000,1200,700,450,300,220 --output <sincronia.json>
+python tools/live_match_simulation.py --ref <commit> --engine 5 --speeds 2000,1200,700,450,300,220 --output <sincronia-base.json>
+```
+
+A simulação prova propriedades da apresentação (linhas de passe, impedimento, bola sempre ancorada, lances chegando ao clímax, regras acima, ordem entre animação e exibição). Ela não executa o motor do Brasfoot e não substitui partida real.
 
 ## Imagens
 
@@ -171,4 +191,4 @@ São geradas quatro imagens, uma para cada condição de gramado (excelente, mui
 3. Gere o bundle de componentes com [`tools/build_component_bundle.py`](../tools/build_component_bundle.py) e o instalador com [`tools/build_distribution.py`](../tools/build_distribution.py) usando uma edição de prévia (`channel: local-preview`).
 4. Distribua prévias apenas localmente até a release.
 
-Ao mexer na movimentação ou nos eventos, preserve as regras de sincronização: transições de posse por contato, eventos durante paralisações enfileirados, placar do painel atualizado somente quando a bola entra e toda fase nova com condição de saída e prazo de segurança.
+Ao mexer na movimentação ou nos eventos, preserve as regras de sincronização: transições de posse por contato, eventos durante paralisações enfileirados, lance exibido só no clímax, minuto liberado só pelo portão de sincronia e toda fase nova com condição de saída e prazo de segurança. Rode `--engine` e `--audit` antes de gerar uma prévia.

@@ -60,6 +60,84 @@ def simulate_events(ref: str | None, runs: int, speeds: list[int], javac: str, j
         return json.loads(output.read_text(encoding="utf-8"))
 
 
+ENGINE_HARNESS = [ROOT / "tools" / "live-match-render" / "mega" / name for name in ("SimClock.java", "EngineSimulation.java")]
+
+
+def instrument(source: Path, work: Path) -> Path:
+    text = source.read_text(encoding="utf-8").replace("\r\n", "\n")
+    text = text.replace("System.currentTimeMillis()", "SimClock.now()")
+    text = text.replace("SwingUtilities.invokeLater(", "SimClock.later(")
+    marker = "    private boolean isDecisionDialogOpen() {\n"
+    if marker not in text:
+        raise SystemExit("isDecisionDialogOpen not found")
+    text = text.replace(marker, marker + "        if (SimClock.dialog) return true;\n", 1)
+    target = work / "instrumented" / "LiveMatchPanel.java"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(text, encoding="utf-8")
+    return target
+
+
+def engine(ref: str | None, seeds: int, speeds: list[int], javac: str, java: str, timeout: float) -> list[dict]:
+    with tempfile.TemporaryDirectory(prefix="live-match-engine-") as temporary:
+        work = Path(temporary)
+        classes = work / "classes"
+        classes.mkdir()
+        source = instrument(panel_source(ref, work), work)
+        subprocess.run([javac, "--release", "8", "-encoding", "UTF-8", "-nowarn", "-d", str(classes), str(source),
+                        *[str(h) for h in ENGINE_HARNESS]], check=True, timeout=timeout)
+        output = work / "engine.json"
+        env = dict(os.environ, LOCALAPPDATA=str(work / "appdata"))
+        subprocess.run([java, "-Djava.awt.headless=true", "-cp", str(classes), "mega.EngineSimulation", str(output),
+                        str(seeds), ",".join(str(s) for s in speeds)], check=True, env=env, timeout=timeout)
+        return json.loads(output.read_text(encoding="utf-8"))
+
+
+def summarize_engine(rows: list[dict]) -> dict:
+    grouped: dict[str, list[dict]] = defaultdict(list)
+    for row in rows:
+        grouped[row["scenario"]].append(row)
+    result = {}
+    for name, items in grouped.items():
+        ok = [r for r in items if "error" not in r]
+        entry = {
+            "runs": len(items),
+            "errors": len(items) - len(ok),
+            "events": sum(r["events"] for r in ok),
+            "shownBeforeAnimation": sum(r["shownBeforeAnimation"] for r in ok),
+            "neverAnimated": sum(r["neverAnimated"] for r in ok),
+            "notShownByEngine": sum(r["notShownByEngine"] for r in ok),
+            "maxShownAfterVisualMs": max((r["maxShownAfterVisualMs"] for r in ok), default=None),
+            "goalMoments": sum(r["goalMoments"] for r in ok),
+            "goalsLeavingScreen": sum(r.get("goalsLeavingScreen", 0) for r in ok),
+            "forcedReleases": sum(r.get("forcedReleases", 0) for r in ok),
+            "panelRuleViolations": sum(r.get("panelRuleViolations", 0) for r in ok),
+        }
+        pauses = [r["pauseToVisualMs"] for r in ok if r.get("pauseToVisualMs", -1) >= 0]
+        if any("pauseToVisualMs" in r for r in ok):
+            entry["pauseToVisualMsMean"] = round(sum(pauses) / len(pauses)) if pauses else None
+            entry["pauseToVisualMsMax"] = max(pauses) if pauses else None
+        leads = [d["injuryLeadMs"] for r in ok for d in r["detail"] if "injuryLeadMs" in d]
+        if leads:
+            entry["injuryLeadMsMin"] = min(leads)
+            entry["injuryLeadMsMax"] = max(leads)
+        corners = [d["cornerBeforeGoal"] for r in ok for d in r["detail"] if "cornerBeforeGoal" in d]
+        if corners:
+            entry["cornerBeforeOlympicGoal"] = sum(1 for c in corners if c)
+            entry["olympicGoals"] = len(corners)
+        aerial = [r for r in ok if "aerialFinalBalls" in r]
+        if aerial:
+            entry["aerialFinalBalls"] = sum(r["aerialFinalBalls"] for r in aerial)
+            entry["aerialScorerFar"] = sum(r["aerialScorerFar"] for r in aerial)
+        deflections = [r["ownGoalDeflectionMs"] for r in ok if "ownGoalDeflectionMs" in r]
+        if deflections:
+            entry["ownGoalDeflectionMsMean"] = round(sum(deflections) / len(deflections))
+        errors = sorted({r["error"] for r in items if "error" in r})
+        if errors:
+            entry["errorSamples"] = errors[:3]
+        result[name] = entry
+    return result
+
+
 AUDIT_MEANS = {"carrierSpeedTackled", "carrierSpeedFree", "meanBackLineSpread", "rigidBackLineShare",
                "meanWhistleGap", "meanScorerGapAtFinalBall", "stationaryLooseMsPerMinute",
                "tackledSpeedRatio"}
@@ -201,8 +279,20 @@ def main() -> None:
     parser.add_argument("--audit", type=int, default=0,
                         help="football-rule audit: open play with stat cues, plus this many goals, own goals, "
                              "cards and substitutions per speed")
+    parser.add_argument("--engine", type=int, default=0,
+                        help="synchronization suite against a fake Brasfoot minute loop: this many seeds per "
+                             "scenario and speed")
     args = parser.parse_args()
     speeds = [int(s) for s in args.speeds.split(",") if s.strip()]
+    if args.engine:
+        rows = engine(args.ref, args.engine, speeds, args.javac, args.java, args.timeout)
+        if args.raw:
+            args.raw.write_text(json.dumps(rows, indent=2, ensure_ascii=False), encoding="utf-8")
+        text = json.dumps(summarize_engine(rows), indent=2, ensure_ascii=False)
+        if args.output:
+            args.output.write_text(text, encoding="utf-8")
+        print(text)
+        return
     if args.audit:
         raw = audit(args.ref, args.seconds, args.seeds, args.audit, speeds, args.javac, args.java, args.timeout)
         if args.raw:
