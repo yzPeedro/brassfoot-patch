@@ -988,6 +988,10 @@ public final class TacticalSimulation {
         out.put("panelClearChanceShots", Integer.valueOf(opt("clearChanceShots")));
         out.put("panelRestartShotsRefused", Integer.valueOf(opt("restartShots")));
         out.put("panelGoalLikePlays", Integer.valueOf(opt("decoyCount")));
+        out.put("panelBoxShots", Integer.valueOf(opt("boxShots")));
+        out.put("panelBoxBackPasses", Integer.valueOf(opt("boxBackPasses")));
+        out.put("panelRealisticOuts", Integer.valueOf(opt("realisticOuts")));
+        out.put("panelGoalKicksLost", Integer.valueOf(opt("goalKicksLost")));
         return out;
     }
 
