@@ -521,6 +521,8 @@ public final class LiveMatchPanel extends JPanel {
     private int goalKicksLost;
     private long lastBoxDribbleAt;
     private boolean lastRestartHurry;
+    private volatile boolean passive;
+    private Object passiveMatch;
     private int dribbleKind;
     private boolean dribbleWins = true;
     private long dribbleSwingUntil;
@@ -587,7 +589,7 @@ public final class LiveMatchPanel extends JPanel {
 
     public static void engineStep(Object match, int minute, int half) throws Throwable {
         LiveMatchPanel panel = active;
-        if (minute == 0 && half == 2 && panel != null && panel.isWatched(match)) {
+        if (minute == 0 && half == 2 && panel != null && !panel.passive && panel.isWatched(match)) {
             synchronized (DEFERRED_ZERO) {
                 if (!DEFERRED_ZERO.contains(match)) DEFERRED_ZERO.add(match);
                 while (DEFERRED_ZERO.size() > 4) DEFERRED_ZERO.remove(0);
@@ -1354,6 +1356,30 @@ public final class LiveMatchPanel extends JPanel {
         fireHeldMinute();
     }
 
+    private boolean updatePassive() {
+        Object match = matchFromLiveRow(currentLiveRow());
+        if (match == null) match = readField(host, "KS");
+        if (match == null || match == passiveMatch) return passive;
+        passiveMatch = match;
+        boolean wasPassive = passive;
+        Object homeHuman = invoke(invoke(match, "hc"), "jZ");
+        Object awayHuman = invoke(invoke(match, "hd"), "jZ");
+        passive = Boolean.FALSE.equals(homeHuman) && Boolean.FALSE.equals(awayHuman);
+        if (passive && !wasPassive) {
+            diagnostic("passive_match", null);
+            if (clockHeld || preEventActive || engineEventOpen || hasAnimationStoppage() || !queuedEngineActions.isEmpty()) {
+                failSafeReset("passive_match");
+            }
+            queuedEngineActions.clear();
+            actionDue.clear();
+            preEventActive = false;
+            penaltyPhase = 0;
+        } else if (!passive && wasPassive) {
+            diagnostic("active_match", null);
+        }
+        return passive;
+    }
+
     private void tickUnsafe() {
         ensureVisibleLayer();
         long nanos = System.nanoTime();
@@ -1361,6 +1387,11 @@ public final class LiveMatchPanel extends JPanel {
         lastTickNanos = nanos;
         frames++;
         if (frames % 8 == 0) syncFromGame();
+        if (updatePassive()) {
+            advanceClock(false);
+            repaint();
+            return;
+        }
         boolean penaltyAnimating = penaltyPhase >= 1 && penaltyPhase <= 4;
         if (isDecisionDialogOpen() && !penaltyAnimating) {
             advanceClock(false);
@@ -3441,7 +3472,7 @@ public final class LiveMatchPanel extends JPanel {
 
     public static void beforePenaltyKick(Object row, Object action) {
         LiveMatchPanel panel = active;
-        if (panel == null) return;
+        if (panel == null || panel.passive) return;
         try {
             panel.runPenaltyKick(row, action);
         } catch (Throwable error) {
@@ -7872,6 +7903,18 @@ public final class LiveMatchPanel extends JPanel {
         g.fillOval(mid - 3, top + fieldH / 2 - 3, 6, 6);
         drawPenaltyArea(g, left, top, fieldW, fieldH, false);
         drawPenaltyArea(g, left, top, fieldW, fieldH, true);
+        if (passive) {
+            g.setFont(NAME_FONT);
+            String note = "Partida sem o seu time: o campo animado acompanha só os jogos do seu time";
+            int noteW = g.getFontMetrics().stringWidth(note);
+            int nx = left + (fieldW - noteW) / 2, ny = top + fieldH / 2 + circle / 2 + 22;
+            g.setColor(SHADOW);
+            g.fillRoundRect(nx - 10, ny - 15, noteW + 20, 22, 10, 10);
+            g.setColor(Color.WHITE);
+            g.drawString(note, nx, ny);
+            g.dispose();
+            return;
+        }
         long now = clockNow();
         drawTeam(g, home, homeColor, homeAccent, homeStripe, homeKeeper, left, top, fieldW, fieldH, now);
         drawTeam(g, away, awayColor, awayAccent, awayStripe, awayKeeper, left, top, fieldW, fieldH, now);
