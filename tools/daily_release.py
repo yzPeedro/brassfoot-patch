@@ -852,6 +852,19 @@ def assemble(inputs: dict, analysis: dict, decoder: Decoder, scratch: Path) -> t
     return approved, decoded, adjustments
 
 
+def previous_live_arguments(current: list, private: Path = PRIVATE) -> list:
+    skip = {sha_file(path) for path in current}
+    arguments, seen = [], set(skip)
+    for folder in sorted(private.glob("live-match-release-*")):
+        for name, flag in (("bf22-23.exe", "--previous-live-executable"),
+                           ("bf22-23-live-only.exe", "--previous-live-only-executable")):
+            path = folder / name
+            if path.is_file() and sha_file(path) not in seen:
+                seen.add(sha_file(path))
+                arguments += [flag, path]
+    return arguments
+
+
 def bundle_commands(inputs: dict, work: Path, approved: Path, version: str, crest_mode: str, dropped_exes: list,
                     kept_exes: list) -> list:
     python = sys.executable
@@ -876,7 +889,9 @@ def bundle_commands(inputs: dict, work: Path, approved: Path, version: str, cres
                      [python, "-m", "tools.build_component_bundle", "--inherit-bundle", release,
                       "--original-executable", exes["original"], "--patch-executable", exes["patch"],
                       "--full-executable", exes["full"], "--live-executable", exes["live"],
-                      "--patch-recipe", work / "patch-recipe.json", "--original-game", exes["original"].parent,
+                      "--patch-recipe", work / "patch-recipe.json",
+                      *previous_live_arguments([exes["full"], exes["live"], exes["patch"]]),
+                      "--original-game", exes["original"].parent,
                       "--output", components, "--version", version, "--release"]))
     crests = work / "bundle-3-crests"
     approved_crests = ROOT / "config/crest-updates-2026.json" if crest_mode == "rebuild" \
@@ -1371,11 +1386,11 @@ def main() -> None:
     prep.add_argument("--base-game", type=Path, required=True)
     prep.add_argument("--work", type=Path, required=True)
     prep.add_argument("--original-game", type=Path, default=PRIVATE / "vanilla-22-23")
-    prep.add_argument("--full-executable", type=Path, default=PRIVATE / "live-match-release-2026.6.10" / "bf22-23.exe")
+    prep.add_argument("--full-executable", type=Path, default=PRIVATE / "live-match-release-2026.6.11" / "bf22-23.exe")
     prep.add_argument("--live-executable", type=Path,
-                      default=PRIVATE / "live-match-release-2026.6.10" / "bf22-23-live-only.exe")
+                      default=PRIVATE / "live-match-release-2026.6.11" / "bf22-23-live-only.exe")
     prep.add_argument("--patch-executable", type=Path,
-                      default=PRIVATE / "live-match-release-2026.6.10" / "bf22-23-patch-only.exe")
+                      default=PRIVATE / "live-match-release-2026.6.11" / "bf22-23-patch-only.exe")
     prep.add_argument("--snapshot", type=Path, default=PRIVATE / "daily" / "snapshot.json")
     prep.add_argument("--world-snapshot", type=Path, default=ROOT / "config" / "super-update-world-2026.json")
     prep.add_argument("--super-update-build", type=Path)

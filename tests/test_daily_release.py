@@ -274,6 +274,28 @@ class FactsTests(unittest.TestCase):
         self.assertEqual(once["facts"][1]["source"], "docs/releases/v2026.6.8.md")
 
 
+class PreviousLiveTests(unittest.TestCase):
+    def test_every_published_field_except_the_current_is_passed_once(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            for folder, full, live in (("live-match-release-2026.5.7", b"A", b"B"), ("live-match-release-2026.6.10", b"C", b"D"),
+                                       ("live-match-release-2026.6.11", b"E", b"F"), ("live-match-release-copia", b"C", b"D")):
+                (root / folder).mkdir()
+                (root / folder / "bf22-23.exe").write_bytes(full)
+                (root / folder / "bf22-23-live-only.exe").write_bytes(live)
+                (root / folder / "bf22-23-patch-only.exe").write_bytes(b"P")
+            current = [root / "live-match-release-2026.6.11" / name
+                       for name in ("bf22-23.exe", "bf22-23-live-only.exe", "bf22-23-patch-only.exe")]
+            arguments = dr.previous_live_arguments(current, root)
+        flags = arguments[0::2]
+        names = [(path.parent.name, path.name) for path in arguments[1::2]]
+        self.assertEqual(flags, ["--previous-live-executable", "--previous-live-only-executable"] * 2)
+        self.assertEqual(names, [("live-match-release-2026.5.7", "bf22-23.exe"),
+                                 ("live-match-release-2026.5.7", "bf22-23-live-only.exe"),
+                                 ("live-match-release-2026.6.10", "bf22-23.exe"),
+                                 ("live-match-release-2026.6.10", "bf22-23-live-only.exe")])
+
+
 class VersionTests(unittest.TestCase):
     def test_version_format_is_strict(self):
         self.assertEqual(dr.parse_version("2026.6.8"), (2026, 6, 8))
