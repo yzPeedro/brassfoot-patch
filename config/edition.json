@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.6.10",
+  "version": "2026.6.11",
   "channel": "stable",
-  "releaseNotes": "Campo animado novo: sincronia com o placar, goleiros, minutos iniciais e jogadas de gol que terminam sem gol.",
+  "releaseNotes": "Campo animado: jogo parado no pênalti e na lesão, batedores do menu tático e posições pela formação escolhida.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [

@@ -1,7 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-14T16:00:00-03:00",
+  "updatedAt": "2026-11-15T15:00:00-03:00",
   "entries": [
+    {
+      "id": "patch-2026-6-11",
+      "version": "2026.6.11",
+      "date": "2026-11-15T15:00:00-03:00",
+      "title": "Campo animado: pênalti, lesão, batedores e formação",
+      "kind": "patch",
+      "summary": "Jogo parado no pênalti e na lesão, batedores do menu tático e posições pela formação escolhida.",
+      "changes": [
+        "O jogo fica parado com a tela do pênalti aberta e enquanto a cobrança é mostrada.",
+        "Faltas no ataque e escanteios são cobrados pelos batedores do menu tático.",
+        "A lesão para o jogo até a substituição, com o relógio parado.",
+        "Cada jogador ocupa a posição da formação escolhida no menu tático.",
+        "Elencos, ligas, escudos, camisas e hub 1.4.2 permanecem iguais."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.6.11"
+    },
     {
       "id": "patch-2026-6-10",
       "version": "2026.6.10",
