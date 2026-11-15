@@ -120,6 +120,7 @@ public final class LiveMatchPanel extends JPanel {
     private long penaltyResolvedAt;
     private int penaltyScoreBefore = -1;
     private volatile Object penaltyLoop;
+    private int engineShowDepth;
     private boolean penaltyBuild;
     private int penaltyFouler = -1;
     private long penaltyFoulDeadline;
@@ -836,7 +837,8 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private boolean mayAdvanceEngine() {
-        if (matchEnded() || penaltyLoop != null) return true;
+        if (matchEnded()) return true;
+        if (engineShowDepth > 0 || penaltyLoop != null) return false;
         if (engineEventOpen) return false;
         for (Object action : queuedEngineActions) {
             if (Boolean.TRUE.equals(invoke(action, "isDone"))) continue;
@@ -847,14 +849,15 @@ public final class LiveMatchPanel extends JPanel {
         return true;
     }
 
-    private void engineClimax() {
-        showEngineAction(activeEngineAction);
+    private boolean engineClimax() {
+        boolean shown = showEngineAction(activeEngineAction);
         engineEventOpen = false;
         activeEngineAction = null;
         escalation = 0;
         escalateAt = 0;
         forceShot = false;
         onClimax();
+        return shown;
     }
 
     private Method findShowMethod() {
@@ -870,25 +873,45 @@ public final class LiveMatchPanel extends JPanel {
         return null;
     }
 
-    private void showEngineAction(final Object action) {
-        if (action == null || Boolean.TRUE.equals(invoke(action, "isDone"))) return;
+    private boolean showEngineAction(final Object action) {
+        if (action == null || Boolean.TRUE.equals(invoke(action, "isDone"))) return false;
         final Object row = currentLiveRow();
         final Object match = matchFromLiveRow(row);
         final Method method = findShowMethod();
-        if (row == null || match == null || method == null || match == row) return;
+        if (row == null || match == null || method == null || match == row) return false;
         Object list = invoke(match, "hE");
-        if (!(list instanceof List<?>) || !((List<?>) list).contains(action)) return;
+        if (!(list instanceof List<?>) || !((List<?>) list).contains(action)) return false;
         final int index = integer(readField(host, "GW"), 0);
         shownAtClimax++;
+        engineShowDepth++;
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() {
                 try {
+                    stopClockForShow();
                     if (!Boolean.TRUE.equals(invoke(action, "isDone"))) method.invoke(host, row, match, action, Integer.valueOf(index));
                 } catch (Throwable error) {
                     diagnostic("show_action_failed", error);
+                } finally {
+                    engineShowDepth = Math.max(0, engineShowDepth - 1);
                 }
             }
         });
+        return true;
+    }
+
+    private void stopClockForShow() {
+        if (clockHeld || matchEnded()) return;
+        Object value = readField(host, "GO");
+        if (!(value instanceof Timer) || !((Timer) value).isRunning()) return;
+        ((Timer) value).stop();
+        markClockHeld();
+    }
+
+    private void markClockHeld() {
+        clockHeld = true;
+        holdStartedReal = System.currentTimeMillis();
+        holdStartedVirtual = clockNow();
+        heldMinuteDue = minuteStartedReal + minuteDelay();
     }
 
     private void openEngineEvent(Object action, long now) {
@@ -964,7 +987,8 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private boolean holdWanted() {
-        if (matchEnded() || penaltyLoop != null) return false;
+        if (matchEnded()) return false;
+        if (engineShowDepth > 0 || penaltyLoop != null) return true;
         if (pendingGoalStage != 0 || cardFoulPhase == 1 || freeKickPhase != 0 || restartActive || penaltyPhase != 0
                 || injuryPhase != 0 || engineEventOpen) {
             return true;
@@ -1005,10 +1029,7 @@ public final class LiveMatchPanel extends JPanel {
         Object value = readField(host, "GO");
         if (!(value instanceof Timer) || !((Timer) value).isRunning()) return;
         ((Timer) value).stop();
-        clockHeld = true;
-        holdStartedReal = System.currentTimeMillis();
-        holdStartedVirtual = clockNow();
-        heldMinuteDue = minuteStartedReal + minuteDelay();
+        markClockHeld();
     }
 
     private void releaseGameClock() {
@@ -1039,6 +1060,12 @@ public final class LiveMatchPanel extends JPanel {
         if (matchEnded() || Boolean.FALSE.equals(readField(host, "GZ"))) return;
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() {
+                if (!matchEnded() && (engineShowDepth > 0 || penaltyLoop != null)) {
+                    diagnostic("minute_deferred_during_show", null);
+                    if (!clockHeld) markClockHeld();
+                    heldMinuteDue = System.currentTimeMillis();
+                    return;
+                }
                 try {
                     host.getClass().getMethod("qa").invoke(host);
                 } catch (Throwable error) {
@@ -1059,7 +1086,7 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private boolean insideEngineStep() {
-        return penaltyLoop != null || isDecisionDialogOpen();
+        return engineShowDepth > 0 || penaltyLoop != null || isDecisionDialogOpen();
     }
 
     private int tactic(int side, int index, int fallback) {
@@ -1185,6 +1212,7 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private long holdLimit() {
+        if (penaltyPhase != 0) return 30000L;
         if (freeKickPhase != 0 || (cardFoulPhase == 1 && cardFoulFreeKick)) return 26000L;
         if (restartActive || kickoffInProgress) return 16000L;
         if (pendingGoalStage == 1) return 14000L;
@@ -2570,8 +2598,7 @@ public final class LiveMatchPanel extends JPanel {
                 penaltyBuild = false;
                 penaltyFouler = -1;
                 startPenaltySetup(now, side, fouled);
-                engineClimax();
-                releaseGameClock();
+                if (!engineClimax()) releaseGameClock();
             }
             return;
         }
@@ -3318,6 +3345,7 @@ public final class LiveMatchPanel extends JPanel {
         penaltyReadyAfter = now + 1600L;
         penaltyDeadline = now + 25000L;
         penaltySettleDeadline = 0;
+        holdStartedVirtual = now;
         event = "Pênalti!";
         Dot[] players = side == 0 ? home : away;
         possessingSide = side;
@@ -3395,7 +3423,7 @@ public final class LiveMatchPanel extends JPanel {
             if (penaltyDebug && now >= penaltyReadyAfter && !ballInFlight) {
                 penaltyActor = nearestActive(shooting, spotX(penaltySide) - direction * .12, .50, -1, false);
                 penaltyPhase = 2;
-            } else if (now >= penaltyDeadline) {
+            } else if (now >= penaltyDeadline && engineShowDepth == 0) {
                 penaltyPhase = 0;
                 recoverToKeeper(now, 1 - penaltySide);
             }
