@@ -216,7 +216,11 @@ public final class LiveMatchPanel extends JPanel {
     private int pauseHurries;
     private int escalationCount;
     private long holdStartedVirtual;
-    private static final long INJURY_LEAD_MS = 2200L;
+    private static final long INJURY_LEAD_MS = 1600L;
+    private static final long INJURY_APPROACH_MS = 2500L;
+    private static final long INJURY_TREATMENT_MS = 900L;
+    private long injuryClimaxAt;
+    private int injuryBallSide = -1;
     private int injuryPhase;
     private int injurySide = -1;
     private int injuryPlayer = -1;
@@ -1216,6 +1220,7 @@ public final class LiveMatchPanel extends JPanel {
 
     private long holdLimit() {
         if (penaltyPhase != 0) return 30000L;
+        if (injuryPhase != 0) return 16000L;
         if (freeKickPhase != 0 || (cardFoulPhase == 1 && cardFoulFreeKick)) return 26000L;
         if (restartActive || kickoffInProgress) return 16000L;
         if (pendingGoalStage == 1) return 14000L;
@@ -1237,6 +1242,8 @@ public final class LiveMatchPanel extends JPanel {
         forceShot = false;
         injuryPhase = 0;
         injuryPlayer = -1;
+        injuryClimaxAt = 0;
+        injuryBallSide = -1;
         clearPlayVariety();
         try {
             exitPenaltyLoop();
@@ -2239,6 +2246,8 @@ public final class LiveMatchPanel extends JPanel {
         injuryPlayer = player;
         injuryStarted = now;
         injuryFallAt = 0;
+        injuryClimaxAt = 0;
+        injuryBallSide = -1;
         injuryPassed = false;
         injuryText = text;
         injuryKey = playerKey(side, (side == 0 ? home : away)[player].fullName);
@@ -2252,20 +2261,26 @@ public final class LiveMatchPanel extends JPanel {
         Dot[] team = injurySide == 0 ? home : away;
         Dot[] rivals = injurySide == 0 ? away : home;
         if (injuryPlayer < 0 || injuryPlayer >= team.length || !team[injuryPlayer].active) {
-            injuryPhase = 0;
-            engineClimax();
+            if (injuryPhase == 2) {
+                if (injuryClimaxAt == 0) engineClimax();
+                finishInjury(now);
+            } else {
+                injuryPhase = 0;
+                engineClimax();
+            }
             return;
         }
         Dot victim = team[injuryPlayer];
         if (injuryPhase == 2) {
-            if (now - injuryFallAt >= INJURY_LEAD_MS) {
-                injuryPhase = 0;
-                injuryPlayer = -1;
-                engineClimax();
-                releaseGameClock();
-                simpleStoppageUntil = now + 500L;
-                controlUntil = now + 900L;
+            if (injuryClimaxAt == 0) {
+                if (now - injuryFallAt >= INJURY_LEAD_MS) {
+                    injuryClimaxAt = now;
+                    engineClimax();
+                }
+                return;
             }
+            if (engineShowDepth > 0 || isDecisionDialogOpen()) return;
+            if (now - injuryClimaxAt >= INJURY_TREATMENT_MS) finishInjury(now);
             return;
         }
         if (injuryRival < 0 || !rivals[injuryRival].active) {
@@ -2290,29 +2305,58 @@ public final class LiveMatchPanel extends JPanel {
                 return;
             }
         }
-        if (now - injuryStarted >= 4800L) injuryFall(now);
+        if (now - injuryStarted >= INJURY_APPROACH_MS) injuryFall(now);
     }
 
     private void injuryFall(long now) {
         if (injuryPhase != 1) return;
         injuryPhase = 2;
         injuryFallAt = now;
+        injuryClimaxAt = 0;
         if (injuryKey != null) injured.add(injuryKey);
-        event = injuryText == null ? "Lesão" : injuryText;
+        event = (injuryText == null ? "Lesão" : injuryText) + " · jogo parado";
         Dot[] team = injurySide == 0 ? home : away;
         Dot victim = team[injuryPlayer];
         victim.velocityX *= .3;
         victim.velocityY *= .3;
         tackleActive = false;
-        if (!ballInFlight && !looseBall && possessingSide == injurySide && possessingPlayer == injuryPlayer) {
-            Dot[] rivals = injurySide == 0 ? away : home;
-            int taker = nearestActive(rivals, ballX, ballY, -1, false);
-            looseBall = true;
-            looseSide = 1 - injurySide;
-            looseChaser = taker;
-            looseSince = now;
-            touch(injurySide, injuryPlayer);
-        }
+        injuryBallSide = looseBall ? looseSide : possessingSide;
+        if (injuryBallSide != 0 && injuryBallSide != 1) injuryBallSide = 1 - injurySide;
+        ballInFlight = false;
+        curveActive = false;
+        ballLift = 0;
+        ballFromX = ballToX = ballX;
+        ballFromY = ballToY = ballY;
+        looseBall = false;
+        receivingSide = -1;
+        receivingPlayer = -1;
+        glideToStop(home);
+        glideToStop(away);
+        simpleStoppageUntil = Long.MAX_VALUE;
+    }
+
+    private void finishInjury(long now) {
+        int side = injuryBallSide == 0 || injuryBallSide == 1 ? injuryBallSide : 1 - injurySide;
+        int excluded = side == injurySide ? injuryPlayer : -1;
+        injuryPhase = 0;
+        injuryPlayer = -1;
+        injuryClimaxAt = 0;
+        injuryBallSide = -1;
+        Dot[] team = side == 0 ? home : away;
+        int chaser = nearestActive(team, ballX, ballY, excluded, false);
+        if (chaser < 0) chaser = nearestActive(team, ballX, ballY, -1, true);
+        ballInFlight = false;
+        ballFromX = ballToX = ballX;
+        ballFromY = ballToY = ballY;
+        looseBall = true;
+        looseSide = side;
+        looseChaser = chaser;
+        looseSince = now;
+        possessingSide = side;
+        simpleStoppageUntil = now + 400L;
+        controlUntil = now + 900L;
+        event = "Bola ao chão";
+        releaseGameClock();
     }
 
     private void followBallCarrier() {
