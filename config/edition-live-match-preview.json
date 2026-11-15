@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch - Previa Jogo ao Vivo",
   "PATCH_YEAR": 2026,
-  "version": "2026.6.14",
+  "version": "2026.6.15",
   "channel": "local-preview",
-  "releaseNotes": "Previa privada do campo animado: o jogo para durante o penalti e so segue depois do resultado.",
+  "releaseNotes": "Previa privada do campo animado: jogo parado durante o penalti e batedores de falta e escanteio escolhidos no menu tatico.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [
