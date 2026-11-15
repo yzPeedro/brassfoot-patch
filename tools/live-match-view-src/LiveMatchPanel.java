@@ -216,6 +216,13 @@ public final class LiveMatchPanel extends JPanel {
     private int pauseHurries;
     private int escalationCount;
     private long holdStartedVirtual;
+    private static final int[][] TACTICAL_SLOTS = {
+        {-1, -1}, {190, 565}, {35, 425}, {100, 485}, {190, 485}, {285, 485}, {100, 405}, {190, 405}, {285, 405},
+        {345, 425}, {35, 265}, {100, 315}, {190, 315}, {285, 315}, {100, 205}, {190, 205}, {285, 205}, {345, 265},
+        {35, 55}, {100, 115}, {190, 115}, {285, 115}, {100, 35}, {190, 30}, {285, 35}, {345, 55}
+    };
+    private static final int[] TACTICAL_DEPTH_PIXELS = {485, 425, 405, 315, 265, 205, 115, 30};
+    private static final double[] TACTICAL_DEPTH_VALUES = {.17, .20, .24, .33, .36, .40, .46, .49};
     private static final long INJURY_LEAD_MS = 1600L;
     private static final long INJURY_APPROACH_MS = 2500L;
     private static final long INJURY_TREATMENT_MS = 900L;
@@ -6104,12 +6111,14 @@ public final class LiveMatchPanel extends JPanel {
         if (!(value instanceof List<?>)) return Collections.emptyList();
         List<Object> ordered = new ArrayList<Object>((List<?>) value);
         if (ordered.size() > 11) ordered = new ArrayList<Object>(ordered.subList(0, 11));
-        for (int i = 0; i < ordered.size(); i++) {
-            if (integer(invoke(ordered.get(i), "getPosicao"), -1) == 0) {
-                if (i > 0) ordered.add(0, ordered.remove(i));
-                break;
-            }
+        int keeper = -1;
+        for (int i = 0; i < ordered.size() && keeper < 0; i++) {
+            if (integer(invoke(ordered.get(i), "fT"), -1) == 1) keeper = i;
         }
+        for (int i = 0; i < ordered.size() && keeper < 0; i++) {
+            if (integer(invoke(ordered.get(i), "getPosicao"), -1) == 0) keeper = i;
+        }
+        if (keeper > 0) ordered.add(0, ordered.remove(keeper));
         return ordered;
     }
 
@@ -6209,6 +6218,7 @@ public final class LiveMatchPanel extends JPanel {
         dots[0].y = .50;
         dots[0].roleLine = 0;
         dots[0].wideRole = false;
+        if (placeByTacticalSlots(dots, players, slotOf, count, mirror)) return;
         List<Integer> fullbacks = new ArrayList<Integer>();
         List<Integer> centreBacks = new ArrayList<Integer>();
         List<Integer> midfielders = new ArrayList<Integer>();
@@ -6373,6 +6383,45 @@ public final class LiveMatchPanel extends JPanel {
             boolean wide = roleLine == 2 && (y <= .27 || y >= .73);
             placeDot(dots, slotOf[group.get(order).intValue()], x, y, roleLine, wide, mirror);
         }
+    }
+
+    private boolean placeByTacticalSlots(Dot[] dots, List<?> players, int[] slotOf, int count, boolean mirror) {
+        int[] slots = new int[count];
+        boolean[] seen = new boolean[TACTICAL_SLOTS.length];
+        int placed = 0;
+        for (int p = 1; p < count; p++) {
+            if (slotOf[p] < 0) continue;
+            int slot = integer(invoke(players.get(p), "fT"), -1);
+            if (slot < 2 || slot >= TACTICAL_SLOTS.length || seen[slot]) return false;
+            seen[slot] = true;
+            slots[p] = slot;
+            placed++;
+        }
+        if (placed == 0) return false;
+        for (int p = 1; p < count; p++) {
+            if (slotOf[p] < 0) continue;
+            int slot = slots[p];
+            int pixelX = TACTICAL_SLOTS[slot][0];
+            int pixelY = TACTICAL_SLOTS[slot][1];
+            int roleLine = slot <= 5 || slot == 9 ? 1 : slot <= 17 ? 2 : 3;
+            boolean wide = slot == 2 || slot == 9 || slot == 10 || slot == 17 || slot == 18 || slot == 25;
+            double y = clamp(.5 + (pixelX - 190) / 155.0 * .36, .08, .92);
+            placeDot(dots, slotOf[p], tacticalDepth(pixelY), mirror ? 1.0 - y : y, roleLine, wide, mirror);
+        }
+        return true;
+    }
+
+    private static double tacticalDepth(int pixelY) {
+        if (pixelY >= TACTICAL_DEPTH_PIXELS[0]) return TACTICAL_DEPTH_VALUES[0];
+        for (int i = 1; i < TACTICAL_DEPTH_PIXELS.length; i++) {
+            int high = TACTICAL_DEPTH_PIXELS[i - 1];
+            int low = TACTICAL_DEPTH_PIXELS[i];
+            if (pixelY >= low) {
+                double t = (high - pixelY) / (double) (high - low);
+                return TACTICAL_DEPTH_VALUES[i - 1] + (TACTICAL_DEPTH_VALUES[i] - TACTICAL_DEPTH_VALUES[i - 1]) * t;
+            }
+        }
+        return TACTICAL_DEPTH_VALUES[TACTICAL_DEPTH_VALUES.length - 1];
     }
 
     private void placeDot(Dot[] dots, int index, double x, double y, int roleLine, boolean wide, boolean mirror) {
