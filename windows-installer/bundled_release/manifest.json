@@ -2,7 +2,7 @@
   "schemaVersion": 4,
   "kind": "BRASFOOT_RELEASE_PATCH",
   "patchSeason": 2026,
-  "version": "2026.6.11",
+  "version": "2026.6.12",
   "publicationAllowed": true,
   "compatibilityTestedInGame": false,
   "channel": "stable",
@@ -12,10 +12,11 @@
     {
       "operation": "replace",
       "path": "bf22-23.exe",
-      "size": 7288692,
-      "sha256": "d2d6b209333b661cbcf124353c8a27691c0eba5046b2c1a91b5632968d1abaa5",
+      "size": 7326883,
+      "sha256": "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa",
       "acceptedOriginalSha256": [
         "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
+        "d2d6b209333b661cbcf124353c8a27691c0eba5046b2c1a91b5632968d1abaa5",
         "3237e2ceaf56f81b14614109128a5133ee69db0fe954f738cd642806da09c7d0",
         "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414",
         "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
@@ -32,7 +33,8 @@
         "2159798376f670db9a99a19c85fd4cba3bbd9128f0a4b3c8b9ffb4b61d189d4a",
         "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
         "d330a79a396ce24b509dec508a224b12e237eeb8e6c049040f8fa8f6be656955",
-        "26be851a51afbd6af0f0a50fec7744826b114700acf4d28459a559c659375f67"
+        "26be851a51afbd6af0f0a50fec7744826b114700acf4d28459a559c659375f67",
+        "b5a76a87142bb887e5a7575e01662f37360e0dda8beebfe693c44effc96dab5a"
       ],
       "vanillaSha256": "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
       "vanillaSize": 7320384
@@ -9467,6 +9469,1904 @@
       "vanillaMissing": true
     },
     {
+      "operation": "replace",
+      "path": "teams/escudos/Differdange_Lux.png",
+      "size": 3983,
+      "sha256": "1d4a66175a7dc932e23cd169e36e761b838ebc32bbafb599c5d05680c48b7524",
+      "acceptedOriginalSha256": [
+        "f05e14264061b7c723fc85d6d5ede3223777b3401fd7992beca6fc5968689663"
+      ],
+      "recipe": "crest-91bc7fa38fc240c7716f.json",
+      "component": "crests",
+      "vanillaSha256": "f05e14264061b7c723fc85d6d5ede3223777b3401fd7992beca6fc5968689663",
+      "vanillaSize": 6735
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/Differdange_Lux.png",
+      "size": 799,
+      "sha256": "4a4bca3f4246204f62b544a968edd58170e4b08be1664474ee83bbaf132b8917",
+      "acceptedOriginalSha256": [
+        "9aa63f3351d31eb3169bb30bd382dff07e35370c107c661e2e9dba34daf2253e"
+      ],
+      "recipe": "crest-e1ccd75dfff8bcad0c9a.json",
+      "component": "crests",
+      "vanillaSha256": "9aa63f3351d31eb3169bb30bd382dff07e35370c107c661e2e9dba34daf2253e",
+      "vanillaSize": 992
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/Saburtalo_Geo.png",
+      "size": 7716,
+      "sha256": "12af40aedc126fd2aa7d1299a29296ea1037dfbc7af69b391b9feaa01c043c57",
+      "acceptedOriginalSha256": [
+        "367b33f4d5c3c045a31d935f3b12c7f3290c5ffb7d761cc4b743cc7d77e05997"
+      ],
+      "recipe": "crest-f9bd33bd505687c31f2c.json",
+      "component": "crests",
+      "vanillaSha256": "367b33f4d5c3c045a31d935f3b12c7f3290c5ffb7d761cc4b743cc7d77e05997",
+      "vanillaSize": 6605
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/Saburtalo_Geo.png",
+      "size": 1011,
+      "sha256": "76e0994e39e1baa7e9faa8592d2a37948b69bd0478847af74f2a199a3b2d0343",
+      "acceptedOriginalSha256": [
+        "87882977e99cc4923b95db31abd8b4f662d2ee0767726e692daedf7f94245bbb"
+      ],
+      "recipe": "crest-ee90bf1c37b9e1dfcc7b.json",
+      "component": "crests",
+      "vanillaSha256": "87882977e99cc4923b95db31abd8b4f662d2ee0767726e692daedf7f94245bbb",
+      "vanillaSize": 910
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/agmk_uzb.png",
+      "size": 6095,
+      "sha256": "543c1f432fedcc1b3c2fac722526eedbac5d5bde029589173f6a27b72bea8011",
+      "acceptedOriginalSha256": [
+        "556de495dc2c0d8df917ce8fb65a111e88f823e6d04f574cf634fd2e8e4cde81"
+      ],
+      "recipe": "crest-880c3f452795e0a3323a.json",
+      "component": "crests",
+      "vanillaSha256": "556de495dc2c0d8df917ce8fb65a111e88f823e6d04f574cf634fd2e8e4cde81",
+      "vanillaSize": 6507
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/agmk_uzb.png",
+      "size": 781,
+      "sha256": "bae3efc250c7b4a2b0153535996c966565c32df405cf0069afa55adf859ba04d",
+      "acceptedOriginalSha256": [
+        "c98b7e8eb95654f0c1dad3f52842c6700304ed63bd14a15eb925d3611d26f1e6"
+      ],
+      "recipe": "crest-bf5d672432556917fcf3.json",
+      "component": "crests",
+      "vanillaSha256": "c98b7e8eb95654f0c1dad3f52842c6700304ed63bd14a15eb925d3611d26f1e6",
+      "vanillaSize": 902
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/ajax_hol.png",
+      "size": 9727,
+      "sha256": "e43d50947411eeb08fd998e71ed987590eba1132d1825182ef6776f8f7df1f9a",
+      "acceptedOriginalSha256": [
+        "e942533eacc72bcb70bce94985413c4c60ae852ed2fb37e4118b0de6123617dd"
+      ],
+      "recipe": "crest-2c83bb72027408eb2dd2.json",
+      "component": "crests",
+      "vanillaSha256": "e942533eacc72bcb70bce94985413c4c60ae852ed2fb37e4118b0de6123617dd",
+      "vanillaSize": 5682
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/ajax_hol.png",
+      "size": 1189,
+      "sha256": "fe29803c2c830ff6ceccfa737e39a3ac730df6b02f7b7f68a0398b6cb56b32c8",
+      "acceptedOriginalSha256": [
+        "591a18eed4104fefdfbfaa9411ef81a00c3151c09bd8ce587d899c425abb5850"
+      ],
+      "recipe": "crest-154b399d8bcdbbb6b69c.json",
+      "component": "crests",
+      "vanillaSha256": "591a18eed4104fefdfbfaa9411ef81a00c3151c09bd8ce587d899c425abb5850",
+      "vanillaSize": 901
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/al_ahli_ara.png",
+      "size": 7320,
+      "sha256": "acc5f17619fbe52d2e3c6921b59dcd431a7da28aa059b8cc1d8fddff50e0688d",
+      "acceptedOriginalSha256": [
+        "7e1067ea3169e96d9206c1bf99aab44ad239cd591c1a9df89a9d6ff837e35fd1"
+      ],
+      "recipe": "crest-84ba0a8be36d6c9a9a5d.json",
+      "component": "crests",
+      "vanillaSha256": "7e1067ea3169e96d9206c1bf99aab44ad239cd591c1a9df89a9d6ff837e35fd1",
+      "vanillaSize": 5760
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/al_ahli_ara.png",
+      "size": 1123,
+      "sha256": "abff99e9af4358394beee0bdf71e4656712411add37965dd8c786afd9bc7853c",
+      "acceptedOriginalSha256": [
+        "4f2017de1e50bac09a62fdeb4de42bc62d65a4b48474847283d97be20aa4dadf"
+      ],
+      "recipe": "crest-e0954c678a84da452003.json",
+      "component": "crests",
+      "vanillaSha256": "4f2017de1e50bac09a62fdeb4de42bc62d65a4b48474847283d97be20aa4dadf",
+      "vanillaSize": 895
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/al_hilal.png",
+      "size": 3173,
+      "sha256": "123d8a3da327587920e056a8ea17dc630c2578e5be13ac5c7945b2e1bc0ee28c",
+      "acceptedOriginalSha256": [
+        "749e464de588d0157ef3382e1eb366cd9d153c735729f79cf4ed8777d9967ab7"
+      ],
+      "recipe": "crest-62bf46eeafa65c6161d9.json",
+      "component": "crests",
+      "vanillaSha256": "749e464de588d0157ef3382e1eb366cd9d153c735729f79cf4ed8777d9967ab7",
+      "vanillaSize": 7404
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/al_hilal.png",
+      "size": 671,
+      "sha256": "d0cdb6b19080c25fae7d657f96ed6b5b703642e2e25032f7f335f1b7665cc708",
+      "acceptedOriginalSha256": [
+        "407136355634bc91f47a95f4f9ba1cce79e7cb689b4a6bab0c4be30ac3b6f66c"
+      ],
+      "recipe": "crest-4202b08128f6b860dc73.json",
+      "component": "crests",
+      "vanillaSha256": "407136355634bc91f47a95f4f9ba1cce79e7cb689b4a6bab0c4be30ac3b6f66c",
+      "vanillaSize": 1011
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/alaves_esp.png",
+      "size": 9148,
+      "sha256": "9d994261b048fc29a99c081f19165073fd0ed5fd74527be752123ca4d00353b5",
+      "acceptedOriginalSha256": [
+        "32db126917fa11505fa2b093719b99381b5ec03c3250d480911d3f7cef13866e"
+      ],
+      "recipe": "crest-0a44a38c51d54c87e88b.json",
+      "component": "crests",
+      "vanillaSha256": "32db126917fa11505fa2b093719b99381b5ec03c3250d480911d3f7cef13866e",
+      "vanillaSize": 5187
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/alaves_esp.png",
+      "size": 1189,
+      "sha256": "82844437ccc6cffbf3160497bb594f90e93d3ed87d487ff79c9fd359ffdda045",
+      "acceptedOriginalSha256": [
+        "c6f97cfb809466ea73f68b2cf8ec6446f2de5e42fe9b4ca2aa4abcdee39da54f"
+      ],
+      "recipe": "crest-3e1afe0d6c61e5bd1ab5.json",
+      "component": "crests",
+      "vanillaSha256": "c6f97cfb809466ea73f68b2cf8ec6446f2de5e42fe9b4ca2aa4abcdee39da54f",
+      "vanillaSize": 818
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/alnassr_ara.png",
+      "size": 8848,
+      "sha256": "bc5b0ed595f63d37bbc2af962f5bfdc70bd01c97f4e9bc2e277d70dbbe75b3a8",
+      "acceptedOriginalSha256": [
+        "7fe2ac00cac1cc3d5f5df11c4c9937ae8dc486534ac2c2c0d04c07a30c292246"
+      ],
+      "recipe": "crest-8583c3d76d0b674a0b0e.json",
+      "component": "crests",
+      "vanillaSha256": "7fe2ac00cac1cc3d5f5df11c4c9937ae8dc486534ac2c2c0d04c07a30c292246",
+      "vanillaSize": 8024
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/alnassr_ara.png",
+      "size": 1170,
+      "sha256": "45e9cb830a37c5be7365e238fca8ecdd603b40790fa77cbe8bfe1456c2a8e3c3",
+      "acceptedOriginalSha256": [
+        "e10a3d322c92d1d807623e162a5514d17232457d8d1fdfe71e007d78833f80f4"
+      ],
+      "recipe": "crest-88fb3379e17357622f4c.json",
+      "component": "crests",
+      "vanillaSha256": "e10a3d322c92d1d807623e162a5514d17232457d8d1fdfe71e007d78833f80f4",
+      "vanillaSize": 1090
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/americamg_bra.png",
+      "size": 6583,
+      "sha256": "38c1db81ad617992f43273dc06466fe9950c67a15c93a3cae9b5e3a706354718",
+      "acceptedOriginalSha256": [
+        "2bb0be4f58519b1ef2774a90a0ede3c90ac0f4c6b9d59888fe6ff99c3fbee3bd"
+      ],
+      "recipe": "crest-ea47345784fde649336f.json",
+      "component": "crests",
+      "vanillaSha256": "2bb0be4f58519b1ef2774a90a0ede3c90ac0f4c6b9d59888fe6ff99c3fbee3bd",
+      "vanillaSize": 5185
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/americamg_bra.png",
+      "size": 1012,
+      "sha256": "e4068ca8cfafd29443f08b32f442b5c1cbe770d8cefee6ab79aeb697091cf57c",
+      "acceptedOriginalSha256": [
+        "7dc690f952aca136c1be3dc8e7c71c50fcf1f3201c0d9a71b692907cfc3588d8"
+      ],
+      "recipe": "crest-99a07f2666786b25ba95.json",
+      "component": "crests",
+      "vanillaSha256": "7dc690f952aca136c1be3dc8e7c71c50fcf1f3201c0d9a71b692907cfc3588d8",
+      "vanillaSize": 769
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/anderlecht_bel.png",
+      "size": 7315,
+      "sha256": "84cddb0689335af01da8879b70ebd4a61e9971fe54f0ab76132f0efa8ddfd70d",
+      "acceptedOriginalSha256": [
+        "0982429e600d5a21a5ec00c30406e55bc21d88afc40afc1cb82f23a7de805e6a"
+      ],
+      "recipe": "crest-4e0ac2c14bb98f6e9a1a.json",
+      "component": "crests",
+      "vanillaSha256": "0982429e600d5a21a5ec00c30406e55bc21d88afc40afc1cb82f23a7de805e6a",
+      "vanillaSize": 8321
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/anderlecht_bel.png",
+      "size": 1098,
+      "sha256": "77a79f38792d27c3ff2dcff3855727230cc6e95a93b437c6d22abd5a2d2dabab",
+      "acceptedOriginalSha256": [
+        "91d5b862cc8098ca8e8d51347ac378e58f06c25026180ec2216682e74554a97a"
+      ],
+      "recipe": "crest-dd7250fc0fa75c6d1688.json",
+      "component": "crests",
+      "vanillaSha256": "91d5b862cc8098ca8e8d51347ac378e58f06c25026180ec2216682e74554a97a",
+      "vanillaSize": 1162
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/apoel_chp.png",
+      "size": 5477,
+      "sha256": "11c880f315e2745f2de543fd11b9fc1f66f4ba28ab63df5eb6a036b90fbe67f9",
+      "acceptedOriginalSha256": [
+        "2263511084ebfbf9372c3e73592c122b53e5ca1f7f6e3ec38de6c7ee4e472aa4"
+      ],
+      "recipe": "crest-d12469ba141eb114d124.json",
+      "component": "crests",
+      "vanillaSha256": "2263511084ebfbf9372c3e73592c122b53e5ca1f7f6e3ec38de6c7ee4e472aa4",
+      "vanillaSize": 6439
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/apoel_chp.png",
+      "size": 927,
+      "sha256": "0418ce4b7134ef6eda0f08226e74ff0a6cb31851be6c5bfd1e44988667503236",
+      "acceptedOriginalSha256": [
+        "8f437b784c02691cdc74743e3742c36eabe2694eb458056bd97bcfb1852b2b39"
+      ],
+      "recipe": "crest-7ff9de97e5482e8b94bd.json",
+      "component": "crests",
+      "vanillaSha256": "8f437b784c02691cdc74743e3742c36eabe2694eb458056bd97bcfb1852b2b39",
+      "vanillaSize": 1027
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/assurn.png",
+      "size": 8097,
+      "sha256": "3a8b6e89eb58d6d15236bb040037024e8c82f47211a2614d13b058ec72612887",
+      "acceptedOriginalSha256": [
+        "b942b408c50f4b2b5a101712a4cd67b8d372c0b929a6d170618615ab8b34b26e"
+      ],
+      "recipe": "crest-10e976d50b1c7d30263c.json",
+      "component": "crests",
+      "vanillaSha256": "b942b408c50f4b2b5a101712a4cd67b8d372c0b929a6d170618615ab8b34b26e",
+      "vanillaSize": 8422
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/assurn.png",
+      "size": 1126,
+      "sha256": "b4c3a1235f84ee6792961385b139075a3ab53291356904794631033af23093f0",
+      "acceptedOriginalSha256": [
+        "33ecd5efbab71958409754f0cd54bcf4b23811218a822b4671b9340720964125"
+      ],
+      "recipe": "crest-2fc62615f2d6289947c3.json",
+      "component": "crests",
+      "vanillaSha256": "33ecd5efbab71958409754f0cd54bcf4b23811218a822b4671b9340720964125",
+      "vanillaSize": 1094
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/astana_caz.png",
+      "size": 3941,
+      "sha256": "d2ca077a9e5009045368ed78af04f80b8d9d55c393123d8d2c0a2efde0b17de9",
+      "acceptedOriginalSha256": [
+        "9cfb6d41a8c47477b41ec0a8aac39b5cdb0d867c3e66ba3ca1312d986139cb05"
+      ],
+      "recipe": "crest-b1bb1ca6cbd18e48273c.json",
+      "component": "crests",
+      "vanillaSha256": "9cfb6d41a8c47477b41ec0a8aac39b5cdb0d867c3e66ba3ca1312d986139cb05",
+      "vanillaSize": 5504
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/astana_caz.png",
+      "size": 642,
+      "sha256": "a7982c89aafcd0cb527d9001c8d9168dd935d9d032b77d65e42f718391794e04",
+      "acceptedOriginalSha256": [
+        "f9ab0d91386a70f49f6c6182607cff119774bd0fbe1b61807c5132759be13899"
+      ],
+      "recipe": "crest-dd4b49dcf458b9e206ee.json",
+      "component": "crests",
+      "vanillaSha256": "f9ab0d91386a70f49f6c6182607cff119774bd0fbe1b61807c5132759be13899",
+      "vanillaSize": 824
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/atalanta_it.png",
+      "size": 8058,
+      "sha256": "2b0b0718b950979dfbbd76b91cf9b5e78fe3a50d8724fdfbc384fb0cbe04c015",
+      "acceptedOriginalSha256": [
+        "2196d9ba76a521a41769223c1e2f901527067364c4b9a57ac709b9cd34427007"
+      ],
+      "recipe": "crest-156a84f8a671ea4fe99f.json",
+      "component": "crests",
+      "vanillaSha256": "2196d9ba76a521a41769223c1e2f901527067364c4b9a57ac709b9cd34427007",
+      "vanillaSize": 4228
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/atalanta_it.png",
+      "size": 1125,
+      "sha256": "4fc647b1821089c940015bbf286f7a9fab227b3da532607bb26bea9118467aa1",
+      "acceptedOriginalSha256": [
+        "7cbd16ca7ff27d5ceeafc49d46ba19df92da3f6cedd660851738df93ff0f99ac"
+      ],
+      "recipe": "crest-097982d345dcfcdfd926.json",
+      "component": "crests",
+      "vanillaSha256": "7cbd16ca7ff27d5ceeafc49d46ba19df92da3f6cedd660851738df93ff0f99ac",
+      "vanillaSize": 792
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/atleticoalagoinhas_bra.png",
+      "size": 7224,
+      "sha256": "1bc0b10205381f6f8aa326cc9be8ad1deb819ea2c6d1a0c38c960e9c60b5c244",
+      "acceptedOriginalSha256": [
+        "af376c129f0712fb95e04de22cb9c32afff8a2fa001962b1064cb309a61a63d1"
+      ],
+      "recipe": "crest-887bc358ea02c04e6cac.json",
+      "component": "crests",
+      "vanillaSha256": "af376c129f0712fb95e04de22cb9c32afff8a2fa001962b1064cb309a61a63d1",
+      "vanillaSize": 6195
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/atleticoalagoinhas_bra.png",
+      "size": 1054,
+      "sha256": "0474649e4104fd7f682f9400f3c958c608edd533115e60c5488a2acbd02f806b",
+      "acceptedOriginalSha256": [
+        "d2fe9abcd02105bb2315e1b53e14ef1d24b968b83bc58dae0c2429e19a55d99a"
+      ],
+      "recipe": "crest-af8eab2f6665f7cd13ea.json",
+      "component": "crests",
+      "vanillaSha256": "d2fe9abcd02105bb2315e1b53e14ef1d24b968b83bc58dae0c2429e19a55d99a",
+      "vanillaSize": 987
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/audax_chi.png",
+      "size": 8896,
+      "sha256": "57c43b2f858126a682d038c584bcfbc92913d52fc512f7a755257670ffb74c71",
+      "acceptedOriginalSha256": [
+        "66d31ac695d9c53c07e7e80fddd66abdf8f81b53ee738e3cbc028c323d9d4a27"
+      ],
+      "recipe": "crest-58ea05fd1363e6ffb6f0.json",
+      "component": "crests",
+      "vanillaSha256": "66d31ac695d9c53c07e7e80fddd66abdf8f81b53ee738e3cbc028c323d9d4a27",
+      "vanillaSize": 7715
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/audax_chi.png",
+      "size": 1189,
+      "sha256": "403c2fffd77ac705fca5ebbbf797de74d5cefa3359a4bf9bf2d468337ea54e3e",
+      "acceptedOriginalSha256": [
+        "4ca731271f11d8dc6adfe4a1989eb4cbc80d750bf766624eb9f9c4fa69f3b155"
+      ],
+      "recipe": "crest-d7ce7e5fd5c4ee3f8308.json",
+      "component": "crests",
+      "vanillaSha256": "4ca731271f11d8dc6adfe4a1989eb4cbc80d750bf766624eb9f9c4fa69f3b155",
+      "vanillaSize": 1183
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/b36torshavn_fro.png",
+      "size": 8540,
+      "sha256": "917bfd3f1e4fb03aaa57dddb4ec55a8e850f085174e2360a623daf13406e3f43",
+      "acceptedOriginalSha256": [
+        "91b8c66c6f84b1bf399d29fc20659bec8296b2b3e09efdcc2eda87d31fde37e7"
+      ],
+      "recipe": "crest-85a90bc4680ff60ced3c.json",
+      "component": "crests",
+      "vanillaSha256": "91b8c66c6f84b1bf399d29fc20659bec8296b2b3e09efdcc2eda87d31fde37e7",
+      "vanillaSize": 5264
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/b36torshavn_fro.png",
+      "size": 1209,
+      "sha256": "5368cdb95f41721be5d35e21558e36bbd87f5a329db81b52aa25d803dfc8f6e9",
+      "acceptedOriginalSha256": [
+        "f14e6cc2c58d70678a6f06a23788fcdbda914f230e48aeb5da0874060420fb7b"
+      ],
+      "recipe": "crest-41ccd30b87390cc98f61.json",
+      "component": "crests",
+      "vanillaSha256": "f14e6cc2c58d70678a6f06a23788fcdbda914f230e48aeb5da0874060420fb7b",
+      "vanillaSize": 752
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/bahiafeira_ba.png",
+      "size": 5090,
+      "sha256": "ac0144732d5ea4e7c77c5df1f8395ddd34ad1abd97c4890e1c0f4e9f1d1587a6",
+      "acceptedOriginalSha256": [
+        "135aac695e24391640db5ff67f88b18d08b40d8e97d4f960f51e60b3f19d6bc6"
+      ],
+      "recipe": "crest-f545822d063d1ea81034.json",
+      "component": "crests",
+      "vanillaSha256": "135aac695e24391640db5ff67f88b18d08b40d8e97d4f960f51e60b3f19d6bc6",
+      "vanillaSize": 4450
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/bahiafeira_ba.png",
+      "size": 993,
+      "sha256": "09a8159addc30995cfa4ad3a1d7f79339bd79e4a389540e7a80dbaa8f461eeaa",
+      "acceptedOriginalSha256": [
+        "41d33ade54d3bda8217f3ee9c0388026dba20dc43ecbfb47bc93428e24c32753"
+      ],
+      "recipe": "crest-45304556b78bc63a3208.json",
+      "component": "crests",
+      "vanillaSha256": "41d33ade54d3bda8217f3ee9c0388026dba20dc43ecbfb47bc93428e24c32753",
+      "vanillaSize": 890
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/boavista_bra.png",
+      "size": 4957,
+      "sha256": "f239adc35bc04b99003c37a274a245ea8805cb79b13d3c8be79a89686d98b754",
+      "acceptedOriginalSha256": [
+        "954f035f20e32deaa8ce0e72f72cf91366f4977174e3917d789264cdf74d62fd"
+      ],
+      "recipe": "crest-62f5f13f61a95285cb8b.json",
+      "component": "crests",
+      "vanillaSha256": "954f035f20e32deaa8ce0e72f72cf91366f4977174e3917d789264cdf74d62fd",
+      "vanillaSize": 6688
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/boavista_bra.png",
+      "size": 851,
+      "sha256": "e5a2763e176d4ef91c19f0fa9b472f0a21b74fc902b367966c1d0c4f33d3fc75",
+      "acceptedOriginalSha256": [
+        "3dd18943949e8087638c6a8938608636cae802cb956229c67427abcfaa0e288e"
+      ],
+      "recipe": "crest-46027c22f7de8c65b430.json",
+      "component": "crests",
+      "vanillaSha256": "3dd18943949e8087638c6a8938608636cae802cb956229c67427abcfaa0e288e",
+      "vanillaSize": 928
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/botafogopb_bra.png",
+      "size": 4481,
+      "sha256": "a56ef2d23c189aca30e26391b34703e43c5c82175e800e2f45b45985032c848d",
+      "acceptedOriginalSha256": [
+        "e23ffd13e939adae1a8ba3b00647ff7318b65565dacfb659413405762a7711a4"
+      ],
+      "recipe": "crest-effef7ece589eaa90821.json",
+      "component": "crests",
+      "vanillaSha256": "e23ffd13e939adae1a8ba3b00647ff7318b65565dacfb659413405762a7711a4",
+      "vanillaSize": 4152
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/botafogopb_bra.png",
+      "size": 922,
+      "sha256": "77ab45febde755623285e918dd906e0afd30bd291da6ae82cf09c1ba82b2440b",
+      "acceptedOriginalSha256": [
+        "2c86605ede5764adea1bb4fb36f2b28571bd7fb53cf0d2ccbc4abca064dcccf7"
+      ],
+      "recipe": "crest-3359c957f1404dad6781.json",
+      "component": "crests",
+      "vanillaSha256": "2c86605ede5764adea1bb4fb36f2b28571bd7fb53cf0d2ccbc4abca064dcccf7",
+      "vanillaSize": 743
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/budapeste_hun.png",
+      "size": 7335,
+      "sha256": "76e0d0c0ea4e55da2ef54164752c7f97ab4e8aef44bb67be08e500e44321a4ee",
+      "acceptedOriginalSha256": [
+        "62104bdba6bf06b09b8790b9f2460ede7c42106df191a53abe71d2bc90eff462"
+      ],
+      "recipe": "crest-85d0f4748c1bc5d3d022.json",
+      "component": "crests",
+      "vanillaSha256": "62104bdba6bf06b09b8790b9f2460ede7c42106df191a53abe71d2bc90eff462",
+      "vanillaSize": 7591
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/budapeste_hun.png",
+      "size": 1011,
+      "sha256": "4264c2fcc83da6f0bb6597036c2833edf0a821f66484f759e57202ce71e558fb",
+      "acceptedOriginalSha256": [
+        "b390033e6e34917ce4f870b3b5052004b57d284cb9f2a10071ca7eb2ddf3df9d"
+      ],
+      "recipe": "crest-bd03ff067e8b4c23f1c4.json",
+      "component": "crests",
+      "vanillaSha256": "b390033e6e34917ce4f870b3b5052004b57d284cb9f2a10071ca7eb2ddf3df9d",
+      "vanillaSize": 1045
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/crbelouizdad_arl.png",
+      "size": 4870,
+      "sha256": "25d12277ce0e20d6091c748fb2188e590e14c9126f125eafd93a00675d14d565",
+      "acceptedOriginalSha256": [
+        "ceb77fde87f371ee4ebf8b6242b2c34d27d4ec7d9514444e238aaa8f2ce578f3"
+      ],
+      "recipe": "crest-32feadf58cbdca07f220.json",
+      "component": "crests",
+      "vanillaSha256": "ceb77fde87f371ee4ebf8b6242b2c34d27d4ec7d9514444e238aaa8f2ce578f3",
+      "vanillaSize": 7243
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/crbelouizdad_arl.png",
+      "size": 849,
+      "sha256": "07181a7ef8cbcd7316d0bfef1fa872cf6a15fb07783977f63a7d29bf6df5dbb5",
+      "acceptedOriginalSha256": [
+        "40330473e8618b94993051b308416f9aafd74d3a9e9454fc3b066a60e394d3b4"
+      ],
+      "recipe": "crest-9dd8d27e33f5f4918258.json",
+      "component": "crests",
+      "vanillaSha256": "40330473e8618b94993051b308416f9aafd74d3a9e9454fc3b066a60e394d3b4",
+      "vanillaSize": 1069
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/dacdunajskastreda_slk.png",
+      "size": 5338,
+      "sha256": "7fb854ecc77eca088585784c09ec71f8ecf4aaceae1c978e0c63f16d91f07c4a",
+      "acceptedOriginalSha256": [
+        "e7fef9db2cf8357ee661ab64651b29a75d1691517b0020028bfbc162b05b9adb"
+      ],
+      "recipe": "crest-fdde895e71b568e5ee7b.json",
+      "component": "crests",
+      "vanillaSha256": "e7fef9db2cf8357ee661ab64651b29a75d1691517b0020028bfbc162b05b9adb",
+      "vanillaSize": 6330
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/dacdunajskastreda_slk.png",
+      "size": 949,
+      "sha256": "1f078b1ca2f17a3d19a925b8833b4958c141542ffc6bc4681385ac69fba317b5",
+      "acceptedOriginalSha256": [
+        "5314285d4f5742324b846794db7bba41a5738f669f9719cbed43c643f75eb1ff"
+      ],
+      "recipe": "crest-96f63c6fd3403f617269.json",
+      "component": "crests",
+      "vanillaSha256": "5314285d4f5742324b846794db7bba41a5738f669f9719cbed43c643f75eb1ff",
+      "vanillaSize": 909
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/dundalk_irl.png",
+      "size": 6657,
+      "sha256": "6dfbc1290709d2702edd110f167c6cb22863bbdcd5c8a9861fc45a2b9f11210a",
+      "acceptedOriginalSha256": [
+        "8741c02ddc2ac2d5301baf5ddcfd971fdee12c5ac46e2cd1bba6632defceca54"
+      ],
+      "recipe": "crest-6b5bacf1449c761791eb.json",
+      "component": "crests",
+      "vanillaSha256": "8741c02ddc2ac2d5301baf5ddcfd971fdee12c5ac46e2cd1bba6632defceca54",
+      "vanillaSize": 5561
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/dundalk_irl.png",
+      "size": 1005,
+      "sha256": "5422fec776888a502d31c984c3166770c84b8717808b938a6eb222e7a05f2e9c",
+      "acceptedOriginalSha256": [
+        "8e267a1dbc489ae57bbfbb7e5ccde36e4560a169990fd218e794b5b041e28673"
+      ],
+      "recipe": "crest-ad57dfd69d6727bb3d94.json",
+      "component": "crests",
+      "vanillaSha256": "8e267a1dbc489ae57bbfbb7e5ccde36e4560a169990fd218e794b5b041e28673",
+      "vanillaSize": 817
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/enyimba_nig.png",
+      "size": 9359,
+      "sha256": "5d4d97af6a6a854866bdd010016f2c7204ce42f79d220a497ba5b7ba6f8e85aa",
+      "acceptedOriginalSha256": [
+        "f3a0af67fe998336573e3e971a973a017dc880b7f2494a21a208111a30d10782"
+      ],
+      "recipe": "crest-09b90b7e189902688d64.json",
+      "component": "crests",
+      "vanillaSha256": "f3a0af67fe998336573e3e971a973a017dc880b7f2494a21a208111a30d10782",
+      "vanillaSize": 6865
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/enyimba_nig.png",
+      "size": 1180,
+      "sha256": "5af4602aca18008a49cd72dd6dcc5d3b42f785ea5ed12b3471bba43f9dae1d67",
+      "acceptedOriginalSha256": [
+        "bb904642e0f293c86d3318d3f5c1a84ce1c68fd788424032478c38d3d83b6b3d"
+      ],
+      "recipe": "crest-a91c12a5168af7caf9a2.json",
+      "component": "crests",
+      "vanillaSha256": "bb904642e0f293c86d3318d3f5c1a84ce1c68fd788424032478c38d3d83b6b3d",
+      "vanillaSize": 943
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/essetif_arl.png",
+      "size": 6777,
+      "sha256": "3467c0eaa55dccbc36d402a3a2ead46176cf33ebd6576c0f1e2e7499c8d6382b",
+      "acceptedOriginalSha256": [
+        "cccbc76a3e65959e718e0e74cb8a60486707f8b096846371b8540f4ddd7a19a2"
+      ],
+      "recipe": "crest-c35439f8db0afda14f58.json",
+      "component": "crests",
+      "vanillaSha256": "cccbc76a3e65959e718e0e74cb8a60486707f8b096846371b8540f4ddd7a19a2",
+      "vanillaSize": 7606
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/essetif_arl.png",
+      "size": 990,
+      "sha256": "467dadb2aacab61e86ac1b6e16691c5d7ef9b5d87fc582fda7d92460f0764944",
+      "acceptedOriginalSha256": [
+        "4c429b34a2690bfcaa3f3c80197ba35b18f42d31234982abea0395d67c38d21c"
+      ],
+      "recipe": "crest-7c8c0c6e5136fcc4bce4.json",
+      "component": "crests",
+      "vanillaSha256": "4c429b34a2690bfcaa3f3c80197ba35b18f42d31234982abea0395d67c38d21c",
+      "vanillaSize": 1021
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/estrelavermelha_ser.png",
+      "size": 4985,
+      "sha256": "8e3b7440eb7b0fdcb747c324f4dbe79edb67435d6d7be4e24073e6dff116fc58",
+      "acceptedOriginalSha256": [
+        "3f05fbd909de4e71bf548b16ef597c0d94ef03fc9ff9c0a4e441aa37ee13a5e4"
+      ],
+      "recipe": "crest-f6c57f42d12b8a80dcb4.json",
+      "component": "crests",
+      "vanillaSha256": "3f05fbd909de4e71bf548b16ef597c0d94ef03fc9ff9c0a4e441aa37ee13a5e4",
+      "vanillaSize": 6046
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/estrelavermelha_ser.png",
+      "size": 816,
+      "sha256": "7aa8f35e26d49ca651bdebd5f3fbb531baddfc5c87cd35be6213a84da8892925",
+      "acceptedOriginalSha256": [
+        "cd604b795b303ae0802ba69c24a87d94556fb2054bc7a15ecb5aa65eaa5b21a3"
+      ],
+      "recipe": "crest-3caa5418ef0aeceec5f6.json",
+      "component": "crests",
+      "vanillaSha256": "cd604b795b303ae0802ba69c24a87d94556fb2054bc7a15ecb5aa65eaa5b21a3",
+      "vanillaSize": 992
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/far_mar.png",
+      "size": 5837,
+      "sha256": "4db1fb07a5ee2867717ea77d4bff7c2d56d65d13a587eecf9758e5c831825153",
+      "acceptedOriginalSha256": [
+        "d7176064246fa31dc63446aa66307194c5033b25879addebd96bfd08701e2b5e"
+      ],
+      "recipe": "crest-59d643c974f2407b14c9.json",
+      "component": "crests",
+      "vanillaSha256": "d7176064246fa31dc63446aa66307194c5033b25879addebd96bfd08701e2b5e",
+      "vanillaSize": 5070
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/far_mar.png",
+      "size": 993,
+      "sha256": "3de9fab759f553b6e5ecb46d12b81032124ab0a41c29e3e2573e922e64fd5555",
+      "acceptedOriginalSha256": [
+        "f0890475a91a4e42ffc09610998ce0b1c24f0f346d9f52f02186803fadd28a83"
+      ],
+      "recipe": "crest-76ffc7f7105ca29c9efb.json",
+      "component": "crests",
+      "vanillaSha256": "f0890475a91a4e42ffc09610998ce0b1c24f0f346d9f52f02186803fadd28a83",
+      "vanillaSize": 754
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/fortaleza.png",
+      "size": 5615,
+      "sha256": "512eeae5cd4192caeb9a2d5f55e176d1492f3ffc44263b617bac8eba4469777c",
+      "acceptedOriginalSha256": [
+        "30ee28dbc63b39249db877d40fd86ecf9e9a567717907f2d86c0a6d58c547948"
+      ],
+      "recipe": "crest-810e7d13fe02adeadf7d.json",
+      "component": "crests",
+      "vanillaSha256": "30ee28dbc63b39249db877d40fd86ecf9e9a567717907f2d86c0a6d58c547948",
+      "vanillaSize": 4657
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/fortaleza.png",
+      "size": 974,
+      "sha256": "28e208caaafaaf8e3c80db70cb7109f2d0820b0f9ac2da78ff1685b90bb9ea9b",
+      "acceptedOriginalSha256": [
+        "223808e4319e362b754ff5ae7f2a20800d148074fa4e91ba3e067d55cc8f7a07"
+      ],
+      "recipe": "crest-ddc1a410624743dab94b.json",
+      "component": "crests",
+      "vanillaSha256": "223808e4319e362b754ff5ae7f2a20800d148074fa4e91ba3e067d55cc8f7a07",
+      "vanillaSize": 708
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/gambaosaka_jap.png",
+      "size": 3905,
+      "sha256": "6b88c8982d5e2f2feb9062211f68cd222f5e854e26d5c5e4ad96d3f3d526c41c",
+      "acceptedOriginalSha256": [
+        "7e9e9165bd1b1d1e5d88d4af830065b82cef944a281e9481ebc3f83b408fafcd"
+      ],
+      "recipe": "crest-651d15af665f83bb3ec2.json",
+      "component": "crests",
+      "vanillaSha256": "7e9e9165bd1b1d1e5d88d4af830065b82cef944a281e9481ebc3f83b408fafcd",
+      "vanillaSize": 9053
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/gambaosaka_jap.png",
+      "size": 852,
+      "sha256": "49748cfdf98f9f2624359247a2c4679a0365bff96348ac6db13e28047473e3c2",
+      "acceptedOriginalSha256": [
+        "dbbae8e823d014d89ef930dba104d98f3ad185ba3b94a78337aa745df2803790"
+      ],
+      "recipe": "crest-bf335ab74842ee58d688.json",
+      "component": "crests",
+      "vanillaSha256": "dbbae8e823d014d89ef930dba104d98f3ad185ba3b94a78337aa745df2803790",
+      "vanillaSize": 1186
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/girona_esp.png",
+      "size": 8716,
+      "sha256": "38fb61990b63bba852562e1484f421098e6c818e73ef6b19dde927221cf74f49",
+      "acceptedOriginalSha256": [
+        "6d1b9280ddfb5a6f62d4be795a10bac90aab5e749c45e4fbe7c8e099b9f6d6cd"
+      ],
+      "recipe": "crest-d7aade6f186a3be5321d.json",
+      "component": "crests",
+      "vanillaSha256": "6d1b9280ddfb5a6f62d4be795a10bac90aab5e749c45e4fbe7c8e099b9f6d6cd",
+      "vanillaSize": 6852
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/girona_esp.png",
+      "size": 1142,
+      "sha256": "6f227597373d345b23dc791c954276c96567204c77cad0a8cda3870352168a4e",
+      "acceptedOriginalSha256": [
+        "0cf794ade2387865bb27699ddce0d4d4144fe2a9a0c7b5088cff5e5e7494b194"
+      ],
+      "recipe": "crest-c638ed57675d3592024a.json",
+      "component": "crests",
+      "vanillaSha256": "0cf794ade2387865bb27699ddce0d4d4144fe2a9a0c7b5088cff5e5e7494b194",
+      "vanillaSize": 924
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/goias.png",
+      "size": 9203,
+      "sha256": "d02e970f5ee4dc1920fe3fd9fe9282f48ae6662dd39e3462f1ed893045fe403e",
+      "acceptedOriginalSha256": [
+        "f401be18a24fb376b4f3b6e8da9b1f90993ebfb3ad2cde84b37049263bbb31dd"
+      ],
+      "recipe": "crest-ad619a849dc976c3d392.json",
+      "component": "crests",
+      "vanillaSha256": "f401be18a24fb376b4f3b6e8da9b1f90993ebfb3ad2cde84b37049263bbb31dd",
+      "vanillaSize": 7504
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/goias.png",
+      "size": 1200,
+      "sha256": "baea66638eab2c7c5c592ea2a7e5f78cd83d0640c84fb6a34880614bd85828b7",
+      "acceptedOriginalSha256": [
+        "3a0bee26cd63d03c4bce4f413df9eb4372ba2711fe2a927792046ab90be5e487"
+      ],
+      "recipe": "crest-c752cb5dcdeadbb732f8.json",
+      "component": "crests",
+      "vanillaSha256": "3a0bee26cd63d03c4bce4f413df9eb4372ba2711fe2a927792046ab90be5e487",
+      "vanillaSize": 1130
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/gremioanapolisgo_bra.png",
+      "size": 8548,
+      "sha256": "c1195f88b7f2c07e4d6b07ab1c81dfcca890cc149bd5e7eafa0fed84e1f4e848",
+      "acceptedOriginalSha256": [
+        "c05a04da71fb8a8bd916d1f3a532c20cf4417e03640aad5672858348655b26d4"
+      ],
+      "recipe": "crest-294cd94138d1591b9fc9.json",
+      "component": "crests",
+      "vanillaSha256": "c05a04da71fb8a8bd916d1f3a532c20cf4417e03640aad5672858348655b26d4",
+      "vanillaSize": 6983
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/gremioanapolisgo_bra.png",
+      "size": 1186,
+      "sha256": "dacc07617ba6ac133e80b3cdfbedb6764a4f1d653ce9de313b775eae0a68b357",
+      "acceptedOriginalSha256": [
+        "619bc0f0149235a0c02f23b108aa8517b9f8586e55d33b11593b340f2d9d4aa1"
+      ],
+      "recipe": "crest-a65653a279a3e5e8eba3.json",
+      "component": "crests",
+      "vanillaSha256": "619bc0f0149235a0c02f23b108aa8517b9f8586e55d33b11593b340f2d9d4aa1",
+      "vanillaSize": 993
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/guaranyrs_bra.png",
+      "size": 5062,
+      "sha256": "8998a19d1c9c3289a47d20dbac0f1b35923e6c3f7fa6915b1ba14477b447e09b",
+      "acceptedOriginalSha256": [
+        "0ae6c2e97932a23a54a9b5fdc3935e517f41d748b537c40dd4e32700612edd53"
+      ],
+      "recipe": "crest-eb47a1ef0a03000c095e.json",
+      "component": "crests",
+      "vanillaSha256": "0ae6c2e97932a23a54a9b5fdc3935e517f41d748b537c40dd4e32700612edd53",
+      "vanillaSize": 6246
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/guaranyrs_bra.png",
+      "size": 967,
+      "sha256": "654d55039e06cc0e116c6f992706c14ad0e9eafe5d218f0d4521a9ec946f4f16",
+      "acceptedOriginalSha256": [
+        "69119a94c3a3248721cbac3892b77d7f9665a9eaea612c08c490c19fb6f533af"
+      ],
+      "recipe": "crest-520fa38e35242f34be05.json",
+      "component": "crests",
+      "vanillaSha256": "69119a94c3a3248721cbac3892b77d7f9665a9eaea612c08c490c19fb6f533af",
+      "vanillaSize": 946
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/hanoi_vie.png",
+      "size": 9764,
+      "sha256": "1469a6d1f7dd7d3a4df6348acfac1a6e73d6eaeb007389734a0da1a5eb23b5e8",
+      "acceptedOriginalSha256": [
+        "4a65f46b82d8f4c084ff848212b5481097f2bc18aa6599359a8c3ba29b7209e1"
+      ],
+      "recipe": "crest-ad86e8147df4f5cca5a2.json",
+      "component": "crests",
+      "vanillaSha256": "4a65f46b82d8f4c084ff848212b5481097f2bc18aa6599359a8c3ba29b7209e1",
+      "vanillaSize": 5252
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/hanoi_vie.png",
+      "size": 1208,
+      "sha256": "fe045aee79e97fcc096271a8fc501c70fcf39538b89370f33626b6bb2251cb5c",
+      "acceptedOriginalSha256": [
+        "c8c1615757c5b73babaa7d8153d6fe1fa14ff50ee8ab9ad0b61ba35e690ab24a"
+      ],
+      "recipe": "crest-3661e356356a75f63feb.json",
+      "component": "crests",
+      "vanillaSha256": "c8c1615757c5b73babaa7d8153d6fe1fa14ff50ee8ab9ad0b61ba35e690ab24a",
+      "vanillaSize": 963
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/helsinki_fin.png",
+      "size": 7674,
+      "sha256": "e914d06d4dc0ab3b44395392390e7143465260f0f4d5a340fb9e3643ff8a7580",
+      "acceptedOriginalSha256": [
+        "9aad6e2031034b8d3896dff11a0058e9e34dee405b4ce08f7ccbec17e7ae0472"
+      ],
+      "recipe": "crest-bcdc9c2a5060b8cf4dd4.json",
+      "component": "crests",
+      "vanillaSha256": "9aad6e2031034b8d3896dff11a0058e9e34dee405b4ce08f7ccbec17e7ae0472",
+      "vanillaSize": 5112
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/helsinki_fin.png",
+      "size": 1115,
+      "sha256": "55af28c6a86f2ed5ec8a43b5a68a310f2fe0082c4ea4690ca82086e6c6580ee9",
+      "acceptedOriginalSha256": [
+        "55ab4465c0f9894ffa844827887e5244a467a66d91897dd0949d3a26566bc03e"
+      ],
+      "recipe": "crest-f41bfa64fb25a8b5188c.json",
+      "component": "crests",
+      "vanillaSha256": "55ab4465c0f9894ffa844827887e5244a467a66d91897dd0949d3a26566bc03e",
+      "vanillaSize": 1031
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/iguatu_ce.png",
+      "size": 9237,
+      "sha256": "ae2422d90faa9f8ab87147a0898deb271601d625432910b33f580ef200401868",
+      "acceptedOriginalSha256": [
+        "918ee975c6a8fa9d5df626243a236cf78ebecc2c484b9c6489de4c5c8868d121"
+      ],
+      "recipe": "crest-18c9a6e033da24d4403f.json",
+      "component": "crests",
+      "vanillaSha256": "918ee975c6a8fa9d5df626243a236cf78ebecc2c484b9c6489de4c5c8868d121",
+      "vanillaSize": 6568
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/iguatu_ce.png",
+      "size": 1203,
+      "sha256": "c1f2cbaf11343c2b5893cdc1cea2c1c22954e1109cb45215b27b463d6f1ed170",
+      "acceptedOriginalSha256": [
+        "8a08e74d9968fc897f9f802e94da1423a162391c64286ee251e857f647c4cc10"
+      ],
+      "recipe": "crest-a2920224a85f6b316307.json",
+      "component": "crests",
+      "vanillaSha256": "8a08e74d9968fc897f9f802e94da1423a162391c64286ee251e857f647c4cc10",
+      "vanillaSize": 887
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/itabaiana_se.png",
+      "size": 6456,
+      "sha256": "1cc870f2331ed4eb37bf0fcfa091a0b4ba142dae64cd02192896704bce76335b",
+      "acceptedOriginalSha256": [
+        "d7359396889d7539d58a7211fc7fee4b76d92e6f144ba31b8e69e01b50530564"
+      ],
+      "recipe": "crest-b2a25b4c0dc5894ea401.json",
+      "component": "crests",
+      "vanillaSha256": "d7359396889d7539d58a7211fc7fee4b76d92e6f144ba31b8e69e01b50530564",
+      "vanillaSize": 4440
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/itabaiana_se.png",
+      "size": 1022,
+      "sha256": "691986e2596cf11e1e35b48695d868f6ed971ea49d347c3b53583fa278c85d30",
+      "acceptedOriginalSha256": [
+        "0aedbaf80f3025f234658911f1850e43cba1216f63016158d17130d6018b2384"
+      ],
+      "recipe": "crest-df112e08641cfaecd63a.json",
+      "component": "crests",
+      "vanillaSha256": "0aedbaf80f3025f234658911f1850e43cba1216f63016158d17130d6018b2384",
+      "vanillaSize": 697
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/ituano_sp.png",
+      "size": 4370,
+      "sha256": "af806f061590de6154abaf8075dcac9f0f16e7fc12af9bfcc788785c2489ebae",
+      "acceptedOriginalSha256": [
+        "f3300aec0b4f48bef602be339eb103c50a430d97da22bca17c27dade97b4ef05"
+      ],
+      "recipe": "crest-a7ff9394073c39db738d.json",
+      "component": "crests",
+      "vanillaSha256": "f3300aec0b4f48bef602be339eb103c50a430d97da22bca17c27dade97b4ef05",
+      "vanillaSize": 3636
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/ituano_sp.png",
+      "size": 936,
+      "sha256": "92d2654f9d4003f616ddd677a5f426095e1fa5cb6445ed228c57f0a9992d357d",
+      "acceptedOriginalSha256": [
+        "a0aeb7e18ca2b26685c9982b85e982522a88be13084d7079cc8f076bcac8b35a"
+      ],
+      "recipe": "crest-24b03eb0d66d572008ea.json",
+      "component": "crests",
+      "vanillaSha256": "a0aeb7e18ca2b26685c9982b85e982522a88be13084d7079cc8f076bcac8b35a",
+      "vanillaSize": 771
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/juazeirense_ba.png",
+      "size": 5770,
+      "sha256": "98ff61c13b62bb2693d12677e76e58d6c144ecb9085cf7c0343cfa68c9981b18",
+      "acceptedOriginalSha256": [
+        "1c12e8b96cf19841985ea710d12a9910ed7fccdf7b1803c4d79827847831c864"
+      ],
+      "recipe": "crest-d678a2fdc70dd319199c.json",
+      "component": "crests",
+      "vanillaSha256": "1c12e8b96cf19841985ea710d12a9910ed7fccdf7b1803c4d79827847831c864",
+      "vanillaSize": 6500
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/juazeirense_ba.png",
+      "size": 886,
+      "sha256": "264a2ceabceec06dd48af03aeb34dd29352d66e4346cb846d00fd9e4d082a05b",
+      "acceptedOriginalSha256": [
+        "60ff6ad516b94165240e8289c5acb43d2205286311394cc627e13671a55bbbc3"
+      ],
+      "recipe": "crest-d83e2eeda1cf81f2b04c.json",
+      "component": "crests",
+      "vanillaSha256": "60ff6ad516b94165240e8289c5acb43d2205286311394cc627e13671a55bbbc3",
+      "vanillaSize": 865
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/kitchee_hkg.png",
+      "size": 6200,
+      "sha256": "05c4f6a458277d2d05452d2536e626385a7aaca0095c3c2433444c9d70822cd1",
+      "acceptedOriginalSha256": [
+        "bd742c16442088165a50b0c40b2a634ad149e4d9b758f7e061e3664b19aace5d"
+      ],
+      "recipe": "crest-b91d5bcd0c413de2533f.json",
+      "component": "crests",
+      "vanillaSha256": "bd742c16442088165a50b0c40b2a634ad149e4d9b758f7e061e3664b19aace5d",
+      "vanillaSize": 7214
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/kitchee_hkg.png",
+      "size": 977,
+      "sha256": "790158d1a1041abc698894075be2f5af90e95c2748acb85ba34a4f277fdda56a",
+      "acceptedOriginalSha256": [
+        "701caedbaefa7cd7e16dd11c423e5fd2102981d9f9201fd435acab6270b5192e"
+      ],
+      "recipe": "crest-30a635a8714d61c7c32a.json",
+      "component": "crests",
+      "vanillaSha256": "701caedbaefa7cd7e16dd11c423e5fd2102981d9f9201fd435acab6270b5192e",
+      "vanillaSize": 1081
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/lagarto_se.png",
+      "size": 5531,
+      "sha256": "e4102965e9740327f84a6ded9cea2923e98748416bc846eb92d5079a1ecaf1b4",
+      "acceptedOriginalSha256": [
+        "156fd5c06154c118986197c99509eaca62db79e329c659dfa8a742bbdd5ec858"
+      ],
+      "recipe": "crest-705ccf2eb189fd9e3000.json",
+      "component": "crests",
+      "vanillaSha256": "156fd5c06154c118986197c99509eaca62db79e329c659dfa8a742bbdd5ec858",
+      "vanillaSize": 5695
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/lagarto_se.png",
+      "size": 915,
+      "sha256": "01dff70848bf5bd2e1f849ad6ddb98507fada3562e2381709e10a840ac115683",
+      "acceptedOriginalSha256": [
+        "07e7ab39a178beee2bb7d3ae0ba1515bf58fd7dd5e6b2d4bb80265ef4fb6f7f1"
+      ],
+      "recipe": "crest-879abb6a2d483223ceea.json",
+      "component": "crests",
+      "vanillaSha256": "07e7ab39a178beee2bb7d3ae0ba1515bf58fd7dd5e6b2d4bb80265ef4fb6f7f1",
+      "vanillaSize": 865
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/ldu_equ.png",
+      "size": 6586,
+      "sha256": "ae5d5b7bad7eb960c5573401737b2b456cc117c0ade35613f3a567686017d211",
+      "acceptedOriginalSha256": [
+        "f49c13a62f8bfe85227cfd3470a536b75b3e7c882a90eec62ca4a52725ba5d7f"
+      ],
+      "recipe": "crest-a9ab1a24559f00b964bc.json",
+      "component": "crests",
+      "vanillaSha256": "f49c13a62f8bfe85227cfd3470a536b75b3e7c882a90eec62ca4a52725ba5d7f",
+      "vanillaSize": 4091
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/ldu_equ.png",
+      "size": 1032,
+      "sha256": "7440d6d505154f672f10d8a0b5a127bb5252572d2c284faf55027b96240f1a43",
+      "acceptedOriginalSha256": [
+        "d3d8271b2f91ef480a180f0172dd37a2de1272e1ece3e739a254d7840185fd8b"
+      ],
+      "recipe": "crest-cc9b2a3f6ee8e095c450.json",
+      "component": "crests",
+      "vanillaSha256": "d3d8271b2f91ef480a180f0172dd37a2de1272e1ece3e739a254d7840185fd8b",
+      "vanillaSize": 781
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/leipzig_ale.png",
+      "size": 5169,
+      "sha256": "7fbe86206440cb59f00f06b1ff027c084d0e15adbd980e65103cb9701644d86a",
+      "acceptedOriginalSha256": [
+        "46ab46650a6109e29b0d92d0d6120e8875794332c0a929561fd842dc589085f7"
+      ],
+      "recipe": "crest-b25a9909f95e649c45d9.json",
+      "component": "crests",
+      "vanillaSha256": "46ab46650a6109e29b0d92d0d6120e8875794332c0a929561fd842dc589085f7",
+      "vanillaSize": 5668
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/leipzig_ale.png",
+      "size": 840,
+      "sha256": "2a2e0150701fc6aac4b3f01fa362079a423bfbba0976ada08a9698594f316591",
+      "acceptedOriginalSha256": [
+        "2c83239c8a84975eafae275589d37f1b03c91c59e60c2b862bacc3f42471eb9e"
+      ],
+      "recipe": "crest-6b9f32a809ce63caec35.json",
+      "component": "crests",
+      "vanillaSha256": "2c83239c8a84975eafae275589d37f1b03c91c59e60c2b862bacc3f42471eb9e",
+      "vanillaSize": 903
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/liverpool_ing.png",
+      "size": 4483,
+      "sha256": "c983d1267bcf7ef4f239e805208dfca9e77b10a1763ce7d633cae1596b42c667",
+      "acceptedOriginalSha256": [
+        "1cb0ac8db09df88446015ed21e2b9f1f669bbd6807cd6b2c2bea4e63caf47ba5"
+      ],
+      "recipe": "crest-89572840fcf583f05dc2.json",
+      "component": "crests",
+      "vanillaSha256": "1cb0ac8db09df88446015ed21e2b9f1f669bbd6807cd6b2c2bea4e63caf47ba5",
+      "vanillaSize": 7122
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/liverpool_ing.png",
+      "size": 659,
+      "sha256": "174f1642d7179319d48558665ab49a6d79c38c1f6c03ec1003b2c1008713791e",
+      "acceptedOriginalSha256": [
+        "ed2d6de725f822a5598c377536393d760f6f386928b3e3705b23fb64e5bc290b"
+      ],
+      "recipe": "crest-7b984860be5b378d20a2.json",
+      "component": "crests",
+      "vanillaSha256": "ed2d6de725f822a5598c377536393d760f6f386928b3e3705b23fb64e5bc290b",
+      "vanillaSize": 940
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/lokoplovdiv_bul.png",
+      "size": 4867,
+      "sha256": "bf4fbe19b49009bf40ac0b097a838cb9fa26067e91a54142373e3111ca15f8c2",
+      "acceptedOriginalSha256": [
+        "ea6e2156843335fcdd322057f120e858262f1912e7caa1eb53fc10694ad06b7c"
+      ],
+      "recipe": "crest-b55918273b1db57adba2.json",
+      "component": "crests",
+      "vanillaSha256": "ea6e2156843335fcdd322057f120e858262f1912e7caa1eb53fc10694ad06b7c",
+      "vanillaSize": 6419
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/lokoplovdiv_bul.png",
+      "size": 874,
+      "sha256": "b6b8467219c90501033f4cd046eb91cf00d6c4645f31c6ce2a6ac41adedc93e9",
+      "acceptedOriginalSha256": [
+        "49eb8f874d7860df52daf245a5e8194c105f54ab9ff5967d6a0daa9946201081"
+      ],
+      "recipe": "crest-c2a4f9409f07b1ce4725.json",
+      "component": "crests",
+      "vanillaSha256": "49eb8f874d7860df52daf245a5e8194c105f54ab9ff5967d6a0daa9946201081",
+      "vanillaSize": 989
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/nagoyagrampus_jap.png",
+      "size": 6397,
+      "sha256": "ce68bf5ed16a9cb6db29a4d416a91a8afbf50977e4cb6edea233536e71d44864",
+      "acceptedOriginalSha256": [
+        "96c0031c2eae1f7b97b63b9e571e9d27a2fcda4adb3887b1c16e941a0eb6b194"
+      ],
+      "recipe": "crest-fa8dd0f5ba0b2d713ad2.json",
+      "component": "crests",
+      "vanillaSha256": "96c0031c2eae1f7b97b63b9e571e9d27a2fcda4adb3887b1c16e941a0eb6b194",
+      "vanillaSize": 6899
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/nagoyagrampus_jap.png",
+      "size": 970,
+      "sha256": "2a5064b9226d84875dc129553e26d54e9c78557ca77eb8d572369f8f63452512",
+      "acceptedOriginalSha256": [
+        "fb48919fe076a1f08c3aeac8ea11d908abfac863ac20aeda8b923b6633cadc94"
+      ],
+      "recipe": "crest-1a1a25a844c320666be2.json",
+      "component": "crests",
+      "vanillaSha256": "fb48919fe076a1f08c3aeac8ea11d908abfac863ac20aeda8b923b6633cadc94",
+      "vanillaSize": 915
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/napoli_it.png",
+      "size": 6511,
+      "sha256": "f0ca5ca38db89845e5dc30ebe69da09fbec074b37e922d9f61078af3002f6c98",
+      "acceptedOriginalSha256": [
+        "b59f1bb89996a24b32d6e9c140dfbaa53803142303e79a8d035b1b99ac012f61"
+      ],
+      "recipe": "crest-6c65518d1a5cafdb7663.json",
+      "component": "crests",
+      "vanillaSha256": "b59f1bb89996a24b32d6e9c140dfbaa53803142303e79a8d035b1b99ac012f61",
+      "vanillaSize": 6236
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/napoli_it.png",
+      "size": 1020,
+      "sha256": "c8f83193e926ccb8f98600f1c54d10ff1bf463da58cd20f61cccfdd810029b04",
+      "acceptedOriginalSha256": [
+        "cdc2c0a1f7c08daaec2f779092e78ecc813339e1512defbfca69310df0eb7907"
+      ],
+      "recipe": "crest-b3137d65f77a55989b8f.json",
+      "component": "crests",
+      "vanillaSha256": "cdc2c0a1f7c08daaec2f779092e78ecc813339e1512defbfca69310df0eb7907",
+      "vanillaSize": 1043
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/neftci_aze.png",
+      "size": 3022,
+      "sha256": "1e038e1aab2d6500f604325d0ce7944381b2eaa2ae3177524c5367f65e24348d",
+      "acceptedOriginalSha256": [
+        "9eaedf076b01bd6c7e5e7e9256dd35d0943779cb047d253d1e21fd5d0f018866"
+      ],
+      "recipe": "crest-b792487b55ba3a488fe4.json",
+      "component": "crests",
+      "vanillaSha256": "9eaedf076b01bd6c7e5e7e9256dd35d0943779cb047d253d1e21fd5d0f018866",
+      "vanillaSize": 4824
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/neftci_aze.png",
+      "size": 690,
+      "sha256": "4f64d3c06279c6e2760b0d5c96fd29a067534b5bf479a7ca7fbf657c31705584",
+      "acceptedOriginalSha256": [
+        "505ebeb0ca84b65467b9688904baac655ea3b26422af49df3048250a13513c15"
+      ],
+      "recipe": "crest-0c95ccfc1a907617f6db.json",
+      "component": "crests",
+      "vanillaSha256": "505ebeb0ca84b65467b9688904baac655ea3b26422af49df3048250a13513c15",
+      "vanillaSize": 869
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/olympiakos_gre.png",
+      "size": 7595,
+      "sha256": "f31f006f704a5537fb91369513a20cac3ba3ecc636190d4e9f212f7c1fcf7fb2",
+      "acceptedOriginalSha256": [
+        "f75d709072b11a176900466ff60e52259de4b1cbff6f7fd826c908820f763fc7"
+      ],
+      "recipe": "crest-cef27ac5b95a16aab413.json",
+      "component": "crests",
+      "vanillaSha256": "f75d709072b11a176900466ff60e52259de4b1cbff6f7fd826c908820f763fc7",
+      "vanillaSize": 8378
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/olympiakos_gre.png",
+      "size": 1013,
+      "sha256": "890674c3c43cbccbf79baf55b431c34dafeee45416ce8c5900101d2b293d2e2c",
+      "acceptedOriginalSha256": [
+        "5b455307df575fac37e4b323eab52fad346f5c0f0384c84940355e27cf226cd7"
+      ],
+      "recipe": "crest-bbd4bc1c7099fa6ef1e7.json",
+      "component": "crests",
+      "vanillaSha256": "5b455307df575fac37e4b323eab52fad346f5c0f0384c84940355e27cf226cd7",
+      "vanillaSize": 1089
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/olympiquemarseile_fra.png",
+      "size": 7753,
+      "sha256": "63e8d3a96314d4bfabf73102851db4928c7f4d5a3dad17eab846b91c1cb310ff",
+      "acceptedOriginalSha256": [
+        "d91be5e2adb2caf230817407fbcfba375fec64ca3654dc999614300922cfb759"
+      ],
+      "recipe": "crest-e1dc130f819f345d6f1e.json",
+      "component": "crests",
+      "vanillaSha256": "d91be5e2adb2caf230817407fbcfba375fec64ca3654dc999614300922cfb759",
+      "vanillaSize": 5543
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/olympiquemarseile_fra.png",
+      "size": 1174,
+      "sha256": "4f3bbadbbc7954e08a2c637045926614959058081c3223d9bbfb55df0a15cbcd",
+      "acceptedOriginalSha256": [
+        "57772ad4a47ee4a3d2ac7b143c54ac5e80ec5954eb6dd97899db229a02577d9b"
+      ],
+      "recipe": "crest-d86c70e0c6d94e36bfc4.json",
+      "component": "crests",
+      "vanillaSha256": "57772ad4a47ee4a3d2ac7b143c54ac5e80ec5954eb6dd97899db229a02577d9b",
+      "vanillaSize": 929
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/palmeirrn_bra.png",
+      "size": 9769,
+      "sha256": "23130669ae1100ee09e71ff4cccb877cd2e3b838c86da4f242addbb439eaf9e5",
+      "acceptedOriginalSha256": [
+        "c26bc94b9235128d3b2955261b6662e6ee586b4681cd56665bc371bdde41ead9"
+      ],
+      "recipe": "crest-56579e3933792220a246.json",
+      "component": "crests",
+      "vanillaSha256": "c26bc94b9235128d3b2955261b6662e6ee586b4681cd56665bc371bdde41ead9",
+      "vanillaSize": 4785
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/palmeirrn_bra.png",
+      "size": 1221,
+      "sha256": "8860250a63380cdb3616f017b4cafba3f2e785095f43fb93a16bd2220506b3da",
+      "acceptedOriginalSha256": [
+        "e51007e5a897b3219c6c7773f94f194b3004457d10f7d0343a867913551eac59"
+      ],
+      "recipe": "crest-4adb92524c9f505977ee.json",
+      "component": "crests",
+      "vanillaSha256": "e51007e5a897b3219c6c7773f94f194b3004457d10f7d0343a867913551eac59",
+      "vanillaSize": 902
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/partizan_ser.png",
+      "size": 6382,
+      "sha256": "7e35f3764cf89f2e64f67aaf30b798aa86c3bb60e714321de7d3cf3caaac8579",
+      "acceptedOriginalSha256": [
+        "7fb72f207b0b04decf5863ca7e749766158ebb74bc5c846848333ed53c05acd3"
+      ],
+      "recipe": "crest-922c334231ea86955b06.json",
+      "component": "crests",
+      "vanillaSha256": "7fb72f207b0b04decf5863ca7e749766158ebb74bc5c846848333ed53c05acd3",
+      "vanillaSize": 5656
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/partizan_ser.png",
+      "size": 921,
+      "sha256": "ddb0e2d86597ead30cbcef822ad6dd60922b6fe75fd99cb4c4b4176e978648b5",
+      "acceptedOriginalSha256": [
+        "c5b86299589b54eb7551a48455f2c9869a7e711ada41fdc3c3e930c6de9d0c29"
+      ],
+      "recipe": "crest-7524633913375085dd81.json",
+      "component": "crests",
+      "vanillaSha256": "c5b86299589b54eb7551a48455f2c9869a7e711ada41fdc3c3e930c6de9d0c29",
+      "vanillaSize": 877
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/patrocinense_mg.png",
+      "size": 4035,
+      "sha256": "8bad28247c09f12a5eae3131203e31cd7d4831c5c9ac8bf3b32427aa4233d87a",
+      "acceptedOriginalSha256": [
+        "ea13f834b851cfaa5233dfad2f46bebb765267afd9546b107e52482f49c67ead"
+      ],
+      "recipe": "crest-d1782eb7eaf05326b068.json",
+      "component": "crests",
+      "vanillaSha256": "ea13f834b851cfaa5233dfad2f46bebb765267afd9546b107e52482f49c67ead",
+      "vanillaSize": 5212
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/patrocinense_mg.png",
+      "size": 761,
+      "sha256": "3e88564eccb14939a549c6583a1b9c5b9b94435fbd3b3bf7fe5aaa325b1669f4",
+      "acceptedOriginalSha256": [
+        "8588e6fd8516d853a4fe6f550166c22044fb3d62576b48723b5b4fbb28707cc5"
+      ],
+      "recipe": "crest-2c96b07aa789f2d8f0e7.json",
+      "component": "crests",
+      "vanillaSha256": "8588e6fd8516d853a4fe6f550166c22044fb3d62576b48723b5b4fbb28707cc5",
+      "vanillaSize": 829
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/penarol_am.png",
+      "size": 7802,
+      "sha256": "16c3469c45a6e193040127263ff63ebe24d48f5291049261da55fc5517dd08fb",
+      "acceptedOriginalSha256": [
+        "c7979413f7c14325e93cb08288ea096eb31a85fe187267d3ab07d3be82e3b4e4"
+      ],
+      "recipe": "crest-b8631567712c2e9db8e8.json",
+      "component": "crests",
+      "vanillaSha256": "c7979413f7c14325e93cb08288ea096eb31a85fe187267d3ab07d3be82e3b4e4",
+      "vanillaSize": 7730
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/penarol_am.png",
+      "size": 1134,
+      "sha256": "15f7b16425ad9f0ec22eb50a7bcc130db79977f3d2f6398e122e1e7bbc74777f",
+      "acceptedOriginalSha256": [
+        "87b9e62827db36356fe146d07c0a5e824ed0c860d5a537f4ef8f85f56982abc5"
+      ],
+      "recipe": "crest-2f3c56e702190fe7eea1.json",
+      "component": "crests",
+      "vanillaSha256": "87b9e62827db36356fe146d07c0a5e824ed0c860d5a537f4ef8f85f56982abc5",
+      "vanillaSize": 977
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/persepolis_irn.png",
+      "size": 6340,
+      "sha256": "95f9cbb8142d2066194d9811fb889838681ae4cf2b9788a27654d48b2df0d1ea",
+      "acceptedOriginalSha256": [
+        "bb932a82f27943df8edb999fb10c7961dbee625700e624eff70b530f52fa4d3c"
+      ],
+      "recipe": "crest-474e068699b2c3afd4a0.json",
+      "component": "crests",
+      "vanillaSha256": "bb932a82f27943df8edb999fb10c7961dbee625700e624eff70b530f52fa4d3c",
+      "vanillaSize": 8510
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/persepolis_irn.png",
+      "size": 1018,
+      "sha256": "8d220c749bc4cf3db2f49889e49cbe6a1dd06085eae9a06b3a1b55d5a42c5050",
+      "acceptedOriginalSha256": [
+        "7904a967f1e3486d504dd87b55ab55d9b43e8c47f9181148809f596c8f8c15f5"
+      ],
+      "recipe": "crest-94561bbd1901faf4115a.json",
+      "component": "crests",
+      "vanillaSha256": "7904a967f1e3486d504dd87b55ab55d9b43e8c47f9181148809f596c8f8c15f5",
+      "vanillaSize": 958
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/randers_den.png",
+      "size": 5892,
+      "sha256": "6ffede2cdced79a34efc9b38626b159b3a5d290cd94d52cfd3c42c08edd61a77",
+      "acceptedOriginalSha256": [
+        "0442f02565454436d654f91e86f0281ec9bd2d36d7b054b78b51efd4293cabe6"
+      ],
+      "recipe": "crest-bda819e9e19b0b98e7bc.json",
+      "component": "crests",
+      "vanillaSha256": "0442f02565454436d654f91e86f0281ec9bd2d36d7b054b78b51efd4293cabe6",
+      "vanillaSize": 9426
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/randers_den.png",
+      "size": 923,
+      "sha256": "79f0e2bec05c3854e47777ac87e0ae11393d6075ab4874a21e0c5ee93418d2f3",
+      "acceptedOriginalSha256": [
+        "dbcfd3559cddc51ca0c1595ea8808ca464a0abfc63d47932971d347b8a36713b"
+      ],
+      "recipe": "crest-79e891ca726316760fba.json",
+      "component": "crests",
+      "vanillaSha256": "dbcfd3559cddc51ca0c1595ea8808ca464a0abfc63d47932971d347b8a36713b",
+      "vanillaSize": 1132
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/retrope_bra.png",
+      "size": 7304,
+      "sha256": "a0ff537dcee25d938f5c1d4ce5b217c191df76abd7e99163830149ef740bd65b",
+      "acceptedOriginalSha256": [
+        "4c2e619d75de746e251ce74b2d9d9aa1d41f0e27e14fb23246d4da5615aca242"
+      ],
+      "recipe": "crest-aeaac77cb1f241c750ed.json",
+      "component": "crests",
+      "vanillaSha256": "4c2e619d75de746e251ce74b2d9d9aa1d41f0e27e14fb23246d4da5615aca242",
+      "vanillaSize": 7005
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/retrope_bra.png",
+      "size": 1042,
+      "sha256": "a9dca30959655de96c96e85e6f7bf4e9757dd16e5e5ef07738cf10fec6ac91be",
+      "acceptedOriginalSha256": [
+        "cef2fcf9588102388b988d9d4375d2db2ff61ca039a81b679a0a9a54eb2daa36"
+      ],
+      "recipe": "crest-0d046a12246c56f58993.json",
+      "component": "crests",
+      "vanillaSha256": "cef2fcf9588102388b988d9d4375d2db2ff61ca039a81b679a0a9a54eb2daa36",
+      "vanillaSize": 958
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/rfs_let.png",
+      "size": 6652,
+      "sha256": "f1ea4d626b7b2ec9354c91dd39fb21c1f9baf300f039b9ca42f06054084ca46e",
+      "acceptedOriginalSha256": [
+        "1717aa9e135df033bb5ec0b86f9f5f580e8f2b4cd1a41d8e62e0ae1ad41f87f0"
+      ],
+      "recipe": "crest-fc997db22aca3c779df1.json",
+      "component": "crests",
+      "vanillaSha256": "1717aa9e135df033bb5ec0b86f9f5f580e8f2b4cd1a41d8e62e0ae1ad41f87f0",
+      "vanillaSize": 7474
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/rfs_let.png",
+      "size": 1073,
+      "sha256": "3fbc356d98975019f7203f8580ba163c5594cf6312dc372318d760e34fa7cc30",
+      "acceptedOriginalSha256": [
+        "c106dbc199be7d15338e914df6c40be19a8c84f77c60c955a50923f78c01fce0"
+      ],
+      "recipe": "crest-c00ec4b1a31a736085dd.json",
+      "component": "crests",
+      "vanillaSha256": "c106dbc199be7d15338e914df6c40be19a8c84f77c60c955a50923f78c01fce0",
+      "vanillaSize": 1045
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/santos.png",
+      "size": 4855,
+      "sha256": "627f89c65b552015c80ce4d603a9dd7a180794022c5a9c14f66e1f60b40da28a",
+      "acceptedOriginalSha256": [
+        "2c0aec77436714872a108e81e70e3a5d2494fb5705791321d4f3313d5dde741a"
+      ],
+      "recipe": "crest-664edc1c0f2d54f22e0e.json",
+      "component": "crests",
+      "vanillaSha256": "2c0aec77436714872a108e81e70e3a5d2494fb5705791321d4f3313d5dde741a",
+      "vanillaSize": 5561
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/santos.png",
+      "size": 989,
+      "sha256": "0f718a4641ef279d1740192cb343a8d26db9d4b32700c60366a6a863385506a0",
+      "acceptedOriginalSha256": [
+        "b71e12e4abc31f51b5fa83611456cd5983d3d85d380633af883c4829fccced0e"
+      ],
+      "recipe": "crest-156a6f7d11ca880e9eef.json",
+      "component": "crests",
+      "vanillaSha256": "b71e12e4abc31f51b5fa83611456cd5983d3d85d380633af883c4829fccced0e",
+      "vanillaSize": 850
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/saocaetano_bra.png",
+      "size": 7294,
+      "sha256": "1de81c80fad600713111c0c941378c0bd3a24e02089c54e6e6984c716e7cc05e",
+      "acceptedOriginalSha256": [
+        "52dcb954238e956ee332e597ad79231900d6717bb3ec4adbb63bd179450b76ac"
+      ],
+      "recipe": "crest-45993e50b2d921a351f0.json",
+      "component": "crests",
+      "vanillaSha256": "52dcb954238e956ee332e597ad79231900d6717bb3ec4adbb63bd179450b76ac",
+      "vanillaSize": 5663
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/saocaetano_bra.png",
+      "size": 1047,
+      "sha256": "f88d2e0e5511450051dcc741c657c6d0e32e4a2b6b168fa10b2e26815a8505b6",
+      "acceptedOriginalSha256": [
+        "a52a31c5b4565f4188951532bae10394a362950816d260180b68c8600b504723"
+      ],
+      "recipe": "crest-0aa1fadf9ab1577d24da.json",
+      "component": "crests",
+      "vanillaSha256": "a52a31c5b4565f4188951532bae10394a362950816d260180b68c8600b504723",
+      "vanillaSize": 843
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/slavia_cze.png",
+      "size": 3958,
+      "sha256": "3121f7db77b856ef6dfcdcc40b28ab63fd8ebaebbd372ba7441f8c541377037b",
+      "acceptedOriginalSha256": [
+        "e053b165b684cc51023856dbb25c80faea05f1e8865eade4b2dd70580d10949a"
+      ],
+      "recipe": "crest-30e68aa928ea2b1f1bd7.json",
+      "component": "crests",
+      "vanillaSha256": "e053b165b684cc51023856dbb25c80faea05f1e8865eade4b2dd70580d10949a",
+      "vanillaSize": 7463
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/slavia_cze.png",
+      "size": 812,
+      "sha256": "6b53c79842c63b83cd41b3dbd2c857201a8fb3de2e4d3f3672d779e30658f069",
+      "acceptedOriginalSha256": [
+        "805f286a6b7270af64911a2b696fe85333fb101f0e3c20bf39cf322d735190ec"
+      ],
+      "recipe": "crest-836aaf28ad9967323be0.json",
+      "component": "crests",
+      "vanillaSha256": "805f286a6b7270af64911a2b696fe85333fb101f0e3c20bf39cf322d735190ec",
+      "vanillaSize": 1076
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/slovanliberec_cze.png",
+      "size": 5654,
+      "sha256": "592e0f2c4b11768ac4e6f2fb6d136daabb5e601c4b2fc5ce2174489262ecb83c",
+      "acceptedOriginalSha256": [
+        "5010bd576f3777bdedf4f09f97da21d149dfa6de98930ea6f742eaee3b3f4044"
+      ],
+      "recipe": "crest-0a04de417f19f8206cc3.json",
+      "component": "crests",
+      "vanillaSha256": "5010bd576f3777bdedf4f09f97da21d149dfa6de98930ea6f742eaee3b3f4044",
+      "vanillaSize": 6537
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/slovanliberec_cze.png",
+      "size": 996,
+      "sha256": "82ecd513e15f861798190a8e37e39b418315d79fee028b681fa9badf7241f446",
+      "acceptedOriginalSha256": [
+        "9a6845f845bd9fe31b6fe29e033fdbad3d249d87b42acd4ba94c1807457a7546"
+      ],
+      "recipe": "crest-f6485ba7a88e2e966f34.json",
+      "component": "crests",
+      "vanillaSha256": "9a6845f845bd9fe31b6fe29e033fdbad3d249d87b42acd4ba94c1807457a7546",
+      "vanillaSize": 1023
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/sparta_tch.png",
+      "size": 7216,
+      "sha256": "50bf1165acb6a8ad98edf0b1701ca100488b3c0d68e18f88a6db99f4fcf4dcea",
+      "acceptedOriginalSha256": [
+        "8692887f2ec710fc9016eedc5c97baa6aa3b91c085e0bddae5489fa3c3467886"
+      ],
+      "recipe": "crest-48f0ff4106f74e964683.json",
+      "component": "crests",
+      "vanillaSha256": "8692887f2ec710fc9016eedc5c97baa6aa3b91c085e0bddae5489fa3c3467886",
+      "vanillaSize": 7565
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/sparta_tch.png",
+      "size": 1167,
+      "sha256": "966a1c4d4dd8ad9712f36362f48b552394b3bf2a9487390ee5dd560c560fe9dc",
+      "acceptedOriginalSha256": [
+        "39648cd047af12079c00a2bc7a727baa423efcd8442245b4347738343c155f2a"
+      ],
+      "recipe": "crest-cce1567396fc9ff328d9.json",
+      "component": "crests",
+      "vanillaSha256": "39648cd047af12079c00a2bc7a727baa423efcd8442245b4347738343c155f2a",
+      "vanillaSize": 1061
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/sport.png",
+      "size": 5617,
+      "sha256": "6800ccd30f82378898542040c1ee26760730c0cda41a91c115f60b987b3bf586",
+      "acceptedOriginalSha256": [
+        "f95d107fc1913e249256246723f24b78584219c4a3c39745bc9e48a2865eba12"
+      ],
+      "recipe": "crest-802a91845c275673e02a.json",
+      "component": "crests",
+      "vanillaSha256": "f95d107fc1913e249256246723f24b78584219c4a3c39745bc9e48a2865eba12",
+      "vanillaSize": 6265
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/sport.png",
+      "size": 919,
+      "sha256": "ca5a7681ed8b4855131364971d70fff5a3c1748ba1b3fd15ee34c487a4625eb8",
+      "acceptedOriginalSha256": [
+        "f454e1ffbc4d926203323698b98fc3e434669912a4392046f028d653adbecc7a"
+      ],
+      "recipe": "crest-488375dabf40d3fe8b69.json",
+      "component": "crests",
+      "vanillaSha256": "f454e1ffbc4d926203323698b98fc3e434669912a4392046f028d653adbecc7a",
+      "vanillaSize": 886
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/steua_bucaresti_rom.png",
+      "size": 6468,
+      "sha256": "bf3a0734cc037c493565b62415b9e9709e087f571270c2b07f63574606b2cc97",
+      "acceptedOriginalSha256": [
+        "a4c823f6128b5823c21aec401d10d3fac299574942b78cc25199e620d07ed240"
+      ],
+      "recipe": "crest-20444d373e573ba81ddc.json",
+      "component": "crests",
+      "vanillaSha256": "a4c823f6128b5823c21aec401d10d3fac299574942b78cc25199e620d07ed240",
+      "vanillaSize": 7809
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/steua_bucaresti_rom.png",
+      "size": 985,
+      "sha256": "da4ba32c4b8d1608b2f48b671761cba99fa2608a38956ed520792e35f6e96287",
+      "acceptedOriginalSha256": [
+        "9d936e58d839eba20eae43a452f1fcebf84b51b80ebe38c29eb6efb95653c09b"
+      ],
+      "recipe": "crest-80c5cae7bd97650ef88f.json",
+      "component": "crests",
+      "vanillaSha256": "9d936e58d839eba20eae43a452f1fcebf84b51b80ebe38c29eb6efb95653c09b",
+      "vanillaSize": 1126
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/tottenhamhotspur_ing.png",
+      "size": 2364,
+      "sha256": "fd4e8877336a471165fdd19a6ac08b219db413ae9eb84404405c1db0643ba7a1",
+      "acceptedOriginalSha256": [
+        "18d9dc95ef285d86e517c0524b629454709c512286aca1c6b11375fa7dfc191c"
+      ],
+      "recipe": "crest-973a255d98a96e498b3b.json",
+      "component": "crests",
+      "vanillaSha256": "18d9dc95ef285d86e517c0524b629454709c512286aca1c6b11375fa7dfc191c",
+      "vanillaSize": 5020
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/tottenhamhotspur_ing.png",
+      "size": 459,
+      "sha256": "d9a3e157c97cd26056543b53df0a1d712504ba4ce745a50c0a22e394fbc719e8",
+      "acceptedOriginalSha256": [
+        "4b1689a836e5a1f4b1b6dd15285df88ddcfe484dc2fd5ca7c24e2e3c5c586a68"
+      ],
+      "recipe": "crest-97a5de41683d9084d4af.json",
+      "component": "crests",
+      "vanillaSha256": "4b1689a836e5a1f4b1b6dd15285df88ddcfe484dc2fd5ca7c24e2e3c5c586a68",
+      "vanillaSize": 955
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/ulsan_jap.png",
+      "size": 6172,
+      "sha256": "0ebc4d3dc2848eb28ab6d3f8027f919afa585d2668f41195d80f6e6b7c2dfb5d",
+      "acceptedOriginalSha256": [
+        "6a50bb5c7d458447b9e94fe600cc28057206fa5604f80a81f343425c17d6ac37"
+      ],
+      "recipe": "crest-b0b03d74010cf0147c79.json",
+      "component": "crests",
+      "vanillaSha256": "6a50bb5c7d458447b9e94fe600cc28057206fa5604f80a81f343425c17d6ac37",
+      "vanillaSize": 6131
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/ulsan_jap.png",
+      "size": 893,
+      "sha256": "4c90138510cdab05c264e4e92b6bb90d0eac1facdb625234fa7f8ae47e74c07b",
+      "acceptedOriginalSha256": [
+        "020e54f5f69457f298b396915d8bc62a3380411b245d99cd520b12890640bc67"
+      ],
+      "recipe": "crest-cb4621891890ea8af04b.json",
+      "component": "crests",
+      "vanillaSha256": "020e54f5f69457f298b396915d8bc62a3380411b245d99cd520b12890640bc67",
+      "vanillaSize": 922
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/unionlacalera_chi.png",
+      "size": 4894,
+      "sha256": "b31df316817f398b5d4d498a6b571be15b55ec1e855acbe2b715fee20187a155",
+      "acceptedOriginalSha256": [
+        "a337005d0003303088e8a1c75af61ab2a81582cd3ecdbd563af37a7671180d6b"
+      ],
+      "recipe": "crest-579d55b3afed667bb64f.json",
+      "component": "crests",
+      "vanillaSha256": "a337005d0003303088e8a1c75af61ab2a81582cd3ecdbd563af37a7671180d6b",
+      "vanillaSize": 7537
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/unionlacalera_chi.png",
+      "size": 886,
+      "sha256": "3892fe2a0b49550c013b075d323e3558eebd14707626cc1d4cb8e1c6bc2e767d",
+      "acceptedOriginalSha256": [
+        "882d6b7b349046b29a348f8f23a1dcdd5e41d3d9a30e4c1f323e91ef88a3520b"
+      ],
+      "recipe": "crest-c23ad85206c1ae7aa03a.json",
+      "component": "crests",
+      "vanillaSha256": "882d6b7b349046b29a348f8f23a1dcdd5e41d3d9a30e4c1f323e91ef88a3520b",
+      "vanillaSize": 1086
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/valmiera_let.png",
+      "size": 2659,
+      "sha256": "eb17af7a688a79c0dd64debc8b0b0e1f4f5a54a9e952ffeab95fb52c4ae1bdf8",
+      "acceptedOriginalSha256": [
+        "9dd1606e8cef0aececfb39b12c0f27b266dc950814527c2fee6093642bb886ef"
+      ],
+      "recipe": "crest-d0b1c34b0300d037888d.json",
+      "component": "crests",
+      "vanillaSha256": "9dd1606e8cef0aececfb39b12c0f27b266dc950814527c2fee6093642bb886ef",
+      "vanillaSize": 5951
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/valmiera_let.png",
+      "size": 543,
+      "sha256": "07aa96c11e23d964471594c0b3138866660548e46fd2786ce2daf7b144fce3ea",
+      "acceptedOriginalSha256": [
+        "797e7e7f0fd7624f94074da241b307c80d805d4223afba1a41f6a4508b199189"
+      ],
+      "recipe": "crest-e00d069485a215a0c194.json",
+      "component": "crests",
+      "vanillaSha256": "797e7e7f0fd7624f94074da241b307c80d805d4223afba1a41f6a4508b199189",
+      "vanillaSize": 951
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/viettel_vie.png",
+      "size": 10207,
+      "sha256": "7cebb549ad9bad2527369be25ee27b029b8ba4dfcf091ceb4185f7fbb1fdd75e",
+      "acceptedOriginalSha256": [
+        "26902ff204379e5634f47076f64f3c30d072be412861157cda76264a9fc1d892"
+      ],
+      "recipe": "crest-83ea4d1dd041330c0587.json",
+      "component": "crests",
+      "vanillaSha256": "26902ff204379e5634f47076f64f3c30d072be412861157cda76264a9fc1d892",
+      "vanillaSize": 5404
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/viettel_vie.png",
+      "size": 1121,
+      "sha256": "ed35a97b6bbfebb5ea19dc8b694679df07a80be327519b98a9ac81973e5e186a",
+      "acceptedOriginalSha256": [
+        "e94b67a0e60c4339d49fa508cd347d91ca0bb41fbebdd692f5feb7e0aff7653e"
+      ],
+      "recipe": "crest-74b308b3b942ffb4d786.json",
+      "component": "crests",
+      "vanillaSha256": "e94b67a0e60c4339d49fa508cd347d91ca0bb41fbebdd692f5feb7e0aff7653e",
+      "vanillaSize": 827
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/vikingur_isl.png",
+      "size": 5240,
+      "sha256": "32ea3938b3635eb73f06f76bcecdfae819b3d5f6c3fec38b45ff16a0db74f3d6",
+      "acceptedOriginalSha256": [
+        "175f2ab3150f86e6f3c912dbb55c47cf7b54a70805dc09bcd31a5b642269eb1f"
+      ],
+      "recipe": "crest-0e0f697aee35f3d006c4.json",
+      "component": "crests",
+      "vanillaSha256": "175f2ab3150f86e6f3c912dbb55c47cf7b54a70805dc09bcd31a5b642269eb1f",
+      "vanillaSize": 7351
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/vikingur_isl.png",
+      "size": 871,
+      "sha256": "cc59a06618989572d4ed36a6719c3e69407a0c416d9b6a3ddc5cd81b056875fe",
+      "acceptedOriginalSha256": [
+        "d1950dbca8deda8dda0ba9077617a87febcf06519e3f5c2354c1f477362cb8bf"
+      ],
+      "recipe": "crest-82ebaa943607946ccb9c.json",
+      "component": "crests",
+      "vanillaSha256": "d1950dbca8deda8dda0ba9077617a87febcf06519e3f5c2354c1f477362cb8bf",
+      "vanillaSize": 1000
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudos/wac_mar.png",
+      "size": 7042,
+      "sha256": "413e7ca9a42a075d4b4ffe78a6a41778171488ffe342c381d15e4453ce5de251",
+      "acceptedOriginalSha256": [
+        "d08606859c6f2fae29e0307f51dcf8277ec03b42a5568057ee7ad75facf89de8"
+      ],
+      "recipe": "crest-f054721fcf1c7acecac0.json",
+      "component": "crests",
+      "vanillaSha256": "d08606859c6f2fae29e0307f51dcf8277ec03b42a5568057ee7ad75facf89de8",
+      "vanillaSize": 6396
+    },
+    {
+      "operation": "replace",
+      "path": "teams/escudosMini/wac_mar.png",
+      "size": 1000,
+      "sha256": "4c6798c1e22a5ce9bcdc500b7cb5bb5dfd1ed90ca2fd91d46176f7d28aa41756",
+      "acceptedOriginalSha256": [
+        "7333996e42c5b6f9a243f1fec1028d1a91c027622e02c55be58a0dfb1123b63e"
+      ],
+      "recipe": "crest-13ac9184c803fffe4a59.json",
+      "component": "crests",
+      "vanillaSha256": "7333996e42c5b6f9a243f1fec1028d1a91c027622e02c55be58a0dfb1123b63e",
+      "vanillaSize": 1084
+    },
+    {
       "recipe": "crest-15bbe3702053d3e55842.json",
       "component": "crests",
       "operation": "add",
@@ -13487,32 +15387,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/Differdange_Lux.png",
-      "size": 3983,
-      "sha256": "1d4a66175a7dc932e23cd169e36e761b838ebc32bbafb599c5d05680c48b7524",
-      "acceptedOriginalSha256": [
-        "f05e14264061b7c723fc85d6d5ede3223777b3401fd7992beca6fc5968689663"
-      ],
-      "recipe": "crest-91bc7fa38fc240c7716f.json",
-      "component": "crests",
-      "vanillaSha256": "f05e14264061b7c723fc85d6d5ede3223777b3401fd7992beca6fc5968689663",
-      "vanillaSize": 6735
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/Saburtalo_Geo.png",
-      "size": 7716,
-      "sha256": "12af40aedc126fd2aa7d1299a29296ea1037dfbc7af69b391b9feaa01c043c57",
-      "acceptedOriginalSha256": [
-        "367b33f4d5c3c045a31d935f3b12c7f3290c5ffb7d761cc4b743cc7d77e05997"
-      ],
-      "recipe": "crest-f9bd33bd505687c31f2c.json",
-      "component": "crests",
-      "vanillaSha256": "367b33f4d5c3c045a31d935f3b12c7f3290c5ffb7d761cc4b743cc7d77e05997",
-      "vanillaSize": 6605
-    },
-    {
       "recipe": "crest-90fe1442cef24b144f7d.json",
       "component": "crests",
       "operation": "add",
@@ -13583,19 +15457,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/agmk_uzb.png",
-      "size": 6095,
-      "sha256": "543c1f432fedcc1b3c2fac722526eedbac5d5bde029589173f6a27b72bea8011",
-      "acceptedOriginalSha256": [
-        "556de495dc2c0d8df917ce8fb65a111e88f823e6d04f574cf634fd2e8e4cde81"
-      ],
-      "recipe": "crest-880c3f452795e0a3323a.json",
-      "component": "crests",
-      "vanillaSha256": "556de495dc2c0d8df917ce8fb65a111e88f823e6d04f574cf634fd2e8e4cde81",
-      "vanillaSize": 6507
-    },
-    {
       "recipe": "crest-85c39b36d2525ce11adf.json",
       "component": "crests",
       "operation": "add",
@@ -13614,58 +15475,6 @@
       "sha256": "2e344f5d1e44aac8f78b0652b36a06030403508d15c0ee29665cd2d1a93b51b5",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/ajax_hol.png",
-      "size": 9727,
-      "sha256": "e43d50947411eeb08fd998e71ed987590eba1132d1825182ef6776f8f7df1f9a",
-      "acceptedOriginalSha256": [
-        "e942533eacc72bcb70bce94985413c4c60ae852ed2fb37e4118b0de6123617dd"
-      ],
-      "recipe": "crest-2c83bb72027408eb2dd2.json",
-      "component": "crests",
-      "vanillaSha256": "e942533eacc72bcb70bce94985413c4c60ae852ed2fb37e4118b0de6123617dd",
-      "vanillaSize": 5682
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/al_ahli_ara.png",
-      "size": 7320,
-      "sha256": "acc5f17619fbe52d2e3c6921b59dcd431a7da28aa059b8cc1d8fddff50e0688d",
-      "acceptedOriginalSha256": [
-        "7e1067ea3169e96d9206c1bf99aab44ad239cd591c1a9df89a9d6ff837e35fd1"
-      ],
-      "recipe": "crest-84ba0a8be36d6c9a9a5d.json",
-      "component": "crests",
-      "vanillaSha256": "7e1067ea3169e96d9206c1bf99aab44ad239cd591c1a9df89a9d6ff837e35fd1",
-      "vanillaSize": 5760
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/al_hilal.png",
-      "size": 3173,
-      "sha256": "123d8a3da327587920e056a8ea17dc630c2578e5be13ac5c7945b2e1bc0ee28c",
-      "acceptedOriginalSha256": [
-        "749e464de588d0157ef3382e1eb366cd9d153c735729f79cf4ed8777d9967ab7"
-      ],
-      "recipe": "crest-62bf46eeafa65c6161d9.json",
-      "component": "crests",
-      "vanillaSha256": "749e464de588d0157ef3382e1eb366cd9d153c735729f79cf4ed8777d9967ab7",
-      "vanillaSize": 7404
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/alaves_esp.png",
-      "size": 9148,
-      "sha256": "9d994261b048fc29a99c081f19165073fd0ed5fd74527be752123ca4d00353b5",
-      "acceptedOriginalSha256": [
-        "32db126917fa11505fa2b093719b99381b5ec03c3250d480911d3f7cef13866e"
-      ],
-      "recipe": "crest-0a44a38c51d54c87e88b.json",
-      "component": "crests",
-      "vanillaSha256": "32db126917fa11505fa2b093719b99381b5ec03c3250d480911d3f7cef13866e",
-      "vanillaSize": 5187
     },
     {
       "recipe": "crest-0941954e2f79630eaf1b.json",
@@ -13738,19 +15547,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/alnassr_ara.png",
-      "size": 8848,
-      "sha256": "bc5b0ed595f63d37bbc2af962f5bfdc70bd01c97f4e9bc2e277d70dbbe75b3a8",
-      "acceptedOriginalSha256": [
-        "7fe2ac00cac1cc3d5f5df11c4c9937ae8dc486534ac2c2c0d04c07a30c292246"
-      ],
-      "recipe": "crest-8583c3d76d0b674a0b0e.json",
-      "component": "crests",
-      "vanillaSha256": "7fe2ac00cac1cc3d5f5df11c4c9937ae8dc486534ac2c2c0d04c07a30c292246",
-      "vanillaSize": 8024
-    },
-    {
       "recipe": "crest-ccab1229e94b8d728b37.json",
       "component": "crests",
       "operation": "add",
@@ -13759,45 +15555,6 @@
       "sha256": "f945b0329d3adb029f787ffa0b10bf7372aaba88386c78035aac7208d16f598a",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/americamg_bra.png",
-      "size": 6583,
-      "sha256": "38c1db81ad617992f43273dc06466fe9950c67a15c93a3cae9b5e3a706354718",
-      "acceptedOriginalSha256": [
-        "2bb0be4f58519b1ef2774a90a0ede3c90ac0f4c6b9d59888fe6ff99c3fbee3bd"
-      ],
-      "recipe": "crest-ea47345784fde649336f.json",
-      "component": "crests",
-      "vanillaSha256": "2bb0be4f58519b1ef2774a90a0ede3c90ac0f4c6b9d59888fe6ff99c3fbee3bd",
-      "vanillaSize": 5185
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/anderlecht_bel.png",
-      "size": 7315,
-      "sha256": "84cddb0689335af01da8879b70ebd4a61e9971fe54f0ab76132f0efa8ddfd70d",
-      "acceptedOriginalSha256": [
-        "0982429e600d5a21a5ec00c30406e55bc21d88afc40afc1cb82f23a7de805e6a"
-      ],
-      "recipe": "crest-4e0ac2c14bb98f6e9a1a.json",
-      "component": "crests",
-      "vanillaSha256": "0982429e600d5a21a5ec00c30406e55bc21d88afc40afc1cb82f23a7de805e6a",
-      "vanillaSize": 8321
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/apoel_chp.png",
-      "size": 5477,
-      "sha256": "11c880f315e2745f2de543fd11b9fc1f66f4ba28ab63df5eb6a036b90fbe67f9",
-      "acceptedOriginalSha256": [
-        "2263511084ebfbf9372c3e73592c122b53e5ca1f7f6e3ec38de6c7ee4e472aa4"
-      ],
-      "recipe": "crest-d12469ba141eb114d124.json",
-      "component": "crests",
-      "vanillaSha256": "2263511084ebfbf9372c3e73592c122b53e5ca1f7f6e3ec38de6c7ee4e472aa4",
-      "vanillaSize": 6439
     },
     {
       "recipe": "crest-2a398a0b7a5fbc623f18.json",
@@ -13850,45 +15607,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/assurn.png",
-      "size": 8097,
-      "sha256": "3a8b6e89eb58d6d15236bb040037024e8c82f47211a2614d13b058ec72612887",
-      "acceptedOriginalSha256": [
-        "b942b408c50f4b2b5a101712a4cd67b8d372c0b929a6d170618615ab8b34b26e"
-      ],
-      "recipe": "crest-10e976d50b1c7d30263c.json",
-      "component": "crests",
-      "vanillaSha256": "b942b408c50f4b2b5a101712a4cd67b8d372c0b929a6d170618615ab8b34b26e",
-      "vanillaSize": 8422
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/astana_caz.png",
-      "size": 3941,
-      "sha256": "d2ca077a9e5009045368ed78af04f80b8d9d55c393123d8d2c0a2efde0b17de9",
-      "acceptedOriginalSha256": [
-        "9cfb6d41a8c47477b41ec0a8aac39b5cdb0d867c3e66ba3ca1312d986139cb05"
-      ],
-      "recipe": "crest-b1bb1ca6cbd18e48273c.json",
-      "component": "crests",
-      "vanillaSha256": "9cfb6d41a8c47477b41ec0a8aac39b5cdb0d867c3e66ba3ca1312d986139cb05",
-      "vanillaSize": 5504
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/atalanta_it.png",
-      "size": 8058,
-      "sha256": "2b0b0718b950979dfbbd76b91cf9b5e78fe3a50d8724fdfbc384fb0cbe04c015",
-      "acceptedOriginalSha256": [
-        "2196d9ba76a521a41769223c1e2f901527067364c4b9a57ac709b9cd34427007"
-      ],
-      "recipe": "crest-156a84f8a671ea4fe99f.json",
-      "component": "crests",
-      "vanillaSha256": "2196d9ba76a521a41769223c1e2f901527067364c4b9a57ac709b9cd34427007",
-      "vanillaSize": 4228
-    },
-    {
       "recipe": "crest-e1db4a73c5b1e576d378.json",
       "component": "crests",
       "operation": "add",
@@ -13907,19 +15625,6 @@
       "sha256": "e2674a29bb69c241a362dcc65a14490dcf663817a889d7aaeb676d94a4fda7a5",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/atleticoalagoinhas_bra.png",
-      "size": 7224,
-      "sha256": "1bc0b10205381f6f8aa326cc9be8ad1deb819ea2c6d1a0c38c960e9c60b5c244",
-      "acceptedOriginalSha256": [
-        "af376c129f0712fb95e04de22cb9c32afff8a2fa001962b1064cb309a61a63d1"
-      ],
-      "recipe": "crest-887bc358ea02c04e6cac.json",
-      "component": "crests",
-      "vanillaSha256": "af376c129f0712fb95e04de22cb9c32afff8a2fa001962b1064cb309a61a63d1",
-      "vanillaSize": 6195
     },
     {
       "recipe": "crest-c52ec96bb3649c361871.json",
@@ -14012,45 +15717,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/audax_chi.png",
-      "size": 8896,
-      "sha256": "57c43b2f858126a682d038c584bcfbc92913d52fc512f7a755257670ffb74c71",
-      "acceptedOriginalSha256": [
-        "66d31ac695d9c53c07e7e80fddd66abdf8f81b53ee738e3cbc028c323d9d4a27"
-      ],
-      "recipe": "crest-58ea05fd1363e6ffb6f0.json",
-      "component": "crests",
-      "vanillaSha256": "66d31ac695d9c53c07e7e80fddd66abdf8f81b53ee738e3cbc028c323d9d4a27",
-      "vanillaSize": 7715
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/b36torshavn_fro.png",
-      "size": 8540,
-      "sha256": "917bfd3f1e4fb03aaa57dddb4ec55a8e850f085174e2360a623daf13406e3f43",
-      "acceptedOriginalSha256": [
-        "91b8c66c6f84b1bf399d29fc20659bec8296b2b3e09efdcc2eda87d31fde37e7"
-      ],
-      "recipe": "crest-85a90bc4680ff60ced3c.json",
-      "component": "crests",
-      "vanillaSha256": "91b8c66c6f84b1bf399d29fc20659bec8296b2b3e09efdcc2eda87d31fde37e7",
-      "vanillaSize": 5264
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/bahiafeira_ba.png",
-      "size": 5090,
-      "sha256": "ac0144732d5ea4e7c77c5df1f8395ddd34ad1abd97c4890e1c0f4e9f1d1587a6",
-      "acceptedOriginalSha256": [
-        "135aac695e24391640db5ff67f88b18d08b40d8e97d4f960f51e60b3f19d6bc6"
-      ],
-      "recipe": "crest-f545822d063d1ea81034.json",
-      "component": "crests",
-      "vanillaSha256": "135aac695e24391640db5ff67f88b18d08b40d8e97d4f960f51e60b3f19d6bc6",
-      "vanillaSize": 4450
-    },
-    {
       "recipe": "crest-a7082ede27adda839d34.json",
       "component": "crests",
       "operation": "add",
@@ -14121,19 +15787,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/boavista_bra.png",
-      "size": 4957,
-      "sha256": "f239adc35bc04b99003c37a274a245ea8805cb79b13d3c8be79a89686d98b754",
-      "acceptedOriginalSha256": [
-        "954f035f20e32deaa8ce0e72f72cf91366f4977174e3917d789264cdf74d62fd"
-      ],
-      "recipe": "crest-62f5f13f61a95285cb8b.json",
-      "component": "crests",
-      "vanillaSha256": "954f035f20e32deaa8ce0e72f72cf91366f4977174e3917d789264cdf74d62fd",
-      "vanillaSize": 6688
-    },
-    {
       "recipe": "crest-25d630bee88d7390ba83.json",
       "component": "crests",
       "operation": "add",
@@ -14174,19 +15827,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/botafogopb_bra.png",
-      "size": 4481,
-      "sha256": "a56ef2d23c189aca30e26391b34703e43c5c82175e800e2f45b45985032c848d",
-      "acceptedOriginalSha256": [
-        "e23ffd13e939adae1a8ba3b00647ff7318b65565dacfb659413405762a7711a4"
-      ],
-      "recipe": "crest-effef7ece589eaa90821.json",
-      "component": "crests",
-      "vanillaSha256": "e23ffd13e939adae1a8ba3b00647ff7318b65565dacfb659413405762a7711a4",
-      "vanillaSize": 4152
-    },
-    {
       "recipe": "crest-3e51019181bf4e5281dc.json",
       "component": "crests",
       "operation": "add",
@@ -14215,19 +15855,6 @@
       "sha256": "7762f9219b5ca6a61e7acec6fdf54827035a3b0ee6058d7ccb663fe0b950384a",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/budapeste_hun.png",
-      "size": 7335,
-      "sha256": "76e0d0c0ea4e55da2ef54164752c7f97ab4e8aef44bb67be08e500e44321a4ee",
-      "acceptedOriginalSha256": [
-        "62104bdba6bf06b09b8790b9f2460ede7c42106df191a53abe71d2bc90eff462"
-      ],
-      "recipe": "crest-85d0f4748c1bc5d3d022.json",
-      "component": "crests",
-      "vanillaSha256": "62104bdba6bf06b09b8790b9f2460ede7c42106df191a53abe71d2bc90eff462",
-      "vanillaSize": 7591
     },
     {
       "recipe": "crest-c60283cdd9dc26a68d62.json",
@@ -14590,19 +16217,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/crbelouizdad_arl.png",
-      "size": 4870,
-      "sha256": "25d12277ce0e20d6091c748fb2188e590e14c9126f125eafd93a00675d14d565",
-      "acceptedOriginalSha256": [
-        "ceb77fde87f371ee4ebf8b6242b2c34d27d4ec7d9514444e238aaa8f2ce578f3"
-      ],
-      "recipe": "crest-32feadf58cbdca07f220.json",
-      "component": "crests",
-      "vanillaSha256": "ceb77fde87f371ee4ebf8b6242b2c34d27d4ec7d9514444e238aaa8f2ce578f3",
-      "vanillaSize": 7243
-    },
-    {
       "recipe": "crest-2220ead5bea280f8dc15.json",
       "component": "crests",
       "operation": "add",
@@ -14641,19 +16255,6 @@
       "sha256": "15d2ce39bf0a6af6491d8fd9a311e131603cae8f4e5fa894e101ad635eb119b9",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/dacdunajskastreda_slk.png",
-      "size": 5338,
-      "sha256": "7fb854ecc77eca088585784c09ec71f8ecf4aaceae1c978e0c63f16d91f07c4a",
-      "acceptedOriginalSha256": [
-        "e7fef9db2cf8357ee661ab64651b29a75d1691517b0020028bfbc162b05b9adb"
-      ],
-      "recipe": "crest-fdde895e71b568e5ee7b.json",
-      "component": "crests",
-      "vanillaSha256": "e7fef9db2cf8357ee661ab64651b29a75d1691517b0020028bfbc162b05b9adb",
-      "vanillaSize": 6330
     },
     {
       "recipe": "crest-7f0fff51cf63cbbce2ce.json",
@@ -14926,19 +16527,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/dundalk_irl.png",
-      "size": 6657,
-      "sha256": "6dfbc1290709d2702edd110f167c6cb22863bbdcd5c8a9861fc45a2b9f11210a",
-      "acceptedOriginalSha256": [
-        "8741c02ddc2ac2d5301baf5ddcfd971fdee12c5ac46e2cd1bba6632defceca54"
-      ],
-      "recipe": "crest-6b5bacf1449c761791eb.json",
-      "component": "crests",
-      "vanillaSha256": "8741c02ddc2ac2d5301baf5ddcfd971fdee12c5ac46e2cd1bba6632defceca54",
-      "vanillaSize": 5561
-    },
-    {
       "recipe": "crest-514fc303c88cd1de66d8.json",
       "component": "crests",
       "operation": "add",
@@ -14959,45 +16547,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/enyimba_nig.png",
-      "size": 9359,
-      "sha256": "5d4d97af6a6a854866bdd010016f2c7204ce42f79d220a497ba5b7ba6f8e85aa",
-      "acceptedOriginalSha256": [
-        "f3a0af67fe998336573e3e971a973a017dc880b7f2494a21a208111a30d10782"
-      ],
-      "recipe": "crest-09b90b7e189902688d64.json",
-      "component": "crests",
-      "vanillaSha256": "f3a0af67fe998336573e3e971a973a017dc880b7f2494a21a208111a30d10782",
-      "vanillaSize": 6865
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/essetif_arl.png",
-      "size": 6777,
-      "sha256": "3467c0eaa55dccbc36d402a3a2ead46176cf33ebd6576c0f1e2e7499c8d6382b",
-      "acceptedOriginalSha256": [
-        "cccbc76a3e65959e718e0e74cb8a60486707f8b096846371b8540f4ddd7a19a2"
-      ],
-      "recipe": "crest-c35439f8db0afda14f58.json",
-      "component": "crests",
-      "vanillaSha256": "cccbc76a3e65959e718e0e74cb8a60486707f8b096846371b8540f4ddd7a19a2",
-      "vanillaSize": 7606
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/estrelavermelha_ser.png",
-      "size": 4985,
-      "sha256": "8e3b7440eb7b0fdcb747c324f4dbe79edb67435d6d7be4e24073e6dff116fc58",
-      "acceptedOriginalSha256": [
-        "3f05fbd909de4e71bf548b16ef597c0d94ef03fc9ff9c0a4e441aa37ee13a5e4"
-      ],
-      "recipe": "crest-f6c57f42d12b8a80dcb4.json",
-      "component": "crests",
-      "vanillaSha256": "3f05fbd909de4e71bf548b16ef597c0d94ef03fc9ff9c0a4e441aa37ee13a5e4",
-      "vanillaSize": 6046
-    },
-    {
       "recipe": "crest-fd47f7317befd861d877.json",
       "component": "crests",
       "operation": "add",
@@ -15016,19 +16565,6 @@
       "sha256": "b9eed83e316b10cbf174e70584025483af41135bbeb55ec4f020df898d1847b4",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/far_mar.png",
-      "size": 5837,
-      "sha256": "4db1fb07a5ee2867717ea77d4bff7c2d56d65d13a587eecf9758e5c831825153",
-      "acceptedOriginalSha256": [
-        "d7176064246fa31dc63446aa66307194c5033b25879addebd96bfd08701e2b5e"
-      ],
-      "recipe": "crest-59d643c974f2407b14c9.json",
-      "component": "crests",
-      "vanillaSha256": "d7176064246fa31dc63446aa66307194c5033b25879addebd96bfd08701e2b5e",
-      "vanillaSize": 5070
     },
     {
       "recipe": "crest-2178a4940c374d1418a1.json",
@@ -15071,19 +16607,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/fortaleza.png",
-      "size": 5615,
-      "sha256": "512eeae5cd4192caeb9a2d5f55e176d1492f3ffc44263b617bac8eba4469777c",
-      "acceptedOriginalSha256": [
-        "30ee28dbc63b39249db877d40fd86ecf9e9a567717907f2d86c0a6d58c547948"
-      ],
-      "recipe": "crest-810e7d13fe02adeadf7d.json",
-      "component": "crests",
-      "vanillaSha256": "30ee28dbc63b39249db877d40fd86ecf9e9a567717907f2d86c0a6d58c547948",
-      "vanillaSize": 4657
-    },
-    {
       "recipe": "crest-5a571c1e83903ed8df91.json",
       "component": "crests",
       "operation": "add",
@@ -15112,19 +16635,6 @@
       "sha256": "708f98a4ccdf400e87f7ea4e0932bbfc712405c634a8548a89fdc59e8351d390",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/gambaosaka_jap.png",
-      "size": 3905,
-      "sha256": "6b88c8982d5e2f2feb9062211f68cd222f5e854e26d5c5e4ad96d3f3d526c41c",
-      "acceptedOriginalSha256": [
-        "7e9e9165bd1b1d1e5d88d4af830065b82cef944a281e9481ebc3f83b408fafcd"
-      ],
-      "recipe": "crest-651d15af665f83bb3ec2.json",
-      "component": "crests",
-      "vanillaSha256": "7e9e9165bd1b1d1e5d88d4af830065b82cef944a281e9481ebc3f83b408fafcd",
-      "vanillaSize": 9053
     },
     {
       "recipe": "crest-59ec5033eb8d378a2d53.json",
@@ -15187,19 +16697,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/girona_esp.png",
-      "size": 8716,
-      "sha256": "38fb61990b63bba852562e1484f421098e6c818e73ef6b19dde927221cf74f49",
-      "acceptedOriginalSha256": [
-        "6d1b9280ddfb5a6f62d4be795a10bac90aab5e749c45e4fbe7c8e099b9f6d6cd"
-      ],
-      "recipe": "crest-d7aade6f186a3be5321d.json",
-      "component": "crests",
-      "vanillaSha256": "6d1b9280ddfb5a6f62d4be795a10bac90aab5e749c45e4fbe7c8e099b9f6d6cd",
-      "vanillaSize": 6852
-    },
-    {
       "recipe": "crest-e46d30083fb32410a46a.json",
       "component": "crests",
       "operation": "add",
@@ -15208,32 +16705,6 @@
       "sha256": "4d0ebfc1400b2b33246ad0892d88fa8f4423eff39c187de41500be9997bbd4cf",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/goias.png",
-      "size": 9203,
-      "sha256": "d02e970f5ee4dc1920fe3fd9fe9282f48ae6662dd39e3462f1ed893045fe403e",
-      "acceptedOriginalSha256": [
-        "f401be18a24fb376b4f3b6e8da9b1f90993ebfb3ad2cde84b37049263bbb31dd"
-      ],
-      "recipe": "crest-ad619a849dc976c3d392.json",
-      "component": "crests",
-      "vanillaSha256": "f401be18a24fb376b4f3b6e8da9b1f90993ebfb3ad2cde84b37049263bbb31dd",
-      "vanillaSize": 7504
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/gremioanapolisgo_bra.png",
-      "size": 8548,
-      "sha256": "c1195f88b7f2c07e4d6b07ab1c81dfcca890cc149bd5e7eafa0fed84e1f4e848",
-      "acceptedOriginalSha256": [
-        "c05a04da71fb8a8bd916d1f3a532c20cf4417e03640aad5672858348655b26d4"
-      ],
-      "recipe": "crest-294cd94138d1591b9fc9.json",
-      "component": "crests",
-      "vanillaSha256": "c05a04da71fb8a8bd916d1f3a532c20cf4417e03640aad5672858348655b26d4",
-      "vanillaSize": 6983
     },
     {
       "recipe": "crest-810893805a3986da782a.json",
@@ -15256,19 +16727,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/guaranyrs_bra.png",
-      "size": 5062,
-      "sha256": "8998a19d1c9c3289a47d20dbac0f1b35923e6c3f7fa6915b1ba14477b447e09b",
-      "acceptedOriginalSha256": [
-        "0ae6c2e97932a23a54a9b5fdc3935e517f41d748b537c40dd4e32700612edd53"
-      ],
-      "recipe": "crest-eb47a1ef0a03000c095e.json",
-      "component": "crests",
-      "vanillaSha256": "0ae6c2e97932a23a54a9b5fdc3935e517f41d748b537c40dd4e32700612edd53",
-      "vanillaSize": 6246
-    },
-    {
       "recipe": "crest-956d4c5261dc8a308a7c.json",
       "component": "crests",
       "operation": "add",
@@ -15289,32 +16747,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/hanoi_vie.png",
-      "size": 9764,
-      "sha256": "1469a6d1f7dd7d3a4df6348acfac1a6e73d6eaeb007389734a0da1a5eb23b5e8",
-      "acceptedOriginalSha256": [
-        "4a65f46b82d8f4c084ff848212b5481097f2bc18aa6599359a8c3ba29b7209e1"
-      ],
-      "recipe": "crest-ad86e8147df4f5cca5a2.json",
-      "component": "crests",
-      "vanillaSha256": "4a65f46b82d8f4c084ff848212b5481097f2bc18aa6599359a8c3ba29b7209e1",
-      "vanillaSize": 5252
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/helsinki_fin.png",
-      "size": 7674,
-      "sha256": "e914d06d4dc0ab3b44395392390e7143465260f0f4d5a340fb9e3643ff8a7580",
-      "acceptedOriginalSha256": [
-        "9aad6e2031034b8d3896dff11a0058e9e34dee405b4ce08f7ccbec17e7ae0472"
-      ],
-      "recipe": "crest-bcdc9c2a5060b8cf4dd4.json",
-      "component": "crests",
-      "vanillaSha256": "9aad6e2031034b8d3896dff11a0058e9e34dee405b4ce08f7ccbec17e7ae0472",
-      "vanillaSize": 5112
-    },
-    {
       "recipe": "crest-8c7c191a0cd73f21e1ba.json",
       "component": "crests",
       "operation": "add",
@@ -15333,19 +16765,6 @@
       "sha256": "990551a752d88f5d7957119680bc72bf1074929a0764d67490a4372379ddb200",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/iguatu_ce.png",
-      "size": 9237,
-      "sha256": "ae2422d90faa9f8ab87147a0898deb271601d625432910b33f580ef200401868",
-      "acceptedOriginalSha256": [
-        "918ee975c6a8fa9d5df626243a236cf78ebecc2c484b9c6489de4c5c8868d121"
-      ],
-      "recipe": "crest-18c9a6e033da24d4403f.json",
-      "component": "crests",
-      "vanillaSha256": "918ee975c6a8fa9d5df626243a236cf78ebecc2c484b9c6489de4c5c8868d121",
-      "vanillaSize": 6568
     },
     {
       "recipe": "crest-23855830bebc3190bb3b.json",
@@ -15428,32 +16847,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/itabaiana_se.png",
-      "size": 6456,
-      "sha256": "1cc870f2331ed4eb37bf0fcfa091a0b4ba142dae64cd02192896704bce76335b",
-      "acceptedOriginalSha256": [
-        "d7359396889d7539d58a7211fc7fee4b76d92e6f144ba31b8e69e01b50530564"
-      ],
-      "recipe": "crest-b2a25b4c0dc5894ea401.json",
-      "component": "crests",
-      "vanillaSha256": "d7359396889d7539d58a7211fc7fee4b76d92e6f144ba31b8e69e01b50530564",
-      "vanillaSize": 4440
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/ituano_sp.png",
-      "size": 4370,
-      "sha256": "af806f061590de6154abaf8075dcac9f0f16e7fc12af9bfcc788785c2489ebae",
-      "acceptedOriginalSha256": [
-        "f3300aec0b4f48bef602be339eb103c50a430d97da22bca17c27dade97b4ef05"
-      ],
-      "recipe": "crest-a7ff9394073c39db738d.json",
-      "component": "crests",
-      "vanillaSha256": "f3300aec0b4f48bef602be339eb103c50a430d97da22bca17c27dade97b4ef05",
-      "vanillaSize": 3636
-    },
-    {
       "recipe": "crest-2fc9c9555a673172675f.json",
       "component": "crests",
       "operation": "add",
@@ -15482,19 +16875,6 @@
       "sha256": "71743e0714b05e8b70e9fff4e30c6025a209c9354bc3f571ca2a85d202256325",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/juazeirense_ba.png",
-      "size": 5770,
-      "sha256": "98ff61c13b62bb2693d12677e76e58d6c144ecb9085cf7c0343cfa68c9981b18",
-      "acceptedOriginalSha256": [
-        "1c12e8b96cf19841985ea710d12a9910ed7fccdf7b1803c4d79827847831c864"
-      ],
-      "recipe": "crest-d678a2fdc70dd319199c.json",
-      "component": "crests",
-      "vanillaSha256": "1c12e8b96cf19841985ea710d12a9910ed7fccdf7b1803c4d79827847831c864",
-      "vanillaSize": 6500
     },
     {
       "recipe": "crest-db5bf2884089acb83719.json",
@@ -15537,32 +16917,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/kitchee_hkg.png",
-      "size": 6200,
-      "sha256": "05c4f6a458277d2d05452d2536e626385a7aaca0095c3c2433444c9d70822cd1",
-      "acceptedOriginalSha256": [
-        "bd742c16442088165a50b0c40b2a634ad149e4d9b758f7e061e3664b19aace5d"
-      ],
-      "recipe": "crest-b91d5bcd0c413de2533f.json",
-      "component": "crests",
-      "vanillaSha256": "bd742c16442088165a50b0c40b2a634ad149e4d9b758f7e061e3664b19aace5d",
-      "vanillaSize": 7214
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/lagarto_se.png",
-      "size": 5531,
-      "sha256": "e4102965e9740327f84a6ded9cea2923e98748416bc846eb92d5079a1ecaf1b4",
-      "acceptedOriginalSha256": [
-        "156fd5c06154c118986197c99509eaca62db79e329c659dfa8a742bbdd5ec858"
-      ],
-      "recipe": "crest-705ccf2eb189fd9e3000.json",
-      "component": "crests",
-      "vanillaSha256": "156fd5c06154c118986197c99509eaca62db79e329c659dfa8a742bbdd5ec858",
-      "vanillaSize": 5695
-    },
-    {
       "recipe": "crest-d16f8a5c1a4f244d468e.json",
       "component": "crests",
       "operation": "add",
@@ -15571,32 +16925,6 @@
       "sha256": "1aca037b7ac3f3bdb08176af7cd1a5264fa8ffbf30aa1772e0b23033d7d0cbfe",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/ldu_equ.png",
-      "size": 6586,
-      "sha256": "ae5d5b7bad7eb960c5573401737b2b456cc117c0ade35613f3a567686017d211",
-      "acceptedOriginalSha256": [
-        "f49c13a62f8bfe85227cfd3470a536b75b3e7c882a90eec62ca4a52725ba5d7f"
-      ],
-      "recipe": "crest-a9ab1a24559f00b964bc.json",
-      "component": "crests",
-      "vanillaSha256": "f49c13a62f8bfe85227cfd3470a536b75b3e7c882a90eec62ca4a52725ba5d7f",
-      "vanillaSize": 4091
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/leipzig_ale.png",
-      "size": 5169,
-      "sha256": "7fbe86206440cb59f00f06b1ff027c084d0e15adbd980e65103cb9701644d86a",
-      "acceptedOriginalSha256": [
-        "46ab46650a6109e29b0d92d0d6120e8875794332c0a929561fd842dc589085f7"
-      ],
-      "recipe": "crest-b25a9909f95e649c45d9.json",
-      "component": "crests",
-      "vanillaSha256": "46ab46650a6109e29b0d92d0d6120e8875794332c0a929561fd842dc589085f7",
-      "vanillaSize": 5668
     },
     {
       "recipe": "crest-710ad155087e4dbac023.json",
@@ -15639,19 +16967,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/liverpool_ing.png",
-      "size": 4483,
-      "sha256": "c983d1267bcf7ef4f239e805208dfca9e77b10a1763ce7d633cae1596b42c667",
-      "acceptedOriginalSha256": [
-        "1cb0ac8db09df88446015ed21e2b9f1f669bbd6807cd6b2c2bea4e63caf47ba5"
-      ],
-      "recipe": "crest-89572840fcf583f05dc2.json",
-      "component": "crests",
-      "vanillaSha256": "1cb0ac8db09df88446015ed21e2b9f1f669bbd6807cd6b2c2bea4e63caf47ba5",
-      "vanillaSize": 7122
-    },
-    {
       "recipe": "crest-540659ece69680b42c41.json",
       "component": "crests",
       "operation": "add",
@@ -15660,19 +16975,6 @@
       "sha256": "79f15525c8a663bbe290ec968990890f90e4b0986778c9ddbbb2059384b645f0",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/lokoplovdiv_bul.png",
-      "size": 4867,
-      "sha256": "bf4fbe19b49009bf40ac0b097a838cb9fa26067e91a54142373e3111ca15f8c2",
-      "acceptedOriginalSha256": [
-        "ea6e2156843335fcdd322057f120e858262f1912e7caa1eb53fc10694ad06b7c"
-      ],
-      "recipe": "crest-b55918273b1db57adba2.json",
-      "component": "crests",
-      "vanillaSha256": "ea6e2156843335fcdd322057f120e858262f1912e7caa1eb53fc10694ad06b7c",
-      "vanillaSize": 6419
     },
     {
       "recipe": "crest-35359e78061e39402cf1.json",
@@ -15745,45 +17047,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/nagoyagrampus_jap.png",
-      "size": 6397,
-      "sha256": "ce68bf5ed16a9cb6db29a4d416a91a8afbf50977e4cb6edea233536e71d44864",
-      "acceptedOriginalSha256": [
-        "96c0031c2eae1f7b97b63b9e571e9d27a2fcda4adb3887b1c16e941a0eb6b194"
-      ],
-      "recipe": "crest-fa8dd0f5ba0b2d713ad2.json",
-      "component": "crests",
-      "vanillaSha256": "96c0031c2eae1f7b97b63b9e571e9d27a2fcda4adb3887b1c16e941a0eb6b194",
-      "vanillaSize": 6899
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/napoli_it.png",
-      "size": 6511,
-      "sha256": "f0ca5ca38db89845e5dc30ebe69da09fbec074b37e922d9f61078af3002f6c98",
-      "acceptedOriginalSha256": [
-        "b59f1bb89996a24b32d6e9c140dfbaa53803142303e79a8d035b1b99ac012f61"
-      ],
-      "recipe": "crest-6c65518d1a5cafdb7663.json",
-      "component": "crests",
-      "vanillaSha256": "b59f1bb89996a24b32d6e9c140dfbaa53803142303e79a8d035b1b99ac012f61",
-      "vanillaSize": 6236
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/neftci_aze.png",
-      "size": 3022,
-      "sha256": "1e038e1aab2d6500f604325d0ce7944381b2eaa2ae3177524c5367f65e24348d",
-      "acceptedOriginalSha256": [
-        "9eaedf076b01bd6c7e5e7e9256dd35d0943779cb047d253d1e21fd5d0f018866"
-      ],
-      "recipe": "crest-b792487b55ba3a488fe4.json",
-      "component": "crests",
-      "vanillaSha256": "9eaedf076b01bd6c7e5e7e9256dd35d0943779cb047d253d1e21fd5d0f018866",
-      "vanillaSize": 4824
-    },
-    {
       "recipe": "crest-d66e5ac6dd4323c13da5.json",
       "component": "crests",
       "operation": "add",
@@ -15802,32 +17065,6 @@
       "sha256": "84ce7676e6496a01b88cb1d727f9aaaeb133f43f8a88ccb4edf5b78a0f851e84",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/olympiakos_gre.png",
-      "size": 7595,
-      "sha256": "f31f006f704a5537fb91369513a20cac3ba3ecc636190d4e9f212f7c1fcf7fb2",
-      "acceptedOriginalSha256": [
-        "f75d709072b11a176900466ff60e52259de4b1cbff6f7fd826c908820f763fc7"
-      ],
-      "recipe": "crest-cef27ac5b95a16aab413.json",
-      "component": "crests",
-      "vanillaSha256": "f75d709072b11a176900466ff60e52259de4b1cbff6f7fd826c908820f763fc7",
-      "vanillaSize": 8378
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/olympiquemarseile_fra.png",
-      "size": 7753,
-      "sha256": "63e8d3a96314d4bfabf73102851db4928c7f4d5a3dad17eab846b91c1cb310ff",
-      "acceptedOriginalSha256": [
-        "d91be5e2adb2caf230817407fbcfba375fec64ca3654dc999614300922cfb759"
-      ],
-      "recipe": "crest-e1dc130f819f345d6f1e.json",
-      "component": "crests",
-      "vanillaSha256": "d91be5e2adb2caf230817407fbcfba375fec64ca3654dc999614300922cfb759",
-      "vanillaSize": 5543
     },
     {
       "recipe": "crest-30c7c4820343da80a580.json",
@@ -15880,45 +17117,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/palmeirrn_bra.png",
-      "size": 9769,
-      "sha256": "23130669ae1100ee09e71ff4cccb877cd2e3b838c86da4f242addbb439eaf9e5",
-      "acceptedOriginalSha256": [
-        "c26bc94b9235128d3b2955261b6662e6ee586b4681cd56665bc371bdde41ead9"
-      ],
-      "recipe": "crest-56579e3933792220a246.json",
-      "component": "crests",
-      "vanillaSha256": "c26bc94b9235128d3b2955261b6662e6ee586b4681cd56665bc371bdde41ead9",
-      "vanillaSize": 4785
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/partizan_ser.png",
-      "size": 6382,
-      "sha256": "7e35f3764cf89f2e64f67aaf30b798aa86c3bb60e714321de7d3cf3caaac8579",
-      "acceptedOriginalSha256": [
-        "7fb72f207b0b04decf5863ca7e749766158ebb74bc5c846848333ed53c05acd3"
-      ],
-      "recipe": "crest-922c334231ea86955b06.json",
-      "component": "crests",
-      "vanillaSha256": "7fb72f207b0b04decf5863ca7e749766158ebb74bc5c846848333ed53c05acd3",
-      "vanillaSize": 5656
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/patrocinense_mg.png",
-      "size": 4035,
-      "sha256": "8bad28247c09f12a5eae3131203e31cd7d4831c5c9ac8bf3b32427aa4233d87a",
-      "acceptedOriginalSha256": [
-        "ea13f834b851cfaa5233dfad2f46bebb765267afd9546b107e52482f49c67ead"
-      ],
-      "recipe": "crest-d1782eb7eaf05326b068.json",
-      "component": "crests",
-      "vanillaSha256": "ea13f834b851cfaa5233dfad2f46bebb765267afd9546b107e52482f49c67ead",
-      "vanillaSize": 5212
-    },
-    {
       "recipe": "crest-09641676fc41b9bdcd77.json",
       "component": "crests",
       "operation": "add",
@@ -15927,32 +17125,6 @@
       "sha256": "9efab3d4bfc177407f610b64df7a840cf7d0ceb3df388aff778b8043d75ab0c0",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/penarol_am.png",
-      "size": 7802,
-      "sha256": "16c3469c45a6e193040127263ff63ebe24d48f5291049261da55fc5517dd08fb",
-      "acceptedOriginalSha256": [
-        "c7979413f7c14325e93cb08288ea096eb31a85fe187267d3ab07d3be82e3b4e4"
-      ],
-      "recipe": "crest-b8631567712c2e9db8e8.json",
-      "component": "crests",
-      "vanillaSha256": "c7979413f7c14325e93cb08288ea096eb31a85fe187267d3ab07d3be82e3b4e4",
-      "vanillaSize": 7730
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/persepolis_irn.png",
-      "size": 6340,
-      "sha256": "95f9cbb8142d2066194d9811fb889838681ae4cf2b9788a27654d48b2df0d1ea",
-      "acceptedOriginalSha256": [
-        "bb932a82f27943df8edb999fb10c7961dbee625700e624eff70b530f52fa4d3c"
-      ],
-      "recipe": "crest-474e068699b2c3afd4a0.json",
-      "component": "crests",
-      "vanillaSha256": "bb932a82f27943df8edb999fb10c7961dbee625700e624eff70b530f52fa4d3c",
-      "vanillaSize": 8510
     },
     {
       "recipe": "crest-08f6309d1525e50463fc.json",
@@ -16033,19 +17205,6 @@
       "sha256": "13a22c536cd6a3ce173ef285e6b440cc0d5a6cf2650207a2e8ba9d3d27e0653e",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/randers_den.png",
-      "size": 5892,
-      "sha256": "6ffede2cdced79a34efc9b38626b159b3a5d290cd94d52cfd3c42c08edd61a77",
-      "acceptedOriginalSha256": [
-        "0442f02565454436d654f91e86f0281ec9bd2d36d7b054b78b51efd4293cabe6"
-      ],
-      "recipe": "crest-bda819e9e19b0b98e7bc.json",
-      "component": "crests",
-      "vanillaSha256": "0442f02565454436d654f91e86f0281ec9bd2d36d7b054b78b51efd4293cabe6",
-      "vanillaSize": 9426
     },
     {
       "recipe": "crest-a1593e96b8e05dc560e9.json",
@@ -16156,32 +17315,6 @@
       "sha256": "8f69b6bd85d2d2fd50a1c582c372783ce2da71ee21a67d8196d01e48764190e3",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/retrope_bra.png",
-      "size": 7304,
-      "sha256": "a0ff537dcee25d938f5c1d4ce5b217c191df76abd7e99163830149ef740bd65b",
-      "acceptedOriginalSha256": [
-        "4c2e619d75de746e251ce74b2d9d9aa1d41f0e27e14fb23246d4da5615aca242"
-      ],
-      "recipe": "crest-aeaac77cb1f241c750ed.json",
-      "component": "crests",
-      "vanillaSha256": "4c2e619d75de746e251ce74b2d9d9aa1d41f0e27e14fb23246d4da5615aca242",
-      "vanillaSize": 7005
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/rfs_let.png",
-      "size": 6652,
-      "sha256": "f1ea4d626b7b2ec9354c91dd39fb21c1f9baf300f039b9ca42f06054084ca46e",
-      "acceptedOriginalSha256": [
-        "1717aa9e135df033bb5ec0b86f9f5f580e8f2b4cd1a41d8e62e0ae1ad41f87f0"
-      ],
-      "recipe": "crest-fc997db22aca3c779df1.json",
-      "component": "crests",
-      "vanillaSha256": "1717aa9e135df033bb5ec0b86f9f5f580e8f2b4cd1a41d8e62e0ae1ad41f87f0",
-      "vanillaSize": 7474
     },
     {
       "recipe": "crest-1ee791c27f434aca0e2a.json",
@@ -16304,19 +17437,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/santos.png",
-      "size": 4855,
-      "sha256": "627f89c65b552015c80ce4d603a9dd7a180794022c5a9c14f66e1f60b40da28a",
-      "acceptedOriginalSha256": [
-        "2c0aec77436714872a108e81e70e3a5d2494fb5705791321d4f3313d5dde741a"
-      ],
-      "recipe": "crest-664edc1c0f2d54f22e0e.json",
-      "component": "crests",
-      "vanillaSha256": "2c0aec77436714872a108e81e70e3a5d2494fb5705791321d4f3313d5dde741a",
-      "vanillaSize": 5561
-    },
-    {
       "recipe": "crest-541f7d2192d8ad735ba0.json",
       "component": "crests",
       "operation": "add",
@@ -16325,19 +17445,6 @@
       "sha256": "2afe2bea6243abff71725690503a53f4f994b2660420613113020c8937b16a30",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/saocaetano_bra.png",
-      "size": 7294,
-      "sha256": "1de81c80fad600713111c0c941378c0bd3a24e02089c54e6e6984c716e7cc05e",
-      "acceptedOriginalSha256": [
-        "52dcb954238e956ee332e597ad79231900d6717bb3ec4adbb63bd179450b76ac"
-      ],
-      "recipe": "crest-45993e50b2d921a351f0.json",
-      "component": "crests",
-      "vanillaSha256": "52dcb954238e956ee332e597ad79231900d6717bb3ec4adbb63bd179450b76ac",
-      "vanillaSize": 5663
     },
     {
       "recipe": "crest-9976dc14c21f4338ecb6.json",
@@ -16378,58 +17485,6 @@
       "sha256": "1e01b26a999420ec18b6be46f353b5f71109c3e231c7c956d25e9956e2bc26e2",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/slavia_cze.png",
-      "size": 3958,
-      "sha256": "3121f7db77b856ef6dfcdcc40b28ab63fd8ebaebbd372ba7441f8c541377037b",
-      "acceptedOriginalSha256": [
-        "e053b165b684cc51023856dbb25c80faea05f1e8865eade4b2dd70580d10949a"
-      ],
-      "recipe": "crest-30e68aa928ea2b1f1bd7.json",
-      "component": "crests",
-      "vanillaSha256": "e053b165b684cc51023856dbb25c80faea05f1e8865eade4b2dd70580d10949a",
-      "vanillaSize": 7463
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/slovanliberec_cze.png",
-      "size": 5654,
-      "sha256": "592e0f2c4b11768ac4e6f2fb6d136daabb5e601c4b2fc5ce2174489262ecb83c",
-      "acceptedOriginalSha256": [
-        "5010bd576f3777bdedf4f09f97da21d149dfa6de98930ea6f742eaee3b3f4044"
-      ],
-      "recipe": "crest-0a04de417f19f8206cc3.json",
-      "component": "crests",
-      "vanillaSha256": "5010bd576f3777bdedf4f09f97da21d149dfa6de98930ea6f742eaee3b3f4044",
-      "vanillaSize": 6537
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/sparta_tch.png",
-      "size": 7216,
-      "sha256": "50bf1165acb6a8ad98edf0b1701ca100488b3c0d68e18f88a6db99f4fcf4dcea",
-      "acceptedOriginalSha256": [
-        "8692887f2ec710fc9016eedc5c97baa6aa3b91c085e0bddae5489fa3c3467886"
-      ],
-      "recipe": "crest-48f0ff4106f74e964683.json",
-      "component": "crests",
-      "vanillaSha256": "8692887f2ec710fc9016eedc5c97baa6aa3b91c085e0bddae5489fa3c3467886",
-      "vanillaSize": 7565
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/sport.png",
-      "size": 5617,
-      "sha256": "6800ccd30f82378898542040c1ee26760730c0cda41a91c115f60b987b3bf586",
-      "acceptedOriginalSha256": [
-        "f95d107fc1913e249256246723f24b78584219c4a3c39745bc9e48a2865eba12"
-      ],
-      "recipe": "crest-802a91845c275673e02a.json",
-      "component": "crests",
-      "vanillaSha256": "f95d107fc1913e249256246723f24b78584219c4a3c39745bc9e48a2865eba12",
-      "vanillaSize": 6265
     },
     {
       "recipe": "crest-47fcec20130b9a631740.json",
@@ -16532,19 +17587,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/steua_bucaresti_rom.png",
-      "size": 6468,
-      "sha256": "bf3a0734cc037c493565b62415b9e9709e087f571270c2b07f63574606b2cc97",
-      "acceptedOriginalSha256": [
-        "a4c823f6128b5823c21aec401d10d3fac299574942b78cc25199e620d07ed240"
-      ],
-      "recipe": "crest-20444d373e573ba81ddc.json",
-      "component": "crests",
-      "vanillaSha256": "a4c823f6128b5823c21aec401d10d3fac299574942b78cc25199e620d07ed240",
-      "vanillaSize": 7809
-    },
-    {
       "recipe": "crest-2fb81562c9dbe957f647.json",
       "component": "crests",
       "operation": "add",
@@ -16605,19 +17647,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/tottenhamhotspur_ing.png",
-      "size": 2364,
-      "sha256": "fd4e8877336a471165fdd19a6ac08b219db413ae9eb84404405c1db0643ba7a1",
-      "acceptedOriginalSha256": [
-        "18d9dc95ef285d86e517c0524b629454709c512286aca1c6b11375fa7dfc191c"
-      ],
-      "recipe": "crest-973a255d98a96e498b3b.json",
-      "component": "crests",
-      "vanillaSha256": "18d9dc95ef285d86e517c0524b629454709c512286aca1c6b11375fa7dfc191c",
-      "vanillaSize": 5020
-    },
-    {
       "recipe": "crest-1c049b9e1decb3753de8.json",
       "component": "crests",
       "operation": "add",
@@ -16658,19 +17687,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/ulsan_jap.png",
-      "size": 6172,
-      "sha256": "0ebc4d3dc2848eb28ab6d3f8027f919afa585d2668f41195d80f6e6b7c2dfb5d",
-      "acceptedOriginalSha256": [
-        "6a50bb5c7d458447b9e94fe600cc28057206fa5604f80a81f343425c17d6ac37"
-      ],
-      "recipe": "crest-b0b03d74010cf0147c79.json",
-      "component": "crests",
-      "vanillaSha256": "6a50bb5c7d458447b9e94fe600cc28057206fa5604f80a81f343425c17d6ac37",
-      "vanillaSize": 6131
-    },
-    {
       "recipe": "crest-893c3cf43fc9ab5f05c6.json",
       "component": "crests",
       "operation": "add",
@@ -16679,19 +17695,6 @@
       "sha256": "9295d49c88a24a1a74f1ddaf9100c898e396c748ba88f3cf643804095bdb426c",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/unionlacalera_chi.png",
-      "size": 4894,
-      "sha256": "b31df316817f398b5d4d498a6b571be15b55ec1e855acbe2b715fee20187a155",
-      "acceptedOriginalSha256": [
-        "a337005d0003303088e8a1c75af61ab2a81582cd3ecdbd563af37a7671180d6b"
-      ],
-      "recipe": "crest-579d55b3afed667bb64f.json",
-      "component": "crests",
-      "vanillaSha256": "a337005d0003303088e8a1c75af61ab2a81582cd3ecdbd563af37a7671180d6b",
-      "vanillaSize": 7537
     },
     {
       "recipe": "crest-7e38563c45032d1424d7.json",
@@ -16734,19 +17737,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudos/valmiera_let.png",
-      "size": 2659,
-      "sha256": "eb17af7a688a79c0dd64debc8b0b0e1f4f5a54a9e952ffeab95fb52c4ae1bdf8",
-      "acceptedOriginalSha256": [
-        "9dd1606e8cef0aececfb39b12c0f27b266dc950814527c2fee6093642bb886ef"
-      ],
-      "recipe": "crest-d0b1c34b0300d037888d.json",
-      "component": "crests",
-      "vanillaSha256": "9dd1606e8cef0aececfb39b12c0f27b266dc950814527c2fee6093642bb886ef",
-      "vanillaSize": 5951
-    },
-    {
       "recipe": "crest-d99ccf0690d6d3a11571.json",
       "component": "crests",
       "operation": "add",
@@ -16755,32 +17745,6 @@
       "sha256": "9e186cb472f7a4ea4159b7346372dc9024b1e45028e137fc607079577de7bcee",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/viettel_vie.png",
-      "size": 10207,
-      "sha256": "7cebb549ad9bad2527369be25ee27b029b8ba4dfcf091ceb4185f7fbb1fdd75e",
-      "acceptedOriginalSha256": [
-        "26902ff204379e5634f47076f64f3c30d072be412861157cda76264a9fc1d892"
-      ],
-      "recipe": "crest-83ea4d1dd041330c0587.json",
-      "component": "crests",
-      "vanillaSha256": "26902ff204379e5634f47076f64f3c30d072be412861157cda76264a9fc1d892",
-      "vanillaSize": 5404
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/vikingur_isl.png",
-      "size": 5240,
-      "sha256": "32ea3938b3635eb73f06f76bcecdfae819b3d5f6c3fec38b45ff16a0db74f3d6",
-      "acceptedOriginalSha256": [
-        "175f2ab3150f86e6f3c912dbb55c47cf7b54a70805dc09bcd31a5b642269eb1f"
-      ],
-      "recipe": "crest-0e0f697aee35f3d006c4.json",
-      "component": "crests",
-      "vanillaSha256": "175f2ab3150f86e6f3c912dbb55c47cf7b54a70805dc09bcd31a5b642269eb1f",
-      "vanillaSize": 7351
     },
     {
       "recipe": "crest-705ba74cff8d1e3a5ea0.json",
@@ -16811,19 +17775,6 @@
       "sha256": "e50f17a595329332e7f313f72ea55a7c1e83b5b4a8af977b1d0d6c396480c872",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudos/wac_mar.png",
-      "size": 7042,
-      "sha256": "413e7ca9a42a075d4b4ffe78a6a41778171488ffe342c381d15e4453ce5de251",
-      "acceptedOriginalSha256": [
-        "d08606859c6f2fae29e0307f51dcf8277ec03b42a5568057ee7ad75facf89de8"
-      ],
-      "recipe": "crest-f054721fcf1c7acecac0.json",
-      "component": "crests",
-      "vanillaSha256": "d08606859c6f2fae29e0307f51dcf8277ec03b42a5568057ee7ad75facf89de8",
-      "vanillaSize": 6396
     },
     {
       "recipe": "crest-18037bcb3bfbc20c1108.json",
@@ -16874,32 +17825,6 @@
       "sha256": "afe897fe28a2b68f63d9e29a10478bf56f4b2b6131cdf0fcfd290dd5a96ecf72",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/Differdange_Lux.png",
-      "size": 799,
-      "sha256": "4a4bca3f4246204f62b544a968edd58170e4b08be1664474ee83bbaf132b8917",
-      "acceptedOriginalSha256": [
-        "9aa63f3351d31eb3169bb30bd382dff07e35370c107c661e2e9dba34daf2253e"
-      ],
-      "recipe": "crest-e1ccd75dfff8bcad0c9a.json",
-      "component": "crests",
-      "vanillaSha256": "9aa63f3351d31eb3169bb30bd382dff07e35370c107c661e2e9dba34daf2253e",
-      "vanillaSize": 992
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/Saburtalo_Geo.png",
-      "size": 1011,
-      "sha256": "76e0994e39e1baa7e9faa8592d2a37948b69bd0478847af74f2a199a3b2d0343",
-      "acceptedOriginalSha256": [
-        "87882977e99cc4923b95db31abd8b4f662d2ee0767726e692daedf7f94245bbb"
-      ],
-      "recipe": "crest-ee90bf1c37b9e1dfcc7b.json",
-      "component": "crests",
-      "vanillaSha256": "87882977e99cc4923b95db31abd8b4f662d2ee0767726e692daedf7f94245bbb",
-      "vanillaSize": 910
     },
     {
       "recipe": "crest-d68987d023eac52d5c34.json",
@@ -16972,19 +17897,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/agmk_uzb.png",
-      "size": 781,
-      "sha256": "bae3efc250c7b4a2b0153535996c966565c32df405cf0069afa55adf859ba04d",
-      "acceptedOriginalSha256": [
-        "c98b7e8eb95654f0c1dad3f52842c6700304ed63bd14a15eb925d3611d26f1e6"
-      ],
-      "recipe": "crest-bf5d672432556917fcf3.json",
-      "component": "crests",
-      "vanillaSha256": "c98b7e8eb95654f0c1dad3f52842c6700304ed63bd14a15eb925d3611d26f1e6",
-      "vanillaSize": 902
-    },
-    {
       "recipe": "crest-7e4d5c062f214ab7e4ce.json",
       "component": "crests",
       "operation": "add",
@@ -17003,58 +17915,6 @@
       "sha256": "f658a84e6facffdcdbfad2408eb2c8e5ed79882c0a1c28c71a78a5c3175e4d5e",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/ajax_hol.png",
-      "size": 1189,
-      "sha256": "fe29803c2c830ff6ceccfa737e39a3ac730df6b02f7b7f68a0398b6cb56b32c8",
-      "acceptedOriginalSha256": [
-        "591a18eed4104fefdfbfaa9411ef81a00c3151c09bd8ce587d899c425abb5850"
-      ],
-      "recipe": "crest-154b399d8bcdbbb6b69c.json",
-      "component": "crests",
-      "vanillaSha256": "591a18eed4104fefdfbfaa9411ef81a00c3151c09bd8ce587d899c425abb5850",
-      "vanillaSize": 901
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/al_ahli_ara.png",
-      "size": 1123,
-      "sha256": "abff99e9af4358394beee0bdf71e4656712411add37965dd8c786afd9bc7853c",
-      "acceptedOriginalSha256": [
-        "4f2017de1e50bac09a62fdeb4de42bc62d65a4b48474847283d97be20aa4dadf"
-      ],
-      "recipe": "crest-e0954c678a84da452003.json",
-      "component": "crests",
-      "vanillaSha256": "4f2017de1e50bac09a62fdeb4de42bc62d65a4b48474847283d97be20aa4dadf",
-      "vanillaSize": 895
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/al_hilal.png",
-      "size": 671,
-      "sha256": "d0cdb6b19080c25fae7d657f96ed6b5b703642e2e25032f7f335f1b7665cc708",
-      "acceptedOriginalSha256": [
-        "407136355634bc91f47a95f4f9ba1cce79e7cb689b4a6bab0c4be30ac3b6f66c"
-      ],
-      "recipe": "crest-4202b08128f6b860dc73.json",
-      "component": "crests",
-      "vanillaSha256": "407136355634bc91f47a95f4f9ba1cce79e7cb689b4a6bab0c4be30ac3b6f66c",
-      "vanillaSize": 1011
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/alaves_esp.png",
-      "size": 1189,
-      "sha256": "82844437ccc6cffbf3160497bb594f90e93d3ed87d487ff79c9fd359ffdda045",
-      "acceptedOriginalSha256": [
-        "c6f97cfb809466ea73f68b2cf8ec6446f2de5e42fe9b4ca2aa4abcdee39da54f"
-      ],
-      "recipe": "crest-3e1afe0d6c61e5bd1ab5.json",
-      "component": "crests",
-      "vanillaSha256": "c6f97cfb809466ea73f68b2cf8ec6446f2de5e42fe9b4ca2aa4abcdee39da54f",
-      "vanillaSize": 818
     },
     {
       "recipe": "crest-54553879c02d612c8b58.json",
@@ -17127,19 +17987,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/alnassr_ara.png",
-      "size": 1170,
-      "sha256": "45e9cb830a37c5be7365e238fca8ecdd603b40790fa77cbe8bfe1456c2a8e3c3",
-      "acceptedOriginalSha256": [
-        "e10a3d322c92d1d807623e162a5514d17232457d8d1fdfe71e007d78833f80f4"
-      ],
-      "recipe": "crest-88fb3379e17357622f4c.json",
-      "component": "crests",
-      "vanillaSha256": "e10a3d322c92d1d807623e162a5514d17232457d8d1fdfe71e007d78833f80f4",
-      "vanillaSize": 1090
-    },
-    {
       "recipe": "crest-c9261976fa2f7d072507.json",
       "component": "crests",
       "operation": "add",
@@ -17148,45 +17995,6 @@
       "sha256": "da0947b481dcb3d7e8ff946aeb6f4e5fae1904ea0eca39b4c86b2fec20a1f070",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/americamg_bra.png",
-      "size": 1012,
-      "sha256": "e4068ca8cfafd29443f08b32f442b5c1cbe770d8cefee6ab79aeb697091cf57c",
-      "acceptedOriginalSha256": [
-        "7dc690f952aca136c1be3dc8e7c71c50fcf1f3201c0d9a71b692907cfc3588d8"
-      ],
-      "recipe": "crest-99a07f2666786b25ba95.json",
-      "component": "crests",
-      "vanillaSha256": "7dc690f952aca136c1be3dc8e7c71c50fcf1f3201c0d9a71b692907cfc3588d8",
-      "vanillaSize": 769
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/anderlecht_bel.png",
-      "size": 1098,
-      "sha256": "77a79f38792d27c3ff2dcff3855727230cc6e95a93b437c6d22abd5a2d2dabab",
-      "acceptedOriginalSha256": [
-        "91d5b862cc8098ca8e8d51347ac378e58f06c25026180ec2216682e74554a97a"
-      ],
-      "recipe": "crest-dd7250fc0fa75c6d1688.json",
-      "component": "crests",
-      "vanillaSha256": "91d5b862cc8098ca8e8d51347ac378e58f06c25026180ec2216682e74554a97a",
-      "vanillaSize": 1162
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/apoel_chp.png",
-      "size": 927,
-      "sha256": "0418ce4b7134ef6eda0f08226e74ff0a6cb31851be6c5bfd1e44988667503236",
-      "acceptedOriginalSha256": [
-        "8f437b784c02691cdc74743e3742c36eabe2694eb458056bd97bcfb1852b2b39"
-      ],
-      "recipe": "crest-7ff9de97e5482e8b94bd.json",
-      "component": "crests",
-      "vanillaSha256": "8f437b784c02691cdc74743e3742c36eabe2694eb458056bd97bcfb1852b2b39",
-      "vanillaSize": 1027
     },
     {
       "recipe": "crest-955ee066437ea36134b1.json",
@@ -17239,45 +18047,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/assurn.png",
-      "size": 1126,
-      "sha256": "b4c3a1235f84ee6792961385b139075a3ab53291356904794631033af23093f0",
-      "acceptedOriginalSha256": [
-        "33ecd5efbab71958409754f0cd54bcf4b23811218a822b4671b9340720964125"
-      ],
-      "recipe": "crest-2fc62615f2d6289947c3.json",
-      "component": "crests",
-      "vanillaSha256": "33ecd5efbab71958409754f0cd54bcf4b23811218a822b4671b9340720964125",
-      "vanillaSize": 1094
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/astana_caz.png",
-      "size": 642,
-      "sha256": "a7982c89aafcd0cb527d9001c8d9168dd935d9d032b77d65e42f718391794e04",
-      "acceptedOriginalSha256": [
-        "f9ab0d91386a70f49f6c6182607cff119774bd0fbe1b61807c5132759be13899"
-      ],
-      "recipe": "crest-dd4b49dcf458b9e206ee.json",
-      "component": "crests",
-      "vanillaSha256": "f9ab0d91386a70f49f6c6182607cff119774bd0fbe1b61807c5132759be13899",
-      "vanillaSize": 824
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/atalanta_it.png",
-      "size": 1125,
-      "sha256": "4fc647b1821089c940015bbf286f7a9fab227b3da532607bb26bea9118467aa1",
-      "acceptedOriginalSha256": [
-        "7cbd16ca7ff27d5ceeafc49d46ba19df92da3f6cedd660851738df93ff0f99ac"
-      ],
-      "recipe": "crest-097982d345dcfcdfd926.json",
-      "component": "crests",
-      "vanillaSha256": "7cbd16ca7ff27d5ceeafc49d46ba19df92da3f6cedd660851738df93ff0f99ac",
-      "vanillaSize": 792
-    },
-    {
       "recipe": "crest-009243c816877b6d3a1a.json",
       "component": "crests",
       "operation": "add",
@@ -17296,19 +18065,6 @@
       "sha256": "c2f08295ce4d5487d0394f87df2347fe2bc534d4f849f8673090410fddf22fa7",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/atleticoalagoinhas_bra.png",
-      "size": 1054,
-      "sha256": "0474649e4104fd7f682f9400f3c958c608edd533115e60c5488a2acbd02f806b",
-      "acceptedOriginalSha256": [
-        "d2fe9abcd02105bb2315e1b53e14ef1d24b968b83bc58dae0c2429e19a55d99a"
-      ],
-      "recipe": "crest-af8eab2f6665f7cd13ea.json",
-      "component": "crests",
-      "vanillaSha256": "d2fe9abcd02105bb2315e1b53e14ef1d24b968b83bc58dae0c2429e19a55d99a",
-      "vanillaSize": 987
     },
     {
       "recipe": "crest-4ff59494433a745f2c43.json",
@@ -17401,45 +18157,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/audax_chi.png",
-      "size": 1189,
-      "sha256": "403c2fffd77ac705fca5ebbbf797de74d5cefa3359a4bf9bf2d468337ea54e3e",
-      "acceptedOriginalSha256": [
-        "4ca731271f11d8dc6adfe4a1989eb4cbc80d750bf766624eb9f9c4fa69f3b155"
-      ],
-      "recipe": "crest-d7ce7e5fd5c4ee3f8308.json",
-      "component": "crests",
-      "vanillaSha256": "4ca731271f11d8dc6adfe4a1989eb4cbc80d750bf766624eb9f9c4fa69f3b155",
-      "vanillaSize": 1183
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/b36torshavn_fro.png",
-      "size": 1209,
-      "sha256": "5368cdb95f41721be5d35e21558e36bbd87f5a329db81b52aa25d803dfc8f6e9",
-      "acceptedOriginalSha256": [
-        "f14e6cc2c58d70678a6f06a23788fcdbda914f230e48aeb5da0874060420fb7b"
-      ],
-      "recipe": "crest-41ccd30b87390cc98f61.json",
-      "component": "crests",
-      "vanillaSha256": "f14e6cc2c58d70678a6f06a23788fcdbda914f230e48aeb5da0874060420fb7b",
-      "vanillaSize": 752
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/bahiafeira_ba.png",
-      "size": 993,
-      "sha256": "09a8159addc30995cfa4ad3a1d7f79339bd79e4a389540e7a80dbaa8f461eeaa",
-      "acceptedOriginalSha256": [
-        "41d33ade54d3bda8217f3ee9c0388026dba20dc43ecbfb47bc93428e24c32753"
-      ],
-      "recipe": "crest-45304556b78bc63a3208.json",
-      "component": "crests",
-      "vanillaSha256": "41d33ade54d3bda8217f3ee9c0388026dba20dc43ecbfb47bc93428e24c32753",
-      "vanillaSize": 890
-    },
-    {
       "recipe": "crest-0d0ee31cae69663fd144.json",
       "component": "crests",
       "operation": "add",
@@ -17510,19 +18227,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/boavista_bra.png",
-      "size": 851,
-      "sha256": "e5a2763e176d4ef91c19f0fa9b472f0a21b74fc902b367966c1d0c4f33d3fc75",
-      "acceptedOriginalSha256": [
-        "3dd18943949e8087638c6a8938608636cae802cb956229c67427abcfaa0e288e"
-      ],
-      "recipe": "crest-46027c22f7de8c65b430.json",
-      "component": "crests",
-      "vanillaSha256": "3dd18943949e8087638c6a8938608636cae802cb956229c67427abcfaa0e288e",
-      "vanillaSize": 928
-    },
-    {
       "recipe": "crest-06ee28af335cc111b5ed.json",
       "component": "crests",
       "operation": "add",
@@ -17563,19 +18267,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/botafogopb_bra.png",
-      "size": 922,
-      "sha256": "77ab45febde755623285e918dd906e0afd30bd291da6ae82cf09c1ba82b2440b",
-      "acceptedOriginalSha256": [
-        "2c86605ede5764adea1bb4fb36f2b28571bd7fb53cf0d2ccbc4abca064dcccf7"
-      ],
-      "recipe": "crest-3359c957f1404dad6781.json",
-      "component": "crests",
-      "vanillaSha256": "2c86605ede5764adea1bb4fb36f2b28571bd7fb53cf0d2ccbc4abca064dcccf7",
-      "vanillaSize": 743
-    },
-    {
       "recipe": "crest-85b39f652bc4b98eefe6.json",
       "component": "crests",
       "operation": "add",
@@ -17604,19 +18295,6 @@
       "sha256": "667f1106d0b9834be4e450afcb3dd60782ac376640b157d4c51fbb5a17a8d43f",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/budapeste_hun.png",
-      "size": 1011,
-      "sha256": "4264c2fcc83da6f0bb6597036c2833edf0a821f66484f759e57202ce71e558fb",
-      "acceptedOriginalSha256": [
-        "b390033e6e34917ce4f870b3b5052004b57d284cb9f2a10071ca7eb2ddf3df9d"
-      ],
-      "recipe": "crest-bd03ff067e8b4c23f1c4.json",
-      "component": "crests",
-      "vanillaSha256": "b390033e6e34917ce4f870b3b5052004b57d284cb9f2a10071ca7eb2ddf3df9d",
-      "vanillaSize": 1045
     },
     {
       "recipe": "crest-47fcd011b7b0f9cf085b.json",
@@ -17979,19 +18657,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/crbelouizdad_arl.png",
-      "size": 849,
-      "sha256": "07181a7ef8cbcd7316d0bfef1fa872cf6a15fb07783977f63a7d29bf6df5dbb5",
-      "acceptedOriginalSha256": [
-        "40330473e8618b94993051b308416f9aafd74d3a9e9454fc3b066a60e394d3b4"
-      ],
-      "recipe": "crest-9dd8d27e33f5f4918258.json",
-      "component": "crests",
-      "vanillaSha256": "40330473e8618b94993051b308416f9aafd74d3a9e9454fc3b066a60e394d3b4",
-      "vanillaSize": 1069
-    },
-    {
       "recipe": "crest-48de776b1eeebe31a8b5.json",
       "component": "crests",
       "operation": "add",
@@ -18030,19 +18695,6 @@
       "sha256": "94eaabc21dadd663fc73447ac78bc1ab715c30e9e3755627a69f37d7a1e1bec8",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/dacdunajskastreda_slk.png",
-      "size": 949,
-      "sha256": "1f078b1ca2f17a3d19a925b8833b4958c141542ffc6bc4681385ac69fba317b5",
-      "acceptedOriginalSha256": [
-        "5314285d4f5742324b846794db7bba41a5738f669f9719cbed43c643f75eb1ff"
-      ],
-      "recipe": "crest-96f63c6fd3403f617269.json",
-      "component": "crests",
-      "vanillaSha256": "5314285d4f5742324b846794db7bba41a5738f669f9719cbed43c643f75eb1ff",
-      "vanillaSize": 909
     },
     {
       "recipe": "crest-2adf9760d8dd02fc32e7.json",
@@ -18315,19 +18967,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/dundalk_irl.png",
-      "size": 1005,
-      "sha256": "5422fec776888a502d31c984c3166770c84b8717808b938a6eb222e7a05f2e9c",
-      "acceptedOriginalSha256": [
-        "8e267a1dbc489ae57bbfbb7e5ccde36e4560a169990fd218e794b5b041e28673"
-      ],
-      "recipe": "crest-ad57dfd69d6727bb3d94.json",
-      "component": "crests",
-      "vanillaSha256": "8e267a1dbc489ae57bbfbb7e5ccde36e4560a169990fd218e794b5b041e28673",
-      "vanillaSize": 817
-    },
-    {
       "recipe": "crest-54cea8708f31efd979e1.json",
       "component": "crests",
       "operation": "add",
@@ -18348,45 +18987,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/enyimba_nig.png",
-      "size": 1180,
-      "sha256": "5af4602aca18008a49cd72dd6dcc5d3b42f785ea5ed12b3471bba43f9dae1d67",
-      "acceptedOriginalSha256": [
-        "bb904642e0f293c86d3318d3f5c1a84ce1c68fd788424032478c38d3d83b6b3d"
-      ],
-      "recipe": "crest-a91c12a5168af7caf9a2.json",
-      "component": "crests",
-      "vanillaSha256": "bb904642e0f293c86d3318d3f5c1a84ce1c68fd788424032478c38d3d83b6b3d",
-      "vanillaSize": 943
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/essetif_arl.png",
-      "size": 990,
-      "sha256": "467dadb2aacab61e86ac1b6e16691c5d7ef9b5d87fc582fda7d92460f0764944",
-      "acceptedOriginalSha256": [
-        "4c429b34a2690bfcaa3f3c80197ba35b18f42d31234982abea0395d67c38d21c"
-      ],
-      "recipe": "crest-7c8c0c6e5136fcc4bce4.json",
-      "component": "crests",
-      "vanillaSha256": "4c429b34a2690bfcaa3f3c80197ba35b18f42d31234982abea0395d67c38d21c",
-      "vanillaSize": 1021
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/estrelavermelha_ser.png",
-      "size": 816,
-      "sha256": "7aa8f35e26d49ca651bdebd5f3fbb531baddfc5c87cd35be6213a84da8892925",
-      "acceptedOriginalSha256": [
-        "cd604b795b303ae0802ba69c24a87d94556fb2054bc7a15ecb5aa65eaa5b21a3"
-      ],
-      "recipe": "crest-3caa5418ef0aeceec5f6.json",
-      "component": "crests",
-      "vanillaSha256": "cd604b795b303ae0802ba69c24a87d94556fb2054bc7a15ecb5aa65eaa5b21a3",
-      "vanillaSize": 992
-    },
-    {
       "recipe": "crest-116b38b59415ea656e3a.json",
       "component": "crests",
       "operation": "add",
@@ -18405,19 +19005,6 @@
       "sha256": "b49f18a03b9014f382b6adb4f6376da165e5a56855ffb6bcd01a341d15050ccd",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/far_mar.png",
-      "size": 993,
-      "sha256": "3de9fab759f553b6e5ecb46d12b81032124ab0a41c29e3e2573e922e64fd5555",
-      "acceptedOriginalSha256": [
-        "f0890475a91a4e42ffc09610998ce0b1c24f0f346d9f52f02186803fadd28a83"
-      ],
-      "recipe": "crest-76ffc7f7105ca29c9efb.json",
-      "component": "crests",
-      "vanillaSha256": "f0890475a91a4e42ffc09610998ce0b1c24f0f346d9f52f02186803fadd28a83",
-      "vanillaSize": 754
     },
     {
       "recipe": "crest-b23870d559bd56e0e51b.json",
@@ -18460,19 +19047,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/fortaleza.png",
-      "size": 974,
-      "sha256": "28e208caaafaaf8e3c80db70cb7109f2d0820b0f9ac2da78ff1685b90bb9ea9b",
-      "acceptedOriginalSha256": [
-        "223808e4319e362b754ff5ae7f2a20800d148074fa4e91ba3e067d55cc8f7a07"
-      ],
-      "recipe": "crest-ddc1a410624743dab94b.json",
-      "component": "crests",
-      "vanillaSha256": "223808e4319e362b754ff5ae7f2a20800d148074fa4e91ba3e067d55cc8f7a07",
-      "vanillaSize": 708
-    },
-    {
       "recipe": "crest-c924beadb914861b5a59.json",
       "component": "crests",
       "operation": "add",
@@ -18501,19 +19075,6 @@
       "sha256": "ef0512254f99c8d3a6ae59c1d74f81dc1b405c3d766f27445da6becd13d4672e",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/gambaosaka_jap.png",
-      "size": 852,
-      "sha256": "49748cfdf98f9f2624359247a2c4679a0365bff96348ac6db13e28047473e3c2",
-      "acceptedOriginalSha256": [
-        "dbbae8e823d014d89ef930dba104d98f3ad185ba3b94a78337aa745df2803790"
-      ],
-      "recipe": "crest-bf335ab74842ee58d688.json",
-      "component": "crests",
-      "vanillaSha256": "dbbae8e823d014d89ef930dba104d98f3ad185ba3b94a78337aa745df2803790",
-      "vanillaSize": 1186
     },
     {
       "recipe": "crest-ac58d4a31eedb8ec8474.json",
@@ -18576,19 +19137,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/girona_esp.png",
-      "size": 1142,
-      "sha256": "6f227597373d345b23dc791c954276c96567204c77cad0a8cda3870352168a4e",
-      "acceptedOriginalSha256": [
-        "0cf794ade2387865bb27699ddce0d4d4144fe2a9a0c7b5088cff5e5e7494b194"
-      ],
-      "recipe": "crest-c638ed57675d3592024a.json",
-      "component": "crests",
-      "vanillaSha256": "0cf794ade2387865bb27699ddce0d4d4144fe2a9a0c7b5088cff5e5e7494b194",
-      "vanillaSize": 924
-    },
-    {
       "recipe": "crest-8bc7573b1d44f35f913d.json",
       "component": "crests",
       "operation": "add",
@@ -18597,32 +19145,6 @@
       "sha256": "62f561489cd32e50cacdf6c6ea8553377d51bd355f11b439f316f67524f317f2",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/goias.png",
-      "size": 1200,
-      "sha256": "baea66638eab2c7c5c592ea2a7e5f78cd83d0640c84fb6a34880614bd85828b7",
-      "acceptedOriginalSha256": [
-        "3a0bee26cd63d03c4bce4f413df9eb4372ba2711fe2a927792046ab90be5e487"
-      ],
-      "recipe": "crest-c752cb5dcdeadbb732f8.json",
-      "component": "crests",
-      "vanillaSha256": "3a0bee26cd63d03c4bce4f413df9eb4372ba2711fe2a927792046ab90be5e487",
-      "vanillaSize": 1130
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/gremioanapolisgo_bra.png",
-      "size": 1186,
-      "sha256": "dacc07617ba6ac133e80b3cdfbedb6764a4f1d653ce9de313b775eae0a68b357",
-      "acceptedOriginalSha256": [
-        "619bc0f0149235a0c02f23b108aa8517b9f8586e55d33b11593b340f2d9d4aa1"
-      ],
-      "recipe": "crest-a65653a279a3e5e8eba3.json",
-      "component": "crests",
-      "vanillaSha256": "619bc0f0149235a0c02f23b108aa8517b9f8586e55d33b11593b340f2d9d4aa1",
-      "vanillaSize": 993
     },
     {
       "recipe": "crest-4b7d1e44253fc522fac3.json",
@@ -18645,19 +19167,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/guaranyrs_bra.png",
-      "size": 967,
-      "sha256": "654d55039e06cc0e116c6f992706c14ad0e9eafe5d218f0d4521a9ec946f4f16",
-      "acceptedOriginalSha256": [
-        "69119a94c3a3248721cbac3892b77d7f9665a9eaea612c08c490c19fb6f533af"
-      ],
-      "recipe": "crest-520fa38e35242f34be05.json",
-      "component": "crests",
-      "vanillaSha256": "69119a94c3a3248721cbac3892b77d7f9665a9eaea612c08c490c19fb6f533af",
-      "vanillaSize": 946
-    },
-    {
       "recipe": "crest-271978a1bfaf2cbf3cba.json",
       "component": "crests",
       "operation": "add",
@@ -18678,32 +19187,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/hanoi_vie.png",
-      "size": 1208,
-      "sha256": "fe045aee79e97fcc096271a8fc501c70fcf39538b89370f33626b6bb2251cb5c",
-      "acceptedOriginalSha256": [
-        "c8c1615757c5b73babaa7d8153d6fe1fa14ff50ee8ab9ad0b61ba35e690ab24a"
-      ],
-      "recipe": "crest-3661e356356a75f63feb.json",
-      "component": "crests",
-      "vanillaSha256": "c8c1615757c5b73babaa7d8153d6fe1fa14ff50ee8ab9ad0b61ba35e690ab24a",
-      "vanillaSize": 963
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/helsinki_fin.png",
-      "size": 1115,
-      "sha256": "55af28c6a86f2ed5ec8a43b5a68a310f2fe0082c4ea4690ca82086e6c6580ee9",
-      "acceptedOriginalSha256": [
-        "55ab4465c0f9894ffa844827887e5244a467a66d91897dd0949d3a26566bc03e"
-      ],
-      "recipe": "crest-f41bfa64fb25a8b5188c.json",
-      "component": "crests",
-      "vanillaSha256": "55ab4465c0f9894ffa844827887e5244a467a66d91897dd0949d3a26566bc03e",
-      "vanillaSize": 1031
-    },
-    {
       "recipe": "crest-3395b2aec8e8f7d7776f.json",
       "component": "crests",
       "operation": "add",
@@ -18722,19 +19205,6 @@
       "sha256": "f907a89c9286fccb221173076ac94a11b9e7d8223d0b82687f4c78d074dc55f2",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/iguatu_ce.png",
-      "size": 1203,
-      "sha256": "c1f2cbaf11343c2b5893cdc1cea2c1c22954e1109cb45215b27b463d6f1ed170",
-      "acceptedOriginalSha256": [
-        "8a08e74d9968fc897f9f802e94da1423a162391c64286ee251e857f647c4cc10"
-      ],
-      "recipe": "crest-a2920224a85f6b316307.json",
-      "component": "crests",
-      "vanillaSha256": "8a08e74d9968fc897f9f802e94da1423a162391c64286ee251e857f647c4cc10",
-      "vanillaSize": 887
     },
     {
       "recipe": "crest-deb293c6f0d75b1dfff0.json",
@@ -18817,32 +19287,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/itabaiana_se.png",
-      "size": 1022,
-      "sha256": "691986e2596cf11e1e35b48695d868f6ed971ea49d347c3b53583fa278c85d30",
-      "acceptedOriginalSha256": [
-        "0aedbaf80f3025f234658911f1850e43cba1216f63016158d17130d6018b2384"
-      ],
-      "recipe": "crest-df112e08641cfaecd63a.json",
-      "component": "crests",
-      "vanillaSha256": "0aedbaf80f3025f234658911f1850e43cba1216f63016158d17130d6018b2384",
-      "vanillaSize": 697
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/ituano_sp.png",
-      "size": 936,
-      "sha256": "92d2654f9d4003f616ddd677a5f426095e1fa5cb6445ed228c57f0a9992d357d",
-      "acceptedOriginalSha256": [
-        "a0aeb7e18ca2b26685c9982b85e982522a88be13084d7079cc8f076bcac8b35a"
-      ],
-      "recipe": "crest-24b03eb0d66d572008ea.json",
-      "component": "crests",
-      "vanillaSha256": "a0aeb7e18ca2b26685c9982b85e982522a88be13084d7079cc8f076bcac8b35a",
-      "vanillaSize": 771
-    },
-    {
       "recipe": "crest-6bc5541f239bf51f3ab6.json",
       "component": "crests",
       "operation": "add",
@@ -18871,19 +19315,6 @@
       "sha256": "12e695c2160ece6d5c6f6b3f71201f5ff3be988d2c2f366ad0e6c1ecadcccb7c",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/juazeirense_ba.png",
-      "size": 886,
-      "sha256": "264a2ceabceec06dd48af03aeb34dd29352d66e4346cb846d00fd9e4d082a05b",
-      "acceptedOriginalSha256": [
-        "60ff6ad516b94165240e8289c5acb43d2205286311394cc627e13671a55bbbc3"
-      ],
-      "recipe": "crest-d83e2eeda1cf81f2b04c.json",
-      "component": "crests",
-      "vanillaSha256": "60ff6ad516b94165240e8289c5acb43d2205286311394cc627e13671a55bbbc3",
-      "vanillaSize": 865
     },
     {
       "recipe": "crest-ecdb9598f48389552789.json",
@@ -18926,32 +19357,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/kitchee_hkg.png",
-      "size": 977,
-      "sha256": "790158d1a1041abc698894075be2f5af90e95c2748acb85ba34a4f277fdda56a",
-      "acceptedOriginalSha256": [
-        "701caedbaefa7cd7e16dd11c423e5fd2102981d9f9201fd435acab6270b5192e"
-      ],
-      "recipe": "crest-30a635a8714d61c7c32a.json",
-      "component": "crests",
-      "vanillaSha256": "701caedbaefa7cd7e16dd11c423e5fd2102981d9f9201fd435acab6270b5192e",
-      "vanillaSize": 1081
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/lagarto_se.png",
-      "size": 915,
-      "sha256": "01dff70848bf5bd2e1f849ad6ddb98507fada3562e2381709e10a840ac115683",
-      "acceptedOriginalSha256": [
-        "07e7ab39a178beee2bb7d3ae0ba1515bf58fd7dd5e6b2d4bb80265ef4fb6f7f1"
-      ],
-      "recipe": "crest-879abb6a2d483223ceea.json",
-      "component": "crests",
-      "vanillaSha256": "07e7ab39a178beee2bb7d3ae0ba1515bf58fd7dd5e6b2d4bb80265ef4fb6f7f1",
-      "vanillaSize": 865
-    },
-    {
       "recipe": "crest-99eb8c33826986280d97.json",
       "component": "crests",
       "operation": "add",
@@ -18960,32 +19365,6 @@
       "sha256": "538487c55a215bf9474411cac5fa9774c1df027522b8e8fffcc60068d7b3f12e",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/ldu_equ.png",
-      "size": 1032,
-      "sha256": "7440d6d505154f672f10d8a0b5a127bb5252572d2c284faf55027b96240f1a43",
-      "acceptedOriginalSha256": [
-        "d3d8271b2f91ef480a180f0172dd37a2de1272e1ece3e739a254d7840185fd8b"
-      ],
-      "recipe": "crest-cc9b2a3f6ee8e095c450.json",
-      "component": "crests",
-      "vanillaSha256": "d3d8271b2f91ef480a180f0172dd37a2de1272e1ece3e739a254d7840185fd8b",
-      "vanillaSize": 781
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/leipzig_ale.png",
-      "size": 840,
-      "sha256": "2a2e0150701fc6aac4b3f01fa362079a423bfbba0976ada08a9698594f316591",
-      "acceptedOriginalSha256": [
-        "2c83239c8a84975eafae275589d37f1b03c91c59e60c2b862bacc3f42471eb9e"
-      ],
-      "recipe": "crest-6b9f32a809ce63caec35.json",
-      "component": "crests",
-      "vanillaSha256": "2c83239c8a84975eafae275589d37f1b03c91c59e60c2b862bacc3f42471eb9e",
-      "vanillaSize": 903
     },
     {
       "recipe": "crest-43d9a754c23a96d42d49.json",
@@ -19028,19 +19407,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/liverpool_ing.png",
-      "size": 659,
-      "sha256": "174f1642d7179319d48558665ab49a6d79c38c1f6c03ec1003b2c1008713791e",
-      "acceptedOriginalSha256": [
-        "ed2d6de725f822a5598c377536393d760f6f386928b3e3705b23fb64e5bc290b"
-      ],
-      "recipe": "crest-7b984860be5b378d20a2.json",
-      "component": "crests",
-      "vanillaSha256": "ed2d6de725f822a5598c377536393d760f6f386928b3e3705b23fb64e5bc290b",
-      "vanillaSize": 940
-    },
-    {
       "recipe": "crest-cb6ca79e51e0f1f84f03.json",
       "component": "crests",
       "operation": "add",
@@ -19049,19 +19415,6 @@
       "sha256": "ebeb3a68208613ff30bbc5a6cf8ae5607e6e9555966db4afebdcd68e0210d093",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/lokoplovdiv_bul.png",
-      "size": 874,
-      "sha256": "b6b8467219c90501033f4cd046eb91cf00d6c4645f31c6ce2a6ac41adedc93e9",
-      "acceptedOriginalSha256": [
-        "49eb8f874d7860df52daf245a5e8194c105f54ab9ff5967d6a0daa9946201081"
-      ],
-      "recipe": "crest-c2a4f9409f07b1ce4725.json",
-      "component": "crests",
-      "vanillaSha256": "49eb8f874d7860df52daf245a5e8194c105f54ab9ff5967d6a0daa9946201081",
-      "vanillaSize": 989
     },
     {
       "recipe": "crest-e6af4e03b70e19c89e8e.json",
@@ -19134,45 +19487,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/nagoyagrampus_jap.png",
-      "size": 970,
-      "sha256": "2a5064b9226d84875dc129553e26d54e9c78557ca77eb8d572369f8f63452512",
-      "acceptedOriginalSha256": [
-        "fb48919fe076a1f08c3aeac8ea11d908abfac863ac20aeda8b923b6633cadc94"
-      ],
-      "recipe": "crest-1a1a25a844c320666be2.json",
-      "component": "crests",
-      "vanillaSha256": "fb48919fe076a1f08c3aeac8ea11d908abfac863ac20aeda8b923b6633cadc94",
-      "vanillaSize": 915
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/napoli_it.png",
-      "size": 1020,
-      "sha256": "c8f83193e926ccb8f98600f1c54d10ff1bf463da58cd20f61cccfdd810029b04",
-      "acceptedOriginalSha256": [
-        "cdc2c0a1f7c08daaec2f779092e78ecc813339e1512defbfca69310df0eb7907"
-      ],
-      "recipe": "crest-b3137d65f77a55989b8f.json",
-      "component": "crests",
-      "vanillaSha256": "cdc2c0a1f7c08daaec2f779092e78ecc813339e1512defbfca69310df0eb7907",
-      "vanillaSize": 1043
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/neftci_aze.png",
-      "size": 690,
-      "sha256": "4f64d3c06279c6e2760b0d5c96fd29a067534b5bf479a7ca7fbf657c31705584",
-      "acceptedOriginalSha256": [
-        "505ebeb0ca84b65467b9688904baac655ea3b26422af49df3048250a13513c15"
-      ],
-      "recipe": "crest-0c95ccfc1a907617f6db.json",
-      "component": "crests",
-      "vanillaSha256": "505ebeb0ca84b65467b9688904baac655ea3b26422af49df3048250a13513c15",
-      "vanillaSize": 869
-    },
-    {
       "recipe": "crest-e838ee5d2615c3061f29.json",
       "component": "crests",
       "operation": "add",
@@ -19191,32 +19505,6 @@
       "sha256": "6f8cdf8a3883bd0ea835494a56285698da394d6098567df47feb805511d114e3",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/olympiakos_gre.png",
-      "size": 1013,
-      "sha256": "890674c3c43cbccbf79baf55b431c34dafeee45416ce8c5900101d2b293d2e2c",
-      "acceptedOriginalSha256": [
-        "5b455307df575fac37e4b323eab52fad346f5c0f0384c84940355e27cf226cd7"
-      ],
-      "recipe": "crest-bbd4bc1c7099fa6ef1e7.json",
-      "component": "crests",
-      "vanillaSha256": "5b455307df575fac37e4b323eab52fad346f5c0f0384c84940355e27cf226cd7",
-      "vanillaSize": 1089
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/olympiquemarseile_fra.png",
-      "size": 1174,
-      "sha256": "4f3bbadbbc7954e08a2c637045926614959058081c3223d9bbfb55df0a15cbcd",
-      "acceptedOriginalSha256": [
-        "57772ad4a47ee4a3d2ac7b143c54ac5e80ec5954eb6dd97899db229a02577d9b"
-      ],
-      "recipe": "crest-d86c70e0c6d94e36bfc4.json",
-      "component": "crests",
-      "vanillaSha256": "57772ad4a47ee4a3d2ac7b143c54ac5e80ec5954eb6dd97899db229a02577d9b",
-      "vanillaSize": 929
     },
     {
       "recipe": "crest-51f70c355a06f1490b7d.json",
@@ -19269,45 +19557,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/palmeirrn_bra.png",
-      "size": 1221,
-      "sha256": "8860250a63380cdb3616f017b4cafba3f2e785095f43fb93a16bd2220506b3da",
-      "acceptedOriginalSha256": [
-        "e51007e5a897b3219c6c7773f94f194b3004457d10f7d0343a867913551eac59"
-      ],
-      "recipe": "crest-4adb92524c9f505977ee.json",
-      "component": "crests",
-      "vanillaSha256": "e51007e5a897b3219c6c7773f94f194b3004457d10f7d0343a867913551eac59",
-      "vanillaSize": 902
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/partizan_ser.png",
-      "size": 921,
-      "sha256": "ddb0e2d86597ead30cbcef822ad6dd60922b6fe75fd99cb4c4b4176e978648b5",
-      "acceptedOriginalSha256": [
-        "c5b86299589b54eb7551a48455f2c9869a7e711ada41fdc3c3e930c6de9d0c29"
-      ],
-      "recipe": "crest-7524633913375085dd81.json",
-      "component": "crests",
-      "vanillaSha256": "c5b86299589b54eb7551a48455f2c9869a7e711ada41fdc3c3e930c6de9d0c29",
-      "vanillaSize": 877
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/patrocinense_mg.png",
-      "size": 761,
-      "sha256": "3e88564eccb14939a549c6583a1b9c5b9b94435fbd3b3bf7fe5aaa325b1669f4",
-      "acceptedOriginalSha256": [
-        "8588e6fd8516d853a4fe6f550166c22044fb3d62576b48723b5b4fbb28707cc5"
-      ],
-      "recipe": "crest-2c96b07aa789f2d8f0e7.json",
-      "component": "crests",
-      "vanillaSha256": "8588e6fd8516d853a4fe6f550166c22044fb3d62576b48723b5b4fbb28707cc5",
-      "vanillaSize": 829
-    },
-    {
       "recipe": "crest-bfee5214529d2abac5c4.json",
       "component": "crests",
       "operation": "add",
@@ -19316,32 +19565,6 @@
       "sha256": "fd02ca141e8d1267bde70bffd23054931945be08e2d71b22d2cfa4ab999158d1",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/penarol_am.png",
-      "size": 1134,
-      "sha256": "15f7b16425ad9f0ec22eb50a7bcc130db79977f3d2f6398e122e1e7bbc74777f",
-      "acceptedOriginalSha256": [
-        "87b9e62827db36356fe146d07c0a5e824ed0c860d5a537f4ef8f85f56982abc5"
-      ],
-      "recipe": "crest-2f3c56e702190fe7eea1.json",
-      "component": "crests",
-      "vanillaSha256": "87b9e62827db36356fe146d07c0a5e824ed0c860d5a537f4ef8f85f56982abc5",
-      "vanillaSize": 977
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/persepolis_irn.png",
-      "size": 1018,
-      "sha256": "8d220c749bc4cf3db2f49889e49cbe6a1dd06085eae9a06b3a1b55d5a42c5050",
-      "acceptedOriginalSha256": [
-        "7904a967f1e3486d504dd87b55ab55d9b43e8c47f9181148809f596c8f8c15f5"
-      ],
-      "recipe": "crest-94561bbd1901faf4115a.json",
-      "component": "crests",
-      "vanillaSha256": "7904a967f1e3486d504dd87b55ab55d9b43e8c47f9181148809f596c8f8c15f5",
-      "vanillaSize": 958
     },
     {
       "recipe": "crest-603bb1c67bb09c5e6bc0.json",
@@ -19422,19 +19645,6 @@
       "sha256": "7348d36bf7546edfe2cb62dc6989fe490f433a33a2e7f79423d109f16a047772",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/randers_den.png",
-      "size": 923,
-      "sha256": "79f0e2bec05c3854e47777ac87e0ae11393d6075ab4874a21e0c5ee93418d2f3",
-      "acceptedOriginalSha256": [
-        "dbcfd3559cddc51ca0c1595ea8808ca464a0abfc63d47932971d347b8a36713b"
-      ],
-      "recipe": "crest-79e891ca726316760fba.json",
-      "component": "crests",
-      "vanillaSha256": "dbcfd3559cddc51ca0c1595ea8808ca464a0abfc63d47932971d347b8a36713b",
-      "vanillaSize": 1132
     },
     {
       "recipe": "crest-58548714977a913fc927.json",
@@ -19545,32 +19755,6 @@
       "sha256": "44777370ad061af9ac62d83b16aff622237f11d958613b5294e99d8af9bede13",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/retrope_bra.png",
-      "size": 1042,
-      "sha256": "a9dca30959655de96c96e85e6f7bf4e9757dd16e5e5ef07738cf10fec6ac91be",
-      "acceptedOriginalSha256": [
-        "cef2fcf9588102388b988d9d4375d2db2ff61ca039a81b679a0a9a54eb2daa36"
-      ],
-      "recipe": "crest-0d046a12246c56f58993.json",
-      "component": "crests",
-      "vanillaSha256": "cef2fcf9588102388b988d9d4375d2db2ff61ca039a81b679a0a9a54eb2daa36",
-      "vanillaSize": 958
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/rfs_let.png",
-      "size": 1073,
-      "sha256": "3fbc356d98975019f7203f8580ba163c5594cf6312dc372318d760e34fa7cc30",
-      "acceptedOriginalSha256": [
-        "c106dbc199be7d15338e914df6c40be19a8c84f77c60c955a50923f78c01fce0"
-      ],
-      "recipe": "crest-c00ec4b1a31a736085dd.json",
-      "component": "crests",
-      "vanillaSha256": "c106dbc199be7d15338e914df6c40be19a8c84f77c60c955a50923f78c01fce0",
-      "vanillaSize": 1045
     },
     {
       "recipe": "crest-f676d2a63bc090b373d0.json",
@@ -19693,19 +19877,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/santos.png",
-      "size": 989,
-      "sha256": "0f718a4641ef279d1740192cb343a8d26db9d4b32700c60366a6a863385506a0",
-      "acceptedOriginalSha256": [
-        "b71e12e4abc31f51b5fa83611456cd5983d3d85d380633af883c4829fccced0e"
-      ],
-      "recipe": "crest-156a6f7d11ca880e9eef.json",
-      "component": "crests",
-      "vanillaSha256": "b71e12e4abc31f51b5fa83611456cd5983d3d85d380633af883c4829fccced0e",
-      "vanillaSize": 850
-    },
-    {
       "recipe": "crest-227afab36fdae3418fa1.json",
       "component": "crests",
       "operation": "add",
@@ -19714,19 +19885,6 @@
       "sha256": "ca7e579034ffa25556ef80c8608696d5dd2f457d0728857640dab164b1fb96e5",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/saocaetano_bra.png",
-      "size": 1047,
-      "sha256": "f88d2e0e5511450051dcc741c657c6d0e32e4a2b6b168fa10b2e26815a8505b6",
-      "acceptedOriginalSha256": [
-        "a52a31c5b4565f4188951532bae10394a362950816d260180b68c8600b504723"
-      ],
-      "recipe": "crest-0aa1fadf9ab1577d24da.json",
-      "component": "crests",
-      "vanillaSha256": "a52a31c5b4565f4188951532bae10394a362950816d260180b68c8600b504723",
-      "vanillaSize": 843
     },
     {
       "recipe": "crest-356244f2947a5de701e8.json",
@@ -19767,58 +19925,6 @@
       "sha256": "3f385fbd03abf9898d54608b135a02c4a841e6bcd198a363854b1763cf3b5dbf",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/slavia_cze.png",
-      "size": 812,
-      "sha256": "6b53c79842c63b83cd41b3dbd2c857201a8fb3de2e4d3f3672d779e30658f069",
-      "acceptedOriginalSha256": [
-        "805f286a6b7270af64911a2b696fe85333fb101f0e3c20bf39cf322d735190ec"
-      ],
-      "recipe": "crest-836aaf28ad9967323be0.json",
-      "component": "crests",
-      "vanillaSha256": "805f286a6b7270af64911a2b696fe85333fb101f0e3c20bf39cf322d735190ec",
-      "vanillaSize": 1076
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/slovanliberec_cze.png",
-      "size": 996,
-      "sha256": "82ecd513e15f861798190a8e37e39b418315d79fee028b681fa9badf7241f446",
-      "acceptedOriginalSha256": [
-        "9a6845f845bd9fe31b6fe29e033fdbad3d249d87b42acd4ba94c1807457a7546"
-      ],
-      "recipe": "crest-f6485ba7a88e2e966f34.json",
-      "component": "crests",
-      "vanillaSha256": "9a6845f845bd9fe31b6fe29e033fdbad3d249d87b42acd4ba94c1807457a7546",
-      "vanillaSize": 1023
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/sparta_tch.png",
-      "size": 1167,
-      "sha256": "966a1c4d4dd8ad9712f36362f48b552394b3bf2a9487390ee5dd560c560fe9dc",
-      "acceptedOriginalSha256": [
-        "39648cd047af12079c00a2bc7a727baa423efcd8442245b4347738343c155f2a"
-      ],
-      "recipe": "crest-cce1567396fc9ff328d9.json",
-      "component": "crests",
-      "vanillaSha256": "39648cd047af12079c00a2bc7a727baa423efcd8442245b4347738343c155f2a",
-      "vanillaSize": 1061
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/sport.png",
-      "size": 919,
-      "sha256": "ca5a7681ed8b4855131364971d70fff5a3c1748ba1b3fd15ee34c487a4625eb8",
-      "acceptedOriginalSha256": [
-        "f454e1ffbc4d926203323698b98fc3e434669912a4392046f028d653adbecc7a"
-      ],
-      "recipe": "crest-488375dabf40d3fe8b69.json",
-      "component": "crests",
-      "vanillaSha256": "f454e1ffbc4d926203323698b98fc3e434669912a4392046f028d653adbecc7a",
-      "vanillaSize": 886
     },
     {
       "recipe": "crest-e3e38b296a6f73ef90d2.json",
@@ -19921,19 +20027,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/steua_bucaresti_rom.png",
-      "size": 985,
-      "sha256": "da4ba32c4b8d1608b2f48b671761cba99fa2608a38956ed520792e35f6e96287",
-      "acceptedOriginalSha256": [
-        "9d936e58d839eba20eae43a452f1fcebf84b51b80ebe38c29eb6efb95653c09b"
-      ],
-      "recipe": "crest-80c5cae7bd97650ef88f.json",
-      "component": "crests",
-      "vanillaSha256": "9d936e58d839eba20eae43a452f1fcebf84b51b80ebe38c29eb6efb95653c09b",
-      "vanillaSize": 1126
-    },
-    {
       "recipe": "crest-656a61b160f6976b1e88.json",
       "component": "crests",
       "operation": "add",
@@ -19994,19 +20087,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/tottenhamhotspur_ing.png",
-      "size": 459,
-      "sha256": "d9a3e157c97cd26056543b53df0a1d712504ba4ce745a50c0a22e394fbc719e8",
-      "acceptedOriginalSha256": [
-        "4b1689a836e5a1f4b1b6dd15285df88ddcfe484dc2fd5ca7c24e2e3c5c586a68"
-      ],
-      "recipe": "crest-97a5de41683d9084d4af.json",
-      "component": "crests",
-      "vanillaSha256": "4b1689a836e5a1f4b1b6dd15285df88ddcfe484dc2fd5ca7c24e2e3c5c586a68",
-      "vanillaSize": 955
-    },
-    {
       "recipe": "crest-f81fab40adfdcace6bbe.json",
       "component": "crests",
       "operation": "add",
@@ -20047,19 +20127,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/ulsan_jap.png",
-      "size": 893,
-      "sha256": "4c90138510cdab05c264e4e92b6bb90d0eac1facdb625234fa7f8ae47e74c07b",
-      "acceptedOriginalSha256": [
-        "020e54f5f69457f298b396915d8bc62a3380411b245d99cd520b12890640bc67"
-      ],
-      "recipe": "crest-cb4621891890ea8af04b.json",
-      "component": "crests",
-      "vanillaSha256": "020e54f5f69457f298b396915d8bc62a3380411b245d99cd520b12890640bc67",
-      "vanillaSize": 922
-    },
-    {
       "recipe": "crest-ec399f6d91f852071361.json",
       "component": "crests",
       "operation": "add",
@@ -20068,19 +20135,6 @@
       "sha256": "a1c86ece6c79aef77ca146dc1ca5d2f1519b46b0e3edc3d115a234b6f35df26b",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/unionlacalera_chi.png",
-      "size": 886,
-      "sha256": "3892fe2a0b49550c013b075d323e3558eebd14707626cc1d4cb8e1c6bc2e767d",
-      "acceptedOriginalSha256": [
-        "882d6b7b349046b29a348f8f23a1dcdd5e41d3d9a30e4c1f323e91ef88a3520b"
-      ],
-      "recipe": "crest-c23ad85206c1ae7aa03a.json",
-      "component": "crests",
-      "vanillaSha256": "882d6b7b349046b29a348f8f23a1dcdd5e41d3d9a30e4c1f323e91ef88a3520b",
-      "vanillaSize": 1086
     },
     {
       "recipe": "crest-2f9521dd60b8d67d1dc0.json",
@@ -20123,19 +20177,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/valmiera_let.png",
-      "size": 543,
-      "sha256": "07aa96c11e23d964471594c0b3138866660548e46fd2786ce2daf7b144fce3ea",
-      "acceptedOriginalSha256": [
-        "797e7e7f0fd7624f94074da241b307c80d805d4223afba1a41f6a4508b199189"
-      ],
-      "recipe": "crest-e00d069485a215a0c194.json",
-      "component": "crests",
-      "vanillaSha256": "797e7e7f0fd7624f94074da241b307c80d805d4223afba1a41f6a4508b199189",
-      "vanillaSize": 951
-    },
-    {
       "recipe": "crest-458625820a4d4b2697ca.json",
       "component": "crests",
       "operation": "add",
@@ -20144,32 +20185,6 @@
       "sha256": "cceb41d114b5d0f4a1a7a93274da4f9fd2a1da2a5354acdd52a406026b7f5cf7",
       "acceptedOriginalSha256": [],
       "vanillaMissing": true
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/viettel_vie.png",
-      "size": 1121,
-      "sha256": "ed35a97b6bbfebb5ea19dc8b694679df07a80be327519b98a9ac81973e5e186a",
-      "acceptedOriginalSha256": [
-        "e94b67a0e60c4339d49fa508cd347d91ca0bb41fbebdd692f5feb7e0aff7653e"
-      ],
-      "recipe": "crest-74b308b3b942ffb4d786.json",
-      "component": "crests",
-      "vanillaSha256": "e94b67a0e60c4339d49fa508cd347d91ca0bb41fbebdd692f5feb7e0aff7653e",
-      "vanillaSize": 827
-    },
-    {
-      "operation": "replace",
-      "path": "teams/escudosMini/vikingur_isl.png",
-      "size": 871,
-      "sha256": "cc59a06618989572d4ed36a6719c3e69407a0c416d9b6a3ddc5cd81b056875fe",
-      "acceptedOriginalSha256": [
-        "d1950dbca8deda8dda0ba9077617a87febcf06519e3f5c2354c1f477362cb8bf"
-      ],
-      "recipe": "crest-82ebaa943607946ccb9c.json",
-      "component": "crests",
-      "vanillaSha256": "d1950dbca8deda8dda0ba9077617a87febcf06519e3f5c2354c1f477362cb8bf",
-      "vanillaSize": 1000
     },
     {
       "recipe": "crest-29450ab7ff1a91ed8a7e.json",
@@ -20202,19 +20217,6 @@
       "vanillaMissing": true
     },
     {
-      "operation": "replace",
-      "path": "teams/escudosMini/wac_mar.png",
-      "size": 1000,
-      "sha256": "4c6798c1e22a5ce9bcdc500b7cb5bb5dfd1ed90ca2fd91d46176f7d28aa41756",
-      "acceptedOriginalSha256": [
-        "7333996e42c5b6f9a243f1fec1028d1a91c027622e02c55be58a0dfb1123b63e"
-      ],
-      "recipe": "crest-13ac9184c803fffe4a59.json",
-      "component": "crests",
-      "vanillaSha256": "7333996e42c5b6f9a243f1fec1028d1a91c027622e02c55be58a0dfb1123b63e",
-      "vanillaSize": 1084
-    },
-    {
       "recipe": "crest-8a85c8244214033ed7e8.json",
       "component": "crests",
       "operation": "add",
@@ -20239,21 +20241,18 @@
     "schemaVersion": 2,
     "originalExecutableSha256": "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
     "liveExecutableSha256": [
-      "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
       "26be851a51afbd6af0f0a50fec7744826b114700acf4d28459a559c659375f67",
-      "3237e2ceaf56f81b14614109128a5133ee69db0fe954f738cd642806da09c7d0",
+      "b5a76a87142bb887e5a7575e01662f37360e0dda8beebfe693c44effc96dab5a",
       "d2d6b209333b661cbcf124353c8a27691c0eba5046b2c1a91b5632968d1abaa5",
-      "d330a79a396ce24b509dec508a224b12e237eeb8e6c049040f8fa8f6be656955",
-      "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414"
+      "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa"
     ],
     "liveOnlyExecutableSha256": [
-      "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
-      "d330a79a396ce24b509dec508a224b12e237eeb8e6c049040f8fa8f6be656955"
+      "26be851a51afbd6af0f0a50fec7744826b114700acf4d28459a559c659375f67"
     ],
     "executables": {
       "patch+live": {
-        "sha256": "d2d6b209333b661cbcf124353c8a27691c0eba5046b2c1a91b5632968d1abaa5",
-        "size": 7288692,
+        "sha256": "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa",
+        "size": 7326883,
         "recipe": "bf22-23.exe.json"
       },
       "patch": {
@@ -20270,23 +20269,23 @@
           "b572ab3370daa18a8753d5f6c9a4687fba6f5785a2be85ec3558bb5732179507",
           "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
           "3237e2ceaf56f81b14614109128a5133ee69db0fe954f738cd642806da09c7d0",
-          "d2d6b209333b661cbcf124353c8a27691c0eba5046b2c1a91b5632968d1abaa5"
+          "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa"
         ]
       },
       "live": {
-        "sha256": "26be851a51afbd6af0f0a50fec7744826b114700acf4d28459a559c659375f67",
-        "size": 7442936,
+        "sha256": "b5a76a87142bb887e5a7575e01662f37360e0dda8beebfe693c44effc96dab5a",
+        "size": 7481127,
         "recipe": "bf22-23.exe.live.json",
         "acceptedOriginalSha256": [
           "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
-          "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
-          "d330a79a396ce24b509dec508a224b12e237eeb8e6c049040f8fa8f6be656955",
-          "d2d6b209333b661cbcf124353c8a27691c0eba5046b2c1a91b5632968d1abaa5",
+          "26be851a51afbd6af0f0a50fec7744826b114700acf4d28459a559c659375f67",
+          "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa",
           "8193758a822282588548b263c5e29772bbb25e8d905fa882b21e2e5ce38ca119"
         ]
       }
     },
     "seasonExecutableSha256": [
+      "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
       "2159798376f670db9a99a19c85fd4cba3bbd9128f0a4b3c8b9ffb4b61d189d4a",
       "2e4aaa4d5db93603546d5528455657e5ea81814600d4d00c5d9b850efd5fe604",
       "31383d9d7085980be8b8b156546f1c068de873c7de4b03ee717e3a7f74f0c87b",
@@ -20301,15 +20300,18 @@
       "bcdc27a44985ca01a37fab50e73d587d78b171814f53f045cb51dfc6c0647f6c",
       "d2d6b209333b661cbcf124353c8a27691c0eba5046b2c1a91b5632968d1abaa5",
       "d2e69ca3154ea998b7b6d4ae62ab4baef1d56beb68768cf82e46044c90fc32f3",
+      "d330a79a396ce24b509dec508a224b12e237eeb8e6c049040f8fa8f6be656955",
+      "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa",
       "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414"
     ],
     "variants": {
       "full": {
-        "sha256": "d2d6b209333b661cbcf124353c8a27691c0eba5046b2c1a91b5632968d1abaa5",
-        "size": 7288692,
+        "sha256": "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa",
+        "size": 7326883,
         "recipe": "bf22-23.exe.json",
         "acceptedOriginalSha256": [
           "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
+          "d2d6b209333b661cbcf124353c8a27691c0eba5046b2c1a91b5632968d1abaa5",
           "3237e2ceaf56f81b14614109128a5133ee69db0fe954f738cd642806da09c7d0",
           "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414",
           "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
@@ -20326,7 +20328,8 @@
           "2159798376f670db9a99a19c85fd4cba3bbd9128f0a4b3c8b9ffb4b61d189d4a",
           "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
           "d330a79a396ce24b509dec508a224b12e237eeb8e6c049040f8fa8f6be656955",
-          "26be851a51afbd6af0f0a50fec7744826b114700acf4d28459a559c659375f67"
+          "26be851a51afbd6af0f0a50fec7744826b114700acf4d28459a559c659375f67",
+          "b5a76a87142bb887e5a7575e01662f37360e0dda8beebfe693c44effc96dab5a"
         ]
       },
       "season": {
@@ -20343,18 +20346,17 @@
           "b572ab3370daa18a8753d5f6c9a4687fba6f5785a2be85ec3558bb5732179507",
           "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
           "3237e2ceaf56f81b14614109128a5133ee69db0fe954f738cd642806da09c7d0",
-          "d2d6b209333b661cbcf124353c8a27691c0eba5046b2c1a91b5632968d1abaa5"
+          "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa"
         ]
       },
       "live": {
-        "sha256": "26be851a51afbd6af0f0a50fec7744826b114700acf4d28459a559c659375f67",
-        "size": 7442936,
+        "sha256": "b5a76a87142bb887e5a7575e01662f37360e0dda8beebfe693c44effc96dab5a",
+        "size": 7481127,
         "recipe": "bf22-23.exe.live.json",
         "acceptedOriginalSha256": [
           "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
-          "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
-          "d330a79a396ce24b509dec508a224b12e237eeb8e6c049040f8fa8f6be656955",
-          "d2d6b209333b661cbcf124353c8a27691c0eba5046b2c1a91b5632968d1abaa5",
+          "26be851a51afbd6af0f0a50fec7744826b114700acf4d28459a559c659375f67",
+          "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa",
           "8193758a822282588548b263c5e29772bbb25e8d905fa882b21e2e5ce38ca119"
         ]
       },
@@ -20363,9 +20365,9 @@
         "size": 7320384,
         "recipe": "bf22-23.exe.original.json",
         "acceptedOriginalSha256": [
-          "d2d6b209333b661cbcf124353c8a27691c0eba5046b2c1a91b5632968d1abaa5",
+          "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa",
           "8193758a822282588548b263c5e29772bbb25e8d905fa882b21e2e5ce38ca119",
-          "26be851a51afbd6af0f0a50fec7744826b114700acf4d28459a559c659375f67"
+          "b5a76a87142bb887e5a7575e01662f37360e0dda8beebfe693c44effc96dab5a"
         ]
       }
     }
