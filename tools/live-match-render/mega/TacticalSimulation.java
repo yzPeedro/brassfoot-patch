@@ -992,6 +992,16 @@ public final class TacticalSimulation {
         out.put("panelBoxBackPasses", Integer.valueOf(opt("boxBackPasses")));
         out.put("panelRealisticOuts", Integer.valueOf(opt("realisticOuts")));
         out.put("panelGoalKicksLost", Integer.valueOf(opt("goalKicksLost")));
+        try {
+            java.lang.reflect.Method totals = panel.getClass().getDeclaredMethod("liveStatTotals");
+            totals.setAccessible(true);
+            int[] t = (int[]) totals.invoke(panel);
+            String[] names = {"liveShotsHome", "liveShotsAway", "liveOnTargetHome", "liveOnTargetAway",
+                    "liveOffTargetHome", "liveOffTargetAway", "liveTacklesHome", "liveTacklesAway",
+                    "livePassErrorsHome", "livePassErrorsAway", "livePossessionHome", "livePossessionAway"};
+            for (int k = 0; k < names.length && k < t.length; k++) out.put(names[k], Integer.valueOf(t[k]));
+        } catch (NoSuchMethodException ignored) {
+        }
         return out;
     }
 

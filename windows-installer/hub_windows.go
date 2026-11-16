@@ -15,7 +15,6 @@ import (
 	"strings"
 	"sync"
 	"syscall"
-	"time"
 	"unsafe"
 
 	webview2 "github.com/jchv/go-webview2"
@@ -198,6 +197,46 @@ func hubFeedInfo(loading bool) map[string]any {
 		info["requiresHub"] = feed.RequiresHub
 	}
 	return info
+}
+
+func hubFeedNow() map[string]any {
+	status := feedStatus()
+	return hubFeedInfo(!status.Loaded)
+}
+
+func hubLiveStats() map[string]any {
+	stats := map[string]any{
+		"available": false, "matchesWatched": 0, "totalMinutes": 0,
+		"goals": 0, "cards": 0, "lastSession": int64(0),
+	}
+	base := os.Getenv("LOCALAPPDATA")
+	if base == "" {
+		base = os.Getenv("USERPROFILE")
+	}
+	data, err := os.ReadFile(filepath.Join(base, "BrassfootPatch2026", "live-match-stats.json"))
+	if err != nil {
+		return stats
+	}
+	var parsed struct {
+		MatchesWatched int     `json:"matchesWatched"`
+		TotalMinutes   int64   `json:"totalMinutes"`
+		EventsByType   []int   `json:"eventsByType"`
+		LastSession    int64   `json:"lastSession"`
+	}
+	if json.Unmarshal(data, &parsed) != nil {
+		return stats
+	}
+	stats["available"] = true
+	stats["matchesWatched"] = parsed.MatchesWatched
+	stats["totalMinutes"] = parsed.TotalMinutes
+	stats["lastSession"] = parsed.LastSession
+	if len(parsed.EventsByType) > 0 {
+		stats["goals"] = parsed.EventsByType[0]
+	}
+	if len(parsed.EventsByType) > 1 {
+		stats["cards"] = parsed.EventsByType[1]
+	}
+	return stats
 }
 
 func hubCheckUpdates() error {
@@ -719,6 +758,7 @@ func runHub() bool {
 	_ = os.Setenv("WEBVIEW2_DEFAULT_BACKGROUND_COLOR", background)
 	showSplash(dark)
 	defer closeSplash()
+	go func() { _ = hubCheckUpdates() }()
 	_, _, width, height := hubWindowRect()
 	view := webview2.NewWithOptions(webview2.WebViewOptions{
 		DataPath:  hubDataPath(),
@@ -755,6 +795,8 @@ func runHub() bool {
 		"hubOpenLink":        hubOpenLink,
 		"hubCopyPix":         hubCopyPix,
 		"hubFeed":            func() map[string]any { return hubFeedInfo(false) },
+		"hubFeedNow":         hubFeedNow,
+		"hubLiveStats":       hubLiveStats,
 		"hubCheckUpdates":    hubCheckUpdates,
 		"hubUpdateHub":       hubUpdateHub,
 		"hubOpenExternal":    hubOpenExternal,
@@ -788,12 +830,6 @@ func runHub() bool {
 	if loadSettings().Notify {
 		go func() { _ = setNotifications(true) }()
 	}
-	go func() {
-		time.Sleep(300 * time.Millisecond)
-		if err := hubCheckUpdates(); err != nil {
-			hubRefresh()
-		}
-	}()
 	view.Run()
 	return true
 }

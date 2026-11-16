@@ -63,10 +63,17 @@ public final class EngineSimulation {
         public int[] kj() { return new int[] {0, 0, 0, 0}; }
     }
 
+    public static final class PlayerStats {
+        int saved;
+        public int tK() { return saved; }
+    }
+
     public static final class Player {
         private final String name;
         private final int position;
         private final int side;
+        final PlayerStats stats = new PlayerStats();
+        public PlayerStats gB() { return stats; }
         Player(String name, int position, int side) {
             this.name = name;
             this.position = position;
@@ -122,6 +129,12 @@ public final class EngineSimulation {
         final ArrayList<Object> awayPlayers = new ArrayList<Object>();
         final int[] score = new int[2];
         final int[] shots = new int[2];
+        final int[] onTarget = new int[2];
+        final int[] wide = new int[2];
+        final int[] tackles = new int[2];
+        final int[] passErrors = new int[2];
+        int scriptedSaved;
+        int scriptedWide;
         double shotRate;
         Random shotRandom = new Random(7);
         Match() {
@@ -135,14 +148,34 @@ public final class EngineSimulation {
         public ArrayList<Object> hE() { return actions; }
         public void q(int minute, int half) {
             calls.add(half + ":" + minute);
-            if (shotRate > 0 && shotRandom.nextDouble() < shotRate) shots[shotRandom.nextInt(2)]++;
+            if (shotRate > 0) {
+                int initiative = (minute + half) % 2;
+                if (shotRandom.nextDouble() < shotRate) {
+                    shots[initiative]++;
+                    if (shotRandom.nextInt(100) < 65) {
+                        onTarget[initiative]++;
+                        scriptedSaved++;
+                        ArrayList<Object> players = initiative == 0 ? homePlayers : awayPlayers;
+                        ((Player) players.get(1 + shotRandom.nextInt(players.size() - 1))).stats.saved++;
+                    } else {
+                        wide[initiative]++;
+                        scriptedWide++;
+                    }
+                } else if (shotRandom.nextBoolean()) {
+                    tackles[1 - initiative]++;
+                } else {
+                    passErrors[initiative]++;
+                }
+            }
             List<Act> list = script.get(half + ":" + minute);
             if (list != null) actions.addAll(list);
         }
         public int[] ib() { return new int[] {0, 0, 0}; }
         public int[] hA() { return shots.clone(); }
-        public int[] hB() { return new int[] {0, 0}; }
-        public int[] hC() { return new int[] {0, 0}; }
+        public int[] hB() { return tackles.clone(); }
+        public int[] hC() { return passErrors.clone(); }
+        public int[] hZ() { return onTarget.clone(); }
+        public int[] ia() { return wide.clone(); }
         public int[] hD() { return new int[] {0, 0}; }
         public int[] hz() { return new int[] {50, 50}; }
         public Object hc() { return home; }
@@ -246,9 +279,11 @@ public final class EngineSimulation {
     void qa() {
         Host.GT++;
         if (Host.dB == 1 && Host.GT > 48) {
+            LiveMatchPanel.flushDeferred(host);
             Host.GT = 0;
             Host.dB = 2;
         } else if (Host.dB == 2 && Host.GT >= 51) {
+            LiveMatchPanel.flushDeferred(host);
             host.GU = Boolean.TRUE;
             return;
         }
@@ -261,7 +296,11 @@ public final class EngineSimulation {
         for (Object value : new ArrayList<Object>(match.actions)) {
             Act act = (Act) value;
             if (act.done || act.half != Host.dB || act.minute > Host.GT) continue;
-            show(act);
+            try {
+                LiveMatchPanel.revealFromClock(host, host.vK.get(0), match, act, 0);
+            } catch (Throwable error) {
+                throw new RuntimeException(error);
+            }
         }
         if (SimClock.dialog) {
             restartAfterDialog = true;
@@ -374,8 +413,26 @@ public final class EngineSimulation {
     private Map<String, Object> run(String name, double seconds, long requestPauseAfterActive) throws Exception {
         int frames = (int) (seconds * 1000 / FRAME_MS);
         long firstActive = -1;
+        long simStart = SimClock.time;
+        long heldFrames = 0;
+        Map<String, Integer> heldWhy = new HashMap<String, Integer>();
         for (int k = 0; k < frames; k++) {
             frame();
+            if (b("clockHeld")) {
+                heldFrames++;
+                String why = (b("preEventActive") ? "pre " : "") + (b("engineEventOpen") ? "open " : "")
+                        + (i("pendingGoalStage") != 0 ? "goal " : "") + (i("penaltyPhase") != 0 ? "pen " : "")
+                        + (b("restartActive") ? "restart " : "") + (b("kickoffInProgress") ? "kick " : "")
+                        + (b("halfStartPending") ? "half " : "") + (i("cardFoulPhase") != 0 ? "card " : "")
+                        + (opt("injuryPhase") != 0 ? "inj " : "") + (((List<?>) get("queuedEngineActions")).isEmpty() ? "" : "queued ");
+                Integer n = heldWhy.get(why);
+                heldWhy.put(why, Integer.valueOf(n == null ? 1 : n.intValue() + 1));
+            }
+            if (name.equals(System.getProperty("trace2")) && k % 25 == 0) System.out.println(String.format(Locale.ROOT,
+                    "T t=%d GT=%d dB=%d restart=%s kick=%s halfPend=%s goal=%d queued=%d held=%s pre=%s open=%s timer=%s",
+                    SimClock.time, Host.GT, Host.dB, get("restartActive"), get("kickoffInProgress"), get("halfStartPending"),
+                    i("pendingGoalStage"), ((List<?>) get("queuedEngineActions")).size(), get("clockHeld"), get("preEventActive"),
+                    get("engineEventOpen"), host.GO.isRunning()) + " act=" + get("activeEngineAction") + " def=" + ((List<?>) get("deferredReveals")).size() + " key=" + get("plannedActionKey") + " ev=" + get("event"));
             if (System.getProperty("trace") != null && pauseRequestedAt > 0 && k % 30 == 0 && i("pendingGoalStage") == 1) System.out.println(String.format(Locale.ROOT, "HURRY t=%d stage=%d var=%d poss=%d/%d actor=%d flight=%s loose=%s esc=%d", SimClock.time - pauseRequestedAt, i("pendingGoalStage"), i("goalVariant"), i("possessingSide"), i("possessingPlayer"), i("pendingGoalActor"), get("ballInFlight"), get("looseBall"), i("escalation")));
             if (requestPauseAfterActive > 0 && pauseRequestedAt < 0) {
                 boolean building = i("pendingGoalStage") == 1 || i("cardFoulPhase") == 1 || opt("injuryPhase") == 1;
@@ -486,6 +543,31 @@ public final class EngineSimulation {
             out.put("twinsPlayed", Integer.valueOf(opt("twinsPlayed")));
         }
         out.put("panelRuleViolations", Integer.valueOf(opt("ruleViolations")));
+        out.put("matchSimSeconds", Double.valueOf((SimClock.time - simStart) / 1000.0));
+        out.put("heldSeconds", Double.valueOf(heldFrames * FRAME_MS / 1000.0));
+        out.put("heldWhy", heldWhy.toString());
+        out.put("engineSavedShots", Integer.valueOf(match.scriptedSaved));
+        out.put("engineWideShots", Integer.valueOf(match.scriptedWide));
+        out.put("engineShotsExpected", Integer.valueOf(opt("engineShotsExpected")));
+        out.put("engineShotsShown", Integer.valueOf(opt("engineShotsShown")));
+        out.put("engineShotsExpired", Integer.valueOf(opt("engineShotsExpired")));
+        out.put("unscheduledShots", Integer.valueOf(opt("unscheduledShots")));
+        out.put("engineShotsOverwritten", Integer.valueOf(opt("engineShotsOverwritten")));
+        out.put("shotCueStarts", Integer.valueOf(opt("shotCueStarts")));
+        for (String k : new String[] {"shotCuesQueued", "shotCuesDropped", "shotCuesLate", "shotCuesCapture"}) out.put(k, Integer.valueOf(opt(k)));
+        out.put("boxShotsDenied", Integer.valueOf(opt("boxShotsDenied")));
+        try {
+            java.lang.reflect.Method totals = LiveMatchPanel.class.getDeclaredMethod("liveStatTotals");
+            totals.setAccessible(true);
+            int[] t = (int[]) totals.invoke(panel);
+            out.put("liveShots", Integer.valueOf(t[0] + t[1]));
+            out.put("liveOnTarget", Integer.valueOf(t[2] + t[3]));
+            out.put("liveOffTarget", Integer.valueOf(t[4] + t[5]));
+            out.put("liveTackles", Integer.valueOf(t[6] + t[7]));
+            out.put("livePassErrors", Integer.valueOf(t[8] + t[9]));
+            out.put("livePossessionHome", Integer.valueOf(t[10]));
+        } catch (Exception ignored) {
+        }
         out.put("detail", events);
         return out;
     }
