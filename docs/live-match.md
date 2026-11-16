@@ -23,7 +23,7 @@ Informações do jogo usadas pelo painel:
 
 ## Integração com o jogo
 
-O patch é aplicado por [`tools/patch_live_match_view.py`](../tools/patch_live_match_view.py), que compila os fontes de [`tools/live-match-view-src/`](../tools/live-match-view-src/) e altera somente a classe da tela de partida (`a/dV.class`) dentro do executável, além de adicionar as classes do pacote `mega`:
+O patch é aplicado por [`tools/patch_live_match_view.py`](../tools/patch_live_match_view.py), que compila os fontes de [`tools/live-match-view-src/`](../tools/live-match-view-src/) e altera dentro do executável a classe da tela de partida (`a/dV.class`) e as três telas que exibem as estatísticas da partida (`a/cD.class`, `a/dq.class` e `a/hk.class`), além de adicionar as classes do pacote `mega`:
 
 | Ponto de integração | O que acontece |
 |---|---|
@@ -31,6 +31,7 @@ O patch é aplicado por [`tools/patch_live_match_view.py`](../tools/patch_live_m
 | Passo do minuto | A chamada ao passo de simulação do minuto passa por `LiveMatchPanel.engineStep`. O painel executa o mesmo método do jogo um minuto antes, uma única vez, para conhecer os lances antes de exibi-los; quando o temporizador do jogo chega ao minuto, o passo já executado é pulado. O passo do minuto 0 do 2º tempo, que o jogo roda junto com o intervalo, é adiado para a entrada dos times, sempre antes do minuto 1 e na mesma ordem |
 | Exibição do lance | No clímax de cada lance o painel chama o método público da tela de partida que exibe um único lance (placar, som, texto e, quando o jogo prevê, a tela de substituição). É o mesmo método que o jogo usa ao virar o minuto; o lance fica marcado como exibido e o jogo não o repete |
 | Cobrança de pênalti | `LiveMatchPanel.beforePenaltyKick` anima a preparação da cobrança; o resultado continua sendo decidido pela tela original de pênalti |
+| Estatísticas exibidas | Nas telas de partida, de pausa, de detalhes e de fim de rodada, as leituras de posse, finalizações, chutes no gol e para fora, desarmes e erros de passe passam por `LiveMatchPanel.stat*`. Ver [Estatísticas da partida](#estatísticas-da-partida) |
 
 O transformador ([`LiveMatchTransformer.java`](../tools/live-match-view-src/LiveMatchTransformer.java)) usa ASM e confere o SHA-256 da classe original antes de alterar qualquer coisa. O patch aceita dois executáveis de origem:
 
@@ -43,6 +44,22 @@ O transformador ([`LiveMatchTransformer.java`](../tools/live-match-view-src/Live
 python tools/patch_live_match_view.py --source <bf22-23.exe> --output <pasta>/bf22-23.exe
 ```
 
+## Estatísticas da partida
+
+As estatísticas que o jogador vê contam o que aconteceu no campo animado, não os sorteios do motor:
+
+| Estatística | Como o campo conta |
+|---|---|
+| Posse de bola | Tempo com a bola em jogo de cada time; paralisações, reposições e entrada dos times não contam |
+| Finalizações | Todo chute mostrado: jogada, gol, pênalti, falta direta e escanteio direto |
+| No gol / fora | No gol: gol, defesa do goleiro ou bola espalmada. Fora: bola para fora ou na trave. Chute travado por defensor ou barreira conta só como finalização |
+| Desarmes | Defensor que toma a bola do adversário que a conduzia |
+| Erros de passe | Passe que termina com o adversário dono da bola (interceptado, dividido ou perdido) ou que sai e dá a reposição ao adversário |
+
+- **Motor intocado.** Os números do motor continuam guardados na partida e o jogo segue usando-os na nota dos jogadores, como no original. O patch só troca o que as telas mostram ([engenharia reversa: estatísticas](re/03-motor-de-partida.md)).
+- **Sempre o campo.** Em toda partida que o campo acompanhou, as telas mostram só o que aconteceu no campo, inclusive quando o campo começou a acompanhar depois do pontapé inicial ou quando o jogador trocou a partida em destaque. Só partidas que o campo nunca acompanhou (sem time humano) mostram os números do motor.
+- **Atualização.** Na tela de partida os números mudam durante a jogada, não só na virada do minuto.
+
 ## Velocidade e tempos
 
 - **Movimento sempre no ritmo normal.** Jogadores e bola se movem na mesma velocidade em qualquer configuração do jogo, e cada lance é feito pelo jogador que o Brasfoot registrou.
@@ -52,11 +69,20 @@ python tools/patch_live_match_view.py --source <bf22-23.exe> --output <pasta>/bf
 - **O minuto nunca fica mais curto.** Ao soltar o relógio, o painel executa o próprio passo de minuto do Brasfoot, nunca antes do horário em que o jogo o executaria. Fora dessas pausas, a partida corre na velocidade escolhida pelo jogador, e substituições e lances de estatística não pausam o jogo.
 - **Quanto tempo a mais.** Cerca de 3 a 8 segundos por gol (jogada e saída de bola) e de 2,5 a 3 segundos por cartão em média (até cerca de 5, quando o infrator precisa chegar ao lance); numa partida típica, de 15 a 30 segundos a mais. A proporção pesa mais nas velocidades rápidas, em que a partida inteira dura menos.
 
-| Velocidade do jogo | Intervalo por minuto | Lances de estatística encenados |
-|---|---|---|
-| Lento | 2000 ms | até 2 por minuto |
-| Normal | 1200 ms | 1 por minuto; experiência ideal |
-| Rápido, Bem rápido, Super rápido, Ultra rápido | 700 a 100 ms | não encenados; gols com jogadas mais curtas |
+| Velocidade do jogo | Intervalo por minuto | O relógio espera | Jogada |
+|---|---|---|---|
+| Lento | 2000 ms | todos os lances do motor: gols, cartões, lesões, pênaltis, chutes, desarmes e passes errados | completa |
+| Normal | 1200 ms | gols, cartões, lesões, pênaltis e chutes | completa |
+| Rápido | 700 ms | nada | direta depois de 1,5 s |
+| Bem rápido | 450 ms | nada | direta depois de 0,7 s |
+| Super rápido e Ultra rápido | 220 e 100 ms | nada | direta depois de 0,3 s; modo só eventos |
+
+- **Sem pausa a partir do Rápido.** O campo nunca segura o relógio, nem nos lances do motor nem no pênalti. Só as janelas do próprio jogo param a partida (pênalti, substituição por lesão ou expulsão do time do jogador, pausa pedida). No pênalti, o batedor já aparece posicionado quando a janela abre e chuta depois dela.
+- **Jogada direta.** Com um lance do motor pendente, a jogada passa pelos degraus de aceleração já existentes (sem passes opcionais, passe direto ao autor, finalização de onde ele estiver) depois do tempo da tabela; a falta é feita por quem corre até o lance. O campo anda até 1,15× (Bem rápido) e 1,3× (Super e Ultra) enquanto há lance pendente.
+- **Exibição adiada.** O jogo deixa de exibir sozinho os gols, cartões, pênaltis e lesões de time da IA da partida em destaque: o campo os exibe quando a bola entra, o apito acontece ou a falta é feita, alguns minutos de jogo depois, sem parar o relógio. Lesões e expulsões do time do jogador aparecem na hora, porque abrem janelas do jogo. No intervalo e no fim da partida tudo o que estiver pendente é exibido. Um lance que o campo não alcança em 8 a 10 segundos (20 s no pênalti) é exibido sem animação.
+- **Modo só eventos (Super e Ultra).** Os times começam o tempo já posicionados, não há laterais, escanteios nem jogadas parecidas com gol criadas pelo campo, e as reposições são rápidas. Entre um lance do motor e outro há só troca de passes.
+
+Desarmes e passes errados do motor são mostrados quando cabem na jogada, em qualquer velocidade, sem segurar o relógio.
 
 - **Troca de lado.** No segundo tempo os times invertem o campo de ataque.
 
@@ -72,6 +98,16 @@ python tools/patch_live_match_view.py --source <bf22-23.exe> --output <pasta>/bf
 - **Cobrança nunca é cancelada:** um lance do jogo que chega durante um lateral ou escanteio espera a cobrança terminar, com o arremesso ou o cruzamento acelerados.
 - **Sem espera parada:** portador parado com a bola por mais de 0,9 s com lance pendente aciona um recurso de futebol (condução, avanço do lance ou chute).
 - **Diagnóstico:** eventos de integração são registrados em `%LOCALAPPDATA%\BrassfootPatch2026\live-match-debug.log`.
+
+## O minuto do motor no campo
+
+A cada minuto o Brasfoot dá a iniciativa a um time e termina o minuto em exatamente um desfecho: chute (gol, defesa ou para fora), desarme do adversário ou passe errado de quem atacava ([engenharia reversa](re/03-motor-de-partida.md)). O painel lê esse desfecho um minuto antes:
+
+- **Nenhum chute inventado.** Todo chute no campo corresponde a um chute do motor, com o mesmo desfecho: defesa ou espalmada quando o motor registrou chute no gol, bola para fora, na trave ou travada quando registrou chute para fora. Sem chute do motor pendente, o jogador que chega à área é desarmado ou tem o chute travado antes de finalizar.
+- **Autor do chute.** No chute defendido, o motor registra quem chutou, e é esse jogador que finaliza no campo; os companheiros tocam para ele. No chute para fora o motor não guarda o autor, e o painel sorteia com os mesmos pesos do motor (posição e características Finalização e Cabeceio).
+- **Jogadas parecidas com gol.** As jogadas de ataque que lembram a de um gol (inclusive o lance gêmeo de cada gol) só terminam em chute quando o motor tem chute daquele time; nos outros casos terminam em interceptação, goleiro, passe longo demais ou desarme.
+- **Pênalti.** O campo anima o que a tela de pênalti do jogo escreve: defesa, trave, trave e goleiro, para fora, por cima (arquibancada), escorregão do batedor, gol no canto ou goleiro de um lado e bola do outro.
+- **Faltas.** O motor não tem faltas, só cartões. O campo mostra falta apenas quando há cartão (decisão do proprietário).
 
 ## Regras do futebol e reconciliação com o motor
 

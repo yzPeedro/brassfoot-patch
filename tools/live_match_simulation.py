@@ -113,6 +113,11 @@ def summarize_engine(rows: list[dict]) -> dict:
             "panelRuleViolations": sum(r.get("panelRuleViolations", 0) for r in ok),
             "phantomGoals": sum(r.get("phantomGoals", 0) for r in ok),
         }
+        for key in ("engineSavedShots", "engineWideShots", "engineShotsExpected", "engineShotsShown",
+                    "engineShotsExpired", "unscheduledShots", "boxShotsDenied", "liveShots", "liveOnTarget",
+                    "liveOffTarget", "liveTackles", "livePassErrors"):
+            if any(key in r for r in ok):
+                entry[key] = sum(r.get(key, 0) for r in ok)
         if any("twinsQueued" in r for r in ok):
             entry["twinsQueued"] = sum(r.get("twinsQueued", 0) for r in ok)
             entry["twinsPlayed"] = sum(r.get("twinsPlayed", 0) for r in ok)

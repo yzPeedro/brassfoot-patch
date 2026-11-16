@@ -10,5 +10,6 @@
 | [Site](site.md) | Estrutura do site, dados publicados e publicação no GitHub Pages |
 | [Release e publicação](release.md) | Do bundle à release final e à atualização do site |
 | [Manutenção diária](scheduled-maintenance.md) | Ciclo automático de atualização de dados e publicação |
+| [Engenharia reversa](re/README.md) | Funcionamento interno do Brasfoot 22-23 original: arquivos, dados, motor de partida, competições, economia e interface |
 
 Para contribuir, veja [CONTRIBUTING.md](../CONTRIBUTING.md). Para relatar vulnerabilidades, veja [SECURITY.md](../SECURITY.md).
