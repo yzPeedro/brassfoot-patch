@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.6.11",
-  "publishedAt": "2026-11-15T17:45:57.444492+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.6.11-windows-x64.exe",
+  "publishedVersion": "2026.6.12",
+  "publishedAt": "2026-11-16T22:26:54.987361+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.6.12-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
-  "fileSizeBytes": 7396352,
-  "sha256": "dd519cd383a220da8766d40cc6dbaea5424c801d8ea101fa15123a609d1c9665",
+  "fileSizeBytes": 7406080,
+  "sha256": "e41ffd6104d3cf6c9f27d406f042981a7b0decd634c333c1385f0c3988407d25",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Campo animado: jogo parado no pênalti e na lesão, batedores do menu tático e posições pela formação escolhida."
+  "releaseNotes": "Melhorias core e campo animado: busca inteligente de times e jogadores, visão tática dos clubes, pular todos em jogos de IA, tooltips instantâneos, verificação de atualização na splash e informações do patch no Sobre."
 }
