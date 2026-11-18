@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "season": 2026,
-  "sourceRelease": "2026.6.13",
+  "sourceRelease": "2026.6.14",
   "includedInPackage": true,
   "totalClubs": 60,
   "totalPlayers": 1985,
@@ -478,7 +478,7 @@
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/coritiba-1212/squad",
       "reviewedOn": "2026-11-18",
-      "rosterPolicy": "preserve-previous-roster",
+      "rosterPolicy": "source-replacement",
       "players": [
         "Pedro Morisco",
         "Keiller",
@@ -778,7 +778,7 @@
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/gremio-1218/squad",
       "reviewedOn": "2026-11-18",
-      "rosterPolicy": "source-replacement",
+      "rosterPolicy": "preserve-previous-roster",
       "players": [
         "Weverton",
         "Gabriel Grando",
@@ -926,7 +926,7 @@
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/mirassol-1269/squad",
       "reviewedOn": "2026-11-18",
-      "rosterPolicy": "preserve-previous-roster",
+      "rosterPolicy": "source-replacement",
       "players": [
         "Georgemy",
         "Walter",
@@ -1480,7 +1480,7 @@
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/vitoria-1228/squad",
       "reviewedOn": "2026-11-18",
-      "rosterPolicy": "source-replacement",
+      "rosterPolicy": "preserve-previous-roster",
       "players": [
         "Lucas Arcanjo",
         "Gabriel Vasconcelos",
@@ -1646,7 +1646,7 @@
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/athletic-club-67683/squad",
       "reviewedOn": "2026-11-18",
-      "rosterPolicy": "source-replacement",
+      "rosterPolicy": "preserve-previous-roster",
       "players": [
         "Tony Batista",
         "Eduardo",
@@ -2108,7 +2108,7 @@
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/criciuma-1780/squad",
       "reviewedOn": "2026-11-18",
-      "rosterPolicy": "source-replacement",
+      "rosterPolicy": "preserve-previous-roster",
       "players": [
         "Alisson",
         "Airton Moraes",
@@ -2420,7 +2420,7 @@
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/juventude-1775/squad",
       "reviewedOn": "2026-11-18",
-      "rosterPolicy": "source-replacement",
+      "rosterPolicy": "preserve-previous-roster",
       "players": [
         "Pedro Rocha",
         "Ruan Carneiro",
@@ -3700,7 +3700,7 @@
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/ferroviaria-9182/squad",
       "reviewedOn": "2026-11-18",
-      "rosterPolicy": "source-replacement",
+      "rosterPolicy": "preserve-previous-roster",
       "players": [
         "Léo Wall",
         "Dênis Júnior",
@@ -3866,7 +3866,7 @@
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/floresta-ec-50729/squad",
       "reviewedOn": "2026-11-18",
-      "rosterPolicy": "source-replacement",
+      "rosterPolicy": "preserve-previous-roster",
       "players": [
         "Jeferson Souza",
         "César Rodrigues",
@@ -4308,7 +4308,7 @@
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/maringa-18884/squad",
       "reviewedOn": "2026-11-18",
-      "rosterPolicy": "source-replacement",
+      "rosterPolicy": "preserve-previous-roster",
       "players": [
         "Gabriel Affonso",
         "Romário",
@@ -4388,7 +4388,7 @@
       "includedInPackage": true,
       "sourceUrl": "https://www.365scores.com/football/team/paysandu-7390/squad",
       "reviewedOn": "2026-11-18",
-      "rosterPolicy": "source-replacement",
+      "rosterPolicy": "preserve-previous-roster",
       "players": [
         "Levi",
         "Marcão",
