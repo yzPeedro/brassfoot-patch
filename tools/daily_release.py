@@ -619,12 +619,17 @@ def check_bundle_contents(final: Path, previous: Path, changed: dict, exes: dict
     expected = {"full": exes["full"], "season": exes["patch"], "live": exes["live"], "original": exes["original"]}
     if {key: variants.get(key, {}).get("sha256") for key in expected} != expected:
         raise Refusal("components.variants não reconhece as quatro variantes do executável")
+    known_origins = {sha_file(path) for folder in PRIVATE.glob("live-match-release-*")
+                     for path in folder.glob("bf22-23*.exe")}
     for name in EXECUTABLE_RECIPES:
         new_origins = {v["originalSha256"] for v in variants_of(final / "patches" / name)}
         old_origins = {v["originalSha256"] for v in variants_of(previous / "patches" / name)} - dropped
-        if new_origins != old_origins:
-            raise Refusal(f"{name}: origens aceitas diferem do pacote anterior "
-                          f"(+{len(new_origins - old_origins)} -{len(old_origins - new_origins)})")
+        removed = old_origins - new_origins
+        if removed:
+            raise Refusal(f"{name}: origens removidas do pacote anterior: {sorted(removed)[:5]}")
+        added = new_origins - old_origins - known_origins
+        if added:
+            raise Refusal(f"{name}: origens novas sem executável publicado: {sorted(added)[:5]}")
     new_files = {item["path"]: item for item in manifest["files"]}
     old_files = {item["path"]: item for item in earlier["files"]}
     if set(new_files) != set(old_files):
