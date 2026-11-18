@@ -338,6 +338,78 @@
       "teamFile": "teams/tenerife_esp.ban",
       "action": "remove",
       "source": "docs/releases/v2026.6.8.md"
+    },
+    {
+      "version": "2026.6.13",
+      "date": "2026-11-17",
+      "player": "Dirk Carlson",
+      "teamFile": "teams/DBatumi_Geo.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.13.md"
+    },
+    {
+      "version": "2026.6.13",
+      "date": "2026-11-17",
+      "player": "Enes Mahmutovic",
+      "teamFile": "teams/DBatumi_Geo.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.13.md"
+    },
+    {
+      "version": "2026.6.13",
+      "date": "2026-11-17",
+      "player": "Giorgi Kukalia",
+      "teamFile": "teams/Saburtalo_Geo.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.13.md"
+    },
+    {
+      "version": "2026.6.13",
+      "date": "2026-11-17",
+      "player": "Ndjicoura Bomba",
+      "teamFile": "teams/bayerleverkusen_ale.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.13.md"
+    },
+    {
+      "version": "2026.6.13",
+      "date": "2026-11-17",
+      "player": "Amine Boukamir",
+      "teamFile": "teams/charleroi_bel.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.13.md"
+    },
+    {
+      "version": "2026.6.13",
+      "date": "2026-11-17",
+      "player": "Solomon Kverkveliya",
+      "teamFile": "teams/dinamotbilisi_geo.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.13.md"
+    },
+    {
+      "version": "2026.6.13",
+      "date": "2026-11-17",
+      "player": "Duane Tjen-A-Kwoei",
+      "teamFile": "teams/feynoord_hol.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.13.md"
+    },
+    {
+      "version": "2026.6.13",
+      "date": "2026-11-17",
+      "player": "Alan Ruschel",
+      "teamFile": "teams/juventude.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.13.md"
+    },
+    {
+      "version": "2026.6.13",
+      "date": "2026-11-17",
+      "player": "Lucas Braga",
+      "teamFile": "teams/vitoria.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.13.md"
     }
   ]
 }

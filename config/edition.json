@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.6.12",
+  "version": "2026.6.13",
   "channel": "stable",
-  "releaseNotes": "Melhorias core e campo animado: busca inteligente de times e jogadores, visão tática dos clubes, pular todos em jogos de IA, tooltips instantâneos, verificação de atualização na splash e informações do patch no Sobre.",
+  "releaseNotes": "Adiciona quatro jogadores, retira cinco e atualiza 68 idades.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [
