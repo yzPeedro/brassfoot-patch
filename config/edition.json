@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.6.13",
+  "version": "2026.6.14",
   "channel": "stable",
-  "releaseNotes": "Adiciona quatro jogadores, retira cinco e atualiza 68 idades.",
+  "releaseNotes": "Atualiza 20 idades.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [
