@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.6.12",
-  "publishedAt": "2026-11-16T22:26:54.987361+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.6.12-windows-x64.exe",
+  "publishedVersion": "2026.6.13",
+  "publishedAt": "2026-11-18T01:52:36.162376+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.6.13-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
   "fileSizeBytes": 7406080,
-  "sha256": "e41ffd6104d3cf6c9f27d406f042981a7b0decd634c333c1385f0c3988407d25",
+  "sha256": "ddce47aa9fe62974531858a64dc4320d8a73674010cfca622914ac49ae78f1f4",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Melhorias core e campo animado: busca inteligente de times e jogadores, visão tática dos clubes, pular todos em jogos de IA, tooltips instantâneos, verificação de atualização na splash e informações do patch no Sobre."
+  "releaseNotes": "Adiciona quatro jogadores, retira cinco e atualiza 68 idades."
 }
