@@ -75,7 +75,7 @@ Uma carreira criada antes do componente carrega e continua normalmente. A tempor
 
 - **Supercopa Rei com o mesmo campeão nos dois títulos:** a regra está implementada, mas o caso não apareceu nas temporadas simuladas.
 
-- **Clubes ausentes:** os 96 clubes oficiais da Série D estão no jogo; 37 deles foram criados por `tools/build_brazil_new_clubs_2026.py` a partir das súmulas da CBF, com posição, data de nascimento e nacionalidade conferidas no oGol. Nível e reputação do clube (mediana da Série D) e características dos jogadores (padrão da posição) são estimativas. Faltam 10 clubes da Copa do Brasil, cujas vagas são preenchidas por clubes do mesmo estado.
+- **Clubes ausentes:** os 96 clubes oficiais da Série D estão no jogo; 37 deles foram criados por `tools/build_brazil_new_clubs_2026.py` a partir das súmulas da CBF, com posição, data de nascimento e nacionalidade conferidas no oGol. Nível e reputação do clube (mediana da Série D) e características dos jogadores (padrão da posição) são estimativas. Os 126 clubes oficiais da Copa do Brasil também estão no jogo: 11 deles foram criados com elencos das súmulas da Copa do Brasil e do oGol.
 - **Duplicatas:** dois clubes publicados têm duas cópias (Brasil de Pelotas e Inter de Limeira). As seleções do motor ignoram a cópia antiga, mas os estaduais do jogo ainda podem incluir as duas.
 - **Desempate na fase de grupos da Série D:** o jogo ordena por pontos, vitórias, saldo e gols pró. Confronto direto, cartões e sorteio não são aplicados.
 - **Sorteios da Copa do Brasil:**
