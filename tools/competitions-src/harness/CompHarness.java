@@ -157,6 +157,7 @@ public final class CompHarness {
                 out.println("campeao " + year + " divisao " + (i + 1) + ": " + (champion == null ? "nenhum" : champion.getNome()));
             }
             serieB(year, (f.B) divisions.get(1));
+            if (season > 0) supercopa(year, brazil);
             copa(year, brazil.jq());
             List<ah> promotedD = serieD(year, (f.B) divisions.get(3));
             ArrayList<ah> cRelegated = new ArrayList<ah>();
@@ -256,6 +257,29 @@ public final class CompHarness {
             total += round.zW().size() + (round.zX() == null ? 0 : round.zX().size());
         }
         return total;
+    }
+
+    private static void supercopa(int year, Z brazil) {
+        f.I found = null;
+        for (Object item : c.a.SR.bW()) {
+            f.I cup = (f.I) item;
+            if (cup.zS() != null && !cup.zS().zp().isEmpty()) {
+                I match = (I) ((f.G) cup.zS().zp().get(0)).zW().get(0);
+                if (match.hc().getPais() == 29) found = cup;
+            }
+        }
+        check(found != null, year + ": Supercopa Rei disputada");
+        if (found == null) return;
+        I match = (I) ((f.G) found.zS().zp().get(0)).zW().get(0);
+        f.B serieA = (f.B) brazil.eb().get(0);
+        ah champion = serieA.cv(c.a.SR.H() - 1);
+        ah[] copa = brazil.bk(c.a.SR.H() - 1);
+        ah expected = copa != null && copa[0] != champion ? copa[0] : null;
+        if (expected == null) {
+            for (Object record : serieA.mn()) if (((best.i) record).H() == c.a.SR.H() - 1) expected = ((best.i) record).cf();
+        }
+        boolean ok = (match.hc() == champion && match.hd() == expected) || (match.hd() == champion && match.hc() == expected);
+        check(ok, year + ": Supercopa Rei " + match.hc().getNome() + " x " + match.hd().getNome() + " (campeao da Serie A x " + (copa != null && copa[0] == champion ? "vice da Serie A" : "campeao da Copa") + ")");
     }
 
     private static void copa(int year, f.f cup) {

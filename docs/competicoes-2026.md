@@ -10,6 +10,7 @@ Parte do componente **Elencos + Competições 2026**. Altera o motor de competi�
 | Série B | 20 clubes; 1º e 2º sobem; 3º x 6º e 4º x 5º em ida e volta, volta na casa do melhor, empate no agregado classifica o melhor colocado (sem pênaltis) | igual |
 | Série C | 20 clubes em turno único; 8 melhores em dois quadrangulares; 4 sobem; 2 caem | igual; em 2027 tem 24 clubes e, a partir de 2028, 28, com 6 rebaixados |
 | Série D | 96 clubes em 16 grupos de 6; 4 por grupo; mata-mata em ida e volta com chaveamento do Anexo B; quartas reordenadas pela campanha; 4 eliminados nas quartas em 2 playoffs (1º x 4º e 2º x 3º); 6 acessos; 610 jogos | igual |
+| Supercopa Rei | campeão da Série A x campeão da Copa do Brasil; com o mesmo clube nos dois títulos, o adversário é o vice da Série A; jogo único | igual (a partida não usa sede neutra) |
 | Copa do Brasil | 126 clubes; 9 fases; fases 1–4 e final em jogo único; 5ª a 8ª em ida e volta; 155 jogos | igual |
 
 ## Fontes
@@ -35,6 +36,7 @@ O regulamento da Série B não foi localizado no site da CBF. As regras dos play
 | acesso e descenso | início de `best.Z.ee()` | Brasil com Série D pelos estaduais: listas assimétricas (6 sobem da D, 2 ou 6 caem da C) |
 | rodadas por temporada | fim de `f.s.aN(boolean)` | recalcula o total de rodadas quando a divisão muda de tamanho |
 | turno único da Série C | `f.s.a(ArrayList, …)` | turno único com 20 ou mais clubes no formato 1020 |
+| Supercopa Rei | início de `f.I.Ab()` | escolhe o adversário pela regra da CBF (o original usava o vice da Copa) |
 | tela da Série D | início de `f.B.mB()` | com os playoffs criados, a tela principal continua no mata-mata principal |
 | Copa do Brasil | início de `f.f.a/b`, fim de `f.G.b(boolean, boolean)` e `f.f.b(L)` | monta as 9 fases, avança cada fase e dá nome às fases |
 
@@ -70,6 +72,8 @@ java -Djava.awt.headless=true -cp "<out>;<novo>/bf22-23.exe" CompHarness <cópia
 Uma carreira criada antes do componente carrega e continua normalmente. A temporada em andamento termina no formato antigo. Na virada para 2027, `best.Z.ee()` ajusta os campos já salvos (Série D com 96 clubes e 16 grupos, Série B com 2 vagas por playoff, Série C com 2 rebaixados), e o formato de 2026 vale a partir da temporada seguinte. A Copa do Brasil muda já na próxima edição. Testado no harness com um save gravado pelo executável publicado.
 
 ## Lacunas conhecidas
+
+- **Supercopa Rei com o mesmo campeão nos dois títulos:** a regra está implementada, mas o caso não apareceu nas temporadas simuladas.
 
 - **Clubes ausentes:** os 96 clubes oficiais da Série D estão no jogo; 37 deles foram criados por `tools/build_brazil_new_clubs_2026.py` a partir das súmulas da CBF, com posição, data de nascimento e nacionalidade conferidas no oGol. Nível e reputação do clube (mediana da Série D) e características dos jogadores (padrão da posição) são estimativas. Faltam 10 clubes da Copa do Brasil, cujas vagas são preenchidas por clubes do mesmo estado.
 - **Duplicatas:** dois clubes publicados têm duas cópias (Brasil de Pelotas e Inter de Limeira). As seleções do motor ignoram a cópia antiga, mas os estaduais do jogo ainda podem incluir as duas.

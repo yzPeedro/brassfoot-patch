@@ -20,6 +20,7 @@ TARGETS = {
     "f/f.class": "copa-start,copa-names",
     "best/w.class": "participants",
     "f/B.class": "main-phase",
+    "f/I.class": "supercopa",
     "best/Z.class": "promotion,division-order",
     "f/s.class": "serie-c-rounds,reset-rounds",
 }

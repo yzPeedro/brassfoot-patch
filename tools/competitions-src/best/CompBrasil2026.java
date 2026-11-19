@@ -395,6 +395,34 @@ public final class CompBrasil2026 {
         new G().a(playoff, order, 0, true, 0, 0, owner.b(), false);
     }
 
+    public static boolean supercopa(at cup) {
+        try {
+            Field country = cup.getClass().getDeclaredField("pais");
+            country.setAccessible(true);
+            if (country.getInt(cup) != BRAZIL) return false;
+            Z brazil = a.SR.o(BRAZIL);
+            if (brazil == null || brazil.eb() == null || brazil.eb().isEmpty()) return false;
+            int previous = a.SR.H() - 1;
+            B serieA = (B) brazil.eb().get(0);
+            ah champion = serieA.cv(previous);
+            ah[] copa = brazil.bk(previous);
+            ah opponent = null;
+            if (copa != null && copa[0] != champion) {
+                opponent = copa[0];
+            } else {
+                for (int k = 0; k < serieA.mn().size(); k++) {
+                    i record = (i) serieA.mn().get(k);
+                    if (record.H() == previous) opponent = record.cf();
+                }
+            }
+            cup.getClass().getMethod("b", ah.class, ah.class).invoke(cup, champion, opponent);
+            return true;
+        } catch (Throwable error) {
+            log("falha na Supercopa Rei", error);
+            return false;
+        }
+    }
+
     public static L[] mainPhase(B division) {
         try {
             z playoff = division.BR();
