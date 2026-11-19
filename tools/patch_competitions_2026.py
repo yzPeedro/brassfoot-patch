@@ -31,6 +31,9 @@ TARGETS = {
     "f/s.class": "serie-c-rounds,reset-rounds,resort,estadual-knockout,estadual-crossed,estadual-table,estadual-relegation,estadual-resort",
     "f/z.class": "estadual-advance,estadual-names",
     "a/al.class": "bracket-names",
+    "best/f.class": "juniors-generation",
+    "best/F.class": "juniors-turn,juniors-replacement",
+    "a/ds.class": "juniors-academy",
 }
 HELPERS = ("best/CompBrasil2026.class", "best/CompBrasil2026Data.class", "mega/SetupPanels.class")
 BRA_CFG = [
@@ -140,6 +143,7 @@ def build(source: Path, destination: Path, source_cfg: Path, output_cfg: Path, j
         run([javac, "--release", "8", "-encoding", "UTF-8", "-cp", source, "-d", classes,
              SOURCE / "best" / "CompBrasil2026.java", helper_dir / "CompBrasil2026Data.java",
              SOURCE / "best" / "CompEstaduais.java", helper_dir / "CompEstaduaisData.java",
+             SOURCE / "best" / "CompJuniores.java",
              SOURCE / "mega" / "SetupPanels.java"])
         run([javac, *EXPORTS, "-d", transformer, SOURCE / "CompetitionsTransformer.java"])
         replacements = {}

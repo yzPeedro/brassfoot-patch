@@ -61,6 +61,8 @@ public final class WorldBuild {
             }
             if ("clear".equals(v[15])) {
                 team.m = new ArrayList<g>();
+            } else if ("replace".equals(v[15])) {
+                team.m = Main.readJuniors(rosters.resolve(file + ".jun.tsv"));
             } else if (!"keep".equals(v[15])) {
                 throw new IllegalArgumentException("Unknown juniors mode: " + v[15]);
             }

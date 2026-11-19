@@ -473,6 +473,79 @@ public final class CompetitionsTransformer {
         return true;
     }
 
+    private static boolean juniorsGeneration(ClassNode owner) {
+        MethodNode target = method(owner, "c", "(Z)V");
+        LabelNode original = new LabelNode(new Label());
+        InsnList hook = new InsnList();
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new VarInsnNode(Opcodes.ILOAD, 1));
+        hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "best/CompJuniores", "skipGeneration", "(Lbest/f;Z)Z", false));
+        hook.add(new JumpInsnNode(Opcodes.IFEQ, original));
+        hook.add(new InsnNode(Opcodes.RETURN));
+        hook.add(original);
+        target.instructions.insert(hook);
+        return true;
+    }
+
+    private static boolean juniorsTurn(ClassNode owner) {
+        MethodNode target = method(owner, "gf", "()V");
+        LabelNode original = new LabelNode(new Label());
+        InsnList hook = new InsnList();
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "best/CompJuniores", "seasonTurn", "(Lbest/F;)Z", false));
+        hook.add(new JumpInsnNode(Opcodes.IFEQ, original));
+        hook.add(new InsnNode(Opcodes.RETURN));
+        hook.add(original);
+        target.instructions.insert(hook);
+        return true;
+    }
+
+    private static boolean juniorsReplacement(ClassNode owner) {
+        String desc = "(Lbest/ah;ILbest/F;ILjava/lang/String;Ljava/lang/Boolean;)Lbest/F;";
+        int changed = 0;
+        for (MethodNode target : owner.methods) {
+            if ("a".equals(target.name) && desc.equals(target.desc)) continue;
+            for (AbstractInsnNode node : target.instructions) {
+                if (node instanceof MethodInsnNode call && call.getOpcode() == Opcodes.INVOKESTATIC
+                        && "best/F".equals(call.owner) && "a".equals(call.name) && desc.equals(call.desc)) {
+                    call.owner = "best/CompJuniores";
+                    call.name = "replacement";
+                    changed++;
+                }
+            }
+        }
+        if (changed != 3) throw new IllegalStateException("junior generation calls " + changed);
+        return false;
+    }
+
+    private static boolean juniorsAcademy(ClassNode owner) {
+        MethodNode label = method(owner, "pK", "()V");
+        LabelNode original = new LabelNode(new Label());
+        InsnList hook = new InsnList();
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new jdk.internal.org.objectweb.asm.tree.FieldInsnNode(Opcodes.GETFIELD, "a/ds", "uh", "Ljavax/swing/JLabel;"));
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new jdk.internal.org.objectweb.asm.tree.FieldInsnNode(Opcodes.GETFIELD, "a/ds", "zu", "Lbest/ah;"));
+        hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "best/CompJuniores", "academyLabel", "(Ljavax/swing/JLabel;Lbest/ah;)Z", false));
+        hook.add(new JumpInsnNode(Opcodes.IFEQ, original));
+        hook.add(new InsnNode(Opcodes.RETURN));
+        hook.add(original);
+        label.instructions.insert(hook);
+        int changed = 0;
+        for (MethodNode target : owner.methods) {
+            for (AbstractInsnNode node : target.instructions) {
+                if (node instanceof IntInsnNode push && push.getOpcode() == Opcodes.BIPUSH && push.operand == 20
+                        && push.getPrevious() instanceof MethodInsnNode size && "size".equals(size.name)
+                        && push.getNext() instanceof JumpInsnNode) {
+                    target.instructions.set(push, new MethodInsnNode(Opcodes.INVOKESTATIC, "best/CompJuniores", "academyLimit", "()I", false));
+                    changed++;
+                }
+            }
+        }
+        if (changed != 2) throw new IllegalStateException("academy limits " + changed);
+        return true;
+    }
+
     private static boolean estadualAdvance(ClassNode owner) {
         MethodNode target = method(owner, "zs", "()V");
         AbstractInsnNode anchor = null;
@@ -634,6 +707,10 @@ public final class CompetitionsTransformer {
             case "division-order": frames = divisionOrder(owner); break;
             case "serie-c-rounds": frames = singleRoundSerieC(owner); break;
             case "estadual-advance": frames = estadualAdvance(owner); break;
+            case "juniors-generation": frames = juniorsGeneration(owner); break;
+            case "juniors-turn": frames = juniorsTurn(owner); break;
+            case "juniors-replacement": frames = juniorsReplacement(owner); break;
+            case "juniors-academy": frames = juniorsAcademy(owner); break;
             case "neutral-venue": frames = neutralVenue(owner); break;
             case "bracket-names": frames = bracketNames(owner); break;
             case "estadual-resort": frames = estadualResort(owner); break;

@@ -180,6 +180,33 @@ public final class Main {
         return replacement;
     }
 
+    static ArrayList<g> readJuniors(Path roster) throws Exception {
+        ArrayList<g> juniors = new ArrayList<>();
+        for (String row : Files.readAllLines(roster, StandardCharsets.UTF_8)) {
+            if (row.isBlank()) continue;
+            String[] v = row.split("\t", -1);
+            if (v.length != 14) throw new IllegalArgumentException("Expected 14 columns in junior row");
+            g p = new g();
+            p.a = new String(Base64.getDecoder().decode(v[0]), StandardCharsets.UTF_8);
+            if (p.a.isBlank() || p.a.length() > 120) throw new IllegalArgumentException("Invalid junior name");
+            p.aid = parseIntField(v[1], "aid", 0, Integer.MAX_VALUE);
+            p.b = Boolean.parseBoolean(v[2]);
+            p.c = parseIntField(v[3], "c", 0, 223);
+            p.d = parseIntField(v[4], "d", 18, 20);
+            p.e = parseIntField(v[5], "e", 0, 4);
+            p.f = parseIntField(v[6], "f", 0, 1);
+            p.g = parseIntField(v[7], "g", 0, 13);
+            p.h = parseIntField(v[8], "h", 0, 13);
+            p.hash = parseIntField(v[9], "hash", 1, 10);
+            p.i = parseIntField(v[10], "i", 0, 1);
+            p.j = Boolean.parseBoolean(v[11]);
+            p.sid = parseIntField(v[12], "sid", 0, Integer.MAX_VALUE);
+            p.tid = parseIntField(v[13], "tid", 0, Integer.MAX_VALUE);
+            juniors.add(p);
+        }
+        return juniors;
+    }
+
     static void shortenNames(ArrayList<g> players) {
         if (players == null) return;
         for (g player : players) {
