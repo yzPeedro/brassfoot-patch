@@ -57,9 +57,12 @@ def build(args: argparse.Namespace) -> dict:
     compiled = work / "compiled"
     (compiled / "teams").mkdir(parents=True)
     (compiled / "conf_ligas_nacionais").mkdir(parents=True)
-    for team in sorted(args.new_teams.glob("*.ban")):
-        shutil.copy2(team, compiled / "teams" / team.name)
+    for folder in args.new_teams:
+        for team in sorted(folder.glob("*.ban")):
+            shutil.copy2(team, compiled / "teams" / team.name)
     shutil.copy2(args.bra_cfg, compiled / "conf_ligas_nacionais" / "BRA.cfg")
+    for config in args.extra_cfg:
+        shutil.copy2(config, compiled / "conf_ligas_nacionais" / config.name)
     stage_data = work / "bundle-1-data"
     data = world_bundle(args.inherit_bundle.resolve(), compiled, args.original_game.resolve(), args.base.resolve(),
                         stage_data, args.version, release=False)
@@ -95,7 +98,8 @@ def main() -> None:
     parser.add_argument("--full", type=Path, required=True)
     parser.add_argument("--patch", type=Path, required=True)
     parser.add_argument("--bra-cfg", type=Path, required=True)
-    parser.add_argument("--new-teams", type=Path, required=True)
+    parser.add_argument("--new-teams", type=Path, action="append", required=True)
+    parser.add_argument("--extra-cfg", type=Path, action="append", default=[])
     parser.add_argument("--previous-live", type=Path, action="append", default=[])
     parser.add_argument("--trophies", type=Path)
     parser.add_argument("--work", type=Path, required=True)

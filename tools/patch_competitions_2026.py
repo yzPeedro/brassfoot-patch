@@ -13,6 +13,7 @@ from tools.patch_continental_cups_2026 import write_executable
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "config" / "competitions" / "brasil-2026.json"
+COUNTRIES = ROOT / "config" / "countries"
 SOURCE = ROOT / "tools" / "competitions-src"
 CODEC = ROOT / "tools" / "competition-codec"
 TARGETS = {
@@ -67,6 +68,13 @@ def data_source(config: dict) -> str:
     copa_criteria = ",".join(str(c["criterion"]) for c in copa)
     copa_rnc = ",".join(str(c["rnc"] or 0) for c in copa)
     rnc_files = ",".join(java_string(e["file"]) for e in config["rnc2026"]["ranking"] if e["file"])
+    countries = [json.loads(path.read_text(encoding="utf-8")) for path in sorted(COUNTRIES.glob("*.json"))]
+    countries = [c for c in countries if c.get("officialDivisions")]
+    country_ids = ",".join(str(c["country"]) for c in countries)
+    country_years = ",".join(str(c.get("startYear", 2026)) for c in countries)
+    country_divisions = ",\n".join(
+        "        {" + ",".join("{" + ",".join(java_string(f) for f in c["officialDivisions"][d]) + "}"
+                               for d in sorted(c["officialDivisions"], key=int)) + "}" for c in countries)
     return ("package best;\n\nfinal class CompBrasil2026Data {\n    private CompBrasil2026Data() {\n    }\n\n"
             f"    static final String[][] SERIE_D_FILES = {{\n{files}\n    }};\n\n"
             f"    static final String[][] SERIE_D_STATES = {{\n{states}\n    }};\n\n"
@@ -76,7 +84,10 @@ def data_source(config: dict) -> str:
             f"    static final String[] COPA_STATES = {{{copa_states}}};\n\n"
             f"    static final int[] COPA_CRITERIA = {{{copa_criteria}}};\n\n"
             f"    static final int[] COPA_RNC = {{{copa_rnc}}};\n\n"
-            f"    static final String[] RNC_FILES = {{{rnc_files}}};\n}}\n")
+            f"    static final String[] RNC_FILES = {{{rnc_files}}};\n\n"
+            f"    static final int[] COUNTRY_IDS = {{{country_ids}}};\n\n"
+            f"    static final int[] COUNTRY_YEARS = {{{country_years}}};\n\n"
+            f"    static final String[][][] COUNTRY_DIVISIONS = {{\n{country_divisions}\n    }};\n}}\n")
 
 
 def build_cfg(source_cfg: Path, output_cfg: Path, java: str, work: Path) -> str:

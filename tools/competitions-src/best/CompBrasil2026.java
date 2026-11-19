@@ -297,11 +297,11 @@ public final class CompBrasil2026 {
         try {
             if (knockout == null || list == null || !(knockout.yT() instanceof B)) return;
             B owner = (B) knockout.yT();
-            if (owner.zO() != BRAZIL) return;
-            if (knockout.zf() == 1099 && owner.ip() == 2 && list.size() == 4) {
-                serieBPlayoff(round, owner, list);
+            if (knockout.zf() == 1099 && index == 0 && list.size() == 4) {
+                playoffPairs(round, owner, list);
                 return;
             }
+            if (owner.zO() != BRAZIL) return;
             if (knockout.zf() == PLAYOFF_CODE) {
                 round.fb(2129);
                 return;
@@ -325,7 +325,7 @@ public final class CompBrasil2026 {
         }
     }
 
-    private static void serieBPlayoff(G round, B owner, ArrayList list) {
+    private static void playoffPairs(G round, B owner, ArrayList list) {
         Object third = list.get(0);
         Object fourth = list.get(1);
         Object fifth = list.get(2);
@@ -335,7 +335,7 @@ public final class CompBrasil2026 {
         list.add(third);
         list.add(fifth);
         list.add(fourth);
-        round.fb(2129);
+        if (owner.zO() == BRAZIL && owner.ip() == 2) round.fb(2129);
     }
 
     private static void secondPhase(ArrayList list) {
@@ -436,9 +436,17 @@ public final class CompBrasil2026 {
 
     public static void divisionOrder(ArrayList teams, Z country) {
         try {
-            if (country.jc() != BRAZIL || a.SR.H() != 1 || a.SR.op() != 2026) return;
+            if (a.SR.H() != 1) return;
+            String[][] divisions = null;
+            if (country.jc() == BRAZIL && a.SR.op() == 2026) divisions = CompBrasil2026Data.DIVISIONS_2026;
+            for (int c = 0; c < CompBrasil2026Data.COUNTRY_IDS.length; c++) {
+                if (CompBrasil2026Data.COUNTRY_IDS[c] == country.jc() && CompBrasil2026Data.COUNTRY_YEARS[c] == a.SR.op()) {
+                    divisions = CompBrasil2026Data.COUNTRY_DIVISIONS[c];
+                }
+            }
+            if (divisions == null) return;
             ArrayList ordered = new ArrayList();
-            String[][] divisions = CompBrasil2026Data.DIVISIONS_2026;
+            int expected = 0;
             for (int d = 0; d < divisions.length; d++) {
                 for (int i = 0; i < divisions[d].length; i++) {
                     for (int t = 0; t < teams.size(); t++) {
@@ -449,8 +457,10 @@ public final class CompBrasil2026 {
                         }
                     }
                 }
-                if (ordered.size() != (d + 1) * 20) {
-                    log("Serie " + (char) ('A' + d) + " oficial incompleta no jogo: " + (ordered.size() - d * 20) + " de 20", null);
+                expected += divisions[d].length;
+                if (ordered.size() != expected) {
+                    log("divisao " + (d + 1) + " oficial do pais " + country.jc() + " incompleta no jogo: faltam "
+                            + (expected - ordered.size()), null);
                     return;
                 }
             }
