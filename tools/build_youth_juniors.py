@@ -12,7 +12,8 @@ from datetime import date
 from pathlib import Path
 
 from tools.world.common import key
-from tools.world.compile_game import DERIVED_TRAITS, b64, java_tools, nationality_lookup, run, stable
+from tools.build_brazil_new_clubs_2026 import nationality_lookup
+from tools.world.compile_game import DERIVED_TRAITS, b64, java_tools, run, stable
 
 ROOT = Path(__file__).resolve().parents[1]
 REFERENCE = date(2026, 1, 1)
@@ -37,7 +38,7 @@ def potential(player: dict, team: dict) -> tuple[int, dict]:
     evidence = 0
     if player.get("alsoProfessional"):
         evidence += 1
-    spread = stable(f"{team.get('d')}:{norm(player.get('fullName') or player.get('displayName'))}", 0, 3) - 1
+    spread = stable(f"{team.get('id')}:{norm(player.get('fullName') or player.get('displayName'))}", 0, 3) - 1
     value = max(2, min(9, base + evidence + spread))
     return value, {"model": MODEL, "base": base, "professionalEvidence": evidence, "spread": spread}
 
@@ -91,7 +92,7 @@ def build(args: argparse.Namespace) -> dict:
             entry["status"] = "SEM_ARQUIVO_NO_JOGO"
             continue
         team = exported.get(stem) or {}
-        professionals = {norm(p.get("a")) for p in team.get("l") or []}
+        professionals = {norm(p.get("name")) for p in team.get("players") or []}
         rows, seen = [], set()
         for player in catalog.get("players") or []:
             born = player.get("dateOfBirth")
@@ -156,7 +157,7 @@ def build(args: argparse.Namespace) -> dict:
                                              r["trait1"], r["trait2"], r["hash"], 0, "false", 0, r["tid"]])))
         (rosters / f"{stem}.jun.tsv").write_text("\n".join(lines) + ("\n" if lines else ""), encoding="utf-8")
         plan.append([stem, f"{available[stem].name}", team.get("a", 0), team.get("b", 0), team.get("c", 1),
-                     team.get("n", 0), team.get("id", 0), "", "", team.get("g", 0), "", team.get("i", 0), "", "",
+                     team.get("n", 0), team.get("internalId", 0), "", "", team.get("g", 0), "", team.get("i", 0), "", "",
                      "keep", "replace"])
         entry["eligible"] = len(rows)
         entry["players"] = rows
