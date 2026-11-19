@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.6.15",
+  "version": "2026.6.50",
   "channel": "local-preview",
-  "releaseNotes": "Prévia privada do componente Elencos + Competições: catálogo estruturado de competições (39), inventário de troféus, renomeação do componente no hub, experimento Série D 96 clubes (lab).",
+  "releaseNotes": "Prévia privada de Elencos + Competições 2026: Série D com 96 clubes em 16 grupos, mata-mata do regulamento, playoffs e 6 acessos; Série B com playoffs 3x6 e 4x5; Série C de 20 clubes com crescimento para 24 e 28; Copa do Brasil com 126 clubes e 9 fases; Supercopa Rei pela regra da CBF; 37 clubes da Série D criados com elencos das súmulas da CBF. Testada só em simulação automática; não homologada em partida.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [
