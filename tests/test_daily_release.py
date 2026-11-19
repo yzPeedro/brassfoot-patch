@@ -129,6 +129,20 @@ class NotesTests(unittest.TestCase):
                          "Hub 1.4.2, executável, ligas, escudos, camisas e campo animado permanecem iguais.")
         self.assertEqual(notes["short"], entry["summary"])
 
+    def test_manager_only_change_is_material_and_listed(self):
+        empty = {kind: [] for kind in dr.KINDS}
+        clubs = [{"teamFile": "teams/ajax_hol.ban", "club": "Ajax", "confirmed": empty,
+                  "manager": {"from": "Alfred Schreuder", "to": "Míchel"}}]
+        model = dr.build_model(clubs, [], COUNTRIES, {})
+        self.assertEqual(model["managers"], [{"club": "Ajax", "from": "Alfred Schreuder", "to": "Míchel"}])
+        self.assertTrue(dr.is_material(model))
+        notes = dr.render_notes("2026.6.16", model, "1.4.4", ["hub"], 0, WHEN)
+        self.assertIn("Esta versão atualiza um técnico.", notes["markdown"])
+        self.assertIn("## Técnico atualizado\n\n- Ajax: Míchel (antes Alfred Schreuder).", notes["markdown"])
+        self.assertEqual(notes["entry"]["title"], "Um técnico atualizado")
+        self.assertIn("Ajax: Míchel assume como técnico.", notes["entry"]["changes"])
+        self.assertFalse(dr.is_material(dr.build_model([], [], COUNTRIES, {})))
+
     def test_notes_never_claim_unchanged_crests_when_images_changed(self):
         notes = dr.render_notes("2026.6.8", self.model(), "1.4.2", ["executable", "leagues", "hub", "live"], 3, WHEN)
         self.assertNotIn("os escudos", notes["markdown"])

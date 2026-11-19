@@ -111,6 +111,8 @@ def roster_changes(published, candidate):
         if field not in ("players", "secondaryPlayers") and published.get(field) != candidate.get(field):
             other.add("clube." + field)
     changes["other"] = sorted(other)
+    changes["identity"] = [{"field": LEDGER_FIELDS[field], "from": published.get(field), "to": candidate.get(field)}
+                           for field in sorted(LEDGER_FIELDS) if published.get(field) != candidate.get(field)]
     return changes, pairs, removed
 
 
@@ -249,6 +251,24 @@ def evaluate_club(published, candidate, *, status, player_defaults=None, ledger_
     return "accepted", accepted, changes
 
 
+def identity_domain(published, candidate, ledger_fields):
+    changed = [field for field in sorted(set(published) | set(candidate))
+               if field not in ("players", "secondaryPlayers") and published.get(field) != candidate.get(field)]
+    if not changed or not all(ledger_supports(ledger_fields, field, candidate.get(field)) for field in changed):
+        return []
+    return [LEDGER_FIELDS[field] for field in changed]
+
+
+def identity_only(published, ledger_fields):
+    candidate = dict(published)
+    for field, name in LEDGER_FIELDS.items():
+        fact = (ledger_fields or {}).get(name)
+        if fact and field in published:
+            value = fact.get("value")
+            candidate[field] = type(published[field])(value) if published[field] is not None else value
+    return candidate
+
+
 def published_version_from(path):
     match = re.fullmatch(r"rosters-(.+)\.json", Path(path).name)
     if not match:
@@ -312,6 +332,12 @@ def approve(*, observed, published_snapshot, base_game, original_game, fallback_
             facts=facts_by_club.get(file))
         evaluated.append((file, decision, reasons, changes))
     accepted = {file for file, decision, _, _ in evaluated if decision == "accepted"}
+    identity_accepted = {}
+    for file, decision, _, _ in evaluated:
+        if decision == "retained":
+            fields = identity_domain(published[file], identity_only(published[file], ledger.get(file)), ledger.get(file))
+            if fields:
+                identity_accepted[file] = fields
     for club in snapshot["clubs"]:
         if club["teamFile"] not in accepted:
             club["players"] = []
@@ -322,7 +348,8 @@ def approve(*, observed, published_snapshot, base_game, original_game, fallback_
     approved_identities = work / "approved-club-identities.json"
     if ledger_data is not None:
         write_json(approved_identities, dict(ledger_data, clubs=[c for c in ledger_data.get("clubs", [])
-                                                                    if c["teamFile"] in accepted]))
+                                                                    if c["teamFile"] in accepted
+                                                                    or c["teamFile"] in identity_accepted]))
     final_report = compile_rosters(base_game, original_game, Path(output), approved_snapshot, supplements,
                                    fallback_game, java, javac, reference, version, approved_identities,
                                    sources_allowed=accepted)
@@ -332,6 +359,12 @@ def approve(*, observed, published_snapshot, base_game, original_game, fallback_
         raise RuntimeError("O compilado final não tem o mesmo conjunto de clubes do publicado")
     mismatches = []
     for file in sorted(published):
+        if file in identity_accepted:
+            if (final[file]["players"] != published[file]["players"]
+                    or final[file].get("secondaryPlayers") != published[file].get("secondaryPlayers")
+                    or identity_domain(published[file], final[file], ledger.get(file)) != identity_accepted[file]):
+                mismatches.append(file)
+            continue
         expected = team_bytes(candidate_teams if file in accepted else published_teams, file)
         if team_bytes(Path(output) / "teams", file) != expected:
             mismatches.append(file)
@@ -345,8 +378,18 @@ def approve(*, observed, published_snapshot, base_game, original_game, fallback_
             changes, _, _ = roster_changes(published[file], final[file])
             changes["estimatedNewPlayers"] = estimated_new
         source = sources.get(file, {})
+        domains = {"roster": {"decision": decision, "reasons": reasons}}
+        if file in identity_accepted:
+            changes, _, _ = roster_changes(published[file], final[file])
+            changes["estimatedNewPlayers"] = []
+            domains["identity"] = {"decision": "accepted", "fields": identity_accepted[file]}
+            decision = "accepted"
+            reasons = [f"identidade com fato no ledger ({', '.join(identity_accepted[file])}); elenco publicado "
+                       "preservado"]
+        elif decision == "accepted" and changes.get("identity"):
+            domains["identity"] = {"decision": "accepted", "fields": [c["field"] for c in changes["identity"]]}
         clubs.append({"teamFile": file, "club": published[file]["name"], "decision": decision, "reasons": reasons,
-                      "collectionStatus": statuses.get(file),
+                      "collectionStatus": statuses.get(file), "domains": domains,
                       "source": {"url": source.get("sourceUrl"), "observedAt": source.get("observedAt")},
                       "changes": changes})
     changed_set = set(changed)
@@ -354,7 +397,10 @@ def approve(*, observed, published_snapshot, base_game, original_game, fallback_
     approval = {"schemaVersion": 1, "version": version, "publishedVersion": published_version, "rule": RULE,
                 "referenceDate": reference.isoformat(),
                 "counts": {"clubsCompared": len(published), "changed": len(changed), "accepted": len(accepted),
-                           "retained": len(changed) - len(accepted),
+                           "identityAccepted": len(identity_accepted),
+                           "managersChanged": sum(any(c["field"] == "manager" for c in club["changes"].get("identity", []))
+                                                  for club in clubs if club["decision"] == "accepted"),
+                           "retained": len(changed) - len(accepted) - len(identity_accepted),
                            "preserved": sum(statuses.get(file) != COMPLETE for file in unchanged),
                            "unchangedSourceComplete": sum(statuses.get(file) == COMPLETE for file in unchanged)},
                 "criteria": approval_policy(published_version, hold_days),

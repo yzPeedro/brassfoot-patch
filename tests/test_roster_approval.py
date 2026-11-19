@@ -1,8 +1,8 @@
 import unittest
 from datetime import date
 
-from tools.roster_approval import (active_facts, approval_policy, evaluate_club, pair_players, provenance_defaults,
-                                   published_version_from, roster_changes)
+from tools.roster_approval import (active_facts, approval_policy, evaluate_club, identity_domain, identity_only,
+                                   pair_players, provenance_defaults, published_version_from, roster_changes)
 
 
 def player(name, position=3, tid=None, age=25, country=29, side=0, f=0):
@@ -177,6 +177,28 @@ class AlarmTests(unittest.TestCase):
     def test_ledger_value_must_match(self):
         decision, _, _ = evaluate(team(squad(20)), team(squad(20), name="Outro"), ledger={"name": {"value": "Novo Nome"}})
         self.assertEqual(decision, "retained")
+
+
+class IdentityDomainTests(unittest.TestCase):
+    def test_manager_fact_is_its_own_domain(self):
+        published = dict(team(squad(20)), manager="Antigo")
+        ledger = {"manager": {"value": "Novo Técnico"}}
+        candidate = identity_only(published, ledger)
+        self.assertEqual(candidate["manager"], "Novo Técnico")
+        self.assertEqual(candidate["players"], published["players"])
+        self.assertEqual(identity_domain(published, candidate, ledger), ["manager"])
+
+    def test_identity_domain_refuses_unsupported_fields(self):
+        published = dict(team(squad(20)), manager="Antigo")
+        self.assertEqual(identity_domain(published, dict(published, manager="Outro"), {}), [])
+        ledger = {"manager": {"value": "Outro"}}
+        self.assertEqual(identity_domain(published, dict(published, manager="Outro", stadium="Novo"), ledger), [])
+        self.assertEqual(identity_domain(published, published, ledger), [])
+
+    def test_changes_list_identity_fields(self):
+        published = dict(team(squad(20)), manager="Antigo")
+        changes, _, _ = roster_changes(published, dict(published, manager="Novo"))
+        self.assertEqual(changes["identity"], [{"field": "manager", "from": "Antigo", "to": "Novo"}])
 
 
 class PublishedFactTests(unittest.TestCase):
