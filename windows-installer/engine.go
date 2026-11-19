@@ -67,7 +67,7 @@ type InstallOptions struct { // TestFailAfter is for automated rollback tests, n
 var (
 	teamName           = regexp.MustCompile(`^teams/[\p{L}\p{N}_ -]+\.ban$`)
 	crestName          = regexp.MustCompile(`^teams/(escudos|escudosMini|camisas|camisas2|camisas3)/[\p{L}\p{N}_ -]+\.png$`)
-	trophyName         = regexp.MustCompile(`^trofeus/tr_[A-Za-z0-9_]+\.png$`)
+	trophyName         = regexp.MustCompile(`^(trofeus/tr_[A-Za-z0-9_]+\.png|juniores-reais\.json)$`)
 	nationalConfigPath = "conf_ligas_nacionais/BRA.cfg"
 	nationalConfigName = regexp.MustCompile(`^conf_ligas_nacionais/[A-Z]{3}\.cfg$`)
 	gameExecutablePath = "bf22-23.exe"

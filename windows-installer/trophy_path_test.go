@@ -11,6 +11,10 @@ func TestTrophyPath(t *testing.T) {
 		"trofeus/tr_copa_TUR.jpg":      false,
 		"trofeus/sub/tr_copa_TUR.png":  false,
 		"Trofeus/tr_copa_TUR.png":      false,
+		"juniores-reais.json":          true,
+		"juniores-reais.json.bak":      false,
+		"sav/juniores-reais.json":      false,
+		"../juniores-reais.json":       false,
 	}
 	for path, want := range cases {
 		if got := trophyName.MatchString(path); got != want {
