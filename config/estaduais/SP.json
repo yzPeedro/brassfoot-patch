@@ -329,7 +329,9 @@
       "legs": 1,
       "tiebreak": "penalties",
       "home": "better-single",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     },
     {
       "name": "Semifinal",
@@ -347,7 +349,9 @@
       "legs": 1,
       "tiebreak": "penalties",
       "home": "better-single",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     },
     {
       "name": "Final",
@@ -361,7 +365,9 @@
       "legs": 2,
       "tiebreak": "points-then-penalties",
       "home": "better-second",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     }
   ],
   "finalTable": [],

@@ -2,8 +2,10 @@
   "state": "AP",
   "season": 2026,
   "competition": "Campeonato Amapaense de Futebol Profissional Série A 2026 (Amapazão Sicredi)",
-  "engine": "ready",
-  "pending": [],
+  "engine": "pending",
+  "pending": [
+    "clube sem arquivo: Esporte Clube Macapá"
+  ],
   "teams": [
     "trem_bra",
     "oratorio_ap",
@@ -11,7 +13,7 @@
     "santos_ap",
     "ypiranga_ap",
     "cristal_ap",
-    "macapa_ap",
+    null,
     "saojose_ap"
   ],
   "names": [
@@ -48,7 +50,9 @@
       "legs": 2,
       "tiebreak": "aggregate-then-better-campaign",
       "home": "better-second",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     },
     {
       "name": "Terceira Fase (Final)",
@@ -62,7 +66,9 @@
       "legs": 1,
       "tiebreak": "penalties",
       "home": "neutral",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     }
   ],
   "finalTable": [],

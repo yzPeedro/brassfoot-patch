@@ -21,7 +21,7 @@ TARGETS = {
     "f/G.class": "pairing,after-tie,points-tiebreak,home-advances",
     "f/f.class": "copa-start,copa-names",
     "f/F.class": "regional-start",
-    "best/I.class": "match-codes",
+    "best/I.class": "match-codes,neutral-venue",
     "best/w.class": "participants,estadual-division",
     "f/B.class": "main-phase,playoff-start",
     "f/I.class": "supercopa",

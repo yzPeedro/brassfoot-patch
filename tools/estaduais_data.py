@@ -80,6 +80,12 @@ def source(*folders: Path) -> str:
         "    static final String[][] TIEBREAK = {\n"
         + rows(lambda s: array(s.get("tiebreakers") or [], text)) + "\n    };",
         "",
+        "    static final String[][][][] KO_OFFICIAL = {\n"
+        + rows(lambda s: knockout(s, lambda r: array(r.get("officialTies") or [], lambda t: array(t, text)))) + "\n    };",
+        "",
+        "    static final String[][] KO_VENUE = {\n"
+        + rows(lambda s: knockout(s, lambda r: text(r.get("venue") or ""))) + "\n    };",
+        "",
         "    static final String[][] KO_NAMES = {\n"
         + rows(lambda s: knockout(s, lambda r: text(r.get("name") or ""))) + "\n    };",
         "",

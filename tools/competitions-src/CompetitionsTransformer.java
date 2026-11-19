@@ -459,6 +459,20 @@ public final class CompetitionsTransformer {
         return true;
     }
 
+    private static boolean neutralVenue(ClassNode owner) {
+        MethodNode target = method(owner, "hX", "()Z");
+        LabelNode original = new LabelNode(new Label());
+        InsnList hook = new InsnList();
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "best/CompEstaduais", "neutral", "(Lbest/I;)Z", false));
+        hook.add(new JumpInsnNode(Opcodes.IFEQ, original));
+        hook.add(new InsnNode(Opcodes.ICONST_1));
+        hook.add(new InsnNode(Opcodes.IRETURN));
+        hook.add(original);
+        target.instructions.insert(hook);
+        return true;
+    }
+
     private static boolean estadualAdvance(ClassNode owner) {
         MethodNode target = method(owner, "zs", "()V");
         AbstractInsnNode anchor = null;
@@ -620,6 +634,7 @@ public final class CompetitionsTransformer {
             case "division-order": frames = divisionOrder(owner); break;
             case "serie-c-rounds": frames = singleRoundSerieC(owner); break;
             case "estadual-advance": frames = estadualAdvance(owner); break;
+            case "neutral-venue": frames = neutralVenue(owner); break;
             case "bracket-names": frames = bracketNames(owner); break;
             case "estadual-resort": frames = estadualResort(owner); break;
             case "estadual-names": frames = estadualNames(owner); break;

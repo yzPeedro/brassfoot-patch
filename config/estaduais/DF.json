@@ -52,7 +52,9 @@
       "legs": 2,
       "tiebreak": "aggregate-then-better-campaign",
       "home": "better-second",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     },
     {
       "name": "Terceira Fase (Final)",
@@ -66,7 +68,9 @@
       "legs": 1,
       "tiebreak": "penalties",
       "home": "neutral",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     }
   ],
   "finalTable": [],

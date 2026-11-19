@@ -182,7 +182,10 @@ def build(sheet: dict, teams: list[dict], created: dict, known: dict, aliases: d
                                 for h, a in r]},
         "relegated": sheet.get("relegated"),
         "knockout": [{"name": s.get("name"), "ties": campaign_codes(s.get("ties")), "entrants": s.get("entrants") or [], "legs": s.get("legs"),
-                      "tiebreak": s.get("tiebreak"), "home": s.get("home"), "condition": s.get("condition") or ""} for s in stages],
+                      "tiebreak": s.get("tiebreak"), "home": s.get("home"), "condition": s.get("condition") or "",
+                      "venue": s.get("venue") or "",
+                      "officialTies": [[("F" + files[t[0]]) if t[0] in files else t[0], ("F" + files[t[1]]) if t[1] in files else t[1]] + t[2:]
+                                       for t in s.get("officialTies") or []]} for s in stages],
         "finalTable": sheet.get("finalTable") or [],
         "tiebreakers": sheet.get("tiebreakers") or [],
         "relegation": sheet.get("relegationRule") or None,

@@ -355,6 +355,11 @@ public final class EstaduaisHarness {
             Object first = ((f.G) rounds.get(spec.sameA)).zY().get(0);
             Object second = ((f.G) rounds.get(spec.sameB)).zY().get(0);
             check(!fallen.contains(first) && !fallen.contains(second), year + " " + spec.uf + ": campeoes de turno protegidos do rebaixamento");
+            if (rounds.size() == spec.rounds) {
+                I decision = (I) ((f.G) rounds.get(rounds.size() - 1)).zW().get(0);
+                I before = (I) ((f.G) rounds.get(rounds.size() - 2)).zW().get(0);
+                check(decision.hX() && !before.hX(), year + " " + spec.uf + ": final geral em campo neutro e final de turno com mando");
+            }
         }
         down.put(spec.uf, files(fallen));
     }

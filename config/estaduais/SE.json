@@ -56,7 +56,9 @@
       "legs": 1,
       "tiebreak": "penalties",
       "home": "better-single",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     },
     {
       "name": "3ª Fase – Semifinal",
@@ -76,7 +78,9 @@
       "legs": 2,
       "tiebreak": "points-then-penalties",
       "home": "better-second",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     },
     {
       "name": "4ª Fase – Final",
@@ -90,7 +94,9 @@
       "legs": 2,
       "tiebreak": "points-then-penalties",
       "home": "better-second",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     }
   ],
   "finalTable": [],

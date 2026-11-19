@@ -50,7 +50,9 @@
       "legs": 1,
       "tiebreak": "penalties",
       "home": "neutral",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     },
     {
       "name": "Final",
@@ -64,7 +66,9 @@
       "legs": 1,
       "tiebreak": "penalties",
       "home": "neutral",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     }
   ],
   "finalTable": [],

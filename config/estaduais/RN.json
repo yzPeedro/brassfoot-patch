@@ -48,7 +48,9 @@
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "better-second",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     },
     {
       "name": "Semifinal",
@@ -66,7 +68,9 @@
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "better-second",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     },
     {
       "name": "Final",
@@ -80,7 +84,9 @@
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "better-second",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     }
   ],
   "finalTable": [],

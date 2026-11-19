@@ -80,7 +80,9 @@
       "legs": 1,
       "tiebreak": "home-advances",
       "home": "neutral",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     },
     {
       "name": "2ª fase e Quadrangular da Permanência - 2ª rodada",
@@ -110,7 +112,9 @@
       "legs": 1,
       "tiebreak": "home-advances",
       "home": "neutral",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     },
     {
       "name": "2ª fase e Quadrangular da Permanência - 3ª rodada",
@@ -140,7 +144,9 @@
       "legs": 1,
       "tiebreak": "home-advances",
       "home": "neutral",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     },
     {
       "name": "Semifinal",
@@ -158,7 +164,9 @@
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "neutral",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     },
     {
       "name": "Disputas de 3º e 5º lugar",
@@ -178,7 +186,9 @@
       "legs": 1,
       "tiebreak": "penalties",
       "home": "better-single",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     },
     {
       "name": "Final",
@@ -192,7 +202,9 @@
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "better-second",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     }
   ],
   "finalTable": [

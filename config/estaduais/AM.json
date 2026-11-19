@@ -25,7 +25,7 @@
     "São Raimundo Esporte Clube"
   ],
   "phase1": {
-    "type": "turns",
+    "type": "crossed",
     "legs": 1,
     "groups": [
       [
@@ -41,7 +41,72 @@
         "saoraimundo_am"
       ]
     ],
-    "fixtures": []
+    "fixtures": [
+      [
+        "amazonas_am",
+        "saoraimundo_am"
+      ],
+      [
+        "nacional_am",
+        "itacoatiara_am"
+      ],
+      [
+        "manauara_am",
+        "princesa_am"
+      ],
+      [
+        "manaus_bra",
+        "parintins_am"
+      ],
+      [
+        "parintins_am",
+        "princesa_am"
+      ],
+      [
+        "itacoatiara_am",
+        "saoraimundo_am"
+      ],
+      [
+        "manaus_bra",
+        "manauara_am"
+      ],
+      [
+        "nacional_am",
+        "amazonas_am"
+      ],
+      [
+        "manauara_am",
+        "nacional_am"
+      ],
+      [
+        "amazonas_am",
+        "manaus_bra"
+      ],
+      [
+        "princesa_am",
+        "itacoatiara_am"
+      ],
+      [
+        "saoraimundo_am",
+        "parintins_am"
+      ],
+      [
+        "parintins_am",
+        "nacional_am"
+      ],
+      [
+        "itacoatiara_am",
+        "manaus_bra"
+      ],
+      [
+        "princesa_am",
+        "amazonas_am"
+      ],
+      [
+        "saoraimundo_am",
+        "manauara_am"
+      ]
+    ]
   },
   "relegated": 1,
   "knockout": [
@@ -61,7 +126,9 @@
       "legs": 1,
       "tiebreak": "home-advances",
       "home": "neutral",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     },
     {
       "name": "1º turno - Semifinal",
@@ -79,7 +146,9 @@
       "legs": 1,
       "tiebreak": "penalties",
       "home": "neutral",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     },
     {
       "name": "1º turno - Final",
@@ -93,7 +162,144 @@
       "legs": 1,
       "tiebreak": "penalties",
       "home": "pool:E",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "2º turno - 1ª rodada",
+      "ties": [
+        [
+          "A1",
+          "A4"
+        ],
+        [
+          "A2",
+          "A3"
+        ],
+        [
+          "B1",
+          "B4"
+        ],
+        [
+          "B2",
+          "B3"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "home-advances",
+      "home": "neutral",
+      "condition": "",
+      "venue": "",
+      "officialTies": [
+        [
+          "Famazonas_am",
+          "Fitacoatiara_am"
+        ],
+        [
+          "Fmanauara_am",
+          "Fparintins_am"
+        ],
+        [
+          "Fnacional_am",
+          "Fsaoraimundo_am"
+        ],
+        [
+          "Fmanaus_bra",
+          "Fprincesa_am"
+        ]
+      ]
+    },
+    {
+      "name": "2º turno - 2ª rodada",
+      "ties": [
+        [
+          "A3",
+          "A1"
+        ],
+        [
+          "A4",
+          "A2"
+        ],
+        [
+          "B3",
+          "B1"
+        ],
+        [
+          "B4",
+          "B2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "home-advances",
+      "home": "neutral",
+      "condition": "",
+      "venue": "",
+      "officialTies": [
+        [
+          "Fitacoatiara_am",
+          "Fparintins_am"
+        ],
+        [
+          "Famazonas_am",
+          "Fmanauara_am"
+        ],
+        [
+          "Fsaoraimundo_am",
+          "Fprincesa_am"
+        ],
+        [
+          "Fnacional_am",
+          "Fmanaus_bra"
+        ]
+      ]
+    },
+    {
+      "name": "2º turno - 3ª rodada",
+      "ties": [
+        [
+          "A1",
+          "A2"
+        ],
+        [
+          "A3",
+          "A4"
+        ],
+        [
+          "B1",
+          "B2"
+        ],
+        [
+          "B3",
+          "B4"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "home-advances",
+      "home": "neutral",
+      "condition": "",
+      "venue": "",
+      "officialTies": [
+        [
+          "Fmanauara_am",
+          "Fitacoatiara_am"
+        ],
+        [
+          "Fparintins_am",
+          "Famazonas_am"
+        ],
+        [
+          "Fmanaus_bra",
+          "Fsaoraimundo_am"
+        ],
+        [
+          "Fprincesa_am",
+          "Fnacional_am"
+        ]
+      ]
     },
     {
       "name": "2º turno - Play-off",
@@ -111,7 +317,9 @@
       "legs": 1,
       "tiebreak": "home-advances",
       "home": "neutral",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     },
     {
       "name": "2º turno - Semifinal",
@@ -129,7 +337,9 @@
       "legs": 1,
       "tiebreak": "penalties",
       "home": "neutral",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     },
     {
       "name": "2º turno - Final",
@@ -143,27 +353,31 @@
       "legs": 1,
       "tiebreak": "penalties",
       "home": "place:CD",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     },
     {
       "name": "Final do Campeonato",
       "ties": [
         [
           "W1@2",
-          "W1@5"
+          "W1@8"
         ]
       ],
       "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
       "home": "neutral",
-      "condition": "distinct"
+      "condition": "distinct",
+      "venue": "neutral",
+      "officialTies": []
     }
   ],
   "finalTable": [
-    "W1@6",
-    "L1@6",
-    "W1@5",
+    "W1@9",
+    "L1@9",
+    "W1@8",
     "W1@2",
     "TG*"
   ],
@@ -183,14 +397,14 @@
     "count": 1,
     "protect": [
       "W1@2",
-      "W1@5"
+      "W1@8"
     ]
   },
   "pools": [
     {
       "name": "A",
       "rounds": [
-        "x"
+        "p"
       ],
       "members": [
         "A1",
@@ -202,7 +416,7 @@
     {
       "name": "B",
       "rounds": [
-        "x"
+        "p"
       ],
       "members": [
         "B1",
@@ -214,7 +428,7 @@
     {
       "name": "E",
       "rounds": [
-        "x"
+        "p"
       ],
       "members": [
         "A1",
@@ -230,7 +444,9 @@
     {
       "name": "C",
       "rounds": [
-        "i"
+        3,
+        4,
+        5
       ],
       "members": [
         "A1",
@@ -242,7 +458,9 @@
     {
       "name": "D",
       "rounds": [
-        "i"
+        3,
+        4,
+        5
       ],
       "members": [
         "B1",
@@ -254,7 +472,10 @@
     {
       "name": "G",
       "rounds": [
-        "p"
+        "p",
+        3,
+        4,
+        5
       ],
       "members": [
         "A1",
@@ -269,23 +490,18 @@
     }
   ],
   "simplifications": [
-    "as fases classificatórias dos dois turnos ficam na 1ª fase do jogo (4 rodadas entre chaves e depois 3 rodadas dentro da chave); por isso o mata-mata do 1º turno é disputado depois das rodadas do 2º turno",
-    "a classificação de cada turno soma só os jogos daquele turno (entre chaves no 1º, dentro da chave no 2º); a classificação geral soma os 7 jogos",
-    "mandos da fase classificatória distribuídos pelo jogo (2 por clube no 1º turno; 2 ou 1 no 2º), não pela tabela da FAF nem pela classificação de 2025",
-    "final geral em campo do campeão do 1º turno (o jogo não tem campo neutro)",
-    "se o mesmo clube vencer os dois turnos, o vice é o melhor colocado da classificação geral (o regulamento lido não define)",
-    "desempates por confronto direto, cartões e sorteio não aplicados",
+    "2026: tabela oficial da FAF (jogos 1 a 16 e 22 a 33) com os mandantes oficiais; o estádio de cada jogo é o do mandante no jogo",
+    "temporadas seguintes: 2º turno com mandos distribuídos pelo jogo (a regra oficial usa a classificação do ano anterior)",
+    "final geral em campo neutro (regulamento: local definido pela FAF, preferencialmente a Arena da Amazônia)",
+    "se o mesmo clube vencer os dois turnos, o vice é o melhor clube restante na pontuação dos 7 jogos classificatórios (inferência: o regulamento não define)",
+    "confronto direto só desempata 2 clubes (o regulamento não trata 3 ou mais); sorteio simulado de forma determinística",
     "mando 'neutral' segue a ordem da tabela"
   ],
-  "unsupported": [
-    "Confronto direto como desempate considera somente o jogo da fase classificatória de um dos turnos (Art. 14, 5); no 1º turno os clubes da mesma chave não se enfrentam, então o critério só pode ser aplicado entre clubes de chaves diferentes.",
-    "Composição das chaves depende da classificação de 2025 e do campeão da Série B (Art. 10 §2º-§4º); para 2026 está fixada acima.",
-    "Vagas nacionais 2027 (Copa do Brasil, Série D, Copa Norte/Verde) para campeão, vice e depois pela classificação geral (Art. 5º): fora do esquema.",
-    "Fonte: o PDF não tem camada de texto; lido por renderização local (páginas 6 a 13). Os capítulos de páginas não renderizadas não foram conferidos."
-  ],
+  "unsupported": [],
   "sources": [
     "pdf/AM-regulamento-barezao-serie-a-2026.pdf (texto em curvas, lido por imagem): Art. 10 e §1º-§5º (sistema híbrido, 2 turnos, chaves A e B, campeão de turno não cai), Art. 11 §1º-§5º (1º turno: A x B, play-off 2º x 3º da mesma chave com vantagem do 2º, semifinal 1º x vencedor, final com mando da melhor pontuação), Art. 12 §1º-§6º (2º turno), Art. 13 (final geral), Art. 14 (desempates 1-8), Art. 15 (campeão, classificação final, 8º rebaixado)",
     "AM.json divisions[0] (participants, groupsComposition, format, relegationRule, results2026)",
-    "results2026 conferido: play-offs Itacoatiara(A2)xManauara(A3) e Princesa(B2)xManaus(B3); semifinais Amazonas(A1)xItacoatiara e Nacional(B1)xPrincesa; 2º turno cruzado Parintins(A2)xPrincesa(B3) e Nacional(B2)xAmazonas(A3); São Raimundo (8º geral) rebaixado"
+    "results2026 conferido: play-offs Itacoatiara(A2)xManauara(A3) e Princesa(B2)xManaus(B3); semifinais Amazonas(A1)xItacoatiara e Nacional(B1)xPrincesa; 2º turno cruzado Parintins(A2)xPrincesa(B3) e Nacional(B2)xAmazonas(A3); São Raimundo (8º geral) rebaixado",
+    "data/private/competitions-sources/estaduais-2026/AM-tabela-oficial.json (39 jogos com súmula da FAF)"
   ]
 }

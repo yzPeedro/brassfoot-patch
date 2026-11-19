@@ -52,7 +52,9 @@
       "legs": 1,
       "tiebreak": "penalties",
       "home": "better-single",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     },
     {
       "name": "Fase III - Final",
@@ -66,7 +68,9 @@
       "legs": 1,
       "tiebreak": "penalties",
       "home": "better-single",
-      "condition": ""
+      "condition": "",
+      "venue": "",
+      "officialTies": []
     }
   ],
   "finalTable": [],

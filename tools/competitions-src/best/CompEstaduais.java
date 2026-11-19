@@ -203,6 +203,7 @@ public final class CompEstaduais {
                 return teams.size() % 2 == 1 ? oddRoundRobin(league, teams, k, current) : current;
             }
             if (groups == null || groups.size() < 2) return current;
+            if (officialSeason() && CompEstaduaisData.FIXTURES[k].length > 0) return fixtures(league, teams, k, current);
             int n = teams.size();
             int[] group = new int[n];
             int size = -1;
@@ -431,7 +432,7 @@ public final class CompEstaduais {
             int k = key(league);
             String[][][] rounds = CompEstaduaisData.KO_TIES[k];
             if (rounds.length == 0) return false;
-            ArrayList list = resolve(league, null, rounds[0], k, 0);
+            ArrayList list = resolve(league, null, ties(k, 0), k, 0);
             if (list == null) return false;
             boolean[] legs = new boolean[Math.max(7, CompEstaduaisData.KO_LEGS[k].length)];
             for (int i = 0; i < legs.length && i < CompEstaduaisData.KO_LEGS[k].length; i++) legs[i] = CompEstaduaisData.KO_LEGS[k][i];
@@ -461,7 +462,7 @@ public final class CompEstaduais {
             int next = knockout.zb() + 1;
             String[] conditions = CompEstaduaisData.KO_COND[k];
             if (next >= conditions.length || !"distinct".equals(conditions[next])) return false;
-            ArrayList list = resolve(league, knockout, CompEstaduaisData.KO_TIES[k][next], k, next);
+            ArrayList list = resolve(league, knockout, ties(k, next), k, next);
             if (list == null || list.size() < 2 || list.get(0) != list.get(1)) return false;
             knockout.ff(next);
             ArrayList order = standing(league, knockout, CompEstaduaisData.FINAL_TABLE[k]);
@@ -472,6 +473,30 @@ public final class CompEstaduais {
             return true;
         } catch (Throwable error) {
             log("falha ao encerrar o mata-mata estadual", error);
+            return false;
+        }
+    }
+
+    static String[][] ties(int k, int index) {
+        String[][] official = index < CompEstaduaisData.KO_OFFICIAL[k].length ? CompEstaduaisData.KO_OFFICIAL[k][index] : new String[0][];
+        return official.length > 0 && officialSeason() ? official : CompEstaduaisData.KO_TIES[k][index];
+    }
+
+    public static boolean neutral(I match) {
+        try {
+            if (!(match.ht() instanceof z)) return false;
+            z knockout = (z) match.ht();
+            s league = owner(knockout);
+            if (league == null) return false;
+            String[] venues = CompEstaduaisData.KO_VENUE[key(league)];
+            for (int r = knockout.zp().size() - 1; r >= 0; r--) {
+                G round = (G) knockout.zp().get(r);
+                if (round.zW().contains(match) || round.zX() != null && round.zX().contains(match)) {
+                    return r < venues.length && "neutral".equals(venues[r]);
+                }
+            }
+            return false;
+        } catch (Throwable error) {
             return false;
         }
     }
@@ -572,6 +597,11 @@ public final class CompEstaduais {
                     a.SR.bx().add(new components.aD(state.getEstado(), league.ip(), team, i + 1));
                 }
             }
+            ArrayList table = league.yK();
+            if (placed.size() == table.size() && placed.containsAll(table)) {
+                table.clear();
+                table.addAll(placed);
+            }
             return true;
         } catch (Throwable error) {
             log("falha na classificacao final do estadual", error);
@@ -589,17 +619,16 @@ public final class CompEstaduais {
             int index = knockout.zp().size();
             Comparator campaign = campaign(league, knockout);
             ArrayList none = new ArrayList();
-            ArrayList members = poolOrder(rule[0].charAt(0), league, knockout, index, campaign, none, null);
-            if (members == null) return null;
             ArrayList protectedTeams = new ArrayList();
             for (int i = 2; i < rule.length; i++) {
                 ah team = slot(rule[i], league, knockout, index, campaign, none);
                 if (team != null) protectedTeams.add(team);
             }
             int wanted = Integer.parseInt(rule[1]);
+            ArrayList table = league.yK();
             ArrayList result = new ArrayList();
-            for (int i = members.size() - 1; i >= 0 && result.size() < wanted; i--) {
-                if (!protectedTeams.contains(members.get(i))) result.add(members.get(i));
+            for (int i = table.size() - 1; i >= 0 && result.size() < wanted; i--) {
+                if (!protectedTeams.contains(table.get(i))) result.add(table.get(i));
             }
             return result;
         } catch (Throwable error) {
@@ -617,7 +646,7 @@ public final class CompEstaduais {
             String[][][] rounds = CompEstaduaisData.KO_TIES[k];
             if (index >= rounds.length) return true;
             if (index > 0) {
-                ArrayList resolved = resolve(league, knockout, rounds[index], k, index);
+                ArrayList resolved = resolve(league, knockout, ties(k, index), k, index);
                 if (resolved == null) return true;
                 G previous = (G) knockout.zp().get(index - 1);
                 if (previous.zY() == list) previous.ar(new ArrayList(list));
@@ -690,6 +719,10 @@ public final class CompEstaduais {
             return position < winners.size() ? (ah) winners.get(position) : null;
         }
         if (head == 'T') return pool(code, league, knockout, index, campaign, candidates);
+        if (head == 'F') {
+            ah team = byFile(code.substring(1));
+            return team != null && league.yK().contains(team) ? team : null;
+        }
         if (head == 'R') {
             int position = Integer.parseInt(code.substring(1)) - 1;
             ArrayList ranked = new ArrayList(candidates);
