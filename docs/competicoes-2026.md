@@ -13,6 +13,38 @@ Parte do componente **Elencos + Competições 2026**. Altera o motor de competi�
 | Supercopa Rei | campeão da Série A x campeão da Copa do Brasil; com o mesmo clube nos dois títulos, o adversário é o vice da Série A; jogo único | igual (a partida não usa sede neutra) |
 | Copa do Brasil | 126 clubes; 9 fases; fases 1–4 e final em jogo único; 5ª a 8ª em ida e volta; 155 jogos | igual |
 
+## Estaduais e regionais
+
+Cada estadual é descrito por uma ficha em `config/estaduais/<UF>.json`, gerada por `tools/build_estaduais_config.py` a partir dos regulamentos de 2026 (pesquisa em `data/private/competitions-sources/estaduais-2026/`, fora do Git). Os regionais usam o mesmo esquema em `config/regionais/`. Só as fichas com `"engine": "ready"` entram no executável. Uma ficha fica `pending` quando falta clube no jogo ou quando alguma regra não cabe no esquema, e o motivo fica em `pending`.
+
+| Elemento | O que o motor faz |
+|---|---|
+| 1ª fase | `league` (pontos corridos), `groups` (dentro do grupo), `crossed` (cada clube enfrenta os grupos indicados em `opponents`, ou todos os outros, e a classificação é dentro do grupo) ou `fixtures` (tabela oficial com mandante e visitante de cada jogo) |
+| vagas do mata-mata | `N` (colocação geral), `A1`, `B2`… (colocação no grupo), `W<k>`/`L<k>` (vencedor e perdedor do k-ésimo confronto da fase anterior), `R<k>` (k-ésimo por campanha acumulada entre os vivos) |
+| desempate | `aggregate-then-penalties`, `penalties`, `points-then-penalties` (pontos nos dois jogos e pênaltis, sem saldo), `aggregate-then-better-campaign` |
+| mando | `better-second` (melhor campanha manda a volta), `better-single` (melhor campanha manda o jogo único) e `neutral` (ordem da ficha) |
+| rebaixamento | número de rebaixados diretos; o acesso e o descenso seguem a rotina do jogo (`best.w.ee`) |
+
+Estado em 19/11/2026:
+
+- **Prontos:** Alagoano (tabela oficial com os mandos), Carioca (1ª fase cruzada, quartas em jogo único, semifinal em ida e volta e final), Copa do Nordeste (grupos A×B e C×D, quartas com mando do 1º, semifinal e final em ida e volta) e Copa Verde (Copa Norte e Copa Centro-Oeste com 2 grupos de 6 cada, quartas e finais regionais, final geral).
+- **Regras prontas, aguardando clubes:** os demais estados, menos AM, CE e MG.
+- **Regras sem suporte:** AM (dois turnos com final entre campeões de turno), CE (2ª fase em grupos cruzados) e MG (semifinal pela classificação geral por posição no grupo).
+
+Pontos de injeção:
+
+| Ponto | Classe e método | Efeito |
+|---|---|---|
+| formato do estadual | `best.w.dY()`, antes de criar o `f.s` da 1ª divisão | participantes, grupos e opções da ficha; código de liga 2700 |
+| tabela da 1ª fase | `f.s.a(ArrayList, boolean, boolean, ArrayList)` | gera a tabela cruzada ou aplica a tabela oficial |
+| mata-mata | início de `f.s.yP()` e de `f.G.b(z, ArrayList, …)` | cria as fases pela ficha e resolve as vagas de cada fase |
+| desempate por pontos | `f.G.b(boolean, boolean)`, código de confronto 2701 | pula o critério de saldo agregado |
+| regionais | início de `f.F.an(ArrayList)` | Copa do Nordeste (código 2702) e Copa Verde (2703) |
+
+Os participantes, os grupos e a tabela oficiais só valem na temporada 2026. Nas seguintes, os estaduais mantêm o formato e trocam clubes pelo acesso e descenso do jogo. Os regionais escolhem os clubes pela ordem do jogo (divisões nacionais primeiro) dentro de cada região ou bloco.
+
+Verificação: `tools/competitions-src/harness/EstaduaisHarness.java`, numa cópia isolada da base 2026.6.14, conferiu por estado participantes, grupos, número de jogos, ausência de jogo dentro do grupo na fase cruzada, mandos da tabela oficial, fases do mata-mata e campeão, por 3 temporadas (2026–2028), sem falhas. É simulação automatizada, não homologação em partida.
+
 ## Fontes
 
 Documentos oficiais da CBF, com SHA-256 registrado em `config/competitions/brasil-2026.json`:
@@ -86,5 +118,11 @@ Uma carreira criada antes do componente carrega e continua normalmente. A tempor
 - **RNC e RNF:** ficam fixos nos valores de 2026 em todas as temporadas da carreira. O critério 3 da Série D (5º a 32º da Série D anterior) não é aplicado nas temporadas seguintes.
 - **Formato da Série C de 2027 e 2028:** não há regulamento publicado. A carreira mantém o formato de 2026 com mais clubes.
 - **Calendário:** as datas seguem os tipos de data do jogo, não a tabela oficial.
+- **Estaduais e regionais:**
+  - desempates por confronto direto, cartões e sorteio não são aplicados; a classificação usa pontos, vitórias, saldo e gols pró;
+  - torneios paralelos (Taça Rio, Troféu Inconfidência, Taça ACESC, Copa Grão-Pará e outros), disputas de 3º lugar e quadrangulares de rebaixamento não são disputados;
+  - o mando pela campanha usa a campanha acumulada no torneio, mesmo quando o regulamento conta só uma fase;
+  - os títulos da Copa Norte e da Copa Centro-Oeste não viram troféus próprios.
+- **Prorrogação:** o motor original não tem tempo extra. Nas regras que exigem prorrogação (playoffs e copas inglesas), o empate segue direto para o critério seguinte do jogo, sem tempo extra.
 - **Interface:**
   - o nome da rodada dos playoffs vem da tabela genérica do jogo.
