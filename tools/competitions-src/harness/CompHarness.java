@@ -91,6 +91,7 @@ public final class CompHarness {
         int seasons = Integer.parseInt(args[1]);
         int startYear = Integer.parseInt(args[2]);
         int reloadAt = args.length > 4 ? Integer.parseInt(args[4]) : -1;
+        String mode = args.length > 5 ? args[5] : "";
         System.setProperty("user.dir", game.getPath());
         out = System.out;
         System.setOut(new PrintStream(new FileOutputStream(new File(game, "harness-game-stdout.log")), true, "UTF-8"));
@@ -108,9 +109,13 @@ public final class CompHarness {
         c.a.SR.setJogaEstadual(true);
         c.a.SR.setJogaIntClubes(false);
         c.a.SR.setJogaSelecoesAll(false);
-        best.p.dg();
-        best.p.dh();
-        c.a.SR.az();
+        if (mode.equals("continue")) {
+            check(load("comp-harness"), "carreira antiga carregada pelo executavel novo");
+        } else {
+            best.p.dg();
+            best.p.dh();
+            c.a.SR.az();
+        }
         sizes("criacao");
         if (args.length > 3 && !args[3].isEmpty()) {
             PrintStream members = new PrintStream(new FileOutputStream(args[3]), true, "UTF-8");
@@ -127,7 +132,14 @@ public final class CompHarness {
                 while (!c.a.SR.bk && steps < 5000) {
                     c.a.SR.V();
                     steps++;
-                    if (season == 0 && steps == reloadAt) reload(year);
+                    if (season == 0 && steps == reloadAt) {
+                        if (mode.equals("save-only")) {
+                            c.a.ae("comp-harness");
+                            out.println("save gravado no passo " + steps);
+                            System.exit(0);
+                        }
+                        reload(year);
+                    }
                 }
             } catch (Throwable error) {
                 error.printStackTrace(out);
@@ -169,12 +181,30 @@ public final class CompHarness {
         int copaPhase = cupBefore == null || cupBefore.yf() == null ? -1 : cupBefore.yf().zb();
         int dTeams = ((f.B) c.a.SR.o(29).eb().get(3)).yi().yK().size();
         c.a.ae("comp-harness");
-        boolean loaded = c.a.c("comp-harness", false);
+        boolean loaded = load("comp-harness");
         f.f cup = c.a.SR.o(29).jq();
         int copaAfter = cup == null || cup.yf() == null ? -1 : cup.yf().zb();
         int dAfter = ((f.B) c.a.SR.o(29).eb().get(3)).yi().yK().size();
         check(loaded && c.a.SR.P().size() == teams, year + ": save gravado e recarregado no meio da temporada (" + teams + " clubes)");
         check(copaPhase == copaAfter && dTeams == dAfter, year + ": apos recarregar, Copa na fase " + copaAfter + " (antes " + copaPhase + ") e Serie D com " + dAfter + " clubes (antes " + dTeams + ")");
+    }
+
+    private static boolean load(String name) {
+        try {
+            com.esotericsoftware.kryo.Kryo kryo = new com.esotericsoftware.kryo.Kryo();
+            kryo.setRegistrationRequired(false);
+            com.esotericsoftware.kryo.io.Input input = new com.esotericsoftware.kryo.io.Input(
+                    new java.io.FileInputStream(System.getProperty("user.dir") + "/sav/" + name + ".s22"));
+            c.a.SR = (best.f) kryo.readClassAndObject(input);
+            c.a.afQ = (best.ay) kryo.readClassAndObject(input);
+            input.close();
+            c.a.SR.bs = false;
+            c.a.SR.G();
+            return true;
+        } catch (Exception error) {
+            error.printStackTrace(out);
+            return false;
+        }
     }
 
     private static void diagnose() {

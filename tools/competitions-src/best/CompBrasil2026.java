@@ -633,7 +633,10 @@ public final class CompBrasil2026 {
             B bDiv = (B) divisions.get(1);
             B cDiv = (B) divisions.get(2);
             B d = (B) divisions.get(3);
-            if (!isSerieD(d.yi())) return false;
+            if (!isSerieD(d.yi())) {
+                migrate(bDiv, cDiv, d);
+                return false;
+            }
             int finished = season() - 1;
             int serieCDown = finished >= 2028 ? 6 : 2;
             aDiv.yi().ah(0, aDiv.getnRebaixados());
@@ -669,6 +672,32 @@ public final class CompBrasil2026 {
         } catch (Throwable error) {
             log("falha no acesso e descenso", error);
             return false;
+        }
+    }
+
+    private static void setField(Object target, String name, Object value) throws Exception {
+        Field field = s.class.getDeclaredField(name);
+        field.setAccessible(true);
+        field.set(target, value);
+    }
+
+    private static void migrate(B serieB, B serieC, B serieD) {
+        try {
+            if (season() < 2027) return;
+            s league = serieD.yi();
+            if (league == null || league.ze() == 1068 || league.ze() == 1020) return;
+            league.nTimes = SERIE_D_TEAMS;
+            setField(league, "Zj", Integer.valueOf(SERIE_D_GROUPS));
+            setField(league, "Zd", Integer.valueOf(4));
+            setField(league, "duasVoltasMataMata", new boolean[]{true, true, true, true, true, true, true});
+            serieD.setVagasSobemPeloMataMata(2);
+            serieB.setVagasSobemPeloMataMata(2);
+            serieB.b(new boolean[]{true, true, true});
+            serieC.setnRebaixados(2);
+            serieC.setRebaixadosDireto(2);
+            log("carreira existente migrada para o formato 2026 a partir da proxima temporada", null);
+        } catch (Throwable error) {
+            log("falha ao migrar a carreira existente", error);
         }
     }
 

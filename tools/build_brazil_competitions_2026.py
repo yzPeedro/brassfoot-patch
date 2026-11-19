@@ -52,7 +52,7 @@ def serie_d(teams: list[dict], created: dict[str, str]) -> dict:
     for code in sorted(phase1["groups"]):
         members = []
         for name, uf in phase1["groups"][code]:
-            file = match_file(name, uf, teams) or created.get(f"{name}|{uf}")
+            file = match_file(name, uf, teams) or created.get(f"{norm(name)}|{uf}")
             members.append({"name": name, "state": uf, "file": file})
         groups.append({"code": code, "clubs": members})
     return {
@@ -171,7 +171,7 @@ def rnc_files(teams: list[dict], ranking: list[dict]) -> list[dict]:
     return result
 
 
-def copa_participants(teams: list[dict], ranking: list[dict]) -> list[dict]:
+def copa_participants(teams: list[dict], ranking: list[dict], created: dict[str, str]) -> list[dict]:
     raw = (SOURCES / "copa-raw.txt").read_text(encoding="utf-8").splitlines()
     start = next(i for i, line in enumerate(raw) if i > 200 and line.startswith("Anexo A - Rela"))
     pattern = re.compile(r"^(.+) (" + "|".join(STATES) + r") (" + "|".join(ORIGINS) + r")$")
@@ -188,7 +188,7 @@ def copa_participants(teams: list[dict], ranking: list[dict]) -> list[dict]:
         short = words[0]
         for size in range(1, len(words)):
             candidate = " ".join(words[:size])
-            file = match_file(candidate, state, teams)
+            file = match_file(candidate, state, teams) or created.get(f"{norm(candidate)}|{state}")
             if file:
                 short = candidate
                 break
@@ -216,7 +216,7 @@ def main() -> None:
     teams = load_teams(args.teams)
     document = {"schemaVersion": 1, "season": "2026", "rnf2026": rnf(), "serieC": SERIE_C,
                 "divisions2026": divisions_abc(teams),
-                "copa2026": {"source": COPA_REC, "participants": copa_participants(teams, rnc())},
+                "copa2026": {"source": COPA_REC, "participants": copa_participants(teams, rnc(), created)},
                 "rnc2026": {"source": RNC_URL, "ranking": rnc_files(teams, rnc())},
                 "serieD": serie_d(teams, created)}
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
