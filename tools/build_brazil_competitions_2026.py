@@ -23,6 +23,7 @@ MANUAL_FILES = {
     ("Operário Ferroviário", "PR"): "operario_pr",
     ("Inter de Limeira", "SP"): "aainternacionaldelimeira_bra",
     ("XV Piracicaba", "SP"): "xvdepiracicaba_sp",
+    ("Desportiva", "ES"): "desportivaferroviaria_es",
 }
 
 

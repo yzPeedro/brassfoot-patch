@@ -672,7 +672,7 @@
     "state": "AC",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "vascodagamaac_ac",
     "rnc": null
    },
    {
@@ -708,7 +708,7 @@
     "state": "AL",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "penedense_al",
     "rnc": 161
    },
    {
@@ -753,7 +753,7 @@
     "state": "AP",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "independente_ap",
     "rnc": 209
    },
    {
@@ -879,16 +879,16 @@
     "state": "ES",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "desportivaferroviaria_es",
     "rnc": null
    },
    {
     "text": "Porto Vitória Porto Vitória Futebol Clube Ltda - Me",
-    "shortName": "Porto Vitória",
+    "shortName": "Porto",
     "state": "ES",
     "origin": "Estadual",
     "criterion": 3,
-    "file": "vitoria_es",
+    "file": "portovitoria_es",
     "rnc": 161
    },
    {
@@ -1010,11 +1010,11 @@
    },
    {
     "text": "FC Pantanal Futebol Clube Pantanal SAF",
-    "shortName": "FC",
+    "shortName": "FC Pantanal",
     "state": "MS",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "pantanal_ms",
     "rnc": null
    },
    {
@@ -1338,7 +1338,7 @@
     "state": "RO",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "jiparana_ro",
     "rnc": 209
    },
    {
@@ -1356,7 +1356,7 @@
     "state": "RR",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "bare_rr",
     "rnc": null
    },
    {
@@ -1464,7 +1464,7 @@
     "state": "SE",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "americadepropria_se",
     "rnc": null
    },
    {
@@ -1518,7 +1518,7 @@
     "state": "SP",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "primavera_sp",
     "rnc": null
    },
    {
@@ -1554,7 +1554,7 @@
     "state": "TO",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "capital_to",
     "rnc": 130
    },
    {
@@ -2479,7 +2479,7 @@
     "name": "Capital",
     "state": "TO",
     "points": 404,
-    "file": null
+    "file": "capital_to"
    },
    {
     "position": 132,
@@ -2724,14 +2724,14 @@
     "name": "Penedense",
     "state": "AL",
     "points": 255,
-    "file": null
+    "file": "penedense_al"
    },
    {
     "position": 161,
     "name": "Porto Vitória",
     "state": "ES",
     "points": 255,
-    "file": "vitoria_es"
+    "file": "portovitoria_es"
    },
    {
     "position": 168,
@@ -3039,14 +3039,14 @@
     "name": "Ji-Paraná",
     "state": "RO",
     "points": 100,
-    "file": null
+    "file": "jiparana_ro"
    },
    {
     "position": 209,
     "name": "Independente",
     "state": "AP",
     "points": 100,
-    "file": null
+    "file": "independente_ap"
    },
    {
     "position": 214,
