@@ -175,6 +175,22 @@ public final class CompetitionsTransformer {
         return true;
     }
 
+    private static boolean mainPhase(ClassNode owner) {
+        MethodNode target = method(owner, "mB", "()[Lbest/L;");
+        requireUnpatched(target);
+        LabelNode original = new LabelNode(new Label());
+        InsnList hook = new InsnList();
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC, HELPER, "mainPhase", "(Lf/B;)[Lbest/L;", false));
+        hook.add(new InsnNode(Opcodes.DUP));
+        hook.add(new JumpInsnNode(Opcodes.IFNULL, original));
+        hook.add(new InsnNode(Opcodes.ARETURN));
+        hook.add(original);
+        hook.add(new InsnNode(Opcodes.POP));
+        target.instructions.insert(hook);
+        return true;
+    }
+
     private static boolean singleRoundSerieC(ClassNode owner) {
         MethodNode target = method(owner, "a", "(Ljava/util/ArrayList;ZZLjava/util/ArrayList;)V");
         int changed = 0;
@@ -215,6 +231,7 @@ public final class CompetitionsTransformer {
             case "after-tie": frames = afterTie(owner); break;
             case "copa-start": frames = copaStart(owner); break;
             case "copa-names": frames = copaNames(owner); break;
+            case "main-phase": frames = mainPhase(owner); break;
             case "division-order": frames = divisionOrder(owner); break;
             case "serie-c-rounds": frames = singleRoundSerieC(owner); break;
             default: throw new IllegalArgumentException("unknown mode " + args[0]);

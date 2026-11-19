@@ -386,6 +386,17 @@ public final class CompBrasil2026 {
         new G().a(playoff, order, 0, true, 0, 0, owner.b(), false);
     }
 
+    public static L[] mainPhase(B division) {
+        try {
+            z playoff = division.BR();
+            s league = division.yi();
+            if (playoff == null || playoff.zf() != PLAYOFF_CODE || !isSerieD(league) || league.yY() == null) return null;
+            return new L[]{league.yY()};
+        } catch (Throwable error) {
+            return null;
+        }
+    }
+
     public static void divisionOrder(ArrayList teams, Z country) {
         try {
             if (country.jc() != BRAZIL || a.SR.H() != 1 || a.SR.op() != 2026) return;

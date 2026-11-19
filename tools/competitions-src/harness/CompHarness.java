@@ -322,6 +322,7 @@ public final class CompHarness {
         f.z playoff = d.BR();
         int playoffGames = legs(playoff);
         check(playoff != null && playoffGames == 4, year + ": playoffs de acesso com " + playoffGames + " jogos");
+        check(d.mB().length == 1 && d.mB()[0] == knockout, year + ": tela principal da Serie D mostra o mata-mata principal");
         check(groupGames / 2 + knockoutGames + playoffGames == 610, year + ": total " + (groupGames / 2 + knockoutGames + playoffGames) + " jogos (esperado 610)");
         if (knockout != null && knockout.zp().size() == 6) {
             f.G first = (f.G) knockout.zp().get(0);

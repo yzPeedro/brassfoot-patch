@@ -19,6 +19,7 @@ TARGETS = {
     "f/G.class": "pairing,after-tie",
     "f/f.class": "copa-start,copa-names",
     "best/w.class": "participants",
+    "f/B.class": "main-phase",
     "best/Z.class": "promotion,division-order",
     "f/s.class": "serie-c-rounds,reset-rounds",
 }
