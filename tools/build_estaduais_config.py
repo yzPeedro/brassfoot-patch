@@ -82,6 +82,11 @@ def resolve(name: str, uf: str, teams: list[dict], created: dict, known: dict, a
         found = by_core(option, uf, teams)
         if found:
             return found
+    for option in candidates(name):
+        hits = [file for key, file in created.items() if key.endswith("|" + uf) and len(core(option)) >= 4
+                and core(key.split("|")[0]) == core(option)]
+        if len(hits) == 1:
+            return hits[0]
     return None
 
 

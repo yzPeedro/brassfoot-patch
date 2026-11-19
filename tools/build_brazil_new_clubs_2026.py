@@ -45,9 +45,10 @@ def owners(paths: list[Path]) -> dict[str, str]:
             ident = p.get("cbfRegistration")
             if not ident:
                 continue
-            rank = (last_sheet(p), p.get("matchesListed") or 0)
+            sheet = last_sheet(p)
+            rank = (1 if sheet else 0, sheet, p.get("matchesListed") or 0)
             if ident not in best or rank > best[ident][0]:
-                best[ident] = (rank, path.name)
+                best[ident] = (rank, str(path))
     return {ident: value[1] for ident, value in best.items()}
 
 
@@ -66,7 +67,7 @@ def serie_d_profile(teams: list[dict], config: dict) -> tuple[int, int, str]:
     return level, reputation, template
 
 
-def build(squads: Path, base: Path, teams_json: Path, output: Path, jdk: Path) -> dict:
+def build(squads: Path, base: Path, teams_json: Path, output: Path, jdk: Path, previous: list | None = None) -> dict:
     config = json.loads(CONFIG.read_text(encoding="utf-8"))
     teams = json.loads(teams_json.read_text(encoding="utf-8"))
     existing = {p.stem.lower() for p in (base / "teams").glob("*.ban")}
@@ -78,7 +79,7 @@ def build(squads: Path, base: Path, teams_json: Path, output: Path, jdk: Path) -
     rosters = output / "rosters"
     rosters.mkdir(parents=True)
     paths = sorted(squads.glob("*.json"))
-    owner = owners(paths)
+    owner = owners(paths + [p for folder in previous or [] for p in sorted(folder.glob("*.json"))])
     for path in paths:
         squad = json.loads(path.read_text(encoding="utf-8"))
         club = squad["club"]
@@ -90,7 +91,7 @@ def build(squads: Path, base: Path, teams_json: Path, output: Path, jdk: Path) -
         for p in squad["players"]:
             if p.get("positionCode") is None:
                 continue
-            if p.get("cbfRegistration") and owner.get(p["cbfRegistration"]) != path.name:
+            if p.get("cbfRegistration") and owner.get(p["cbfRegistration"]) != str(path):
                 counts["movedToLaterClub"] += 1
                 continue
             players.append({"name": p.get("name") or p.get("shirtName"), "positionCode": p["positionCode"],
@@ -135,10 +136,12 @@ def main() -> None:
     parser.add_argument("--teams-json", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--jdk", type=Path, required=True)
+    parser.add_argument("--previous-squads", type=Path, action="append", default=[],
+                        help="pastas ja compiladas, usadas so para decidir o clube atual de cada atleta")
     args = parser.parse_args()
     if args.output.exists():
         parser.exit(1, "saida ja existe\n")
-    print(json.dumps(build(args.squads, args.base, args.teams_json, args.output, args.jdk), ensure_ascii=False))
+    print(json.dumps(build(args.squads, args.base, args.teams_json, args.output, args.jdk, args.previous_squads), ensure_ascii=False))
 
 
 if __name__ == "__main__":
