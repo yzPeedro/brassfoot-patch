@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "productName": "Brasfoot Mega Patch",
+  "PATCH_YEAR": 2026,
+  "version": "2026.6.15",
+  "channel": "local-preview",
+  "releaseNotes": "Prévia privada do componente Elencos + Competições: catálogo estruturado de competições (39), inventário de troféus, renomeação do componente no hub, experimento Série D 96 clubes (lab).",
+  "repository": "yzPeedro/brassfoot-patch",
+  "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
+  "platforms": [
+    {
+      "os": "windows",
+      "arch": "amd64",
+      "interface": "webview2-hub-with-win32-fallback",
+      "gameRuntime": "windows"
+    }
+  ]
+}

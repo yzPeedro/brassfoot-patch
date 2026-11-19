@@ -1,0 +1,2990 @@
+{
+  "schemaVersion": 1,
+  "season": "2026",
+  "generatedBy": "tools/build_competitions_catalog.py",
+  "scope": "Cataloged competitions with provided participant lists; motor implementation is separate.",
+  "competitionCount": 39,
+  "clubCount": 294,
+  "competitions": [
+    {
+      "competitionId": "BRA_SERIE_A",
+      "officialName": "Campeonato Brasileiro Série A",
+      "displayName": "Brasileirão Série A 2026",
+      "countryId": "BRA",
+      "confederationId": "CONMEBOL",
+      "competitionType": "league",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-01-28",
+      "seasonEndDate": "2026-12-06",
+      "calendarType": "annual",
+      "participantCount": 20,
+      "participantIds": [
+        "br-flamengo-rj",
+        "br-sao-paulo-sp",
+        "br-palmeiras-sp",
+        "br-atletico-mineiro-mg",
+        "br-fluminense-rj",
+        "br-gremio-rs",
+        "br-botafogo-rj",
+        "br-cruzeiro-mg",
+        "br-corinthians-sp",
+        "br-bahia-ba",
+        "br-mirassol-sp",
+        "br-vasco-da-gama-rj",
+        "br-internacional-rs",
+        "br-athletico-paranaense-pr",
+        "br-coritiba-pr",
+        "br-red-bull-bragantino-sp",
+        "br-vitoria-ba",
+        "br-remo-pa",
+        "br-chapecoense-sc",
+        "br-santos-sp"
+      ],
+      "competitionFormat": "round_robin_double",
+      "stages": [
+        "regular_season"
+      ],
+      "round1Fixtures": [
+        [
+          "São Paulo",
+          "Flamengo"
+        ],
+        [
+          "Atlético-MG",
+          "Palmeiras"
+        ],
+        [
+          "Fluminense",
+          "Grêmio"
+        ],
+        [
+          "Botafogo",
+          "Cruzeiro"
+        ],
+        [
+          "Corinthians",
+          "Bahia"
+        ],
+        [
+          "Mirassol",
+          "Vasco da Gama"
+        ],
+        [
+          "Internacional",
+          "Athletico-PR"
+        ],
+        [
+          "Coritiba",
+          "Red Bull Bragantino"
+        ],
+        [
+          "Vitória",
+          "Remo"
+        ],
+        [
+          "Chapecoense",
+          "Santos"
+        ]
+      ],
+      "promotionRules": [],
+      "relegationRules": [
+        "bottom_4_to_BRA_SERIE_B"
+      ],
+      "continentalQualificationRules": [
+        "libertadores_and_sudamericana_slots"
+      ],
+      "trophyAssetId": "tr_nacional_BRA.png",
+      "status": "participants_complete_calendar_partial"
+    },
+    {
+      "competitionId": "BRA_SERIE_B",
+      "officialName": "Campeonato Brasileiro Série B",
+      "displayName": "Brasileirão Série B 2026",
+      "countryId": "BRA",
+      "confederationId": "CONMEBOL",
+      "competitionType": "league",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-03-21",
+      "seasonEndDate": null,
+      "calendarType": "annual",
+      "participantCount": 20,
+      "participantIds": [
+        "br-ceara-ce",
+        "br-sao-bernardo-sp",
+        "br-vila-nova-go",
+        "br-crb-al",
+        "br-operario-ferroviario-pr",
+        "br-atletico-goianiense-go",
+        "br-botafogo-sp",
+        "br-fortaleza-ce",
+        "br-cuiaba-mt",
+        "br-sport-pe",
+        "br-avai-sc",
+        "br-juventude-rs",
+        "br-nautico-pe",
+        "br-criciuma-sc",
+        "br-athletic-mg",
+        "br-ponte-preta-sp",
+        "br-goias-go",
+        "br-america-mg",
+        "br-novorizontino-sp",
+        "br-londrina-pr"
+      ],
+      "competitionFormat": "round_robin_double_with_playoffs",
+      "stages": [
+        "regular_season",
+        "playoffs_access"
+      ],
+      "promotionRules": [
+        "top2_direct",
+        "playoff_3vs6",
+        "playoff_4vs5",
+        "two_playoff_winners_promoted"
+      ],
+      "relegationRules": [
+        "bottom_4_relegated"
+      ],
+      "trophyAssetId": "tr_bra_serie_b_2026.png",
+      "status": "participants_complete_calendar_partial"
+    },
+    {
+      "competitionId": "BRA_SERIE_C",
+      "officialName": "Campeonato Brasileiro Série C",
+      "displayName": "Brasileirão Série C 2026",
+      "countryId": "BRA",
+      "confederationId": "CONMEBOL",
+      "competitionType": "league",
+      "seasonId": "2026",
+      "seasonStartDate": null,
+      "seasonEndDate": null,
+      "calendarType": "annual",
+      "participantCount": 20,
+      "participantIds": [
+        "br-amazonas-am",
+        "br-anapolis-go",
+        "br-barra-sc",
+        "br-botafogo-pb",
+        "br-brusque-sc",
+        "br-caxias-rs",
+        "br-confianca-se",
+        "br-ferroviaria-sp",
+        "br-figueirense-sc",
+        "br-floresta-ce",
+        "br-guarani-sp",
+        "br-inter-de-limeira-sp",
+        "br-itabaiana-se",
+        "br-ituano-sp",
+        "br-maranhao-ma",
+        "br-maringa-pr",
+        "br-paysandu-pa",
+        "br-santa-cruz-pe",
+        "br-volta-redonda-rj",
+        "br-ypiranga-rs"
+      ],
+      "competitionFormat": "official_2026_format_preserved",
+      "stages": [
+        "classification",
+        "decisive_groups",
+        "promotion",
+        "relegation"
+      ],
+      "trophyAssetId": "tr_bra_serie_c_2026.png",
+      "status": "participants_complete_calendar_pending"
+    },
+    {
+      "competitionId": "BRA_SERIE_D",
+      "officialName": "Campeonato Brasileiro Série D",
+      "displayName": "Brasileirão Série D 2026",
+      "countryId": "BRA",
+      "confederationId": "CONMEBOL",
+      "competitionType": "league",
+      "seasonId": "2026",
+      "seasonStartDate": null,
+      "seasonEndDate": null,
+      "calendarType": "annual",
+      "participantCount": 96,
+      "participantIds": [
+        "br-nacional-am",
+        "br-manaus-am",
+        "br-manauara-am",
+        "br-gas-rr",
+        "br-monte-roraima-rr",
+        "br-sao-raimundo-rr",
+        "br-independencia-ac",
+        "br-galvez-ac",
+        "br-humaita-ac",
+        "br-porto-velho-ro",
+        "br-guapore-ro",
+        "br-araguaina-to",
+        "br-gama-df",
+        "br-brasiliense-df",
+        "br-luverdense-mt",
+        "br-primavera-mt",
+        "br-inhumas-go",
+        "br-aparecidense-go",
+        "br-capital-df",
+        "br-ceilandia-df",
+        "br-mixto-mt",
+        "br-operario-mt",
+        "br-uniao-mt",
+        "br-goiatuba-go",
+        "br-trem-ap",
+        "br-oratorio-ap",
+        "br-tuna-luso-pa",
+        "br-aguia-de-maraba-pa",
+        "br-tocantinopolis-to",
+        "br-imperatriz-ma",
+        "br-sampaio-correa-ma",
+        "br-moto-club-ma",
+        "br-iape-ma",
+        "br-maracana-ce",
+        "br-iguatu-ce",
+        "br-parnahyba-pi",
+        "br-ferroviario-ce",
+        "br-tirol-ce",
+        "br-atletico-ce",
+        "br-altos-pi",
+        "br-piaui-pi",
+        "br-fluminense-pi",
+        "br-abc-rn",
+        "br-america-rn",
+        "br-laguna-rn",
+        "br-sousa-pb",
+        "br-maguary-pe",
+        "br-central-pe",
+        "br-retro-pe",
+        "br-decisao-pe",
+        "br-serra-branca-pb",
+        "br-treze-pb",
+        "br-lagarto-se",
+        "br-sergipe-se",
+        "br-asa-al",
+        "br-csa-al",
+        "br-cse-al",
+        "br-jacuipense-ba",
+        "br-atletico-ba",
+        "br-juazeirense-ba",
+        "br-uberlandia-mg",
+        "br-betim-mg",
+        "br-crac-go",
+        "br-abecat-go",
+        "br-operario-ms",
+        "br-ivinhema-ms",
+        "br-porto-ba",
+        "br-rio-branco-es",
+        "br-vitoria-es",
+        "br-real-noroeste-es",
+        "br-tombense-mg",
+        "br-democrata-gv-mg",
+        "br-madureira-rj",
+        "br-portuguesa-rj",
+        "br-america-rj",
+        "br-portuguesa-sp",
+        "br-agua-santa-sp",
+        "br-pouso-alegre-mg",
+        "br-nova-iguacu-rj",
+        "br-sampaio-correa-rj",
+        "br-marica-rj",
+        "br-xv-de-piracicaba-sp",
+        "br-noroeste-sp",
+        "br-velo-clube-sp",
+        "br-cianorte-pr",
+        "br-fc-cascavel-pr",
+        "br-santa-catarina-sc",
+        "br-joinville-sc",
+        "br-guarany-de-bage-rs",
+        "br-sao-luiz-rs",
+        "br-blumenau-sc",
+        "br-marcilio-dias-sc",
+        "br-sao-joseense-pr",
+        "br-azuriz-pr",
+        "br-sao-jose-rs",
+        "br-brasil-rs"
+      ],
+      "competitionFormat": "16_groups_of_6",
+      "stages": [
+        "group_stage",
+        "knockout"
+      ],
+      "trophyAssetId": "tr_bra_serie_d_2026.png",
+      "status": "participants_complete_calendar_pending",
+      "configNote": "Requires .cfg nTimes 64->96 and nGrupos 8->16 (trial-serie-d-96, experimental only)"
+    },
+    {
+      "competitionId": "BRA_COPA_DO_BRASIL",
+      "officialName": "Copa do Brasil",
+      "displayName": "Copa do Brasil 2026",
+      "countryId": "BRA",
+      "confederationId": "CONMEBOL",
+      "competitionType": "cup",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-02-18",
+      "seasonEndDate": "2026-12-06",
+      "calendarType": "annual",
+      "participantCount": 126,
+      "participantIds": [],
+      "competitionFormat": "nine_phases_mixed_single_and_two_legs",
+      "stages": [
+        "phase_1",
+        "phase_2",
+        "phase_3",
+        "phase_4",
+        "phase_5",
+        "phase_6",
+        "phase_7",
+        "phase_8",
+        "final"
+      ],
+      "trophyAssetId": "tr_copa_BRA.png",
+      "status": "motor_implemented_participants_pending"
+    },
+    {
+      "competitionId": "BRA_COPA_NORDESTE",
+      "officialName": "Copa do Nordeste",
+      "displayName": "Copa do Nordeste 2026",
+      "countryId": "BRA",
+      "confederationId": "CONMEBOL",
+      "competitionType": "regional_cup",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-03-25",
+      "seasonEndDate": "2026-06-07",
+      "calendarType": "annual",
+      "participantCount": 20,
+      "participantIds": [
+        "br-abc-rn",
+        "br-américa-rn-xx",
+        "br-asa-al",
+        "br-botafogo-pb-xx",
+        "br-ceara-ce",
+        "br-confianca-se",
+        "br-crb-al",
+        "br-ferroviario-ce",
+        "br-fluminense-pi-xx",
+        "br-fortaleza-ce",
+        "br-imperatriz-ma",
+        "br-itabaiana-se",
+        "br-jacuipense-ba",
+        "br-juazeirense-ba",
+        "br-maranhao-ma",
+        "br-piaui-pi",
+        "br-retro-pe",
+        "br-sousa-pb",
+        "br-sport-pe",
+        "br-vitoria-ba"
+      ],
+      "competitionFormat": "4_groups_of_5_cross_groups",
+      "stages": [
+        "group_stage_50_matches",
+        "knockout"
+      ],
+      "trophyAssetId": "tr_copanordeste.png",
+      "status": "participants_complete_calendar_partial"
+    },
+    {
+      "competitionId": "BRA_COPA_VERDE",
+      "officialName": "Copa Verde",
+      "displayName": "Copa Verde 2026",
+      "countryId": "BRA",
+      "confederationId": "CONMEBOL",
+      "competitionType": "regional_cup",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-03-24",
+      "seasonEndDate": "2026-06-07",
+      "calendarType": "annual",
+      "participantCount": 24,
+      "participantIds": [
+        "br-grêmio-sampaio-xx",
+        "br-guapore-ro",
+        "br-independencia-ac",
+        "br-nacional-am-xx",
+        "br-paysandu-pa",
+        "br-trem-ap",
+        "br-aguia-de-maraba-pa",
+        "br-amazonas-am",
+        "br-galvez-ac",
+        "br-monte-roraima-rr",
+        "br-porto-velho-ro",
+        "br-remo-pa",
+        "br-araguaina-to",
+        "br-capital-df-xx",
+        "br-operário-ms-xx",
+        "br-primavera-mt-xx",
+        "br-rio-branco-es-xx",
+        "br-vila-nova-go",
+        "br-anapolis-go",
+        "br-atlético-go-xx",
+        "br-cuiaba-mt",
+        "br-gama-df",
+        "br-porto-vitória-xx",
+        "br-tocantinopolis-to"
+      ],
+      "competitionFormat": "4_groups_of_6_regional_then_final",
+      "stages": [
+        "group_stage",
+        "regional_semifinals",
+        "regional_finals",
+        "copa_verde_final"
+      ],
+      "trophyAssetId": "tr_copaverde.png",
+      "status": "participants_complete_calendar_partial"
+    },
+    {
+      "competitionId": "BRA_SUPERCOPA_REI",
+      "officialName": "Supercopa Rei",
+      "displayName": "Supercopa Rei 2026",
+      "countryId": "BRA",
+      "confederationId": "CONMEBOL",
+      "competitionType": "supercup",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-02-01",
+      "seasonEndDate": "2026-02-01",
+      "calendarType": "annual",
+      "participantCount": 2,
+      "participantIds": [
+        "br-flamengo-rj",
+        "br-corinthians-sp"
+      ],
+      "competitionFormat": "single_match",
+      "stages": [
+        "final"
+      ],
+      "venue": "Arena BRB Mané Garrincha, Brasília",
+      "thirdPlaceEnabled": false,
+      "trophyAssetId": "tr_bra_supercopa_rei_2026.png",
+      "status": "participants_complete_calendar_complete"
+    },
+    {
+      "competitionId": "CONMEBOL_LIBERTADORES",
+      "officialName": "CONMEBOL Libertadores",
+      "displayName": "Copa Libertadores 2026",
+      "countryId": null,
+      "confederationId": "CONMEBOL",
+      "competitionType": "continental_cup",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-04-07",
+      "seasonEndDate": "2026-11-28",
+      "calendarType": "annual",
+      "participantCount": 32,
+      "participantIds": [
+        "conmebol-flamengo",
+        "conmebol-estudiantes",
+        "conmebol-cusco",
+        "conmebol-independiente-medellin",
+        "conmebol-nacional-uru",
+        "conmebol-universitario",
+        "conmebol-coquimbo-unido",
+        "conmebol-deportes-tolima",
+        "conmebol-fluminense",
+        "conmebol-bolivar",
+        "conmebol-deportivo-la-guaira",
+        "conmebol-independiente-rivadavia",
+        "conmebol-boca-juniors",
+        "conmebol-cruzeiro",
+        "conmebol-universidad-catolica-chi",
+        "conmebol-barcelona-equ",
+        "conmebol-penarol",
+        "conmebol-corinthians",
+        "conmebol-independiente-santa-fe",
+        "conmebol-platense",
+        "conmebol-palmeiras",
+        "conmebol-cerro-porteno",
+        "conmebol-junior-barranquilla",
+        "conmebol-sporting-cristal",
+        "conmebol-ldu-quito",
+        "conmebol-lanus",
+        "conmebol-always-ready",
+        "conmebol-mirassol",
+        "conmebol-independiente-del-valle",
+        "conmebol-libertad",
+        "conmebol-rosario-central",
+        "conmebol-universidad-central"
+      ],
+      "competitionFormat": "group_stage_8_groups_of_4_then_knockout",
+      "stages": [
+        "preliminary",
+        "group_stage",
+        "round_of_16",
+        "quarterfinals",
+        "semifinals",
+        "final"
+      ],
+      "groups": {
+        "A": [
+          "Flamengo",
+          "Estudiantes",
+          "Cusco",
+          "Independiente Medellín"
+        ],
+        "B": [
+          "Nacional-URU",
+          "Universitario",
+          "Coquimbo Unido",
+          "Deportes Tolima"
+        ],
+        "C": [
+          "Fluminense",
+          "Bolívar",
+          "Deportivo La Guaira",
+          "Independiente Rivadavia"
+        ],
+        "D": [
+          "Boca Juniors",
+          "Cruzeiro",
+          "Universidad Católica-CHI",
+          "Barcelona-EQU"
+        ],
+        "E": [
+          "Peñarol",
+          "Corinthians",
+          "Independiente Santa Fe",
+          "Platense"
+        ],
+        "F": [
+          "Palmeiras",
+          "Cerro Porteño",
+          "Junior Barranquilla",
+          "Sporting Cristal"
+        ],
+        "G": [
+          "LDU Quito",
+          "Lanús",
+          "Always Ready",
+          "Mirassol"
+        ],
+        "H": [
+          "Independiente del Valle",
+          "Libertad",
+          "Rosario Central",
+          "Universidad Central"
+        ]
+      },
+      "finalVenue": "Montevidéu",
+      "finalDate": "2026-11-28",
+      "thirdPlaceEnabled": false,
+      "trophyAssetId": "tr_libertadores.png",
+      "status": "group_stage_participants_complete_calendar_complete"
+    },
+    {
+      "competitionId": "CONMEBOL_SULAMERICANA",
+      "officialName": "CONMEBOL Sudamericana",
+      "displayName": "Copa Sudamericana 2026",
+      "countryId": null,
+      "confederationId": "CONMEBOL",
+      "competitionType": "continental_cup",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-04-07",
+      "seasonEndDate": "2026-11-21",
+      "calendarType": "annual",
+      "participantCount": 32,
+      "participantIds": [
+        "conmebol-america-de-cali",
+        "conmebol-tigre",
+        "conmebol-macara",
+        "conmebol-alianza-atletico",
+        "conmebol-atletico-mg",
+        "conmebol-cienciano",
+        "conmebol-academia-puerto-cabello",
+        "conmebol-juventud",
+        "conmebol-são-paulo",
+        "conmebol-millonarios",
+        "conmebol-boston-river",
+        "conmebol-ohiggins",
+        "conmebol-santos",
+        "conmebol-san-lorenzo",
+        "conmebol-deportivo-cuenca",
+        "conmebol-recoleta",
+        "conmebol-racing-club",
+        "conmebol-caracas",
+        "conmebol-independiente-petrolero",
+        "conmebol-botafogo",
+        "conmebol-grêmio",
+        "conmebol-palestino",
+        "conmebol-montevideo-city-torque",
+        "conmebol-deportivo-riestra",
+        "conmebol-olimpia-par",
+        "conmebol-vasco",
+        "conmebol-audax-italiano",
+        "conmebol-barracas-central",
+        "conmebol-river-plate",
+        "conmebol-red-bull-bragantino",
+        "conmebol-blooming",
+        "conmebol-carabobo"
+      ],
+      "competitionFormat": "group_stage_8_groups_of_4_then_knockout",
+      "stages": [
+        "preliminary",
+        "group_stage",
+        "playoff_round_of_16",
+        "round_of_16",
+        "quarterfinals",
+        "semifinals",
+        "final"
+      ],
+      "groups": {
+        "A": [
+          "América de Cali",
+          "Tigre",
+          "Macará",
+          "Alianza Atlético"
+        ],
+        "B": [
+          "Atlético-MG",
+          "Cienciano",
+          "Academia Puerto Cabello",
+          "Juventud"
+        ],
+        "C": [
+          "São Paulo",
+          "Millonarios",
+          "Boston River",
+          "O'Higgins"
+        ],
+        "D": [
+          "Santos",
+          "San Lorenzo",
+          "Deportivo Cuenca",
+          "Recoleta"
+        ],
+        "E": [
+          "Racing Club",
+          "Caracas",
+          "Independiente Petrolero",
+          "Botafogo"
+        ],
+        "F": [
+          "Grêmio",
+          "Palestino",
+          "Montevideo City Torque",
+          "Deportivo Riestra"
+        ],
+        "G": [
+          "Olimpia-PAR",
+          "Vasco",
+          "Audax Italiano",
+          "Barracas Central"
+        ],
+        "H": [
+          "River Plate",
+          "Red Bull Bragantino",
+          "Blooming",
+          "Carabobo"
+        ]
+      },
+      "finalVenue": "Barranquilla",
+      "finalDate": "2026-11-21",
+      "thirdPlaceEnabled": false,
+      "trophyAssetId": "tr_sulamericana.png",
+      "status": "group_stage_participants_complete_calendar_complete"
+    },
+    {
+      "competitionId": "CONMEBOL_RECOPA",
+      "officialName": "CONMEBOL Recopa",
+      "displayName": "Recopa Sudamericana 2026",
+      "countryId": null,
+      "confederationId": "CONMEBOL",
+      "competitionType": "supercup",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-02-19",
+      "seasonEndDate": "2026-02-26",
+      "calendarType": "annual",
+      "participantCount": 2,
+      "participantIds": [
+        "conmebol-flamengo",
+        "conmebol-lanus"
+      ],
+      "competitionFormat": "two_legs",
+      "stages": [
+        "first_leg",
+        "second_leg"
+      ],
+      "legs": 2,
+      "firstLegVenue": "Lanús (home)",
+      "secondLegVenue": "Flamengo (home)",
+      "thirdPlaceEnabled": false,
+      "trophyAssetId": "tr_conmebol_recopa_2026.png",
+      "status": "participants_complete_calendar_complete"
+    },
+    {
+      "competitionId": "UEFA_CHAMPIONS_LEAGUE",
+      "officialName": "UEFA Champions League",
+      "displayName": "UEFA Champions League 2026/27",
+      "countryId": null,
+      "confederationId": "UEFA",
+      "competitionType": "continental_cup",
+      "seasonId": "2026/27",
+      "seasonStartDate": "2026-09-08",
+      "seasonEndDate": "2027-06-05",
+      "calendarType": "interannual",
+      "participantCount": 36,
+      "participantIds": [
+        "uefa-lask",
+        "uefa-sabah",
+        "uefa-club-brugge",
+        "uefa-slavia-praha",
+        "uefa-arsenal",
+        "uefa-aston-villa",
+        "uefa-liverpool",
+        "uefa-manchester-city",
+        "uefa-manchester-united",
+        "uefa-lens",
+        "uefa-lille",
+        "uefa-paris-saint-germain",
+        "uefa-bayern-munchen",
+        "uefa-borussia-dortmund",
+        "uefa-rb-leipzig",
+        "uefa-stuttgart",
+        "uefa-aek-athens",
+        "uefa-como",
+        "uefa-inter",
+        "uefa-napoli",
+        "uefa-roma",
+        "uefa-feyenoord",
+        "uefa-psv",
+        "uefa-bodø/glimt",
+        "uefa-viking",
+        "uefa-porto",
+        "uefa-sporting-cp",
+        "uefa-slovan-bratislava",
+        "uefa-atletico-de-madrid",
+        "uefa-barcelona",
+        "uefa-real-betis",
+        "uefa-real-madrid",
+        "uefa-villarreal",
+        "uefa-fenerbahçe",
+        "uefa-galatasaray",
+        "uefa-shakhtar-donetsk"
+      ],
+      "competitionFormat": "league_phase_36_single_table",
+      "stages": [
+        "league_phase",
+        "playoff",
+        "round_of_16",
+        "quarterfinals",
+        "semifinals",
+        "final"
+      ],
+      "finalVenue": "Madri",
+      "finalDate": "2027-06-05",
+      "thirdPlaceEnabled": false,
+      "trophyAssetId": "tr_ligacampeoes.png",
+      "status": "participants_complete_calendar_complete",
+      "admissionNote": "UEFA list published 2026-11-04, subject to admission conditions"
+    },
+    {
+      "competitionId": "UEFA_EUROPA_LEAGUE",
+      "officialName": "UEFA Europa League",
+      "displayName": "UEFA Europa League 2026/27",
+      "countryId": null,
+      "confederationId": "UEFA",
+      "competitionType": "continental_cup",
+      "seasonId": "2026/27",
+      "seasonStartDate": null,
+      "seasonEndDate": null,
+      "calendarType": "interannual",
+      "participantCount": 36,
+      "participantIds": [],
+      "competitionFormat": "league_phase_36",
+      "stages": [
+        "league_phase",
+        "knockout"
+      ],
+      "trophyAssetId": "tr_ligaeuropa.png",
+      "status": "architecture_ready_participants_pending"
+    },
+    {
+      "competitionId": "UEFA_CONFERENCE_LEAGUE",
+      "officialName": "UEFA Conference League",
+      "displayName": "UEFA Conference League 2026/27",
+      "countryId": null,
+      "confederationId": "UEFA",
+      "competitionType": "continental_cup",
+      "seasonId": "2026/27",
+      "seasonStartDate": null,
+      "seasonEndDate": null,
+      "calendarType": "interannual",
+      "participantCount": 36,
+      "participantIds": [],
+      "competitionFormat": "league_phase_36",
+      "stages": [
+        "league_phase",
+        "knockout"
+      ],
+      "trophyAssetId": "tr_conference.png",
+      "status": "architecture_ready_participants_pending"
+    },
+    {
+      "competitionId": "UEFA_SUPER_CUP",
+      "officialName": "UEFA Super Cup",
+      "displayName": "UEFA Super Cup 2026",
+      "countryId": null,
+      "confederationId": "UEFA",
+      "competitionType": "supercup",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-08-12",
+      "seasonEndDate": "2026-08-12",
+      "calendarType": "annual",
+      "participantCount": 2,
+      "participantIds": [
+        "uefa-paris-saint-germain",
+        "uefa-aston-villa"
+      ],
+      "competitionFormat": "single_match_neutral",
+      "stages": [
+        "final"
+      ],
+      "venue": "Stadion Salzburg, Salzburgo",
+      "thirdPlaceEnabled": false,
+      "trophyAssetId": "tr_uefa_supercup_2026.png",
+      "status": "participants_complete_calendar_complete"
+    },
+    {
+      "competitionId": "CONCACAF_CHAMPIONS_CUP",
+      "officialName": "Concacaf Champions Cup",
+      "displayName": "Concacaf Champions Cup 2026",
+      "countryId": null,
+      "confederationId": "CONCACAF",
+      "competitionType": "continental_cup",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-02-01",
+      "seasonEndDate": "2026-05-30",
+      "calendarType": "annual",
+      "participantCount": 27,
+      "participantIds": [
+        "concacaf-vancouver-fc",
+        "concacaf-mount-pleasant",
+        "concacaf-o&m-fc",
+        "concacaf-defence-force",
+        "concacaf-alajuelense",
+        "concacaf-real-espana",
+        "concacaf-xelaju",
+        "concacaf-olimpia-de-honduras",
+        "concacaf-cartagines",
+        "concacaf-sporting-san-miguelito",
+        "concacaf-forge-fc",
+        "concacaf-atletico-ottawa",
+        "concacaf-seattle-sounders",
+        "concacaf-la-galaxy",
+        "concacaf-club-america",
+        "concacaf-monterrey",
+        "concacaf-toluca",
+        "concacaf-cruz-azul",
+        "concacaf-tigres-uanl",
+        "concacaf-pumas-unam",
+        "concacaf-inter-miami",
+        "concacaf-philadelphia-union",
+        "concacaf-san-diego-fc",
+        "concacaf-fc-cincinnati",
+        "concacaf-vancouver-whitecaps",
+        "concacaf-los-angeles-fc",
+        "concacaf-nashville-sc"
+      ],
+      "competitionFormat": "5_knockout_rounds_22_start_r1_5_bye_to_r16",
+      "stages": [
+        "round_1",
+        "round_of_16",
+        "quarterfinals",
+        "semifinals",
+        "final"
+      ],
+      "finalDate": "2026-05-30",
+      "thirdPlaceEnabled": false,
+      "trophyAssetId": "tr_ligaconcacaf.png",
+      "status": "participants_complete_calendar_partial"
+    },
+    {
+      "competitionId": "FIFA_INTERCONTINENTAL_CUP",
+      "officialName": "FIFA Intercontinental Cup",
+      "displayName": "FIFA Intercontinental Cup 2026",
+      "countryId": null,
+      "confederationId": "FIFA",
+      "competitionType": "intercontinental",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-12-09",
+      "seasonEndDate": "2026-12-16",
+      "calendarType": "annual",
+      "participantCount": null,
+      "participantIds": [],
+      "competitionFormat": "intercontinental_with_intermediate_trophies",
+      "stages": [
+        "derby_of_the_americas",
+        "challenger_cup",
+        "final"
+      ],
+      "intermediateTrophies": [
+        "tr_fifa_derby_americas_2026.png",
+        "tr_fifa_challenger_cup_2026.png"
+      ],
+      "qualifiedSlots": {
+        "UEFA": "Paris Saint-Germain",
+        "CONCACAF": "Toluca",
+        "CAF": "Mamelodi Sundowns",
+        "CONMEBOL": "WINNER(CONMEBOL_LIBERTADORES,2026)"
+      },
+      "thirdPlaceEnabled": false,
+      "trophyAssetId": "tr_fifa_intercontinental_2026.png",
+      "status": "structure_complete_participants_partial"
+    },
+    {
+      "competitionId": "CAF_SUPER_CUP",
+      "officialName": "CAF Super Cup",
+      "displayName": "CAF Super Cup 2026",
+      "countryId": null,
+      "confederationId": "CAF",
+      "competitionType": "supercup",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-11-08",
+      "seasonEndDate": "2026-11-08",
+      "calendarType": "annual",
+      "participantCount": 2,
+      "participantIds": [
+        "caf-mamelodi-sundowns",
+        "caf-usm-alger"
+      ],
+      "competitionFormat": "single_match",
+      "stages": [
+        "final"
+      ],
+      "venue": "Loftus Versfeld, Pretória",
+      "thirdPlaceEnabled": false,
+      "trophyAssetId": "tr_caf_supercup_2026.png",
+      "status": "participants_complete_calendar_complete"
+    },
+    {
+      "competitionId": "AFC_CHAMPIONS_LEAGUE_ELITE",
+      "officialName": "AFC Champions League Elite",
+      "displayName": "AFC Champions League Elite 2026/27",
+      "countryId": null,
+      "confederationId": "AFC",
+      "competitionType": "continental_cup",
+      "seasonId": "2026/27",
+      "seasonStartDate": null,
+      "seasonEndDate": null,
+      "calendarType": "interannual",
+      "participantCount": null,
+      "participantIds": [],
+      "competitionFormat": "see_regulation",
+      "stages": [],
+      "trophyAssetId": null,
+      "status": "architecture_ready_participants_pending"
+    },
+    {
+      "competitionId": "AFC_CHAMPIONS_LEAGUE_TWO",
+      "officialName": "AFC Champions League Two",
+      "displayName": "AFC Champions League Two 2026/27",
+      "countryId": null,
+      "confederationId": "AFC",
+      "competitionType": "continental_cup",
+      "seasonId": "2026/27",
+      "seasonStartDate": null,
+      "seasonEndDate": null,
+      "calendarType": "interannual",
+      "participantCount": null,
+      "participantIds": [],
+      "competitionFormat": "see_regulation",
+      "stages": [],
+      "trophyAssetId": null,
+      "status": "architecture_ready_participants_pending"
+    },
+    {
+      "competitionId": "AFC_CHALLENGE_LEAGUE",
+      "officialName": "AFC Challenge League",
+      "displayName": "AFC Challenge League 2026/27",
+      "countryId": null,
+      "confederationId": "AFC",
+      "competitionType": "continental_cup",
+      "seasonId": "2026/27",
+      "seasonStartDate": null,
+      "seasonEndDate": null,
+      "calendarType": "interannual",
+      "participantCount": null,
+      "participantIds": [],
+      "competitionFormat": "see_regulation",
+      "stages": [],
+      "trophyAssetId": null,
+      "status": "architecture_ready_participants_pending"
+    },
+    {
+      "competitionId": "CAF_CHAMPIONS_LEAGUE",
+      "officialName": "CAF Champions League",
+      "displayName": "CAF Champions League 2026/27",
+      "countryId": null,
+      "confederationId": "CAF",
+      "competitionType": "continental_cup",
+      "seasonId": "2026/27",
+      "seasonStartDate": null,
+      "seasonEndDate": null,
+      "calendarType": "interannual",
+      "participantCount": null,
+      "participantIds": [],
+      "competitionFormat": "see_regulation",
+      "stages": [],
+      "trophyAssetId": null,
+      "status": "architecture_ready_participants_pending"
+    },
+    {
+      "competitionId": "CAF_CONFEDERATION_CUP",
+      "officialName": "CAF Confederation Cup",
+      "displayName": "CAF Confederation Cup 2026/27",
+      "countryId": null,
+      "confederationId": "CAF",
+      "competitionType": "continental_cup",
+      "seasonId": "2026/27",
+      "seasonStartDate": null,
+      "seasonEndDate": null,
+      "calendarType": "interannual",
+      "participantCount": null,
+      "participantIds": [],
+      "competitionFormat": "see_regulation",
+      "stages": [],
+      "trophyAssetId": null,
+      "status": "architecture_ready_participants_pending"
+    },
+    {
+      "competitionId": "OFC_CHAMPIONS_LEAGUE",
+      "officialName": "OFC Champions League",
+      "displayName": "OFC Champions League 2026/27",
+      "countryId": null,
+      "confederationId": "OFC",
+      "competitionType": "continental_cup",
+      "seasonId": "2026/27",
+      "seasonStartDate": null,
+      "seasonEndDate": null,
+      "calendarType": "interannual",
+      "participantCount": null,
+      "participantIds": [],
+      "competitionFormat": "see_regulation",
+      "stages": [],
+      "trophyAssetId": null,
+      "status": "architecture_ready_participants_pending"
+    },
+    {
+      "competitionId": "OFC_PRO_LEAGUE",
+      "officialName": "OFC Pro League",
+      "displayName": "OFC Pro League 2026/27",
+      "countryId": null,
+      "confederationId": "OFC",
+      "competitionType": "continental_cup",
+      "seasonId": "2026/27",
+      "seasonStartDate": null,
+      "seasonEndDate": null,
+      "calendarType": "interannual",
+      "participantCount": null,
+      "participantIds": [],
+      "competitionFormat": "see_regulation",
+      "stages": [],
+      "trophyAssetId": null,
+      "status": "architecture_ready_participants_pending"
+    },
+    {
+      "competitionId": "ARG_TROFEO_CAMPEONES",
+      "officialName": "Trofeo de Campeones LPF",
+      "displayName": "Trofeo de Campeones LPF 2026",
+      "countryId": "ARG",
+      "confederationId": "UEFA",
+      "competitionType": "supercup",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-12-19",
+      "seasonEndDate": "2026-12-19",
+      "calendarType": "annual",
+      "participantCount": null,
+      "participantIds": [],
+      "competitionFormat": "see_regulation",
+      "stages": [],
+      "thirdPlaceEnabled": false,
+      "trophyAssetId": "tr_arg_trofeo_campeones_2026.png",
+      "status": "architecture_ready_participants_pending"
+    },
+    {
+      "competitionId": "COL_SUPERLIGA",
+      "officialName": "Superliga BetPlay DIMAYOR",
+      "displayName": "Superliga BetPlay DIMAYOR 2026",
+      "countryId": "COL",
+      "confederationId": "UEFA",
+      "competitionType": "supercup",
+      "seasonId": "2026",
+      "seasonStartDate": null,
+      "seasonEndDate": null,
+      "calendarType": "annual",
+      "participantCount": null,
+      "participantIds": [],
+      "competitionFormat": "see_regulation",
+      "stages": [],
+      "thirdPlaceEnabled": false,
+      "trophyAssetId": "tr_col_superliga_2026.png",
+      "status": "architecture_ready_participants_pending"
+    },
+    {
+      "competitionId": "ESP_SUPERCOPA",
+      "officialName": "Supercopa de España",
+      "displayName": "Supercopa de España 2026",
+      "countryId": "SPA",
+      "confederationId": "UEFA",
+      "competitionType": "supercup",
+      "seasonId": "2026",
+      "seasonStartDate": null,
+      "seasonEndDate": null,
+      "calendarType": "annual",
+      "participantCount": null,
+      "participantIds": [],
+      "competitionFormat": "see_regulation",
+      "stages": [],
+      "thirdPlaceEnabled": false,
+      "trophyAssetId": "tr_esp_supercopa_2026.png",
+      "status": "architecture_ready_participants_pending"
+    },
+    {
+      "competitionId": "ITA_SUPERCOPPA",
+      "officialName": "Supercoppa Italiana",
+      "displayName": "Supercoppa Italiana 2026",
+      "countryId": "ITA",
+      "confederationId": "UEFA",
+      "competitionType": "supercup",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-12-22",
+      "seasonEndDate": "2026-12-22",
+      "calendarType": "annual",
+      "participantCount": null,
+      "participantIds": [],
+      "competitionFormat": "see_regulation",
+      "stages": [],
+      "thirdPlaceEnabled": false,
+      "trophyAssetId": "tr_ita_supercoppa_2026.png",
+      "status": "architecture_ready_participants_pending"
+    },
+    {
+      "competitionId": "ENG_COMMUNITY_SHIELD",
+      "officialName": "FA Community Shield",
+      "displayName": "FA Community Shield 2026",
+      "countryId": "ENG",
+      "confederationId": "UEFA",
+      "competitionType": "supercup",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-08-16",
+      "seasonEndDate": "2026-08-16",
+      "calendarType": "annual",
+      "participantCount": null,
+      "participantIds": [],
+      "competitionFormat": "see_regulation",
+      "stages": [],
+      "thirdPlaceEnabled": false,
+      "trophyAssetId": "tr_eng_community_shield_2026.png",
+      "status": "architecture_ready_participants_pending"
+    },
+    {
+      "competitionId": "GER_FRANZ_BECKENBAUER_SUPERCUP",
+      "officialName": "Franz Beckenbauer Supercup",
+      "displayName": "Franz Beckenbauer Supercup 2026",
+      "countryId": "GER",
+      "confederationId": "UEFA",
+      "competitionType": "supercup",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-08-22",
+      "seasonEndDate": "2026-08-22",
+      "calendarType": "annual",
+      "participantCount": null,
+      "participantIds": [],
+      "competitionFormat": "see_regulation",
+      "stages": [],
+      "thirdPlaceEnabled": false,
+      "trophyAssetId": "tr_ger_supercup_2026.png",
+      "status": "architecture_ready_participants_pending"
+    },
+    {
+      "competitionId": "FRA_TROPHEE_CHAMPIONS",
+      "officialName": "Trophée des Champions",
+      "displayName": "Trophée des Champions 2026",
+      "countryId": "FRA",
+      "confederationId": "UEFA",
+      "competitionType": "supercup",
+      "seasonId": "2026",
+      "seasonStartDate": null,
+      "seasonEndDate": null,
+      "calendarType": "annual",
+      "participantCount": null,
+      "participantIds": [],
+      "competitionFormat": "see_regulation",
+      "stages": [],
+      "thirdPlaceEnabled": false,
+      "trophyAssetId": "tr_fra_trophee_champions.png",
+      "status": "architecture_ready_participants_pending"
+    },
+    {
+      "competitionId": "POR_SUPERTACA",
+      "officialName": "Supertaça Cândido de Oliveira",
+      "displayName": "Supertaça Cândido de Oliveira 2026",
+      "countryId": "POR",
+      "confederationId": "UEFA",
+      "competitionType": "supercup",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-08-01",
+      "seasonEndDate": "2026-08-01",
+      "calendarType": "annual",
+      "participantCount": null,
+      "participantIds": [],
+      "competitionFormat": "see_regulation",
+      "stages": [],
+      "thirdPlaceEnabled": false,
+      "trophyAssetId": "tr_por_supertaca_2026.png",
+      "status": "architecture_ready_participants_pending"
+    },
+    {
+      "competitionId": "NED_JOHAN_CRUIJFF_SCHAAL",
+      "officialName": "Johan Cruijff Schaal",
+      "displayName": "Johan Cruijff Schaal 2026",
+      "countryId": "NET",
+      "confederationId": "UEFA",
+      "competitionType": "supercup",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-08-02",
+      "seasonEndDate": "2026-08-02",
+      "calendarType": "annual",
+      "participantCount": null,
+      "participantIds": [],
+      "competitionFormat": "see_regulation",
+      "stages": [],
+      "thirdPlaceEnabled": false,
+      "trophyAssetId": "tr_ned_johan_cruyff_schaal_2026.png",
+      "status": "architecture_ready_participants_pending"
+    },
+    {
+      "competitionId": "BEL_SUPERCUP",
+      "officialName": "Belgian Super Cup",
+      "displayName": "Belgian Super Cup 2026",
+      "countryId": "BEL",
+      "confederationId": "UEFA",
+      "competitionType": "supercup",
+      "seasonId": "2026",
+      "seasonStartDate": null,
+      "seasonEndDate": null,
+      "calendarType": "annual",
+      "participantCount": null,
+      "participantIds": [],
+      "competitionFormat": "see_regulation",
+      "stages": [],
+      "thirdPlaceEnabled": false,
+      "trophyAssetId": "tr_bel_supercup_2026.png",
+      "status": "architecture_ready_participants_pending"
+    },
+    {
+      "competitionId": "TUR_SUPER_KUPA",
+      "officialName": "Turkcell Süper Kupa",
+      "displayName": "Turkcell Süper Kupa 2026",
+      "countryId": "TUR",
+      "confederationId": "UEFA",
+      "competitionType": "supercup",
+      "seasonId": "2026",
+      "seasonStartDate": null,
+      "seasonEndDate": null,
+      "calendarType": "annual",
+      "participantCount": null,
+      "participantIds": [],
+      "competitionFormat": "see_regulation",
+      "stages": [],
+      "thirdPlaceEnabled": false,
+      "trophyAssetId": "tr_tur_super_kupa_2026.png",
+      "status": "architecture_ready_participants_pending"
+    },
+    {
+      "competitionId": "CONMEBOL_LIBERTADORES_U20",
+      "officialName": "CONMEBOL Libertadores Sub-20",
+      "displayName": "Libertadores Sub-20 2026",
+      "countryId": null,
+      "confederationId": "CONMEBOL",
+      "competitionType": "youth_continental_cup",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-03-01",
+      "seasonEndDate": "2026-03-22",
+      "calendarType": "annual",
+      "participantCount": 12,
+      "participantIds": [],
+      "competitionFormat": "3_groups_of_4_semifinal_third_place_final",
+      "stages": [
+        "group_stage",
+        "semifinals",
+        "third_place",
+        "final"
+      ],
+      "thirdPlaceEnabled": true,
+      "trophyAssetId": "tr_conmebol_libertadores_u20_2026.png",
+      "status": "participants_partial"
+    },
+    {
+      "competitionId": "CONMEBOL_LIBERTADORES_WOMEN",
+      "officialName": "CONMEBOL Libertadores Feminina",
+      "displayName": "Libertadores Feminina 2026",
+      "countryId": null,
+      "confederationId": "CONMEBOL",
+      "competitionType": "women_continental_cup",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-10-15",
+      "seasonEndDate": "2026-10-31",
+      "calendarType": "annual",
+      "participantCount": 16,
+      "participantIds": [],
+      "competitionFormat": "4_groups_of_4_quarters_semis_third_place_final",
+      "stages": [
+        "group_stage",
+        "quarterfinals",
+        "semifinals",
+        "third_place",
+        "final"
+      ],
+      "thirdPlaceEnabled": true,
+      "trophyAssetId": "tr_conmebol_libertadores_women_2026.png",
+      "status": "participants_pending"
+    },
+    {
+      "competitionId": "FIFA_WOMENS_CHAMPIONS_CUP",
+      "officialName": "FIFA Women's Champions Cup",
+      "displayName": "FIFA Women's Champions Cup 2026",
+      "countryId": null,
+      "confederationId": "FIFA",
+      "competitionType": "women_intercontinental",
+      "seasonId": "2026",
+      "seasonStartDate": "2026-01-28",
+      "seasonEndDate": "2026-02-01",
+      "calendarType": "annual",
+      "participantCount": 6,
+      "participantIds": [],
+      "competitionFormat": "intercontinental_with_third_place",
+      "stages": [
+        "preliminary",
+        "semifinals",
+        "third_place",
+        "final"
+      ],
+      "thirdPlaceEnabled": true,
+      "thirdPlaceDate": "2026-02-01",
+      "trophyAssetId": "tr_fifa_womens_champions_cup_2026.png",
+      "status": "participants_partial"
+    }
+  ],
+  "clubs": [
+    {
+      "clubId": "br-flamengo-rj",
+      "officialName": "Flamengo",
+      "countryId": "BRA",
+      "shortName": "Flamengo"
+    },
+    {
+      "clubId": "br-sao-paulo-sp",
+      "officialName": "São Paulo",
+      "countryId": "BRA",
+      "shortName": "São Paulo"
+    },
+    {
+      "clubId": "br-palmeiras-sp",
+      "officialName": "Palmeiras",
+      "countryId": "BRA",
+      "shortName": "Palmeiras"
+    },
+    {
+      "clubId": "br-atletico-mineiro-mg",
+      "officialName": "Atlético Mineiro",
+      "countryId": "BRA",
+      "shortName": "Atlético-MG"
+    },
+    {
+      "clubId": "br-fluminense-rj",
+      "officialName": "Fluminense",
+      "countryId": "BRA",
+      "shortName": "Fluminense"
+    },
+    {
+      "clubId": "br-gremio-rs",
+      "officialName": "Grêmio",
+      "countryId": "BRA",
+      "shortName": "Grêmio"
+    },
+    {
+      "clubId": "br-botafogo-rj",
+      "officialName": "Botafogo",
+      "countryId": "BRA",
+      "shortName": "Botafogo"
+    },
+    {
+      "clubId": "br-cruzeiro-mg",
+      "officialName": "Cruzeiro",
+      "countryId": "BRA",
+      "shortName": "Cruzeiro"
+    },
+    {
+      "clubId": "br-corinthians-sp",
+      "officialName": "Corinthians",
+      "countryId": "BRA",
+      "shortName": "Corinthians"
+    },
+    {
+      "clubId": "br-bahia-ba",
+      "officialName": "Bahia",
+      "countryId": "BRA",
+      "shortName": "Bahia"
+    },
+    {
+      "clubId": "br-mirassol-sp",
+      "officialName": "Mirassol",
+      "countryId": "BRA",
+      "shortName": "Mirassol"
+    },
+    {
+      "clubId": "br-vasco-da-gama-rj",
+      "officialName": "Vasco da Gama",
+      "countryId": "BRA",
+      "shortName": "Vasco da Gama"
+    },
+    {
+      "clubId": "br-internacional-rs",
+      "officialName": "Internacional",
+      "countryId": "BRA",
+      "shortName": "Internacional"
+    },
+    {
+      "clubId": "br-athletico-paranaense-pr",
+      "officialName": "Athletico Paranaense",
+      "countryId": "BRA",
+      "shortName": "Athletico-PR"
+    },
+    {
+      "clubId": "br-coritiba-pr",
+      "officialName": "Coritiba",
+      "countryId": "BRA",
+      "shortName": "Coritiba"
+    },
+    {
+      "clubId": "br-red-bull-bragantino-sp",
+      "officialName": "Red Bull Bragantino",
+      "countryId": "BRA",
+      "shortName": "Red Bull Bragantino"
+    },
+    {
+      "clubId": "br-vitoria-ba",
+      "officialName": "Vitória",
+      "countryId": "BRA",
+      "shortName": "Vitória"
+    },
+    {
+      "clubId": "br-remo-pa",
+      "officialName": "Remo",
+      "countryId": "BRA",
+      "shortName": "Remo"
+    },
+    {
+      "clubId": "br-chapecoense-sc",
+      "officialName": "Chapecoense",
+      "countryId": "BRA",
+      "shortName": "Chapecoense"
+    },
+    {
+      "clubId": "br-santos-sp",
+      "officialName": "Santos",
+      "countryId": "BRA",
+      "shortName": "Santos"
+    },
+    {
+      "clubId": "br-ceara-ce",
+      "officialName": "Ceará",
+      "countryId": "BRA",
+      "state": "CE"
+    },
+    {
+      "clubId": "br-sao-bernardo-sp",
+      "officialName": "São Bernardo",
+      "countryId": "BRA",
+      "state": "SP"
+    },
+    {
+      "clubId": "br-vila-nova-go",
+      "officialName": "Vila Nova",
+      "countryId": "BRA",
+      "state": "GO"
+    },
+    {
+      "clubId": "br-crb-al",
+      "officialName": "CRB",
+      "countryId": "BRA",
+      "state": "AL"
+    },
+    {
+      "clubId": "br-operario-ferroviario-pr",
+      "officialName": "Operário-PR",
+      "countryId": "BRA",
+      "state": "PR"
+    },
+    {
+      "clubId": "br-atletico-goianiense-go",
+      "officialName": "Atlético-GO",
+      "countryId": "BRA",
+      "state": "GO"
+    },
+    {
+      "clubId": "br-botafogo-sp",
+      "officialName": "Botafogo-SP",
+      "countryId": "BRA",
+      "state": "SP"
+    },
+    {
+      "clubId": "br-fortaleza-ce",
+      "officialName": "Fortaleza",
+      "countryId": "BRA",
+      "state": "CE"
+    },
+    {
+      "clubId": "br-cuiaba-mt",
+      "officialName": "Cuiabá",
+      "countryId": "BRA",
+      "state": "MT"
+    },
+    {
+      "clubId": "br-sport-pe",
+      "officialName": "Sport",
+      "countryId": "BRA",
+      "state": "PE"
+    },
+    {
+      "clubId": "br-avai-sc",
+      "officialName": "Avaí",
+      "countryId": "BRA",
+      "state": "SC"
+    },
+    {
+      "clubId": "br-juventude-rs",
+      "officialName": "Juventude",
+      "countryId": "BRA",
+      "state": "RS"
+    },
+    {
+      "clubId": "br-nautico-pe",
+      "officialName": "Náutico",
+      "countryId": "BRA",
+      "state": "PE"
+    },
+    {
+      "clubId": "br-criciuma-sc",
+      "officialName": "Criciúma",
+      "countryId": "BRA",
+      "state": "SC"
+    },
+    {
+      "clubId": "br-athletic-mg",
+      "officialName": "Athletic",
+      "countryId": "BRA",
+      "state": "MG"
+    },
+    {
+      "clubId": "br-ponte-preta-sp",
+      "officialName": "Ponte Preta",
+      "countryId": "BRA",
+      "state": "SP"
+    },
+    {
+      "clubId": "br-goias-go",
+      "officialName": "Goiás",
+      "countryId": "BRA",
+      "state": "GO"
+    },
+    {
+      "clubId": "br-america-mg",
+      "officialName": "América-MG",
+      "countryId": "BRA",
+      "state": "MG"
+    },
+    {
+      "clubId": "br-novorizontino-sp",
+      "officialName": "Novorizontino",
+      "countryId": "BRA",
+      "state": "SP"
+    },
+    {
+      "clubId": "br-londrina-pr",
+      "officialName": "Londrina",
+      "countryId": "BRA",
+      "state": "PR"
+    },
+    {
+      "clubId": "br-amazonas-am",
+      "officialName": "Amazonas",
+      "countryId": "BRA",
+      "state": "AM"
+    },
+    {
+      "clubId": "br-anapolis-go",
+      "officialName": "Anápolis",
+      "countryId": "BRA",
+      "state": "GO"
+    },
+    {
+      "clubId": "br-barra-sc",
+      "officialName": "Barra",
+      "countryId": "BRA",
+      "state": "SC"
+    },
+    {
+      "clubId": "br-botafogo-pb",
+      "officialName": "Botafogo",
+      "countryId": "BRA",
+      "state": "PB"
+    },
+    {
+      "clubId": "br-brusque-sc",
+      "officialName": "Brusque",
+      "countryId": "BRA",
+      "state": "SC"
+    },
+    {
+      "clubId": "br-caxias-rs",
+      "officialName": "Caxias",
+      "countryId": "BRA",
+      "state": "RS"
+    },
+    {
+      "clubId": "br-confianca-se",
+      "officialName": "Confiança",
+      "countryId": "BRA",
+      "state": "SE"
+    },
+    {
+      "clubId": "br-ferroviaria-sp",
+      "officialName": "Ferroviária",
+      "countryId": "BRA",
+      "state": "SP"
+    },
+    {
+      "clubId": "br-figueirense-sc",
+      "officialName": "Figueirense",
+      "countryId": "BRA",
+      "state": "SC"
+    },
+    {
+      "clubId": "br-floresta-ce",
+      "officialName": "Floresta",
+      "countryId": "BRA",
+      "state": "CE"
+    },
+    {
+      "clubId": "br-guarani-sp",
+      "officialName": "Guarani",
+      "countryId": "BRA",
+      "state": "SP"
+    },
+    {
+      "clubId": "br-inter-de-limeira-sp",
+      "officialName": "Inter de Limeira",
+      "countryId": "BRA",
+      "state": "SP"
+    },
+    {
+      "clubId": "br-itabaiana-se",
+      "officialName": "Itabaiana",
+      "countryId": "BRA",
+      "state": "SE"
+    },
+    {
+      "clubId": "br-ituano-sp",
+      "officialName": "Ituano",
+      "countryId": "BRA",
+      "state": "SP"
+    },
+    {
+      "clubId": "br-maranhao-ma",
+      "officialName": "Maranhão",
+      "countryId": "BRA",
+      "state": "MA"
+    },
+    {
+      "clubId": "br-maringa-pr",
+      "officialName": "Maringá",
+      "countryId": "BRA",
+      "state": "PR"
+    },
+    {
+      "clubId": "br-paysandu-pa",
+      "officialName": "Paysandu",
+      "countryId": "BRA",
+      "state": "PA"
+    },
+    {
+      "clubId": "br-santa-cruz-pe",
+      "officialName": "Santa Cruz",
+      "countryId": "BRA",
+      "state": "PE"
+    },
+    {
+      "clubId": "br-volta-redonda-rj",
+      "officialName": "Volta Redonda",
+      "countryId": "BRA",
+      "state": "RJ"
+    },
+    {
+      "clubId": "br-ypiranga-rs",
+      "officialName": "Ypiranga",
+      "countryId": "BRA",
+      "state": "RS"
+    },
+    {
+      "clubId": "br-nacional-am",
+      "officialName": "Nacional",
+      "countryId": "BRA",
+      "state": "AM"
+    },
+    {
+      "clubId": "br-manaus-am",
+      "officialName": "Manaus",
+      "countryId": "BRA",
+      "state": "AM"
+    },
+    {
+      "clubId": "br-manauara-am",
+      "officialName": "Manauara",
+      "countryId": "BRA",
+      "state": "AM"
+    },
+    {
+      "clubId": "br-gas-rr",
+      "officialName": "GAS",
+      "countryId": "BRA",
+      "state": "RR"
+    },
+    {
+      "clubId": "br-monte-roraima-rr",
+      "officialName": "Monte Roraima",
+      "countryId": "BRA",
+      "state": "RR"
+    },
+    {
+      "clubId": "br-sao-raimundo-rr",
+      "officialName": "São Raimundo",
+      "countryId": "BRA",
+      "state": "RR"
+    },
+    {
+      "clubId": "br-independencia-ac",
+      "officialName": "Independência",
+      "countryId": "BRA",
+      "state": "AC"
+    },
+    {
+      "clubId": "br-galvez-ac",
+      "officialName": "Galvez",
+      "countryId": "BRA",
+      "state": "AC"
+    },
+    {
+      "clubId": "br-humaita-ac",
+      "officialName": "Humaitá",
+      "countryId": "BRA",
+      "state": "AC"
+    },
+    {
+      "clubId": "br-porto-velho-ro",
+      "officialName": "Porto Velho",
+      "countryId": "BRA",
+      "state": "RO"
+    },
+    {
+      "clubId": "br-guapore-ro",
+      "officialName": "Guaporé",
+      "countryId": "BRA",
+      "state": "RO"
+    },
+    {
+      "clubId": "br-araguaina-to",
+      "officialName": "Araguaína",
+      "countryId": "BRA",
+      "state": "TO"
+    },
+    {
+      "clubId": "br-gama-df",
+      "officialName": "Gama",
+      "countryId": "BRA",
+      "state": "DF"
+    },
+    {
+      "clubId": "br-brasiliense-df",
+      "officialName": "Brasiliense",
+      "countryId": "BRA",
+      "state": "DF"
+    },
+    {
+      "clubId": "br-luverdense-mt",
+      "officialName": "Luverdense",
+      "countryId": "BRA",
+      "state": "MT"
+    },
+    {
+      "clubId": "br-primavera-mt",
+      "officialName": "Primavera",
+      "countryId": "BRA",
+      "state": "MT"
+    },
+    {
+      "clubId": "br-inhumas-go",
+      "officialName": "Inhumas",
+      "countryId": "BRA",
+      "state": "GO"
+    },
+    {
+      "clubId": "br-aparecidense-go",
+      "officialName": "Aparecidense",
+      "countryId": "BRA",
+      "state": "GO"
+    },
+    {
+      "clubId": "br-capital-df",
+      "officialName": "Capital",
+      "countryId": "BRA",
+      "state": "DF"
+    },
+    {
+      "clubId": "br-ceilandia-df",
+      "officialName": "Ceilândia",
+      "countryId": "BRA",
+      "state": "DF"
+    },
+    {
+      "clubId": "br-mixto-mt",
+      "officialName": "Mixto",
+      "countryId": "BRA",
+      "state": "MT"
+    },
+    {
+      "clubId": "br-operario-mt",
+      "officialName": "Operário",
+      "countryId": "BRA",
+      "state": "MT"
+    },
+    {
+      "clubId": "br-uniao-mt",
+      "officialName": "União",
+      "countryId": "BRA",
+      "state": "MT"
+    },
+    {
+      "clubId": "br-goiatuba-go",
+      "officialName": "Goiatuba",
+      "countryId": "BRA",
+      "state": "GO"
+    },
+    {
+      "clubId": "br-trem-ap",
+      "officialName": "Trem",
+      "countryId": "BRA",
+      "state": "AP"
+    },
+    {
+      "clubId": "br-oratorio-ap",
+      "officialName": "Oratório",
+      "countryId": "BRA",
+      "state": "AP"
+    },
+    {
+      "clubId": "br-tuna-luso-pa",
+      "officialName": "Tuna Luso",
+      "countryId": "BRA",
+      "state": "PA"
+    },
+    {
+      "clubId": "br-aguia-de-maraba-pa",
+      "officialName": "Águia de Marabá",
+      "countryId": "BRA",
+      "state": "PA"
+    },
+    {
+      "clubId": "br-tocantinopolis-to",
+      "officialName": "Tocantinópolis",
+      "countryId": "BRA",
+      "state": "TO"
+    },
+    {
+      "clubId": "br-imperatriz-ma",
+      "officialName": "Imperatriz",
+      "countryId": "BRA",
+      "state": "MA"
+    },
+    {
+      "clubId": "br-sampaio-correa-ma",
+      "officialName": "Sampaio Corrêa",
+      "countryId": "BRA",
+      "state": "MA"
+    },
+    {
+      "clubId": "br-moto-club-ma",
+      "officialName": "Moto Club",
+      "countryId": "BRA",
+      "state": "MA"
+    },
+    {
+      "clubId": "br-iape-ma",
+      "officialName": "IAPE",
+      "countryId": "BRA",
+      "state": "MA"
+    },
+    {
+      "clubId": "br-maracana-ce",
+      "officialName": "Maracanã",
+      "countryId": "BRA",
+      "state": "CE"
+    },
+    {
+      "clubId": "br-iguatu-ce",
+      "officialName": "Iguatu",
+      "countryId": "BRA",
+      "state": "CE"
+    },
+    {
+      "clubId": "br-parnahyba-pi",
+      "officialName": "Parnahyba",
+      "countryId": "BRA",
+      "state": "PI"
+    },
+    {
+      "clubId": "br-ferroviario-ce",
+      "officialName": "Ferroviário",
+      "countryId": "BRA",
+      "state": "CE"
+    },
+    {
+      "clubId": "br-tirol-ce",
+      "officialName": "Tirol",
+      "countryId": "BRA",
+      "state": "CE"
+    },
+    {
+      "clubId": "br-atletico-ce",
+      "officialName": "Atlético",
+      "countryId": "BRA",
+      "state": "CE"
+    },
+    {
+      "clubId": "br-altos-pi",
+      "officialName": "Altos",
+      "countryId": "BRA",
+      "state": "PI"
+    },
+    {
+      "clubId": "br-piaui-pi",
+      "officialName": "Piauí",
+      "countryId": "BRA",
+      "state": "PI"
+    },
+    {
+      "clubId": "br-fluminense-pi",
+      "officialName": "Fluminense",
+      "countryId": "BRA",
+      "state": "PI"
+    },
+    {
+      "clubId": "br-abc-rn",
+      "officialName": "ABC",
+      "countryId": "BRA",
+      "state": "RN"
+    },
+    {
+      "clubId": "br-america-rn",
+      "officialName": "América",
+      "countryId": "BRA",
+      "state": "RN"
+    },
+    {
+      "clubId": "br-laguna-rn",
+      "officialName": "Laguna",
+      "countryId": "BRA",
+      "state": "RN"
+    },
+    {
+      "clubId": "br-sousa-pb",
+      "officialName": "Sousa",
+      "countryId": "BRA",
+      "state": "PB"
+    },
+    {
+      "clubId": "br-maguary-pe",
+      "officialName": "Maguary",
+      "countryId": "BRA",
+      "state": "PE"
+    },
+    {
+      "clubId": "br-central-pe",
+      "officialName": "Central",
+      "countryId": "BRA",
+      "state": "PE"
+    },
+    {
+      "clubId": "br-retro-pe",
+      "officialName": "Retrô",
+      "countryId": "BRA",
+      "state": "PE"
+    },
+    {
+      "clubId": "br-decisao-pe",
+      "officialName": "Decisão",
+      "countryId": "BRA",
+      "state": "PE"
+    },
+    {
+      "clubId": "br-serra-branca-pb",
+      "officialName": "Serra Branca",
+      "countryId": "BRA",
+      "state": "PB"
+    },
+    {
+      "clubId": "br-treze-pb",
+      "officialName": "Treze",
+      "countryId": "BRA",
+      "state": "PB"
+    },
+    {
+      "clubId": "br-lagarto-se",
+      "officialName": "Lagarto",
+      "countryId": "BRA",
+      "state": "SE"
+    },
+    {
+      "clubId": "br-sergipe-se",
+      "officialName": "Sergipe",
+      "countryId": "BRA",
+      "state": "SE"
+    },
+    {
+      "clubId": "br-asa-al",
+      "officialName": "ASA",
+      "countryId": "BRA",
+      "state": "AL"
+    },
+    {
+      "clubId": "br-csa-al",
+      "officialName": "CSA",
+      "countryId": "BRA",
+      "state": "AL"
+    },
+    {
+      "clubId": "br-cse-al",
+      "officialName": "CSE",
+      "countryId": "BRA",
+      "state": "AL"
+    },
+    {
+      "clubId": "br-jacuipense-ba",
+      "officialName": "Jacuipense",
+      "countryId": "BRA",
+      "state": "BA"
+    },
+    {
+      "clubId": "br-atletico-ba",
+      "officialName": "Atlético",
+      "countryId": "BRA",
+      "state": "BA"
+    },
+    {
+      "clubId": "br-juazeirense-ba",
+      "officialName": "Juazeirense",
+      "countryId": "BRA",
+      "state": "BA"
+    },
+    {
+      "clubId": "br-uberlandia-mg",
+      "officialName": "Uberlândia",
+      "countryId": "BRA",
+      "state": "MG"
+    },
+    {
+      "clubId": "br-betim-mg",
+      "officialName": "Betim",
+      "countryId": "BRA",
+      "state": "MG"
+    },
+    {
+      "clubId": "br-crac-go",
+      "officialName": "CRAC",
+      "countryId": "BRA",
+      "state": "GO"
+    },
+    {
+      "clubId": "br-abecat-go",
+      "officialName": "ABECAT",
+      "countryId": "BRA",
+      "state": "GO"
+    },
+    {
+      "clubId": "br-operario-ms",
+      "officialName": "Operário",
+      "countryId": "BRA",
+      "state": "MS"
+    },
+    {
+      "clubId": "br-ivinhema-ms",
+      "officialName": "Ivinhema",
+      "countryId": "BRA",
+      "state": "MS"
+    },
+    {
+      "clubId": "br-porto-ba",
+      "officialName": "Porto",
+      "countryId": "BRA",
+      "state": "BA"
+    },
+    {
+      "clubId": "br-rio-branco-es",
+      "officialName": "Rio Branco",
+      "countryId": "BRA",
+      "state": "ES"
+    },
+    {
+      "clubId": "br-vitoria-es",
+      "officialName": "Vitória",
+      "countryId": "BRA",
+      "state": "ES"
+    },
+    {
+      "clubId": "br-real-noroeste-es",
+      "officialName": "Real Noroeste",
+      "countryId": "BRA",
+      "state": "ES"
+    },
+    {
+      "clubId": "br-tombense-mg",
+      "officialName": "Tombense",
+      "countryId": "BRA",
+      "state": "MG"
+    },
+    {
+      "clubId": "br-democrata-gv-mg",
+      "officialName": "Democrata GV",
+      "countryId": "BRA",
+      "state": "MG"
+    },
+    {
+      "clubId": "br-madureira-rj",
+      "officialName": "Madureira",
+      "countryId": "BRA",
+      "state": "RJ"
+    },
+    {
+      "clubId": "br-portuguesa-rj",
+      "officialName": "Portuguesa",
+      "countryId": "BRA",
+      "state": "RJ"
+    },
+    {
+      "clubId": "br-america-rj",
+      "officialName": "America",
+      "countryId": "BRA",
+      "state": "RJ"
+    },
+    {
+      "clubId": "br-portuguesa-sp",
+      "officialName": "Portuguesa",
+      "countryId": "BRA",
+      "state": "SP"
+    },
+    {
+      "clubId": "br-agua-santa-sp",
+      "officialName": "Água Santa",
+      "countryId": "BRA",
+      "state": "SP"
+    },
+    {
+      "clubId": "br-pouso-alegre-mg",
+      "officialName": "Pouso Alegre",
+      "countryId": "BRA",
+      "state": "MG"
+    },
+    {
+      "clubId": "br-nova-iguacu-rj",
+      "officialName": "Nova Iguaçu",
+      "countryId": "BRA",
+      "state": "RJ"
+    },
+    {
+      "clubId": "br-sampaio-correa-rj",
+      "officialName": "Sampaio Corrêa",
+      "countryId": "BRA",
+      "state": "RJ"
+    },
+    {
+      "clubId": "br-marica-rj",
+      "officialName": "Maricá",
+      "countryId": "BRA",
+      "state": "RJ"
+    },
+    {
+      "clubId": "br-xv-de-piracicaba-sp",
+      "officialName": "XV de Piracicaba",
+      "countryId": "BRA",
+      "state": "SP"
+    },
+    {
+      "clubId": "br-noroeste-sp",
+      "officialName": "Noroeste",
+      "countryId": "BRA",
+      "state": "SP"
+    },
+    {
+      "clubId": "br-velo-clube-sp",
+      "officialName": "Velo Clube",
+      "countryId": "BRA",
+      "state": "SP"
+    },
+    {
+      "clubId": "br-cianorte-pr",
+      "officialName": "Cianorte",
+      "countryId": "BRA",
+      "state": "PR"
+    },
+    {
+      "clubId": "br-fc-cascavel-pr",
+      "officialName": "FC Cascavel",
+      "countryId": "BRA",
+      "state": "PR"
+    },
+    {
+      "clubId": "br-santa-catarina-sc",
+      "officialName": "Santa Catarina",
+      "countryId": "BRA",
+      "state": "SC"
+    },
+    {
+      "clubId": "br-joinville-sc",
+      "officialName": "Joinville",
+      "countryId": "BRA",
+      "state": "SC"
+    },
+    {
+      "clubId": "br-guarany-de-bage-rs",
+      "officialName": "Guarany de Bagé",
+      "countryId": "BRA",
+      "state": "RS"
+    },
+    {
+      "clubId": "br-sao-luiz-rs",
+      "officialName": "São Luiz",
+      "countryId": "BRA",
+      "state": "RS"
+    },
+    {
+      "clubId": "br-blumenau-sc",
+      "officialName": "Blumenau",
+      "countryId": "BRA",
+      "state": "SC"
+    },
+    {
+      "clubId": "br-marcilio-dias-sc",
+      "officialName": "Marcílio Dias",
+      "countryId": "BRA",
+      "state": "SC"
+    },
+    {
+      "clubId": "br-sao-joseense-pr",
+      "officialName": "São Joseense",
+      "countryId": "BRA",
+      "state": "PR"
+    },
+    {
+      "clubId": "br-azuriz-pr",
+      "officialName": "Azuriz",
+      "countryId": "BRA",
+      "state": "PR"
+    },
+    {
+      "clubId": "br-sao-jose-rs",
+      "officialName": "São José",
+      "countryId": "BRA",
+      "state": "RS"
+    },
+    {
+      "clubId": "br-brasil-rs",
+      "officialName": "Brasil",
+      "countryId": "BRA",
+      "state": "RS"
+    },
+    {
+      "clubId": "br-américa-rn-xx",
+      "officialName": "América-RN",
+      "countryId": "BRA"
+    },
+    {
+      "clubId": "br-botafogo-pb-xx",
+      "officialName": "Botafogo-PB",
+      "countryId": "BRA"
+    },
+    {
+      "clubId": "br-fluminense-pi-xx",
+      "officialName": "Fluminense-PI",
+      "countryId": "BRA"
+    },
+    {
+      "clubId": "br-grêmio-sampaio-xx",
+      "officialName": "Grêmio Sampaio",
+      "countryId": "BRA"
+    },
+    {
+      "clubId": "br-nacional-am-xx",
+      "officialName": "Nacional-AM",
+      "countryId": "BRA"
+    },
+    {
+      "clubId": "br-capital-df-xx",
+      "officialName": "Capital-DF",
+      "countryId": "BRA"
+    },
+    {
+      "clubId": "br-operário-ms-xx",
+      "officialName": "Operário-MS",
+      "countryId": "BRA"
+    },
+    {
+      "clubId": "br-primavera-mt-xx",
+      "officialName": "Primavera-MT",
+      "countryId": "BRA"
+    },
+    {
+      "clubId": "br-rio-branco-es-xx",
+      "officialName": "Rio Branco-ES",
+      "countryId": "BRA"
+    },
+    {
+      "clubId": "br-atlético-go-xx",
+      "officialName": "Atlético-GO",
+      "countryId": "BRA"
+    },
+    {
+      "clubId": "br-porto-vitória-xx",
+      "officialName": "Porto Vitória",
+      "countryId": "BRA"
+    },
+    {
+      "clubId": "conmebol-flamengo",
+      "officialName": "Flamengo",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-estudiantes",
+      "officialName": "Estudiantes",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-cusco",
+      "officialName": "Cusco",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-independiente-medellin",
+      "officialName": "Independiente Medellín",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-nacional-uru",
+      "officialName": "Nacional-URU",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-universitario",
+      "officialName": "Universitario",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-coquimbo-unido",
+      "officialName": "Coquimbo Unido",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-deportes-tolima",
+      "officialName": "Deportes Tolima",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-fluminense",
+      "officialName": "Fluminense",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-bolivar",
+      "officialName": "Bolívar",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-deportivo-la-guaira",
+      "officialName": "Deportivo La Guaira",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-independiente-rivadavia",
+      "officialName": "Independiente Rivadavia",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-boca-juniors",
+      "officialName": "Boca Juniors",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-cruzeiro",
+      "officialName": "Cruzeiro",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-universidad-catolica-chi",
+      "officialName": "Universidad Católica-CHI",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-barcelona-equ",
+      "officialName": "Barcelona-EQU",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-penarol",
+      "officialName": "Peñarol",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-corinthians",
+      "officialName": "Corinthians",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-independiente-santa-fe",
+      "officialName": "Independiente Santa Fe",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-platense",
+      "officialName": "Platense",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-palmeiras",
+      "officialName": "Palmeiras",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-cerro-porteno",
+      "officialName": "Cerro Porteño",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-junior-barranquilla",
+      "officialName": "Junior Barranquilla",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-sporting-cristal",
+      "officialName": "Sporting Cristal",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-ldu-quito",
+      "officialName": "LDU Quito",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-lanus",
+      "officialName": "Lanús",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-always-ready",
+      "officialName": "Always Ready",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-mirassol",
+      "officialName": "Mirassol",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-independiente-del-valle",
+      "officialName": "Independiente del Valle",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-libertad",
+      "officialName": "Libertad",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-rosario-central",
+      "officialName": "Rosario Central",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-universidad-central",
+      "officialName": "Universidad Central",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-america-de-cali",
+      "officialName": "América de Cali",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-tigre",
+      "officialName": "Tigre",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-macara",
+      "officialName": "Macará",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-alianza-atletico",
+      "officialName": "Alianza Atlético",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-atletico-mg",
+      "officialName": "Atlético-MG",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-cienciano",
+      "officialName": "Cienciano",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-academia-puerto-cabello",
+      "officialName": "Academia Puerto Cabello",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-juventud",
+      "officialName": "Juventud",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-são-paulo",
+      "officialName": "São Paulo",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-millonarios",
+      "officialName": "Millonarios",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-boston-river",
+      "officialName": "Boston River",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-ohiggins",
+      "officialName": "O'Higgins",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-santos",
+      "officialName": "Santos",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-san-lorenzo",
+      "officialName": "San Lorenzo",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-deportivo-cuenca",
+      "officialName": "Deportivo Cuenca",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-recoleta",
+      "officialName": "Recoleta",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-racing-club",
+      "officialName": "Racing Club",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-caracas",
+      "officialName": "Caracas",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-independiente-petrolero",
+      "officialName": "Independiente Petrolero",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-botafogo",
+      "officialName": "Botafogo",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-grêmio",
+      "officialName": "Grêmio",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-palestino",
+      "officialName": "Palestino",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-montevideo-city-torque",
+      "officialName": "Montevideo City Torque",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-deportivo-riestra",
+      "officialName": "Deportivo Riestra",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-olimpia-par",
+      "officialName": "Olimpia-PAR",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-vasco",
+      "officialName": "Vasco",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-audax-italiano",
+      "officialName": "Audax Italiano",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-barracas-central",
+      "officialName": "Barracas Central",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-river-plate",
+      "officialName": "River Plate",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-red-bull-bragantino",
+      "officialName": "Red Bull Bragantino",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-blooming",
+      "officialName": "Blooming",
+      "countryId": null
+    },
+    {
+      "clubId": "conmebol-carabobo",
+      "officialName": "Carabobo",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-lask",
+      "officialName": "LASK",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-sabah",
+      "officialName": "Sabah",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-club-brugge",
+      "officialName": "Club Brugge",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-slavia-praha",
+      "officialName": "Slavia Praha",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-arsenal",
+      "officialName": "Arsenal",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-aston-villa",
+      "officialName": "Aston Villa",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-liverpool",
+      "officialName": "Liverpool",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-manchester-city",
+      "officialName": "Manchester City",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-manchester-united",
+      "officialName": "Manchester United",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-lens",
+      "officialName": "Lens",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-lille",
+      "officialName": "Lille",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-paris-saint-germain",
+      "officialName": "Paris Saint-Germain",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-bayern-munchen",
+      "officialName": "Bayern München",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-borussia-dortmund",
+      "officialName": "Borussia Dortmund",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-rb-leipzig",
+      "officialName": "RB Leipzig",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-stuttgart",
+      "officialName": "Stuttgart",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-aek-athens",
+      "officialName": "AEK Athens",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-como",
+      "officialName": "Como",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-inter",
+      "officialName": "Inter",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-napoli",
+      "officialName": "Napoli",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-roma",
+      "officialName": "Roma",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-feyenoord",
+      "officialName": "Feyenoord",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-psv",
+      "officialName": "PSV",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-bodø/glimt",
+      "officialName": "Bodø/Glimt",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-viking",
+      "officialName": "Viking",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-porto",
+      "officialName": "Porto",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-sporting-cp",
+      "officialName": "Sporting CP",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-slovan-bratislava",
+      "officialName": "Slovan Bratislava",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-atletico-de-madrid",
+      "officialName": "Atlético de Madrid",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-barcelona",
+      "officialName": "Barcelona",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-real-betis",
+      "officialName": "Real Betis",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-real-madrid",
+      "officialName": "Real Madrid",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-villarreal",
+      "officialName": "Villarreal",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-fenerbahçe",
+      "officialName": "Fenerbahçe",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-galatasaray",
+      "officialName": "Galatasaray",
+      "countryId": null
+    },
+    {
+      "clubId": "uefa-shakhtar-donetsk",
+      "officialName": "Shakhtar Donetsk",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-vancouver-fc",
+      "officialName": "Vancouver FC",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-mount-pleasant",
+      "officialName": "Mount Pleasant",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-o&m-fc",
+      "officialName": "O&M FC",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-defence-force",
+      "officialName": "Defence Force",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-alajuelense",
+      "officialName": "Alajuelense",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-real-espana",
+      "officialName": "Real España",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-xelaju",
+      "officialName": "Xelajú",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-olimpia-de-honduras",
+      "officialName": "Olimpia de Honduras",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-cartagines",
+      "officialName": "Cartaginés",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-sporting-san-miguelito",
+      "officialName": "Sporting San Miguelito",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-forge-fc",
+      "officialName": "Forge FC",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-atletico-ottawa",
+      "officialName": "Atlético Ottawa",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-seattle-sounders",
+      "officialName": "Seattle Sounders",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-la-galaxy",
+      "officialName": "LA Galaxy",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-club-america",
+      "officialName": "Club América",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-monterrey",
+      "officialName": "Monterrey",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-toluca",
+      "officialName": "Toluca",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-cruz-azul",
+      "officialName": "Cruz Azul",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-tigres-uanl",
+      "officialName": "Tigres UANL",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-pumas-unam",
+      "officialName": "Pumas UNAM",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-inter-miami",
+      "officialName": "Inter Miami",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-philadelphia-union",
+      "officialName": "Philadelphia Union",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-san-diego-fc",
+      "officialName": "San Diego FC",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-fc-cincinnati",
+      "officialName": "FC Cincinnati",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-vancouver-whitecaps",
+      "officialName": "Vancouver Whitecaps",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-los-angeles-fc",
+      "officialName": "Los Angeles FC",
+      "countryId": null
+    },
+    {
+      "clubId": "concacaf-nashville-sc",
+      "officialName": "Nashville SC",
+      "countryId": null
+    }
+  ]
+}
