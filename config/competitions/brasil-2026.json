@@ -654,7 +654,7 @@
     "state": "AC",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "galvez_ac",
     "rnc": 217
    },
    {
@@ -663,7 +663,7 @@
     "state": "AC",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "independencia_ac",
     "rnc": 132
    },
    {
@@ -726,7 +726,7 @@
     "state": "AM",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "manauara_am",
     "rnc": 103
    },
    {
@@ -762,7 +762,7 @@
     "state": "AP",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "oratorio_ap",
     "rnc": 198
    },
    {
@@ -843,7 +843,7 @@
     "state": "CE",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "tirol_ce",
     "rnc": null
    },
    {
@@ -861,7 +861,7 @@
     "state": "DF",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "ceilandia_df",
     "rnc": 77
    },
    {
@@ -1023,7 +1023,7 @@
     "state": "MS",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "ivinhema_ms",
     "rnc": null
    },
    {
@@ -1032,7 +1032,7 @@
     "state": "MS",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "operario_ms",
     "rnc": 93
    },
    {
@@ -1050,7 +1050,7 @@
     "state": "MT",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "mixto_mt",
     "rnc": 119
    },
    {
@@ -1068,7 +1068,7 @@
     "state": "MT",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "primavera_mt",
     "rnc": null
    },
    {
@@ -1122,7 +1122,7 @@
     "state": "PB",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "serrabranca_pb",
     "rnc": null
    },
    {
@@ -1140,7 +1140,7 @@
     "state": "PE",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "maguary_pe",
     "rnc": null
    },
    {
@@ -1194,7 +1194,7 @@
     "state": "PI",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "piaui_pi",
     "rnc": null
    },
    {
@@ -1320,7 +1320,7 @@
     "state": "RN",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "laguna_rn",
     "rnc": null
    },
    {
@@ -1329,7 +1329,7 @@
     "state": "RO",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "guapore_ro",
     "rnc": null
    },
    {
@@ -1347,7 +1347,7 @@
     "state": "RO",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "gazinportovelho_ro",
     "rnc": 75
    },
    {
@@ -1365,7 +1365,7 @@
     "state": "RR",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "gas_rr",
     "rnc": 113
    },
    {
@@ -1374,7 +1374,7 @@
     "state": "RR",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "monteroraima_rr",
     "rnc": null
    },
    {
@@ -1563,7 +1563,7 @@
     "state": "TO",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "tocantinopolis_to",
     "rnc": 71
    }
   ]
@@ -2066,7 +2066,7 @@
     "name": "Tocantinópolis",
     "state": "TO",
     "points": 1297,
-    "file": null
+    "file": "tocantinopolis_to"
    },
    {
     "position": 72,
@@ -2080,7 +2080,7 @@
     "name": "Brasiliense",
     "state": "DF",
     "points": 1242,
-    "file": null
+    "file": "brasiliense_df"
    },
    {
     "position": 74,
@@ -2094,7 +2094,7 @@
     "name": "Porto Velho",
     "state": "RO",
     "points": 1185,
-    "file": null
+    "file": "gazinportovelho_ro"
    },
    {
     "position": 76,
@@ -2108,7 +2108,7 @@
     "name": "Ceilândia",
     "state": "DF",
     "points": 1131,
-    "file": null
+    "file": "ceilandia_df"
    },
    {
     "position": 78,
@@ -2129,7 +2129,7 @@
     "name": "Humaitá",
     "state": "AC",
     "points": 1064,
-    "file": null
+    "file": "humaita_ac"
    },
    {
     "position": 80,
@@ -2185,7 +2185,7 @@
     "name": "São Raimundo",
     "state": "RR",
     "points": 965,
-    "file": null
+    "file": "saoraimundo_rr"
    },
    {
     "position": 89,
@@ -2220,7 +2220,7 @@
     "name": "Operário",
     "state": "MS",
     "points": 783,
-    "file": null
+    "file": "operario_ms"
    },
    {
     "position": 94,
@@ -2290,7 +2290,7 @@
     "name": "Manauara",
     "state": "AM",
     "points": 665,
-    "file": null
+    "file": "manauara_am"
    },
    {
     "position": 104,
@@ -2318,7 +2318,7 @@
     "name": "Parnahyba",
     "state": "PI",
     "points": 608,
-    "file": null
+    "file": "parnahyba_pi"
    },
    {
     "position": 108,
@@ -2367,7 +2367,7 @@
     "name": "GAS",
     "state": "RR",
     "points": 531,
-    "file": null
+    "file": "gas_rr"
    },
    {
     "position": 115,
@@ -2402,7 +2402,7 @@
     "name": "Mixto",
     "state": "MT",
     "points": 494,
-    "file": null
+    "file": "mixto_mt"
    },
    {
     "position": 120,
@@ -2500,7 +2500,7 @@
     "name": "Independência",
     "state": "AC",
     "points": 380,
-    "file": null
+    "file": "independencia_ac"
    },
    {
     "position": 135,
@@ -2962,7 +2962,7 @@
     "name": "Oratório",
     "state": "AP",
     "points": 125,
-    "file": null
+    "file": "oratorio_ap"
    },
    {
     "position": 202,
@@ -3109,7 +3109,7 @@
     "name": "Galvez",
     "state": "AC",
     "points": 76,
-    "file": null
+    "file": "galvez_ac"
    },
    {
     "position": 217,
@@ -3270,12 +3270,12 @@
      {
       "name": "Grêmio Sampaio",
       "state": "RR",
-      "file": null
+      "file": "gas_rr"
      },
      {
       "name": "Manauara",
       "state": "AM",
-      "file": null
+      "file": "manauara_am"
      },
      {
       "name": "Manaus",
@@ -3285,7 +3285,7 @@
      {
       "name": "Monte Roraima",
       "state": "RR",
-      "file": null
+      "file": "monteroraima_rr"
      },
      {
       "name": "Nacional",
@@ -3295,7 +3295,7 @@
      {
       "name": "São Raimundo",
       "state": "RR",
-      "file": null
+      "file": "saoraimundo_rr"
      }
     ]
    },
@@ -3310,27 +3310,27 @@
      {
       "name": "Galvez",
       "state": "AC",
-      "file": null
+      "file": "galvez_ac"
      },
      {
       "name": "Guaporé",
       "state": "RO",
-      "file": null
+      "file": "guapore_ro"
      },
      {
       "name": "Humaitá",
       "state": "AC",
-      "file": null
+      "file": "humaita_ac"
      },
      {
       "name": "Independência",
       "state": "AC",
-      "file": null
+      "file": "independencia_ac"
      },
      {
       "name": "Porto Velho",
       "state": "RO",
-      "file": null
+      "file": "gazinportovelho_ro"
      }
     ]
    },
@@ -3345,7 +3345,7 @@
      {
       "name": "Brasiliense",
       "state": "DF",
-      "file": null
+      "file": "brasiliense_df"
      },
      {
       "name": "Gama",
@@ -3355,7 +3355,7 @@
      {
       "name": "Inhumas",
       "state": "GO",
-      "file": null
+      "file": "inhumas_go"
      },
      {
       "name": "Luverdense",
@@ -3365,7 +3365,7 @@
      {
       "name": "Primavera",
       "state": "MT",
-      "file": null
+      "file": "primavera_mt"
      }
     ]
    },
@@ -3380,7 +3380,7 @@
      {
       "name": "Ceilândia",
       "state": "DF",
-      "file": null
+      "file": "ceilandia_df"
      },
      {
       "name": "Goiatuba",
@@ -3390,7 +3390,7 @@
      {
       "name": "Mixto",
       "state": "MT",
-      "file": null
+      "file": "mixto_mt"
      },
      {
       "name": "Operário VG",
@@ -3415,12 +3415,12 @@
      {
       "name": "Oratório",
       "state": "AP",
-      "file": null
+      "file": "oratorio_ap"
      },
      {
       "name": "Tocantinópolis",
       "state": "TO",
-      "file": null
+      "file": "tocantinopolis_to"
      },
      {
       "name": "Trem",
@@ -3465,7 +3465,7 @@
      {
       "name": "Parnahyba",
       "state": "PI",
-      "file": null
+      "file": "parnahyba_pi"
      },
      {
       "name": "Sampaio Corrêa",
@@ -3500,12 +3500,12 @@
      {
       "name": "Piauí",
       "state": "PI",
-      "file": null
+      "file": "piaui_pi"
      },
      {
       "name": "Tirol",
       "state": "CE",
-      "file": null
+      "file": "tirol_ce"
      }
     ]
    },
@@ -3530,12 +3530,12 @@
      {
       "name": "Laguna",
       "state": "RN",
-      "file": null
+      "file": "laguna_rn"
      },
      {
       "name": "Maguary",
       "state": "PE",
-      "file": null
+      "file": "maguary_pe"
      },
      {
       "name": "Sousa",
@@ -3550,7 +3550,7 @@
      {
       "name": "Decisão",
       "state": "PE",
-      "file": null
+      "file": "decisaogoiana_pe"
      },
      {
       "name": "Lagarto",
@@ -3570,7 +3570,7 @@
      {
       "name": "Serra Branca",
       "state": "PB",
-      "file": null
+      "file": "serrabranca_pb"
      },
      {
       "name": "Treze",
@@ -3620,7 +3620,7 @@
      {
       "name": "Abecat",
       "state": "GO",
-      "file": null
+      "file": "agroec_go"
      },
      {
       "name": "Betim",
@@ -3635,12 +3635,12 @@
      {
       "name": "Ivinhema",
       "state": "MS",
-      "file": null
+      "file": "ivinhema_ms"
      },
      {
       "name": "Operário",
       "state": "MS",
-      "file": null
+      "file": "operario_ms"
      },
      {
       "name": "Uberlândia",
