@@ -169,7 +169,7 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 	if err != nil {
 		return p, err
 	}
-	if stat.Size() > 1024*1024 {
+	if stat.Size() > maxManifestBytes {
 		return p, errors.New("manifesto grande demais")
 	}
 	buf, err := os.ReadFile(manifestPath)
@@ -188,8 +188,8 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		(m.Kind == "BRASFOOT_RELEASE_PATCH" && m.PublicationAllowed)) {
 		return p, errors.New("marcadores de homologação/publicação incoerentes; instalação recusada")
 	}
-	if len(m.Files) < 1 || len(m.Files) > 2048 {
-		return p, errors.New("o pacote precisa ter de 1 a 2048 arquivos autorizados")
+	if err = validateManifestLimits(m.Files); err != nil {
+		return p, err
 	}
 	p = Plan{Game: game, Payload: payload, Manifest: m, AlreadyInstalled: true, Items: make([]Item, 0, len(m.Files))}
 	seen := map[string]bool{}

@@ -4,7 +4,9 @@ import json
 from pathlib import Path
 import re
 
-MAX_FILES = 2048
+MAX_FILES = 16384
+MAX_MANIFEST_BYTES = 16 * 1024 * 1024
+MAX_TOTAL_BYTES = 2 * 1024 * 1024 * 1024
 MAX_ORIGINS = 64
 MAX_SIZE = 25 * 1024 * 1024
 HASH = re.compile(r"[0-9a-f]{64}")
@@ -15,6 +17,11 @@ def hub_limit_errors(manifest: dict) -> list[str]:
     files = manifest.get("files", [])
     if not 1 <= len(files) <= MAX_FILES:
         errors.append(f"o pacote tem {len(files)} arquivos; o hub aceita de 1 a {MAX_FILES}")
+    total = sum(int(entry.get("size", 0)) for entry in files)
+    if total > MAX_TOTAL_BYTES:
+        errors.append(f"o pacote soma {total} bytes; o hub aceita até {MAX_TOTAL_BYTES}")
+    if len(json.dumps(manifest, ensure_ascii=False).encode("utf-8")) > MAX_MANIFEST_BYTES:
+        errors.append(f"manifesto acima de {MAX_MANIFEST_BYTES} bytes")
     executable = None
     for entry in files:
         path = entry.get("path", "")
