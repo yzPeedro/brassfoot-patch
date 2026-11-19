@@ -57,6 +57,22 @@ Os países aceitos estão em `GAME_COUNTRIES`, com os códigos numéricos usados
 
 Para ampliar a cobertura, acrescente entradas ao mapa fixo depois de confirmar a identidade do clube. Homônimos (mesmo nome em países ou estados diferentes) sempre exigem entrada explícita.
 
+### Descoberta de clubes e ligas
+
+`tools/discovery_queue.py` lê a coleta e o catálogo publicado:
+
+- **Correspondências:** compara os clubes da fonte sem correspondência com os clubes do jogo em `identification-pending-preserve-roster`, pelo nome sem termos genéricos (FC, Clube, SC…). `strict` (nome igual, único dos dois lados) entra no mapa fixo com `--team-map`; `loose` e `conflict` ficam no relatório para revisão. Mapa errado não passa na aprovação: a perda de elenco retém o clube.
+- **Clubes novos:** clubes da fonte sem nenhum candidato no jogo entram na fila persistente (`data/private/daily/discovery-queue.json`) com `firstSeen`, `lastSeen` e `status` (`NOT_RESEARCHED`). Criar o clube exige pesquisa de elenco real e não é automático.
+- **Ligas:** os países do jogo com clubes pendentes que nenhuma liga coletada cobre aparecem em `uncoveredCountries`. Uma liga nova entra na lista `LEAGUES` do coletor só depois de conferida.
+
+### Técnicos
+
+A coleta guarda a comissão técnica de cada clube (`staff`). `tools/manager_facts.py` transforma o técnico atual (função `Coach`, `Manager` ou `Head Coach`, um só por clube) em fato do ledger `config/club-identity-<ano>.json`, com `sourceUrl`, `sourcePublishedAt`, `sourceLevel` e data de registro. Não há fato quando a fonte não traz técnico, traz mais de um ou traz o mesmo do jogo (mesmo nome sem acentos, nome contido no outro ou mesmo sobrenome com a mesma inicial). Antes desta ferramenta o ledger ficava vazio e nenhum técnico mudava, porque `compile_live_rosters` só troca o técnico por fato do ledger.
+
+### Juniores Sub-20
+
+Os elencos Sub-20 reais são pesquisados por clube e gravados em `data/private/youth-sources/<PAÍS>/<arquivo>.json`: atleta com nome completo, nascimento com fonte, `positionCode` 0–4, nacionalidade, vínculo, `leftAt`, estatísticas por competição ou `NOT_AVAILABLE`, fontes e o `status` do clube. `tools/youth_status.py` mostra a situação de cada clube (`NOT_RESEARCHED` a `GAME_HOMOLOGATED`), marca catálogo com mais de 30 dias e escolhe os próximos clubes (Brasil primeiro, depois reputação e divisão). A compilação (`tools/build_youth_juniors.py`, 18–20 anos, potencial `youth-potential-v1`) e o modo de juniores reais do jogo estão na branch `feat/juniores-sub20` e não são publicados pela rotina até o proprietário homologar o componente.
+
 ### Execução
 
 O catálogo original é o diretório de `*.ban.json` gerado por `app.Main export-directory` a partir de uma cópia dos `teams/` originais.

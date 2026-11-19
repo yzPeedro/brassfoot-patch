@@ -62,6 +62,25 @@ Coleta elencos públicos do serviço de elencos do 365Scores, com cache e regist
 - **Saída:** JSON com `provider`, `collectedAt`, `clubs`, `failures`, `catalogCoverage` e listas de clubes sem correspondência.
 - **Restrições:** sem credenciais nem API-Football; resposta limitada a 12 MB; uma falha de rede reaproveita o cache marcado como `stale`, sem novas tentativas nem contorno de limites.
 
+### `tools/discovery_queue.py`
+
+Fila de clubes e ligas fora da cobertura, a partir da coleta.
+
+| Opção | Uso |
+|---|---|
+| `--observed`, `--catalog` | coleta do dia e `export-directory` do jogo publicado |
+| `--queue` | fila persistente de clubes novos (`firstSeen`, `lastSeen`, `status`) |
+| `--report` | correspondências `strict`/`loose`/`conflict`, clubes novos do dia e países sem liga coletada |
+| `--team-map` | aplica só as correspondências `strict`, sem sobrescrever entradas |
+
+### `tools/manager_facts.py`
+
+Registra o técnico observado na coleta como fato do ledger de identidade (`--observed`, `--catalog`, `--ledger`, `--output-ledger`, `--report`, `--date`). Preserva os demais campos do ledger e a data de registro de um fato repetido.
+
+### `tools/youth_status.py`
+
+Situação da pesquisa Sub-20 por clube e próximos clubes a pesquisar (`--sources`, `--catalog`, `--integrated`, `--next`, `--report`).
+
 ### `tools/compile_live_rosters.py`
 
 Gera os arquivos de equipe `.ban` a partir do snapshot, fora do jogo.
@@ -511,7 +530,8 @@ Os testes existem no repositório, mas a execução está dispensada na manuten�
 | `edition.json` | `productName`, `PATCH_YEAR`, `version`, `channel`, `releaseNotes`, `repository`, `siteUrl`, `platforms` (5 alvos com `interface` e `gameRuntime`) | build, publicação, compilação, exportação |
 | `edition-live-match-preview.json`, `edition-hub-preview.json` | edições `local-preview` só para Windows, passadas com `--edition` | `build_distribution.py` |
 | `sources.json` | feeds públicos CC0 do catálogo mundial e `schedule` (`hour`, `timezone`) | `daily_update`, `daily_maintenance` |
-| `live-roster-team-map.json` | ID de clube na fonte → `teams/<arquivo>.ban` | `collect_live_rosters` |
+| `live-roster-team-map.json` | ID de clube na fonte → `teams/<arquivo>.ban` | `collect_live_rosters`, `discovery_queue` |
+| `club-identity-<ano>.json` | fatos de identidade por clube (técnico, nome, estádio, cores, divisão) com fonte | `manager_facts`, `roster_approval`, `compile_live_rosters` |
 | `rosters-<versão>.json` | snapshot coletado por versão | `compile_live_rosters`, `export_patch_clubs` |
 | `live-rosters-supplement.json` | clubes coletados à parte, com `identitySources` | `compile_live_rosters` (`--supplement`), `export_patch_clubs` |
 | `player-status-2026.json` | marcações de estrela e Top Mundial por atleta e clube, com política, fonte e motivo de remoção | `compile_live_rosters` |

@@ -1,6 +1,10 @@
 # Manutenção diária
 
-O projeto tem um ciclo automático executado todos os dias às 18h (horário de Brasília) que pesquisa os elencos, compila as mudanças, publica uma nova versão quando há alterações materiais e atualiza o site.
+O projeto tem um ciclo automático diário que pesquisa elencos e técnicos, descobre clubes fora da cobertura, acompanha a pesquisa Sub-20, compila as mudanças, publica uma nova versão quando há alterações materiais e atualiza o site.
+
+## Agendador
+
+O ciclo é uma automação local do app Codex nesta máquina (`%USERPROFILE%\.codex\automations\<id>\automation.toml`, tipo `heartbeat`, regra diária às 09:00 no horário local), ligada a uma conversa do Codex. Não há tarefa do Agendador de Tarefas do Windows. O texto da automação é uma cópia do roteiro local `data/private/codex/rotina-diaria-prompt.md`: mudar o arquivo local não muda a automação, e o proprietário cola o roteiro novo no Codex. Não crie outro agendador.
 
 ## Escopo
 
@@ -12,6 +16,9 @@ O projeto tem um ciclo automático executado todos os dias às 18h (horário de 
 
 1. **Estado publicado.** Ler `config/edition.json`, os manifestos de `site/data/` e a última release para partir da versão realmente publicada.
 2. **Coleta.** Consultar as fontes com dados novos (`tools/collect_live_rosters.py --refresh`), registrando URL, data da consulta e procedência. Falhas de fonte preservam o último dado confiável e ficam registradas.
+   - **Descoberta:** `tools/discovery_queue.py` aplica ao mapa fixo as correspondências estritas e mantém a fila de clubes novos e de países sem liga coletada; com correspondência aplicada, a coleta roda de novo sem `--refresh`.
+   - **Técnicos:** `tools/manager_facts.py` grava o técnico atual da fonte no ledger `config/club-identity-<ano>.json`.
+   - **Sub-20:** `tools/youth_status.py` aponta os próximos clubes; a pesquisa grava catálogos em `data/private/youth-sources/` e não entra na release até a homologação do componente.
 3. **Aprovação e compilação.** `python -m tools.roster_approval` compila o candidato com `tools/compile_live_rosters.py`, decide clube a clube e recompila só com os aceitos (ver [Aprovação por clube](#aprovação-por-clube)). Mudanças apenas de data de consulta, ordenação ou metadados não geram release.
 4. **Preparação.** `python -m tools.daily_release prepare` sobe a versão, monta o pacote na ordem de [Release e publicação](release.md) com herança do pacote anterior, exporta os dados do site, regenera as imagens, escreve as notas a partir das mudanças que estão nos `.ban` e acrescenta as entradas e saídas a `config/roster-facts-2026.json`. O executável publicado mais recente, com o campo animado, é sempre a base das versões seguintes.
 5. **Regressão.** `python -m tools.regression_suite` roda as suítes do repositório, a decodificação de todos os `.ban`, as conferências do pacote, a matriz de instalação e remoção pelo `hubcli` (origens: original, release anterior completa, só patch, só campo, um componente só e gerações antigas), saves, renderização do campo e dados do site, e grava um veredito. Só `pass` libera a publicação.
@@ -39,6 +46,12 @@ Os usuários recebem a release diária pelo hub: ao virar `latest`, o `release.j
 - não desfaz uma entrada ou saída publicada há menos de `holdDays` dias (90) em `config/roster-facts-2026.json`.
 
 O clube que não passa volta ao estado publicado, com o motivo em `approval.json`; os demais seguem para a release. Clubes com fonte parcial ou sem identificação continuam preservados.
+
+A aprovação é por domínio: quando o elenco é retido, a identidade (técnico e demais campos) com fato no ledger é aceita sozinha e o elenco publicado é mantido. Cada clube registra `domains` (`roster`, `identity`) em `approval.json`, e as contagens trazem `identityAccepted` e `managersChanged`.
+
+## Materialidade
+
+Há release quando o compilado aprovado muda algum vínculo, idade, nacionalidade, posição, lado de campo ou técnico. Troca só de técnico é material e aparece nas notas em "Técnicos atualizados". Data de consulta, ordenação e metadados não geram release.
 
 ## Ano da edição
 
