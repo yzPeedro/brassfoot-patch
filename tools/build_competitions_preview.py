@@ -24,15 +24,17 @@ def run(arguments: list) -> str:
     return result.stdout
 
 
-def add_trophies(bundle: Path, trophies: Path, original_game: Path) -> list[str]:
+def add_trophies(bundle: Path, trophies: Path | None, original_game: Path, marker: Path | None = None) -> list[str]:
     manifest_path = bundle / "manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     entries = {f["path"]: f for f in manifest["files"]}
     added = []
-    for image in sorted(trophies.glob("tr_*.png")):
-        relative = "trofeus/" + image.name
+    sources = [("trofeus/" + image.name, image) for image in sorted(trophies.glob("tr_*.png"))] if trophies else []
+    if marker:
+        sources.append(("juniores-reais.json", marker))
+    for relative, image in sources:
         if (original_game / relative).exists():
-            raise SystemExit(f"trofeu ja existe no jogo original; substituicao nao suportada: {relative}")
+            raise SystemExit(f"arquivo ja existe no jogo original; substituicao nao suportada: {relative}")
         target = image.read_bytes()
         operations, _ = match_ops(b"", target)
         name = "trophy-" + sha(relative.encode())[:20] + ".json"
@@ -81,7 +83,7 @@ def build(args: argparse.Namespace) -> dict:
          "--full-executable", args.full, "--live-executable", args.live, "--patch-recipe", patch_recipe,
          *previous, "--previous-live-only-executable", args.live,
          "--original-game", args.original_game, "--output", final, "--version", args.version])
-    trophies = add_trophies(final, args.trophies, args.original_game) if args.trophies else []
+    trophies = add_trophies(final, args.trophies, args.original_game, args.juniors_marker) if args.trophies or args.juniors_marker else []
     manifest = json.loads((final / "manifest.json").read_text(encoding="utf-8"))
     return {"bundle": str(final), "version": manifest["version"], "files": len(manifest["files"]), "trophies": trophies,
             "data": data, "full": sha(args.full.read_bytes()), "patch": sha(args.patch.read_bytes())}
@@ -102,6 +104,7 @@ def main() -> None:
     parser.add_argument("--extra-cfg", type=Path, action="append", default=[])
     parser.add_argument("--previous-live", type=Path, action="append", default=[])
     parser.add_argument("--trophies", type=Path)
+    parser.add_argument("--juniors-marker", type=Path)
     parser.add_argument("--work", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--version", required=True)
