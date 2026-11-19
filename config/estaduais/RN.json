@@ -1,0 +1,121 @@
+{
+  "state": "RN",
+  "season": 2026,
+  "competition": "Campeonato Potiguar 2026",
+  "engine": "ready",
+  "pending": [],
+  "teams": [
+    "abcrn_bra",
+    "americarn",
+    "potiguar_bra",
+    "laguna_rn",
+    "globo_fc",
+    "santacruzrn",
+    "qfc_rn",
+    "potyguarrn_bra"
+  ],
+  "names": [
+    "ABC Futebol Clube",
+    "América Futebol Clube",
+    "Associação Cultural e Desportiva Potiguar (Potiguar de Mossoró)",
+    "Clube Laguna SAF",
+    "Globo Futebol Clube",
+    "Santa Cruz Futebol Clube (Santa Cruz de Natal)",
+    "QFC (Quinho Futebol Clube), campeão da 2ª Divisão 2025",
+    "Potyguar Seridoense, vice da 2ª Divisão 2025"
+  ],
+  "phase1": {
+    "type": "league",
+    "legs": 1,
+    "groups": [],
+    "fixtures": []
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "Mata-Mata Classificatório",
+      "ties": [
+        [
+          "6",
+          "3"
+        ],
+        [
+          "5",
+          "4"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Semifinal",
+      "ties": [
+        [
+          "R4",
+          "1"
+        ],
+        [
+          "R3",
+          "2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    }
+  ],
+  "finalTable": [],
+  "tiebreakers": [
+    "points",
+    "wins",
+    "goalDifference",
+    "goalsFor",
+    "headToHead",
+    "fewerRedCards",
+    "fewerYellowCards",
+    "draw"
+  ],
+  "relegation": null,
+  "pools": [],
+  "simplifications": [],
+  "unsupported": [
+    "Equivalência: todos os mata-matas são decididos por pontos e saldo de gols nos dois jogos e depois pênaltis, sem prorrogação e sem vantagem (Art. 9º §4º, 10 §3º, 11 §1º); pontos seguidos de saldo agregado empata exatamente nos mesmos casos que o placar agregado, então 'aggregate-then-penalties' reproduz a regra.",
+    "Confronto direto (headToHead) só se aplica quando o empate é entre DOIS clubes; com 3 ou mais, é ignorado (Art. 12 parágrafo único).",
+    "Semifinal: 1º geral x vencedor do mata-mata com MENOR aproveitamento na fase de Grupo; 2º geral x vencedor com MELHOR aproveitamento (Art. 10). Com 7 jogos para todos, aproveitamento segue a posição da fase de Grupo; por isso C1/C2 são o 1º e o 2º e C3/C4 os vencedores do mata-mata ordenados pela fase de Grupo.",
+    "Final: mando do 2º jogo para o melhor na Classificação Geral, que soma pontos da fase de Grupo e da Semifinal (Art. 10 §4º, Art. 11), não só a posição da 1ª fase; e os dois jogos são na Arena das Dunas, estádio comum com renda dividida (Art. 17 §4º e §6º). 'better-second' é aproximação.",
+    "Mandos da fase de Grupo: os 4 melhores da 1ª Divisão 2025 mandam 4 jogos; os 5º e 6º de 2025 e os 2 promovidos da 2ª Divisão 2025 mandam 3 (Art. 7º parágrafo único); tabela não obtida, jogos não fixados.",
+    "Classificação do 3º ao 6º: pontos da fase de Grupo + Semifinal, sem os do Mata-Mata (Art. 9º §5º, Art. 11 §3º).",
+    "Art. 11 §4º diz rebaixamento para a '2ª Divisão do Campeonato Potiguar 2026' (aparente erro de ano); tratado como 7º e 8º da fase de Grupo rebaixados.",
+    "Participantes 7 e 8 constam no REC só como 'Campeão' e 'Vice da 2ª Divisão 2025'; QFC e Potyguar Seridoense vêm de notícia da FNF.",
+    "2026 teve caso disciplinar (perda de pontos de América-RN e Potyguar Seridoense depois convertida em multa); não é regra do campeonato."
+  ],
+  "sources": [
+    "pdf/RN-rec-campeonato-potiguar-2026.pdf: Art. 7º (fase de Grupo e mandos), Art. 8º, Art. 9º (Mata-Mata Classificatório), Art. 10 (semifinal), Art. 11 (final e rebaixamento), Art. 12 (desempate), Art. 17 (Arena das Dunas)",
+    "RN.json divisions[0] e results2026 (mata-mata QFC x Santa Cruz e Potiguar x Laguna; rebaixados Potyguar Seridoense e Globo)"
+  ]
+}

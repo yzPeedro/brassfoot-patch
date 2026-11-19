@@ -1,0 +1,24 @@
+{
+ "schemaVersion": 1,
+ "note": "Código FIFA (e nomes em inglês usados por fontes) para a sigla de país do Brasfoot (best.ac). Siglas iguais não são assumidas: NIR no jogo é Níger e COM é Costa do Marfim.",
+ "map": {
+  "AFG": "AFG", "ALB": "ALB", "ALG": "ALG", "AND": "AND", "ANG": "AGO", "ARG": "ARG", "ARM": "ARM", "ATG": "ATG",
+  "Antigua and Barbuda": "ATG", "AUS": "AUS", "AUT": "AUT", "AZE": "AZE", "BAN": "BAN", "BDI": "BUR", "BEL": "BEL",
+  "BEN": "BEN", "BER": "BER", "BFA": "BKF", "BIH": "BOS", "BLR": "BIE", "BOL": "BOL", "BRA": "BRA", "BRB": "BAR",
+  "BUL": "BUL", "CAN": "CAN", "Canada": "CAN", "CGO": "CNG", "CHI": "CHI", "CHN": "CHN", "CIV": "COM", "CMR": "CAM",
+  "COD": "RDG", "COL": "COL", "COM": "ICM", "CPV": "CAV", "CRC": "CSR", "CRO": "CRO", "CUB": "CUB", "CUW": "CUR",
+  "CYP": "CPR", "CZE": "RTC", "DEN": "DIN", "DMA": "DOM", "DOM": "RDO", "ECU": "EQU", "EGY": "EGI", "ENG": "ING",
+  "ESP": "ESP", "EST": "EST", "FIN": "FIN", "FRA": "FRA", "FRO": "IFA", "GAB": "GAB", "GAM": "GAM", "GEO": "GEO",
+  "GER": "ALE", "GHA": "GAN", "GLP": "GDA", "GNB": "GNB", "GRE": "GRE", "GRN": "GRA", "GUI": "GUI", "GUY": "GUN",
+  "HAI": "HAI", "HON": "HON", "HUN": "HUN", "IDN": "IDO", "IRL": "IRL", "IRN": "IRA", "IRQ": "IRQ", "ISL": "ISL",
+  "ISR": "ISR", "ITA": "ITA", "JAM": "JAM", "JOR": "JOR", "JPN": "JAP", "KAZ": "CAZ", "KEN": "QUE", "KOR": "CRS",
+  "KVX": "KOS", "LCA": "STL", "LTU": "LIT", "LVA": "LET", "MAR": "MAR", "MDA": "MOL", "MEX": "MEX", "MKD": "MCD",
+  "MLI": "MLI", "MLT": "MTA", "MNE": "MON", "MOZ": "MOC", "MSR": "MST", "MTN": "MAU", "MTQ": "MTI", "MWI": "MWI",
+  "NAM": "NAM", "NED": "HOL", "NGA": "NIG", "NIG": "NIR", "NIR": "IRN", "NOR": "NOR", "NZL": "NOZ", "PAN": "PAN",
+  "PAR": "PAR", "PER": "PER", "PHI": "FIL", "POL": "POL", "POR": "POR", "ROM": "ROM", "ROU": "ROM", "RSA": "AFS",
+  "RUS": "RUS", "SCO": "ESC", "SEN": "SEN", "SER": "SER", "SGP": "SIN", "SKN": "SCN", "SLE": "SLE", "SRB": "SER",
+  "SUI": "SUI", "SUR": "SUR", "SVK": "ELQ", "SVN": "ESV", "SWE": "SUE", "TCA": "ITC", "TRI": "TRT",
+  "Trinidad and Tobago": "TRT", "TUN": "TUN", "TUR": "TUR", "UGA": "UGA", "UKR": "UCR", "URU": "URU", "USA": "EUA",
+  "UZB": "UZB", "VEN": "VEN", "WAL": "PGA", "ZAM": "ZAM", "ZIM": "ZIM"
+ }
+}

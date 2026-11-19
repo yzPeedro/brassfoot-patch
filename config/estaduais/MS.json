@@ -1,0 +1,126 @@
+{
+  "state": "MS",
+  "season": 2026,
+  "competition": "Campeonato Sul-Mato-Grossense 2026",
+  "engine": "ready",
+  "pending": [],
+  "teams": [
+    "naviraiense_ms",
+    "operario_ms",
+    "aguianegra_ms",
+    "costarica_ms",
+    "corumbaense_ms",
+    "pantanal_ms",
+    "ivinhema_ms",
+    "dourados_ms",
+    "craquidauana_ms",
+    "bataguassu_ms"
+  ],
+  "names": [
+    "Naviraiense",
+    "Operário-MS",
+    "Águia Negra",
+    "Costa Rica",
+    "Corumbaense",
+    "Pantanal",
+    "Ivinhema",
+    "Dourados",
+    "Clube de Regatas Aquidauana",
+    "Bataguassu"
+  ],
+  "phase1": {
+    "type": "league",
+    "legs": 1,
+    "groups": [],
+    "fixtures": []
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "Quartas",
+      "ties": [
+        [
+          "6",
+          "3"
+        ],
+        [
+          "5",
+          "4"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "neutral",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Semifinal",
+      "ties": [
+        [
+          "W2",
+          "1"
+        ],
+        [
+          "W1",
+          "2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "neutral",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "W2",
+          "W1"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    }
+  ],
+  "finalTable": [],
+  "tiebreakers": [
+    "points",
+    "wins",
+    "goalDifference",
+    "goalsFor",
+    "headToHead",
+    "fewerRedCards",
+    "fewerYellowCards",
+    "draw"
+  ],
+  "relegation": null,
+  "pools": [],
+  "simplifications": [
+    "mando 'neutral' segue a ordem da tabela"
+  ],
+  "unsupported": [
+    "Participante corrigido pelo review (Art. 9º e tabela oficial): o 10º clube é o 'Clube de Regatas Aquidauana' (Aquidauana), e não 'Aquidauanense' como em MS.json. 'teams' usa o nome corrigido, que não consta de participants[].name da pesquisa; MS.json não foi alterado e também dá 'Aquidauanense' como campeão da Série B 2026 (Midiamax), o que precisa ser conferido antes de ligar os dois registros.",
+    "Desempate da 1ª fase (Art. 3º): confronto direto só entre 2 clubes; depois menos vermelhos, menos amarelos e sorteio público na FFMS.",
+    "Quartas (Art. 9º §2º; Art. 10): B = 6º x 3º (ida) e 3º x 6º (volta); C = 5º x 4º e 4º x 5º. Gravado com 'neutral' e a ordem do REC: o 1º clube do par manda o 1º jogo, o 2º manda a volta. Empate em pontos: vitórias, saldo, gols marcados, depois pênaltis (Art. 10 §1º); em dois jogos, isso decide igual a 'aggregate-then-penalties'.",
+    "Semifinal (Art. 11): D = vencedor de C x 1º e E = vencedor de B x 2º, com 1º e 2º mandando a volta; gravado com 'neutral' e essa ordem. Mesmo critério de empate (Art. 11 §1º).",
+    "Final (Art. 12): jogo de volta na casa da melhor campanha no campeonato; com número de jogos diferente, vale a média dos critérios. O motor compara totais acumulados (pontos, vitórias, saldo, gols pró), não médias: aproximação quando um finalista veio da folga e o outro das quartas. Mesmo critério de empate (Art. 12 §1º).",
+    "Mandos da 1ª fase: Operário, Ivinhema, Pantanal, Costa Rica e Dourados com 5 jogos em casa (Art. 9º §1º); a tabela não foi fixada em pairs.",
+    "Vagas 2027 (Art. 27): fora do esquema."
+  ],
+  "sources": [
+    "pdf/MS-serie-A-REC-2026.pdf (sha256 f8f148a4…285cf1): Art. 3º (desempates), Art. 9º (participantes, mandos da 1ª fase, classificados), Art. 10 (quartas), Art. 11 (semifinal), Art. 12 (final), Art. 13 (rebaixamento), Art. 27 (vagas)",
+    "MS.review.json (19/11/2026)",
+    "MS.json (pesquisa): imprensa (fontes anteriores ao REC)"
+  ]
+}

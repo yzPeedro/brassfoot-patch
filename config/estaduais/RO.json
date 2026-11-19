@@ -1,0 +1,97 @@
+{
+  "state": "RO",
+  "season": 2026,
+  "competition": "Campeonato Rondoniense Série A 2026",
+  "engine": "ready",
+  "pending": [],
+  "teams": [
+    "gazinportovelho_ro",
+    "genus_ro",
+    "barcelona_ro",
+    "rondoniense_ro",
+    "jiparana_ro",
+    "guapore_ro",
+    "uniaocacoalense_ro"
+  ],
+  "names": [
+    "Gazin Porto Velho Esporte Clube",
+    "Sport Club Genus de Porto Velho",
+    "Barcelona Futebol Clube",
+    "Rondoniense Social Clube",
+    "Ji-Paraná Futebol Clube",
+    "Guaporé Futebol Clube",
+    "Sociedade Esportiva União Cacoalense"
+  ],
+  "phase1": {
+    "type": "league",
+    "legs": 2,
+    "groups": [],
+    "fixtures": []
+  },
+  "relegated": 1,
+  "knockout": [
+    {
+      "name": "Semifinal",
+      "ties": [
+        [
+          "4",
+          "1"
+        ],
+        [
+          "3",
+          "2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    }
+  ],
+  "finalTable": [],
+  "tiebreakers": [
+    "points",
+    "wins",
+    "headToHead",
+    "goalDifference",
+    "goalsFor",
+    "fewerRedCards",
+    "fewerYellowCards",
+    "draw"
+  ],
+  "relegation": null,
+  "pools": [],
+  "simplifications": [],
+  "unsupported": [
+    "Equivalência: semifinal e final decididas por pontos nos dois jogos, depois saldo de gols nas duas partidas e depois pênaltis, sem prorrogação (Art. 15); pontos seguidos de saldo agregado empata exatamente nos mesmos casos que o placar agregado, então 'aggregate-then-penalties' reproduz a regra.",
+    "Confronto direto (2º critério) usa a soma dos jogos de ida e volta ('jogo de 180 minutos') e não vale quando o empate envolve mais de 2 clubes (Art. 16 §1º e §2º).",
+    "Final: mando para a equipe melhor classificada em TODA a competição (Art. 14 parágrafo único), somando 1ª fase e semifinal, não a posição da 1ª fase. Em 2026 o Guaporé, 3º na 1ª fase, mandou o 2º jogo por ter mais pontos na classificação geral. 'better-second' só é fiel se o motor ordenar pela classificação geral acumulada.",
+    "Inconsistência do REC: Art. 13 e 15 tratam a 3ª fase como ida e volta, mas o Art. 14 parágrafo único fala em 'partida final'; a FFER disputou a final em dois jogos (results2026), adotado aqui.",
+    "Rebaixamento: o último da classificação geral ao final da competição (Art. 17), que soma todas as fases; como os 4 classificados acumulam os pontos da 1ª fase mais os do mata-mata, o último geral coincide com o 7º da 1ª fase (salvo empates com critérios sobre jogos diferentes). Rebaixamento da União Cacoalense em 2026 inferido, sem homologação consultada.",
+    "1ª fase com 7 clubes: uma folga por rodada em cada turno (12 jogos por clube).",
+    "Ordem da 1ª fase de 2026 vem de fonte frágil (NC News, textos assinados por 'Agente IA'), usada só para conferência; a regra vem do REC."
+  ],
+  "sources": [
+    "pdf/RO-regulamento-rondoniense-serie-a-2026.pdf: Art. 11 e 12 (turno e returno, 4 classificados), Art. 13 (cruzamento olímpico 4ºx1º e 3ºx2º), Art. 14 (final e mando), Art. 15 (desempate do mata-mata), Art. 16 (desempate da 1ª fase), Art. 17 (descenso)",
+    "pdf/RO-tabela-rondoniense-serie-a-2026.pdf e RO.json results2026 (semifinais Rondoniense x Ji-Paraná e Guaporé x Gazin; final em dois jogos com volta do Guaporé)"
+  ]
+}

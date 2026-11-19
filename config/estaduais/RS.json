@@ -1,0 +1,150 @@
+{
+  "state": "RS",
+  "season": 2026,
+  "competition": "Gauchão Superbet 2026 – Série A1 (Divisão Especial)",
+  "engine": "ready",
+  "pending": [],
+  "teams": [
+    "avenida_rs",
+    "interdesantamaria_rs",
+    "juventude",
+    "novohamburgo_bra",
+    "saojosers_bra",
+    "saoluiz_rs",
+    "gremio",
+    "guaranyrs_bra",
+    "monsoonfc_rs",
+    "caxias",
+    "internacional_bra",
+    "ypiranga_rs"
+  ],
+  "names": [
+    "Avenida",
+    "Inter-SM",
+    "Juventude",
+    "Novo Hamburgo",
+    "São José",
+    "São Luiz",
+    "Grêmio",
+    "Guarany",
+    "Monsoon",
+    "Caxias",
+    "Internacional",
+    "Ypiranga"
+  ],
+  "phase1": {
+    "type": "crossed",
+    "legs": 1,
+    "groups": [
+      [
+        "internacional_bra",
+        "juventude",
+        "avenida_rs",
+        "saojosers_bra",
+        "guaranyrs_bra",
+        "saoluiz_rs"
+      ],
+      [
+        "gremio",
+        "caxias",
+        "novohamburgo_bra",
+        "monsoonfc_rs",
+        "interdesantamaria_rs",
+        "ypiranga_rs"
+      ]
+    ],
+    "fixtures": []
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "Quartas de final",
+      "ties": [
+        [
+          "A1",
+          "A4"
+        ],
+        [
+          "A2",
+          "A3"
+        ],
+        [
+          "B1",
+          "B4"
+        ],
+        [
+          "B2",
+          "B3"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "better-single",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Semifinal",
+      "ties": [
+        [
+          "R4",
+          "R1"
+        ],
+        [
+          "R3",
+          "R2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "points-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "R2",
+          "R1"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "points-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    }
+  ],
+  "finalTable": [],
+  "tiebreakers": [
+    "points",
+    "wins",
+    "goalDifference",
+    "goalsFor",
+    "fewerRedCards",
+    "fewerYellowCards",
+    "draw"
+  ],
+  "relegation": null,
+  "pools": [],
+  "simplifications": [],
+  "unsupported": [
+    "Semifinal e final: empate em pontos é decidido pelo maior saldo de gols da fase e depois pênaltis (art. 20). Nota de equivalência: pontos nos dois jogos e depois saldo agregado empatam exatamente nos mesmos casos que o placar agregado, então equivale a 'aggregate-then-penalties'.",
+    "Melhor campanha (C1..C4) para mando da semifinal = pontos da classificatória + quartas (art. 11 §1º); na final = classificatória + quartas + semifinal (art. 12 par. único); desempate pelo art. 19. O esquema não diz quais fases somam.",
+    "Mando das quartas: 1º e 2º do grupo (art. 10 §1º), expresso como better-single.",
+    "Troféu Farroupilha (arts. 15–16): os 4 eliminados nas quartas jogam semifinal (4ª x 1ª e 3ª x 2ª melhor campanha, classificatória + quartas) e final em ida e volta, volta em casa da melhor campanha, empate em pontos → saldo → pênaltis (art. 20); campeão é o 5º colocado geral e leva a 5ª vaga na Copa do Brasil 2027. Torneio paralelo não expressável.",
+    "Classificação final (art. 18): 3º/4º entre eliminados na semifinal por pontos acumulados; 5º–8º pelo Troféu Farroupilha; 9º–12º pela pontuação do quadrangular. Título de Campeão do Interior (art. 13).",
+    "Ordem das rodadas do quadrangular depende de comparar os 5ºs e os 6ºs dos dois grupos ('melhor 5º/6º', critério não detalhado além do art. 19)."
+  ],
+  "sources": [
+    "pdf/RS-A-REC-2026.pdf: art. 4 (participantes), arts. 8 e 17 (quadrangular e rebaixamento), art. 9 (grupos; jogos só contra o outro grupo, turno único), art. 10 (quartas), art. 11 (semifinal), art. 12 (final), arts. 15–16 (Troféu Farroupilha), art. 18 (classificação final), art. 19 (desempate), art. 20 (mata-matas)",
+    "RS.json divisions[0]"
+  ]
+}

@@ -67,11 +67,14 @@ type InstallOptions struct { // TestFailAfter is for automated rollback tests, n
 var (
 	teamName           = regexp.MustCompile(`^teams/[\p{L}\p{N}_ -]+\.ban$`)
 	crestName          = regexp.MustCompile(`^teams/(escudos|escudosMini|camisas|camisas2|camisas3)/[\p{L}\p{N}_ -]+\.png$`)
+	trophyName         = regexp.MustCompile(`^(trofeus/tr_[A-Za-z0-9_]+\.png|juniores-reais\.json)$`)
 	nationalConfigPath = "conf_ligas_nacionais/BRA.cfg"
 	nationalConfigName = regexp.MustCompile(`^conf_ligas_nacionais/[A-Z]{3}\.cfg$`)
 	gameExecutablePath = "bf22-23.exe"
 	validHash          = regexp.MustCompile(`^[0-9a-f]{64}$`)
 	pngHeader          = [4]byte{0x89, 0x50, 0x4e, 0x47}
+	juniorsMarkerPath  = "juniores-reais.json"
+	juniorsHeader      = [4]byte{0x7b, 0x22, 0x76, 0x65}
 	validVersion       = regexp.MustCompile(`^[0-9]{4}\.[0-9]+\.[0-9]+$`)
 )
 
@@ -168,7 +171,7 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 	if err != nil {
 		return p, err
 	}
-	if stat.Size() > 1024*1024 {
+	if stat.Size() > maxManifestBytes {
 		return p, errors.New("manifesto grande demais")
 	}
 	buf, err := os.ReadFile(manifestPath)
@@ -187,8 +190,8 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		(m.Kind == "BRASFOOT_RELEASE_PATCH" && m.PublicationAllowed)) {
 		return p, errors.New("marcadores de homologação/publicação incoerentes; instalação recusada")
 	}
-	if len(m.Files) < 1 || len(m.Files) > 2048 {
-		return p, errors.New("o pacote precisa ter de 1 a 2048 arquivos autorizados")
+	if err = validateManifestLimits(m.Files); err != nil {
+		return p, err
 	}
 	p = Plan{Game: game, Payload: payload, Manifest: m, AlreadyInstalled: true, Items: make([]Item, 0, len(m.Files))}
 	seen := map[string]bool{}
@@ -197,7 +200,7 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		// O executável só pode ser atualizado por manifesto v4 e assinatura SHA reconhecida.
 		isNationalConfig := nationalConfigName.MatchString(entry.Path) && m.SchemaVersion >= 3
 		isExecutable := entry.Path == gameExecutablePath && m.SchemaVersion == 4
-		isCrest := crestName.MatchString(entry.Path) && m.SchemaVersion == 4
+		isCrest := (crestName.MatchString(entry.Path) || trophyName.MatchString(entry.Path)) && m.SchemaVersion == 4
 		if !teamName.MatchString(entry.Path) && !isNationalConfig && !isExecutable && !isCrest {
 			return Plan{}, fmt.Errorf("caminho de patch proibido: %s", entry.Path)
 		}
@@ -296,7 +299,8 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		_, err = io.ReadFull(f, h[:])
 		f.Close()
 		if err != nil || (isExecutable && (h[0] != 0x4d || h[1] != 0x5a)) ||
-			(isCrest && h != pngHeader) ||
+			(isCrest && entry.Path != juniorsMarkerPath && h != pngHeader) ||
+			(entry.Path == juniorsMarkerPath && h != juniorsHeader) ||
 			(!isExecutable && !isCrest && h != [4]byte{0xac, 0xed, 0x00, 0x05}) {
 			return Plan{}, fmt.Errorf("assinatura inválida de arquivo autorizado: %s", entry.Path)
 		}

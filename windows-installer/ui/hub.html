@@ -310,7 +310,7 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
             <h1 id="home-title">Tudo pronto para jogar.</h1>
             <div class="folder"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5b6885" stroke-width="1.8" stroke-linejoin="round"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><code id="game-path">Procurando o jogo…</code><button class="link" id="choose">Alterar</button></div>
             <div class="status">
-              <div class="status-row"><div><strong>Elencos 2026</strong><small>Jogadores atualizados nos clubes</small></div><span class="badge off" id="badge-rosters">—</span></div>
+              <div class="status-row"><div><strong>Elencos + Competições 2026</strong><small>Jogadores e competições atualizados</small></div><span class="badge off" id="badge-rosters">—</span></div>
               <div class="status-row"><div><strong>Temporada 2026</strong><small>Ano 2026, Copa do Mundo, copas e divisões</small></div><span class="badge off" id="badge-season">—</span></div>
               <div class="status-row"><div><strong>Campo animado</strong><small>Partidas ao vivo na tela de jogo</small></div><span class="badge off" id="badge-live">—</span></div>
               <div class="status-row" id="row-crests" hidden><div><strong>Escudos e camisas</strong><small>Escudos atuais e camisas dos clubes novos</small></div><span class="badge off" id="badge-crests">—</span></div>
@@ -353,8 +353,8 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
           <button class="option" role="checkbox" aria-checked="true" data-option="rosters">
             <div class="option-top"><span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><span class="badge off" id="opt-rosters">—</span></div>
             <div class="thumb patch"><div><strong>704</strong><span>CLUBES</span></div><div><strong>301</strong><span>ELENCOS</span></div></div>
-            <h2>Elencos 2026</h2>
-            <p>Jogadores atualizados nos clubes do Brasil e da Europa.</p>
+            <h2>Elencos + Competições 2026</h2>
+            <p>Jogadores e competições atualizados nos clubes do Brasil e da Europa.</p>
             <p class="why" id="why-rosters" hidden></p>
           </button>
           <button class="option" role="checkbox" aria-checked="true" data-option="season">
@@ -470,8 +470,8 @@ h1{font-size:25px;letter-spacing:-.03em;line-height:1.15;margin:0 0 6px}
   const ALL_COMPONENTS = ['rosters', 'season', 'live', 'crests'];
   const offered = name => name !== 'crests' || (targets() && components().crestsTotal > 0);
   const activeComponents = () => ALL_COMPONENTS.filter(offered);
-  const names = {rosters: 'os Elencos 2026', season: 'a Temporada 2026', live: 'o campo animado', crests: 'os escudos e camisas'};
-  const labels = {rosters: 'Elencos 2026', season: 'Temporada 2026', live: 'Campo animado', crests: 'Escudos e camisas'};
+  const names = {rosters: 'os Elencos + Competições 2026', season: 'a Temporada 2026', live: 'o campo animado', crests: 'os escudos e camisas'};
+  const labels = {rosters: 'Elencos + Competições 2026', season: 'Temporada 2026', live: 'Campo animado', crests: 'Escudos e camisas'};
   const icons = {
     ok: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>',
     error: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 8v5m0 4h.01"/><circle cx="12" cy="12" r="9"/></svg>',

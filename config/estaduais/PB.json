@@ -1,0 +1,101 @@
+{
+  "state": "PB",
+  "season": 2026,
+  "competition": "Campeonato Paraibano da Primeira Divisão 2026",
+  "engine": "ready",
+  "pending": [],
+  "teams": [
+    "atleticopb_bra",
+    "botafogopb_bra",
+    "campinensepb_bra",
+    "confiancadesape_pb",
+    "esportedepatos_pb",
+    "nacional_pb",
+    "pombalec_pb",
+    "serrabranca_pb",
+    "sousapb_bra",
+    "trezepb_bra"
+  ],
+  "names": [
+    "Atlético Cajazeirense de Desportos",
+    "Botafogo Futebol Clube (Botafogo-PB)",
+    "Campinense Clube",
+    "Confiança Esporte Clube",
+    "Esporte Clube de Patos",
+    "Nacional Atlético Clube (Nacional de Patos)",
+    "Pombal Esporte Clube",
+    "Serra Branca Esporte Clube",
+    "Sousa Esporte Clube",
+    "Treze Futebol Clube"
+  ],
+  "phase1": {
+    "type": "league",
+    "legs": 1,
+    "groups": [],
+    "fixtures": []
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "Semifinal",
+      "ties": [
+        [
+          "4",
+          "1"
+        ],
+        [
+          "3",
+          "2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    }
+  ],
+  "finalTable": [],
+  "tiebreakers": [
+    "points",
+    "wins",
+    "goalDifference",
+    "goalsFor",
+    "fewerRedCards",
+    "fewerYellowCards",
+    "draw"
+  ],
+  "relegation": null,
+  "pools": [],
+  "simplifications": [],
+  "unsupported": [
+    "Equivalência: a fonte (Wikipedia, com base no regulamento) decide o mata-mata por pontos nos dois jogos, depois saldo de gols no confronto e depois pênaltis, sem prorrogação. Pontos nos dois jogos seguidos de saldo agregado empata exatamente nos mesmos casos que o placar agregado, então 'aggregate-then-penalties' reproduz a regra; o vencedor por pontos sempre tem saldo agregado maior ou igual, e quando pontos empatam vence o saldo.",
+    "Final: mando do 2º jogo para a melhor campanha da 1ª fase; o par ['W1','W2'] lista o vencedor da semifinal 1º x 4º primeiro, mas o motor deve inverter quando W2 tiver melhor campanha (better-second).",
+    "Fonte frágil: o REC 2026 da FPF-PB não foi obtido (PDF inacessível em 18/11/2026). Formato, desempates da 1ª fase (vitórias, saldo, gols pró, menos vermelhos, menos amarelos, sorteio), critério do mata-mata e rebaixamento de 2 vêm de imprensa (A União, Repórter PB) e da Wikipedia; nada conferido no regulamento oficial.",
+    "Última rodada da 1ª fase com jogos simultâneos (só calendário)."
+  ],
+  "sources": [
+    "PB.json divisions[0].format (phases, tiebreakers, extraTimeOrPenalties, homeAdvantage) e gaps",
+    "https://pt.wikipedia.org/wiki/Campeonato_Paraibano_de_Futebol_de_2026 (formato, mata-mata, rebaixamento)",
+    "A União 25/11/2025 e Repórter PB 05/12/2025 (turno único, 4 classificados, 2 rebaixados)",
+    "results2026 do PB.json conferido: semifinais Serra Branca(4º)x Botafogo-PB(1º) e Sousa(3º)x Campinense(2º) com volta na casa do melhor; Confiança e Pombal (9º e 10º) rebaixados"
+  ]
+}

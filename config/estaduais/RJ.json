@@ -1,0 +1,159 @@
+{
+  "state": "RJ",
+  "season": 2026,
+  "competition": "Campeonato Carioca Série A 2026",
+  "engine": "ready",
+  "pending": [],
+  "teams": [
+    "bangu_bra",
+    "boavista_bra",
+    "botafogorj_bra",
+    "flarj",
+    "flurj",
+    "madureira_bra",
+    "marica_rj",
+    "novaiguacu_rj",
+    "portuguesarj_bra",
+    "sampaiocorrea_rj",
+    "vasco",
+    "voltaredondarj_bra"
+  ],
+  "names": [
+    "Bangu",
+    "Boavista",
+    "Botafogo",
+    "Flamengo",
+    "Fluminense",
+    "Madureira",
+    "Maricá",
+    "Nova Iguaçu",
+    "Portuguesa-RJ",
+    "Sampaio Corrêa-RJ",
+    "Vasco",
+    "Volta Redonda"
+  ],
+  "phase1": {
+    "type": "crossed",
+    "legs": 1,
+    "groups": [
+      [
+        "flurj",
+        "vasco",
+        "voltaredondarj_bra",
+        "sampaiocorrea_rj",
+        "portuguesarj_bra",
+        "bangu_bra"
+      ],
+      [
+        "flarj",
+        "botafogorj_bra",
+        "madureira_bra",
+        "marica_rj",
+        "boavista_bra",
+        "novaiguacu_rj"
+      ]
+    ],
+    "fixtures": []
+  },
+  "relegated": 1,
+  "knockout": [
+    {
+      "name": "Quartas de final",
+      "ties": [
+        [
+          "A1",
+          "A4"
+        ],
+        [
+          "B1",
+          "B4"
+        ],
+        [
+          "A2",
+          "A3"
+        ],
+        [
+          "B2",
+          "B3"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "better-single",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Semifinal",
+      "ties": [
+        [
+          "W1",
+          "W3"
+        ],
+        [
+          "W2",
+          "W4"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "neutral",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    }
+  ],
+  "finalTable": [],
+  "tiebreakers": [
+    "points",
+    "wins",
+    "goalDifference",
+    "goalsFor",
+    "fewerCardPointsRedEqualsThreeYellows",
+    "draw"
+  ],
+  "relegation": null,
+  "pools": [],
+  "simplifications": [
+    "mando 'neutral' segue a ordem da tabela"
+  ],
+  "unsupported": [
+    "Desempate da Taça Guanabara (Art. 2º §3º): o 4º critério é menor número de cartões amarelos contando cada vermelho como 3 amarelos (identificador 'fewerCardPointsRedEqualsThreeYellows'); sorteio público na FERJ como último critério.",
+    "Campeão da Taça Guanabara: o 1º do Grupo A ou do Grupo B com mais pontos; empate entre eles por vitórias, saldo, gols pró, confronto direto, cartões e sorteio (Art. 3º). Título de turno sem efeito na classificação; não modelado.",
+    "Semifinais intragrupo por cruzamento olímpico (Art. 6º): Grupo G = vencedor de C (A1xA4) x vencedor de E (A2xA3), Grupo H = vencedor de D (B1xB4) x vencedor de F (B2xB3). O clube mais bem colocado na Taça Guanabara ESCOLHE mandar o 1º ou o 2º jogo (Art. 6º §1º); 'better-second' é aproximação e a ordem dos pares deve ser decidida pelo motor.",
+    "Equivalência: semifinais (e semifinais da Taça Rio) decididas por pontos e saldo de gols nos dois jogos e depois pênaltis, sem prorrogação (Art. 6º §3º, Art. 10 §3º); pontos seguidos de saldo agregado empata exatamente nos mesmos casos que o placar agregado, então 'aggregate-then-penalties' reproduz a regra.",
+    "Final em jogo único no Maracanã (Art. 8º), salvo impedimento, força maior ou acordo; mando formal do mais bem colocado na Taça Guanabara (mesma posição no grupo: pontos, vitórias, saldo, gols pró, confronto direto, cartões, sorteio) só para obrigações legais (Art. 7º §2º-§3º). Modelado como 'neutral'.",
+    "Taça Rio (Art. 10-12): os 4 perdedores das quartas jogam semifinais em ida e volta (Grupo J = perdedor de C x perdedor de E, Grupo K = perdedor de D x perdedor de F, melhor colocado escolhe o mando, pontos+saldo e pênaltis) e final em jogo único (mando com escolha de local para o melhor colocado na Taça Guanabara, pênaltis se empatar). Campeão e vice ocupam 5º e 6º; o campeão ganha vaga na Copa do Brasil 2027 e na Copa Sul-Sudeste 2027 (Art. 31). Torneio paralelo de colocação, não cabe no esquema (ties L1..L4 de quartas, com semifinal de ida e volta e final).",
+    "Classificação geral (Art. 16): 3º/4º entre perdedores das semifinais pela colocação no grupo da Taça Guanabara (empate: pontos, vitórias, saldo, gols pró, confronto direto, cartões, sorteio); 7º/8º idem para perdedores das semifinais da Taça Rio; 9º-12º pela posição no Grupo X.",
+    "Repescagem do penúltimo do Grupo X contra o vice da Série A2 aparece só na pesquisa (Wikipedia/conselho arbitral; 2026: Nova Iguaçu x Resende, resultado não encontrado). O regulamento da Série A 2026 não a prevê (Art. 15 só rebaixa o último) e o regulamento da Série A2 2026 (Art. 59) diz que há 1 única vaga de acesso, para o campeão da A2. Conflito de fontes; não modelada.",
+    "Composição dos Grupos A e B: definida por sorteio (Art. 2º) e não listada no regulamento; vem da imprensa (Goal) e é coerente com a tabela oficial da Taça Guanabara (confrontos só entre grupos) e com o Grupo X oficial (Portuguesa e Sampaio Corrêa do A, Nova Iguaçu e Maricá do B).",
+    "Mando da Taça Guanabara definido pela tabela (sorteio); a tabela oficial em PDF não tem extração legível dos mandos, então os jogos não foram fixados (phase1 sem pairs)."
+  ],
+  "sources": [
+    "pdf/RJ-A-regulamento-2026.pdf: Art. 1º (participantes e estrutura), Art. 2º (Taça Guanabara e desempate), Art. 3º, Art. 5º (quartas), Art. 6º (semifinais), Art. 7º e 8º (final), Art. 10-12 (Taça Rio), Art. 13-15 (Grupo X), Art. 16 (classificação geral), Art. 31 (vagas)",
+    "pdf/RJ-A2-regulamento-2026.pdf Art. 59 (1 vaga de acesso)",
+    "pdf/RJ-A-classificacao-geral-2026.pdf e pdf/RJ-A-classificacao-grupo-x-2026.pdf (Maricá 4º do Grupo X, rebaixado)",
+    "pdf/RJ-A-tabela-taca-guanabara-2026.pdf (confrontos entre grupos)",
+    "RJ.json divisions[0].groupsTacaGuanabara (fonte: goal.com) e relegationPlayoff/gaps",
+    "RJ.review.json (19/11/2026): conferido contra pdf/RJ-A-regulamento-2026.pdf, Arts. 2º, 5º a 8º e 13 a 16; nenhuma divergência com esta ficha."
+  ]
+}

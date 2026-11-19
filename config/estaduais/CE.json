@@ -1,0 +1,366 @@
+{
+  "state": "CE",
+  "season": 2026,
+  "competition": "Campeonato Cearense Série A 2026",
+  "engine": "ready",
+  "pending": [],
+  "teams": [
+    "iguatu_ce",
+    "ceara_bra",
+    "tirol_ce",
+    "ferroviarioce_bra",
+    "florestace",
+    "fortaleza",
+    "horizonte_ce",
+    "maracana_ce",
+    "maranguape_ce",
+    "quixada_ce"
+  ],
+  "names": [
+    "Associação Desportiva Iguatu",
+    "Ceará Sporting Club",
+    "Centro de Formação de Atletas do Tirol",
+    "Ferroviário Atlético Clube",
+    "Floresta Esporte Clube",
+    "Fortaleza Esporte Clube",
+    "Horizonte Futebol Clube",
+    "Maracanã Esporte Clube",
+    "Maranguape Futebol Clube",
+    "Quixadá Futebol Clube"
+  ],
+  "phase1": {
+    "type": "groups",
+    "legs": 1,
+    "groups": [
+      [
+        "fortaleza",
+        "ferroviarioce_bra",
+        "maracana_ce",
+        "horizonte_ce",
+        "quixada_ce"
+      ],
+      [
+        "ceara_bra",
+        "florestace",
+        "iguatu_ce",
+        "tirol_ce",
+        "maranguape_ce"
+      ]
+    ],
+    "fixtures": []
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "2ª fase e Quadrangular da Permanência - 1ª rodada",
+      "ties": [
+        [
+          "A1",
+          "B3"
+        ],
+        [
+          "A2",
+          "B2",
+          "better-single"
+        ],
+        [
+          "B1",
+          "A3"
+        ],
+        [
+          "A4",
+          "B5"
+        ],
+        [
+          "B4",
+          "A5"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "home-advances",
+      "home": "neutral",
+      "condition": "",
+      "venue": "",
+      "officialTies": [
+        [
+          "Fferroviarioce_bra",
+          "Fceara_bra"
+        ],
+        [
+          "Ffortaleza",
+          "Fflorestace"
+        ],
+        [
+          "Figuatu_ce",
+          "Fhorizonte_ce"
+        ],
+        [
+          "Fmaranguape_ce",
+          "Fmaracana_ce"
+        ],
+        [
+          "Fquixada_ce",
+          "Ftirol_ce"
+        ]
+      ]
+    },
+    {
+      "name": "2ª fase e Quadrangular da Permanência - 2ª rodada",
+      "ties": [
+        [
+          "A1",
+          "B2"
+        ],
+        [
+          "A2",
+          "B1"
+        ],
+        [
+          "A3",
+          "B3"
+        ],
+        [
+          "A4",
+          "B4"
+        ],
+        [
+          "B5",
+          "A5"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "home-advances",
+      "home": "neutral",
+      "condition": "",
+      "venue": "",
+      "officialTies": [
+        [
+          "Fflorestace",
+          "Fferroviarioce_bra"
+        ],
+        [
+          "Ffortaleza",
+          "Figuatu_ce"
+        ],
+        [
+          "Fceara_bra",
+          "Fhorizonte_ce"
+        ],
+        [
+          "Fmaranguape_ce",
+          "Ftirol_ce"
+        ],
+        [
+          "Fmaracana_ce",
+          "Fquixada_ce"
+        ]
+      ]
+    },
+    {
+      "name": "2ª fase e Quadrangular da Permanência - 3ª rodada",
+      "ties": [
+        [
+          "B1",
+          "A1"
+        ],
+        [
+          "B3",
+          "A2"
+        ],
+        [
+          "B2",
+          "A3"
+        ],
+        [
+          "A5",
+          "A4"
+        ],
+        [
+          "B4",
+          "B5"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "home-advances",
+      "home": "neutral",
+      "condition": "",
+      "venue": "",
+      "officialTies": [
+        [
+          "Fceara_bra",
+          "Ffortaleza"
+        ],
+        [
+          "Fferroviarioce_bra",
+          "Figuatu_ce"
+        ],
+        [
+          "Fhorizonte_ce",
+          "Fflorestace"
+        ],
+        [
+          "Fquixada_ce",
+          "Fmaranguape_ce"
+        ],
+        [
+          "Ftirol_ce",
+          "Fmaracana_ce"
+        ]
+      ]
+    },
+    {
+      "name": "Disputa de 5º lugar",
+      "ties": [
+        [
+          "TC3",
+          "TD3"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "better-single",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Semifinal",
+      "ties": [
+        [
+          "TC2",
+          "TC1"
+        ],
+        [
+          "TD2",
+          "TD1"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "neutral",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Disputa de 3º lugar",
+      "ties": [
+        [
+          "L1",
+          "L2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "better-single",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "W1@4",
+          "W2@4"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    }
+  ],
+  "finalTable": [
+    "W1@6",
+    "L1@6",
+    "W1@5",
+    "L1@5",
+    "W1@3",
+    "L1@3",
+    "TR*"
+  ],
+  "tiebreakers": [
+    "points",
+    "wins",
+    "goalDifference",
+    "goalsFor",
+    "fewerRedCards",
+    "fewerYellowCards",
+    "draw"
+  ],
+  "relegation": {
+    "pool": "R",
+    "count": 2
+  },
+  "pools": [
+    {
+      "name": "C",
+      "rounds": [
+        0,
+        1,
+        2
+      ],
+      "members": [
+        "A1",
+        "A2",
+        "A3"
+      ]
+    },
+    {
+      "name": "D",
+      "rounds": [
+        0,
+        1,
+        2
+      ],
+      "members": [
+        "B1",
+        "B2",
+        "B3"
+      ]
+    },
+    {
+      "name": "R",
+      "rounds": [
+        0,
+        1,
+        2
+      ],
+      "members": [
+        "A4",
+        "A5",
+        "B4",
+        "B5"
+      ]
+    }
+  ],
+  "simplifications": [
+    "2ª fase (Grupos C e D) e Quadrangular da Permanência disputados como as 3 primeiras rodadas do mata-mata, nas mesmas datas; em 2026 os confrontos e mandantes são os das súmulas da FCF (jogos 21 a 35)",
+    "ordem oficial: 5º lugar (11/02) antes das semifinais e 3º lugar (26/02) entre as semifinais e a final",
+    "mando do 3º e do 5º lugar e da volta da final pela campanha acumulada (Art. 12 e 16)",
+    "1ª fase gerada pelo jogo (grupos de 5 com folga), sem a tabela oficial jogo a jogo",
+    "mando 'neutral' segue a ordem da tabela"
+  ],
+  "unsupported": [
+    "1ª fase: cada clube tem 2 mandos nos 4 jogos do grupo (Art. 16 §1º); a tabela básica oficial existe, mas a extração de texto não preserva os pares mandante x visitante de forma confiável, por isso não foi usado 'fixtures'.",
+    "Vagas 2027 (Copa do Brasil para 1º a 3º e 4ª vaga ligada à Taça Fares Lopes; Série D para 3 clubes sem série nacional; Copa do Nordeste pelos critérios da CBF) e Taça Padre Cícero ao campeão do interior (Art. 4º §5º e 5º): fora do esquema.",
+    "Cartões amarelos zerados ao fim da 1ª e da 2ª fase (Art. 26): fora do esquema."
+  ],
+  "sources": [
+    "pdf/CE-rec-serie-a-2026.pdf: Art. 11 (fases), Art. 12 §1º-§7º (grupos A e B, Quadrangular da Permanência, 2ª fase C x D, semifinais E e F, 3º e 5º lugar, final G), Art. 13 (desempates), Art. 14 (saldo na fase e pênaltis), Art. 15 (pênaltis nos jogos de 3º e 5º), Art. 16 (mandos), Art. 17 (classificação geral), Art. 18 (9º e 10º rebaixados), Anexo A (clubes), Anexo B (grupos da 1ª fase)",
+    "pdf/CE-tabela-basica-serie-a-2026.pdf (1ª fase e Quadrangular; não usada para os pares por falha de extração)",
+    "CE.json divisions[0] (participants, format, results2026, gaps)",
+    "results2026 conferido: Grupo C Fortaleza/Ferroviário/Horizonte e Grupo D Ceará/Floresta/Iguatu; semifinais Ferroviário x Fortaleza e Floresta x Ceará com volta na casa do 1º; 3º lugar Ferroviário x Floresta; 5º lugar Iguatu x Horizonte; Quadrangular Maranguape, Maracanã, Quixadá, Tirol, com Quixadá e Tirol rebaixados",
+    "data/private/competitions-sources/estaduais-2026/CE-tabela-oficial.json (43 jogos das súmulas da FCF)"
+  ]
+}

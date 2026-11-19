@@ -1,0 +1,149 @@
+{
+  "state": "PA",
+  "season": 2026,
+  "competition": "Campeonato Paraense de Futebol Profissional da Primeira Divisão – Série A1/2026 (Parazão Banpará 2026)",
+  "engine": "ready",
+  "pending": [],
+  "teams": [
+    "aguiapa_bra",
+    "independentepa",
+    "bragantino_pa",
+    "cameta_pa",
+    "capitaopoco_pa",
+    "castanhalpa_bra",
+    "remo",
+    "paysandu",
+    "santarosa_pa",
+    "saofrancisco_pa",
+    "saoraimundo_pa",
+    "tunaluso_pa"
+  ],
+  "names": [
+    "Águia de Marabá Futebol Clube",
+    "Amazônia Independente Futebol Clube",
+    "Bragantino Clube do Pará",
+    "Cametá Sport Club",
+    "Capitão Poço Esporte Clube",
+    "Castanhal Esporte Clube",
+    "Clube do Remo",
+    "Paysandu Sport Club",
+    "Santa Rosa Esporte Clube",
+    "São Francisco Futebol Clube",
+    "São Raimundo Esporte Clube",
+    "Tuna Luso Brasileira"
+  ],
+  "phase1": {
+    "type": "crossed",
+    "legs": 1,
+    "groups": [
+      [
+        "remo",
+        "saoraimundo_pa",
+        "capitaopoco_pa",
+        "tunaluso_pa",
+        "cameta_pa",
+        "santarosa_pa"
+      ],
+      [
+        "paysandu",
+        "saofrancisco_pa",
+        "bragantino_pa",
+        "castanhalpa_bra",
+        "independentepa",
+        "aguiapa_bra"
+      ]
+    ],
+    "fixtures": []
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "Quartas",
+      "ties": [
+        [
+          "1",
+          "8"
+        ],
+        [
+          "2",
+          "7"
+        ],
+        [
+          "3",
+          "6"
+        ],
+        [
+          "4",
+          "5"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "better-single",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Semifinal",
+      "ties": [
+        [
+          "W1",
+          "W4"
+        ],
+        [
+          "W2",
+          "W3"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "better-single",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "W2",
+          "W1"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    }
+  ],
+  "finalTable": [],
+  "tiebreakers": [
+    "points",
+    "wins",
+    "goalDifference",
+    "goalsFor",
+    "fewerRedCards",
+    "fewerYellowCards",
+    "draw"
+  ],
+  "relegation": null,
+  "pools": [],
+  "simplifications": [],
+  "unsupported": [
+    "1ª fase (Arts. 11-12): cada clube joga 3 vezes como mandante e 3 como visitante, por algoritmo do DCO; a distribuição dos mandos não está no REC.",
+    "Mando na semifinal (Art. 22) e na final (Arts. 27 e 31): pela classificação/campanha acumulada até então (pontos de todas as fases já disputadas, desempate pelo Art. 30 IV), não só pela posição na 1ª fase. Nos pares da semifinal o primeiro listado é o vencedor do confronto do melhor colocado na 1ª fase, mas o mandante real é dinâmico. Conferido em results2026: Paysandu (3º) mandou contra Castanhal (7º) e fez a volta da final contra o Remo.",
+    "Final (Art. 28 §1º e Art. 30 III): empate em pontos -> maior saldo de gols -> pênaltis, sem prorrogação; nota de equivalência: o regulamento decide por pontos nos dois jogos e depois saldo de gols da fase; isso empata exatamente nos mesmos casos que o saldo agregado (quem soma mais pontos em 2 jogos sempre tem saldo agregado maior), por isso foi mapeado como agregado.",
+    "Eliminados nas quartas (5º-8º, Art. 19) e nas semifinais (3º-4º, Art. 24) vão à Copa Grão-Pará 2026, competição independente; não modelada. O Art. 19 cita 'Copa Grão-Pará 2025' (provável erro do REC).",
+    "Classificação final do 3º ao 12º por fase de eliminação e campanha (Art. 32) não modelada."
+  ],
+  "sources": [
+    "pdf/PA-regulamento-parazao-serie-a1-2026.pdf: Art. 7º (4 fases), Art. 8º (grupos A e B), Arts. 11-13 (cruzamento entre grupos, turno único, classificação geral), Art. 14 (11º e 12º rebaixados), Arts. 15-18 (quartas 1x8, 2x7, 3x6, 4x5, jogo único, mando, pênaltis), Arts. 20-23 (semifinal C x F e D x E, jogo único, mando, pênaltis), Arts. 25-28 (final em ida e volta, mando pela melhor campanha), Arts. 30-31 (desempates e melhor campanha)",
+    "PA.json results2026 (Wikipedia en, ge, súmula FPF): conferência de confrontos e mandos de quartas, semifinal e final"
+  ]
+}

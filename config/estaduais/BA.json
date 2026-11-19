@@ -1,0 +1,106 @@
+{
+  "state": "BA",
+  "season": 2026,
+  "competition": "Campeonato Baiano de Futebol Profissional Série A 2026",
+  "engine": "ready",
+  "pending": [],
+  "teams": [
+    "atleticoalagoinhas_bra",
+    "bahiafeira_ba",
+    "jequie_ba",
+    "bahia",
+    "jacuipense_bra",
+    "vitoria",
+    "galicia_ba",
+    "barcelonaba_bra",
+    "portosc_ba",
+    "juazeirense_ba"
+  ],
+  "names": [
+    "Alagoinhas Atlético Clube",
+    "Associação Desportiva Bahia de Feira",
+    "Associação Desportiva Jequié",
+    "Esporte Clube Bahia",
+    "Esporte Clube Jacuipense",
+    "Esporte Clube Vitória",
+    "Galícia Esporte Clube",
+    "Ilhéus Soccer Futebol Entretenimento S/A (Barcelona de Ilhéus)",
+    "Porto Sport Club",
+    "Sociedade Desportiva Juazeirense"
+  ],
+  "phase1": {
+    "type": "league",
+    "legs": 1,
+    "groups": [],
+    "fixtures": []
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "Fase II - Semifinal",
+      "ties": [
+        [
+          "1",
+          "4"
+        ],
+        [
+          "2",
+          "3"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "better-single",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Fase III - Final",
+      "ties": [
+        [
+          "R1",
+          "R2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "better-single",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    }
+  ],
+  "finalTable": [],
+  "tiebreakers": [
+    "points",
+    "wins",
+    "goalDifference",
+    "goalsFor",
+    "headToHeadPoints",
+    "headToHeadGoalDifference",
+    "fewerRedCards",
+    "fewerYellowCards",
+    "draw"
+  ],
+  "relegation": null,
+  "pools": [],
+  "simplifications": [],
+  "unsupported": [
+    "Semifinal e final são jogos únicos tratados formalmente como 'grupos' de 2 (Grupos 02, 03 e 04); empate em pontos decide por saldo de gols e depois pênaltis (série de 5 e depois alternadas, só quem terminou a partida) (Art. 9º §5º e 10 §5º). Num jogo único, empate em pontos implica saldo zero, então equivale a 'penalties' direto, sem prorrogação.",
+    "Final: mando da melhor campanha em todo o campeonato, somando Fase I e semifinal, com os desempates do Art. 6º (Art. 10 §4º). 'C1'/'C2' devem ser calculados por essa soma, não só pela Fase I.",
+    "Desempate da Fase I: confronto direto em dois critérios separados, pontos no confronto direto e depois saldo de gols no confronto direto (Art. 6º d-e); valem também com três ou mais empatados (o artigo diz 'duas ou mais Associações').",
+    "Fase I em turno único: o regulamento não define como são distribuídos os mandos (tabela da FBF não está nas fontes).",
+    "3º e 4º lugares sem jogo: eliminados da semifinal ordenados pela campanha somada das duas fases (Art. 9º §6º); 5º a 10º pela Fase I (Art. 17 §1º). Classificação final fora do esquema.",
+    "Rebaixamento: penúltimo e último da Fase I (Art. 18); se a Série B 2026 não for realizada, só o último cai (Art. 19, parágrafo único). Condição externa não modelada.",
+    "Vagas 2027 (Copa do Nordeste, Copa do Brasil para 1º a 3º e a 4ª vaga ligada à Copa Governador do Estado, Série D para os 3 mais bem colocados fora das séries nacionais) (Art. 11 a 17): fora do esquema.",
+    "Fonte: regulamento na versão de 03/11/2025; a pesquisa não verificou se houve RDI posterior."
+  ],
+  "sources": [
+    "pdf/BA-regulamento-baianao-serie-a-2026.pdf: Art. 6º (desempates a-h), Art. 7º (turno único, 3 fases), Art. 8º (Grupo 01 com 10 clubes, só ida, 4 classificados), Art. 9º §1º-§6º (semifinal 1ºx4º e 2ºx3º em jogo único, mando do melhor, saldo e pênaltis, 3º/4º pela campanha), Art. 10 §1º-§5º (final em jogo único, mando da melhor campanha somada, saldo e pênaltis), Art. 18-19 (2 rebaixados)",
+    "BA.json divisions[0] (participants, format, results2026, gaps)",
+    "results2026 conferido: semifinais Bahia(1º) 4x2 Juazeirense(4º) e Vitória(2º) 1x1 Jacuipense(3º) com pênaltis; final Bahia x Vitória na Fonte Nova; Bahia de Feira e Atlético de Alagoinhas (9º e 10º) rebaixados"
+  ]
+}

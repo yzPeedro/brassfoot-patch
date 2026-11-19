@@ -1,0 +1,156 @@
+{
+  "state": "GO",
+  "season": 2026,
+  "competition": "Campeonato Goiano (Goianão 2026)",
+  "engine": "ready",
+  "pending": [],
+  "teams": [
+    "agroec_go",
+    "anapolina_go",
+    "anapolisgo_bra",
+    "aparecidense_go",
+    "atleticogo_bra",
+    "goias",
+    "vilago",
+    "centrooeste_go",
+    "cracgo_bra",
+    "goiatubago_bra",
+    "inhumas_go",
+    "jataiense_go"
+  ],
+  "names": [
+    "ABECAT",
+    "Anapolina",
+    "Anápolis",
+    "Aparecidense",
+    "Atlético-GO",
+    "Goiás",
+    "Vila Nova",
+    "Centro Oeste",
+    "CRAC",
+    "Goiatuba",
+    "Inhumas",
+    "Jataiense"
+  ],
+  "phase1": {
+    "type": "crossed",
+    "legs": 1,
+    "groups": [
+      [
+        "vilago",
+        "cracgo_bra",
+        "inhumas_go",
+        "goiatubago_bra"
+      ],
+      [
+        "anapolisgo_bra",
+        "goias",
+        "jataiense_go",
+        "aparecidense_go"
+      ],
+      [
+        "atleticogo_bra",
+        "agroec_go",
+        "centrooeste_go",
+        "anapolina_go"
+      ]
+    ],
+    "fixtures": []
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "Quartas",
+      "ties": [
+        [
+          "1",
+          "8"
+        ],
+        [
+          "2",
+          "7"
+        ],
+        [
+          "3",
+          "6"
+        ],
+        [
+          "4",
+          "5"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Semifinal",
+      "ties": [
+        [
+          "R1",
+          "R4"
+        ],
+        [
+          "R2",
+          "R3"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    }
+  ],
+  "finalTable": [],
+  "tiebreakers": [
+    "points",
+    "wins",
+    "goalDifference",
+    "goalsFor",
+    "fewerRedCards",
+    "fewerYellowCards",
+    "draw"
+  ],
+  "relegation": null,
+  "pools": [],
+  "simplifications": [],
+  "unsupported": [
+    "Composição dos grupos (Art. 6º): 'Atlético GS' no REC é o Atlético-GO e 'CRA Catalano' é o CRAC. A 1ª fase tem classificação única (Art. 7º).",
+    "Desempate da 1ª fase (Art. 7º): sem confronto direto; após gols pró, menos vermelhos, menos amarelos e sorteio.",
+    "Quartas (Art. 9º): D = 1º x 8º, E = 2º x 7º, F = 3º x 6º, G = 4º x 5º; volta em casa dos 4 melhores da 1ª fase (Art. 10); pontos, depois saldo dos dois jogos, depois pênaltis, sem prorrogação; gravado como 'aggregate-then-penalties', que decide igual (Art. 9º §2º; pênaltis até 10 minutos após o jogo de volta).",
+    "Semifinal (Art. 11): os 4 classificados são reclassificados pela soma das fases (pontos, vitórias, saldo, gols pró, vermelhos, amarelos, sorteio): H = 1º x 4º, I = 2º x 3º ('C1' x 'C4', 'C2' x 'C3'); volta em casa dos 2 melhores (Art. 12); mesmo critério de empate. Os slots 'C' e o mando por campanha do motor usam pontos, vitórias, saldo e gols pró acumulados, sem os critérios de cartões e sorteio.",
+    "Final (Arts. 13-14): ida e volta; volta em casa de quem somou mais pontos nas fases anteriores; mesmo critério de empate.",
+    "3º e 4º lugares (Art. 11 §4º) pela soma das fases, sem jogo: fora do esquema.",
+    "Playoff de 5º a 8º (Arts. 15-18): eliminados nas quartas, reclassificados pela soma das fases, jogam semifinal 1º x 4º e 2º x 3º e final, ambas em ida e volta, com volta em casa do mais bem colocado; pontos, saldo, pênaltis. Define só 5º a 8º (Art. 17); o REC não liga o playoff a vagas (Art. 24: vagas pelos critérios da CBF e pela classificação final). Torneio paralelo, não cabe no esquema.",
+    "Rebaixamento condicional (playoff de permanência, Arts. 19-20) não cabe em 'relegation'; descrito em special. 'relegated' = 2 é o caso sem playoff.",
+    "Campeão do Interior (Art. 23) e vagas (Arts. 24-25): fora do esquema."
+  ],
+  "sources": [
+    "pdf/GO-1a-divisao-REC-2026.pdf (sha256 e9c06234…f6de8): Art. 2º (participantes), Art. 5º (fases), Art. 6º (grupos), Art. 7º (classificação e desempates), Arts. 9º-10 (quartas), Arts. 11-12 (semifinal), Arts. 13-14 (final), Arts. 15-18 (playoff de 5º a 8º), Arts. 19-20 (playoff de permanência), Arts. 21-22 (classificação final e rebaixamento)",
+    "GO.review.json (19/11/2026)",
+    "GO.json (pesquisa): Wikipedia pt e O Hoje (fontes anteriores ao REC)"
+  ]
+}

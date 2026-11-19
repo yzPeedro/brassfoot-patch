@@ -1,0 +1,109 @@
+{
+  "state": "DF",
+  "season": 2026,
+  "competition": "51º Campeonato de Futebol Profissional da FFDF - Série A 2026 (Candangão Série A 2026)",
+  "engine": "ready",
+  "pending": [],
+  "teams": [
+    "gama_bra",
+    "samambaia_df",
+    "sobradinho_df",
+    "ceilandia_df",
+    "capitalbrasilia_bra",
+    "brasiliense_df",
+    "realbrasilia_df",
+    "paranoa_df",
+    "brasilia_df",
+    "aruc_df"
+  ],
+  "names": [
+    "Gama",
+    "Samambaia",
+    "Sobradinho",
+    "Ceilândia",
+    "Capital",
+    "Brasiliense",
+    "Real Brasília",
+    "Paranoá",
+    "Brasília",
+    "ARUC"
+  ],
+  "phase1": {
+    "type": "league",
+    "legs": 1,
+    "groups": [],
+    "fixtures": []
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "Segunda Fase (Semifinal)",
+      "ties": [
+        [
+          "4",
+          "1"
+        ],
+        [
+          "3",
+          "2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-better-campaign",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Terceira Fase (Final)",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "neutral",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    }
+  ],
+  "finalTable": [],
+  "tiebreakers": [
+    "points",
+    "wins",
+    "goalDifference",
+    "goalsFor",
+    "fewerRedCards",
+    "fewerYellowCards",
+    "headToHead",
+    "extraMatch"
+  ],
+  "relegation": null,
+  "pools": [],
+  "simplifications": [
+    "mando 'neutral' segue a ordem da tabela"
+  ],
+  "unsupported": [
+    "Último desempate da 1ª fase: 'Partida Única entre as equipes, com mando e definição da FFDF' (Art. 17); representado como 'extraMatch', sem regra de empate definida no REC para essa partida.",
+    "Final em jogo único na Arena BRB Mané Garrincha, data fixada pela FFDF (Art. 16 §2º); 'neutral' corresponde ao local definido pela federação. Empate decidido por pênaltis (Art. 16 §1º).",
+    "Semifinal: empate no placar agregado classifica o clube melhor colocado na 1ª fase (Art. 15 §1º); 'aggregate-then-better-campaign' corresponde exatamente, sem gols fora.",
+    "Pontuação zerada no início de cada fase (Art. 13); 3º e 4º colocados finais pelos pontos obtidos só na semifinal e os desempates do Art. 17 (Art. 13 §2º); 5º a 10º pela 1ª fase (Art. 13 §1º). Classificação final fora do esquema.",
+    "Mandos da 1ª fase: número de mandos de cada clube definido por sorteio da tabela no conselho técnico; mandante é o clube à esquerda na tabela do DCO (Art. 19 e 23). A tabela não está nas fontes; 'league' sem lista de jogos.",
+    "Última rodada da 1ª fase com jogos simultâneos (Art. 20): só calendário.",
+    "Vagas 2027 (Série D, Copa do Brasil e Copa Verde para campeão e, havendo vaga, vice; vagas extras pela classificação final) (Art. 22): fora do esquema. A pesquisa (DF.json) cita o 3º colocado na Copa Verde 2027 pela Agência Brasília, o que não está no REC.",
+    "Fonte: o DF.json diz que o regulamento 2026 não foi localizado, mas o PDF DF-serie-A-REC-2026.pdf está na pasta e foi usado aqui. O texto do PDF tem ruído de OCR (marcadores de lista e '§' trocados por '8', 'SR', 'Ra'); a ordem dos critérios do Art. 17 foi lida como está e coincide com o Art. 2º da homologação de 11/05/2026."
+  ],
+  "sources": [
+    "pdf/DF-serie-A-REC-2026.pdf: Art. 2 (10 clubes), Art. 12-13 (três fases, pontos zerados, classificação de 3º a 10º), Art. 14 (grupo único, só ida, 9 jogos, 4 classificados), Art. 15 e §1º (semifinal 1º x 4º e 2º x 3º, volta na casa do 1º e do 2º, empate no agregado favorece o melhor colocado), Art. 16 (final em jogo único, pênaltis, Mané Garrincha), Art. 17 (desempates), Art. 19 e 23 (mandos), Art. 21 (2 últimos rebaixados)",
+    "pdf/DF-serie-A-homologacao-classificacao-final-2026.pdf (Ofício DCO/FFDF 90/2026, 11/05/2026): classificação final e critérios",
+    "DF.json divisions[0] (participants, firstPhaseStandings2026, format)",
+    "results2026 conferido: semifinais Gama(1º) x Ceilândia(4º) e Samambaia(2º) x Sobradinho(3º); final Gama x Sobradinho no Mané Garrincha; Brasília e ARUC (9º e 10º) rebaixados",
+    "DF.review.json (19/11/2026): conferido contra pdf/DF-serie-A-REC-2026.pdf, Arts. 15 a 17 e 21; nenhuma divergência com esta ficha."
+  ]
+}

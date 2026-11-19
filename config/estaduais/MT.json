@@ -1,0 +1,127 @@
+{
+  "state": "MT",
+  "season": 2026,
+  "competition": "Campeonato Mato-grossense Martinello Sicredi 2026",
+  "engine": "ready",
+  "pending": [],
+  "teams": [
+    "chapada_mt",
+    "clubeesportivooperariova_mt",
+    "cuiaba_bra",
+    "luverdensemt_bra",
+    "mixto_mt",
+    "novamutum_mt",
+    "primavera_mt",
+    "sinop_mt",
+    "uniaorondonopolis_mt",
+    "varzeagrandeec_mt"
+  ],
+  "names": [
+    "Chapada",
+    "CEOV",
+    "Cuiabá",
+    "Luverdense",
+    "Mixto",
+    "Nova Mutum",
+    "Primavera",
+    "Sport Sinop",
+    "União",
+    "Várzea Grande"
+  ],
+  "phase1": {
+    "type": "league",
+    "legs": 1,
+    "groups": [],
+    "fixtures": []
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "Quartas de final",
+      "ties": [
+        [
+          "3",
+          "6"
+        ],
+        [
+          "4",
+          "5"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "neutral",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Semifinal",
+      "ties": [
+        [
+          "W2",
+          "1"
+        ],
+        [
+          "W1",
+          "2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "neutral",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    }
+  ],
+  "finalTable": [],
+  "tiebreakers": [
+    "points",
+    "wins",
+    "goalDifference",
+    "goalsFor",
+    "headToHead",
+    "fewerYellowCards",
+    "fewerRedCards",
+    "draw"
+  ],
+  "relegation": null,
+  "pools": [],
+  "simplifications": [
+    "mando 'neutral' segue a ordem da tabela"
+  ],
+  "unsupported": [
+    "Desempate da 1ª fase (Art. 16): confronto direto, depois menos amarelos antes de menos vermelhos, e sorteio.",
+    "Quartas (Art. 19): A = 3º x 6º e B = 4º x 5º em jogo único na casa do 3º e do 4º; empate: pênaltis (Art. 19 §1º). Gravado com 'neutral' e a ordem do REC (o 1º clube do par é o mandante).",
+    "Semifinal (Art. 21; Art. 24): C = 1º x vencedor de B (4º x 5º) e D = 2º x vencedor de A (3º x 6º), ida e volta com 1º e 2º mandando a volta; gravado com 'neutral' e o vencedor das quartas primeiro. Empate em pontos: saldo dos dois jogos, depois pênaltis (Art. 21 par. único); pontos, depois saldo dos dois jogos, depois pênaltis, sem prorrogação; gravado como 'aggregate-then-penalties', que decide igual.",
+    "Final (Art. 22; Art. 24): ida e volta, volta em casa de quem somar mais pontos na 1ª e na 3ª fases (sem as quartas); o motor compara a campanha acumulada de todas as fases (pontos, vitórias, saldo, gols pró), o que difere quando um finalista jogou as quartas. Mesmo critério de empate (Art. 22 par. único).",
+    "Rebaixamento: contradição no REC. O Art. 6º fala em rebaixar 'o último colocado na classificação final'; o Art. 18 rebaixa o 9º e o 10º da 1ª fase. Adotado o Art. 18 (regra do sistema de disputa), relegated = 2; os rebaixados de 2026 não foram conferidos em fonte oficial.",
+    "Mandos da 1ª fase pela tabela da FMF (clube à esquerda, Art. 24); a tabela não foi fixada em pairs.",
+    "Vagas 2027 (Art. 5º): fora do esquema."
+  ],
+  "sources": [
+    "pdf/MT-1a-divisao-REC-2026.pdf (sha256 e348039a…891f9): Art. 5º (vagas), Art. 6º e Art. 18 (rebaixamento), Art. 15 (1ª fase), Art. 16 (desempates), Art. 17 (eliminados), Art. 19 (quartas), Art. 21 (semifinal), Art. 22 (final), Art. 24 (mando)",
+    "pdf/MT-1a-divisao-tabela-2026.pdf: tabela básica (grupo único, 10 clubes, 9 rodadas)",
+    "MT.review.json (19/11/2026)",
+    "MT.json (pesquisa): boletim FMF e imprensa (fontes anteriores ao REC)"
+  ]
+}

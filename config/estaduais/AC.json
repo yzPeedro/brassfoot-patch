@@ -1,0 +1,104 @@
+{
+  "state": "AC",
+  "season": 2026,
+  "competition": "Campeonato Acreano de Futebol Profissional Série A 2026 (Acreanão Sicredi)",
+  "engine": "ready",
+  "pending": [],
+  "teams": [
+    "adesg_ac",
+    "vascodagamaac_ac",
+    "galvez_ac",
+    "independencia_ac",
+    "riobranco_ac",
+    "santacruz_ac",
+    "saofrancisco_ac",
+    "humaita_ac"
+  ],
+  "names": [
+    "Associação Desportiva Senador Guiomard (ADESG)",
+    "Associação Desportiva Vasco da Gama",
+    "Galvez Esporte Clube",
+    "Independência Futebol Clube",
+    "Rio Branco Football Club",
+    "Santa Cruz Acre Esporte Clube",
+    "São Francisco Futebol Clube",
+    "Sport Clube Humaitá"
+  ],
+  "phase1": {
+    "type": "league",
+    "legs": 1,
+    "groups": [],
+    "fixtures": []
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "Semifinais",
+      "ties": [
+        [
+          "4",
+          "1"
+        ],
+        [
+          "3",
+          "2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-better-campaign",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "neutral",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    }
+  ],
+  "finalTable": [],
+  "tiebreakers": [
+    "points",
+    "wins",
+    "goalDifference",
+    "goalsFor",
+    "fewerGoalsAgainst",
+    "headToHead",
+    "fewerRedCards",
+    "fewerYellowCards",
+    "extraMatch"
+  ],
+  "relegation": null,
+  "pools": [],
+  "simplifications": [
+    "disputa de 3º lugar nao disputada no jogo",
+    "mando 'neutral' segue a ordem da tabela"
+  ],
+  "unsupported": [
+    "Semifinais: o critério oficial é pontos ganhos nos dois jogos; empatados em pontos, passa a melhor campanha da 1ª fase (1º e 2º), sem saldo de gols nem pênaltis (Art. 7º §1º). Não há valor exato no esquema: 'aggregate-then-better-campaign' foi o mais próximo, mas difere quando cada clube vence um jogo com placares diferentes (ex.: 3x0 e 0x1): pela regra oficial os pontos empatam e passa a melhor campanha; pelo agregado passaria quem fez 3x0. O motor deve aplicar pontos -> melhor campanha.",
+    "Desempate da 1ª fase, último critério: '01 (uma) partida extra; se a mesma terminar empatada haverá decisão por pênaltis' (Art. 9º, H). Representado como 'extraMatch'; o motor precisa criar uma partida extra (mando não definido) com pênaltis se empatar.",
+    "Final em partida única com pênaltis (Art. 7º, item Final); o regulamento não define mando nem estádio da final. 'neutral' é suposição de modelagem, não regra escrita (a final de 2026 foi no Tonicão, segundo a FFAC).",
+    "Disputa de 3º lugar em partida única entre os perdedores das semifinais, com pênaltis (Art. 7º §2º); mando não definido no regulamento. Na lista 'knockout' ela vem depois da Final, mas 'L1'/'L2' referem-se aos perdedores dos confrontos 1 e 2 das Semifinais, não da Final.",
+    "Rebaixamento: os 2 clubes com menor número de pontos ganhos ao fim da 1ª fase (Art. 8º); o texto fala só em pontos, assume-se que os desempates do Art. 9º valem também aqui.",
+    "Perda de pontos: a classificação publicada pela FFAC dá -1 ponto ao Vasco da Gama; o motivo (decisão do TJD) não está documentado nas fontes e não é modelável como regra do regulamento.",
+    "Vagas nacionais (Copa do Brasil, Série D e Copa Norte 2027) para campeão e vice, com reposição pelo critério técnico de todos os jogos do campeonato (Art. 3º §§1º-2º): fora do esquema."
+  ],
+  "sources": [
+    "pdf/AC-regulamento-acreanao-2026.pdf (digitalizado; lido por imagem nesta tarefa): Art. 1º §2º (8 clubes), Art. 6º (turno único, 4 às semifinais), Art. 7º (semifinais 4ºx1º e 3ºx2º, volta com o melhor; §1º pontos e melhor campanha; §2º 3º lugar com pênaltis; Final em partida única com pênaltis), Art. 8º (2 rebaixados por menor pontuação), Art. 9º (desempates A-H), Art. 10 (3/1/0 pontos)",
+    "AC.json divisions[0] (participants, format, results2026)",
+    "results2026 conferido: semifinais Galvez(1º)xRio Branco(4º) e Humaitá(2º)xSanta Cruz(3º); 3º lugar Galvez x Humaitá; rebaixados Vasco da Gama e São Francisco (7º e 8º)"
+  ]
+}

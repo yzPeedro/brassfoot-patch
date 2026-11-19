@@ -1,0 +1,176 @@
+{
+ "schemaVersion": 1,
+ "country": 97,
+ "sigla": "ING",
+ "season": "2026/27",
+ "levelModel": "estimativa: nível e reputação por divisão, calibrados pela escala do Brasil na base 2026.6.14 (Série A mediana 17, B 12, C 10, D 8); clubes que já existiam mantêm nível e reputação",
+ "divisions": {
+  "1": {
+   "level": 16,
+   "reputation": 3,
+   "capacity": 30000
+  },
+  "2": {
+   "level": 13,
+   "reputation": 2,
+   "capacity": 20000
+  },
+  "3": {
+   "level": 11,
+   "reputation": 1,
+   "capacity": 10000
+  },
+  "4": {
+   "level": 9,
+   "reputation": 1,
+   "capacity": 6000
+  }
+ },
+ "officialDivisions": {
+  "1": [
+   "arsenal",
+   "astonvilla_ing",
+   "bournemouth_ing",
+   "brentford_ing",
+   "brightonhovealbion_ing",
+   "chelsea",
+   "coventrycity_ing",
+   "crystalpalace_ing",
+   "everton_ing",
+   "fulham_ing",
+   "hullcity_ing",
+   "ipswichtown_ing",
+   "leedsunited_ing",
+   "liverpool_ing",
+   "machester_ing",
+   "machestercity_ing",
+   "newcastleunited_ing",
+   "nottinghamforest_ing",
+   "sunderland_ing",
+   "tottenhamhotspur_ing"
+  ],
+  "2": [
+   "birminghamcity_ing",
+   "blackburnrovers_ing",
+   "boltonwanderers_ing",
+   "bristolcity_ing",
+   "burnley_ing",
+   "cardiffcity_wal",
+   "charltonathletic_ing",
+   "derbycounty_ing",
+   "lincolncity_ing",
+   "middlesbrough_ing",
+   "millwall_ing",
+   "norwichcity_ing",
+   "portsmouth_ing",
+   "prestonnorthend_ing",
+   "queensparkrangers_ing",
+   "sheffieldunited_ing",
+   "southampton_ing",
+   "stokecity_ing",
+   "swanseacity_wal",
+   "watford_ing",
+   "westbromwichalbion_ing",
+   "westham_eng",
+   "wolverhamptonwanderers_ing",
+   "wrexham_wal"
+  ],
+  "3": [
+   "afcwimbledon_ing",
+   "barnsley_ing",
+   "blackpool_ing",
+   "bradfordcity_ing",
+   "bromley_ing",
+   "burtonalbion_ing",
+   "cambridgeunited_ing",
+   "doncasterrovers_ing",
+   "huddersfieldtown_ing",
+   "leicestercity_ing",
+   "leytonorient_ing",
+   "lutontown_ing",
+   "mansfieldtown_ing",
+   "miltonkeynesdons_ing",
+   "nottscounty_ing",
+   "oxfordunited_ing",
+   "peterboroughunited_ing",
+   "plymouthargyle_ing",
+   "reading_ing",
+   "sheffieldwednesday_ing",
+   "stevenage_ing",
+   "stockportcounty_ing",
+   "wiganathletic_ing",
+   "wycombewanderers_ing"
+  ],
+  "4": [
+   "accringtonstanley_ing",
+   "barnet_ing",
+   "bristolrovers_ing",
+   "cheltenhamtown_ing",
+   "chesterfield_ing",
+   "colchesterunited_ing",
+   "crawleytown_ing",
+   "crewealexandra_ing",
+   "exetercity_ing",
+   "fleetwoodtown_ing",
+   "gillingham_ing",
+   "grimsbytown_ing",
+   "newportcounty_wal",
+   "northamptontown_ing",
+   "oldhamathletic_ing",
+   "portvale_ing",
+   "rochdale_ing",
+   "rotherhamunited_ing",
+   "salfordcity_ing",
+   "shrewsburytown_ing",
+   "swindontown_ing",
+   "tranmererovers_ing",
+   "walsall_ing",
+   "yorkcity_ing"
+  ]
+ },
+ "officialDivisionsSource": "data/private/competitions-sources/england-2026/structure.json (Wikipedia 2026-27, revisões gravadas nos JSON dos clubes)",
+ "playoffs": {
+  "2": {
+   "type": "six-team",
+   "positions": [
+    3,
+    8
+   ],
+   "eliminators": "5x8 e 6x7 em jogo único, mando do melhor colocado",
+   "semifinals": "3º x vencedor de pior colocação, 4º x o outro; ida e volta, volta na casa do melhor colocado",
+   "final": "jogo único",
+   "source": "structure.json (EFL, formato 2026/27)"
+  },
+  "3": {
+   "type": "four-team",
+   "positions": [
+    3,
+    6
+   ]
+  },
+  "4": {
+   "type": "four-team",
+   "positions": [
+    4,
+    7
+   ]
+  }
+ },
+ "tiebreakers": [
+  "points",
+  "goalDifference",
+  "goalsFor",
+  "wins"
+ ],
+ "tiebreakersNote": "Premier League: pontos, saldo, gols pró; EFL: pontos, saldo, gols pró, confronto direto, vitórias, gols fora, disciplina. O motor não registra confronto direto nem disciplina por competição; vitórias entram como quarto critério.",
+ "countryOverrides": {
+  "Cardiff City": 145,
+  "Swansea City": 145,
+  "Wrexham": 145,
+  "Newport County": 145
+ },
+ "countryOverridesNote": "Clubes galeses do sistema de ligas inglês: mantêm o país País de Gales e entram nas divisões inglesas pela lista oficial.",
+ "overrideSuffix": {
+  "145": "wal"
+ }
+}

@@ -1,0 +1,132 @@
+{
+  "state": "SE",
+  "season": 2026,
+  "competition": "Campeonato Sergipano de Futebol Profissional da Série A1 2026",
+  "engine": "ready",
+  "pending": [],
+  "teams": [
+    "americadepropria_se",
+    "guarany_se",
+    "desportivaaracaju_se",
+    "atleticogloriense_se",
+    "confianca_se",
+    "itabaiana_se",
+    "sergipe_se",
+    "dorense_se",
+    "falcon_se",
+    "lagarto_se"
+  ],
+  "names": [
+    "América Futebol Clube (América de Propriá)",
+    "Associação Atlética Guarany",
+    "Associação Desportiva Aracaju (Desportiva Aracaju)",
+    "Associação Desportiva Atlético Gloriense",
+    "S.A.F. Confiança",
+    "Associação Olímpica de Itabaiana",
+    "Club Sportivo Sergipe",
+    "Dorense Futebol Clube",
+    "Falcon Futebol Clube Ltda",
+    "Lagarto Futebol Clube"
+  ],
+  "phase1": {
+    "type": "league",
+    "legs": 1,
+    "groups": [],
+    "fixtures": []
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "2ª Fase – Eliminatória",
+      "ties": [
+        [
+          "2",
+          "7"
+        ],
+        [
+          "3",
+          "6"
+        ],
+        [
+          "4",
+          "5"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "better-single",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "3ª Fase – Semifinal",
+      "ties": [
+        [
+          "R4",
+          "R1"
+        ],
+        [
+          "R3",
+          "R2"
+        ]
+      ],
+      "entrants": [
+        "1"
+      ],
+      "legs": 2,
+      "tiebreak": "points-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "4ª Fase – Final",
+      "ties": [
+        [
+          "R2",
+          "R1"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "points-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    }
+  ],
+  "finalTable": [],
+  "tiebreakers": [
+    "points",
+    "wins",
+    "goalDifference",
+    "goalsFor",
+    "headToHead",
+    "fewerRedCards",
+    "fewerYellowCards",
+    "draw"
+  ],
+  "relegation": null,
+  "pools": [],
+  "simplifications": [
+    "disputa de 3º lugar nao disputada no jogo"
+  ],
+  "unsupported": [
+    "Folga: o 1º da 1ª fase entra direto na semifinal (é sempre C1). C1..C4 na semifinal e C1/C2 na final = colocação na 1ª fase (art. 15 §3º e §5º): o 1º enfrenta o classificado da eliminatória de pior colocação na 1ª fase; os outros dois formam o grupo F.",
+    "Semifinal e final: empate em pontos → maior saldo de gols exclusivamente na fase → pênaltis (art. 15 §3º e §5º). Nota de equivalência: pontos nos dois jogos e depois saldo agregado empatam exatamente nos mesmos casos que o placar agregado, então equivale a 'aggregate-then-penalties'.",
+    "Confronto direto (headToHead) só quando o empate for entre dois clubes (art. 17, 4º).",
+    "Disputa de 3º lugar entre os perdedores das semifinais: mando do melhor colocado na 1ª fase (art. 15 §4º), por isso better-single e a ordem do par não indica mando. Vale a 3ª vaga na Copa do Brasil 2027 pela Revisão I/ata de adequação (PDF digitalizado sem texto, não lido; conteúdo pela notícia da FSF).",
+    "Mando da 1ª fase fixado pela tabela (art. 18): os 5 primeiros da A1 2025 mandam 5 jogos; os 6º–8º e os 2 promovidos da A2 2025 mandam 4 (art. 15 §1º). A tabela de jogos não está nas fontes.",
+    "Jogos da final só nos estádios Lourival Baptista, Etelvino Mendonça e Paulo Barreto de Menezes (art. 15 §7º). Todas as fases começam com zero ponto (art. 16).",
+    "Classificação geral (art. 6º §2º): 3º/4º pelo jogo de 3º lugar; 5º–10º pelos pontos da 1ª fase."
+  ],
+  "sources": [
+    "pdf/SE-regulamento-sergipano-a1-2026-revisao-I.pdf: art. 6º §2º (classificação geral), art. 15 §1º–§7º (fórmula, rebaixamento de 9º e 10º, eliminatória, semifinal, 3º lugar, final, estádios), art. 16, art. 17 (desempate), art. 18 (mando), Anexo II",
+    "pdf/SE-ata-adequacao-regulamento-a1-2026.pdf (digitalizado; não lido)",
+    "SE.json results2026 (conferência: Itabaiana x Falcon, Confiança x Guarany, Lagarto x América; semifinais Confiança x Itabaiana e América x Sergipe)"
+  ]
+}

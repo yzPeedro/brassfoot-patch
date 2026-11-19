@@ -27,7 +27,7 @@ Regras para qualquer agente que trabalhe neste repositório. A documentação t�
 
 - Não modificar o jogo instalado, saves, ativação, licenças ou backups do usuário; trabalhar sempre em cópias em `data/private/`.
 - Não redistribuir binários proprietários; distribuir apenas receitas delta reconhecidas por SHA-256.
-- O motor de simulação do Brasfoot não é alterado; recursos visuais usam apenas informações expostas pelo jogo.
+- O motor de simulação do Brasfoot não é alterado; recursos visuais usam apenas informações expostas pelo jogo. Exceção autorizada pelo proprietário em 18/11/2026 só para o componente Elencos + Competições 2026: ver "Elencos + Competições 2026".
 - Não inventar dados esportivos, transferências, testes, compatibilidade ou porcentagens.
 - Segredos (tokens, `.env`, chaves) nunca entram em commits, logs ou documentos. Dados pessoais só com necessidade técnica.
 - Código sem comentários explicativos.
@@ -48,6 +48,17 @@ Regras para qualquer agente que trabalhe neste repositório. A documentação t�
 - Publicar artefatos verificados antes de manifestos e site; vincular cada versão a commit e hashes; recuperar falhas parciais de forma idempotente.
 - Releases seguintes partem do executável publicado mais recente, que contém o campo animado. Base atual (2026.6.15, com os executáveis do campo animado da 2026.6.12): executável `data/private/live-match-release-2026.6.12/bf22-23.exe` (SHA-256 `e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa`), executável só com o campo `data/private/live-match-release-2026.6.12/bf22-23-live-only.exe` (SHA-256 `b5a76a87142bb887e5a7575e01662f37360e0dda8beebfe693c44effc96dab5a`), executável do patch sem campo `data/private/live-match-release-2026.6.12/bf22-23-patch-only.exe` (SHA-256 `8193758a822282588548b263c5e29772bbb25e8d905fa882b21e2e5ce38ca119`) e bundle `data/private/scheduled-maintenance/2026-11-19/release-bundle-2026.6.15-final` (Super Update da América do Sul preservado: `.cfg` de 10 países, 253 clubes novos, escudos e camisas; exige hub 1.4.0). `build_release_bundle` herda do pacote anterior as entradas que não processa (ligas de outros países e clubes acrescentados) e `build_crest_bundle --previous-bundle` herda escudos e camisas; nunca rode a release sem `--inherit-bundle` e `--previous-bundle`. O Super Update é recompilado com `python -m tools.world.compile_game` e empacotado com `python -m tools.world.build_preview_bundle --release`; a rotina diária só o recompila quando a fonte tem diferença material e a ordem de herança entre esse pacote e `build_release_bundle` está comprovada no código e no checkpoint em que foi publicado. Sem essa comprovação, a recompilação fica para o dia seguinte e a lacuna é registrada. O hub aceita no máximo 64 origens por arquivo: não acumule executáveis de prévias privadas no bundle de release (`tools/prune_bundle_origins.py` remove; `build_distribution` e `build_component_bundle` recusam pacotes fora do limite). A versão do hub fica em `config/hub.json` e só muda quando o código do hub muda.
 - Toda release precisa manter os componentes do hub: depois de `tools/build_release_bundle.py` (herdando o bundle anterior), rode `tools/build_component_bundle.py --release` com o original, o executável do patch sem campo, o completo e o só-campo e, por último, `python -m tools.build_crest_bundle bundle --previous-bundle <bundle-publicado-anterior>`, como descrito em [`docs/release.md`](docs/release.md). Pacote com escudos exige `requiresHub` 1.2.0.
+
+## Elencos + Competições 2026
+
+Autorização expressa do proprietário (18/11/2026), válida só para este componente, na branch `feat/competicoes-2026`:
+
+- **Motor de competições:** pode ser alterado por transformação de bytecode (`f.*`, `best.Z`, `best.a`, `best.w` e o que for necessário). Em `best.I`, só o que as regras oficiais exigem: prorrogação, pênaltis, desempates, duração e procedimentos de finais e mata-matas. Probabilidade de gol, força dos clubes e inteligência tática não mudam sem necessidade demonstrada.
+- **Saves:** os campos das classes serializadas continuam iguais. Estado novo fica em arquivo externo versionado, ligado ao save, com backup e gravação atômica.
+- **Jogadores:** só atletas reais, com vínculo verificável. Força, potencial e demais atributos do Brasfoot podem sair de um modelo documentado e reproduzível, marcado como estimativa. Data de nascimento, nacionalidade e transferências nunca são inventadas.
+- **Troféus:** imagens só com licença compatível (CC0, domínio público, CC BY, CC BY-SA ou autorização oficial expressa), com créditos e licenças dentro do pacote distribuído. Sem licença adequada, o troféu fica pendente.
+- **Testes:** testes automatizados do jogo, inclusive partidas, autorizados só em cópias privadas e descartáveis, nunca em `C:\Brasfoot22-23` nem em saves pessoais. Harness, simulação isolada e homologação em partida real são estados diferentes.
+- **Publicação:** prévias privadas em `dist/` e commits na branch; release pública segue os gates de release e homologação.
 
 ## Campo animado
 

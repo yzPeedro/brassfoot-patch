@@ -180,6 +180,9 @@ func preparePayloadWithFS(fsys fs.FS, gamePath, staged string) error {
 	if err != nil {
 		return err
 	}
+	if len(body) > maxManifestBytes {
+		return fmt.Errorf("manifesto do pacote grande demais")
+	}
 	var manifest Manifest
 	if err = json.Unmarshal(body, &manifest); err != nil {
 		return err
@@ -246,14 +249,14 @@ func preparePayloadManifest(fsys fs.FS, manifest Manifest, gamePath, staged stri
 	if (manifest.SchemaVersion != 2 && manifest.SchemaVersion != 3 && manifest.SchemaVersion != 4) || manifest.PatchSeason != patchYear() || !validVersion.MatchString(manifest.Version) || !strings.HasPrefix(manifest.Version, patchYearText+".") {
 		return fmt.Errorf("manifesto do pacote inválido")
 	}
-	if len(manifest.Files) < 1 || len(manifest.Files) > 2048 {
-		return fmt.Errorf("pacote incompatível: esperado de 1 a 2048 arquivos autorizados, encontrados %d", len(manifest.Files))
+	if err := validateManifestLimits(manifest.Files); err != nil {
+		return fmt.Errorf("pacote incompatível: %w", err)
 	}
 	seen := make(map[string]bool, len(manifest.Files))
 	for _, f := range manifest.Files {
 		isNationalConfig := manifest.SchemaVersion >= 3 && nationalConfigName.MatchString(f.Path)
 		isExecutable := manifest.SchemaVersion == 4 && f.Path == gameExecutablePath
-		isCrest := manifest.SchemaVersion == 4 && crestName.MatchString(f.Path)
+		isCrest := manifest.SchemaVersion == 4 && (crestName.MatchString(f.Path) || trophyName.MatchString(f.Path))
 		if !teamName.MatchString(f.Path) && !isNationalConfig && !isExecutable && !isCrest {
 			return fmt.Errorf("arquivo não autorizado no pacote: %s", f.Path)
 		}

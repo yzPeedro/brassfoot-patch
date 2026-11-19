@@ -1,0 +1,150 @@
+{
+  "state": "PR",
+  "season": 2026,
+  "competition": "Campeonato Paranaense 1ª Divisão 2026",
+  "engine": "ready",
+  "pending": [],
+  "teams": [
+    "andraus_pr",
+    "atleticopr_bra",
+    "azurizpr_bra",
+    "cascavel_pr",
+    "cianorte_pr",
+    "coritiba_bra",
+    "fozdoiguacu_pr",
+    "galomaringa_pr",
+    "londrina_pr",
+    "maringapr",
+    "operario_pr",
+    "independente_pr"
+  ],
+  "names": [
+    "Andraus",
+    "Athletico-PR",
+    "Azuriz",
+    "FC Cascavel",
+    "Cianorte",
+    "Coritiba",
+    "Foz do Iguaçu",
+    "Galo Maringá",
+    "Londrina",
+    "Maringá",
+    "Operário-PR",
+    "São Joseense"
+  ],
+  "phase1": {
+    "type": "crossed",
+    "legs": 1,
+    "groups": [
+      [
+        "atleticopr_bra",
+        "maringapr",
+        "londrina_pr",
+        "independente_pr",
+        "cascavel_pr",
+        "fozdoiguacu_pr"
+      ],
+      [
+        "coritiba_bra",
+        "operario_pr",
+        "azurizpr_bra",
+        "cianorte_pr",
+        "andraus_pr",
+        "galomaringa_pr"
+      ]
+    ],
+    "fixtures": []
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "Quartas de final",
+      "ties": [
+        [
+          "A4",
+          "A1"
+        ],
+        [
+          "A3",
+          "A2"
+        ],
+        [
+          "B4",
+          "B1"
+        ],
+        [
+          "B3",
+          "B2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Semifinal",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ],
+        [
+          "W3",
+          "W4"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "condition": "",
+      "venue": "",
+      "officialTies": []
+    }
+  ],
+  "finalTable": [],
+  "tiebreakers": [
+    "points",
+    "wins",
+    "goalDifference",
+    "goalsFor",
+    "fewerRedCards",
+    "fewerYellowCards",
+    "draw"
+  ],
+  "relegation": null,
+  "pools": [],
+  "simplifications": [],
+  "unsupported": [
+    "Equivalência: todos os mata-matas (Descenso, quartas, semifinal e final) são decididos por pontos nos dois jogos, depois saldo de gols e depois pênaltis, sem prorrogação (Art. 9º §4º, 11 §4º, 12 §4º, 13 §4º). Pontos seguidos de saldo agregado empata exatamente nos mesmos casos que o placar agregado, então 'aggregate-then-penalties' reproduz a regra.",
+    "Semifinal: mando do 2º jogo para quem somou mais pontos na 1ª e 2ª fases (Art. 12 §2º); final: mais pontos na 1ª, 2ª e 3ª fases (Art. 13 §2º). Não é a posição da 1ª fase; 'better-second' só vale se o motor ordenar por pontos acumulados nas fases anteriores (desempate pelo RGCP).",
+    "Descenso precisa de ranking cruzado dos 5º/6º de dois grupos por pontos da 1ª fase; notação de ties do esquema não cobre esse ranking (descrito em special).",
+    "Fonte frágil: os critérios de desempate de pontos corridos estão no RGCP da FPF, não baixado; a lista (vitórias, saldo, gols pró, menos vermelhos, menos amarelos, sorteio) vem da Wikipedia da 2ª Divisão.",
+    "Classificação geral (Art. 14): 3º-4º por pontos nas fases 1 a 3, 5º-8º por pontos nas fases 1 e 2, 9º-12º por pontos na 1ª fase mais Descenso; usada nas vagas nacionais. Uma vaga da Copa do Brasil 2027 vai ao campeão de torneio seletivo da FPF no 2º semestre (Art. 18 §1º), fora deste campeonato.",
+    "Mando da 1ª fase definido pela tabela da FPF (Art. 8º §2º); a tabela não foi baixada, então os mandos da 1ª fase não estão fixados."
+  ],
+  "sources": [
+    "pdf/PR-1a-REC-2026.pdf: Art. 7º e 8º (grupos e cruzamento), Art. 9º e 10 (Descenso), Art. 11 (quartas), Art. 12 (semifinal), Art. 13 (final), Art. 14 (classificação geral), Art. 16 (rebaixamento)",
+    "PR.json divisions[0] (groups, format, tiebreakers com tiebreakersSource Wikipedia; rebaixados 2026 Andraus e Galo Maringá)"
+  ]
+}
