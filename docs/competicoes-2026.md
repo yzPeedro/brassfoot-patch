@@ -71,7 +71,8 @@ Uma carreira criada antes do componente carrega e continua normalmente. A tempor
 
 ## Lacunas conhecidas
 
-- **Clubes ausentes:** 37 clubes oficiais da Série D e 34 da Copa do Brasil (a maioria são os mesmos) não existem no jogo. As vagas são preenchidas por clubes do mesmo estado até os elencos reais serem criados.
+- **Clubes ausentes:** os 96 clubes oficiais da Série D estão no jogo; 37 deles foram criados por `tools/build_brazil_new_clubs_2026.py` a partir das súmulas da CBF, com posição, data de nascimento e nacionalidade conferidas no oGol. Nível e reputação do clube (mediana da Série D) e características dos jogadores (padrão da posição) são estimativas. Faltam 10 clubes da Copa do Brasil, cujas vagas são preenchidas por clubes do mesmo estado.
+- **Duplicatas:** dois clubes publicados têm duas cópias (Brasil de Pelotas e Inter de Limeira). As seleções do motor ignoram a cópia antiga, mas os estaduais do jogo ainda podem incluir as duas.
 - **Desempate na fase de grupos da Série D:** o jogo ordena por pontos, vitórias, saldo e gols pró. Confronto direto, cartões e sorteio não são aplicados.
 - **Sorteios da Copa do Brasil:**
   - a 1ª fase segue o RNC (1º x 28º);
