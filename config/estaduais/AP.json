@@ -2,10 +2,8 @@
   "state": "AP",
   "season": 2026,
   "competition": "Campeonato Amapaense de Futebol Profissional Série A 2026 (Amapazão Sicredi)",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Esporte Clube Macapá"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
     "trem_bra",
     "oratorio_ap",
@@ -13,7 +11,7 @@
     "santos_ap",
     "ypiranga_ap",
     "cristal_ap",
-    null,
+    "macapa_ap",
     "saojose_ap"
   ],
   "names": [

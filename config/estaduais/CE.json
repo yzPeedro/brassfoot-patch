@@ -2,10 +2,8 @@
   "state": "CE",
   "season": 2026,
   "competition": "Campeonato Cearense Série A 2026",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Horizonte Futebol Clube"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
     "iguatu_ce",
     "ceara_bra",
@@ -13,7 +11,7 @@
     "ferroviarioce_bra",
     "florestace",
     "fortaleza",
-    null,
+    "horizonte_ce",
     "maracana_ce",
     "maranguape_ce",
     "quixada_ce"
@@ -38,7 +36,7 @@
         "fortaleza",
         "ferroviarioce_bra",
         "maracana_ce",
-        null,
+        "horizonte_ce",
         "quixada_ce"
       ],
       [
