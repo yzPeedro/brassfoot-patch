@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "1.4.4",
-  "requiresHub": "1.4.0",
-  "notes": "docs/hub/v1.4.4.md"
+  "version": "1.4.5",
+  "requiresHub": "1.4.5",
+  "notes": "docs/hub/v1.4.5.md"
 }

@@ -2,7 +2,7 @@
   "schemaVersion": 4,
   "kind": "BRASFOOT_RELEASE_PATCH",
   "patchSeason": 2026,
-  "version": "2026.6.15",
+  "version": "2026.6.16",
   "publicationAllowed": true,
   "compatibilityTestedInGame": false,
   "channel": "stable",
@@ -12,9 +12,10 @@
     {
       "operation": "replace",
       "path": "bf22-23.exe",
-      "size": 7326883,
-      "sha256": "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa",
+      "size": 7457456,
+      "sha256": "4ebad9edf428d35261e00d54e4745d61f9a5e30b55748306233f877327d66a94",
       "acceptedOriginalSha256": [
+        "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa",
         "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
         "d2d6b209333b661cbcf124353c8a27691c0eba5046b2c1a91b5632968d1abaa5",
         "3237e2ceaf56f81b14614109128a5133ee69db0fe954f738cd642806da09c7d0",
@@ -40,16 +41,126 @@
       "vanillaSize": 7320384
     },
     {
+      "operation": "add",
+      "path": "conf_ligas_nacionais/ARG.cfg",
+      "size": 984,
+      "sha256": "3a3680fb0ad9d2986bb32080534d141b59592737f714ddaaa1afc2d8f288713b",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "conf_ligas_nacionais/BOL.cfg",
+      "size": 706,
+      "sha256": "b23535163abad8ee696fe03e52c4e4cd0310affd9dd4136ac4649c7c477682e5",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "conf_ligas_nacionais/BRA.cfg",
       "size": 1089,
-      "sha256": "fa23cd0f1c11891606ec12c22dcccf4f6bd34656cfc4598dfde3e310c8584698",
+      "sha256": "ba4d3b4a4388985c101583ea0e58d5a2a3ee10f81e1805a08ae27b38f88420b9",
       "acceptedOriginalSha256": [
-        "76b7af89b81859ed8ee29f78de34ced3c48636ec0a27554c29d8d0da55bc2834"
+        "76b7af89b81859ed8ee29f78de34ced3c48636ec0a27554c29d8d0da55bc2834",
+        "fa23cd0f1c11891606ec12c22dcccf4f6bd34656cfc4598dfde3e310c8584698"
       ],
       "component": "season",
       "vanillaSha256": "76b7af89b81859ed8ee29f78de34ced3c48636ec0a27554c29d8d0da55bc2834",
       "vanillaSize": 1089
+    },
+    {
+      "operation": "add",
+      "path": "conf_ligas_nacionais/CHI.cfg",
+      "size": 969,
+      "sha256": "b8f945ab0e5286d0bc53f8b74c43a1870d713b9332114db5257b09a474f23de8",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "conf_ligas_nacionais/COL.cfg",
+      "size": 849,
+      "sha256": "6ad5b60555c84cf066cacc7359b136227acf8544c680f878f3a866c04fbce1ad",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "conf_ligas_nacionais/EQU.cfg",
+      "size": 697,
+      "sha256": "833428146a9f4fbbdc29929e63eb85b0031606fd92717032f82f8b3c2afc9e82",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "conf_ligas_nacionais/ING.cfg",
+      "size": 1115,
+      "sha256": "5dad07ee8d5479645ac88ce016a456b5e42132be50ea504b7ffb91c4c7b063ed",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "conf_ligas_nacionais/ITA.cfg",
+      "size": 969,
+      "sha256": "3f4f09106ed18be20c387c75f302a524df8bbac82f3c427add1f44e6005a7f98",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "conf_ligas_nacionais/PAR.cfg",
+      "size": 856,
+      "sha256": "ac36f37ac22c0a3a72ff12594a3ce1e831f37918af0885bd9d92f2376bf0edbf",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "conf_ligas_nacionais/PER.cfg",
+      "size": 831,
+      "sha256": "ae9fc74fe14d4bbb93c6155cdac880ff6d449e58f8289496a3b23d705b0f3fac",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "conf_ligas_nacionais/URU.cfg",
+      "size": 873,
+      "sha256": "80b12e0ab0370283da4a0f863ac1132680156dee28f51e8144897c4b261e6e19",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "conf_ligas_nacionais/VEN.cfg",
+      "size": 1017,
+      "sha256": "00053ecfe185593358db108bd9741c7eec9b672bf5c0406987f8d95546eb5dee",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "path": "juniores-reais.json",
+      "operation": "add",
+      "size": 322,
+      "sha256": "57ee6056f0b27f48e74621e73dbb36f5fa3092ba607e7a20b43b35ab0e8b9cf9",
+      "acceptedOriginalSha256": [],
+      "recipe": "trophy-98209dc60a31c16bb763.json",
+      "vanillaMissing": true,
+      "component": "rosters"
     },
     {
       "operation": "add",
@@ -400,9 +511,36 @@
     },
     {
       "operation": "add",
+      "path": "teams/accringtonstanley_ing.ban",
+      "size": 2378,
+      "sha256": "e9421fb3dae2dfed9710742d129995564c0b290b9a9ac314a515267bab1692b5",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/adajaen_per.ban",
       "size": 2547,
       "sha256": "fa7958d321941752b468f8e39ee0599efe6991d159bb8e7299e0eafa495e4041",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/adesg_ac.ban",
+      "size": 2398,
+      "sha256": "8c88a86e00839cbf050e2e7bbb4a76e843acf0e9077f4fc26ca8ea04c33bc75b",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/adjaguar_pe.ban",
+      "size": 2220,
+      "sha256": "74d933d63047807c7c57b305f61ff086c4ead3377167e11e31387f5a8454dc88",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -429,6 +567,15 @@
       "vanillaSize": 1926
     },
     {
+      "operation": "add",
+      "path": "teams/afcwimbledon_ing.ban",
+      "size": 2580,
+      "sha256": "272e4963fc4ec5de19ed210957bbf1cb1d11d3328626ce489a5e77fe9cbd739d",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/afogadospe_bra.ban",
       "size": 1722,
@@ -442,9 +589,27 @@
     },
     {
       "operation": "add",
+      "path": "teams/agroec_go.ban",
+      "size": 2240,
+      "sha256": "85e61d33cc4537718760d89a1db8cbd3d6e8b6b73003b3ff67d92659f2c3bf2a",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/agropecuarioargentino_arg.ban",
       "size": 2766,
       "sha256": "d1a0ea273ce429456c29b3ed34db953a283d8214651148068f0cd46738c096fb",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/aguianegra_ms.ban",
+      "size": 2255,
+      "sha256": "4d27c5799a07e5061ebf608ac6be797d3c261bf23caafb0478e3640e8dceea8e",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -575,9 +740,27 @@
     },
     {
       "operation": "add",
+      "path": "teams/albinoleffe_ita.ban",
+      "size": 2720,
+      "sha256": "bcb439bf0b8aa24c714e3121b8e2abcc8782827e47de5e21ddd4294b5f69010c",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/albion_uru.ban",
       "size": 2478,
       "sha256": "e83df556ae38d21dbee2eaf10685815d7fa55db0211756768b1d92bac88208e3",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/alcionemilano_ita.ban",
+      "size": 2520,
+      "sha256": "87eda9e58a777aed3aabb1f5ff9cdc95f962169291a9ee69bc40b59f5d22cb48",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -711,6 +894,15 @@
       "vanillaSize": 1885
     },
     {
+      "operation": "add",
+      "path": "teams/altamura_ita.ban",
+      "size": 2359,
+      "sha256": "d06d32959912e3a858b3dd36f551c6a038abbc68705e1b10c6b5428098c74e56",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/altos_pi.ban",
       "size": 1887,
@@ -771,6 +963,15 @@
       "vanillaSize": 1626
     },
     {
+      "operation": "add",
+      "path": "teams/america_rj.ban",
+      "size": 3030,
+      "sha256": "efc336f7c849a9d6b93c08a75fd2b8223b0ad11d3afd97de323b81fd5c7380d3",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/americacali_col.ban",
       "size": 2265,
@@ -781,6 +982,15 @@
       "component": "rosters",
       "vanillaSha256": "057fd3e146c9c1ddb79622851f9602c93ec7a3a8f8fc03e97678436c688d0413",
       "vanillaSize": 1933
+    },
+    {
+      "operation": "add",
+      "path": "teams/americadepropria_se.ban",
+      "size": 2007,
+      "sha256": "9342a63ac4584fe2385ece7b35646802d850f29f1e1cce6e9cb80cd60ce2bf80",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -796,6 +1006,15 @@
       "component": "rosters",
       "vanillaSha256": "bbfffd3d7225ad378794f2e025c7be595fcf50994b37c1efd3dad776846e92ad",
       "vanillaSize": 2125
+    },
+    {
+      "operation": "add",
+      "path": "teams/anapolina_go.ban",
+      "size": 2056,
+      "sha256": "6a0b877c3929dcc15135d5f4417ffb07cea73b3881f9ed5393163e0fc6d20e9d",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -824,6 +1043,15 @@
       "component": "rosters",
       "vanillaSha256": "635efeb6e1eca8d963294f028ccc07cee39736cf5fa2ed2e876a83a6b007c7b1",
       "vanillaSize": 2006
+    },
+    {
+      "operation": "add",
+      "path": "teams/andraus_pr.ban",
+      "size": 2033,
+      "sha256": "0832947a17908f319c23bea06b606004bcafce90d71ccf6b763614eade83e2f3",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -938,6 +1166,15 @@
     },
     {
       "operation": "add",
+      "path": "teams/arezzo_ita.ban",
+      "size": 2552,
+      "sha256": "6f157818b1554a1a018f11b19964e75ac63f0970223492a075f957dd8243e21b",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/argentinodequilmes_arg.ban",
       "size": 2974,
       "sha256": "adbb9d78053306f45c9b5ad5d6638fc24d4c1da722fcc90fb410ddba98787a49",
@@ -1006,10 +1243,11 @@
     {
       "operation": "replace",
       "path": "teams/arsenal.ban",
-      "size": 2131,
-      "sha256": "ce800522c586225a55ac0d1dbdb0768e8bb85e1030143de4041eda07199bc1fb",
+      "size": 2069,
+      "sha256": "eec9e9bb609560d115212e4578d952f555fc313c8c4d1f763a88e58ae718929a",
       "acceptedOriginalSha256": [
         "3b26da885b96a653fc0bb0b235217ac798c928d28bf0a704f824b04accf81f7c",
+        "ce800522c586225a55ac0d1dbdb0768e8bb85e1030143de4041eda07199bc1fb",
         "5276d0d957bee990fdbd2c4675fe6fc6d93baee47cc824a1cc899495d219107b",
         "374b851eaafc072ae7d18eab182e536d2012e45df29c5eea2b4ecc874b562610"
       ],
@@ -1030,6 +1268,24 @@
       "vanillaSize": 1892
     },
     {
+      "operation": "add",
+      "path": "teams/aruc_df.ban",
+      "size": 2807,
+      "sha256": "bfa0087fcaffa3dbd1e38d5e864f3323fb033cd223033d6e8143e43d46ede303",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/arzignanovalchiampo_ita.ban",
+      "size": 2295,
+      "sha256": "c9927072d7d12fd85015a7148785d9e7549d619781ca558078737167ca6a3dad",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/asantekotoko_nig.ban",
       "size": 1985,
@@ -1040,6 +1296,15 @@
       "component": "rosters",
       "vanillaSha256": "99a9bc4701d65da0ec748f13c79a87d15671d71c906e9909b796443784f14562",
       "vanillaSize": 1993
+    },
+    {
+      "operation": "add",
+      "path": "teams/ascoli_ita.ban",
+      "size": 2329,
+      "sha256": "b6b444c6d9c3c13d62fd2c0d93a2c8aee6abb8e2b87544d091774c2ec0981fbd",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -1067,18 +1332,37 @@
       "vanillaSize": 1994
     },
     {
+      "operation": "add",
+      "path": "teams/astonvilla_ing.ban",
+      "size": 2381,
+      "sha256": "5ab528c2916d896f61e636f11a3a1bfe77c936237125842a892472f8494546e7",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/atalanta_it.ban",
-      "size": 2235,
-      "sha256": "a4c420bba79b9432d056798e0923a05a6fee1e26502a25dfe0f8d8d05dc4ca61",
+      "size": 2231,
+      "sha256": "1b565f91a4dca18401eb1c47c80c458ed0574d1e40ac114233d37971a6a13191",
       "acceptedOriginalSha256": [
         "c679be62c311737cdd1a3fb1b187fd8217c4f4c1e3c27ce831bd77a70682789a",
+        "a4c420bba79b9432d056798e0923a05a6fee1e26502a25dfe0f8d8d05dc4ca61",
         "0fa5581caaaa45f4b227ad3dfbec5f76650e10014401c80e0baef3d16968638f",
         "f4eaa4044352c2fdd3c2bb0665604c3a4a5762f211ae88a8c89216649733ee12"
       ],
       "component": "rosters",
       "vanillaSha256": "c679be62c311737cdd1a3fb1b187fd8217c4f4c1e3c27ce831bd77a70682789a",
       "vanillaSize": 1846
+    },
+    {
+      "operation": "add",
+      "path": "teams/atalantau23_ita.ban",
+      "size": 2646,
+      "sha256": "1fc8102fcd3be6e2f30011a272965738b467fd9179591a87b0443a95508e6133",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -1098,13 +1382,16 @@
       "vanillaSize": 1755
     },
     {
-      "operation": "add",
+      "operation": "replace",
       "path": "teams/athleticoparanaense_bra.ban",
-      "size": 2644,
-      "sha256": "6651152f8dee7a5abcd21ba1ed4c65a66a2ec9864934027a7b20f2071eab9113",
-      "acceptedOriginalSha256": [],
+      "size": 3876,
+      "sha256": "8c674e96834714393d602974537fd3577486f855f0498a4baf59009736a092ac",
+      "acceptedOriginalSha256": [
+        "6651152f8dee7a5abcd21ba1ed4c65a66a2ec9864934027a7b20f2071eab9113"
+      ],
       "component": "rosters",
-      "vanillaMissing": true
+      "vanillaMissing": true,
+      "allowMissing": true
     },
     {
       "operation": "add",
@@ -1164,6 +1451,15 @@
       "path": "teams/atleticofc_col.ban",
       "size": 2428,
       "sha256": "0b1a1b58caf4f0d212fee87e9dc579d67272ff289d58298f68806493b1ed53f2",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/atleticogloriense_se.ban",
+      "size": 2299,
+      "sha256": "a16fb8a3fc5e357b2a81b81acff48dcc49d6de0ac0c32a6aec14e26311bf520f",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -1231,13 +1527,16 @@
       "vanillaSize": 1751
     },
     {
-      "operation": "add",
+      "operation": "replace",
       "path": "teams/atleticomineiro_bra.ban",
-      "size": 2595,
-      "sha256": "a9ba29c20624fa1c9917e0a0d653c48e8ea258c361ed914bceb3a2a93a1747bb",
-      "acceptedOriginalSha256": [],
+      "size": 3409,
+      "sha256": "c4bdda4bb92669de1fb85fe57a5739b13e0bfcf55f1bae73b27a67672e2a922c",
+      "acceptedOriginalSha256": [
+        "a9ba29c20624fa1c9917e0a0d653c48e8ea258c361ed914bceb3a2a93a1747bb"
+      ],
       "component": "rosters",
-      "vanillaMissing": true
+      "vanillaMissing": true,
+      "allowMissing": true
     },
     {
       "operation": "replace",
@@ -1250,6 +1549,15 @@
       "component": "rosters",
       "vanillaSha256": "5eca48692181d8b8c028c931c16732c2e225adbfc40aea81865d9aa438212f4e",
       "vanillaSize": 1602
+    },
+    {
+      "operation": "add",
+      "path": "teams/atleticopiauiense_pi.ban",
+      "size": 2277,
+      "sha256": "28bfcfb0310fbbab0e8bc8714f73bde3fd88b7823c3ccf6eadb8faa089440bd7",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -1293,6 +1601,15 @@
       "vanillaMissing": true
     },
     {
+      "operation": "add",
+      "path": "teams/audacecerignola_ita.ban",
+      "size": 3096,
+      "sha256": "f60185f5d6cdb140c00eb626d3c95160df2fdd2d9e21d757c60674529657faf8",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/audax_chi.ban",
       "size": 2490,
@@ -1330,6 +1647,24 @@
       "component": "rosters",
       "vanillaSha256": "2b50901b43b016c91b4958d3724ba132d327af3d2a2d92c227a679f1a8c0df47",
       "vanillaSize": 1885
+    },
+    {
+      "operation": "add",
+      "path": "teams/avellino_ita.ban",
+      "size": 2487,
+      "sha256": "d95179b1f89974478d30553039c5561c180a5cda6d49a84d4e54014fce846271",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/avenida_rs.ban",
+      "size": 2068,
+      "sha256": "5a7b476728ee3d3fb8488ed541ce4c05807ae93aa3432ef3e2e43f359e77967a",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -1396,10 +1731,11 @@
     {
       "operation": "replace",
       "path": "teams/bahia.ban",
-      "size": 2607,
-      "sha256": "dbb3cbf84ebdfdb32e4c02324c1970b89935444d6f18d25d8d43508743e742e7",
+      "size": 3628,
+      "sha256": "6d833d2b9737619cecf3680c1ee476732f6db356f2fd63514deccde6aea19dbc",
       "acceptedOriginalSha256": [
         "86521d33166685fb2c827d1a94661c316c68946f7b6e9b1263720e679d2c473f",
+        "dbb3cbf84ebdfdb32e4c02324c1970b89935444d6f18d25d8d43508743e742e7",
         "b4b845209a007cd182b7fb8db3ce62edb751d18059f3133b7c7be8372cde5948",
         "e6b3bdaa06dbced5ff6ac2b503aa2d0205efe22a10452a4fbdbba0aef5bd8dff",
         "39f06b59d07809fed6a2e332025d371f5131f6d3c4de2171246e5f3c4786f876"
@@ -1479,6 +1815,15 @@
       "vanillaSize": 2116
     },
     {
+      "operation": "add",
+      "path": "teams/barcelona_ro.ban",
+      "size": 2042,
+      "sha256": "e5f38589cea6d5a43808ef3ff7d005ac74ec8cfd24ee1798704c4256cbdbbfd4",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/barcelonaba_bra.ban",
       "size": 1872,
@@ -1489,6 +1834,51 @@
       "component": "rosters",
       "vanillaSha256": "66502650d46c09b28cddcde0b6cd4bb1910e672e63b66ae8b21ec4559711722d",
       "vanillaSize": 1872
+    },
+    {
+      "operation": "add",
+      "path": "teams/bare_rr.ban",
+      "size": 1980,
+      "sha256": "f1826876e906ac085986e0a860f4d42d2b02e15da87b5c4c4fff40e1b8bd4df6",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/bari_ita.ban",
+      "size": 2130,
+      "sha256": "1e3d020c1fed44d1eefee8f8f3533e6934b29f85cab526ef931e5bb9ab69d4b8",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/barletta_ita.ban",
+      "size": 2289,
+      "sha256": "5d31402d668e309a0b330c65e30b23e5cb0a1db7f1579d4da97d7be3722170d8",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/barnet_ing.ban",
+      "size": 2390,
+      "sha256": "3691eea1cf47c29a2a0af1f617ad5642547850b7480c2943060611e9d0a9752a",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/barnsley_ing.ban",
+      "size": 2232,
+      "sha256": "30d048a6866e08e18a457b427e17edf14ed058b6029dc2e7fb3b3112c9d60529",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -1552,6 +1942,15 @@
       "vanillaSize": 1817
     },
     {
+      "operation": "add",
+      "path": "teams/bataguassu_ms.ban",
+      "size": 2476,
+      "sha256": "b77602038213f6a75e75d5deb54491ff93a52bb5509f8864575f90976cade186",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/bateborisov_bie.ban",
       "size": 1958,
@@ -1594,9 +1993,27 @@
     },
     {
       "operation": "add",
+      "path": "teams/belavista_to.ban",
+      "size": 3043,
+      "sha256": "05ce4f98e7e8baadf9ee14b315b3c32fd1349cea5fcc6f810d5149fec67c27ca",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/belgrano_arg.ban",
       "size": 2260,
       "sha256": "4e55a3ed39bbed0b0504f536e4ba8f96198dabaf25f355733fd45f1418359065",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/benevento_ita.ban",
+      "size": 2706,
+      "sha256": "6af85ef44868ca510a68e839eb8a60e3780ee63d13951f1997a26ffb5f2573a8",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -1671,6 +2088,33 @@
       "vanillaSize": 1971
     },
     {
+      "operation": "add",
+      "path": "teams/birminghamcity_ing.ban",
+      "size": 2313,
+      "sha256": "ff313c55fb08821135e260eaf35340c4421b410c0be0e184ae47b7e2519c2d52",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/blackburnrovers_ing.ban",
+      "size": 2398,
+      "sha256": "867335c5c3d79e325e7b35210cd4c5c2deee1f148696fc3caf3be0ffc68061dc",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/blackpool_ing.ban",
+      "size": 2506,
+      "sha256": "05cf82dd42b894355d50b31660e678af562da75e82d983ac49c6cec09380ce73",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/blooming_bol.ban",
       "size": 2472,
@@ -1679,6 +2123,15 @@
         "c7db8a91cfdff8bae14178438a050aa4a7505b76eddc58687b11f4e27c069739"
       ],
       "allowMissing": true,
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/blumenau_sc.ban",
+      "size": 2669,
+      "sha256": "06f3da3a3cf7fbffbceade3e5a29b1e64b9a04c04a625a5c0bc7955efcf9ea2d",
+      "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
     },
@@ -1788,6 +2241,24 @@
       "vanillaSize": 2057
     },
     {
+      "operation": "add",
+      "path": "teams/bologna_ita.ban",
+      "size": 2399,
+      "sha256": "7a406234715638c4071e951e572b6e8dca9a421bee18a096541dde3a8ccac645",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/boltonwanderers_ing.ban",
+      "size": 2259,
+      "sha256": "4f1ec6b41d2c232121863c3e80767de0e329c7c2b4ce65858697013666520c51",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/borac_bih.ban",
       "size": 3787,
@@ -1844,10 +2315,11 @@
     {
       "operation": "replace",
       "path": "teams/botafogorj_bra.ban",
-      "size": 2901,
-      "sha256": "df9469c72cc0b01861e0cb961e97127be9e1a61dbe753557f79fa4285700e295",
+      "size": 4055,
+      "sha256": "a542b27ce83e5f20c2b39f8f17ba12b359508a8420a6ddb71477c3f921612eb5",
       "acceptedOriginalSha256": [
         "d8bfeaef34a2f47249896ec1ff2755efbc1ab4a5a482f80b045f67653630bb2d",
+        "df9469c72cc0b01861e0cb961e97127be9e1a61dbe753557f79fa4285700e295",
         "7590404690ec2fd710d0601b4fcd6b1e9975d8de07be9dd1d1afe0ebe4267fcd",
         "44daea952aa47d142e0bc915bf11401dd7a46922ef3da9bfa1bd73790efc68dd"
       ],
@@ -1900,6 +2372,15 @@
     },
     {
       "operation": "add",
+      "path": "teams/bournemouth_ing.ban",
+      "size": 2371,
+      "sha256": "2b38afc3ea746b3efb20fff25289db5c1dabc435df53e3bd3bfa83f86b699c89",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/boyacachico_col.ban",
       "size": 2520,
       "sha256": "871db39a300de71ae66b7b00ea3023c803984ed159c27f713813e4a8f6101725",
@@ -1908,12 +2389,22 @@
       "vanillaMissing": true
     },
     {
+      "operation": "add",
+      "path": "teams/bradfordcity_ing.ban",
+      "size": 2589,
+      "sha256": "d651dd5b9c552c8292345185541cce6abaad3e8120ea36d2facfeb7bd6d5246d",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/bragantino_bra.ban",
-      "size": 2713,
-      "sha256": "7f531fdd84eb4cd5f69427b36bc572fc83aab2bc5a79f0945341ea83ce49cc95",
+      "size": 3554,
+      "sha256": "3d15b3c0f248c75675af3539927039ab90fc5dacba00812f79faf26536e3fe73",
       "acceptedOriginalSha256": [
         "38054125a0b63e6b6b5833f5232fbb5096c3f2f6072ecc3c4c24bffa60193c3f",
+        "7f531fdd84eb4cd5f69427b36bc572fc83aab2bc5a79f0945341ea83ce49cc95",
         "621a085c3d83dc00dded475e2930548a04de70e8a2da62eb92a6d14df44a20a5",
         "c0d97d131b33ad6446ce4afd11f40901dfe7f072a85187236a525696828fe64e",
         "f4de3c64e4a1b10633a1251b0ac20d64960ce00a4ec163b066aa4581d3def010"
@@ -1933,6 +2424,24 @@
       "component": "rosters",
       "vanillaSha256": "3527f0ca2712755d1039d2c123d3693226d5d21e943d285548bfeaa1c48ec2b5",
       "vanillaSize": 2213
+    },
+    {
+      "operation": "add",
+      "path": "teams/brasilia_df.ban",
+      "size": 2875,
+      "sha256": "59aaa823540294b83576d13726e8d221b6c76ec9029c92a9aa455cdd363bcdd0",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/brasiliense_df.ban",
+      "size": 3143,
+      "sha256": "ab4e100076ac1200b3373ef20fd4c4628a0043ed38ecc5cb16c47b9342b7a5ea",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -1958,6 +2467,51 @@
       "component": "rosters",
       "vanillaSha256": "a98eefc5d8217d8cdf573926fd264f6993e631a322a397492d1184f31966c283",
       "vanillaSize": 3059
+    },
+    {
+      "operation": "add",
+      "path": "teams/brentford_ing.ban",
+      "size": 2477,
+      "sha256": "71b938244c5fb517cb43bad03cbad2fd72e02c1745b97c4f749836c78b91fc03",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/brightonhovealbion_ing.ban",
+      "size": 2543,
+      "sha256": "0d0efd4fbfe903f04a2732b6aff382dbcfb53b6cc8272b3dcb35e29f1d8d719c",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/bristolcity_ing.ban",
+      "size": 2411,
+      "sha256": "47b42bbc9c05123bc74d0851b601325c80b35afa6afd651cd99dff61c3a6c09f",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/bristolrovers_ing.ban",
+      "size": 2127,
+      "sha256": "aca59db09fedb23f0c7025ff9e5458beffe14e370fb0c0e6d2e64ecd76bc0627",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/bromley_ing.ban",
+      "size": 2708,
+      "sha256": "a00679371e827d699c6fc05d3ce40fa8929b0338be3588b5ee5ae992daabe382",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -2062,6 +2616,24 @@
     },
     {
       "operation": "add",
+      "path": "teams/burnley_ing.ban",
+      "size": 2703,
+      "sha256": "9260ebd1b4ad0588daf0abb7daef05f51266fbcebe9d122a6985c38726138023",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/burtonalbion_ing.ban",
+      "size": 2168,
+      "sha256": "27bcb5f5c5fb53a4602b1aeac5e5834de0cbc15623fe968c4a0fd7161592e0e5",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/cabartolomemitreposadas_arg.ban",
       "size": 2881,
       "sha256": "b43b855e4dabb646df0af6f38e73c0d087667bb06593abcfed6cafb1a7bc697b",
@@ -2102,6 +2674,15 @@
       "vanillaMissing": true
     },
     {
+      "operation": "add",
+      "path": "teams/cagliari_ita.ban",
+      "size": 2590,
+      "sha256": "3d594b9784436df1b88de4f054f64a9ae6df51e7a6d5edee0cea40789ff483e4",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/caldense_bra.ban",
       "size": 1698,
@@ -2126,6 +2707,24 @@
       "vanillaSize": 1759
     },
     {
+      "operation": "add",
+      "path": "teams/cambridgeunited_ing.ban",
+      "size": 2324,
+      "sha256": "4f48f1de6e3e490f0ab0dc6b8c87fac5f5e2a7f0526a0de8d3ffdfca34839d82",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/cameta_pa.ban",
+      "size": 2104,
+      "sha256": "c9fc70c3938ad639582d12243868370573459eca60b635d5e652d28245f55365",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/campinensepb_bra.ban",
       "size": 1882,
@@ -2140,9 +2739,54 @@
     },
     {
       "operation": "add",
+      "path": "teams/campobasso_ita.ban",
+      "size": 2435,
+      "sha256": "a2b40ff068bc2aeefb59f5f0db66444965f3f456741ad52f75109bb022384047",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/capital_to.ban",
+      "size": 1905,
+      "sha256": "398c2728e4dd6a1fb3775dac3cc98f98e9276e9b9902a781e8327240904e155a",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/capitalbrasilia_bra.ban",
       "size": 1802,
       "sha256": "e410289209a20c5274d4ea817f21d4bb2caeff7b1b6584f13718877b83c31eb0",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/capitaopoco_pa.ban",
+      "size": 2003,
+      "sha256": "d537d15f81bd16c8cbfc201655172c11266995419638ee6f423aec59514789ca",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/capivariano_sp.ban",
+      "size": 2296,
+      "sha256": "58c6ee53509e30c9fd3835b504edf584b71bd082ff13f1e18d569e70e9b2eb74",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/capixabasc_es.ban",
+      "size": 1828,
+      "sha256": "7175d76f86e3cec58906510e8c4b28428609c1df212b9a250ed64faafe2e852c",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -2181,9 +2825,45 @@
     },
     {
       "operation": "add",
+      "path": "teams/cardiffcity_wal.ban",
+      "size": 2237,
+      "sha256": "cdcade58b17cbe246997023953ab6a0c2f0083993e9345993fc6361852bb3b50",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/carlosamannucci_per.ban",
       "size": 2506,
       "sha256": "be45e4b222a2c67a030b5d133f06ef423676ce8a114f1f9e0cab4d5646c33380",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/carlosrenaux_sc.ban",
+      "size": 2446,
+      "sha256": "b7c7a288ff92ed3bbedf6fe80ee000a601c5979114f25752019642d17624bbe3",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/carpi_ita.ban",
+      "size": 2210,
+      "sha256": "ba24986779c5053bd3d0d952124ab7f06e36bd7a893fee141301ef52b0f3d88c",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/carrarese_ita.ban",
+      "size": 2638,
+      "sha256": "e05508d983c470b0ddcc453d89034150a51d2ba951fe2a6aa635bb3a19ffd324",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -2215,6 +2895,15 @@
       "vanillaSize": 1790
     },
     {
+      "operation": "add",
+      "path": "teams/casarano_ita.ban",
+      "size": 2450,
+      "sha256": "45e7239d75c452dbc3a08cbe037a2cd2912afdeb876a928014f99fb4e66cba20",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/cascavel_pr.ban",
       "size": 1650,
@@ -2227,6 +2916,15 @@
       "vanillaSize": 1650
     },
     {
+      "operation": "add",
+      "path": "teams/casertana_ita.ban",
+      "size": 2067,
+      "sha256": "da970f5fbc281d12ec9cb7df380d9f29beb03ffa4b759bee962a064120b467e8",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/castanhalpa_bra.ban",
       "size": 1712,
@@ -2237,6 +2935,24 @@
       "component": "rosters",
       "vanillaSha256": "81a53122ba33e7dc3e206d69e2ae919789ba0a90e42a6523094fae416a08b02d",
       "vanillaSize": 1712
+    },
+    {
+      "operation": "add",
+      "path": "teams/catania_ita.ban",
+      "size": 2640,
+      "sha256": "a502b1a997ad2c67c32f725f6a231b8bc6905d5b22c908c4d6843651a0b79fb0",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/catanzaro_ita.ban",
+      "size": 2580,
+      "sha256": "a0e49fc2d2364199be5c388dbcb8510daab93bfb92a05c9fada845039f2e1b78",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -2261,6 +2977,15 @@
       "component": "rosters",
       "vanillaSha256": "ed5f0859265296210b3bd56c649d36ea1e394e0fe508dc514b71b0389acfccdb",
       "vanillaSize": 2854
+    },
+    {
+      "operation": "add",
+      "path": "teams/cavese_ita.ban",
+      "size": 2494,
+      "sha256": "2b5c8f2112b92be740acea7e575e0e9b22d0f045e51f976739fef53148939190",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -2327,6 +3052,15 @@
       "vanillaSize": 1993
     },
     {
+      "operation": "add",
+      "path": "teams/ceilandia_df.ban",
+      "size": 2678,
+      "sha256": "06cffe35c4e127c97002533c7bc919b2a74e2fc4a3922bed773afdbca1f901bc",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/celje_elv.ban",
       "size": 2839,
@@ -2377,6 +3111,15 @@
       "path": "teams/centralnortedesalta_arg.ban",
       "size": 2435,
       "sha256": "efdee360e682679b79ee760b6452ebe2632ddd4118376829a59686e89948f689",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/centrooeste_go.ban",
+      "size": 2246,
+      "sha256": "e1759bebf27feb5cb2cff22d2af38177f2c0e7b73ca098530c6a93ff3ba0444c",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -2441,6 +3184,15 @@
       "vanillaSize": 1947
     },
     {
+      "operation": "add",
+      "path": "teams/cesena_ita.ban",
+      "size": 2428,
+      "sha256": "1557b58fbe789c02c6d73baf5fddbf8ce0b88dceff4b0fd8e0e9072009f1e74a",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/cfrcluj_rom.ban",
       "size": 2925,
@@ -2465,12 +3217,22 @@
       "vanillaMissing": true
     },
     {
+      "operation": "add",
+      "path": "teams/chapada_mt.ban",
+      "size": 2334,
+      "sha256": "e707fd96472655911156f43d82592a65eaaf5e8e5ce4ca0015c7cffc14dfaf49",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/chapecoense_bra.ban",
-      "size": 2637,
-      "sha256": "9e85196f74d23ff3d15c25708a66219abc29f827d3c0812cd56e44c29a71754e",
+      "size": 4350,
+      "sha256": "a1a3930b8f192b2c0bf8c786ed12b30ba19199b964d1367d85ee7d1b90ccffe1",
       "acceptedOriginalSha256": [
         "99f2cf112734f9de45051c4fb28c17885b6782ce3d34595cbd0d15bf6ec52ff3",
+        "9e85196f74d23ff3d15c25708a66219abc29f827d3c0812cd56e44c29a71754e",
         "5f0b8eea42bf4c7a02f11b3992b1bcf1c8e38a512ac891656b2ede1f1407b765",
         "b0589239967c9ce424cc78b1c2bc328c9331e17c73c24712c77e14de676c6b93",
         "65aeab87d81c5bc86bb61a53aa5392d17e35a1020d7aa68333ac981371600e96",
@@ -2495,17 +3257,45 @@
       "vanillaSize": 1854
     },
     {
+      "operation": "add",
+      "path": "teams/charltonathletic_ing.ban",
+      "size": 2590,
+      "sha256": "2c7730f4580f8ec74c0a0bc2cf2a3712db736a52249d016b819596553dc42c6a",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/chelsea.ban",
-      "size": 2322,
-      "sha256": "1896b91abad88cc0e852ef182d67d3f02dc00921ce1bf5f36f72080d3539a152",
+      "size": 2539,
+      "sha256": "d4890e19ee453d0e955a96b72dcc24c20f6f6d4a3b089554e0653f9c5ee6b9a1",
       "acceptedOriginalSha256": [
         "f3a595eb31f90fc403b7d5438f2c9e355f6df67078ec0b279e0c4d1435d2bee1",
+        "1896b91abad88cc0e852ef182d67d3f02dc00921ce1bf5f36f72080d3539a152",
         "5b7d9d230246c7ba7e8fbc540e5ed844d42934a09be02bfd7a590b9d41dadc51"
       ],
       "component": "rosters",
       "vanillaSha256": "f3a595eb31f90fc403b7d5438f2c9e355f6df67078ec0b279e0c4d1435d2bee1",
       "vanillaSize": 1868
+    },
+    {
+      "operation": "add",
+      "path": "teams/cheltenhamtown_ing.ban",
+      "size": 2314,
+      "sha256": "d7837befdc264306477b51f5a09a408712a96a52fe473e111db1a3bcd599a450",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/chesterfield_ing.ban",
+      "size": 2644,
+      "sha256": "49fe52329f8234f3405968f7c8eb9a28c8c7ebfd24cc88bd4e15ed15107beb64",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -2533,6 +3323,15 @@
       "path": "teams/circulodeportivo_arg.ban",
       "size": 1659,
       "sha256": "29eb67408bd3541037c084a00bd1b2774d51bf96427f758b055edbd2d51b3d86",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/cittadella_ita.ban",
+      "size": 2237,
+      "sha256": "82222b501e4cd7280ff8a523480222c50faf627378903b7bff700983c9b04a16",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -2636,6 +3435,15 @@
     },
     {
       "operation": "add",
+      "path": "teams/clubeesportivooperariova_mt.ban",
+      "size": 2289,
+      "sha256": "63e17e950c0a670edf647c1eaf22f6a4d88598d574c569a64a399c739b5df8e0",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/clubsocialydeporteslinar_chi.ban",
       "size": 2690,
       "sha256": "cb79798b68c6a42c0dfb6fc5c2c9534d5029600ac3ed6f9483ff743bd9c70592",
@@ -2675,6 +3483,15 @@
       "path": "teams/cobresal_chi.ban",
       "size": 2382,
       "sha256": "cb1b09bb6df326b6d893c959c8504f27155ead7245198d5415830d4ab30fab99",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/colchesterunited_ing.ban",
+      "size": 2254,
+      "sha256": "f7ad2064db96dd70112862df20d90261ef029bac51e424fe260152b21785ca3c",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -2735,6 +3552,15 @@
     },
     {
       "operation": "add",
+      "path": "teams/como_ita.ban",
+      "size": 2318,
+      "sha256": "80069d5687b00aa849ac553c26df268aa6e18ff66613b06152ec025d8213ab50",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/comunicaciones_arg.ban",
       "size": 2388,
       "sha256": "b9221d3ce9838048eec208800bdd01459a09ae4ccee33a000413f9c3e704b025",
@@ -2775,6 +3601,15 @@
       "component": "rosters",
       "vanillaSha256": "e0bb08819eefefaad4201167ffe6da6d6c173b6985b3a9051de688077c381b60",
       "vanillaSize": 1946
+    },
+    {
+      "operation": "add",
+      "path": "teams/confiancadesape_pb.ban",
+      "size": 2152,
+      "sha256": "91ac616343d18731f33803f857cf0a87d433e5ce5d518514c9b81fd7d4d45cff",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -2831,10 +3666,11 @@
     {
       "operation": "replace",
       "path": "teams/corinthians_bra.ban",
-      "size": 2746,
-      "sha256": "332ef5b0136132b35385a63a7ea100ff2c156226b9b79d10dca2732f1af8ce63",
+      "size": 3849,
+      "sha256": "d7cce8d8064007d88dd76d4a74bd7958534e449483677b9405ed2dc1bc4ae4a0",
       "acceptedOriginalSha256": [
         "a1dd8a3bfc3bd3574615f1f727dd32c47871e9fecbe1cdb09b2b39e378071e6a",
+        "332ef5b0136132b35385a63a7ea100ff2c156226b9b79d10dca2732f1af8ce63",
         "e3062abd5f82f99958c37adf12ec37506ba7452ddced4d952ef2ebb4bf59ff90",
         "35fe0e5724df2b3580270b9721a21b740a515672d9c45b8ae5bf578c690c5224",
         "172dac6d5ba22644d19a22345a6b5440fde0a3f42f0975cb1f2e75ba7b5aa4a4"
@@ -2844,12 +3680,22 @@
       "vanillaSize": 2047
     },
     {
+      "operation": "add",
+      "path": "teams/corisabba_pi.ban",
+      "size": 2091,
+      "sha256": "b585c22144fd991b69161971fa6cd8e116537ea3eef5ac70d8a9bc29d1dac9d0",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/coritiba_bra.ban",
-      "size": 2614,
-      "sha256": "a455815b7e0b0e4b8fc4dfaf61627a192e965f0ecfb8ee68cc183bfa58ce711e",
+      "size": 3346,
+      "sha256": "2ef071f812df7f242d70813b61ef8e0529e9b05c9109bcdb21a922fc61c58e56",
       "acceptedOriginalSha256": [
         "c7572c7400cebb5a05eda92823a806ec3f469db3fdf3d9d2329d8b1b5bc78a12",
+        "a455815b7e0b0e4b8fc4dfaf61627a192e965f0ecfb8ee68cc183bfa58ce711e",
         "675fac562be73e5852d06f5a9d289888a9cf854478c356afb007f86110d14c97",
         "93545baea678dad3ea1493fa9a6c70bc68125dbaf444c26e704e889d9f9ad8ec",
         "11b3f8b05c64df01953a2313e92bbc36fb918d10c30d5f3900364cfbff548ae7"
@@ -2857,6 +3703,15 @@
       "component": "rosters",
       "vanillaSha256": "c7572c7400cebb5a05eda92823a806ec3f469db3fdf3d9d2329d8b1b5bc78a12",
       "vanillaSize": 1996
+    },
+    {
+      "operation": "add",
+      "path": "teams/corumbaense_ms.ban",
+      "size": 2330,
+      "sha256": "7dfa86b3a822a517fdc0eb89d4d9fd36f01b005d5c30177ddeb42c3276a560e5",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -2871,6 +3726,24 @@
       "vanillaSize": 1778
     },
     {
+      "operation": "add",
+      "path": "teams/cosenza_ita.ban",
+      "size": 2439,
+      "sha256": "feeb7ec9e53bda0222f74e7f2c2f49214fef26cd5195c45ff14cbece0f63cfb9",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/costarica_ms.ban",
+      "size": 1992,
+      "sha256": "772ac9b15e844d2f4b81bd566a39c3bdad7acfd0c1a07757328ce183c3e8ab07",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/cotonsport_cam.ban",
       "size": 2005,
@@ -2881,6 +3754,15 @@
       "component": "rosters",
       "vanillaSha256": "961dc2ca0f3b52d3360a97862f5efaf9ee6c3408e7adef66649bf835761f13c5",
       "vanillaSize": 2009
+    },
+    {
+      "operation": "add",
+      "path": "teams/coventrycity_ing.ban",
+      "size": 2543,
+      "sha256": "21efac4fcfa0b88b331a7cdbff27ab3acbe607a24ec77c98be94ab2ab1d43c8f",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -2910,6 +3792,15 @@
       "vanillaSize": 2936
     },
     {
+      "operation": "add",
+      "path": "teams/craquidauana_ms.ban",
+      "size": 2742,
+      "sha256": "8ac7f196615761fdb25e278ec2106c0310401a86c7029917e56fbad8c61045a9",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/crato_ce.ban",
       "size": 1670,
@@ -2920,6 +3811,15 @@
       "component": "rosters",
       "vanillaSha256": "0f1e84264186802f94dfdfaafa673ef651cd20b60590f2aa4847a8928d385686",
       "vanillaSize": 1670
+    },
+    {
+      "operation": "add",
+      "path": "teams/crawleytown_ing.ban",
+      "size": 2486,
+      "sha256": "be0c57641b0d6cdead2d7958a890b817955245d9a2353b0fb880e5d3ca95b927",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -2948,6 +3848,24 @@
       "vanillaSize": 1866
     },
     {
+      "operation": "add",
+      "path": "teams/cremonese_ita.ban",
+      "size": 2437,
+      "sha256": "deaf529e5cd1fa5c1805d9a7c417d49df64600a8d1c47a07119306ae79f4f04e",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/crewealexandra_ing.ban",
+      "size": 2304,
+      "sha256": "e1c96a11e6fd155fdfb08f6a50bfd2b6810d24adea093a13bfa99846702db28c",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/criciuma_bra.ban",
       "size": 2715,
@@ -2964,6 +3882,24 @@
       "vanillaSize": 1926
     },
     {
+      "operation": "add",
+      "path": "teams/cristal_ap.ban",
+      "size": 1959,
+      "sha256": "27e3341b1e4dc88ce25b766d136e255f576fee1ca768bf831711711f142b9be8",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/crotone_ita.ban",
+      "size": 2196,
+      "sha256": "87e13b78d3a0bb9d94043d5c214b91caa7f530bc90ea658a42e8fa44a20618d2",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/cruzeiro_al.ban",
       "size": 1765,
@@ -2978,10 +3914,11 @@
     {
       "operation": "replace",
       "path": "teams/cruzeiro_bra.ban",
-      "size": 2624,
-      "sha256": "f9ef4d82253c2915681347c1400e2921dd810a15574a26b86790a2740882c762",
+      "size": 3595,
+      "sha256": "074e4c1963a54e5544e03a5c0d397b760ea408b38385fdae078c33ef9868e507",
       "acceptedOriginalSha256": [
         "2f5f637107015c161cb1a706fdebd0fdc296e992db18a2c00a48efdb40e120a6",
+        "f9ef4d82253c2915681347c1400e2921dd810a15574a26b86790a2740882c762",
         "7b100fc4493eafca966e97ef5f6d89c835de0248dd8a240007601d4c74776bdb",
         "b4d4394d4a66b16f7733ce64d4fbdba50ed33f2f808c17714a57e9cba910c79b",
         "0de94b9e3a1d31a55f5f961f2dad5c373ef5c3f3545235d89e1b6b83a30b2f0b"
@@ -2989,6 +3926,15 @@
       "component": "rosters",
       "vanillaSha256": "2f5f637107015c161cb1a706fdebd0fdc296e992db18a2c00a48efdb40e120a6",
       "vanillaSize": 2226
+    },
+    {
+      "operation": "add",
+      "path": "teams/crystalpalace_ing.ban",
+      "size": 2401,
+      "sha256": "1cff599d393d8409f0b3670ebe556b7d62e924d145a50f4d8204f46653f0fe8b",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -3130,6 +4076,15 @@
       "component": "rosters",
       "vanillaSha256": "24ba0a5019136a7fcc2900feb1f37ea6acd118dda2b8feaf05af2b0dc89837b6",
       "vanillaSize": 2081
+    },
+    {
+      "operation": "add",
+      "path": "teams/decisaogoiana_pe.ban",
+      "size": 2211,
+      "sha256": "b3c664b5f71f2972b38e3c99e240cfe44fc28ff60ca088c4501867817702e09c",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -3494,6 +4449,15 @@
       "vanillaSize": 1828
     },
     {
+      "operation": "add",
+      "path": "teams/derbycounty_ing.ban",
+      "size": 2739,
+      "sha256": "8751c85f859e5ea4be8041f6c9cdcadbf0c7253132fb1e23620b8448ac50ece3",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/derry_irl.ban",
       "size": 3773,
@@ -3507,6 +4471,33 @@
       "component": "rosters",
       "vanillaSha256": "fef6b99054f6ac438ebf4ce338668ee6abb77b49b1c0417929a6a105a7da477c",
       "vanillaSize": 3049
+    },
+    {
+      "operation": "add",
+      "path": "teams/desenzano_ita.ban",
+      "size": 2368,
+      "sha256": "1704e77d88f92bd262be0d6a61179172267db4a854c40154f45df96444f4f4ad",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/desportivaaracaju_se.ban",
+      "size": 2386,
+      "sha256": "ac65ba5b51c947f9ef2b7bad64719cebe733ec06b1c1c80b8db8fbacd45b68f9",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/desportivaferroviaria_es.ban",
+      "size": 2156,
+      "sha256": "fa8a8937cd741fb7fc973d3eb37038a923a383a6d3c083335b12b3feab333526",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -3587,6 +4578,15 @@
       "vanillaSize": 1611
     },
     {
+      "operation": "add",
+      "path": "teams/dolomitibellunesi_ita.ban",
+      "size": 2568,
+      "sha256": "e47b8199b4e5abd4cf515188d5c0f295693cfabb5d3fe48f0800ae34784de0e9",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/domboscomt.ban",
       "size": 1662,
@@ -3600,9 +4600,36 @@
     },
     {
       "operation": "add",
+      "path": "teams/doncasterrovers_ing.ban",
+      "size": 2523,
+      "sha256": "7ea5a8cf0a251de9b1d6a0c484be1202c1baf8e18831b1964e8a2868268a04c8",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/dorense_se.ban",
+      "size": 2240,
+      "sha256": "b930a78d5e351d0fef85574cb5edd52f221527d9ef0c016f9c717a72c7df152e",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/douglashaig_arg.ban",
       "size": 2630,
       "sha256": "e4c6c93d1b668c53287101ec62155e3c58f2fabd7c046b53482a7e52055f1b15",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/dourados_ms.ban",
+      "size": 2245,
+      "sha256": "0eef851a9401fdd8ac826aec367e979be1bfe34446b18fd39ac4cba8b05d9f75",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -3694,6 +4721,15 @@
       "vanillaSize": 2053
     },
     {
+      "operation": "add",
+      "path": "teams/empoli_ita.ban",
+      "size": 2211,
+      "sha256": "74a062b4be7ba871afdd2bc726e21d6eb5c932fceccce782510885b37235e846",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/engordany_and.ban",
       "size": 2300,
@@ -3740,6 +4776,15 @@
       "component": "rosters",
       "vanillaSha256": "3d560d259254d42a1ac346a8a5c240c2b1471ab3a35d09f088f3e2f308e121bc",
       "vanillaSize": 1766
+    },
+    {
+      "operation": "add",
+      "path": "teams/esportedepatos_pb.ban",
+      "size": 2125,
+      "sha256": "4be53de49b90b7e3965823025640e329b60eb17288f58bb614c8b91a7faa849e",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -3846,6 +4891,33 @@
       "component": "rosters",
       "vanillaSha256": "9366796077df66584c9892c353ad836358aa0be70550c144d6a1d06ba5840ae6",
       "vanillaSize": 1926
+    },
+    {
+      "operation": "add",
+      "path": "teams/everton_ing.ban",
+      "size": 1944,
+      "sha256": "31bbfd188e60c5150e9eaba1a087caede8ad7fece8f58278d558cc5630bce3f3",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/exetercity_ing.ban",
+      "size": 2429,
+      "sha256": "fb1660b2753535025660366a275dcda7672f133328d80ab757fe706bf1cef3b0",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/falcon_se.ban",
+      "size": 2591,
+      "sha256": "69d0643fd328a6a36c7215f823697503b25374e13cb8625ee26f2ac6d5f0fbaf",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -3979,6 +5051,15 @@
     },
     {
       "operation": "add",
+      "path": "teams/fiorentina_ita.ban",
+      "size": 2046,
+      "sha256": "ad1db40a9d20d38720582f567cec6fafd004f99b63e962f68606f800aaaff37c",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/flandria_arg.ban",
       "size": 2277,
       "sha256": "bc38cf518c2e750633a7f7e2a7e03858754b84b290ece00fd920362f61916fe6",
@@ -3989,10 +5070,11 @@
     {
       "operation": "replace",
       "path": "teams/flarj.ban",
-      "size": 2292,
-      "sha256": "eb1d7c098a83181c22cb0bdde0b06f2844492ed0bbce0510af9edb57f6eaf8c1",
+      "size": 3231,
+      "sha256": "ad0eb74a23cfedc9092b2375e6a4ad7cd77fe44f7c589240722b078bfc073a83",
       "acceptedOriginalSha256": [
         "7a73cfe1b61b94c76a64e92143ae4a6ebe74ea2e9752ed8365e6b5e312d5bd9a",
+        "eb1d7c098a83181c22cb0bdde0b06f2844492ed0bbce0510af9edb57f6eaf8c1",
         "cbb6118a503ea31709246865bf24631af5f7741fefb86acaa5abb8eb928b3eb0",
         "e8a27fcc03fe4487338d772ed2808622af641819916242a4a53b46a604a0501e",
         "511f6bfeaeacc1c05ba2cbe7823185a844b67a5a1bbe219a1c2131c4720e6f37"
@@ -4000,6 +5082,15 @@
       "component": "rosters",
       "vanillaSha256": "7a73cfe1b61b94c76a64e92143ae4a6ebe74ea2e9752ed8365e6b5e312d5bd9a",
       "vanillaSize": 2095
+    },
+    {
+      "operation": "add",
+      "path": "teams/fleetwoodtown_ing.ban",
+      "size": 1967,
+      "sha256": "1bb53b030eecd73560503b118c6e0f65618c9a46ce269fb13f4bfad6cbfd65dd",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -4068,16 +5159,35 @@
     {
       "operation": "replace",
       "path": "teams/flurj.ban",
-      "size": 2797,
-      "sha256": "92e7c4cd6b7715bc2550334d0744e751aa2469fd3cef2badab659bd5138a5148",
+      "size": 4150,
+      "sha256": "fa5f41de01a78234d407c6635eee1eed0fe7f35cebf129ecfbed2ab73a2aaa3b",
       "acceptedOriginalSha256": [
         "1d6e1c6b68c7f27a0a8b0817723faffa525f22a52b0a2ab1f746e4d2ebee2b0c",
+        "92e7c4cd6b7715bc2550334d0744e751aa2469fd3cef2badab659bd5138a5148",
         "f06df1663be4627eaa174a948aeea9f087e412aa7452cd13849033ccbb98e94e",
         "dc67756599d63b2daa59aebb734ad4e6876e91bd8f2d1b22ced9e1dc96fedebd"
       ],
       "component": "rosters",
       "vanillaSha256": "1d6e1c6b68c7f27a0a8b0817723faffa525f22a52b0a2ab1f746e4d2ebee2b0c",
       "vanillaSize": 1968
+    },
+    {
+      "operation": "add",
+      "path": "teams/foggia_ita.ban",
+      "size": 2401,
+      "sha256": "00bacbdc8c2ff9ace56fdcf1f841afd70ceecfcba4a5e3d3a8943ab397c637fc",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/folgorecaratese_ita.ban",
+      "size": 2318,
+      "sha256": "a8f318dff520929deae2288f84e47c084dac5443f212451eed67fb7f0e48373a",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -4090,6 +5200,15 @@
       "component": "rosters",
       "vanillaSha256": "0886bbb578c00147c7e9b62411b7275c43e265f2e14bd1a1cf465765e4a8c022",
       "vanillaSize": 1635
+    },
+    {
+      "operation": "add",
+      "path": "teams/forli_ita.ban",
+      "size": 2637,
+      "sha256": "f410e1cb0a915ea84677135e18c7511032e3108f60dad999a44e0753a5e9d5ad",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -4116,6 +5235,24 @@
       "vanillaMissing": true
     },
     {
+      "operation": "add",
+      "path": "teams/forte_es.ban",
+      "size": 2150,
+      "sha256": "9a12f1dfa89de4b00eb16e4b17a21ebf743b577343f7a5599e02ca34e4b59a3c",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/fozdoiguacu_pr.ban",
+      "size": 1983,
+      "sha256": "ab38b8fe24efced6d1efaf30daf57bb2c1b175c10c77d621ba6ed07b03ddcc2a",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/freipaulistano_se.ban",
       "size": 1625,
@@ -4126,6 +5263,15 @@
       "component": "rosters",
       "vanillaSha256": "d9fb2c54e4acf16148ad474b097c823b587154914a0303fc214c84d87f516350",
       "vanillaSize": 1625
+    },
+    {
+      "operation": "add",
+      "path": "teams/frosinone_ita.ban",
+      "size": 2559,
+      "sha256": "4186c63bfd36cd75028c4cee13c1c482be8c8c2ac25eb1357a6db496d54ed930",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -4141,6 +5287,15 @@
       "component": "rosters",
       "vanillaSha256": "bb084d5a2d80939712012a0e253fcc925a590ccfdf65d3c5af30808bb7b68073",
       "vanillaSize": 1981
+    },
+    {
+      "operation": "add",
+      "path": "teams/fulham_ing.ban",
+      "size": 2226,
+      "sha256": "1005afc063a31a0c9050d2b39ef19a0c5cd9b813141add436a7c6b9014c140f6",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "add",
@@ -4167,9 +5322,45 @@
     },
     {
       "operation": "add",
+      "path": "teams/galicia_ba.ban",
+      "size": 2374,
+      "sha256": "026ccc042f3cb3aab5049a42cab53b7cfb1dbfe044d78747e0b7c4d97c5ed6a3",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/galomaringa_pr.ban",
+      "size": 2222,
+      "sha256": "9f7e5750c87d09eda77492629f8a8f30f923bd86e75cce589b3a0eee83ddbf7d",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/galvez_ac.ban",
+      "size": 2246,
+      "sha256": "18eea38e71fa27287eff0b6ba0e4308db545466ed551b5f2bf1f65edc75757d4",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/gama_bra.ban",
       "size": 1835,
       "sha256": "161428938cefecee641aa815b7a99e6d108400ea24466bd9500ceea1516079a7",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/gas_rr.ban",
+      "size": 2166,
+      "sha256": "4a2f4591dbd66ec40a319636fb11aad08a8c3a867d6750105aed001685c9e99e",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -4185,6 +5376,15 @@
       "component": "rosters",
       "vanillaSha256": "b462960f6c90233f8cd000b55e8162872c052c215f6700234d42262af295e092",
       "vanillaSize": 1685
+    },
+    {
+      "operation": "add",
+      "path": "teams/gazinportovelho_ro.ban",
+      "size": 2755,
+      "sha256": "4e6ee7a9df079174d89bf2073980730466506fa4a058741a9f09bcdb0a8a2810",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -4221,6 +5421,24 @@
       "vanillaSize": 1970
     },
     {
+      "operation": "add",
+      "path": "teams/genoa_ita.ban",
+      "size": 2392,
+      "sha256": "7a39a9a48017e62d765be47698750bf199d0babc4a3528aefc02c1e0aad6f22a",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/genus_ro.ban",
+      "size": 2932,
+      "sha256": "523765c3ff2c069333eec0376ad318c7f0426d1dbc4b89591b4eb8d13440cfdc",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/getafe_esp.ban",
       "size": 2163,
@@ -4232,6 +5450,24 @@
       "component": "rosters",
       "vanillaSha256": "508306d12555169fed3ac9d9ae0668bccaceffb5ef8cb57ce1c8192aba1298b0",
       "vanillaSize": 1674
+    },
+    {
+      "operation": "add",
+      "path": "teams/gianaerminio_ita.ban",
+      "size": 2219,
+      "sha256": "6906c0f5d9c7b11a7d636de73840e68dd49f39974af7ee1959f6b138ccd7cf1f",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/gillingham_ing.ban",
+      "size": 2901,
+      "sha256": "dcd72915176ddacf7940090bac367db30d5861ce50461731cf0eb2e0a95116df",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -4318,6 +5554,15 @@
       "component": "rosters",
       "vanillaSha256": "53e6fc89910761c17f45f074e850137fbcb137cc9196708b1f4ced1b30535066",
       "vanillaSize": 1681
+    },
+    {
+      "operation": "add",
+      "path": "teams/giugliano_ita.ban",
+      "size": 3058,
+      "sha256": "9aedb264259d198944b4806d0ed41e73d5ddafc66a1c16ef2b6e06a2ec0d5247",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -4412,10 +5657,11 @@
     {
       "operation": "replace",
       "path": "teams/gremio.ban",
-      "size": 2714,
-      "sha256": "828774289a50bce2e41a8c57a37494dbfe39ef919c5334760c95a17e1d4c025e",
+      "size": 4241,
+      "sha256": "101599022bcae1452bfb5f127f1ec3000398ae04446c9b590b341999a7d53493",
       "acceptedOriginalSha256": [
         "76366417ca9ae459cfd3ddbb7cdc9012c03c3ba8287437fca527d38f05b97f27",
+        "828774289a50bce2e41a8c57a37494dbfe39ef919c5334760c95a17e1d4c025e",
         "163534df66ac76449d3d4cc8b52d1edf03162dc065675d88c92cf632aa6a0f21",
         "81c250fc854ff2c178f49716dcb4a87dbdf96edd0fd329d8df5e5da05ab73ee1",
         "6a767dac3a72b91eb9b324a3d6c41bcfd37fb636b1f5e8c943e5a9ddc595035e"
@@ -4458,6 +5704,24 @@
       "vanillaSize": 1559
     },
     {
+      "operation": "add",
+      "path": "teams/grimsbytown_ing.ban",
+      "size": 3112,
+      "sha256": "d986c4ade0598bdab514d460a559f779ad71b53fcebc9bf6da4c5b65dc9c62c3",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/grosseto_ita.ban",
+      "size": 3212,
+      "sha256": "ed64383fe426340ab7fbb47ea896704514adb1a3ced44c5b3ef7b70fd66624ed",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/gualaceo_equ.ban",
       "size": 1909,
@@ -4474,6 +5738,24 @@
       "path": "teams/gualbertovillarroelsj_bol.ban",
       "size": 2704,
       "sha256": "5d480e0cd5a38997e26e06d910eb59167cc8c3441e5b3040a3bfc11fd293eb14",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/guapore_ro.ban",
+      "size": 2312,
+      "sha256": "5682c80a906932f100e705e3dca6a4a4ae73e2363120be97983eee9418a9ca0f",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/guarai_to.ban",
+      "size": 2332,
+      "sha256": "37254313459c4bb87d04c598e380b99f8768dd8fb5146ce1e85576d2f42704fa",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -4506,6 +5788,15 @@
       "vanillaSize": 1978
     },
     {
+      "operation": "add",
+      "path": "teams/guarany_se.ban",
+      "size": 2306,
+      "sha256": "96f434c040cfe916b51b84221762be2548199599e4310061c0e03910a3bd5ef7",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/guaranyrs_bra.ban",
       "size": 1812,
@@ -4528,9 +5819,36 @@
     },
     {
       "operation": "add",
+      "path": "teams/gubbio_ita.ban",
+      "size": 2407,
+      "sha256": "ce7215966714efbd9063e743b65a0f4a05d3284cc76d7d812a095d46d59cbd59",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/guidoniamontecelio_ita.ban",
+      "size": 2556,
+      "sha256": "df45febf10e411ec1eeb460c8315992d2700ee9538ec916ed1056e53c4244a65",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/guillermobrown_arg.ban",
       "size": 2333,
       "sha256": "a6c96c00fb4cdc1a4212fe405dfe97672efbde63c64a5dc5b3746077ecfa9b32",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/gurupi_to.ban",
+      "size": 2078,
+      "sha256": "410507d8634e1276289342f398147ab5e01b333d75b69e546527078289367a95",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -4602,6 +5920,15 @@
       "component": "rosters",
       "vanillaSha256": "96fb50f0671c4da2570830c823d0294e15a79b0f78675b6f1c2aae9510706bf7",
       "vanillaSize": 2764
+    },
+    {
+      "operation": "add",
+      "path": "teams/hellasverona_ita.ban",
+      "size": 2701,
+      "sha256": "83b32a076fb2e3f822d13e32d74003955f1b10cca4731073d552406bf4716dac",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -4695,9 +6022,27 @@
     },
     {
       "operation": "add",
+      "path": "teams/horizonte_ce.ban",
+      "size": 2043,
+      "sha256": "d0481430e516becdf3f8a5861146db41203f80cfcfea7c8ef17ee19fd0fbe9e4",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/huachipato_chi.ban",
       "size": 2383,
       "sha256": "fecf0b158919629a3ebd2fa971f08c5bde30f50a1bd0708b624f80fb056b2547",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/huddersfieldtown_ing.ban",
+      "size": 2393,
+      "sha256": "cfdf0a387f1b1981195dca5b078aec7a3ee007010afaaf870cb058905ec4b0df",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -4713,6 +6058,24 @@
       "component": "rosters",
       "vanillaSha256": "96582481a0ae946d45e90c48c5e7286410e6d3cbd94d37f494ae86f1d7a40d4b",
       "vanillaSize": 1716
+    },
+    {
+      "operation": "add",
+      "path": "teams/hullcity_ing.ban",
+      "size": 2736,
+      "sha256": "e81fedce48096988a091b216e0ddc5360360a420de40f10298cdd2acfd4265e9",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/humaita_ac.ban",
+      "size": 2455,
+      "sha256": "0246374e92e056c82295f7d2b80ea8e80599bc32afbfecd0693527c85299a1fe",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "add",
@@ -4771,6 +6134,24 @@
       "component": "rosters",
       "vanillaSha256": "2792f7ab93abec9d1646ea5b838cc226ee472da21d91a8337b7bf50d68905219",
       "vanillaSize": 2868
+    },
+    {
+      "operation": "add",
+      "path": "teams/independencia_ac.ban",
+      "size": 2442,
+      "sha256": "4e29531adc6641c3cff56ed8b05d6420ae6348bc867469c7b1dd3883ecba84d1",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/independente_ap.ban",
+      "size": 2014,
+      "sha256": "8a1e0451f0cc78c2bcebdf96546580a62d25ec9584578d6f69648afb3b9f10f9",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -4880,6 +6261,15 @@
     },
     {
       "operation": "add",
+      "path": "teams/inhumas_go.ban",
+      "size": 2384,
+      "sha256": "a8332c3e12a7f3cecbf208a205f3b5d6c44c183277357c80a75860cce8c1931d",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/institutoaccordoba_arg.ban",
       "size": 2449,
       "sha256": "8c90f0221f6a78d2f1dd42340ea450b2f08583b225c01680c7e3f9d12fcb4e32",
@@ -4903,16 +6293,26 @@
     {
       "operation": "replace",
       "path": "teams/inter_it.ban",
-      "size": 2150,
-      "sha256": "b2cff25c8f5db64f8d53047bcdb83a9289e7f71bd484373017b7a300a1d1c532",
+      "size": 2152,
+      "sha256": "2d1cf91dcfe384ea3377e047457b92d6b552538b09f88c2a52e46a185385f42a",
       "acceptedOriginalSha256": [
         "0661f78b36b98519d1cce58500b6b47c080d0dc86aa3e1baca0f221a6a7129e1",
+        "b2cff25c8f5db64f8d53047bcdb83a9289e7f71bd484373017b7a300a1d1c532",
         "dd191299b40e2074769678092d3776b19a701a4c3f64b58a83c0e3dff8a6e07e",
         "ae05b5007d3d757d7bf9847c066340dde45e3d07542fdc6e263b8a489e13ca29"
       ],
       "component": "rosters",
       "vanillaSha256": "0661f78b36b98519d1cce58500b6b47c080d0dc86aa3e1baca0f221a6a7129e1",
       "vanillaSize": 2050
+    },
+    {
+      "operation": "add",
+      "path": "teams/interdesantamaria_rs.ban",
+      "size": 2650,
+      "sha256": "4a9d432eafeb59d02edd201c703de1bd1a35956f052efd23e03ea04cd9ca2c88",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -4930,12 +6330,22 @@
       "vanillaSize": 1689
     },
     {
+      "operation": "add",
+      "path": "teams/intermilanu23_ita.ban",
+      "size": 2520,
+      "sha256": "f2fe194c8c6f92b701a3fcb4caf1cabbbdf167f55fb73a3afa2257d66cfedfa3",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/internacional_bra.ban",
-      "size": 3132,
-      "sha256": "61eab87e3ddf9f8b676bc88c632b056c291022f3a7861f7c7b9884fce87ef165",
+      "size": 4322,
+      "sha256": "b7836643984185f9a16794c377520fbd7e9f01722190ad0ff7425eca69d89213",
       "acceptedOriginalSha256": [
         "1c3387d720175f7f1c04dcf67cb0a568ea61bd31b980711480f79648183fd229",
+        "61eab87e3ddf9f8b676bc88c632b056c291022f3a7861f7c7b9884fce87ef165",
         "e84354ee711a0525ee5ee7ded9af4578391ff372aac4b0214b14b5b6ee538b06"
       ],
       "component": "rosters",
@@ -4996,6 +6406,15 @@
       "vanillaSize": 1707
     },
     {
+      "operation": "add",
+      "path": "teams/ipswichtown_ing.ban",
+      "size": 2375,
+      "sha256": "b4120b6e11398a24d4efd627b875a9b94d2ebfbb4aeb86222df9c3940a7471ef",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/iranduba_am.ban",
       "size": 1672,
@@ -5022,6 +6441,15 @@
       "vanillaSize": 1786
     },
     {
+      "operation": "add",
+      "path": "teams/itacoatiara_am.ban",
+      "size": 1768,
+      "sha256": "84ae4c439ce65f936286605aa62b5e22c028e22d9a5ad61bad55df343cb2a8e9",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/ituano_sp.ban",
       "size": 2375,
@@ -5040,6 +6468,24 @@
       "path": "teams/ituzaingo_arg.ban",
       "size": 2563,
       "sha256": "999056cd6bbb77063f47dddb1ce869c23fd7d869613b38e67adc633ef6c1989b",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/itzsport_ma.ban",
+      "size": 1930,
+      "sha256": "97d65d7081979bd9ecbeb9edf9993039097e9320c9bb5763281f480eb1cee17a",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/ivinhema_ms.ban",
+      "size": 2743,
+      "sha256": "1ec4947694b7789a4f6b194d303bc2a0659062f7006944c4a95f81dbd58d7054",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -5089,6 +6535,24 @@
       "component": "rosters",
       "vanillaSha256": "d0f5b1327335a2ebd42cb78d1666a312ec1e8344a8a80710cbfa681ff2d0f25e",
       "vanillaSize": 1667
+    },
+    {
+      "operation": "add",
+      "path": "teams/jequie_ba.ban",
+      "size": 2049,
+      "sha256": "f9e9b6d72d100e718a50043439cf5b13eff616f7d6d089a5ff04226e5379dd43",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/jiparana_ro.ban",
+      "size": 1904,
+      "sha256": "b3404595b7ca4c43e6c01cf3ea36c235b196e9a4c765abe3aaff30b6c817015a",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -5182,15 +6646,25 @@
     {
       "operation": "replace",
       "path": "teams/juventus_it.ban",
-      "size": 2470,
-      "sha256": "8fad6e7f98f6c78d17b8395f3fcc8ddb1c075ac1dcd236f60dcdedd0edb64f09",
+      "size": 2474,
+      "sha256": "985ecd9e1e30b23c5a107b8e58277f7d70bfe898a5e799310d111315ceebc72a",
       "acceptedOriginalSha256": [
         "bed85c7a04efc45e1f8ed1b7c22429cc8b0075108d1815f39648ea088a4f299b",
+        "8fad6e7f98f6c78d17b8395f3fcc8ddb1c075ac1dcd236f60dcdedd0edb64f09",
         "52b92f64521bb548a616a9d2f69f3b75fd4efe48f04eb60a3a3844f61073e42d"
       ],
       "component": "rosters",
       "vanillaSha256": "bed85c7a04efc45e1f8ed1b7c22429cc8b0075108d1815f39648ea088a4f299b",
       "vanillaSize": 1945
+    },
+    {
+      "operation": "add",
+      "path": "teams/juventusnextgen_ita.ban",
+      "size": 2719,
+      "sha256": "4a05ce6c25438f318aeb50a598e669d2605348bcd3a6eb32c3bc1a333ce31def",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -5203,6 +6677,15 @@
       "component": "rosters",
       "vanillaSha256": "170e1a817f13094158dd33974f4b4e1cac3ac401c97f58ed889ee8c85f4ec85e",
       "vanillaSize": 1604
+    },
+    {
+      "operation": "add",
+      "path": "teams/juvestabia_ita.ban",
+      "size": 2647,
+      "sha256": "a2974e74ec79c6abc077fe858de249230dccbfad9507498b25c4e01b4f0c6524",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -5356,6 +6839,15 @@
     },
     {
       "operation": "add",
+      "path": "teams/laguna_rn.ban",
+      "size": 2306,
+      "sha256": "28a0cf3f363bdf2c57a3e90a65f4f4ac614ae784abbd4cccfff3ff32bb702a7f",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/laluz_uru.ban",
       "size": 2963,
       "sha256": "e3312bafadf2bb53e6d8d78b92edd5d13fac918bd6b53d0579c310c084d2ac58",
@@ -5402,12 +6894,22 @@
       "vanillaSize": 1983
     },
     {
+      "operation": "add",
+      "path": "teams/latina_ita.ban",
+      "size": 2541,
+      "sha256": "8167198c86577efb35c8d74e7d7d07da0d2d80b97d17f3b4c671027fb8919d63",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/lazio_it.ban",
-      "size": 2773,
-      "sha256": "6fa76e01ee325c1f5d66137b265681b9b5faefcd7040adb05f164eadf88c46df",
+      "size": 2640,
+      "sha256": "7c64835fc005b40e0e755f2c4930d35a21c8a7e5d62b45aad26db00fb073a016",
       "acceptedOriginalSha256": [
         "9194465aed754c8f826a94af899768cde965eb5c807714bdae54340045254002",
+        "6fa76e01ee325c1f5d66137b265681b9b5faefcd7040adb05f164eadf88c46df",
         "5559a2d29d7b4c1d3a6ac021994a9b6b518b08f2e765e844b032b7f88d37d654"
       ],
       "component": "rosters",
@@ -5428,6 +6930,24 @@
       "vanillaSize": 1840
     },
     {
+      "operation": "add",
+      "path": "teams/lecce_ita.ban",
+      "size": 2662,
+      "sha256": "d392d9b1f99a180b9d4b5e957fd102bc9222e459b6b9b3e57729a192baedb43b",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/lecco_ita.ban",
+      "size": 2328,
+      "sha256": "09182451229a74ce744ffd53db5e3fd4097e7926c78e39060f101766e0b6d7f4",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/lechpoznan_pol.ban",
       "size": 2439,
@@ -5439,6 +6959,15 @@
       "component": "rosters",
       "vanillaSha256": "8a7984dcde493a20ee9755d25755d90faca5bca5fcd85c119dbd47dc3d41d91a",
       "vanillaSize": 2076
+    },
+    {
+      "operation": "add",
+      "path": "teams/leedsunited_ing.ban",
+      "size": 2112,
+      "sha256": "86bd80a521d2249570e8b2806ffac5064f7401103580cf45a751f9741d9acdd0",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -5474,10 +7003,11 @@
     {
       "operation": "replace",
       "path": "teams/leicestercity_ing.ban",
-      "size": 2125,
-      "sha256": "fd5f9114fb02de00905d0eb709aa442a13df8bab2e84edfb7a96c7d57e97c14d",
+      "size": 2391,
+      "sha256": "0e3401cbaa0c195f1e1c423009fe90375a6e9df1122af594c78b208c54c162a5",
       "acceptedOriginalSha256": [
         "d22835ecc99d7a1204e048b6eab3068c923445774978caa0f71dc7ea6f214ac2",
+        "fd5f9114fb02de00905d0eb709aa442a13df8bab2e84edfb7a96c7d57e97c14d",
         "78a6909852aedb2296ad0cd259961f226e828c67ddc39059dae03090219650cf"
       ],
       "component": "rosters",
@@ -5542,6 +7072,15 @@
       "component": "rosters",
       "vanillaSha256": "79358fceae9f810d68847ea7fa1c17eb240059b3325b3f96e47af7c30e3df06c",
       "vanillaSize": 1897
+    },
+    {
+      "operation": "add",
+      "path": "teams/leytonorient_ing.ban",
+      "size": 2665,
+      "sha256": "37d4adebea0cdcdb6b1dd3b360179e41b7ddde48b9a718cf86a7d3a47dde2216",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -5629,6 +7168,15 @@
     },
     {
       "operation": "add",
+      "path": "teams/lincolncity_ing.ban",
+      "size": 2374,
+      "sha256": "24d80c5bd3f5a33b6073bb4c7c370011b4752165848205ace0eb984c3a8dace9",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/liniers_arg.ban",
       "size": 2461,
       "sha256": "266be8a5b57afdc0418cccb1819948c5e4a96cb5d142d1af582ba1bfa9301744",
@@ -5639,10 +7187,11 @@
     {
       "operation": "replace",
       "path": "teams/liverpool_ing.ban",
-      "size": 2479,
-      "sha256": "1f24ec905ad4d324813f94744e402a0d6d24c28c7d0cd0faee7720dcf81b4fc5",
+      "size": 2537,
+      "sha256": "8e7de31981df46211a6454f875f374d0aaa65607de27a5b60f129b58ca694771",
       "acceptedOriginalSha256": [
         "1a7deb3356626e2506188360befd018bb56717261756d67febeb8c02efdc95fe",
+        "1f24ec905ad4d324813f94744e402a0d6d24c28c7d0cd0faee7720dcf81b4fc5",
         "f1f96c391443899c57c34ef9d94b1c9b0902ab988715a830de749dc6f99aa9a7",
         "8b0ad4ed835227696f77c99a3d48ee29966043c0fc4d25301f5bd07f09ea7854"
       ],
@@ -5661,6 +7210,15 @@
       "component": "rosters",
       "vanillaSha256": "bfa5c93ce7f6f16c93692cb35178ad27e049bf9df8af6fb4f0496ae2afa62708",
       "vanillaSize": 2852
+    },
+    {
+      "operation": "add",
+      "path": "teams/livorno_ita.ban",
+      "size": 2410,
+      "sha256": "7c2ae0189fd7657d806d8acc101b27f92669d9baca7c44c1c240b5a567a5fdbe",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "add",
@@ -5781,6 +7339,33 @@
       "vanillaSize": 1625
     },
     {
+      "operation": "add",
+      "path": "teams/lumezzane_ita.ban",
+      "size": 2672,
+      "sha256": "29acc8701d2f45ced8e4a3f32131872d1186693b343184bd0e2adefbac62a7c3",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/luminense_ma.ban",
+      "size": 2252,
+      "sha256": "d89bc9040461d370f37f7d6cb18ddcf8716c8e7b7485518eaced9692f6420332",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/lutontown_ing.ban",
+      "size": 2502,
+      "sha256": "a63a0367bbe8e21eb90001a92a648103a5372bdf639c7b6b783807df444f8d41",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/luzern_sui.ban",
       "size": 2469,
@@ -5848,10 +7433,11 @@
     {
       "operation": "replace",
       "path": "teams/machester_ing.ban",
-      "size": 2457,
-      "sha256": "6ef09fbd86af10cac9c60e0a005e7bfc9635189a8104d0b7229743acab8c32da",
+      "size": 2521,
+      "sha256": "621419ad53700417839e6da3a7423e22f2f114d02eb7d403e0c84f43eecbb444",
       "acceptedOriginalSha256": [
         "834a41a3c0722f8d13e1768209223eeba61258151a09e3fd762b02260857a3fd",
+        "6ef09fbd86af10cac9c60e0a005e7bfc9635189a8104d0b7229743acab8c32da",
         "db4593f285130a97af623709c6c0507c3f22201397eee33d99d1788fd62059ed",
         "40c031915c00bcef3778ff63d9a7c4040e350c40b6fdeb8be33041eff0bf5311",
         "7fcc74eb4ad4823ff1ffbc9deae316ee113edd325eac8103225d0bcd01a814dd"
@@ -5863,10 +7449,11 @@
     {
       "operation": "replace",
       "path": "teams/machestercity_ing.ban",
-      "size": 2135,
-      "sha256": "7e37cb6f83fc13f03e5e8b7e5154ee6f7fefd61b1738e27391d11ed6658fb18e",
+      "size": 2282,
+      "sha256": "8e4404c9a8feb6356e4865f206588f8d04a282d741ac0ab61b2e8bef4744944a",
       "acceptedOriginalSha256": [
         "b82af5d4f6e958db2b813c7351ab23e350e497adcb171a806686e99eceb4d7d1",
+        "7e37cb6f83fc13f03e5e8b7e5154ee6f7fefd61b1738e27391d11ed6658fb18e",
         "50a16771527a2a7f37c1ddc3be1abe2968a2535cf172a5fa5bc4a95915b98de9",
         "65a33ed8bf898a1b6e00ca9fd8ce75137d5df5c4b5b806b8165219f54accfc73"
       ],
@@ -5879,6 +7466,15 @@
       "path": "teams/magallanes_chi.ban",
       "size": 2619,
       "sha256": "2081cb64bd68ef832b92a10b213d41b55da257ff409b9afcce056dba62a468ae",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/maguary_pe.ban",
+      "size": 2451,
+      "sha256": "dd798fbf68c8dbb55a42abbe503bd72e3f63c45d41aaa03ccca5fbc087022f90",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -5926,6 +7522,15 @@
       "vanillaSize": 1973
     },
     {
+      "operation": "add",
+      "path": "teams/manauara_am.ban",
+      "size": 2476,
+      "sha256": "c819694140dce79c34b9fa4dd1307a058f18f8d03f15d01d04ff338ff5aecb6a",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/manaus_bra.ban",
       "size": 1841,
@@ -5936,6 +7541,33 @@
       "component": "rosters",
       "vanillaSha256": "9403118ce1eeed49c468745c942ef8e6c319f0abbe7e5359d79b508b41779651",
       "vanillaSize": 1841
+    },
+    {
+      "operation": "add",
+      "path": "teams/mansfieldtown_ing.ban",
+      "size": 2178,
+      "sha256": "112f378b6a608ee93c2ec7c566252cc0c020e29ee2bce259c0a8d01d63539688",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/mantova_ita.ban",
+      "size": 2575,
+      "sha256": "04dd0cc892efb3ee49f1d3e2f0552d9460ef9fd7a6f736f56f1781bd05c5ac42",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/maranguape_ce.ban",
+      "size": 2191,
+      "sha256": "7f18efa8601effa52ad4b26ad0614e2e7b37e4b9d0d57d31490d9f00edf0a775",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -5965,6 +7597,15 @@
       "component": "rosters",
       "vanillaSha256": "ffac016480145871e1ba4bea8ce84dc72b26c9aa02b54ef17d7ea8c70a7bc165",
       "vanillaSize": 1966
+    },
+    {
+      "operation": "add",
+      "path": "teams/marica_rj.ban",
+      "size": 2660,
+      "sha256": "2fe7de5310cbeafd20a3e5b3825eacedb95aa91ce249760062851f4c1bbd0f3f",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -6019,6 +7660,15 @@
       "vanillaSize": 1679
     },
     {
+      "operation": "add",
+      "path": "teams/middlesbrough_ing.ban",
+      "size": 2328,
+      "sha256": "0b9234979814f90d00ee1b5ba7ea190c6fd6ecd53a4e5815b523123b4369b9d7",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/midtjylland_din.ban",
       "size": 2452,
@@ -6036,10 +7686,11 @@
     {
       "operation": "replace",
       "path": "teams/miirassol_sp.ban",
-      "size": 2587,
-      "sha256": "b2a4fc78cfb8aa7161a18ca8fd45d5b801cae55c635edd7b8f20e86e41b2dc1e",
+      "size": 2936,
+      "sha256": "328a9a738a557114bb48df26cff4d83bba1c8c071167a8496992972fa656c295",
       "acceptedOriginalSha256": [
         "1504e7e11eab25c779ef0c17371993389663f452fd479260fdee3e7a4af87b3d",
+        "b2a4fc78cfb8aa7161a18ca8fd45d5b801cae55c635edd7b8f20e86e41b2dc1e",
         "172978b93737c8a3d07f4c2137f2c1e7026a8e55c6e4a7740581c450e8555391",
         "a0adaa580bbe2ce598b1fc2ac472108c5eddec5a827c42dd4e0dd532273a51ee",
         "776056dc8c8f812f581ec422fb64a7ce97d6142960f086710b641b819760b9d6",
@@ -6053,10 +7704,11 @@
     {
       "operation": "replace",
       "path": "teams/milan_it.ban",
-      "size": 2432,
-      "sha256": "6d23723cb46a4dbce0dd57d1043e77ae45ac6c3664488a677bd2cd86604611f7",
+      "size": 2362,
+      "sha256": "63996f2f43e9dd45b769c15f1fd34917d0677d8cae635c315bae842da18f25c8",
       "acceptedOriginalSha256": [
         "6da529fd591d30bd07a58041da6617f8173efcab1fa5645bd12f340602b547d0",
+        "6d23723cb46a4dbce0dd57d1043e77ae45ac6c3664488a677bd2cd86604611f7",
         "6ea42807c9cd4bbc898a2c337a158cf86024069382b064a1671f489f8a491f04",
         "cf7bc66dcfc7d022412c7ddc3773255725430f344257e4f224bbde86f9421441",
         "cc321c3270d4439e081af46230e6dadb80d3f1ecafd07c7283ae36d7a3c65ce3"
@@ -6079,9 +7731,54 @@
     },
     {
       "operation": "add",
+      "path": "teams/millwall_ing.ban",
+      "size": 2497,
+      "sha256": "8fed42668435d983cf4957de8b598e5ee0bd51d3e34c9ca03df7bde7dfb31d16",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/miltonkeynesdons_ing.ban",
+      "size": 2665,
+      "sha256": "402458923de68160acaefc6d602a0279406673d65f55576d66316ff93321229d",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/minasdosul_mg.ban",
+      "size": 2160,
+      "sha256": "e1cf4802cea4f60c02873b8b85105fa879451e309a0883e491083cb1273cca1d",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/miramarmisiones_uru.ban",
       "size": 3020,
       "sha256": "1a9bf1573effe0b4d6eb8482b3345c12bfbdfc8aef313ee082a1ca310c8a919b",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/mixto_mt.ban",
+      "size": 2460,
+      "sha256": "a518fd5446a8f3ff1593df289a896d634f1833775180ba748a3173f8e4ed260e",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/modena_ita.ban",
+      "size": 2626,
+      "sha256": "31add5112eaff32a4792fea2f9e299878d4b39930483316182d786663f96fe5c",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -6146,6 +7843,15 @@
       "vanillaSize": 2052
     },
     {
+      "operation": "add",
+      "path": "teams/monopoli_ita.ban",
+      "size": 2453,
+      "sha256": "248dd8d69b06a427c840ae2f62bc7e62552959313ce2f121ea0dbb916b06a6cf",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/monscalpe_gib.ban",
       "size": 2723,
@@ -6158,6 +7864,24 @@
       "vanillaSize": 2727
     },
     {
+      "operation": "add",
+      "path": "teams/monsoonfc_rs.ban",
+      "size": 2181,
+      "sha256": "9305f65001a7d9e3eedd8e6054e18b8085126fb279bf8312cdd2968a8cd935d0",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/monteroraima_rr.ban",
+      "size": 2810,
+      "sha256": "3c515c53822bfc3b0c731d5a06bbc09395cbc4ce911a6bfea8ff3860ee5a85e0",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/montevideotorque_uru.ban",
       "size": 2382,
@@ -6168,6 +7892,15 @@
       "component": "rosters",
       "vanillaSha256": "7557bc5d4f2321f7951b6b05c1e1822b9f14bcf6c0ed82acf97264830345f2c5",
       "vanillaSize": 2040
+    },
+    {
+      "operation": "add",
+      "path": "teams/monza_ita.ban",
+      "size": 2602,
+      "sha256": "1e1b02af214abb378766e2a84fa9a999d902d3f0be190796c0852abbc9ca32fc",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -6282,10 +8015,11 @@
     {
       "operation": "replace",
       "path": "teams/napoli_it.ban",
-      "size": 2358,
-      "sha256": "9526ae32b7dadc0e54776fef1b45c7797496626a68d55766025803f5714e2e15",
+      "size": 2347,
+      "sha256": "f65a6d1a29ec7f6efa746c79691658c1ffa60f2d60aec66701aa6a7a37addbc7",
       "acceptedOriginalSha256": [
         "f7fa43d1ea4dca6301c47e5df1af94b6af58a74e20750249110175950744814f",
+        "9526ae32b7dadc0e54776fef1b45c7797496626a68d55766025803f5714e2e15",
         "604173dfc0511d6c3ec5faf04966f5fb40dee2545d3773aa33704bcda191f85b",
         "51f62c94ee2169a18cdadda77f481783fb32774e1b586b08a967cf506cee6e57",
         "fed230096cf4bb844e46f973de54eaf9386b8e6182a7eb1c3903d58d01c77637"
@@ -6310,6 +8044,24 @@
       "vanillaSize": 1813
     },
     {
+      "operation": "add",
+      "path": "teams/nautico_rr.ban",
+      "size": 2026,
+      "sha256": "32e99823cca8137ac37fc3cbd603e4ab309f8251312c5721c598ff11f1d804fa",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/naviraiense_ms.ban",
+      "size": 2347,
+      "sha256": "ab28e0c5476cb61d0735128bbd51fa8a53efd5cbff1d1b76ec958e183ec30dec",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/neftci_aze.ban",
       "size": 2347,
@@ -6323,6 +8075,15 @@
       "vanillaSize": 2005
     },
     {
+      "operation": "add",
+      "path": "teams/newcastleunited_ing.ban",
+      "size": 2175,
+      "sha256": "8f44e41fce515c6ebbe3eb85b3c07cac985e2f81800205bb70bbd047ede99345",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/newoldboys_ar.ban",
       "size": 2710,
@@ -6333,6 +8094,15 @@
       "component": "rosters",
       "vanillaSha256": "7e8a951057281045cf287081e9ad02489cfcf32a2179c55aeaab45cb3252b739",
       "vanillaSize": 1958
+    },
+    {
+      "operation": "add",
+      "path": "teams/newportcounty_wal.ban",
+      "size": 2391,
+      "sha256": "3b51d0501e76fcbb21d4c305f8d5b802f4f518a50127aef25b311c42e573a908",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -6365,6 +8135,60 @@
       "vanillaSize": 2599
     },
     {
+      "operation": "add",
+      "path": "teams/noroeste_sp.ban",
+      "size": 2552,
+      "sha256": "b14b58338693c74a50f831639e03d9d89e33d3d46e8574c76c94601dc3cbfd84",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/north_mg.ban",
+      "size": 1958,
+      "sha256": "35d59150c3ebd29d5b936ff4d186ebd57e71f2c9336314a04c3c2a5f09187adb",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/northamptontown_ing.ban",
+      "size": 2315,
+      "sha256": "34c9cc0143037811691f21d7ef87525e8b676041e2f4d9e3520dc576a271f0a0",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/norwichcity_ing.ban",
+      "size": 2653,
+      "sha256": "78d44a6df661b5da3adcc5c4966ac7634139a31d2375c915ccb97ae1626378ef",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/nottinghamforest_ing.ban",
+      "size": 2110,
+      "sha256": "2bbbdd14d6d88d514e005c6739831fc77f300fe92cfb30bbce4bf907f3c3fddc",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/nottscounty_ing.ban",
+      "size": 2370,
+      "sha256": "c947c5b8d3878e7243d1c3ea7f4303240a4f24e0f492da9a838f7b0ce425c0ae",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/novamutum_mt.ban",
       "size": 1694,
@@ -6375,6 +8199,15 @@
       "component": "rosters",
       "vanillaSha256": "d5dd2f91239187dfd8c314fb41eef124cb2f7484b68240aeeccf5dd8e7940c7f",
       "vanillaSize": 1694
+    },
+    {
+      "operation": "add",
+      "path": "teams/novara_ita.ban",
+      "size": 2499,
+      "sha256": "a6907c5bca6e177b0600d7b0bec723a9069f7a4a3607ca9d953c5129a4f29a43",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -6450,6 +8283,15 @@
       "vanillaMissing": true
     },
     {
+      "operation": "add",
+      "path": "teams/oeirense_pi.ban",
+      "size": 1926,
+      "sha256": "6f50bebc467cee11a20466bb1169dc4aea525d5fa1ce45ea74b403b0ac45db17",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/oestesp_bra.ban",
       "size": 1792,
@@ -6479,6 +8321,15 @@
       "path": "teams/ohigginsfc_chi.ban",
       "size": 2415,
       "sha256": "32d64f9bbd59e7a06691cae7c653bd831f7543dc551a4f11bf4f9f0ef10b328a",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/oldhamathletic_ing.ban",
+      "size": 2377,
+      "sha256": "bf3c46b18004db9ac7cac0c2b84764e54c61f3318dee0d8f50252ebae738075c",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -6572,6 +8423,15 @@
       "vanillaMissing": true
     },
     {
+      "operation": "add",
+      "path": "teams/operario_ms.ban",
+      "size": 2580,
+      "sha256": "9aba2e80740d1f51c60d3285522f4400d1d7a116a3e849583269a1342a98caf7",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/operario_pr.ban",
       "size": 2688,
@@ -6585,6 +8445,15 @@
       "component": "rosters",
       "vanillaSha256": "7721dd7657a7ca344c4feaceb9d74ef58f961f6c06abe5bdb2fb5baeda003c29",
       "vanillaSize": 1917
+    },
+    {
+      "operation": "add",
+      "path": "teams/oratorio_ap.ban",
+      "size": 2466,
+      "sha256": "44e02fbda06061d8113db12a6d574d589f08c1abbbfbe493a638e3aecfb9d79b",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -6657,6 +8526,33 @@
       "vanillaSize": 3005
     },
     {
+      "operation": "add",
+      "path": "teams/ospitaletto_ita.ban",
+      "size": 2252,
+      "sha256": "057f0dcfbb4a890bed24979564a936123d7e2ea1a9c21492ba34bfb9e9c22323",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/ostiamare_ita.ban",
+      "size": 2360,
+      "sha256": "5a0386e9a8e688dd87dec4bcd4a7c2d580b957d7787a7b67195014f9c9c47b36",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/oxfordunited_ing.ban",
+      "size": 2385,
+      "sha256": "4195eacd22630c391b0edb2a9e19c84db499bc885f72507c7288181b285f501a",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/pacajusce_bra.ban",
       "size": 1714,
@@ -6667,6 +8563,15 @@
       "component": "rosters",
       "vanillaSha256": "1333b9c53b35e5f5749a890ec8c117f1fdffcafe86fe25eb0846951503589c3c",
       "vanillaSize": 1714
+    },
+    {
+      "operation": "add",
+      "path": "teams/padova_ita.ban",
+      "size": 2509,
+      "sha256": "dc01544b78f19d3f9c35f7e3b4acb3feb01d1ec2b292fa1eb34a61acc5901ec1",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -6682,6 +8587,15 @@
     },
     {
       "operation": "add",
+      "path": "teams/palermo_ita.ban",
+      "size": 2288,
+      "sha256": "e42436ca56a32b6bce89fd274b075a2fb9bfcaa662a5edf83d29c0dc53bffd65",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/palestino_chi.ban",
       "size": 2344,
       "sha256": "d2bb997daa17ba609cfbc63c7244f7981cf88136d191a8f0d869997db864ddd9",
@@ -6690,12 +8604,22 @@
       "vanillaMissing": true
     },
     {
+      "operation": "add",
+      "path": "teams/palmas_to.ban",
+      "size": 2789,
+      "sha256": "ce33fa8c425e81da14ab10b4428b975513b3bf593cbdda57aba7dbf72a24f135",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/palmeiras.ban",
-      "size": 2236,
-      "sha256": "c758856b6ffd5bb11d4d6fab3c9a416926c1f95703734dba35f07c859353206c",
+      "size": 4554,
+      "sha256": "632b1814cf32e6061888d8460f83f485f449d426ce4e394a0ee5feb90bbe4a8d",
       "acceptedOriginalSha256": [
         "8a8e76657513721fcfc93a10cb657850615aa45777c4a7155a67d8a8a8b13f76",
+        "c758856b6ffd5bb11d4d6fab3c9a416926c1f95703734dba35f07c859353206c",
         "1ba4ad8e394769810a095713d1c92f46d987c63220e8e56fb58055f9e74a5e0c"
       ],
       "component": "rosters",
@@ -6713,6 +8637,15 @@
       "component": "rosters",
       "vanillaSha256": "8c665479e78c5f5ec808cb0a7ee51dbde1c47a863a354d8030cfdda71cc2a67f",
       "vanillaSize": 1835
+    },
+    {
+      "operation": "add",
+      "path": "teams/pantanal_ms.ban",
+      "size": 1951,
+      "sha256": "587e652e6617517bef4c8f2854d5f1d6dbe5798c9f587adc5c50a619a7906f60",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -6740,6 +8673,24 @@
       "vanillaSize": 1906
     },
     {
+      "operation": "add",
+      "path": "teams/paranoa_df.ban",
+      "size": 2169,
+      "sha256": "f800f8e38a1a65ac18cc2b5229a201047f7838c85653987ec066d5f33f8e42e0",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/parintins_am.ban",
+      "size": 2270,
+      "sha256": "8bc7021f669debe8f51dd59e41e0de6e6e3d5d0ba9c129ca74f1143ccaa4d058",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/parissaintgermain_fr.ban",
       "size": 2220,
@@ -6752,6 +8703,24 @@
       "component": "rosters",
       "vanillaSha256": "c2597695b9a9c7cd081e358d66387dfa32519668ae8aba89d2d88aca82868f03",
       "vanillaSize": 1956
+    },
+    {
+      "operation": "add",
+      "path": "teams/parma_ita.ban",
+      "size": 2417,
+      "sha256": "27906e0b1ea58efd4d755950d65abd3b180567d95bcc921d4e585c7cc5108f1a",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/parnahyba_pi.ban",
+      "size": 2826,
+      "sha256": "fa92ef29b491260f1602b3dc0f3a7deaeaee65d68e7e7bc0fe4a6939d23a5652",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -6840,6 +8809,51 @@
       "vanillaSize": 1941
     },
     {
+      "operation": "add",
+      "path": "teams/penedense_al.ban",
+      "size": 2134,
+      "sha256": "09d00ed7bfe21fcfca4a03c3f71d2a775d1ba320cd4b94f58213f54487f05dfd",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/pergolettese_ita.ban",
+      "size": 2295,
+      "sha256": "6b56831db4fc4a63fa8e6b37c449b069f178b10bda06fbc3815c4507edfa41ec",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/perugia_ita.ban",
+      "size": 2574,
+      "sha256": "bc388914dbaedab1d1baf39969bc0f3f9431b0d555e5f28fa6c701cd03c5737a",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/pescara_ita.ban",
+      "size": 2708,
+      "sha256": "72a2cb1684005ecd6b58e374d2d7eb8177edc2dd478518648a5d9992fba039c4",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/peterboroughunited_ing.ban",
+      "size": 2869,
+      "sha256": "7502457e482305fab8df4195d150e1da329bd942175e11f60d76b7f507e42da0",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/petrocub_mol.ban",
       "size": 4112,
@@ -6851,6 +8865,15 @@
       "component": "rosters",
       "vanillaSha256": "988a32aa2b40ead57a81a4f89eb5a27a707bf501d637f71d0f83c8fd007868f1",
       "vanillaSize": 2884
+    },
+    {
+      "operation": "add",
+      "path": "teams/pianese_ita.ban",
+      "size": 2076,
+      "sha256": "a150466ccae58d954272f22913e3d7777f49dfce98148994ab030d81625f27f3",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -6865,6 +8888,33 @@
       "vanillaSize": 1863
     },
     {
+      "operation": "add",
+      "path": "teams/piaui_pi.ban",
+      "size": 2471,
+      "sha256": "856661d9c9bc6057346976e3231a0cce9ba71be95b301f816098b1879db4ac3c",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/picerno_ita.ban",
+      "size": 2498,
+      "sha256": "e620a3db72bfa76c1723057b158ca7d75a14a88aa903002dbcd1a13781225795",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/pineto_ita.ban",
+      "size": 2301,
+      "sha256": "dc4788ca1f5d402e74858db902a893095a7db963fa79a423039b070c869cfe5c",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/pinheiroma_bra.ban",
       "size": 1700,
@@ -6875,6 +8925,15 @@
       "component": "rosters",
       "vanillaSha256": "186ee831ade2ec2680d622a5733584818d5dd5bb7e2a52ca20d8ce081a2f624c",
       "vanillaSize": 1700
+    },
+    {
+      "operation": "add",
+      "path": "teams/pisa_ita.ban",
+      "size": 2474,
+      "sha256": "2a82d62b5373eaa57e62e7df7c2a98c36f0aabacdb5984d91486b70cfcaffac2",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "add",
@@ -6899,6 +8958,15 @@
       "vanillaSize": 2922
     },
     {
+      "operation": "add",
+      "path": "teams/plymouthargyle_ing.ban",
+      "size": 2043,
+      "sha256": "0510494823dd7c47f7c882b52ebf1596998cfcf1e694717de20b04739abea666",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/pocone_mt.ban",
       "size": 1694,
@@ -6909,6 +8977,15 @@
       "component": "rosters",
       "vanillaSha256": "f05b9193edf87da08e1ccf66d676d464ea860900699609a7b56806ad4614fb1a",
       "vanillaSize": 1694
+    },
+    {
+      "operation": "add",
+      "path": "teams/pombalec_pb.ban",
+      "size": 2239,
+      "sha256": "676528730acc7839648087def883fba35baee4296af07ab20daba25d96cb06ec",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -6952,6 +9029,33 @@
     },
     {
       "operation": "add",
+      "path": "teams/portosc_ba.ban",
+      "size": 2465,
+      "sha256": "291cb658a994ae39332bd98d58e15f5d529e13562d888a80905328c56d2b5daa",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/portovitoria_es.ban",
+      "size": 1915,
+      "sha256": "7cfeaa443d8f016b0b70feaf0d1d15fa1dee0fc94f3867e8e7a23ec09840e64b",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/portsmouth_ing.ban",
+      "size": 2573,
+      "sha256": "f654ac051ee619e79b2143761e05ab75f2da03f1d891850aba8d8d38f1b87d54",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/portuguesadesportos_bra.ban",
       "size": 3138,
       "sha256": "ae022f4ea8cb5389c91b4333a51339e49bdefa0aaa87d3589c08eec9db79a368",
@@ -6964,6 +9068,24 @@
       "path": "teams/portuguesafc_ven.ban",
       "size": 2441,
       "sha256": "ceef3df954bd7a4a7906ac3c014d4977e2f4a28e8fa1a75c04584badecaa1401",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/portvale_ing.ban",
+      "size": 2424,
+      "sha256": "f727c873f24cd82c32c32084a3231c585aad3cb205c6316d0da521ec375966b3",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/potenza_ita.ban",
+      "size": 2207,
+      "sha256": "36001efdb54951a56f5a461a6d2e8da261d262624c11436064f7f9ae79a1221c",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -6993,6 +9115,33 @@
       "vanillaSize": 1756
     },
     {
+      "operation": "add",
+      "path": "teams/prestonnorthend_ing.ban",
+      "size": 2296,
+      "sha256": "51507adf0901a85703a99c97357c2caf6591ca36b9eff26d113376438eccacde",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/primavera_mt.ban",
+      "size": 2183,
+      "sha256": "30b37bb484306728ac25165b3cd8309d7f07ea6888781b5ed5cb7001b9abfc6e",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/primavera_sp.ban",
+      "size": 1992,
+      "sha256": "066d62cf2abc13d1355b06db9005d43a86ed26e0a9a2f3bfc63283fe24ab9d54",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/princesa_am.ban",
       "size": 1752,
@@ -7014,6 +9163,15 @@
       "vanillaMissing": true
     },
     {
+      "operation": "add",
+      "path": "teams/progresso_rr.ban",
+      "size": 1760,
+      "sha256": "151e0399536228461e388de8940771e763a043d88622d674f7dc64c53ce9c58e",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/prospera_sc.ban",
       "size": 1869,
@@ -7024,6 +9182,15 @@
       "component": "rosters",
       "vanillaSha256": "2f6dd1d726a9ab128d1db8452ce55b9d42e37af69673d589968d54b0f6ba4d82",
       "vanillaSize": 1869
+    },
+    {
+      "operation": "add",
+      "path": "teams/provercelli_ita.ban",
+      "size": 2290,
+      "sha256": "cf44a307579387f9b11ac104258bbc5cf6cec017ff61d4f157aae7fcb333cb9d",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "add",
@@ -7100,9 +9267,36 @@
     },
     {
       "operation": "add",
+      "path": "teams/qfc_rn.ban",
+      "size": 2164,
+      "sha256": "68ebeff398aa7e3c108c552dff84708f0e19327b2fe502e869d4cde10da9b5ca",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/queensparkrangers_ing.ban",
+      "size": 2251,
+      "sha256": "46d37fef630cf7c5164d53703c271281c20c6490f035226890f293c29d1a55b3",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/quilmesatleticoclub_arg.ban",
       "size": 1986,
       "sha256": "69457a6034c572cbc086f41f0471de7bdf69c3416bc82f72021a34e0db659a7b",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/quixada_ce.ban",
+      "size": 2014,
+      "sha256": "18f601d5adfc20f57feee1471c5e94faad55a1aaa370f6bdc3d78f75c1fa6573",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -7201,6 +9395,15 @@
       "vanillaSize": 1998
     },
     {
+      "operation": "add",
+      "path": "teams/ravenna_ita.ban",
+      "size": 2255,
+      "sha256": "27a0bb59121a68c676e3b76fd4c29172fd08709e0024ec7ebafd09d9edbf28f3",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/rayovallecano_esp.ban",
       "size": 2339,
@@ -7238,6 +9441,24 @@
     },
     {
       "operation": "add",
+      "path": "teams/reading_ing.ban",
+      "size": 2236,
+      "sha256": "2b7df3bfe293e5e94b713e587271c30271b95799e75c8f13f3afb9bb39ee372f",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/realbrasilia_df.ban",
+      "size": 2253,
+      "sha256": "25c80673e2c47415d9060f2ec4943ae1e5a318b042b383ff03678d7b4abbed3e",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/realcartagena_col.ban",
       "size": 2778,
       "sha256": "eaf6386e1ecb68507f20d5ff8f57c2572fa1291c7613e77b3e4a0a638538f4f1",
@@ -7269,6 +9490,15 @@
       "component": "rosters",
       "vanillaSha256": "46056570d2a8c383263b036feadcb0d1932ca824996228a7173dc9ab13a91139",
       "vanillaSize": 2103
+    },
+    {
+      "operation": "add",
+      "path": "teams/realnoroeste_es.ban",
+      "size": 2272,
+      "sha256": "6a34ede193055dba27226b0bb3bc4c816afb50e092ee61b881f617f5089519ab",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "add",
@@ -7365,12 +9595,22 @@
       "vanillaMissing": true
     },
     {
+      "operation": "add",
+      "path": "teams/reggiana_ita.ban",
+      "size": 2383,
+      "sha256": "245ca5d47ad3d5d713075c5fb44c567cd033635673684c98d7c2d952ff3a088a",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/remo.ban",
-      "size": 2584,
-      "sha256": "f2ff021bae7922fb5c440dabc1c62566d03af9579529f5904436477c414f8380",
+      "size": 4763,
+      "sha256": "21b98d7852f9eeab33a1f05e545b1e49b07c2b5b2163bb36ae5a6d884d9992aa",
       "acceptedOriginalSha256": [
         "5221da9996d84bf0ddccc7af9898610729a1432baaf2e3f8218b05abbd7f45a2",
+        "f2ff021bae7922fb5c440dabc1c62566d03af9579529f5904436477c414f8380",
         "e78d008959bb594f3f7a3392d33530bff457153a87cc195d1e8eab7c1a221858",
         "145528206d7b7ec8938f95b3029f71705c48bcfff14ee0a0eb3048ae32bc02b9",
         "363a32c6c9b48e6cb6c9d4b302334a2451306bd44eb92c6b4369811eba23e80b",
@@ -7379,6 +9619,15 @@
       "component": "rosters",
       "vanillaSha256": "5221da9996d84bf0ddccc7af9898610729a1432baaf2e3f8218b05abbd7f45a2",
       "vanillaSize": 1850
+    },
+    {
+      "operation": "add",
+      "path": "teams/renate_ita.ban",
+      "size": 2435,
+      "sha256": "ffb8d793bdf16925c5b5e5cc0f0b06eefc1035f66b184f7435902d0e60aeccfc",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -7468,6 +9717,24 @@
       "vanillaSize": 2995
     },
     {
+      "operation": "add",
+      "path": "teams/riobranco_ac.ban",
+      "size": 2411,
+      "sha256": "eadb690d3c0e40005b88a588e427c46b4d1c28814387523f95c087fe2780aabe",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/riobranco_es.ban",
+      "size": 3004,
+      "sha256": "a27c92175dc879d1fedbac242598258343d655c30fcf3efa62c7b1dc68ebcb94",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/riobranco_pr.ban",
       "size": 1638,
@@ -7480,6 +9747,24 @@
       "vanillaSize": 1638
     },
     {
+      "operation": "add",
+      "path": "teams/riobrancofutebolclube_es.ban",
+      "size": 2140,
+      "sha256": "2da5fa7172e9a40985fca7da69d623c341023ecaf2606e6c2eddf11eca4c8ece",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/rionegrororaima_rr.ban",
+      "size": 1708,
+      "sha256": "b01e47f5d3e7f44d0d6fc4e6ebc552d96191670fab61ab038c22cfede4124b69",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/riteriai_lit.ban",
       "size": 3090,
@@ -7490,6 +9775,15 @@
       "component": "rosters",
       "vanillaSha256": "1339322035ea9f0693235a8d52867d4efd0ec10f8cc376e5c079cc182b248996",
       "vanillaSize": 3090
+    },
+    {
+      "operation": "add",
+      "path": "teams/river_rr.ban",
+      "size": 1829,
+      "sha256": "3c81e943ac45865923a88f6897b25ce68c87865611d3dfd586201a2cb296c6ed",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -7531,18 +9825,46 @@
       "vanillaSize": 2998
     },
     {
+      "operation": "add",
+      "path": "teams/rochdale_ing.ban",
+      "size": 2993,
+      "sha256": "3a9a045102356e5e6286d2e540d328516013036af7a998ab2b1146bff658ecc5",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/roma_it.ban",
-      "size": 2199,
-      "sha256": "d0cb39eb823f8a55beff64bf0486d5bf744d8c486f0955b5bc1e7e1f4a19597c",
+      "size": 2188,
+      "sha256": "646b5aa08e0df96d0e92442ba8274c3befc57a1b3259f0503b4165e3f45d2e41",
       "acceptedOriginalSha256": [
         "60ef1429221dcbcdd3bed67c69b64c9e28c585234ba98ae60382fe88ce809498",
+        "d0cb39eb823f8a55beff64bf0486d5bf744d8c486f0955b5bc1e7e1f4a19597c",
         "b65ad403aa3b693526f5ba30c192964a6c868777ff34859a9a9ae54f3eb58ef7",
         "791f172adc13a44a94da97c8310f6c32458d311325ef4f847199943939a8d633"
       ],
       "component": "rosters",
       "vanillaSha256": "60ef1429221dcbcdd3bed67c69b64c9e28c585234ba98ae60382fe88ce809498",
       "vanillaSize": 2037
+    },
+    {
+      "operation": "add",
+      "path": "teams/rondoniense_ro.ban",
+      "size": 1833,
+      "sha256": "1d9302cad66e48b0e9c34efc8c7536b69d551cf0ebb6581f81e563fb5f34a13e",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/roraima_rr.ban",
+      "size": 1945,
+      "sha256": "3bc101671816d921205a0ce9ebf968643a93716ad95715e55292c12f89359e19",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -7567,6 +9889,15 @@
       "component": "rosters",
       "vanillaSha256": "e3b7daaa4767721fdfc08671f75a03c998b26afb804c541167848070fc445c67",
       "vanillaSize": 1945
+    },
+    {
+      "operation": "add",
+      "path": "teams/rotherhamunited_ing.ban",
+      "size": 2730,
+      "sha256": "6a9f57c764872c3b881bf7a98806679468358fb1437bca27e6e7cef7fd6acdc3",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -7615,6 +9946,24 @@
       "vanillaSize": 3008
     },
     {
+      "operation": "add",
+      "path": "teams/salernitana_ita.ban",
+      "size": 2266,
+      "sha256": "244595c56167e74a97ddeb2ec702810fe1f2a1ba4367e2bbfe748f0ed757e33f",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/salfordcity_ing.ban",
+      "size": 2612,
+      "sha256": "55e72ca7602c3b6c96ee5a00b2f3591a5ae4d00308ec8213df5042b31d8cab97",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/salgueirope_bra.ban",
       "size": 1750,
@@ -7639,6 +9988,15 @@
       "vanillaSize": 1894
     },
     {
+      "operation": "add",
+      "path": "teams/samambaia_df.ban",
+      "size": 1774,
+      "sha256": "bebff630f6176634f9187ddfbf346e51a96b54d953d25adef992a8df8c90b7d4",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/samapaiocorrea_ma.ban",
       "size": 1996,
@@ -7649,6 +10007,33 @@
       "component": "rosters",
       "vanillaSha256": "d7afd5714753b99e6bd89cd308d209bf472da3de04547da7465e046a83f90137",
       "vanillaSize": 1996
+    },
+    {
+      "operation": "add",
+      "path": "teams/sambenedettese_ita.ban",
+      "size": 2508,
+      "sha256": "7c1c2d590dfd85bbfbc26c5f8b95154aa8eba6ce8f370f9df7fc81faa5d4cbad",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/sampaiocorrea_rj.ban",
+      "size": 2791,
+      "sha256": "9e1fe84eb1543450890020d3de73b0914ad0ad31ca1dd6a3ef0f0fdf901bcce1",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/sampdoria_ita.ban",
+      "size": 2413,
+      "sha256": "8bbafe296627f15cc26134132aeaee206db1c62cdcc983ef60970d1e63018030",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "add",
@@ -7728,6 +10113,24 @@
       "vanillaSize": 1902
     },
     {
+      "operation": "add",
+      "path": "teams/santacatarinaclube_sc.ban",
+      "size": 2539,
+      "sha256": "9d7afdb35f0f9452e2cde619e5ab32d50311ded1929710612aab3d6ab0e89b67",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/santacruz_ac.ban",
+      "size": 2310,
+      "sha256": "327849d152668a035b9910d8141e95e0c63094acb770f8cb7564712bc335911a",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/santacruzrn.ban",
       "size": 1682,
@@ -7744,6 +10147,15 @@
       "path": "teams/santamarinatandil_arg.ban",
       "size": 2186,
       "sha256": "9b870448298017220dce4e05b2401b6304f6368dd7f5432814fef4e9a646e081",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/santarosa_pa.ban",
+      "size": 2057,
+      "sha256": "dd4b5cd49ffe4159e32e8e314c5412c1758bfa1ce9add476455533cbe66a62b4",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -7790,16 +10202,26 @@
     {
       "operation": "replace",
       "path": "teams/santos.ban",
-      "size": 2815,
-      "sha256": "5df8916e85c04a708fe576d8659f2370a004cabad1b7cbd367cc230765165fb7",
+      "size": 4492,
+      "sha256": "bd14cbdc3eeab4eb002ecb235709452bc9f1db6349252ab8a429a7caf4319458",
       "acceptedOriginalSha256": [
         "6900fe639a2a0fecd074fb2e9c5887a8d37d5251b9efdcd442c8ec10158a198b",
+        "5df8916e85c04a708fe576d8659f2370a004cabad1b7cbd367cc230765165fb7",
         "821ad3be3158ab71e0922e6f9c28e4cc842e8fcac5cc151f12f8a229cd3b5366",
         "449d26ba4d442361c4179b4a96a64789a251fe500ffeaecd2c80573199c07914"
       ],
       "component": "rosters",
       "vanillaSha256": "6900fe639a2a0fecd074fb2e9c5887a8d37d5251b9efdcd442c8ec10158a198b",
       "vanillaSize": 1921
+    },
+    {
+      "operation": "add",
+      "path": "teams/santos_ap.ban",
+      "size": 2271,
+      "sha256": "f8f9e15057e91c266fa3694fab5f454110c26a9b91c620325221f925bf2c39ae",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "add",
@@ -7851,6 +10273,33 @@
       "vanillaSize": 1788
     },
     {
+      "operation": "add",
+      "path": "teams/saofrancisco_ac.ban",
+      "size": 1655,
+      "sha256": "f3b23a978397e74dfe85e61251e6fbe959a27382590dee82b35cf4af5e5573e5",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/saofrancisco_pa.ban",
+      "size": 2226,
+      "sha256": "02ed47bdaff4efe9797a64678b20d720258c932a89a7b3e621a260066017ef21",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/saojose_ap.ban",
+      "size": 2177,
+      "sha256": "f440fa2d6d3dd30bb0114a415b21bb98ec9246eb2b6954950a575e3279ee8b4b",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/saojose_ma.ban",
       "size": 1767,
@@ -7889,10 +10338,11 @@
     {
       "operation": "replace",
       "path": "teams/saopaulo_bra.ban",
-      "size": 3113,
-      "sha256": "1c86c1207d04078942d8fe55637f2fe6077a3ccf28d8b0681211ec1bcfe211b2",
+      "size": 4891,
+      "sha256": "36f43b7edbc248f78297a6bf46454c2b5a6a975392e2500f0902b483df41f72a",
       "acceptedOriginalSha256": [
         "2c70c8f5be7ba32beb44794205c1714133529220e85e9aa7dfd3ea8f9741564a",
+        "1c86c1207d04078942d8fe55637f2fe6077a3ccf28d8b0681211ec1bcfe211b2",
         "e7b49d8d28c350c3794ae66ad37a8e6c19caf91614737d672ad75dd97f0ced9f",
         "be62c49f07bbb4848be3346dc9df98a0d1a3dc9c14aff5d1643637d26c3a1238",
         "399dc7729fcbdc6d413449465a34ddca51ef4a2867797fff76ca05caf6ac0429"
@@ -7900,6 +10350,33 @@
       "component": "rosters",
       "vanillaSha256": "2c70c8f5be7ba32beb44794205c1714133529220e85e9aa7dfd3ea8f9741564a",
       "vanillaSize": 1965
+    },
+    {
+      "operation": "add",
+      "path": "teams/saoraimundo_am.ban",
+      "size": 2119,
+      "sha256": "4d1894a888ef15c4d3600c75606ec50ab5bd0ad81e9209bb368ff53138b30edc",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/saoraimundo_pa.ban",
+      "size": 2262,
+      "sha256": "74a7a079a3ff53e1fc4c1861e8c0865a47450a32266151cec3a254e9441afeea",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/saoraimundo_rr.ban",
+      "size": 2588,
+      "sha256": "351a3d93b4c994d01f1d3a564d880b4707044491484699155b785eacc40a4a8b",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -7944,9 +10421,54 @@
     },
     {
       "operation": "add",
+      "path": "teams/sassuolo_ita.ban",
+      "size": 2782,
+      "sha256": "5860a39326c5d642b6fc45b7151f6569ada7fde56fc046cb07830198e5557181",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/savoia_ita.ban",
+      "size": 2276,
+      "sha256": "e2c45acd33ed80d9e1be9ac91ab503682d39b468de98d69a9efe6e2728dff357",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/scafatese_ita.ban",
+      "size": 2501,
+      "sha256": "6b994ed0acfba936ea83083d0e8b60e65e7e0536d798b3322f7fb7de2de4207a",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/sdaucas_equ.ban",
       "size": 2220,
       "sha256": "16f76dbb5706442ede7ab60f052df682f7153abfcaa783075985c7d19024d628",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/serra_es.ban",
+      "size": 2255,
+      "sha256": "18165b56029de1c02b7f673a8bb85cb5b480390b1d89dff594079ab047da33f6",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/serrabranca_pb.ban",
+      "size": 2725,
+      "sha256": "acb9d3cf17d7810c0d5c10d5280850646a5d8ad6f72a94f9d9e9094f0df43d8f",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -8037,6 +10559,24 @@
       "vanillaSize": 3074
     },
     {
+      "operation": "add",
+      "path": "teams/sheffieldunited_ing.ban",
+      "size": 2548,
+      "sha256": "5f4666431bbe435bb877b6541067e9f03510c9764ed03aa9320221f41934f9e6",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/sheffieldwednesday_ing.ban",
+      "size": 2670,
+      "sha256": "47bd8635aa4f7a938715880ed0ed145bea4192c5599096f4cc604beeec36e167",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/sherifftiraspol_mol.ban",
       "size": 2550,
@@ -8061,6 +10601,15 @@
       "component": "rosters",
       "vanillaSha256": "309662a1b0a93bedf5a3d107df288a747a934fcd09e9c671bc32698cc1616338",
       "vanillaSize": 2056
+    },
+    {
+      "operation": "add",
+      "path": "teams/shrewsburytown_ing.ban",
+      "size": 2568,
+      "sha256": "2020994ce9825fa2e1d9388009ca15d484d46c25ad7aba8c49c9d950843028d0",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -8156,6 +10705,15 @@
       "vanillaSize": 2555
     },
     {
+      "operation": "add",
+      "path": "teams/sobradinho_df.ban",
+      "size": 2271,
+      "sha256": "06219ea1add0259edda0291b274a503718eb26d99c7a13ced7c240378116c9e1",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/solamerica_par.ban",
       "size": 3265,
@@ -8194,6 +10752,24 @@
       "vanillaSize": 1945
     },
     {
+      "operation": "add",
+      "path": "teams/sorrento_ita.ban",
+      "size": 2205,
+      "sha256": "8b2fcbcd7e308f564d0f859f505aa4293ff3285e65d2d851510fc73e5dd2f012",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/southampton_ing.ban",
+      "size": 2162,
+      "sha256": "2a2b28f6c507b4132bb07a47de8c7fd96e314613cf10f52d7de4054440b5db94",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/sparta_tch.ban",
       "size": 2480,
@@ -8216,6 +10792,15 @@
       "component": "rosters",
       "vanillaSha256": "6e29fc860b4face5af5be604a4a1eebc630bf2bac7d819e604854ce3b8d7ecb1",
       "vanillaSize": 1914
+    },
+    {
+      "operation": "add",
+      "path": "teams/spezia_ita.ban",
+      "size": 2437,
+      "sha256": "e45a7d76b439903a6872def6858e81e7d84b182f9d3288f39c042bb60e2926ab",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -8418,6 +11003,15 @@
       "vanillaSize": 1847
     },
     {
+      "operation": "add",
+      "path": "teams/stevenage_ing.ban",
+      "size": 2391,
+      "sha256": "8c7532e6a66dd46ba068fc78b0040d030829de892a910d71497d4f470cab9d25",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/stgallen_sui.ban",
       "size": 2469,
@@ -8442,6 +11036,24 @@
       "component": "rosters",
       "vanillaSha256": "e9ba06002f586b3da597c5079f58ea9ed9bf7c5cacdb65eef3ab4829d7cc4bd6",
       "vanillaSize": 2846
+    },
+    {
+      "operation": "add",
+      "path": "teams/stockportcounty_ing.ban",
+      "size": 2768,
+      "sha256": "a6d979c3a503444ffe408dd067ad41dfba42b42a8f00fe026a1c94bf23234dc7",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/stokecity_ing.ban",
+      "size": 2313,
+      "sha256": "72bef1712397aa6fbb7169df5772bd895b05bd5a63122bb0264e5b8b1f626606",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -8471,6 +11083,15 @@
       "vanillaSize": 2091
     },
     {
+      "operation": "add",
+      "path": "teams/sudtirol_ita.ban",
+      "size": 2260,
+      "sha256": "7a7d73627240de72d0cdc58e67c4020618918044b689510a20ad7f35c2d26544",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/suduva_lit.ban",
       "size": 3086,
@@ -8496,6 +11117,15 @@
       "vanillaSize": 2897
     },
     {
+      "operation": "add",
+      "path": "teams/sunderland_ing.ban",
+      "size": 2419,
+      "sha256": "a59e3f67a08719f3da60f269e3b685bf323fb362dfb89127b3e15ac19fe383f4",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/sutjeska_mon.ban",
       "size": 2313,
@@ -8519,6 +11149,24 @@
       "component": "rosters",
       "vanillaSha256": "4461f2c03da0eda9333446fcb48d8e97c8a29f8e891183ab32249c47a44a5fb8",
       "vanillaSize": 2533
+    },
+    {
+      "operation": "add",
+      "path": "teams/swanseacity_wal.ban",
+      "size": 2230,
+      "sha256": "37ee5fb1866509bcaf2fea5cfa8bdf492a911a99ca236a6318feaf63b6bd445e",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/swindontown_ing.ban",
+      "size": 2656,
+      "sha256": "a348390117cf701892931b4f931d50e11893cec57140926b6c4f039e11a76218",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "add",
@@ -8582,6 +11230,15 @@
       "component": "rosters",
       "vanillaSha256": "b6e95ca61aaf493363dc06688a72940b0b11b1557ba79d37c905cf835c33dd55",
       "vanillaSize": 2960
+    },
+    {
+      "operation": "add",
+      "path": "teams/tec_pi.ban",
+      "size": 2527,
+      "sha256": "56f476073439d459e49a75daa575316aad79779b52b051c1a7eefa81e3ddde39",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "add",
@@ -8663,6 +11320,24 @@
       "vanillaMissing": true
     },
     {
+      "operation": "add",
+      "path": "teams/tirol_ce.ban",
+      "size": 2592,
+      "sha256": "19ca06774d4eab3c33df150403465079b5c05bbbfe4c68cd363327d1204e079a",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/tocantinopolis_to.ban",
+      "size": 2464,
+      "sha256": "10db7e2d7adf0408bc88fa7d2ed2c03545be2e1deab1145dd0b31274d184734e",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/tombense_mg.ban",
       "size": 1906,
@@ -8675,12 +11350,31 @@
       "vanillaSize": 1906
     },
     {
+      "operation": "add",
+      "path": "teams/torino_ita.ban",
+      "size": 2501,
+      "sha256": "ff619d4a2573008ee4ce1165afeecbc4be3a8e2f40b167dd86e04f3dcdeb8066",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/torres_ita.ban",
+      "size": 2231,
+      "sha256": "5e79e7dbcbfa217cc1a6a41e1adac17faf190b1ca361db8a2fd35452d3672636",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/tottenhamhotspur_ing.ban",
-      "size": 2410,
-      "sha256": "cb3ca62b95135e9748276f51f676f149ba9fd300d09f27a261cea8b5206021bc",
+      "size": 2477,
+      "sha256": "deb769db5bc616a200b63c8d3471f71113834d1da30258d329cf4c639adbdaf8",
       "acceptedOriginalSha256": [
         "af4594c65eb1d301751fa79aacf38563d7c0629dd5cc952699a9d4795975c97b",
+        "cb3ca62b95135e9748276f51f676f149ba9fd300d09f27a261cea8b5206021bc",
         "ed0c2f947299f5b76f892d7a285d3bcd553d39abdbb1cf94af6ad39a92c730ac"
       ],
       "component": "rosters",
@@ -8701,9 +11395,27 @@
     },
     {
       "operation": "add",
+      "path": "teams/tranmererovers_ing.ban",
+      "size": 2450,
+      "sha256": "022bbb3ebbae643fcc13c57064ea4b0d9dbc31512c125b71af5971ddea14cbec",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/trem_bra.ban",
       "size": 1990,
       "sha256": "29d62c7dfe234f4fd5420599dbaa219609c842e38ab93a1daed360eb0e39ef8b",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/trento_ita.ban",
+      "size": 2407,
+      "sha256": "a58333b2e23c40fe0302ee6fb10bac10cf1261146e615f0ad4f864250baac291",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -8719,6 +11431,15 @@
       "component": "rosters",
       "vanillaSha256": "8a12a92fed7eab67731086a8048d200a66b1d6da921183f84dbada118fabc56f",
       "vanillaSize": 2015
+    },
+    {
+      "operation": "add",
+      "path": "teams/treviso_ita.ban",
+      "size": 2276,
+      "sha256": "36fab06d225c9671f47d54153a4b4f9fcee75e158faa2cf823216c034ba1fd2d",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "add",
@@ -8789,6 +11510,33 @@
       "vanillaMissing": true
     },
     {
+      "operation": "add",
+      "path": "teams/udinese_ita.ban",
+      "size": 2403,
+      "sha256": "24bcdfa57811e5177342b0f0a829995ffb19a8e242743f39c9ba2b9663f81fe8",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/uniao_to.ban",
+      "size": 2843,
+      "sha256": "e8217981147d49e79356d28d4852a518f7386a51fdc47a45bddb7a8bc83450ed",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/uniaocacoalense_ro.ban",
+      "size": 2611,
+      "sha256": "c7efd31544611eb85939533cd7c48c286d31871cc8281d6203aff7195321f3e9",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/uniaopr_bra.ban",
       "size": 1825,
@@ -8817,6 +11565,15 @@
       "path": "teams/unionatleticoaltoapure_ven.ban",
       "size": 1859,
       "sha256": "d14a5ff02e60e5a4d23e0b524b8cb34cb573d3e88135dfc49989f70d2c8f9bd1",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/unionbrescia_ita.ban",
+      "size": 2354,
+      "sha256": "7b075f19a79f06c2a7e47a8d8f0633b70ba368f1406f4b047c57416223871e49",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -8976,6 +11733,15 @@
       "vanillaMissing": true
     },
     {
+      "operation": "add",
+      "path": "teams/vado_ita.ban",
+      "size": 2839,
+      "sha256": "d4fd8efabbc4c9e7b7dae0a184eb9a91c4e99eb3b3e909da66fa7d4f4dc1060e",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/vaduz_lie.ban",
       "size": 2403,
@@ -9042,12 +11808,22 @@
       "vanillaSize": 1783
     },
     {
+      "operation": "add",
+      "path": "teams/varzeagrandeec_mt.ban",
+      "size": 2423,
+      "sha256": "7ed9729089ebc65435974f7b002b501f40d9d3838087d4bcd2bdb15748b0548e",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/vasco.ban",
-      "size": 2874,
-      "sha256": "5e10b9c22a3edcefcc641f3934405b2a350a246441dfcf735b00335b4c0ba836",
+      "size": 3843,
+      "sha256": "97836d612940f2bb2e9512a30df6c5091b603a617524193cd620e7ef786836c8",
       "acceptedOriginalSha256": [
         "7abe6fb3b3aff7b65e84982aa35bc55000978c40c2e1f1083e7b0ac0f8518a91",
+        "5e10b9c22a3edcefcc641f3934405b2a350a246441dfcf735b00335b4c0ba836",
         "4ff383d2b57b33c96a0892c614ae94d9b586fb161fbbb3d1add9d7507a15eb2a",
         "1f84dc9cf9bb203d80ce0bc55660072bead5b41e2d0b9bdf1852d1ae1b9f468c",
         "81d7614e6252f4212b57342841841defc32e33299b67732fbcb98b84731164ab",
@@ -9056,6 +11832,15 @@
       "component": "rosters",
       "vanillaSha256": "7abe6fb3b3aff7b65e84982aa35bc55000978c40c2e1f1083e7b0ac0f8518a91",
       "vanillaSize": 1980
+    },
+    {
+      "operation": "add",
+      "path": "teams/vascodagamaac_ac.ban",
+      "size": 2055,
+      "sha256": "316bb9b7047d2d76a1ccdcae167535c266fc7128e1de24a76178310b00b6009c",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -9079,6 +11864,15 @@
       "vanillaMissing": true
     },
     {
+      "operation": "add",
+      "path": "teams/venezia_ita.ban",
+      "size": 2890,
+      "sha256": "98af984137c4e58e33b7f69f4ffb3352c83b9f29869f6d6ed516b6cbeddafee2",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/veracruz_pe.ban",
       "size": 1716,
@@ -9089,6 +11883,15 @@
       "component": "rosters",
       "vanillaSha256": "4d66050ed33e5dce8fe4d418db9b9929c79556c8269456b03536c2b629aed20a",
       "vanillaSize": 1716
+    },
+    {
+      "operation": "add",
+      "path": "teams/vicenza_ita.ban",
+      "size": 2353,
+      "sha256": "58ac99c86dff64cda5a1c813ea061649fb744d16cb420a4797e1a47532944dd9",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -9158,6 +11961,15 @@
     },
     {
       "operation": "add",
+      "path": "teams/vilavelhense_es.ban",
+      "size": 2523,
+      "sha256": "b68c4a1eb6755132eadd5ccbdfa35e3ba2464f37b1ac1865f1400a5fd2c43411",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/villadalmine_arg.ban",
       "size": 2378,
       "sha256": "7a3078c91d9343c50b2beaf766343a183c1f7204b55b8e255739b03515abe7f9",
@@ -9210,6 +12022,24 @@
       "vanillaMissing": true
     },
     {
+      "operation": "add",
+      "path": "teams/virtusentella_ita.ban",
+      "size": 2359,
+      "sha256": "9f8c8360d9eaafc3e652d3e53e90dbbddf1900ef681873dcf640760dd980f896",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/vispesaro_ita.ban",
+      "size": 2807,
+      "sha256": "3ff28d122aa0a1b46643e982eb79f33aabefbde8adda43837528a207f43e04ce",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/vitesse_hol.ban",
       "size": 2215,
@@ -9226,10 +12056,11 @@
     {
       "operation": "replace",
       "path": "teams/vitoria.ban",
-      "size": 2953,
-      "sha256": "86122a45dc1d7be207a54d0bfd205b049d9f41124191b76223b21abfc17c9888",
+      "size": 4058,
+      "sha256": "023c5fe87158ffaf2b5f46c2495e474e9e8b2add26d9bdf8123b3248de2c1fdb",
       "acceptedOriginalSha256": [
         "7a264825f37d76518d32b7868999aff54f94fe7b66f3b479ed87db1088fd75ec",
+        "86122a45dc1d7be207a54d0bfd205b049d9f41124191b76223b21abfc17c9888",
         "58ff32dd77b89b0acff9986755836d7da8f2502492933aaf16d467544f4e3da2",
         "8f066b12cad69a219a1b65e397b8646b9f789ff8b2e81235d839d61b6c8ea96f",
         "cb214621c97c9e992322e9f1a0d68ce2fc413c7dc00d71f30e20d0f9892d73cd",
@@ -9238,6 +12069,15 @@
       "component": "rosters",
       "vanillaSha256": "7a264825f37d76518d32b7868999aff54f94fe7b66f3b479ed87db1088fd75ec",
       "vanillaSize": 1781
+    },
+    {
+      "operation": "add",
+      "path": "teams/vitoria_es.ban",
+      "size": 2613,
+      "sha256": "7cb4011fe68ccda9f6a2a8dd5c56c5bcb0c7836905de65b0f2c7ce1226ed275d",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -9251,6 +12091,15 @@
       "component": "rosters",
       "vanillaSha256": "f4584c51471891f81a4b4728f3d86646b4ce197fd82fffe7f886f20c4e05ccdc",
       "vanillaSize": 2030
+    },
+    {
+      "operation": "add",
+      "path": "teams/vitoriape_pe.ban",
+      "size": 2298,
+      "sha256": "5e304b0e45903496dd9131e59033196029805ac87e3a24f83838688e5fee9181",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -9291,6 +12140,15 @@
       "vanillaSize": 2044
     },
     {
+      "operation": "add",
+      "path": "teams/walsall_ing.ban",
+      "size": 2421,
+      "sha256": "272e94420e14d4eda73c556b1dccf6fc7449a3a99276b713a48ea724cf900f59",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/wanderers_uru.ban",
       "size": 2167,
@@ -9315,12 +12173,31 @@
       "vanillaSize": 3184
     },
     {
+      "operation": "add",
+      "path": "teams/watford_ing.ban",
+      "size": 2388,
+      "sha256": "8e1ff7eb6b9ac3447c5104d3ed596c7582b0703a5e69fb069312204feddb5282",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/westbromwichalbion_ing.ban",
+      "size": 1991,
+      "sha256": "ce7abfd9cb369c4792f78a6c8a34468bd8c87805046d13f132dbbb3664a214c7",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
       "operation": "replace",
       "path": "teams/westham_eng.ban",
-      "size": 2390,
-      "sha256": "16df6ec9f0272b440e7f581b698e17e87fbbf4c675e2203b9b03607b5b9058e6",
+      "size": 2402,
+      "sha256": "91940b47c47b5b2502a9c316c594a283944b2a397ed7a5ca744b045dbe006a42",
       "acceptedOriginalSha256": [
         "8a1a4a8a58c0b3bb3bc8b6985d13cfe88ba25cabf025f7238180f427a3beabc1",
+        "16df6ec9f0272b440e7f581b698e17e87fbbf4c675e2203b9b03607b5b9058e6",
         "c0057c2c89b3c34e264e200f4ba5c44b64434dd271c381c897e109b6e10661f4",
         "1bbe3570aed02a0c51ff0a8d8996da486c89060b95b66be21d1f3a1eb93d6f09",
         "ff6dd5882eb452894c3d64f39590b62ae21270cea079cef2ec58c5ab19845048"
@@ -9328,6 +12205,15 @@
       "component": "rosters",
       "vanillaSha256": "8a1a4a8a58c0b3bb3bc8b6985d13cfe88ba25cabf025f7238180f427a3beabc1",
       "vanillaSize": 1889
+    },
+    {
+      "operation": "add",
+      "path": "teams/wiganathletic_ing.ban",
+      "size": 2594,
+      "sha256": "9ace9d4f473a443dcd0fcd7b738ff5a1ddbaa9ab422c8d8df608674418afbee8",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -9359,9 +12245,54 @@
     },
     {
       "operation": "add",
+      "path": "teams/wolverhamptonwanderers_ing.ban",
+      "size": 2414,
+      "sha256": "705fe902d8d6dfa051e2443bf7b0e99aba2534e3499466804a47f7127c8dd838",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/wrexham_wal.ban",
+      "size": 2441,
+      "sha256": "3bcb13b9e33bc5479395447b08ad9a8148a883c28788e414417d763c4bbd28ba",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/wycombewanderers_ing.ban",
+      "size": 2242,
+      "sha256": "f34432654071a2eb7640b78b021a79cbf82a61613993ed8c9612a398e404cb72",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/xvdepiracicaba_sp.ban",
+      "size": 2663,
+      "sha256": "008102211acc4ec54f3579d03a23739812a105fc4a2ad3c188f70fd023866704",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
       "path": "teams/yaracuyanos_ven.ban",
       "size": 3236,
       "sha256": "2667eb17b704a3307f90422bb2e2dccfe0cd007197b5d6be17fc401e2fcec34a",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
+    },
+    {
+      "operation": "add",
+      "path": "teams/yorkcity_ing.ban",
+      "size": 2835,
+      "sha256": "6fc62fc5234ec16f1a57b86591c6c3f544e83741f224b279dd8a91d59bd5954e",
       "acceptedOriginalSha256": [],
       "component": "rosters",
       "vanillaMissing": true
@@ -9378,6 +12309,15 @@
       "component": "rosters",
       "vanillaSha256": "1634609b333a658dc0fb75c1a73fef5cc7e28a878963a9a74fd5ed61208212ae",
       "vanillaSize": 1979
+    },
+    {
+      "operation": "add",
+      "path": "teams/ypiranga_ap.ban",
+      "size": 2180,
+      "sha256": "19bacd5d975a6830facbabc460d56b7cc798c69899a4d5525f7e214c7a74d732",
+      "acceptedOriginalSha256": [],
+      "component": "rosters",
+      "vanillaMissing": true
     },
     {
       "operation": "replace",
@@ -9493,85 +12433,64 @@
       "vanillaSize": 1981
     },
     {
+      "path": "trofeus/tr_copa_ALE.png",
       "operation": "add",
-      "path": "conf_ligas_nacionais/ARG.cfg",
-      "size": 984,
-      "sha256": "3a3680fb0ad9d2986bb32080534d141b59592737f714ddaaa1afc2d8f288713b",
+      "size": 15889,
+      "sha256": "f2d262631cb887d431bf7ed00a1c70eec3508166010c6af43c9b55c1ce259e6c",
       "acceptedOriginalSha256": [],
-      "component": "rosters",
-      "vanillaMissing": true
+      "recipe": "trophy-4d03999411c05ca824e9.json",
+      "vanillaMissing": true,
+      "component": "rosters"
     },
     {
+      "path": "trofeus/tr_copa_TUR.png",
       "operation": "add",
-      "path": "conf_ligas_nacionais/BOL.cfg",
-      "size": 706,
-      "sha256": "b23535163abad8ee696fe03e52c4e4cd0310affd9dd4136ac4649c7c477682e5",
+      "size": 18679,
+      "sha256": "25cb73df31fa4f0bfc1f3cebb8f0f51231afd6c08d10fe176aa5649ec9d91378",
       "acceptedOriginalSha256": [],
-      "component": "rosters",
-      "vanillaMissing": true
+      "recipe": "trophy-db3f436fa029dba77a21.json",
+      "vanillaMissing": true,
+      "component": "rosters"
     },
     {
+      "path": "trofeus/tr_nacional_ALE.png",
       "operation": "add",
-      "path": "conf_ligas_nacionais/CHI.cfg",
-      "size": 969,
-      "sha256": "b8f945ab0e5286d0bc53f8b74c43a1870d713b9332114db5257b09a474f23de8",
+      "size": 18045,
+      "sha256": "310bb91cb69ec1b06f9143d41ea9c7399ab90da336f9615b3ae212102866d48f",
       "acceptedOriginalSha256": [],
-      "component": "rosters",
-      "vanillaMissing": true
+      "recipe": "trophy-47a04bdb72ddeabefbeb.json",
+      "vanillaMissing": true,
+      "component": "rosters"
     },
     {
+      "path": "trofeus/tr_nacional_TUR.png",
       "operation": "add",
-      "path": "conf_ligas_nacionais/COL.cfg",
-      "size": 849,
-      "sha256": "6ad5b60555c84cf066cacc7359b136227acf8544c680f878f3a866c04fbce1ad",
+      "size": 15278,
+      "sha256": "5627ef824893a08d1a2bc755ca413a5b04de6d1ed94f74803ecfffbaefe39d88",
       "acceptedOriginalSha256": [],
-      "component": "rosters",
-      "vanillaMissing": true
+      "recipe": "trophy-a575082c12cb46bc21cf.json",
+      "vanillaMissing": true,
+      "component": "rosters"
     },
     {
+      "path": "trofeus/tr_supercopa_ING.png",
       "operation": "add",
-      "path": "conf_ligas_nacionais/EQU.cfg",
-      "size": 697,
-      "sha256": "833428146a9f4fbbdc29929e63eb85b0031606fd92717032f82f8b3c2afc9e82",
+      "size": 17350,
+      "sha256": "4040e4db0909ff9927f400105e563525917b9fa3ad08e79a8b1d522b49229aba",
       "acceptedOriginalSha256": [],
-      "component": "rosters",
-      "vanillaMissing": true
+      "recipe": "trophy-546cf6e1f2afb16223cf.json",
+      "vanillaMissing": true,
+      "component": "rosters"
     },
     {
+      "path": "trofeus/tr_supercopa_ITA.png",
       "operation": "add",
-      "path": "conf_ligas_nacionais/PAR.cfg",
-      "size": 856,
-      "sha256": "ac36f37ac22c0a3a72ff12594a3ce1e831f37918af0885bd9d92f2376bf0edbf",
+      "size": 12026,
+      "sha256": "e075a66c4768583ba8a571b5c96c7478421976e0702dd97f5679a2e0dc922e7b",
       "acceptedOriginalSha256": [],
-      "component": "rosters",
-      "vanillaMissing": true
-    },
-    {
-      "operation": "add",
-      "path": "conf_ligas_nacionais/PER.cfg",
-      "size": 831,
-      "sha256": "ae9fc74fe14d4bbb93c6155cdac880ff6d449e58f8289496a3b23d705b0f3fac",
-      "acceptedOriginalSha256": [],
-      "component": "rosters",
-      "vanillaMissing": true
-    },
-    {
-      "operation": "add",
-      "path": "conf_ligas_nacionais/URU.cfg",
-      "size": 873,
-      "sha256": "80b12e0ab0370283da4a0f863ac1132680156dee28f51e8144897c4b261e6e19",
-      "acceptedOriginalSha256": [],
-      "component": "rosters",
-      "vanillaMissing": true
-    },
-    {
-      "operation": "add",
-      "path": "conf_ligas_nacionais/VEN.cfg",
-      "size": 1017,
-      "sha256": "00053ecfe185593358db108bd9741c7eec9b672bf5c0406987f8d95546eb5dee",
-      "acceptedOriginalSha256": [],
-      "component": "rosters",
-      "vanillaMissing": true
+      "recipe": "trophy-e190e389a3fdc2e3265c.json",
+      "vanillaMissing": true,
+      "component": "rosters"
     },
     {
       "operation": "replace",
@@ -20346,41 +23265,27 @@
     "schemaVersion": 2,
     "originalExecutableSha256": "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
     "liveExecutableSha256": [
-      "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
-      "26be851a51afbd6af0f0a50fec7744826b114700acf4d28459a559c659375f67",
       "3237e2ceaf56f81b14614109128a5133ee69db0fe954f738cd642806da09c7d0",
+      "4ebad9edf428d35261e00d54e4745d61f9a5e30b55748306233f877327d66a94",
       "b5a76a87142bb887e5a7575e01662f37360e0dda8beebfe693c44effc96dab5a",
       "d2d6b209333b661cbcf124353c8a27691c0eba5046b2c1a91b5632968d1abaa5",
-      "d330a79a396ce24b509dec508a224b12e237eeb8e6c049040f8fa8f6be656955",
-      "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa",
       "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414"
     ],
-    "liveOnlyExecutableSha256": [
-      "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
-      "26be851a51afbd6af0f0a50fec7744826b114700acf4d28459a559c659375f67",
-      "d330a79a396ce24b509dec508a224b12e237eeb8e6c049040f8fa8f6be656955"
-    ],
+    "liveOnlyExecutableSha256": [],
     "executables": {
       "patch+live": {
-        "sha256": "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa",
-        "size": 7326883,
+        "sha256": "4ebad9edf428d35261e00d54e4745d61f9a5e30b55748306233f877327d66a94",
+        "size": 7457456,
         "recipe": "bf22-23.exe.json"
       },
       "patch": {
-        "sha256": "8193758a822282588548b263c5e29772bbb25e8d905fa882b21e2e5ce38ca119",
-        "size": 7166140,
+        "sha256": "fd5d4222888229fdad46582afe56a9d09c2bba34b778b42465ce93d5d2848f9f",
+        "size": 7296713,
         "recipe": "bf22-23.exe.patch.json",
         "acceptedOriginalSha256": [
-          "574772163c9cd1be9aa1af48cf30f045a219d2825b7f8735314247f247f987e6",
+          "8193758a822282588548b263c5e29772bbb25e8d905fa882b21e2e5ce38ca119",
           "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
-          "5ba1bff7a563cb8bdab28735696b22edac388c90edce4ac8a8caa75919d2b3ae",
-          "2e4aaa4d5db93603546d5528455657e5ea81814600d4d00c5d9b850efd5fe604",
-          "31383d9d7085980be8b8b156546f1c068de873c7de4b03ee717e3a7f74f0c87b",
-          "d2e69ca3154ea998b7b6d4ae62ab4baef1d56beb68768cf82e46044c90fc32f3",
-          "b572ab3370daa18a8753d5f6c9a4687fba6f5785a2be85ec3558bb5732179507",
-          "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
-          "3237e2ceaf56f81b14614109128a5133ee69db0fe954f738cd642806da09c7d0",
-          "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa"
+          "4ebad9edf428d35261e00d54e4745d61f9a5e30b55748306233f877327d66a94"
         ]
       },
       "live": {
@@ -20389,21 +23294,21 @@
         "recipe": "bf22-23.exe.live.json",
         "acceptedOriginalSha256": [
           "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
-          "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
-          "d330a79a396ce24b509dec508a224b12e237eeb8e6c049040f8fa8f6be656955",
-          "26be851a51afbd6af0f0a50fec7744826b114700acf4d28459a559c659375f67",
-          "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa",
-          "8193758a822282588548b263c5e29772bbb25e8d905fa882b21e2e5ce38ca119"
+          "4ebad9edf428d35261e00d54e4745d61f9a5e30b55748306233f877327d66a94",
+          "fd5d4222888229fdad46582afe56a9d09c2bba34b778b42465ce93d5d2848f9f"
         ]
       }
     },
     "seasonExecutableSha256": [
+      "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
       "2159798376f670db9a99a19c85fd4cba3bbd9128f0a4b3c8b9ffb4b61d189d4a",
+      "26be851a51afbd6af0f0a50fec7744826b114700acf4d28459a559c659375f67",
       "2e4aaa4d5db93603546d5528455657e5ea81814600d4d00c5d9b850efd5fe604",
       "31383d9d7085980be8b8b156546f1c068de873c7de4b03ee717e3a7f74f0c87b",
       "3237e2ceaf56f81b14614109128a5133ee69db0fe954f738cd642806da09c7d0",
       "3fa5e69666961f32a01224c1204f8f28f516109b6cf3fc29162fcd3f6f38d017",
       "4ae89b42c5bd18cfcc76025133e6ac5b9c85c5e72eabf7c490da2a35cd570bde",
+      "4ebad9edf428d35261e00d54e4745d61f9a5e30b55748306233f877327d66a94",
       "574772163c9cd1be9aa1af48cf30f045a219d2825b7f8735314247f247f987e6",
       "5ba1bff7a563cb8bdab28735696b22edac388c90edce4ac8a8caa75919d2b3ae",
       "8193758a822282588548b263c5e29772bbb25e8d905fa882b21e2e5ce38ca119",
@@ -20412,15 +23317,18 @@
       "bcdc27a44985ca01a37fab50e73d587d78b171814f53f045cb51dfc6c0647f6c",
       "d2d6b209333b661cbcf124353c8a27691c0eba5046b2c1a91b5632968d1abaa5",
       "d2e69ca3154ea998b7b6d4ae62ab4baef1d56beb68768cf82e46044c90fc32f3",
+      "d330a79a396ce24b509dec508a224b12e237eeb8e6c049040f8fa8f6be656955",
       "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa",
-      "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414"
+      "fc670a5857d2a2f0eaf8960249ff1c5f2e15a55564d3cfc7ae87865ad1b76414",
+      "fd5d4222888229fdad46582afe56a9d09c2bba34b778b42465ce93d5d2848f9f"
     ],
     "variants": {
       "full": {
-        "sha256": "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa",
-        "size": 7326883,
+        "sha256": "4ebad9edf428d35261e00d54e4745d61f9a5e30b55748306233f877327d66a94",
+        "size": 7457456,
         "recipe": "bf22-23.exe.json",
         "acceptedOriginalSha256": [
+          "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa",
           "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
           "d2d6b209333b661cbcf124353c8a27691c0eba5046b2c1a91b5632968d1abaa5",
           "3237e2ceaf56f81b14614109128a5133ee69db0fe954f738cd642806da09c7d0",
@@ -20444,20 +23352,13 @@
         ]
       },
       "season": {
-        "sha256": "8193758a822282588548b263c5e29772bbb25e8d905fa882b21e2e5ce38ca119",
-        "size": 7166140,
+        "sha256": "fd5d4222888229fdad46582afe56a9d09c2bba34b778b42465ce93d5d2848f9f",
+        "size": 7296713,
         "recipe": "bf22-23.exe.patch.json",
         "acceptedOriginalSha256": [
-          "574772163c9cd1be9aa1af48cf30f045a219d2825b7f8735314247f247f987e6",
+          "8193758a822282588548b263c5e29772bbb25e8d905fa882b21e2e5ce38ca119",
           "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
-          "5ba1bff7a563cb8bdab28735696b22edac388c90edce4ac8a8caa75919d2b3ae",
-          "2e4aaa4d5db93603546d5528455657e5ea81814600d4d00c5d9b850efd5fe604",
-          "31383d9d7085980be8b8b156546f1c068de873c7de4b03ee717e3a7f74f0c87b",
-          "d2e69ca3154ea998b7b6d4ae62ab4baef1d56beb68768cf82e46044c90fc32f3",
-          "b572ab3370daa18a8753d5f6c9a4687fba6f5785a2be85ec3558bb5732179507",
-          "9ac62560ee238f679d27bff683b0812f187607673be9e6a45a26c702a68fd4cc",
-          "3237e2ceaf56f81b14614109128a5133ee69db0fe954f738cd642806da09c7d0",
-          "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa"
+          "4ebad9edf428d35261e00d54e4745d61f9a5e30b55748306233f877327d66a94"
         ]
       },
       "live": {
@@ -20466,11 +23367,8 @@
         "recipe": "bf22-23.exe.live.json",
         "acceptedOriginalSha256": [
           "2fa65476a92611419ce28c0cfd158a0c7f741af235aa988b0bed00c44443bb1c",
-          "05a90040fb10b6b0475490c9243dd7fe8fab86eb5b9b4ed0c7e452f471aa50b9",
-          "d330a79a396ce24b509dec508a224b12e237eeb8e6c049040f8fa8f6be656955",
-          "26be851a51afbd6af0f0a50fec7744826b114700acf4d28459a559c659375f67",
-          "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa",
-          "8193758a822282588548b263c5e29772bbb25e8d905fa882b21e2e5ce38ca119"
+          "4ebad9edf428d35261e00d54e4745d61f9a5e30b55748306233f877327d66a94",
+          "fd5d4222888229fdad46582afe56a9d09c2bba34b778b42465ce93d5d2848f9f"
         ]
       },
       "original": {
@@ -20478,8 +23376,8 @@
         "size": 7320384,
         "recipe": "bf22-23.exe.original.json",
         "acceptedOriginalSha256": [
-          "e21a8112f1fe487dcc3f7f5e5732a31d7885e17c8cbd47f5965a475dae4c19fa",
-          "8193758a822282588548b263c5e29772bbb25e8d905fa882b21e2e5ce38ca119",
+          "4ebad9edf428d35261e00d54e4745d61f9a5e30b55748306233f877327d66a94",
+          "fd5d4222888229fdad46582afe56a9d09c2bba34b778b42465ce93d5d2848f9f",
           "b5a76a87142bb887e5a7575e01662f37360e0dda8beebfe693c44effc96dab5a"
         ]
       }

@@ -67,11 +67,11 @@ def build(args: argparse.Namespace) -> dict:
         shutil.copy2(config, compiled / "conf_ligas_nacionais" / config.name)
     stage_data = work / "bundle-1-data"
     data = world_bundle(args.inherit_bundle.resolve(), compiled, args.original_game.resolve(), args.base.resolve(),
-                        stage_data, args.version, release=False)
+                        stage_data, args.version, release=args.release)
     stage_exe = work / "bundle-2-executable"
     run([sys.executable, "-m", "tools.build_live_match_preview_bundle", "--inherit-bundle", stage_data,
          "--published-executable", args.published_full, "--preview-executable", args.full,
-         "--output", stage_exe, "--version", args.version])
+         "--output", stage_exe, "--version", args.version, *(["--release"] if args.release else [])])
     patch_recipe = work / "patch-recipe.json"
     write_recipe(patch_recipe, [recipe(args.published_patch.read_bytes(), args.patch.read_bytes())])
     final = args.output.resolve()
@@ -82,7 +82,8 @@ def build(args: argparse.Namespace) -> dict:
          "--original-executable", args.original_game / "bf22-23.exe", "--patch-executable", args.patch,
          "--full-executable", args.full, "--live-executable", args.live, "--patch-recipe", patch_recipe,
          *previous, "--previous-live-only-executable", args.live,
-         "--original-game", args.original_game, "--output", final, "--version", args.version])
+         "--original-game", args.original_game, "--output", final, "--version", args.version,
+         *(["--release"] if args.release else [])])
     trophies = add_trophies(final, args.trophies, args.original_game, args.juniors_marker) if args.trophies or args.juniors_marker else []
     manifest = json.loads((final / "manifest.json").read_text(encoding="utf-8"))
     return {"bundle": str(final), "version": manifest["version"], "files": len(manifest["files"]), "trophies": trophies,
@@ -108,6 +109,7 @@ def main() -> None:
     parser.add_argument("--work", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--version", required=True)
+    parser.add_argument("--release", action="store_true")
     print(json.dumps(build(parser.parse_args()), ensure_ascii=False))
 
 
