@@ -253,7 +253,7 @@ func preparePayloadManifest(fsys fs.FS, manifest Manifest, gamePath, staged stri
 	for _, f := range manifest.Files {
 		isNationalConfig := manifest.SchemaVersion >= 3 && nationalConfigName.MatchString(f.Path)
 		isExecutable := manifest.SchemaVersion == 4 && f.Path == gameExecutablePath
-		isCrest := manifest.SchemaVersion == 4 && crestName.MatchString(f.Path)
+		isCrest := manifest.SchemaVersion == 4 && (crestName.MatchString(f.Path) || trophyName.MatchString(f.Path))
 		if !teamName.MatchString(f.Path) && !isNationalConfig && !isExecutable && !isCrest {
 			return fmt.Errorf("arquivo não autorizado no pacote: %s", f.Path)
 		}
