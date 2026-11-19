@@ -18,9 +18,10 @@ COUNTRIES = ROOT / "config" / "countries"
 SOURCE = ROOT / "tools" / "competitions-src"
 CODEC = ROOT / "tools" / "competition-codec"
 TARGETS = {
-    "f/G.class": "pairing,after-tie,points-tiebreak",
+    "f/G.class": "pairing,after-tie,points-tiebreak,home-advances",
     "f/f.class": "copa-start,copa-names",
     "f/F.class": "regional-start",
+    "best/I.class": "match-codes",
     "best/w.class": "participants,estadual-division",
     "f/B.class": "main-phase,playoff-start",
     "f/I.class": "supercopa",

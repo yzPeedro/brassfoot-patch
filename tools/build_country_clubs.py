@@ -32,11 +32,19 @@ def hex_color(value: str | None) -> str:
     return value.lower() if value and re.fullmatch(r"#[0-9A-Fa-f]{6}", value) else ""
 
 
+RESERVE = re.compile(r"\b(U-?\d{2}|Next Gen|II|B|Primavera|Reserves?)\b", re.IGNORECASE)
+
+
 def match_existing(club: dict, existing: list[dict]) -> dict | None:
+    reserve = bool(RESERVE.search(club.get("name") or ""))
     names = {norm(club.get(k) or "") for k in ("name", "shortName", "fullName")} - {""}
-    for team in existing:
+    pool = [t for t in existing if bool(RESERVE.search(t["e"])) == reserve]
+    for team in pool:
+        if norm(team["e"]) in names:
+            return team
+    for team in pool:
         candidate = norm(team["e"])
-        if candidate in names or any(candidate and (candidate in n or n in candidate) for n in names if len(n) >= 6):
+        if any(candidate and (candidate in n or n in candidate) for n in names if len(n) >= 6):
             return team
     return None
 

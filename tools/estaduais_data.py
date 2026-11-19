@@ -7,6 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ESTADUAIS = ROOT / "config" / "estaduais"
 REGIONAIS = ROOT / "config" / "regionais"
+LIGAS = ROOT / "config" / "ligas"
 UF = sorted("AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO".split())
 
 
@@ -20,7 +21,7 @@ def array(values, render) -> str:
 
 def ready_states(*folders: Path) -> list[dict]:
     states = []
-    for folder in folders or (ESTADUAIS, REGIONAIS):
+    for folder in folders or (ESTADUAIS, REGIONAIS, LIGAS):
         if folder.exists():
             states += [json.loads(p.read_text(encoding="utf-8")) for p in sorted(folder.glob("*.json"))
                        if p.name != "aliases.json"]
@@ -72,6 +73,9 @@ def source(*folders: Path) -> str:
         "",
         "    static final String[][] KO_HOME = {\n"
         + rows(lambda s: knockout(s, lambda r: text(r.get("home", "better-second")))) + "\n    };",
+        "",
+        "    static final String[][][] KO_ENTRANTS = {\n"
+        + rows(lambda s: knockout(s, lambda r: array(r.get("entrants") or [], text))) + "\n    };",
         "}",
         "",
     ]

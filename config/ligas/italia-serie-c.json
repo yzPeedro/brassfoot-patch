@@ -1,0 +1,201 @@
+{
+  "state": "ITA-C",
+  "key": 11043,
+  "season": 2026,
+  "competition": "Serie C 2026/27 - play-off",
+  "engine": "ready",
+  "pending": [],
+  "teams": [],
+  "names": [],
+  "phase1": {
+    "type": "national",
+    "legs": 2,
+    "groups": [],
+    "fixtures": [],
+    "opponents": []
+  },
+  "relegated": 0,
+  "knockout": [
+    {
+      "name": "Fase de grupo - 1º turno",
+      "legs": 1,
+      "tiebreak": "home-advances",
+      "home": "better-single",
+      "ties": [
+        [
+          "A5",
+          "A10"
+        ],
+        [
+          "A6",
+          "A9"
+        ],
+        [
+          "A7",
+          "A8"
+        ],
+        [
+          "B5",
+          "B10"
+        ],
+        [
+          "B6",
+          "B9"
+        ],
+        [
+          "B7",
+          "B8"
+        ],
+        [
+          "C5",
+          "C10"
+        ],
+        [
+          "C6",
+          "C9"
+        ],
+        [
+          "C7",
+          "C8"
+        ]
+      ]
+    },
+    {
+      "name": "Fase de grupo - 2º turno",
+      "legs": 1,
+      "tiebreak": "home-advances",
+      "home": "better-single",
+      "entrants": [
+        "A4",
+        "B4",
+        "C4"
+      ],
+      "ties": [
+        [
+          "QA1",
+          "QA4"
+        ],
+        [
+          "QA2",
+          "QA3"
+        ],
+        [
+          "QB1",
+          "QB4"
+        ],
+        [
+          "QB2",
+          "QB3"
+        ],
+        [
+          "QC1",
+          "QC4"
+        ],
+        [
+          "QC2",
+          "QC3"
+        ]
+      ]
+    },
+    {
+      "name": "Fase nacional - 1º turno",
+      "legs": 2,
+      "tiebreak": "aggregate-then-second-host",
+      "home": "neutral",
+      "entrants": [
+        "A3",
+        "B3",
+        "C3",
+        "P31"
+      ],
+      "ties": [
+        [
+          "X1",
+          "A3"
+        ],
+        [
+          "X2",
+          "B3"
+        ],
+        [
+          "X3",
+          "C3"
+        ],
+        [
+          "X4",
+          "P31"
+        ],
+        [
+          "X5",
+          "G1"
+        ]
+      ]
+    },
+    {
+      "name": "Fase nacional - 2º turno",
+      "legs": 2,
+      "tiebreak": "aggregate-then-second-host",
+      "home": "neutral",
+      "entrants": [
+        "A2",
+        "B2",
+        "C2"
+      ],
+      "ties": [
+        [
+          "X1",
+          "A2"
+        ],
+        [
+          "X2",
+          "B2"
+        ],
+        [
+          "X3",
+          "C2"
+        ],
+        [
+          "X4",
+          "G1"
+        ]
+      ]
+    },
+    {
+      "name": "Final Four - semifinal",
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "neutral",
+      "ties": [
+        [
+          "X1",
+          "X2"
+        ],
+        [
+          "X3",
+          "X4"
+        ]
+      ]
+    },
+    {
+      "name": "Final Four - final",
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "neutral",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ]
+      ]
+    }
+  ],
+  "simplifications": [
+    "o campeão da Coppa Italia Serie C não é simulado; a vaga dele na 1ª fase nacional fica com o melhor 11º colocado (P31)",
+    "prorrogação da Final Four não disputada; empate no agregado vai aos pênaltis",
+    "rebaixamento e play-out da Serie C não são disputados (a Serie D não existe no jogo)",
+    "sorteios da fase nacional e da Final Four feitos pelo jogo"
+  ],
+  "sources": [
+    "data/private/competitions-sources/italy-2026/structure.json (art. 49 NOIF, CU FIGC 209/A)"
+  ]
+}

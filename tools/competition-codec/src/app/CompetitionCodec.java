@@ -145,6 +145,13 @@ public final class CompetitionCodec {
     }
 
     static void setField(Object root, String assignment) throws Exception {
+        if (assignment.startsWith("count=")) {
+            int count = Integer.parseInt(assignment.substring(6));
+            java.util.List<?> all = root instanceof ArrayLigaType n ? n.a : ((ArrayLigaEType) root).a;
+            if (count < 1 || count > all.size()) throw new IllegalArgumentException("Invalid count: " + count);
+            while (all.size() > count) all.remove(all.size() - 1);
+            return;
+        }
         int dot = assignment.indexOf('.');
         int eq = assignment.indexOf('=');
         if (dot < 1 || eq < dot) throw new IllegalArgumentException("Expected INDEX.field=value: " + assignment);

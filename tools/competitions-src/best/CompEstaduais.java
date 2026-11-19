@@ -18,6 +18,7 @@ import java.util.Map;
 public final class CompEstaduais {
     static final int CODE = 2700;
     static final int POINTS_CODE = 2701;
+    static final int HOME_CODE = 2130;
 
     private CompEstaduais() {
     }
@@ -38,7 +39,8 @@ public final class CompEstaduais {
         int code = league.ze();
         if (code == CODE) return league.ir() == null ? -1 : index(league.ir().getEstado());
         if (code > CODE + 1 && code < CODE + 100) return index(code - CODE + 100);
-        return -1;
+        Z country = league.iq();
+        return country == null ? -1 : index(10000 + country.jc() * 10 + league.ip());
     }
 
     static boolean officialSeason() {
@@ -377,6 +379,8 @@ public final class CompEstaduais {
             String tiebreak = CompEstaduaisData.KO_TIEBREAK[k][index];
             if ("better-campaign".equals(tiebreak) || "aggregate-then-better-campaign".equals(tiebreak)) round.fb(2129);
             if ("points-then-penalties".equals(tiebreak)) round.fb(POINTS_CODE);
+            if ("aggregate-then-second-host".equals(tiebreak)) round.fb(2129);
+            if ("home-advances".equals(tiebreak)) round.fb(HOME_CODE);
             return true;
         } catch (Throwable error) {
             log("falha no mata-mata estadual", error);
@@ -414,6 +418,25 @@ public final class CompEstaduais {
             }
             return position < ordered.size() ? (ah) ordered.get(position) : null;
         }
+        if (head == 'Q') {
+            int group = code.charAt(1) - 'A';
+            int position = Integer.parseInt(code.substring(2)) - 1;
+            final ArrayList members = ((best.G) league.yQ().get(group)).gR();
+            ArrayList same = new ArrayList();
+            for (int i = 0; i < candidates.size(); i++) if (members.contains(candidates.get(i))) same.add(candidates.get(i));
+            Collections.sort(same, new Comparator() {
+                public int compare(Object x, Object y) {
+                    return members.indexOf(x) - members.indexOf(y);
+                }
+            });
+            return position < same.size() ? (ah) same.get(position) : null;
+        }
+        if (head == 'G') {
+            int position = Integer.parseInt(code.substring(1)) - 1;
+            ArrayList winners = new ArrayList(((G) knockout.zp().get(index - 1)).zY());
+            Collections.sort(winners, byGroupPosition(league, campaign));
+            return position < winners.size() ? (ah) winners.get(position) : null;
+        }
         if (head == 'R') {
             int position = Integer.parseInt(code.substring(1)) - 1;
             ArrayList ranked = new ArrayList(candidates);
@@ -426,27 +449,75 @@ public final class CompEstaduais {
         return position < members.size() ? (ah) members.get(position) : null;
     }
 
+    private static boolean direct(String code) {
+        char head = code.charAt(0);
+        return head != 'W' && head != 'L' && head != 'R' && head != 'Q' && head != 'G' && head != 'X';
+    }
+
+    private static Comparator byGroupPosition(final s league, final Comparator campaign) {
+        return new Comparator() {
+            int place(Object team) {
+                ArrayList groups = league.yQ();
+                for (int g = 0; g < groups.size(); g++) {
+                    int at = ((best.G) groups.get(g)).gR().indexOf(team);
+                    if (at >= 0) return at;
+                }
+                return league.yK().indexOf(team);
+            }
+
+            public int compare(Object x, Object y) {
+                int difference = place(x) - place(y);
+                return difference != 0 ? difference : campaign.compare(x, y);
+            }
+        };
+    }
+
     private static ArrayList resolve(s league, z knockout, String[][] ties, int k, int index) {
         Comparator campaign = campaign(league, knockout);
         ArrayList candidates = new ArrayList();
+        ArrayList winners = new ArrayList();
         if (knockout != null && index > 0) {
             G previous = (G) knockout.zp().get(index - 1);
-            candidates.addAll(previous.zY());
+            winners.addAll(previous.zY());
+            candidates.addAll(winners);
+            String[] entrants = index < CompEstaduaisData.KO_ENTRANTS[k].length ? CompEstaduaisData.KO_ENTRANTS[k][index] : new String[0];
+            for (int e = 0; e < entrants.length; e++) {
+                ah entrant = slot(entrants[e], league, knockout, index, campaign, candidates);
+                if (entrant != null && !candidates.contains(entrant)) candidates.add(entrant);
+            }
             for (int t = 0; t < ties.length; t++) {
                 for (int side = 0; side < 2; side++) {
-                    char head = ties[t][side].charAt(0);
-                    if (head != 'W' && head != 'L' && head != 'R') {
-                        ah direct = slot(ties[t][side], league, knockout, index, campaign, candidates);
-                        if (direct != null && !candidates.contains(direct)) candidates.add(direct);
+                    if (direct(ties[t][side])) {
+                        ah team = slot(ties[t][side], league, knockout, index, campaign, candidates);
+                        if (team != null && !candidates.contains(team)) candidates.add(team);
                     }
                 }
+            }
+        }
+        ah[][] chosen = new ah[ties.length][2];
+        ArrayList used = new ArrayList();
+        for (int t = 0; t < ties.length; t++) {
+            for (int side = 0; side < 2; side++) {
+                if (ties[t][side].charAt(0) == 'X') continue;
+                chosen[t][side] = slot(ties[t][side], league, knockout, index, campaign, candidates);
+                if (chosen[t][side] != null) used.add(chosen[t][side]);
+            }
+        }
+        ArrayList drawn = new ArrayList(winners);
+        drawn.removeAll(used);
+        Collections.shuffle(drawn);
+        for (int t = 0; t < ties.length; t++) {
+            for (int side = 0; side < 2; side++) {
+                if (ties[t][side].charAt(0) != 'X') continue;
+                int position = Integer.parseInt(ties[t][side].substring(1)) - 1;
+                chosen[t][side] = position < drawn.size() ? (ah) drawn.get(position) : null;
             }
         }
         String home = CompEstaduaisData.KO_HOME[k][index];
         ArrayList list = new ArrayList();
         for (int t = 0; t < ties.length; t++) {
-            ah first = slot(ties[t][0], league, knockout, index, campaign, candidates);
-            ah second = slot(ties[t][1], league, knockout, index, campaign, candidates);
+            ah first = chosen[t][0];
+            ah second = chosen[t][1];
             if (first == null || second == null) {
                 log("confronto sem clube: " + ties[t][0] + " x " + ties[t][1] + " (grupos " + (league.yQ() == null ? -1 : league.yQ().size()) + ", tabela " + league.yK().size() + ")", null);
                 return null;

@@ -151,6 +151,94 @@ public final class CountryHarness {
         check(((f.G) playoff.zp().get(1)).zX() == null || ((f.G) playoff.zp().get(1)).zX().isEmpty(), year + " pais " + id + " final do playoff em jogo unico");
     }
 
+    private static String ties(ArrayList table, f.G round) {
+        StringBuilder text = new StringBuilder();
+        for (int t = 0; t < round.zW().size(); t++) {
+            I first = (I) round.zW().get(t);
+            text.append(table.indexOf(first.hc()) + 1).append('x').append(table.indexOf(first.hd()) + 1)
+                    .append(' ').append(first.hu()).append('-').append(first.hw());
+            if (round.zX() != null && t < round.zX().size()) {
+                I second = (I) round.zX().get(t);
+                text.append('/').append(second.hu()).append('-').append(second.hw());
+            }
+            text.append("; ");
+        }
+        StringBuilder winners = new StringBuilder();
+        for (Object team : round.zY()) winners.append(table.indexOf(team) + 1).append(' ');
+        return text + "-> " + winners;
+    }
+
+    private static Object field(Object target, String name) throws Exception {
+        java.lang.reflect.Field field = target.getClass().getDeclaredField(name);
+        field.setAccessible(true);
+        return field.get(target);
+    }
+
+    private static void italyB(int year, f.B division) throws Exception {
+        ArrayList table = division.yi().yK();
+        f.z eliminators = (f.z) field(division, "ZV");
+        f.z playoff = division.BR();
+        f.z playout = (f.z) field(division, "agB");
+        int third = ((ah) table.get(2)).d(division.yi())[0];
+        int fourth = ((ah) table.get(3)).d(division.yi())[0];
+        if (third - fourth > 14) {
+            out.println(year + " Serie B: 3o sobe direto (" + third + " x " + fourth + " pontos)");
+        } else {
+            boolean ok = eliminators != null && !eliminators.zp().isEmpty();
+            String text = ok ? ties(table, (f.G) eliminators.zp().get(0)) : "";
+            if (ok) {
+                f.G first = (f.G) eliminators.zp().get(0);
+                I a = (I) first.zW().get(0);
+                I b = (I) first.zW().get(1);
+                ok = table.indexOf(a.hc()) == 4 && table.indexOf(a.hd()) == 7 && table.indexOf(b.hc()) == 5 && table.indexOf(b.hd()) == 6;
+                for (int t = 0; t < 2; t++) {
+                    I match = (I) first.zW().get(t);
+                    if (match.hu() == match.hw()) ok &= first.zY().contains(match.hc());
+                }
+            }
+            check(ok, year + " Serie B eliminatorias 5x8 e 6x7, empate classifica o mandante: " + text);
+            boolean semis = playoff != null && playoff.zp().size() == 2;
+            String semiText = playoff != null && !playoff.zp().isEmpty() ? ties(table, (f.G) playoff.zp().get(0)) : "";
+            if (semis) {
+                f.G first = (f.G) playoff.zp().get(0);
+                semis = table.indexOf(((I) first.zW().get(0)).hd()) == 2 && table.indexOf(((I) first.zW().get(1)).hd()) == 3;
+            }
+            check(semis, year + " Serie B semifinais com o 3o e o 4o mandando a volta: " + semiText
+                    + (playoff != null && playoff.zp().size() > 1 ? " | final " + ties(table, (f.G) playoff.zp().get(1)) : ""));
+        }
+        int sixteenth = ((ah) table.get(15)).d(division.yi())[0];
+        int seventeenth = ((ah) table.get(16)).d(division.yi())[0];
+        if (sixteenth - seventeenth > 4) {
+            check(playout == null, year + " Serie B sem play-out (" + sixteenth + " x " + seventeenth + " pontos)");
+        } else {
+            boolean ok = playout != null && !playout.zp().isEmpty() && ((f.G) playout.zp().get(0)).zY().size() == 1;
+            check(ok, year + " Serie B play-out 17o x 16o: " + (ok ? ties(table, (f.G) playout.zp().get(0)) : "ausente"));
+        }
+    }
+
+    private static void italyC(int year, f.B division) throws Exception {
+        f.s league = division.yi();
+        ArrayList groups = league.yQ();
+        StringBuilder sizes = new StringBuilder();
+        for (Object group : groups) sizes.append(((best.G) group).gR().size()).append(' ');
+        check(groups.size() == 3 && sizes.toString().equals("20 20 20 "), year + " Serie C em 3 grupos: " + sizes);
+        f.z knockout = league.yY();
+        int rounds = knockout == null ? 0 : knockout.zp().size();
+        ArrayList last = rounds == 0 ? new ArrayList() : ((f.G) knockout.zp().get(rounds - 1)).zY();
+        StringBuilder text = new StringBuilder();
+        for (int r = 0; r < rounds; r++) text.append(((f.G) knockout.zp().get(r)).zW().size()).append(' ');
+        check(rounds == 6 && last.size() == 1, year + " Serie C play-off com 6 fases (confrontos " + text + ") campeao "
+                + (last.isEmpty() ? "nenhum" : ((ah) last.get(0)).getNome()));
+        StringBuilder leaders = new StringBuilder();
+        for (Object group : groups) leaders.append(((ah) ((best.G) group).gR().get(0)).getNome()).append("; ");
+        out.println(year + " Serie C campeoes de grupo: " + leaders);
+        for (int g = 0; g < groups.size(); g++) {
+            StringBuilder files = new StringBuilder();
+            for (Object team : ((best.G) groups.get(g)).gR()) files.append(((ah) team).jY()).append(',');
+            out.println(year + " grupo " + (char) ('A' + g) + ": " + files);
+        }
+    }
+
     private static void seasonEnd(int year, int id, String[] rule) throws Exception {
         Z country = c.a.SR.o(id);
         ArrayList divisions = country.eb();
@@ -160,6 +248,14 @@ public final class CountryHarness {
             out.println(year + " pais " + id + " divisao " + (i + 1) + " campeao: " + (champion == null ? "nenhum" : champion.getNome()));
             check(champion != null, year + " pais " + id + " divisao " + (i + 1) + " com campeao");
             String kind = i < rule.length ? rule[i] : "";
+            if (kind.equals("italyB")) {
+                italyB(year, division);
+                continue;
+            }
+            if (kind.equals("italyC")) {
+                italyC(year, division);
+                continue;
+            }
             if (kind.equals("six")) {
                 sixTeam(year, id, division, i + 1);
                 tableOrder(year, id, division, i + 1);

@@ -298,6 +298,20 @@ public final class CompBrasil2026 {
             if (knockout != null && list != null && CompEstaduais.round(round, knockout, list, index)) return;
             if (knockout == null || list == null || !(knockout.yT() instanceof B)) return;
             B owner = (B) knockout.yT();
+            String italian = playoffRule(owner);
+            if ("six-team-italy".equals(italian)) {
+                if (knockout.zf() == ELIMINATOR_CODE) round.fb(CompEstaduais.HOME_CODE);
+                if (knockout.zf() == 1099 || knockout.zf() == PLAYOUT_CODE) round.fb(2129);
+                if (knockout.zf() == 1099 && index == 1 && list.size() == 2) {
+                    ArrayList table = owner.yi().yK();
+                    if (table.indexOf(list.get(0)) < table.indexOf(list.get(1))) {
+                        Object first = list.get(0);
+                        list.set(0, list.get(1));
+                        list.set(1, first);
+                    }
+                }
+                return;
+            }
             if (knockout.zf() == 1099 && index == 0 && list.size() == 4) {
                 String rule = playoffRule(owner);
                 if ("four-team".equals(rule)) playoffPairs(round, owner, list);
@@ -329,6 +343,8 @@ public final class CompBrasil2026 {
     }
 
     private static final int ELIMINATOR_CODE = 1096;
+    private static final int PLAYOUT_CODE = 1095;
+    private static final int ITALY = 104;
 
     static String playoffRule(B owner) {
         int country = owner.zO();
@@ -350,9 +366,17 @@ public final class CompBrasil2026 {
 
     public static boolean playoffStart(B owner) {
         try {
-            if (!"six-team".equals(playoffRule(owner)) || owner.ip() <= 1 || owner.BR() != null) return false;
+            String rule = playoffRule(owner);
+            if (!"six-team".equals(rule) && !"six-team-italy".equals(rule) || owner.ip() <= 1 || owner.BR() != null) return false;
             ArrayList table = owner.yi().yK();
             if (table.size() < 8) return false;
+            if ("six-team-italy".equals(rule)) {
+                playout(owner, table);
+                if (points(owner, table.get(2)) - points(owner, table.get(3)) > 14) {
+                    owner.BO();
+                    return true;
+                }
+            }
             ArrayList pairs = new ArrayList();
             pairs.add(table.get(4));
             pairs.add(table.get(7));
@@ -369,6 +393,24 @@ public final class CompBrasil2026 {
         }
     }
 
+    static int points(B owner, Object team) {
+        return ((ah) team).d(owner.yi())[0];
+    }
+
+    private static void playout(B owner, ArrayList table) throws Exception {
+        if (bField("agB").get(owner) != null || table.size() < 17) return;
+        Object sixteenth = table.get(table.size() - 5);
+        Object seventeenth = table.get(table.size() - 4);
+        if (points(owner, sixteenth) - points(owner, seventeenth) > 4) return;
+        ArrayList pair = new ArrayList();
+        pair.add(seventeenth);
+        pair.add(sixteenth);
+        boolean[] legs = {true, false, false, false, false, false, false};
+        z playout = new z(null, 2, owner.b(), 1, legs, owner, PLAYOUT_CODE);
+        bField("agB").set(owner, playout);
+        new G().a(playout, pair, 0, true, 0, 0, owner.b(), false);
+    }
+
     private static void sixTeamSemifinals(G round) throws Exception {
         z eliminators = round.zT();
         if (eliminators == null || !(eliminators.yT() instanceof B)) return;
@@ -377,6 +419,21 @@ public final class CompBrasil2026 {
         ArrayList table = owner.yi().yK();
         ArrayList winners = new ArrayList(round.zY());
         if (winners.size() != 2) return;
+        if ("six-team-italy".equals(playoffRule(owner))) {
+            I fiveEight = (I) round.zW().get(0);
+            Object winnerFiveEight = winners.contains(fiveEight.hc()) ? fiveEight.hc() : fiveEight.hd();
+            Object winnerSixSeven = winnerFiveEight == winners.get(0) ? winners.get(1) : winners.get(0);
+            ArrayList semis = new ArrayList();
+            semis.add(winnerSixSeven);
+            semis.add(table.get(2));
+            semis.add(winnerFiveEight);
+            semis.add(table.get(3));
+            boolean[] legs = {true, true, false, false, false, false, false};
+            z playoff = new z(null, 4, owner.b(), 0, legs, owner, 1099);
+            bField("agA").set(owner, playoff);
+            new G().a(playoff, semis, 0, true, 0, 0, owner.b(), false);
+            return;
+        }
         Object worse = table.indexOf(winners.get(0)) > table.indexOf(winners.get(1)) ? winners.get(0) : winners.get(1);
         Object other = worse == winners.get(0) ? winners.get(1) : winners.get(0);
         ArrayList semis = new ArrayList();
@@ -786,8 +843,77 @@ public final class CompBrasil2026 {
         }
     }
 
+    private static Object champion(z knockout) {
+        if (knockout == null || knockout.zp().isEmpty()) return null;
+        ArrayList last = ((G) knockout.zp().get(knockout.zp().size() - 1)).zY();
+        return last.size() == 1 ? last.get(0) : null;
+    }
+
+    private static Object loser(z knockout) {
+        if (knockout == null || knockout.zp().isEmpty()) return null;
+        G round = (G) knockout.zp().get(0);
+        ArrayList losers = new ArrayList();
+        for (int i = 0; i < round.zW().size(); i++) {
+            I match = (I) round.zW().get(i);
+            if (!round.zY().contains(match.hc())) losers.add(match.hc());
+            if (!round.zY().contains(match.hd())) losers.add(match.hd());
+        }
+        return losers.size() == 1 && round.zY().size() == 1 ? losers.get(0) : null;
+    }
+
+    private static void move(ArrayList teams, B from, B to, int flag) {
+        for (int i = 0; i < teams.size(); i++) {
+            ah team = (ah) teams.get(i);
+            team.b(from, flag);
+            from.yi().yK().remove(team);
+            to.yi().yK().add(team);
+        }
+    }
+
+    static boolean italy(Z country) {
+        ArrayList divisions = country.eb();
+        if (divisions.size() != 3) return false;
+        B serieA = (B) divisions.get(0);
+        B serieB = (B) divisions.get(1);
+        B serieC = (B) divisions.get(2);
+        ArrayList aTable = serieA.yi().yK();
+        ArrayList bTable = serieB.yi().yK();
+        ArrayList aDown = new ArrayList(aTable.subList(aTable.size() - 3, aTable.size()));
+        ArrayList bUp = new ArrayList(bTable.subList(0, 2));
+        boolean thirdDirect = points(serieB, bTable.get(2)) - points(serieB, bTable.get(3)) > 14;
+        Object playoffWinner = thirdDirect ? bTable.get(2) : champion(serieB.BR());
+        ArrayList bDown = new ArrayList(bTable.subList(bTable.size() - 3, bTable.size()));
+        Object playoutLoser = null;
+        try {
+            playoutLoser = loser((z) bField("agB").get(serieB));
+        } catch (Exception error) {
+            log("play-out da Serie B indisponivel", error);
+        }
+        Object seventeenth = bTable.get(bTable.size() - 4);
+        if (playoutLoser == null && points(serieB, bTable.get(bTable.size() - 5)) - points(serieB, seventeenth) > 4) playoutLoser = seventeenth;
+        ArrayList cUp = new ArrayList();
+        ArrayList groups = serieC.yi().yQ();
+        for (int g = 0; g < groups.size(); g++) cUp.add(((best.G) groups.get(g)).gR().get(0));
+        Object cPlayoff = champion(serieC.yi().yY());
+        if (playoffWinner == null || playoutLoser == null || cPlayoff == null || cUp.size() != 3) {
+            log("Italia: acesso e descenso incompletos (playoff B " + playoffWinner + ", play-out " + playoutLoser + ", playoff C " + cPlayoff + ")", null);
+            return false;
+        }
+        bUp.add(playoffWinner);
+        bDown.add(playoutLoser);
+        cUp.add(cPlayoff);
+        move(aDown, serieA, serieB, 0);
+        move(bUp, serieB, serieA, 1);
+        move(bDown, serieB, serieC, 0);
+        move(cUp, serieC, serieB, 1);
+        for (int i = 0; i < divisions.size(); i++) ((B) divisions.get(i)).yi().yI();
+        for (int i = 0; i < divisions.size(); i++) ((B) divisions.get(i)).BJ();
+        return true;
+    }
+
     public static boolean promotion(Z country) {
         try {
+            if (country.jc() == ITALY && a.SR.H() > 0) return italy(country);
             if (country.jc() != BRAZIL || !a.SR.bk()) return false;
             ArrayList divisions = country.eb();
             if (divisions.size() != 4) return false;

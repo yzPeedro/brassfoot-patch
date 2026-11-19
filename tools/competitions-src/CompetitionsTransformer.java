@@ -346,6 +346,78 @@ public final class CompetitionsTransformer {
         return true;
     }
 
+    private static boolean homeAdvances(ClassNode owner) {
+        MethodNode target = method(owner, "b", "(ZZ)V");
+        AbstractInsnNode anchor = null;
+        for (AbstractInsnNode node : target.instructions) {
+            if (node instanceof IntInsnNode push && push.getOpcode() == Opcodes.SIPUSH && push.operand == 2129
+                    && push.getPrevious() instanceof MethodInsnNode code && "ze".equals(code.name)
+                    && code.getPrevious() != null && code.getPrevious().getPrevious() instanceof JumpInsnNode skip
+                    && skip.getOpcode() == Opcodes.IFNE
+                    && skip.getPrevious() instanceof VarInsnNode decision && decision.getOpcode() == Opcodes.ILOAD) {
+                if (anchor != null) throw new IllegalStateException("ambiguous 2129 decision");
+                anchor = decision;
+            }
+        }
+        if (anchor == null) throw new IllegalStateException("2129 decision absent");
+        int decision = ((VarInsnNode) anchor).var;
+        LabelNode skip = new LabelNode(new Label());
+        InsnList hook = new InsnList();
+        hook.add(new VarInsnNode(Opcodes.ILOAD, decision));
+        hook.add(new JumpInsnNode(Opcodes.IFNE, skip));
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "f/G", "ze", "()I", false));
+        hook.add(new IntInsnNode(Opcodes.SIPUSH, 2130));
+        hook.add(new JumpInsnNode(Opcodes.IF_ICMPNE, skip));
+        hook.add(new InsnNode(Opcodes.ICONST_1));
+        hook.add(new VarInsnNode(Opcodes.ISTORE, decision));
+        hook.add(skip);
+        target.instructions.insertBefore(anchor, hook);
+        return true;
+    }
+
+    private static boolean matchCodes(ClassNode owner) {
+        MethodNode target = method(owner, "hk", "()Z");
+        VarInsnNode codeStore = null;
+        for (AbstractInsnNode node : target.instructions) {
+            if (node instanceof MethodInsnNode call && "BI".equals(call.name) && node.getNext() instanceof VarInsnNode store
+                    && store.getOpcode() == Opcodes.ISTORE) {
+                codeStore = store;
+                break;
+            }
+        }
+        if (codeStore == null) throw new IllegalStateException("tie code absent");
+        int code = codeStore.var;
+        LabelNode keep = new LabelNode(new Label());
+        InsnList early = new InsnList();
+        early.add(new VarInsnNode(Opcodes.ILOAD, code));
+        early.add(new IntInsnNode(Opcodes.SIPUSH, 2130));
+        early.add(new JumpInsnNode(Opcodes.IF_ICMPNE, keep));
+        early.add(new InsnNode(Opcodes.ICONST_0));
+        early.add(new InsnNode(Opcodes.IRETURN));
+        early.add(keep);
+        target.instructions.insert(codeStore, early);
+        JumpInsnNode skip = null;
+        for (AbstractInsnNode node : target.instructions) {
+            if (node instanceof VarInsnNode decision && decision.getOpcode() == Opcodes.ILOAD
+                    && node.getNext() instanceof JumpInsnNode jump && jump.getOpcode() == Opcodes.IFNE
+                    && jump.getNext() instanceof VarInsnNode home && home.getOpcode() == Opcodes.ILOAD
+                    && home.getNext() instanceof VarInsnNode away && away.getOpcode() == Opcodes.ILOAD
+                    && away.getNext() instanceof JumpInsnNode compare && compare.getOpcode() == Opcodes.IF_ICMPLE
+                    && home.var != away.var && home.var != decision.var) {
+                skip = jump;
+                break;
+            }
+        }
+        if (skip == null) throw new IllegalStateException("aggregate block absent in hk");
+        InsnList points = new InsnList();
+        points.add(new VarInsnNode(Opcodes.ILOAD, code));
+        points.add(new IntInsnNode(Opcodes.SIPUSH, 2701));
+        points.add(new JumpInsnNode(Opcodes.IF_ICMPEQ, skip.label));
+        target.instructions.insert(skip, points);
+        return true;
+    }
+
     private static boolean regionalStart(ClassNode owner) {
         MethodNode target = method(owner, "an", "(Ljava/util/ArrayList;)V");
         LabelNode original = new LabelNode(new Label());
@@ -436,6 +508,8 @@ public final class CompetitionsTransformer {
             case "estadual-crossed": frames = estadualCrossed(owner); break;
             case "points-tiebreak": frames = pointsTiebreak(owner); break;
             case "regional-start": frames = regionalStart(owner); break;
+            case "home-advances": frames = homeAdvances(owner); break;
+            case "match-codes": frames = matchCodes(owner); break;
             case "division-order": frames = divisionOrder(owner); break;
             case "serie-c-rounds": frames = singleRoundSerieC(owner); break;
             default: throw new IllegalArgumentException("unknown mode " + args[0]);
