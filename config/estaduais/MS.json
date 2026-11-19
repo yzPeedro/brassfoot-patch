@@ -4,17 +4,12 @@
   "competition": "Campeonato Sul-Mato-Grossense 2026",
   "engine": "pending",
   "pending": [
-    "fase 1 sem confrontos definidos",
-    "fase 1: desempate 'None' sem suporte",
-    "fase 1: mando 'None' sem suporte",
-    "fase 2 sem confrontos definidos",
-    "fase 2: mando 'None' sem suporte",
     "clube sem arquivo: Naviraiense",
     "clube sem arquivo: Águia Negra",
     "clube sem arquivo: Costa Rica",
     "clube sem arquivo: Corumbaense",
     "clube sem arquivo: Dourados",
-    "clube sem arquivo: Aquidauanense",
+    "clube sem arquivo: Clube de Regatas Aquidauana",
     "clube sem arquivo: Bataguassu"
   ],
   "teams": [
@@ -38,7 +33,7 @@
     "Pantanal",
     "Ivinhema",
     "Dourados",
-    "Aquidauanense",
+    "Clube de Regatas Aquidauana",
     "Bataguassu"
   ],
   "phase1": {
@@ -51,17 +46,35 @@
   "knockout": [
     {
       "name": "Quartas",
-      "ties": null,
+      "ties": [
+        [
+          "6",
+          "3"
+        ],
+        [
+          "5",
+          "4"
+        ]
+      ],
       "legs": 2,
-      "tiebreak": null,
-      "home": null
+      "tiebreak": "aggregate-then-penalties",
+      "home": "neutral"
     },
     {
       "name": "Semifinal",
-      "ties": null,
+      "ties": [
+        [
+          "W2",
+          "1"
+        ],
+        [
+          "W1",
+          "2"
+        ]
+      ],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
-      "home": null
+      "home": "neutral"
     },
     {
       "name": "Final",
@@ -76,16 +89,21 @@
       "home": "better-second"
     }
   ],
-  "simplifications": [],
+  "simplifications": [
+    "mando 'neutral' segue a ordem da tabela"
+  ],
   "unsupported": [
-    "Regulamento oficial da FFMS 2026 não localizado: o formato vem só de imprensa (fonte secundária).",
-    "Folga: 1º e 2º vão direto às semifinais; 3º a 6º jogam as quartas em ida e volta. Os cruzamentos das quartas e das semifinais (quem enfrenta 1º e 2º) não constam das fontes (ties = null).",
-    "Quartas: critério de desempate e mando sem fonte. Semifinal: empate no agregado -> pênaltis; mando sem fonte.",
-    "Final: 2º jogo em casa da melhor campanha; empate no agregado -> pênaltis. As fontes não dizem se 'melhor campanha' é só a 1ª fase ou a campanha acumulada.",
-    "Critérios de desempate da 1ª fase sem fonte (só pontos é certo)."
+    "Participante corrigido pelo review (Art. 9º e tabela oficial): o 10º clube é o 'Clube de Regatas Aquidauana' (Aquidauana), e não 'Aquidauanense' como em MS.json. 'teams' usa o nome corrigido, que não consta de participants[].name da pesquisa; MS.json não foi alterado e também dá 'Aquidauanense' como campeão da Série B 2026 (Midiamax), o que precisa ser conferido antes de ligar os dois registros.",
+    "Desempate da 1ª fase (Art. 3º): confronto direto só entre 2 clubes; depois menos vermelhos, menos amarelos e sorteio público na FFMS.",
+    "Quartas (Art. 9º §2º; Art. 10): B = 6º x 3º (ida) e 3º x 6º (volta); C = 5º x 4º e 4º x 5º. Gravado com 'neutral' e a ordem do REC: o 1º clube do par manda o 1º jogo, o 2º manda a volta. Empate em pontos: vitórias, saldo, gols marcados, depois pênaltis (Art. 10 §1º); em dois jogos, isso decide igual a 'aggregate-then-penalties'.",
+    "Semifinal (Art. 11): D = vencedor de C x 1º e E = vencedor de B x 2º, com 1º e 2º mandando a volta; gravado com 'neutral' e essa ordem. Mesmo critério de empate (Art. 11 §1º).",
+    "Final (Art. 12): jogo de volta na casa da melhor campanha no campeonato; com número de jogos diferente, vale a média dos critérios. O motor compara totais acumulados (pontos, vitórias, saldo, gols pró), não médias: aproximação quando um finalista veio da folga e o outro das quartas. Mesmo critério de empate (Art. 12 §1º).",
+    "Mandos da 1ª fase: Operário, Ivinhema, Pantanal, Costa Rica e Dourados com 5 jogos em casa (Art. 9º §1º); a tabela não foi fixada em pairs.",
+    "Vagas 2027 (Art. 27): fora do esquema."
   ],
   "sources": [
-    "MS.json (pesquisa): imprensa de 01/03/2026 (participantes, formato, classificados, rebaixados); imprensa da final; Correio do Estado (pênaltis após empate no agregado)",
-    "Sem PDF oficial de MS no lote"
+    "pdf/MS-serie-A-REC-2026.pdf (sha256 f8f148a4…285cf1): Art. 3º (desempates), Art. 9º (participantes, mandos da 1ª fase, classificados), Art. 10 (quartas), Art. 11 (semifinal), Art. 12 (final), Art. 13 (rebaixamento), Art. 27 (vagas)",
+    "MS.review.json (19/11/2026)",
+    "MS.json (pesquisa): imprensa (fontes anteriores ao REC)"
   ]
 }

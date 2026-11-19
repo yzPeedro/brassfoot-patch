@@ -4,10 +4,6 @@
   "competition": "Campeonato Catarinense 2026 – Série A",
   "engine": "pending",
   "pending": [
-    "fase 1: desempate 'None' sem suporte",
-    "fase 2 sem confrontos definidos",
-    "fase 2: desempate 'None' sem suporte",
-    "fase 3: desempate 'None' sem suporte",
     "clube sem arquivo: Carlos Renaux"
   ],
   "teams": [
@@ -67,57 +63,71 @@
       "name": "Quartas de final",
       "ties": [
         [
-          "A4",
-          "A1"
+          "A1",
+          "A4"
         ],
         [
-          "A3",
-          "A2"
+          "B1",
+          "B4"
         ],
         [
-          "B4",
-          "B1"
+          "A2",
+          "A3"
         ],
         [
-          "B3",
-          "B2"
+          "B2",
+          "B3"
         ]
       ],
       "legs": 2,
-      "tiebreak": null,
+      "tiebreak": "aggregate-then-penalties",
       "home": "better-second"
     },
     {
       "name": "Semifinal",
-      "ties": null,
+      "ties": [
+        [
+          "W1",
+          "W4"
+        ],
+        [
+          "W2",
+          "W3"
+        ]
+      ],
       "legs": 2,
-      "tiebreak": null,
+      "tiebreak": "aggregate-then-penalties",
       "home": "better-second"
     },
     {
       "name": "Final",
       "ties": [
         [
-          "R2",
-          "R1"
+          "W1",
+          "W2"
         ]
       ],
       "legs": 2,
-      "tiebreak": null,
+      "tiebreak": "aggregate-then-penalties",
       "home": "better-second"
     }
   ],
   "simplifications": [],
   "unsupported": [
-    "Fonte frágil: REC oficial da Série A 2026 não localizado (sem PDF); formato só pela Wikipedia pt e pela NSC Total (SC.json gaps).",
-    "Critérios de desempate da 1ª fase não constam das fontes: só 'points' listado.",
-    "Regra de empate nos mata-matas (quartas, semifinal e final) não consta das fontes: tiebreak = null.",
-    "Semifinal: as fontes dizem só 'cruzamento entre grupos', sem dizer qual vencedor das quartas enfrenta qual; ties = null em vez de chutar.",
-    "Mando: as fontes dizem só 'jogo de volta em casa do mais bem colocado'; na semifinal e na final não se sabe se é a posição no grupo, a campanha da 1ª fase ou a campanha acumulada. A final como ['C2','C1'] é aproximação.",
-    "1ª fase cruzada (cada clube enfrenta os 6 do outro grupo em turno único, sem jogos no próprio grupo); mando de cada jogo não consta das fontes.",
-    "Taça ACESC 70 Anos: eliminados nas quartas (2 confrontos de ida e volta) e depois os eliminados nas semifinais; campeão é o 3º colocado do estadual e leva vaga na Copa do Brasil 2027. Estrutura exata não detalhada; não expressável."
+    "Desempate da 1ª fase (Art. 21): confronto direto só entre 2 clubes, pela soma dos dois jogos e depois gols marcados fora; na 1ª fase cruzada só se enfrentam clubes de grupos diferentes. Depois: menos vermelhos, menos amarelos, sorteio.",
+    "Quartas (Art. 8º): grupos C (1ºA x 4ºA), D (1ºB x 4ºB), E (2ºA x 3ºA), F (2ºB x 3ºB), nessa ordem nos ties; ida e volta com volta em casa do 1º e do 2º de cada grupo; pontos, depois saldo dos dois jogos, depois pênaltis, sem prorrogação; gravado como 'aggregate-then-penalties', que decide igual (Art. 8º §§1º-3º).",
+    "Semifinais (Art. 11): H = vencedor C x vencedor F (W1 x W4) e I = vencedor D x vencedor E (W2 x W3); volta em casa de quem somou mais pontos na 1ª fase e nas quartas, com desempate do Art. 21; mesmo critério de empate das quartas.",
+    "Final (Art. 19): grupo O = vencedor H x vencedor I; volta em casa de quem somou mais pontos nas 1ª a 3ª fases; mesmo critério de empate das quartas.",
+    "Mando por campanha: o motor compara pontos, vitórias, saldo e gols pró acumulados; o REC usa pontos somados e depois o Art. 21 (que inclui cartões e sorteio). Diferem só em empates profundos.",
+    "Bonificação de 1 ponto ao melhor 5º colocado no Quadrangular de Descenso (Art. 5º §2º) não cabe no esquema; descrita em special.",
+    "1ª fase cruzada (Art. 6º): cada clube enfrenta os 6 do outro grupo em turno único; mando de cada jogo pela tabela do DCO (Art. 26), que não está nas fontes.",
+    "Taça ACESC 70 Anos (Arts. 12-18): eliminatórias J = perdedor C x perdedor F e K = perdedor D x perdedor E em ida e volta (volta em casa de quem somou mais pontos); semifinais em jogo único L = perdedor H x vencedor J e M = perdedor I x vencedor K, mando dos perdedores das semifinais, empate em pênaltis; final N em jogo único se um finalista disputar a Copa do Brasil 2026, senão ida e volta, mando pela soma de pontos. O campeão é o 3º e o vice o 4º da classificação final (Art. 22, II). Torneio paralelo, não cabe no esquema.",
+    "Classificação final (Art. 22) e vagas (Arts. 2º-4º: Copa Sul-Sudeste, Copa do Brasil e Série D 2027): fora do esquema."
   ],
   "sources": [
-    "SC.json divisions[0]: Wikipedia pt Campeonato Catarinense de Futebol de 2026 – Série A (grupos, formato, quadrangular) e NSC Total https://www.nsctotal.com.br/?p=7770379 (3 rebaixados)"
+    "pdf/SC-serie-A-REC-2026.pdf (sha256 50a22b9f…cae1cb9): Art. 5º (fases e bonificação), Art. 6º (grupos e 1ª fase), Art. 8º (quartas), Art. 9º (quadrangular), Art. 11 (semifinais), Arts. 12-18 (Taça ACESC), Art. 19 (final), Art. 21 (desempates), Art. 22 (classificação final), Art. 26 (mando), Art. 28 (rebaixamento)",
+    "pdf/SC-serie-A-resolucao-10-2026-homologacao.pdf (classificação final 2026)",
+    "SC.review.json (19/11/2026)",
+    "SC.json divisions[0]: Wikipedia pt e NSC Total (fontes anteriores ao REC)"
   ]
 }

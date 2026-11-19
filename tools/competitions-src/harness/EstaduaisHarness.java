@@ -127,6 +127,23 @@ public final class EstaduaisHarness {
         }
         check(c.a.SR.bk, "temporada terminou em " + steps + " passos");
         for (Spec spec : specs) result(spec);
+        int seasons = args.length > 3 ? Integer.parseInt(args[3]) : 1;
+        for (int season = 1; season < seasons; season++) {
+            steps = 0;
+            try {
+                c.a.SR.V();
+                while (!c.a.SR.bk && steps < 5000) {
+                    c.a.SR.V();
+                    steps++;
+                }
+            } catch (Throwable error) {
+                error.printStackTrace(out);
+                System.exit(2);
+            }
+            int year = c.a.SR.op() + c.a.SR.H() - 1;
+            check(c.a.SR.bk, year + ": temporada terminou em " + steps + " passos");
+            for (Spec spec : specs) later(spec, year);
+        }
         out.println("falhas=" + failures);
         System.exit(failures == 0 ? 0 : 1);
     }
@@ -208,6 +225,20 @@ public final class EstaduaisHarness {
         out.println(spec.uf + ":" + text);
         ArrayList last = ((f.G) rounds.get(rounds.size() - 1)).zY();
         check(last.size() == 1, spec.uf + ": campeao " + (last.isEmpty() ? "nenhum" : ((ah) last.get(0)).getNome()));
+    }
+
+    private static void later(Spec spec, int year) {
+        f.s league = league(spec.state);
+        check(league != null && league.yK().size() == spec.teams.size(), year + " " + spec.uf + ": disputado com " + (league == null ? 0 : league.yK().size()) + " clubes");
+        if (league == null) return;
+        int goals = 0;
+        for (Object item : matches(league)) goals += ((I) item).hu() + ((I) item).hw();
+        f.z knockout = league.yY();
+        ArrayList rounds = knockout == null ? new ArrayList() : knockout.zp();
+        ArrayList last = rounds.isEmpty() ? new ArrayList() : ((f.G) rounds.get(rounds.size() - 1)).zY();
+        Set<String> now = files(league.yK());
+        now.removeAll(spec.teams);
+        check(goals > 0 && rounds.size() == spec.rounds && last.size() == 1, year + " " + spec.uf + ": " + rounds.size() + " fases, campeao " + (last.isEmpty() ? "nenhum" : ((ah) last.get(0)).getNome()) + ", clubes novos " + now);
     }
 
     private static String names(List teams) {

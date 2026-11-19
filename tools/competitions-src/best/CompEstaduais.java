@@ -41,6 +41,42 @@ public final class CompEstaduais {
         return -1;
     }
 
+    static boolean officialSeason() {
+        return a.SR.op() + a.SR.H() - 1 == 2026;
+    }
+
+    private static final int[][] BLOCKS = {{0, 2, 3, 13, 20, 21}, {6, 7, 8, 11, 12, 26}};
+    private static final int[][] REGION_STATES = {{}, {}, {1, 4, 5, 9, 14, 15, 16, 19, 24}, {0, 2, 3, 6, 7, 8, 11, 12, 13, 20, 21, 26}};
+
+    private static boolean in(int[] values, int value) {
+        for (int i = 0; i < values.length; i++) if (values[i] == value) return true;
+        return false;
+    }
+
+    private static ArrayList laterSeason(int region, String[][] groups, ArrayList pool) {
+        int size = groups[0].length;
+        int[][] blocks = region == 3 ? BLOCKS : new int[][]{REGION_STATES[region]};
+        int perBlock = groups.length / blocks.length;
+        ArrayList arranged = new ArrayList();
+        for (int b = 0; b < blocks.length; b++) {
+            ArrayList picked = new ArrayList();
+            for (int i = 0; i < pool.size() && picked.size() < perBlock * size; i++) {
+                ah team = (ah) pool.get(i);
+                if (team.getPais() == 29 && in(blocks[b], team.getEstado()) && !picked.contains(team)) picked.add(team);
+            }
+            if (picked.size() < perBlock * size) return null;
+            ArrayList[] block = new ArrayList[perBlock];
+            for (int g = 0; g < perBlock; g++) block[g] = new ArrayList();
+            for (int i = 0; i < picked.size(); i++) {
+                int line = i / perBlock;
+                int g = line % 2 == 0 ? i % perBlock : perBlock - 1 - i % perBlock;
+                block[g].add(picked.get(i));
+            }
+            for (int g = 0; g < perBlock; g++) arranged.addAll(block[g]);
+        }
+        return arranged;
+    }
+
     public static boolean regional(F cup, ArrayList pool) {
         try {
             int region = ((Integer) field(F.class, "aad").get(cup)).intValue();
@@ -48,7 +84,11 @@ public final class CompEstaduais {
             if (k < 0) return false;
             String[][] groups = CompEstaduaisData.GROUPS[k];
             ArrayList arranged = new ArrayList();
-            for (int g = 0; g < groups.length; g++) {
+            if (!officialSeason()) {
+                arranged = laterSeason(region, groups, pool);
+                if (arranged == null) return false;
+            }
+            for (int g = 0; officialSeason() && g < groups.length; g++) {
                 for (int r = 0; r < groups[g].length; r++) {
                     ah team = byFile(groups[g][r]);
                     if (team == null || team.getPais() != 29) {
@@ -92,7 +132,7 @@ public final class CompEstaduais {
 
     public static void division(w state, LoadLigaOptions options, ArrayList teams, o competition) {
         try {
-            if (state.ds.size() != 0) return;
+            if (state.ds.size() != 0 || !officialSeason()) return;
             int k = index(state.getEstado());
             if (k < 0) return;
             String type = CompEstaduaisData.P1_TYPE[k];
@@ -155,7 +195,7 @@ public final class CompEstaduais {
             int state = ((ah) teams.get(0)).getEstado();
             int k = league.ze() == CODE ? index(state) : key(league);
             if (k < 0) return current;
-            if (!cross) return fixtures(league, teams, k, current);
+            if (!cross) return officialSeason() ? fixtures(league, teams, k, current) : current;
             if (groups == null || groups.size() < 2) return current;
             int n = teams.size();
             int[] group = new int[n];

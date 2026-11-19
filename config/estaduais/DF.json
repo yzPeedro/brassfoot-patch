@@ -89,6 +89,7 @@
     "pdf/DF-serie-A-REC-2026.pdf: Art. 2 (10 clubes), Art. 12-13 (três fases, pontos zerados, classificação de 3º a 10º), Art. 14 (grupo único, só ida, 9 jogos, 4 classificados), Art. 15 e §1º (semifinal 1º x 4º e 2º x 3º, volta na casa do 1º e do 2º, empate no agregado favorece o melhor colocado), Art. 16 (final em jogo único, pênaltis, Mané Garrincha), Art. 17 (desempates), Art. 19 e 23 (mandos), Art. 21 (2 últimos rebaixados)",
     "pdf/DF-serie-A-homologacao-classificacao-final-2026.pdf (Ofício DCO/FFDF 90/2026, 11/05/2026): classificação final e critérios",
     "DF.json divisions[0] (participants, firstPhaseStandings2026, format)",
-    "results2026 conferido: semifinais Gama(1º) x Ceilândia(4º) e Samambaia(2º) x Sobradinho(3º); final Gama x Sobradinho no Mané Garrincha; Brasília e ARUC (9º e 10º) rebaixados"
+    "results2026 conferido: semifinais Gama(1º) x Ceilândia(4º) e Samambaia(2º) x Sobradinho(3º); final Gama x Sobradinho no Mané Garrincha; Brasília e ARUC (9º e 10º) rebaixados",
+    "DF.review.json (19/11/2026): conferido contra pdf/DF-serie-A-REC-2026.pdf, Arts. 15 a 17 e 21; nenhuma divergência com esta ficha."
   ]
 }
