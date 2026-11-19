@@ -415,6 +415,8 @@ public final class CompEstaduais {
             if (index > 0) {
                 ArrayList resolved = resolve(league, knockout, rounds[index], k, index);
                 if (resolved == null) return true;
+                G previous = (G) knockout.zp().get(index - 1);
+                if (previous.zY() == list) previous.ar(new ArrayList(list));
                 list.clear();
                 list.addAll(resolved);
             }
@@ -479,6 +481,7 @@ public final class CompEstaduais {
             Collections.sort(winners, byGroupPosition(league, campaign));
             return position < winners.size() ? (ah) winners.get(position) : null;
         }
+        if (head == 'T') return pool(code, league, knockout, index, campaign, candidates);
         if (head == 'R') {
             int position = Integer.parseInt(code.substring(1)) - 1;
             ArrayList ranked = new ArrayList(candidates);
@@ -494,6 +497,42 @@ public final class CompEstaduais {
         int position = Integer.parseInt(code.substring(1)) - 1;
         ArrayList members = ((best.G) league.yQ().get(group)).gR();
         return position < members.size() ? (ah) members.get(position) : null;
+    }
+
+    private static ah pool(String code, final s league, z knockout, int index, Comparator campaign, List candidates) {
+        String[][] pools = CompEstaduaisData.KO_POOLS[key(league)];
+        int position = Integer.parseInt(code.substring(2)) - 1;
+        for (int p = 0; p < pools.length; p++) {
+            String[] pool = pools[p];
+            if (pool[0].charAt(0) != code.charAt(1)) continue;
+            String[] rounds = pool[1].split(",");
+            ArrayList members = new ArrayList();
+            final Map stats = new HashMap();
+            for (int m = 2; m < pool.length; m++) {
+                ah team = slot(pool[m], league, knockout, index, campaign, candidates);
+                if (team == null) continue;
+                int[] value = new int[4];
+                for (int r = 0; r < rounds.length; r++) {
+                    int round = Integer.parseInt(rounds[r].trim());
+                    if (knockout == null || round >= knockout.zp().size()) continue;
+                    G stage = (G) knockout.zp().get(round);
+                    add(value, team, stage.zW());
+                    add(value, team, stage.zX());
+                }
+                members.add(team);
+                stats.put(team, value);
+            }
+            Collections.sort(members, new Comparator() {
+                public int compare(Object x, Object y) {
+                    int[] a = (int[]) stats.get(x);
+                    int[] b = (int[]) stats.get(y);
+                    for (int i = 0; i < a.length; i++) if (a[i] != b[i]) return b[i] - a[i];
+                    return league.yK().indexOf(x) - league.yK().indexOf(y);
+                }
+            });
+            return position < members.size() ? (ah) members.get(position) : null;
+        }
+        return null;
     }
 
     private static boolean direct(String code) {

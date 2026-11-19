@@ -136,6 +136,7 @@ Uma carreira criada antes do componente carrega e continua normalmente. A tempor
   - torneios paralelos (Taça Rio, Troféu Inconfidência, Taça ACESC, Copa Grão-Pará e outros), disputas de 3º lugar e quadrangulares de rebaixamento não são disputados;
   - o mando pela campanha usa a campanha acumulada no torneio, mesmo quando o regulamento conta só uma fase;
   - os títulos da Copa Norte e da Copa Centro-Oeste não viram troféus próprios.
+- **Fases de pontos dentro do mata-mata:** uma fase de grupos posterior à 1ª fase (como a 2ª fase do Cearense) é disputada como rodadas do mata-mata; a vaga `T<grupo><posição>` classifica os membros do grupo somando só os jogos dessas rodadas (pontos, vitórias, saldo e gols pró). O mata-mata do jogo comporta no máximo 7 rodadas, por isso o Amazonense (dois turnos e final entre campeões de turno, 10 rodadas) não foi adaptado.
 - **Prorrogação:** o motor original não tem tempo extra e, por decisão do proprietário (19/11/2026), ela não será implementada. Nas regras que exigem prorrogação (playoffs e copas inglesas), o empate segue direto para o critério seguinte do jogo.
 - **Interface:**
   - o nome da rodada dos playoffs vem da tabela genérica do jogo.

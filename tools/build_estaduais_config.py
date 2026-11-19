@@ -14,7 +14,7 @@ ALIASES = OUTPUT / "aliases.json"
 COMPETITIONS = ROOT / "config" / "competitions" / "brasil-2026.json"
 PHASE1 = {"league", "groups", "crossed", "fixtures"}
 TIEBREAKS = {"aggregate-then-penalties", "penalties", "aggregate-then-better-campaign", "better-campaign",
-             "points-then-penalties"}
+             "points-then-penalties", "home-advances"}
 HOMES = {"better-second", "better-single", "neutral"}
 
 
@@ -181,7 +181,8 @@ def build(sheet: dict, teams: list[dict], created: dict, known: dict, aliases: d
         "relegated": sheet.get("relegated"),
         "knockout": [{"name": s.get("name"), "ties": campaign_codes(s.get("ties")), "entrants": s.get("entrants") or [], "legs": s.get("legs"),
                       "tiebreak": s.get("tiebreak"), "home": s.get("home")} for s in stages],
-        "simplifications": (["disputa de 3º lugar nao disputada no jogo"] if dropped else [])
+        "pools": sheet.get("pools") or [],
+        "simplifications": (sheet.get("simplifications") or []) + (["disputa de 3º lugar nao disputada no jogo"] if dropped else [])
         + (["mando 'neutral' segue a ordem da tabela"] if any(s.get("home") == "neutral" for s in stages) else []),
         "unsupported": sheet.get("unsupported") or [],
         "sources": sheet.get("sources") or [],

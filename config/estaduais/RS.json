@@ -113,6 +113,7 @@
       "home": "better-second"
     }
   ],
+  "pools": [],
   "simplifications": [],
   "unsupported": [
     "Semifinal e final: empate em pontos é decidido pelo maior saldo de gols da fase e depois pênaltis (art. 20). Nota de equivalência: pontos nos dois jogos e depois saldo agregado empatam exatamente nos mesmos casos que o placar agregado, então equivale a 'aggregate-then-penalties'.",

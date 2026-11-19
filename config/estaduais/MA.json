@@ -63,6 +63,7 @@
       "home": "better-second"
     }
   ],
+  "pools": [],
   "simplifications": [],
   "unsupported": [
     "Semifinal (Art. 13 V) e final (Art. 14 IV): empate em pontos e saldo de gols na fase -> pênaltis, sem prorrogação; nota de equivalência: o regulamento decide por pontos nos dois jogos e depois saldo de gols da fase; isso empata exatamente nos mesmos casos que o saldo agregado (quem soma mais pontos em 2 jogos sempre tem saldo agregado maior), por isso foi mapeado como agregado.",

@@ -61,6 +61,7 @@
       "home": "better-second"
     }
   ],
+  "pools": [],
   "simplifications": [],
   "unsupported": [
     "Equivalência: semifinal e final decididas por pontos nos dois jogos, depois saldo de gols nas duas partidas e depois pênaltis, sem prorrogação (Art. 15); pontos seguidos de saldo agregado empata exatamente nos mesmos casos que o placar agregado, então 'aggregate-then-penalties' reproduz a regra.",

@@ -96,6 +96,7 @@
       "home": "better-single"
     }
   ],
+  "pools": [],
   "simplifications": [],
   "unsupported": [
     "O esquema só representa o 1º turno. O campeonato tem 2 turnos (Art. 10 §1º, 11 e 12), e a 'phase1' + 'knockout' acima descrevem apenas o 1º turno, cujo campeão é no mínimo vice-campeão estadual (Art. 11 §5º F).",

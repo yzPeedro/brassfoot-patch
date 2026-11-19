@@ -80,6 +80,7 @@
       "home": "better-second"
     }
   ],
+  "pools": [],
   "simplifications": [],
   "unsupported": [
     "Equivalência: o regulamento decide o mata-mata por pontos nos dois jogos, depois saldo de gols no confronto e depois pênaltis, sem prorrogação. Pontos nos dois jogos seguidos de saldo agregado empata exatamente nos mesmos casos que o placar agregado, então 'aggregate-then-penalties' reproduz a regra; o vencedor por pontos sempre tem saldo agregado maior ou igual, e quando pontos empatam vence o saldo. (Art. 14; pênaltis iniciados em até 10 minutos após o jogo).",

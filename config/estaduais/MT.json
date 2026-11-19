@@ -84,6 +84,7 @@
       "home": "better-second"
     }
   ],
+  "pools": [],
   "simplifications": [
     "mando 'neutral' segue a ordem da tabela"
   ],

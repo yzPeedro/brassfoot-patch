@@ -4,10 +4,6 @@
   "competition": "Campeonato Cearense Série A 2026",
   "engine": "pending",
   "pending": [
-    "fase 1 sem confrontos definidos",
-    "fase 2 sem confrontos definidos",
-    "fase 3 sem confrontos definidos",
-    "fase 4 sem confrontos definidos",
     "clube sem arquivo: Horizonte Futebol Clube"
   ],
   "teams": [
@@ -58,39 +54,133 @@
   "relegated": 2,
   "knockout": [
     {
+      "name": "2ª fase - 1ª rodada (Grupos C e D)",
+      "ties": [
+        [
+          "A1",
+          "B3"
+        ],
+        [
+          "A2",
+          "B2"
+        ],
+        [
+          "A3",
+          "B1"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "home-advances",
+      "home": "better-single"
+    },
+    {
+      "name": "2ª fase - 2ª rodada (Grupos C e D)",
+      "ties": [
+        [
+          "A1",
+          "B2"
+        ],
+        [
+          "A2",
+          "B1"
+        ],
+        [
+          "A3",
+          "B3"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "home-advances",
+      "home": "better-single"
+    },
+    {
+      "name": "2ª fase - 3ª rodada (Grupos C e D)",
+      "ties": [
+        [
+          "A1",
+          "B1"
+        ],
+        [
+          "A2",
+          "B3"
+        ],
+        [
+          "A3",
+          "B2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "home-advances",
+      "home": "better-single"
+    },
+    {
       "name": "3ª fase (Semifinal)",
-      "ties": null,
+      "ties": [
+        [
+          "TC2",
+          "TC1"
+        ],
+        [
+          "TD2",
+          "TD1"
+        ]
+      ],
       "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
-      "home": "better-second"
+      "home": "neutral"
     },
     {
       "name": "4ª fase (Final)",
-      "ties": null,
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ]
+      ],
       "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "better-second"
-    },
-    {
-      "name": "Disputa de 3º lugar",
-      "ties": null,
-      "entrants": [],
-      "legs": 1,
-      "tiebreak": "penalties",
-      "home": "better-single"
-    },
-    {
-      "name": "Disputa de 5º lugar",
-      "ties": null,
-      "entrants": [],
-      "legs": 1,
-      "tiebreak": "penalties",
-      "home": "better-single"
     }
   ],
-  "simplifications": [],
+  "pools": [
+    {
+      "name": "C",
+      "rounds": [
+        0,
+        1,
+        2
+      ],
+      "members": [
+        "A1",
+        "A2",
+        "A3"
+      ]
+    },
+    {
+      "name": "D",
+      "rounds": [
+        0,
+        1,
+        2
+      ],
+      "members": [
+        "B1",
+        "B2",
+        "B3"
+      ]
+    }
+  ],
+  "simplifications": [
+    "2ª fase (Grupos C e D) disputada como 3 rodadas do mata-mata; a classificação de cada grupo soma só esses 3 jogos (pontos, vitórias, saldo e gols pró)",
+    "mandos da 2ª fase pela melhor campanha acumulada, não pela tabela do Art. 16 §2º",
+    "disputas de 3º e 5º lugar e Quadrangular da Permanência não disputados; o rebaixamento usa a classificação do jogo",
+    "mando 'neutral' segue a ordem da tabela"
+  ],
   "unsupported": [
     "2ª fase não cabe no esquema: os 3 primeiros do Grupo A formam o Grupo C e os 3 primeiros do Grupo B formam o Grupo D; cada clube do C enfrenta os 3 do D em turno único (3 jogos), classificação dentro do próprio grupo, pontuação só da fase; 1º e 2º de C e D vão às semifinais, 3ºs de C e D vão à disputa de 5º lugar (Art. 12 §3º e §6º). Mandos: os 1ºs dos Grupos A e B e o melhor 2º da 1ª fase têm 2 mandos; os demais, 1 (Art. 16 §2º). Desempates do Art. 13.",
     "Por isso os confrontos ('ties') do mata-mata ficaram nulos: a notação só referencia posições da 1ª fase. Confrontos oficiais: Semifinal Grupo E = 2º C x 1º C e Grupo F = 2º D x 1º D (volta na casa do 1º colocado do grupo na 2ª fase; os semifinalistas de cada confronto vêm do mesmo grupo da 1ª fase) (Art. 12 §4º, 16 §3º); Final Grupo G = vencedor E x vencedor F, volta na casa da melhor campanha acumulada 1ª+2ª+3ª fase (Art. 12 §7º, 16 §4º); Disputa de 3º = perdedores das semifinais, jogo único com mando da melhor campanha acumulada 1ª+2ª+3ª fase (Art. 12 §5º, 16 §5º); Disputa de 5º = 3º C x 3º D, jogo único com mando da melhor campanha acumulada 1ª+2ª fase (Art. 12 §6º, 16 §6º).",

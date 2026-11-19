@@ -76,6 +76,10 @@ def source(*folders: Path) -> str:
         "",
         "    static final String[][][] KO_ENTRANTS = {\n"
         + rows(lambda s: knockout(s, lambda r: array(r.get("entrants") or [], text))) + "\n    };",
+        "",
+        "    static final String[][][] KO_POOLS = {\n"
+        + rows(lambda s: array(s.get("pools") or [], lambda p: array([p["name"], ",".join(str(r) for r in p["rounds"])]
+                                                                     + p["members"], text))) + "\n    };",
         "}",
         "",
     ]

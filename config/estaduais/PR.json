@@ -113,6 +113,7 @@
       "home": "better-second"
     }
   ],
+  "pools": [],
   "simplifications": [],
   "unsupported": [
     "Equivalência: todos os mata-matas (Descenso, quartas, semifinal e final) são decididos por pontos nos dois jogos, depois saldo de gols e depois pênaltis, sem prorrogação (Art. 9º §4º, 11 §4º, 12 §4º, 13 §4º). Pontos seguidos de saldo agregado empata exatamente nos mesmos casos que o placar agregado, então 'aggregate-then-penalties' reproduz a regra.",

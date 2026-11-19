@@ -80,6 +80,7 @@
       "home": "better-second"
     }
   ],
+  "pools": [],
   "simplifications": [],
   "unsupported": [
     "Equivalência: todos os mata-matas são decididos por pontos e saldo de gols nos dois jogos e depois pênaltis, sem prorrogação e sem vantagem (Art. 9º §4º, 10 §3º, 11 §1º); pontos seguidos de saldo agregado empata exatamente nos mesmos casos que o placar agregado, então 'aggregate-then-penalties' reproduz a regra.",
