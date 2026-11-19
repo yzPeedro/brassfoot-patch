@@ -8,7 +8,6 @@
     "clube sem arquivo: Sobradinho",
     "clube sem arquivo: Real Brasília",
     "clube sem arquivo: Paranoá",
-    "clube sem arquivo: Brasília",
     "clube sem arquivo: ARUC"
   ],
   "teams": [
@@ -20,7 +19,7 @@
     "brasiliense_df",
     null,
     null,
-    null,
+    "brasilia_df",
     null
   ],
   "names": [

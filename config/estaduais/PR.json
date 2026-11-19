@@ -5,8 +5,7 @@
   "engine": "pending",
   "pending": [
     "clube sem arquivo: Andraus",
-    "clube sem arquivo: Foz do Iguaçu",
-    "clube sem arquivo: Galo Maringá"
+    "clube sem arquivo: Foz do Iguaçu"
   ],
   "teams": [
     null,
@@ -16,7 +15,7 @@
     "cianorte_pr",
     "coritiba_bra",
     null,
-    null,
+    "galomaringa_pr",
     "londrina_pr",
     "maringapr",
     "operario_pr",
@@ -54,7 +53,7 @@
         "azurizpr_bra",
         "cianorte_pr",
         null,
-        null
+        "galomaringa_pr"
       ]
     ],
     "fixtures": []

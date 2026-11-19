@@ -71,8 +71,10 @@ def serie_d_profile(teams: list[dict], config: dict, existing: set | None = None
 def build(squads: Path, base: Path, teams_json: Path, output: Path, jdk: Path, previous: list | None = None) -> dict:
     config = json.loads(CONFIG.read_text(encoding="utf-8"))
     teams = json.loads(teams_json.read_text(encoding="utf-8"))
-    existing = {p.stem.lower() for p in (base / "teams").glob("*.ban")}
-    level, reputation, template = serie_d_profile(teams, config, existing)
+    in_base = {p.stem.lower() for p in (base / "teams").glob("*.ban")}
+    existing = set(in_base)
+    existing |= {t["d"].lower() for t in json.loads(teams_json.read_text(encoding="utf-8")) if t.get("d")}
+    level, reputation, template = serie_d_profile(teams, config, in_base)
     nations = nationality_lookup()
     counts: Counter = Counter()
     issued: set[int] = set()
@@ -85,9 +87,11 @@ def build(squads: Path, base: Path, teams_json: Path, output: Path, jdk: Path, p
         squad = json.loads(path.read_text(encoding="utf-8"))
         club = squad["club"]
         uf = club["state"]
-        stem = f"{ascii_slug(club.get('shortName') or club['name'], 24)}_{uf.lower()}"
+        options = [f"{ascii_slug(name, 24)}_{uf.lower()}" for name in (club.get("shortName"), club["name"]) if name]
+        stem = next((o for o in options if o.lower() not in existing), options[0])
         while stem.lower() in existing:
             stem += "x"
+        existing.add(stem.lower())
         players = []
         for p in squad["players"]:
             if p.get("positionCode") is None:
