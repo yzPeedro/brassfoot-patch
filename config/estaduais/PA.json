@@ -2,26 +2,20 @@
   "state": "PA",
   "season": 2026,
   "competition": "Campeonato Paraense de Futebol Profissional da Primeira Divisão – Série A1/2026 (Parazão Banpará 2026)",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Cametá Sport Club",
-    "clube sem arquivo: Capitão Poço Esporte Clube",
-    "clube sem arquivo: Santa Rosa Esporte Clube",
-    "clube sem arquivo: São Francisco Futebol Clube",
-    "clube sem arquivo: São Raimundo Esporte Clube"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
     "aguiapa_bra",
     "independentepa",
     "bragantino_pa",
-    null,
-    null,
+    "cameta_pa",
+    "capitaopoco_pa",
     "castanhalpa_bra",
     "remo",
     "paysandu",
-    null,
-    null,
-    null,
+    "santarosa_pa",
+    "saofrancisco_pa",
+    "saoraimundo_pa",
     "tunaluso_pa"
   ],
   "names": [
@@ -44,15 +38,15 @@
     "groups": [
       [
         "remo",
-        null,
-        null,
+        "saoraimundo_pa",
+        "capitaopoco_pa",
         "tunaluso_pa",
-        null,
-        null
+        "cameta_pa",
+        "santarosa_pa"
       ],
       [
         "paysandu",
-        null,
+        "saofrancisco_pa",
         "bragantino_pa",
         "castanhalpa_bra",
         "independentepa",
@@ -83,6 +77,7 @@
           "5"
         ]
       ],
+      "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
       "home": "better-single"
@@ -99,6 +94,7 @@
           "W3"
         ]
       ],
+      "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
       "home": "better-single"
@@ -111,6 +107,7 @@
           "W1"
         ]
       ],
+      "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "better-second"

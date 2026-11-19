@@ -2,10 +2,8 @@
   "state": "RN",
   "season": 2026,
   "competition": "Campeonato Potiguar 2026",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: QFC (Quinho Futebol Clube), campeão da 2ª Divisão 2025"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
     "abcrn_bra",
     "americarn",
@@ -13,7 +11,7 @@
     "laguna_rn",
     "globo_fc",
     "santacruzrn",
-    null,
+    "qfc_rn",
     "potyguarrn_bra"
   ],
   "names": [
@@ -46,6 +44,7 @@
           "4"
         ]
       ],
+      "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "better-second"
@@ -62,6 +61,7 @@
           "2"
         ]
       ],
+      "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "better-second"
@@ -74,6 +74,7 @@
           "W2"
         ]
       ],
+      "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "better-second"

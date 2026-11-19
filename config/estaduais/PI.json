@@ -2,22 +2,17 @@
   "state": "PI",
   "season": 2026,
   "competition": "Campeonato Piauiense Série A 2026",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Clube Atlético Piauiense (CAP)",
-    "clube sem arquivo: Associação Atlética Oeirense",
-    "clube sem arquivo: Teresina Esporte Clube",
-    "clube sem arquivo: Associação Atlética Corisabbá"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
     "altos_pi",
-    null,
+    "atleticopiauiense_pi",
     "parnahyba_pi",
-    null,
-    null,
+    "oeirense_pi",
+    "tec_pi",
     "piaui_pi",
     "fluminensepi_bra",
-    null
+    "corisabba_pi"
   ],
   "names": [
     "Associação Esportiva de Altos",
@@ -49,6 +44,7 @@
           "2"
         ]
       ],
+      "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "better-second"
@@ -61,6 +57,7 @@
           "W2"
         ]
       ],
+      "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "better-second"

@@ -5,19 +5,17 @@
   "engine": "pending",
   "pending": [
     "fase 1: vantagem de campanha em jogo unico sem suporte",
-    "clube sem arquivo: RPE Parintins Futebol Clube",
-    "clube sem arquivo: Itacoatiara Futebol Clube",
-    "clube sem arquivo: São Raimundo Esporte Clube"
+    "clube sem arquivo: RPE Parintins Futebol Clube"
   ],
   "teams": [
     "amazonas_am",
     "manauara_am",
     null,
-    null,
+    "itacoatiara_am",
     "nacional_am",
     "manaus_bra",
     "princesa_am",
-    null
+    "saoraimundo_am"
   ],
   "names": [
     "Amazonas Futebol Clube",
@@ -37,13 +35,13 @@
         "amazonas_am",
         "manauara_am",
         null,
-        null
+        "itacoatiara_am"
       ],
       [
         "nacional_am",
         "manaus_bra",
         "princesa_am",
-        null
+        "saoraimundo_am"
       ]
     ],
     "fixtures": []
@@ -62,6 +60,7 @@
           "B3"
         ]
       ],
+      "entrants": [],
       "legs": 1,
       "tiebreak": "better-campaign",
       "home": "better-single"
@@ -78,6 +77,7 @@
           "W2"
         ]
       ],
+      "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
       "home": "better-single"
@@ -90,6 +90,7 @@
           "R2"
         ]
       ],
+      "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
       "home": "better-single"

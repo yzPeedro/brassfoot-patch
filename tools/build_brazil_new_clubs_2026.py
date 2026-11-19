@@ -58,12 +58,13 @@ def hex_color(value: str | None) -> str:
     return ""
 
 
-def serie_d_profile(teams: list[dict], config: dict) -> tuple[int, int, str]:
+def serie_d_profile(teams: list[dict], config: dict, existing: set | None = None) -> tuple[int, int, str]:
     files = {c["file"] for g in config["serieD"]["groups"] for c in g["clubs"] if c["file"]}
     members = [t for t in teams if t["d"] in files]
     level = round(statistics.median(t["c"] for t in members))
     reputation = round(statistics.median(t["n"] for t in members))
-    template = min(members, key=lambda t: (abs(t["c"] - level), t["d"]))["d"]
+    usable = [t for t in members if existing is None or t["d"].lower() in existing] or members
+    template = min(usable, key=lambda t: (abs(t["c"] - level), t["d"]))["d"]
     return level, reputation, template
 
 
@@ -71,7 +72,7 @@ def build(squads: Path, base: Path, teams_json: Path, output: Path, jdk: Path, p
     config = json.loads(CONFIG.read_text(encoding="utf-8"))
     teams = json.loads(teams_json.read_text(encoding="utf-8"))
     existing = {p.stem.lower() for p in (base / "teams").glob("*.ban")}
-    level, reputation, template = serie_d_profile(teams, config)
+    level, reputation, template = serie_d_profile(teams, config, existing)
     nations = nationality_lookup()
     counts: Counter = Counter()
     issued: set[int] = set()

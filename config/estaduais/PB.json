@@ -2,20 +2,16 @@
   "state": "PB",
   "season": 2026,
   "competition": "Campeonato Paraibano da Primeira Divisão 2026",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Confiança Esporte Clube",
-    "clube sem arquivo: Esporte Clube de Patos",
-    "clube sem arquivo: Pombal Esporte Clube"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
     "atleticopb_bra",
     "botafogopb_bra",
     "campinensepb_bra",
-    null,
-    null,
+    "confiancadesape_pb",
+    "esportedepatos_pb",
     "nacional_pb",
-    null,
+    "pombalec_pb",
     "serrabranca_pb",
     "sousapb_bra",
     "trezepb_bra"
@@ -52,6 +48,7 @@
           "2"
         ]
       ],
+      "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "better-second"
@@ -64,6 +61,7 @@
           "W2"
         ]
       ],
+      "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "better-second"

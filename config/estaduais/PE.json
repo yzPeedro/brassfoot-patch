@@ -2,20 +2,17 @@
   "state": "PE",
   "season": 2026,
   "competition": "Campeonato Pernambucano da Série A1 2026",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Associação Desportiva Jaboatão dos Guararapes (Jaguar)",
-    "clube sem arquivo: Associação Acadêmica e Desportiva Vitória das Tabocas (Vitória)"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
     "decisaogoiana_pe",
-    null,
+    "adjaguar_pe",
     "maguary_pe",
     "nautico",
     "retrope_bra",
     "santa",
     "sport",
-    null
+    "vitoriape_pe"
   ],
   "names": [
     "Sociedade Esportiva Decisão Futebol Clube (Decisão Goiana)",
@@ -47,6 +44,7 @@
           "4"
         ]
       ],
+      "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "better-second"
@@ -63,6 +61,7 @@
           "2"
         ]
       ],
+      "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "better-second"
@@ -75,6 +74,7 @@
           "W2"
         ]
       ],
+      "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "better-second"

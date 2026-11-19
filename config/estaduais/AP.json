@@ -4,21 +4,17 @@
   "competition": "Campeonato Amapaense de Futebol Profissional Série A 2026 (Amapazão Sicredi)",
   "engine": "pending",
   "pending": [
-    "clube sem arquivo: Santos Futebol Clube do Amapá",
-    "clube sem arquivo: Ypiranga Clube",
-    "clube sem arquivo: Clube Atlético Cristal",
-    "clube sem arquivo: Esporte Clube Macapá",
-    "clube sem arquivo: Sociedade Esportiva e Recreativa São José"
+    "clube sem arquivo: Esporte Clube Macapá"
   ],
   "teams": [
     "trem_bra",
     "oratorio_ap",
     "independente_ap",
+    "santos_ap",
+    "ypiranga_ap",
+    "cristal_ap",
     null,
-    null,
-    null,
-    null,
-    null
+    "saojose_ap"
   ],
   "names": [
     "Trem Desportivo Clube",
@@ -50,6 +46,7 @@
           "2"
         ]
       ],
+      "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-better-campaign",
       "home": "better-second"
@@ -62,6 +59,7 @@
           "W2"
         ]
       ],
+      "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
       "home": "neutral"

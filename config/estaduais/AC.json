@@ -2,21 +2,16 @@
   "state": "AC",
   "season": 2026,
   "competition": "Campeonato Acreano de Futebol Profissional Série A 2026 (Acreanão Sicredi)",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Associação Desportiva Senador Guiomard (ADESG)",
-    "clube sem arquivo: Rio Branco Football Club",
-    "clube sem arquivo: Santa Cruz Acre Esporte Clube",
-    "clube sem arquivo: São Francisco Futebol Clube"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
-    null,
+    "adesg_ac",
     "vascodagamaac_ac",
     "galvez_ac",
     "independencia_ac",
-    null,
-    null,
-    null,
+    "riobranco_ac",
+    "santacruz_ac",
+    "saofrancisco_ac",
     "humaita_ac"
   ],
   "names": [
@@ -49,6 +44,7 @@
           "2"
         ]
       ],
+      "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-better-campaign",
       "home": "better-second"
@@ -61,6 +57,7 @@
           "W2"
         ]
       ],
+      "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
       "home": "neutral"

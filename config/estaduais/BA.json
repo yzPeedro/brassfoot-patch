@@ -2,19 +2,16 @@
   "state": "BA",
   "season": 2026,
   "competition": "Campeonato Baiano de Futebol Profissional Série A 2026",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Associação Desportiva Jequié",
-    "clube sem arquivo: Galícia Esporte Clube"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
     "atleticoalagoinhas_bra",
     "bahiafeira_ba",
-    null,
+    "jequie_ba",
     "bahia",
     "jacuipense_bra",
     "vitoria",
-    null,
+    "galicia_ba",
     "barcelonaba_bra",
     "portosc_ba",
     "juazeirense_ba"
@@ -51,6 +48,7 @@
           "3"
         ]
       ],
+      "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
       "home": "better-single"
@@ -63,6 +61,7 @@
           "R2"
         ]
       ],
+      "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
       "home": "better-single"

@@ -2,24 +2,18 @@
   "state": "SE",
   "season": 2026,
   "competition": "Campeonato Sergipano de Futebol Profissional da Série A1 2026",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Associação Atlética Guarany",
-    "clube sem arquivo: Associação Desportiva Aracaju (Desportiva Aracaju)",
-    "clube sem arquivo: Associação Desportiva Atlético Gloriense",
-    "clube sem arquivo: Dorense Futebol Clube",
-    "clube sem arquivo: Falcon Futebol Clube Ltda"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
     "americadepropria_se",
-    null,
-    null,
-    null,
+    "guarany_se",
+    "desportivaaracaju_se",
+    "atleticogloriense_se",
     "confianca_se",
     "itabaiana_se",
     "sergipe_se",
-    null,
-    null,
+    "dorense_se",
+    "falcon_se",
     "lagarto_se"
   ],
   "names": [
@@ -58,6 +52,7 @@
           "5"
         ]
       ],
+      "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
       "home": "better-single"
@@ -74,6 +69,9 @@
           "R2"
         ]
       ],
+      "entrants": [
+        "1"
+      ],
       "legs": 2,
       "tiebreak": "points-then-penalties",
       "home": "better-second"
@@ -86,6 +84,7 @@
           "R1"
         ]
       ],
+      "entrants": [],
       "legs": 2,
       "tiebreak": "points-then-penalties",
       "home": "better-second"

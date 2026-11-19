@@ -7,10 +7,7 @@
     "fase 1 sem confrontos definidos",
     "fase 2 sem confrontos definidos",
     "fase 3 sem confrontos definidos",
-    "fase 4 sem confrontos definidos",
-    "clube sem arquivo: Horizonte Futebol Clube",
-    "clube sem arquivo: Maranguape Futebol Clube",
-    "clube sem arquivo: Quixadá Futebol Clube"
+    "fase 4 sem confrontos definidos"
   ],
   "teams": [
     "iguatu_ce",
@@ -19,10 +16,10 @@
     "ferroviarioce_bra",
     "florestace",
     "fortaleza",
-    null,
+    "horizonte_ce",
     "maracana_ce",
-    null,
-    null
+    "maranguape_ce",
+    "quixada_ce"
   ],
   "names": [
     "Associação Desportiva Iguatu",
@@ -44,15 +41,15 @@
         "fortaleza",
         "ferroviarioce_bra",
         "maracana_ce",
-        null,
-        null
+        "horizonte_ce",
+        "quixada_ce"
       ],
       [
         "ceara_bra",
         "florestace",
         "iguatu_ce",
         "tirol_ce",
-        null
+        "maranguape_ce"
       ]
     ],
     "fixtures": []
@@ -62,6 +59,7 @@
     {
       "name": "3ª fase (Semifinal)",
       "ties": null,
+      "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "better-second"
@@ -69,6 +67,7 @@
     {
       "name": "4ª fase (Final)",
       "ties": null,
+      "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "better-second"
@@ -76,6 +75,7 @@
     {
       "name": "Disputa de 3º lugar",
       "ties": null,
+      "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
       "home": "better-single"
@@ -83,6 +83,7 @@
     {
       "name": "Disputa de 5º lugar",
       "ties": null,
+      "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
       "home": "better-single"

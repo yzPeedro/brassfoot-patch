@@ -440,7 +440,12 @@ public final class CompEstaduais {
         if (head == 'R') {
             int position = Integer.parseInt(code.substring(1)) - 1;
             ArrayList ranked = new ArrayList(candidates);
-            Collections.sort(ranked, campaign);
+            final ArrayList table = league.yK();
+            Collections.sort(ranked, new Comparator() {
+                public int compare(Object x, Object y) {
+                    return table.indexOf(x) - table.indexOf(y);
+                }
+            });
             return position < ranked.size() ? (ah) ranked.get(position) : null;
         }
         int group = head - 'A';

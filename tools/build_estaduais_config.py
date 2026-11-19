@@ -179,7 +179,7 @@ def build(sheet: dict, teams: list[dict], created: dict, known: dict, aliases: d
                    "fixtures": [[files[h], files[a]] for r in rounds(sheet["teams"], phase1.get("pairs") or []) or []
                                 for h, a in r]},
         "relegated": sheet.get("relegated"),
-        "knockout": [{"name": s.get("name"), "ties": campaign_codes(s.get("ties")), "legs": s.get("legs"),
+        "knockout": [{"name": s.get("name"), "ties": campaign_codes(s.get("ties")), "entrants": s.get("entrants") or [], "legs": s.get("legs"),
                       "tiebreak": s.get("tiebreak"), "home": s.get("home")} for s in stages],
         "simplifications": (["disputa de 3º lugar nao disputada no jogo"] if dropped else [])
         + (["mando 'neutral' segue a ordem da tabela"] if any(s.get("home") == "neutral" for s in stages) else []),

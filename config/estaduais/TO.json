@@ -2,22 +2,16 @@
   "state": "TO",
   "season": 2026,
   "competition": "Campeonato Tocantinense 1ª Divisão 2026",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Palmas Futebol e Regatas",
-    "clube sem arquivo: Guaraí Esporte Clube",
-    "clube sem arquivo: Bela Vista Futebol Clube",
-    "clube sem arquivo: Gurupi Esporte Clube",
-    "clube sem arquivo: União Atlético Clube (União Araguainense)"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
     "tocantinopolis_to",
-    null,
+    "palmas_to",
     "capital_to",
-    null,
-    null,
-    null,
-    null,
+    "guarai_to",
+    "belavista_to",
+    "gurupi_to",
+    "uniao_to",
     "araguaina_bra"
   ],
   "names": [
@@ -40,47 +34,47 @@
         "araguaina_bra"
       ],
       [
-        null,
-        null
+        "gurupi_to",
+        "palmas_to"
       ],
       [
-        null,
+        "uniao_to",
         "tocantinopolis_to"
       ],
       [
-        null,
-        null
+        "belavista_to",
+        "guarai_to"
       ],
       [
-        null,
-        null
+        "palmas_to",
+        "uniao_to"
       ],
       [
         "tocantinopolis_to",
-        null
+        "belavista_to"
       ],
       [
-        null,
+        "guarai_to",
         "capital_to"
       ],
       [
         "araguaina_bra",
-        null
+        "gurupi_to"
       ],
       [
         "tocantinopolis_to",
-        null
+        "guarai_to"
       ],
       [
-        null,
-        null
+        "gurupi_to",
+        "uniao_to"
       ],
       [
         "araguaina_bra",
-        null
+        "palmas_to"
       ],
       [
-        null,
+        "belavista_to",
         "capital_to"
       ],
       [
@@ -88,60 +82,60 @@
         "araguaina_bra"
       ],
       [
-        null,
-        null
+        "guarai_to",
+        "palmas_to"
       ],
       [
-        null,
-        null
-      ],
-      [
-        "capital_to",
-        null
+        "uniao_to",
+        "belavista_to"
       ],
       [
         "capital_to",
-        null
+        "gurupi_to"
       ],
       [
-        null,
-        null
+        "capital_to",
+        "uniao_to"
+      ],
+      [
+        "gurupi_to",
+        "belavista_to"
       ],
       [
         "araguaina_bra",
-        null
+        "guarai_to"
       ],
       [
-        null,
+        "palmas_to",
         "tocantinopolis_to"
       ],
       [
-        null,
-        null
+        "uniao_to",
+        "guarai_to"
       ],
       [
-        null,
+        "gurupi_to",
         "tocantinopolis_to"
       ],
       [
         "capital_to",
-        null
+        "palmas_to"
       ],
       [
-        null,
+        "belavista_to",
         "araguaina_bra"
       ],
       [
         "araguaina_bra",
-        null
+        "uniao_to"
       ],
       [
-        null,
-        null
+        "palmas_to",
+        "belavista_to"
       ],
       [
-        null,
-        null
+        "guarai_to",
+        "gurupi_to"
       ],
       [
         "tocantinopolis_to",
@@ -163,6 +157,7 @@
           "2"
         ]
       ],
+      "entrants": [],
       "legs": 2,
       "tiebreak": "points-then-penalties",
       "home": "better-second"
@@ -175,6 +170,7 @@
           "R1"
         ]
       ],
+      "entrants": [],
       "legs": 2,
       "tiebreak": "points-then-penalties",
       "home": "better-second"

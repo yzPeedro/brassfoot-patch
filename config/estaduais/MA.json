@@ -2,15 +2,12 @@
   "state": "MA",
   "season": 2026,
   "competition": "Campeonato Maranhense Série A 2026",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: ITZ Sport",
-    "clube sem arquivo: Luminense Atlético Clube"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
     "iape_ma",
-    null,
-    null,
+    "itzsport_ma",
+    "luminense_ma",
     "maranhao_ma",
     "motoclubma_bra",
     "samapaiocorrea_ma",
@@ -47,6 +44,7 @@
           "2"
         ]
       ],
+      "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "better-second"
@@ -59,6 +57,7 @@
           "W1"
         ]
       ],
+      "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "better-second"

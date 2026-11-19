@@ -1,12 +1,17 @@
 {
+ "AC|Santa Cruz Acre Esporte Clube": "santacruz_ac",
+ "AP|Santos Futebol Clube do Amapá": "santos_ap",
  "DF|Capital": "capitalbrasilia_bra",
  "ES|Rio Branco": "riobranco_es",
  "PB|Atlético Cajazeirense de Desportos": "atleticopb_bra",
+ "PE|Associação Acadêmica e Desportiva Vitória das Tabocas (Vitória)": "vitoriape_pe",
  "PE|Sport Club do Recife": "sport",
  "PI|Piauí Esporte Clube": "piaui_pi",
  "PR|Maringá": "maringapr",
  "RN|ABC Futebol Clube": "abcrn_bra",
+ "RN|QFC (Quinho Futebol Clube), campeão da 2ª Divisão 2025": "qfc_rn",
  "RR|Monte Roraima Futebol Clube": "monteroraima_rr",
  "RS|Internacional": "internacional_bra",
+ "SE|Associação Desportiva Atlético Gloriense": "atleticogloriense_se",
  "SP|Red Bull Bragantino": "bragantino_bra"
 }
