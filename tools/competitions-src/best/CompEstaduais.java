@@ -197,7 +197,10 @@ public final class CompEstaduais {
             int state = ((ah) teams.get(0)).getEstado();
             int k = league.ze() == CODE ? index(state) : key(league);
             if (k < 0) return current;
-            if (!cross) return officialSeason() ? fixtures(league, teams, k, current) : current;
+            if (!cross) {
+                if (officialSeason() && CompEstaduaisData.FIXTURES[k].length > 0) return fixtures(league, teams, k, current);
+                return teams.size() % 2 == 1 ? oddRoundRobin(league, teams, k, current) : current;
+            }
             if (groups == null || groups.size() < 2) return current;
             int n = teams.size();
             int[] group = new int[n];
@@ -274,6 +277,45 @@ public final class CompEstaduais {
             if (twoLegs) {
                 result[r + rounds][m][0] = away;
                 result[r + rounds][m][3] = home;
+            }
+        }
+        return result;
+    }
+
+    private static ah[][][] oddRoundRobin(s league, ArrayList teams, int k, ah[][][] current) {
+        int n = teams.size();
+        int nodes = n + 1;
+        int[] group = new int[nodes];
+        boolean[][] allowed = new boolean[nodes][nodes];
+        for (int i = 0; i < nodes; i++) {
+            group[i] = i;
+            for (int j = 0; j < nodes; j++) allowed[i][j] = i != j;
+        }
+        int[][] pairs = schedule(nodes, group, allowed, n, new java.util.Random(104729L * (k + 1)));
+        if (pairs == null) return current;
+        boolean twoLegs = CompEstaduaisData.P1_LEGS[k] == 2;
+        int perRound = n / 2;
+        ah[][][] result = new ah[twoLegs ? n * 2 : n][perRound][4];
+        int[] homes = new int[n];
+        for (int r = 0; r < n; r++) {
+            int m = 0;
+            for (int p = 0; p < pairs[r].length; p += 2) {
+                int x = pairs[r][p];
+                int y = pairs[r][p + 1];
+                if (x == n || y == n) continue;
+                if (homes[y] < homes[x] || homes[y] == homes[x] && (r + m) % 2 == 1) {
+                    int swap = x;
+                    x = y;
+                    y = swap;
+                }
+                homes[x]++;
+                result[r][m][0] = (ah) teams.get(x);
+                result[r][m][3] = (ah) teams.get(y);
+                if (twoLegs) {
+                    result[r + n][m][0] = (ah) teams.get(y);
+                    result[r + n][m][3] = (ah) teams.get(x);
+                }
+                m++;
             }
         }
         return result;

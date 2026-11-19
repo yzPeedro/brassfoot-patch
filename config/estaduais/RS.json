@@ -5,12 +5,11 @@
   "engine": "pending",
   "pending": [
     "clube sem arquivo: Avenida",
-    "clube sem arquivo: Inter-SM",
     "clube sem arquivo: Monsoon"
   ],
   "teams": [
     null,
-    null,
+    "interdesantamaria_rs",
     "juventude",
     "novohamburgo_bra",
     "saojosers_bra",
@@ -53,7 +52,7 @@
         "caxias",
         "novohamburgo_bra",
         null,
-        null,
+        "interdesantamaria_rs",
         "ypiranga_rs"
       ]
     ],

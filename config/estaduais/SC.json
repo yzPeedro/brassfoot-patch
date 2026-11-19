@@ -2,16 +2,14 @@
   "state": "SC",
   "season": 2026,
   "competition": "Campeonato Catarinense 2026 – Série A",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Carlos Renaux"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
     "avai_bra",
     "barra_sc",
     "brusquesc_bra",
     "camboriu_sc",
-    null,
+    "carlosrenaux_sc",
     "chapecoense_bra",
     "concordiasc_bra",
     "criciuma_bra",
@@ -52,7 +50,7 @@
         "criciuma_bra",
         "barra_sc",
         "figueirense",
-        null
+        "carlosrenaux_sc"
       ]
     ],
     "fixtures": []

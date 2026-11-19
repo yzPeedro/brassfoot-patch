@@ -2,25 +2,19 @@
   "state": "DF",
   "season": 2026,
   "competition": "51º Campeonato de Futebol Profissional da FFDF - Série A 2026 (Candangão Série A 2026)",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Samambaia",
-    "clube sem arquivo: Sobradinho",
-    "clube sem arquivo: Real Brasília",
-    "clube sem arquivo: Paranoá",
-    "clube sem arquivo: ARUC"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
     "gama_bra",
-    null,
-    null,
+    "samambaia_df",
+    "sobradinho_df",
     "ceilandia_df",
     "capitalbrasilia_bra",
     "brasiliense_df",
-    null,
-    null,
+    "realbrasilia_df",
+    "paranoa_df",
     "brasilia_df",
-    null
+    "aruc_df"
   ],
   "names": [
     "Gama",

@@ -7,7 +7,8 @@
     "fase 1 sem confrontos definidos",
     "fase 2 sem confrontos definidos",
     "fase 3 sem confrontos definidos",
-    "fase 4 sem confrontos definidos"
+    "fase 4 sem confrontos definidos",
+    "clube sem arquivo: Horizonte Futebol Clube"
   ],
   "teams": [
     "iguatu_ce",
@@ -16,7 +17,7 @@
     "ferroviarioce_bra",
     "florestace",
     "fortaleza",
-    "horizonte_ce",
+    null,
     "maracana_ce",
     "maranguape_ce",
     "quixada_ce"
@@ -41,7 +42,7 @@
         "fortaleza",
         "ferroviarioce_bra",
         "maracana_ce",
-        "horizonte_ce",
+        null,
         "quixada_ce"
       ],
       [

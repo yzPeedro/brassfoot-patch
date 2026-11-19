@@ -2,24 +2,19 @@
   "state": "ES",
   "season": 2026,
   "competition": "Campeonato Estadual Série A (Capixabão 2026)",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Capixaba",
-    "clube sem arquivo: Forte",
-    "clube sem arquivo: Serra",
-    "clube sem arquivo: Vilavelhense"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
     "desportivaferroviaria_es",
-    null,
-    null,
-    null,
+    "capixabasc_es",
+    "forte_es",
+    "serra_es",
     "portovitoria_es",
     "realnoroeste_es",
     "riobranco_es",
     "riobrancofutebolclube_es",
     "vitoria_es",
-    null
+    "vilavelhense_es"
   ],
   "names": [
     "Desportiva Ferroviária",

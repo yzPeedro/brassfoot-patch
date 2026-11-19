@@ -2,13 +2,11 @@
   "state": "SP",
   "season": 2026,
   "competition": "Paulistão Casas Bahia 2026 (Série A1)",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Capivariano"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
     "botafogosp_bra",
-    null,
+    "capivariano_sp",
     "corinthians_bra",
     "guaranisp_bra",
     "miirassol_sp",
@@ -73,7 +71,7 @@
       ],
       [
         "portuguesadesportos_bra",
-        null
+        "capivariano_sp"
       ],
       [
         "noroeste_sp",
@@ -101,7 +99,7 @@
       ],
       [
         "pontepreta_bra",
-        null
+        "capivariano_sp"
       ],
       [
         "guaranisp_bra",
@@ -141,7 +139,7 @@
       ],
       [
         "noroeste_sp",
-        null
+        "capivariano_sp"
       ],
       [
         "corinthians_bra",
@@ -173,7 +171,7 @@
       ],
       [
         "botafogosp_bra",
-        null
+        "capivariano_sp"
       ],
       [
         "corinthians_bra",
@@ -204,7 +202,7 @@
         "botafogosp_bra"
       ],
       [
-        null,
+        "capivariano_sp",
         "primavera_sp"
       ],
       [
@@ -229,7 +227,7 @@
       ],
       [
         "miirassol_sp",
-        null
+        "capivariano_sp"
       ],
       [
         "pontepreta_bra",
@@ -257,7 +255,7 @@
       ],
       [
         "saobernardo_sp",
-        null
+        "capivariano_sp"
       ],
       [
         "novorinzontino_sp",
@@ -273,7 +271,7 @@
       ],
       [
         "corinthians_bra",
-        null
+        "capivariano_sp"
       ],
       [
         "palmeiras",

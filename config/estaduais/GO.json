@@ -2,20 +2,17 @@
   "state": "GO",
   "season": 2026,
   "competition": "Campeonato Goiano (Goianão 2026)",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Anapolina",
-    "clube sem arquivo: Centro Oeste"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
     "agroec_go",
-    null,
+    "anapolina_go",
     "anapolisgo_bra",
     "aparecidense_go",
     "atleticogo_bra",
     "goias",
     "vilago",
-    null,
+    "centrooeste_go",
     "cracgo_bra",
     "goiatubago_bra",
     "inhumas_go",
@@ -54,8 +51,8 @@
       [
         "atleticogo_bra",
         "agroec_go",
-        null,
-        null
+        "centrooeste_go",
+        "anapolina_go"
       ]
     ],
     "fixtures": []

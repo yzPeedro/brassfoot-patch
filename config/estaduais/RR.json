@@ -2,23 +2,17 @@
   "state": "RR",
   "season": 2026,
   "competition": "Campeonato Roraimense de Futebol Profissional 2026",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Atlético Progresso Clube",
-    "clube sem arquivo: Atlético Rio Negro Clube",
-    "clube sem arquivo: Atlético Roraima Clube",
-    "clube sem arquivo: Náutico Futebol Clube",
-    "clube sem arquivo: River Esporte Clube"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
-    null,
-    null,
-    null,
+    "progresso_rr",
+    "rionegrororaima_rr",
+    "roraima_rr",
     "bare_rr",
     "gas_rr",
     "monteroraima_rr",
-    null,
-    null,
+    "nautico_rr",
+    "river_rr",
     "saoraimundo_rr"
   ],
   "names": [

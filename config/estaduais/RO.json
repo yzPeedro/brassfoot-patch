@@ -2,21 +2,16 @@
   "state": "RO",
   "season": 2026,
   "competition": "Campeonato Rondoniense Série A 2026",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Sport Club Genus de Porto Velho",
-    "clube sem arquivo: Barcelona Futebol Clube",
-    "clube sem arquivo: Rondoniense Social Clube",
-    "clube sem arquivo: Sociedade Esportiva União Cacoalense"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
     "gazinportovelho_ro",
-    null,
-    null,
-    null,
+    "genus_ro",
+    "barcelona_ro",
+    "rondoniense_ro",
     "jiparana_ro",
     "guapore_ro",
-    null
+    "uniaocacoalense_ro"
   ],
   "names": [
     "Gazin Porto Velho Esporte Clube",
