@@ -14,7 +14,7 @@ from tools.world.compile_game import ascii_slug, b64, java_tools, roster_rows, r
 
 ROOT = Path(__file__).resolve().parents[1]
 FIFA = ROOT / "config" / "fifa-to-game-country.json"
-GAME_CODES = ROOT / "data" / "private" / "comp-lab" / "game-country-codes.json"
+GAME_CODES = ROOT / "config" / "game-country-codes.json"
 
 
 def norm(text: str) -> str:
