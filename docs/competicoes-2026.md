@@ -45,6 +45,19 @@ Os participantes, os grupos e a tabela oficiais só valem na temporada 2026. Nas
 
 Verificação: `tools/competitions-src/harness/EstaduaisHarness.java`, numa cópia isolada da base 2026.6.14, conferiu por estado participantes, grupos, número de jogos, ausência de jogo dentro do grupo na fase cruzada, mandos da tabela oficial, fases do mata-mata e campeão, por 3 temporadas (2026–2028), sem falhas. É simulação automatizada, não homologação em partida.
 
+## Outros países
+
+Cada país tem um modelo em `config/countries/<país>-2026.json` (divisões oficiais, regras de play-off, desempate e nível estimado por divisão) e clubes gerados por `tools/build_country_clubs.py` a partir dos elencos pesquisados. Os `.cfg` das ligas são montados pelo codec (`app.CompetitionCodec set … count=N`).
+
+| País | Divisões | Regras |
+|---|---|---|
+| Inglaterra (2026/27) | Premier League 20, Championship 24, League One 24, League Two 24 | play-off de 6 clubes na Championship (5×8 e 6×7 em jogo único; semifinais 3º e 4º contra os vencedores em ida e volta; final); League One 3º a 6º e League Two 4º a 7º; saldo antes de vitórias; clubes galeses com país País de Gales |
+| Itália (2026/27) | Serie A 20, Serie B 20, Serie C 60 em 3 grupos oficiais | Serie B: 2 sobem direto, o 3º sobe direto com mais de 14 pontos sobre o 4º, senão play-off 5×8 e 6×7 em jogo único (empate classifica o mandante), semifinais 3º × vencedor de 6×7 e 4º × vencedor de 5×8 e final em ida e volta (empate classifica o melhor colocado); play-out 17º × 16º em ida e volta, dispensado com mais de 4 pontos de diferença; Serie C: sobem os 3 campeões de grupo e o vencedor do play-off de 28 clubes (fase de grupo, fase nacional com sorteio e Final Four, em `config/ligas/italia-serie-c.json`) |
+
+Códigos de confronto usados na partida (`best.I.hk` e `f.G.b(boolean, boolean)`): 2129, o original (empate classifica quem joga a volta em casa, sem pênaltis); 2130 (empate classifica o mandante do jogo único, sem pênaltis); 2701 (pontos nos dois jogos e pênaltis, sem saldo).
+
+Limitações da Itália: a Serie D não existe no jogo, então a Serie C não tem rebaixamento nem play-out; o campeão da Coppa Italia Serie C não é simulado, e a vaga dele na fase nacional fica com o melhor 11º colocado; a prorrogação não é disputada; o confronto direto (classifica avulsa) não entra no desempate; a Coppa Italia e a Supercoppa não foram adaptadas ao formato oficial. Os grupos da Serie C das temporadas seguintes seguem a distribuição do jogo.
+
 ## Fontes
 
 Documentos oficiais da CBF, com SHA-256 registrado em `config/competitions/brasil-2026.json`:
