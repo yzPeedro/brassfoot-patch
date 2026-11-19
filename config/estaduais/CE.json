@@ -82,7 +82,28 @@
       "home": "neutral",
       "condition": "",
       "venue": "",
-      "officialTies": []
+      "officialTies": [
+        [
+          "Fferroviarioce_bra",
+          "Fceara_bra"
+        ],
+        [
+          "Ffortaleza",
+          "Fflorestace"
+        ],
+        [
+          "Figuatu_ce",
+          "Fhorizonte_ce"
+        ],
+        [
+          "Fmaranguape_ce",
+          "Fmaracana_ce"
+        ],
+        [
+          "Fquixada_ce",
+          "Ftirol_ce"
+        ]
+      ]
     },
     {
       "name": "2ª fase e Quadrangular da Permanência - 2ª rodada",
@@ -114,7 +135,28 @@
       "home": "neutral",
       "condition": "",
       "venue": "",
-      "officialTies": []
+      "officialTies": [
+        [
+          "Fflorestace",
+          "Fferroviarioce_bra"
+        ],
+        [
+          "Ffortaleza",
+          "Figuatu_ce"
+        ],
+        [
+          "Fceara_bra",
+          "Fhorizonte_ce"
+        ],
+        [
+          "Fmaranguape_ce",
+          "Ftirol_ce"
+        ],
+        [
+          "Fmaracana_ce",
+          "Fquixada_ce"
+        ]
+      ]
     },
     {
       "name": "2ª fase e Quadrangular da Permanência - 3ª rodada",
@@ -146,6 +188,43 @@
       "home": "neutral",
       "condition": "",
       "venue": "",
+      "officialTies": [
+        [
+          "Fceara_bra",
+          "Ffortaleza"
+        ],
+        [
+          "Fferroviarioce_bra",
+          "Figuatu_ce"
+        ],
+        [
+          "Fhorizonte_ce",
+          "Fflorestace"
+        ],
+        [
+          "Fquixada_ce",
+          "Fmaranguape_ce"
+        ],
+        [
+          "Ftirol_ce",
+          "Fmaracana_ce"
+        ]
+      ]
+    },
+    {
+      "name": "Disputa de 5º lugar",
+      "ties": [
+        [
+          "TC3",
+          "TD3"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "better-single",
+      "condition": "",
+      "venue": "",
       "officialTies": []
     },
     {
@@ -169,17 +248,11 @@
       "officialTies": []
     },
     {
-      "name": "Disputas de 3º e 5º lugar",
+      "name": "Disputa de 3º lugar",
       "ties": [
         [
           "L1",
-          "L2",
-          "better-single"
-        ],
-        [
-          "TC3",
-          "TD3",
-          "better-single"
+          "L2"
         ]
       ],
       "entrants": [],
@@ -194,8 +267,8 @@
       "name": "Final",
       "ties": [
         [
-          "W1@3",
-          "W2@3"
+          "W1@4",
+          "W2@4"
         ]
       ],
       "entrants": [],
@@ -208,12 +281,12 @@
     }
   ],
   "finalTable": [
+    "W1@6",
+    "L1@6",
     "W1@5",
     "L1@5",
-    "W1@4",
-    "L1@4",
-    "W2@4",
-    "L2@4",
+    "W1@3",
+    "L1@3",
     "TR*"
   ],
   "tiebreakers": [
@@ -272,11 +345,10 @@
     }
   ],
   "simplifications": [
-    "2ª fase (Grupos C e D) e Quadrangular da Permanência disputados como as 3 primeiras rodadas do mata-mata, em paralelo; cada grupo soma só os próprios jogos (pontos, vitórias, saldo e gols pró)",
-    "mandos da 2ª fase fixados pelo Art. 16 §2º: 1ºs dos Grupos A e B com 2 mandos e o melhor 2º decidido pela campanha no confronto entre os 2ºs",
-    "mandos do Quadrangular: 4ºs com 2 mandos e 5ºs com 1",
-    "disputas de 3º e de 5º lugar em jogo único na semana anterior à final, mando da melhor campanha, empate nos pênaltis",
-    "desempates por cartões e sorteio não aplicados; após pontos, vitórias, saldo e gols pró vale a classificação da 1ª fase",
+    "2ª fase (Grupos C e D) e Quadrangular da Permanência disputados como as 3 primeiras rodadas do mata-mata, nas mesmas datas; em 2026 os confrontos e mandantes são os das súmulas da FCF (jogos 21 a 35)",
+    "ordem oficial: 5º lugar (11/02) antes das semifinais e 3º lugar (26/02) entre as semifinais e a final",
+    "mando do 3º e do 5º lugar e da volta da final pela campanha acumulada (Art. 12 e 16)",
+    "1ª fase gerada pelo jogo (grupos de 5 com folga), sem a tabela oficial jogo a jogo",
     "mando 'neutral' segue a ordem da tabela"
   ],
   "unsupported": [
@@ -288,6 +360,7 @@
     "pdf/CE-rec-serie-a-2026.pdf: Art. 11 (fases), Art. 12 §1º-§7º (grupos A e B, Quadrangular da Permanência, 2ª fase C x D, semifinais E e F, 3º e 5º lugar, final G), Art. 13 (desempates), Art. 14 (saldo na fase e pênaltis), Art. 15 (pênaltis nos jogos de 3º e 5º), Art. 16 (mandos), Art. 17 (classificação geral), Art. 18 (9º e 10º rebaixados), Anexo A (clubes), Anexo B (grupos da 1ª fase)",
     "pdf/CE-tabela-basica-serie-a-2026.pdf (1ª fase e Quadrangular; não usada para os pares por falha de extração)",
     "CE.json divisions[0] (participants, format, results2026, gaps)",
-    "results2026 conferido: Grupo C Fortaleza/Ferroviário/Horizonte e Grupo D Ceará/Floresta/Iguatu; semifinais Ferroviário x Fortaleza e Floresta x Ceará com volta na casa do 1º; 3º lugar Ferroviário x Floresta; 5º lugar Iguatu x Horizonte; Quadrangular Maranguape, Maracanã, Quixadá, Tirol, com Quixadá e Tirol rebaixados"
+    "results2026 conferido: Grupo C Fortaleza/Ferroviário/Horizonte e Grupo D Ceará/Floresta/Iguatu; semifinais Ferroviário x Fortaleza e Floresta x Ceará com volta na casa do 1º; 3º lugar Ferroviário x Floresta; 5º lugar Iguatu x Horizonte; Quadrangular Maranguape, Maracanã, Quixadá, Tirol, com Quixadá e Tirol rebaixados",
+    "data/private/competitions-sources/estaduais-2026/CE-tabela-oficial.json (43 jogos das súmulas da FCF)"
   ]
 }

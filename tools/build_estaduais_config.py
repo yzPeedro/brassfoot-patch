@@ -164,7 +164,7 @@ def build(sheet: dict, teams: list[dict], created: dict, known: dict, aliases: d
     files = {name: file if file and (taken.count(file) == 1 or f"{uf}|{name}" in aliases) else None
              for name, file in files.items()}
     missing = [name for name, file in files.items() if not file]
-    stages = [s for s in sheet.get("knockout") or [] if not third_place(s)]
+    stages = [s for s in sheet.get("knockout") or [] if not third_place(s) or sheet.get("finalTable")]
     dropped = len(sheet.get("knockout") or []) - len(stages)
     issues = problems({**sheet, "knockout": stages})
     phase1 = sheet["phase1"]
