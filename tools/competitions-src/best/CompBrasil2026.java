@@ -25,6 +25,7 @@ public final class CompBrasil2026 {
             "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO"};
     private static final String[] REGION_ORDER = {"AM", "RR", "AC", "RO", "TO", "GO", "DF", "MT", "PA", "AP", "MA",
             "CE", "PI", "RN", "PB", "PE", "SE", "AL", "BA", "MS", "MG", "ES", "RJ", "SP", "PR", "SC", "RS"};
+    private static final String[] DUPLICATES = {"interlimeirasp_bra", "brasilpelotas_bra"};
     private static boolean busy;
 
     private CompBrasil2026() {
@@ -85,8 +86,16 @@ public final class CompBrasil2026 {
         return null;
     }
 
+    private static boolean duplicate(Object team) {
+        String file = ((ah) team).jY();
+        for (int i = 0; i < DUPLICATES.length; i++) {
+            if (DUPLICATES[i].equals(file)) return true;
+        }
+        return false;
+    }
+
     private static boolean free(ah team) {
-        return team != null && team.getDivisao() == 0 && !team.ko();
+        return team != null && team.getDivisao() == 0 && !team.ko() && !duplicate(team);
     }
 
     private static ArrayList official(Z brazil, ArrayList fallback) {
@@ -124,11 +133,11 @@ public final class CompBrasil2026 {
     private static ah substitute(ArrayList pool, HashSet used, int state) {
         for (int i = 0; i < pool.size(); i++) {
             ah team = (ah) pool.get(i);
-            if (!used.contains(team) && team.getEstado() == state) return team;
+            if (!used.contains(team) && !duplicate(team) && team.getEstado() == state) return team;
         }
         for (int i = 0; i < pool.size(); i++) {
             ah team = (ah) pool.get(i);
-            if (!used.contains(team)) return team;
+            if (!used.contains(team) && !duplicate(team)) return team;
         }
         return null;
     }
@@ -586,17 +595,17 @@ public final class CompBrasil2026 {
             for (int i = 0; i < ranking.size() && slots > 0; i++) {
                 aD entry = (aD) ranking.get(i);
                 ah team = entry.vD();
-                if (entry.getEstado() == state && team != null && used.add(team)) {
+                if (entry.getEstado() == state && team != null && !duplicate(team) && used.add(team)) {
                     entries[2].add(team);
                     slots--;
                 }
             }
         }
         for (int i = 0; i < pool.size() && entries[1].size() < 4; i++) {
-            if (used.add(pool.get(i))) entries[1].add(pool.get(i));
+            if (!duplicate(pool.get(i)) && used.add(pool.get(i))) entries[1].add(pool.get(i));
         }
         for (int i = 0; i < pool.size() && entries[2].size() < 102; i++) {
-            if (used.add(pool.get(i))) entries[2].add(pool.get(i));
+            if (!duplicate(pool.get(i)) && used.add(pool.get(i))) entries[2].add(pool.get(i));
         }
         return entries[0].size() == 20 && entries[1].size() == 4 && entries[2].size() == 102 ? entries : null;
     }

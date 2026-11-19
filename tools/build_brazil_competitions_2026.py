@@ -22,6 +22,7 @@ MANUAL_FILES = {
     ("Red Bull Bragantino", "SP"): "bragantino_bra",
     ("Operário Ferroviário", "PR"): "operario_pr",
     ("Inter de Limeira", "SP"): "aainternacionaldelimeira_bra",
+    ("XV Piracicaba", "SP"): "xvdepiracicaba_sp",
 }
 
 

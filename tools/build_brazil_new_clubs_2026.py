@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import statistics
 from collections import Counter
 from datetime import date
@@ -15,6 +16,7 @@ from tools.world.compile_game import (ascii_slug, b64, java_tools, roster_rows, 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "config" / "competitions" / "brasil-2026.json"
 REFERENCE = date(2026, 9, 13)
+SHEET = re.compile(r"sumulas/2026/(\d+)se\.pdf")
 MODEL = {
     "level": "mediana do nivel dos clubes oficiais da Serie D 2026 ja existentes no jogo",
     "reputation": "mediana da reputacao desses mesmos clubes",
@@ -29,6 +31,24 @@ MODEL = {
 def nationality_lookup() -> dict[str, int]:
     names = json.loads((ROOT / "config" / "brasfoot-country-names.json").read_text(encoding="utf-8"))
     return {key(name): int(code) for code, name in names.items()}
+
+
+def last_sheet(player: dict) -> int:
+    numbers = [int(m.group(1)) for url in player.get("sources", []) if (m := SHEET.search(url))]
+    return max(numbers, default=0)
+
+
+def owners(paths: list[Path]) -> dict[str, str]:
+    best: dict[str, tuple] = {}
+    for path in paths:
+        for p in json.loads(path.read_text(encoding="utf-8"))["players"]:
+            ident = p.get("cbfRegistration")
+            if not ident:
+                continue
+            rank = (last_sheet(p), p.get("matchesListed") or 0)
+            if ident not in best or rank > best[ident][0]:
+                best[ident] = (rank, path.name)
+    return {ident: value[1] for ident, value in best.items()}
 
 
 def hex_color(value: str | None) -> str:
@@ -57,7 +77,9 @@ def build(squads: Path, base: Path, teams_json: Path, output: Path, jdk: Path) -
     plan, report, created = [], [], {}
     rosters = output / "rosters"
     rosters.mkdir(parents=True)
-    for path in sorted(squads.glob("*.json")):
+    paths = sorted(squads.glob("*.json"))
+    owner = owners(paths)
+    for path in paths:
         squad = json.loads(path.read_text(encoding="utf-8"))
         club = squad["club"]
         uf = club["state"]
@@ -67,6 +89,9 @@ def build(squads: Path, base: Path, teams_json: Path, output: Path, jdk: Path) -
         players = []
         for p in squad["players"]:
             if p.get("positionCode") is None:
+                continue
+            if p.get("cbfRegistration") and owner.get(p["cbfRegistration"]) != path.name:
+                counts["movedToLaterClub"] += 1
                 continue
             players.append({"name": p.get("name") or p.get("shirtName"), "positionCode": p["positionCode"],
                             "birthDate": p.get("birthDate"), "nationality": p.get("nationality") or "Brasil",

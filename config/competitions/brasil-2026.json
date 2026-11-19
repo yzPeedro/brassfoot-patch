@@ -807,7 +807,7 @@
     "state": "BA",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "portosc_ba",
     "rnc": null
    },
    {
@@ -884,11 +884,11 @@
    },
    {
     "text": "Porto Vitória Porto Vitória Futebol Clube Ltda - Me",
-    "shortName": "Porto",
+    "shortName": "Porto Vitória",
     "state": "ES",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "vitoria_es",
     "rnc": 161
    },
    {
@@ -897,7 +897,7 @@
     "state": "ES",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "riobranco_es",
     "rnc": 112
    },
    {
@@ -1284,7 +1284,7 @@
     "state": "RJ",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "sampaiocorrea_rj",
     "rnc": null
    },
    {
@@ -1455,7 +1455,7 @@
     "state": "SC",
     "origin": "Estadual",
     "criterion": 3,
-    "file": null,
+    "file": "santacatarinaclube_sc",
     "rnc": null
    },
    {
@@ -2241,7 +2241,7 @@
     "name": "Real Noroeste",
     "state": "ES",
     "points": 754,
-    "file": null
+    "file": "realnoroeste_es"
    },
    {
     "position": 97,
@@ -2353,7 +2353,7 @@
     "name": "Rio Branco",
     "state": "ES",
     "points": 536,
-    "file": null
+    "file": "riobranco_es"
    },
    {
     "position": 113,
@@ -2591,7 +2591,7 @@
     "name": "Rio Branco VN",
     "state": "ES",
     "points": 326,
-    "file": null
+    "file": "riobranco_es"
    },
    {
     "position": 148,
@@ -2633,7 +2633,7 @@
     "name": "Maricá",
     "state": "RJ",
     "points": 305,
-    "file": null
+    "file": "marica_rj"
    },
    {
     "position": 153,
@@ -2731,7 +2731,7 @@
     "name": "Porto Vitória",
     "state": "ES",
     "points": 255,
-    "file": null
+    "file": "vitoria_es"
    },
    {
     "position": 168,
@@ -2787,7 +2787,7 @@
     "name": "Vitória",
     "state": "ES",
     "points": 228,
-    "file": null
+    "file": "vitoria_es"
    },
    {
     "position": 173,
@@ -2878,7 +2878,7 @@
     "name": "XV de Piracicaba",
     "state": "SP",
     "points": 153,
-    "file": null
+    "file": "xvdepiracicaba_sp"
    },
    {
     "position": 189,
@@ -3660,17 +3660,17 @@
      {
       "name": "Porto",
       "state": "BA",
-      "file": null
+      "file": "portosc_ba"
      },
      {
       "name": "Real Noroeste",
       "state": "ES",
-      "file": null
+      "file": "realnoroeste_es"
      },
      {
       "name": "Rio Branco",
       "state": "ES",
-      "file": null
+      "file": "riobranco_es"
      },
      {
       "name": "Tombense",
@@ -3680,7 +3680,7 @@
      {
       "name": "Vitória",
       "state": "ES",
-      "file": null
+      "file": "vitoria_es"
      }
     ]
    },
@@ -3690,7 +3690,7 @@
      {
       "name": "América",
       "state": "RJ",
-      "file": null
+      "file": "america_rj"
      },
      {
       "name": "Madureira",
@@ -3725,12 +3725,12 @@
      {
       "name": "Maricá",
       "state": "RJ",
-      "file": null
+      "file": "marica_rj"
      },
      {
       "name": "Noroeste",
       "state": "SP",
-      "file": null
+      "file": "noroeste_sp"
      },
      {
       "name": "Nova Iguaçu",
@@ -3740,7 +3740,7 @@
      {
       "name": "Sampaio Corrêa",
       "state": "RJ",
-      "file": null
+      "file": "sampaiocorrea_rj"
      },
      {
       "name": "Velo Clube",
@@ -3750,7 +3750,7 @@
      {
       "name": "XV Piracicaba",
       "state": "SP",
-      "file": null
+      "file": "xvdepiracicaba_sp"
      }
     ]
    },
@@ -3780,7 +3780,7 @@
      {
       "name": "Santa Catarina",
       "state": "SC",
-      "file": null
+      "file": "santacatarinaclube_sc"
      },
      {
       "name": "São Luiz",
@@ -3800,7 +3800,7 @@
      {
       "name": "Blumenau",
       "state": "SC",
-      "file": null
+      "file": "blumenau_sc"
      },
      {
       "name": "Brasil",
