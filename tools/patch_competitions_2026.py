@@ -21,11 +21,12 @@ TARGETS = {
     "best/w.class": "participants",
     "f/B.class": "main-phase",
     "f/I.class": "supercopa",
+    "a/hU.class": "setup-install",
+    "best/p.class": "country-filter",
     "best/Z.class": "promotion,division-order",
     "f/s.class": "serie-c-rounds,reset-rounds",
 }
-HELPERS = ("best/CompBrasil2026.class", "best/CompBrasil2026$1.class", "best/CompBrasil2026$2.class",
-           "best/CompBrasil2026Data.class")
+HELPERS = ("best/CompBrasil2026.class", "best/CompBrasil2026Data.class", "mega/SetupPanels.class")
 BRA_CFG = [
     "1.vagasSobemPeloMataMata=2", "1.duasVoltasMataMataSobe=true,true,true",
     "2.nTimes=20", "2.nRebaixados=2", "2.rebaixadosDireto=2",
@@ -110,11 +111,13 @@ def build(source: Path, destination: Path, source_cfg: Path, output_cfg: Path, j
         classes.mkdir()
         transformer.mkdir()
         run([javac, "--release", "8", "-encoding", "UTF-8", "-cp", source, "-d", classes,
-             SOURCE / "best" / "CompBrasil2026.java", helper_dir / "CompBrasil2026Data.java"])
+             SOURCE / "best" / "CompBrasil2026.java", helper_dir / "CompBrasil2026Data.java",
+             SOURCE / "mega" / "SetupPanels.java"])
         run([javac, *EXPORTS, "-d", transformer, SOURCE / "CompetitionsTransformer.java"])
         replacements = {}
-        for path in sorted((classes / "best").glob("*.class")):
-            replacements["best/" + path.name] = path.read_bytes()
+        for package in ("best", "mega"):
+            for path in sorted((classes / package).glob("*.class")):
+                replacements[f"{package}/{path.name}"] = path.read_bytes()
         for name, modes in TARGETS.items():
             current = originals[name]
             for step, mode in enumerate(modes.split(",")):

@@ -205,6 +205,39 @@ public final class CompetitionsTransformer {
         return true;
     }
 
+    private static boolean beforeReturns(ClassNode owner, String name, String desc, InsnList template) {
+        MethodNode target = method(owner, name, desc);
+        for (AbstractInsnNode node : target.instructions) {
+            if (node instanceof MethodInsnNode call && "mega/SetupPanels".equals(call.owner)) {
+                throw new IllegalStateException("already patched: " + name);
+            }
+        }
+        int returns = 0;
+        for (AbstractInsnNode node : target.instructions.toArray()) {
+            if (node.getOpcode() == Opcodes.RETURN) {
+                InsnList copy = new InsnList();
+                for (AbstractInsnNode item : template) copy.add(item.clone(null));
+                target.instructions.insertBefore(node, copy);
+                returns++;
+            }
+        }
+        if (returns == 0) throw new IllegalStateException(name + " without return");
+        return true;
+    }
+
+    private static boolean setupInstall(ClassNode owner) {
+        InsnList hook = new InsnList();
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "mega/SetupPanels", "install", "(La/hU;)V", false));
+        return beforeReturns(owner, "<init>", "(Ljavax/swing/JFrame;)V", hook);
+    }
+
+    private static boolean countryFilter(ClassNode owner) {
+        InsnList hook = new InsnList();
+        hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "mega/SetupPanels", "filterCountries", "()V", false));
+        return beforeReturns(owner, "dd", "()V", hook);
+    }
+
     private static boolean singleRoundSerieC(ClassNode owner) {
         MethodNode target = method(owner, "a", "(Ljava/util/ArrayList;ZZLjava/util/ArrayList;)V");
         int changed = 0;
@@ -247,6 +280,8 @@ public final class CompetitionsTransformer {
             case "copa-names": frames = copaNames(owner); break;
             case "main-phase": frames = mainPhase(owner); break;
             case "supercopa": frames = supercopa(owner); break;
+            case "setup-install": frames = setupInstall(owner); break;
+            case "country-filter": frames = countryFilter(owner); break;
             case "division-order": frames = divisionOrder(owner); break;
             case "serie-c-rounds": frames = singleRoundSerieC(owner); break;
             default: throw new IllegalArgumentException("unknown mode " + args[0]);
