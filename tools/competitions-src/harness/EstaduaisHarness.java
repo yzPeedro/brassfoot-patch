@@ -203,6 +203,16 @@ public final class EstaduaisHarness {
         int goals = 0;
         for (Object item : matches(league)) goals += ((I) item).hu() + ((I) item).hw();
         check(goals > 0, spec.uf + ": 1a fase disputada (" + goals + " gols)");
+        if (!spec.groups.isEmpty()) {
+            boolean sorted = true;
+            for (Object group : league.yQ()) {
+                ArrayList members = ((best.G) group).gR();
+                for (int i = 1; i < members.size(); i++) {
+                    sorted &= ((ah) members.get(i - 1)).d(league)[0] >= ((ah) members.get(i)).d(league)[0];
+                }
+            }
+            check(sorted, spec.uf + ": grupos ordenados por pontos ao fim da 1a fase");
+        }
         f.z knockout = league.yY();
         check(knockout != null, spec.uf + ": mata-mata criado");
         if (knockout == null) return;

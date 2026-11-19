@@ -398,6 +398,22 @@ public final class CompEstaduais {
             boolean homeWon = previous.zY().contains(match.hc());
             return (head == 'W') == homeWon ? match.hc() : match.hd();
         }
+        if (head == 'P') {
+            int position = Integer.parseInt(code.substring(1)) - 1;
+            ArrayList ordered = new ArrayList();
+            ArrayList groups = league.yQ();
+            for (int place = 0; ordered.size() < league.yK().size(); place++) {
+                ArrayList same = new ArrayList();
+                for (int g = 0; g < groups.size(); g++) {
+                    ArrayList members = ((best.G) groups.get(g)).gR();
+                    if (place < members.size()) same.add(members.get(place));
+                }
+                if (same.isEmpty()) break;
+                Collections.sort(same, campaign);
+                ordered.addAll(same);
+            }
+            return position < ordered.size() ? (ah) ordered.get(position) : null;
+        }
         if (head == 'R') {
             int position = Integer.parseInt(code.substring(1)) - 1;
             ArrayList ranked = new ArrayList(candidates);
