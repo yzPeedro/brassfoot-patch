@@ -116,7 +116,78 @@ public final class CompetitionCodec {
         d.nGrupos = 16;
     }
 
+    static String dumpJson(Object root) throws Exception {
+        StringBuilder out = new StringBuilder("[");
+        java.util.List<?> items = root instanceof ArrayLigaType n ? n.a : ((ArrayLigaEType) root).a;
+        for (int i = 0; i < items.size(); i++) {
+            Object item = items.get(i);
+            if (i > 0) out.append(',');
+            out.append('{');
+            java.lang.reflect.Field[] fields = item.getClass().getDeclaredFields();
+            Arrays.sort(fields, (a, b) -> a.getName().compareTo(b.getName()));
+            boolean first = true;
+            for (java.lang.reflect.Field f : fields) {
+                if (java.lang.reflect.Modifier.isStatic(f.getModifiers())) continue;
+                f.setAccessible(true);
+                Object v = f.get(item);
+                if (!first) out.append(',');
+                first = false;
+                out.append('"').append(f.getName()).append("\":");
+                if (v == null) out.append("null");
+                else if (v instanceof String str) out.append('"').append(str.replace("\\", "\\\\").replace("\"", "\\\"")).append('"');
+                else if (v instanceof boolean[] b) out.append(Arrays.toString(b));
+                else if (v instanceof int[] a) out.append(Arrays.toString(a));
+                else out.append(v);
+            }
+            out.append('}');
+        }
+        return out.append(']').toString();
+    }
+
+    static void setField(Object root, String assignment) throws Exception {
+        int dot = assignment.indexOf('.');
+        int eq = assignment.indexOf('=');
+        if (dot < 1 || eq < dot) throw new IllegalArgumentException("Expected INDEX.field=value: " + assignment);
+        int index = Integer.parseInt(assignment.substring(0, dot));
+        String name = assignment.substring(dot + 1, eq);
+        String value = assignment.substring(eq + 1);
+        java.util.List<?> items = root instanceof ArrayLigaType n ? n.a : ((ArrayLigaEType) root).a;
+        Object item = items.get(index);
+        java.lang.reflect.Field f = item.getClass().getDeclaredField(name);
+        f.setAccessible(true);
+        Class<?> t = f.getType();
+        if (t == int.class) f.setInt(item, Integer.parseInt(value));
+        else if (t == boolean.class) f.setBoolean(item, Boolean.parseBoolean(value));
+        else if (t == String.class) f.set(item, value);
+        else if (t == boolean[].class) {
+            String[] parts = value.split(",");
+            boolean[] arr = new boolean[parts.length];
+            for (int i = 0; i < parts.length; i++) arr[i] = Boolean.parseBoolean(parts[i].trim());
+            f.set(item, arr);
+        } else throw new IllegalArgumentException("Unsupported field type: " + name);
+    }
+
     public static void main(String[] args) throws Exception {
+        if (args.length == 2 && args[0].equals("dump")) {
+            Path in = Path.of(args[1]);
+            if (!Files.isRegularFile(in) || Files.size(in) > MAX_INPUT_BYTES) throw new IOException("Invalid source");
+            System.out.println(dumpJson(decode(Files.readAllBytes(in))));
+            return;
+        }
+        if (args.length >= 4 && args[0].equals("set")) {
+            Path in = Path.of(args[1]);
+            Path outPath = Path.of(args[2]);
+            if (!Files.isRegularFile(in) || Files.size(in) > MAX_INPUT_BYTES) throw new IOException("Invalid source");
+            ensureSafeOutput(in, outPath, true);
+            Object root = decode(Files.readAllBytes(in));
+            for (int i = 3; i < args.length; i++) setField(root, args[i]);
+            byte[] encoded = encode(root);
+            Object check = decode(encoded);
+            if (!dumpJson(check).equals(dumpJson(root))) throw new IOException("Verification failed");
+            Files.write(outPath, encoded, StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE);
+            System.out.println(dumpJson(check));
+            return;
+        }
         if (args.length < 2 || args.length > 3
                 || (!args[0].equals("inspect") && !args[0].equals("roundtrip")
                     && !args[0].equals("trial-serie-d-96"))) {
