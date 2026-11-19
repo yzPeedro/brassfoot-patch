@@ -1,0 +1,376 @@
+{
+  "state": "SP",
+  "season": 2026,
+  "competition": "Paulistão Casas Bahia 2026 (Série A1)",
+  "engine": "pending",
+  "pending": [
+    "clube sem arquivo: Capivariano"
+  ],
+  "teams": [
+    "botafogosp_bra",
+    null,
+    "corinthians_bra",
+    "guaranisp_bra",
+    "miirassol_sp",
+    "noroeste_sp",
+    "novorinzontino_sp",
+    "palmeiras",
+    "pontepreta_bra",
+    "portuguesadesportos_bra",
+    "primavera_sp",
+    "bragantino_bra",
+    "santos",
+    "saobernardo_sp",
+    "saopaulo_bra",
+    "veloclube_bra"
+  ],
+  "names": [
+    "Botafogo-SP",
+    "Capivariano",
+    "Corinthians",
+    "Guarani",
+    "Mirassol",
+    "Noroeste",
+    "Novorizontino",
+    "Palmeiras",
+    "Ponte Preta",
+    "Portuguesa",
+    "Primavera",
+    "Red Bull Bragantino",
+    "Santos",
+    "São Bernardo",
+    "São Paulo",
+    "Velo Clube"
+  ],
+  "phase1": {
+    "type": "fixtures",
+    "legs": 1,
+    "groups": [],
+    "fixtures": [
+      [
+        "corinthians_bra",
+        "santos"
+      ],
+      [
+        "palmeiras",
+        "saopaulo_bra"
+      ],
+      [
+        "saobernardo_sp",
+        "bragantino_bra"
+      ],
+      [
+        "novorinzontino_sp",
+        "miirassol_sp"
+      ],
+      [
+        "pontepreta_bra",
+        "veloclube_bra"
+      ],
+      [
+        "guaranisp_bra",
+        "primavera_sp"
+      ],
+      [
+        "portuguesadesportos_bra",
+        null
+      ],
+      [
+        "noroeste_sp",
+        "botafogosp_bra"
+      ],
+      [
+        "corinthians_bra",
+        "palmeiras"
+      ],
+      [
+        "saopaulo_bra",
+        "santos"
+      ],
+      [
+        "saobernardo_sp",
+        "novorinzontino_sp"
+      ],
+      [
+        "bragantino_bra",
+        "noroeste_sp"
+      ],
+      [
+        "miirassol_sp",
+        "portuguesadesportos_bra"
+      ],
+      [
+        "pontepreta_bra",
+        null
+      ],
+      [
+        "guaranisp_bra",
+        "veloclube_bra"
+      ],
+      [
+        "botafogosp_bra",
+        "primavera_sp"
+      ],
+      [
+        "corinthians_bra",
+        "saopaulo_bra"
+      ],
+      [
+        "palmeiras",
+        "santos"
+      ],
+      [
+        "saobernardo_sp",
+        "pontepreta_bra"
+      ],
+      [
+        "novorinzontino_sp",
+        "bragantino_bra"
+      ],
+      [
+        "miirassol_sp",
+        "primavera_sp"
+      ],
+      [
+        "guaranisp_bra",
+        "botafogosp_bra"
+      ],
+      [
+        "veloclube_bra",
+        "portuguesadesportos_bra"
+      ],
+      [
+        "noroeste_sp",
+        null
+      ],
+      [
+        "corinthians_bra",
+        "bragantino_bra"
+      ],
+      [
+        "palmeiras",
+        "novorinzontino_sp"
+      ],
+      [
+        "saopaulo_bra",
+        "miirassol_sp"
+      ],
+      [
+        "santos",
+        "veloclube_bra"
+      ],
+      [
+        "saobernardo_sp",
+        "noroeste_sp"
+      ],
+      [
+        "pontepreta_bra",
+        "guaranisp_bra"
+      ],
+      [
+        "portuguesadesportos_bra",
+        "primavera_sp"
+      ],
+      [
+        "botafogosp_bra",
+        null
+      ],
+      [
+        "corinthians_bra",
+        "saobernardo_sp"
+      ],
+      [
+        "palmeiras",
+        "miirassol_sp"
+      ],
+      [
+        "saopaulo_bra",
+        "portuguesadesportos_bra"
+      ],
+      [
+        "santos",
+        "bragantino_bra"
+      ],
+      [
+        "novorinzontino_sp",
+        "guaranisp_bra"
+      ],
+      [
+        "pontepreta_bra",
+        "noroeste_sp"
+      ],
+      [
+        "veloclube_bra",
+        "botafogosp_bra"
+      ],
+      [
+        null,
+        "primavera_sp"
+      ],
+      [
+        "corinthians_bra",
+        "veloclube_bra"
+      ],
+      [
+        "palmeiras",
+        "guaranisp_bra"
+      ],
+      [
+        "saopaulo_bra",
+        "saobernardo_sp"
+      ],
+      [
+        "santos",
+        "novorinzontino_sp"
+      ],
+      [
+        "bragantino_bra",
+        "botafogosp_bra"
+      ],
+      [
+        "miirassol_sp",
+        null
+      ],
+      [
+        "pontepreta_bra",
+        "portuguesadesportos_bra"
+      ],
+      [
+        "noroeste_sp",
+        "primavera_sp"
+      ],
+      [
+        "corinthians_bra",
+        "pontepreta_bra"
+      ],
+      [
+        "palmeiras",
+        "portuguesadesportos_bra"
+      ],
+      [
+        "saopaulo_bra",
+        "primavera_sp"
+      ],
+      [
+        "santos",
+        "guaranisp_bra"
+      ],
+      [
+        "saobernardo_sp",
+        null
+      ],
+      [
+        "novorinzontino_sp",
+        "botafogosp_bra"
+      ],
+      [
+        "bragantino_bra",
+        "miirassol_sp"
+      ],
+      [
+        "veloclube_bra",
+        "noroeste_sp"
+      ],
+      [
+        "corinthians_bra",
+        null
+      ],
+      [
+        "palmeiras",
+        "botafogosp_bra"
+      ],
+      [
+        "saopaulo_bra",
+        "pontepreta_bra"
+      ],
+      [
+        "santos",
+        "noroeste_sp"
+      ],
+      [
+        "saobernardo_sp",
+        "miirassol_sp"
+      ],
+      [
+        "novorinzontino_sp",
+        "primavera_sp"
+      ],
+      [
+        "bragantino_bra",
+        "veloclube_bra"
+      ],
+      [
+        "guaranisp_bra",
+        "portuguesadesportos_bra"
+      ]
+    ]
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "Quartas de final",
+      "ties": [
+        [
+          "1",
+          "8"
+        ],
+        [
+          "2",
+          "7"
+        ],
+        [
+          "3",
+          "6"
+        ],
+        [
+          "4",
+          "5"
+        ]
+      ],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "better-single"
+    },
+    {
+      "name": "Semifinal",
+      "ties": [
+        [
+          "C1",
+          "C4"
+        ],
+        [
+          "C2",
+          "C3"
+        ]
+      ],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "better-single"
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "C2",
+          "C1"
+        ]
+      ],
+      "legs": 2,
+      "tiebreak": "points-then-penalties",
+      "home": "better-second"
+    }
+  ],
+  "simplifications": [],
+  "unsupported": [
+    "Mando da 1ª fase desconhecido: o REC (art. 5º §3º) lista só os 8 adversários de cada clube (64 jogos, turno único, classificação única); mando e ordem das rodadas foram definidos depois pelo DCO e não estão nas fontes. A ordem dentro de cada par em 'pairs' NÃO é o mandante oficial.",
+    "Potes (art. 5º §1º–§2º): A Corinthians, Palmeiras, São Paulo, Santos; B São Bernardo, Novorizontino, Red Bull Bragantino, Mirassol; C Ponte Preta, Guarani, Velo Clube, Portuguesa; D Botafogo, Noroeste, Capivariano, Primavera. Cada clube enfrenta os 3 do próprio pote e 5 de outros potes (A: 1 do D e 2 de B e C; B: 1 do C e 2 de A e D; C: 1 do B e 2 de A e D; D: 1 do A e 2 de B e C). Para temporadas futuras o sorteio com essas restrições (art. 6º: cabeças Santos, São Paulo, Palmeiras, Corinthians) não é expressável; 'fixtures' vale só para 2026.",
+    "Melhor campanha (C1..C4 na semifinal, C1/C2 na final) = pontos acumulados em todas as fases, com os desempates do art. 16 (art. 16 §4º); o esquema não diz que soma as fases.",
+    "Final: o REC (art. 14) permite jogo único ou ida e volta, conforme alinhamento FPF/CBF; em 2026 foi ida e volta (Wikipedia). Em ida e volta vence quem somar mais pontos só na final; empate em pontos → pênaltis ao fim do returno, sem saldo (art. 14 §2º, art. 16 §3º): 'points-then-penalties' exato. Melhor campanha joga a 1ª como visitante e a 2ª como mandante (art. 15 §2º). Em jogo único: mando da melhor campanha e pênaltis (art. 15 §1º, art. 16 §2º).",
+    "Locais dos clássicos entre os 4 grandes e dos mata-matas designados pelo DCO; restrição de jogar na capital a até 2 clubes da cidade de São Paulo nas quartas (art. 7º).",
+    "Fonte frágil para resultados: campeão e rebaixados só conferidos na Wikipedia (SP.json gaps)."
+  ],
+  "sources": [
+    "pdf/SP-A1-REC-2026.pdf: art. 4º (participantes), art. 5º §1º–§3º (potes e adversários de cada clube), art. 9º (1ª fase e rebaixamento dos 2 últimos), arts. 10–11 (quartas), arts. 12–13 (semifinal), arts. 14–15 (final e mando), art. 16 (desempates e melhor campanha)",
+    "SP.json divisions[0]"
+  ]
+}

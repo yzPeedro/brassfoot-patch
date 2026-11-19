@@ -1,0 +1,84 @@
+{
+  "state": "MT",
+  "season": 2026,
+  "competition": "Campeonato Mato-grossense Martinello Sicredi 2026",
+  "engine": "pending",
+  "pending": [
+    "fase 1 sem confrontos definidos",
+    "fase 1: desempate 'None' sem suporte",
+    "fase 1: mando 'None' sem suporte",
+    "fase 1: numero de jogos 'None' sem suporte",
+    "fase 2: desempate 'None' sem suporte",
+    "fase 2: mando 'None' sem suporte",
+    "rebaixamento indefinido",
+    "clube sem arquivo: Chapada",
+    "clube sem arquivo: CEOV",
+    "clube sem arquivo: Várzea Grande"
+  ],
+  "teams": [
+    null,
+    null,
+    "cuiaba_bra",
+    "luverdensemt_bra",
+    "mixto_mt",
+    "novamutum_mt",
+    "primavera_mt",
+    "sinop_mt",
+    "uniaorondonopolis_mt",
+    null
+  ],
+  "names": [
+    "Chapada",
+    "CEOV",
+    "Cuiabá",
+    "Luverdense",
+    "Mixto",
+    "Nova Mutum",
+    "Primavera",
+    "Sport Sinop",
+    "União",
+    "Várzea Grande"
+  ],
+  "phase1": {
+    "type": "league",
+    "legs": 1,
+    "groups": [],
+    "fixtures": []
+  },
+  "relegated": null,
+  "knockout": [
+    {
+      "name": "Semifinal",
+      "ties": null,
+      "legs": null,
+      "tiebreak": null,
+      "home": null
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ]
+      ],
+      "legs": 2,
+      "tiebreak": null,
+      "home": null
+    }
+  ],
+  "simplifications": [],
+  "unsupported": [
+    "REC da 1ª Divisão 2026 não obtido (o link da FMF-MT devolve erro): número de classificados, existência de quartas, cruzamentos, mandos, desempates e rebaixamento sem fonte.",
+    "1ª fase: a tabela básica oficial mostra grupo único com 10 clubes em 9 rodadas (turno único); só isso é confirmado.",
+    "Semifinal: só se sabe que existiu (boletim da FMF sobre VAR nas semifinais); número de jogos e classificados não confirmados. Não se sabe se houve quartas.",
+    "Final: ida e volta (imprensa), decidida nos pênaltis em 2026; não se sabe se o critério antes dos pênaltis é agregado, pontos e saldo ou vantagem de campanha, nem quem manda a volta.",
+    "Rebaixamento sem fonte (relegated = null). Indício indireto: o REC da 2ª divisão (Art. 5º) dá acesso ao campeão e ao vice para a 1ª divisão 2027.",
+    "Critérios de desempate da 1ª fase sem fonte (só pontos é certo)."
+  ],
+  "sources": [
+    "pdf/MT-1a-divisao-tabela-2026.pdf: tabela básica (grupo único, 10 clubes, 9 rodadas de 10/01 a 08/02/2026)",
+    "pdf/MT-2a-divisao-REC-2026.pdf: Art. 5º (campeão e vice da 2ª divisão disputam a 1ª divisão 2027)",
+    "MT.json (pesquisa): boletim FMF jan/fev 2026 (semifinais com VAR); imprensa (final em ida e volta, decidida nos pênaltis)"
+  ]
+}

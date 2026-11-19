@@ -18,7 +18,7 @@ COUNTRIES = ROOT / "config" / "countries"
 SOURCE = ROOT / "tools" / "competitions-src"
 CODEC = ROOT / "tools" / "competition-codec"
 TARGETS = {
-    "f/G.class": "pairing,after-tie",
+    "f/G.class": "pairing,after-tie,points-tiebreak",
     "f/f.class": "copa-start,copa-names",
     "best/w.class": "participants,estadual-division",
     "f/B.class": "main-phase,playoff-start",
@@ -26,7 +26,7 @@ TARGETS = {
     "a/hU.class": "setup-install",
     "best/p.class": "country-filter",
     "best/Z.class": "promotion,division-order",
-    "f/s.class": "serie-c-rounds,reset-rounds,resort,estadual-knockout",
+    "f/s.class": "serie-c-rounds,reset-rounds,resort,estadual-knockout,estadual-crossed",
 }
 HELPERS = ("best/CompBrasil2026.class", "best/CompBrasil2026Data.class", "mega/SetupPanels.class")
 BRA_CFG = [

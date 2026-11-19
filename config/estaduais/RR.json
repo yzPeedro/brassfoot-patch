@@ -1,0 +1,86 @@
+{
+  "state": "RR",
+  "season": 2026,
+  "competition": "Campeonato Roraimense de Futebol Profissional 2026",
+  "engine": "pending",
+  "pending": [
+    "clube sem arquivo: Atlético Progresso Clube",
+    "clube sem arquivo: Atlético Rio Negro Clube",
+    "clube sem arquivo: Atlético Roraima Clube",
+    "clube sem arquivo: Náutico Futebol Clube",
+    "clube sem arquivo: River Esporte Clube"
+  ],
+  "teams": [
+    null,
+    null,
+    null,
+    "bare_rr",
+    "gas_rr",
+    "monteroraima_rr",
+    null,
+    null,
+    "saoraimundo_rr"
+  ],
+  "names": [
+    "Atlético Progresso Clube",
+    "Atlético Rio Negro Clube",
+    "Atlético Roraima Clube",
+    "Baré Esporte Clube",
+    "Grêmio Atlético Sampaio (GAS)",
+    "Monte Roraima Futebol Clube",
+    "Náutico Futebol Clube",
+    "River Esporte Clube",
+    "São Raimundo Esporte Clube"
+  ],
+  "phase1": {
+    "type": "league",
+    "legs": 1,
+    "groups": [],
+    "fixtures": []
+  },
+  "relegated": 1,
+  "knockout": [
+    {
+      "name": "Semifinais",
+      "ties": [
+        [
+          "1",
+          "4"
+        ],
+        [
+          "2",
+          "3"
+        ]
+      ],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "neutral"
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ]
+      ],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "neutral"
+    }
+  ],
+  "simplifications": [
+    "mando 'neutral' segue a ordem da tabela"
+  ],
+  "unsupported": [
+    "Fonte frágil: regulamento específico oficial da FRF não localizado; formato, desempates e rebaixamento vêm só da FolhaBV (23/12/2025) e da Wikipedia pt (gaps do RR.json).",
+    "Todos os jogos (1ª fase, semifinais e final) no Estádio Canarinho, em Boa Vista: não há mando real; a 1ª fase também é em campo neutro, o que o tipo 'league' não expressa.",
+    "Desempate: confronto direto antes de vitórias (FolhaBV e Wikipedia pt); 'fewerGoalsAgainst' = menos gols sofridos (não há saldo de gols na lista); 'draw' (sorteio) só aparece na Wikipedia pt.",
+    "Pareamento das semifinais (1º x 4º e 2º x 3º) só na Wikipedia pt; confere com os resultados de 2026 (São Raimundo x Baré, Monte Roraima x GAS).",
+    "Sem prorrogação: empate em semifinal e final vai direto aos pênaltis (FolhaBV)."
+  ],
+  "sources": [
+    "RR.json divisions[0].format: FolhaBV https://www.folhabv.com.br/?p=595330 (turno único no Canarinho, 4 às semifinais, último rebaixado, pênaltis) e Wikipedia pt Campeonato Roraimense de Futebol de 2026 (confrontos 1x4/2x3, sorteio)",
+    "RR.json results2026 (conferência dos confrontos)"
+  ]
+}

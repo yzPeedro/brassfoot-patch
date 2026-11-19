@@ -310,6 +310,67 @@ public final class CompetitionsTransformer {
         return true;
     }
 
+    private static boolean estadualCrossed(ClassNode owner) {
+        MethodNode target = method(owner, "a", "(Ljava/util/ArrayList;ZZLjava/util/ArrayList;)V");
+        int schedule = -1;
+        for (AbstractInsnNode node : target.instructions) {
+            if (node.getOpcode() == Opcodes.ACONST_NULL && node.getNext() instanceof VarInsnNode store
+                    && store.getOpcode() == Opcodes.ASTORE) {
+                schedule = store.var;
+                break;
+            }
+        }
+        if (schedule < 0) throw new IllegalStateException("schedule local absent");
+        AbstractInsnNode anchor = null;
+        for (AbstractInsnNode node : target.instructions) {
+            if (node instanceof VarInsnNode load && load.getOpcode() == Opcodes.ALOAD && load.var == 1
+                    && node.getNext() instanceof MethodInsnNode size && "size".equals(size.name)
+                    && size.getNext().getOpcode() == Opcodes.ICONST_2
+                    && size.getNext().getNext().getOpcode() == Opcodes.IDIV) {
+                if (anchor != null) throw new IllegalStateException("ambiguous round size");
+                anchor = node;
+            }
+        }
+        if (anchor == null) throw new IllegalStateException("round size absent");
+        InsnList hook = new InsnList();
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 1));
+        hook.add(new VarInsnNode(Opcodes.ILOAD, 3));
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 4));
+        hook.add(new VarInsnNode(Opcodes.ALOAD, schedule));
+        hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "best/CompEstaduais", "crossed",
+                "(Lf/s;Ljava/util/ArrayList;ZLjava/util/ArrayList;[[[Lbest/ah;)[[[Lbest/ah;", false));
+        hook.add(new jdk.internal.org.objectweb.asm.tree.TypeInsnNode(Opcodes.CHECKCAST, "[[[Lbest/ah;"));
+        hook.add(new VarInsnNode(Opcodes.ASTORE, schedule));
+        target.instructions.insertBefore(anchor, hook);
+        return true;
+    }
+
+    private static boolean pointsTiebreak(ClassNode owner) {
+        MethodNode target = method(owner, "b", "(ZZ)V");
+        AbstractInsnNode found = null;
+        for (AbstractInsnNode node : target.instructions) {
+            if (node instanceof VarInsnNode decision && decision.getOpcode() == Opcodes.ILOAD
+                    && node.getNext() instanceof JumpInsnNode skip && skip.getOpcode() == Opcodes.IFNE
+                    && skip.getNext() instanceof VarInsnNode home && home.getOpcode() == Opcodes.ILOAD
+                    && home.getNext() instanceof VarInsnNode away && away.getOpcode() == Opcodes.ILOAD
+                    && away.getNext() instanceof JumpInsnNode compare && compare.getOpcode() == Opcodes.IF_ICMPLE
+                    && home.var != away.var && home.var != decision.var) {
+                found = skip;
+                break;
+            }
+        }
+        if (found == null) throw new IllegalStateException("aggregate block absent");
+        JumpInsnNode skip = (JumpInsnNode) found;
+        InsnList hook = new InsnList();
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "f/G", "ze", "()I", false));
+        hook.add(new IntInsnNode(Opcodes.SIPUSH, 2701));
+        hook.add(new JumpInsnNode(Opcodes.IF_ICMPEQ, skip.label));
+        target.instructions.insert(skip, hook);
+        return false;
+    }
+
     private static boolean singleRoundSerieC(ClassNode owner) {
         MethodNode target = method(owner, "a", "(Ljava/util/ArrayList;ZZLjava/util/ArrayList;)V");
         int changed = 0;
@@ -358,6 +419,8 @@ public final class CompetitionsTransformer {
             case "resort": frames = resort(owner); break;
             case "estadual-division": frames = estadualDivision(owner); break;
             case "estadual-knockout": frames = estadualKnockout(owner); break;
+            case "estadual-crossed": frames = estadualCrossed(owner); break;
+            case "points-tiebreak": frames = pointsTiebreak(owner); break;
             case "division-order": frames = divisionOrder(owner); break;
             case "serie-c-rounds": frames = singleRoundSerieC(owner); break;
             default: throw new IllegalArgumentException("unknown mode " + args[0]);

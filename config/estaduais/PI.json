@@ -1,0 +1,80 @@
+{
+  "state": "PI",
+  "season": 2026,
+  "competition": "Campeonato Piauiense Série A 2026",
+  "engine": "pending",
+  "pending": [
+    "clube sem arquivo: Clube Atlético Piauiense (CAP)",
+    "clube sem arquivo: Associação Atlética Oeirense",
+    "clube sem arquivo: Teresina Esporte Clube",
+    "clube sem arquivo: Associação Atlética Corisabbá"
+  ],
+  "teams": [
+    "altos_pi",
+    null,
+    "parnahyba_pi",
+    null,
+    null,
+    "piaui_pi",
+    "fluminensepi_bra",
+    null
+  ],
+  "names": [
+    "Associação Esportiva de Altos",
+    "Clube Atlético Piauiense (CAP)",
+    "Parnahyba Sport Club",
+    "Associação Atlética Oeirense",
+    "Teresina Esporte Clube",
+    "Piauí Esporte Clube",
+    "Fluminense Esporte Clube",
+    "Associação Atlética Corisabbá"
+  ],
+  "phase1": {
+    "type": "league",
+    "legs": 1,
+    "groups": [],
+    "fixtures": []
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "Semifinal",
+      "ties": [
+        [
+          "4",
+          "1"
+        ],
+        [
+          "3",
+          "2"
+        ]
+      ],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second"
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ]
+      ],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second"
+    }
+  ],
+  "simplifications": [],
+  "unsupported": [
+    "Equivalência: semifinal e final decididas por soma de pontos e saldo de gols nos dois jogos e depois pênaltis (série de 5), sem prorrogação (Art. 10 §1º, Art. 11 §1º). Pontos seguidos de saldo agregado empata exatamente nos mesmos casos que o placar agregado, então 'aggregate-then-penalties' reproduz a regra.",
+    "Final: mando do jogo de volta para o melhor índice técnico somado nas Fases I e II (Art. 11), não só na Fase I. 'better-second' por posição da 1ª fase pode divergir; o motor precisaria somar os jogos da semifinal ao índice da 1ª fase para decidir o mando. O mesmo índice das Fases I+II ordena a classificação final do 3º ao 8º (Art. 11 §2º).",
+    "Rebaixamento: as 2 equipes com menos pontos na Fase I, com desempate do Art. 21 (Art. 17); equivale aos 2 últimos da classificação da 1ª fase.",
+    "Regulamento cita 'Série A / 2025' no Art. 11 §1º-2º (aparente cópia do ano anterior); tratado como 2026."
+  ],
+  "sources": [
+    "pdf/PI-regulamento-serie-a-2026.pdf: Art. 7º e 8º (turno único, 4 classificados), Art. 10 (semifinal 4ºx1º e 3ºx2º, volta do melhor), Art. 11 (final), Art. 17 (rebaixamento), Art. 21 (desempate)",
+    "PI.json divisions[0] e results2026 (semifinais Fluminense x Piauí e Altos x CAP com volta do melhor colocado; Corisabbá e Parnahyba rebaixados) conferidos"
+  ]
+}

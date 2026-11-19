@@ -46,6 +46,9 @@ def source(folder: Path = ESTADUAIS) -> str:
         "    static final String[][][] GROUPS = {\n"
         + rows(lambda s: array(s["phase1"].get("groups") or [], lambda g: array(g, text))) + "\n    };",
         "",
+        "    static final String[][] FIXTURES = {\n"
+        + rows(lambda s: array([f for pair in s["phase1"].get("fixtures") or [] for f in pair], text)) + "\n    };",
+        "",
         "    static final int[] RELEGATED = " + array(states, lambda s: str(s.get("relegated", 0))) + ";",
         "",
         "    static final String[][][][] KO_TIES = {\n"

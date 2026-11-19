@@ -1,0 +1,107 @@
+{
+  "state": "CE",
+  "season": 2026,
+  "competition": "Campeonato Cearense Série A 2026",
+  "engine": "pending",
+  "pending": [
+    "fase 1 sem confrontos definidos",
+    "fase 2 sem confrontos definidos",
+    "fase 3 sem confrontos definidos",
+    "fase 4 sem confrontos definidos",
+    "clube sem arquivo: Horizonte Futebol Clube",
+    "clube sem arquivo: Maranguape Futebol Clube",
+    "clube sem arquivo: Quixadá Futebol Clube"
+  ],
+  "teams": [
+    "iguatu_ce",
+    "ceara_bra",
+    "tirol_ce",
+    "ferroviarioce_bra",
+    "florestace",
+    "fortaleza",
+    null,
+    "maracana_ce",
+    null,
+    null
+  ],
+  "names": [
+    "Associação Desportiva Iguatu",
+    "Ceará Sporting Club",
+    "Centro de Formação de Atletas do Tirol",
+    "Ferroviário Atlético Clube",
+    "Floresta Esporte Clube",
+    "Fortaleza Esporte Clube",
+    "Horizonte Futebol Clube",
+    "Maracanã Esporte Clube",
+    "Maranguape Futebol Clube",
+    "Quixadá Futebol Clube"
+  ],
+  "phase1": {
+    "type": "groups",
+    "legs": 1,
+    "groups": [
+      [
+        "fortaleza",
+        "ferroviarioce_bra",
+        "maracana_ce",
+        null,
+        null
+      ],
+      [
+        "ceara_bra",
+        "florestace",
+        "iguatu_ce",
+        "tirol_ce",
+        null
+      ]
+    ],
+    "fixtures": []
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "3ª fase (Semifinal)",
+      "ties": null,
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second"
+    },
+    {
+      "name": "4ª fase (Final)",
+      "ties": null,
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second"
+    },
+    {
+      "name": "Disputa de 3º lugar",
+      "ties": null,
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "better-single"
+    },
+    {
+      "name": "Disputa de 5º lugar",
+      "ties": null,
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "better-single"
+    }
+  ],
+  "simplifications": [],
+  "unsupported": [
+    "2ª fase não cabe no esquema: os 3 primeiros do Grupo A formam o Grupo C e os 3 primeiros do Grupo B formam o Grupo D; cada clube do C enfrenta os 3 do D em turno único (3 jogos), classificação dentro do próprio grupo, pontuação só da fase; 1º e 2º de C e D vão às semifinais, 3ºs de C e D vão à disputa de 5º lugar (Art. 12 §3º e §6º). Mandos: os 1ºs dos Grupos A e B e o melhor 2º da 1ª fase têm 2 mandos; os demais, 1 (Art. 16 §2º). Desempates do Art. 13.",
+    "Por isso os confrontos ('ties') do mata-mata ficaram nulos: a notação só referencia posições da 1ª fase. Confrontos oficiais: Semifinal Grupo E = 2º C x 1º C e Grupo F = 2º D x 1º D (volta na casa do 1º colocado do grupo na 2ª fase; os semifinalistas de cada confronto vêm do mesmo grupo da 1ª fase) (Art. 12 §4º, 16 §3º); Final Grupo G = vencedor E x vencedor F, volta na casa da melhor campanha acumulada 1ª+2ª+3ª fase (Art. 12 §7º, 16 §4º); Disputa de 3º = perdedores das semifinais, jogo único com mando da melhor campanha acumulada 1ª+2ª+3ª fase (Art. 12 §5º, 16 §5º); Disputa de 5º = 3º C x 3º D, jogo único com mando da melhor campanha acumulada 1ª+2ª fase (Art. 12 §6º, 16 §6º).",
+    "Equivalência: semifinal e final são decididas por pontos ganhos nos dois jogos, depois melhor saldo de gols dentro da fase e depois pênaltis, sem prorrogação (Art. 14). Pontos nos dois jogos seguidos de saldo agregado empata exatamente nos mesmos casos que o placar agregado, então 'aggregate-then-penalties' reproduz a regra. Disputas de 3º e 5º lugar: empate vai para pênaltis (Art. 15).",
+    "Classificação geral: 1º-2º pela final, 3º-4º pelo jogo de 3º lugar e 5º-6º pelo jogo de 5º lugar, ignorando fases anteriores; 7º-10º pelo Quadrangular da Permanência, ignorando a 1ª fase (Art. 17 §3º-§5º).",
+    "1ª fase: cada clube tem 2 mandos nos 4 jogos do grupo (Art. 16 §1º); a tabela básica oficial existe, mas a extração de texto não preserva os pares mandante x visitante de forma confiável, por isso não foi usado 'fixtures'.",
+    "Vagas 2027 (Copa do Brasil para 1º a 3º e 4ª vaga ligada à Taça Fares Lopes; Série D para 3 clubes sem série nacional; Copa do Nordeste pelos critérios da CBF) e Taça Padre Cícero ao campeão do interior (Art. 4º §5º e 5º): fora do esquema.",
+    "Cartões amarelos zerados ao fim da 1ª e da 2ª fase (Art. 26): fora do esquema."
+  ],
+  "sources": [
+    "pdf/CE-rec-serie-a-2026.pdf: Art. 11 (fases), Art. 12 §1º-§7º (grupos A e B, Quadrangular da Permanência, 2ª fase C x D, semifinais E e F, 3º e 5º lugar, final G), Art. 13 (desempates), Art. 14 (saldo na fase e pênaltis), Art. 15 (pênaltis nos jogos de 3º e 5º), Art. 16 (mandos), Art. 17 (classificação geral), Art. 18 (9º e 10º rebaixados), Anexo A (clubes), Anexo B (grupos da 1ª fase)",
+    "pdf/CE-tabela-basica-serie-a-2026.pdf (1ª fase e Quadrangular; não usada para os pares por falha de extração)",
+    "CE.json divisions[0] (participants, format, results2026, gaps)",
+    "results2026 conferido: Grupo C Fortaleza/Ferroviário/Horizonte e Grupo D Ceará/Floresta/Iguatu; semifinais Ferroviário x Fortaleza e Floresta x Ceará com volta na casa do 1º; 3º lugar Ferroviário x Floresta; 5º lugar Iguatu x Horizonte; Quadrangular Maranguape, Maracanã, Quixadá, Tirol, com Quixadá e Tirol rebaixados"
+  ]
+}

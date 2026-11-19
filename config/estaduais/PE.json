@@ -1,0 +1,96 @@
+{
+  "state": "PE",
+  "season": 2026,
+  "competition": "Campeonato Pernambucano da Série A1 2026",
+  "engine": "pending",
+  "pending": [
+    "clube sem arquivo: Associação Desportiva Jaboatão dos Guararapes (Jaguar)",
+    "clube sem arquivo: Associação Acadêmica e Desportiva Vitória das Tabocas (Vitória)"
+  ],
+  "teams": [
+    "decisaogoiana_pe",
+    null,
+    "maguary_pe",
+    "nautico",
+    "retrope_bra",
+    "santa",
+    "sport",
+    null
+  ],
+  "names": [
+    "Sociedade Esportiva Decisão Futebol Clube (Decisão Goiana)",
+    "Associação Desportiva Jaboatão dos Guararapes (Jaguar)",
+    "Associação Atlética Maguary",
+    "Clube Náutico Capibaribe",
+    "Retrô Futebol Clube Brasil",
+    "Santa Cruz Futebol Clube",
+    "Sport Club do Recife",
+    "Associação Acadêmica e Desportiva Vitória das Tabocas (Vitória)"
+  ],
+  "phase1": {
+    "type": "league",
+    "legs": 1,
+    "groups": [],
+    "fixtures": []
+  },
+  "relegated": 0,
+  "knockout": [
+    {
+      "name": "Segunda Fase",
+      "ties": [
+        [
+          "6",
+          "3"
+        ],
+        [
+          "5",
+          "4"
+        ]
+      ],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second"
+    },
+    {
+      "name": "Semifinais",
+      "ties": [
+        [
+          "W2",
+          "1"
+        ],
+        [
+          "W1",
+          "2"
+        ]
+      ],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second"
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ]
+      ],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second"
+    }
+  ],
+  "simplifications": [],
+  "unsupported": [
+    "Equivalência: o regulamento decide o mata-mata por pontos nos dois jogos, depois saldo de gols no confronto e depois pênaltis, sem prorrogação. Pontos nos dois jogos seguidos de saldo agregado empata exatamente nos mesmos casos que o placar agregado, então 'aggregate-then-penalties' reproduz a regra; o vencedor por pontos sempre tem saldo agregado maior ou igual, e quando pontos empatam vence o saldo. (Art. 14; pênaltis iniciados em até 10 minutos após o jogo).",
+    "Final: volta com mando do melhor colocado na 1ª fase (Art. 16 e nota do Anexo B); o par ['W1','W2'] precisa ser reordenado pelo motor quando W2 tiver melhor colocação.",
+    "Sem rebaixamento direto em 2026: o 7º permanece na Série A1 2027 entrando no Segundo Turno, e o 8º disputa o Primeiro Turno do Pernambucano 2027, realizado no 2º semestre de 2026 (Art. 3º §2º e Art. 11). O formato e o destino desse Primeiro Turno não estão no regulamento nem na pesquisa; não modelado.",
+    "Regulamento vale só para 2026; a edição 2027 terá formato distinto, ainda não definido (Art. 3º §1º).",
+    "Classificação final: 3º/4º e 5º/6º entre eliminados ordenados pela pontuação da 1ª fase (Art. 11), usada nas vagas de Copa do Brasil e Série D.",
+    "Pontos, vitórias, saldo e gols zerados após a 1ª fase (Art. 15): sem efeito no mata-mata, que é por confronto."
+  ],
+  "sources": [
+    "pdf/PE-regulamento-pernambucano-a1-2026.pdf (REC Rev. 1, 06/12/2025): Art. 3º, Art. 11 (fases e confrontos), Art. 13 (desempate da 1ª fase), Art. 14 (mata-mata), Art. 15, Art. 16 (mando), Anexo B (Grupos B a F)",
+    "PE.json divisions[0] (participants, format) e results2026 (Santa Cruz 4º x Decisão 5º, Retrô 3º x Maguary 6º; semifinais Náutico 1º x Santa Cruz e Sport 2º x Retrô) conferidos com o Anexo B"
+  ]
+}

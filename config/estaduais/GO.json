@@ -1,0 +1,97 @@
+{
+  "state": "GO",
+  "season": 2026,
+  "competition": "Campeonato Goiano (Goianão 2026)",
+  "engine": "pending",
+  "pending": [
+    "grupos nao definidos",
+    "fase 1 sem confrontos definidos",
+    "fase 1: desempate 'None' sem suporte",
+    "fase 1: mando 'None' sem suporte",
+    "fase 2 sem confrontos definidos",
+    "fase 2: desempate 'None' sem suporte",
+    "fase 2: mando 'None' sem suporte",
+    "fase 3: desempate 'None' sem suporte",
+    "fase 3: mando 'None' sem suporte",
+    "clube sem arquivo: Anapolina",
+    "clube sem arquivo: Centro Oeste"
+  ],
+  "teams": [
+    "agroec_go",
+    null,
+    "anapolisgo_bra",
+    "aparecidense_go",
+    "atleticogo_bra",
+    "goias",
+    "vilago",
+    null,
+    "cracgo_bra",
+    "goiatubago_bra",
+    "inhumas_go",
+    "jataiense_go"
+  ],
+  "names": [
+    "ABECAT",
+    "Anapolina",
+    "Anápolis",
+    "Aparecidense",
+    "Atlético-GO",
+    "Goiás",
+    "Vila Nova",
+    "Centro Oeste",
+    "CRAC",
+    "Goiatuba",
+    "Inhumas",
+    "Jataiense"
+  ],
+  "phase1": {
+    "type": "crossed",
+    "legs": 1,
+    "groups": [],
+    "fixtures": []
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "Quartas",
+      "ties": null,
+      "legs": 2,
+      "tiebreak": null,
+      "home": null
+    },
+    {
+      "name": "Semifinal",
+      "ties": null,
+      "legs": 2,
+      "tiebreak": null,
+      "home": null
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ]
+      ],
+      "legs": 2,
+      "tiebreak": null,
+      "home": null
+    }
+  ],
+  "simplifications": [],
+  "unsupported": [
+    "Regulamento oficial da FGF 2026 não localizado: todo o formato vem da Wikipedia pt (fonte secundária) e de imprensa.",
+    "1ª fase: 3 grupos de 4 em que cada clube enfrenta os 8 dos outros grupos em turno único, com classificação geral única; a composição dos grupos não consta das fontes (groups = null).",
+    "Critérios de desempate da 1ª fase sem fonte (só pontos é certo).",
+    "Quartas: '4 grupos de 2' em ida e volta; os cruzamentos não constam das fontes. Semifinal e final em ida e volta; cruzamentos da semifinal, mandos e critérios de desempate sem fonte.",
+    "Desempate dos mata-matas: a pesquisa só registra pênaltis no playoff 5º-8º (ABECAT x Anápolis); regra geral (agregado, pontos, vantagem de campanha) não confirmada em regulamento.",
+    "Playoff de 5º a 8º: eliminados nas quartas jogam semifinal e final em ida e volta para definir 5º a 8º e vagas da Série D 2027; cruzamentos e mando sem fonte (2026: Jataiense x CRAC e ABECAT x Anápolis).",
+    "Rebaixamento condicional (playoff de permanência só se 10º e 11º estiverem separados por até 6 pontos) não cabe no campo relegation; descrito em special. Mando e desempate do playoff sem fonte; o número de jogos (2) vem dos placares de 2026."
+  ],
+  "sources": [
+    "GO.json (pesquisa): Wikipedia pt 'Campeonato Goiano de Futebol de 2026' (formato, participantes, playoff de permanência, playoff 5º-8º)",
+    "GO.json: O Hoje, 17/02/2026 (vagas da Série D 2027 e playoff dos eliminados nas quartas)",
+    "Sem PDF oficial de GO no lote"
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "state": "AM",
+  "season": 2026,
+  "competition": "Campeonato Amazonense de Futebol Profissional Série A 2026 (Barezão)",
+  "engine": "pending",
+  "pending": [
+    "fase 1: vantagem de campanha em jogo unico sem suporte",
+    "clube sem arquivo: RPE Parintins Futebol Clube",
+    "clube sem arquivo: Itacoatiara Futebol Clube",
+    "clube sem arquivo: São Raimundo Esporte Clube"
+  ],
+  "teams": [
+    "amazonas_am",
+    "manauara_am",
+    null,
+    null,
+    "nacional_am",
+    "manaus_bra",
+    "princesa_am",
+    null
+  ],
+  "names": [
+    "Amazonas Futebol Clube",
+    "Manauara Esporte Clube",
+    "RPE Parintins Futebol Clube",
+    "Itacoatiara Futebol Clube",
+    "Nacional Futebol Clube",
+    "Manaus Futebol Clube",
+    "Princesa do Solimões Esporte Clube",
+    "São Raimundo Esporte Clube"
+  ],
+  "phase1": {
+    "type": "crossed",
+    "legs": 1,
+    "groups": [
+      [
+        "amazonas_am",
+        "manauara_am",
+        null,
+        null
+      ],
+      [
+        "nacional_am",
+        "manaus_bra",
+        "princesa_am",
+        null
+      ]
+    ],
+    "fixtures": []
+  },
+  "relegated": 1,
+  "knockout": [
+    {
+      "name": "1º turno - Play-off de quartas",
+      "ties": [
+        [
+          "A2",
+          "A3"
+        ],
+        [
+          "B2",
+          "B3"
+        ]
+      ],
+      "legs": 1,
+      "tiebreak": "better-campaign",
+      "home": "better-single"
+    },
+    {
+      "name": "1º turno - Semifinal",
+      "ties": [
+        [
+          "A1",
+          "W1"
+        ],
+        [
+          "B1",
+          "W2"
+        ]
+      ],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "better-single"
+    },
+    {
+      "name": "1º turno - Final",
+      "ties": [
+        [
+          "C1",
+          "C2"
+        ]
+      ],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "better-single"
+    }
+  ],
+  "simplifications": [],
+  "unsupported": [
+    "O esquema só representa o 1º turno. O campeonato tem 2 turnos (Art. 10 §1º, 11 e 12), e a 'phase1' + 'knockout' acima descrevem apenas o 1º turno, cujo campeão é no mínimo vice-campeão estadual (Art. 11 §5º F).",
+    "2º turno, 1ª fase (Art. 12 e §2º-§3º): nova fase de grupos em turno único DENTRO de cada chave (A x A, B x B; 3 jogos por clube), pontuação zerada para efeito de classificação no turno (só os 3 jogos contam). Mandos: 2 para os clubes classificados de 1º a 4º em 2025 e 1 para os de 5º a 7º e o campeão da Série B 2025. A tabela pode ser alterada (Art. 12 §1º).",
+    "2º turno, play-off de quartas em jogo único CRUZADO: jogo 34 = 2º A x 3º B, jogo 35 = 2º B x 3º A; o 2º colocado tem mando e vantagem do empate, independentemente da pontuação (Art. 12 §4º).",
+    "2º turno, semifinal em jogo único: 1º A x vencedor do jogo 35 e 1º B x vencedor do jogo 34; mando dos 1ºs colocados, sem vantagem do empate; empate vai para pênaltis (Art. 12 §5º).",
+    "2º turno, final em jogo único: mando do clube de melhor COLOCAÇÃO na sua chave (independentemente da chave); com a mesma colocação, mando da melhor pontuação na 1ª fase do 2º turno e seus desempates; sem vantagem do empate; empate vai para pênaltis (Art. 12 §6º).",
+    "Final geral (Art. 13 e 15): campeões do 1º e do 2º turno em jogo único, empate vai para pênaltis; local preferencialmente na Arena da Amazônia, definido pela FAF (mando não definido; equivale a campo neutro). Se o mesmo clube vencer os dois turnos, é campeão direto e não há final geral (Art. 13 §3º).",
+    "Classificação final a partir do 3º lugar pela pontuação geral dos 7 jogos das fases classificatórias dos dois turnos (Art. 15 §1º).",
+    "1º turno - Play-off: o 2º colocado de cada chave tem mando e vantagem do empate em jogo único, sem pênaltis (Art. 11 §3º E); 'better-campaign' aqui significa vantagem do empate para o 2º colocado da chave (primeiro do par).",
+    "1º turno - Final: jogo único entre os vencedores das semifinais (obrigatoriamente um da chave A e um da chave B); mando do finalista com melhor pontuação na 1ª fase do turno (4 jogos) e seus desempates, independentemente da colocação na chave (Art. 11 §5º C-D). 'C1'/'C2' devem ser calculados por essa pontuação, não pela posição na chave.",
+    "Confronto direto como desempate considera somente o jogo da fase classificatória de um dos turnos (Art. 14, 5); no 1º turno os clubes da mesma chave não se enfrentam, então o critério só pode ser aplicado entre clubes de chaves diferentes.",
+    "Chaves 'crossed' do 1º turno: cada clube faz 4 jogos contra a outra chave, com 2 mandos (Art. 11 §2º); a tabela de mandos oficial não está nas fontes.",
+    "Composição das chaves depende da classificação de 2025 e do campeão da Série B (Art. 10 §2º-§4º); para 2026 está fixada acima.",
+    "Vagas nacionais 2027 (Copa do Brasil, Série D, Copa Norte/Verde) para campeão, vice e depois pela classificação geral (Art. 5º): fora do esquema.",
+    "Fonte: o PDF não tem camada de texto; lido por renderização local (páginas 6 a 13). Os capítulos de páginas não renderizadas não foram conferidos."
+  ],
+  "sources": [
+    "pdf/AM-regulamento-barezao-serie-a-2026.pdf (texto em curvas, lido por imagem): Art. 10 e §1º-§5º (sistema híbrido, 2 turnos, chaves A e B, campeão de turno não cai), Art. 11 §1º-§5º (1º turno: A x B, play-off 2º x 3º da mesma chave com vantagem do 2º, semifinal 1º x vencedor, final com mando da melhor pontuação), Art. 12 §1º-§6º (2º turno), Art. 13 (final geral), Art. 14 (desempates 1-8), Art. 15 (campeão, classificação final, 8º rebaixado)",
+    "AM.json divisions[0] (participants, groupsComposition, format, relegationRule, results2026)",
+    "results2026 conferido: play-offs Itacoatiara(A2)xManauara(A3) e Princesa(B2)xManaus(B3); semifinais Amazonas(A1)xItacoatiara e Nacional(B1)xPrincesa; 2º turno cruzado Parintins(A2)xPrincesa(B3) e Nacional(B2)xAmazonas(A3); São Raimundo (8º geral) rebaixado"
+  ]
+}

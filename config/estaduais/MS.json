@@ -1,0 +1,91 @@
+{
+  "state": "MS",
+  "season": 2026,
+  "competition": "Campeonato Sul-Mato-Grossense 2026",
+  "engine": "pending",
+  "pending": [
+    "fase 1 sem confrontos definidos",
+    "fase 1: desempate 'None' sem suporte",
+    "fase 1: mando 'None' sem suporte",
+    "fase 2 sem confrontos definidos",
+    "fase 2: mando 'None' sem suporte",
+    "clube sem arquivo: Naviraiense",
+    "clube sem arquivo: Águia Negra",
+    "clube sem arquivo: Costa Rica",
+    "clube sem arquivo: Corumbaense",
+    "clube sem arquivo: Dourados",
+    "clube sem arquivo: Aquidauanense",
+    "clube sem arquivo: Bataguassu"
+  ],
+  "teams": [
+    null,
+    "operario_ms",
+    null,
+    null,
+    null,
+    "pantanal_ms",
+    "ivinhema_ms",
+    null,
+    null,
+    null
+  ],
+  "names": [
+    "Naviraiense",
+    "Operário-MS",
+    "Águia Negra",
+    "Costa Rica",
+    "Corumbaense",
+    "Pantanal",
+    "Ivinhema",
+    "Dourados",
+    "Aquidauanense",
+    "Bataguassu"
+  ],
+  "phase1": {
+    "type": "league",
+    "legs": 1,
+    "groups": [],
+    "fixtures": []
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "Quartas",
+      "ties": null,
+      "legs": 2,
+      "tiebreak": null,
+      "home": null
+    },
+    {
+      "name": "Semifinal",
+      "ties": null,
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": null
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "W2",
+          "W1"
+        ]
+      ],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second"
+    }
+  ],
+  "simplifications": [],
+  "unsupported": [
+    "Regulamento oficial da FFMS 2026 não localizado: o formato vem só de imprensa (fonte secundária).",
+    "Folga: 1º e 2º vão direto às semifinais; 3º a 6º jogam as quartas em ida e volta. Os cruzamentos das quartas e das semifinais (quem enfrenta 1º e 2º) não constam das fontes (ties = null).",
+    "Quartas: critério de desempate e mando sem fonte. Semifinal: empate no agregado -> pênaltis; mando sem fonte.",
+    "Final: 2º jogo em casa da melhor campanha; empate no agregado -> pênaltis. As fontes não dizem se 'melhor campanha' é só a 1ª fase ou a campanha acumulada.",
+    "Critérios de desempate da 1ª fase sem fonte (só pontos é certo)."
+  ],
+  "sources": [
+    "MS.json (pesquisa): imprensa de 01/03/2026 (participantes, formato, classificados, rebaixados); imprensa da final; Correio do Estado (pênaltis após empate no agregado)",
+    "Sem PDF oficial de MS no lote"
+  ]
+}

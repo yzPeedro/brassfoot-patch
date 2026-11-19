@@ -1,0 +1,110 @@
+{
+  "state": "ES",
+  "season": 2026,
+  "competition": "Campeonato Estadual Série A (Capixabão 2026)",
+  "engine": "pending",
+  "pending": [
+    "clube sem arquivo: Capixaba",
+    "clube sem arquivo: Forte",
+    "clube sem arquivo: Serra",
+    "clube sem arquivo: Rio Branco VN",
+    "clube sem arquivo: Vilavelhense"
+  ],
+  "teams": [
+    "desportivaferroviaria_es",
+    null,
+    null,
+    null,
+    "portovitoria_es",
+    "realnoroeste_es",
+    "riobranco_es",
+    null,
+    "vitoria_es",
+    null
+  ],
+  "names": [
+    "Desportiva Ferroviária",
+    "Capixaba",
+    "Forte",
+    "Serra",
+    "Porto Vitória",
+    "Real Noroeste",
+    "Rio Branco",
+    "Rio Branco VN",
+    "Vitória-ES",
+    "Vilavelhense"
+  ],
+  "phase1": {
+    "type": "league",
+    "legs": 1,
+    "groups": [],
+    "fixtures": []
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "Quartas",
+      "ties": [
+        [
+          "8",
+          "1"
+        ],
+        [
+          "7",
+          "2"
+        ],
+        [
+          "6",
+          "3"
+        ],
+        [
+          "5",
+          "4"
+        ]
+      ],
+      "legs": 2,
+      "tiebreak": "aggregate-then-better-campaign",
+      "home": "better-second"
+    },
+    {
+      "name": "Semifinal",
+      "ties": [
+        [
+          "W4",
+          "W1"
+        ],
+        [
+          "W3",
+          "W2"
+        ]
+      ],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second"
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "W2",
+          "W1"
+        ]
+      ],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second"
+    }
+  ],
+  "simplifications": [],
+  "unsupported": [
+    "1ª fase: o confronto direto (Art. 6º, d) só se aplica quando exatamente 2 clubes continuam empatados; com 3 ou mais empatados passa-se direto a cartões vermelhos.",
+    "Quartas (Art. 8º): empate em pontos -> saldo de gols da fase -> melhor classificação na 1ª fase, sem pênaltis; nota de equivalência: o regulamento decide por pontos nos dois jogos e depois saldo de gols da fase; isso empata exatamente nos mesmos casos que o saldo agregado (quem soma mais pontos em 2 jogos sempre tem saldo agregado maior), por isso foi mapeado como agregado. Aqui 'better-campaign' é a posição na 1ª fase, não campanha acumulada.",
+    "Semifinal e final (Arts. 10 e 12): empate em pontos -> saldo da fase -> pênaltis (IFAB), sem prorrogação; nota de equivalência: o regulamento decide por pontos nos dois jogos e depois saldo de gols da fase; isso empata exatamente nos mesmos casos que o saldo agregado (quem soma mais pontos em 2 jogos sempre tem saldo agregado maior), por isso foi mapeado como agregado.",
+    "Mando: em quartas, semifinal e final o 2º jogo é do mais bem classificado na 1ª fase (Arts. 7º, 9º e 11 §2º). Nos pares de semifinal e final a ordem segue o regulamento (Confronto 4 x Confronto 1, Confronto 3 x Confronto 2), mas o mandante da ida é decidido dinamicamente: o pior colocado na 1ª fase.",
+    "Participantes não constam do REC (remetem à tabela); a lista vem do RSSSF Brasil (fonte secundária)."
+  ],
+  "sources": [
+    "pdf/ES-SerieA-regulamento-2026.pdf: Art. 3º (4 fases), Art. 4º (turno único), Art. 5º (8 classificados), Art. 6º (desempates), Art. 7º (quartas 1x8, 2x7, 3x6, 4x5 e mando), Art. 8º (desempate das quartas), Art. 9º (semifinal C4xC1 e C3xC2 e mando), Art. 10 (desempate da semifinal), Art. 11 (final ida e volta; mando no §2º), Art. 12 (desempate da final), Art. 13 (2 últimos rebaixados)",
+    "ES.json: participantes (RSSSF Brasil es2026)"
+  ]
+}

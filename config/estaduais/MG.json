@@ -1,0 +1,102 @@
+{
+  "state": "MG",
+  "season": 2026,
+  "competition": "Campeonato Mineiro SICOOB 2026",
+  "engine": "pending",
+  "pending": [
+    "fase 1 sem confrontos definidos",
+    "clube sem arquivo: Itabirito",
+    "clube sem arquivo: North"
+  ],
+  "teams": [
+    "americamg_bra",
+    "athleticclub_mg",
+    "atleticomg_bra",
+    "betimfutebol_bra",
+    "cruzeiro_bra",
+    "ecdemocrata_mg",
+    null,
+    null,
+    "pousoalegre_mg",
+    "tombense_mg",
+    "uberlandia_ec",
+    "urt_bra"
+  ],
+  "names": [
+    "América-MG",
+    "Athletic",
+    "Atlético-MG",
+    "Betim",
+    "Cruzeiro",
+    "Democrata-GV",
+    "Itabirito",
+    "North",
+    "Pouso Alegre",
+    "Tombense",
+    "Uberlândia",
+    "URT"
+  ],
+  "phase1": {
+    "type": "crossed",
+    "legs": 1,
+    "groups": [
+      [
+        "atleticomg_bra",
+        "urt_bra",
+        "uberlandia_ec",
+        "ecdemocrata_mg"
+      ],
+      [
+        "americamg_bra",
+        "pousoalegre_mg",
+        "tombense_mg",
+        "betimfutebol_bra"
+      ],
+      [
+        "cruzeiro_bra",
+        null,
+        null,
+        "athleticclub_mg"
+      ]
+    ],
+    "fixtures": []
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "Semifinal",
+      "ties": null,
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second"
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ]
+      ],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "neutral"
+    }
+  ],
+  "simplifications": [
+    "mando 'neutral' segue a ordem da tabela"
+  ],
+  "unsupported": [
+    "REC oficial do Módulo I 2026 não localizado (só 2025 e 2027 no eSúmula da FMF): o formato vem da Wikipedia pt e da Goal (fontes secundárias).",
+    "1ª fase: 3 grupos de 4, cada clube enfrenta os 8 dos outros dois grupos (sem jogos no próprio grupo). Vão às semifinais os 3 líderes de grupo e o melhor 2º colocado na classificação geral; rebaixamento (2 piores) e Troféu Inconfidência usam a classificação geral. Esse critério misto não cabe em 'ranking'.",
+    "Critérios de desempate da 1ª fase sem fonte (só pontos é certo).",
+    "Semifinal: ida e volta, 2º jogo em casa da melhor campanha, empate no agregado -> pênaltis, sem prorrogação; os cruzamentos entre os 4 semifinalistas não constam das fontes (ties = null).",
+    "Final em jogo único com local definido pela FMF (mapeado como 'neutral'); empate -> pênaltis.",
+    "Troféu Inconfidência: 5º a 8º da classificação geral em semifinal e final; número de jogos, cruzamentos e desempates não confirmados."
+  ],
+  "sources": [
+    "MG.json (pesquisa): Wikipedia pt 'Campeonato Mineiro de Futebol de 2026 - Módulo I' (participantes, grupos, regulamento resumido)",
+    "MG.json: Goal.com, 'como funciona o regulamento do Campeonato Mineiro 2026' (desempate por pênaltis)",
+    "Sem PDF oficial de MG no lote"
+  ]
+}

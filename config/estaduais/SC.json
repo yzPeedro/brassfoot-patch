@@ -1,0 +1,123 @@
+{
+  "state": "SC",
+  "season": 2026,
+  "competition": "Campeonato Catarinense 2026 – Série A",
+  "engine": "pending",
+  "pending": [
+    "fase 1: desempate 'None' sem suporte",
+    "fase 2 sem confrontos definidos",
+    "fase 2: desempate 'None' sem suporte",
+    "fase 3: desempate 'None' sem suporte",
+    "clube sem arquivo: Carlos Renaux"
+  ],
+  "teams": [
+    "avai_bra",
+    "barra_sc",
+    "brusquesc_bra",
+    "camboriu_sc",
+    null,
+    "chapecoense_bra",
+    "concordiasc_bra",
+    "criciuma_bra",
+    "figueirense",
+    "joinville",
+    "marciliodiassc_bra",
+    "santacatarinaclube_sc"
+  ],
+  "names": [
+    "Avaí",
+    "Barra",
+    "Brusque",
+    "Camboriú",
+    "Carlos Renaux",
+    "Chapecoense",
+    "Concórdia",
+    "Criciúma",
+    "Figueirense",
+    "Joinville",
+    "Marcílio Dias",
+    "Santa Catarina"
+  ],
+  "phase1": {
+    "type": "crossed",
+    "legs": 1,
+    "groups": [
+      [
+        "brusquesc_bra",
+        "avai_bra",
+        "camboriu_sc",
+        "concordiasc_bra",
+        "marciliodiassc_bra",
+        "joinville"
+      ],
+      [
+        "santacatarinaclube_sc",
+        "chapecoense_bra",
+        "criciuma_bra",
+        "barra_sc",
+        "figueirense",
+        null
+      ]
+    ],
+    "fixtures": []
+  },
+  "relegated": 3,
+  "knockout": [
+    {
+      "name": "Quartas de final",
+      "ties": [
+        [
+          "A4",
+          "A1"
+        ],
+        [
+          "A3",
+          "A2"
+        ],
+        [
+          "B4",
+          "B1"
+        ],
+        [
+          "B3",
+          "B2"
+        ]
+      ],
+      "legs": 2,
+      "tiebreak": null,
+      "home": "better-second"
+    },
+    {
+      "name": "Semifinal",
+      "ties": null,
+      "legs": 2,
+      "tiebreak": null,
+      "home": "better-second"
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "C2",
+          "C1"
+        ]
+      ],
+      "legs": 2,
+      "tiebreak": null,
+      "home": "better-second"
+    }
+  ],
+  "simplifications": [],
+  "unsupported": [
+    "Fonte frágil: REC oficial da Série A 2026 não localizado (sem PDF); formato só pela Wikipedia pt e pela NSC Total (SC.json gaps).",
+    "Critérios de desempate da 1ª fase não constam das fontes: só 'points' listado.",
+    "Regra de empate nos mata-matas (quartas, semifinal e final) não consta das fontes: tiebreak = null.",
+    "Semifinal: as fontes dizem só 'cruzamento entre grupos', sem dizer qual vencedor das quartas enfrenta qual; ties = null em vez de chutar.",
+    "Mando: as fontes dizem só 'jogo de volta em casa do mais bem colocado'; na semifinal e na final não se sabe se é a posição no grupo, a campanha da 1ª fase ou a campanha acumulada. A final como ['C2','C1'] é aproximação.",
+    "1ª fase cruzada (cada clube enfrenta os 6 do outro grupo em turno único, sem jogos no próprio grupo); mando de cada jogo não consta das fontes.",
+    "Taça ACESC 70 Anos: eliminados nas quartas (2 confrontos de ida e volta) e depois os eliminados nas semifinais; campeão é o 3º colocado do estadual e leva vaga na Copa do Brasil 2027. Estrutura exata não detalhada; não expressável."
+  ],
+  "sources": [
+    "SC.json divisions[0]: Wikipedia pt Campeonato Catarinense de Futebol de 2026 – Série A (grupos, formato, quadrangular) e NSC Total https://www.nsctotal.com.br/?p=7770379 (3 rebaixados)"
+  ]
+}

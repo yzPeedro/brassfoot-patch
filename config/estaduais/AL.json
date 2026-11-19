@@ -1,0 +1,193 @@
+{
+  "state": "AL",
+  "season": 2026,
+  "competition": "Campeonato Alagoano Série A 2026",
+  "engine": "ready",
+  "pending": [],
+  "teams": [
+    "asaarapiracaal_bra",
+    "coruripe_al",
+    "csa_bra",
+    "crb_bra",
+    "cseal_bra",
+    "cruzeiro_al",
+    "muricial",
+    "penedense_al"
+  ],
+  "names": [
+    "Agremiação Sportiva Arapiraquense (ASA)",
+    "Associação Atlética Coruripe",
+    "Centro Sportivo Alagoano (CSA)",
+    "Clube de Regatas Brasil (CRB)",
+    "Clube Sociedade Esportiva (CSE)",
+    "Esporte Clube Cruzeiro Arapiraca",
+    "Murici Sport Clube",
+    "Sport Club Penedense"
+  ],
+  "phase1": {
+    "type": "fixtures",
+    "legs": 1,
+    "groups": [],
+    "fixtures": [
+      [
+        "crb_bra",
+        "cseal_bra"
+      ],
+      [
+        "penedense_al",
+        "cruzeiro_al"
+      ],
+      [
+        "asaarapiracaal_bra",
+        "muricial"
+      ],
+      [
+        "csa_bra",
+        "coruripe_al"
+      ],
+      [
+        "coruripe_al",
+        "cseal_bra"
+      ],
+      [
+        "csa_bra",
+        "penedense_al"
+      ],
+      [
+        "cruzeiro_al",
+        "asaarapiracaal_bra"
+      ],
+      [
+        "crb_bra",
+        "muricial"
+      ],
+      [
+        "asaarapiracaal_bra",
+        "csa_bra"
+      ],
+      [
+        "cseal_bra",
+        "cruzeiro_al"
+      ],
+      [
+        "muricial",
+        "coruripe_al"
+      ],
+      [
+        "penedense_al",
+        "crb_bra"
+      ],
+      [
+        "penedense_al",
+        "cseal_bra"
+      ],
+      [
+        "muricial",
+        "csa_bra"
+      ],
+      [
+        "crb_bra",
+        "cruzeiro_al"
+      ],
+      [
+        "asaarapiracaal_bra",
+        "coruripe_al"
+      ],
+      [
+        "csa_bra",
+        "crb_bra"
+      ],
+      [
+        "cruzeiro_al",
+        "muricial"
+      ],
+      [
+        "coruripe_al",
+        "penedense_al"
+      ],
+      [
+        "cseal_bra",
+        "asaarapiracaal_bra"
+      ],
+      [
+        "crb_bra",
+        "asaarapiracaal_bra"
+      ],
+      [
+        "cruzeiro_al",
+        "coruripe_al"
+      ],
+      [
+        "penedense_al",
+        "muricial"
+      ],
+      [
+        "cseal_bra",
+        "csa_bra"
+      ],
+      [
+        "csa_bra",
+        "cruzeiro_al"
+      ],
+      [
+        "muricial",
+        "cseal_bra"
+      ],
+      [
+        "asaarapiracaal_bra",
+        "penedense_al"
+      ],
+      [
+        "coruripe_al",
+        "crb_bra"
+      ]
+    ]
+  },
+  "relegated": 1,
+  "knockout": [
+    {
+      "name": "Fase Semifinal",
+      "ties": [
+        [
+          "4",
+          "1"
+        ],
+        [
+          "3",
+          "2"
+        ]
+      ],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second"
+    },
+    {
+      "name": "Fase Final",
+      "ties": [
+        [
+          "C2",
+          "C1"
+        ]
+      ],
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second"
+    }
+  ],
+  "simplifications": [],
+  "unsupported": [
+    "Equivalência: semifinal e final são decididas por pontos ganhos nos dois jogos, depois maior saldo de gols nas duas partidas e depois pênaltis, sem prorrogação (Art. 6º §2º e 7º §2º). Pontos nos dois jogos seguidos de saldo agregado empata exatamente nos mesmos casos que o placar agregado, então 'aggregate-then-penalties' reproduz a regra.",
+    "1ª fase em turno único com mando desigual: os 4 melhores do Alagoano 2025 têm 4 mandos e os demais 3; mandante é o clube à esquerda na tabela (Art. 14 §1º). Por isso a 1ª fase usa 'fixtures' com os 28 jogos da tabela detalhada oficial (parte integrante do regulamento, Art. 14). Em outra temporada os mandos dependem da classificação anterior, o que o esquema não expressa.",
+    "Desempate 'headToHead' só vale quando o empate é entre dois clubes e sem gol qualificado fora de casa (Art. 5º §1º, IV); com três ou mais empatados o critério é pulado.",
+    "Final: mando do 2º jogo para a melhor campanha somadas todas as fases anteriores (1ª fase + semifinal), e melhor campanha = maior soma de pontos ganhos e, persistindo, os critérios do Art. 5º §1º (Art. 7º e §1º). 'C1'/'C2' devem ser calculados com essa soma, não só com a 1ª fase.",
+    "3º colocado sem jogo: entre os eliminados na semifinal, o de melhor campanha somadas todas as fases (Art. 9º); 5º a 8º pela 1ª fase (Art. 5º §2º). Classificação final fora do esquema.",
+    "Rebaixamento: 8º na classificação final (Art. 11), que coincide com o 8º da 1ª fase porque os eliminados ocupam 5º a 8º pela tabela da 1ª fase (Art. 5º §2º).",
+    "Vagas nacionais (Copa do Brasil 2027 para campeão, vice e 3º; Série D e Copa do Nordeste 2027 para campeão e vice, com reposição pela classificação final) (Art. 8º a 10): fora do esquema."
+  ],
+  "sources": [
+    "pdf/AL-regulamento-alagoano-serie-a-2026.pdf: Art. 1º (8 clubes), Art. 3º-4º (três fases; 1ª fase só ida, 7 jogos), Art. 5º e §1º (4 classificados; desempates I-VII) e §2º, Art. 6º (semifinal 1ºx4º e 2ºx3º, volta com a melhor campanha; §2º saldo e pênaltis), Art. 7º (final ida e volta, campanha somada; §2º saldo e pênaltis), Art. 9º (3º colocado), Art. 11 (8º rebaixado), Art. 14 §1º (mandos)",
+    "pdf/AL-tabela-detalhada-serie-a-2026.pdf (emissão 21/11/2025, atualização 09/03/2026): jogos 001-028 da Primeira Fase com mandante à esquerda; jogos 029-034 do mata-mata",
+    "AL.json divisions[0] (participants, format, results2026)",
+    "results2026 conferido: semifinais Murici(4º)xASA(1º) e CRB(3º)xCSA(2º) com volta na casa do melhor; final CRB x ASA com volta em Arapiraca (ASA melhor campanha); CSE (8º) rebaixado"
+  ]
+}

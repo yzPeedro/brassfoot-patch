@@ -1,0 +1,87 @@
+{
+  "state": "AP",
+  "season": 2026,
+  "competition": "Campeonato Amapaense de Futebol Profissional Série A 2026 (Amapazão Sicredi)",
+  "engine": "pending",
+  "pending": [
+    "clube sem arquivo: Santos Futebol Clube do Amapá",
+    "clube sem arquivo: Ypiranga Clube",
+    "clube sem arquivo: Clube Atlético Cristal",
+    "clube sem arquivo: Esporte Clube Macapá",
+    "clube sem arquivo: Sociedade Esportiva e Recreativa São José"
+  ],
+  "teams": [
+    "trem_bra",
+    "oratorio_ap",
+    "independente_ap",
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "names": [
+    "Trem Desportivo Clube",
+    "Oratório Recreativo Clube",
+    "Independente Esporte Clube",
+    "Santos Futebol Clube do Amapá",
+    "Ypiranga Clube",
+    "Clube Atlético Cristal",
+    "Esporte Clube Macapá",
+    "Sociedade Esportiva e Recreativa São José"
+  ],
+  "phase1": {
+    "type": "league",
+    "legs": 1,
+    "groups": [],
+    "fixtures": []
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "Segunda Fase (Semifinal)",
+      "ties": [
+        [
+          "4",
+          "1"
+        ],
+        [
+          "3",
+          "2"
+        ]
+      ],
+      "legs": 2,
+      "tiebreak": "aggregate-then-better-campaign",
+      "home": "better-second"
+    },
+    {
+      "name": "Terceira Fase (Final)",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ]
+      ],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "neutral"
+    }
+  ],
+  "simplifications": [
+    "mando 'neutral' segue a ordem da tabela"
+  ],
+  "unsupported": [
+    "Final em partida única 'em igualdade de condições', empate decidido por pênaltis (Art. 13 §3º); o mando pertence ao clube à esquerda na tabela elaborada pelo Departamento Técnico da FAF (Art. 13 §4º), sem critério esportivo. 'neutral' representa a ausência de vantagem; a final de 2026 foi no Estádio Augusto Antunes (Santana).",
+    "1ª fase: mandante de cada jogo é o clube à esquerda na tabela da FAF (Art. 13 §4º); quase todos os jogos da tabela oficial são no Estádio Augusto Antunes (um no CDFA e um no Nelson de Souza), então o mando tem efeito prático pequeno. A extração de texto da tabela não preserva a ligação mandante x visitante de forma confiável, por isso a 1ª fase ficou como 'league' sem lista de jogos.",
+    "Art. 13 §1º remete os desempates ao 'Artigo 12º', mas os critérios estão no Art. 14 (erro de remissão no próprio regulamento); usados os do Art. 14.",
+    "Semifinal: passa quem tiver maior saldo de gols no somatório das duas partidas; sem saldo, passam os 1º e 2º colocados da 1ª fase (Art. 13 §2º a-b). 'aggregate-then-better-campaign' corresponde exatamente, entendendo 'saldo agregado' como diferença do placar somado (sem gols fora).",
+    "Rebaixamento: os 2 últimos da 1ª fase descem à Série B 2027 (Art. 8º). A pesquisa registra que a FAF anunciou nova sistemática de acesso e descenso em 05/09/2026 (documento não lido); não conferido se o rebaixamento foi aplicado.",
+    "Vagas nacionais 2027: Copa do Brasil para campeão, vice e 3º colocado da 1ª fase; Série D para campeão e vice; Copa Norte para o campeão e, havendo vaga extra, o vice (Art. 7º §5º): fora do esquema."
+  ],
+  "sources": [
+    "pdf/AP-regulamento-amapazao-serie-a-2026.pdf (digitalizado; lido por imagem as páginas do REC numeradas 3 a 6): Art. 7º §5º (vagas), Art. 8º (2 últimos descem), Art. 13 (8 clubes, 3 fases; §1º turno único, 4 classificados; §2º semifinal 4ºx1º e 3ºx2º com volta no melhor, saldo agregado e depois 1º e 2º; §3º final única com pênaltis; §4º mando pela tabela), Art. 14 (desempates 1º-7º)",
+    "pdf/AP-tabela-amapazao-serie-a-2026.pdf (IMT 001/2026-DT/FAF): chave única, turno único, 28 jogos, locais",
+    "AP.json divisions[0] (participants, format, results2026, gaps)",
+    "results2026 conferido: semifinais Independente(4º)xSão José(1º), 2x2 e 2x2, São José avança pela melhor campanha; Santos(3º)xOratório(2º); final São José x Santos; Macapá e Cristal (7º e 8º) indicados como rebaixados"
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "state": "TO",
+  "season": 2026,
+  "competition": "Campeonato Tocantinense 1ª Divisão 2026",
+  "engine": "pending",
+  "pending": [
+    "clube sem arquivo: Palmas Futebol e Regatas",
+    "clube sem arquivo: Guaraí Esporte Clube",
+    "clube sem arquivo: Bela Vista Futebol Clube",
+    "clube sem arquivo: Gurupi Esporte Clube",
+    "clube sem arquivo: União Atlético Clube (União Araguainense)"
+  ],
+  "teams": [
+    "tocantinopolis_to",
+    null,
+    "capital_to",
+    null,
+    null,
+    null,
+    null,
+    "araguaina_bra"
+  ],
+  "names": [
+    "Tocantinópolis Esporte Clube (TEC)",
+    "Palmas Futebol e Regatas",
+    "Capital Futebol Clube",
+    "Guaraí Esporte Clube",
+    "Bela Vista Futebol Clube",
+    "Gurupi Esporte Clube",
+    "União Atlético Clube (União Araguainense)",
+    "Araguaína Futebol e Regatas"
+  ],
+  "phase1": {
+    "type": "fixtures",
+    "legs": 1,
+    "groups": [],
+    "fixtures": [
+      [
+        "capital_to",
+        "araguaina_bra"
+      ],
+      [
+        null,
+        null
+      ],
+      [
+        null,
+        "tocantinopolis_to"
+      ],
+      [
+        null,
+        null
+      ],
+      [
+        null,
+        null
+      ],
+      [
+        "tocantinopolis_to",
+        null
+      ],
+      [
+        null,
+        "capital_to"
+      ],
+      [
+        "araguaina_bra",
+        null
+      ],
+      [
+        "tocantinopolis_to",
+        null
+      ],
+      [
+        null,
+        null
+      ],
+      [
+        "araguaina_bra",
+        null
+      ],
+      [
+        null,
+        "capital_to"
+      ],
+      [
+        "tocantinopolis_to",
+        "araguaina_bra"
+      ],
+      [
+        null,
+        null
+      ],
+      [
+        null,
+        null
+      ],
+      [
+        "capital_to",
+        null
+      ],
+      [
+        "capital_to",
+        null
+      ],
+      [
+        null,
+        null
+      ],
+      [
+        "araguaina_bra",
+        null
+      ],
+      [
+        null,
+        "tocantinopolis_to"
+      ],
+      [
+        null,
+        null
+      ],
+      [
+        null,
+        "tocantinopolis_to"
+      ],
+      [
+        "capital_to",
+        null
+      ],
+      [
+        null,
+        "araguaina_bra"
+      ],
+      [
+        "araguaina_bra",
+        null
+      ],
+      [
+        null,
+        null
+      ],
+      [
+        null,
+        null
+      ],
+      [
+        "tocantinopolis_to",
+        "capital_to"
+      ]
+    ]
+  },
+  "relegated": 2,
+  "knockout": [
+    {
+      "name": "2ª fase – Semifinais",
+      "ties": [
+        [
+          "4",
+          "1"
+        ],
+        [
+          "3",
+          "2"
+        ]
+      ],
+      "legs": 2,
+      "tiebreak": "points-then-penalties",
+      "home": "better-second"
+    },
+    {
+      "name": "3ª fase – Final",
+      "ties": [
+        [
+          "C2",
+          "C1"
+        ]
+      ],
+      "legs": 2,
+      "tiebreak": "points-then-penalties",
+      "home": "better-second"
+    }
+  ],
+  "simplifications": [],
+  "unsupported": [
+    "Semifinal e final: empate em pontos após ida e volta → melhor saldo de gols na fase → pênaltis (art. 11 §2º). Nota de equivalência: pontos nos dois jogos e depois saldo agregado empatam exatamente nos mesmos casos que o placar agregado, então equivale a 'aggregate-then-penalties'.",
+    "Final: ida 'Vencedor do Grupo C x Vencedor do Grupo B' com mando do 2º em índice técnico geral; volta com mando da melhor campanha em todo o campeonato pelos critérios do art. 11 (art. 12; Anexo II). C1/C2 = campanha acumulada em todas as fases; o esquema não diz que soma as fases.",
+    "Confronto direto (headToHead) só quando o empate for entre duas associações (art. 11, 4).",
+    "3º e 4º lugares definidos só entre os semifinalistas, por pontos e critérios do art. 11 (art. 11 §1º); não há jogo de 3º lugar.",
+    "Todas as fases começam com zero ponto (art. 10, 4). Os 2 rebaixados (piores campanhas da 1ª fase, art. 13) vão para a 2ª Divisão disputada no 2º semestre de 2026, e não da temporada seguinte."
+  ],
+  "sources": [
+    "pdf/TO-rec-primeira-divisao-2026.pdf (digitalizado, lido por imagem, p. 2): art. 10 (fórmula), art. 11 (desempate; §2º mata-mata), art. 12 (mando), art. 13 (rebaixamento)",
+    "pdf/TO-tabela-revisada-primeira-divisao-2026.pdf (Anexo II, atualizado em 12/01/2026, lido por imagem): 28 jogos da 1ª fase com mandante à esquerda; semifinais com ida 4º x 1º e 3º x 2º; final",
+    "TO.json results2026 (conferência: Capital x Tocantinópolis e Gurupi x União na ida das semifinais)"
+  ]
+}
