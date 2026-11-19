@@ -73,6 +73,8 @@ var (
 	gameExecutablePath = "bf22-23.exe"
 	validHash          = regexp.MustCompile(`^[0-9a-f]{64}$`)
 	pngHeader          = [4]byte{0x89, 0x50, 0x4e, 0x47}
+	juniorsMarkerPath  = "juniores-reais.json"
+	juniorsHeader      = [4]byte{0x7b, 0x22, 0x76, 0x65}
 	validVersion       = regexp.MustCompile(`^[0-9]{4}\.[0-9]+\.[0-9]+$`)
 )
 
@@ -297,7 +299,8 @@ func inspect(payloadPath, gamePath string) (Plan, error) {
 		_, err = io.ReadFull(f, h[:])
 		f.Close()
 		if err != nil || (isExecutable && (h[0] != 0x4d || h[1] != 0x5a)) ||
-			(isCrest && h != pngHeader) ||
+			(isCrest && entry.Path != juniorsMarkerPath && h != pngHeader) ||
+			(entry.Path == juniorsMarkerPath && h != juniorsHeader) ||
 			(!isExecutable && !isCrest && h != [4]byte{0xac, 0xed, 0x00, 0x05}) {
 			return Plan{}, fmt.Errorf("assinatura inválida de arquivo autorizado: %s", entry.Path)
 		}
