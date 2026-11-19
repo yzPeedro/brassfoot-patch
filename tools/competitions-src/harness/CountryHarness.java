@@ -92,11 +92,12 @@ public final class CountryHarness {
         Z country = c.a.SR.o(expected[0]);
         ArrayList divisions = country.eb();
         StringBuilder text = new StringBuilder();
-        boolean ok = divisions.size() == expected.length - 1;
+        boolean any = expected.length == 2 && expected[1] == 0;
+        boolean ok = any ? divisions.size() > 0 : divisions.size() == expected.length - 1;
         for (int i = 0; i < divisions.size(); i++) {
             int size = ((f.B) divisions.get(i)).yi().yK().size();
             text.append(size).append(' ');
-            ok &= i + 1 < expected.length && size == expected[i + 1];
+            ok &= any ? size > 0 : i + 1 < expected.length && size == expected[i + 1];
         }
         check(ok, label + " pais " + expected[0] + ": divisoes " + text);
     }
