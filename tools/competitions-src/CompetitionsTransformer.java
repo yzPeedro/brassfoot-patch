@@ -271,6 +271,45 @@ public final class CompetitionsTransformer {
         return false;
     }
 
+    private static boolean estadualDivision(ClassNode owner) {
+        MethodNode target = method(owner, "dY", "()V");
+        AbstractInsnNode anchor = null;
+        for (AbstractInsnNode node : target.instructions) {
+            if (node.getOpcode() == Opcodes.NEW && "f/s".equals(((jdk.internal.org.objectweb.asm.tree.TypeInsnNode) node).desc)) {
+                if (anchor != null) throw new IllegalStateException("ambiguous f/s creation");
+                anchor = node;
+            }
+        }
+        if (anchor == null) throw new IllegalStateException("f/s creation absent");
+        AbstractInsnNode first = anchor.getNext().getNext();
+        AbstractInsnNode second = first.getNext();
+        if (!(first instanceof VarInsnNode options) || options.var != 9 || !(second instanceof VarInsnNode list) || list.var != 7) {
+            throw new IllegalStateException("unexpected f/s arguments");
+        }
+        InsnList hook = new InsnList();
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 9));
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 7));
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 14));
+        hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "best/CompEstaduais", "division",
+                "(Lbest/w;Lest/LoadLigaOptions;Ljava/util/ArrayList;Lf/o;)V", false));
+        target.instructions.insertBefore(anchor, hook);
+        return true;
+    }
+
+    private static boolean estadualKnockout(ClassNode owner) {
+        MethodNode target = method(owner, "yP", "()V");
+        LabelNode original = new LabelNode(new Label());
+        InsnList hook = new InsnList();
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "best/CompEstaduais", "knockout", "(Lf/s;)Z", false));
+        hook.add(new JumpInsnNode(Opcodes.IFEQ, original));
+        hook.add(new InsnNode(Opcodes.RETURN));
+        hook.add(original);
+        target.instructions.insert(hook);
+        return true;
+    }
+
     private static boolean singleRoundSerieC(ClassNode owner) {
         MethodNode target = method(owner, "a", "(Ljava/util/ArrayList;ZZLjava/util/ArrayList;)V");
         int changed = 0;
@@ -317,6 +356,8 @@ public final class CompetitionsTransformer {
             case "country-filter": frames = countryFilter(owner); break;
             case "playoff-start": frames = playoffStart(owner); break;
             case "resort": frames = resort(owner); break;
+            case "estadual-division": frames = estadualDivision(owner); break;
+            case "estadual-knockout": frames = estadualKnockout(owner); break;
             case "division-order": frames = divisionOrder(owner); break;
             case "serie-c-rounds": frames = singleRoundSerieC(owner); break;
             default: throw new IllegalArgumentException("unknown mode " + args[0]);

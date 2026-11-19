@@ -9,6 +9,7 @@ import tempfile
 import zipfile
 from pathlib import Path
 
+from tools import estaduais_data
 from tools.patch_continental_cups_2026 import write_executable
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,13 +20,13 @@ CODEC = ROOT / "tools" / "competition-codec"
 TARGETS = {
     "f/G.class": "pairing,after-tie",
     "f/f.class": "copa-start,copa-names",
-    "best/w.class": "participants",
+    "best/w.class": "participants,estadual-division",
     "f/B.class": "main-phase,playoff-start",
     "f/I.class": "supercopa",
     "a/hU.class": "setup-install",
     "best/p.class": "country-filter",
     "best/Z.class": "promotion,division-order",
-    "f/s.class": "serie-c-rounds,reset-rounds,resort",
+    "f/s.class": "serie-c-rounds,reset-rounds,resort,estadual-knockout",
 }
 HELPERS = ("best/CompBrasil2026.class", "best/CompBrasil2026Data.class", "mega/SetupPanels.class")
 BRA_CFG = [
@@ -127,12 +128,14 @@ def build(source: Path, destination: Path, source_cfg: Path, output_cfg: Path, j
         helper_dir = work / "src" / "best"
         helper_dir.mkdir(parents=True)
         (helper_dir / "CompBrasil2026Data.java").write_text(data_source(config), encoding="utf-8")
+        (helper_dir / "CompEstaduaisData.java").write_text(estaduais_data.source(), encoding="utf-8")
         classes = work / "classes"
         transformer = work / "transformer"
         classes.mkdir()
         transformer.mkdir()
         run([javac, "--release", "8", "-encoding", "UTF-8", "-cp", source, "-d", classes,
              SOURCE / "best" / "CompBrasil2026.java", helper_dir / "CompBrasil2026Data.java",
+             SOURCE / "best" / "CompEstaduais.java", helper_dir / "CompEstaduaisData.java",
              SOURCE / "mega" / "SetupPanels.java"])
         run([javac, *EXPORTS, "-d", transformer, SOURCE / "CompetitionsTransformer.java"])
         replacements = {}

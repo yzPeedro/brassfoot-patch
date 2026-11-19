@@ -295,6 +295,7 @@ public final class CompBrasil2026 {
 
     public static void pairing(G round, z knockout, ArrayList list, int index) {
         try {
+            if (knockout != null && list != null && CompEstaduais.round(round, knockout, list, index)) return;
             if (knockout == null || list == null || !(knockout.yT() instanceof B)) return;
             B owner = (B) knockout.yT();
             if (knockout.zf() == 1099 && index == 0 && list.size() == 4) {
