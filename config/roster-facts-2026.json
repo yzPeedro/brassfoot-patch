@@ -410,6 +410,38 @@
       "teamFile": "teams/vitoria.ban",
       "action": "remove",
       "source": "docs/releases/v2026.6.13.md"
+    },
+    {
+      "version": "2026.6.15",
+      "date": "2026-11-19",
+      "player": "Gleidson",
+      "teamFile": "teams/chapecoense_bra.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.15.md"
+    },
+    {
+      "version": "2026.6.15",
+      "date": "2026-11-19",
+      "player": "Eren Kaya",
+      "teamFile": "teams/sivasspor_tur.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.15.md"
+    },
+    {
+      "version": "2026.6.15",
+      "date": "2026-11-19",
+      "player": "Emeka Friday",
+      "teamFile": "teams/sturmgraz_aut.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.15.md"
+    },
+    {
+      "version": "2026.6.15",
+      "date": "2026-11-19",
+      "player": "Walace Falcão",
+      "teamFile": "teams/vasco.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.15.md"
     }
   ]
 }

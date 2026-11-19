@@ -1,7 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-18T09:06:05-03:00",
+  "updatedAt": "2026-11-19T09:12:14-03:00",
   "entries": [
+    {
+      "id": "patch-2026-6-15",
+      "version": "2026.6.15",
+      "date": "2026-11-19T09:12:14-03:00",
+      "title": "Quatro vínculos e 21 idades atualizados",
+      "kind": "patch",
+      "summary": "Adiciona três jogadores, retira um e atualiza 21 idades.",
+      "changes": [
+        "Gleidson, Eren Kaya e Emeka Friday adicionados a Chapecoense, Sivasspor e Sturm Graz.",
+        "Walace Falcão retirado de Vasco.",
+        "21 idades atualizadas.",
+        "Diferenças sem confirmação ficaram retidas e os últimos dados publicados foram preservados.",
+        "Hub 1.4.3, executável, ligas, escudos, camisas e campo animado permanecem iguais."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.6.15"
+    },
     {
       "id": "patch-2026-6-14",
       "version": "2026.6.14",
