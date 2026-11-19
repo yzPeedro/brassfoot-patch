@@ -33,6 +33,8 @@ public final class EstaduaisHarness {
         Set<String> fixtures = new HashSet<String>();
         int legs;
         int rounds;
+        int degree;
+        int code;
     }
 
     private static List<Spec> specs(File file) throws Exception {
@@ -49,6 +51,8 @@ public final class EstaduaisHarness {
             if (!cols[5].isEmpty()) spec.fixtures.addAll(Arrays.asList(cols[5].split(",")));
             spec.legs = Integer.parseInt(cols[6]);
             spec.rounds = Integer.parseInt(cols[7]);
+            spec.degree = Integer.parseInt(cols[8]);
+            spec.code = Integer.parseInt(cols[9]);
             result.add(spec);
         }
         reader.close();
@@ -56,6 +60,10 @@ public final class EstaduaisHarness {
     }
 
     private static f.s league(int state) {
+        if (state >= 100) {
+            f.F cup = c.a.SR.bV()[state - 100];
+            return cup == null ? null : cup.yd();
+        }
         for (Object item : c.a.SR.aE()) {
             best.w w = (best.w) item;
             if (w.getEstado() == state && !w.ds.isEmpty()) return ((f.o) w.ds.get(0)).yi();
@@ -101,6 +109,7 @@ public final class EstaduaisHarness {
         c.a.SR.I(startYear);
         c.a.SR.setJogaEstadual(true);
         c.a.SR.setJogaIntClubes(false);
+        c.a.SR.setJogaRegionaisTodos(new boolean[]{false, false, true, true});
         c.a.SR.setJogaSelecoesAll(false);
         best.p.dg();
         best.p.dh();
@@ -126,7 +135,7 @@ public final class EstaduaisHarness {
         f.s league = league(spec.state);
         check(league != null, spec.uf + ": estadual criado");
         if (league == null) return;
-        check(league.ze() == 2700, spec.uf + ": formato oficial aplicado (codigo " + league.ze() + ")");
+        check(league.ze() == spec.code, spec.uf + ": formato oficial aplicado (codigo " + league.ze() + ")");
         check(files(league.yK()).equals(new HashSet<String>(spec.teams)), spec.uf + ": participantes oficiais (" + league.yK().size() + " de " + spec.teams.size() + ")");
         Map<String, Integer> group = new HashMap<String, Integer>();
         for (int g = 0; g < spec.groups.size(); g++) for (String f : spec.groups.get(g)) group.put(f, g);
@@ -157,7 +166,7 @@ public final class EstaduaisHarness {
         }
         int n = spec.teams.size();
         int expected;
-        if ("crossed".equals(spec.type)) expected = n * (n - spec.groups.get(0).size()) / 2 * spec.legs;
+        if ("crossed".equals(spec.type)) expected = n * spec.degree / 2 * spec.legs;
         else if ("groups".equals(spec.type)) {
             expected = 0;
             for (List<String> g : spec.groups) expected += g.size() * (g.size() - 1) / 2 * spec.legs;

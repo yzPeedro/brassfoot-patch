@@ -66,12 +66,12 @@
       "name": "3ª Fase – Semifinal",
       "ties": [
         [
-          "C4",
-          "C1"
+          "R4",
+          "R1"
         ],
         [
-          "C3",
-          "C2"
+          "R3",
+          "R2"
         ]
       ],
       "legs": 2,
@@ -82,8 +82,8 @@
       "name": "4ª Fase – Final",
       "ties": [
         [
-          "C2",
-          "C1"
+          "R2",
+          "R1"
         ]
       ],
       "legs": 2,

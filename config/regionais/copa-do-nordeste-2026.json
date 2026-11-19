@@ -1,0 +1,199 @@
+{
+  "state": "NE",
+  "key": 102,
+  "season": 2026,
+  "competition": "Copa do Nordeste",
+  "engine": "ready",
+  "pending": [],
+  "teams": [
+    "vitoria",
+    "asaarapiracaal_bra",
+    "sousapb_bra",
+    "itabaiana_se",
+    "fluminensepi_bra",
+    "juazeirense_ba",
+    "crb_bra",
+    "botafogopb_bra",
+    "confianca_se",
+    "piaui_pi",
+    "ceara_bra",
+    "sport",
+    "americarn",
+    "imperatriz_ma",
+    "ferroviarioce_bra",
+    "fortaleza",
+    "retrope_bra",
+    "abcrn_bra",
+    "maranhao_ma",
+    "jacuipense_bra"
+  ],
+  "names": [
+    "ABC",
+    "América-RN",
+    "ASA",
+    "Botafogo-PB",
+    "Ceará",
+    "Confiança",
+    "CRB",
+    "Ferroviário",
+    "Fluminense-PI",
+    "Fortaleza",
+    "Imperatriz",
+    "Itabaiana",
+    "Jacuipense",
+    "Juazeirense",
+    "Maranhão",
+    "Piauí",
+    "Retrô",
+    "Sousa",
+    "Sport",
+    "Vitória"
+  ],
+  "phase1": {
+    "type": "crossed",
+    "legs": 1,
+    "groups": [
+      [
+        "vitoria",
+        "asaarapiracaal_bra",
+        "sousapb_bra",
+        "itabaiana_se",
+        "fluminensepi_bra"
+      ],
+      [
+        "juazeirense_ba",
+        "crb_bra",
+        "botafogopb_bra",
+        "confianca_se",
+        "piaui_pi"
+      ],
+      [
+        "ceara_bra",
+        "sport",
+        "americarn",
+        "imperatriz_ma",
+        "ferroviarioce_bra"
+      ],
+      [
+        "fortaleza",
+        "retrope_bra",
+        "abcrn_bra",
+        "maranhao_ma",
+        "jacuipense_bra"
+      ]
+    ],
+    "fixtures": [],
+    "opponents": [
+      [
+        1
+      ],
+      [
+        0
+      ],
+      [
+        3
+      ],
+      [
+        2
+      ]
+    ]
+  },
+  "relegated": 0,
+  "knockout": [
+    {
+      "name": "Quartas de final",
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "neutral",
+      "ties": [
+        [
+          "A1",
+          "C2"
+        ],
+        [
+          "B1",
+          "D2"
+        ],
+        [
+          "C1",
+          "A2"
+        ],
+        [
+          "D1",
+          "B2"
+        ]
+      ]
+    },
+    {
+      "name": "Semifinal",
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "ties": [
+        [
+          "W1",
+          "W4"
+        ],
+        [
+          "W2",
+          "W3"
+        ]
+      ]
+    },
+    {
+      "name": "Final",
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ]
+      ]
+    }
+  ],
+  "simplifications": [
+    "posicoes sorteadas nos grupos e mandos da 1a fase nao confirmados; o jogo equilibra os mandos",
+    "classificacao por pontos, vitorias, saldo e gols pro; cartoes e sorteio nao modelados"
+  ],
+  "unsupported": [
+    "Posições sorteadas (A1..D5) nos grupos não confirmadas em fonte oficial; definem o mando da 1ª fase (A e C com 3 mandos).",
+    "Placar exato da final: a imprensa diverge; só campeão (Vitória) e vice (Fortaleza) foram conferidos.",
+    "Data real da final de volta (06/06 na imprensa x 07/06 na tabela básica) não conferida em súmula.",
+    "Critérios de vaga da Copa do Nordeste 2027 não encontrados nas fontes consultadas."
+  ],
+  "sources": [
+    {
+      "url": "https://www.cbf.com.br/futebol-brasileiro/noticias/undefined/gremio-x-criciuma/confira-os-documentos-tecnicos-da-copa-do-nordeste-de-2026",
+      "type": "página CBF (documentos técnicos)",
+      "retrievedAt": "2026-11-19"
+    },
+    {
+      "url": "https://stcbfsiteprdimgbrs.blob.core.windows.net/img-site/cdn/REC_Copa_do_Nordeste_2026_25c8b8939c.pdf",
+      "type": "regulamento específico (PDF CBF)",
+      "retrievedAt": "2026-11-19",
+      "sha256": "f08d6a68bb37e929d5d00dbece042506c45e5bf264216cd5936c363df01f8b3a",
+      "local": "../pdf/REC_Copa_do_Nordeste_2026_25c8b8939c.pdf"
+    },
+    {
+      "url": "https://stcbfsiteprdimgbrs.blob.core.windows.net/img-site/cdn/Tabela_Basica_Copa_do_Nordeste_2026_0f4a40b05a.pdf",
+      "type": "tabela básica (PDF CBF)",
+      "retrievedAt": "2026-11-19",
+      "sha256": "17e43cfac34f708d487faef1a1bf11b1a7575c388299fad817a7dfed473e8784",
+      "local": "../pdf/Tabela_Basica_Copa_do_Nordeste_2026_0f4a40b05a.pdf"
+    },
+    {
+      "url": "https://stcbfsiteprdimgbrs.blob.core.windows.net/img-site/cdn/PGA_Copa_do_Nordeste_2026_3156f2c7e2.pdf",
+      "type": "plano geral de ação (PDF CBF)",
+      "retrievedAt": "2026-11-19",
+      "sha256": "0049049fa27f1ad4d12c35cef8b64309fbe5f9c6c0628da15ee2cbe7f6547f4e",
+      "local": "../pdf/PGA_Copa_do_Nordeste_2026_3156f2c7e2.pdf"
+    },
+    {
+      "url": "https://www.tnh1.com.br/noticia/nid/copa-do-nordeste-2026-veja-os-grupos-o-formato-e-as-datas/",
+      "type": "imprensa (grupos)",
+      "retrievedAt": "2026-11-19"
+    }
+  ]
+}

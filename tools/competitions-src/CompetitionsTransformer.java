@@ -346,6 +346,20 @@ public final class CompetitionsTransformer {
         return true;
     }
 
+    private static boolean regionalStart(ClassNode owner) {
+        MethodNode target = method(owner, "an", "(Ljava/util/ArrayList;)V");
+        LabelNode original = new LabelNode(new Label());
+        InsnList hook = new InsnList();
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 1));
+        hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "best/CompEstaduais", "regional", "(Lf/F;Ljava/util/ArrayList;)Z", false));
+        hook.add(new JumpInsnNode(Opcodes.IFEQ, original));
+        hook.add(new InsnNode(Opcodes.RETURN));
+        hook.add(original);
+        target.instructions.insert(hook);
+        return true;
+    }
+
     private static boolean pointsTiebreak(ClassNode owner) {
         MethodNode target = method(owner, "b", "(ZZ)V");
         AbstractInsnNode found = null;
@@ -421,6 +435,7 @@ public final class CompetitionsTransformer {
             case "estadual-knockout": frames = estadualKnockout(owner); break;
             case "estadual-crossed": frames = estadualCrossed(owner); break;
             case "points-tiebreak": frames = pointsTiebreak(owner); break;
+            case "regional-start": frames = regionalStart(owner); break;
             case "division-order": frames = divisionOrder(owner); break;
             case "serie-c-rounds": frames = singleRoundSerieC(owner); break;
             default: throw new IllegalArgumentException("unknown mode " + args[0]);

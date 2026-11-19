@@ -2,6 +2,7 @@ package best;
 
 import c.a;
 import est.LoadLigaOptions;
+import f.F;
 import f.G;
 import f.o;
 import f.s;
@@ -30,6 +31,54 @@ public final class CompEstaduais {
             if (CompEstaduaisData.STATE[i] == state) return i;
         }
         return -1;
+    }
+
+    static int key(s league) {
+        if (league == null) return -1;
+        int code = league.ze();
+        if (code == CODE) return league.ir() == null ? -1 : index(league.ir().getEstado());
+        if (code > CODE + 1 && code < CODE + 100) return index(code - CODE + 100);
+        return -1;
+    }
+
+    public static boolean regional(F cup, ArrayList pool) {
+        try {
+            int region = ((Integer) field(F.class, "aad").get(cup)).intValue();
+            int k = index(100 + region);
+            if (k < 0) return false;
+            String[][] groups = CompEstaduaisData.GROUPS[k];
+            ArrayList arranged = new ArrayList();
+            for (int g = 0; g < groups.length; g++) {
+                for (int r = 0; r < groups[g].length; r++) {
+                    ah team = byFile(groups[g][r]);
+                    if (team == null || team.getPais() != 29) {
+                        log("regional " + region + ": clube oficial ausente " + groups[g][r] + "; formato original mantido", null);
+                        return false;
+                    }
+                    arranged.add(team);
+                }
+            }
+            boolean[] legs = new boolean[7];
+            for (int i = 0; i < legs.length && i < CompEstaduaisData.KO_LEGS[k].length; i++) legs[i] = CompEstaduaisData.KO_LEGS[k][i];
+            LoadLigaOptions options = new LoadLigaOptions();
+            options.nTimes = arranged.size();
+            options.nGrupos = groups.length;
+            options.numeroTimesMataMata = 1;
+            options.doisTurnos = CompEstaduaisData.P1_LEGS[k] == 2;
+            options.duasVoltasMataMata = legs;
+            options.jogosDentroGrupo = !"crossed".equals(CompEstaduaisData.P1_TYPE[k]);
+            options.var0 = CODE + region;
+            ArrayList members = (ArrayList) field(F.class, "YF").get(cup);
+            members.clear();
+            members.addAll(arranged);
+            s league = new s(options, members, 0, null, null, null, 10, null, false, null, true, cup);
+            field(F.class, "YD").set(cup, league);
+            league.setNome(cup.getNome());
+            return true;
+        } catch (Throwable error) {
+            log("falha ao montar o regional", error);
+            return false;
+        }
     }
 
     private static ah byFile(String file) {
@@ -102,9 +151,9 @@ public final class CompEstaduais {
 
     public static ah[][][] crossed(s league, ArrayList teams, boolean cross, ArrayList groups, ah[][][] current) {
         try {
-            if (league.ze() != CODE || teams.isEmpty()) return current;
+            if (teams.isEmpty()) return current;
             int state = ((ah) teams.get(0)).getEstado();
-            int k = index(state);
+            int k = league.ze() == CODE ? index(state) : key(league);
             if (k < 0) return current;
             if (!cross) return fixtures(league, teams, k, current);
             if (groups == null || groups.size() < 2) return current;
@@ -117,8 +166,18 @@ public final class CompEstaduais {
                 size = members.size();
                 for (int m = 0; m < members.size(); m++) group[teams.indexOf(members.get(m))] = g;
             }
-            int rounds = n - size;
-            int[][] pairs = schedule(n, group, rounds, new java.util.Random(7919L * (k + 1)));
+            int[][] opponents = CompEstaduaisData.OPPONENTS[k];
+            boolean[][] allowed = new boolean[groups.size()][groups.size()];
+            int rounds = 0;
+            for (int g = 0; g < groups.size(); g++) {
+                for (int h = 0; h < groups.size(); h++) {
+                    boolean listed = opponents.length == 0;
+                    for (int i = 0; opponents.length > 0 && i < opponents[g].length; i++) listed |= opponents[g][i] == h;
+                    allowed[g][h] = g != h && listed;
+                    if (g == 0 && allowed[g][h]) rounds += size;
+                }
+            }
+            int[][] pairs = schedule(n, group, allowed, rounds, new java.util.Random(7919L * (k + 1)));
             if (pairs == null) {
                 log("estadual " + state + ": tabela cruzada sem solucao", null);
                 return current;
@@ -178,7 +237,7 @@ public final class CompEstaduais {
         return result;
     }
 
-    static int[][] schedule(int n, int[] group, int rounds, java.util.Random random) {
+    static int[][] schedule(int n, int[] group, boolean[][] allowed, int rounds, java.util.Random random) {
         for (int attempt = 0; attempt < 5000; attempt++) {
             boolean[][] used = new boolean[n][n];
             int[][] result = new int[rounds][];
@@ -186,7 +245,7 @@ public final class CompEstaduais {
             for (int r = 0; r < rounds && ok; r++) {
                 int[] matching = new int[n];
                 java.util.Arrays.fill(matching, -1);
-                ok = match(0, n, group, used, matching, random);
+                ok = match(0, n, group, allowed, used, matching, random);
                 if (!ok) break;
                 int[] flat = new int[n];
                 int f = 0;
@@ -205,7 +264,7 @@ public final class CompEstaduais {
         return null;
     }
 
-    private static boolean match(int from, int n, int[] group, boolean[][] used, int[] matching, java.util.Random random) {
+    private static boolean match(int from, int n, int[] group, boolean[][] allowed, boolean[][] used, int[] matching, java.util.Random random) {
         int v = from;
         while (v < n && matching[v] >= 0) v++;
         if (v == n) return true;
@@ -219,10 +278,10 @@ public final class CompEstaduais {
         }
         for (int i = 0; i < n; i++) {
             int w = order[i];
-            if (w == v || matching[w] >= 0 || group[w] == group[v] || used[v][w]) continue;
+            if (w == v || matching[w] >= 0 || !allowed[group[v]][group[w]] || used[v][w]) continue;
             matching[v] = w;
             matching[w] = v;
-            if (match(v + 1, n, group, used, matching, random)) return true;
+            if (match(v + 1, n, group, allowed, used, matching, random)) return true;
             matching[v] = -1;
             matching[w] = -1;
         }
@@ -236,13 +295,13 @@ public final class CompEstaduais {
     }
 
     static boolean ours(s league) {
-        return league != null && league.ze() == CODE && league.ir() != null && index(league.ir().getEstado()) >= 0;
+        return key(league) >= 0;
     }
 
     public static boolean knockout(s league) {
         try {
             if (!ours(league)) return false;
-            int k = index(league.ir().getEstado());
+            int k = key(league);
             String[][][] rounds = CompEstaduaisData.KO_TIES[k];
             if (rounds.length == 0) return false;
             ArrayList list = resolve(league, null, rounds[0], k, 0);
@@ -266,7 +325,7 @@ public final class CompEstaduais {
             if (!(knockout.zy() instanceof s)) return false;
             s league = (s) knockout.zy();
             if (!ours(league)) return false;
-            int k = index(league.ir().getEstado());
+            int k = key(league);
             String[][][] rounds = CompEstaduaisData.KO_TIES[k];
             if (index >= rounds.length) return true;
             if (index > 0) {
@@ -299,7 +358,7 @@ public final class CompEstaduais {
             boolean homeWon = previous.zY().contains(match.hc());
             return (head == 'W') == homeWon ? match.hc() : match.hd();
         }
-        if (head == 'C') {
+        if (head == 'R') {
             int position = Integer.parseInt(code.substring(1)) - 1;
             ArrayList ranked = new ArrayList(candidates);
             Collections.sort(ranked, campaign);
@@ -320,7 +379,7 @@ public final class CompEstaduais {
             for (int t = 0; t < ties.length; t++) {
                 for (int side = 0; side < 2; side++) {
                     char head = ties[t][side].charAt(0);
-                    if (head != 'W' && head != 'L' && head != 'C') {
+                    if (head != 'W' && head != 'L' && head != 'R') {
                         ah direct = slot(ties[t][side], league, knockout, index, campaign, candidates);
                         if (direct != null && !candidates.contains(direct)) candidates.add(direct);
                     }
@@ -333,7 +392,7 @@ public final class CompEstaduais {
             ah first = slot(ties[t][0], league, knockout, index, campaign, candidates);
             ah second = slot(ties[t][1], league, knockout, index, campaign, candidates);
             if (first == null || second == null) {
-                log("confronto sem clube: " + ties[t][0] + " x " + ties[t][1], null);
+                log("confronto sem clube: " + ties[t][0] + " x " + ties[t][1] + " (grupos " + (league.yQ() == null ? -1 : league.yQ().size()) + ", tabela " + league.yK().size() + ")", null);
                 return null;
             }
             boolean firstBetter = campaign.compare(first, second) <= 0;

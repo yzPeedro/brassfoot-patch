@@ -139,6 +139,12 @@ def rounds(teams: list, pairs: list) -> list | None:
     return packed if place(0) else None
 
 
+def campaign_codes(ties: list | None) -> list | None:
+    if ties is None:
+        return None
+    return [[re.sub(r"^C(?=\d)", "R", str(side)) for side in tie] for tie in ties]
+
+
 def third_place(stage: dict) -> bool:
     ties = stage.get("ties") or []
     return bool(ties) and all(str(side).startswith("L") for tie in ties for side in tie)
@@ -168,7 +174,7 @@ def build(sheet: dict, teams: list[dict], created: dict, known: dict, aliases: d
                    "fixtures": [[files[h], files[a]] for r in rounds(sheet["teams"], phase1.get("pairs") or []) or []
                                 for h, a in r]},
         "relegated": sheet.get("relegated"),
-        "knockout": [{"name": s.get("name"), "ties": s.get("ties"), "legs": s.get("legs"),
+        "knockout": [{"name": s.get("name"), "ties": campaign_codes(s.get("ties")), "legs": s.get("legs"),
                       "tiebreak": s.get("tiebreak"), "home": s.get("home")} for s in stages],
         "simplifications": (["disputa de 3º lugar nao disputada no jogo"] if dropped else [])
         + (["mando 'neutral' segue a ordem da tabela"] if any(s.get("home") == "neutral" for s in stages) else []),
@@ -178,12 +184,75 @@ def build(sheet: dict, teams: list[dict], created: dict, known: dict, aliases: d
     return document
 
 
+REGIONAIS = {
+    "copa-do-nordeste-2026": {
+        "key": 102, "state": "NE", "order": ["A", "B", "C", "D"], "opponents": [[1], [0], [3], [2]], "type": "crossed",
+        "knockout": [
+            {"name": "Quartas de final", "legs": 1, "tiebreak": "penalties", "home": "neutral",
+             "ties": [["A1", "C2"], ["B1", "D2"], ["C1", "A2"], ["D1", "B2"]]},
+            {"name": "Semifinal", "legs": 2, "tiebreak": "aggregate-then-penalties", "home": "better-second",
+             "ties": [["W1", "W4"], ["W2", "W3"]]},
+            {"name": "Final", "legs": 2, "tiebreak": "aggregate-then-penalties", "home": "better-second",
+             "ties": [["W1", "W2"]]},
+        ],
+    },
+    "copa-verde-2026": {
+        "key": 103, "state": "CV", "order": [("Copa Norte", "A"), ("Copa Norte", "B"), ("Copa Centro-Oeste", "A"),
+                                             ("Copa Centro-Oeste", "B")], "type": "groups",
+        "knockout": [
+            {"name": "Quartas de final", "legs": 1, "tiebreak": "penalties", "home": "neutral",
+             "ties": [["A1", "B2"], ["B1", "A2"], ["C1", "D2"], ["D1", "C2"]]},
+            {"name": "Finais da Copa Norte e da Copa Centro-Oeste", "legs": 2, "tiebreak": "aggregate-then-penalties",
+             "home": "better-second", "ties": [["W1", "W2"], ["W3", "W4"]]},
+            {"name": "Final", "legs": 2, "tiebreak": "aggregate-then-penalties", "home": "better-second",
+             "ties": [["W1", "W2"]]},
+        ],
+    },
+}
+
+
+def regional(name: str, sheet: dict, teams: list[dict], created: dict, known: dict, aliases: dict) -> dict:
+    rule = REGIONAIS[name]
+    by_name = {p["name"]: p for p in sheet["participants"]}
+    files = {}
+    for p in sheet["participants"]:
+        files[p["name"]] = (resolve(p["name"], p["uf"], teams, created, known, aliases)
+                            or resolve(p.get("officialName") or p["name"], p["uf"], teams, created, known, aliases))
+    groups = []
+    for key in rule["order"]:
+        members = sheet["groups"][key[0]][key[1]] if isinstance(key, tuple) else sheet["groups"][key]
+        groups.append([files[by_name[m]["name"]] for m in members])
+    missing = [n for n, f in files.items() if not f]
+    taken = [f for f in files.values() if f]
+    duplicated = sorted({f for f in taken if taken.count(f) > 1})
+    sizes = {len(g) for g in groups}
+    pending = [f"clube sem arquivo: {n}" for n in missing] + [f"arquivo repetido: {f}" for f in duplicated]
+    if len(sizes) != 1:
+        pending.append("grupos de tamanhos diferentes")
+    return {
+        "state": rule["state"], "key": rule["key"], "season": sheet.get("season", 2026),
+        "competition": sheet.get("competition"),
+        "engine": "pending" if pending else "ready", "pending": pending,
+        "teams": [f for g in groups for f in g], "names": list(files),
+        "phase1": {"type": rule["type"], "legs": 1, "groups": groups, "fixtures": [],
+                   "opponents": rule.get("opponents") or []},
+        "relegated": 0, "knockout": rule["knockout"],
+        "simplifications": ["posicoes sorteadas nos grupos e mandos da 1a fase nao confirmados; o jogo equilibra os mandos",
+                            "classificacao por pontos, vitorias, saldo e gols pro; cartoes e sorteio nao modelados"]
+        + (["titulos da Copa Norte e da Copa Centro-Oeste nao sao registrados como trofeus separados"]
+           if rule["state"] == "CV" else []),
+        "unsupported": sheet.get("gaps") or [],
+        "sources": sheet.get("sources") or [],
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--sheets", type=Path, required=True, help="pasta com <UF>.json normalizados")
     parser.add_argument("--teams", type=Path, required=True, help="saida de app.ListTeams da base")
     parser.add_argument("--created", type=Path, action="append", default=[], help="JSON {'nome|UF': arquivo}")
     parser.add_argument("--output", type=Path, default=OUTPUT)
+    parser.add_argument("--regional-output", type=Path, default=ROOT / "config" / "regionais")
     args = parser.parse_args()
     teams = load_teams(args.teams)
     created = {}
@@ -197,6 +266,15 @@ def main() -> None:
         document = build(json.loads(path.read_text(encoding="utf-8")), teams, created, known, aliases)
         (args.output / path.name).write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         summary[document["state"]] = document["engine"] if document["engine"] == "ready" else document["pending"]
+    regionais = args.sheets.parent / "regionais"
+    target = args.regional_output
+    target.mkdir(parents=True, exist_ok=True)
+    for name in REGIONAIS:
+        path = regionais / f"{name}.json"
+        if path.exists():
+            document = regional(name, json.loads(path.read_text(encoding="utf-8")), teams, created, known, aliases)
+            (target / f"{name}.json").write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            summary[document["state"]] = document["engine"] if document["engine"] == "ready" else document["pending"]
     print(json.dumps(summary, ensure_ascii=False, indent=1))
 
 

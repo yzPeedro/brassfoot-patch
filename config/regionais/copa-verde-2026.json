@@ -1,0 +1,198 @@
+{
+  "state": "CV",
+  "key": 103,
+  "season": 2026,
+  "competition": "Copa Verde (Copa Norte + Copa Centro-Oeste)",
+  "engine": "ready",
+  "pending": [],
+  "teams": [
+    "nacional_am",
+    "paysandu",
+    "independencia_ac",
+    "guapore_ro",
+    "trem_bra",
+    "gas_rr",
+    "amazonas_am",
+    "remo",
+    "galvez_ac",
+    "gazinportovelho_ro",
+    "aguiapa_bra",
+    "monteroraima_rr",
+    "primavera_mt",
+    "vilago",
+    "capitalbrasilia_bra",
+    "riobranco_es",
+    "araguaina_bra",
+    "operario_ms",
+    "cuiaba_bra",
+    "atleticogo_bra",
+    "gama_bra",
+    "portovitoria_es",
+    "tocantinopolis_to",
+    "anapolisgo_bra"
+  ],
+  "names": [
+    "Independência",
+    "Trem",
+    "Amazonas",
+    "Gama",
+    "Rio Branco-ES",
+    "Vila Nova",
+    "Primavera-MT",
+    "Operário-MS",
+    "Remo",
+    "Gazin Porto Velho",
+    "GAS (Grêmio Sampaio)",
+    "Araguaína",
+    "Anápolis",
+    "Cuiabá",
+    "Paysandu",
+    "Nacional-AM",
+    "Capital-DF",
+    "Galvez",
+    "Porto Vitória",
+    "Tocantinópolis",
+    "Monte Roraima",
+    "Guaporé",
+    "Águia de Marabá",
+    "Atlético-GO"
+  ],
+  "phase1": {
+    "type": "groups",
+    "legs": 1,
+    "groups": [
+      [
+        "nacional_am",
+        "paysandu",
+        "independencia_ac",
+        "guapore_ro",
+        "trem_bra",
+        "gas_rr"
+      ],
+      [
+        "amazonas_am",
+        "remo",
+        "galvez_ac",
+        "gazinportovelho_ro",
+        "aguiapa_bra",
+        "monteroraima_rr"
+      ],
+      [
+        "primavera_mt",
+        "vilago",
+        "capitalbrasilia_bra",
+        "riobranco_es",
+        "araguaina_bra",
+        "operario_ms"
+      ],
+      [
+        "cuiaba_bra",
+        "atleticogo_bra",
+        "gama_bra",
+        "portovitoria_es",
+        "tocantinopolis_to",
+        "anapolisgo_bra"
+      ]
+    ],
+    "fixtures": [],
+    "opponents": []
+  },
+  "relegated": 0,
+  "knockout": [
+    {
+      "name": "Quartas de final",
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "neutral",
+      "ties": [
+        [
+          "A1",
+          "B2"
+        ],
+        [
+          "B1",
+          "A2"
+        ],
+        [
+          "C1",
+          "D2"
+        ],
+        [
+          "D1",
+          "C2"
+        ]
+      ]
+    },
+    {
+      "name": "Finais da Copa Norte e da Copa Centro-Oeste",
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ],
+        [
+          "W3",
+          "W4"
+        ]
+      ]
+    },
+    {
+      "name": "Final",
+      "legs": 2,
+      "tiebreak": "aggregate-then-penalties",
+      "home": "better-second",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ]
+      ]
+    }
+  ],
+  "simplifications": [
+    "posicoes sorteadas nos grupos e mandos da 1a fase nao confirmados; o jogo equilibra os mandos",
+    "classificacao por pontos, vitorias, saldo e gols pro; cartoes e sorteio nao modelados",
+    "titulos da Copa Norte e da Copa Centro-Oeste nao sao registrados como trofeus separados"
+  ],
+  "unsupported": [
+    "Posições sorteadas (1..6) nos grupos não confirmadas; definem o mando da 1ª fase.",
+    "Placar da final regional Norte não conferido em súmula.",
+    "Critérios da Copa Verde 2027 não consultados."
+  ],
+  "sources": [
+    {
+      "url": "https://www.cbf.com.br/futebol-brasileiro/noticias/serie-a/a/cbf-publica-documentos-tecnicos-da-copa-verde-de-2026-2",
+      "type": "página CBF (documentos técnicos)",
+      "retrievedAt": "2026-11-19"
+    },
+    {
+      "url": "https://stcbfsiteprdimgbrs.blob.core.windows.net/img-site/cdn/REC_COPA_VERDE_2026_733ec5eed1.pdf",
+      "type": "regulamento específico (PDF CBF)",
+      "retrievedAt": "2026-11-19",
+      "sha256": "cdebd5c2f2e4e403febb92467e6f546564b45fb8d7e46c4ea4b68336a6be77d9",
+      "local": "../pdf/REC_COPA_VERDE_2026_733ec5eed1.pdf"
+    },
+    {
+      "url": "https://stcbfsiteprdimgbrs.blob.core.windows.net/img-site/cdn/Tabela_Basica_COPA_VERDE_2026_8e3dd33f20.pdf",
+      "type": "tabela básica (PDF CBF)",
+      "retrievedAt": "2026-11-19",
+      "sha256": "ca0a03cf4cf8df1f2a86b6f6ec0b37586b115836f32c4051625f0bb390201960",
+      "local": "../pdf/Tabela_Basica_COPA_VERDE_2026_8e3dd33f20.pdf"
+    },
+    {
+      "url": "https://stcbfsiteprdimgbrs.blob.core.windows.net/img-site/cdn/PGA_COPA_VERDE_2026_9762841ec0.pdf",
+      "type": "plano geral de ação (PDF CBF)",
+      "retrievedAt": "2026-11-19",
+      "sha256": "ec44a665ae821d88ea1261480437ef15bb1a553b3ba1f7c5a58d99e6ec87dc46",
+      "local": "../pdf/PGA_COPA_VERDE_2026_9762841ec0.pdf"
+    },
+    {
+      "url": "https://www.itatiaia.com.br/esportes/futebol/futebol-nacional/copa-verde/sorteio-realizado-pela-cbf-define-grupos-da-copa-verde-2026/",
+      "type": "imprensa (grupos)",
+      "retrievedAt": "2026-11-19"
+    }
+  ]
+}

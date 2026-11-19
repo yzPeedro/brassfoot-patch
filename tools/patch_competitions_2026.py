@@ -20,6 +20,7 @@ CODEC = ROOT / "tools" / "competition-codec"
 TARGETS = {
     "f/G.class": "pairing,after-tie,points-tiebreak",
     "f/f.class": "copa-start,copa-names",
+    "f/F.class": "regional-start",
     "best/w.class": "participants,estadual-division",
     "f/B.class": "main-phase,playoff-start",
     "f/I.class": "supercopa",
@@ -142,11 +143,11 @@ def build(source: Path, destination: Path, source_cfg: Path, output_cfg: Path, j
         for package in ("best", "mega"):
             for path in sorted((classes / package).glob("*.class")):
                 replacements[f"{package}/{path.name}"] = path.read_bytes()
-        for name, modes in TARGETS.items():
+        for number, (name, modes) in enumerate(TARGETS.items()):
             current = originals[name]
             for step, mode in enumerate(modes.split(",")):
-                original = work / f"{name.replace('/', '-')}.{step}.in"
-                patched = work / f"{name.replace('/', '-')}.{step}.out"
+                original = work / f"{number}-{step}.in"
+                patched = work / f"{number}-{step}.out"
                 original.write_bytes(current)
                 run([java, *EXPORTS, "-cp", transformer, "CompetitionsTransformer",
                      mode, original, patched, source])
