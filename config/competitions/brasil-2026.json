@@ -429,6 +429,2781 @@
    }
   ]
  },
+ "copa2026": {
+  "source": "https://stcbfsiteprdimgbrs.blob.core.windows.net/img-site/cdn/REC_Copa_do_Brasil_2026_66989a5426.pdf",
+  "participants": [
+   {
+    "text": "Flamengo Clube de Regatas do Flamengo",
+    "shortName": "Flamengo",
+    "state": "RJ",
+    "origin": "Brasileiro Série A",
+    "criterion": 1,
+    "file": "flarj",
+    "rnc": 1
+   },
+   {
+    "text": "Corinthians Sport Club Corinthians Paulista",
+    "shortName": "Corinthians",
+    "state": "SP",
+    "origin": "Brasileiro Série A",
+    "criterion": 1,
+    "file": "corinthians_bra",
+    "rnc": 2
+   },
+   {
+    "text": "Palmeiras Sociedade Esportiva Palmeiras",
+    "shortName": "Palmeiras",
+    "state": "SP",
+    "origin": "Brasileiro Série A",
+    "criterion": 1,
+    "file": "palmeiras",
+    "rnc": 3
+   },
+   {
+    "text": "Atlético Atlético Mineira SAF",
+    "shortName": "Atlético",
+    "state": "MG",
+    "origin": "Brasileiro Série A",
+    "criterion": 1,
+    "file": "atleticomg_bra",
+    "rnc": 4
+   },
+   {
+    "text": "São Paulo São Paulo Futebol Clube",
+    "shortName": "São Paulo",
+    "state": "SP",
+    "origin": "Brasileiro Série A",
+    "criterion": 1,
+    "file": "saopaulo_bra",
+    "rnc": 5
+   },
+   {
+    "text": "Fluminense Fluminense Football Club",
+    "shortName": "Fluminense",
+    "state": "RJ",
+    "origin": "Brasileiro Série A",
+    "criterion": 1,
+    "file": "flurj",
+    "rnc": 6
+   },
+   {
+    "text": "Botafogo SAF Botafogo",
+    "shortName": "Botafogo",
+    "state": "RJ",
+    "origin": "Brasileiro Série A",
+    "criterion": 1,
+    "file": "botafogorj_bra",
+    "rnc": 7
+   },
+   {
+    "text": "Athletico Clube Athletico Paranaense",
+    "shortName": "Athletico",
+    "state": "PR",
+    "origin": "Brasileiro Série A",
+    "criterion": 1,
+    "file": "atleticopr_bra",
+    "rnc": 8
+   },
+   {
+    "text": "Bahia Esporte Clube Bahia SAF",
+    "shortName": "Bahia",
+    "state": "BA",
+    "origin": "Brasileiro Série A",
+    "criterion": 1,
+    "file": "bahia",
+    "rnc": 9
+   },
+   {
+    "text": "Vasco da Gama Vasco da Gama Sociedade Anônima do Futebol",
+    "shortName": "Vasco",
+    "state": "RJ",
+    "origin": "Brasileiro Série A",
+    "criterion": 1,
+    "file": "vasco",
+    "rnc": 10
+   },
+   {
+    "text": "Cruzeiro Cruzeiro Esporte Clube Sociedade Anônima do Futebol",
+    "shortName": "Cruzeiro",
+    "state": "MG",
+    "origin": "Brasileiro Série A",
+    "criterion": 1,
+    "file": "cruzeiro_bra",
+    "rnc": 11
+   },
+   {
+    "text": "Grêmio Grêmio Foot-Ball Porto Alegrense",
+    "shortName": "Grêmio",
+    "state": "RS",
+    "origin": "Brasileiro Série A",
+    "criterion": 1,
+    "file": "gremio",
+    "rnc": 12
+   },
+   {
+    "text": "Internacional Sport Club Internacional",
+    "shortName": "Internacional",
+    "state": "RS",
+    "origin": "Brasileiro Série A",
+    "criterion": 1,
+    "file": "internacional_bra",
+    "rnc": 14
+   },
+   {
+    "text": "Red Bull Bragantino Red Bull Bragantino Futebol Ltda",
+    "shortName": "Red Bull Bragantino",
+    "state": "SP",
+    "origin": "Brasileiro Série A",
+    "criterion": 1,
+    "file": "bragantino_bra",
+    "rnc": 15
+   },
+   {
+    "text": "Santos Santos Futebol Clube",
+    "shortName": "Santos",
+    "state": "SP",
+    "origin": "Brasileiro Série A",
+    "criterion": 1,
+    "file": "santos",
+    "rnc": 16
+   },
+   {
+    "text": "Vitória Esporte Clube Vitória",
+    "shortName": "Vitória",
+    "state": "BA",
+    "origin": "Brasileiro Série A",
+    "criterion": 1,
+    "file": "vitoria",
+    "rnc": 20
+   },
+   {
+    "text": "Coritiba Coritiba Sociedade Anônima do Futebol",
+    "shortName": "Coritiba",
+    "state": "PR",
+    "origin": "Brasileiro Série A",
+    "criterion": 1,
+    "file": "coritiba_bra",
+    "rnc": 24
+   },
+   {
+    "text": "Mirassol Mirassol Futebol Clube",
+    "shortName": "Mirassol",
+    "state": "SP",
+    "origin": "Brasileiro Série A",
+    "criterion": 1,
+    "file": "miirassol_sp",
+    "rnc": 28
+   },
+   {
+    "text": "Chapecoense Associação Chapecoense de Futebol",
+    "shortName": "Chapecoense",
+    "state": "SC",
+    "origin": "Brasileiro Série A",
+    "criterion": 1,
+    "file": "chapecoense_bra",
+    "rnc": 33
+   },
+   {
+    "text": "Remo Clube do Remo",
+    "shortName": "Remo",
+    "state": "PA",
+    "origin": "Brasileiro Série A",
+    "criterion": 1,
+    "file": "remo",
+    "rnc": 37
+   },
+   {
+    "text": "Paysandu Paysandu Sport Club",
+    "shortName": "Paysandu",
+    "state": "PA",
+    "origin": "Copa Verde",
+    "criterion": 2,
+    "file": "paysandu",
+    "rnc": 35
+   },
+   {
+    "text": "Ponte Preta Associação Atlética Ponte Preta",
+    "shortName": "Ponte",
+    "state": "SP",
+    "origin": "Brasileiro Série C",
+    "criterion": 2,
+    "file": "pontepreta_bra",
+    "rnc": 38
+   },
+   {
+    "text": "Confiança Associação Desportiva Confiança",
+    "shortName": "Confiança",
+    "state": "SE",
+    "origin": "Copa do Nordeste",
+    "criterion": 2,
+    "file": "confianca_se",
+    "rnc": 53
+   },
+   {
+    "text": "Barra Barra Futebol Clube Ltda",
+    "shortName": "Barra",
+    "state": "SC",
+    "origin": "Brasileiro Série D",
+    "criterion": 2,
+    "file": "barra_sc",
+    "rnc": 99
+   },
+   {
+    "text": "Galvez Galvez Esporte Clube",
+    "shortName": "Galvez",
+    "state": "AC",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": 217
+   },
+   {
+    "text": "Independência Independência Futebol Clube",
+    "shortName": "Independência",
+    "state": "AC",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": 132
+   },
+   {
+    "text": "Vasco Associação Desportiva Vasco da Gama",
+    "shortName": "Vasco",
+    "state": "AC",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": null
+   },
+   {
+    "text": "ASA Agremiação Sportiva Arapiraquense",
+    "shortName": "ASA",
+    "state": "AL",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "asaarapiracaal_bra",
+    "rnc": 74
+   },
+   {
+    "text": "CRB Clube de Regatas Brasil",
+    "shortName": "CRB",
+    "state": "AL",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "crb_bra",
+    "rnc": 26
+   },
+   {
+    "text": "CSA Centro Sportivo Alagoano",
+    "shortName": "CSA",
+    "state": "AL",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "csa_bra",
+    "rnc": 39
+   },
+   {
+    "text": "Penedense Sport Club Penedense",
+    "shortName": "Penedense",
+    "state": "AL",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": 161
+   },
+   {
+    "text": "Amazonas Amazonas FC - Sociedade Anônima de Futebol",
+    "shortName": "Amazonas",
+    "state": "AM",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "amazonas_am",
+    "rnc": 40
+   },
+   {
+    "text": "Manauara Manauara Esporte Clube",
+    "shortName": "Manauara",
+    "state": "AM",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": 103
+   },
+   {
+    "text": "Manaus Manaus Futebol Clube",
+    "shortName": "Manaus",
+    "state": "AM",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "manaus_bra",
+    "rnc": 64
+   },
+   {
+    "text": "Nacional Nacional Futebol Clube",
+    "shortName": "Nacional",
+    "state": "AM",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "nacional_am",
+    "rnc": 185
+   },
+   {
+    "text": "Independente Independente Esporte Clube",
+    "shortName": "Independente",
+    "state": "AP",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": 209
+   },
+   {
+    "text": "Oratório Oratório Recreativo Clube",
+    "shortName": "Oratório",
+    "state": "AP",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": 198
+   },
+   {
+    "text": "Trem Trem Desportivo Clube",
+    "shortName": "Trem",
+    "state": "AP",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "trem_bra",
+    "rnc": 80
+   },
+   {
+    "text": "Atlético Alagoinhas Atlético Clube",
+    "shortName": "Atlético",
+    "state": "BA",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "atleticoalagoinhas_bra",
+    "rnc": 123
+   },
+   {
+    "text": "Jacuipense Esporte Clube Jacuipense",
+    "shortName": "Jacuipense",
+    "state": "BA",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "jacuipense_bra",
+    "rnc": 94
+   },
+   {
+    "text": "Juazeirense Sociedade Desportiva Juazeirense",
+    "shortName": "Juazeirense",
+    "state": "BA",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "juazeirense_ba",
+    "rnc": 83
+   },
+   {
+    "text": "Porto Porto Seguro SAF",
+    "shortName": "Porto",
+    "state": "BA",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": null
+   },
+   {
+    "text": "Ceará Ceará Sporting Club",
+    "shortName": "Ceará",
+    "state": "CE",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "ceara_bra",
+    "rnc": 21
+   },
+   {
+    "text": "Fortaleza Fortaleza Esporte Clube SAF",
+    "shortName": "Fortaleza",
+    "state": "CE",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "fortaleza",
+    "rnc": 13
+   },
+   {
+    "text": "Maracanã Maracanã Esporte Clube",
+    "shortName": "Maracanã",
+    "state": "CE",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "maracana_ce",
+    "rnc": 89
+   },
+   {
+    "text": "Tirol SAF Centro de Formação de Atletas do Tirol",
+    "shortName": "Tirol",
+    "state": "CE",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": null
+   },
+   {
+    "text": "Capital Capital Sociedade Anônima do Futebol",
+    "shortName": "Capital",
+    "state": "DF",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "capitalbrasilia_bra",
+    "rnc": 95
+   },
+   {
+    "text": "Ceilândia Ceilândia Esporte Clube",
+    "shortName": "Ceilândia",
+    "state": "DF",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": 77
+   },
+   {
+    "text": "Gama Sociedade Esportiva do Gama",
+    "shortName": "Gama",
+    "state": "DF",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "gama_bra",
+    "rnc": 217
+   },
+   {
+    "text": "Desportiva Associação Desportiva Ferroviária Vale do Rio Doce",
+    "shortName": "Desportiva",
+    "state": "ES",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": null
+   },
+   {
+    "text": "Porto Vitória Porto Vitória Futebol Clube Ltda - Me",
+    "shortName": "Porto",
+    "state": "ES",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": 161
+   },
+   {
+    "text": "Rio Branco Rio Branco Atlético Clube Sociedade Anônima do Futebol",
+    "shortName": "Rio",
+    "state": "ES",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": 112
+   },
+   {
+    "text": "Anápolis Anápolis Futebol Clube",
+    "shortName": "Anápolis",
+    "state": "GO",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "anapolisgo_bra",
+    "rnc": 69
+   },
+   {
+    "text": "Atlético Atlético Goianiense - Sociedade Anônima do Futebol",
+    "shortName": "Atlético",
+    "state": "GO",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "atleticogo_bra",
+    "rnc": 18
+   },
+   {
+    "text": "Goiás Goiás Esporte Clube",
+    "shortName": "Goiás",
+    "state": "GO",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "goias",
+    "rnc": 23
+   },
+   {
+    "text": "Vila Nova Vila Nova Futebol Clube",
+    "shortName": "Vila",
+    "state": "GO",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "vilago",
+    "rnc": 29
+   },
+   {
+    "text": "IAPE Instituto de Administração de Projetos Especiais Futebol Clube",
+    "shortName": "IAPE",
+    "state": "MA",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "iape_ma",
+    "rnc": null
+   },
+   {
+    "text": "Imperatriz Sociedade Imperatriz de Desportos",
+    "shortName": "Imperatriz",
+    "state": "MA",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "imperatriz_ma",
+    "rnc": 144
+   },
+   {
+    "text": "Maranhão Maranhão Atlético Clube",
+    "shortName": "Maranhão",
+    "state": "MA",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "maranhao_ma",
+    "rnc": 85
+   },
+   {
+    "text": "América América Futebol Clube SAF",
+    "shortName": "América",
+    "state": "MG",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "americamg_bra",
+    "rnc": 19
+   },
+   {
+    "text": "Athletic Athletic Club Esportes SAF",
+    "shortName": "Athletic",
+    "state": "MG",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "athleticclub_mg",
+    "rnc": 51
+   },
+   {
+    "text": "Betim Associação Mineira de Desenvolvimento Humano",
+    "shortName": "Betim",
+    "state": "MG",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "betimfutebol_bra",
+    "rnc": null
+   },
+   {
+    "text": "Tombense Tombense Futebol Clube SAF",
+    "shortName": "Tombense",
+    "state": "MG",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "tombense_mg",
+    "rnc": 42
+   },
+   {
+    "text": "Uberlândia Uberlândia Esporte Clube S.A.F.",
+    "shortName": "Uberlândia",
+    "state": "MG",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "uberlandia_ec",
+    "rnc": 143
+   },
+   {
+    "text": "FC Pantanal Futebol Clube Pantanal SAF",
+    "shortName": "FC",
+    "state": "MS",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": null
+   },
+   {
+    "text": "Ivinhema Sociedade Esportiva Recreativa Ivinhema",
+    "shortName": "Ivinhema",
+    "state": "MS",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": null
+   },
+   {
+    "text": "Operário Operário Futebol Clube",
+    "shortName": "Operário",
+    "state": "MS",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": 93
+   },
+   {
+    "text": "Cuiabá Cuiabá Esporte Clube - Sociedade Anônima do Futebol",
+    "shortName": "Cuiabá",
+    "state": "MT",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "cuiaba_bra",
+    "rnc": 22
+   },
+   {
+    "text": "Mixto Mixto Esporte Clube",
+    "shortName": "Mixto",
+    "state": "MT",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": 119
+   },
+   {
+    "text": "Operário VG Clube Esportivo Operário Varzeagrandense",
+    "shortName": "Operário",
+    "state": "MT",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "operariovg_mt",
+    "rnc": 102
+   },
+   {
+    "text": "Primavera Primavera Atlético Clube Ltda",
+    "shortName": "Primavera",
+    "state": "MT",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": null
+   },
+   {
+    "text": "Águia de Marabá Águia de Marabá Futebol Clube",
+    "shortName": "Águia",
+    "state": "PA",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "aguiapa_bra",
+    "rnc": 67
+   },
+   {
+    "text": "Bragantino Bragantino Clube do Pará",
+    "shortName": "Bragantino",
+    "state": "PA",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "bragantino_pa",
+    "rnc": null
+   },
+   {
+    "text": "Castanhal Castanhal Esporte Clube",
+    "shortName": "Castanhal",
+    "state": "PA",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "castanhalpa_bra",
+    "rnc": 170
+   },
+   {
+    "text": "Tuna Luso Tuna Luso Brasileira",
+    "shortName": "Tuna",
+    "state": "PA",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "tunaluso_pa",
+    "rnc": 87
+   },
+   {
+    "text": "Botafogo Botafogo PB Sociedade Anônima do Futebol",
+    "shortName": "Botafogo",
+    "state": "PB",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "botafogopb_bra",
+    "rnc": 52
+   },
+   {
+    "text": "Serra Branca Serra Branca Esporte Clube",
+    "shortName": "Serra",
+    "state": "PB",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": null
+   },
+   {
+    "text": "Sousa Sousa Esporte Clube",
+    "shortName": "Sousa",
+    "state": "PB",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "sousapb_bra",
+    "rnc": 70
+   },
+   {
+    "text": "Maguary Associação Atlética Maguary",
+    "shortName": "Maguary",
+    "state": "PE",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": null
+   },
+   {
+    "text": "Retrô Retrô Futebol Clube Brasil",
+    "shortName": "Retrô",
+    "state": "PE",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "retrope_bra",
+    "rnc": 49
+   },
+   {
+    "text": "Santa Cruz Santa Cruz Futebol Clube",
+    "shortName": "Santa",
+    "state": "PE",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "santa",
+    "rnc": 86
+   },
+   {
+    "text": "Sport Sport Clube do Recife",
+    "shortName": "Sport",
+    "state": "PE",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "sport",
+    "rnc": 25
+   },
+   {
+    "text": "Altos Associação Esportiva de Altos",
+    "shortName": "Altos",
+    "state": "PI",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "altos_pi",
+    "rnc": 65
+   },
+   {
+    "text": "Fluminense Fluminense Esporte Clube",
+    "shortName": "Fluminense",
+    "state": "PI",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "fluminensepi_bra",
+    "rnc": 97
+   },
+   {
+    "text": "Piauí Piauí Esporte Clube",
+    "shortName": "Piauí",
+    "state": "PI",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": null
+   },
+   {
+    "text": "Azuriz Azuriz Futebol de Alta Performance S.A.F.",
+    "shortName": "Azuriz",
+    "state": "PR",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "azurizpr_bra",
+    "rnc": 111
+   },
+   {
+    "text": "Cianorte Leão do Vale - Cianorte Futebol Clube SAF",
+    "shortName": "Cianorte",
+    "state": "PR",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "cianorte_pr",
+    "rnc": 90
+   },
+   {
+    "text": "Londrina Londrina Esporte Clube Sociedade Anônima do Futebol",
+    "shortName": "Londrina",
+    "state": "PR",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "londrina_pr",
+    "rnc": 48
+   },
+   {
+    "text": "Maringá Maringá Futebol Clube SAF",
+    "shortName": "Maringá",
+    "state": "PR",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "maringapr",
+    "rnc": 56
+   },
+   {
+    "text": "Operário Operário Ferroviário Esporte Clube",
+    "shortName": "Operário",
+    "state": "PR",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "operario_pr",
+    "rnc": 30
+   },
+   {
+    "text": "Boavista Boavista Sport Club S.A.F.",
+    "shortName": "Boavista",
+    "state": "RJ",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "boavista_bra",
+    "rnc": 113
+   },
+   {
+    "text": "Madureira Madureira Esporte Clube",
+    "shortName": "Madureira",
+    "state": "RJ",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "madureira_bra",
+    "rnc": 217
+   },
+   {
+    "text": "Nova Iguaçu Nova Iguaçu Sociedade Anônima do Futebol",
+    "shortName": "Nova",
+    "state": "RJ",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "novaiguacu_rj",
+    "rnc": 66
+   },
+   {
+    "text": "Portuguesa Associação Atlética Portuguesa",
+    "shortName": "Portuguesa",
+    "state": "RJ",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "portuguesarj_bra",
+    "rnc": 78
+   },
+   {
+    "text": "Sampaio Corrêa Sampaio Correa Futebol E Esporte Ltda",
+    "shortName": "Sampaio",
+    "state": "RJ",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": null
+   },
+   {
+    "text": "Volta Redonda Volta Redonda Futebol Clube",
+    "shortName": "Volta",
+    "state": "RJ",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "voltaredondarj_bra",
+    "rnc": 43
+   },
+   {
+    "text": "ABC ABC Futebol Clube",
+    "shortName": "ABC",
+    "state": "RN",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "abcrn_bra",
+    "rnc": 46
+   },
+   {
+    "text": "América América Futebol Clube SAF",
+    "shortName": "América",
+    "state": "RN",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "americarn",
+    "rnc": 62
+   },
+   {
+    "text": "Laguna Clube Laguna S.A.F.",
+    "shortName": "Laguna",
+    "state": "RN",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": null
+   },
+   {
+    "text": "Guaporé Guaporé Futebol Clube",
+    "shortName": "Guaporé",
+    "state": "RO",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": null
+   },
+   {
+    "text": "Ji-Paraná Ji-Paraná Futebol Clube",
+    "shortName": "Ji-Paraná",
+    "state": "RO",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": 209
+   },
+   {
+    "text": "Porto Velho Gazin Porto Velho Esporte Clube",
+    "shortName": "Porto",
+    "state": "RO",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": 75
+   },
+   {
+    "text": "Baré Baré Esporte Clube",
+    "shortName": "Baré",
+    "state": "RR",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": null
+   },
+   {
+    "text": "GAS Grêmio Atlético Sampaio",
+    "shortName": "GAS",
+    "state": "RR",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": 113
+   },
+   {
+    "text": "Monte Roraima Monte Roraima Futebol Clube - Sociedade Anônima do Futebol",
+    "shortName": "Monte",
+    "state": "RR",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": null
+   },
+   {
+    "text": "Caxias Sociedade Esportiva e Recreativa Caxias do Sul",
+    "shortName": "Caxias",
+    "state": "RS",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "caxias",
+    "rnc": 58
+   },
+   {
+    "text": "Guarany de Bagé Guarany Futebol Clube",
+    "shortName": "Guarany",
+    "state": "RS",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "guaranyrs_bra",
+    "rnc": 116
+   },
+   {
+    "text": "Juventude Esporte Clube Juventude",
+    "shortName": "Juventude",
+    "state": "RS",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "juventude",
+    "rnc": 17
+   },
+   {
+    "text": "São Luiz Esporte Clube São Luiz",
+    "shortName": "São Luiz",
+    "state": "RS",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "saoluiz_rs",
+    "rnc": 98
+   },
+   {
+    "text": "Ypiranga Ypiranga Futebol Clube",
+    "shortName": "Ypiranga",
+    "state": "RS",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "ypiranga_rs",
+    "rnc": 50
+   },
+   {
+    "text": "Avaí Avaí Futebol Clube",
+    "shortName": "Avaí",
+    "state": "SC",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "avai_bra",
+    "rnc": 31
+   },
+   {
+    "text": "Figueirense Figueirense Futebol Clube SAF",
+    "shortName": "Figueirense",
+    "state": "SC",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "figueirense",
+    "rnc": 59
+   },
+   {
+    "text": "Joinville Joinville Esporte Clube",
+    "shortName": "Joinville",
+    "state": "SC",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "joinville",
+    "rnc": 136
+   },
+   {
+    "text": "Santa Catarina Santa Catarina Clube",
+    "shortName": "Santa",
+    "state": "SC",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": null
+   },
+   {
+    "text": "América América Futebol Clube",
+    "shortName": "América",
+    "state": "SE",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": null
+   },
+   {
+    "text": "Itabaiana Associação Olímpica de Itabaiana",
+    "shortName": "Itabaiana",
+    "state": "SE",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "itabaiana_se",
+    "rnc": 84
+   },
+   {
+    "text": "Lagarto Lagarto Futebol Clube",
+    "shortName": "Lagarto",
+    "state": "SE",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "lagarto_se",
+    "rnc": 127
+   },
+   {
+    "text": "Guarani Guarani Futebol Clube",
+    "shortName": "Guarani",
+    "state": "SP",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "guaranisp_bra",
+    "rnc": 45
+   },
+   {
+    "text": "Novorizontino Grêmio Novorizontino SAF",
+    "shortName": "Novorizontino",
+    "state": "SP",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "novorinzontino_sp",
+    "rnc": 32
+   },
+   {
+    "text": "Portuguesa Portuguesa Sociedade Anônima do Futebol",
+    "shortName": "Portuguesa",
+    "state": "SP",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "portuguesadesportos_bra",
+    "rnc": 121
+   },
+   {
+    "text": "Primavera Primavera Sociedade Anônima do Futebol",
+    "shortName": "Primavera",
+    "state": "SP",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": null
+   },
+   {
+    "text": "São Bernardo FC São Bernardo Futebol Clube Ltda",
+    "shortName": "São Bernardo",
+    "state": "SP",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "saobernardo_sp",
+    "rnc": 57
+   },
+   {
+    "text": "Velo Clube Associação Esportiva Velo Clube Rioclarense",
+    "shortName": "Velo",
+    "state": "SP",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "veloclube_bra",
+    "rnc": null
+   },
+   {
+    "text": "Araguaína Araguaína Futebol e Regatas",
+    "shortName": "Araguaína",
+    "state": "TO",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": "araguaina_bra",
+    "rnc": null
+   },
+   {
+    "text": "Capital Ricanato Futebol Clube (Capital Futebol Clube)",
+    "shortName": "Capital",
+    "state": "TO",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": 130
+   },
+   {
+    "text": "Tocantinópolis Tocantinópolis Esporte Clube",
+    "shortName": "Tocantinópolis",
+    "state": "TO",
+    "origin": "Estadual",
+    "criterion": 3,
+    "file": null,
+    "rnc": 71
+   }
+  ]
+ },
+ "rnc2026": {
+  "source": "https://stcbfsiteprdimgbrs.blob.core.windows.net/img-site/cdn/RNC_Ranking_Nacional_dos_Clubes_2026_27e24418e7.pdf",
+  "ranking": [
+   {
+    "position": 1,
+    "name": "Flamengo",
+    "state": "RJ",
+    "points": 16314,
+    "file": "flarj"
+   },
+   {
+    "position": 2,
+    "name": "Corinthians",
+    "state": "SP",
+    "points": 14930,
+    "file": "corinthians_bra"
+   },
+   {
+    "position": 3,
+    "name": "Palmeiras",
+    "state": "SP",
+    "points": 13860,
+    "file": "palmeiras"
+   },
+   {
+    "position": 4,
+    "name": "Atlético",
+    "state": "MG",
+    "points": 13696,
+    "file": "atleticomg_bra"
+   },
+   {
+    "position": 5,
+    "name": "São Paulo",
+    "state": "SP",
+    "points": 13556,
+    "file": "saopaulo_bra"
+   },
+   {
+    "position": 6,
+    "name": "Fluminense",
+    "state": "RJ",
+    "points": 13006,
+    "file": "flurj"
+   },
+   {
+    "position": 7,
+    "name": "Botafogo",
+    "state": "RJ",
+    "points": 12834,
+    "file": "botafogorj_bra"
+   },
+   {
+    "position": 8,
+    "name": "Athletico",
+    "state": "PR",
+    "points": 12656,
+    "file": "atleticopr_bra"
+   },
+   {
+    "position": 9,
+    "name": "Bahia",
+    "state": "BA",
+    "points": 12632,
+    "file": "bahia"
+   },
+   {
+    "position": 10,
+    "name": "Vasco da Gama",
+    "state": "RJ",
+    "points": 11330,
+    "file": "vasco"
+   },
+   {
+    "position": 11,
+    "name": "Cruzeiro",
+    "state": "MG",
+    "points": 11010,
+    "file": "cruzeiro_bra"
+   },
+   {
+    "position": 12,
+    "name": "Grêmio",
+    "state": "RS",
+    "points": 10636,
+    "file": "gremio"
+   },
+   {
+    "position": 13,
+    "name": "Fortaleza",
+    "state": "CE",
+    "points": 10382,
+    "file": "fortaleza"
+   },
+   {
+    "position": 14,
+    "name": "Internacional",
+    "state": "RS",
+    "points": 10014,
+    "file": "internacional_bra"
+   },
+   {
+    "position": 15,
+    "name": "Red Bull Bragantino",
+    "state": "SP",
+    "points": 9802,
+    "file": "bragantino_bra"
+   },
+   {
+    "position": 16,
+    "name": "Santos",
+    "state": "SP",
+    "points": 8852,
+    "file": "santos"
+   },
+   {
+    "position": 17,
+    "name": "Juventude",
+    "state": "RS",
+    "points": 8426,
+    "file": "juventude"
+   },
+   {
+    "position": 18,
+    "name": "Atlético",
+    "state": "GO",
+    "points": 7476,
+    "file": "atleticogo_bra"
+   },
+   {
+    "position": 19,
+    "name": "América",
+    "state": "MG",
+    "points": 7429,
+    "file": "americamg_bra"
+   },
+   {
+    "position": 20,
+    "name": "Vitória",
+    "state": "BA",
+    "points": 7205,
+    "file": "vitoria"
+   },
+   {
+    "position": 21,
+    "name": "Ceará",
+    "state": "CE",
+    "points": 7122,
+    "file": "ceara_bra"
+   },
+   {
+    "position": 22,
+    "name": "Cuiabá",
+    "state": "MT",
+    "points": 6746,
+    "file": "cuiaba_bra"
+   },
+   {
+    "position": 23,
+    "name": "Goiás",
+    "state": "GO",
+    "points": 6463,
+    "file": "goias"
+   },
+   {
+    "position": 24,
+    "name": "Coritiba",
+    "state": "PR",
+    "points": 6381,
+    "file": "coritiba_bra"
+   },
+   {
+    "position": 25,
+    "name": "Sport",
+    "state": "PE",
+    "points": 6340,
+    "file": "sport"
+   },
+   {
+    "position": 26,
+    "name": "CRB",
+    "state": "AL",
+    "points": 6150,
+    "file": "crb_bra"
+   },
+   {
+    "position": 27,
+    "name": "Criciúma",
+    "state": "SC",
+    "points": 6090,
+    "file": "criciuma_bra"
+   },
+   {
+    "position": 28,
+    "name": "Mirassol",
+    "state": "SP",
+    "points": 5537,
+    "file": "miirassol_sp"
+   },
+   {
+    "position": 29,
+    "name": "Vila Nova",
+    "state": "GO",
+    "points": 4750,
+    "file": "vilago"
+   },
+   {
+    "position": 30,
+    "name": "Operário",
+    "state": "PR",
+    "points": 4525,
+    "file": "operario_pr"
+   },
+   {
+    "position": 31,
+    "name": "Avaí",
+    "state": "SC",
+    "points": 4491,
+    "file": "avai_bra"
+   },
+   {
+    "position": 32,
+    "name": "Novorizontino",
+    "state": "SP",
+    "points": 4436,
+    "file": "novorinzontino_sp"
+   },
+   {
+    "position": 33,
+    "name": "Chapecoense",
+    "state": "SC",
+    "points": 4277,
+    "file": "chapecoense_bra"
+   },
+   {
+    "position": 34,
+    "name": "Botafogo",
+    "state": "SP",
+    "points": 4036,
+    "file": "botafogosp_bra"
+   },
+   {
+    "position": 35,
+    "name": "Paysandu",
+    "state": "PA",
+    "points": 4030,
+    "file": "paysandu"
+   },
+   {
+    "position": 36,
+    "name": "Brusque",
+    "state": "SC",
+    "points": 3807,
+    "file": "brusquesc_bra"
+   },
+   {
+    "position": 37,
+    "name": "Remo",
+    "state": "PA",
+    "points": 3764,
+    "file": "remo"
+   },
+   {
+    "position": 38,
+    "name": "Ponte Preta",
+    "state": "SP",
+    "points": 3743,
+    "file": "pontepreta_bra"
+   },
+   {
+    "position": 39,
+    "name": "CSA",
+    "state": "AL",
+    "points": 3736,
+    "file": "csa_bra"
+   },
+   {
+    "position": 40,
+    "name": "Amazonas",
+    "state": "AM",
+    "points": 3403,
+    "file": "amazonas_am"
+   },
+   {
+    "position": 41,
+    "name": "Ituano",
+    "state": "SP",
+    "points": 3380,
+    "file": "ituano_sp"
+   },
+   {
+    "position": 42,
+    "name": "Tombense",
+    "state": "MG",
+    "points": 3240,
+    "file": "tombense_mg"
+   },
+   {
+    "position": 43,
+    "name": "Volta Redonda",
+    "state": "RJ",
+    "points": 3210,
+    "file": "voltaredondarj_bra"
+   },
+   {
+    "position": 44,
+    "name": "Náutico",
+    "state": "PE",
+    "points": 3200,
+    "file": "nautico"
+   },
+   {
+    "position": 45,
+    "name": "Guarani",
+    "state": "SP",
+    "points": 3186,
+    "file": "guaranisp_bra"
+   },
+   {
+    "position": 46,
+    "name": "ABC",
+    "state": "RN",
+    "points": 3008,
+    "file": "abcrn_bra"
+   },
+   {
+    "position": 47,
+    "name": "Sampaio Corrêa",
+    "state": "MA",
+    "points": 2908,
+    "file": "samapaiocorrea_ma"
+   },
+   {
+    "position": 48,
+    "name": "Londrina",
+    "state": "PR",
+    "points": 2865,
+    "file": "londrina_pr"
+   },
+   {
+    "position": 49,
+    "name": "Retrô",
+    "state": "PE",
+    "points": 2707,
+    "file": "retrope_bra"
+   },
+   {
+    "position": 50,
+    "name": "Ypiranga",
+    "state": "RS",
+    "points": 2686,
+    "file": "ypiranga_rs"
+   },
+   {
+    "position": 51,
+    "name": "Athletic",
+    "state": "MG",
+    "points": 2570,
+    "file": "athleticclub_mg"
+   },
+   {
+    "position": 52,
+    "name": "Botafogo",
+    "state": "PB",
+    "points": 2529,
+    "file": "botafogopb_bra"
+   },
+   {
+    "position": 53,
+    "name": "Confiança",
+    "state": "SE",
+    "points": 2363,
+    "file": "confianca_se"
+   },
+   {
+    "position": 54,
+    "name": "Ferroviária",
+    "state": "SP",
+    "points": 2201,
+    "file": "ferroviaria_sp"
+   },
+   {
+    "position": 55,
+    "name": "Aparecidense",
+    "state": "GO",
+    "points": 2091,
+    "file": "aparecidense_go"
+   },
+   {
+    "position": 56,
+    "name": "Maringá",
+    "state": "PR",
+    "points": 2086,
+    "file": "maringapr"
+   },
+   {
+    "position": 57,
+    "name": "São Bernardo FC",
+    "state": "SP",
+    "points": 2061,
+    "file": "saobernardo_sp"
+   },
+   {
+    "position": 58,
+    "name": "Caxias",
+    "state": "RS",
+    "points": 2051,
+    "file": "caxias"
+   },
+   {
+    "position": 59,
+    "name": "Figueirense",
+    "state": "SC",
+    "points": 1983,
+    "file": "figueirense"
+   },
+   {
+    "position": 60,
+    "name": "Ferroviário",
+    "state": "CE",
+    "points": 1916,
+    "file": "ferroviarioce_bra"
+   },
+   {
+    "position": 61,
+    "name": "Floresta",
+    "state": "CE",
+    "points": 1838,
+    "file": "florestace"
+   },
+   {
+    "position": 62,
+    "name": "América",
+    "state": "RN",
+    "points": 1818,
+    "file": "americarn"
+   },
+   {
+    "position": 63,
+    "name": "São José",
+    "state": "RS",
+    "points": 1741,
+    "file": "saojosers_bra"
+   },
+   {
+    "position": 64,
+    "name": "Manaus",
+    "state": "AM",
+    "points": 1697,
+    "file": "manaus_bra"
+   },
+   {
+    "position": 65,
+    "name": "Altos",
+    "state": "PI",
+    "points": 1575,
+    "file": "altos_pi"
+   },
+   {
+    "position": 66,
+    "name": "Nova Iguaçu",
+    "state": "RJ",
+    "points": 1566,
+    "file": "novaiguacu_rj"
+   },
+   {
+    "position": 67,
+    "name": "Águia de Marabá",
+    "state": "PA",
+    "points": 1437,
+    "file": "aguiapa_bra"
+   },
+   {
+    "position": 68,
+    "name": "Brasil",
+    "state": "RS",
+    "points": 1434,
+    "file": "gremioesportivobrasil_bra"
+   },
+   {
+    "position": 69,
+    "name": "Anápolis",
+    "state": "GO",
+    "points": 1404,
+    "file": "anapolisgo_bra"
+   },
+   {
+    "position": 70,
+    "name": "Sousa",
+    "state": "PB",
+    "points": 1394,
+    "file": "sousapb_bra"
+   },
+   {
+    "position": 71,
+    "name": "Tocantinópolis",
+    "state": "TO",
+    "points": 1297,
+    "file": null
+   },
+   {
+    "position": 72,
+    "name": "FC Cascavel",
+    "state": "PR",
+    "points": 1271,
+    "file": "cascavel_pr"
+   },
+   {
+    "position": 73,
+    "name": "Brasiliense",
+    "state": "DF",
+    "points": 1242,
+    "file": null
+   },
+   {
+    "position": 74,
+    "name": "ASA",
+    "state": "AL",
+    "points": 1239,
+    "file": "asaarapiracaal_bra"
+   },
+   {
+    "position": 75,
+    "name": "Porto Velho",
+    "state": "RO",
+    "points": 1185,
+    "file": null
+   },
+   {
+    "position": 76,
+    "name": "Pouso Alegre",
+    "state": "MG",
+    "points": 1168,
+    "file": "pousoalegre_mg"
+   },
+   {
+    "position": 77,
+    "name": "Ceilândia",
+    "state": "DF",
+    "points": 1131,
+    "file": null
+   },
+   {
+    "position": 78,
+    "name": "Portuguesa",
+    "state": "RJ",
+    "points": 1101,
+    "file": "portuguesarj_bra"
+   },
+   {
+    "position": 79,
+    "name": "Inter de Limeira",
+    "state": "SP",
+    "points": 1070,
+    "file": "aainternacionaldelimeira_bra"
+   },
+   {
+    "position": 80,
+    "name": "Humaitá",
+    "state": "AC",
+    "points": 1064,
+    "file": null
+   },
+   {
+    "position": 80,
+    "name": "Trem",
+    "state": "AP",
+    "points": 1064,
+    "file": "trem_bra"
+   },
+   {
+    "position": 82,
+    "name": "Sergipe",
+    "state": "SE",
+    "points": 1045,
+    "file": "sergipe_se"
+   },
+   {
+    "position": 83,
+    "name": "Juazeirense",
+    "state": "BA",
+    "points": 1016,
+    "file": "juazeirense_ba"
+   },
+   {
+    "position": 84,
+    "name": "Itabaiana",
+    "state": "SE",
+    "points": 1011,
+    "file": "itabaiana_se"
+   },
+   {
+    "position": 85,
+    "name": "Maranhão",
+    "state": "MA",
+    "points": 1001,
+    "file": "maranhao_ma"
+   },
+   {
+    "position": 86,
+    "name": "Santa Cruz",
+    "state": "PE",
+    "points": 979,
+    "file": "santa"
+   },
+   {
+    "position": 87,
+    "name": "Tuna Luso",
+    "state": "PA",
+    "points": 978,
+    "file": "tunaluso_pa"
+   },
+   {
+    "position": 88,
+    "name": "São Raimundo",
+    "state": "RR",
+    "points": 965,
+    "file": null
+   },
+   {
+    "position": 89,
+    "name": "Maracanã",
+    "state": "CE",
+    "points": 959,
+    "file": "maracana_ce"
+   },
+   {
+    "position": 90,
+    "name": "Cianorte",
+    "state": "PR",
+    "points": 940,
+    "file": "cianorte_pr"
+   },
+   {
+    "position": 91,
+    "name": "Iguatu",
+    "state": "CE",
+    "points": 926,
+    "file": "iguatu_ce"
+   },
+   {
+    "position": 92,
+    "name": "União",
+    "state": "MT",
+    "points": 793,
+    "file": "uniaorondonopolis_mt"
+   },
+   {
+    "position": 93,
+    "name": "Operário",
+    "state": "MS",
+    "points": 783,
+    "file": null
+   },
+   {
+    "position": 94,
+    "name": "Jacuipense",
+    "state": "BA",
+    "points": 756,
+    "file": "jacuipense_bra"
+   },
+   {
+    "position": 95,
+    "name": "Capital",
+    "state": "DF",
+    "points": 755,
+    "file": "capitalbrasilia_bra"
+   },
+   {
+    "position": 96,
+    "name": "Real Noroeste",
+    "state": "ES",
+    "points": 754,
+    "file": null
+   },
+   {
+    "position": 97,
+    "name": "Fluminense",
+    "state": "PI",
+    "points": 734,
+    "file": "fluminensepi_bra"
+   },
+   {
+    "position": 98,
+    "name": "São Luiz",
+    "state": "RS",
+    "points": 707,
+    "file": "saoluiz_rs"
+   },
+   {
+    "position": 99,
+    "name": "Barra",
+    "state": "SC",
+    "points": 704,
+    "file": "barra_sc"
+   },
+   {
+    "position": 100,
+    "name": "Treze",
+    "state": "PB",
+    "points": 703,
+    "file": "trezepb_bra"
+   },
+   {
+    "position": 101,
+    "name": "Atlético",
+    "state": "CE",
+    "points": 679,
+    "file": "atleticoce_bra"
+   },
+   {
+    "position": 102,
+    "name": "Operário",
+    "state": "MT",
+    "points": 667,
+    "file": "operariovg_mt"
+   },
+   {
+    "position": 103,
+    "name": "Manauara",
+    "state": "AM",
+    "points": 665,
+    "file": null
+   },
+   {
+    "position": 104,
+    "name": "Água Santa",
+    "state": "SP",
+    "points": 659,
+    "file": "aguasantasp_bra"
+   },
+   {
+    "position": 105,
+    "name": "Marcílio Dias",
+    "state": "SC",
+    "points": 658,
+    "file": "marciliodiassc_bra"
+   },
+   {
+    "position": 106,
+    "name": "Moto Club",
+    "state": "MA",
+    "points": 615,
+    "file": "motoclubma_bra"
+   },
+   {
+    "position": 107,
+    "name": "Parnahyba",
+    "state": "PI",
+    "points": 608,
+    "file": null
+   },
+   {
+    "position": 108,
+    "name": "Concórdia",
+    "state": "SC",
+    "points": 607,
+    "file": "concordiasc_bra"
+   },
+   {
+    "position": 109,
+    "name": "Campinense",
+    "state": "PB",
+    "points": 599,
+    "file": "campinensepb_bra"
+   },
+   {
+    "position": 110,
+    "name": "Santa Cruz",
+    "state": "RN",
+    "points": 584,
+    "file": "santacruzrn"
+   },
+   {
+    "position": 111,
+    "name": "Azuriz",
+    "state": "PR",
+    "points": 559,
+    "file": "azurizpr_bra"
+   },
+   {
+    "position": 112,
+    "name": "Rio Branco",
+    "state": "ES",
+    "points": 536,
+    "file": null
+   },
+   {
+    "position": 113,
+    "name": "Boavista",
+    "state": "RJ",
+    "points": 531,
+    "file": "boavista_bra"
+   },
+   {
+    "position": 113,
+    "name": "GAS",
+    "state": "RR",
+    "points": 531,
+    "file": null
+   },
+   {
+    "position": 115,
+    "name": "Santo André",
+    "state": "SP",
+    "points": 510,
+    "file": "santoandre_sp"
+   },
+   {
+    "position": 116,
+    "name": "Guarany de Bagé",
+    "state": "RS",
+    "points": 505,
+    "file": "guaranyrs_bra"
+   },
+   {
+    "position": 116,
+    "name": "União",
+    "state": "TO",
+    "points": 505,
+    "file": null
+   },
+   {
+    "position": 118,
+    "name": "Bahia de Feira",
+    "state": "BA",
+    "points": 501,
+    "file": "bahiafeira_ba"
+   },
+   {
+    "position": 119,
+    "name": "Mixto",
+    "state": "MT",
+    "points": 494,
+    "file": null
+   },
+   {
+    "position": 120,
+    "name": "Rio Branco",
+    "state": "AC",
+    "points": 482,
+    "file": null
+   },
+   {
+    "position": 121,
+    "name": "Portuguesa",
+    "state": "SP",
+    "points": 461,
+    "file": "portuguesadesportos_bra"
+   },
+   {
+    "position": 122,
+    "name": "Iporá",
+    "state": "GO",
+    "points": 459,
+    "file": "iporago_bra"
+   },
+   {
+    "position": 123,
+    "name": "Atlético",
+    "state": "BA",
+    "points": 456,
+    "file": "atleticoalagoinhas_bra"
+   },
+   {
+    "position": 123,
+    "name": "Costa Rica",
+    "state": "MS",
+    "points": 456,
+    "file": null
+   },
+   {
+    "position": 126,
+    "name": "Patrocinense",
+    "state": "MG",
+    "points": 438,
+    "file": "patrocinense_mg"
+   },
+   {
+    "position": 127,
+    "name": "Lagarto",
+    "state": "SE",
+    "points": 435,
+    "file": "lagarto_se"
+   },
+   {
+    "position": 128,
+    "name": "CSE",
+    "state": "AL",
+    "points": 431,
+    "file": "cseal_bra"
+   },
+   {
+    "position": 129,
+    "name": "Real Brasília",
+    "state": "DF",
+    "points": 429,
+    "file": null
+   },
+   {
+    "position": 130,
+    "name": "Petrolina",
+    "state": "PE",
+    "points": 404,
+    "file": null
+   },
+   {
+    "position": 130,
+    "name": "Capital",
+    "state": "TO",
+    "points": 404,
+    "file": null
+   },
+   {
+    "position": 132,
+    "name": "Barcelona",
+    "state": "BA",
+    "points": 380,
+    "file": "barcelonaba_bra"
+   },
+   {
+    "position": 132,
+    "name": "Jequié",
+    "state": "BA",
+    "points": 380,
+    "file": null
+   },
+   {
+    "position": 132,
+    "name": "Independência",
+    "state": "AC",
+    "points": 380,
+    "file": null
+   },
+   {
+    "position": 135,
+    "name": "Hercílio Luz",
+    "state": "SC",
+    "points": 372,
+    "file": "hercilioluzsc_bra"
+   },
+   {
+    "position": 136,
+    "name": "Joinville",
+    "state": "SC",
+    "points": 370,
+    "file": "joinville"
+   },
+   {
+    "position": 137,
+    "name": "Potiguar",
+    "state": "RN",
+    "points": 366,
+    "file": "potiguar_bra"
+   },
+   {
+    "position": 138,
+    "name": "CRAC",
+    "state": "GO",
+    "points": 361,
+    "file": "cracgo_bra"
+   },
+   {
+    "position": 139,
+    "name": "Novo Hamburgo",
+    "state": "RS",
+    "points": 357,
+    "file": "novohamburgo_bra"
+   },
+   {
+    "position": 140,
+    "name": "Globo",
+    "state": "RN",
+    "points": 355,
+    "file": "globo_fc"
+   },
+   {
+    "position": 141,
+    "name": "Central",
+    "state": "PE",
+    "points": 351,
+    "file": "central_bra"
+   },
+   {
+    "position": 142,
+    "name": "Olaria",
+    "state": "RJ",
+    "points": 350,
+    "file": null
+   },
+   {
+    "position": 143,
+    "name": "Uberlândia",
+    "state": "MG",
+    "points": 347,
+    "file": "uberlandia_ec"
+   },
+   {
+    "position": 144,
+    "name": "Imperatriz",
+    "state": "MA",
+    "points": 346,
+    "file": "imperatriz_ma"
+   },
+   {
+    "position": 145,
+    "name": "Goianésia",
+    "state": "GO",
+    "points": 331,
+    "file": "goianesiago_bra"
+   },
+   {
+    "position": 146,
+    "name": "Goiatuba",
+    "state": "GO",
+    "points": 330,
+    "file": "goiatubago_bra"
+   },
+   {
+    "position": 147,
+    "name": "Rio Branco VN",
+    "state": "ES",
+    "points": 326,
+    "file": null
+   },
+   {
+    "position": 148,
+    "name": "Camboriú",
+    "state": "SC",
+    "points": 324,
+    "file": "camboriu_sc"
+   },
+   {
+    "position": 149,
+    "name": "Nova Venécia",
+    "state": "ES",
+    "points": 320,
+    "file": null
+   },
+   {
+    "position": 150,
+    "name": "Itabuna",
+    "state": "BA",
+    "points": 316,
+    "file": null
+   },
+   {
+    "position": 151,
+    "name": "Luverdense",
+    "state": "MT",
+    "points": 315,
+    "file": "luverdensemt_bra"
+   },
+   {
+    "position": 152,
+    "name": "Aimoré",
+    "state": "RS",
+    "points": 314,
+    "file": "aimorers_bra"
+   },
+   {
+    "position": 153,
+    "name": "Maricá",
+    "state": "RJ",
+    "points": 305,
+    "file": null
+   },
+   {
+    "position": 153,
+    "name": "Paraná",
+    "state": "PR",
+    "points": 305,
+    "file": "parana"
+   },
+   {
+    "position": 155,
+    "name": "Audax Rio",
+    "state": "RJ",
+    "points": 304,
+    "file": null
+   },
+   {
+    "position": 155,
+    "name": "River",
+    "state": "PI",
+    "points": 304,
+    "file": null
+   },
+   {
+    "position": 157,
+    "name": "Caucaia",
+    "state": "CE",
+    "points": 279,
+    "file": "caucaiace_bra"
+   },
+   {
+    "position": 158,
+    "name": "Murici",
+    "state": "AL",
+    "points": 276,
+    "file": "muricial"
+   },
+   {
+    "position": 159,
+    "name": "Quatro de Julho",
+    "state": "PI",
+    "points": 264,
+    "file": null
+   },
+   {
+    "position": 160,
+    "name": "Oeste",
+    "state": "SP",
+    "points": 260,
+    "file": "oestesp_bra"
+   },
+   {
+    "position": 161,
+    "name": "Monte Azul",
+    "state": "SP",
+    "points": 255,
+    "file": null
+   },
+   {
+    "position": 161,
+    "name": "Itabirito",
+    "state": "MG",
+    "points": 255,
+    "file": null
+   },
+   {
+    "position": 161,
+    "name": "Horizonte",
+    "state": "CE",
+    "points": 255,
+    "file": null
+   },
+   {
+    "position": 161,
+    "name": "Pacajus",
+    "state": "CE",
+    "points": 255,
+    "file": "pacajusce_bra"
+   },
+   {
+    "position": 161,
+    "name": "Goiânia",
+    "state": "GO",
+    "points": 255,
+    "file": null
+   },
+   {
+    "position": 161,
+    "name": "Penedense",
+    "state": "AL",
+    "points": 255,
+    "file": null
+   },
+   {
+    "position": 161,
+    "name": "Porto Vitória",
+    "state": "ES",
+    "points": 255,
+    "file": null
+   },
+   {
+    "position": 168,
+    "name": "Caldense",
+    "state": "MG",
+    "points": 253,
+    "file": "caldense_bra"
+   },
+   {
+    "position": 169,
+    "name": "Real Ariquemes",
+    "state": "RO",
+    "points": 238,
+    "file": null
+   },
+   {
+    "position": 170,
+    "name": "Castanhal",
+    "state": "PA",
+    "points": 234,
+    "file": "castanhalpa_bra"
+   },
+   {
+    "position": 172,
+    "name": "Nova Mutum",
+    "state": "MT",
+    "points": 229,
+    "file": "novamutum_mt"
+   },
+   {
+    "position": 173,
+    "name": "Resende",
+    "state": "RJ",
+    "points": 228,
+    "file": "resenderj_bra"
+   },
+   {
+    "position": 173,
+    "name": "Cordino",
+    "state": "MA",
+    "points": 228,
+    "file": "cordino_ma"
+   },
+   {
+    "position": 173,
+    "name": "Falcon",
+    "state": "SE",
+    "points": 228,
+    "file": null
+   },
+   {
+    "position": 173,
+    "name": "Vitória",
+    "state": "ES",
+    "points": 228,
+    "file": null
+   },
+   {
+    "position": 173,
+    "name": "São Francisco",
+    "state": "AC",
+    "points": 228,
+    "file": null
+   },
+   {
+    "position": 178,
+    "name": "São José",
+    "state": "SP",
+    "points": 204,
+    "file": null
+   },
+   {
+    "position": 178,
+    "name": "Democrata SL",
+    "state": "MG",
+    "points": 204,
+    "file": null
+   },
+   {
+    "position": 178,
+    "name": "ipatinga",
+    "state": "MG",
+    "points": 204,
+    "file": null
+   },
+   {
+    "position": 178,
+    "name": "Avenida",
+    "state": "RS",
+    "points": 204,
+    "file": null
+   },
+   {
+    "position": 178,
+    "name": "Cametá",
+    "state": "PA",
+    "points": 204,
+    "file": null
+   },
+   {
+    "position": 178,
+    "name": "Serra",
+    "state": "ES",
+    "points": 204,
+    "file": null
+   },
+   {
+    "position": 184,
+    "name": "Villa Nova",
+    "state": "MG",
+    "points": 200,
+    "file": "villanovamg"
+   },
+   {
+    "position": 185,
+    "name": "Nacional",
+    "state": "AM",
+    "points": 195,
+    "file": "nacional_am"
+   },
+   {
+    "position": 186,
+    "name": "Nacional",
+    "state": "PB",
+    "points": 180,
+    "file": "nacional_pb"
+   },
+   {
+    "position": 187,
+    "name": "Juventude",
+    "state": "MA",
+    "points": 178,
+    "file": "juventudema_bra"
+   },
+   {
+    "position": 188,
+    "name": "Tuntum",
+    "state": "MA",
+    "points": 175,
+    "file": "tuntumma_bra"
+   },
+   {
+    "position": 189,
+    "name": "XV de Piracicaba",
+    "state": "SP",
+    "points": 153,
+    "file": null
+   },
+   {
+    "position": 189,
+    "name": "Sãojoseense",
+    "state": "PR",
+    "points": 153,
+    "file": "independente_pr"
+   },
+   {
+    "position": 189,
+    "name": "Juventus",
+    "state": "SC",
+    "points": 153,
+    "file": "juventussc_bra"
+   },
+   {
+    "position": 189,
+    "name": "Cruzeiro",
+    "state": "AL",
+    "points": 153,
+    "file": "cruzeiro_al"
+   },
+   {
+    "position": 189,
+    "name": "Interporto",
+    "state": "TO",
+    "points": 153,
+    "file": null
+   },
+   {
+    "position": 194,
+    "name": "URT",
+    "state": "MG",
+    "points": 152,
+    "file": "urt_bra"
+   },
+   {
+    "position": 194,
+    "name": "Icasa",
+    "state": "CE",
+    "points": 152,
+    "file": "icasa_ce"
+   },
+   {
+    "position": 194,
+    "name": "Grêmio Anápolis",
+    "state": "GO",
+    "points": 152,
+    "file": "gremioanapolisgo_bra"
+   },
+   {
+    "position": 194,
+    "name": "São Raimundo",
+    "state": "AM",
+    "points": 152,
+    "file": null
+   },
+   {
+    "position": 198,
+    "name": "Votuporanguense",
+    "state": "SP",
+    "points": 125,
+    "file": null
+   },
+   {
+    "position": 198,
+    "name": "Barcelona",
+    "state": "RO",
+    "points": 125,
+    "file": null
+   },
+   {
+    "position": 198,
+    "name": "Dourados",
+    "state": "MS",
+    "points": 125,
+    "file": null
+   },
+   {
+    "position": 198,
+    "name": "Oratório",
+    "state": "AP",
+    "points": 125,
+    "file": null
+   },
+   {
+    "position": 202,
+    "name": "Pérolas Negras",
+    "state": "RJ",
+    "points": 102,
+    "file": null
+   },
+   {
+    "position": 202,
+    "name": "Crato",
+    "state": "CE",
+    "points": 102,
+    "file": "crato_ce"
+   },
+   {
+    "position": 202,
+    "name": "Próspera",
+    "state": "SC",
+    "points": 102,
+    "file": "prospera_sc"
+   },
+   {
+    "position": 202,
+    "name": "Afogados",
+    "state": "PE",
+    "points": 102,
+    "file": "afogadospe_bra"
+   },
+   {
+    "position": 202,
+    "name": "Ação",
+    "state": "MT",
+    "points": 102,
+    "file": "acao_mt"
+   },
+   {
+    "position": 202,
+    "name": "São Paulo Crystal",
+    "state": "PB",
+    "points": 102,
+    "file": null
+   },
+   {
+    "position": 202,
+    "name": "Náutico",
+    "state": "RR",
+    "points": 102,
+    "file": null
+   },
+   {
+    "position": 209,
+    "name": "Portuguesa Santista",
+    "state": "SP",
+    "points": 100,
+    "file": null
+   },
+   {
+    "position": 209,
+    "name": "Marília",
+    "state": "SP",
+    "points": 100,
+    "file": null
+   },
+   {
+    "position": 209,
+    "name": "Glória",
+    "state": "RS",
+    "points": 100,
+    "file": null
+   },
+   {
+    "position": 209,
+    "name": "Ji-Paraná",
+    "state": "RO",
+    "points": 100,
+    "file": null
+   },
+   {
+    "position": 209,
+    "name": "Independente",
+    "state": "AP",
+    "points": 100,
+    "file": null
+   },
+   {
+    "position": 214,
+    "name": "Guarany de Sobral",
+    "state": "CE",
+    "points": 89,
+    "file": null
+   },
+   {
+    "position": 215,
+    "name": "Esportivo",
+    "state": "RS",
+    "points": 83,
+    "file": "esportivors_bra"
+   },
+   {
+    "position": 216,
+    "name": "Penarol",
+    "state": "AM",
+    "points": 77,
+    "file": "penarol_am"
+   },
+   {
+    "position": 217,
+    "name": "Madureira",
+    "state": "RJ",
+    "points": 76,
+    "file": "madureira_bra"
+   },
+   {
+    "position": 217,
+    "name": "Jaraguá",
+    "state": "GO",
+    "points": 76,
+    "file": null
+   },
+   {
+    "position": 217,
+    "name": "Gama",
+    "state": "DF",
+    "points": 76,
+    "file": "gama_bra"
+   },
+   {
+    "position": 217,
+    "name": "Palmas",
+    "state": "TO",
+    "points": 76,
+    "file": null
+   },
+   {
+    "position": 217,
+    "name": "Atlético",
+    "state": "AC",
+    "points": 76,
+    "file": null
+   },
+   {
+    "position": 217,
+    "name": "Galvez",
+    "state": "AC",
+    "points": 76,
+    "file": null
+   },
+   {
+    "position": 217,
+    "name": "Águia Negra",
+    "state": "MS",
+    "points": 76,
+    "file": null
+   },
+   {
+    "position": 217,
+    "name": "Ypiranga",
+    "state": "AP",
+    "points": 76,
+    "file": null
+   },
+   {
+    "position": 225,
+    "name": "Salgueiro",
+    "state": "PE",
+    "points": 75,
+    "file": "salgueirope_bra"
+   },
+   {
+    "position": 226,
+    "name": "Paragominas",
+    "state": "PA",
+    "points": 63,
+    "file": null
+   },
+   {
+    "position": 227,
+    "name": "Picos",
+    "state": "PI",
+    "points": 60,
+    "file": null
+   },
+   {
+    "position": 228,
+    "name": "São Bento",
+    "state": "SP",
+    "points": 51,
+    "file": "saobento_bra"
+   },
+   {
+    "position": 228,
+    "name": "Bangu",
+    "state": "RJ",
+    "points": 51,
+    "file": "bangu_bra"
+   },
+   {
+    "position": 228,
+    "name": "Boa Esporte",
+    "state": "MG",
+    "points": 51,
+    "file": null
+   },
+   {
+    "position": 228,
+    "name": "Rio Branco",
+    "state": "PR",
+    "points": 51,
+    "file": "riobranco_pr"
+   },
+   {
+    "position": 228,
+    "name": "Fast Clube",
+    "state": "AM",
+    "points": 51,
+    "file": null
+   },
+   {
+    "position": 233,
+    "name": "Santa Cruz",
+    "state": "RS",
+    "points": 25,
+    "file": null
+   },
+   {
+    "position": 234,
+    "name": "Aquidauanense",
+    "state": "MS",
+    "points": 10,
+    "file": null
+   },
+   {
+    "position": 234,
+    "name": "Santana",
+    "state": "AP",
+    "points": 10,
+    "file": null
+   }
+  ]
+ },
  "serieD": {
   "competitionId": "BRA_SERIE_D",
   "editionId": "BRA_SERIE_D_2026",

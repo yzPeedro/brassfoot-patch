@@ -3,6 +3,7 @@ package best;
 import c.a;
 import components.aD;
 import f.B;
+import f.f;
 import f.G;
 import f.s;
 import f.z;
@@ -412,6 +413,214 @@ public final class CompBrasil2026 {
             teams.addAll(ordered);
         } catch (Throwable error) {
             log("falha ao ordenar as divisoes oficiais", error);
+        }
+    }
+
+    private static final int COPA_FIRST_CODE = 26101;
+    private static final int COPA_FINAL_CODE = 2729;
+    private static final int COPA_PHASES = 9;
+    private static final String[] COPA_NAMES = {"1ª fase", "2ª fase", "3ª fase", "4ª fase", "5ª fase", "Oitavas",
+            "Quartas", "Semifinal", "Final"};
+    private static final int[] COPA_WAITING = {74, 4, 20};
+
+    private static ArrayList waitingList(f cup) throws Exception {
+        Field field = f.class.getDeclaredField("afU");
+        field.setAccessible(true);
+        ArrayList value = (ArrayList) field.get(cup);
+        if (value == null) {
+            value = new ArrayList();
+            field.set(cup, value);
+        }
+        return value;
+    }
+
+    private static ArrayList waiting(f cup, int group) throws Exception {
+        ArrayList all = waitingList(cup);
+        int start = 0;
+        for (int i = 0; i < group; i++) start += COPA_WAITING[i];
+        int end = start + COPA_WAITING[group];
+        if (all.size() < end) return new ArrayList();
+        return new ArrayList(all.subList(start, end));
+    }
+
+    private static boolean isCopa2026(f cup) {
+        z knockout = cup.yf();
+        return knockout != null && knockout.zf() == 2029 && knockout.zq() == COPA_PHASES - 1;
+    }
+
+    public static String[] copaNames(f cup) {
+        try {
+            return isCopa2026(cup) ? COPA_NAMES : null;
+        } catch (Throwable error) {
+            return null;
+        }
+    }
+
+    private static int rank(ah team) {
+        String file = team.jY();
+        String[] order = CompBrasil2026Data.RNC_FILES;
+        for (int i = 0; i < order.length; i++) {
+            if (order[i].equals(file)) return i;
+        }
+        return order.length;
+    }
+
+    private static void sortByRanking(ArrayList teams) {
+        ArrayList ranked = new ArrayList();
+        ArrayList unranked = new ArrayList();
+        for (int i = 0; i < teams.size(); i++) {
+            ah team = (ah) teams.get(i);
+            if (rank(team) < CompBrasil2026Data.RNC_FILES.length) ranked.add(team);
+            else unranked.add(team);
+        }
+        Collections.sort(ranked, new Comparator() {
+            public int compare(Object x, Object y) {
+                return rank((ah) x) - rank((ah) y);
+            }
+        });
+        teams.clear();
+        teams.addAll(ranked);
+        teams.addAll(unranked);
+    }
+
+    private static void addPair(ArrayList pairs, Object first, Object second) {
+        if (Math.random() < 0.5) {
+            pairs.add(first);
+            pairs.add(second);
+        } else {
+            pairs.add(second);
+            pairs.add(first);
+        }
+    }
+
+    public static boolean copa(f cup, ArrayList pool) {
+        try {
+            Z country = cup.yg();
+            if (country == null || country.jc() != BRAZIL || season() < 2026) return false;
+            ArrayList[] entries = a.SR.H() == 1 && a.SR.op() == 2026 ? copaOfficial(country, pool) : copaCareer(country, pool);
+            if (entries == null) {
+                log("Copa do Brasil sem participantes suficientes; formato original mantido", null);
+                return false;
+            }
+            ArrayList third = entries[2];
+            sortByRanking(third);
+            ArrayList firstPhase = new ArrayList(third.subList(third.size() - 28, third.size()));
+            ArrayList secondPhase = new ArrayList(third.subList(0, third.size() - 28));
+            ArrayList pairs = new ArrayList();
+            for (int i = 0; i < 14; i++) addPair(pairs, firstPhase.get(i), firstPhase.get(27 - i));
+            boolean[] legs = {false, false, false, false, true, true, true, true, false};
+            z knockout = new z(null, 128, 2, 0, legs, cup, 2029);
+            knockout.ff(COPA_PHASES);
+            cup.b(knockout);
+            ArrayList stored = waitingList(cup);
+            stored.clear();
+            stored.addAll(secondPhase);
+            stored.addAll(entries[1]);
+            stored.addAll(entries[0]);
+            G round = new G();
+            round.a(knockout, pairs, 1, false, 0, 0, 2, false);
+            round.fb(COPA_FIRST_CODE);
+            return true;
+        } catch (Throwable error) {
+            log("falha ao montar a Copa do Brasil", error);
+            return false;
+        }
+    }
+
+    private static ArrayList[] copaOfficial(Z country, ArrayList pool) {
+        ArrayList[] entries = {new ArrayList(), new ArrayList(), new ArrayList()};
+        HashSet used = new HashSet();
+        String[] files = CompBrasil2026Data.COPA_FILES;
+        int[] criteria = CompBrasil2026Data.COPA_CRITERIA;
+        ArrayList missing = new ArrayList();
+        for (int i = 0; i < files.length; i++) {
+            ah team = byFile(country, files[i]);
+            if (team != null && used.add(team)) entries[criteria[i] - 1].add(team);
+            else missing.add(new int[]{criteria[i], stateIndex(CompBrasil2026Data.COPA_STATES[i])});
+        }
+        for (int i = 0; i < missing.size(); i++) {
+            int[] slot = (int[]) missing.get(i);
+            ah substitute = substitute(pool, used, slot[1]);
+            if (substitute == null) return null;
+            used.add(substitute);
+            entries[slot[0] - 1].add(substitute);
+        }
+        if (!missing.isEmpty()) log(missing.size() + " vagas da Copa do Brasil sem clube no jogo, completadas por clubes do mesmo estado", null);
+        return entries[0].size() == 20 && entries[1].size() == 4 && entries[2].size() == 102 ? entries : null;
+    }
+
+    private static ArrayList[] copaCareer(Z country, ArrayList pool) {
+        ArrayList[] entries = {new ArrayList(), new ArrayList(), new ArrayList()};
+        HashSet used = new HashSet();
+        ArrayList divisions = country.eb();
+        ArrayList serieA = ((B) divisions.get(0)).yi().yK();
+        for (int i = 0; i < serieA.size() && entries[0].size() < 20; i++) {
+            if (used.add(serieA.get(i))) entries[0].add(serieA.get(i));
+        }
+        at[] regional = a.SR.bV();
+        at[] sources = {regional != null && regional.length > 2 ? regional[2] : null,
+                regional != null && regional.length > 3 ? regional[3] : null,
+                divisions.size() > 2 ? (at) divisions.get(2) : null,
+                divisions.size() > 3 ? (at) divisions.get(3) : null};
+        for (int i = 0; i < sources.length; i++) {
+            if (sources[i] == null) continue;
+            ah champion = i < 2 ? sources[i].cS() : sources[i].cv(a.SR.H() - 1);
+            if (champion != null && used.add(champion)) entries[1].add(champion);
+        }
+        ArrayList ranking = a.SR.bx();
+        String[] rnf = CompBrasil2026Data.RNF_2026;
+        for (int r = 0; r < rnf.length; r++) {
+            int slots = r <= 1 ? 6 : r <= 4 ? 5 : r <= 13 ? 4 : 3;
+            int state = stateIndex(rnf[r]);
+            for (int i = 0; i < ranking.size() && slots > 0; i++) {
+                aD entry = (aD) ranking.get(i);
+                ah team = entry.vD();
+                if (entry.getEstado() == state && team != null && used.add(team)) {
+                    entries[2].add(team);
+                    slots--;
+                }
+            }
+        }
+        for (int i = 0; i < pool.size() && entries[1].size() < 4; i++) {
+            if (used.add(pool.get(i))) entries[1].add(pool.get(i));
+        }
+        for (int i = 0; i < pool.size() && entries[2].size() < 102; i++) {
+            if (used.add(pool.get(i))) entries[2].add(pool.get(i));
+        }
+        return entries[0].size() == 20 && entries[1].size() == 4 && entries[2].size() == 102 ? entries : null;
+    }
+
+    public static void afterTie(G round) {
+        try {
+            int code = round.ze();
+            if (code < COPA_FIRST_CODE || code >= COPA_FIRST_CODE + COPA_PHASES - 1) return;
+            z knockout = round.zT();
+            if (knockout == null || !(knockout.yT() instanceof f)) return;
+            f cup = (f) knockout.yT();
+            int phase = code - COPA_FIRST_CODE + 1;
+            ArrayList next = new ArrayList(round.zY());
+            if (phase == 4) {
+                next.addAll(waiting(cup, 2));
+                sortByRanking(next);
+                ArrayList top = new ArrayList(next.subList(0, next.size() / 2));
+                ArrayList bottom = new ArrayList(next.subList(next.size() / 2, next.size()));
+                Collections.shuffle(top);
+                Collections.shuffle(bottom);
+                next = new ArrayList();
+                for (int i = 0; i < top.size(); i++) addPair(next, top.get(i), bottom.get(i));
+                waitingList(cup).clear();
+            } else if (phase != 7) {
+                if (phase <= 2) next.addAll(waiting(cup, phase - 1));
+                Collections.shuffle(next);
+            }
+            int nextPhase = phase + 1;
+            boolean twoLegs = nextPhase >= 5 && nextPhase <= 8;
+            G following = new G();
+            following.a(knockout, next, Math.min(nextPhase, 8), twoLegs, 0, 0, 2, false);
+            following.fb(nextPhase == COPA_PHASES ? COPA_FINAL_CODE : COPA_FIRST_CODE + nextPhase - 1);
+            knockout.BH();
+        } catch (Throwable error) {
+            log("falha ao avancar a Copa do Brasil", error);
         }
     }
 

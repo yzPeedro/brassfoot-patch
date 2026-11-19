@@ -90,6 +90,7 @@ public final class CompHarness {
         File game = new File(args[0]).getCanonicalFile();
         int seasons = Integer.parseInt(args[1]);
         int startYear = Integer.parseInt(args[2]);
+        int reloadAt = args.length > 4 ? Integer.parseInt(args[4]) : -1;
         System.setProperty("user.dir", game.getPath());
         out = System.out;
         System.setOut(new PrintStream(new FileOutputStream(new File(game, "harness-game-stdout.log")), true, "UTF-8"));
@@ -111,7 +112,7 @@ public final class CompHarness {
         best.p.dh();
         c.a.SR.az();
         sizes("criacao");
-        if (args.length > 3) {
+        if (args.length > 3 && !args[3].isEmpty()) {
             PrintStream members = new PrintStream(new FileOutputStream(args[3]), true, "UTF-8");
             ArrayList divisions = c.a.SR.o(29).eb();
             for (int i = 0; i < divisions.size(); i++) {
@@ -126,6 +127,7 @@ public final class CompHarness {
                 while (!c.a.SR.bk && steps < 5000) {
                     c.a.SR.V();
                     steps++;
+                    if (season == 0 && steps == reloadAt) reload(year);
                 }
             } catch (Throwable error) {
                 error.printStackTrace(out);
@@ -143,6 +145,7 @@ public final class CompHarness {
                 out.println("campeao " + year + " divisao " + (i + 1) + ": " + (champion == null ? "nenhum" : champion.getNome()));
             }
             serieB(year, (f.B) divisions.get(1));
+            copa(year, brazil.jq());
             List<ah> promotedD = serieD(year, (f.B) divisions.get(3));
             ArrayList<ah> cRelegated = new ArrayList<ah>();
             c.a.SR.V();
@@ -158,6 +161,20 @@ public final class CompHarness {
         }
         out.println("falhas=" + failures);
         System.exit(failures == 0 ? 0 : 1);
+    }
+
+    private static void reload(int year) {
+        int teams = c.a.SR.P().size();
+        f.f cupBefore = c.a.SR.o(29).jq();
+        int copaPhase = cupBefore == null || cupBefore.yf() == null ? -1 : cupBefore.yf().zb();
+        int dTeams = ((f.B) c.a.SR.o(29).eb().get(3)).yi().yK().size();
+        c.a.ae("comp-harness");
+        boolean loaded = c.a.c("comp-harness", false);
+        f.f cup = c.a.SR.o(29).jq();
+        int copaAfter = cup == null || cup.yf() == null ? -1 : cup.yf().zb();
+        int dAfter = ((f.B) c.a.SR.o(29).eb().get(3)).yi().yK().size();
+        check(loaded && c.a.SR.P().size() == teams, year + ": save gravado e recarregado no meio da temporada (" + teams + " clubes)");
+        check(copaPhase == copaAfter && dTeams == dAfter, year + ": apos recarregar, Copa na fase " + copaAfter + " (antes " + copaPhase + ") e Serie D com " + dAfter + " clubes (antes " + dTeams + ")");
     }
 
     private static void diagnose() {
@@ -209,6 +226,29 @@ public final class CompHarness {
             total += round.zW().size() + (round.zX() == null ? 0 : round.zX().size());
         }
         return total;
+    }
+
+    private static void copa(int year, f.f cup) {
+        f.z knockout = cup == null ? null : cup.yf();
+        check(knockout != null && knockout.zp().size() == 9, year + ": Copa do Brasil com " + (knockout == null ? 0 : knockout.zp().size()) + " fases");
+        if (knockout == null) return;
+        int[] teams = {28, 88, 48, 24, 32, 16, 8, 4, 2};
+        StringBuilder sizes = new StringBuilder();
+        int matches = 0;
+        boolean ok = knockout.zp().size() == 9;
+        for (int i = 0; i < knockout.zp().size(); i++) {
+            f.G round = (f.G) knockout.zp().get(i);
+            int clubs = round.zW().size() * 2;
+            int second = round.zX() == null ? 0 : round.zX().size();
+            matches += round.zW().size() + second;
+            sizes.append(clubs).append(second > 0 ? "(iv)" : "").append(' ');
+            boolean twoLegs = i >= 4 && i <= 7;
+            ok &= i < teams.length && clubs == teams[i] && (second > 0) == twoLegs && round.zY().size() == round.zW().size();
+        }
+        check(ok, year + ": Copa do Brasil fases " + sizes);
+        check(matches == 155, year + ": Copa do Brasil com " + matches + " jogos (esperado 155)");
+        ah champion = cup.cS();
+        check(champion != null, year + ": campeao da Copa do Brasil " + (champion == null ? "nenhum" : champion.getNome()));
     }
 
     private static void serieB(int year, f.B b) {

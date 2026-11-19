@@ -16,7 +16,8 @@ CONFIG = ROOT / "config" / "competitions" / "brasil-2026.json"
 SOURCE = ROOT / "tools" / "competitions-src"
 CODEC = ROOT / "tools" / "competition-codec"
 TARGETS = {
-    "f/G.class": "pairing",
+    "f/G.class": "pairing,after-tie",
+    "f/f.class": "copa-start,copa-names",
     "best/w.class": "participants",
     "best/Z.class": "promotion,division-order",
     "f/s.class": "serie-c-rounds,reset-rounds",
@@ -57,11 +58,22 @@ def data_source(config: dict) -> str:
     rnf = ",".join(java_string(s) for s in config["rnf2026"]["order"])
     abc = ",\n".join("        {" + ",".join(java_string(c["file"]) for c in config["divisions2026"][letter]) + "}"
                      for letter in "ABC")
+    copa = config["copa2026"]["participants"]
+    copa_files = ",".join(java_string(c["file"]) for c in copa)
+    copa_states = ",".join(java_string(c["state"]) for c in copa)
+    copa_criteria = ",".join(str(c["criterion"]) for c in copa)
+    copa_rnc = ",".join(str(c["rnc"] or 0) for c in copa)
+    rnc_files = ",".join(java_string(e["file"]) for e in config["rnc2026"]["ranking"] if e["file"])
     return ("package best;\n\nfinal class CompBrasil2026Data {\n    private CompBrasil2026Data() {\n    }\n\n"
             f"    static final String[][] SERIE_D_FILES = {{\n{files}\n    }};\n\n"
             f"    static final String[][] SERIE_D_STATES = {{\n{states}\n    }};\n\n"
             f"    static final String[] RNF_2026 = {{{rnf}}};\n\n"
-            f"    static final String[][] DIVISIONS_2026 = {{\n{abc}\n    }};\n}}\n")
+            f"    static final String[][] DIVISIONS_2026 = {{\n{abc}\n    }};\n\n"
+            f"    static final String[] COPA_FILES = {{{copa_files}}};\n\n"
+            f"    static final String[] COPA_STATES = {{{copa_states}}};\n\n"
+            f"    static final int[] COPA_CRITERIA = {{{copa_criteria}}};\n\n"
+            f"    static final int[] COPA_RNC = {{{copa_rnc}}};\n\n"
+            f"    static final String[] RNC_FILES = {{{rnc_files}}};\n}}\n")
 
 
 def build_cfg(source_cfg: Path, output_cfg: Path, java: str, work: Path) -> str:

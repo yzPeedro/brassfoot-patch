@@ -118,6 +118,88 @@ def divisions_abc(teams: list[dict]) -> dict:
     return result
 
 
+COPA_REC = "https://stcbfsiteprdimgbrs.blob.core.windows.net/img-site/cdn/REC_Copa_do_Brasil_2026_66989a5426.pdf"
+RNC_URL = "https://stcbfsiteprdimgbrs.blob.core.windows.net/img-site/cdn/RNC_Ranking_Nacional_dos_Clubes_2026_27e24418e7.pdf"
+ORIGINS = ("Brasileiro Série A", "Brasileiro Série C", "Brasileiro Série D", "Copa do Nordeste", "Copa Verde", "Estadual")
+
+
+def rnc() -> list[dict]:
+    text = (SOURCES / "RNC_Ranking_Nacional_dos_Clubes_2026_27e24418e7.txt").read_text(encoding="utf-8")
+    ranking = []
+    for line in text.splitlines():
+        tokens = []
+        for token in line.split():
+            if token not in STATES and len(token) > 2 and token[-2:] in STATES and token[-3].islower():
+                tokens.extend([token[:-2], token[-2:]])
+            else:
+                tokens.append(token)
+        i = 0
+        while i < len(tokens) and tokens[i].isdigit():
+            j = i + 1
+            name = []
+            while j < len(tokens) and tokens[j] not in STATES:
+                name.append(tokens[j])
+                j += 1
+            if j >= len(tokens) or not name:
+                break
+            points = int(tokens[j + 1].replace(".", "")) if j + 1 < len(tokens) and tokens[j + 1].replace(".", "").isdigit() else None
+            entry = {"position": int(tokens[i]), "name": " ".join(name), "state": tokens[j], "points": points}
+            if entry not in ranking:
+                ranking.append(entry)
+            i = j + 4
+    return sorted(ranking, key=lambda e: (e["position"], -(e["points"] or 0)))
+
+
+def rnc_position(text: str, state: str, ranking: list[dict]) -> int | None:
+    words = text.split()
+    for size in range(len(words), 0, -1):
+        name = norm(" ".join(words[:size]))
+        for entry in ranking:
+            if entry["state"] == state and norm(entry["name"]) == name:
+                return entry["position"]
+    for entry in ranking:
+        if entry["state"] == state and norm(words[0]) == norm(entry["name"].split()[0]) and len(norm(words[0])) >= 4:
+            return entry["position"]
+    return None
+
+
+def rnc_files(teams: list[dict], ranking: list[dict]) -> list[dict]:
+    result = []
+    for entry in ranking:
+        file = match_file(entry["name"], entry["state"], teams)
+        result.append({**entry, "file": file})
+    return result
+
+
+def copa_participants(teams: list[dict], ranking: list[dict]) -> list[dict]:
+    raw = (SOURCES / "copa-raw.txt").read_text(encoding="utf-8").splitlines()
+    start = next(i for i, line in enumerate(raw) if i > 200 and line.startswith("Anexo A - Rela"))
+    pattern = re.compile(r"^(.+) (" + "|".join(STATES) + r") (" + "|".join(ORIGINS) + r")$")
+    rows = []
+    for line in raw[start:]:
+        if line.startswith("Anexo B - Compos"):
+            break
+        match = pattern.match(line.strip())
+        if not match:
+            continue
+        text, state, origin = match.groups()
+        words = text.split()
+        file = None
+        short = words[0]
+        for size in range(1, len(words)):
+            candidate = " ".join(words[:size])
+            file = match_file(candidate, state, teams)
+            if file:
+                short = candidate
+                break
+        criterion = 1 if origin == "Brasileiro Série A" else 3 if origin == "Estadual" else 2
+        rows.append({"text": text, "shortName": short, "state": state, "origin": origin, "criterion": criterion,
+                     "file": file, "rnc": rnc_position(text, state, ranking)})
+    if len(rows) != 126:
+        raise ValueError(f"Anexo A com {len(rows)} clubes")
+    return rows
+
+
 def load_teams(path: Path) -> list[dict]:
     teams = json.loads(path.read_text(encoding="utf-8"))
     for t in teams:
@@ -134,6 +216,8 @@ def main() -> None:
     teams = load_teams(args.teams)
     document = {"schemaVersion": 1, "season": "2026", "rnf2026": rnf(), "serieC": SERIE_C,
                 "divisions2026": divisions_abc(teams),
+                "copa2026": {"source": COPA_REC, "participants": copa_participants(teams, rnc())},
+                "rnc2026": {"source": RNC_URL, "ranking": rnc_files(teams, rnc())},
                 "serieD": serie_d(teams, created)}
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(json.dumps(document, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")

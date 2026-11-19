@@ -124,6 +124,57 @@ public final class CompetitionsTransformer {
         return true;
     }
 
+    private static boolean afterTie(ClassNode owner) {
+        MethodNode target = method(owner, "b", "(ZZ)V");
+        requireUnpatched(target);
+        int returns = 0;
+        for (AbstractInsnNode node : target.instructions.toArray()) {
+            if (node.getOpcode() == Opcodes.RETURN) {
+                InsnList call = new InsnList();
+                call.add(new VarInsnNode(Opcodes.ALOAD, 0));
+                call.add(new MethodInsnNode(Opcodes.INVOKESTATIC, HELPER, "afterTie", "(Lf/G;)V", false));
+                target.instructions.insertBefore(node, call);
+                returns++;
+            }
+        }
+        if (returns == 0) throw new IllegalStateException("b(ZZ) without return");
+        return true;
+    }
+
+    private static boolean copaStart(ClassNode owner) {
+        int patched = 0;
+        for (String name : new String[]{"a", "b"}) {
+            MethodNode target = method(owner, name, "(Lf/f;Ljava/util/ArrayList;[Z)V");
+            requireUnpatched(target);
+            LabelNode original = new LabelNode(new Label());
+            InsnList hook = new InsnList();
+            hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+            hook.add(new VarInsnNode(Opcodes.ALOAD, 2));
+            hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC, HELPER, "copa", "(Lf/f;Ljava/util/ArrayList;)Z", false));
+            hook.add(new JumpInsnNode(Opcodes.IFEQ, original));
+            hook.add(new InsnNode(Opcodes.RETURN));
+            hook.add(original);
+            target.instructions.insert(hook);
+            patched++;
+        }
+        return patched == 2;
+    }
+
+    private static boolean copaNames(ClassNode owner) {
+        MethodNode target = method(owner, "b", "(Lbest/L;)[Ljava/lang/String;");
+        LabelNode original = new LabelNode(new Label());
+        InsnList hook = new InsnList();
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC, HELPER, "copaNames", "(Lf/f;)[Ljava/lang/String;", false));
+        hook.add(new InsnNode(Opcodes.DUP));
+        hook.add(new JumpInsnNode(Opcodes.IFNULL, original));
+        hook.add(new InsnNode(Opcodes.ARETURN));
+        hook.add(original);
+        hook.add(new InsnNode(Opcodes.POP));
+        target.instructions.insert(hook);
+        return true;
+    }
+
     private static boolean singleRoundSerieC(ClassNode owner) {
         MethodNode target = method(owner, "a", "(Ljava/util/ArrayList;ZZLjava/util/ArrayList;)V");
         int changed = 0;
@@ -161,6 +212,9 @@ public final class CompetitionsTransformer {
             case "participants": frames = participants(owner); break;
             case "promotion": frames = promotion(owner); break;
             case "reset-rounds": frames = resetRounds(owner); break;
+            case "after-tie": frames = afterTie(owner); break;
+            case "copa-start": frames = copaStart(owner); break;
+            case "copa-names": frames = copaNames(owner); break;
             case "division-order": frames = divisionOrder(owner); break;
             case "serie-c-rounds": frames = singleRoundSerieC(owner); break;
             default: throw new IllegalArgumentException("unknown mode " + args[0]);
