@@ -100,7 +100,7 @@ public final class CompEstaduais {
                     arranged.add(team);
                 }
             }
-            boolean[] legs = new boolean[7];
+            boolean[] legs = new boolean[Math.max(7, CompEstaduaisData.KO_LEGS[k].length)];
             for (int i = 0; i < legs.length && i < CompEstaduaisData.KO_LEGS[k].length; i++) legs[i] = CompEstaduaisData.KO_LEGS[k][i];
             LoadLigaOptions options = new LoadLigaOptions();
             options.nTimes = arranged.size();
@@ -149,7 +149,7 @@ public final class CompEstaduais {
                 official.add(team);
             }
             boolean[] legs = CompEstaduaisData.KO_LEGS[k].length > 0 ? CompEstaduaisData.KO_LEGS[k] : new boolean[]{false};
-            boolean[] knockoutLegs = new boolean[7];
+            boolean[] knockoutLegs = new boolean[Math.max(7, legs.length)];
             for (int i = 0; i < knockoutLegs.length && i < legs.length; i++) knockoutLegs[i] = legs[i];
             ArrayList arranged = new ArrayList();
             if ("league".equals(type) || "fixtures".equals(type)) {
@@ -433,7 +433,7 @@ public final class CompEstaduais {
             if (rounds.length == 0) return false;
             ArrayList list = resolve(league, null, rounds[0], k, 0);
             if (list == null) return false;
-            boolean[] legs = new boolean[7];
+            boolean[] legs = new boolean[Math.max(7, CompEstaduaisData.KO_LEGS[k].length)];
             for (int i = 0; i < legs.length && i < CompEstaduaisData.KO_LEGS[k].length; i++) legs[i] = CompEstaduaisData.KO_LEGS[k][i];
             z knockout = new z(league, Math.max(2, list.size()), league.b(), 0, legs, league.yT(), -1);
             knockout.ff(rounds.length);
@@ -472,6 +472,27 @@ public final class CompEstaduais {
             return true;
         } catch (Throwable error) {
             log("falha ao encerrar o mata-mata estadual", error);
+            return false;
+        }
+    }
+
+    public static boolean bracketNames(z knockout, ArrayList names, ArrayList counts, ArrayList shortNames) {
+        try {
+            s league = owner(knockout);
+            if (league == null) return false;
+            int k = key(league);
+            String[] stages = CompEstaduaisData.KO_NAMES[k];
+            if (stages.length <= 7) return false;
+            names.clear();
+            counts.clear();
+            shortNames.clear();
+            for (int i = 0; i < stages.length; i++) {
+                names.add(stages[i]);
+                counts.add(Integer.valueOf(CompEstaduaisData.KO_TIES[k][i].length));
+                shortNames.add(stages[i]);
+            }
+            return true;
+        } catch (Throwable error) {
             return false;
         }
     }
@@ -695,7 +716,8 @@ public final class CompEstaduais {
     private static ArrayList phaseOne(s league) {
         ArrayList result = new ArrayList();
         ArrayList days = a.SR.R();
-        for (int d = 0; d < days.size(); d++) {
+        int today = league.yY() != null ? days.size() - 1 : Math.min(a.SR.J(), days.size() - 1);
+        for (int d = 0; d <= today; d++) {
             ArrayList list = ((best.a) days.get(d)).h();
             for (int m = 0; m < list.size(); m++) {
                 I match = (I) list.get(m);
@@ -722,10 +744,11 @@ public final class CompEstaduais {
             ArrayList members = new ArrayList();
             final Map stats = out != null ? out : new HashMap();
             ArrayList phase = null;
+            ArrayList used = new ArrayList();
             for (int m = 2; m < pool.length; m++) {
                 ah team = slot(pool[m], league, knockout, index, campaign, candidates);
                 if (team == null || members.contains(team)) continue;
-                int[] value = new int[4];
+                int[] value = new int[5];
                 for (int r = 0; r < rounds.length; r++) {
                     String token = rounds[r].trim();
                     if (token.equals("x") || token.equals("i") || token.equals("p")) {
@@ -737,6 +760,7 @@ public final class CompEstaduais {
                             if (token.equals("p") || token.equals("i") == same) chosen.add(match);
                         }
                         add(value, team, chosen);
+                        for (int i = 0; i < chosen.size(); i++) if (!used.contains(chosen.get(i))) used.add(chosen.get(i));
                         continue;
                     }
                     int round = Integer.parseInt(token);
@@ -744,18 +768,13 @@ public final class CompEstaduais {
                     G stage = (G) knockout.zp().get(round);
                     add(value, team, stage.zW());
                     add(value, team, stage.zX());
+                    for (int i = 0; i < stage.zW().size(); i++) if (!used.contains(stage.zW().get(i))) used.add(stage.zW().get(i));
+                    for (int i = 0; stage.zX() != null && i < stage.zX().size(); i++) if (!used.contains(stage.zX().get(i))) used.add(stage.zX().get(i));
                 }
                 members.add(team);
                 stats.put(team, value);
             }
-            Collections.sort(members, new Comparator() {
-                public int compare(Object x, Object y) {
-                    int[] a = (int[]) stats.get(x);
-                    int[] b = (int[]) stats.get(y);
-                    for (int i = 0; i < a.length; i++) if (a[i] != b[i]) return b[i] - a[i];
-                    return league.yK().indexOf(x) - league.yK().indexOf(y);
-                }
-            });
+            rank(members, rules(key(league)), stats, used);
             return members;
         }
         return null;
@@ -923,6 +942,146 @@ public final class CompEstaduais {
             total[1] += own > other ? 1 : 0;
             total[2] += own - other;
             total[3] += own;
+            if (total.length > 4) total[4] += other;
+        }
+    }
+
+    private static boolean pairwise(String rule) {
+        return rule.startsWith("headToHead");
+    }
+
+    private static int[] cards(List matches, ah team) {
+        int[] total = new int[2];
+        for (int i = 0; i < matches.size(); i++) {
+            ArrayList events = ((I) matches.get(i)).hE();
+            for (int e = 0; events != null && e < events.size(); e++) {
+                A event = (A) events.get(e);
+                if (event.cu() != team) continue;
+                if (event.b() == 2) total[0]++;
+                if (event.b() == 3) {
+                    total[0]++;
+                    total[1]++;
+                }
+                if (event.b() == 4) total[1]++;
+            }
+        }
+        return total;
+    }
+
+    private static int lot(Object team, long salt) {
+        long seed = ((ah) team).lk() * 2654435761L + salt * 40503L;
+        return new java.util.Random(seed).nextInt();
+    }
+
+    private static long salt(List matches) {
+        long total = matches.size();
+        for (int i = 0; i < matches.size(); i++) {
+            I match = (I) matches.get(i);
+            total = total * 31 + match.hu() * 7 + match.hw();
+        }
+        return total;
+    }
+
+    private static int criterion(String rule, Object x, Object y, Map stats, List matches, Map cardCache) {
+        int[] p = (int[]) stats.get(x);
+        int[] q = (int[]) stats.get(y);
+        if ("points".equals(rule)) return q[0] - p[0];
+        if ("wins".equals(rule)) return q[1] - p[1];
+        if ("goalDifference".equals(rule)) return q[2] - p[2];
+        if ("goalsFor".equals(rule)) return q[3] - p[3];
+        if ("fewerGoalsAgainst".equals(rule)) return p[4] - q[4];
+        if (pairwise(rule)) {
+            int[] first = new int[5];
+            int[] second = new int[5];
+            ArrayList between = new ArrayList();
+            for (int i = 0; i < matches.size(); i++) {
+                I match = (I) matches.get(i);
+                if (match.hc() == x && match.hd() == y || match.hc() == y && match.hd() == x) between.add(match);
+            }
+            add(first, (ah) x, between);
+            add(second, (ah) y, between);
+            if ("headToHeadGoalDifference".equals(rule)) return second[2] - first[2];
+            return second[0] - first[0];
+        }
+        if (rule.startsWith("fewer") && rule.contains("Card")) {
+            int[] u = (int[]) cardCache.get(x);
+            if (u == null) cardCache.put(x, u = cards(matches, (ah) x));
+            int[] v = (int[]) cardCache.get(y);
+            if (v == null) cardCache.put(y, v = cards(matches, (ah) y));
+            if ("fewerRedCards".equals(rule)) return u[1] - v[1];
+            if ("fewerYellowCards".equals(rule)) return u[0] - v[0];
+            return u[0] + 3 * u[1] - v[0] - 3 * v[1];
+        }
+        return 0;
+    }
+
+    static void rank(List teams, final String[] rules, final Map stats, final List matches) {
+        if (teams.size() < 2) return;
+        final Map cardCache = new HashMap();
+        final long salt = salt(matches);
+        Collections.sort(teams, new Comparator() {
+            public int compare(Object x, Object y) {
+                for (int i = 0; i < rules.length; i++) {
+                    if (pairwise(rules[i])) continue;
+                    int difference = criterion(rules[i], x, y, stats, matches, cardCache);
+                    if (difference != 0) return difference;
+                }
+                int p = lot(x, salt);
+                int q = lot(y, salt);
+                return p < q ? -1 : p > q ? 1 : 0;
+            }
+        });
+        int first = -1;
+        for (int i = 0; i < rules.length && first < 0; i++) if (pairwise(rules[i])) first = i;
+        if (first < 0) return;
+        int start = 0;
+        while (start < teams.size()) {
+            int end = start + 1;
+            while (end < teams.size() && tied(rules, first, teams.get(start), teams.get(end), stats, matches, cardCache)) end++;
+            if (end - start == 2) {
+                Object x = teams.get(start);
+                Object y = teams.get(start + 1);
+                int difference = 0;
+                for (int i = first; i < rules.length && difference == 0; i++) difference = criterion(rules[i], x, y, stats, matches, cardCache);
+                if (difference == 0) difference = lot(x, salt) < lot(y, salt) ? -1 : 1;
+                if (difference > 0) {
+                    teams.set(start, y);
+                    teams.set(start + 1, x);
+                }
+            }
+            start = end;
+        }
+    }
+
+    private static boolean tied(String[] rules, int upto, Object x, Object y, Map stats, List matches, Map cardCache) {
+        for (int i = 0; i < upto; i++) if (criterion(rules[i], x, y, stats, matches, cardCache) != 0) return false;
+        return true;
+    }
+
+    static String[] rules(int k) {
+        String[] rules = CompEstaduaisData.TIEBREAK[k];
+        return rules.length > 0 ? rules : new String[]{"points", "wins", "goalDifference", "goalsFor"};
+    }
+
+    public static void resort(s league) {
+        try {
+            if (!ours(league)) return;
+            int k = key(league);
+            if (CompEstaduaisData.TIEBREAK[k].length == 0) return;
+            ArrayList matches = phaseOne(league);
+            Map stats = new HashMap();
+            ArrayList table = league.yK();
+            for (int t = 0; t < table.size(); t++) {
+                int[] value = new int[5];
+                add(value, (ah) table.get(t), matches);
+                stats.put(table.get(t), value);
+            }
+            String[] rules = rules(k);
+            rank(table, rules, stats, matches);
+            ArrayList groups = league.yQ();
+            for (int g = 0; groups != null && g < groups.size(); g++) rank(((best.G) groups.get(g)).gR(), rules, stats, matches);
+        } catch (Throwable error) {
+            log("falha no desempate do estadual", error);
         }
     }
 }

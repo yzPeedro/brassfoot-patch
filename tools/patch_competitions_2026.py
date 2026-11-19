@@ -28,8 +28,9 @@ TARGETS = {
     "a/hU.class": "setup-install",
     "best/p.class": "country-filter",
     "best/Z.class": "promotion,division-order",
-    "f/s.class": "serie-c-rounds,reset-rounds,resort,estadual-knockout,estadual-crossed,estadual-table,estadual-relegation",
+    "f/s.class": "serie-c-rounds,reset-rounds,resort,estadual-knockout,estadual-crossed,estadual-table,estadual-relegation,estadual-resort",
     "f/z.class": "estadual-advance,estadual-names",
+    "a/al.class": "bracket-names",
 }
 HELPERS = ("best/CompBrasil2026.class", "best/CompBrasil2026Data.class", "mega/SetupPanels.class")
 BRA_CFG = [

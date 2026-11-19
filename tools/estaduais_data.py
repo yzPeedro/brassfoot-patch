@@ -77,6 +77,9 @@ def source(*folders: Path) -> str:
         "    static final String[][][] KO_ENTRANTS = {\n"
         + rows(lambda s: knockout(s, lambda r: array(r.get("entrants") or [], text))) + "\n    };",
         "",
+        "    static final String[][] TIEBREAK = {\n"
+        + rows(lambda s: array(s.get("tiebreakers") or [], text)) + "\n    };",
+        "",
         "    static final String[][] KO_NAMES = {\n"
         + rows(lambda s: knockout(s, lambda r: text(r.get("name") or ""))) + "\n    };",
         "",

@@ -184,6 +184,7 @@ def build(sheet: dict, teams: list[dict], created: dict, known: dict, aliases: d
         "knockout": [{"name": s.get("name"), "ties": campaign_codes(s.get("ties")), "entrants": s.get("entrants") or [], "legs": s.get("legs"),
                       "tiebreak": s.get("tiebreak"), "home": s.get("home"), "condition": s.get("condition") or ""} for s in stages],
         "finalTable": sheet.get("finalTable") or [],
+        "tiebreakers": sheet.get("tiebreakers") or [],
         "relegation": sheet.get("relegationRule") or None,
         "pools": sheet.get("pools") or [],
         "simplifications": (sheet.get("simplifications") or []) + (["disputa de 3º lugar nao disputada no jogo"] if dropped else [])

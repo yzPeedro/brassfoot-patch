@@ -167,6 +167,17 @@
     "W1@2",
     "TG*"
   ],
+  "tiebreakers": [
+    "points",
+    "wins",
+    "goalDifference",
+    "goalsFor",
+    "fewerGoalsAgainst",
+    "headToHead",
+    "fewerRedCards",
+    "fewerYellowCards",
+    "draw"
+  ],
   "relegation": {
     "pool": "G",
     "count": 1,

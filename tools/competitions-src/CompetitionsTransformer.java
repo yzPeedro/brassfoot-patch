@@ -418,6 +418,47 @@ public final class CompetitionsTransformer {
         return true;
     }
 
+    private static boolean estadualResort(ClassNode owner) {
+        MethodNode target = method(owner, "pO", "()V");
+        AbstractInsnNode anchor = null;
+        for (AbstractInsnNode node : target.instructions) {
+            if (node.getOpcode() == Opcodes.PUTFIELD && "Zf".equals(((jdk.internal.org.objectweb.asm.tree.FieldInsnNode) node).name)) {
+                anchor = node;
+                break;
+            }
+        }
+        if (anchor == null) throw new IllegalStateException("Zf increment absent");
+        AbstractInsnNode start = anchor;
+        for (int i = 0; i < 5; i++) start = start.getPrevious();
+        if (!(start instanceof VarInsnNode load) || load.getOpcode() != Opcodes.ALOAD || load.var != 0) {
+            throw new IllegalStateException("unexpected Zf increment");
+        }
+        InsnList hook = new InsnList();
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "best/CompEstaduais", "resort", "(Lf/s;)V", false));
+        target.instructions.insertBefore(start, hook);
+        return false;
+    }
+
+    private static boolean bracketNames(ClassNode owner) {
+        MethodNode target = method(owner, "nf", "()V");
+        LabelNode original = new LabelNode(new Label());
+        InsnList hook = new InsnList();
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new jdk.internal.org.objectweb.asm.tree.FieldInsnNode(Opcodes.GETFIELD, "a/al", "vY", "Lf/z;"));
+        for (String name : new String[]{"wr", "ws", "wt"}) {
+            hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+            hook.add(new jdk.internal.org.objectweb.asm.tree.FieldInsnNode(Opcodes.GETFIELD, "a/al", name, "Ljava/util/ArrayList;"));
+        }
+        hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "best/CompEstaduais", "bracketNames",
+                "(Lf/z;Ljava/util/ArrayList;Ljava/util/ArrayList;Ljava/util/ArrayList;)Z", false));
+        hook.add(new JumpInsnNode(Opcodes.IFEQ, original));
+        hook.add(new InsnNode(Opcodes.RETURN));
+        hook.add(original);
+        target.instructions.insert(hook);
+        return true;
+    }
+
     private static boolean estadualAdvance(ClassNode owner) {
         MethodNode target = method(owner, "zs", "()V");
         AbstractInsnNode anchor = null;
@@ -579,6 +620,8 @@ public final class CompetitionsTransformer {
             case "division-order": frames = divisionOrder(owner); break;
             case "serie-c-rounds": frames = singleRoundSerieC(owner); break;
             case "estadual-advance": frames = estadualAdvance(owner); break;
+            case "bracket-names": frames = bracketNames(owner); break;
+            case "estadual-resort": frames = estadualResort(owner); break;
             case "estadual-names": frames = estadualNames(owner); break;
             case "estadual-table": frames = estadualTable(owner); break;
             case "estadual-relegation": frames = estadualRelegation(owner); break;

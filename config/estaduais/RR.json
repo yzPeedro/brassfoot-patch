@@ -68,6 +68,16 @@
     }
   ],
   "finalTable": [],
+  "tiebreakers": [
+    "points",
+    "headToHead",
+    "wins",
+    "fewerGoalsAgainst",
+    "goalsFor",
+    "fewerRedCards",
+    "fewerYellowCards",
+    "draw"
+  ],
   "relegation": null,
   "pools": [],
   "simplifications": [

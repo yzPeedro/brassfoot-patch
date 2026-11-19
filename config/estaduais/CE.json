@@ -204,6 +204,15 @@
     "L2@4",
     "TR*"
   ],
+  "tiebreakers": [
+    "points",
+    "wins",
+    "goalDifference",
+    "goalsFor",
+    "fewerRedCards",
+    "fewerYellowCards",
+    "draw"
+  ],
   "relegation": {
     "pool": "R",
     "count": 2
