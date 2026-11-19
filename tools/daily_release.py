@@ -44,8 +44,10 @@ UNITS_F = {**UNITS_M, 1: "uma", 2: "duas"}
 UPDATES = (("age", "idade", "idades", True),
            ("nationality", "nacionalidade esportiva", "nacionalidades esportivas", True),
            ("position", "posição", "posições", True),
-           ("side", "lado de campo", "lados de campo", False))
-TITLE_PARTS = (("roster", "vínculo", "vínculos", False), ("age", "idade", "idades", True),
+           ("side", "lado de campo", "lados de campo", False),
+           ("managers", "técnico", "técnicos", False))
+TITLE_PARTS = (("roster", "vínculo", "vínculos", False), ("managers", "técnico", "técnicos", False),
+               ("age", "idade", "idades", True),
                ("nationality", "nacionalidade", "nacionalidades", True), ("position", "posição", "posições", True),
                ("side", "lado de campo", "lados de campo", False), ("images", "imagem", "imagens", True))
 UNCHANGED_NOTES = {"executable": "o executável", "leagues": "as ligas", "crests": "os escudos",
@@ -329,6 +331,8 @@ def build_model(clubs: list, retained: list, countries: dict, name_counts: dict)
                 rows[kind].append({"name": name, "club": club["club"], "label": label,
                                    "from": describe(kind, item["from"], countries),
                                    "to": describe(kind, item["to"], countries)})
+        if club.get("manager"):
+            rows["managers"].append({"club": club["club"], **club["manager"]})
     transfers = []
     entering, leaving = Counter(item["name"] for item in added), Counter(item["name"] for item in removed)
     for name in sorted(set(entering) & set(leaving)):
@@ -350,7 +354,8 @@ def build_model(clubs: list, retained: list, countries: dict, name_counts: dict)
 
 
 def is_material(model: dict) -> bool:
-    return any(model[key] for key in ("transfers", "added", "removed", "age", "nationality", "position", "side"))
+    return any(model[key] for key in ("transfers", "added", "removed", "age", "nationality", "position", "side",
+                                      "managers"))
 
 
 def unchanged_sentence(unchanged: list, hub: str) -> str:
@@ -403,6 +408,9 @@ def render_notes(version: str, model: dict, hub: str, unchanged: list, images: i
     if model["position"]:
         sections.append(("Posições atualizadas" if len(model["position"]) > 1 else "Posição atualizada",
                          [f"- {item['label']}: {item['to']} (antes {item['from']})." for item in model["position"]]))
+    if model["managers"]:
+        sections.append(("Técnicos atualizados" if len(model["managers"]) > 1 else "Técnico atualizado",
+                         [f"- {item['club']}: {item['to']} (antes {item['from']})." for item in model["managers"]]))
     if model["side"]:
         sections.append(("Lado do campo",
                          [f"- {item['label']}: lado {item['to']} (antes {item['from']})." for item in model["side"]]))
@@ -456,6 +464,12 @@ def render_notes(version: str, model: dict, hub: str, unchanged: list, images: i
     if model["side"]:
         count = len(model["side"])
         changes.append(capitalize(quantity(count, "lado de campo atualizado", "lados de campo atualizados")) + ".")
+    if model["managers"]:
+        items = model["managers"]
+        if len(items) <= 3:
+            changes += [f"{item['club']}: {item['to']} assume como técnico." for item in items]
+        else:
+            changes.append(capitalize(quantity(len(items), "técnico atualizado", "técnicos atualizados")) + ".")
     if images:
         changes.append(capitalize(quantity(images, "imagem de escudo ou camisa atualizada",
                                            "imagens de escudos e camisas atualizadas", True)) + ".")
@@ -809,8 +823,11 @@ def analyse(approval: dict, compiled: Path, base: Path, decoder: Decoder, scratc
         dropped += [{"teamFile": key, **item} for item in lost]
         unlisted += [{"teamFile": key, **item} for item in extra]
         other += [{"teamFile": key, **item} for item in diff["other"]]
+        manager = None
+        if before[key].get("manager") != after[key].get("manager"):
+            manager = {"from": before[key].get("manager"), "to": after[key].get("manager")}
         accepted.append({"teamFile": key, "club": club.get("club") or after[key]["name"], "confirmed": confirmed,
-                         "sha256": sha_file(compiled_files[name])})
+                         "manager": manager, "sha256": sha_file(compiled_files[name])})
     for key, club in clubs.items():
         if club["decision"] == "accepted" and key[len("teams/"):] not in changed:
             for kind in KINDS:
@@ -950,13 +967,14 @@ def prepare(args) -> dict:
     summary = {"accepted": len(analysis["accepted"]), "retained": len(analysis["retained"]),
                "reverted": sorted(analysis["reverted"]), "droppedNotInBan": analysis["dropped"],
                "otherBanChanges": analysis["other"],
-               "confirmed": {kind: sum(len(c["confirmed"][kind]) for c in analysis["accepted"]) for kind in KINDS}}
+               "confirmed": {kind: sum(len(c["confirmed"][kind]) for c in analysis["accepted"]) for kind in KINDS},
+               "managers": sum(1 for c in analysis["accepted"] if c.get("manager"))}
     base_result = {"schemaVersion": 1, "version": version, "publishedVersion": published,
                    "preparedAt": datetime.now(BRT).replace(microsecond=0).isoformat(), "dryRun": bool(args.dry_run),
                    "head": git("rev-parse", "HEAD"), "approval": {"path": str(args.approval.resolve()),
                                                                    "sha256": sha_file(args.approval.resolve()),
                                                                    "counts": approval.get("counts"), **summary}}
-    if not any(summary["confirmed"].values()):
+    if not any(summary["confirmed"].values()) and not summary["managers"]:
         result = {**base_result, "material": False,
                   "reason": "nenhuma mudança aceita aparece nos .ban compilados", "steps": steps}
         if not args.dry_run:
