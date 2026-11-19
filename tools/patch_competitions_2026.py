@@ -20,12 +20,12 @@ TARGETS = {
     "f/G.class": "pairing,after-tie",
     "f/f.class": "copa-start,copa-names",
     "best/w.class": "participants",
-    "f/B.class": "main-phase",
+    "f/B.class": "main-phase,playoff-start",
     "f/I.class": "supercopa",
     "a/hU.class": "setup-install",
     "best/p.class": "country-filter",
     "best/Z.class": "promotion,division-order",
-    "f/s.class": "serie-c-rounds,reset-rounds",
+    "f/s.class": "serie-c-rounds,reset-rounds,resort",
 }
 HELPERS = ("best/CompBrasil2026.class", "best/CompBrasil2026Data.class", "mega/SetupPanels.class")
 BRA_CFG = [
@@ -72,6 +72,12 @@ def data_source(config: dict) -> str:
     countries = [c for c in countries if c.get("officialDivisions")]
     country_ids = ",".join(str(c["country"]) for c in countries)
     country_years = ",".join(str(c.get("startYear", 2026)) for c in countries)
+    playoff_rows = [(c["country"], int(d), rule["type"]) for c in countries for d, rule in sorted(c.get("playoffs", {}).items())]
+    playoff_country = ",".join(str(r[0]) for r in playoff_rows)
+    playoff_division = ",".join(str(r[1]) for r in playoff_rows)
+    playoff_type = ",".join(java_string(r[2]) for r in playoff_rows)
+    goal_difference = ",".join(str(c["country"]) for c in countries
+                               if c.get("tiebreakers", [None, None])[1:2] == ["goalDifference"])
     country_divisions = ",\n".join(
         "        {" + ",".join("{" + ",".join(java_string(f) for f in c["officialDivisions"][d]) + "}"
                                for d in sorted(c["officialDivisions"], key=int)) + "}" for c in countries)
@@ -87,7 +93,11 @@ def data_source(config: dict) -> str:
             f"    static final String[] RNC_FILES = {{{rnc_files}}};\n\n"
             f"    static final int[] COUNTRY_IDS = {{{country_ids}}};\n\n"
             f"    static final int[] COUNTRY_YEARS = {{{country_years}}};\n\n"
-            f"    static final String[][][] COUNTRY_DIVISIONS = {{\n{country_divisions}\n    }};\n}}\n")
+            f"    static final String[][][] COUNTRY_DIVISIONS = {{\n{country_divisions}\n    }};\n\n"
+            f"    static final int[] PLAYOFF_COUNTRY = {{{playoff_country}}};\n\n"
+            f"    static final int[] PLAYOFF_DIVISION = {{{playoff_division}}};\n\n"
+            f"    static final String[] PLAYOFF_TYPE = {{{playoff_type}}};\n\n"
+            f"    static final int[] GOAL_DIFFERENCE_FIRST = {{{goal_difference}}};\n}}\n")
 
 
 def build_cfg(source_cfg: Path, output_cfg: Path, java: str, work: Path) -> str:

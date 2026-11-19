@@ -238,6 +238,39 @@ public final class CompetitionsTransformer {
         return beforeReturns(owner, "dd", "()V", hook);
     }
 
+    private static boolean playoffStart(ClassNode owner) {
+        MethodNode target = method(owner, "BQ", "()V");
+        LabelNode original = new LabelNode(new Label());
+        InsnList hook = new InsnList();
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC, HELPER, "playoffStart", "(Lf/B;)Z", false));
+        hook.add(new JumpInsnNode(Opcodes.IFEQ, original));
+        hook.add(new InsnNode(Opcodes.RETURN));
+        hook.add(original);
+        target.instructions.insert(hook);
+        return true;
+    }
+
+    private static boolean resort(ClassNode owner) {
+        MethodNode target = method(owner, "pO", "()V");
+        AbstractInsnNode anchor = null;
+        for (AbstractInsnNode node : target.instructions) {
+            if (node instanceof MethodInsnNode call && "java/util/Collections".equals(call.owner) && "sort".equals(call.name)
+                    && node.getPrevious() instanceof jdk.internal.org.objectweb.asm.tree.FieldInsnNode field
+                    && "abn".equals(field.name) && field.getPrevious() instanceof jdk.internal.org.objectweb.asm.tree.FieldInsnNode list
+                    && "Zb".equals(list.name)) {
+                if (anchor != null) throw new IllegalStateException("ambiguous Zb sort");
+                anchor = node;
+            }
+        }
+        if (anchor == null) throw new IllegalStateException("Zb sort absent");
+        InsnList hook = new InsnList();
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC, HELPER, "resort", "(Lf/s;)V", false));
+        target.instructions.insert(anchor, hook);
+        return false;
+    }
+
     private static boolean singleRoundSerieC(ClassNode owner) {
         MethodNode target = method(owner, "a", "(Ljava/util/ArrayList;ZZLjava/util/ArrayList;)V");
         int changed = 0;
@@ -282,6 +315,8 @@ public final class CompetitionsTransformer {
             case "supercopa": frames = supercopa(owner); break;
             case "setup-install": frames = setupInstall(owner); break;
             case "country-filter": frames = countryFilter(owner); break;
+            case "playoff-start": frames = playoffStart(owner); break;
+            case "resort": frames = resort(owner); break;
             case "division-order": frames = divisionOrder(owner); break;
             case "serie-c-rounds": frames = singleRoundSerieC(owner); break;
             default: throw new IllegalArgumentException("unknown mode " + args[0]);

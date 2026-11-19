@@ -60,12 +60,14 @@ def build(args: argparse.Namespace) -> dict:
         band = model["divisions"].get(division)
         if band is None:
             continue
+        country = int(model.get("countryOverrides", {}).get(club["name"], args.country))
+        suffix = args.suffix if country == args.country else model.get("overrideSuffix", {}).get(str(country), str(country))
         original = match_existing(club, [t for t in existing if t["a"] == args.country and t["file"] not in used_existing])
         if original:
             used_existing.add(original["file"])
             stem = original["file"][:-4]
         else:
-            stem = f"{ascii_slug(club.get('shortName') or club['name'], 24)}_{args.suffix}"
+            stem = f"{ascii_slug(club.get('shortName') or club['name'], 24)}_{suffix}"
             while stem.lower() in files_in_base or stem in created.values():
                 stem += "x"
         players = []
@@ -75,9 +77,9 @@ def build(args: argparse.Namespace) -> dict:
             if entry["positionCode"] is None and "DF" in (p.get("positionSource") or ""):
                 entry["position"] = "Defender"
             players.append(entry)
-        rows = roster_rows(players, stem, args.country, {}, lookup, date.fromisoformat(args.reference), counts, issued)
+        rows = roster_rows(players, stem, country, {}, lookup, date.fromisoformat(args.reference), counts, issued)
         keepers = sum(1 for r in rows if r["position"] == 0)
-        entry = {"club": club["name"], "file": stem, "division": division, "existing": bool(original),
+        entry = {"club": club["name"], "file": stem, "division": division, "existing": bool(original), "country": country,
                  "players": len(rows), "goalkeepers": keepers, "source": path.name,
                  "estimated": dict(Counter(k for r in rows for k, v in r["provenance"].items() if v != "source"))}
         if len(rows) < MIN_PLAYERS or keepers < 2:
@@ -91,10 +93,10 @@ def build(args: argparse.Namespace) -> dict:
                          stable(stem, 800_000, 100_000), "", "", original["g"], "", original["i"], "", "",
                          "replace", "keep"])
         else:
-            plan.append([stem, args.template + ".ban", args.country, 0, band["level"], band["reputation"],
+            plan.append([stem, args.template + ".ban", country, 0, band["level"], band["reputation"],
                          stable(stem, 800_000, 100_000), b64(club.get("shortName", club["name"])[:40]),
                          b64((club.get("stadium") or "-")[:60]), int(club.get("capacity") or band["capacity"]),
-                         b64("-"), args.country, hex_color(colors[0] if colors else None),
+                         b64("-"), country, hex_color(colors[0] if colors else None),
                          hex_color(colors[1] if len(colors) > 1 else None), "replace", "clear"])
         entry["status"] = "atualizado" if original else "criado"
         entry["roster"] = [{"name": r["name"], "position": r["position"], "age": r["age"], "country": r["country"],

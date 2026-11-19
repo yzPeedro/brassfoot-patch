@@ -298,9 +298,11 @@ public final class CompBrasil2026 {
             if (knockout == null || list == null || !(knockout.yT() instanceof B)) return;
             B owner = (B) knockout.yT();
             if (knockout.zf() == 1099 && index == 0 && list.size() == 4) {
-                playoffPairs(round, owner, list);
+                String rule = playoffRule(owner);
+                if ("four-team".equals(rule)) playoffPairs(round, owner, list);
                 return;
             }
+            if (knockout.zf() == ELIMINATOR_CODE) return;
             if (owner.zO() != BRAZIL) return;
             if (knockout.zf() == PLAYOFF_CODE) {
                 round.fb(2129);
@@ -322,6 +324,93 @@ public final class CompBrasil2026 {
             }
         } catch (Throwable error) {
             log("falha no chaveamento", error);
+        }
+    }
+
+    private static final int ELIMINATOR_CODE = 1096;
+
+    static String playoffRule(B owner) {
+        int country = owner.zO();
+        int division = owner.ip();
+        if (country == BRAZIL && division == 2) return "four-team";
+        for (int i = 0; i < CompBrasil2026Data.PLAYOFF_COUNTRY.length; i++) {
+            if (CompBrasil2026Data.PLAYOFF_COUNTRY[i] == country && CompBrasil2026Data.PLAYOFF_DIVISION[i] == division) {
+                return CompBrasil2026Data.PLAYOFF_TYPE[i];
+            }
+        }
+        return null;
+    }
+
+    private static Field bField(String name) throws Exception {
+        Field field = B.class.getDeclaredField(name);
+        field.setAccessible(true);
+        return field;
+    }
+
+    public static boolean playoffStart(B owner) {
+        try {
+            if (!"six-team".equals(playoffRule(owner)) || owner.ip() <= 1 || owner.BR() != null) return false;
+            ArrayList table = owner.yi().yK();
+            if (table.size() < 8) return false;
+            ArrayList pairs = new ArrayList();
+            pairs.add(table.get(4));
+            pairs.add(table.get(7));
+            pairs.add(table.get(5));
+            pairs.add(table.get(6));
+            boolean[] legs = {false, false, false, false, false, false, false};
+            z eliminators = new z(null, 4, owner.b(), 1, legs, owner, ELIMINATOR_CODE);
+            bField("ZV").set(owner, eliminators);
+            new G().a(eliminators, pairs, 0, false, 0, 0, owner.b(), false);
+            return true;
+        } catch (Throwable error) {
+            log("falha ao iniciar o playoff de seis clubes", error);
+            return false;
+        }
+    }
+
+    private static void sixTeamSemifinals(G round) throws Exception {
+        z eliminators = round.zT();
+        if (eliminators == null || !(eliminators.yT() instanceof B)) return;
+        B owner = (B) eliminators.yT();
+        if (owner.BR() != null) return;
+        ArrayList table = owner.yi().yK();
+        ArrayList winners = new ArrayList(round.zY());
+        if (winners.size() != 2) return;
+        Object worse = table.indexOf(winners.get(0)) > table.indexOf(winners.get(1)) ? winners.get(0) : winners.get(1);
+        Object other = worse == winners.get(0) ? winners.get(1) : winners.get(0);
+        ArrayList semis = new ArrayList();
+        semis.add(worse);
+        semis.add(table.get(2));
+        semis.add(other);
+        semis.add(table.get(3));
+        boolean[] legs = {true, false, false, false, false, false, false};
+        z playoff = new z(null, 4, owner.b(), 0, legs, owner, 1099);
+        bField("agA").set(owner, playoff);
+        new G().a(playoff, semis, 0, true, 0, 0, owner.b(), false);
+    }
+
+    public static void resort(s league) {
+        try {
+            Z country = league.iq();
+            if (country == null || league.yQ().size() > 0) return;
+            boolean goalDifferenceFirst = false;
+            for (int i = 0; i < CompBrasil2026Data.GOAL_DIFFERENCE_FIRST.length; i++) {
+                if (CompBrasil2026Data.GOAL_DIFFERENCE_FIRST[i] == country.jc()) goalDifferenceFirst = true;
+            }
+            if (!goalDifferenceFirst) return;
+            final s target = league;
+            Collections.sort(league.yK(), new Comparator() {
+                public int compare(Object x, Object y) {
+                    int[] p = ((ah) x).d(target);
+                    int[] q = ((ah) y).d(target);
+                    if (p[0] != q[0]) return q[0] - p[0];
+                    if (p[7] != q[7]) return q[7] - p[7];
+                    if (p[5] != q[5]) return q[5] - p[5];
+                    return q[2] - p[2];
+                }
+            });
+        } catch (Throwable error) {
+            log("falha no desempate por pais", error);
         }
     }
 
@@ -446,11 +535,21 @@ public final class CompBrasil2026 {
             }
             if (divisions == null) return;
             ArrayList ordered = new ArrayList();
+            ArrayList pool = new ArrayList(teams);
+            ArrayList all = a.SR.P();
+            for (int d = 0; d < divisions.length; d++) {
+                for (int i = 0; i < divisions[d].length; i++) {
+                    for (int t = 0; t < all.size(); t++) {
+                        ah team = (ah) all.get(t);
+                        if (divisions[d][i].equals(team.jY()) && !pool.contains(team)) pool.add(team);
+                    }
+                }
+            }
             int expected = 0;
             for (int d = 0; d < divisions.length; d++) {
                 for (int i = 0; i < divisions[d].length; i++) {
-                    for (int t = 0; t < teams.size(); t++) {
-                        ah team = (ah) teams.get(t);
+                    for (int t = 0; t < pool.size(); t++) {
+                        ah team = (ah) pool.get(t);
                         if (divisions[d][i].equals(team.jY()) && !ordered.contains(team)) {
                             ordered.add(team);
                             break;
@@ -650,6 +749,10 @@ public final class CompBrasil2026 {
 
     public static void afterTie(G round) {
         try {
+            if (round.zT() != null && round.zT().zf() == ELIMINATOR_CODE) {
+                sixTeamSemifinals(round);
+                return;
+            }
             int code = round.ze();
             if (code < COPA_FIRST_CODE || code >= COPA_FIRST_CODE + COPA_PHASES - 1) return;
             z knockout = round.zT();
