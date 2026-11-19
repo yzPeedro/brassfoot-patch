@@ -2,11 +2,8 @@
   "state": "MG",
   "season": 2026,
   "competition": "Campeonato Mineiro SICOOB 2026",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Itabirito",
-    "clube sem arquivo: North"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
     "americamg_bra",
     "athleticclub_mg",
@@ -14,8 +11,8 @@
     "betimfutebol_bra",
     "cruzeiro_bra",
     "ecdemocrata_mg",
-    null,
-    null,
+    "minasdosul_mg",
+    "north_mg",
     "pousoalegre_mg",
     "tombense_mg",
     "uberlandia_ec",
@@ -53,8 +50,8 @@
       ],
       [
         "cruzeiro_bra",
-        null,
-        null,
+        "north_mg",
+        "minasdosul_mg",
         "athleticclub_mg"
       ]
     ],

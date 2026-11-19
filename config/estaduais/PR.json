@@ -2,19 +2,16 @@
   "state": "PR",
   "season": 2026,
   "competition": "Campeonato Paranaense 1ª Divisão 2026",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Andraus",
-    "clube sem arquivo: Foz do Iguaçu"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
-    null,
+    "andraus_pr",
     "atleticopr_bra",
     "azurizpr_bra",
     "cascavel_pr",
     "cianorte_pr",
     "coritiba_bra",
-    null,
+    "fozdoiguacu_pr",
     "galomaringa_pr",
     "londrina_pr",
     "maringapr",
@@ -45,14 +42,14 @@
         "londrina_pr",
         "independente_pr",
         "cascavel_pr",
-        null
+        "fozdoiguacu_pr"
       ],
       [
         "coritiba_bra",
         "operario_pr",
         "azurizpr_bra",
         "cianorte_pr",
-        null,
+        "andraus_pr",
         "galomaringa_pr"
       ]
     ],

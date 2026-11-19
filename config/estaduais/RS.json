@@ -2,13 +2,10 @@
   "state": "RS",
   "season": 2026,
   "competition": "Gauchão Superbet 2026 – Série A1 (Divisão Especial)",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Avenida",
-    "clube sem arquivo: Monsoon"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
-    null,
+    "avenida_rs",
     "interdesantamaria_rs",
     "juventude",
     "novohamburgo_bra",
@@ -16,7 +13,7 @@
     "saoluiz_rs",
     "gremio",
     "guaranyrs_bra",
-    null,
+    "monsoonfc_rs",
     "caxias",
     "internacional_bra",
     "ypiranga_rs"
@@ -42,7 +39,7 @@
       [
         "internacional_bra",
         "juventude",
-        null,
+        "avenida_rs",
         "saojosers_bra",
         "guaranyrs_bra",
         "saoluiz_rs"
@@ -51,7 +48,7 @@
         "gremio",
         "caxias",
         "novohamburgo_bra",
-        null,
+        "monsoonfc_rs",
         "interdesantamaria_rs",
         "ypiranga_rs"
       ]

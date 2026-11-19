@@ -2,15 +2,11 @@
   "state": "MT",
   "season": 2026,
   "competition": "Campeonato Mato-grossense Martinello Sicredi 2026",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Chapada",
-    "clube sem arquivo: CEOV",
-    "clube sem arquivo: Várzea Grande"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
-    null,
-    null,
+    "chapada_mt",
+    "clubeesportivooperariova_mt",
     "cuiaba_bra",
     "luverdensemt_bra",
     "mixto_mt",
@@ -18,7 +14,7 @@
     "primavera_mt",
     "sinop_mt",
     "uniaorondonopolis_mt",
-    null
+    "varzeagrandeec_mt"
   ],
   "names": [
     "Chapada",

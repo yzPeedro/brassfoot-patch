@@ -2,27 +2,19 @@
   "state": "MS",
   "season": 2026,
   "competition": "Campeonato Sul-Mato-Grossense 2026",
-  "engine": "pending",
-  "pending": [
-    "clube sem arquivo: Naviraiense",
-    "clube sem arquivo: Águia Negra",
-    "clube sem arquivo: Costa Rica",
-    "clube sem arquivo: Corumbaense",
-    "clube sem arquivo: Dourados",
-    "clube sem arquivo: Clube de Regatas Aquidauana",
-    "clube sem arquivo: Bataguassu"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
-    null,
+    "naviraiense_ms",
     "operario_ms",
-    null,
-    null,
-    null,
+    "aguianegra_ms",
+    "costarica_ms",
+    "corumbaense_ms",
     "pantanal_ms",
     "ivinhema_ms",
-    null,
-    null,
-    null
+    "dourados_ms",
+    "craquidauana_ms",
+    "bataguassu_ms"
   ],
   "names": [
     "Naviraiense",
