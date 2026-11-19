@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.6.15",
-  "publishedAt": "2026-11-19T12:20:38.682299+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.6.15-windows-x64.exe",
+  "publishedVersion": "2026.6.16",
+  "publishedAt": "2026-11-19T19:34:24.692047+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.6.16-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
-  "fileSizeBytes": 7406080,
-  "sha256": "8bf005ca7ffee5d532291111897dc852f17921b0804a282641ef67e0b6f3f48a",
+  "fileSizeBytes": 7409152,
+  "sha256": "51679722619fd232cd78262e83eace4cdf074f5e9c089d6883d9e46eecf4e921",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Adiciona três jogadores, retira um e atualiza 21 idades."
+  "releaseNotes": "Competições brasileiras 2026 (Séries A a D, Copa do Brasil, Supercopa Rei, 27 estaduais, Copa do Nordeste e Copa Verde), Inglaterra e Itália com 4 divisões, 310 clubes novos e juniores Sub-20 reais dos 20 clubes da Série A."
 }

@@ -1,7 +1,25 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-19T09:12:14-03:00",
+  "updatedAt": "2026-11-19T16:18:31-03:00",
   "entries": [
+    {
+      "id": "patch-2026-6-16",
+      "version": "2026.6.16",
+      "date": "2026-11-19T16:18:31-03:00",
+      "title": "Competições 2026, Inglaterra, Itália e juniores Sub-20 reais",
+      "kind": "patch",
+      "summary": "Competições brasileiras de 2026, Inglaterra e Itália com 4 divisões, 310 clubes novos e juniores Sub-20 reais na Série A.",
+      "changes": [
+        "Séries A a D, Copa do Brasil e Supercopa Rei no formato oficial de 2026.",
+        "27 estaduais, Copa do Nordeste e Copa Verde com participantes e formatos de 2026.",
+        "Inglaterra (92 clubes) e Itália (Serie A, B e C em 3 grupos) com play-offs oficiais.",
+        "310 clubes novos com elencos de fontes públicas.",
+        "Juniores Sub-20 reais nos 20 clubes da Série A; clubes não pesquisados ficam sem juniores.",
+        "Seis troféus novos, com créditos nas notas da versão.",
+        "Hub 1.4.5 obrigatório."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.6.16"
+    },
     {
       "id": "patch-2026-6-15",
       "version": "2026.6.15",
