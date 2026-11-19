@@ -4,7 +4,6 @@
   "competition": "Campeonato Mineiro SICOOB 2026",
   "engine": "pending",
   "pending": [
-    "fase 1 sem confrontos definidos",
     "clube sem arquivo: Itabirito",
     "clube sem arquivo: North"
   ],
@@ -65,7 +64,16 @@
   "knockout": [
     {
       "name": "Semifinal",
-      "ties": null,
+      "ties": [
+        [
+          "P4",
+          "P1"
+        ],
+        [
+          "P3",
+          "P2"
+        ]
+      ],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
       "home": "better-second"
@@ -88,7 +96,6 @@
   ],
   "unsupported": [
     "Classificação Geral da 1ª fase (Art. 9º, I a XII) é por posição no grupo: 1º a 3º são os três líderes ordenados entre si, 4º a 6º os segundos, 7º a 9º os terceiros, 10º a 12º os quartos. O esquema não tem slot para 'n-ésimo melhor entre os k-ésimos de grupo', e a classificação geral do motor ('N') não segue essa regra.",
-    "Semifinal (Art. 12): 1º x 4º e 2º x 3º da Classificação Geral do Art. 9º (o 4º é o melhor segundo colocado). Não expressável pelos slots atuais; ties = null para não trocar a regra por outra.",
     "Semifinal: classifica quem somar mais pontos; empate em pontos: saldo na fase e pênaltis, sem prorrogação (Art. 14 par. único); pontos, depois saldo dos dois jogos, depois pênaltis, sem prorrogação; gravado como 'aggregate-then-penalties', que decide igual.",
     "Semifinal: ordem padrão com o mais bem colocado jogando a volta em casa ('better-second'); ele pode optar por mandar o 1º jogo avisando a DCO (Art. 13), o que o esquema não expressa. O motor compara pela campanha, não pela posição do Art. 9º.",
     "Final em jogo único com mando da FMF em estádio designado pela DCO (Art. 17); pênaltis sem prorrogação (Art. 17 §2º). Mapeado como 'neutral'.",
@@ -96,7 +103,8 @@
     "Rebaixamento (Art. 9º §3º; Art. 27, IX): 11º e 12º da Classificação Geral, isto é, os dois piores entre os quartos colocados de grupo. 'relegated' = 2 fica, mas o motor rebaixa pela própria tabela geral, que pode divergir; 'relegation' passou a 'special'. O REC escreve 'Módulo II em 2026' (provável erro de digitação).",
     "Troféu Inconfidência (Arts. 19-24): 5º a 8º da Classificação Geral; semifinais 5º x 8º e 6º x 7º e final, todas em ida e volta, pontos, saldo e pênaltis sem prorrogação; o mais bem colocado manda a volta, com opção de inverter. Torneio paralelo de colocação, não cabe no esquema.",
     "Troféu Campeão do Interior (Art. 6º par. único; Art. 25): se 2 clubes do interior caírem nas semifinais, jogam 2 partidas (melhor colocado faz a 2ª em casa; pontos, saldo, pênaltis) que definem 3º e 4º da classificação final (Art. 27, III-IV). Fase condicional, não cabe no esquema.",
-    "Classificação final (Art. 27) e vagas (Art. 72, Série D sem número de vagas; REC omisso sobre a Copa do Brasil 2027): fora do esquema."
+    "Classificação final (Art. 27) e vagas (Art. 72, Série D sem número de vagas; REC omisso sobre a Copa do Brasil 2027): fora do esquema.",
+    "Semifinal (Art. 12): 1º x 4º e 2º x 3º da Classificação Geral do Art. 9º, representados pelos slots P<k> (classificação por posição no grupo e, entre clubes da mesma posição, por pontos, vitórias, saldo e gols pró)."
   ],
   "sources": [
     "pdf/MG-modulo-I-REC-2026.pdf (sha256 6f4b1dae…21ab3): Art. 2º (participantes), Art. 7º (datas), Art. 8º (grupos, 1ª fase cruzada, desempates), Art. 9º (Classificação Geral e rebaixamento), Arts. 12-14 (semifinal), Art. 17 (final), Arts. 19-24 (Troféu Inconfidência), Art. 25 (Campeão do Interior), Art. 27 (classificação final)",
