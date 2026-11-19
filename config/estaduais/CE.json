@@ -52,7 +52,7 @@
   "relegated": 2,
   "knockout": [
     {
-      "name": "2ª fase - 1ª rodada (Grupos C e D)",
+      "name": "2ª fase e Quadrangular da Permanência - 1ª rodada",
       "ties": [
         [
           "A1",
@@ -60,20 +60,30 @@
         ],
         [
           "A2",
-          "B2"
+          "B2",
+          "better-single"
         ],
         [
-          "A3",
-          "B1"
+          "B1",
+          "A3"
+        ],
+        [
+          "A4",
+          "B5"
+        ],
+        [
+          "B4",
+          "A5"
         ]
       ],
       "entrants": [],
       "legs": 1,
       "tiebreak": "home-advances",
-      "home": "better-single"
+      "home": "neutral",
+      "condition": ""
     },
     {
-      "name": "2ª fase - 2ª rodada (Grupos C e D)",
+      "name": "2ª fase e Quadrangular da Permanência - 2ª rodada",
       "ties": [
         [
           "A1",
@@ -86,36 +96,54 @@
         [
           "A3",
           "B3"
+        ],
+        [
+          "A4",
+          "B4"
+        ],
+        [
+          "B5",
+          "A5"
         ]
       ],
       "entrants": [],
       "legs": 1,
       "tiebreak": "home-advances",
-      "home": "better-single"
+      "home": "neutral",
+      "condition": ""
     },
     {
-      "name": "2ª fase - 3ª rodada (Grupos C e D)",
+      "name": "2ª fase e Quadrangular da Permanência - 3ª rodada",
       "ties": [
         [
-          "A1",
-          "B1"
+          "B1",
+          "A1"
         ],
         [
-          "A2",
-          "B3"
+          "B3",
+          "A2"
         ],
         [
-          "A3",
-          "B2"
+          "B2",
+          "A3"
+        ],
+        [
+          "A5",
+          "A4"
+        ],
+        [
+          "B4",
+          "B5"
         ]
       ],
       "entrants": [],
       "legs": 1,
       "tiebreak": "home-advances",
-      "home": "better-single"
+      "home": "neutral",
+      "condition": ""
     },
     {
-      "name": "3ª fase (Semifinal)",
+      "name": "Semifinal",
       "ties": [
         [
           "TC2",
@@ -129,22 +157,57 @@
       "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
-      "home": "neutral"
+      "home": "neutral",
+      "condition": ""
     },
     {
-      "name": "4ª fase (Final)",
+      "name": "Disputas de 3º e 5º lugar",
       "ties": [
         [
-          "W1",
-          "W2"
+          "L1",
+          "L2",
+          "better-single"
+        ],
+        [
+          "TC3",
+          "TD3",
+          "better-single"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "better-single",
+      "condition": ""
+    },
+    {
+      "name": "Final",
+      "ties": [
+        [
+          "W1@3",
+          "W2@3"
         ]
       ],
       "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
-      "home": "better-second"
+      "home": "better-second",
+      "condition": ""
     }
   ],
+  "finalTable": [
+    "W1@5",
+    "L1@5",
+    "W1@4",
+    "L1@4",
+    "W2@4",
+    "L2@4",
+    "TR*"
+  ],
+  "relegation": {
+    "pool": "R",
+    "count": 2
+  },
   "pools": [
     {
       "name": "C",
@@ -171,19 +234,31 @@
         "B2",
         "B3"
       ]
+    },
+    {
+      "name": "R",
+      "rounds": [
+        0,
+        1,
+        2
+      ],
+      "members": [
+        "A4",
+        "A5",
+        "B4",
+        "B5"
+      ]
     }
   ],
   "simplifications": [
-    "2ª fase (Grupos C e D) disputada como 3 rodadas do mata-mata; a classificação de cada grupo soma só esses 3 jogos (pontos, vitórias, saldo e gols pró)",
-    "mandos da 2ª fase pela melhor campanha acumulada, não pela tabela do Art. 16 §2º",
-    "disputas de 3º e 5º lugar e Quadrangular da Permanência não disputados; o rebaixamento usa a classificação do jogo",
+    "2ª fase (Grupos C e D) e Quadrangular da Permanência disputados como as 3 primeiras rodadas do mata-mata, em paralelo; cada grupo soma só os próprios jogos (pontos, vitórias, saldo e gols pró)",
+    "mandos da 2ª fase fixados pelo Art. 16 §2º: 1ºs dos Grupos A e B com 2 mandos e o melhor 2º decidido pela campanha no confronto entre os 2ºs",
+    "mandos do Quadrangular: 4ºs com 2 mandos e 5ºs com 1",
+    "disputas de 3º e de 5º lugar em jogo único na semana anterior à final, mando da melhor campanha, empate nos pênaltis",
+    "desempates por cartões e sorteio não aplicados; após pontos, vitórias, saldo e gols pró vale a classificação da 1ª fase",
     "mando 'neutral' segue a ordem da tabela"
   ],
   "unsupported": [
-    "2ª fase não cabe no esquema: os 3 primeiros do Grupo A formam o Grupo C e os 3 primeiros do Grupo B formam o Grupo D; cada clube do C enfrenta os 3 do D em turno único (3 jogos), classificação dentro do próprio grupo, pontuação só da fase; 1º e 2º de C e D vão às semifinais, 3ºs de C e D vão à disputa de 5º lugar (Art. 12 §3º e §6º). Mandos: os 1ºs dos Grupos A e B e o melhor 2º da 1ª fase têm 2 mandos; os demais, 1 (Art. 16 §2º). Desempates do Art. 13.",
-    "Por isso os confrontos ('ties') do mata-mata ficaram nulos: a notação só referencia posições da 1ª fase. Confrontos oficiais: Semifinal Grupo E = 2º C x 1º C e Grupo F = 2º D x 1º D (volta na casa do 1º colocado do grupo na 2ª fase; os semifinalistas de cada confronto vêm do mesmo grupo da 1ª fase) (Art. 12 §4º, 16 §3º); Final Grupo G = vencedor E x vencedor F, volta na casa da melhor campanha acumulada 1ª+2ª+3ª fase (Art. 12 §7º, 16 §4º); Disputa de 3º = perdedores das semifinais, jogo único com mando da melhor campanha acumulada 1ª+2ª+3ª fase (Art. 12 §5º, 16 §5º); Disputa de 5º = 3º C x 3º D, jogo único com mando da melhor campanha acumulada 1ª+2ª fase (Art. 12 §6º, 16 §6º).",
-    "Equivalência: semifinal e final são decididas por pontos ganhos nos dois jogos, depois melhor saldo de gols dentro da fase e depois pênaltis, sem prorrogação (Art. 14). Pontos nos dois jogos seguidos de saldo agregado empata exatamente nos mesmos casos que o placar agregado, então 'aggregate-then-penalties' reproduz a regra. Disputas de 3º e 5º lugar: empate vai para pênaltis (Art. 15).",
-    "Classificação geral: 1º-2º pela final, 3º-4º pelo jogo de 3º lugar e 5º-6º pelo jogo de 5º lugar, ignorando fases anteriores; 7º-10º pelo Quadrangular da Permanência, ignorando a 1ª fase (Art. 17 §3º-§5º).",
     "1ª fase: cada clube tem 2 mandos nos 4 jogos do grupo (Art. 16 §1º); a tabela básica oficial existe, mas a extração de texto não preserva os pares mandante x visitante de forma confiável, por isso não foi usado 'fixtures'.",
     "Vagas 2027 (Copa do Brasil para 1º a 3º e 4ª vaga ligada à Taça Fares Lopes; Série D para 3 clubes sem série nacional; Copa do Nordeste pelos critérios da CBF) e Taça Padre Cícero ao campeão do interior (Art. 4º §5º e 5º): fora do esquema.",
     "Cartões amarelos zerados ao fim da 1ª e da 2ª fase (Art. 26): fora do esquema."

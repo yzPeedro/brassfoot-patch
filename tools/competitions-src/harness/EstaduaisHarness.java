@@ -35,6 +35,9 @@ public final class EstaduaisHarness {
         int rounds;
         int degree;
         int code;
+        int sameA = -1;
+        int sameB = -1;
+        boolean rule;
     }
 
     private static List<Spec> specs(File file) throws Exception {
@@ -46,6 +49,12 @@ public final class EstaduaisHarness {
             spec.uf = cols[0];
             spec.state = Integer.parseInt(cols[1]);
             spec.type = cols[2];
+            if (cols.length > 10 && cols[10].length() > 0) {
+                String[] pair = cols[10].split(",");
+                spec.sameA = Integer.parseInt(pair[0]);
+                spec.sameB = Integer.parseInt(pair[1]);
+            }
+            spec.rule = cols.length > 11 && "1".equals(cols[11]);
             spec.teams = Arrays.asList(cols[3].split(","));
             if (!cols[4].isEmpty()) for (String g : cols[4].split(";")) spec.groups.add(Arrays.asList(g.split(",")));
             if (!cols[5].isEmpty()) spec.fixtures.addAll(Arrays.asList(cols[5].split(",")));
@@ -120,6 +129,7 @@ public final class EstaduaisHarness {
             while (!c.a.SR.bk && steps < 5000) {
                 c.a.SR.V();
                 steps++;
+                maybeReload(specs);
             }
         } catch (Throwable error) {
             error.printStackTrace(out);
@@ -135,6 +145,7 @@ public final class EstaduaisHarness {
                 while (!c.a.SR.bk && steps < 5000) {
                     c.a.SR.V();
                     steps++;
+                    maybeReload(specs);
                 }
             } catch (Throwable error) {
                 error.printStackTrace(out);
@@ -144,8 +155,69 @@ public final class EstaduaisHarness {
             check(c.a.SR.bk, year + ": temporada terminou em " + steps + " passos");
             for (Spec spec : specs) later(spec, year);
         }
+        if (RELOAD_UF.length() > 0) check(reloads == RELOAD_AT.length, RELOAD_UF + ": " + reloads + " de " + RELOAD_AT.length + " saves recarregados durante o mata-mata");
         out.println("falhas=" + failures);
         System.exit(failures == 0 ? 0 : 1);
+    }
+
+    private static final String RELOAD_UF = System.getProperty("reload.uf", "");
+    private static final String[] RELOAD_AT = System.getProperty("reload.rounds", "").split(",");
+    private static int reloads = 0;
+
+    private static void maybeReload(List<Spec> specs) {
+        if (RELOAD_UF.length() == 0 || reloads >= RELOAD_AT.length || RELOAD_AT[reloads].length() == 0) return;
+        for (Spec spec : specs) {
+            if (!spec.uf.equals(RELOAD_UF)) continue;
+            f.s league = league(spec.state);
+            f.z knockout = league == null ? null : league.yY();
+            if (knockout != null && knockout.zp().size() == Integer.parseInt(RELOAD_AT[reloads])) {
+                reload(spec, knockout);
+                reloads++;
+            }
+        }
+    }
+
+    private static void reload(Spec spec, f.z knockout) {
+        int rounds = knockout.zp().size();
+        int stage = knockout.zb();
+        int leg = knockout.zr();
+        String last = names(((f.G) knockout.zp().get(rounds - 1)).zW().isEmpty() ? new ArrayList() : teamsOf((f.G) knockout.zp().get(rounds - 1)));
+        int teams = c.a.SR.P().size();
+        c.a.ae("est-harness");
+        boolean loaded = load("est-harness");
+        f.s league = league(spec.state);
+        f.z after = league == null ? null : league.yY();
+        boolean same = loaded && after != null && after != knockout && after.zp().size() == rounds && after.zb() == stage && after.zr() == leg
+                && c.a.SR.P().size() == teams
+                && last.equals(names(teamsOf((f.G) after.zp().get(rounds - 1))));
+        check(same, spec.uf + ": save gravado e recarregado com " + rounds + " fases do mata-mata (fase " + (stage + 1) + ", jogo " + leg + "; " + last + ")");
+    }
+
+    private static List teamsOf(f.G round) {
+        List result = new ArrayList();
+        for (Object item : round.zW()) {
+            result.add(((I) item).hc());
+            result.add(((I) item).hd());
+        }
+        return result;
+    }
+
+    private static boolean load(String name) {
+        try {
+            com.esotericsoftware.kryo.Kryo kryo = new com.esotericsoftware.kryo.Kryo();
+            kryo.setRegistrationRequired(false);
+            com.esotericsoftware.kryo.io.Input input = new com.esotericsoftware.kryo.io.Input(
+                    new java.io.FileInputStream(System.getProperty("user.dir") + "/sav/" + name + ".s22"));
+            c.a.SR = (best.f) kryo.readClassAndObject(input);
+            c.a.afQ = (best.ay) kryo.readClassAndObject(input);
+            input.close();
+            c.a.SR.bs = false;
+            c.a.SR.G();
+            return true;
+        } catch (Exception error) {
+            error.printStackTrace(out);
+            return false;
+        }
     }
 
     private static void structure(Spec spec) {
@@ -183,7 +255,7 @@ public final class EstaduaisHarness {
         }
         int n = spec.teams.size();
         int expected;
-        if ("crossed".equals(spec.type)) expected = n * spec.degree / 2 * spec.legs;
+        if ("crossed".equals(spec.type) || "turns".equals(spec.type)) expected = n * spec.degree / 2 * spec.legs;
         else if ("groups".equals(spec.type)) {
             expected = 0;
             for (List<String> g : spec.groups) expected += g.size() * (g.size() - 1) / 2 * spec.legs;
@@ -192,6 +264,11 @@ public final class EstaduaisHarness {
         check(matches.size() == expected, spec.uf + ": " + matches.size() + " jogos na 1a fase (esperado " + expected + ")");
         check(repeated == 0, spec.uf + ": nenhum confronto repetido em turno unico");
         if ("crossed".equals(spec.type)) check(intra == 0, spec.uf + ": nenhum jogo dentro do proprio grupo (" + intra + ")");
+        if ("turns".equals(spec.type)) {
+            int inside = 0;
+            for (List<String> g : spec.groups) inside += g.size() * (g.size() - 1) / 2;
+            check(intra == inside, spec.uf + ": 2o turno com " + intra + " jogos dentro da chave (esperado " + inside + ")");
+        }
         if ("fixtures".equals(spec.type)) check(pairs.containsAll(spec.fixtures), spec.uf + ": mandos da tabela oficial");
         Set<Integer> counts = new HashSet<Integer>(played.values());
         check(counts.size() == 1, spec.uf + ": todos os clubes com o mesmo numero de jogos " + counts);
@@ -217,7 +294,7 @@ public final class EstaduaisHarness {
         check(knockout != null, spec.uf + ": mata-mata criado");
         if (knockout == null) return;
         ArrayList rounds = knockout.zp();
-        check(rounds.size() == spec.rounds, spec.uf + ": " + rounds.size() + " fases de mata-mata (esperado " + spec.rounds + ")");
+        check(roundsOk(spec, rounds), spec.uf + ": " + rounds.size() + " fases de mata-mata (esperado " + spec.rounds + ")");
         StringBuilder text = new StringBuilder();
         for (int r = 0; r < rounds.size(); r++) {
             f.G round = (f.G) rounds.get(r);
@@ -235,6 +312,51 @@ public final class EstaduaisHarness {
         out.println(spec.uf + ":" + text);
         ArrayList last = ((f.G) rounds.get(rounds.size() - 1)).zY();
         check(last.size() == 1, spec.uf + ": campeao " + (last.isEmpty() ? "nenhum" : ((ah) last.get(0)).getNome()));
+        table(spec, league, String.valueOf(c.a.SR.op() + c.a.SR.H() - 1));
+    }
+
+    private static boolean roundsOk(Spec spec, ArrayList rounds) {
+        if (rounds.size() == spec.rounds) {
+            if (spec.sameA < 0) return true;
+            Object a = ((f.G) rounds.get(spec.sameA)).zY().get(0);
+            Object b = ((f.G) rounds.get(spec.sameB)).zY().get(0);
+            check(a != b, spec.uf + ": final geral disputada entre campeoes de turno diferentes");
+            return a != b;
+        }
+        if (spec.sameA < 0 || rounds.size() != spec.rounds - 1) return false;
+        Object a = ((f.G) rounds.get(spec.sameA)).zY().get(0);
+        Object b = ((f.G) rounds.get(spec.sameB)).zY().get(0);
+        check(a == b, spec.uf + ": sem final geral porque o mesmo clube venceu os dois turnos (" + ((ah) a).getNome() + ")");
+        return a == b;
+    }
+
+    private static final Map<String, Set<String>> down = new HashMap<String, Set<String>>();
+    private static final Map<String, Set<String>> before = new HashMap<String, Set<String>>();
+
+    private static void table(Spec spec, f.s league, String year) {
+        before.put(spec.uf, files(league.yK()));
+        ArrayList order = best.CompEstaduais.finalOrder(league);
+        ArrayList fallen = best.CompEstaduais.relegated(league, 0);
+        if (!spec.rule) return;
+        check(order != null && order.size() == league.yK().size(), year + " " + spec.uf + ": classificacao final com " + (order == null ? 0 : order.size()) + " clubes");
+        if (order == null) return;
+        ArrayList rounds = league.yY().zp();
+        Object champion = ((f.G) rounds.get(rounds.size() - 1)).zY().get(0);
+        check(order.get(0) == champion, year + " " + spec.uf + ": 1o colocado e o campeao do mata-mata");
+        StringBuilder text = new StringBuilder();
+        for (int i = 0; i < order.size(); i++) text.append(i + 1).append(". ").append(((ah) order.get(i)).getNome()).append("; ");
+        out.println(year + " " + spec.uf + " classificacao final: " + text);
+        check(fallen != null && !fallen.isEmpty(), year + " " + spec.uf + ": rebaixados pela regra " + (fallen == null ? "nenhum" : names(fallen)));
+        if (fallen == null) return;
+        boolean bottom = true;
+        for (Object team : fallen) bottom &= order.indexOf(team) >= order.size() - fallen.size() - 2;
+        check(!fallen.contains(champion), year + " " + spec.uf + ": campeao nao rebaixado");
+        if (spec.sameA >= 0) {
+            Object first = ((f.G) rounds.get(spec.sameA)).zY().get(0);
+            Object second = ((f.G) rounds.get(spec.sameB)).zY().get(0);
+            check(!fallen.contains(first) && !fallen.contains(second), year + " " + spec.uf + ": campeoes de turno protegidos do rebaixamento");
+        }
+        down.put(spec.uf, files(fallen));
     }
 
     private static void later(Spec spec, int year) {
@@ -247,8 +369,15 @@ public final class EstaduaisHarness {
         ArrayList rounds = knockout == null ? new ArrayList() : knockout.zp();
         ArrayList last = rounds.isEmpty() ? new ArrayList() : ((f.G) rounds.get(rounds.size() - 1)).zY();
         Set<String> now = files(league.yK());
+        Set<String> previous = before.get(spec.uf);
+        if (spec.rule && previous != null && down.containsKey(spec.uf)) {
+            Set<String> left = new HashSet<String>(previous);
+            left.removeAll(files(league.yK()));
+            check(left.equals(down.get(spec.uf)), year + " " + spec.uf + ": sairam " + left + ", rebaixados pela regra " + down.get(spec.uf));
+        }
         now.removeAll(spec.teams);
-        check(goals > 0 && rounds.size() == spec.rounds && last.size() == 1, year + " " + spec.uf + ": " + rounds.size() + " fases, campeao " + (last.isEmpty() ? "nenhum" : ((ah) last.get(0)).getNome()) + ", clubes novos " + now);
+        if (knockout != null && rounds.size() > 0 && last.size() == 1) table(spec, league, String.valueOf(year));
+        check(goals > 0 && roundsOk(spec, rounds) && last.size() == 1, year + " " + spec.uf + ": " + rounds.size() + " fases, campeao " + (last.isEmpty() ? "nenhum" : ((ah) last.get(0)).getNome()) + ", clubes novos " + now);
     }
 
     private static String names(List teams) {

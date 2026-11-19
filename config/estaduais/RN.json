@@ -47,7 +47,8 @@
       "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
-      "home": "better-second"
+      "home": "better-second",
+      "condition": ""
     },
     {
       "name": "Semifinal",
@@ -64,7 +65,8 @@
       "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
-      "home": "better-second"
+      "home": "better-second",
+      "condition": ""
     },
     {
       "name": "Final",
@@ -77,9 +79,12 @@
       "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-penalties",
-      "home": "better-second"
+      "home": "better-second",
+      "condition": ""
     }
   ],
+  "finalTable": [],
+  "relegation": null,
   "pools": [],
   "simplifications": [],
   "unsupported": [

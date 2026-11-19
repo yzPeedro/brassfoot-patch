@@ -2,15 +2,12 @@
   "state": "AM",
   "season": 2026,
   "competition": "Campeonato Amazonense de Futebol Profissional Série A 2026 (Barezão)",
-  "engine": "pending",
-  "pending": [
-    "fase 1: vantagem de campanha em jogo unico sem suporte",
-    "clube sem arquivo: RPE Parintins Futebol Clube"
-  ],
+  "engine": "ready",
+  "pending": [],
   "teams": [
     "amazonas_am",
     "manauara_am",
-    null,
+    "parintins_am",
     "itacoatiara_am",
     "nacional_am",
     "manaus_bra",
@@ -28,13 +25,13 @@
     "São Raimundo Esporte Clube"
   ],
   "phase1": {
-    "type": "crossed",
+    "type": "turns",
     "legs": 1,
     "groups": [
       [
         "amazonas_am",
         "manauara_am",
-        null,
+        "parintins_am",
         "itacoatiara_am"
       ],
       [
@@ -49,67 +46,228 @@
   "relegated": 1,
   "knockout": [
     {
-      "name": "1º turno - Play-off de quartas",
+      "name": "1º turno - Play-off",
       "ties": [
         [
-          "A2",
-          "A3"
+          "TA2",
+          "TA3"
         ],
         [
-          "B2",
-          "B3"
+          "TB2",
+          "TB3"
         ]
       ],
       "entrants": [],
       "legs": 1,
-      "tiebreak": "better-campaign",
-      "home": "better-single"
+      "tiebreak": "home-advances",
+      "home": "neutral",
+      "condition": ""
     },
     {
       "name": "1º turno - Semifinal",
       "ties": [
         [
-          "A1",
+          "TA1",
           "W1"
         ],
         [
-          "B1",
+          "TB1",
           "W2"
         ]
       ],
       "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
-      "home": "better-single"
+      "home": "neutral",
+      "condition": ""
     },
     {
       "name": "1º turno - Final",
       "ties": [
         [
-          "R1",
-          "R2"
+          "W1",
+          "W2"
         ]
       ],
       "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
-      "home": "better-single"
+      "home": "pool:E",
+      "condition": ""
+    },
+    {
+      "name": "2º turno - Play-off",
+      "ties": [
+        [
+          "TC2",
+          "TD3"
+        ],
+        [
+          "TD2",
+          "TC3"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "home-advances",
+      "home": "neutral",
+      "condition": ""
+    },
+    {
+      "name": "2º turno - Semifinal",
+      "ties": [
+        [
+          "TC1",
+          "W2"
+        ],
+        [
+          "TD1",
+          "W1"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "neutral",
+      "condition": ""
+    },
+    {
+      "name": "2º turno - Final",
+      "ties": [
+        [
+          "W1",
+          "W2"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "place:CD",
+      "condition": ""
+    },
+    {
+      "name": "Final do Campeonato",
+      "ties": [
+        [
+          "W1@2",
+          "W1@5"
+        ]
+      ],
+      "entrants": [],
+      "legs": 1,
+      "tiebreak": "penalties",
+      "home": "neutral",
+      "condition": "distinct"
     }
   ],
-  "pools": [],
-  "simplifications": [],
+  "finalTable": [
+    "W1@6",
+    "L1@6",
+    "W1@5",
+    "W1@2",
+    "TG*"
+  ],
+  "relegation": {
+    "pool": "G",
+    "count": 1,
+    "protect": [
+      "W1@2",
+      "W1@5"
+    ]
+  },
+  "pools": [
+    {
+      "name": "A",
+      "rounds": [
+        "x"
+      ],
+      "members": [
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ]
+    },
+    {
+      "name": "B",
+      "rounds": [
+        "x"
+      ],
+      "members": [
+        "B1",
+        "B2",
+        "B3",
+        "B4"
+      ]
+    },
+    {
+      "name": "E",
+      "rounds": [
+        "x"
+      ],
+      "members": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "B1",
+        "B2",
+        "B3",
+        "B4"
+      ]
+    },
+    {
+      "name": "C",
+      "rounds": [
+        "i"
+      ],
+      "members": [
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ]
+    },
+    {
+      "name": "D",
+      "rounds": [
+        "i"
+      ],
+      "members": [
+        "B1",
+        "B2",
+        "B3",
+        "B4"
+      ]
+    },
+    {
+      "name": "G",
+      "rounds": [
+        "p"
+      ],
+      "members": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "B1",
+        "B2",
+        "B3",
+        "B4"
+      ]
+    }
+  ],
+  "simplifications": [
+    "as fases classificatórias dos dois turnos ficam na 1ª fase do jogo (4 rodadas entre chaves e depois 3 rodadas dentro da chave); por isso o mata-mata do 1º turno é disputado depois das rodadas do 2º turno",
+    "a classificação de cada turno soma só os jogos daquele turno (entre chaves no 1º, dentro da chave no 2º); a classificação geral soma os 7 jogos",
+    "mandos da fase classificatória distribuídos pelo jogo (2 por clube no 1º turno; 2 ou 1 no 2º), não pela tabela da FAF nem pela classificação de 2025",
+    "final geral em campo do campeão do 1º turno (o jogo não tem campo neutro)",
+    "se o mesmo clube vencer os dois turnos, o vice é o melhor colocado da classificação geral (o regulamento lido não define)",
+    "desempates por confronto direto, cartões e sorteio não aplicados",
+    "mando 'neutral' segue a ordem da tabela"
+  ],
   "unsupported": [
-    "O esquema só representa o 1º turno. O campeonato tem 2 turnos (Art. 10 §1º, 11 e 12), e a 'phase1' + 'knockout' acima descrevem apenas o 1º turno, cujo campeão é no mínimo vice-campeão estadual (Art. 11 §5º F).",
-    "2º turno, 1ª fase (Art. 12 e §2º-§3º): nova fase de grupos em turno único DENTRO de cada chave (A x A, B x B; 3 jogos por clube), pontuação zerada para efeito de classificação no turno (só os 3 jogos contam). Mandos: 2 para os clubes classificados de 1º a 4º em 2025 e 1 para os de 5º a 7º e o campeão da Série B 2025. A tabela pode ser alterada (Art. 12 §1º).",
-    "2º turno, play-off de quartas em jogo único CRUZADO: jogo 34 = 2º A x 3º B, jogo 35 = 2º B x 3º A; o 2º colocado tem mando e vantagem do empate, independentemente da pontuação (Art. 12 §4º).",
-    "2º turno, semifinal em jogo único: 1º A x vencedor do jogo 35 e 1º B x vencedor do jogo 34; mando dos 1ºs colocados, sem vantagem do empate; empate vai para pênaltis (Art. 12 §5º).",
-    "2º turno, final em jogo único: mando do clube de melhor COLOCAÇÃO na sua chave (independentemente da chave); com a mesma colocação, mando da melhor pontuação na 1ª fase do 2º turno e seus desempates; sem vantagem do empate; empate vai para pênaltis (Art. 12 §6º).",
-    "Final geral (Art. 13 e 15): campeões do 1º e do 2º turno em jogo único, empate vai para pênaltis; local preferencialmente na Arena da Amazônia, definido pela FAF (mando não definido; equivale a campo neutro). Se o mesmo clube vencer os dois turnos, é campeão direto e não há final geral (Art. 13 §3º).",
-    "Classificação final a partir do 3º lugar pela pontuação geral dos 7 jogos das fases classificatórias dos dois turnos (Art. 15 §1º).",
-    "1º turno - Play-off: o 2º colocado de cada chave tem mando e vantagem do empate em jogo único, sem pênaltis (Art. 11 §3º E); 'better-campaign' aqui significa vantagem do empate para o 2º colocado da chave (primeiro do par).",
-    "1º turno - Final: jogo único entre os vencedores das semifinais (obrigatoriamente um da chave A e um da chave B); mando do finalista com melhor pontuação na 1ª fase do turno (4 jogos) e seus desempates, independentemente da colocação na chave (Art. 11 §5º C-D). 'C1'/'C2' devem ser calculados por essa pontuação, não pela posição na chave.",
     "Confronto direto como desempate considera somente o jogo da fase classificatória de um dos turnos (Art. 14, 5); no 1º turno os clubes da mesma chave não se enfrentam, então o critério só pode ser aplicado entre clubes de chaves diferentes.",
-    "Chaves 'crossed' do 1º turno: cada clube faz 4 jogos contra a outra chave, com 2 mandos (Art. 11 §2º); a tabela de mandos oficial não está nas fontes.",
     "Composição das chaves depende da classificação de 2025 e do campeão da Série B (Art. 10 §2º-§4º); para 2026 está fixada acima.",
     "Vagas nacionais 2027 (Copa do Brasil, Série D, Copa Norte/Verde) para campeão, vice e depois pela classificação geral (Art. 5º): fora do esquema.",
     "Fonte: o PDF não tem camada de texto; lido por renderização local (páginas 6 a 13). Os capítulos de páginas não renderizadas não foram conferidos."

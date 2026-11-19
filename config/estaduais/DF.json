@@ -51,7 +51,8 @@
       "entrants": [],
       "legs": 2,
       "tiebreak": "aggregate-then-better-campaign",
-      "home": "better-second"
+      "home": "better-second",
+      "condition": ""
     },
     {
       "name": "Terceira Fase (Final)",
@@ -64,9 +65,12 @@
       "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
-      "home": "neutral"
+      "home": "neutral",
+      "condition": ""
     }
   ],
+  "finalTable": [],
+  "relegation": null,
   "pools": [],
   "simplifications": [
     "mando 'neutral' segue a ordem da tabela"

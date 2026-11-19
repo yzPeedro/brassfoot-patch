@@ -51,7 +51,8 @@
       "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
-      "home": "better-single"
+      "home": "better-single",
+      "condition": ""
     },
     {
       "name": "Fase III - Final",
@@ -64,9 +65,12 @@
       "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
-      "home": "better-single"
+      "home": "better-single",
+      "condition": ""
     }
   ],
+  "finalTable": [],
+  "relegation": null,
   "pools": [],
   "simplifications": [],
   "unsupported": [

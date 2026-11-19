@@ -19,17 +19,21 @@ Cada estadual é descrito por uma ficha em `config/estaduais/<UF>.json`, gerada 
 
 | Elemento | O que o motor faz |
 |---|---|
-| 1ª fase | `league` (pontos corridos), `groups` (dentro do grupo), `crossed` (cada clube enfrenta os grupos indicados em `opponents`, ou todos os outros, e a classificação é dentro do grupo) ou `fixtures` (tabela oficial com mandante e visitante de cada jogo) |
-| vagas do mata-mata | `N` (colocação geral), `A1`, `B2`… (colocação no grupo), `W<k>`/`L<k>` (vencedor e perdedor do k-ésimo confronto da fase anterior), `R<k>` (k-ésimo por campanha acumulada entre os vivos) |
+| 1ª fase | `league` (pontos corridos), `groups` (dentro do grupo), `crossed` (cada clube enfrenta os grupos indicados em `opponents`, ou todos os outros, e a classificação é dentro do grupo), `fixtures` (tabela oficial com mandante e visitante de cada jogo) ou `turns` (duas chaves: rodadas entre chaves e depois rodadas dentro da chave, para campeonatos de dois turnos) |
+| vagas do mata-mata | `N` (colocação geral), `A1`, `B2`… (colocação no grupo), `W<k>`/`L<k>` (vencedor e perdedor do k-ésimo confronto da fase anterior; `W<k>@<fase>` aponta para uma fase anterior qualquer), `R<k>` (k-ésimo por campanha acumulada entre os vivos), `T<grupo><k>` (k-ésimo de um grupo de pontos, ver abaixo) |
+| grupos de pontos (`pools`) | cada grupo lista os membros e o que soma: fases do mata-mata (números), jogos da 1ª fase entre chaves (`x`), dentro da chave (`i`) ou todos (`p`); ordena por pontos, vitórias, saldo e gols pró |
+| fases paralelas | uma fase do mata-mata pode ter confrontos de ramos diferentes (2ª fase e quadrangular de permanência na mesma rodada; 3º e 5º lugar juntos), e cada confronto pode ter mando próprio (terceiro elemento do confronto) |
+| final condicional | `"condition": "distinct"` na última fase: se os dois lados forem o mesmo clube (campeão dos dois turnos), a fase não é criada e o título é registrado direto |
+| classificação final (`finalTable`) | ordem das posições por vagas (`W1@5`, `L1@5`…) e `T<grupo>*` para o restante; grava posição, título e vagas nacionais (`aD`) no lugar de `f.s.za` |
+| rebaixamento por regra (`relegationRule`) | últimos de um grupo de pontos, com clubes protegidos (campeões de turno); substitui `f.s.fG` |
 | desempate | `aggregate-then-penalties`, `penalties`, `points-then-penalties` (pontos nos dois jogos e pênaltis, sem saldo), `aggregate-then-better-campaign` |
-| mando | `better-second` (melhor campanha manda a volta), `better-single` (melhor campanha manda o jogo único) e `neutral` (ordem da ficha) |
+| mando | `better-second` (melhor campanha manda a volta), `better-single` (melhor campanha manda o jogo único), `neutral` (ordem da ficha), `pool:<grupos>` (melhor no grupo de pontos) e `place:<grupos>` (melhor colocação no próprio grupo, depois a pontuação) |
 | rebaixamento | número de rebaixados diretos; o acesso e o descenso seguem a rotina do jogo (`best.w.ee`) |
 
-Estado em 19/11/2026:
+Estado em 19/11/2026: as 27 fichas estaduais, a Copa do Nordeste e a Copa Verde estão `ready`.
 
-- **Prontos:** Alagoano (tabela oficial com os mandos), Carioca (1ª fase cruzada, quartas em jogo único, semifinal em ida e volta e final), Copa do Nordeste (grupos A×B e C×D, quartas com mando do 1º, semifinal e final em ida e volta) e Copa Verde (Copa Norte e Copa Centro-Oeste com 2 grupos de 6 cada, quartas e finais regionais, final geral).
-- **Regras prontas, aguardando clubes:** os demais estados, menos AM, CE e MG.
-- **Regras sem suporte:** AM (dois turnos com final entre campeões de turno), CE (2ª fase em grupos cruzados) e MG (semifinal pela classificação geral por posição no grupo).
+- **Amazonense:** 1ª fase `turns` (4 rodadas entre as chaves A e B, depois 3 rodadas dentro da chave); mata-mata de 7 fases: play-off, semifinal e final do 1º turno, as mesmas do 2º turno e a final geral condicional. A classificação de cada turno soma só os jogos do turno; a geral soma os 7. O 8º da geral cai, exceto campeão de turno.
+- **Cearense:** 2ª fase (Grupos C e D) e Quadrangular da Permanência nas 3 primeiras fases, em paralelo; semifinais; 3º e 5º lugar; final. A classificação final vem dos jogos (final, 3º lugar, 5º lugar, quadrangular) e os dois últimos do quadrangular caem.
 
 Pontos de injeção:
 
@@ -40,6 +44,10 @@ Pontos de injeção:
 | mata-mata | início de `f.s.yP()` e de `f.G.b(z, ArrayList, …)` | cria as fases pela ficha e resolve as vagas de cada fase |
 | desempate por pontos | `f.G.b(boolean, boolean)`, código de confronto 2701 | pula o critério de saldo agregado |
 | regionais | início de `f.F.an(ArrayList)` | Copa do Nordeste (código 2702) e Copa Verde (2703) |
+| final condicional | `f.z.zs()`, logo depois de `f.G.b(false, false)` | encerra o mata-mata sem a final geral quando os lados coincidem |
+| nome da fase | início de `f.z.io()` | nome da fase pela ficha |
+| classificação final | início de `f.s.za()` | posições, título e vagas nacionais pela ficha |
+| rebaixamento | início de `f.s.fG(int)` | rebaixados pela regra da ficha |
 
 Os participantes, os grupos e a tabela oficiais só valem na temporada 2026. Nas seguintes, os estaduais mantêm o formato e trocam clubes pelo acesso e descenso do jogo. Os regionais escolhem os clubes pela ordem do jogo (divisões nacionais primeiro) dentro de cada região ou bloco.
 
@@ -133,10 +141,12 @@ Uma carreira criada antes do componente carrega e continua normalmente. A tempor
 - **Calendário:** as datas seguem os tipos de data do jogo, não a tabela oficial.
 - **Estaduais e regionais:**
   - desempates por confronto direto, cartões e sorteio não são aplicados; a classificação usa pontos, vitórias, saldo e gols pró;
-  - torneios paralelos (Taça Rio, Troféu Inconfidência, Taça ACESC, Copa Grão-Pará e outros), disputas de 3º lugar e quadrangulares de rebaixamento não são disputados;
+  - torneios paralelos (Taça Rio, Troféu Inconfidência, Taça ACESC, Copa Grão-Pará e outros) não são disputados; disputas de 3º lugar só no Cearense (nos demais estados ficam de fora); quadrangular de rebaixamento só no Cearense;
+  - Amazonense: as rodadas classificatórias dos dois turnos vêm antes do mata-mata do 1º turno (o mata-mata do jogo só começa depois da 1ª fase); mandos da fase classificatória pelo jogo, não pela tabela da FAF; final geral no campo do campeão do 1º turno (o jogo não tem campo neutro); quando o mesmo clube vence os dois turnos, o vice é o melhor da classificação geral;
+  - Cearense: as disputas de 3º e 5º lugar acontecem antes da final, em jogo único com mando da melhor campanha;
   - o mando pela campanha usa a campanha acumulada no torneio, mesmo quando o regulamento conta só uma fase;
   - os títulos da Copa Norte e da Copa Centro-Oeste não viram troféus próprios.
-- **Fases de pontos dentro do mata-mata:** uma fase de grupos posterior à 1ª fase (como a 2ª fase do Cearense) é disputada como rodadas do mata-mata; a vaga `T<grupo><posição>` classifica os membros do grupo somando só os jogos dessas rodadas (pontos, vitórias, saldo e gols pró). O mata-mata do jogo comporta no máximo 7 rodadas, por isso o Amazonense (dois turnos e final entre campeões de turno, 10 rodadas) não foi adaptado.
+- **Limite de 7 fases do mata-mata:** o calendário aceita mais fases (as datas são buscadas livres), mas as telas de chaveamento (`a.aa`, `a.al`) indexam a tabela fixa de 7 nomes (`aq.ps`/`aq.pu`) pelo número de fases e quebrariam acima disso. Por isso o Amazonense usa a 1ª fase `turns` e cabe em 7 fases, sem mexer nas telas.
 - **Prorrogação:** o motor original não tem tempo extra e, por decisão do proprietário (19/11/2026), ela não será implementada. Nas regras que exigem prorrogação (playoffs e copas inglesas), o empate segue direto para o critério seguinte do jogo.
 - **Interface:**
   - o nome da rodada dos playoffs vem da tabela genérica do jogo.

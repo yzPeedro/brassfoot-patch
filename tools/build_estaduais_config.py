@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "config" / "estaduais"
 ALIASES = OUTPUT / "aliases.json"
 COMPETITIONS = ROOT / "config" / "competitions" / "brasil-2026.json"
-PHASE1 = {"league", "groups", "crossed", "fixtures"}
+PHASE1 = {"league", "groups", "crossed", "fixtures", "turns"}
 TIEBREAKS = {"aggregate-then-penalties", "penalties", "aggregate-then-better-campaign", "better-campaign",
              "points-then-penalties", "home-advances"}
 HOMES = {"better-second", "better-single", "neutral"}
@@ -97,6 +97,8 @@ def problems(sheet: dict) -> list[str]:
         found.append(f"primeira fase '{phase1.get('type')}' sem suporte")
     if phase1.get("type") in ("groups", "crossed") and not phase1.get("groups"):
         found.append("grupos nao definidos")
+    if phase1.get("type") == "turns" and (len(phase1.get("groups") or []) != 2 or len({len(g) for g in phase1["groups"]}) > 1):
+        found.append("turnos exigem duas chaves do mesmo tamanho")
     if phase1.get("type") == "crossed" and len({len(g) for g in phase1.get("groups") or []}) > 1:
         found.append("grupos cruzados de tamanhos diferentes")
     if phase1.get("type") == "fixtures" and rounds(sheet["teams"], phase1.get("pairs") or []) is None:
@@ -106,7 +108,7 @@ def problems(sheet: dict) -> list[str]:
             found.append(f"fase {number} sem confrontos definidos")
         if stage.get("tiebreak") not in TIEBREAKS:
             found.append(f"fase {number}: desempate '{stage.get('tiebreak')}' sem suporte")
-        if stage.get("home") not in HOMES:
+        if stage.get("home") not in HOMES and not str(stage.get("home")).startswith(("pool:", "place:")):
             found.append(f"fase {number}: mando '{stage.get('home')}' sem suporte")
         if stage.get("legs") not in (1, 2):
             found.append(f"fase {number}: numero de jogos '{stage.get('legs')}' sem suporte")
@@ -180,7 +182,9 @@ def build(sheet: dict, teams: list[dict], created: dict, known: dict, aliases: d
                                 for h, a in r]},
         "relegated": sheet.get("relegated"),
         "knockout": [{"name": s.get("name"), "ties": campaign_codes(s.get("ties")), "entrants": s.get("entrants") or [], "legs": s.get("legs"),
-                      "tiebreak": s.get("tiebreak"), "home": s.get("home")} for s in stages],
+                      "tiebreak": s.get("tiebreak"), "home": s.get("home"), "condition": s.get("condition") or ""} for s in stages],
+        "finalTable": sheet.get("finalTable") or [],
+        "relegation": sheet.get("relegationRule") or None,
         "pools": sheet.get("pools") or [],
         "simplifications": (sheet.get("simplifications") or []) + (["disputa de 3º lugar nao disputada no jogo"] if dropped else [])
         + (["mando 'neutral' segue a ordem da tabela"] if any(s.get("home") == "neutral" for s in stages) else []),

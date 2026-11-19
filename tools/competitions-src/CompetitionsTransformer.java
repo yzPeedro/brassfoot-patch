@@ -418,6 +418,72 @@ public final class CompetitionsTransformer {
         return true;
     }
 
+    private static boolean estadualAdvance(ClassNode owner) {
+        MethodNode target = method(owner, "zs", "()V");
+        AbstractInsnNode anchor = null;
+        for (AbstractInsnNode node : target.instructions) {
+            if (node instanceof MethodInsnNode call && call.getOpcode() == Opcodes.INVOKEVIRTUAL
+                    && "f/G".equals(call.owner) && "b".equals(call.name) && "(ZZ)V".equals(call.desc)) {
+                if (anchor != null) throw new IllegalStateException("ambiguous round close");
+                anchor = node;
+            }
+        }
+        if (anchor == null) throw new IllegalStateException("round close absent");
+        LabelNode original = new LabelNode(new Label());
+        InsnList hook = new InsnList();
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "best/CompEstaduais", "advance", "(Lf/z;)Z", false));
+        hook.add(new JumpInsnNode(Opcodes.IFEQ, original));
+        hook.add(new InsnNode(Opcodes.RETURN));
+        hook.add(original);
+        target.instructions.insert(anchor, hook);
+        return true;
+    }
+
+    private static boolean estadualNames(ClassNode owner) {
+        MethodNode target = method(owner, "io", "()Ljava/lang/String;");
+        LabelNode original = new LabelNode(new Label());
+        InsnList hook = new InsnList();
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "best/CompEstaduais", "stageName", "(Lf/z;)Ljava/lang/String;", false));
+        hook.add(new InsnNode(Opcodes.DUP));
+        hook.add(new JumpInsnNode(Opcodes.IFNULL, original));
+        hook.add(new InsnNode(Opcodes.ARETURN));
+        hook.add(original);
+        hook.add(new InsnNode(Opcodes.POP));
+        target.instructions.insert(hook);
+        return true;
+    }
+
+    private static boolean estadualTable(ClassNode owner) {
+        MethodNode target = method(owner, "za", "()V");
+        LabelNode original = new LabelNode(new Label());
+        InsnList hook = new InsnList();
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "best/CompEstaduais", "finalTable", "(Lf/s;)Z", false));
+        hook.add(new JumpInsnNode(Opcodes.IFEQ, original));
+        hook.add(new InsnNode(Opcodes.RETURN));
+        hook.add(original);
+        target.instructions.insert(hook);
+        return true;
+    }
+
+    private static boolean estadualRelegation(ClassNode owner) {
+        MethodNode target = method(owner, "fG", "(I)Ljava/util/ArrayList;");
+        LabelNode original = new LabelNode(new Label());
+        InsnList hook = new InsnList();
+        hook.add(new VarInsnNode(Opcodes.ALOAD, 0));
+        hook.add(new VarInsnNode(Opcodes.ILOAD, 1));
+        hook.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "best/CompEstaduais", "relegated", "(Lf/s;I)Ljava/util/ArrayList;", false));
+        hook.add(new InsnNode(Opcodes.DUP));
+        hook.add(new JumpInsnNode(Opcodes.IFNULL, original));
+        hook.add(new InsnNode(Opcodes.ARETURN));
+        hook.add(original);
+        hook.add(new InsnNode(Opcodes.POP));
+        target.instructions.insert(hook);
+        return true;
+    }
+
     private static boolean regionalStart(ClassNode owner) {
         MethodNode target = method(owner, "an", "(Ljava/util/ArrayList;)V");
         LabelNode original = new LabelNode(new Label());
@@ -512,6 +578,10 @@ public final class CompetitionsTransformer {
             case "match-codes": frames = matchCodes(owner); break;
             case "division-order": frames = divisionOrder(owner); break;
             case "serie-c-rounds": frames = singleRoundSerieC(owner); break;
+            case "estadual-advance": frames = estadualAdvance(owner); break;
+            case "estadual-names": frames = estadualNames(owner); break;
+            case "estadual-table": frames = estadualTable(owner); break;
+            case "estadual-relegation": frames = estadualRelegation(owner); break;
             default: throw new IllegalArgumentException("unknown mode " + args[0]);
         }
         final URLClassLoader loader = new URLClassLoader(new URL[]{Path.of(args[3]).toUri().toURL()}, null);

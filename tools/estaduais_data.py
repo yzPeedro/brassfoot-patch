@@ -77,6 +77,19 @@ def source(*folders: Path) -> str:
         "    static final String[][][] KO_ENTRANTS = {\n"
         + rows(lambda s: knockout(s, lambda r: array(r.get("entrants") or [], text))) + "\n    };",
         "",
+        "    static final String[][] KO_NAMES = {\n"
+        + rows(lambda s: knockout(s, lambda r: text(r.get("name") or ""))) + "\n    };",
+        "",
+        "    static final String[][] KO_COND = {\n"
+        + rows(lambda s: knockout(s, lambda r: text(r.get("condition") or ""))) + "\n    };",
+        "",
+        "    static final String[][] FINAL_TABLE = {\n"
+        + rows(lambda s: array(s.get("finalTable") or [], text)) + "\n    };",
+        "",
+        "    static final String[][] RELEGATION = {\n"
+        + rows(lambda s: array(([s["relegation"]["pool"], str(s["relegation"]["count"])] + s["relegation"].get("protect", []))
+                               if isinstance(s.get("relegation"), dict) else [], text)) + "\n    };",
+        "",
         "    static final String[][][] KO_POOLS = {\n"
         + rows(lambda s: array(s.get("pools") or [], lambda p: array([p["name"], ",".join(str(r) for r in p["rounds"])]
                                                                      + p["members"], text))) + "\n    };",

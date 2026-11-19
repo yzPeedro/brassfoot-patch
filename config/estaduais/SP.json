@@ -328,7 +328,8 @@
       "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
-      "home": "better-single"
+      "home": "better-single",
+      "condition": ""
     },
     {
       "name": "Semifinal",
@@ -345,7 +346,8 @@
       "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
-      "home": "better-single"
+      "home": "better-single",
+      "condition": ""
     },
     {
       "name": "Final",
@@ -358,9 +360,12 @@
       "entrants": [],
       "legs": 2,
       "tiebreak": "points-then-penalties",
-      "home": "better-second"
+      "home": "better-second",
+      "condition": ""
     }
   ],
+  "finalTable": [],
+  "relegation": null,
   "pools": [],
   "simplifications": [],
   "unsupported": [

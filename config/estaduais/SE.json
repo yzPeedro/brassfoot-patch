@@ -55,7 +55,8 @@
       "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
-      "home": "better-single"
+      "home": "better-single",
+      "condition": ""
     },
     {
       "name": "3ª Fase – Semifinal",
@@ -74,7 +75,8 @@
       ],
       "legs": 2,
       "tiebreak": "points-then-penalties",
-      "home": "better-second"
+      "home": "better-second",
+      "condition": ""
     },
     {
       "name": "4ª Fase – Final",
@@ -87,9 +89,12 @@
       "entrants": [],
       "legs": 2,
       "tiebreak": "points-then-penalties",
-      "home": "better-second"
+      "home": "better-second",
+      "condition": ""
     }
   ],
+  "finalTable": [],
+  "relegation": null,
   "pools": [],
   "simplifications": [
     "disputa de 3º lugar nao disputada no jogo"

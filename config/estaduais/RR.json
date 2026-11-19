@@ -49,7 +49,8 @@
       "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
-      "home": "neutral"
+      "home": "neutral",
+      "condition": ""
     },
     {
       "name": "Final",
@@ -62,9 +63,12 @@
       "entrants": [],
       "legs": 1,
       "tiebreak": "penalties",
-      "home": "neutral"
+      "home": "neutral",
+      "condition": ""
     }
   ],
+  "finalTable": [],
+  "relegation": null,
   "pools": [],
   "simplifications": [
     "mando 'neutral' segue a ordem da tabela"
