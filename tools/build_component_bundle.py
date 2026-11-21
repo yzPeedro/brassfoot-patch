@@ -99,8 +99,9 @@ def build(args: argparse.Namespace) -> dict:
     main_variants = variants_of(main_path)
     if any(item.get("targetSha256") != full_sha for item in main_variants):
         raise ValueError("inherited executable recipe does not target the full executable")
-    if live_sha not in {item["originalSha256"] for item in main_variants}:
-        main_variants.append(recipe(live, full))
+    for source, source_sha in ((live, live_sha), (patch, patch_sha)):
+        if source_sha not in {item["originalSha256"] for item in main_variants}:
+            main_variants.append(recipe(source, full))
     write_recipe(main_path, main_variants)
 
     patch_variants = [item for item in variants_of(args.patch_recipe.resolve()) if item.get("targetSha256") == patch_sha]

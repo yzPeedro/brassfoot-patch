@@ -285,22 +285,26 @@ def inheritance_categories(manifest: dict) -> dict[str, dict[str, str]]:
             categories["ligas"][path] = entry["sha256"]
         elif file_component(entry) == "crests":
             categories["escudosECamisas"][path] = entry["sha256"]
-        elif path.startswith("teams/") and path.endswith(".ban") and entry.get("operation") == "add":
+        elif path.startswith("teams/") and path.endswith(".ban") and (
+                entry.get("operation") == "add" or (entry.get("vanillaMissing") and entry.get("allowMissing"))):
             categories["clubesSuperUpdate"][path] = entry["sha256"]
     return categories
 
 
-def inheritance_report(previous: dict, candidate: dict, super_update_recompiled: bool = False) -> dict:
+def inheritance_report(previous: dict, candidate: dict, super_update_recompiled: bool = False,
+                       compiled: dict[str, str] | None = None) -> dict:
     before, after = inheritance_categories(previous), inheritance_categories(candidate)
+    compiled = compiled or {}
     report = {}
     for name in before:
         missing = sorted(path for path in before[name] if path not in after[name])
         changed = sorted(path for path in before[name] if path in after[name] and before[name][path] != after[name][path])
         added = sorted(path for path in after[name] if path not in before[name])
+        daily = sorted(path for path in changed if name == "clubesSuperUpdate" and compiled.get(path[6:]) == after[name][path])
         tolerated = super_update_recompiled and name in ("ligas", "clubesSuperUpdate")
         report[name] = {"previous": len(before[name]), "candidate": len(after[name]), "missing": missing,
-                        "changed": changed, "added": added,
-                        "ok": not missing and (not changed or tolerated)}
+                        "changed": changed, "dailyChanged": daily, "added": added,
+                        "ok": not missing and (len(changed) == len(daily) or tolerated)}
     return report
 
 
@@ -676,10 +680,14 @@ def section_bundle(ctx: Context) -> dict:
         notes.append("Sem release.json ao lado do candidato: requiresHub conferido só em config/hub.json.")
     hub = requires_hub_errors(hub_config, release, manifest)
     checks.append(check("requiresHub coerente e não abaixo de 1.4.0", not hub, "; ".join(hub) or f"requiresHub {hub_config.get('requiresHub')}"))
-    report = inheritance_report(previous, manifest, ctx.args.super_update_recompiled)
+    compiled = {}
+    if ctx.compiled:
+        compiled = {path.name: file_sha(path) for path in sorted(ctx.compiled_teams().glob("*.ban")) if path.is_file()}
+    report = inheritance_report(previous, manifest, ctx.args.super_update_recompiled, compiled)
     for name, item in report.items():
         detail = (f"anterior {item['previous']}, candidato {item['candidate']}; ausentes {len(item['missing'])} {item['missing'][:5]}; "
-                  f"alterados {len(item['changed'])} {item['changed'][:5]}; novos {len(item['added'])}")
+                  f"alterados {len(item['changed'])} {item['changed'][:5]}, {len(item['dailyChanged'])} pela compilação do dia; "
+                  f"novos {len(item['added'])}")
         checks.append(check(f"herança de {name}", item["ok"], detail))
     return finish("bundle", started, checks, [], notes, {"inheritance": {key: {k: (len(v) if isinstance(v, list) else v) for k, v in item.items()}
                                                                         for key, item in report.items()}})
