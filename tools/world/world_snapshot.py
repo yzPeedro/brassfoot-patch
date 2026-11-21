@@ -31,18 +31,26 @@ def save(path: Path, clubs: dict, provenance: dict, meta: dict, targets: dict, v
 def load(path: Path, report_path: Path, targets: dict) -> tuple[dict, dict, dict]:
     data = read(path)
     rows = {r["teamFile"]: r for r in read(report_path)["clubs"]}
-    clubs = {}
+    clubs, refreshed = {}, False
     for file, stored in data["clubs"].items():
         club = {k: stored[k] for k in FIELDS}
+        row = rows.get(file)
         if club["replaced"] or club["new"]:
             if targets.get(file) != stored["sha256"]:
-                raise ValueError("Super Update club differs from the world snapshot; recompile the Super Update: " + file)
+                if row is None or row.get("rosterPolicy") != "source-replacement":
+                    raise ValueError("Super Update club differs from the world snapshot; recompile the Super Update: "
+                                     + file)
+                club.update(name=row["club"], players=row_players(row), sourceUrl=row["sourceUrl"],
+                            observedAt=row["observedAt"])
+                stored.update({k: club[k] for k in FIELDS}, sha256=targets[file])
+                refreshed = True
         else:
-            row = rows.get(file)
             if row is None:
                 raise ValueError("world club missing from the roster report: " + file)
             club.update(name=row["club"], players=row_players(row))
         clubs[file] = club
+    if refreshed:
+        path.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf8")
     provenance = {"worldBuildReportSha256": data["worldBuildReportSha256"], "worldScope": data["worldScope"],
                   "worldSnapshotSha256": hashlib.sha256(path.read_bytes()).hexdigest()}
     meta = {"games": set(data["gameCountries"]), "countries": data["countries"], "divisions": data["divisions"]}
