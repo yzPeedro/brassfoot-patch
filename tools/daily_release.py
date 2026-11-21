@@ -596,6 +596,30 @@ def dedupe_patch_recipe(source: Path, target: Path, full_sha: str, patch_sha: st
     return {"inherited": len(variants), "kept": len(kept)}
 
 
+def compare_entries(new_files: dict, old_files: dict, changed: dict) -> Counter:
+    removed = sorted(set(old_files) - set(new_files))
+    added = sorted(set(new_files) - set(old_files))
+    unapproved = [path for path in added if not (path.startswith("teams/") and path.endswith(".ban")
+                                                 and new_files[path]["sha256"] == changed.get(path))]
+    if removed or unapproved:
+        raise Refusal(f"entradas do pacote mudaram: +{unapproved[:5]} -{removed[:5]}")
+    changed_images, wrong = Counter(), []
+    for path, item in old_files.items():
+        current = new_files[path]
+        if path in changed:
+            if current["sha256"] != changed[path] or current["sha256"] == item["sha256"]:
+                wrong.append(path)
+        elif current["sha256"] != item["sha256"]:
+            folder = path.rsplit("/", 1)[0]
+            if item.get("component") == "crests" and folder in CREST_FOLDERS:
+                changed_images[CREST_FOLDERS[folder]] += 1
+            else:
+                wrong.append(path)
+    if wrong:
+        raise Refusal(f"entradas mudaram sem aprovação ou não chegaram ao alvo: {wrong[:8]} ({len(wrong)})")
+    return changed_images
+
+
 def check_bundle_contents(final: Path, previous: Path, changed: dict, exes: dict, version: str,
                           dropped: set) -> dict:
     from tools.bundle_limits import check_bundle
@@ -646,23 +670,7 @@ def check_bundle_contents(final: Path, previous: Path, changed: dict, exes: dict
             raise Refusal(f"{name}: origens novas sem executável publicado: {sorted(added)[:5]}")
     new_files = {item["path"]: item for item in manifest["files"]}
     old_files = {item["path"]: item for item in earlier["files"]}
-    if set(new_files) != set(old_files):
-        raise Refusal(f"entradas do pacote mudaram: +{sorted(set(new_files) - set(old_files))[:5]} "
-                      f"-{sorted(set(old_files) - set(new_files))[:5]}")
-    changed_images, wrong = Counter(), []
-    for path, item in old_files.items():
-        current = new_files[path]
-        if path in changed:
-            if current["sha256"] != changed[path] or current["sha256"] == item["sha256"]:
-                wrong.append(path)
-        elif current["sha256"] != item["sha256"]:
-            folder = path.rsplit("/", 1)[0]
-            if item.get("component") == "crests" and folder in CREST_FOLDERS:
-                changed_images[CREST_FOLDERS[folder]] += 1
-            else:
-                wrong.append(path)
-    if wrong:
-        raise Refusal(f"entradas mudaram sem aprovação ou não chegaram ao alvo: {wrong[:8]} ({len(wrong)})")
+    changed_images = compare_entries(new_files, old_files, changed)
     categories = Counter()
     for path, item in new_files.items():
         folder = path.rsplit("/", 1)[0] if "/" in path else path
