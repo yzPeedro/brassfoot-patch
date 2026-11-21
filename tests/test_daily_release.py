@@ -310,6 +310,27 @@ class PreviousLiveTests(unittest.TestCase):
                                  ("live-match-release-2026.6.10", "bf22-23-live-only.exe")])
 
 
+class EntriesTests(unittest.TestCase):
+    OLD = {"teams/a_bra.ban": {"sha256": "a0"}, "bf22-23.exe": {"sha256": "e0"}}
+
+    def test_first_change_of_original_club_adds_entry(self):
+        new = dict(self.OLD, **{"teams/b_esp.ban": {"sha256": "b1"}})
+        self.assertEqual(dr.compare_entries(new, self.OLD, {"teams/b_esp.ban": "b1"}), {})
+
+    def test_unapproved_or_wrong_hash_addition_is_refused(self):
+        for changed in ({}, {"teams/b_esp.ban": "outro"}):
+            new = dict(self.OLD, **{"teams/b_esp.ban": {"sha256": "b1"}})
+            with self.assertRaises(dr.Refusal):
+                dr.compare_entries(new, self.OLD, changed)
+
+    def test_non_team_addition_and_removal_are_refused(self):
+        with self.assertRaises(dr.Refusal):
+            dr.compare_entries(dict(self.OLD, **{"leagues/x.cfg": {"sha256": "x"}}), self.OLD,
+                               {"leagues/x.cfg": "x"})
+        with self.assertRaises(dr.Refusal):
+            dr.compare_entries({"bf22-23.exe": {"sha256": "e0"}}, self.OLD, {})
+
+
 class VersionTests(unittest.TestCase):
     def test_version_format_is_strict(self):
         self.assertEqual(dr.parse_version("2026.6.8"), (2026, 6, 8))
