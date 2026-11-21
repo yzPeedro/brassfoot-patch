@@ -214,6 +214,18 @@ class BundleTests(unittest.TestCase):
         self.assertTrue(relaxed["clubesSuperUpdate"]["ok"])
         self.assertFalse(relaxed["escudosECamisas"]["ok"])
 
+    def test_daily_change_of_added_club_is_inherited(self):
+        previous, candidate = manifest(), manifest()
+        for entry in candidate["files"]:
+            if entry["path"] == "teams/novo_arg.ban":
+                entry.update(operation="replace", allowMissing=True, sha256=h("diario"))
+        report = rs.inheritance_report(previous, candidate, compiled={"novo_arg.ban": h("diario")})
+        self.assertEqual(report["clubesSuperUpdate"]["missing"], [])
+        self.assertEqual(report["clubesSuperUpdate"]["dailyChanged"], ["teams/novo_arg.ban"])
+        self.assertTrue(report["clubesSuperUpdate"]["ok"])
+        stale = rs.inheritance_report(previous, candidate, compiled={"novo_arg.ban": h("outro")})
+        self.assertFalse(stale["clubesSuperUpdate"]["ok"])
+
     def test_brazilian_replacements_are_not_inheritance_entries(self):
         categories = rs.inheritance_categories(manifest())
         self.assertEqual(set(categories["ligas"]), {"conf_ligas_nacionais/ARG.cfg"})
