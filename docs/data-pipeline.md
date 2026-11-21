@@ -330,7 +330,7 @@ Quando `data/private/super-update/build/` não está disponível, a exportação
 python -m tools.world.site_export --report data/private/compiled-<versão>/report.json --world-snapshot config/super-update-world-2026.json
 ```
 
-- Os clubes com elenco do Super Update (substituídos ou novos) usam o nome e o elenco do retrato. Cada `.ban` precisa ter no manifesto do pacote o mesmo SHA-256 guardado no retrato. Se algum mudou, a exportação para e pede a recompilação do Super Update.
+- Os clubes com elenco do Super Update (substituídos ou novos) usam o nome e o elenco do retrato. Cada `.ban` precisa ter no manifesto do pacote o mesmo SHA-256 guardado no retrato. Se o `.ban` mudou porque a rotina diária aprovou um elenco da fonte (`rosterPolicy` `source-replacement` no relatório), a exportação usa nome, elenco, fonte e data do relatório e grava esses dados e o SHA-256 novo no retrato. Qualquer outra divergência para a exportação e pede a recompilação do Super Update. Antes de recompilar o Super Update, confira que ele não desfaz esses elencos diários.
 - Os demais clubes dos 10 países mantêm do retrato só a competição, a divisão e o estado; nome e elenco vêm do relatório diário. A exportação com `--build` pararia se o `.ban` de um desses clubes mudasse; com o retrato, ela segue com o elenco novo.
 - Os totais do Super Update (países, divisões e países considerados sul-americanos) também vêm do retrato.
 - A proveniência da tabela mantém o `worldBuildReportSha256` da compilação original e acrescenta `worldSnapshotSha256`.
