@@ -1,7 +1,21 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-22T16:24:21-03:00",
+  "updatedAt": "2026-11-22T20:06:49-03:00",
   "entries": [
+    {
+      "id": "patch-2026-6-18",
+      "version": "2026.6.18",
+      "date": "2026-11-22T20:06:49-03:00",
+      "title": "Placar do seu jogo e tela de pausa",
+      "kind": "patch",
+      "summary": "O seu jogo mostra placar, estádio e estatísticas em dias com outros campeonatos, e a pausa mostra os gols completos.",
+      "changes": [
+        "Em dias que começam com jogos sem time seu, como a Libertadores depois da Concacaf, o seu jogo mostra placar, estádio, público e estatísticas.",
+        "\"Pular todos\" fica ao lado da barra de tempo, sem cobrir o tempo de jogo.",
+        "Na tela de pausa, cada gol aparece com o autor, o ícone e a assistência, nunca a assistência sozinha."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.6.18"
+    },
     {
       "id": "patch-2026-6-17",
       "version": "2026.6.17",
