@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.6.17",
+  "version": "2026.6.18",
   "channel": "stable",
-  "releaseNotes": "Seu jogo na velocidade certa em dias com outros campeonatos e escudos para 317 clubes que estavam sem.",
+  "releaseNotes": "Placar, estádio e estatísticas do seu jogo em dias com outros campeonatos e tela de pausa com os gols completos.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [
