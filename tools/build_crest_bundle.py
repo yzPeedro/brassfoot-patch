@@ -118,6 +118,26 @@ def build(args: argparse.Namespace) -> dict:
             path = f"teams/{folder}/{club['stem']}.png"
             vanilla_path = args.original_game / path
             if not vanilla_path.exists():
+                if not club.get("newClub"):
+                    continue
+                target = render(body, side)
+                old = previous.get(path)
+                if old and old["sha256"] == sha(target):
+                    continue
+                if old:
+                    raise ValueError(f"escudo de clube novo já publicado com outra imagem: {path}")
+                name = recipe_name(path)
+                variant = crest_recipe(path, {sha(b""): 0}, target)
+                (patches / name).write_text(json.dumps({"schemaVersion": 2, "path": path, "variants": [variant]},
+                                                       separators=(",", ":")), encoding="utf8")
+                manifest["files"].append({
+                    "operation": "add", "path": path, "size": len(target), "sha256": sha(target),
+                    "acceptedOriginalSha256": [], "recipe": name, "component": COMPONENT, "vanillaMissing": True})
+                regenerated.add(path)
+                preview = previews / folder / f"{club['stem']}.png"
+                preview.parent.mkdir(parents=True, exist_ok=True)
+                preview.write_bytes(target)
+                files.append({"path": path, "sha256": sha(target)})
                 continue
             vanilla = vanilla_path.read_bytes()
             target = render(body, side)
@@ -192,6 +212,10 @@ def main() -> None:
         result["excluded"] = previous.get("excluded", [])
         excluded = {item["teamFile"] for item in result["excluded"]}
         result["clubs"] = [club for club in result["clubs"] if club["teamFile"] not in excluded]
+        listed = {club["teamFile"] for club in result["clubs"]}
+        result["clubs"] = sorted(result["clubs"] + [club for club in previous.get("clubs", [])
+                                                    if club.get("newClub") and club["teamFile"] not in listed],
+                                 key=lambda club: club["teamFile"])
         fetcher = Fetcher(args.cache, 0.5, 24 * 365)
         for club in result["clubs"]:
             status, body = fetcher.get(club["imageUrl"], "image/png")
