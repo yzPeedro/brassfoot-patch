@@ -44,6 +44,7 @@ public final class LiveMatchTransformer {
         final int[] stats = {0};
         final int[] reveals = {0};
         final int[] flushes = {0};
+        final int[] blocks = {0};
         final int[] teamsPatched = {0};
         final int[] playersPatched = {0};
         final int[] tooltipsPatched = {0};
@@ -181,6 +182,24 @@ public final class LiveMatchTransformer {
                         }
                     };
                 }
+                if ("Y".equals(name) && "(Ljava/util/ArrayList;)V".equals(descriptor)) {
+                    return new MethodVisitor(Opcodes.ASM7, delegate) {
+                        @Override public void visitMethodInsn(int opcode, String owner, String method,
+                                                              String desc, boolean isInterface) {
+                            if (opcode == Opcodes.INVOKEVIRTUAL && "a/dV".equals(owner)
+                                    && "oR".equals(method) && "()V".equals(desc)) {
+                                super.visitInsn(Opcodes.DUP);
+                                super.visitMethodInsn(Opcodes.INVOKESTATIC, "mega/LiveMatchPanel", "blockStart",
+                                        "(Ljava/lang/Object;)V", false);
+                                blocks[0]++;
+                            }
+                            super.visitMethodInsn(opcode, owner, method, desc, isInterface);
+                        }
+                        @Override public void visitMaxs(int maxStack, int maxLocals) {
+                            super.visitMaxs(maxStack + 1, maxLocals);
+                        }
+                    };
+                }
                 if ("b".equals(name) && "(Lcomponents/v;Lbest/A;)V".equals(descriptor)) {
                     return new MethodVisitor(Opcodes.ASM7, delegate) {
                         @Override public void visitCode() {
@@ -214,6 +233,7 @@ public final class LiveMatchTransformer {
             if (steps[0] != 1) throw new IllegalStateException("expected one engine step call in aa, found " + steps[0]);
             if (reveals[0] != 1) throw new IllegalStateException("expected one reveal call in aa, found " + reveals[0]);
             if (flushes[0] != 2) throw new IllegalStateException("expected halftime and full-time methods, found " + flushes[0]);
+            if (blocks[0] != 1) throw new IllegalStateException("expected one clock start in Y, found " + blocks[0]);
         }
         if (teamsScreen && teamsPatched[0] != 1) {
             throw new IllegalStateException("recognized teams-screen constructor not found");

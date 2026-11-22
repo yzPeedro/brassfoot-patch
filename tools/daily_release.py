@@ -599,11 +599,16 @@ def dedupe_patch_recipe(source: Path, target: Path, full_sha: str, patch_sha: st
 def compare_entries(new_files: dict, old_files: dict, changed: dict) -> Counter:
     removed = sorted(set(old_files) - set(new_files))
     added = sorted(set(new_files) - set(old_files))
-    unapproved = [path for path in added if not (path.startswith("teams/") and path.endswith(".ban")
-                                                 and new_files[path]["sha256"] == changed.get(path))]
+    new_images = [path for path in added if new_files[path].get("component") == "crests"
+                  and new_files[path].get("operation") == "add" and path.rsplit("/", 1)[0] in CREST_FOLDERS]
+    unapproved = [path for path in added if path not in new_images
+                  and not (path.startswith("teams/") and path.endswith(".ban")
+                           and new_files[path]["sha256"] == changed.get(path))]
     if removed or unapproved:
         raise Refusal(f"entradas do pacote mudaram: +{unapproved[:5]} -{removed[:5]}")
     changed_images, wrong = Counter(), []
+    for path in new_images:
+        changed_images[CREST_FOLDERS[path.rsplit("/", 1)[0]]] += 1
     for path, item in old_files.items():
         current = new_files[path]
         if path in changed:
