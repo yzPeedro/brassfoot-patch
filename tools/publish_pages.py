@@ -1,5 +1,6 @@
 """Publish the current static site to the configured gh-pages branch."""
 from pathlib import Path
+import os
 import shutil
 import subprocess
 import tempfile
@@ -31,14 +32,16 @@ def main():
             shutil.copytree(ROOT / "site", checkout, dirs_exist_ok=True,
                             ignore=shutil.ignore_patterns("tests", "*.test.js"))
             git("add", "-A", cwd=checkout)
+            pushed = False
             if git("status", "--porcelain", cwd=checkout):
                 git("commit", "-m", "publish: Brasfoot Mega Patch website [skip ci]", cwd=checkout)
                 git("push", "origin", "HEAD:gh-pages", cwd=checkout)
+                pushed = True
             print("Published gh-pages commit " + git("rev-parse", "HEAD", cwd=checkout))
         finally:
             git("worktree", "remove", str(checkout))
-    # A branch push made by GitHub Actions needs an explicit Pages build request.
-    subprocess.run(["gh", "api", "--method", "POST", "repos/yzPeedro/brassfoot-patch/pages/builds"], check=True)
+    if pushed and os.environ.get("GITHUB_ACTIONS") == "true":
+        subprocess.run(["gh", "api", "--method", "POST", "repos/yzPeedro/brassfoot-patch/pages/builds"], check=True)
 
 
 if __name__ == "__main__":

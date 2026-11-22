@@ -47,6 +47,9 @@ jobs:
           if [ "$state" = "false" ]; then
             echo "published=true" >> "$GITHUB_OUTPUT"
             echo "v${{ steps.edition.outputs.version }} já publicada; nada a fazer."
+          elif [ "$state" = "true" ]; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+            echo "v${{ steps.edition.outputs.version }} em rascunho de outra publicação; nada a fazer."
           else
             echo "published=false" >> "$GITHUB_OUTPUT"
           fi
