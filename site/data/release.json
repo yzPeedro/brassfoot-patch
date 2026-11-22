@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.6.17",
-  "publishedAt": "2026-11-22T19:38:26.147257+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.6.17-windows-x64.exe",
+  "publishedVersion": "2026.6.18",
+  "publishedAt": "2026-11-22T23:18:10.680152+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.6.18-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
   "fileSizeBytes": 7409152,
-  "sha256": "171640f3bb7f1ab65288637d49656d59a18dec6c9c9f8e933c44ac66c76ca0e8",
+  "sha256": "a66307476c0e83532cd76b2c62f808f709ba87fbc4005151ac249bca781c1ea3",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Seu jogo na velocidade certa em dias com outros campeonatos e escudos para 317 clubes que estavam sem."
+  "releaseNotes": "Placar, estádio e estatísticas do seu jogo em dias com outros campeonatos e tela de pausa com os gols completos."
 }
