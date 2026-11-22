@@ -1,7 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-19T16:18:31-03:00",
+  "updatedAt": "2026-11-22T16:24:21-03:00",
   "entries": [
+    {
+      "id": "patch-2026-6-17",
+      "version": "2026.6.17",
+      "date": "2026-11-22T16:24:21-03:00",
+      "title": "Velocidade do seu jogo e escudos dos clubes novos",
+      "kind": "patch",
+      "summary": "O seu jogo roda na velocidade certa em dias com outros campeonatos, e 317 clubes ganham escudo.",
+      "changes": [
+        "Em dias com mais de um bloco de jogos, o seu jogo usa a velocidade configurada para jogos com humanos.",
+        "O campo animado começa do zero quando o bloco do seu jogo entra.",
+        "\"Pular todos\" aparece na frente do placar e para no bloco do seu jogo.",
+        "Escudos para 317 clubes de Inglaterra, Itália, estaduais, Série D, Copa do Brasil, Venezuela, Argentina e Chile."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.6.17"
+    },
     {
       "id": "patch-2026-6-16",
       "version": "2026.6.16",
