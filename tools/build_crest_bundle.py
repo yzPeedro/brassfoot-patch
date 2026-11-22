@@ -125,7 +125,8 @@ def build(args: argparse.Namespace) -> dict:
                 if old and old["sha256"] == sha(target):
                     continue
                 if old:
-                    raise ValueError(f"escudo de clube novo já publicado com outra imagem: {path}")
+                    skipped.append({"teamFile": club["teamFile"], "reason": f"escudo novo já publicado difere: {path}"})
+                    continue
                 name = recipe_name(path)
                 variant = crest_recipe(path, {sha(b""): 0}, target)
                 (patches / name).write_text(json.dumps({"schemaVersion": 2, "path": path, "variants": [variant]},

@@ -323,6 +323,19 @@ class EntriesTests(unittest.TestCase):
             with self.assertRaises(dr.Refusal):
                 dr.compare_entries(new, self.OLD, changed)
 
+    def test_new_club_crest_addition_is_counted_as_crest_change(self):
+        new = dict(self.OLD, **{
+            "teams/escudos/b_ing.png": {"sha256": "c1", "component": "crests", "operation": "add"},
+            "teams/escudosMini/b_ing.png": {"sha256": "c2", "component": "crests", "operation": "add"}})
+        self.assertEqual(dr.compare_entries(new, self.OLD, {}), {"crests": 2})
+
+    def test_image_addition_outside_crest_component_is_refused(self):
+        for item in ({"sha256": "c1", "operation": "add"},
+                     {"sha256": "c1", "component": "rosters", "operation": "add"},
+                     {"sha256": "c1", "component": "crests", "operation": "replace"}):
+            with self.assertRaises(dr.Refusal):
+                dr.compare_entries(dict(self.OLD, **{"teams/escudos/b_ing.png": item}), self.OLD, {})
+
     def test_non_team_addition_and_removal_are_refused(self):
         with self.assertRaises(dr.Refusal):
             dr.compare_entries(dict(self.OLD, **{"leagues/x.cfg": {"sha256": "x"}}), self.OLD,
