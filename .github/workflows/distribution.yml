@@ -40,15 +40,28 @@ jobs:
           with open(os.environ['GITHUB_OUTPUT'], 'a') as stream:
               stream.write('version=' + version + '\n')
           PY
+      - name: Skip versions already published
+        id: release
+        run: |
+          state=$(gh release view "v${{ steps.edition.outputs.version }}" --repo "$GITHUB_REPOSITORY" --json isDraft --jq .isDraft 2>/dev/null || true)
+          if [ "$state" = "false" ]; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+            echo "v${{ steps.edition.outputs.version }} já publicada; nada a fazer."
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          fi
       - name: Restore or collect source snapshot
+        if: steps.release.outputs.published != 'true'
         uses: actions/cache/restore@v4
         with:
           path: data/private/daily
           key: daily-football-v1-${{ github.run_id }}
           restore-keys: daily-football-v1-
       - name: Collect catalog for this distribution
+        if: steps.release.outputs.published != 'true'
         run: python -m tools.daily_update
       - name: Compile distributable artifacts (no test execution)
+        if: steps.release.outputs.published != 'true'
         run: >-
           python tools/build_distribution.py
           --bundle windows-installer/bundled_release
@@ -56,10 +69,12 @@ jobs:
           --source-commit "$GITHUB_SHA"
           --snapshot data/private/daily/snapshot.json
       - name: Publish artifacts then derive site manifest
+        if: steps.release.outputs.published != 'true'
         run: >-
           python tools/publish_distribution.py --directory dist/release
           --notes docs/releases/v${{ steps.edition.outputs.version }}.md
       - name: Save published manifest and publish site
+        if: steps.release.outputs.published != 'true'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -69,7 +84,7 @@ jobs:
           git push origin HEAD:main
           python tools/publish_pages.py
       - name: Preserve artifacts for interrupted publication
-        if: always()
+        if: always() && steps.release.outputs.published != 'true'
         uses: actions/upload-artifact@v4
         with:
           name: mega-patch-distribution-${{ steps.edition.outputs.version }}
