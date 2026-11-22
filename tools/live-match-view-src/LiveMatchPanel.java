@@ -44,6 +44,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -3093,6 +3094,7 @@ public final class LiveMatchPanel extends JPanel {
         if (!host.isShowing()) {
             if (everShown) {
                 timer.stop();
+                removeSkipAllButton();
                 if (getParent() != null) getParent().remove(this);
                 if (active == this) active = null;
                 diagnostic("panel_stopped host_no_longer_showing", null);
@@ -3130,11 +3132,23 @@ public final class LiveMatchPanel extends JPanel {
         skipAllButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { skipAllMatches(); }
         });
-        skipAllButton.setBounds(host.getWidth() - 130, 8, 120, 26);
-        host.setLayout(null);
-        host.add(skipAllButton, 0);
-        host.revalidate();
-        host.repaint();
+        JRootPane root = SwingUtilities.getRootPane(host);
+        if (root == null) {
+            skipAllButton = null;
+            return;
+        }
+        JLayeredPane layers = root.getLayeredPane();
+        Object progress = readField(host, "Hf");
+        Point corner;
+        if (progress instanceof Component && ((Component) progress).isShowing() && ((Component) progress).getWidth() > 0) {
+            Component bar = (Component) progress;
+            corner = SwingUtilities.convertPoint(bar.getParent(), bar.getX() - 128, bar.getY() + (bar.getHeight() - 24) / 2, layers);
+        } else {
+            corner = SwingUtilities.convertPoint(host, host.getWidth() / 2 - 60, 8, layers);
+        }
+        skipAllButton.setBounds(corner.x, corner.y, 116, 24);
+        layers.add(skipAllButton, JLayeredPane.PALETTE_LAYER);
+        layers.repaint();
     }
 
     private void removeSkipAllButton() {
@@ -3215,6 +3229,10 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private void openFieldSpace() {
+        if (host.getLayout() != null) {
+            host.invalidate();
+            host.validate();
+        }
         int width = host.getWidth();
         int height = host.getHeight();
         Component[] children = host.getComponents();
