@@ -43,6 +43,7 @@ public final class LiveMatchTransformer {
         final int[] penalty = {0};
         final int[] stats = {0};
         final int[] reveals = {0};
+        final int[] dialogs = {0};
         final int[] flushes = {0};
         final int[] blocks = {0};
         final int[] teamsPatched = {0};
@@ -178,6 +179,13 @@ public final class LiveMatchTransformer {
                                 reveals[0]++;
                                 return;
                             }
+                            if (opcode == Opcodes.INVOKESPECIAL && "a/dV".equals(owner) && "e".equals(method)
+                                    && "(IZ)V".equals(desc)) {
+                                super.visitMethodInsn(Opcodes.INVOKESTATIC, "mega/LiveMatchPanel", "openLineupDialog",
+                                        "(Ljava/lang/Object;IZ)V", false);
+                                dialogs[0]++;
+                                return;
+                            }
                             super.visitMethodInsn(opcode, owner, method, desc, isInterface);
                         }
                     };
@@ -234,6 +242,7 @@ public final class LiveMatchTransformer {
             if (reveals[0] != 1) throw new IllegalStateException("expected one reveal call in aa, found " + reveals[0]);
             if (flushes[0] != 2) throw new IllegalStateException("expected halftime and full-time methods, found " + flushes[0]);
             if (blocks[0] != 1) throw new IllegalStateException("expected one clock start in Y, found " + blocks[0]);
+            if (dialogs[0] != 1) throw new IllegalStateException("expected one lineup dialog in aa, found " + dialogs[0]);
         }
         if (teamsScreen && teamsPatched[0] != 1) {
             throw new IllegalStateException("recognized teams-screen constructor not found");

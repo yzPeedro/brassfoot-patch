@@ -689,6 +689,7 @@ public final class LiveMatchPanel extends JPanel {
         if (!(clock instanceof Timer)) return;
         if (!((Timer) clock).isRunning() && !clockHeld) return;
         if (Boolean.FALSE.equals(readField(host, "GZ"))) return;
+        if (pauseRequested()) return;
         Object row = currentLiveRow();
         Object match = matchFromLiveRow(row);
         if (row == null || match == null || match == row) return;
@@ -1340,6 +1341,7 @@ public final class LiveMatchPanel extends JPanel {
             boolean human = Boolean.TRUE.equals(invoke(invoke(action, "cu"), "jZ"));
             if (type == 1) return true;
             if (type == 2) return true;
+            if (type == 8) return pendingGoalFor(action) != null;
             if (type == 3 || type == 4 || type == 5) return !human;
             return false;
         } catch (Throwable error) {
@@ -1347,7 +1349,29 @@ public final class LiveMatchPanel extends JPanel {
         }
     }
 
+    private Object pendingGoalFor(Object assist) {
+        Object row = currentLiveRow();
+        Object match = matchFromLiveRow(row);
+        Object list = match == null ? null : invoke(match, "hE");
+        if (!(list instanceof List<?>)) return null;
+        int minute = integer(invoke(assist, "em"), -1);
+        int half = integer(invoke(assist, "en"), -1);
+        Object team = invoke(assist, "cu");
+        for (Object candidate : (List<?>) list) {
+            if (candidate == assist || Boolean.TRUE.equals(invoke(candidate, "isDone"))) continue;
+            if (integer(invoke(candidate, "b"), -1) != 1) continue;
+            if (integer(invoke(candidate, "em"), -1) != minute || integer(invoke(candidate, "en"), -1) != half) continue;
+            if (invoke(candidate, "cu") == team) return candidate;
+        }
+        return null;
+    }
+
     private void noteDeferred(Object row, Object match, Object action, int index) {
+        if (integer(invoke(action, "b"), -1) == 8) {
+            for (Object[] entry : deferredReveals) if (entry[2] == action) return;
+            deferredReveals.add(new Object[] { row, match, action, Integer.valueOf(index), Long.valueOf(System.currentTimeMillis()) });
+            return;
+        }
         for (Object[] entry : deferredReveals) if (entry[2] == action) return;
         deferredReveals.add(new Object[] { row, match, action, Integer.valueOf(index), Long.valueOf(System.currentTimeMillis()) });
         boolean animating = action == activeGoalAction || action == penaltyActionRef
@@ -1377,6 +1401,11 @@ public final class LiveMatchPanel extends JPanel {
             if (Boolean.TRUE.equals(invoke(entry[2], "isDone"))) {
                 deferredReveals.remove(i);
                 deferredShown++;
+            } else if (integer(invoke(entry[2], "b"), -1) == 8) {
+                if (pendingGoalFor(entry[2]) == null) {
+                    deferredReveals.remove(i);
+                    revealDeferred(entry);
+                }
             } else if (real - ((Long) entry[4]).longValue() > (isPenalty(entry[2]) ? 20000L : limit)
                     && !(penaltyBusy && isPenalty(entry[2]))) {
                 deferredReveals.remove(i);
@@ -1396,6 +1425,18 @@ public final class LiveMatchPanel extends JPanel {
             callReveal(host, entry[0], entry[1], entry[2], ((Integer) entry[3]).intValue());
         } catch (Throwable error) {
             diagnostic("deferred_reveal_failed", error);
+        }
+    }
+
+    public static void openLineupDialog(Object host, int index, boolean forced) throws Throwable {
+        LiveMatchPanel panel = active;
+        if (panel != null && panel.host == host) panel.flushAllDeferred();
+        Method method = host.getClass().getDeclaredMethod("e", int.class, boolean.class);
+        method.setAccessible(true);
+        try {
+            method.invoke(host, Integer.valueOf(index), Boolean.valueOf(forced));
+        } catch (java.lang.reflect.InvocationTargetException error) {
+            throw error.getCause() == null ? error : error.getCause();
         }
     }
 
