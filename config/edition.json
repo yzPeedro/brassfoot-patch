@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.6.16",
+  "version": "2026.6.17",
   "channel": "stable",
-  "releaseNotes": "Competições brasileiras 2026 (Séries A a D, Copa do Brasil, Supercopa Rei, 27 estaduais, Copa do Nordeste e Copa Verde), Inglaterra e Itália com 4 divisões, 310 clubes novos e juniores Sub-20 reais dos 20 clubes da Série A.",
+  "releaseNotes": "Seu jogo na velocidade certa em dias com outros campeonatos e escudos para 317 clubes que estavam sem.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [
