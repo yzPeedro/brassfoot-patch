@@ -3102,20 +3102,17 @@ public final class LiveMatchPanel extends JPanel {
         everShown = true;
         if (laidOut) return;
         if (host.getWidth() <= 0 || host.getHeight() <= 0) return;
-        int watchedNow = integer(readField(host, "GW"), -2);
-        if (watchedNow >= 0 && noHumanMatch) {
-            if (skipAllButton != null && skipAllButton.getParent() != null) {
-                skipAllButton.getParent().remove(skipAllButton);
-            }
+        int watched = integer(readField(host, "GW"), -2);
+        if (watched >= 0 && noHumanMatch) {
+            removeSkipAllButton();
             setVisible(true);
             noHumanMatch = false;
         }
-        int watched = watchedNow;
-        noHumanMatch = watched < 0;
-        if (noHumanMatch) {
+        if (watched < 0) {
+            if (!noHumanMatch) diagnostic("no_human_match field_hidden", null);
+            noHumanMatch = true;
             addSkipAllButton();
             setVisible(false);
-            diagnostic("no_human_match field_hidden", null);
             return;
         }
         laidOut = true;
@@ -3135,9 +3132,48 @@ public final class LiveMatchPanel extends JPanel {
         });
         skipAllButton.setBounds(host.getWidth() - 130, 8, 120, 26);
         host.setLayout(null);
-        host.add(skipAllButton);
+        host.add(skipAllButton, 0);
         host.revalidate();
         host.repaint();
+    }
+
+    private void removeSkipAllButton() {
+        if (skipAllButton == null) return;
+        Container parent = skipAllButton.getParent();
+        if (parent != null) {
+            parent.remove(skipAllButton);
+            parent.repaint();
+        }
+        skipAllButton = null;
+    }
+
+    private void retire() {
+        timer.stop();
+        removeSkipAllButton();
+        if (getParent() != null) getParent().remove(this);
+        if (active == this) active = null;
+    }
+
+    public static void blockStart(Object host) {
+        try {
+            Object clock = readField(host, "GO");
+            Object delay = readField(host, "d");
+            if (clock instanceof Timer && delay instanceof Integer && ((Integer) delay).intValue() > 0) {
+                ((Timer) clock).setInitialDelay(((Integer) delay).intValue());
+                ((Timer) clock).setDelay(((Integer) delay).intValue());
+            }
+            Object watched = readField(host, "GW");
+            LiveMatchPanel panel = active;
+            boolean human = watched instanceof Integer && ((Integer) watched).intValue() >= 0;
+            diagnostic("block_start human=" + human + " delay=" + delay, null);
+            if (human && panel != null && panel.host == host && panel.noHumanMatch && !panel.laidOut) {
+                panel.retire();
+                new LiveMatchPanel((JPanel) host);
+                diagnostic("block_start panel_renewed", null);
+            }
+        } catch (Throwable error) {
+            diagnostic("block_start_failed", error);
+        }
     }
 
     private void skipAllMatches() {
@@ -3149,7 +3185,10 @@ public final class LiveMatchPanel extends JPanel {
             cRField.setAccessible(true);
             for (int i = 0; i < 200; i++) {
                 dJ.invoke(null);
-                if (cRField.get(null) == null) break;
+                Object screen = cRField.get(null);
+                if (screen == null) break;
+                Object watched = readField(screen, "GW");
+                if (watched instanceof Integer && ((Integer) watched).intValue() >= 0) break;
             }
             diagnostic("skip_all_done", null);
         } catch (Throwable error) {
