@@ -70,6 +70,19 @@
    "sourceSha256": "0bd786a6793b22cdba636f24cf80b454a67ce7972b25a8cde006aca399d7b6e5"
   },
   {
+   "teamFile": "teams/adjaguar_pe.ban",
+   "stem": "adjaguar_pe",
+   "name": "AD Jaguar",
+   "country": "Brasil",
+   "source": "ogol",
+   "sourceId": "72999",
+   "imageUrl": "https://cdn-img.staticzz.com/img/logos/equipas/99/72999_logo_jaguar_20260219155233.png",
+   "newClub": true,
+   "auditStatus": "clube novo sem escudo",
+   "evidence": "oGol: Jaboatão dos Guararapes-PE",
+   "sourceSha256": "4a7cb9ca1679240165f982b226e5f87eb9a2dde6b0773992e62b6cf5325fb3f3"
+  },
+  {
    "teamFile": "teams/afcwimbledon_ing.ban",
    "stem": "afcwimbledon_ing",
    "name": "AFC Wimbledon",
@@ -99,6 +112,19 @@
     "transfermarkt365": 0.0055
    },
    "sourceSha256": "c0e2d5cea6839a536cbd326a04f2ce4c96649de5f8026c37296d88228eb86277"
+  },
+  {
+   "teamFile": "teams/agroec_go.ban",
+   "stem": "agroec_go",
+   "name": "Agro EC",
+   "country": "Brasil",
+   "source": "ogol",
+   "sourceId": "215573",
+   "imageUrl": "https://cdn-img.staticzz.com/img/logos/equipas/215573_imgbank_1794909572.png",
+   "newClub": true,
+   "auditStatus": "clube novo sem escudo",
+   "evidence": "oGol: Ouvidor-GO",
+   "sourceSha256": "4f90e00720e45fc46d5a9b966f6c7cb5d2b563d112a53d33ce3a1dd2adee8a4f"
   },
   {
    "teamFile": "teams/aguianegra_ms.ban",
@@ -1010,6 +1036,19 @@
    "sourceSha256": "e0e057f8c615935ec826f8f16eb78d41bcce0764a6ff59bc6bcd278806dd99b8"
   },
   {
+   "teamFile": "teams/cafetalerosdebiscucuyfut_ven.ban",
+   "stem": "cafetalerosdebiscucuyfut_ven",
+   "name": "Cafetaleros de Biscucuy Fútbol Club",
+   "country": "Venezuela",
+   "source": "ogol",
+   "sourceId": "250790",
+   "imageUrl": "https://cdn-img.staticzz.com/img/logos/equipas/90/250790_logo_cafetaleros_de_biscucuy.jpg",
+   "newClub": true,
+   "auditStatus": "clube novo sem escudo",
+   "evidence": "oGol: Biscucuy, Venezuela (logo pode ser antigo)",
+   "sourceSha256": "b418fbd937f1c9c142bfc3e3ae9a5a032e893449061915c0de4469bcf5db99e0"
+  },
+  {
    "teamFile": "teams/cagliari_ita.ban",
    "stem": "cagliari_ita",
    "name": "Cagliari",
@@ -1335,6 +1374,19 @@
    "sourceSha256": "7d068bf6b6cdae3d6bd91702b1edbc18bcc9f60a58e37218b5857287fc59cdaa"
   },
   {
+   "teamFile": "teams/clubatleticoportuguesa_ven.ban",
+   "stem": "clubatleticoportuguesa_ven",
+   "name": "Club Atlético Portuguesa",
+   "country": "Venezuela",
+   "source": "ogol",
+   "sourceId": "13759",
+   "imageUrl": "https://cdn-img.staticzz.com/img/logos/equipas/13759_imgbank_1700560074.png",
+   "newClub": true,
+   "auditStatus": "clube novo sem escudo",
+   "evidence": "oGol: Portuguesa FC, Acarigua",
+   "sourceSha256": "5e7bf4313f086198197da4afbf4c93fa6affd2669ef4fd5cc452ab6ceeb40bc6"
+  },
+  {
    "teamFile": "teams/clubeesportivooperariova_mt.ban",
    "stem": "clubeesportivooperariova_mt",
    "name": "Operário VG",
@@ -1372,6 +1424,32 @@
    "auditStatus": "clube novo sem escudo",
    "evidence": "Transfermarkt e 365Scores concordam",
    "sourceSha256": "2392352fa7e7bbde03e598bbe6e9b527dcecff64b46513dbeaaccdb72d083b61"
+  },
+  {
+   "teamFile": "teams/confiancadesape_pb.ban",
+   "stem": "confiancadesape_pb",
+   "name": "Confiança de Sapé",
+   "country": "Brasil",
+   "source": "ogol",
+   "sourceId": "71552",
+   "imageUrl": "https://cdn-img.staticzz.com/img/logos/equipas/71552_imgbank.png",
+   "newClub": true,
+   "auditStatus": "clube novo sem escudo",
+   "evidence": "oGol: Sapé-PB",
+   "sourceSha256": "c6e5773dababa6dfa4d29cd8b7f7dbcf37ddf94b781ae48469ff5198b20a42e6"
+  },
+  {
+   "teamFile": "teams/corisabba_pi.ban",
+   "stem": "corisabba_pi",
+   "name": "Corisabbá",
+   "country": "Brasil",
+   "source": "ogol",
+   "sourceId": "3207",
+   "imageUrl": "https://cdn-img.staticzz.com/img/logos/equipas/3207_imgbank.png",
+   "newClub": true,
+   "auditStatus": "clube novo sem escudo",
+   "evidence": "oGol: Floriano-PI",
+   "sourceSha256": "875f7979c0754e7af10563744aef79c71d169489d444e2d5f9620ba32460f3ad"
   },
   {
    "teamFile": "teams/corumbaense_ms.ban",
@@ -1424,6 +1502,19 @@
    "auditStatus": "clube novo sem escudo",
    "evidence": "ID do Transfermarkt na fonte do elenco",
    "sourceSha256": "b853dcff0f1dd4e125f8df9f3abadbbd26795966dd641abbe8ab7cfa1abdbe50"
+  },
+  {
+   "teamFile": "teams/craquidauana_ms.ban",
+   "stem": "craquidauana_ms",
+   "name": "CR Aquidauana",
+   "country": "Brasil",
+   "source": "ogol",
+   "sourceId": "15590",
+   "imageUrl": "https://cdn-img.staticzz.com/img/logos/equipas/15590_imgbank.png",
+   "newClub": true,
+   "auditStatus": "clube novo sem escudo",
+   "evidence": "oGol: Aquidauana-MS",
+   "sourceSha256": "09a786e06d6f60c6eb6f6420de1e2f199399f6921c7c8e81e07df7fcb24b539c"
   },
   {
    "teamFile": "teams/crawleytown_ing.ban",
@@ -1540,6 +1631,19 @@
    "sourceSha256": "0a0dacd53d0edfaa0a60b140aef6264f0d93f3f79df8905bcdb79301a19be0c9"
   },
   {
+   "teamFile": "teams/decisaogoiana_pe.ban",
+   "stem": "decisaogoiana_pe",
+   "name": "Decisão Goiana",
+   "country": "Brasil",
+   "source": "ogol",
+   "sourceId": "96110",
+   "imageUrl": "https://cdn-img.staticzz.com/img/logos/equipas/96110_imgbank_1783508898.png",
+   "newClub": true,
+   "auditStatus": "clube novo sem escudo",
+   "evidence": "oGol: Goiana-PE",
+   "sourceSha256": "a6d623ea2132a68867adef27716e751467903ae421e5093b67907a110cae4b86"
+  },
+  {
    "teamFile": "teams/defensoresdebelgrano_arg.ban",
    "stem": "defensoresdebelgrano_arg",
    "name": "Defensores de Belgrano",
@@ -1564,6 +1668,19 @@
    "auditStatus": "clube novo sem escudo",
    "evidence": "365Scores",
    "sourceSha256": "eac9f952d40d5e38731dc68a71b33988236ba0af1694e7ee3f30b65efb1a19aa"
+  },
+  {
+   "teamFile": "teams/deportivolaguairafutbolc_ven.ban",
+   "stem": "deportivolaguairafutbolc_ven",
+   "name": "Deportivo La Guaira Fútbol Club \"B\"",
+   "country": "Venezuela",
+   "source": "ogol",
+   "sourceId": "15415",
+   "imageUrl": "https://cdn-img.staticzz.com/img/logos/equipas/15415_imgbank_1688137007.png",
+   "newClub": true,
+   "auditStatus": "clube novo sem escudo",
+   "evidence": "oGol: escudo da equipe principal do Deportivo La Guaira",
+   "sourceSha256": "60c9392e32f53d89a7932a37e8f9ee4fa574668c57b9a41d49bad53cab65edf5"
   },
   {
    "teamFile": "teams/derbycounty_ing.ban",
@@ -4086,6 +4203,58 @@
    "sourceSha256": "59d7a8298b19360fa79e9eb40d399ca22d839de667efc78d0fe963d99dccb27b"
   },
   {
+   "teamFile": "teams/riobranco_es.ban",
+   "stem": "riobranco_es",
+   "name": "Rio Branco",
+   "country": "Brasil",
+   "source": "ogol",
+   "sourceId": "3426",
+   "imageUrl": "https://cdn-img.staticzz.com/img/logos/equipas/3426_imgbank_1793610742.png",
+   "newClub": true,
+   "auditStatus": "clube novo sem escudo",
+   "evidence": "oGol: Rio Branco AC, Vitória-ES",
+   "sourceSha256": "4134130f8ea3ddc44be88fa499a3a38fb7c63576d6f40c91c86c58f9a9ec9179"
+  },
+  {
+   "teamFile": "teams/riobrancofutebolclube_es.ban",
+   "stem": "riobrancofutebolclube_es",
+   "name": "Rio Branco",
+   "country": "Brasil",
+   "source": "ogol",
+   "sourceId": "208784",
+   "imageUrl": "https://cdn-img.staticzz.com/img/logos/equipas/208784_imgbank_1741946493.png",
+   "newClub": true,
+   "auditStatus": "clube novo sem escudo",
+   "evidence": "oGol: Rio Branco FC, Venda Nova do Imigrante-ES",
+   "sourceSha256": "3bc8bbfb7f30e2e32a9ed5183dd20fe03c0c7d4a1363fcfe39d42587517c9bda"
+  },
+  {
+   "teamFile": "teams/rionegrororaima_rr.ban",
+   "stem": "rionegrororaima_rr",
+   "name": "Rio Negro (Roraima)",
+   "country": "Brasil",
+   "source": "ogol",
+   "sourceId": "15720",
+   "imageUrl": "https://cdn-img.staticzz.com/img/logos/equipas/15720_imgbank_1709308237.png",
+   "newClub": true,
+   "auditStatus": "clube novo sem escudo",
+   "evidence": "oGol: Boa Vista-RR",
+   "sourceSha256": "7e1d3e628ad43d41e606251a7a48bf8b72fb0ba1ba7c5f9e96ffe817d65e45c7"
+  },
+  {
+   "teamFile": "teams/river_rr.ban",
+   "stem": "river_rr",
+   "name": "River",
+   "country": "Brasil",
+   "source": "ogol",
+   "sourceId": "15722",
+   "imageUrl": "https://cdn-img.staticzz.com/img/logos/equipas/15722_imgbank_1709308356.png",
+   "newClub": true,
+   "auditStatus": "clube novo sem escudo",
+   "evidence": "oGol: Boa Vista-RR",
+   "sourceSha256": "fd10058a876d70bc5d34c70b88765394e5b2eb8e000a62244aa3dd3fc3504e35"
+  },
+  {
    "teamFile": "teams/rochdale_ing.ban",
    "stem": "rochdale_ing",
    "name": "Rochdale",
@@ -4719,6 +4888,19 @@
    "sourceSha256": "a9ab3295c121358792c2c35872b1a63855593fbc92e8bf1c6010aa78b447968e"
   },
   {
+   "teamFile": "teams/tec_pi.ban",
+   "stem": "tec_pi",
+   "name": "Tec",
+   "country": "Brasil",
+   "source": "ogol",
+   "sourceId": "270616",
+   "imageUrl": "https://cdn-img.staticzz.com/img/logos/equipas/270616_imgbank.png",
+   "newClub": true,
+   "auditStatus": "clube novo sem escudo",
+   "evidence": "oGol: Teresina EC, Teresina-PI",
+   "sourceSha256": "6741d5118645bd020fd4eb1d822fbed19ebac81784f6eff3e07e2851dd4baf1c"
+  },
+  {
    "teamFile": "teams/tirol_ce.ban",
    "stem": "tirol_ce",
    "name": "Tirol",
@@ -4916,6 +5098,19 @@
    "sourceSha256": "0b041295c85b13325c955a09dfcb414f8644470afc7e60db99dab6f9b41c5456"
   },
   {
+   "teamFile": "teams/universidaddeconcepcion_chi.ban",
+   "stem": "universidaddeconcepcion_chi",
+   "name": "Universidad de Concepción",
+   "country": "Chile",
+   "source": "ogol",
+   "sourceId": "2271",
+   "imageUrl": "https://cdn-img.staticzz.com/img/logos/equipas/2271_imgbank_1688116163.png",
+   "newClub": true,
+   "auditStatus": "clube novo sem escudo",
+   "evidence": "oGol: Concepción, Chile",
+   "sourceSha256": "53be71349d747aa2d3f63d4de5039ad21d3e234fab9e4c0d6b6b334a030bd6f0"
+  },
+  {
    "teamFile": "teams/vado_ita.ban",
    "stem": "vado_ita",
    "name": "Vado",
@@ -4958,6 +5153,19 @@
    "auditStatus": "clube novo sem escudo",
    "evidence": "365Scores, estado pela competição (Mato-Grossense)",
    "sourceSha256": "c1157e4b54a79ed98de0781b70ccf1739a4e8f5b3e5148bc22a7c20341c6357e"
+  },
+  {
+   "teamFile": "teams/vascodagamaac_ac.ban",
+   "stem": "vascodagamaac_ac",
+   "name": "Vasco da Gama-AC",
+   "country": "Brasil",
+   "source": "ogol",
+   "sourceId": "3524",
+   "imageUrl": "https://cdn-img.staticzz.com/img/logos/equipas/3524_imgbank_1673278692.png",
+   "newClub": true,
+   "auditStatus": "clube novo sem escudo",
+   "evidence": "oGol: Rio Branco-AC",
+   "sourceSha256": "d199bc0dbdb3080c9513d9af93d314794fe0898f623bc3b33767a489e879c065"
   },
   {
    "teamFile": "teams/venezia_ita.ban",
