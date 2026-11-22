@@ -110,6 +110,10 @@ def publish(directory, notes):
     gh("release", "edit", tag, "--repo", REPO, "--draft=false", "--prerelease=false", "--latest",
        "--notes-file", str(notes))
     release = json.loads(gh("api", release_api))
+    uploaded = {asset["name"]: asset for asset in release["assets"]}
+    stale = [name for name, asset in uploaded.items() if "/download/" + tag + "/" not in asset.get("browser_download_url", "")]
+    if stale:
+        raise ValueError("release published but asset URLs are not tagged yet: " + ", ".join(stale))
     public = dict(manifest, status="published", publishedAt=datetime.now(timezone.utc).isoformat())
     public["artifacts"] = [dict(a,
         platform={"macos": "darwin"}.get(a["platform"], a["platform"]),
