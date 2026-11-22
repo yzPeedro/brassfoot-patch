@@ -15,6 +15,8 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+      - name: Install Python test dependencies
+        run: python -m pip install Pillow==11.3.0
       - name: Compile Python
         run: python -m compileall -q api_football_sync.py build_preview.py install_preview.py transfer_windows.py tests
       - name: Offline unit tests (no user game files or API secrets)
