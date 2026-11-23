@@ -1,7 +1,25 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-23T12:56:05-03:00",
+  "updatedAt": "2026-11-23T15:30:00-03:00",
   "entries": [
+    {
+      "id": "patch-2026-6-20",
+      "version": "2026.6.20",
+      "date": "2026-11-23T15:30:00-03:00",
+      "title": "Correções no campo animado",
+      "kind": "patch",
+      "summary": "Corrige pausas, finalizações, faltas, posicionamento, expulsões e pênaltis no campo animado.",
+      "changes": [
+        "O relógio pausa durante reposição pós-gol, início/retorno de tempo e cobranças de falta, inclusive faltas diretas.",
+        "Jogadores com chance clara na área finalizam em vez de segurar a bola ou recuar sem necessidade.",
+        "Dentro da área adversária, o portador só toca para companheiro que também esteja na área ou finaliza.",
+        "Faltas com cartão amarelo podem ter cobrador diferente; cobranças diretas mantêm o batedor designado.",
+        "Antes do pontapé inicial e no início do segundo tempo, os jogadores ficam no próprio campo.",
+        "Em expulsão com cartão vermelho, a animação aparece antes do menu de substituição.",
+        "Pênaltis não ficam travados esperando o modal; o resultado é adiantado e a animação segue sincronizada."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.6.20"
+    },
     {
       "id": "patch-2026-6-19",
       "version": "2026.6.19",
