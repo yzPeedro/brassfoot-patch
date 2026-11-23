@@ -442,6 +442,1766 @@
       "teamFile": "teams/vasco.ban",
       "action": "remove",
       "source": "docs/releases/v2026.6.15.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Martin Odegaard",
+      "teamFile": "teams/arsenal.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Max Dowman",
+      "teamFile": "teams/arsenal.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Martin Ødegaard",
+      "teamFile": "teams/arsenal.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Alysson Edward",
+      "teamFile": "teams/astonvilla_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Emilliano Buendía",
+      "teamFile": "teams/astonvilla_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Alysson",
+      "teamFile": "teams/astonvilla_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Emiliano Buendía",
+      "teamFile": "teams/astonvilla_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "James Wright",
+      "teamFile": "teams/astonvilla_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Charles de Ketelaere",
+      "teamFile": "teams/atalanta_it.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Charles De",
+      "teamFile": "teams/atalanta_it.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Lorenzo De Silvestri",
+      "teamFile": "teams/bologna_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Lukasz Skorupski",
+      "teamFile": "teams/bologna_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Oussama El Azzouzi",
+      "teamFile": "teams/bologna_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Torbjörn Heggem",
+      "teamFile": "teams/bologna_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Lorenzo De",
+      "teamFile": "teams/bologna_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Oussama El",
+      "teamFile": "teams/bologna_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Torbjørn Heggem",
+      "teamFile": "teams/bologna_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Łukasz Skorupski",
+      "teamFile": "teams/bologna_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Ben Doak",
+      "teamFile": "teams/bournemouth_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Djordje Petrovic",
+      "teamFile": "teams/bournemouth_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Eli Kroupi",
+      "teamFile": "teams/bournemouth_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Michele Di Gregorio",
+      "teamFile": "teams/bournemouth_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Ben Gannon-Doak",
+      "teamFile": "teams/bournemouth_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Eli Junior",
+      "teamFile": "teams/bournemouth_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Michele Di",
+      "teamFile": "teams/bournemouth_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Đorđe Petrović",
+      "teamFile": "teams/bournemouth_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Hákon Rafn",
+      "teamFile": "teams/brentford_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Keane Lewis",
+      "teamFile": "teams/brentford_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Sepp Van den Berg",
+      "teamFile": "teams/brentford_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Yegor Yarmolyuk",
+      "teamFile": "teams/brentford_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Hákon Valdimarsson",
+      "teamFile": "teams/brentford_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Keane Lewis-Potter",
+      "teamFile": "teams/brentford_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Sepp van",
+      "teamFile": "teams/brentford_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Yehor Yarmolyuk",
+      "teamFile": "teams/brentford_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Alberto Marí",
+      "teamFile": "teams/budapeste_hun.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Dastan Satpaev",
+      "teamFile": "teams/burnley_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Jacob Larsen",
+      "teamFile": "teams/burnley_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Jordan Beyer",
+      "teamFile": "teams/burnley_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Dastan Satpayev",
+      "teamFile": "teams/burnley_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Enock Agyei",
+      "teamFile": "teams/burnley_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Jacob Bruun",
+      "teamFile": "teams/burnley_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Alessandro Sugamele",
+      "teamFile": "teams/cagliari_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Matija Kavcic",
+      "teamFile": "teams/celje_elv.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Mahdi Nicoll-Jazuli",
+      "teamFile": "teams/chelsea.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Olutayo Subuloye",
+      "teamFile": "teams/chelsea.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Reggie Watson",
+      "teamFile": "teams/chelsea.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Lucas Da Cunha",
+      "teamFile": "teams/como_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Lucas Da",
+      "teamFile": "teams/como_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Daniel Bentley",
+      "teamFile": "teams/coventrycity_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Kaine Kesler",
+      "teamFile": "teams/coventrycity_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Milan van Ewijk",
+      "teamFile": "teams/coventrycity_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Dan Bentley",
+      "teamFile": "teams/coventrycity_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Kaine Kesler-Hayden",
+      "teamFile": "teams/coventrycity_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Milan van",
+      "teamFile": "teams/coventrycity_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Oliver Dovin",
+      "teamFile": "teams/coventrycity_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Jean Philippe",
+      "teamFile": "teams/crystalpalace_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Jean-Philippe Mateta",
+      "teamFile": "teams/crystalpalace_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Jacob Zetterström",
+      "teamFile": "teams/derbycounty_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Lars Salvesen",
+      "teamFile": "teams/derbycounty_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Charlie Smith",
+      "teamFile": "teams/derbycounty_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Isaac Gordon",
+      "teamFile": "teams/derbycounty_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Jacob Widell",
+      "teamFile": "teams/derbycounty_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Lars-Jørgen Salvesen",
+      "teamFile": "teams/derbycounty_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Alejandro Santiago",
+      "teamFile": "teams/espanyol_esp.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Carlos Alcaraz",
+      "teamFile": "teams/everton_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Christian Norgaard",
+      "teamFile": "teams/everton_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Vitaliy Mykolenko",
+      "teamFile": "teams/everton_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Charly Alcaraz",
+      "teamFile": "teams/everton_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Christian Nørgaard",
+      "teamFile": "teams/everton_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Vitalii Mykolenko",
+      "teamFile": "teams/everton_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "David De Gea",
+      "teamFile": "teams/fiorentina_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Dos Santos",
+      "teamFile": "teams/fiorentina_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Federico Croci",
+      "teamFile": "teams/fiorentina_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Riccardo Sottil",
+      "teamFile": "teams/fiorentina_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "David de",
+      "teamFile": "teams/fiorentina_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Dodô",
+      "teamFile": "teams/fiorentina_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Anouar El Azzouzi",
+      "teamFile": "teams/frosinone_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Anouar El",
+      "teamFile": "teams/frosinone_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Alexander Borto",
+      "teamFile": "teams/fulham_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Emile Smith-Rowe",
+      "teamFile": "teams/fulham_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Alex Borto",
+      "teamFile": "teams/fulham_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Emile Smith",
+      "teamFile": "teams/fulham_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Amorim",
+      "teamFile": "teams/genoa_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Leo Oestigaard",
+      "teamFile": "teams/genoa_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Lukas Klišys",
+      "teamFile": "teams/genoa_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Mamedi Doucouré",
+      "teamFile": "teams/genoa_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Marcelo Vaz",
+      "teamFile": "teams/genoa_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Mikael Ellertsson",
+      "teamFile": "teams/genoa_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Rendijs Mihelsons",
+      "teamFile": "teams/genoa_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Robinho Jr.",
+      "teamFile": "teams/genoa_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Stephan El Shaarawy",
+      "teamFile": "teams/genoa_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Alex Amorim",
+      "teamFile": "teams/genoa_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Leo Østigård",
+      "teamFile": "teams/genoa_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Mikael Egill",
+      "teamFile": "teams/genoa_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Stephan El",
+      "teamFile": "teams/genoa_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Jens Hjerto-Dahl",
+      "teamFile": "teams/hullcity_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Mohamed Bachir",
+      "teamFile": "teams/hullcity_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Oliver McBurnie",
+      "teamFile": "teams/hullcity_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Jens Hjertø-Dahl",
+      "teamFile": "teams/hullcity_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Mohamed Belloumi",
+      "teamFile": "teams/hullcity_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Oli McBurnie",
+      "teamFile": "teams/hullcity_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Henrik Mkhitaryan",
+      "teamFile": "teams/inter_it.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Raffaele Di Gennaro",
+      "teamFile": "teams/inter_it.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Henrikh Mkhitaryan",
+      "teamFile": "teams/inter_it.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Raffaele Di",
+      "teamFile": "teams/inter_it.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Nicolas Gonzalez",
+      "teamFile": "teams/juventus_it.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Pape Sarr",
+      "teamFile": "teams/juventus_it.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Nico González",
+      "teamFile": "teams/juventus_it.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Pape Matar",
+      "teamFile": "teams/juventus_it.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Albert Gudmundsson",
+      "teamFile": "teams/lazio_it.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Mohamed Salim",
+      "teamFile": "teams/lazio_it.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Ricardo Bordon",
+      "teamFile": "teams/lazio_it.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Tijanni Noslin",
+      "teamFile": "teams/lazio_it.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Albert Guðmundsson",
+      "teamFile": "teams/lazio_it.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Tijjani Noslin",
+      "teamFile": "teams/lazio_it.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Sebastian Esposito",
+      "teamFile": "teams/lecce_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Vernon Addo",
+      "teamFile": "teams/lecce_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Hjalte Lærke",
+      "teamFile": "teams/lecce_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Jean Bahoya",
+      "teamFile": "teams/leedsunited_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Mateo Joseph",
+      "teamFile": "teams/leedsunited_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Jayden Lienou",
+      "teamFile": "teams/leedsunited_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Jean-Mattéo Bahoya",
+      "teamFile": "teams/leedsunited_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Matthijs de Ligt",
+      "teamFile": "teams/machester_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Jack Fletcher",
+      "teamFile": "teams/machester_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Matthijs de",
+      "teamFile": "teams/machester_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Allan Elias",
+      "teamFile": "teams/machestercity_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Rayan Ait",
+      "teamFile": "teams/machestercity_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Allan",
+      "teamFile": "teams/machestercity_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Floyd Samba",
+      "teamFile": "teams/machestercity_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Kaden Braithwaite",
+      "teamFile": "teams/machestercity_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Rayan Aït-Nouri",
+      "teamFile": "teams/machestercity_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Alex Bangura",
+      "teamFile": "teams/middlesbrough_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Jonathan McLaughlin",
+      "teamFile": "teams/middlesbrough_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Micah Hamilton",
+      "teamFile": "teams/middlesbrough_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Cruz Ibeh",
+      "teamFile": "teams/middlesbrough_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Jon McLaughlin",
+      "teamFile": "teams/middlesbrough_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Koni De Winter",
+      "teamFile": "teams/milan_it.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Warren Bondo",
+      "teamFile": "teams/milan_it.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Koni De",
+      "teamFile": "teams/milan_it.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Benicio Baker",
+      "teamFile": "teams/millwall_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Casper De Norre",
+      "teamFile": "teams/millwall_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Joel Coleman",
+      "teamFile": "teams/millwall_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Casper De",
+      "teamFile": "teams/millwall_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Manga Foe-Ondoa",
+      "teamFile": "teams/monza_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Manga Foe",
+      "teamFile": "teams/monza_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Giovanni Di Lorenzo",
+      "teamFile": "teams/napoli_it.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Kevin De Bruyne",
+      "teamFile": "teams/napoli_it.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Rasmus Höjlund",
+      "teamFile": "teams/napoli_it.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Giovanni Di",
+      "teamFile": "teams/napoli_it.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Kevin De",
+      "teamFile": "teams/napoli_it.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Rasmus Højlund",
+      "teamFile": "teams/napoli_it.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Jair",
+      "teamFile": "teams/nottinghamforest_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Jair Cunha",
+      "teamFile": "teams/nottinghamforest_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Thomas De Martis",
+      "teamFile": "teams/parma_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Thomás de",
+      "teamFile": "teams/parma_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Chinedu Agu",
+      "teamFile": "teams/portsmouth_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Joshua Murphy",
+      "teamFile": "teams/portsmouth_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Marko Milovanović",
+      "teamFile": "teams/portsmouth_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Michael Ani",
+      "teamFile": "teams/portsmouth_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Nathaniel Chioma",
+      "teamFile": "teams/portsmouth_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Tayo Singerr",
+      "teamFile": "teams/portsmouth_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Josh Murphy",
+      "teamFile": "teams/portsmouth_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Marezi",
+      "teamFile": "teams/portsmouth_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Amadou Salif",
+      "teamFile": "teams/queensparkrangers_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Isak Alemayehu",
+      "teamFile": "teams/queensparkrangers_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Amadou Mbengue",
+      "teamFile": "teams/queensparkrangers_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Giorgio De Marzi",
+      "teamFile": "teams/roma_it.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Marten De Roon",
+      "teamFile": "teams/roma_it.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Giorgio De",
+      "teamFile": "teams/roma_it.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Marten de",
+      "teamFile": "teams/roma_it.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Edoardo Pieragnolo",
+      "teamFile": "teams/sassuolo_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Ignace Van Der Brempt",
+      "teamFile": "teams/sassuolo_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Rafael Obrador",
+      "teamFile": "teams/sassuolo_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Ignace Van",
+      "teamFile": "teams/sassuolo_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Rafa Obrador",
+      "teamFile": "teams/sassuolo_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Cameron Bragg",
+      "teamFile": "teams/southampton_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Joachim Kayi",
+      "teamFile": "teams/southampton_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Cam Bragg",
+      "teamFile": "teams/southampton_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Karlo Muhar",
+      "teamFile": "teams/steua_bucaresti_rom.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Cyrill May",
+      "teamFile": "teams/stgallen_sui.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Eric Junior",
+      "teamFile": "teams/stokecity_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Joon-ho Bae",
+      "teamFile": "teams/stokecity_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Maksym Taloverov",
+      "teamFile": "teams/stokecity_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Bae Jun-ho",
+      "teamFile": "teams/stokecity_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Eric Bocat",
+      "teamFile": "teams/stokecity_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Maksym Talovierov",
+      "teamFile": "teams/stokecity_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Aji Alese",
+      "teamFile": "teams/sunderland_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Daniel Ballard",
+      "teamFile": "teams/sunderland_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Enzo Le Fee",
+      "teamFile": "teams/sunderland_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Reinildo Mandava",
+      "teamFile": "teams/sunderland_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Dan Ballard",
+      "teamFile": "teams/sunderland_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Enzo Le",
+      "teamFile": "teams/sunderland_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Juan Riquelme",
+      "teamFile": "teams/sunderland_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Reinildo",
+      "teamFile": "teams/sunderland_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Timur Tutyerov",
+      "teamFile": "teams/sunderland_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Eray Cümart",
+      "teamFile": "teams/torino_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Eray Cömert",
+      "teamFile": "teams/torino_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Andrew Robertson",
+      "teamFile": "teams/tottenhamhotspur_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Micky van de Ven",
+      "teamFile": "teams/tottenhamhotspur_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Mykhaylo Mudryk",
+      "teamFile": "teams/tottenhamhotspur_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Savinho",
+      "teamFile": "teams/tottenhamhotspur_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Andy Robertson",
+      "teamFile": "teams/tottenhamhotspur_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Luca Williams-Barnett",
+      "teamFile": "teams/tottenhamhotspur_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Micky van",
+      "teamFile": "teams/tottenhamhotspur_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Mykhailo Mudryk",
+      "teamFile": "teams/tottenhamhotspur_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Sávio",
+      "teamFile": "teams/tottenhamhotspur_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Juan Arizala",
+      "teamFile": "teams/udinese_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Juan David",
+      "teamFile": "teams/udinese_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Armel Bella",
+      "teamFile": "teams/venezia_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Thórir Helgason",
+      "teamFile": "teams/venezia_ita.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Armel Bella-Kotchap",
+      "teamFile": "teams/venezia_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Þórir Jóhann",
+      "teamFile": "teams/venezia_ita.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Albert Eames",
+      "teamFile": "teams/watford_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "James Clarridge",
+      "teamFile": "teams/watford_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Matthew Pollock",
+      "teamFile": "teams/watford_ing.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Mattie Pollock",
+      "teamFile": "teams/watford_ing.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Edvin Austbo",
+      "teamFile": "teams/westham_eng.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Max Kilman",
+      "teamFile": "teams/westham_eng.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Edvin Austbø",
+      "teamFile": "teams/westham_eng.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
+    },
+    {
+      "version": "2026.6.19",
+      "date": "2026-11-23",
+      "player": "Maximilian Kilman",
+      "teamFile": "teams/westham_eng.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.19.md"
     }
   ]
 }

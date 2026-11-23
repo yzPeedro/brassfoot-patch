@@ -2,5 +2,4150 @@
   "schemaVersion": 1,
   "year": 2026,
   "policy": "Somente fatos aceitos no ledger de evidências; campos ausentes preservam o valor publicado.",
-  "clubs": []
+  "clubs": [
+    {
+      "teamFile": "teams/BeitarJer_isr.ban",
+      "fields": {
+        "manager": {
+          "value": "Almog Cohen",
+          "sourceUrl": "https://www.365scores.com/football/team/beitar-jerusalem-559/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.237071+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 239513,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/Coleraine_irn.ban",
+      "fields": {
+        "manager": {
+          "value": "Ruaidhrí Higgins",
+          "sourceUrl": "https://www.365scores.com/football/team/coleraine-fc-10380/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.492931+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 133620,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/Differdange_Lux.ban",
+      "fields": {
+        "manager": {
+          "value": "Pedro Silva",
+          "sourceUrl": "https://www.365scores.com/football/team/differdange-03-7533/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.205893+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 206664,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/Hafnarfjordur_isl.ban",
+      "fields": {
+        "manager": {
+          "value": "Joey Gudjónsson",
+          "sourceUrl": "https://www.365scores.com/football/team/fh-hafnarfjordur-2090/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.532389+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 237507,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/Larne_irn.ban",
+      "fields": {
+        "manager": {
+          "value": "Gary Haveron",
+          "sourceUrl": "https://www.365scores.com/football/team/larne-fc-17048/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.731704+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 192483,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/MaccaiTel_isr.ban",
+      "fields": {
+        "manager": {
+          "value": "Kenny Miller",
+          "sourceUrl": "https://www.365scores.com/football/team/maccabi-tel-aviv-566/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.237071+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 238365,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/Noah_Arm.ban",
+      "fields": {
+        "manager": {
+          "value": "Sandro Perkovic",
+          "sourceUrl": "https://www.365scores.com/football/team/noah-56933/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:35.130006+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 202592,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/Prishtina_kos.ban",
+      "fields": {
+        "manager": {
+          "value": "Arsim Thaqi",
+          "sourceUrl": "https://www.365scores.com/football/team/prishtina-45035/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.967564+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 206534,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/Saburtalo_Geo.ban",
+      "fields": {
+        "manager": {
+          "value": "Levan Korghalidze",
+          "sourceUrl": "https://www.365scores.com/football/team/fc-iberia-1999-14390/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.678490+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 206586,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/aarhus_den.ban",
+      "fields": {
+        "manager": {
+          "value": "Jakob Poulsen",
+          "sourceUrl": "https://www.365scores.com/football/team/aarhus-1831/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.261535+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 9143,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/aberdeen_esc.ban",
+      "fields": {
+        "manager": {
+          "value": "Mario Frick",
+          "sourceUrl": "https://www.365scores.com/football/team/aberdeen-761/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.291229+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 11812,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/aek_gre.ban",
+      "fields": {
+        "manager": {
+          "value": "Marko Nikolic",
+          "sourceUrl": "https://www.365scores.com/football/team/aek-athens-1024/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.572119+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 61018,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/ajax_hol.ban",
+      "fields": {
+        "manager": {
+          "value": "Míchel",
+          "sourceUrl": "https://www.365scores.com/football/team/ajax-690/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.204640+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 50807,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/alanyaspor_tur.ban",
+      "fields": {
+        "manager": {
+          "value": "Uğur Uçar",
+          "sourceUrl": "https://www.365scores.com/football/team/alanyaspor-1009/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.572119+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 244374,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/alashkertyerevan_arm.ban",
+      "fields": {
+        "manager": {
+          "value": "Vahe Gevorgyan",
+          "sourceUrl": "https://www.365scores.com/football/team/alashkert-martuni-14387/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.678490+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 228724,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/alaves_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Quique Sánchez Flores",
+          "sourceUrl": "https://www.365scores.com/football/team/alaves-168/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.681231+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46210,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/albacete_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Joseba Etxeberria",
+          "sourceUrl": "https://www.365scores.com/football/team/albacete-170/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.681231+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 55944,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/alcorcon_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Pablo Álvarez",
+          "sourceUrl": "https://www.365scores.com/football/team/alcorcon-6159/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.132128+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 90872,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/almeria_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Francisco Pimienta",
+          "sourceUrl": "https://www.365scores.com/football/team/almeria-138/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.451717+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 57748,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/americamg_bra.ban",
+      "fields": {
+        "manager": {
+          "value": "Moacir Júnior",
+          "sourceUrl": "https://www.365scores.com/football/team/america-mineiro-8514/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.249453+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 84938,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/anderlecht_bel.ban",
+      "fields": {
+        "manager": {
+          "value": "Vítor Bruno",
+          "sourceUrl": "https://www.365scores.com/football/team/anderlecht-1173/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.710645+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 136915,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/anorthosisfamag_cyp.ban",
+      "fields": {
+        "manager": {
+          "value": "Barak Itzhaki",
+          "sourceUrl": "https://www.365scores.com/football/team/anorthosis-2260/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.643678+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 7050,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/apoel_chp.ban",
+      "fields": {
+        "manager": {
+          "value": "Nikolaos Papadopoulos",
+          "sourceUrl": "https://www.365scores.com/football/team/apoel-nicosia-2261/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.643678+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 161163,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/apollonlemesos_chp.ban",
+      "fields": {
+        "manager": {
+          "value": "Hernan Losada",
+          "sourceUrl": "https://www.365scores.com/football/team/apollon-limassol-2263/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.643678+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 1191,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/araraterewan_arm.ban",
+      "fields": {
+        "manager": {
+          "value": "Tulipa",
+          "sourceUrl": "https://www.365scores.com/football/team/fc-ararat-armenia-48879/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:35.130006+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 124139,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/aris_gre.ban",
+      "fields": {
+        "manager": {
+          "value": "Michalis Grigoriou",
+          "sourceUrl": "https://www.365scores.com/football/team/aris-salonica-1025/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.572119+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 78464,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/arislimassol_chp.ban",
+      "fields": {
+        "manager": {
+          "value": "Artem Radkov",
+          "sourceUrl": "https://www.365scores.com/football/team/aris-limasol-2270/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.643678+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 218340,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/astana_caz.ban",
+      "fields": {
+        "manager": {
+          "value": "Grigoriy Babayan",
+          "sourceUrl": "https://www.365scores.com/football/team/astana-10785/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.492931+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 61871,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/astonvilla_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Unai Emery",
+          "sourceUrl": "https://www.365scores.com/football/team/aston-villa-109/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.192863+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46258,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/atalanta_it.ban",
+      "fields": {
+        "manager": {
+          "value": "Maurizio Sarri",
+          "sourceUrl": "https://www.365scores.com/football/team/atalanta-232/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.948530+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46235,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/athleticclub_mg.ban",
+      "fields": {
+        "manager": {
+          "value": "Alex",
+          "sourceUrl": "https://www.365scores.com/football/team/athletic-club-67683/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:35.130006+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 3596,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/atleticobilbao_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Edin Terzic",
+          "sourceUrl": "https://www.365scores.com/football/team/athletic-bilbao-144/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.489837+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 86315,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/azalkmaar_hol.ban",
+      "fields": {
+        "manager": {
+          "value": "Lee-Roy Echteld",
+          "sourceUrl": "https://www.365scores.com/football/team/az-alkmaar-699/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.204640+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 88705,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/b36torshavn_fro.ban",
+      "fields": {
+        "manager": {
+          "value": "Jákup Joensen",
+          "sourceUrl": "https://www.365scores.com/football/team/b36-torshavn-5626/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.014141+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 228846,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/backa_srb.ban",
+      "fields": {
+        "manager": {
+          "value": "Tomislav Sivić",
+          "sourceUrl": "https://www.365scores.com/football/team/tsc-backa-topola-56890/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:35.130006+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 147764,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/bahia.ban",
+      "fields": {
+        "manager": {
+          "value": "Rogerio Ceni",
+          "sourceUrl": "https://www.365scores.com/football/team/bahia-1767/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.017602+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 3092,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/basaksehir_tur.ban",
+      "fields": {
+        "manager": {
+          "value": "Nuri Sahin",
+          "sourceUrl": "https://www.365scores.com/football/team/basaksehir-958/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.572119+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 1862,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/basel_sui.ban",
+      "fields": {
+        "manager": {
+          "value": "Slaviša Jokanović",
+          "sourceUrl": "https://www.365scores.com/football/team/fc-basel-1893-1138/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.525424+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46137,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/bateborisov_bie.ban",
+      "fields": {
+        "manager": {
+          "value": "Kirill Alshevskiy",
+          "sourceUrl": "https://www.365scores.com/football/team/bate-borisov-5441/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.888913+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 75084,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/bayerleverkusen_ale.ban",
+      "fields": {
+        "manager": {
+          "value": "Carles Martínez",
+          "sourceUrl": "https://www.365scores.com/football/team/bayer-leverkusen-333/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.961186+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 136262,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/bayern_ale.ban",
+      "fields": {
+        "manager": {
+          "value": "Vincent Kompany",
+          "sourceUrl": "https://www.365scores.com/football/team/bayern-munich-331/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.961186+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 831,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/benfica_por.ban",
+      "fields": {
+        "manager": {
+          "value": "Marco Silva",
+          "sourceUrl": "https://www.365scores.com/football/team/benfica-888/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.453261+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 47572,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/besiktas_tur.ban",
+      "fields": {
+        "manager": {
+          "value": "Vincenzo Italiano",
+          "sourceUrl": "https://www.365scores.com/football/team/besiktas-947/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.572119+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 70173,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/blackburnrovers_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Tony Mowbray",
+          "sourceUrl": "https://www.365scores.com/football/team/blackburn-rovers-112/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.435106+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 47934,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/bohemians_irl.ban",
+      "fields": {
+        "manager": {
+          "value": "Alan Reynolds",
+          "sourceUrl": "https://www.365scores.com/football/team/bohemians-836/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.291229+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 156986,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/bologna_ita.ban",
+      "fields": {
+        "manager": {
+          "value": "Raffaele Palladino",
+          "sourceUrl": "https://www.365scores.com/football/team/bologna-245/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.961186+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 6417,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/borac_bih.ban",
+      "fields": {
+        "manager": {
+          "value": "Vinko Marinovic",
+          "sourceUrl": "https://www.365scores.com/football/team/borac-banjaluka-7528/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.205893+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 228812,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/borussia_ale.ban",
+      "fields": {
+        "manager": {
+          "value": "Niko Kovač",
+          "sourceUrl": "https://www.365scores.com/football/team/borussia-dortmund-341/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.007782+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 886,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/botafogopb_bra.ban",
+      "fields": {
+        "manager": {
+          "value": "Victor Ferraz Macedo",
+          "sourceUrl": "https://www.365scores.com/football/team/botafogo-pb-9203/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.466856+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 251164,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/botafogorj_bra.ban",
+      "fields": {
+        "manager": {
+          "value": "Tite",
+          "sourceUrl": "https://www.365scores.com/football/team/botafogo-1211/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.769758+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 47577,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/botafogosp_bra.ban",
+      "fields": {
+        "manager": {
+          "value": "Cláudio Tencati",
+          "sourceUrl": "https://www.365scores.com/football/team/botafogo-sp-1773/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.017602+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 43751,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/botev_bul.ban",
+      "fields": {
+        "manager": {
+          "value": "Stanislav Genchev",
+          "sourceUrl": "https://www.365scores.com/football/team/botev-plovdiv-2286/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.775493+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 70907,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/botosani_rom.ban",
+      "fields": {
+        "manager": {
+          "value": "Marius Croitoru",
+          "sourceUrl": "https://www.365scores.com/football/team/fc-botosani-12365/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.626643+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 134969,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/bournemouth_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Marco Rose",
+          "sourceUrl": "https://www.365scores.com/football/team/bournemouth-50/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.252859+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 51365,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/bragantino_bra.ban",
+      "fields": {
+        "manager": {
+          "value": "Vágner Mancini",
+          "sourceUrl": "https://www.365scores.com/football/team/rb-bragantino-1273/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.987730+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 43775,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/breidablik_isl.ban",
+      "fields": {
+        "manager": {
+          "value": "Olafur Skulason",
+          "sourceUrl": "https://www.365scores.com/football/team/breidablik-2089/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.532389+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 226282,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/brentford_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Keith Andrews",
+          "sourceUrl": "https://www.365scores.com/football/team/brentford-63/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.252859+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 6608,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/bristolcity_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Michael Skubala",
+          "sourceUrl": "https://www.365scores.com/football/team/bristol-city-6/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.183263+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 126324,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/brondby_din.ban",
+      "fields": {
+        "manager": {
+          "value": "Thomas Norgaard",
+          "sourceUrl": "https://www.365scores.com/football/team/brøndby-if-1829/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.261535+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 49797,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/brugge_bel.ban",
+      "fields": {
+        "manager": {
+          "value": "Ivan Leko",
+          "sourceUrl": "https://www.365scores.com/football/team/club-brugge-1169/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.710645+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46178,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/brusquesc_bra.ban",
+      "fields": {
+        "manager": {
+          "value": "Higo Magalhaes",
+          "sourceUrl": "https://www.365scores.com/football/team/brusque-9149/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.375842+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 97251,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/budapeste_hun.ban",
+      "fields": {
+        "manager": {
+          "value": "Maurizio Jacobacci",
+          "sourceUrl": "https://www.365scores.com/football/team/budapest-honved-2069/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.532389+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 56854,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/buducnost_mon.ban",
+      "fields": {
+        "manager": {
+          "value": "Dejan Vukicevic",
+          "sourceUrl": "https://www.365scores.com/football/team/buducnost-podgorica-5440/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.888913+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 228720,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/burgos_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Sergio Francisco",
+          "sourceUrl": "https://www.365scores.com/football/team/burgos-cf-180/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.766058+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 218270,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/burnley_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Fabio Celestini",
+          "sourceUrl": "https://www.365scores.com/football/team/burnley-12/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.183263+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46300,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/cadiz_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Borja Jiménez",
+          "sourceUrl": "https://www.365scores.com/football/team/cadiz-cf-163/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.705109+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 81180,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/cagliari_ita.ban",
+      "fields": {
+        "manager": {
+          "value": "Fabio Pisacane",
+          "sourceUrl": "https://www.365scores.com/football/team/cagliari-243/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.948530+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 42620,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/celje_elv.ban",
+      "fields": {
+        "manager": {
+          "value": "Zoran Željkovič",
+          "sourceUrl": "https://www.365scores.com/football/team/nk-celje-2345/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.775493+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 144679,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/celtadevigo_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Claudio Giráldez",
+          "sourceUrl": "https://www.365scores.com/football/team/celta-vigo-158/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.705109+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 155861,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/cfrcluj_rom.ban",
+      "fields": {
+        "manager": {
+          "value": "Marius Şumudică",
+          "sourceUrl": "https://www.365scores.com/football/team/cfr-cluj-2040/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.411519+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 50759,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/chapecoense_bra.ban",
+      "fields": {
+        "manager": {
+          "value": "Vinicius Bergantin",
+          "sourceUrl": "https://www.365scores.com/football/team/chapecoense-7387/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.205893+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 128180,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/charleroi_bel.ban",
+      "fields": {
+        "manager": {
+          "value": "Mario Kohnen",
+          "sourceUrl": "https://www.365scores.com/football/team/charleroi-1178/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.769758+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 237237,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/chelsea.ban",
+      "fields": {
+        "manager": {
+          "value": "Xabi Alonso",
+          "sourceUrl": "https://www.365scores.com/football/team/chelsea-106/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.192863+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 124,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/como_ita.ban",
+      "fields": {
+        "manager": {
+          "value": "Cesc Fabregas",
+          "sourceUrl": "https://www.365scores.com/football/team/como-6117/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.132128+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 122,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/connahsquay_wal.ban",
+      "fields": {
+        "manager": {
+          "value": "Neil Gibson",
+          "sourceUrl": "https://www.365scores.com/football/team/gap-connah's-quay-13587/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.678490+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 173787,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/copenhague_din.ban",
+      "fields": {
+        "manager": {
+          "value": "Bo Svensson",
+          "sourceUrl": "https://www.365scores.com/football/team/fc-copenhagen-1824/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.261535+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 87114,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/corinthians_bra.ban",
+      "fields": {
+        "manager": {
+          "value": "Clarence Seedorf",
+          "sourceUrl": "https://www.365scores.com/football/team/corinthians-1267/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.987730+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 54532,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/coritiba_bra.ban",
+      "fields": {
+        "manager": {
+          "value": "Guila Bossle",
+          "sourceUrl": "https://www.365scores.com/football/team/coritiba-1212/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.769758+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 147554,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/coventrycity_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Frank Lampard",
+          "sourceUrl": "https://www.365scores.com/football/team/coventry-24/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.252859+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 408,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/cracóvia_pl.ban",
+      "fields": {
+        "manager": {
+          "value": "Aleksandar Vukovic",
+          "sourceUrl": "https://www.365scores.com/football/team/cracovia-krakow-2215/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.583828+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 76415,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/craiova_rom.ban",
+      "fields": {
+        "manager": {
+          "value": "Filipe Coelho",
+          "sourceUrl": "https://www.365scores.com/football/team/cs-universitatea-craiova-2048/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.411519+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 227477,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/crb_bra.ban",
+      "fields": {
+        "manager": {
+          "value": "Fábio Matias",
+          "sourceUrl": "https://www.365scores.com/football/team/crb-1784/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.130959+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 153664,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/criciuma_bra.ban",
+      "fields": {
+        "manager": {
+          "value": "Umberto Louzer",
+          "sourceUrl": "https://www.365scores.com/football/team/criciuma-1780/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.017602+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 58111,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/cruzeiro_bra.ban",
+      "fields": {
+        "manager": {
+          "value": "Artur Jorge",
+          "sourceUrl": "https://www.365scores.com/football/team/cruzeiro-1213/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.769758+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 78640,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/crystalpalace_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Thomas Frank",
+          "sourceUrl": "https://www.365scores.com/football/team/crystal-palace-10/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.183263+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 61842,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/cskamoscow_rus.ban",
+      "fields": {
+        "manager": {
+          "value": "Dmitri Igdisamov",
+          "sourceUrl": "https://www.365scores.com/football/team/cska-moscow-1077/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.525424+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 238397,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/cskasofia_bul.ban",
+      "fields": {
+        "manager": {
+          "value": "Markus Gisdol",
+          "sourceUrl": "https://www.365scores.com/football/team/cska-sofia-2276/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.643678+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46194,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/cuiaba_bra.ban",
+      "fields": {
+        "manager": {
+          "value": "Eduardo Barros",
+          "sourceUrl": "https://www.365scores.com/football/team/cuiaba-9188/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.466856+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 72227,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/dacdunajskastreda_slk.ban",
+      "fields": {
+        "manager": {
+          "value": "Robert Klauß",
+          "sourceUrl": "https://www.365scores.com/football/team/dunajska-streda-2119/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.583828+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 80602,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/debrecen_hun.ban",
+      "fields": {
+        "manager": {
+          "value": "Gert Rammel",
+          "sourceUrl": "https://www.365scores.com/football/team/debreceni-vsc-2064/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.532389+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 242787,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/deportivolacoruna_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Antonio Hidalgo",
+          "sourceUrl": "https://www.365scores.com/football/team/deportivo-la-coruna-148/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.489837+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 81092,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/derbycounty_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "John Eustace",
+          "sourceUrl": "https://www.365scores.com/football/team/derby-3/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.183263+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 3831,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/derry_irl.ban",
+      "fields": {
+        "manager": {
+          "value": "Mark McChrystal",
+          "sourceUrl": "https://www.365scores.com/football/team/derry-city-840/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.291229+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 244095,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/dinamokiev_ucr.ban",
+      "fields": {
+        "manager": {
+          "value": "Igor Kostyuk",
+          "sourceUrl": "https://www.365scores.com/football/team/dynamo-kyiv-1956/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.292578+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 228483,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/dinamominsk_bie.ban",
+      "fields": {
+        "manager": {
+          "value": "Vadim Skripchenko",
+          "sourceUrl": "https://www.365scores.com/football/team/dinamo-minsk-5426/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.888913+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46657,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/dinamotbilisi_geo.ban",
+      "fields": {
+        "manager": {
+          "value": "Giorgi Tchiabrishvili",
+          "sourceUrl": "https://www.365scores.com/football/team/dinamo-tbilisi-5428/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.888913+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 134166,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/dinamozagreb_cro.ban",
+      "fields": {
+        "manager": {
+          "value": "Jerko Leko",
+          "sourceUrl": "https://www.365scores.com/football/team/dinamo-zagreb-2245/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.583828+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 270028,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/dundalk_irl.ban",
+      "fields": {
+        "manager": {
+          "value": "Ciarán Kilduff",
+          "sourceUrl": "https://www.365scores.com/football/team/dundalk-846/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.291229+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 228716,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/dynamo_rus.ban",
+      "fields": {
+        "manager": {
+          "value": "Sandro Schwarz",
+          "sourceUrl": "https://www.365scores.com/football/team/dynamo-moscow-1080/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.525424+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 51039,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/eibar_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Jokin Aranbarri",
+          "sourceUrl": "https://www.365scores.com/football/team/eibar-164/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.681231+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 244635,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/elche_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Martin Anselmi",
+          "sourceUrl": "https://www.365scores.com/football/team/elche-156/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.705109+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 108104,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/espanyol_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Eder Sarabia",
+          "sourceUrl": "https://www.365scores.com/football/team/espanyol-136/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.451717+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 116613,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/estrelavermelha_ser.ban",
+      "fields": {
+        "manager": {
+          "value": "Albert Riera",
+          "sourceUrl": "https://www.365scores.com/football/team/fk-crvena-zvezda-8957/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.375842+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 6259,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/everton_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "David Moyes",
+          "sourceUrl": "https://www.365scores.com/football/team/everton-107/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.192863+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46120,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/fcandorra_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Carles Manso Rubio",
+          "sourceUrl": "https://www.365scores.com/football/team/andorra-cf-9256/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.466856+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 227967,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/fenerbahce_tur.ban",
+      "fields": {
+        "manager": {
+          "value": "Emre Belözoğlu",
+          "sourceUrl": "https://www.365scores.com/football/team/fenerbahce-sk-946/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.572119+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 9635,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/ferencvaros_hun.ban",
+      "fields": {
+        "manager": {
+          "value": "Balazs Borbely",
+          "sourceUrl": "https://www.365scores.com/football/team/ferencvaros-6020/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.132128+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 176717,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/ferroviaria_sp.ban",
+      "fields": {
+        "manager": {
+          "value": "Rogério Correa",
+          "sourceUrl": "https://www.365scores.com/football/team/ferroviaria-9182/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.375842+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 125779,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/feynoord_hol.ban",
+      "fields": {
+        "manager": {
+          "value": "Gio van Bronckhorst",
+          "sourceUrl": "https://www.365scores.com/football/team/feyenoord-691/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.204640+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46312,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/fiorentina_ita.ban",
+      "fields": {
+        "manager": {
+          "value": "Paolo Vanoli",
+          "sourceUrl": "https://www.365scores.com/football/team/fiorentina-228/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.766058+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 110869,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/flarj.ban",
+      "fields": {
+        "manager": {
+          "value": "Leonardo Jardim",
+          "sourceUrl": "https://www.365scores.com/football/team/flamengo-1215/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.903012+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46251,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/floratallinn_est.ban",
+      "fields": {
+        "manager": {
+          "value": "Konstantin Vassiljev",
+          "sourceUrl": "https://www.365scores.com/football/team/flora-tallinn-5445/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.888913+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 241124,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/floriana_mta.ban",
+      "fields": {
+        "manager": {
+          "value": "Daniel Portela",
+          "sourceUrl": "https://www.365scores.com/football/team/floriana-fc-8489/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.249453+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 241090,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/flurj.ban",
+      "fields": {
+        "manager": {
+          "value": "Marcão",
+          "sourceUrl": "https://www.365scores.com/football/team/fluminense-1216/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.903012+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 70759,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/frosinone_ita.ban",
+      "fields": {
+        "manager": {
+          "value": "Massimiliano Alvini",
+          "sourceUrl": "https://www.365scores.com/football/team/frosinone-254/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.961186+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 81496,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/fsvfrankfurt_ale.ban",
+      "fields": {
+        "manager": {
+          "value": "Adi Hütter",
+          "sourceUrl": "https://www.365scores.com/football/team/eintracht-frankfurt-337/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.007782+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46307,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/fulham_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Alvaro Arbeloa",
+          "sourceUrl": "https://www.365scores.com/football/team/fulham-120/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.435106+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 3431,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/genk_bel.ban",
+      "fields": {
+        "manager": {
+          "value": "Timmy Simons",
+          "sourceUrl": "https://www.365scores.com/football/team/krc-genk-1177/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.769758+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 243801,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/genoa_ita.ban",
+      "fields": {
+        "manager": {
+          "value": "Daniele De Rossi",
+          "sourceUrl": "https://www.365scores.com/football/team/genoa-231/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.948530+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 352,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/getafe_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "José Bordalás",
+          "sourceUrl": "https://www.365scores.com/football/team/getafe-140/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.451717+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46281,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/gilvicente_por.ban",
+      "fields": {
+        "manager": {
+          "value": "Luis Pinto",
+          "sourceUrl": "https://www.365scores.com/football/team/gil-vicente-fc-905/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.453261+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 179692,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/gimnastic_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Martin Monreal",
+          "sourceUrl": "https://www.365scores.com/football/team/gimnastic-169/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.681231+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 52572,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/girona_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Quique Álvarez",
+          "sourceUrl": "https://www.365scores.com/football/team/girona-175/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.681231+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 244636,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/glasgowceltic_esc.ban",
+      "fields": {
+        "manager": {
+          "value": "Martin O'Neill",
+          "sourceUrl": "https://www.365scores.com/football/team/celtic-754/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.291229+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 42424,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/goias.ban",
+      "fields": {
+        "manager": {
+          "value": "Mozart Santos",
+          "sourceUrl": "https://www.365scores.com/football/team/goias-1217/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.903012+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 81296,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/gotenborg_sue.ban",
+      "fields": {
+        "manager": {
+          "value": "Joachim Björklund",
+          "sourceUrl": "https://www.365scores.com/football/team/ifk-goteborg-1888/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.261535+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 243236,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/granada_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Pacheta",
+          "sourceUrl": "https://www.365scores.com/football/team/granada-159/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.705109+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 60398,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/gremio.ban",
+      "fields": {
+        "manager": {
+          "value": "Renato Gaúcho",
+          "sourceUrl": "https://www.365scores.com/football/team/gremio-1218/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.903012+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 44796,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/hajduk_cro.ban",
+      "fields": {
+        "manager": {
+          "value": "Gonzalo Garcia",
+          "sourceUrl": "https://www.365scores.com/football/team/hnk-hajduk-split-2249/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.643678+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 38271,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/hammarby_sue.ban",
+      "fields": {
+        "manager": {
+          "value": "Henrik Rydström",
+          "sourceUrl": "https://www.365scores.com/football/team/hammarby-1895/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.292578+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 78087,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/hapoelbeersheva_isr.ban",
+      "fields": {
+        "manager": {
+          "value": "Ran Kozuk",
+          "sourceUrl": "https://www.365scores.com/football/team/hapoel-beer-sheva-579/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.204640+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 124442,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/hbtorshavn_fro.ban",
+      "fields": {
+        "manager": {
+          "value": "Adolfo Sormani",
+          "sourceUrl": "https://www.365scores.com/football/team/hb-torshavn-20161/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.872243+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 59167,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/helsinki_fin.ban",
+      "fields": {
+        "manager": {
+          "value": "Joonas Rantanen",
+          "sourceUrl": "https://www.365scores.com/football/team/hjk-helsinki-1925/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.292578+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 159470,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/hibernian_esc.ban",
+      "fields": {
+        "manager": {
+          "value": "Marink Reedijk",
+          "sourceUrl": "https://www.365scores.com/football/team/hibernian-757/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.291229+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 250913,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/hoffebheim_ale.ban",
+      "fields": {
+        "manager": {
+          "value": "Christian Ilzer",
+          "sourceUrl": "https://www.365scores.com/football/team/hoffenheim-351/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.007782+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 59425,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/huesca_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "José Luis Oltra",
+          "sourceUrl": "https://www.365scores.com/football/team/sd-huesca-176/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.681231+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46279,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/hullcity_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Sergej Jakirović",
+          "sourceUrl": "https://www.365scores.com/football/team/hull-city-11/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.183263+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 125615,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/ilves_fin.ban",
+      "fields": {
+        "manager": {
+          "value": "Camilo Speranza",
+          "sourceUrl": "https://www.365scores.com/football/team/ilves-10553/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.492931+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 140695,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/inter_and.ban",
+      "fields": {
+        "manager": {
+          "value": "Felip Ortiz",
+          "sourceUrl": "https://www.365scores.com/football/team/inter-escaldes-6913/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.132128+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 176373,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/inter_it.ban",
+      "fields": {
+        "manager": {
+          "value": "Cristian Chivu",
+          "sourceUrl": "https://www.365scores.com/football/team/inter-milan-224/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.766058+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 198043,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/interlimeirasp_bra.ban",
+      "fields": {
+        "manager": {
+          "value": "Matheus Costa",
+          "sourceUrl": "https://www.365scores.com/football/team/inter-de-limeira-23975/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.909988+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 51947,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/internacional_bra.ban",
+      "fields": {
+        "manager": {
+          "value": "Eduardo Baptista",
+          "sourceUrl": "https://www.365scores.com/football/team/internacional-1219/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.903012+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 181709,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/interturku_fin.ban",
+      "fields": {
+        "manager": {
+          "value": "Vesa Vasara",
+          "sourceUrl": "https://www.365scores.com/football/team/inter-turku-1923/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.292578+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 159480,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/jablonec_tch.ban",
+      "fields": {
+        "manager": {
+          "value": "Lubos Kozel",
+          "sourceUrl": "https://www.365scores.com/football/team/jablonec-97-1800/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.130959+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 77593,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/juventude.ban",
+      "fields": {
+        "manager": {
+          "value": "Maurício Barbieri",
+          "sourceUrl": "https://www.365scores.com/football/team/juventude-1775/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.017602+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 58047,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/juventus_it.ban",
+      "fields": {
+        "manager": {
+          "value": "Luciano Spalletti",
+          "sourceUrl": "https://www.365scores.com/football/team/juventus-226/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.766058+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46237,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/kairat_caz.ban",
+      "fields": {
+        "manager": {
+          "value": "Zhora Arutyunyan",
+          "sourceUrl": "https://www.365scores.com/football/team/kairat-almaty-10564/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.492931+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 270595,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/kauno_lit.ban",
+      "fields": {
+        "manager": {
+          "value": "Željko Sopić",
+          "sourceUrl": "https://www.365scores.com/football/team/kauno-zalgiris-29716/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.967564+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 66331,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/keshla_azb.ban",
+      "fields": {
+        "manager": {
+          "value": "Azər Bağırov",
+          "sourceUrl": "https://www.365scores.com/football/team/shamakhi-fk-5584/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.892062+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 267273,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/klaksvik_fro.ban",
+      "fields": {
+        "manager": {
+          "value": "Magnus Powell",
+          "sourceUrl": "https://www.365scores.com/football/team/ki-klaksvik-19260/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.872243+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 123716,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/kolos_ucr.ban",
+      "fields": {
+        "manager": {
+          "value": "Ruslan Kostyshyn",
+          "sourceUrl": "https://www.365scores.com/football/team/kolos-kovalivka-25550/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.909988+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 74880,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/krreykjavic_isl.ban",
+      "fields": {
+        "manager": {
+          "value": "Óskar Hrafn Thorvaldsson",
+          "sourceUrl": "https://www.365scores.com/football/team/kr-reykjavik-2098/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.532389+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 134106,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/kups_fin.ban",
+      "fields": {
+        "manager": {
+          "value": "Miika Nuutinen",
+          "sourceUrl": "https://www.365scores.com/football/team/kups-1935/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.292578+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 228712,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/laspalmas_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Albert Sánchez",
+          "sourceUrl": "https://www.365scores.com/football/team/las-palmas-167/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.681231+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 218591,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/lazio_it.ban",
+      "fields": {
+        "manager": {
+          "value": "Gennaro Gattuso",
+          "sourceUrl": "https://www.365scores.com/football/team/lazio-236/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.948530+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 52428,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/lecce_ita.ban",
+      "fields": {
+        "manager": {
+          "value": "Eusebio Di Francesco",
+          "sourceUrl": "https://www.365scores.com/football/team/lecce-246/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.961186+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46239,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/lechpoznan_pol.ban",
+      "fields": {
+        "manager": {
+          "value": "Niels Frederiksen",
+          "sourceUrl": "https://www.365scores.com/football/team/lech-poznan-2211/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.583828+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 68295,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/leedsunited_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Daniel Farke",
+          "sourceUrl": "https://www.365scores.com/football/team/leeds-united-36/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.252859+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 50670,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/leganes_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Luis Carrión",
+          "sourceUrl": "https://www.365scores.com/football/team/cd-leganes-9242/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.466856+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 51004,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/legiawarsaw.ban",
+      "fields": {
+        "manager": {
+          "value": "Marek Papszun",
+          "sourceUrl": "https://www.365scores.com/football/team/legia-warszawa-2209/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.583828+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 76436,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/leicestercity_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Russell Martin",
+          "sourceUrl": "https://www.365scores.com/football/team/leicester-city-22/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.252859+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 4110,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/leipzig_ale.ban",
+      "fields": {
+        "manager": {
+          "value": "Martin Demichelis",
+          "sourceUrl": "https://www.365scores.com/football/team/rb-leipzig-7171/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.205893+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 855,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/levadia_est.ban",
+      "fields": {
+        "manager": {
+          "value": "Vjatseslav Zahovaiko",
+          "sourceUrl": "https://www.365scores.com/football/team/levadia-tallinn-5444/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.888913+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 242293,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/levante_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Luís Castro",
+          "sourceUrl": "https://www.365scores.com/football/team/levante-150/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.489837+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 110906,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/liepaja_let.ban",
+      "fields": {
+        "manager": {
+          "value": "Jānis Goba",
+          "sourceUrl": "https://www.365scores.com/football/team/fk-liepaja-22826/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.909988+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 202402,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/lille_fra.ban",
+      "fields": {
+        "manager": {
+          "value": "Davide Ancelotti",
+          "sourceUrl": "https://www.365scores.com/football/team/lille-478/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.237071+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 202439,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/lincoln_gib.ban",
+      "fields": {
+        "manager": {
+          "value": "Juanma Pavón",
+          "sourceUrl": "https://www.365scores.com/football/team/lincoln-red-imps-16037/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.731704+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 241013,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/liverpool_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Andoni Iraola",
+          "sourceUrl": "https://www.365scores.com/football/team/liverpool-108/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.192863+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 5780,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/logrones_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Sergio Rodríguez",
+          "sourceUrl": "https://www.365scores.com/football/team/ud-logrones-7813/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.249453+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 81013,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/lokoplovdiv_bul.ban",
+      "fields": {
+        "manager": {
+          "value": "Dusan Kosic",
+          "sourceUrl": "https://www.365scores.com/football/team/lokomotiv-plovdiv-2284/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.775493+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 200405,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/londrina_pr.ban",
+      "fields": {
+        "manager": {
+          "value": "Hugo Chacon",
+          "sourceUrl": "https://www.365scores.com/football/team/londrina-9113/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.375842+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 251423,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/ludogorets_bul.ban",
+      "fields": {
+        "manager": {
+          "value": "Igor Jovičević",
+          "sourceUrl": "https://www.365scores.com/football/team/ludogorets-8528/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.375842+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 82133,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/lugo_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Íñigo Vélez",
+          "sourceUrl": "https://www.365scores.com/football/team/cd-lugo-9232/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.466856+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 101085,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/luzern_sui.ban",
+      "fields": {
+        "manager": {
+          "value": "Jörg Portmann",
+          "sourceUrl": "https://www.365scores.com/football/team/luzern-1142/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.710645+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 241877,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/lyon.ban",
+      "fields": {
+        "manager": {
+          "value": "Carlos Vicens",
+          "sourceUrl": "https://www.365scores.com/football/team/lyon-465/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.007782+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 206632,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/maccabihaifa_isr.ban",
+      "fields": {
+        "manager": {
+          "value": "Ran Ben Shimon",
+          "sourceUrl": "https://www.365scores.com/football/team/maccabi-haifa-562/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.237071+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46262,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/machester_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Mauricio Pochettino",
+          "sourceUrl": "https://www.365scores.com/football/team/manchester-united-105/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.192863+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46122,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/machestercity_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Enzo Maresca",
+          "sourceUrl": "https://www.365scores.com/football/team/manchester-city-110/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.192863+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 6449,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/malaga_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Juan Funes",
+          "sourceUrl": "https://www.365scores.com/football/team/malaga-152/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.705109+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 227659,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/mallorca_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Luis García",
+          "sourceUrl": "https://www.365scores.com/football/team/mallorca-142/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.489837+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 44116,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/malmo_sue.ban",
+      "fields": {
+        "manager": {
+          "value": "Gaute Helstrup",
+          "sourceUrl": "https://www.365scores.com/football/team/malmo-ff-1891/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.261535+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 94638,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/maribor_esl.ban",
+      "fields": {
+        "manager": {
+          "value": "Darko Milanic",
+          "sourceUrl": "https://www.365scores.com/football/team/maribor-2346/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.775493+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 50572,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/maringapr.ban",
+      "fields": {
+        "manager": {
+          "value": "Ivan Campanari",
+          "sourceUrl": "https://www.365scores.com/football/team/maringa-18884/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.872243+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 247340,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/middlesbrough_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Kim Hellberg",
+          "sourceUrl": "https://www.365scores.com/football/team/middlesbrough-115/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.435106+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 110659,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/midtjylland_din.ban",
+      "fields": {
+        "manager": {
+          "value": "Mike Tullberg",
+          "sourceUrl": "https://www.365scores.com/football/team/fc-midtjylland-1823/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.130959+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 144613,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/miirassol_sp.ban",
+      "fields": {
+        "manager": {
+          "value": "Rafael Guanaes",
+          "sourceUrl": "https://www.365scores.com/football/team/mirassol-1269/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.987730+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 113939,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/milan_it.ban",
+      "fields": {
+        "manager": {
+          "value": "Ruben Amorim",
+          "sourceUrl": "https://www.365scores.com/football/team/ac-milan-227/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.766058+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 810,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/millwall_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Alex Neil",
+          "sourceUrl": "https://www.365scores.com/football/team/millwall-45/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.252859+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46142,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/mirandes_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Antxon Muneta",
+          "sourceUrl": "https://www.365scores.com/football/team/mirandes-8800/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.375842+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 231696,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/molde_nor.ban",
+      "fields": {
+        "manager": {
+          "value": "Sindre Tjelmeland",
+          "sourceUrl": "https://www.365scores.com/football/team/molde-1983/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.411519+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 239271,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/molvidi_hun.ban",
+      "fields": {
+        "manager": {
+          "value": "Krisztián Timár",
+          "sourceUrl": "https://www.365scores.com/football/team/mol-fehervar-2066/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.532389+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 176499,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/monaco_fr.ban",
+      "fields": {
+        "manager": {
+          "value": "Filipe Luis",
+          "sourceUrl": "https://www.365scores.com/football/team/monaco-471/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.237071+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 4272,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/monchengladbach_ale.ban",
+      "fields": {
+        "manager": {
+          "value": "Alexander Blessin",
+          "sourceUrl": "https://www.365scores.com/football/team/borussia-monchengladbach-349/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.007782+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 79571,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/monza_ita.ban",
+      "fields": {
+        "manager": {
+          "value": "Ivan Jurić",
+          "sourceUrl": "https://www.365scores.com/football/team/monza-293/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.961186+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46230,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/motherwell_esc.ban",
+      "fields": {
+        "manager": {
+          "value": "Alfred Johansson",
+          "sourceUrl": "https://www.365scores.com/football/team/motherwell-755/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.291229+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 157209,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/napoli_it.ban",
+      "fields": {
+        "manager": {
+          "value": "Massimiliano Allegri",
+          "sourceUrl": "https://www.365scores.com/football/team/napoli-234/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.948530+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46232,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/neftci_aze.ban",
+      "fields": {
+        "manager": {
+          "value": "Rashad Abdullayev",
+          "sourceUrl": "https://www.365scores.com/football/team/neftchi-baku-5425/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.775493+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 229048,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/newcastleunited_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Matthias Jaissle",
+          "sourceUrl": "https://www.365scores.com/football/team/newcastle-united-116/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.435106+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 99161,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/nice_fra.ban",
+      "fields": {
+        "manager": {
+          "value": "Olivier Pantaloni",
+          "sourceUrl": "https://www.365scores.com/football/team/ogc-nice-470/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.007782+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 80075,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/nkzagreb_cro.ban",
+      "fields": {
+        "manager": {
+          "value": "Nikica Jelavić",
+          "sourceUrl": "https://www.365scores.com/football/team/nk-lokomotiva-zagreb-23330/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.909988+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 218044,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/nottinghamforest_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Oliver Glasner",
+          "sourceUrl": "https://www.365scores.com/football/team/nottingham-forest-29/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.252859+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 56994,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/novorinzontino_sp.ban",
+      "fields": {
+        "manager": {
+          "value": "Enderson Moreira",
+          "sourceUrl": "https://www.365scores.com/football/team/novorizontino-23765/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.909988+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 44797,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/nsmura_elv.ban",
+      "fields": {
+        "manager": {
+          "value": "Mitja Mörec",
+          "sourceUrl": "https://www.365scores.com/football/team/mura-05-8487/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.249453+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 218173,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/ofi_gre.ban",
+      "fields": {
+        "manager": {
+          "value": "Christos Kontis",
+          "sourceUrl": "https://www.365scores.com/football/team/ofi-crete-1032/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.525424+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 70516,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/olimpia_esl.ban",
+      "fields": {
+        "manager": {
+          "value": "Jugoslav Trencovski",
+          "sourceUrl": "https://www.365scores.com/football/team/nk-olimpija-ljubljana-5986/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.132128+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 244797,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/olympiakos_gre.ban",
+      "fields": {
+        "manager": {
+          "value": "Imanol Alguacil",
+          "sourceUrl": "https://www.365scores.com/football/team/olympiacos-1023/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.572119+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 57503,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/olympiquemarseile_fra.ban",
+      "fields": {
+        "manager": {
+          "value": "Bruno Génésio",
+          "sourceUrl": "https://www.365scores.com/football/team/olympique-de-marseille-469/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.007782+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46256,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/omonianicosia_chp.ban",
+      "fields": {
+        "manager": {
+          "value": "Henning Berg",
+          "sourceUrl": "https://www.365scores.com/football/team/omonia-2262/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.643678+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 80804,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/operario_pr.ban",
+      "fields": {
+        "manager": {
+          "value": "Alberto Valentim",
+          "sourceUrl": "https://www.365scores.com/football/team/operario-pr-9109/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.375842+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 52640,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/osijek_cro.ban",
+      "fields": {
+        "manager": {
+          "value": "Federico Bessone",
+          "sourceUrl": "https://www.365scores.com/football/team/nk-osijek-2247/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.583828+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 3758,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/paok_gre.ban",
+      "fields": {
+        "manager": {
+          "value": "Alessio Lisci",
+          "sourceUrl": "https://www.365scores.com/football/team/paok-1029/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.525424+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 105314,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/parissaintgermain_fr.ban",
+      "fields": {
+        "manager": {
+          "value": "Luis Enrique",
+          "sourceUrl": "https://www.365scores.com/football/team/psg-480/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.237071+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46206,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/parma_ita.ban",
+      "fields": {
+        "manager": {
+          "value": "Alberto Gilardino",
+          "sourceUrl": "https://www.365scores.com/football/team/parma-241/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.948530+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 13287,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/partizan_ser.ban",
+      "fields": {
+        "manager": {
+          "value": "Aleksandar Stanojevic",
+          "sourceUrl": "https://www.365scores.com/football/team/partizan-belgrade-5437/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.888913+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 54115,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/paysandu.ban",
+      "fields": {
+        "manager": {
+          "value": "Ignácio Neto",
+          "sourceUrl": "https://www.365scores.com/football/team/paysandu-7390/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.205893+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 202026,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/petrocub_mol.ban",
+      "fields": {
+        "manager": {
+          "value": "Andrei Martin",
+          "sourceUrl": "https://www.365scores.com/football/team/petrocub-s-g-21847/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.872243+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 173140,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/piast_pol.ban",
+      "fields": {
+        "manager": {
+          "value": "Daniel Myśliwiec",
+          "sourceUrl": "https://www.365scores.com/football/team/piast-gliwice-2226/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.583828+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 144146,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/ponferradina_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Juan Francisco García",
+          "sourceUrl": "https://www.365scores.com/football/team/ponferradina-201/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.766058+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 130845,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/pontepreta_bra.ban",
+      "fields": {
+        "manager": {
+          "value": "Gilson Kleina",
+          "sourceUrl": "https://www.365scores.com/football/team/ponte-preta-1266/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.987730+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 45200,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/porto.ban",
+      "fields": {
+        "manager": {
+          "value": "Francesco Farioli",
+          "sourceUrl": "https://www.365scores.com/football/team/fc-porto-887/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.453261+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 90969,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/portsmouth_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "John Mousinho",
+          "sourceUrl": "https://www.365scores.com/football/team/portsmouth-111/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.192863+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 43944,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/psv_hol.ban",
+      "fields": {
+        "manager": {
+          "value": "Peter Bosz",
+          "sourceUrl": "https://www.365scores.com/football/team/psv-eindhoven-725/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.204640+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46310,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/puskás_hun.ban",
+      "fields": {
+        "manager": {
+          "value": "Levente Babó",
+          "sourceUrl": "https://www.365scores.com/football/team/puskas-fc-academy-11248/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.626643+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 242788,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/queensparkrangers_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Julien Stephan",
+          "sourceUrl": "https://www.365scores.com/football/team/qpr-18/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.183263+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 62087,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/racing_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "José Alberto López",
+          "sourceUrl": "https://www.365scores.com/football/team/racing-santander-137/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.451717+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 80991,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/randers_den.ban",
+      "fields": {
+        "manager": {
+          "value": "Rasmus Bertelsen",
+          "sourceUrl": "https://www.365scores.com/football/team/randers-fc-1830/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.261535+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 56277,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/rangers_esc.ban",
+      "fields": {
+        "manager": {
+          "value": "Derek McInnes",
+          "sourceUrl": "https://www.365scores.com/football/team/rangers-753/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.204640+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 50085,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/rapidviena_aut.ban",
+      "fields": {
+        "manager": {
+          "value": "Johannes Thorup",
+          "sourceUrl": "https://www.365scores.com/football/team/rapid-vienna-1738/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.987730+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 128691,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/rayovallecano_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Beñat San José",
+          "sourceUrl": "https://www.365scores.com/football/team/rayo-vallecano-174/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.681231+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46578,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/realmadrid_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "José Mourinho",
+          "sourceUrl": "https://www.365scores.com/football/team/real-madrid-131/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.435106+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46116,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/realoviedo_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Raúl González",
+          "sourceUrl": "https://www.365scores.com/football/team/real-oviedo-193/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.766058+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 270814,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/realsociedad_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Pellegrino Matarazzo",
+          "sourceUrl": "https://www.365scores.com/football/team/real-sociedad-154/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.705109+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 73787,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/realzaragoza_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "David Navarro",
+          "sourceUrl": "https://www.365scores.com/football/team/real-zaragoza-145/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.489837+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 234648,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/remo.ban",
+      "fields": {
+        "manager": {
+          "value": "Thiago Carpini",
+          "sourceUrl": "https://www.365scores.com/football/team/remo-7383/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.205893+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 70645,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/rennes_fr.ban",
+      "fields": {
+        "manager": {
+          "value": "Franck Haise",
+          "sourceUrl": "https://www.365scores.com/football/team/rennes-477/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.237071+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 79895,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/riga_let.ban",
+      "fields": {
+        "manager": {
+          "value": "Adrian Gula",
+          "sourceUrl": "https://www.365scores.com/football/team/riga-29362/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.967564+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 77211,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/rijeka_cro.ban",
+      "fields": {
+        "manager": {
+          "value": "Matjaž Kek",
+          "sourceUrl": "https://www.365scores.com/football/team/hnk-rijeka-2248/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.643678+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 50498,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/rioave_por.ban",
+      "fields": {
+        "manager": {
+          "value": "Vasco Seabra",
+          "sourceUrl": "https://www.365scores.com/football/team/rio-ave-904/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.453261+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 48617,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/roma_it.ban",
+      "fields": {
+        "manager": {
+          "value": "Gian Piero Gasperini",
+          "sourceUrl": "https://www.365scores.com/football/team/as-roma-225/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.766058+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46224,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/rosenborg_nor.ban",
+      "fields": {
+        "manager": {
+          "value": "Freyr Alexandersson",
+          "sourceUrl": "https://www.365scores.com/football/team/rosenborg-1986/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.411519+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 114517,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/royalantwerp_bel.ban",
+      "fields": {
+        "manager": {
+          "value": "Marvin Compper",
+          "sourceUrl": "https://www.365scores.com/football/team/royal-antwerp-fc-1191/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.769758+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 42495,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/ruzomberok_slk.ban",
+      "fields": {
+        "manager": {
+          "value": "Jaroslav Kostl",
+          "sourceUrl": "https://www.365scores.com/football/team/mfk-ruzomberok-2113/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.583828+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 108284,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/salzburg_aut.ban",
+      "fields": {
+        "manager": {
+          "value": "Danny Röhl",
+          "sourceUrl": "https://www.365scores.com/football/team/red-bull-salzburg-1739/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.987730+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 144549,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/saopaulo_bra.ban",
+      "fields": {
+        "manager": {
+          "value": "Dorival Júnior",
+          "sourceUrl": "https://www.365scores.com/football/team/sao-paulo-1225/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.903012+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 43763,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/saraievo_bos.ban",
+      "fields": {
+        "manager": {
+          "value": "Zoran Zekic",
+          "sourceUrl": "https://www.365scores.com/football/team/fk-sarajevo-5977/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.132128+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 87859,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/sassuolo_ita.ban",
+      "fields": {
+        "manager": {
+          "value": "Roberto D'Aversa",
+          "sourceUrl": "https://www.365scores.com/football/team/sassuolo-266/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.961186+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 52469,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/servette_sui.ban",
+      "fields": {
+        "manager": {
+          "value": "Jocelyn Gourvennec",
+          "sourceUrl": "https://www.365scores.com/football/team/servette-fc-1154/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.710645+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46244,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/sevilla_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Luis García",
+          "sourceUrl": "https://www.365scores.com/football/team/sevilla-135/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.451717+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 62086,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/shakhtar_ucr.ban",
+      "fields": {
+        "manager": {
+          "value": "Arda Turan",
+          "sourceUrl": "https://www.365scores.com/football/team/shakhtar-donetsk-1955/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.292578+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 5751,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/sherifftiraspol_mol.ban",
+      "fields": {
+        "manager": {
+          "value": "Victor Mihailov",
+          "sourceUrl": "https://www.365scores.com/football/team/sheriff-tiraspol-5582/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.892062+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 122821,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/sivasspor_tur.ban",
+      "fields": {
+        "manager": {
+          "value": "Çağdaş Çavuş",
+          "sourceUrl": "https://www.365scores.com/football/team/sivasspor-948/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.572119+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 269969,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/slaviasofia_bul.ban",
+      "fields": {
+        "manager": {
+          "value": "Ratko Dostanic",
+          "sourceUrl": "https://www.365scores.com/football/team/slavia-sofia-2280/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.775493+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 201492,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/slovan_slk.ban",
+      "fields": {
+        "manager": {
+          "value": "Yaya Toure",
+          "sourceUrl": "https://www.365scores.com/football/team/slovan-bratislava-2112/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.532389+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 145644,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/slovanliberec_cze.ban",
+      "fields": {
+        "manager": {
+          "value": "Branislav Fodrek",
+          "sourceUrl": "https://www.365scores.com/football/team/slovan-liberec-1794/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.130959+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 194055,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/sonderjyske_din.ban",
+      "fields": {
+        "manager": {
+          "value": "Fatah Abdirahman",
+          "sourceUrl": "https://www.365scores.com/football/team/sonderjyske-1835/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.261535+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Manager",
+          "sourceId": 242285,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/southampton_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Tonda Eckert",
+          "sourceUrl": "https://www.365scores.com/football/team/southampton-21/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.252859+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 226223,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/spartak_rus.ban",
+      "fields": {
+        "manager": {
+          "value": "Juan Carlos Carcedo",
+          "sourceUrl": "https://www.365scores.com/football/team/spartak-moscow-1076/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.525424+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 101099,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/sport.ban",
+      "fields": {
+        "manager": {
+          "value": "Mariano Soso",
+          "sourceUrl": "https://www.365scores.com/football/team/sport-recife-1226/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.903012+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46575,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/sporting_por.ban",
+      "fields": {
+        "manager": {
+          "value": "Paulo Fonseca",
+          "sourceUrl": "https://www.365scores.com/football/team/sporting-cp-890/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.453261+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 50746,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/sportingbraga_por.ban",
+      "fields": {
+        "manager": {
+          "value": "Franclim Carvalho",
+          "sourceUrl": "https://www.365scores.com/football/team/sc-braga-895/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.453261+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 181860,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/sportinggijon_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Nicolás Larcamon",
+          "sourceUrl": "https://www.365scores.com/football/team/sporting-gijon-153/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.705109+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 50332,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/standardliege_bel.ban",
+      "fields": {
+        "manager": {
+          "value": "Vincent Euvrard",
+          "sourceUrl": "https://www.365scores.com/football/team/standard-de-liege-1170/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.710645+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 110886,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/steua_bucaresti_rom.ban",
+      "fields": {
+        "manager": {
+          "value": "Laurențiu Reghecampf",
+          "sourceUrl": "https://www.365scores.com/football/team/fcsb-2041/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.411519+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 82235,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/stgallen_sui.ban",
+      "fields": {
+        "manager": {
+          "value": "Enrico Maaßen",
+          "sourceUrl": "https://www.365scores.com/football/team/fc-st.-gallen-1146/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.710645+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 115747,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/stokecity_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Mark Robins",
+          "sourceUrl": "https://www.365scores.com/football/team/stoke-city-7/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.183263+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 80851,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/strasbourg_fra.ban",
+      "fields": {
+        "manager": {
+          "value": "Vitor Matos",
+          "sourceUrl": "https://www.365scores.com/football/team/strasbourg-479/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.237071+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 189332,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/sturmgraz_aut.ban",
+      "fields": {
+        "manager": {
+          "value": "Fabio Ingolitsch",
+          "sourceUrl": "https://www.365scores.com/football/team/sturm-graz-1741/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.987730+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 186685,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/sumqayit_azb.ban",
+      "fields": {
+        "manager": {
+          "value": "Filipe Cândido",
+          "sourceUrl": "https://www.365scores.com/football/team/sumqayit-13803/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.678490+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 104756,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/sunderland_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Régis Le Bris",
+          "sourceUrl": "https://www.365scores.com/football/team/sunderland-117/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.435106+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 115997,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/sutjeska_mon.ban",
+      "fields": {
+        "manager": {
+          "value": "Milorad Pekovic",
+          "sourceUrl": "https://www.365scores.com/football/team/sutjeska-niksic-5934/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.014141+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 173113,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/tenerife_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Álvaro Cervera",
+          "sourceUrl": "https://www.365scores.com/football/team/tenerife-160/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.705109+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46278,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/thenewsaints_wal.ban",
+      "fields": {
+        "manager": {
+          "value": "Craig Harrison",
+          "sourceUrl": "https://www.365scores.com/football/team/the-new-saints-5652/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.014141+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 133875,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/torino_ita.ban",
+      "fields": {
+        "manager": {
+          "value": "Ignazio Abate",
+          "sourceUrl": "https://www.365scores.com/football/team/torino-235/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.948530+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 244806,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/tottenhamhotspur_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Roberto De Zerbi",
+          "sourceUrl": "https://www.365scores.com/football/team/tottenham-114/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.435106+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46236,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/tsvhartberg_aut.ban",
+      "fields": {
+        "manager": {
+          "value": "Markus Schopp",
+          "sourceUrl": "https://www.365scores.com/football/team/tsv-hartberg-5969/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.132128+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 59450,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/twente_hol.ban",
+      "fields": {
+        "manager": {
+          "value": "John van den Brom",
+          "sourceUrl": "https://www.365scores.com/football/team/twente-696/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.204640+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46309,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/udinese_ita.ban",
+      "fields": {
+        "manager": {
+          "value": "Paolo Zanetti",
+          "sourceUrl": "https://www.365scores.com/football/team/udinese-229/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.948530+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 70192,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/vaduz_lie.ban",
+      "fields": {
+        "manager": {
+          "value": "Marc Schneider",
+          "sourceUrl": "https://www.365scores.com/football/team/fc-vaduz-1148/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.710645+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 50165,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/valencia_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Javier Aguirre",
+          "sourceUrl": "https://www.365scores.com/football/team/valencia-139/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.451717+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 59977,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/valladolid_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Fran Escribá",
+          "sourceUrl": "https://www.365scores.com/football/team/real-valladolid-141/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.489837+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 233421,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/valmiera_let.ban",
+      "fields": {
+        "manager": {
+          "value": "Gatis Kalniņš",
+          "sourceUrl": "https://www.365scores.com/football/team/valmieras-fk-11230/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.626643+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 171873,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/vasco.ban",
+      "fields": {
+        "manager": {
+          "value": "Pedro Emanuel",
+          "sourceUrl": "https://www.365scores.com/football/team/vasco-da-gama-1227/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.987730+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 48615,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/venezia_ita.ban",
+      "fields": {
+        "manager": {
+          "value": "Davide Nicola",
+          "sourceUrl": "https://www.365scores.com/football/team/venezia-308/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.961186+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 46227,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/viktoria_rep.ban",
+      "fields": {
+        "manager": {
+          "value": "Radoslav Kováč",
+          "sourceUrl": "https://www.365scores.com/football/team/viktoria-plzen-1796/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.130959+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 78381,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/vilago.ban",
+      "fields": {
+        "manager": {
+          "value": "Guto Ferreira",
+          "sourceUrl": "https://www.365scores.com/football/team/vila-nova-1782/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.130959+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 43749,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/villareal_esp.ban",
+      "fields": {
+        "manager": {
+          "value": "Iñigo Pérez",
+          "sourceUrl": "https://www.365scores.com/football/team/villarreal-133/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.451717+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 43562,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/vitesse_hol.ban",
+      "fields": {
+        "manager": {
+          "value": "Rudiger Rehm",
+          "sourceUrl": "https://www.365scores.com/football/team/vitesse-697/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.204640+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 68562,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/vitoriaguimaraes_por.ban",
+      "fields": {
+        "manager": {
+          "value": "Tiago Margarido",
+          "sourceUrl": "https://www.365scores.com/football/team/guimaraes-889/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.453261+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 156751,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/vojvodina_srb.ban",
+      "fields": {
+        "manager": {
+          "value": "Marko Savic",
+          "sourceUrl": "https://www.365scores.com/football/team/vojvodina-5447/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.892062+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 141457,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/westham_eng.ban",
+      "fields": {
+        "manager": {
+          "value": "Scott Parker",
+          "sourceUrl": "https://www.365scores.com/football/team/west-ham-united-113/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:31.435106+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 65602,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/wolfsbergerac_aut.ban",
+      "fields": {
+        "manager": {
+          "value": "Manfred Schmid",
+          "sourceUrl": "https://www.365scores.com/football/team/wolfsberger-ac-9376/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.492931+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 99108,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/wolfsburg_ale.ban",
+      "fields": {
+        "manager": {
+          "value": "Tobias Strobl",
+          "sourceUrl": "https://www.365scores.com/football/team/wolfsburg-339/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.007782+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 243920,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/youngboys_sui.ban",
+      "fields": {
+        "manager": {
+          "value": "Gerardo Seoane",
+          "sourceUrl": "https://www.365scores.com/football/team/young-boys-1139/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:32.710645+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 55939,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/zilina_slk.ban",
+      "fields": {
+        "manager": {
+          "value": "Vladimir Vesely",
+          "sourceUrl": "https://www.365scores.com/football/team/msk-zilina-2108/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.532389+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 244765,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/zorya_ucr.ban",
+      "fields": {
+        "manager": {
+          "value": "Viktor Skripnik",
+          "sourceUrl": "https://www.365scores.com/football/team/zorya-luhansk-1967/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:33.292578+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 74827,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/zrinjski_bos.ban",
+      "fields": {
+        "manager": {
+          "value": "Igor Štimac",
+          "sourceUrl": "https://www.365scores.com/football/team/zrinjski-5650/squad",
+          "sourcePublishedAt": "2026-11-23T15:53:34.014141+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 146990,
+          "recordedAt": "2026-11-23"
+        }
+      }
+    }
+  ]
 }
