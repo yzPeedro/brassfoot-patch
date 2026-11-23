@@ -36,3 +36,6 @@ __pycache__/
 *.key
 PROMPT.md
 windows-installer/*.syso
+
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+/graft/
