@@ -132,6 +132,7 @@ public final class LiveMatchPanel extends JPanel {
     private double cardFoulSpotX = .5;
     private double cardFoulSpotY = .5;
     private long penaltySettleDeadline;
+    private long penaltyModalAdvanceAt;
     private long substitutionHoldSince;
     private int goalVariant;
     private int goalReboundPhase;
@@ -388,6 +389,7 @@ public final class LiveMatchPanel extends JPanel {
     private int penaltyPhase;
     private int penaltySide;
     private int penaltyActor;
+    private boolean penaltyHuman;
     private int penaltyOutcome;
     private double penaltyShotY;
     private final double[] penaltyLaunch = new double[3];
@@ -405,6 +407,7 @@ public final class LiveMatchPanel extends JPanel {
     private int ambientShotPhase;
     private int ambientShotSide;
     private int ambientShotOutcome;
+    private boolean shotManual;
     private double ambientShotY;
     private int cardFoulPhase;
     private int cardFoulOffenderSide;
@@ -1291,6 +1294,7 @@ public final class LiveMatchPanel extends JPanel {
     private final List<Object[]> deferredReveals = new ArrayList<Object[]>();
     private int deferredShown;
     private int deferredFlushed;
+    private Object[] pendingLineupDialog;
 
     private int speedProfile() {
         int delay = minuteDelay();
@@ -1430,13 +1434,40 @@ public final class LiveMatchPanel extends JPanel {
 
     public static void openLineupDialog(Object host, int index, boolean forced) throws Throwable {
         LiveMatchPanel panel = active;
-        if (panel != null && panel.host == host) panel.flushAllDeferred();
+        if (panel != null && panel.host == host) {
+            if (panel.shouldDeferLineupDialog()) {
+                panel.pendingLineupDialog = new Object[] { Integer.valueOf(index), Boolean.valueOf(forced) };
+                return;
+            }
+            panel.flushAllDeferred();
+        }
+        invokeLineupDialog(host, index, forced);
+    }
+
+    private static void invokeLineupDialog(Object host, int index, boolean forced) throws Throwable {
         Method method = host.getClass().getDeclaredMethod("e", int.class, boolean.class);
         method.setAccessible(true);
         try {
             method.invoke(host, Integer.valueOf(index), Boolean.valueOf(forced));
         } catch (java.lang.reflect.InvocationTargetException error) {
             throw error.getCause() == null ? error : error.getCause();
+        }
+    }
+
+    private boolean shouldDeferLineupDialog() {
+        if (matchEnded()) return false;
+        return cardFoulPhase != 0 && cardFoulRed;
+    }
+
+    private void flushPendingLineupDialog() {
+        if (pendingLineupDialog == null) return;
+        if (shouldDeferLineupDialog()) return;
+        Object[] pending = pendingLineupDialog;
+        pendingLineupDialog = null;
+        try {
+            invokeLineupDialog(host, ((Integer) pending[0]).intValue(), ((Boolean) pending[1]).booleanValue());
+        } catch (Throwable error) {
+            diagnostic("lineup_dialog_failed", error);
         }
     }
 
@@ -1457,8 +1488,8 @@ public final class LiveMatchPanel extends JPanel {
     private boolean mayAdvanceEngine() {
         if (matchEnded()) return true;
         if (engineShowDepth > 0 || penaltyLoop != null) return false;
-        if (speedProfile() >= SPEED_FAST) return true;
-        if (engineEventOpen) return false;
+        if (pendingGoalStage != 0 || cardFoulPhase != 0 || freeKickPhase != 0 || restartActive || kickoffInProgress || penaltyPhase != 0
+                || injuryPhase != 0 || engineEventOpen) return false;
         for (Object action : queuedEngineActions) {
             if (Boolean.TRUE.equals(invoke(action, "isDone"))) continue;
             if (integer(invoke(action, "en"), -1) > engineHalf) continue;
@@ -1617,8 +1648,7 @@ public final class LiveMatchPanel extends JPanel {
     private boolean holdWanted() {
         if (matchEnded()) return false;
         if (engineShowDepth > 0 || penaltyLoop != null) return true;
-        if (speedProfile() >= SPEED_FAST) return false;
-        if (pendingGoalStage != 0 || cardFoulPhase == 1 || freeKickPhase != 0 || restartActive || penaltyPhase != 0
+        if (pendingGoalStage != 0 || cardFoulPhase == 1 || freeKickPhase != 0 || restartActive || kickoffInProgress || penaltyPhase != 0
                 || injuryPhase != 0 || engineEventOpen) {
             return true;
         }
@@ -1626,7 +1656,7 @@ public final class LiveMatchPanel extends JPanel {
             int type = integer(invoke(action, "b"), -1);
             if (type >= 1 && type <= 5) return true;
         }
-        return false;
+        return speedProfile() < SPEED_FAST;
     }
 
     private boolean hasQueuedGoal(int half) {
@@ -1999,6 +2029,7 @@ public final class LiveMatchPanel extends JPanel {
         if (penaltyPhase >= 4 && penaltyPhase <= 5) capturePenaltyText();
         boolean penaltyAnimating = penaltyPhase >= 1 && penaltyPhase <= 4;
         if (isDecisionDialogOpen() && !penaltyAnimating) {
+            if (penaltyPhase == 5) capturePenaltyText();
             advanceClock(false);
             repaint();
             return;
@@ -2011,6 +2042,7 @@ public final class LiveMatchPanel extends JPanel {
         else refreshBallRoleTargets();
         updatePlayerPositions();
         ageDeferredReveals();
+        flushPendingLineupDialog();
         trackLiveStats();
         refreshStatsLabel();
         updateHeldClock();
@@ -2094,7 +2126,7 @@ public final class LiveMatchPanel extends JPanel {
         boolean play = !ballInFlight && !looseBall && restartPlay == 0 && !restartActive && penaltyPhase == 0
                 && freeKickPhase == 0 && cardFoulPhase <= 1 && injuryPhase != 2 && simpleStoppageUntil == 0
                 && !kickoffInProgress && prepPassUntil == 0;
-        if (!pending || !play || !carrierHasBall()) {
+        if (!play || !carrierHasBall()) {
             idleSince = 0;
             return;
         }
@@ -2110,6 +2142,26 @@ public final class LiveMatchPanel extends JPanel {
         }
         long idle = now - idleSince;
         if (idle < 900L) return;
+        if (!pending) {
+            if (!decoyActive && possessingPlayer > 0 && inShootingZone(possessingSide, carrier)) {
+                clearChanceShots++;
+                if (pendingStatShotSide == possessingSide) pendingStatShotSide = -1;
+                shotManual = true;
+                startShot(now, visualShotOutcome());
+                idleSince = now;
+                return;
+            }
+            if (substitutionWanted && possessingPlayer > 0) {
+                idleMillis += idle;
+                idleSince = now;
+                idleResources++;
+                if (restartAllowed(0) && ballOutByPlay(now, false)) return;
+                loseBallInContext(now, carrier, possessingSide == 0 ? home : away, possessingSide == 0 ? away : home, 1 - possessingSide);
+                return;
+            }
+            idleSince = now;
+            return;
+        }
         idleMillis += idle;
         idleSince = now;
         idleResources++;
@@ -2119,6 +2171,13 @@ public final class LiveMatchPanel extends JPanel {
         }
         if (pendingGoalStage == 1 && engineEventOpen) {
             escalateEvent(now);
+            return;
+        }
+        if (!decoyActive && clearChance(possessingSide, carrier, false) && inShootingZone(possessingSide, carrier)) {
+            clearChanceShots++;
+            if (pendingStatShotSide == possessingSide) pendingStatShotSide = -1;
+            shotManual = true;
+            startShot(now, visualShotOutcome());
             return;
         }
         double direction = possessingSide == 0 ? 1.0 : -1.0;
@@ -2884,6 +2943,32 @@ public final class LiveMatchPanel extends JPanel {
                 entry++;
             }
         }
+        for (Dot[] team : new Dot[][] { home, away }) {
+            boolean awaySide = team == away;
+            int midfielders = 0;
+            for (int i = 1; i < team.length; i++) {
+                Dot dot = team[i];
+                if (!dot.active) continue;
+                double limit = awaySide ? .505 : .495;
+                if (awaySide) {
+                    if (dot.x < limit) dot.x = limit;
+                    if (!dot.entering && dot.currentX < limit) dot.currentX = limit;
+                } else {
+                    if (dot.x > limit) dot.x = limit;
+                    if (!dot.entering && dot.currentX > limit) dot.currentX = limit;
+                }
+                if (Math.abs(dot.x - .5) < .12) midfielders++;
+            }
+            if (midfielders > 2) {
+                for (int i = team.length - 1; i >= 1 && midfielders > 2; i--) {
+                    Dot dot = team[i];
+                    if (!dot.active || Math.abs(dot.x - .5) >= .12) continue;
+                    dot.x = awaySide ? .56 : .44;
+                    if (!dot.entering) dot.currentX = dot.x;
+                    midfielders--;
+                }
+            }
+        }
         refX = .5;
         refY = .985;
         refVX = 0;
@@ -2921,12 +3006,70 @@ public final class LiveMatchPanel extends JPanel {
             if (!window.isShowing()) continue;
             Component screen = findByClassName(window, "a.gb");
             if (screen == null) continue;
+            if (penaltyPhase == 5) {
+                hidePenaltyModal(window);
+                advancePenaltyModal(window, clockNow());
+            }
             Object label = readField(screen, "JU");
             if (!(label instanceof JLabel)) continue;
             String text = ((JLabel) label).getText();
             if (text == null) continue;
             text = text.replaceAll("<[^>]*>", " ").replaceAll("\\s+", " ").trim();
             if (text.length() > 0) penaltyText = text;
+        }
+    }
+
+    private void hidePenaltyModal(Window window) {
+        try {
+            if (window.isShowing()) window.setLocation(-32000, -32000);
+        } catch (Throwable ignored) {
+        }
+    }
+
+    private void advancePenaltyModal(Window window, long now) {
+        if (now < penaltyModalAdvanceAt) return;
+        penaltyModalAdvanceAt = now + 180L;
+        try {
+            clickPenaltyButtons(window);
+            java.awt.KeyboardFocusManager mgr = java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager();
+            Component focus = mgr.getFocusOwner();
+            if (focus == null) focus = window;
+            java.awt.event.KeyEvent press = new java.awt.event.KeyEvent(focus, java.awt.event.KeyEvent.KEY_PRESSED,
+                    now, 0, java.awt.event.KeyEvent.VK_ENTER, java.awt.event.KeyEvent.CHAR_UNDEFINED);
+            java.awt.event.KeyEvent release = new java.awt.event.KeyEvent(focus, java.awt.event.KeyEvent.KEY_RELEASED,
+                    now, 0, java.awt.event.KeyEvent.VK_ENTER, java.awt.event.KeyEvent.CHAR_UNDEFINED);
+            focus.dispatchEvent(press);
+            focus.dispatchEvent(release);
+        } catch (Throwable ignored) {
+        }
+    }
+
+    private void disposePenaltyModal() {
+        try {
+            for (Window window : Window.getWindows()) {
+                if (!window.isShowing()) continue;
+                if (findByClassName(window, "a.gb") != null) {
+                    window.setVisible(false);
+                    window.dispose();
+                }
+            }
+        } catch (Throwable ignored) {
+        }
+    }
+
+    private void clickPenaltyButtons(Component root) {
+        if (root == null) return;
+        if (root instanceof javax.swing.AbstractButton) {
+            javax.swing.AbstractButton button = (javax.swing.AbstractButton) root;
+            if (button.isShowing() && button.isEnabled()) {
+                button.doClick();
+                return;
+            }
+        }
+        if (root instanceof Container) {
+            for (Component child : ((Container) root).getComponents()) {
+                clickPenaltyButtons(child);
+            }
         }
     }
 
@@ -4096,7 +4239,12 @@ public final class LiveMatchPanel extends JPanel {
     }
 
     private boolean clearChance(int side, Dot carrier) {
-        if (carrier == null || !engineShotReady(side)) return false;
+        return clearChance(side, carrier, true);
+    }
+
+    private boolean clearChance(int side, Dot carrier, boolean engineGated) {
+        if (carrier == null) return false;
+        if (engineGated && !engineShotReady(side)) return false;
         int shooter = engineShooter[side];
         Dot[] shooters = side == 0 ? home : away;
         if (shooter > 0 && shooter < shooters.length && shooters[shooter].active && shooters[shooter] != carrier) return false;
@@ -4324,31 +4472,21 @@ public final class LiveMatchPanel extends JPanel {
         penaltyActionRef = action;
         penaltyDebug = false;
         penaltyScoreBefore = scoreFor(side);
+        penaltyHuman = Boolean.TRUE.equals(invoke(invoke(action, "cu"), "jZ"));
         String key = engineActionKey(action);
         if (key != null) animatedKeys.add(key);
-        if (speedProfile() >= SPEED_FAST) {
-            double direction = side == 0 ? 1.0 : -1.0;
-            ballInFlight = false;
-            ballX = ballFromX = ballToX = spotX(side);
-            ballY = ballFromY = ballToY = .50;
-            Dot kicker = players[taker];
-            kicker.currentX = spotX(side) - direction * .05;
-            kicker.currentY = .50;
-            penaltyPhase = 5;
-            event = "Cobrança: " + kicker.name;
-            return;
-        }
-        penaltyPhase = 2;
-        SecondaryLoop loop = Toolkit.getDefaultToolkit().getSystemEventQueue().createSecondaryLoop();
-        penaltyLoop = loop;
-        Timer guard = new Timer(10000, new ActionListener() {
-            @Override public void actionPerformed(ActionEvent event) { exitPenaltyLoop(); }
-        });
-        guard.setRepeats(false);
-        guard.start();
-        loop.enter();
-        guard.stop();
-        penaltyLoop = null;
+        double direction = side == 0 ? 1.0 : -1.0;
+        ballInFlight = false;
+        ballX = ballFromX = ballToX = spotX(side);
+        ballY = ballFromY = ballToY = .50;
+        Dot kicker = players[taker];
+        kicker.currentX = spotX(side) - direction * .05;
+        kicker.currentY = .50;
+        penaltySettleDeadline = 0;
+        penaltyReadyAfter = now + (penaltyHuman ? 250L : 80L);
+        penaltyModalAdvanceAt = 0;
+        penaltyPhase = 5;
+        event = "Cobrança: " + kicker.name;
     }
 
     private void exitPenaltyLoop() {
@@ -4394,6 +4532,8 @@ public final class LiveMatchPanel extends JPanel {
             }
         } else if (penaltyPhase == 3) {
             if (now >= penaltyPauseUntil) {
+                penaltySettleDeadline = 0;
+                penaltyReadyAfter = now + 1200L;
                 penaltyPhase = 5;
                 event = "Cobrança: " + taker.name;
                 exitPenaltyLoop();
@@ -4418,9 +4558,32 @@ public final class LiveMatchPanel extends JPanel {
             penaltyPhase = penaltyLaunchGoal ? 6 : 7;
             event = penaltyLaunchEvent;
         } else if (penaltyPhase == 5) {
-            if (penaltyLoop != null || isDecisionDialogOpen()) return;
-            boolean goal = penaltyDebug ? random.nextInt(100) < 75
-                    : penaltyScoreBefore >= 0 && scoreFor(penaltySide) > penaltyScoreBefore;
+            if (penaltyLoop != null) return;
+            if (isDecisionDialogOpen()) {
+                capturePenaltyText();
+                if (now >= penaltyReadyAfter) {
+                    disposePenaltyModal();
+                } else {
+                    penaltySettleDeadline = 0;
+                    return;
+                }
+            }
+            if (penaltySettleDeadline == 0) {
+                penaltySettleDeadline = now + 120L;
+                return;
+            }
+            if (now < penaltySettleDeadline) return;
+            capturePenaltyText();
+            String lower = penaltyText == null ? "" : penaltyText.toLowerCase(Locale.ROOT);
+            boolean goalByScore = penaltyScoreBefore >= 0 && scoreFor(penaltySide) > penaltyScoreBefore;
+            boolean goalByText = lower.contains("gol");
+            boolean missByText = lower.contains("defe") || lower.contains("trave") || lower.contains("fora")
+                    || lower.contains("arquibancada") || lower.contains("escorrega") || lower.contains("perdeu")
+                    || lower.contains("perdido") || lower.contains("pra fora") || lower.contains("por cima");
+            boolean goal = penaltyDebug ? random.nextInt(100) < 75 : goalByScore || (goalByText && !missByText);
+            if (!goal && !missByText && penaltyScoreBefore < 0 && !goalByText) {
+                goal = false;
+            }
             penaltyResolvedAt = now;
             int miss = goal ? -1 : penaltyMissKind(penaltyText);
             recordShot(penaltySide, goal || miss != PEN_WIDE && miss != PEN_OVER ? STAT_ON_TARGET : STAT_OFF_TARGET);
@@ -4428,7 +4591,6 @@ public final class LiveMatchPanel extends JPanel {
             Dot keeper = keeperSide == 0 ? home[0] : away[0];
             double goalLine = penaltySide == 0 ? 1.0 : 0.0;
             double inward = penaltySide == 0 ? -1.0 : 1.0;
-            String lower = penaltyText == null ? "" : penaltyText.toLowerCase(Locale.ROOT);
             double side = random.nextBoolean() ? 1.0 : -1.0;
             penaltyLaunchGoal = goal;
             penaltyDiveY = -1;
@@ -4438,7 +4600,7 @@ public final class LiveMatchPanel extends JPanel {
                 penaltyLaunch[0] = penaltySide == 0 ? GOAL_OUT : 1.0 - GOAL_OUT;
                 penaltyLaunch[1] = y;
                 penaltyLaunch[2] = 420 + random.nextInt(80);
-                boolean wrongSide = lower.contains("um lado") || random.nextInt(100) < 55;
+                boolean wrongSide = lower.contains("um lado") || lower.contains("outro lado") || lower.contains("enganou") || random.nextInt(100) < 55;
                 penaltyDiveY = wrongSide ? .5 - side * .07 : .5 + side * .045;
                 penaltyLaunchEvent = penaltyText != null ? penaltyText : "Gol de pênalti!";
             } else if (miss == PEN_SAVE) {
@@ -4806,8 +4968,10 @@ public final class LiveMatchPanel extends JPanel {
             return;
         }
         int shooterSide = possessingSide;
-        int engineKind = goalSetup ? 0 : consumeEngineShot(shooterSide);
-        if (engineKind == 0 && !goalSetup) {
+        boolean manual = shotManual;
+        shotManual = false;
+        int engineKind = goalSetup || manual ? 0 : consumeEngineShot(shooterSide);
+        if (engineKind == 0 && !goalSetup && !manual) {
             unscheduledShots++;
             denyShot(now, shooterSide);
             return;
@@ -5192,7 +5356,8 @@ public final class LiveMatchPanel extends JPanel {
         }
         cardFoulDesignated = false;
         boolean attackingHalf = takerSide == 0 ? foulX >= .5 : foulX <= .5;
-        int designated = attackingHalf ? designatedTaker(takerSide, FREE_KICK_TAKER_FIELD) : -1;
+        boolean yellowCardFreeKick = cardFoulKey != null && !cardFoulRed;
+        int designated = attackingHalf && !yellowCardFreeKick ? designatedTaker(takerSide, FREE_KICK_TAKER_FIELD) : -1;
         if (designated >= 0) {
             cardFoulTaker = designated;
             cardFoulDesignated = true;
@@ -5513,6 +5678,14 @@ public final class LiveMatchPanel extends JPanel {
         decideOnBall(now, side, rivals, current, counter && !license ? Math.max(cap, .78) : cap, flair, counter);
     }
 
+    private boolean openPlayClearShot(int team, Dot carrier) {
+        if (ballInFlight || looseBall || tackleActive || restartPlay != 0 || restartActive || kickoffInProgress
+                || pendingGoalStage != 0 || decoyActive || freeKickPhase != 0 || penaltyPhase != 0 || injuryPhase != 0
+                || cardFoulPhase != 0 || penaltyBuild || engineEventOpen || preEventActive || ambientShotPhase != 0) return false;
+        if (possessingPlayer <= 0 || carrier == null) return false;
+        return clearChance(team, carrier, false);
+    }
+
     private void decideOnBall(long now, Dot[] side, Dot[] rivals, Dot current, double cap, boolean flair, boolean counter) {
         int team = possessingSide;
         double here = attackProgress(team, current.currentX);
@@ -5521,12 +5694,20 @@ public final class LiveMatchPanel extends JPanel {
         int style = tactic(team, 1, 0);
         int focus = tactic(team, 3, 0);
         double crowd = Tactics.density(rivals, current.currentY, .22);
+        if (openPlayClearShot(team, current)) {
+            clearChanceShots++;
+            if (pendingStatShotSide == team) pendingStatShotSide = -1;
+            shotManual = true;
+            startShot(now, visualShotOutcome());
+            return;
+        }
         int best = -1;
         double bestScore = -9;
         double bestX = 0, bestY = 0;
         int bestDuration = 0;
         boolean bestLofted = false;
         double direction = team == 0 ? 1.0 : -1.0;
+        boolean inOppBox = inDefendedBox(1 - team, current.currentX, current.currentY, 0);
         for (int candidate = 0; candidate < side.length * 2; candidate++) {
             int i = candidate % side.length;
             boolean through = candidate >= side.length;
@@ -5540,6 +5721,7 @@ public final class LiveMatchPanel extends JPanel {
             double tx = through ? clamp(mate.currentX + direction * .10, .03, .97)
                     : clamp(mate.currentX + mate.velocityX * lead, .03, .97);
             double ty = clamp(mate.currentY + mate.velocityY * lead, .05, .95);
+            if (inOppBox && !inDefendedBox(1 - team, tx, ty, 0)) continue;
             double d = distance(current.currentX, current.currentY, tx, ty);
             if (d < .05 || d > (here < .40 ? .62 : .50)) continue;
             double there = attackProgress(team, tx);
@@ -5570,10 +5752,17 @@ public final class LiveMatchPanel extends JPanel {
                 bestLofted = lofted;
             }
         }
+        if (inOppBox && best < 0) {
+            clearChanceShots++;
+            if (pendingStatShotSide == team) pendingStatShotSide = -1;
+            shotManual = true;
+            startShot(now, visualShotOutcome());
+            return;
+        }
         double ahead = Tactics.spaceAhead(current, team, rivals);
         double carryScore = -9;
         boolean freeRun = pressing == 0 && here >= .55 && here < .86 && ahead > .07;
-        if ((here < cap - .03 && ahead > .09 || freeRun) && pressing == 0 && possessingPlayer != 0) {
+        if (!inOppBox && (here < cap - .03 && ahead > .09 || freeRun) && pressing == 0 && possessingPlayer != 0) {
             carryScore = Math.min(.16, ahead) * (counter ? 2.6 : 1.4) + random.nextDouble() * .05;
         }
         int duel = defenderAhead(team, current, .075);
@@ -5581,7 +5770,7 @@ public final class LiveMatchPanel extends JPanel {
         if (flair && duel >= 0 && pressing <= 1 && here < cap && here > .30) {
             dribbleScore = .02 + (counter ? .08 : 0) + (current.roleLine == 3 ? .06 : 0) + random.nextDouble() * .14;
         }
-        double shieldScore = pressing >= 1 && bestScore < 0 && possessingPlayer != 0 ? -.02 + random.nextDouble() * .06 : -9;
+        double shieldScore = !inOppBox && pressing >= 1 && bestScore < 0 && possessingPlayer != 0 ? -.02 + random.nextDouble() * .06 : -9;
         if (shieldScore > -9 && (current.currentY < .12 || current.currentY > .88) && restartAllowed(700)
                 && random.nextInt(100) < 50) {
             startTackle(now, 1 - team, nearestActive(rivals, current.currentX, current.currentY, -1, false), TACKLE_POKE_OUT);
@@ -6254,7 +6443,7 @@ public final class LiveMatchPanel extends JPanel {
                 return true;
             }
         }
-        if (roll >= 97 && pressing >= 2) {
+        if (roll >= 97 && pressing >= 2 && !inDefendedBox(1 - side, carrier.currentX, carrier.currentY, 0)) {
             int back = nearestActive(team, carrier.currentX - (side == 0 ? .12 : -.12), carrier.currentY, possessingPlayer, false);
             Dot m = team[back];
             if (!inDefendedBox(1 - side, m.currentX, m.currentY, 0)
@@ -6275,8 +6464,9 @@ public final class LiveMatchPanel extends JPanel {
             return true;
         }
         if (!engineShotReady(side)) {
-            boxShotsDenied++;
-            denyShot(now, side);
+            boxShots++;
+            shotManual = true;
+            startShot(now, boxShotOutcome(side, carrier, tight));
             return true;
         }
         int shooter = engineShooter[side];
@@ -6308,7 +6498,7 @@ public final class LiveMatchPanel extends JPanel {
         for (int i = 1; i < team.length; i++) {
             if (i == possessingPlayer || !team[i].active) continue;
             Dot mate = team[i];
-            if (!inShootingZone(side, mate)) continue;
+            if (!inDefendedBox(1 - side, mate.currentX, mate.currentY, 0)) continue;
             double there = attackProgress(side, mate.currentX);
             double mateOff = Math.abs(mate.currentY - .5);
             if (there < here - .04 || mateOff > off - .03 && there < here + .02) continue;
@@ -7968,7 +8158,13 @@ public final class LiveMatchPanel extends JPanel {
 
     private void placeDot(Dot[] dots, int index, double x, double y, int roleLine, boolean wide, boolean mirror) {
         if (index < 0 || index >= dots.length) return;
-        dots[index].x = mirror ? 1.0 - x : x;
+        double px = mirror ? 1.0 - x : x;
+        if (halfStartPending || !openingKickoffDone) {
+            double limit = mirror ? .495 : .505;
+            if (mirror) px = Math.max(limit, px);
+            else px = Math.min(limit, px);
+        }
+        dots[index].x = px;
         dots[index].y = y;
         dots[index].roleLine = roleLine;
         dots[index].wideRole = wide;
