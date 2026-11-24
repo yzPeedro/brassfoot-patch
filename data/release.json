@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.6.20",
-  "publishedAt": "2026-11-23T23:42:59.367616+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.6.20-windows-x64.exe",
+  "publishedVersion": "2026.6.21",
+  "publishedAt": "2026-11-24T20:43:12.417047+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.6.21-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
   "fileSizeBytes": 7409152,
-  "sha256": "9f39b05b1e8bbed3322d6a12934ea0428eaa3beb096a0ffdd481dcc8840dacf1",
+  "sha256": "c4cc36816b3b3cdbcb0ecd358f35a1ba07b33ef0241d6d5c78da131e8cea7ac8",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Corrige pausas, finalizações, faltas, posicionamento, expulsões e pênaltis no campo animado."
+  "releaseNotes": "Adiciona um jogador e atualiza 16 idades."
 }
