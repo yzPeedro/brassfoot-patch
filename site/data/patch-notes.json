@@ -1,7 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-23T15:30:00-03:00",
+  "updatedAt": "2026-11-24T17:31:23-03:00",
   "entries": [
+    {
+      "id": "patch-2026-6-21",
+      "version": "2026.6.21",
+      "date": "2026-11-24T17:31:23-03:00",
+      "title": "Um vínculo e 16 idades atualizados",
+      "kind": "patch",
+      "summary": "Adiciona um jogador e atualiza 16 idades.",
+      "changes": [
+        "Karl-Johan Johnsson adicionado a Lech Poznań.",
+        "16 idades atualizadas.",
+        "Diferenças sem confirmação ficaram retidas e os últimos dados publicados foram preservados.",
+        "Hub 1.4.5, executável, ligas, escudos, camisas e campo animado permanecem iguais."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.6.21"
+    },
     {
       "id": "patch-2026-6-20",
       "version": "2026.6.20",

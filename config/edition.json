@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.6.20",
+  "version": "2026.6.21",
   "channel": "stable",
-  "releaseNotes": "Corrige pausas, finalizações, faltas, posicionamento, expulsões e pênaltis no campo animado.",
+  "releaseNotes": "Adiciona um jogador e atualiza 16 idades.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [
