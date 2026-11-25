@@ -17,22 +17,48 @@
       "engineSlots": 47,
       "directIds": [
         "bocajuniors_arg", "estudiantes_ar", "lanus_arg", "rosariocentral_arg",
+        "platense_arg", "independienterivadavia_arg",
         "alwaysready_bol", "bolivar_bol", "corinthians_bra", "cruzeiro_bra",
         "flarj", "flurj", "miirassol_sp", "palmeiras", "universidadcatolica_chi",
-        "junior_col", "independiente_equ", "ldu_equ", "cerroporteno_par",
-        "libertad_par", "universitario_per", "nacional_uru", "penarol_uru",
+        "coquimbounido_chi", "junior_col", "independientesantafe_col",
+        "independiente_equ", "ldu_equ", "cerroporteno_par", "libertad_par",
+        "universitario_per", "cuscofc_per", "nacional_uru", "penarol_uru",
         "deplaguaira_ven"
+      ],
+      "firstStageIds": [
+        "deptachira_ven", "thestrongest_bol", "alianzalima_per",
+        "univcatolicaquito_equ", "juventuddelaspiedras_uru", "2demayo_par"
       ],
       "qualifyingIds": [
         "deptachira_ven", "thestrongest_bol", "alianzalima_per",
-        "univcatolicaquito_equ", "indepmedellin_col", "liverpool_uru",
-        "sportingcristal_per", "deportestolima_col", "bahia", "barcelona_equ",
-        "argentinojnrs_arg", "botafogorj_bra", "nacionalpotosi_bol", "guarani_par"
+        "univcatolicaquito_equ", "juventuddelaspiedras_uru", "2demayo_par",
+        "indepmedellin_col", "liverpool_uru", "sportingcristal_per",
+        "deportestolima_col", "bahia", "barcelona_equ", "argentinojnrs_arg",
+        "botafogorj_bra", "nacionalpotosi_bol", "guarani_par", "ohigginsfc_chi",
+        "huachipato_chi", "carabobofc_ven"
       ],
+      "countryById": {
+        "bocajuniors_arg": 11, "estudiantes_ar": 11, "lanus_arg": 11,
+        "rosariocentral_arg": 11, "platense_arg": 11,
+        "independienterivadavia_arg": 11, "argentinojnrs_arg": 11,
+        "alwaysready_bol": 26, "bolivar_bol": 26, "thestrongest_bol": 26,
+        "nacionalpotosi_bol": 26, "corinthians_bra": 29, "cruzeiro_bra": 29,
+        "flarj": 29, "flurj": 29, "miirassol_sp": 29, "palmeiras": 29,
+        "bahia": 29, "botafogorj_bra": 29, "universidadcatolica_chi": 42,
+        "coquimbounido_chi": 42, "ohigginsfc_chi": 42, "huachipato_chi": 42,
+        "junior_col": 46, "independientesantafe_col": 46,
+        "indepmedellin_col": 46, "deportestolima_col": 46,
+        "independiente_equ": 60, "ldu_equ": 60, "univcatolicaquito_equ": 60,
+        "barcelona_equ": 60, "cerroporteno_par": 150, "libertad_par": 150,
+        "2demayo_par": 150, "guarani_par": 150, "universitario_per": 151,
+        "cuscofc_per": 151, "alianzalima_per": 151, "sportingcristal_per": 151,
+        "nacional_uru": 195, "penarol_uru": 195,
+        "juventuddelaspiedras_uru": 195, "liverpool_uru": 195,
+        "deplaguaira_ven": 198, "deptachira_ven": 198, "carabobofc_ven": 198
+      },
+      "openDirectCountries": [198],
       "notInGame": [
-        "Independiente Rivadavia", "Platense", "Coquimbo Unido", "Santa Fe",
-        "Cusco FC", "Universidad Central", "2 de Mayo", "Juventud de Las Piedras",
-        "Carabobo", "Huachipato", "O'Higgins"
+        "Universidad Central"
       ]
     },
     "sudamericana": {
@@ -151,7 +177,8 @@
     }
   },
   "limitations": [
-    "The game contains 704 club files and cannot select an official entrant that has no club file.",
+    "The game cannot select an official entrant that has no club file; in the Libertadores that slot goes to the original selector of the same country.",
+    "Libertadores, first season: official entrants are loaded even when their country is not playable, the fixed 2022 groups are not used and the game draws the groups.",
     "The legacy competition formats have different slot counts from the 2026 Concacaf and 2026/27 UEFA formats.",
     "Mapped official entrants are seeded first; remaining legacy slots use the original game selection logic.",
     "No gameplay verification was performed at the owner's request."

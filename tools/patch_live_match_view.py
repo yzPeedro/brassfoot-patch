@@ -34,6 +34,8 @@ ABOUT_MODE = "about:(Ljavax/swing/JDialog;)V"
 ABOUT_SIZE_CLASS_PATH = "a/eg.class"
 ABOUT_SIZE_CLASS_SHA256 = "ca708c478ddd4ef77336e55b561862ea98cd2b7b89b0ed59c20b5c206c9b04fd"
 ABOUT_SIZE_MODE = "aboutsize"
+PENALTY_CLASS_PATH = "a/gb.class"
+PENALTY_CLASS_SHA256 = "8ddab0a381eb85f306de8d84181fdf643e536c92a5e22b96f2654b356956a443"
 STAT_CLASSES = {
     "a/cD.class": ("304cfc4727f9a257d7bdf9b954928f42999ff44269d7408a98bf5352c10a8215", 1),
     "a/dq.class": ("6961905237111e387c75f07f39faf9c6030b57f7f5bb937c30544554b8c2bbf6", 1),
@@ -149,6 +151,7 @@ def build(source: Path, destination: Path, javac: str, java: str) -> Path:
         tooltip_classes = {name: archive.read(name) for name in TOOLTIP_CLASSES}
         about_class = archive.read(ABOUT_CLASS_PATH)
         about_size_class = archive.read(ABOUT_SIZE_CLASS_PATH)
+        penalty_class = archive.read(PENALTY_CLASS_PATH)
     if sha256_bytes(match_class) != MATCH_CLASS_SHA256:
         raise ValueError("match-screen class fingerprint differs")
     if sha256_bytes(teams_class) != TEAMS_CLASS_SHA256:
@@ -165,6 +168,8 @@ def build(source: Path, destination: Path, javac: str, java: str) -> Path:
         raise ValueError("about-screen class fingerprint differs")
     if sha256_bytes(about_size_class) != ABOUT_SIZE_CLASS_SHA256:
         raise ValueError("about-size class fingerprint differs")
+    if sha256_bytes(penalty_class) != PENALTY_CLASS_SHA256:
+        raise ValueError("penalty-screen class fingerprint differs")
     edition = ROOT / "config" / "edition-live-match-preview.json"
     try:
         import json as _json
@@ -186,6 +191,7 @@ def build(source: Path, destination: Path, javac: str, java: str) -> Path:
             replacements[name] = transform_class(work, name, source_bytes_tooltip, java, mode)
         replacements[ABOUT_CLASS_PATH] = transform_class(work, ABOUT_CLASS_PATH, about_class, java, ABOUT_MODE)
         replacements[ABOUT_SIZE_CLASS_PATH] = transform_class(work, ABOUT_SIZE_CLASS_PATH, about_size_class, java, ABOUT_SIZE_MODE)
+        replacements[PENALTY_CLASS_PATH] = transform_class(work, PENALTY_CLASS_PATH, penalty_class, java, "penalty")
         replacements["mega/patch-version.txt"] = patch_version.encode("utf-8")
         replacements.update(panel_classes)
         replace_zip_entries(source, destination, replacements)
