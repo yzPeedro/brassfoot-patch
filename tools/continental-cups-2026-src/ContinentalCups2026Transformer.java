@@ -16,6 +16,9 @@ import jdk.internal.org.objectweb.asm.tree.VarInsnNode;
 
 /** Injects a first-season participant seed without replacing competition logic. */
 public final class ContinentalCups2026Transformer {
+    private static final String HELPER = "best/CupParticipants2026";
+    private static final String QUOTAS = "(Ljava/util/ArrayList;Ljava/util/ArrayList;Ljava/util/ArrayList;Z)V";
+
     private ContinentalCups2026Transformer() {}
 
     public static void main(String[] args) throws Exception {
@@ -24,10 +27,43 @@ public final class ContinentalCups2026Transformer {
         ClassNode owner = new ClassNode();
         reader.accept(owner, 0);
         MethodNode method = unique(owner.methods, args[3]);
-        if ("prepare-libertadores".equals(args[0])) {
+        if ("libertadores".equals(args[0])) {
+            int fixed = 0;
+            for (AbstractInsnNode instruction : method.instructions.toArray()) {
+                if (!(instruction instanceof MethodInsnNode call)) continue;
+                if (call.getOpcode() == Opcodes.INVOKESTATIC && HELPER.equals(call.owner)
+                        && "prepareLibertadores".equals(call.name)) {
+                    method.instructions.remove(call);
+                } else if (call.getOpcode() == Opcodes.INVOKEVIRTUAL && "best/f".equals(call.owner)
+                        && "isGruposIntPadrao".equals(call.name) && "()Z".equals(call.desc)) {
+                    InsnList off = new InsnList();
+                    off.add(new InsnNode(Opcodes.POP));
+                    off.add(new InsnNode(Opcodes.ICONST_0));
+                    method.instructions.insert(call, off);
+                    method.instructions.remove(call);
+                    fixed++;
+                }
+            }
+            if (fixed != 1) throw new IllegalArgumentException("fixed groups check absent");
+            String[] names = {"libertadoresHolders", "libertadoresDirect", "libertadoresQualifying"};
+            int quotas = 0;
+            for (AbstractInsnNode instruction : unique(owner.methods, "ys").instructions.toArray()) {
+                if (instruction instanceof MethodInsnNode call && call.getOpcode() == Opcodes.INVOKESTATIC
+                        && "f/b".equals(call.owner) && "a".equals(call.name) && QUOTAS.equals(call.desc)) {
+                    if (quotas == names.length) throw new IllegalArgumentException("unexpected quota call");
+                    call.owner = HELPER;
+                    call.name = names[quotas++];
+                }
+            }
+            if (quotas != names.length) throw new IllegalArgumentException("quota calls absent");
+        } else if ("priority".equals(args[0])) {
             InsnList call = new InsnList();
-            call.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "best/CupParticipants2026",
-                    "prepareLibertadores", "()V", false));
+            call.add(new MethodInsnNode(Opcodes.INVOKESTATIC, HELPER, "prioritize", "()V", false));
+            for (AbstractInsnNode instruction : method.instructions.toArray()) {
+                if (instruction instanceof MethodInsnNode existing && HELPER.equals(existing.owner)) {
+                    throw new IllegalArgumentException("priority already applied");
+                }
+            }
             method.instructions.insert(call);
         } else if ("seed-after-clear".equals(args[0]) && args.length == 7) {
             AbstractInsnNode lastClear = null;

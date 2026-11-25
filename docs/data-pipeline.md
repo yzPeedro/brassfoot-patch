@@ -262,7 +262,7 @@ A Série D usa a configuração original do jogo. `conf_ligas_nacionais/BRA.cfg`
 Esses torneios vivem no executável, não nos `.ban`:
 
 - **Copa do Mundo:** `tools/patch_world_cup_2026.py` usa os grupos embutidos nos moldes Java de `tools/world-cup-2026-src/`. `config/world-cup-2026.json` documenta grupos e fontes.
-- **Copas continentais:** `tools/patch_continental_cups_2026.py` gera o código a partir de `config/continental-cups-2026.json`: participantes iniciais, fontes e limitações. Clubes ausentes do catálogo do jogo e vagas restantes seguem a lógica original.
+- **Copas continentais:** `tools/patch_continental_cups_2026.py` gera o código a partir de `config/continental-cups-2026.json`: participantes iniciais, fontes e limitações. Clubes ausentes do catálogo do jogo e vagas restantes seguem a lógica original. Na Libertadores da primeira temporada, os 47 participantes vêm da configuração (28 diretos, 19 na preliminar, os seis primeiros na fase 1), os grupos fixos de 2022 não são usados e a vaga de um clube sem arquivo vai para o seletor original do mesmo país. Os participantes das copas são carregados mesmo quando o país não é jogável: tomam o lugar dos clubes de menor nível entre os 15 que o jogo carrega nesses países. Com `--upgrade`, a ferramenta atualiza um executável que já tem a classe auxiliar.
 - **Site:** `site/data/explorer-cups.json` resume seleções e copas para o explorador e aponta essas duas configurações como fonte.
 
 ---

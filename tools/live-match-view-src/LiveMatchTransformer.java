@@ -25,6 +25,10 @@ public final class LiveMatchTransformer {
         if (args.length != 3) throw new IllegalArgumentException("input.class output.class match|teams|players|tooltips:<desc>|about:<desc>|stats:<count>");
         Path input = Paths.get(args[0]);
         Path output = Paths.get(args[1]);
+        if ("penalty".equals(args[2])) {
+            penaltyScreen(input, output);
+            return;
+        }
         final boolean matchScreen = "match".equals(args[2]);
         final boolean teamsScreen = "teams".equals(args[2]);
         final boolean playersScreen = "players".equals(args[2]);
@@ -262,6 +266,55 @@ public final class LiveMatchTransformer {
         if (!tooltipsScreen && !aboutScreen && !aboutSizeScreen && stats[0] != expectedStats) {
             throw new IllegalStateException("expected " + expectedStats + " statistic reads, found " + stats[0]);
         }
+        Files.createDirectories(output.getParent());
+        Files.write(output, writer.toByteArray());
+    }
+
+    private static void penaltyScreen(Path input, Path output) throws Exception {
+        ClassReader reader = new ClassReader(Files.readAllBytes(input));
+        ClassWriter writer = new ClassWriter(reader, 0);
+        final int[] delays = {0};
+        final int[] results = {0};
+        final int[] decisions = {0};
+        reader.accept(new ClassVisitor(Opcodes.ASM7, writer) {
+            @Override public MethodVisitor visitMethod(int access, final String name, final String descriptor,
+                                                       String signature, String[] exceptions) {
+                return new MethodVisitor(Opcodes.ASM7, super.visitMethod(access, name, descriptor, signature, exceptions)) {
+                    @Override public void visitLdcInsn(Object value) {
+                        if (value instanceof Long && ((Long) value).longValue() == 2000L) {
+                            int index = delays[0]++;
+                            if (index % 2 == 0) {
+                                super.visitIntInsn(Opcodes.BIPUSH, index / 2);
+                                super.visitMethodInsn(Opcodes.INVOKESTATIC, "mega/LiveMatchPanel", "penaltyDelay",
+                                        "(I)J", false);
+                                return;
+                            }
+                        }
+                        super.visitLdcInsn(value);
+                    }
+                    @Override public void visitInsn(int opcode) {
+                        if (opcode == Opcodes.RETURN && "nO".equals(name) && "()V".equals(descriptor)) {
+                            super.visitMethodInsn(Opcodes.INVOKESTATIC, "mega/LiveMatchPanel", "penaltyResolved",
+                                    "()V", false);
+                            results[0]++;
+                        }
+                        super.visitInsn(opcode);
+                    }
+                    @Override public void visitVarInsn(int opcode, int variable) {
+                        if (opcode == Opcodes.ILOAD && variable == 3 && "nO".equals(name) && "()V".equals(descriptor)) {
+                            super.visitVarInsn(Opcodes.ILOAD, 3);
+                            super.visitMethodInsn(Opcodes.INVOKESTATIC, "mega/LiveMatchPanel", "penaltyDecided",
+                                    "(Z)V", false);
+                            decisions[0]++;
+                        }
+                        super.visitVarInsn(opcode, variable);
+                    }
+                };
+            }
+        }, 0);
+        if (delays[0] != 8) throw new IllegalStateException("expected four penalty timers, found " + delays[0]);
+        if (results[0] != 1) throw new IllegalStateException("expected one penalty result, found " + results[0]);
+        if (decisions[0] != 1) throw new IllegalStateException("expected one penalty decision, found " + decisions[0]);
         Files.createDirectories(output.getParent());
         Files.write(output, writer.toByteArray());
     }

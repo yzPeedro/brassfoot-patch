@@ -132,7 +132,10 @@ public final class LiveMatchPanel extends JPanel {
     private double cardFoulSpotX = .5;
     private double cardFoulSpotY = .5;
     private long penaltySettleDeadline;
-    private long penaltyModalAdvanceAt;
+    private volatile boolean penaltyDriven;
+    private volatile int penaltyEngineOutcome;
+    private volatile int penaltyEngineDecision;
+    private long penaltyOutcomeDeadline;
     private long substitutionHoldSince;
     private int goalVariant;
     private int goalReboundPhase;
@@ -2021,13 +2024,14 @@ public final class LiveMatchPanel extends JPanel {
         lastTickNanos = nanos;
         frames++;
         if (frames % 8 == 0) syncFromGame();
+        if (penaltyDriven && penaltyPhase == 0) releasePenaltyModal();
         if (updatePassive()) {
             advanceClock(false);
             repaint();
             return;
         }
         if (penaltyPhase >= 4 && penaltyPhase <= 5) capturePenaltyText();
-        boolean penaltyAnimating = penaltyPhase >= 1 && penaltyPhase <= 4;
+        boolean penaltyAnimating = penaltyPhase >= 1 && (penaltyPhase <= 4 || penaltyDriven);
         if (isDecisionDialogOpen() && !penaltyAnimating) {
             if (penaltyPhase == 5) capturePenaltyText();
             advanceClock(false);
@@ -3006,10 +3010,7 @@ public final class LiveMatchPanel extends JPanel {
             if (!window.isShowing()) continue;
             Component screen = findByClassName(window, "a.gb");
             if (screen == null) continue;
-            if (penaltyPhase == 5) {
-                hidePenaltyModal(window);
-                advancePenaltyModal(window, clockNow());
-            }
+            if (penaltyPhase >= 5) hidePenaltyModal(window);
             Object label = readField(screen, "JU");
             if (!(label instanceof JLabel)) continue;
             String text = ((JLabel) label).getText();
@@ -3026,22 +3027,25 @@ public final class LiveMatchPanel extends JPanel {
         }
     }
 
-    private void advancePenaltyModal(Window window, long now) {
-        if (now < penaltyModalAdvanceAt) return;
-        penaltyModalAdvanceAt = now + 180L;
-        try {
-            clickPenaltyButtons(window);
-            java.awt.KeyboardFocusManager mgr = java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager();
-            Component focus = mgr.getFocusOwner();
-            if (focus == null) focus = window;
-            java.awt.event.KeyEvent press = new java.awt.event.KeyEvent(focus, java.awt.event.KeyEvent.KEY_PRESSED,
-                    now, 0, java.awt.event.KeyEvent.VK_ENTER, java.awt.event.KeyEvent.CHAR_UNDEFINED);
-            java.awt.event.KeyEvent release = new java.awt.event.KeyEvent(focus, java.awt.event.KeyEvent.KEY_RELEASED,
-                    now, 0, java.awt.event.KeyEvent.VK_ENTER, java.awt.event.KeyEvent.CHAR_UNDEFINED);
-            focus.dispatchEvent(press);
-            focus.dispatchEvent(release);
-        } catch (Throwable ignored) {
-        }
+    public static long penaltyDelay(int stage) {
+        LiveMatchPanel panel = active;
+        if (panel == null || !panel.penaltyDriven || panel.penaltyPhase == 0) return 2000L;
+        return stage == 0 ? 350L : stage == 3 ? 3500L : 450L;
+    }
+
+    public static void penaltyDecided(boolean goal) {
+        LiveMatchPanel panel = active;
+        if (panel != null) panel.penaltyEngineDecision = goal ? 1 : 2;
+    }
+
+    public static void penaltyResolved() {
+        LiveMatchPanel panel = active;
+        if (panel != null && panel.penaltyDriven) panel.penaltyEngineOutcome = panel.penaltyEngineDecision;
+    }
+
+    private void releasePenaltyModal() {
+        penaltyDriven = false;
+        disposePenaltyModal();
     }
 
     private void disposePenaltyModal() {
@@ -3054,22 +3058,6 @@ public final class LiveMatchPanel extends JPanel {
                 }
             }
         } catch (Throwable ignored) {
-        }
-    }
-
-    private void clickPenaltyButtons(Component root) {
-        if (root == null) return;
-        if (root instanceof javax.swing.AbstractButton) {
-            javax.swing.AbstractButton button = (javax.swing.AbstractButton) root;
-            if (button.isShowing() && button.isEnabled()) {
-                button.doClick();
-                return;
-            }
-        }
-        if (root instanceof Container) {
-            for (Component child : ((Container) root).getComponents()) {
-                clickPenaltyButtons(child);
-            }
         }
     }
 
@@ -4483,8 +4471,11 @@ public final class LiveMatchPanel extends JPanel {
         kicker.currentX = spotX(side) - direction * .05;
         kicker.currentY = .50;
         penaltySettleDeadline = 0;
-        penaltyReadyAfter = now + (penaltyHuman ? 250L : 80L);
-        penaltyModalAdvanceAt = 0;
+        penaltyReadyAfter = now;
+        penaltyEngineOutcome = 0;
+        penaltyEngineDecision = 0;
+        penaltyOutcomeDeadline = now + 6000L;
+        penaltyDriven = true;
         penaltyPhase = 5;
         event = "Cobrança: " + kicker.name;
     }
@@ -4559,20 +4550,19 @@ public final class LiveMatchPanel extends JPanel {
             event = penaltyLaunchEvent;
         } else if (penaltyPhase == 5) {
             if (penaltyLoop != null) return;
-            if (isDecisionDialogOpen()) {
-                capturePenaltyText();
-                if (now >= penaltyReadyAfter) {
-                    disposePenaltyModal();
-                } else {
-                    penaltySettleDeadline = 0;
-                    return;
-                }
-            }
-            if (penaltySettleDeadline == 0) {
-                penaltySettleDeadline = now + 120L;
+            int outcome = penaltyEngineOutcome;
+            if (penaltyDriven && outcome == 0 && now < penaltyOutcomeDeadline) return;
+            if (!penaltyDriven && isDecisionDialogOpen()) {
+                penaltySettleDeadline = 0;
                 return;
             }
-            if (now < penaltySettleDeadline) return;
+            if (outcome == 0) {
+                if (penaltySettleDeadline == 0) {
+                    penaltySettleDeadline = now + 120L;
+                    return;
+                }
+                if (now < penaltySettleDeadline) return;
+            }
             capturePenaltyText();
             String lower = penaltyText == null ? "" : penaltyText.toLowerCase(Locale.ROOT);
             boolean goalByScore = penaltyScoreBefore >= 0 && scoreFor(penaltySide) > penaltyScoreBefore;
@@ -4580,7 +4570,8 @@ public final class LiveMatchPanel extends JPanel {
             boolean missByText = lower.contains("defe") || lower.contains("trave") || lower.contains("fora")
                     || lower.contains("arquibancada") || lower.contains("escorrega") || lower.contains("perdeu")
                     || lower.contains("perdido") || lower.contains("pra fora") || lower.contains("por cima");
-            boolean goal = penaltyDebug ? random.nextInt(100) < 75 : goalByScore || (goalByText && !missByText);
+            boolean goal = penaltyDebug ? random.nextInt(100) < 75
+                    : outcome != 0 ? outcome == 1 : goalByScore || (goalByText && !missByText);
             if (!goal && !missByText && penaltyScoreBefore < 0 && !goalByText) {
                 goal = false;
             }
@@ -4647,9 +4638,11 @@ public final class LiveMatchPanel extends JPanel {
             exitPenaltyLoop();
         } else if (penaltyPhase == 6) {
             penaltyPhase = 0;
+            releasePenaltyModal();
             beginGoalRestart(now, penaltySide);
         } else if (penaltyPhase == 7) {
             penaltyPhase = 0;
+            releasePenaltyModal();
             recoverToKeeper(now, 1 - penaltySide);
         }
     }
