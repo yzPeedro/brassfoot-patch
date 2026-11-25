@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "status": "published",
-  "publishedVersion": "2026.6.21",
-  "publishedAt": "2026-11-24T20:43:12.417047+00:00",
-  "assetName": "Brasfoot-Mega-Patch-2026.6.21-windows-x64.exe",
+  "publishedVersion": "2026.6.22",
+  "publishedAt": "2026-11-25T15:06:33.239814+00:00",
+  "assetName": "Brasfoot-Mega-Patch-2026.6.22-windows-x64.exe",
   "downloadUrl": "https://github.com/yzPeedro/brassfoot-patch/releases/latest/download/Brasfoot-Mega-Patch-windows-x64.exe",
   "fileSizeBytes": 7409152,
-  "sha256": "c4cc36816b3b3cdbcb0ecd358f35a1ba07b33ef0241d6d5c78da131e8cea7ac8",
+  "sha256": "864fa5f41ecdd2925969fafcf9f903aab4b9e5f4185e1e438f839ec15458b040",
   "competitionSeason": 2026,
   "editionStatus": "stable",
   "compatibilityVerifiedInGame": false,
   "gameplayVerified": false,
-  "releaseNotes": "Adiciona um jogador e atualiza 16 idades."
+  "releaseNotes": "Libertadores 2026 com os participantes reais na primeira temporada, cobranca de penalti sem espera e sincronizada no campo animado e Pular todos sem apito da partida pulada."
 }
