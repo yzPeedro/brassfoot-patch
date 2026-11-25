@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch - Previa Jogo ao Vivo",
   "PATCH_YEAR": 2026,
-  "version": "2026.6.68",
+  "version": "2026.6.69",
   "channel": "local-preview",
-  "releaseNotes": "Libertadores 2026 com os participantes reais na primeira temporada (inclusive com o pais nao jogavel) e penalti sem espera, com a cobranca no campo sincronizada com o resultado do jogo.",
+  "releaseNotes": "Libertadores 2026 com os participantes reais na primeira temporada (inclusive com o pais nao jogavel) e penalti sem espera, com a cobranca no campo sincronizada com o resultado do jogo; Pular todos para o relogio e o som da partida pulada.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [

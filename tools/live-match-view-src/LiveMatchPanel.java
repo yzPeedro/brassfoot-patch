@@ -3369,6 +3369,10 @@ public final class LiveMatchPanel extends JPanel {
             dJ.setAccessible(true);
             Field cRField = sClass.getDeclaredField("cR");
             cRField.setAccessible(true);
+            Object skipped = cRField.get(null);
+            Object clock = skipped == null ? null : readField(skipped, "GO");
+            if (clock instanceof Timer) ((Timer) clock).stop();
+            silenceMatchSounds(skipped);
             for (int i = 0; i < 200; i++) {
                 dJ.invoke(null);
                 Object screen = cRField.get(null);
@@ -3379,6 +3383,20 @@ public final class LiveMatchPanel extends JPanel {
             diagnostic("skip_all_done", null);
         } catch (Throwable error) {
             diagnostic("skip_all_failed", error);
+        }
+    }
+
+    private void silenceMatchSounds(Object screen) {
+        if (screen == null) return;
+        try {
+            Field clips = screen.getClass().getDeclaredField("He");
+            clips.setAccessible(true);
+            Object value = clips.get(null);
+            if (!(value instanceof Object[])) return;
+            for (Object clip : (Object[]) value) {
+                if (clip instanceof javax.sound.sampled.Clip) ((javax.sound.sampled.Clip) clip).stop();
+            }
+        } catch (Throwable ignored) {
         }
     }
 
