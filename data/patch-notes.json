@@ -1,7 +1,24 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-24T17:31:23-03:00",
+  "updatedAt": "2026-11-25T11:51:01-03:00",
   "entries": [
+    {
+      "id": "patch-2026-6-22",
+      "version": "2026.6.22",
+      "date": "2026-11-25T11:51:01-03:00",
+      "title": "Libertadores 2026 e correções no campo animado",
+      "kind": "patch",
+      "summary": "Corrige os participantes da Libertadores em carreiras novas, a cobrança de pênalti e o \"Pular todos\" no campo animado.",
+      "changes": [
+        "Libertadores da primeira temporada com os participantes de 2026: 28 clubes direto nos grupos e 19 na preliminar, com grupos sorteados pelo jogo.",
+        "Participantes das copas continentais entram na carreira mesmo quando o país deles não é jogável.",
+        "Pênalti no campo animado sem a espera da tela de pênalti; a cobrança segue o resultado decidido pelo jogo.",
+        "\"Pular todos\" para o relógio e os apitos da partida pulada.",
+        "Carreiras já criadas mantêm a Libertadores sorteada no save.",
+        "Hub 1.4.5, elencos, ligas, escudos e camisas permanecem iguais."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.6.22"
+    },
     {
       "id": "patch-2026-6-21",
       "version": "2026.6.21",
