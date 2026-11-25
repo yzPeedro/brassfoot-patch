@@ -2210,6 +2210,22 @@
       "teamFile": "teams/lechpoznan_pol.ban",
       "action": "add",
       "source": "docs/releases/v2026.6.21.md"
+    },
+    {
+      "version": "2026.6.23",
+      "date": "2026-11-25",
+      "player": "Phillip Cancar",
+      "teamFile": "teams/Saburtalo_Geo.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.23.md"
+    },
+    {
+      "version": "2026.6.23",
+      "date": "2026-11-25",
+      "player": "Álvaro Romero",
+      "teamFile": "teams/lincoln_gib.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.23.md"
     }
   ]
 }

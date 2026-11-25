@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "productName": "Brasfoot Mega Patch",
   "PATCH_YEAR": 2026,
-  "version": "2026.6.22",
+  "version": "2026.6.23",
   "channel": "stable",
-  "releaseNotes": "Libertadores 2026 com os participantes reais na primeira temporada, cobranca de penalti sem espera e sincronizada no campo animado e Pular todos sem apito da partida pulada.",
+  "releaseNotes": "Adiciona dois jogadores e atualiza 13 idades e uma nacionalidade esportiva.",
   "repository": "yzPeedro/brassfoot-patch",
   "siteUrl": "https://yzpeedro.github.io/brassfoot-patch/",
   "platforms": [

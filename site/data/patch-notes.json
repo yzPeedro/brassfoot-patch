@@ -1,7 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-25T11:51:01-03:00",
+  "updatedAt": "2026-11-25T19:07:15-03:00",
   "entries": [
+    {
+      "id": "patch-2026-6-23",
+      "version": "2026.6.23",
+      "date": "2026-11-25T19:07:15-03:00",
+      "title": "Dois vínculos e 13 idades atualizados",
+      "kind": "patch",
+      "summary": "Adiciona dois jogadores e atualiza 13 idades e uma nacionalidade esportiva.",
+      "changes": [
+        "Álvaro Romero e Phillip Cancar adicionados a Lincoln Red Imps e Saburtalo.",
+        "13 idades atualizadas.",
+        "Nassim Laarej com nacionalidade esportiva atualizada para Marrocos.",
+        "Diferenças sem confirmação ficaram retidas e os últimos dados publicados foram preservados.",
+        "Hub 1.4.5, executável, ligas, escudos, camisas e campo animado permanecem iguais."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.6.23"
+    },
     {
       "id": "patch-2026-6-22",
       "version": "2026.6.22",
