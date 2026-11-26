@@ -3297,13 +3297,13 @@
       "teamFile": "teams/riga_let.ban",
       "fields": {
         "manager": {
-          "value": "Adrian Gula",
+          "value": "Didier Zanetti",
           "sourceUrl": "https://www.365scores.com/football/team/riga-29362/squad",
-          "sourcePublishedAt": "2026-11-23T15:53:34.967564+00:00",
+          "sourcePublishedAt": "2026-11-26T19:04:35.668683+00:00",
           "sourceLevel": "365scores-squad-staff",
           "sourceRole": "Coach",
-          "sourceId": 77211,
-          "recordedAt": "2026-11-23"
+          "sourceId": 234891,
+          "recordedAt": "2026-11-26"
         }
       }
     },
@@ -4046,6 +4046,20 @@
           "sourceRole": "Coach",
           "sourceId": 141457,
           "recordedAt": "2026-11-23"
+        }
+      }
+    },
+    {
+      "teamFile": "teams/watford_ing.ban",
+      "fields": {
+        "manager": {
+          "value": "Edward Iordănescu",
+          "sourceUrl": "https://www.365scores.com/football/team/watford-fc-4/squad",
+          "sourcePublishedAt": "2026-11-26T19:04:31.644971+00:00",
+          "sourceLevel": "365scores-squad-staff",
+          "sourceRole": "Coach",
+          "sourceId": 113124,
+          "recordedAt": "2026-11-26"
         }
       }
     },

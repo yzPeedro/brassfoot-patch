@@ -1,7 +1,25 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-25T19:07:15-03:00",
+  "updatedAt": "2026-11-26T16:07:16-03:00",
   "entries": [
+    {
+      "id": "patch-2026-6-24",
+      "version": "2026.6.24",
+      "date": "2026-11-26T16:07:16-03:00",
+      "title": "Três vínculos e dois técnicos atualizados",
+      "kind": "patch",
+      "summary": "Adiciona dois jogadores, retira um e atualiza 15 idades e dois técnicos.",
+      "changes": [
+        "Karim Makhametzhan e Ugo Kadmiri adicionados a Kairat Almaty e Olympique Marseille.",
+        "Alfons Borèn retirado de IFK Göteborg.",
+        "15 idades atualizadas.",
+        "Riga: Didier Zanetti assume como técnico.",
+        "Watford: Edward Iordănescu assume como técnico.",
+        "Diferenças sem confirmação ficaram retidas e os últimos dados publicados foram preservados.",
+        "Hub 1.4.5, executável, ligas, escudos, camisas e campo animado permanecem iguais."
+      ],
+      "url": "https://github.com/yzPeedro/brassfoot-patch/releases/tag/v2026.6.24"
+    },
     {
       "id": "patch-2026-6-23",
       "version": "2026.6.23",

@@ -2226,6 +2226,30 @@
       "teamFile": "teams/lincoln_gib.ban",
       "action": "add",
       "source": "docs/releases/v2026.6.23.md"
+    },
+    {
+      "version": "2026.6.24",
+      "date": "2026-11-26",
+      "player": "Alfons Borèn",
+      "teamFile": "teams/gotenborg_sue.ban",
+      "action": "remove",
+      "source": "docs/releases/v2026.6.24.md"
+    },
+    {
+      "version": "2026.6.24",
+      "date": "2026-11-26",
+      "player": "Karim Makhametzhan",
+      "teamFile": "teams/kairat_caz.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.24.md"
+    },
+    {
+      "version": "2026.6.24",
+      "date": "2026-11-26",
+      "player": "Ugo Kadmiri",
+      "teamFile": "teams/olympiquemarseile_fra.ban",
+      "action": "add",
+      "source": "docs/releases/v2026.6.24.md"
     }
   ]
 }
